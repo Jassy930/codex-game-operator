@@ -1,5 +1,31 @@
 # Decision
 
+## 2026-04-29 Product decision：星图航段序号
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 当前仍有真实体验反馈 #2 open，且没有 open bug，继续进入有反馈样本下的 Product decision。
+
+当前最大问题：#2 仍围绕“内容丰富度太差，可玩的内容太少”保持 open，上一轮当前航段标记后没有新的复测结论。星图项目已经有总览、奖励预告和当前航段高亮，但玩家在主目标条和项目列表中仍只能从项目数量间接感知路线规模，缺少“当前是第几段/总共几段”的直接信号。
+
+本轮决策：
+
+- 为星图项目状态派生 `segmentIndex`、`segmentTotal` 和 `segmentText`。
+- 星图总览显示“下一段 X/10：项目名”，把下一段目标和完整航线规模放在同一行。
+- 星图主目标进度前置“航段 X/10”，让当前追逐目标直接带有路线位置。
+- 星图项目列表显示“航段 X/10”徽章，并继续只把第一个未完成项目标为“当前航段”。
+- 不新增项目、不调整奖励数值、不改变升级曲线，先提升已有中后段内容的规模感和导航清晰度。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-04-29 02:12 CST 查询到 1 个 open issue、1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
+- npm install 成功。
+- npm test 通过，覆盖星图航段序号、总览下一段序号和星图主目标航段文案。
+- npm run build 生成 dist。
+- bun run test 和 bun run build 通过。
+- GitHub Pages workflow 完成后，线上地址返回 HTTP 200。
+- #2 已回复并仍为 open。
+
+下一步：#2 保持 open；等待玩家复测航段序号是否改善中后段内容规模感和目标定位。
+
 ## 2026-04-29 Product decision：星图当前航段标记
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 当前仍有真实体验反馈 #2 open，且没有 open bug，继续进入有反馈样本下的 Product decision。

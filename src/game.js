@@ -472,16 +472,21 @@ export function getComboStatus(state, now = Date.now()) {
 
 export function getProjectStatuses(state) {
   const current = normalizeState(state);
+  const segmentTotal = PROJECT_DEFS.length;
 
-  const statuses = PROJECT_DEFS.map((project) => {
+  const statuses = PROJECT_DEFS.map((project, index) => {
     const currentValue = Math.max(0, project.current(current));
     const target = Math.max(1, project.target);
     const remaining = Math.max(0, target - currentValue);
     const progress = Math.min(1, currentValue / target);
     const completed = remaining <= 0;
+    const segmentIndex = index + 1;
 
     return {
       ...project,
+      segmentIndex,
+      segmentTotal,
+      segmentText: buildProjectSegmentText(segmentIndex, segmentTotal),
       currentValue,
       remaining,
       progress,
@@ -528,7 +533,11 @@ export function getProjectOverview(state) {
       completed +
       "/" +
       projects.length +
-      " · 下一段：" +
+      " · 下一段 " +
+      nextProject.segmentIndex +
+      "/" +
+      nextProject.segmentTotal +
+      "：" +
       nextProject.name +
       " · 奖励 " +
       nextProject.reward,
@@ -712,15 +721,18 @@ function buildNextProjectGoal(state) {
     return null;
   }
 
-  const project = PROJECT_DEFS.find((item) => item.current(state) < item.target);
-  if (!project) {
+  const projectIndex = PROJECT_DEFS.findIndex((item) => item.current(state) < item.target);
+  if (projectIndex < 0) {
     return null;
   }
+  const project = PROJECT_DEFS[projectIndex];
 
   return {
     id: "project-" + project.id,
     label: "星图计划",
     value: project.name,
+    segmentIndex: projectIndex + 1,
+    segmentTotal: PROJECT_DEFS.length,
     upgradeId: project.upgradeId,
     reward: project.reward,
     unit: project.unit,
@@ -735,13 +747,18 @@ function buildNextProjectGoal(state) {
 function buildGoalProgressText(goal, currentValue, target, remaining, state) {
   const currentText = formatGoalAmount(goal, Math.min(currentValue, target));
   const targetText = formatGoalAmount(goal, target);
+  const segmentText =
+    goal.segmentIndex && goal.segmentTotal
+      ? buildProjectSegmentText(goal.segmentIndex, goal.segmentTotal) + " · "
+      : "";
   const rewardText = goal.reward ? " · 奖励 " + goal.reward : "";
   if (remaining <= 0) {
-    return "进度 " + targetText + " / " + targetText + " · 已完成" + rewardText;
+    return segmentText + "进度 " + targetText + " / " + targetText + " · 已完成" + rewardText;
   }
   const actionText = typeof goal.action === "function" ? goal.action(state) : null;
   const suffixText = actionText ?? "还差 " + formatGoalAmount(goal, remaining);
   return (
+    segmentText +
     "进度 " +
     currentText +
     " / " +
@@ -755,6 +772,10 @@ function buildGoalProgressText(goal, currentValue, target, remaining, state) {
 function formatGoalAmount(goal, value) {
   const unit = goal.unit ? " " + goal.unit : "";
   return formatNumber(value) + unit;
+}
+
+function buildProjectSegmentText(segmentIndex, segmentTotal) {
+  return "航段 " + segmentIndex + "/" + segmentTotal;
 }
 
 function buildProjectProgressText(project, currentValue, target, remaining) {

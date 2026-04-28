@@ -444,24 +444,35 @@ h2 {
 .project-header {
   display: flex;
   min-width: 0;
+  flex-wrap: wrap;
   gap: 8px;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
 }
 
 .project-header strong {
   min-width: 0;
+  margin-right: auto;
   font-size: 0.98rem;
 }
 
+.project-segment-badge,
 .project-current-badge {
   flex: 0 0 auto;
   padding: 3px 8px;
   border-radius: 999px;
-  background: rgba(244, 178, 60, 0.18);
-  color: #fff7c2;
   font-size: 0.74rem;
   font-weight: 900;
+}
+
+.project-segment-badge {
+  background: rgba(248, 243, 231, 0.1);
+  color: rgba(248, 243, 231, 0.78);
+}
+
+.project-current-badge {
+  background: rgba(244, 178, 60, 0.18);
+  color: #fff7c2;
 }
 
 .project-current-badge[hidden] {
