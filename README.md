@@ -22,7 +22,11 @@ npm run build
 
 ## 部署
 
-主分支 push 会通过 `.github/workflows/pages.yml` 构建并部署 GitHub Pages。部署前必须通过：
+主分支 push 会通过 `.github/workflows/pages.yml` 构建并在公开仓库上部署 GitHub Pages。当前私有仓库先使用 Vercel：
+
+https://dist-kblvoc9qq-wangf930-2746s-projects.vercel.app
+
+部署前必须通过：
 
 ```bash
 npm install

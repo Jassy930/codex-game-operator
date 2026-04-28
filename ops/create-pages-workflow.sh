@@ -30,6 +30,7 @@ jobs:
         with:
           path: dist
   deploy:
+    if: ${{ !github.event.repository.private }}
     environment:
       name: github-pages
     runs-on: ubuntu-latest

@@ -8,12 +8,17 @@
 
 本轮决策：新增 GitHub Pages Actions workflow，并同步更新 workflow 生成脚本。CI 必须执行安装、测试和构建，测试失败不得继续部署。
 
+执行结果：GitHub Actions build job 通过，但私有仓库当前计划不支持 GitHub Pages，已创建 issue #1 跟踪。为避免已知失败，Pages deploy job 仅在公开仓库执行；本轮已改用 Vercel 发布 `dist/`。
+
+当前可访问版本：https://dist-kblvoc9qq-wangf930-2746s-projects.vercel.app
+
 验收标准：
 
 - npm install 成功。
 - npm test 通过。
 - npm run build 生成 dist。
 - .github/workflows/pages.yml 存在并使用 npm install、npm test、npm run build。
+- Vercel 部署状态为 READY。
 
 下一步：部署成功后补齐游戏内反馈入口。
 
