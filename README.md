@@ -20,6 +20,16 @@ npm test
 npm run build
 ```
 
+## 部署
+
+主分支 push 会通过 `.github/workflows/pages.yml` 构建并部署 GitHub Pages。部署前必须通过：
+
+```bash
+npm install
+npm test
+npm run build
+```
+
 ## 启动
 
 ```bash

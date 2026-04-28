@@ -1,19 +1,19 @@
-#!/usr/bin/env bash
-set -euo pipefail
-mkdir -p .github/workflows
-cat > .github/workflows/pages.yml <<'YAML'
 name: Deploy GitHub Pages
+
 on:
   push:
     branches: [main]
   workflow_dispatch:
+
 permissions:
   contents: read
   pages: write
   id-token: write
+
 concurrency:
   group: pages
   cancel-in-progress: true
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -29,6 +29,7 @@ jobs:
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist
+
   deploy:
     environment:
       name: github-pages
@@ -36,4 +37,3 @@ jobs:
     needs: build
     steps:
       - uses: actions/deploy-pages@v4
-YAML
