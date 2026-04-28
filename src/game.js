@@ -592,6 +592,29 @@ export const PROJECT_DEFS = [
   }
 ];
 
+export const PROJECT_CHAPTER_DEFS = [
+  {
+    name: "首段星图",
+    startId: "stellar-map",
+    endId: "collector-grid"
+  },
+  {
+    name: "专精校准",
+    startId: "ignition-drill",
+    endId: "balanced-tuning"
+  },
+  {
+    name: "深空基建",
+    startId: "farstar-relay",
+    endId: "stellar-anchor"
+  },
+  {
+    name: "远航长尾",
+    startId: "void-gate-expedition",
+    endId: "dawn-abyss-observatory"
+  }
+];
+
 export const PROJECT_GOAL_UNLOCK_ENERGY = 100_000;
 
 const INITIAL_UPGRADES = Object.fromEntries(
@@ -843,6 +866,7 @@ export function getProjectOverview(state) {
   const nextProject = projects.find((project) => !project.completed) ?? null;
   const bonusText = buildProjectBonusText(getProjectBonusesFromStatuses(projects));
   const compositionText = buildProjectCompositionText(projects);
+  const chapterText = buildProjectChapterText(projects, nextProject);
 
   if (!nextProject) {
     return {
@@ -853,6 +877,7 @@ export function getProjectOverview(state) {
       summaryText: "星图进度 " + completed + "/" + projects.length + " · 全部航段已完成",
       detailText: "所有星图奖励已生效，继续累计能量等待下一段航线。",
       trackText: buildProjectTrackText(projects),
+      chapterText,
       compositionText,
       bonusText,
       forecastText: "航线预告：等待下一段航线"
@@ -881,6 +906,7 @@ export function getProjectOverview(state) {
       nextProject.reward,
     detailText: nextProject.progressText,
     trackText: buildProjectTrackText(projects),
+    chapterText,
     compositionText,
     bonusText,
     forecastText:
@@ -1169,6 +1195,44 @@ function buildProjectCompositionText(projects) {
     " 个升级航段 · 奖励分布 " +
     rewardText
   );
+}
+
+function buildProjectChapterText(projects, nextProject) {
+  const chapterParts = PROJECT_CHAPTER_DEFS.map((chapter) => {
+    const chapterProjects = getChapterProjects(projects, chapter);
+    const completed = chapterProjects.filter((project) => project.completed).length;
+
+    return chapter.name + " " + completed + "/" + chapterProjects.length;
+  });
+  const currentChapter = nextProject
+    ? PROJECT_CHAPTER_DEFS.find((chapter) =>
+        getChapterProjects(projects, chapter).some((project) => project.id === nextProject.id)
+      )
+    : null;
+  const currentText =
+    nextProject && currentChapter
+      ? "当前 " +
+        currentChapter.name +
+        " " +
+        nextProject.segmentIndex +
+        "/" +
+        nextProject.segmentTotal +
+        " " +
+        nextProject.name
+      : "全部阶段完成";
+
+  return "阶段导航：" + chapterParts.join(" · ") + "；" + currentText;
+}
+
+function getChapterProjects(projects, chapter) {
+  const startIndex = projects.findIndex((project) => project.id === chapter.startId);
+  const endIndex = projects.findIndex((project) => project.id === chapter.endId);
+
+  if (startIndex < 0 || endIndex < startIndex) {
+    return [];
+  }
+
+  return projects.slice(startIndex, endIndex + 1);
 }
 
 function formatProjectTrack(project) {
