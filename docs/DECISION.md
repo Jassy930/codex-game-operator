@@ -14,12 +14,13 @@
 
 验收标准：
 
-- GitHub Issues 已同步：2026-04-29 01:11 CST 查询到 1 个 open issue、1 个 open feedback issue、0 个 open bug issue；#2 仍为 open。
-- npm test 通过，覆盖首个星图项目前、部分星图奖励生效后、全部星图项目完成后的加成总览文案。
+- GitHub Issues 已同步：2026-04-29 01:18 CST 查询到 1 个 open issue、1 个 open feedback issue、0 个 open bug issue；#2 已回复并仍为 open。
 - npm install 成功。
+- npm test 通过，覆盖首个星图项目前、部分星图奖励生效后、全部星图项目完成后的加成总览文案。
 - npm run build 生成 dist。
+- GitHub Pages workflow 25067331498 已成功，线上地址返回 HTTP 200。
 
-下一步：验证后回复 #2 并保持 open；等待玩家复测星图加成总览是否改善内容丰富度和成长反馈感知。
+下一步：#2 已回复并保持 open；等待玩家复测星图加成总览是否改善内容丰富度和成长反馈感知。
 
 ## 2026-04-29 Product decision：星图航线预告
 
