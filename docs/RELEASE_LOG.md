@@ -29,3 +29,4 @@
 - 改进反馈收集脚本：空 issue 分区会写入 None，并保留 closed issue 快照。
 - 修复发布脚本测试绕过：`ops/deploy.sh` 和 `ops/autopush.sh` 现在会在 `npm test` 失败时停止。
 - 扩展星图长尾目标：新增稳定矩阵和远星中继，让 250K 后继续出现可追项目和产能奖励。
+- 已回复 #2，说明 250K 后长尾星图目标已部署，并保持 issue open 等待复测。
