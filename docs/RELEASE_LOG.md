@@ -6,6 +6,8 @@
 - 同步 GitHub Issues 反馈状态：当前 1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
 - 验证通过：bun install --no-save、bun run test、bun run build、npm install、npm test、npm run build。
 - 构建产物已包含“阶段导航”文案和 projectOverviewChapter 渲染字段。
+- GitHub Pages workflow 25083504675 已成功，线上地址返回 HTTP 200，且发布文件包含“阶段导航”。
+- 已回复 #2，说明阶段导航已部署，并保持 issue open 等待复测。
 - 新增星图航线构成：星图总览显示 22 个累计航段、9 个升级航段，并汇总总产能 10 段、点击 8 段、自动 8 段、过载 5 段奖励分布。
 - 同步 GitHub Issues 反馈状态：当前 1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
 - 验证通过：bun install --no-save、bun run test、bun run build、npm install、npm test、npm run build。

@@ -18,8 +18,10 @@
 - bun install --no-save、bun run test、bun run build、npm install、npm test 和 npm run build 已通过，覆盖星图总览阶段导航和全部完成状态。
 - 构建产物 dist 包含“阶段导航”和 `projectOverviewChapter` 渲染字段。
 - 发布前未发现 open bug 或测试失败。
+- GitHub Pages workflow 25083504675 已成功，线上地址返回 HTTP 200，发布文件包含“阶段导航”。
+- #2 已回复并保持 open，等待复测确认阶段导航是否改善内容层次感和内容丰富度感知。
 
-下一步：发布后回复 #2，并等待复测确认阶段导航是否改善内容层次感。
+下一步：继续观察 #2 复测是否认为阶段导航改善内容层次感和内容丰富度感知。
 
 ## 2026-04-29 Product decision：星图航线构成
 
