@@ -46,6 +46,7 @@ export const GOALS = [
     id: "first-upgrade",
     label: "当前目标",
     value: "购买第一次升级",
+    upgradeId: "lens",
     unit: "次升级",
     target: 1,
     current(state) {
@@ -59,6 +60,7 @@ export const GOALS = [
     id: "passive-production",
     label: "当前目标",
     value: "启动自动采集",
+    upgradeId: "collector",
     unit: "级",
     target: 1,
     current(state) {
@@ -82,6 +84,7 @@ export const GOALS = [
     id: "stable-core",
     label: "当前目标",
     value: "安装稳定器",
+    upgradeId: "stabilizer",
     unit: "级",
     target: 1,
     current(state) {

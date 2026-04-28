@@ -314,6 +314,13 @@ h2 {
   background: rgba(19, 181, 166, 0.14);
 }
 
+.upgrade-card.is-goal-target {
+  border-color: rgba(244, 178, 60, 0.72);
+  background:
+    linear-gradient(180deg, rgba(244, 178, 60, 0.14), transparent),
+    rgba(248, 243, 231, 0.08);
+}
+
 .upgrade-card:disabled {
   cursor: not-allowed;
   opacity: 0.5;
@@ -322,6 +329,19 @@ h2 {
 .upgrade-name {
   font-size: 1.05rem;
   font-weight: 900;
+}
+
+.upgrade-goal-badge {
+  padding: 3px 8px;
+  border-radius: 999px;
+  background: rgba(244, 178, 60, 0.18);
+  color: #fff7c2;
+  font-size: 0.76rem;
+  font-weight: 900;
+}
+
+.upgrade-goal-badge[hidden] {
+  display: none;
 }
 
 .upgrade-summary {

@@ -1,5 +1,26 @@
 # Decision
 
+## 2026-04-28 Product decision：目标升级推荐
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 与 manual-feedback 仍无真实玩家反馈，继续处于无反馈样本下的 Product decision。
+
+当前最大问题：目标条已经说明下一步关键升级，但升级区没有视觉锚点，玩家仍需要在卡片列表里自行匹配目标对应的升级。
+
+本轮决策：
+
+- 为购买型目标暴露对应 upgradeId。
+- 升级区将当前目标对应卡片高亮，并显示“目标推荐”标记。
+- 保持数值曲线、目标顺序、反馈入口和部署基础设施不变。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-04-28 23:12 CST 查询到 0 个 open issue、0 个 open feedback issue、0 个 open bug issue，#1 仍为 closed。
+- npm install 成功。
+- npm test 通过，覆盖购买型目标到升级推荐的映射。
+- npm run build 生成 dist。
+
+下一步：等待真实玩家反馈；若仍无反馈，继续围绕 30 秒内的目标理解、升级选择和反馈入口转化做小步优化。
+
 ## 2026-04-28 Product decision：目标完成反馈
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 与 manual-feedback 仍无真实玩家反馈，继续处于无反馈样本下的 Product decision。

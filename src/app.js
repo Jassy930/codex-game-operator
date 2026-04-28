@@ -146,17 +146,18 @@ function render() {
   renderActionNotice();
 
   elements.upgradeList.replaceChildren(
-    ...UPGRADE_DEFS.map((upgrade) => renderUpgrade(upgrade, current))
+    ...UPGRADE_DEFS.map((upgrade) => renderUpgrade(upgrade, current, goal))
   );
 }
 
-function renderUpgrade(upgrade, current) {
+function renderUpgrade(upgrade, current, goal) {
   const affordability = getUpgradeAffordability(current, upgrade.id);
   const cost = affordability.cost;
   const level = current.upgrades[upgrade.id] ?? 0;
   const canBuy = affordability.canBuy;
+  const isGoalTarget = goal.upgradeId === upgrade.id;
   const button = document.createElement("button");
-  button.className = "upgrade-card";
+  button.className = isGoalTarget ? "upgrade-card is-goal-target" : "upgrade-card";
   button.type = "button";
   button.disabled = !canBuy;
   button.addEventListener("click", () => {
@@ -189,6 +190,11 @@ function renderUpgrade(upgrade, current) {
   header.className = "upgrade-name";
   header.textContent = upgrade.name;
 
+  const goalBadge = document.createElement("span");
+  goalBadge.className = "upgrade-goal-badge";
+  goalBadge.textContent = "目标推荐";
+  goalBadge.hidden = !isGoalTarget;
+
   const summary = document.createElement("span");
   summary.className = "upgrade-summary";
   summary.textContent = upgrade.summary;
@@ -211,7 +217,7 @@ function renderUpgrade(upgrade, current) {
   fill.style.width = Math.round(affordability.progress * 100) + "%";
   meter.append(fill);
 
-  button.append(header, summary, meta, affordance, meter);
+  button.append(header, goalBadge, summary, meta, affordance, meter);
   return button;
 }
 

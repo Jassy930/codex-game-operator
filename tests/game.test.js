@@ -162,6 +162,32 @@ test("当前目标会从第一次升级推进到自动采集", () => {
 
   assert.equal(goal.id, "passive-production");
   assert.equal(goal.value, "启动自动采集");
+  assert.equal(goal.upgradeId, "collector");
+});
+
+test("购买型当前目标会暴露对应升级用于界面推荐", () => {
+  const firstUpgrade = getCurrentGoal(createInitialState(0));
+  const passiveProduction = getCurrentGoal({
+    ...createInitialState(0),
+    upgrades: {
+      lens: 1,
+      collector: 0,
+      stabilizer: 0
+    }
+  });
+  const stableCore = getCurrentGoal({
+    ...createInitialState(0),
+    totalEnergy: 120,
+    upgrades: {
+      lens: 1,
+      collector: 1,
+      stabilizer: 0
+    }
+  });
+
+  assert.equal(firstUpgrade.upgradeId, "lens");
+  assert.equal(passiveProduction.upgradeId, "collector");
+  assert.equal(stableCore.upgradeId, "stabilizer");
 });
 
 test("当前目标会返回可读的进度和剩余量", () => {
