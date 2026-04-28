@@ -2,6 +2,8 @@
 
 ## 2026-04-29
 
+- 本轮已回复 #2：说明星图总览、主目标条和项目列表现在都会显示航段序号；GitHub Pages workflow 25070035103 已成功且线上地址返回 HTTP 200；issue 保持 open，等待复测确认航段序号是否改善内容规模感和目标定位。
+- data/feedback/github-feedback.md 已在回复 #2 后同步本地快照。
 - GitHub Issues：gh 可用且已认证；2026-04-29 02:12 CST 查询到 1 个 open issue、1 个 open feedback issue、0 个 open bug issue。
 - #2 仍为 open，未出现新的复测结论或 bug；本轮继续围绕“内容丰富度太差，可玩的内容太少”补充星图航段序号，让主目标、总览和项目列表都显示当前航段在完整路线中的位置。
 - data/feedback/github-feedback.md 已同步本地快照。

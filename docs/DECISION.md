@@ -21,7 +21,7 @@
 - npm test 通过，覆盖星图航段序号、总览下一段序号和星图主目标航段文案。
 - npm run build 生成 dist。
 - bun run test 和 bun run build 通过。
-- GitHub Pages workflow 完成后，线上地址返回 HTTP 200。
+- GitHub Pages workflow 25070035103 已成功，线上地址返回 HTTP 200。
 - #2 已回复并仍为 open。
 
 下一步：#2 保持 open；等待玩家复测航段序号是否改善中后段内容规模感和目标定位。
