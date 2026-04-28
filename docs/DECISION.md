@@ -1,5 +1,25 @@
 # Decision
 
+## 2026-04-29 Product decision：航线专精进度展示
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 当前仍有真实体验反馈 #2 open，且没有 open bug，继续进入有反馈样本下的 Product decision。
+
+当前最大问题：#2 仍围绕“内容丰富度太差，可玩的内容太少”保持 open，上一轮已把航线策略扩展为点火航校、巡航航校和均衡校准三段专精目标，但策略按钮本身仍只显示倍率摘要，玩家需要去项目列表里对照对应专精航段。
+
+本轮决策：
+
+- 航线策略定义绑定对应专精航段：均衡航线对应均衡校准，点火优先对应点火航校，巡航优先对应巡航航校。
+- 航线策略按钮在 100K 解锁后显示对应专精航段进度或完成状态。
+- 不新增存档字段、不调整奖励数值和升级价格，先把主动策略选择和现有可追目标连起来。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-04-29 02:57 CST 查询到 1 个 open issue、1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
+- bun run test 通过，覆盖航线策略专精进度和已完成状态。
+- npm install、npm test、npm run build、bun run test 和 bun run build 通过。
+
+下一步：发布后观察 #2 复测是否认为航线策略和策略专精目标的关联更清晰。
+
 ## 2026-04-29 Product decision：星图策略专精航段
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 当前仍有真实体验反馈 #2 open，且没有 open bug，继续进入有反馈样本下的 Product decision。

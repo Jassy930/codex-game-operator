@@ -420,7 +420,7 @@ h2 {
 
 .route-stance-button {
   display: grid;
-  min-height: 78px;
+  min-height: 104px;
   gap: 5px;
   align-content: center;
   padding: 10px;
@@ -442,6 +442,14 @@ h2 {
   font-size: 0.76rem;
   font-weight: 800;
   line-height: 1.3;
+}
+
+.route-stance-button .route-stance-mastery {
+  color: #fff7c2;
+}
+
+.route-stance-mastery[hidden] {
+  display: none;
 }
 
 .route-stance-button:enabled:hover,

@@ -282,7 +282,12 @@ function renderRouteStance(option, routeStance) {
   const summary = document.createElement("span");
   summary.textContent = routeStance.unlocked ? option.summary : routeStance.unlockText;
 
-  button.append(name, summary);
+  const mastery = document.createElement("span");
+  mastery.className = "route-stance-mastery";
+  mastery.textContent = option.masteryText;
+  mastery.hidden = !routeStance.unlocked;
+
+  button.append(name, summary, mastery);
   return button;
 }
 

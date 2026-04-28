@@ -61,6 +61,7 @@ export const ROUTE_STANCE_DEFS = [
     id: DEFAULT_ROUTE_STANCE_ID,
     name: "均衡航线",
     summary: "保持当前产能分配",
+    masteryProjectId: "balanced-tuning",
     effect: {
       clickMultiplier: 1,
       secondMultiplier: 1,
@@ -71,6 +72,7 @@ export const ROUTE_STANCE_DEFS = [
     id: "ignition",
     name: "点火优先",
     summary: "点击产能 +14%，过载奖励 +8%",
+    masteryProjectId: "ignition-drill",
     effect: {
       clickMultiplier: 1.14,
       secondMultiplier: 1,
@@ -81,6 +83,7 @@ export const ROUTE_STANCE_DEFS = [
     id: "cruise",
     name: "巡航优先",
     summary: "自动产能 +16%",
+    masteryProjectId: "cruise-drill",
     effect: {
       clickMultiplier: 1,
       secondMultiplier: 1.16,
@@ -637,6 +640,7 @@ export function getRouteStanceStatus(state) {
   const unlocked = current.totalEnergy >= PROJECT_GOAL_UNLOCK_ENERGY;
   const activeId = getValidRouteStanceId(current.routeStance);
   const active = getRouteStanceDef(activeId);
+  const projects = getProjectStatuses(current);
 
   return {
     unlocked,
@@ -645,6 +649,7 @@ export function getRouteStanceStatus(state) {
     unlockText: unlocked ? "航线策略已解锁" : "累计 100K 能量后解锁航线策略",
     options: ROUTE_STANCE_DEFS.map((option) => ({
       ...option,
+      masteryText: buildRouteStanceMasteryText(option, projects),
       selected: option.id === activeId,
       disabled: !unlocked
     }))
@@ -859,6 +864,26 @@ function buildProjectBonusText(bonuses) {
 
 function formatForecastProject(project) {
   return project.name + "（" + project.reward + "）";
+}
+
+function buildRouteStanceMasteryText(option, projects) {
+  const project = projects.find((item) => item.id === option.masteryProjectId);
+
+  if (!project) {
+    return "专精：等待后续航段";
+  }
+  if (project.completed) {
+    return "专精：" + project.name + "已完成";
+  }
+
+  return (
+    "专精：" +
+    project.name +
+    " " +
+    formatProjectAmount(project, Math.min(project.currentValue, project.target)) +
+    "/" +
+    formatProjectAmount(project, project.target)
+  );
 }
 
 function formatMultiplier(value) {

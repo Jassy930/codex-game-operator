@@ -150,6 +150,59 @@ test("星图航线策略会兼容旧存档和未知策略", () => {
   assert.equal(status.active.name, "均衡航线");
 });
 
+test("星图航线策略会显示对应专精航段进度", () => {
+  const status = getRouteStanceStatus({
+    ...createInitialState(0),
+    totalEnergy: 260_000,
+    upgrades: {
+      lens: 12,
+      collector: 13,
+      resonator: 6,
+      stabilizer: 9
+    }
+  });
+
+  assert.equal(status.unlocked, true);
+  assert.equal(
+    status.options.find((option) => option.id === "ignition").masteryText,
+    "专精：点火航校 12 级/14 级"
+  );
+  assert.equal(
+    status.options.find((option) => option.id === "cruise").masteryText,
+    "专精：巡航航校 13 级/14 级"
+  );
+  assert.equal(
+    status.options.find((option) => option.id === "balanced").masteryText,
+    "专精：均衡校准 9 级/14 级"
+  );
+});
+
+test("已完成的航线策略专精会显示完成状态", () => {
+  const status = getRouteStanceStatus({
+    ...createInitialState(0),
+    totalEnergy: 1_200_000,
+    upgrades: {
+      lens: 14,
+      collector: 16,
+      resonator: 6,
+      stabilizer: 16
+    }
+  });
+
+  assert.equal(
+    status.options.find((option) => option.id === "ignition").masteryText,
+    "专精：点火航校已完成"
+  );
+  assert.equal(
+    status.options.find((option) => option.id === "cruise").masteryText,
+    "专精：巡航航校已完成"
+  );
+  assert.equal(
+    status.options.find((option) => option.id === "balanced").masteryText,
+    "专精：均衡校准已完成"
+  );
+});
+
 test("操作提示会拼接目标完成和下一目标", () => {
   const state = {
     ...createInitialState(0),
