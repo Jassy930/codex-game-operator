@@ -1,5 +1,27 @@
 # Decision
 
+## 2026-04-29 Product decision：星图航线策略
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 当前仍有真实体验反馈 #2 open，且没有 open bug，继续进入有反馈样本下的 Product decision。
+
+当前最大问题：#2 仍围绕“内容丰富度太差，可玩的内容太少”保持 open，上一轮航段序号后没有新的复测结论。星图计划已经扩展了路线、奖励和导航，但玩家在 100K 后仍主要是沿一条固定路线推进，缺少一个可主动切换的玩法选择。
+
+本轮决策：
+
+- 新增星图航线策略，累计 100K 能量后解锁。
+- 提供“均衡航线”“点火优先”“巡航优先”三种策略。
+- 点火优先提升点击产能和过载奖励；巡航优先提升自动产能；均衡航线保持当前产能分配。
+- 航线策略进入本地存档、产能计算、界面按钮和反馈快照。
+- 不新增星图项目、不改既有星图奖励和升级价格，先用一组轻量可切换策略提升中后段主动选择感。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-04-29 02:28 CST 查询到 1 个 open issue、1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
+- npm test 通过，覆盖 100K 后航线策略解锁、点火优先产能变化、旧存档未知策略兼容和反馈快照中的航线策略。
+- npm install、npm test、npm run build、bun run test 和 bun run build 通过。
+
+下一步：部署后回复 #2，说明星图航线策略已上线，并继续等待玩家复测主动选择是否改善内容丰富度。
+
 ## 2026-04-29 Product decision：星图航段序号
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 当前仍有真实体验反馈 #2 open，且没有 open bug，继续进入有反馈样本下的 Product decision。

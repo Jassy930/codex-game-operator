@@ -14,9 +14,11 @@ import {
   getEffectiveProduction,
   getProjectOverview,
   getProjectStatuses,
+  getRouteStanceStatus,
   getUpgradeAffordability,
   getUpgradeCost,
   purchaseUpgrade,
+  setRouteStance,
   settleOfflineProgress,
   tick
 } from "../src/game.js";
@@ -107,6 +109,45 @@ test("购买星核谐振器会提升过载奖励", () => {
   assert.equal(result.state.overloadBonus, 7);
   assert.equal(result.state.upgrades.resonator, 1);
   assert.equal(buildUpgradePurchaseNotice(result), "已购买星核谐振器 Lv.1，过载奖励 +7");
+});
+
+test("星图航线策略会在 100K 后解锁并影响产能", () => {
+  const locked = setRouteStance(createInitialState(0), "ignition");
+
+  assert.equal(locked.changed, false);
+  assert.equal(locked.reason, "locked");
+  assert.equal(locked.state.routeStance, "balanced");
+
+  const unlockedState = {
+    ...createInitialState(0),
+    energyPerClick: 10,
+    energyPerSecond: 10,
+    totalEnergy: 100_000
+  };
+  const switched = setRouteStance(unlockedState, "ignition");
+  const status = getRouteStanceStatus(switched.state);
+  const production = getEffectiveProduction(switched.state);
+
+  assert.equal(switched.changed, true);
+  assert.equal(switched.stance.name, "点火优先");
+  assert.equal(status.unlocked, true);
+  assert.equal(status.activeId, "ignition");
+  assert.equal(status.options.find((option) => option.id === "ignition").selected, true);
+  assert.equal(production.routeStance.activeId, "ignition");
+  assert.equal(production.perClick, 12.768);
+  assert.equal(production.perSecond, 11.2);
+  assert.equal(production.overloadBonus, 6.8947);
+});
+
+test("星图航线策略会兼容旧存档和未知策略", () => {
+  const status = getRouteStanceStatus({
+    ...createInitialState(0),
+    totalEnergy: 120_000,
+    routeStance: "unknown"
+  });
+
+  assert.equal(status.activeId, "balanced");
+  assert.equal(status.active.name, "均衡航线");
 });
 
 test("操作提示会拼接目标完成和下一目标", () => {
@@ -656,6 +697,7 @@ test("反馈入口会生成带游戏快照的 GitHub Issue 链接", () => {
     energy: 42,
     totalEnergy: 80,
     energyPerSecond: 0.7,
+    routeStance: "ignition",
     upgrades: {
       lens: 1,
       collector: 1,
@@ -681,5 +723,6 @@ test("反馈入口会生成带游戏快照的 GitHub Issue 链接", () => {
   assert.match(body, /升级按钮反馈不明显/);
   assert.match(body, /当前目标：累计 100 能量/);
   assert.match(body, /过载奖励：5/);
+  assert.match(body, /航线策略：点火优先/);
   assert.match(body, /lens:1/);
 });

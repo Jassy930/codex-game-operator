@@ -1,3 +1,5 @@
+import { DEFAULT_ROUTE_STANCE_ID, ROUTE_STANCE_DEFS } from "./game.js";
+
 export const FEEDBACK_TYPES = {
   experience: {
     label: "体验反馈",
@@ -51,6 +53,7 @@ export function createFeedbackEntry({
       energyPerClick: currentState.energyPerClick ?? 1,
       multiplier: currentState.multiplier ?? 1,
       overloadBonus: currentState.overloadBonus ?? 5,
+      routeStance: getFeedbackRouteStanceId(currentState.routeStance),
       combo: currentState.combo ?? 0,
       goal: currentGoal.value ?? "未知",
       upgrades: currentState.upgrades ?? {}
@@ -88,12 +91,26 @@ export function createFeedbackIssueBody(entry) {
     `- 每次产能：${snapshot.energyPerClick}`,
     `- 产能倍率：${snapshot.multiplier}`,
     `- 过载奖励：${snapshot.overloadBonus}`,
+    `- 航线策略：${getFeedbackRouteStanceName(snapshot.routeStance)}`,
     `- 连击：${snapshot.combo}`,
     `- 当前目标：${snapshot.goal}`,
     `- 升级：${upgrades || "无"}`,
     `- Session：${entry.sessionId ?? "未知"}`,
     `- 创建时间：${entry.createdAt}`
   ].join("\n");
+}
+
+function getFeedbackRouteStanceId(routeStanceId) {
+  return ROUTE_STANCE_DEFS.some((item) => item.id === routeStanceId)
+    ? routeStanceId
+    : DEFAULT_ROUTE_STANCE_ID;
+}
+
+function getFeedbackRouteStanceName(routeStanceId) {
+  return (
+    ROUTE_STANCE_DEFS.find((item) => item.id === routeStanceId)?.name ??
+    ROUTE_STANCE_DEFS[0].name
+  );
 }
 
 function clampRating(value) {

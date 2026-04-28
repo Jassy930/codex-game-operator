@@ -55,6 +55,39 @@ export const UPGRADE_DEFS = [
 
 export const OVERLOAD_INTERVAL = 8;
 export const BASE_OVERLOAD_BONUS = 5;
+export const DEFAULT_ROUTE_STANCE_ID = "balanced";
+export const ROUTE_STANCE_DEFS = [
+  {
+    id: DEFAULT_ROUTE_STANCE_ID,
+    name: "均衡航线",
+    summary: "保持当前产能分配",
+    effect: {
+      clickMultiplier: 1,
+      secondMultiplier: 1,
+      overloadMultiplier: 1
+    }
+  },
+  {
+    id: "ignition",
+    name: "点火优先",
+    summary: "点击产能 +14%，过载奖励 +8%",
+    effect: {
+      clickMultiplier: 1.14,
+      secondMultiplier: 1,
+      overloadMultiplier: 1.08
+    }
+  },
+  {
+    id: "cruise",
+    name: "巡航优先",
+    summary: "自动产能 +16%",
+    effect: {
+      clickMultiplier: 1,
+      secondMultiplier: 1.16,
+      overloadMultiplier: 1
+    }
+  }
+];
 export const GOALS = [
   {
     id: "first-upgrade",
@@ -277,6 +310,7 @@ export function createInitialState(now = Date.now()) {
     combo: 0,
     comboExpiresAt: 0,
     clicks: 0,
+    routeStance: DEFAULT_ROUTE_STANCE_ID,
     createdAt: now,
     firstUpgradeAt: null,
     lastTick: now,
@@ -306,6 +340,7 @@ export function normalizeState(state, now = Date.now()) {
     combo: Math.max(0, Number(source.combo ?? initial.combo) || 0),
     comboExpiresAt: readNumber(source.comboExpiresAt, initial.comboExpiresAt),
     clicks: Math.max(0, Number(source.clicks ?? initial.clicks) || 0),
+    routeStance: getValidRouteStanceId(source.routeStance),
     createdAt: readNumber(source.createdAt, initial.createdAt),
     lastTick: readNumber(source.lastTick, now),
     lastGain: Math.max(0, Number(source.lastGain ?? initial.lastGain) || 0),
@@ -552,6 +587,58 @@ export function getProjectBonuses(state) {
   return getProjectBonusesFromStatuses(getProjectStatuses(state));
 }
 
+export function getRouteStanceStatus(state) {
+  const current = normalizeState(state);
+  const unlocked = current.totalEnergy >= PROJECT_GOAL_UNLOCK_ENERGY;
+  const activeId = getValidRouteStanceId(current.routeStance);
+  const active = getRouteStanceDef(activeId);
+
+  return {
+    unlocked,
+    activeId,
+    active,
+    unlockText: unlocked ? "航线策略已解锁" : "累计 100K 能量后解锁航线策略",
+    options: ROUTE_STANCE_DEFS.map((option) => ({
+      ...option,
+      selected: option.id === activeId,
+      disabled: !unlocked
+    }))
+  };
+}
+
+export function setRouteStance(state, routeStanceId) {
+  const current = normalizeState(state);
+  const nextId = getValidRouteStanceId(routeStanceId);
+  const stance = getRouteStanceDef(nextId);
+
+  if (current.totalEnergy < PROJECT_GOAL_UNLOCK_ENERGY) {
+    return {
+      changed: false,
+      reason: "locked",
+      state: current,
+      stance
+    };
+  }
+
+  if (current.routeStance === nextId) {
+    return {
+      changed: false,
+      reason: "same",
+      state: current,
+      stance
+    };
+  }
+
+  return {
+    changed: true,
+    state: {
+      ...current,
+      routeStance: nextId
+    },
+    stance
+  };
+}
+
 function getProjectBonusesFromStatuses(projects) {
   const completedProjects = projects.filter((project) => project.completed);
   return completedProjects.reduce(
@@ -592,10 +679,29 @@ function getProjectBonusesFromStatuses(projects) {
 export function getEffectiveProduction(state) {
   const current = normalizeState(state);
   const bonuses = getProjectBonuses(current);
-  const clickGainMultiplier = current.multiplier * bonuses.totalMultiplier * bonuses.clickMultiplier;
-  const secondGainMultiplier = current.multiplier * bonuses.totalMultiplier * bonuses.secondMultiplier;
+  const routeStance = getRouteStanceStatus(current);
+  const routeEffect = routeStance.unlocked
+    ? routeStance.active.effect
+    : {
+        clickMultiplier: 1,
+        secondMultiplier: 1,
+        overloadMultiplier: 1
+      };
+  const clickGainMultiplier =
+    current.multiplier *
+    bonuses.totalMultiplier *
+    bonuses.clickMultiplier *
+    routeEffect.clickMultiplier;
+  const secondGainMultiplier =
+    current.multiplier *
+    bonuses.totalMultiplier *
+    bonuses.secondMultiplier *
+    routeEffect.secondMultiplier;
   const overloadBonus =
-    current.overloadBonus * bonuses.overloadMultiplier * clickGainMultiplier;
+    current.overloadBonus *
+    bonuses.overloadMultiplier *
+    routeEffect.overloadMultiplier *
+    clickGainMultiplier;
 
   return {
     perClick: roundTo(current.energyPerClick * clickGainMultiplier, 4),
@@ -604,7 +710,8 @@ export function getEffectiveProduction(state) {
     totalMultiplier: roundTo(current.multiplier * bonuses.totalMultiplier, 4),
     clickGainMultiplier: roundTo(clickGainMultiplier, 4),
     secondGainMultiplier: roundTo(secondGainMultiplier, 4),
-    projectBonuses: bonuses
+    projectBonuses: bonuses,
+    routeStance
   };
 }
 
@@ -810,6 +917,19 @@ function buildUpgradeActionText(state, upgradeId) {
   }
 
   return "还差 " + formatNumber(affordability.remaining) + " 能量购买" + upgrade.name;
+}
+
+function getValidRouteStanceId(routeStanceId) {
+  return ROUTE_STANCE_DEFS.some((item) => item.id === routeStanceId)
+    ? routeStanceId
+    : DEFAULT_ROUTE_STANCE_ID;
+}
+
+function getRouteStanceDef(routeStanceId) {
+  return (
+    ROUTE_STANCE_DEFS.find((item) => item.id === getValidRouteStanceId(routeStanceId)) ??
+    ROUTE_STANCE_DEFS[0]
+  );
 }
 
 function describeUpgradeProduction(upgradeId, state) {

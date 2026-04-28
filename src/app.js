@@ -11,9 +11,11 @@ import {
   getEffectiveProduction,
   getProjectOverview,
   getProjectStatuses,
+  getRouteStanceStatus,
   getUpgradeAffordability,
   normalizeState,
   purchaseUpgrade,
+  setRouteStance,
   settleOfflineProgress,
   tick
 } from "./game.js";
@@ -43,6 +45,7 @@ const elements = {
   projectOverviewDetail: document.querySelector("#projectOverviewDetail"),
   projectOverviewBonus: document.querySelector("#projectOverviewBonus"),
   projectOverviewForecast: document.querySelector("#projectOverviewForecast"),
+  routeStanceList: document.querySelector("#routeStanceList"),
   projectList: document.querySelector("#projectList"),
   resetButton: document.querySelector("#resetButton"),
   feedbackForm: document.querySelector("#feedbackForm"),
@@ -143,6 +146,7 @@ function render() {
   const combo = getComboStatus(current);
   const production = getEffectiveProduction(current);
   const projectOverview = getProjectOverview(current);
+  const routeStance = getRouteStanceStatus(current);
 
   elements.energy.textContent = formatNumber(current.energy);
   elements.perSecond.textContent = formatNumber(production.perSecond);
@@ -160,6 +164,7 @@ function render() {
   elements.projectOverviewDetail.textContent = projectOverview.detailText;
   elements.projectOverviewBonus.textContent = projectOverview.bonusText;
   elements.projectOverviewForecast.textContent = projectOverview.forecastText;
+  renderRouteStances(routeStance);
 
   elements.upgradeList.replaceChildren(
     ...UPGRADE_DEFS.map((upgrade) => renderUpgrade(upgrade, current, goal))
@@ -237,6 +242,47 @@ function renderUpgrade(upgrade, current, goal) {
   meter.append(fill);
 
   button.append(header, goalBadge, summary, meta, affordance, meter);
+  return button;
+}
+
+function renderRouteStances(routeStance) {
+  elements.routeStanceList.replaceChildren(
+    ...routeStance.options.map((option) => renderRouteStance(option, routeStance))
+  );
+}
+
+function renderRouteStance(option, routeStance) {
+  const button = document.createElement("button");
+  button.className = option.selected
+    ? "route-stance-button is-active"
+    : "route-stance-button";
+  button.type = "button";
+  button.disabled = option.disabled;
+  button.setAttribute("aria-pressed", option.selected ? "true" : "false");
+  button.addEventListener("click", () => {
+    offlineSummary = null;
+    const result = setRouteStance(state, option.id);
+    state = result.state;
+
+    if (result.changed) {
+      actionNotice = "已切换航线策略：" + result.stance.name;
+      recordEvent("route_stance", {
+        routeStance: result.stance.id
+      });
+    } else if (result.reason === "locked") {
+      actionNotice = routeStance.unlockText;
+    }
+
+    saveAndRender();
+  });
+
+  const name = document.createElement("strong");
+  name.textContent = option.name;
+
+  const summary = document.createElement("span");
+  summary.textContent = routeStance.unlocked ? option.summary : routeStance.unlockText;
+
+  button.append(name, summary);
   return button;
 }
 
