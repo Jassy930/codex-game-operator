@@ -2,6 +2,9 @@
 
 ## 2026-04-29
 
+- GitHub Issues：gh 可用且已认证；2026-04-29 03:10 CST 查询到 1 个 open issue、1 个 open feedback issue、0 个 open bug issue。
+- #2 仍为 open，未出现新的复测结论或 bug；本轮继续围绕“内容丰富度太差，可玩的内容太少”新增 1.5M 后星门远征航段，让现有 13 段星图完成后仍有明确深空后续目标。
+- data/feedback/github-feedback.md 已同步本地快照。
 - 本轮已回复 #2：说明航线策略按钮现在会显示对应专精航段进度或完成状态；GitHub Pages workflow 25072150110 已成功且线上地址返回 HTTP 200；issue 保持 open，等待复测确认航线策略和策略专精目标的关联是否更清晰。
 - data/feedback/github-feedback.md 已在回复 #2 后同步本地快照。
 - GitHub Issues：gh 可用且已认证；2026-04-29 02:57 CST 查询到 1 个 open issue、1 个 open feedback issue、0 个 open bug issue。

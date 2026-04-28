@@ -1,5 +1,26 @@
 # Decision
 
+## 2026-04-29 Product decision：星门远征航段
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 当前仍有真实体验反馈 #2 open，且没有 open bug，继续进入有反馈样本下的 Product decision。
+
+当前最大问题：#2 仍围绕“内容丰富度太差，可玩的内容太少”保持 open，上一轮已把航线策略和策略专精进度关联到同屏，但当玩家完成现有 13 段星图路线后仍会回到循环累计目标，后续内容边界过早暴露。
+
+本轮决策：
+
+- 新增“星门远征”航段，要求累计 1.5M 能量，奖励总产能 +16%。
+- 星图路线从 13 段扩展到 14 段；主目标、总览、航线预告、项目列表和全部完成状态沿用现有航段序号与奖励展示。
+- 不新增存档字段、不调整既有奖励数值和升级价格，先用一个深空后续航段延长现有路线。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-04-29 03:10 CST 查询到 1 个 open issue、1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
+- bun run test 通过，覆盖深空航段完成后继续指向星门远征、14 段航线序号和全部完成总览。
+- npm install、npm test、npm run build、bun run test 和 bun run build 通过。
+- 发布后回复 #2 并保持 open，等待复测确认 1.5M 后续航段是否改善长尾内容丰富度。
+
+下一步：提交推送并等待 GitHub Pages workflow，发布后回复 #2 并回填线上状态。
+
 ## 2026-04-29 Product decision：航线专精进度展示
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 当前仍有真实体验反馈 #2 open，且没有 open bug，继续进入有反馈样本下的 Product decision。

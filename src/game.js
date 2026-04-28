@@ -337,6 +337,20 @@ export const PROJECT_DEFS = [
     current(state) {
       return state.upgrades.stabilizer ?? 0;
     }
+  },
+  {
+    id: "void-gate-expedition",
+    name: "星门远征",
+    summary: "累计 1.5M 能量，开启更远深空航线。",
+    unit: "能量",
+    target: 1_500_000,
+    reward: "总产能 +16%",
+    effect: {
+      totalMultiplier: 1.16
+    },
+    current(state) {
+      return state.totalEnergy;
+    }
   }
 ];
 
