@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- 新增 3.5M 后引力航标航段：彗尾船坞完成后继续出现累计能量目标，完成后奖励总产能 +15%，星图路线扩展到 17 段。
+- 同步 GitHub Issues 反馈状态：当前 1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
 - 新增 2.75M 后彗尾船坞航段：外环信标完成后继续出现累计能量目标，完成后奖励自动产能 +18%，星图路线扩展到 16 段。
 - 同步 GitHub Issues 反馈状态：当前 1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
 - 已回复 #2，说明彗尾船坞航段已部署，并保持 issue open 等待复测。

@@ -379,6 +379,20 @@ export const PROJECT_DEFS = [
     current(state) {
       return state.totalEnergy;
     }
+  },
+  {
+    id: "gravity-beacon",
+    name: "引力航标",
+    summary: "累计 3.5M 能量，在深空引力井校准回航航标。",
+    unit: "能量",
+    target: 3_500_000,
+    reward: "总产能 +15%",
+    effect: {
+      totalMultiplier: 1.15
+    },
+    current(state) {
+      return state.totalEnergy;
+    }
   }
 ];
 
