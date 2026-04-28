@@ -16,6 +16,8 @@
 
 - GitHub Issues 已同步：2026-04-29 05:00 CST 查询到 1 个 open issue、1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
 - bun install、bun run test、bun run build、npm install、npm test 和 npm run build 通过，覆盖深穹测距阵完成后继续指向寂光中继环、22 段航线序号和全部完成总览。
+- GitHub Pages workflow 25077653548 已成功，线上地址返回 HTTP 200。
+- #2 已回复并保持 open。
 
 下一步：发布后继续观察 #2 复测是否认为寂光中继环改善长尾内容丰富度。
 
