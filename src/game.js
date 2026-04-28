@@ -322,6 +322,28 @@ export function buildUpgradePurchaseNotice(result) {
   );
 }
 
+export function buildGoalCompletionNotice(previousGoal, nextGoal) {
+  if (!previousGoal || !nextGoal || previousGoal.id === nextGoal.id) {
+    return "";
+  }
+
+  return "目标完成：" + previousGoal.value + "；下一目标：" + nextGoal.value;
+}
+
+export function buildActionNoticeWithGoalTransition(actionText, previousGoal, nextGoal) {
+  const primaryText = String(actionText ?? "").trim();
+  const goalText = buildGoalCompletionNotice(previousGoal, nextGoal);
+
+  if (!goalText) {
+    return primaryText;
+  }
+  if (!primaryText) {
+    return goalText;
+  }
+
+  return primaryText + " · " + goalText;
+}
+
 export function formatNumber(value) {
   const number = Number(value) || 0;
   if (number < 1000) {

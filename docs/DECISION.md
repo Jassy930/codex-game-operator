@@ -1,5 +1,26 @@
 # Decision
 
+## 2026-04-28 Product decision：目标完成反馈
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 与 manual-feedback 仍无真实玩家反馈，继续处于无反馈样本下的 Product decision。
+
+当前最大问题：目标条能显示下一步和剩余量，但完成目标的那一刻只会切换到新目标，玩家缺少明确的“已完成/下一目标”反馈。
+
+本轮决策：
+
+- 点击、购买升级或自动产能推进目标时，在主操作区拼接显示目标完成和下一目标。
+- 新增本地 `goal_complete` 事件，记录完成目标和下一目标，用于验证目标链路是否被触发。
+- 保持数值曲线、升级顺序、反馈入口和部署基础设施不变。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-04-28 23:02 CST 查询到 0 个 open issue、0 个 open feedback issue、0 个 open bug issue，#1 仍为 closed。
+- npm install 成功。
+- npm test 通过，覆盖目标完成提示拼接。
+- npm run build 生成 dist。
+
+下一步：等待真实玩家反馈；若仍无反馈，继续围绕 30 秒内的目标完成、升级选择和反馈入口转化做小步优化。
+
 ## 2026-04-28 Product decision：操作反馈可见性
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 与 manual-feedback 仍无真实玩家反馈，继续处于无反馈样本下的 Product decision。

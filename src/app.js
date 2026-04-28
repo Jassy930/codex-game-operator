@@ -1,5 +1,6 @@
 import {
   UPGRADE_DEFS,
+  buildActionNoticeWithGoalTransition,
   buildClickActionNotice,
   buildUpgradePurchaseNotice,
   clickCore,
@@ -63,8 +64,9 @@ render();
 
 elements.coreButton.addEventListener("click", () => {
   offlineSummary = null;
+  const previousGoal = getCurrentGoal(state);
   state = clickCore(state);
-  actionNotice = buildClickActionNotice(state);
+  applyActionNoticeWithGoalTransition(previousGoal, state, buildClickActionNotice(state));
   recordEvent("click", {
     energy: Math.floor(state.energy),
     combo: state.combo
@@ -120,7 +122,9 @@ elements.feedbackForm.addEventListener("submit", (event) => {
 });
 
 setInterval(() => {
+  const previousGoal = getCurrentGoal(state);
   state = tick(state);
+  applyActionNoticeWithGoalTransition(previousGoal, state);
   saveAndRender();
 }, 250);
 
@@ -157,10 +161,15 @@ function renderUpgrade(upgrade, current) {
   button.disabled = !canBuy;
   button.addEventListener("click", () => {
     offlineSummary = null;
+    const previousGoal = getCurrentGoal(state);
     const result = purchaseUpgrade(state, upgrade.id);
     state = result.state;
     if (result.purchased) {
-      actionNotice = buildUpgradePurchaseNotice(result);
+      applyActionNoticeWithGoalTransition(
+        previousGoal,
+        state,
+        buildUpgradePurchaseNotice(result)
+      );
       recordEvent("upgrade_purchase", {
         upgrade: upgrade.id,
         level: state.upgrades[upgrade.id],
@@ -214,6 +223,22 @@ function renderActionNotice() {
 function saveAndRender() {
   persistState();
   render();
+}
+
+function applyActionNoticeWithGoalTransition(previousGoal, nextState, primaryNotice = "") {
+  const nextGoal = getCurrentGoal(nextState);
+  const notice = buildActionNoticeWithGoalTransition(primaryNotice, previousGoal, nextGoal);
+
+  if (notice) {
+    actionNotice = notice;
+  }
+
+  if (previousGoal.id !== nextGoal.id) {
+    recordEvent("goal_complete", {
+      completedGoal: previousGoal.id,
+      nextGoal: nextGoal.id
+    });
+  }
 }
 
 function loadState() {

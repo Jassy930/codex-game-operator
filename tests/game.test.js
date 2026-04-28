@@ -2,7 +2,9 @@ import test from "node:test";
 import assert from "node:assert/strict";
 
 import {
+  buildActionNoticeWithGoalTransition,
   buildClickActionNotice,
+  buildGoalCompletionNotice,
   buildUpgradePurchaseNotice,
   clickCore,
   createInitialState,
@@ -86,6 +88,30 @@ test("购买聚能透镜会扣除成本并提升点击产能", () => {
   assert.equal(result.state.energyPerClick, 2);
   assert.equal(result.state.upgrades.lens, 1);
   assert.equal(buildUpgradePurchaseNotice(result), "已购买聚能透镜 Lv.1，每次产能 2");
+});
+
+test("操作提示会拼接目标完成和下一目标", () => {
+  const state = {
+    ...createInitialState(0),
+    energy: 10,
+    totalEnergy: 10
+  };
+  const previousGoal = getCurrentGoal(state);
+  const result = purchaseUpgrade(state, "lens", 1000);
+  const nextGoal = getCurrentGoal(result.state);
+
+  assert.equal(
+    buildGoalCompletionNotice(previousGoal, nextGoal),
+    "目标完成：购买第一次升级；下一目标：启动自动采集"
+  );
+  assert.equal(
+    buildActionNoticeWithGoalTransition(
+      buildUpgradePurchaseNotice(result),
+      previousGoal,
+      nextGoal
+    ),
+    "已购买聚能透镜 Lv.1，每次产能 2 · 目标完成：购买第一次升级；下一目标：启动自动采集"
+  );
 });
 
 test("自动产能随 tick 增长并限制离线收益上限", () => {
