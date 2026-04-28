@@ -1,5 +1,27 @@
 # Decision
 
+## 2026-04-29 Product decision：星图长尾目标
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 当前仍有真实体验反馈 #2 open，且没有 open bug，继续进入有反馈样本下的 Product decision。
+
+当前最大问题：上一轮已让星图项目进入主目标并显示奖励，但星桥试运行之后仍会回到循环累计目标。对“内容丰富度太差”的反馈来说，首批星图项目完成后还需要继续看到 250K 之后的可追目标。
+
+本轮决策：
+
+- 在星桥试运行之后新增稳定矩阵和远星中继两个星图项目。
+- 稳定矩阵要求星核稳定器达到 12 级，并奖励总产能 +18%。
+- 远星中继要求累计 500K 能量，并奖励自动产能 +24%。
+- 保持 100K 前目标、反馈入口、部署基础设施和已有升级曲线不变，先扩展星图长尾而不引入主动分支系统。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-04-29 00:06 CST 查询到 1 个 open issue、1 个 open feedback issue、0 个 open bug issue；#2 仍为 open。
+- npm install 成功。
+- npm test 通过，覆盖首批星图项目完成后继续指向稳定矩阵，以及远星中继完成后的自动产能奖励。
+- npm run build 生成 dist。
+
+下一步：#2 保持 open；发布后回复玩家本轮新增了 250K 后长尾目标，等待复测内容丰富度是否改善。
+
 ## 2026-04-28 Product decision：星图奖励进主目标
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 当前仍有真实体验反馈 #2 open，且没有 open bug，继续进入有反馈样本下的 Product decision。

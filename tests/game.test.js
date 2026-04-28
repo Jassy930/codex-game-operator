@@ -343,6 +343,29 @@ test("星图主目标会直接显示项目奖励", () => {
   );
 });
 
+test("首批星图项目完成后会继续指向稳定矩阵", () => {
+  const state = {
+    ...createInitialState(0),
+    energy: 50_000,
+    totalEnergy: 260_000,
+    upgrades: {
+      lens: 12,
+      collector: 12,
+      stabilizer: 9
+    }
+  };
+
+  const goal = getCurrentGoal(state);
+
+  assert.equal(goal.id, "project-stabilizer-matrix");
+  assert.equal(goal.value, "稳定矩阵");
+  assert.equal(goal.upgradeId, "stabilizer");
+  assert.equal(
+    goal.progressText,
+    "进度 9 级 / 12 级 · 可购买星核稳定器 · 奖励 总产能 +18%"
+  );
+});
+
 test("100K 前当前目标仍保留短周期累计目标", () => {
   const state = {
     ...createInitialState(0),
@@ -387,6 +410,34 @@ test("已完成星图项目会提升有效产能", () => {
   assert.equal(production.perClick, 26.432);
   assert.equal(production.perSecond, 13.216);
   assert.equal(clicked.lastGain, 26.432);
+});
+
+test("远星中继完成后会继续提升自动产能", () => {
+  const state = {
+    ...createInitialState(0),
+    energyPerClick: 10,
+    energyPerSecond: 10,
+    totalEnergy: 600_000,
+    upgrades: {
+      lens: 12,
+      collector: 12,
+      stabilizer: 12
+    }
+  };
+
+  const production = getEffectiveProduction(state);
+
+  assert.deepEqual(production.projectBonuses.projectIds, [
+    "stellar-map",
+    "lens-array",
+    "collector-grid",
+    "starbridge-trial",
+    "stabilizer-matrix",
+    "farstar-relay"
+  ]);
+  assert.equal(production.projectBonuses.completed, 6);
+  assert.equal(production.projectBonuses.secondMultiplier, 1.4632);
+  assert.equal(production.perSecond, 24.1721);
 });
 
 test("反馈入口会生成带游戏快照的 GitHub Issue 链接", () => {

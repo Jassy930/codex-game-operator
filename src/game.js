@@ -154,6 +154,35 @@ export const PROJECT_DEFS = [
     current(state) {
       return state.totalEnergy;
     }
+  },
+  {
+    id: "stabilizer-matrix",
+    name: "稳定矩阵",
+    summary: "将星核稳定器扩展到 12 级。",
+    upgradeId: "stabilizer",
+    unit: "级",
+    target: 12,
+    reward: "总产能 +18%",
+    effect: {
+      totalMultiplier: 1.18
+    },
+    current(state) {
+      return state.upgrades.stabilizer ?? 0;
+    }
+  },
+  {
+    id: "farstar-relay",
+    name: "远星中继",
+    summary: "累计 500K 能量，维持远星航线。",
+    unit: "能量",
+    target: 500_000,
+    reward: "自动产能 +24%",
+    effect: {
+      secondMultiplier: 1.24
+    },
+    current(state) {
+      return state.totalEnergy;
+    }
   }
 ];
 
