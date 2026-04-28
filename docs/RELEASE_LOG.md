@@ -5,6 +5,8 @@
 - 新增 9M 后深穹测距阵航段：星云档案库完成后继续出现累计能量目标，完成后奖励总产能 +17%，星图路线扩展到 21 段。
 - 同步 GitHub Issues 反馈状态：当前 1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
 - 验证通过：bun install、bun run test、bun run build、npm install、npm test、npm run build。
+- GitHub Pages workflow 25077104300 已成功，线上地址返回 HTTP 200。
+- 已回复 #2，说明深穹测距阵航段已部署，并保持 issue open 等待复测。
 - 新增 7.25M 后星云档案库航段：虚空罗盘完成后继续出现累计能量目标，完成后奖励自动产能 +17%，星图路线扩展到 20 段。
 - 同步 GitHub Issues 反馈状态：当前 1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
 - 验证通过：bun install、bun run test、bun run build、npm install、npm test、npm run build。
