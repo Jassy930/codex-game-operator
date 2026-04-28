@@ -547,6 +547,20 @@ export const PROJECT_DEFS = [
     current(state) {
       return state.totalEnergy;
     }
+  },
+  {
+    id: "far-dawn-lighthouse",
+    name: "远曦灯塔",
+    summary: "累计 50M 能量，在离辉轨道港外点亮远曦灯塔。",
+    unit: "能量",
+    target: 50_000_000,
+    reward: "总产能 +19%",
+    effect: {
+      totalMultiplier: 1.19
+    },
+    current(state) {
+      return state.totalEnergy;
+    }
   }
 ];
 
