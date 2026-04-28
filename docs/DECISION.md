@@ -16,7 +16,8 @@
 
 - GitHub Issues 已同步：2026-04-29 06:04 CST 查询到 1 个 open issue、1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
 - bun install、bun run test、bun run build、npm install、npm test 和 npm run build 已通过，覆盖引潮星环完成后继续指向脉冲航闸、27 段航线序号和全部完成总览。
-- 待推送后由 GitHub Pages workflow 发布，并在发布通过后回复 #2。
+- GitHub Pages workflow 25080325889 已成功，线上地址返回 HTTP 200，且发布文件包含脉冲航闸。
+- #2 已回复并保持 open，等待复测确认脉冲航闸是否改善长尾内容丰富度。
 
 下一步：发布后继续观察 #2 复测是否认为脉冲航闸改善长尾内容丰富度。
 
