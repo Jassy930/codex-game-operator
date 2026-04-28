@@ -1,5 +1,26 @@
 # Decision
 
+## 2026-04-29 Product decision：星图奖励完成反馈
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 当前仍有真实体验反馈 #2 open，且没有 open bug，继续进入有反馈样本下的 Product decision。
+
+当前最大问题：#2 仍围绕“内容丰富度太差，可玩的内容太少”保持 open。上一轮已经扩展 250K 后长尾项目，但项目完成瞬间只提示目标切换，没有明确确认“刚获得了什么奖励”，中后段内容的完成感仍可能被弱化。
+
+本轮决策：
+
+- 星图项目完成并切换到下一目标时，在操作提示中追加“获得奖励：X”。
+- 普通早期目标完成提示保持原文案，不额外制造奖励描述。
+- 不调整升级曲线、星图项目数量、奖励数值和反馈入口，先补强已有中后段内容的完成反馈。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-04-29 00:21 CST 查询到 1 个 open issue、1 个 open feedback issue、0 个 open bug issue；#2 仍为 open。
+- npm install 成功。
+- npm test 通过，覆盖星桥试运行完成后提示已获得总产能奖励并切换到稳定矩阵。
+- npm run build 生成 dist。
+
+下一步：完成部署后回复 #2，说明本轮把星图项目奖励确认加入目标完成提示；继续等待玩家复测内容丰富度和中后段完成感。
+
 ## 2026-04-29 Product decision：星图长尾目标
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 当前仍有真实体验反馈 #2 open，且没有 open bug，继续进入有反馈样本下的 Product decision。

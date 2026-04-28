@@ -116,6 +116,35 @@ test("操作提示会拼接目标完成和下一目标", () => {
   );
 });
 
+test("星图目标完成提示会确认项目奖励", () => {
+  const before = {
+    ...createInitialState(0),
+    totalEnergy: 249_999,
+    upgrades: {
+      lens: 12,
+      collector: 12,
+      stabilizer: 9
+    }
+  };
+  const after = {
+    ...before,
+    totalEnergy: 250_000
+  };
+  const previousGoal = getCurrentGoal(before);
+  const nextGoal = getCurrentGoal(after);
+
+  assert.equal(previousGoal.id, "project-starbridge-trial");
+  assert.equal(nextGoal.id, "project-stabilizer-matrix");
+  assert.equal(
+    buildGoalCompletionNotice(previousGoal, nextGoal),
+    "目标完成：星桥试运行；获得奖励：总产能 +25%；下一目标：稳定矩阵"
+  );
+  assert.equal(
+    buildActionNoticeWithGoalTransition("", previousGoal, nextGoal),
+    "目标完成：星桥试运行；获得奖励：总产能 +25%；下一目标：稳定矩阵"
+  );
+});
+
 test("自动产能随 tick 增长并限制离线收益上限", () => {
   const state = {
     ...createInitialState(0),

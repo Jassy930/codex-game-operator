@@ -498,7 +498,8 @@ export function buildGoalCompletionNotice(previousGoal, nextGoal) {
     return "";
   }
 
-  return "目标完成：" + previousGoal.value + "；下一目标：" + nextGoal.value;
+  const rewardText = previousGoal.reward ? "；获得奖励：" + previousGoal.reward : "";
+  return "目标完成：" + previousGoal.value + rewardText + "；下一目标：" + nextGoal.value;
 }
 
 export function buildActionNoticeWithGoalTransition(actionText, previousGoal, nextGoal) {
