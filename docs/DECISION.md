@@ -20,8 +20,10 @@
 - npm test 通过，覆盖星图项目只会标记第一个未完成项目为当前航段，全部完成时没有当前航段。
 - npm run build 生成 dist。
 - bun run test 和 bun run build 通过。
+- GitHub Pages workflow 25069380519 已成功，线上地址返回 HTTP 200。
+- #2 已回复并仍为 open。
 
-下一步：提交并推送后等待 GitHub Pages workflow；部署成功后回复 #2，继续等待玩家复测当前航段标记是否改善中后段目标识别。
+下一步：#2 已回复并保持 open；等待玩家复测当前航段标记是否改善中后段目标识别。
 
 ## 2026-04-29 Product decision：过载谐振线
 
