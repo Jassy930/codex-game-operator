@@ -4,6 +4,7 @@
 
 - 新增 2.75M 后彗尾船坞航段：外环信标完成后继续出现累计能量目标，完成后奖励自动产能 +18%，星图路线扩展到 16 段。
 - 同步 GitHub Issues 反馈状态：当前 1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
+- 已回复 #2，说明彗尾船坞航段已部署，并保持 issue open 等待复测。
 - 新增 2M 后外环信标航段：星门远征完成后继续出现累计能量目标，完成后奖励点击产能 +14%，星图路线扩展到 15 段。
 - 同步 GitHub Issues 反馈状态：当前 1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
 - 已回复 #2，说明外环信标航段已部署，并保持 issue open 等待复测。
