@@ -575,6 +575,20 @@ export const PROJECT_DEFS = [
     current(state) {
       return state.totalEnergy;
     }
+  },
+  {
+    id: "dawn-abyss-observatory",
+    name: "晨渊观星台",
+    summary: "累计 85M 能量，在星冠回声站外校准晨渊观星台。",
+    unit: "能量",
+    target: 85_000_000,
+    reward: "点击产能 +19%",
+    effect: {
+      clickMultiplier: 1.19
+    },
+    current(state) {
+      return state.totalEnergy;
+    }
   }
 ];
 
