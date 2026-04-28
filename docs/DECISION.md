@@ -21,8 +21,10 @@
 - npm install 成功。
 - npm run build 生成 dist。
 - bun run test 和 bun run build 通过。
+- GitHub Pages workflow 25068686413 已成功，线上地址返回 HTTP 200。
+- #2 已回复并仍为 open。
 
-下一步：完成 install/build 验证后回复 #2，说明本轮新增过载谐振成长线，并保持 issue open 等待复测。
+下一步：#2 已回复并保持 open；等待玩家复测过载谐振成长线是否改善内容丰富度和主动点击成长感知。
 
 ## 2026-04-29 Product decision：星图航线奖励预告
 
