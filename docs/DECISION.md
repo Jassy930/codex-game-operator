@@ -19,8 +19,9 @@
 - npm install 成功。
 - npm test 通过，覆盖 500K 后继续指向深空矿带，以及深空航段完成后的项目奖励叠加。
 - npm run build 生成 dist。
+- GitHub Pages workflow 25065455400 已成功，线上地址返回 HTTP 200。
 
-下一步：部署后回复 #2 并保持 open；等待玩家复测 500K 后深空航段是否改善内容丰富度。
+下一步：#2 已回复并保持 open；等待玩家复测 500K 后深空航段是否改善内容丰富度。
 
 ## 2026-04-29 Product decision：星图奖励完成反馈
 
