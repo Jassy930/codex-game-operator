@@ -314,7 +314,33 @@ test("100K 后当前目标会指向下一个未完成星图项目", () => {
   assert.equal(goal.label, "星图计划");
   assert.equal(goal.value, "透镜阵列");
   assert.equal(goal.upgradeId, "lens");
-  assert.equal(goal.progressText, "进度 11 级 / 12 级 · 可购买聚能透镜");
+  assert.equal(
+    goal.progressText,
+    "进度 11 级 / 12 级 · 可购买聚能透镜 · 奖励 点击产能 +18%"
+  );
+});
+
+test("星图主目标会直接显示项目奖励", () => {
+  const state = {
+    ...createInitialState(0),
+    energy: 50_000,
+    totalEnergy: 120_000,
+    upgrades: {
+      lens: 12,
+      collector: 11,
+      stabilizer: 9
+    }
+  };
+
+  const goal = getCurrentGoal(state);
+
+  assert.equal(goal.id, "project-collector-grid");
+  assert.equal(goal.value, "采集阵列");
+  assert.equal(goal.reward, "自动产能 +18%");
+  assert.equal(
+    goal.progressText,
+    "进度 11 级 / 12 级 · 可购买自动采集臂 · 奖励 自动产能 +18%"
+  );
 });
 
 test("100K 前当前目标仍保留短周期累计目标", () => {

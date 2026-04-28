@@ -530,6 +530,7 @@ function buildNextProjectGoal(state) {
     label: "星图计划",
     value: project.name,
     upgradeId: project.upgradeId,
+    reward: project.reward,
     unit: project.unit,
     target: project.target,
     current: project.current,
@@ -542,8 +543,9 @@ function buildNextProjectGoal(state) {
 function buildGoalProgressText(goal, currentValue, target, remaining, state) {
   const currentText = formatGoalAmount(goal, Math.min(currentValue, target));
   const targetText = formatGoalAmount(goal, target);
+  const rewardText = goal.reward ? " · 奖励 " + goal.reward : "";
   if (remaining <= 0) {
-    return "进度 " + targetText + " / " + targetText + " · 已完成";
+    return "进度 " + targetText + " / " + targetText + " · 已完成" + rewardText;
   }
   const actionText = typeof goal.action === "function" ? goal.action(state) : null;
   const suffixText = actionText ?? "还差 " + formatGoalAmount(goal, remaining);
@@ -553,7 +555,8 @@ function buildGoalProgressText(goal, currentValue, target, remaining, state) {
     " / " +
     targetText +
     " · " +
-    suffixText
+    suffixText +
+    rewardText
   );
 }
 

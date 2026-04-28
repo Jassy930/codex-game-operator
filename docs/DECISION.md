@@ -1,5 +1,26 @@
 # Decision
 
+## 2026-04-28 Product decision：星图奖励进主目标
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 当前仍有真实体验反馈 #2 open，且没有 open bug，继续进入有反馈样本下的 Product decision。
+
+当前最大问题：星图计划已经接管 100K 后主目标，但目标条只显示进度和下一步购买动作，奖励仍主要在侧栏项目列表里。对“内容丰富度太差”的反馈来说，主操作区需要直接说明完成当前计划会带来什么成长。
+
+本轮决策：
+
+- 星图项目进入主目标条时，把项目奖励随进度文案一起展示。
+- 透镜阵列、采集阵列仍保留对应升级的可购买/能量缺口提示，并追加奖励说明。
+- 100K 前目标、项目奖励数值、反馈入口和部署基础设施保持不变。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-04-28 23:55 CST 查询到 1 个 open issue、1 个 open feedback issue、0 个 open bug issue；#2 仍为 open。
+- npm install 成功。
+- npm test 通过，覆盖星图主目标显示奖励文案。
+- npm run build 生成 dist。
+
+下一步：#2 保持 open；等待玩家复测主目标条同时显示行动和奖励后，确认内容丰富度感知是否改善。
+
 ## 2026-04-28 Product decision：星图主目标
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 当前仍有真实体验反馈 #2 open，且没有 open bug，继续进入有反馈样本下的 Product decision。
