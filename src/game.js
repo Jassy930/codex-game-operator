@@ -365,6 +365,20 @@ export const PROJECT_DEFS = [
     current(state) {
       return state.totalEnergy;
     }
+  },
+  {
+    id: "comet-tail-dock",
+    name: "彗尾船坞",
+    summary: "累计 2.75M 能量，在彗尾航道建立自动补给船坞。",
+    unit: "能量",
+    target: 2_750_000,
+    reward: "自动产能 +18%",
+    effect: {
+      secondMultiplier: 1.18
+    },
+    current(state) {
+      return state.totalEnergy;
+    }
   }
 ];
 
