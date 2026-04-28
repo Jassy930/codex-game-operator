@@ -421,6 +421,20 @@ export const PROJECT_DEFS = [
     current(state) {
       return state.totalEnergy;
     }
+  },
+  {
+    id: "nebula-archive",
+    name: "星云档案库",
+    summary: "累计 7.25M 能量，在虚空罗盘指向的星云边界建立档案库。",
+    unit: "能量",
+    target: 7_250_000,
+    reward: "自动产能 +17%",
+    effect: {
+      secondMultiplier: 1.17
+    },
+    current(state) {
+      return state.totalEnergy;
+    }
   }
 ];
 
