@@ -351,6 +351,20 @@ export const PROJECT_DEFS = [
     current(state) {
       return state.totalEnergy;
     }
+  },
+  {
+    id: "outer-ring-beacon",
+    name: "外环信标",
+    summary: "累计 2M 能量，在星门外环布置信标。",
+    unit: "能量",
+    target: 2_000_000,
+    reward: "点击产能 +14%",
+    effect: {
+      clickMultiplier: 1.14
+    },
+    current(state) {
+      return state.totalEnergy;
+    }
   }
 ];
 
