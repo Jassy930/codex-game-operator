@@ -335,11 +335,14 @@ test("星图项目会给中后段玩家新的可追目标", () => {
 
   assert.equal(projects[0].id, "stellar-map");
   assert.equal(projects[0].completed, true);
+  assert.equal(projects[0].isCurrent, false);
   assert.equal(projects[0].progressText, "进度 100K 能量 / 100K 能量 · 已完成");
   assert.equal(projects[1].id, "resonance-calibration");
+  assert.equal(projects[1].isCurrent, true);
   assert.equal(projects[1].remaining, 6);
   assert.equal(projects[1].progressText, "进度 0 级 / 6 级 · 还差 6 级");
   assert.equal(projects[2].id, "lens-array");
+  assert.equal(projects[2].isCurrent, false);
   assert.equal(projects[2].remaining, 1);
   assert.equal(projects[3].id, "collector-grid");
   assert.equal(projects[3].remaining, 1);
@@ -575,6 +578,40 @@ test("深空航段完成后会继续叠加项目奖励", () => {
   assert.equal(production.perClick, 29.965);
   assert.equal(production.perSecond, 38.3369);
   assert.equal(production.overloadBonus, 61.1285);
+});
+
+test("星图项目只会标记第一个未完成项目为当前航段", () => {
+  const active = getProjectStatuses({
+    ...createInitialState(0),
+    totalEnergy: 260_000,
+    overloadBonus: 17,
+    upgrades: {
+      lens: 12,
+      collector: 12,
+      resonator: 6,
+      stabilizer: 9
+    }
+  });
+  const completed = getProjectStatuses({
+    ...createInitialState(0),
+    totalEnergy: 1_200_000,
+    overloadBonus: 17,
+    upgrades: {
+      lens: 12,
+      collector: 16,
+      resonator: 6,
+      stabilizer: 16
+    }
+  });
+
+  assert.deepEqual(
+    active.filter((project) => project.isCurrent).map((project) => project.id),
+    ["stabilizer-matrix"]
+  );
+  assert.deepEqual(
+    completed.filter((project) => project.isCurrent).map((project) => project.id),
+    []
+  );
 });
 
 test("星图总览会显示全部完成状态", () => {

@@ -434,8 +434,38 @@ h2 {
     rgba(248, 243, 231, 0.06);
 }
 
-.project-item strong {
+.project-item.is-current {
+  border-color: rgba(244, 178, 60, 0.72);
+  background:
+    linear-gradient(180deg, rgba(244, 178, 60, 0.14), transparent),
+    rgba(248, 243, 231, 0.06);
+}
+
+.project-header {
+  display: flex;
+  min-width: 0;
+  gap: 8px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.project-header strong {
+  min-width: 0;
   font-size: 0.98rem;
+}
+
+.project-current-badge {
+  flex: 0 0 auto;
+  padding: 3px 8px;
+  border-radius: 999px;
+  background: rgba(244, 178, 60, 0.18);
+  color: #fff7c2;
+  font-size: 0.74rem;
+  font-weight: 900;
+}
+
+.project-current-badge[hidden] {
+  display: none;
 }
 
 .project-summary,

@@ -242,10 +242,24 @@ function renderUpgrade(upgrade, current, goal) {
 
 function renderProject(project) {
   const item = document.createElement("article");
-  item.className = project.completed ? "project-item is-complete" : "project-item";
+  item.className = [
+    "project-item",
+    project.completed ? "is-complete" : "",
+    project.isCurrent ? "is-current" : ""
+  ]
+    .filter(Boolean)
+    .join(" ");
+
+  const header = document.createElement("div");
+  header.className = "project-header";
 
   const name = document.createElement("strong");
   name.textContent = project.name;
+
+  const currentBadge = document.createElement("span");
+  currentBadge.className = "project-current-badge";
+  currentBadge.textContent = "当前航段";
+  currentBadge.hidden = !project.isCurrent;
 
   const summary = document.createElement("span");
   summary.className = "project-summary";
@@ -267,7 +281,8 @@ function renderProject(project) {
   fill.style.width = Math.round(project.progress * 100) + "%";
   meter.append(fill);
 
-  item.append(name, summary, progress, reward, meter);
+  header.append(name, currentBadge);
+  item.append(header, summary, progress, reward, meter);
   return item;
 }
 

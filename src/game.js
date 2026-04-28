@@ -473,7 +473,7 @@ export function getComboStatus(state, now = Date.now()) {
 export function getProjectStatuses(state) {
   const current = normalizeState(state);
 
-  return PROJECT_DEFS.map((project) => {
+  const statuses = PROJECT_DEFS.map((project) => {
     const currentValue = Math.max(0, project.current(current));
     const target = Math.max(1, project.target);
     const remaining = Math.max(0, target - currentValue);
@@ -489,6 +489,12 @@ export function getProjectStatuses(state) {
       progressText: buildProjectProgressText(project, currentValue, target, remaining)
     };
   });
+  const currentIndex = statuses.findIndex((project) => !project.completed);
+
+  return statuses.map((project, index) => ({
+    ...project,
+    isCurrent: index === currentIndex
+  }));
 }
 
 export function getProjectOverview(state) {

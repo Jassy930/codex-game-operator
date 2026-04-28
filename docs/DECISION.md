@@ -1,5 +1,28 @@
 # Decision
 
+## 2026-04-29 Product decision：星图当前航段标记
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 当前仍有真实体验反馈 #2 open，且没有 open bug，继续进入有反馈样本下的 Product decision。
+
+当前最大问题：#2 仍围绕“内容丰富度太差，可玩的内容太少”保持 open，且上一轮过载谐振成长线后没有新的复测结论。星图总览已经显示下一段和后续航线，但项目列表本身仍缺少“当前正在推进哪一段”的直接标记，玩家在多个中后段项目之间还需要自行对照总览和列表。
+
+本轮决策：
+
+- 为星图项目状态派生 `isCurrent`，只标记第一个未完成项目。
+- 星图项目列表对当前项目显示“当前航段”徽章并高亮。
+- 全部星图项目完成时不显示当前航段，避免误导。
+- 不新增项目、不调整奖励数值、不改变升级曲线，先提升已有中后段内容的导航清晰度。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-04-29 01:55 CST 查询到 1 个 open issue、1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
+- npm install 成功。
+- npm test 通过，覆盖星图项目只会标记第一个未完成项目为当前航段，全部完成时没有当前航段。
+- npm run build 生成 dist。
+- bun run test 和 bun run build 通过。
+
+下一步：提交并推送后等待 GitHub Pages workflow；部署成功后回复 #2，继续等待玩家复测当前航段标记是否改善中后段目标识别。
+
 ## 2026-04-29 Product decision：过载谐振线
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 当前仍有真实体验反馈 #2 open，且没有 open bug，继续进入有反馈样本下的 Product decision。
