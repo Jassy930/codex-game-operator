@@ -393,6 +393,20 @@ export const PROJECT_DEFS = [
     current(state) {
       return state.totalEnergy;
     }
+  },
+  {
+    id: "dark-current-observatory",
+    name: "暗流观测站",
+    summary: "累计 4.5M 能量，在引力航标外侧观测深空暗流。",
+    unit: "能量",
+    target: 4_500_000,
+    reward: "过载奖励 +15%",
+    effect: {
+      overloadMultiplier: 1.15
+    },
+    current(state) {
+      return state.totalEnergy;
+    }
   }
 ];
 

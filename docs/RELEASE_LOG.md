@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+- 新增 4.5M 后暗流观测站航段：引力航标完成后继续出现累计能量目标，完成后奖励过载奖励 +15%，星图路线扩展到 18 段。
+- 同步 GitHub Issues 反馈状态：当前 1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
+- 验证通过：bun install、bun run test、bun run build、npm install、npm test、npm run build。
 - 新增 3.5M 后引力航标航段：彗尾船坞完成后继续出现累计能量目标，完成后奖励总产能 +15%，星图路线扩展到 17 段。
 - 同步 GitHub Issues 反馈状态：当前 1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
 - 已回复 #2，说明引力航标航段已部署，并保持 issue open 等待复测。
