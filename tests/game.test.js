@@ -395,6 +395,27 @@ test("首批星图项目完成后会继续指向稳定矩阵", () => {
   );
 });
 
+test("500K 后星图会继续指向深空矿带", () => {
+  const state = {
+    ...createInitialState(0),
+    totalEnergy: 600_000,
+    upgrades: {
+      lens: 12,
+      collector: 12,
+      stabilizer: 12
+    }
+  };
+
+  const goal = getCurrentGoal(state);
+
+  assert.equal(goal.id, "project-deep-space-mine");
+  assert.equal(goal.value, "深空矿带");
+  assert.equal(
+    goal.progressText,
+    "进度 600K 能量 / 750K 能量 · 还差 150K 能量 · 奖励 点击产能 +26%"
+  );
+});
+
 test("100K 前当前目标仍保留短周期累计目标", () => {
   const state = {
     ...createInitialState(0),
@@ -441,16 +462,16 @@ test("已完成星图项目会提升有效产能", () => {
   assert.equal(clicked.lastGain, 26.432);
 });
 
-test("远星中继完成后会继续提升自动产能", () => {
+test("深空航段完成后会继续叠加项目奖励", () => {
   const state = {
     ...createInitialState(0),
     energyPerClick: 10,
     energyPerSecond: 10,
-    totalEnergy: 600_000,
+    totalEnergy: 1_200_000,
     upgrades: {
       lens: 12,
-      collector: 12,
-      stabilizer: 12
+      collector: 16,
+      stabilizer: 16
     }
   };
 
@@ -462,11 +483,16 @@ test("远星中继完成后会继续提升自动产能", () => {
     "collector-grid",
     "starbridge-trial",
     "stabilizer-matrix",
-    "farstar-relay"
+    "farstar-relay",
+    "deep-space-mine",
+    "orbital-foundry",
+    "stellar-anchor"
   ]);
-  assert.equal(production.projectBonuses.completed, 6);
-  assert.equal(production.projectBonuses.secondMultiplier, 1.4632);
-  assert.equal(production.perSecond, 24.1721);
+  assert.equal(production.projectBonuses.completed, 9);
+  assert.equal(production.projectBonuses.clickMultiplier, 1.4868);
+  assert.equal(production.projectBonuses.secondMultiplier, 1.9022);
+  assert.equal(production.perClick, 29.965);
+  assert.equal(production.perSecond, 38.3369);
 });
 
 test("反馈入口会生成带游戏快照的 GitHub Issue 链接", () => {

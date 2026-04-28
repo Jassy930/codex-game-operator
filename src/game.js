@@ -183,6 +183,50 @@ export const PROJECT_DEFS = [
     current(state) {
       return state.totalEnergy;
     }
+  },
+  {
+    id: "deep-space-mine",
+    name: "深空矿带",
+    summary: "累计 750K 能量，锁定远星资源带。",
+    unit: "能量",
+    target: 750_000,
+    reward: "点击产能 +26%",
+    effect: {
+      clickMultiplier: 1.26
+    },
+    current(state) {
+      return state.totalEnergy;
+    }
+  },
+  {
+    id: "orbital-foundry",
+    name: "星环工厂",
+    summary: "将自动采集臂扩展到 16 级。",
+    upgradeId: "collector",
+    unit: "级",
+    target: 16,
+    reward: "自动产能 +30%",
+    effect: {
+      secondMultiplier: 1.3
+    },
+    current(state) {
+      return state.upgrades.collector ?? 0;
+    }
+  },
+  {
+    id: "stellar-anchor",
+    name: "恒星锚点",
+    summary: "将星核稳定器扩展到 16 级。",
+    upgradeId: "stabilizer",
+    unit: "级",
+    target: 16,
+    reward: "总产能 +22%",
+    effect: {
+      totalMultiplier: 1.22
+    },
+    current(state) {
+      return state.upgrades.stabilizer ?? 0;
+    }
   }
 ];
 

@@ -1,5 +1,27 @@
 # Decision
 
+## 2026-04-29 Product decision：深空航段
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 当前仍有真实体验反馈 #2 open，且没有 open bug，继续进入有反馈样本下的 Product decision。
+
+当前最大问题：#2 仍围绕“内容丰富度太差，可玩的内容太少”保持 open。上一轮已经补强星图项目完成反馈，但远星中继完成后仍会回到循环累计目标；对中后段玩家来说，500K 后还需要看到下一段明确内容。
+
+本轮决策：
+
+- 在远星中继之后新增深空矿带，要求累计 750K 能量，奖励点击产能 +26%。
+- 新增星环工厂，要求自动采集臂达到 16 级，奖励自动产能 +30%。
+- 新增恒星锚点，要求星核稳定器达到 16 级，奖励总产能 +22%。
+- 不调整 100K 前目标、反馈入口、部署基础设施和已有升级曲线，先扩展星图项目层的后续目标密度。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-04-29 00:32 CST 查询到 1 个 open issue、1 个 open feedback issue、0 个 open bug issue；#2 仍为 open。
+- npm install 成功。
+- npm test 通过，覆盖 500K 后继续指向深空矿带，以及深空航段完成后的项目奖励叠加。
+- npm run build 生成 dist。
+
+下一步：部署后回复 #2 并保持 open；等待玩家复测 500K 后深空航段是否改善内容丰富度。
+
 ## 2026-04-29 Product decision：星图奖励完成反馈
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 当前仍有真实体验反馈 #2 open，且没有 open bug，继续进入有反馈样本下的 Product decision。
