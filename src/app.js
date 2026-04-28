@@ -40,6 +40,7 @@ const elements = {
   upgradeList: document.querySelector("#upgradeList"),
   projectOverview: document.querySelector("#projectOverview"),
   projectOverviewDetail: document.querySelector("#projectOverviewDetail"),
+  projectOverviewForecast: document.querySelector("#projectOverviewForecast"),
   projectList: document.querySelector("#projectList"),
   resetButton: document.querySelector("#resetButton"),
   feedbackForm: document.querySelector("#feedbackForm"),
@@ -154,6 +155,7 @@ function render() {
   renderActionNotice();
   elements.projectOverview.textContent = projectOverview.summaryText;
   elements.projectOverviewDetail.textContent = projectOverview.detailText;
+  elements.projectOverviewForecast.textContent = projectOverview.forecastText;
 
   elements.upgradeList.replaceChildren(
     ...UPGRADE_DEFS.map((upgrade) => renderUpgrade(upgrade, current, goal))

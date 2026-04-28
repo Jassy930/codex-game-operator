@@ -470,15 +470,20 @@ export function getProjectOverview(state) {
       completed,
       total: projects.length,
       nextProjectId: null,
+      upcomingProjectIds: [],
       summaryText: "星图进度 " + completed + "/" + projects.length + " · 全部航段已完成",
-      detailText: "所有星图奖励已生效，继续累计能量等待下一段航线。"
+      detailText: "所有星图奖励已生效，继续累计能量等待下一段航线。",
+      forecastText: "航线预告：等待下一段航线"
     };
   }
+
+  const upcomingProjects = projects.filter((project) => !project.completed).slice(0, 3);
 
   return {
     completed,
     total: projects.length,
     nextProjectId: nextProject.id,
+    upcomingProjectIds: upcomingProjects.map((project) => project.id),
     summaryText:
       "星图进度 " +
       completed +
@@ -488,7 +493,9 @@ export function getProjectOverview(state) {
       nextProject.name +
       " · 奖励 " +
       nextProject.reward,
-    detailText: nextProject.progressText
+    detailText: nextProject.progressText,
+    forecastText:
+      "航线预告：" + upcomingProjects.map((project) => project.name).join("、")
   };
 }
 

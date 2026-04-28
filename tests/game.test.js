@@ -342,11 +342,17 @@ test("星图总览会显示完成数和下一段奖励", () => {
   assert.equal(overview.completed, 1);
   assert.equal(overview.total, 9);
   assert.equal(overview.nextProjectId, "lens-array");
+  assert.deepEqual(overview.upcomingProjectIds, [
+    "lens-array",
+    "collector-grid",
+    "starbridge-trial"
+  ]);
   assert.equal(
     overview.summaryText,
     "星图进度 1/9 · 下一段：透镜阵列 · 奖励 点击产能 +18%"
   );
   assert.equal(overview.detailText, "进度 11 级 / 12 级 · 还差 1 级");
+  assert.equal(overview.forecastText, "航线预告：透镜阵列、采集阵列、星桥试运行");
 });
 
 test("100K 后当前目标会指向下一个未完成星图项目", () => {
@@ -540,6 +546,7 @@ test("星图总览会显示全部完成状态", () => {
     overview.detailText,
     "所有星图奖励已生效，继续累计能量等待下一段航线。"
   );
+  assert.equal(overview.forecastText, "航线预告：等待下一段航线");
 });
 
 test("反馈入口会生成带游戏快照的 GitHub Issue 链接", () => {
