@@ -463,6 +463,20 @@ export const PROJECT_DEFS = [
     current(state) {
       return state.totalEnergy;
     }
+  },
+  {
+    id: "daybreak-warp-well",
+    name: "极昼折跃井",
+    summary: "累计 13.5M 能量，在寂光中继环外稳定极昼折跃井。",
+    unit: "能量",
+    target: 13_500_000,
+    reward: "点击产能 +16%",
+    effect: {
+      clickMultiplier: 1.16
+    },
+    current(state) {
+      return state.totalEnergy;
+    }
   }
 ];
 
