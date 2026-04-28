@@ -6,6 +6,8 @@
 - 同步 GitHub Issues 反馈状态：当前 1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
 - 验证通过：bun install、bun run test、bun run build、npm install、npm test、npm run build。
 - 构建产物已包含离辉轨道港。
+- GitHub Pages workflow 25080761749 已成功，线上地址返回 HTTP 200，且发布文件包含离辉轨道港。
+- 已回复 #2，说明离辉轨道港航段已部署，并保持 issue open 等待复测。
 - 新增 30M 后脉冲航闸航段：引潮星环完成后继续出现累计能量目标，完成后奖励点击产能 +18%，星图路线扩展到 27 段。
 - 同步 GitHub Issues 反馈状态：当前 1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
 - 验证通过：bun install、bun run test、bun run build、npm install、npm test、npm run build。

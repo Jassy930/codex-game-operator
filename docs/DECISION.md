@@ -17,9 +17,10 @@
 - GitHub Issues 已同步：2026-04-29 06:17 CST 查询到 1 个 open issue、1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
 - bun install、bun run test、bun run build、npm install、npm test 和 npm run build 已通过，覆盖脉冲航闸完成后继续指向离辉轨道港、28 段航线序号和全部完成总览。
 - 构建产物 dist 已包含离辉轨道港。
-- 发布后继续回复 #2，并保持 open 等待复测确认离辉轨道港是否改善长尾内容丰富度。
+- GitHub Pages workflow 25080761749 已成功，线上地址返回 HTTP 200，且发布文件包含离辉轨道港。
+- #2 已回复并保持 open，等待复测确认离辉轨道港是否改善长尾内容丰富度。
 
-下一步：推送后等待 GitHub Pages workflow 完成，再回复 #2。
+下一步：发布后继续观察 #2 复测是否认为离辉轨道港改善长尾内容丰富度。
 
 ## 2026-04-29 Product decision：脉冲航闸航段
 
