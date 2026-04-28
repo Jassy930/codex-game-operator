@@ -1,5 +1,11 @@
 # Feedback
 
+## 2026-04-29
+
+- 本轮已回复 #2：说明星图项目奖励已进入主目标条，GitHub Pages workflow 25063597183 已成功；issue 保持 open，等待复测确认内容丰富度和目标奖励感知是否改善。
+- GitHub Issues：gh 可用且已认证；2026-04-29 00:00 CST 查询到 1 个 open issue、1 个 open feedback issue、0 个 open bug issue。
+- data/feedback/github-feedback.md 已同步本地快照。
+
 ## 2026-04-28
 
 - GitHub Issues：gh 可用且已认证；2026-04-28 23:55 CST 查询到 1 个 open issue、1 个 open feedback issue、0 个 open bug issue。
