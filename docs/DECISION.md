@@ -17,8 +17,10 @@
 - GitHub Issues 已同步：2026-04-29 04:06 CST 查询到 1 个 open issue、1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
 - bun install、bun run test、bun run build、npm install、npm test 和 npm run build 通过。
 - 测试覆盖引力航标完成后继续指向暗流观测站、18 段航线序号和全部完成总览。
+- GitHub Pages workflow 25075213288 已成功，线上地址返回 HTTP 200。
+- #2 已回复并保持 open。
 
-下一步：发布后回复 #2，并继续观察暗流观测站是否改善长尾内容丰富度。
+下一步：继续观察 #2 复测是否认为暗流观测站改善长尾内容丰富度。
 
 ## 2026-04-29 Product decision：引力航标航段
 
