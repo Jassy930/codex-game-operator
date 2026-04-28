@@ -498,7 +498,7 @@ export function getProjectOverview(state) {
     detailText: nextProject.progressText,
     bonusText,
     forecastText:
-      "航线预告：" + upcomingProjects.map((project) => project.name).join("、")
+      "航线预告：" + upcomingProjects.map(formatForecastProject).join("、")
   };
 }
 
@@ -648,6 +648,10 @@ function buildProjectBonusText(bonuses) {
     .map(([label, multiplier]) => label + " x" + formatMultiplier(multiplier));
 
   return "生效加成：" + bonusParts.join(" · ");
+}
+
+function formatForecastProject(project) {
+  return project.name + "（" + project.reward + "）";
 }
 
 function formatMultiplier(value) {

@@ -1,5 +1,27 @@
 # Decision
 
+## 2026-04-29 Product decision：星图航线奖励预告
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 当前仍有真实体验反馈 #2 open，且没有 open bug，继续进入有反馈样本下的 Product decision。
+
+当前最大问题：#2 仍围绕“内容丰富度太差，可玩的内容太少”保持 open。星图总览已经显示下一段、后续航线和已生效加成，但航线预告只列项目名，玩家仍需要去项目列表里逐项查看后续奖励。
+
+本轮决策：
+
+- 在星图总览的“航线预告”中，把最多 3 个未完成项目的名称和奖励一起展示。
+- 全部项目完成后的等待下一段航线文案保持不变。
+- 不新增项目、不调整奖励数值、不改变升级曲线，先提升已有后续内容的成长预期可见性。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-04-29 01:24 CST 查询到 1 个 open issue、1 个 open feedback issue、0 个 open bug issue；#2 仍为 open。
+- npm install 成功。
+- npm test 通过，覆盖星图总览航线预告中的后续项目奖励文案。
+- npm run build 生成 dist。
+- bun run test 和 bun run build 通过。
+
+下一步：推送后等待 GitHub Pages workflow 完成，并回复 #2 说明航线预告现在会直接展示后续项目奖励。
+
 ## 2026-04-29 Product decision：星图加成总览
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 当前仍有真实体验反馈 #2 open，且没有 open bug，继续进入有反馈样本下的 Product decision。
