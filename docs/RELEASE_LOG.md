@@ -6,6 +6,8 @@
 - 同步 GitHub Issues 反馈状态：当前 1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
 - 验证通过：bun install --no-save、bun run test、bun run build、npm install、npm test、npm run build。
 - 构建产物已包含“航线构成”文案和 projectOverviewComposition 渲染字段。
+- GitHub Pages workflow 25083078319 已成功，线上地址返回 HTTP 200，且发布文件包含“航线构成”。
+- 已回复 #2，说明航线构成和奖励分布已部署，并保持 issue open 等待复测。
 - 新增星图目标分轨：星图总览同时显示下一个未完成累计航段和下一个未完成升级航段，让 100K 后玩家更快看到两条可追推进线。
 - 静态 HTML 初始星图总数同步到 31 段。
 - 验证通过：bun install --no-save、bun run test、bun run build、npm install、npm test、npm run build。

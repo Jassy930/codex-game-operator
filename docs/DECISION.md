@@ -17,8 +17,10 @@
 - GitHub Issues 已同步：2026-04-29 07:27 CST 查询到 1 个 open issue、1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
 - bun install --no-save、bun run test、bun run build、npm install、npm test 和 npm run build 通过，覆盖星图总览航线构成和全部完成状态。
 - 构建产物 dist 包含“航线构成”和 `projectOverviewComposition` 渲染字段。
+- GitHub Pages workflow 25083078319 已成功，线上地址返回 HTTP 200，发布文件包含“航线构成”。
+- #2 已回复并保持 open，等待复测确认航线构成和奖励分布是否改善内容丰富度感知。
 
-下一步：发布后继续观察 #2 复测是否认为航线构成和奖励分布改善内容丰富度感知。
+下一步：继续观察 #2 复测是否认为航线构成和奖励分布改善内容丰富度感知。
 
 ## 2026-04-29 Product decision：星图目标分轨
 
