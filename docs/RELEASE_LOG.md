@@ -8,5 +8,6 @@
 - 新增 GitHub Pages 自动部署 workflow，并移除部署脚本中的测试绕过。
 - 记录 GitHub Pages 私有仓库计划阻塞 issue #1，并发布 Vercel 版本：https://dist-kblvoc9qq-wangf930-2746s-projects.vercel.app
 - 新增游戏内反馈入口：玩家可填写类型、评分和内容，生成预填 GitHub Issue，并本地记录 feedback_sent 与反馈快照。
-- 仓库已为 public，GitHub Pages 已启用 workflow 发布源；等待本轮 push 后的 deploy workflow 验证。
+- 仓库已为 public，GitHub Pages 已启用 workflow 发布源；run 25056371852 已成功部署到 https://jassy930.github.io/codex-game-operator/
 - 补齐 GitHub Issue 标签：feedback、balance、idea、release、research、tech-debt。
+- 回复并关闭部署阻塞 issue #1。

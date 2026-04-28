@@ -11,16 +11,16 @@
 - 在侧栏新增游戏内反馈表单，收集类型、评分和内容。
 - 提交时生成预填的 GitHub Issue 草稿，并附带当前游戏快照，避免提交密钥或引入未验证后端。
 - 本地记录最近 50 条反馈草稿，并写入 `feedback_sent` 事件，作为前端行为验证；发布前不得把本地记录当作真实线上指标。
-- GitHub 仓库当前为 public，已通过 REST API 用 `build_type=workflow` 启用 GitHub Pages；issue #1 等首个 deploy workflow 验证后再关闭。
+- GitHub 仓库当前为 public，已通过 REST API 用 `build_type=workflow` 启用 GitHub Pages；issue #1 已在 deploy workflow 通过后回复并关闭。
 
 验收标准：
 
 - npm install 成功。
 - npm test 通过，覆盖反馈 Issue 链接和游戏快照。
 - npm run build 生成 dist。
-- 主分支 push 后 GitHub Pages workflow 可部署。
+- 主分支 push 后 GitHub Pages workflow 可部署，本轮 run 25056371852 已通过。
 
-下一步：等待 Pages deploy 通过后回复/关闭 issue #1，并开始收集真实玩家反馈。
+下一步：开始收集真实玩家反馈，优先观察 feedback issue 的内容质量和首批阻塞点。
 
 ## 2026-04-28 Build/Deploy Infra
 

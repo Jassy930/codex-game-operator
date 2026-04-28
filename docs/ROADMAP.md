@@ -3,6 +3,6 @@
 M0 可运行：已完成最小浏览器游戏、测试与构建脚本。
 M1 可玩：进行中。
 M2 可反馈：已完成游戏内反馈入口，等待真实玩家反馈验证。
-M3 可发布：进行中，Vercel 已发布；GitHub Pages 已启用，等待首个 deploy workflow 验证。
+M3 可发布：已完成，GitHub Pages 与 Vercel 均有可访问版本。
 M4 可运营
 M5 可持续进化
