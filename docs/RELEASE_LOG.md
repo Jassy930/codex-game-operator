@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+- 新增 24M 后引潮星环航段：磁帆穹顶完成后继续出现累计能量目标，完成后奖励过载奖励 +18%，星图路线扩展到 26 段。
+- 同步 GitHub Issues 反馈状态：当前 1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
+- 验证通过：bun install、bun run test、bun run build、npm install、npm test、npm run build。
 - 新增 20M 后磁帆穹顶航段：日冕回廊完成后继续出现累计能量目标，完成后奖励总产能 +18%，星图路线扩展到 25 段。
 - 同步 GitHub Issues 反馈状态：当前 1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
 - 验证通过：bun install、bun run test、bun run build、npm install、npm test、npm run build。

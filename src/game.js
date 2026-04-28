@@ -505,6 +505,20 @@ export const PROJECT_DEFS = [
     current(state) {
       return state.totalEnergy;
     }
+  },
+  {
+    id: "tidal-star-ring",
+    name: "引潮星环",
+    summary: "累计 24M 能量，在磁帆穹顶外调校引潮星环。",
+    unit: "能量",
+    target: 24_000_000,
+    reward: "过载奖励 +18%",
+    effect: {
+      overloadMultiplier: 1.18
+    },
+    current(state) {
+      return state.totalEnergy;
+    }
   }
 ];
 
