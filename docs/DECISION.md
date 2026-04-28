@@ -16,7 +16,8 @@
 
 - GitHub Issues 已同步：2026-04-29 05:26 CST 查询到 1 个 open issue、1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
 - bun install、bun run test、bun run build、npm install、npm test 和 npm run build 通过，覆盖极昼折跃井完成后继续指向日冕回廊、24 段航线序号和全部完成总览。
-- 发布后回复 #2 并保持 open，等待复测确认日冕回廊是否改善长尾内容丰富度。
+- GitHub Pages workflow 25078802380 已成功，线上地址返回 HTTP 200，且发布文件包含日冕回廊。
+- #2 已回复并保持 open，等待复测确认日冕回廊是否改善长尾内容丰富度。
 
 下一步：发布后继续观察 #2 复测是否认为日冕回廊改善长尾内容丰富度。
 

@@ -5,7 +5,8 @@
 - 新增 16.5M 后日冕回廊航段：极昼折跃井完成后继续出现累计能量目标，完成后奖励自动产能 +16%，星图路线扩展到 24 段。
 - 同步 GitHub Issues 反馈状态：当前 1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
 - 验证通过：bun install、bun run test、bun run build、npm install、npm test、npm run build。
-- 发布后回复 #2，说明日冕回廊航段已部署，并保持 issue open 等待复测。
+- GitHub Pages workflow 25078802380 已成功，线上地址返回 HTTP 200，且发布文件包含日冕回廊。
+- 已回复 #2，说明日冕回廊航段已部署，并保持 issue open 等待复测。
 - 新增 13.5M 后极昼折跃井航段：寂光中继环完成后继续出现累计能量目标，完成后奖励点击产能 +16%，星图路线扩展到 23 段。
 - 同步 GitHub Issues 反馈状态：当前 1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
 - 验证通过：bun install、bun run test、bun run build、npm install、npm test、npm run build。
