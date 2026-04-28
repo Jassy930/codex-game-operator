@@ -2,6 +2,8 @@
 
 ## 2026-04-28
 
+- 本轮已回复 #2：说明 100K 后星图项目会进入主目标条、升级型项目会高亮对应升级卡片；issue 保持 open，等待复测确认内容丰富度和目标可见性是否改善。
+- GitHub Issues：gh 可用且已认证；2026-04-28 23:49 CST 查询到 1 个 open issue、1 个 open feedback issue、0 个 open bug issue。
 - GitHub Issues：gh 可用且已认证；2026-04-28 23:43 CST 查询到 1 个 open issue、1 个 open feedback issue、0 个 open bug issue。
 - #2 仍为 open，未出现新的复测结论或 bug；继续将“内容丰富度太差，可玩的内容太少”作为本轮 Product decision 输入。
 - data/feedback/github-feedback.md 已同步本地快照。
