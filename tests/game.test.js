@@ -483,7 +483,7 @@ test("星图总览会显示完成数和下一段奖励", () => {
   );
   assert.equal(
     overview.chapterText,
-    "阶段导航：首段星图 1/4 · 专精校准 0/5 · 深空基建 0/4 · 远航长尾 0/18；当前 首段星图 2/31 谐振校准"
+    "阶段导航：首段星图 1/4 · 专精校准 0/5 · 深空基建 0/4 · 远航长尾 0/18；当前 首段星图 2/31 谐振校准 · 本阶段还剩 3 段 · 下一阶段 专精校准"
   );
   assert.equal(
     overview.compositionText,
@@ -1181,6 +1181,25 @@ test("星图总览会显示全部完成状态", () => {
   assert.equal(
     overview.compositionText,
     "航线构成：22 个累计航段 · 9 个升级航段 · 奖励分布 总产能 10 段 / 点击 8 段 / 自动 8 段 / 过载 5 段"
+  );
+});
+
+test("星图阶段导航会显示最终阶段余量", () => {
+  const overview = getProjectOverview({
+    ...createInitialState(0),
+    totalEnergy: 66_000_000,
+    overloadBonus: 17,
+    upgrades: {
+      lens: 14,
+      collector: 16,
+      resonator: 6,
+      stabilizer: 16
+    }
+  });
+
+  assert.equal(
+    overview.chapterText,
+    "阶段导航：首段星图 4/4 · 专精校准 5/5 · 深空基建 4/4 · 远航长尾 17/18；当前 远航长尾 31/31 晨渊观星台 · 本阶段还剩 1 段 · 最终阶段"
   );
 });
 

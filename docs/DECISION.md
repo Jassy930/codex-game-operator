@@ -1,5 +1,27 @@
 # Decision
 
+## 2026-04-29 Product decision：星图阶段余量
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 当前仍有真实体验反馈 #2 open，且没有 open bug，继续进入有反馈样本下的 Product decision。
+
+当前最大问题：#2 仍围绕“内容丰富度太差，可玩的内容太少”保持 open。上一轮已经在星图总览新增阶段导航，但阶段导航只说明当前处于哪个阶段，没有直接告诉玩家“这个阶段还剩几段”和“下一阶段是什么”，章节感仍可继续增强。
+
+本轮决策：
+
+- 在阶段导航中追加“本阶段还剩 X 段”和“下一阶段 Y / 最终阶段”。
+- 不新增第 32 段，不调整奖励数值、升级价格和存档结构；继续提升已有 31 段星图的章节进度可见性。
+- 静态 HTML 初始文案同步到新的阶段余量展示，避免加载前信息与运行态不一致。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-04-29 07:53 CST 查询到 1 个 open issue、1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
+- bun install --no-save、bun run test、bun run build、npm install、npm test 和 npm run build 已通过，覆盖当前阶段余量和最终阶段余量。
+- 构建产物 dist 包含“本阶段还剩”和 `projectOverviewChapter` 渲染字段。
+- 发布后需要验证 GitHub Pages 线上地址返回 HTTP 200，且发布文件包含“本阶段还剩”。
+- #2 需要回复并保持 open，等待复测确认阶段余量是否改善内容层次感和后续内容感知。
+
+下一步：完成验证、发布和反馈回复后，继续观察 #2 复测结论。
+
 ## 2026-04-29 Product decision：星图阶段导航
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 当前仍有真实体验反馈 #2 open，且没有 open bug，继续进入有反馈样本下的 Product decision。

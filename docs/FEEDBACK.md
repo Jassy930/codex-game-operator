@@ -2,6 +2,9 @@
 
 ## 2026-04-29
 
+- GitHub Issues：gh 可用且已认证；2026-04-29 07:53 CST 查询到 1 个 open issue、1 个 open feedback issue、0 个 open bug issue。
+- #2 仍为 open，未出现新的复测结论或 bug；本轮不追加第 32 段，改为在阶段导航中追加本阶段剩余航段数和下一阶段名称，让已有 31 段星图的章节进度更明确。
+- data/feedback/github-feedback.md 已同步本地快照。
 - GitHub Issues：gh 可用且已认证；2026-04-29 07:40 CST 查询到 1 个 open issue、1 个 open feedback issue、0 个 open bug issue。
 - #2 仍为 open，未出现新的复测结论或 bug；本轮不追加第 32 段，改为在星图总览新增“阶段导航”，把 31 段星图拆成首段星图、专精校准、深空基建、远航长尾四个阶段。
 - data/feedback/github-feedback.md 已同步本地快照。

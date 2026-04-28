@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+- 新增星图阶段余量：阶段导航会显示当前阶段还剩几段，并提示下一阶段名称或最终阶段状态。
+- 同步 GitHub Issues 反馈状态：当前 1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
+- 验证通过：bun install --no-save、bun run test、bun run build、npm install、npm test、npm run build。
+- 构建产物已包含“本阶段还剩”文案和 projectOverviewChapter 渲染字段。
 - 新增星图阶段导航：星图总览把 31 段路线拆成首段星图、专精校准、深空基建、远航长尾四个阶段，显示各阶段已完成数/总数和当前所在阶段。
 - 同步 GitHub Issues 反馈状态：当前 1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
 - 验证通过：bun install --no-save、bun run test、bun run build、npm install、npm test、npm run build。

@@ -1204,11 +1204,13 @@ function buildProjectChapterText(projects, nextProject) {
 
     return chapter.name + " " + completed + "/" + chapterProjects.length;
   });
-  const currentChapter = nextProject
-    ? PROJECT_CHAPTER_DEFS.find((chapter) =>
+  const currentChapterIndex = nextProject
+    ? PROJECT_CHAPTER_DEFS.findIndex((chapter) =>
         getChapterProjects(projects, chapter).some((project) => project.id === nextProject.id)
       )
-    : null;
+    : -1;
+  const currentChapter =
+    currentChapterIndex >= 0 ? PROJECT_CHAPTER_DEFS[currentChapterIndex] : null;
   const currentText =
     nextProject && currentChapter
       ? "当前 " +
@@ -1218,10 +1220,21 @@ function buildProjectChapterText(projects, nextProject) {
         "/" +
         nextProject.segmentTotal +
         " " +
-        nextProject.name
+        nextProject.name +
+        " · " +
+        buildProjectChapterPacingText(projects, currentChapter, currentChapterIndex)
       : "全部阶段完成";
 
   return "阶段导航：" + chapterParts.join(" · ") + "；" + currentText;
+}
+
+function buildProjectChapterPacingText(projects, chapter, chapterIndex) {
+  const chapterProjects = getChapterProjects(projects, chapter);
+  const remaining = chapterProjects.filter((project) => !project.completed).length;
+  const nextChapter = PROJECT_CHAPTER_DEFS[chapterIndex + 1];
+  const nextChapterText = nextChapter ? " · 下一阶段 " + nextChapter.name : " · 最终阶段";
+
+  return "本阶段还剩 " + remaining + " 段" + nextChapterText;
 }
 
 function getChapterProjects(projects, chapter) {
