@@ -2,6 +2,9 @@
 
 ## 2026-04-29
 
+- GitHub Issues：gh 可用且已认证；2026-04-29 00:46 CST 查询到 1 个 open issue、1 个 open feedback issue、0 个 open bug issue。
+- #2 仍为 open，未出现新的复测结论或 bug；本轮继续围绕“内容丰富度太差，可玩的内容太少”补充星图总览，让玩家更快看到已完成项目数、下一段和奖励。
+- data/feedback/github-feedback.md 已同步本地快照。
 - 本轮已回复 #2：说明 500K 后新增深空矿带、星环工厂和恒星锚点，GitHub Pages workflow 25065455400 已成功；issue 保持 open，等待复测确认深空航段是否改善内容丰富度。
 - GitHub Issues：gh 可用且已认证；2026-04-29 00:32 CST 查询到 1 个 open issue、1 个 open feedback issue、0 个 open bug issue。
 - #2 仍为 open，未出现新的复测结论或 bug；本轮继续围绕“内容丰富度太差，可玩的内容太少”补充 500K 后深空航段。

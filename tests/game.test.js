@@ -12,6 +12,7 @@ import {
   getComboStatus,
   getCurrentGoal,
   getEffectiveProduction,
+  getProjectOverview,
   getProjectStatuses,
   getUpgradeAffordability,
   getUpgradeCost,
@@ -325,6 +326,29 @@ test("星图项目会给中后段玩家新的可追目标", () => {
   assert.equal(projects[3].completed, false);
 });
 
+test("星图总览会显示完成数和下一段奖励", () => {
+  const state = {
+    ...createInitialState(0),
+    totalEnergy: 114_354.89,
+    upgrades: {
+      lens: 11,
+      collector: 11,
+      stabilizer: 9
+    }
+  };
+
+  const overview = getProjectOverview(state);
+
+  assert.equal(overview.completed, 1);
+  assert.equal(overview.total, 9);
+  assert.equal(overview.nextProjectId, "lens-array");
+  assert.equal(
+    overview.summaryText,
+    "星图进度 1/9 · 下一段：透镜阵列 · 奖励 点击产能 +18%"
+  );
+  assert.equal(overview.detailText, "进度 11 级 / 12 级 · 还差 1 级");
+});
+
 test("100K 后当前目标会指向下一个未完成星图项目", () => {
   const state = {
     ...createInitialState(0),
@@ -493,6 +517,29 @@ test("深空航段完成后会继续叠加项目奖励", () => {
   assert.equal(production.projectBonuses.secondMultiplier, 1.9022);
   assert.equal(production.perClick, 29.965);
   assert.equal(production.perSecond, 38.3369);
+});
+
+test("星图总览会显示全部完成状态", () => {
+  const state = {
+    ...createInitialState(0),
+    totalEnergy: 1_200_000,
+    upgrades: {
+      lens: 12,
+      collector: 16,
+      stabilizer: 16
+    }
+  };
+
+  const overview = getProjectOverview(state);
+
+  assert.equal(overview.completed, 9);
+  assert.equal(overview.total, 9);
+  assert.equal(overview.nextProjectId, null);
+  assert.equal(overview.summaryText, "星图进度 9/9 · 全部航段已完成");
+  assert.equal(
+    overview.detailText,
+    "所有星图奖励已生效，继续累计能量等待下一段航线。"
+  );
 });
 
 test("反馈入口会生成带游戏快照的 GitHub Issue 链接", () => {

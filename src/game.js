@@ -460,6 +460,38 @@ export function getProjectStatuses(state) {
   });
 }
 
+export function getProjectOverview(state) {
+  const projects = getProjectStatuses(state);
+  const completed = projects.filter((project) => project.completed).length;
+  const nextProject = projects.find((project) => !project.completed) ?? null;
+
+  if (!nextProject) {
+    return {
+      completed,
+      total: projects.length,
+      nextProjectId: null,
+      summaryText: "星图进度 " + completed + "/" + projects.length + " · 全部航段已完成",
+      detailText: "所有星图奖励已生效，继续累计能量等待下一段航线。"
+    };
+  }
+
+  return {
+    completed,
+    total: projects.length,
+    nextProjectId: nextProject.id,
+    summaryText:
+      "星图进度 " +
+      completed +
+      "/" +
+      projects.length +
+      " · 下一段：" +
+      nextProject.name +
+      " · 奖励 " +
+      nextProject.reward,
+    detailText: nextProject.progressText
+  };
+}
+
 export function getProjectBonuses(state) {
   const completedProjects = getProjectStatuses(state).filter((project) => project.completed);
 

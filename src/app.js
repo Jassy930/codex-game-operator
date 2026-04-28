@@ -9,6 +9,7 @@ import {
   getComboStatus,
   getCurrentGoal,
   getEffectiveProduction,
+  getProjectOverview,
   getProjectStatuses,
   getUpgradeAffordability,
   normalizeState,
@@ -37,6 +38,8 @@ const elements = {
   offlineNotice: document.querySelector("#offlineNotice"),
   actionNotice: document.querySelector("#actionNotice"),
   upgradeList: document.querySelector("#upgradeList"),
+  projectOverview: document.querySelector("#projectOverview"),
+  projectOverviewDetail: document.querySelector("#projectOverviewDetail"),
   projectList: document.querySelector("#projectList"),
   resetButton: document.querySelector("#resetButton"),
   feedbackForm: document.querySelector("#feedbackForm"),
@@ -136,6 +139,7 @@ function render() {
   const goal = getCurrentGoal(current);
   const combo = getComboStatus(current);
   const production = getEffectiveProduction(current);
+  const projectOverview = getProjectOverview(current);
 
   elements.energy.textContent = formatNumber(current.energy);
   elements.perSecond.textContent = formatNumber(production.perSecond);
@@ -148,6 +152,8 @@ function render() {
   elements.goalMeter.style.width = Math.round(goal.progress * 100) + "%";
   renderOfflineNotice();
   renderActionNotice();
+  elements.projectOverview.textContent = projectOverview.summaryText;
+  elements.projectOverviewDetail.textContent = projectOverview.detailText;
 
   elements.upgradeList.replaceChildren(
     ...UPGRADE_DEFS.map((upgrade) => renderUpgrade(upgrade, current, goal))

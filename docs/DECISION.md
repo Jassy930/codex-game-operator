@@ -1,5 +1,27 @@
 # Decision
 
+## 2026-04-29 Product decision：星图总览
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 当前仍有真实体验反馈 #2 open，且没有 open bug，继续进入有反馈样本下的 Product decision。
+
+当前最大问题：#2 仍围绕“内容丰富度太差，可玩的内容太少”保持 open。星图计划已经延伸到 500K 后，但侧栏只逐项罗列项目，玩家缺少一个快速判断“已完成多少、下一段是什么、奖励是什么”的总览。
+
+本轮决策：
+
+- 在星图计划列表前新增星图总览。
+- 总览显示已完成项目数/总项目数、下一段项目名称、下一段奖励和对应进度详情。
+- 全部项目完成后显示全部航段已完成和奖励已生效状态。
+- 不新增项目、不调整奖励数值、不改变升级曲线，先提升已有中后段内容的可读性。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-04-29 00:46 CST 查询到 1 个 open issue、1 个 open feedback issue、0 个 open bug issue；#2 仍为 open。
+- npm test 通过，覆盖中后段玩家的星图总览，以及全部星图项目完成后的总览状态。
+- npm install 成功。
+- npm run build 生成 dist。
+
+下一步：完成 push 和部署后回复 #2，说明星图总览已上线，并继续等待玩家复测内容丰富度感知是否改善。
+
 ## 2026-04-29 Product decision：深空航段
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 当前仍有真实体验反馈 #2 open，且没有 open bug，继续进入有反馈样本下的 Product decision。
