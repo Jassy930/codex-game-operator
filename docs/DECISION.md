@@ -1,5 +1,27 @@
 # Decision
 
+## 2026-04-28 Product decision：过载进度可读性
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 与 manual-feedback 仍无真实玩家反馈，继续处于无反馈样本下的 Product decision。
+
+当前最大问题：第八次连击会触发过载奖励，但界面只显示连击数和“稳定/过载”状态，玩家无法直接判断还差几次点击触发下一次奖励。
+
+本轮决策：
+
+- 将过载间隔提取为可测试常量，并返回连击数、过载进度、剩余点击数和触发状态。
+- 在连击状态栏显示“过载 X/8”和“距过载 X 次”，触发时保留过载奖励反馈。
+- 修正旧发布脚本中的测试绕过，确保 deploy/autopush 路径在测试失败时停止。
+- 保持升级、目标、离线收益和反馈基础设施不变，继续优先补强 30 秒内核心循环的状态可见性。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-04-28 22:25 CST 查询到 0 个 open issue、0 个 open feedback issue、0 个 open bug issue，#1 仍为 closed。
+- npm install 成功。
+- npm test 通过，覆盖连击过载进度和剩余点击数。
+- npm run build 生成 dist。
+
+下一步：等待真实玩家反馈；若仍无反馈，优先观察早期点击节奏和反馈表单转化是否需要更清晰的微文案。
+
 ## 2026-04-28 Product decision：目标进度可读性
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 与 manual-feedback 仍无真实玩家反馈，继续处于无反馈样本下的 Product decision。

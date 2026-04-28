@@ -5,6 +5,7 @@ import {
   clickCore,
   createInitialState,
   formatNumber,
+  getComboStatus,
   getCurrentGoal,
   getUpgradeAffordability,
   getUpgradeCost,
@@ -36,6 +37,32 @@ test("第八次连击触发过载奖励", () => {
 
   assert.equal(state.energy, 13);
   assert.equal(state.lastPulse, "过载 +5");
+});
+
+test("连击状态会返回过载进度和剩余点击数", () => {
+  let state = createInitialState(0);
+  for (let index = 0; index < 3; index += 1) {
+    state = clickCore(state, index * 100);
+  }
+
+  const charging = getComboStatus(state, 300);
+  assert.equal(charging.count, 3);
+  assert.equal(charging.step, 3);
+  assert.equal(charging.remaining, 5);
+  assert.equal(charging.progress, 0.375);
+  assert.equal(charging.progressText, "过载 3/8");
+  assert.equal(charging.hintText, "距过载 5 次");
+
+  for (let index = 3; index < 8; index += 1) {
+    state = clickCore(state, index * 100);
+  }
+
+  const overloaded = getComboStatus(state, 800);
+  assert.equal(overloaded.count, 8);
+  assert.equal(overloaded.step, 8);
+  assert.equal(overloaded.remaining, 0);
+  assert.equal(overloaded.progress, 1);
+  assert.equal(overloaded.hintText, "过载已触发");
 });
 
 test("购买聚能透镜会扣除成本并提升点击产能", () => {

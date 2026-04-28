@@ -3,6 +3,7 @@ import {
   clickCore,
   createInitialState,
   formatNumber,
+  getComboStatus,
   getCurrentGoal,
   getUpgradeAffordability,
   normalizeState,
@@ -120,12 +121,13 @@ setInterval(() => {
 function render() {
   const current = normalizeState(state);
   const goal = getCurrentGoal(current);
+  const combo = getComboStatus(current);
 
   elements.energy.textContent = formatNumber(current.energy);
   elements.perSecond.textContent = formatNumber(current.energyPerSecond * current.multiplier);
   elements.perClick.textContent = formatNumber(current.energyPerClick * current.multiplier);
-  elements.combo.textContent = "连击 " + current.combo;
-  elements.pulse.textContent = current.lastPulse;
+  elements.combo.textContent = "连击 " + combo.count + " · " + combo.progressText;
+  elements.pulse.textContent = combo.overloaded ? current.lastPulse : combo.hintText;
   elements.goalLabel.textContent = goal.label;
   elements.goalValue.textContent = goal.value;
   elements.goalHint.textContent = goal.progressText;

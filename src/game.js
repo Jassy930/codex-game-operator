@@ -40,6 +40,7 @@ export const UPGRADE_DEFS = [
   }
 ];
 
+export const OVERLOAD_INTERVAL = 8;
 export const GOALS = [
   {
     id: "first-upgrade",
@@ -173,7 +174,7 @@ export function clickCore(state, now = Date.now()) {
   const current = tick(state, now);
   const activeCombo = now <= current.comboExpiresAt ? current.combo : 0;
   const combo = activeCombo + 1;
-  const overloadBonus = combo % 8 === 0 ? 5 : 0;
+  const overloadBonus = combo % OVERLOAD_INTERVAL === 0 ? 5 : 0;
   const gain = (current.energyPerClick + overloadBonus) * current.multiplier;
 
   return {
@@ -259,6 +260,26 @@ export function getCurrentGoal(state) {
 export function getPurchasedUpgradeCount(state) {
   const current = normalizeState(state);
   return Object.values(current.upgrades).reduce((sum, count) => sum + count, 0);
+}
+
+export function getComboStatus(state, now = Date.now()) {
+  const current = normalizeState(state, now);
+  const count = now <= current.comboExpiresAt ? current.combo : 0;
+  const modulo = count % OVERLOAD_INTERVAL;
+  const step = count > 0 && modulo === 0 ? OVERLOAD_INTERVAL : modulo;
+  const remaining = step === OVERLOAD_INTERVAL ? 0 : OVERLOAD_INTERVAL - step;
+  const overloaded = step === OVERLOAD_INTERVAL;
+
+  return {
+    count,
+    interval: OVERLOAD_INTERVAL,
+    step,
+    remaining,
+    progress: step / OVERLOAD_INTERVAL,
+    progressText: "过载 " + step + "/" + OVERLOAD_INTERVAL,
+    hintText: overloaded ? "过载已触发" : "距过载 " + remaining + " 次",
+    overloaded
+  };
 }
 
 export function formatNumber(value) {
