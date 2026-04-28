@@ -851,6 +851,7 @@ export function getProjectOverview(state) {
       upcomingProjectIds: [],
       summaryText: "星图进度 " + completed + "/" + projects.length + " · 全部航段已完成",
       detailText: "所有星图奖励已生效，继续累计能量等待下一段航线。",
+      trackText: buildProjectTrackText(projects),
       bonusText,
       forecastText: "航线预告：等待下一段航线"
     };
@@ -877,6 +878,7 @@ export function getProjectOverview(state) {
       " · 奖励 " +
       nextProject.reward,
     detailText: nextProject.progressText,
+    trackText: buildProjectTrackText(projects),
     bonusText,
     forecastText:
       "航线预告：" + upcomingProjects.map(formatForecastProject).join("、")
@@ -1112,6 +1114,26 @@ function buildProjectBonusText(bonuses) {
     .map(([label, multiplier]) => label + " x" + formatMultiplier(multiplier));
 
   return "生效加成：" + bonusParts.join(" · ");
+}
+
+function buildProjectTrackText(projects) {
+  const energyProject = projects.find((project) => !project.completed && !project.upgradeId);
+  const upgradeProject = projects.find((project) => !project.completed && project.upgradeId);
+
+  return (
+    "目标分轨：累计航段" +
+    formatProjectTrack(energyProject) +
+    "；升级航段" +
+    formatProjectTrack(upgradeProject)
+  );
+}
+
+function formatProjectTrack(project) {
+  if (!project) {
+    return " 全部完成";
+  }
+
+  return " " + project.name + "（" + project.progressText + "）";
 }
 
 function formatForecastProject(project) {

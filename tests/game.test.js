@@ -477,6 +477,10 @@ test("星图总览会显示完成数和下一段奖励", () => {
     "星图进度 1/31 · 下一段 2/31：谐振校准 · 奖励 过载奖励 +20%"
   );
   assert.equal(overview.detailText, "进度 0 级 / 6 级 · 还差 6 级");
+  assert.equal(
+    overview.trackText,
+    "目标分轨：累计航段 星桥试运行（进度 114.4K 能量 / 250K 能量 · 还差 135.6K 能量）；升级航段 谐振校准（进度 0 级 / 6 级 · 还差 6 级）"
+  );
   assert.equal(overview.bonusText, "生效加成：总产能 x1.12");
   assert.equal(
     overview.forecastText,
@@ -1156,6 +1160,7 @@ test("星图总览会显示全部完成状态", () => {
     overview.detailText,
     "所有星图奖励已生效，继续累计能量等待下一段航线。"
   );
+  assert.equal(overview.trackText, "目标分轨：累计航段 全部完成；升级航段 全部完成");
   assert.equal(
     overview.bonusText,
     "生效加成：总产能 x5.04 · 点击 x3.68 · 自动 x4.17 · 过载 x2.25"

@@ -1,5 +1,25 @@
 # Decision
 
+## 2026-04-29 Product decision：星图目标分轨
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 当前仍有真实体验反馈 #2 open，且没有 open bug，继续进入有反馈样本下的 Product decision。
+
+当前最大问题：#2 仍围绕“内容丰富度太差，可玩的内容太少”保持 open。过去多轮主要用新增长尾航段延长内容边界，但 100K 后玩家在总览里仍主要看到一个线性下一目标和一个最多 3 项预告，较难同时识别“累计能量航段”和“升级航段”两条推进线。
+
+本轮决策：
+
+- 在星图总览中新增“目标分轨”，同时显示下一个未完成累计航段和下一个未完成升级航段。
+- 不新增存档字段、不调整既有奖励数值和升级价格，不改变项目完成判定；先提升已有 31 段星图内容的结构可见性。
+- 页面初始文案同步到 31 段，避免静态 HTML 与当前项目总数不一致。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-04-29 07:15 CST 查询到 1 个 open issue、1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
+- bun install --no-save、bun run test、bun run build、npm install、npm test 和 npm run build 通过，覆盖星图总览目标分轨和全部完成状态。
+- 构建产物 dist 包含目标分轨文案和渲染字段。
+
+下一步：验证、发布并回复 #2，说明本轮不是继续单纯追加终点，而是让玩家在星图总览中看到累计航段和升级航段两条可追线索。
+
 ## 2026-04-29 Product decision：晨渊观星台航段
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 当前仍有真实体验反馈 #2 open，且没有 open bug，继续进入有反馈样本下的 Product decision。

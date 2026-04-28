@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+- 新增星图目标分轨：星图总览同时显示下一个未完成累计航段和下一个未完成升级航段，让 100K 后玩家更快看到两条可追推进线。
+- 静态 HTML 初始星图总数同步到 31 段。
+- 验证通过：bun install --no-save、bun run test、bun run build、npm install、npm test、npm run build。
+- 构建产物已包含目标分轨文案和渲染字段。
 - 新增 85M 后晨渊观星台航段：星冠回声站完成后继续出现累计能量目标，完成后奖励点击产能 +19%，星图路线扩展到 31 段。
 - 同步 GitHub Issues 反馈状态：当前 1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
 - 验证通过：bun install --no-save、bun run test、bun run build、npm install、npm test、npm run build。
