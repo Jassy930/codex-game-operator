@@ -17,8 +17,10 @@
 - GitHub Issues 已同步：2026-04-29 03:53 CST 查询到 1 个 open issue、1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
 - npm test 通过，覆盖彗尾船坞完成后继续指向引力航标、17 段航线序号和全部完成总览。
 - npm install、npm test、npm run build、bun run test 和 bun run build 通过。
+- GitHub Pages workflow 25074556183 已成功，线上地址返回 HTTP 200。
+- #2 已回复并保持 open。
 
-下一步：发布后观察 #2 复测是否认为引力航标改善长尾内容丰富度。
+下一步：继续观察 #2 复测是否认为引力航标改善长尾内容丰富度。
 
 ## 2026-04-29 Product decision：彗尾船坞航段
 
