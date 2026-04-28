@@ -561,6 +561,20 @@ export const PROJECT_DEFS = [
     current(state) {
       return state.totalEnergy;
     }
+  },
+  {
+    id: "star-crown-echo-station",
+    name: "星冠回声站",
+    summary: "累计 65M 能量，在远曦灯塔外架设星冠回声站。",
+    unit: "能量",
+    target: 65_000_000,
+    reward: "过载奖励 +19%",
+    effect: {
+      overloadMultiplier: 1.19
+    },
+    current(state) {
+      return state.totalEnergy;
+    }
   }
 ];
 

@@ -1,5 +1,25 @@
 # Decision
 
+## 2026-04-29 Product decision：星冠回声站航段
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 当前仍有真实体验反馈 #2 open，且没有 open bug，继续进入有反馈样本下的 Product decision。
+
+当前最大问题：#2 仍围绕“内容丰富度太差，可玩的内容太少”保持 open，上一轮已把星图路线延伸到 50M 的远曦灯塔，但远曦灯塔完成后仍会暴露“全部航段已完成，等待下一段航线”的内容边界。
+
+本轮决策：
+
+- 新增“星冠回声站”航段，要求累计 65M 能量，奖励过载奖励 +19%。
+- 星图路线从 29 段扩展到 30 段；主目标、总览、航线预告、项目列表和全部完成状态沿用现有航段序号与奖励展示。
+- 不新增存档字段、不调整既有奖励数值和升级价格，先用一个远曦灯塔后续航段继续延长现有路线，并把奖励落到过载奖励成长线。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-04-29 06:46 CST 查询到 1 个 open issue、1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
+- bun install、bun run test、bun run build、npm install、npm test 和 npm run build 已通过，覆盖远曦灯塔完成后继续指向星冠回声站、30 段航线序号和全部完成总览。
+- 构建产物 dist 已包含星冠回声站。
+
+下一步：push 后等待 GitHub Pages workflow 成功，再回复 #2 并继续观察复测结论。
+
 ## 2026-04-29 Product decision：远曦灯塔航段
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 当前仍有真实体验反馈 #2 open，且没有 open bug，继续进入有反馈样本下的 Product decision。

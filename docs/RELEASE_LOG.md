@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+- 新增 65M 后星冠回声站航段：远曦灯塔完成后继续出现累计能量目标，完成后奖励过载奖励 +19%，星图路线扩展到 30 段。
+- 同步 GitHub Issues 反馈状态：当前 1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
+- 验证通过：bun install、bun run test、bun run build、npm install、npm test、npm run build。
+- 构建产物已包含星冠回声站。
 - 新增 50M 后远曦灯塔航段：离辉轨道港完成后继续出现累计能量目标，完成后奖励总产能 +19%，星图路线扩展到 29 段。
 - 同步 GitHub Issues 反馈状态：当前 1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
 - 验证通过：bun install、bun run test、bun run build、npm install、npm test、npm run build。
