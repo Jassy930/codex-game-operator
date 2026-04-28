@@ -519,6 +519,20 @@ export const PROJECT_DEFS = [
     current(state) {
       return state.totalEnergy;
     }
+  },
+  {
+    id: "pulse-arc-gate",
+    name: "脉冲航闸",
+    summary: "累计 30M 能量，在引潮星环外开启脉冲航闸。",
+    unit: "能量",
+    target: 30_000_000,
+    reward: "点击产能 +18%",
+    effect: {
+      clickMultiplier: 1.18
+    },
+    current(state) {
+      return state.totalEnergy;
+    }
   }
 ];
 
