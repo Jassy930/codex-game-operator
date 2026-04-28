@@ -26,6 +26,7 @@ const elements = {
   pulse: document.querySelector("#pulseValue"),
   goalLabel: document.querySelector("#goalLabel"),
   goalValue: document.querySelector("#goalValue"),
+  goalHint: document.querySelector("#goalHint"),
   goalMeter: document.querySelector("#goalMeter"),
   offlineNotice: document.querySelector("#offlineNotice"),
   upgradeList: document.querySelector("#upgradeList"),
@@ -127,6 +128,7 @@ function render() {
   elements.pulse.textContent = current.lastPulse;
   elements.goalLabel.textContent = goal.label;
   elements.goalValue.textContent = goal.value;
+  elements.goalHint.textContent = goal.progressText;
   elements.goalMeter.style.width = Math.round(goal.progress * 100) + "%";
   renderOfflineNotice();
 

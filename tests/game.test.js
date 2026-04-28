@@ -104,6 +104,26 @@ test("当前目标会从第一次升级推进到自动采集", () => {
   assert.equal(goal.value, "启动自动采集");
 });
 
+test("当前目标会返回可读的进度和剩余量", () => {
+  const state = {
+    ...createInitialState(0),
+    upgrades: {
+      lens: 1,
+      collector: 1,
+      stabilizer: 0
+    },
+    totalEnergy: 42
+  };
+
+  const goal = getCurrentGoal(state);
+
+  assert.equal(goal.id, "hundred-energy");
+  assert.equal(goal.currentValue, 42);
+  assert.equal(goal.remaining, 58);
+  assert.equal(goal.progress, 0.42);
+  assert.equal(goal.progressText, "进度 42 能量 / 100 能量 · 还差 58 能量");
+});
+
 test("升级价格和数字格式稳定", () => {
   const state = {
     ...createInitialState(0),

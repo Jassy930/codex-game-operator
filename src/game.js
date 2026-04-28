@@ -45,6 +45,7 @@ export const GOALS = [
     id: "first-upgrade",
     label: "当前目标",
     value: "购买第一次升级",
+    unit: "次升级",
     target: 1,
     current(state) {
       return getPurchasedUpgradeCount(state);
@@ -54,6 +55,7 @@ export const GOALS = [
     id: "passive-production",
     label: "当前目标",
     value: "启动自动采集",
+    unit: "级",
     target: 1,
     current(state) {
       return state.upgrades.collector ?? 0;
@@ -63,6 +65,7 @@ export const GOALS = [
     id: "hundred-energy",
     label: "当前目标",
     value: "累计 100 能量",
+    unit: "能量",
     target: 100,
     current(state) {
       return state.totalEnergy;
@@ -72,6 +75,7 @@ export const GOALS = [
     id: "stable-core",
     label: "当前目标",
     value: "安装稳定器",
+    unit: "级",
     target: 1,
     current(state) {
       return state.upgrades.stabilizer ?? 0;
@@ -238,11 +242,17 @@ export function getCurrentGoal(state) {
   const goal =
     GOALS.find((item) => item.current(current) < item.target) ??
     buildLoopGoal(current);
-  const progress = Math.min(1, goal.current(current) / goal.target);
+  const currentValue = Math.max(0, goal.current(current));
+  const target = Math.max(1, goal.target);
+  const remaining = Math.max(0, target - currentValue);
+  const progress = Math.min(1, currentValue / target);
 
   return {
     ...goal,
-    progress
+    currentValue,
+    remaining,
+    progress,
+    progressText: buildGoalProgressText(goal, currentValue, target, remaining)
   };
 }
 
@@ -272,11 +282,33 @@ function buildLoopGoal(state) {
     id: "loop-" + target,
     label: "当前目标",
     value: "累计 " + formatNumber(target) + " 能量",
+    unit: "能量",
     target,
     current(currentState) {
       return currentState.totalEnergy;
     }
   };
+}
+
+function buildGoalProgressText(goal, currentValue, target, remaining) {
+  const currentText = formatGoalAmount(goal, Math.min(currentValue, target));
+  const targetText = formatGoalAmount(goal, target);
+  if (remaining <= 0) {
+    return "进度 " + targetText + " / " + targetText + " · 已完成";
+  }
+  return (
+    "进度 " +
+    currentText +
+    " / " +
+    targetText +
+    " · 还差 " +
+    formatGoalAmount(goal, remaining)
+  );
+}
+
+function formatGoalAmount(goal, value) {
+  const unit = goal.unit ? " " + goal.unit : "";
+  return formatNumber(value) + unit;
 }
 
 function roundTo(value, precision) {

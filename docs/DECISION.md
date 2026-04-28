@@ -1,5 +1,26 @@
 # Decision
 
+## 2026-04-28 Product decision：目标进度可读性
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 与 manual-feedback 仍无真实玩家反馈，继续处于无反馈样本下的 Product decision。
+
+当前最大问题：当前目标只显示目标名称和进度条，玩家无法直接看到“已经完成多少、还差多少”，目标条的信息密度低于升级卡片。
+
+本轮决策：
+
+- 为当前目标返回 currentValue、remaining 和 progressText。
+- 在目标条中显示“进度 X / Y · 还差 Z”，覆盖首次升级、自动采集、累计能量、稳定器和循环目标。
+- 保持数值曲线、升级成本和反馈基础设施不变，避免无反馈时扩大系统复杂度。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-04-28 22:16 CST 查询到 0 个 open issue、0 个 open feedback issue、0 个 open bug issue，#1 仍为 closed。
+- npm install 成功。
+- npm test 通过，覆盖当前目标进度和剩余量。
+- npm run build 生成 dist。
+
+下一步：等待真实玩家反馈；若仍无反馈，优先继续补强 30 秒内目标链路的状态反馈。
+
 ## 2026-04-28 Product decision：升级可读性
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 与 manual-feedback 暂无真实玩家反馈，继续处于无反馈样本下的 Product decision。

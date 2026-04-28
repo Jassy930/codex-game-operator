@@ -140,6 +140,12 @@ h2 {
   font-size: 1.1rem;
 }
 
+.goal-strip .goal-hint {
+  margin-top: 8px;
+  color: #fff7c2;
+  font-weight: 850;
+}
+
 .goal-meter {
   width: 100%;
   height: 8px;

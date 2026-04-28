@@ -2,6 +2,12 @@
 
 Agent 可以主动上网调研 idle/incremental/clicker game 设计和留存问题。
 
+## 2026-04-28 Goal clarity
+
+本轮未新增外部网页调研；沿用上一轮关于放置类核心循环和系统状态可见性的结论。当前没有真实玩家反馈，因此继续优先减少玩家对下一步目标的猜测成本。
+
+产品结论：目标条需要和升级卡片一样直接说明进度与剩余量，先补足 30 秒内的状态反馈，再考虑新增系统。
+
 ## 2026-04-28 Upgrade clarity
 
 - Machinations 的 idle game 设计文章强调资源生成器、升级和自动化是放置类游戏的核心循环，玩家需要持续看到下一次成长的路径：https://machinations.io/articles/idle-games-and-how-to-design-them
