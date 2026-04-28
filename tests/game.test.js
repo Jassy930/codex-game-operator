@@ -352,7 +352,16 @@ test("星图总览会显示完成数和下一段奖励", () => {
     "星图进度 1/9 · 下一段：透镜阵列 · 奖励 点击产能 +18%"
   );
   assert.equal(overview.detailText, "进度 11 级 / 12 级 · 还差 1 级");
+  assert.equal(overview.bonusText, "生效加成：总产能 x1.12");
   assert.equal(overview.forecastText, "航线预告：透镜阵列、采集阵列、星桥试运行");
+});
+
+test("星图总览在首个项目前会提示等待奖励生效", () => {
+  const overview = getProjectOverview(createInitialState(0));
+
+  assert.equal(overview.completed, 0);
+  assert.equal(overview.nextProjectId, "stellar-map");
+  assert.equal(overview.bonusText, "生效加成：等待首个星图奖励");
 });
 
 test("100K 后当前目标会指向下一个未完成星图项目", () => {
@@ -545,6 +554,10 @@ test("星图总览会显示全部完成状态", () => {
   assert.equal(
     overview.detailText,
     "所有星图奖励已生效，继续累计能量等待下一段航线。"
+  );
+  assert.equal(
+    overview.bonusText,
+    "生效加成：总产能 x2.02 · 点击 x1.49 · 自动 x1.90"
   );
   assert.equal(overview.forecastText, "航线预告：等待下一段航线");
 });

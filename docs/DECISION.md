@@ -1,5 +1,26 @@
 # Decision
 
+## 2026-04-29 Product decision：星图加成总览
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 当前仍有真实体验反馈 #2 open，且没有 open bug，继续进入有反馈样本下的 Product decision。
+
+当前最大问题：#2 仍围绕“内容丰富度太差，可玩的内容太少”保持 open。前序迭代已经让星图总览显示下一段目标、奖励和后续航线，但玩家完成项目后，仍需要从产能数字变化中反推“已完成内容正在带来什么长期收益”。
+
+本轮决策：
+
+- 在星图总览中新增“生效加成”，汇总当前已完成星图项目带来的总产能、点击产能和自动产能倍率。
+- 尚未完成任何星图项目时显示等待首个星图奖励。
+- 不新增项目、不调整奖励数值、不改变升级曲线，先提升已有内容和长期成长之间的可见关联。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-04-29 01:11 CST 查询到 1 个 open issue、1 个 open feedback issue、0 个 open bug issue；#2 仍为 open。
+- npm test 通过，覆盖首个星图项目前、部分星图奖励生效后、全部星图项目完成后的加成总览文案。
+- npm install 成功。
+- npm run build 生成 dist。
+
+下一步：验证后回复 #2 并保持 open；等待玩家复测星图加成总览是否改善内容丰富度和成长反馈感知。
+
 ## 2026-04-29 Product decision：星图航线预告
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 当前仍有真实体验反馈 #2 open，且没有 open bug，继续进入有反馈样本下的 Product decision。

@@ -464,6 +464,7 @@ export function getProjectOverview(state) {
   const projects = getProjectStatuses(state);
   const completed = projects.filter((project) => project.completed).length;
   const nextProject = projects.find((project) => !project.completed) ?? null;
+  const bonusText = buildProjectBonusText(getProjectBonusesFromStatuses(projects));
 
   if (!nextProject) {
     return {
@@ -473,6 +474,7 @@ export function getProjectOverview(state) {
       upcomingProjectIds: [],
       summaryText: "星图进度 " + completed + "/" + projects.length + " · 全部航段已完成",
       detailText: "所有星图奖励已生效，继续累计能量等待下一段航线。",
+      bonusText,
       forecastText: "航线预告：等待下一段航线"
     };
   }
@@ -494,14 +496,18 @@ export function getProjectOverview(state) {
       " · 奖励 " +
       nextProject.reward,
     detailText: nextProject.progressText,
+    bonusText,
     forecastText:
       "航线预告：" + upcomingProjects.map((project) => project.name).join("、")
   };
 }
 
 export function getProjectBonuses(state) {
-  const completedProjects = getProjectStatuses(state).filter((project) => project.completed);
+  return getProjectBonusesFromStatuses(getProjectStatuses(state));
+}
 
+function getProjectBonusesFromStatuses(projects) {
+  const completedProjects = projects.filter((project) => project.completed);
   return completedProjects.reduce(
     (bonuses, project) => {
       const effect = project.effect ?? {};
@@ -626,6 +632,29 @@ function buildLoopGoal(state) {
       return currentState.totalEnergy;
     }
   };
+}
+
+function buildProjectBonusText(bonuses) {
+  if (!bonuses.completed) {
+    return "生效加成：等待首个星图奖励";
+  }
+
+  const bonusParts = [
+    ["总产能", bonuses.totalMultiplier],
+    ["点击", bonuses.clickMultiplier],
+    ["自动", bonuses.secondMultiplier]
+  ]
+    .filter(([, multiplier]) => multiplier > 1)
+    .map(([label, multiplier]) => label + " x" + formatMultiplier(multiplier));
+
+  return "生效加成：" + bonusParts.join(" · ");
+}
+
+function formatMultiplier(value) {
+  return roundTo(value, 2).toLocaleString("zh-CN", {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2
+  });
 }
 
 function buildNextProjectGoal(state) {

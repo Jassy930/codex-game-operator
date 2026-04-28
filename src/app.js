@@ -40,6 +40,7 @@ const elements = {
   upgradeList: document.querySelector("#upgradeList"),
   projectOverview: document.querySelector("#projectOverview"),
   projectOverviewDetail: document.querySelector("#projectOverviewDetail"),
+  projectOverviewBonus: document.querySelector("#projectOverviewBonus"),
   projectOverviewForecast: document.querySelector("#projectOverviewForecast"),
   projectList: document.querySelector("#projectList"),
   resetButton: document.querySelector("#resetButton"),
@@ -155,6 +156,7 @@ function render() {
   renderActionNotice();
   elements.projectOverview.textContent = projectOverview.summaryText;
   elements.projectOverviewDetail.textContent = projectOverview.detailText;
+  elements.projectOverviewBonus.textContent = projectOverview.bonusText;
   elements.projectOverviewForecast.textContent = projectOverview.forecastText;
 
   elements.upgradeList.replaceChildren(
