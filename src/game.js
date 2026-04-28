@@ -82,7 +82,7 @@ export const GOALS = [
 const INITIAL_UPGRADES = Object.fromEntries(
   UPGRADE_DEFS.map((upgrade) => [upgrade.id, 0])
 );
-const MAX_OFFLINE_SECONDS = 8 * 60 * 60;
+export const MAX_OFFLINE_SECONDS = 8 * 60 * 60;
 
 export function createInitialState(now = Date.now()) {
   return {
@@ -138,6 +138,30 @@ export function tick(state, now = Date.now()) {
     totalEnergy: current.totalEnergy + gain,
     lastTick: now,
     combo: now > current.comboExpiresAt ? 0 : current.combo
+  };
+}
+
+export function settleOfflineProgress(
+  state,
+  now = Date.now(),
+  { minimumGain = 1, minimumSeconds = 30 } = {}
+) {
+  const current = normalizeState(state, now);
+  const rawElapsedSeconds = Math.max(0, (now - current.lastTick) / 1000);
+  const elapsedSeconds = Math.min(MAX_OFFLINE_SECONDS, rawElapsedSeconds);
+  const updated = tick(current, now);
+  const gained = Math.max(0, updated.energy - current.energy);
+  const shouldNotify = gained >= minimumGain && elapsedSeconds >= minimumSeconds;
+
+  return {
+    state: updated,
+    summary: shouldNotify
+      ? {
+          gained,
+          elapsedSeconds: Math.floor(elapsedSeconds),
+          capped: rawElapsedSeconds > MAX_OFFLINE_SECONDS
+        }
+      : null
   };
 }
 

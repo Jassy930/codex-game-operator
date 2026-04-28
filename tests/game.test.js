@@ -8,6 +8,7 @@ import {
   getCurrentGoal,
   getUpgradeCost,
   purchaseUpgrade,
+  settleOfflineProgress,
   tick
 } from "../src/game.js";
 import {
@@ -64,6 +65,26 @@ test("自动产能随 tick 增长并限制离线收益上限", () => {
 
   assert.equal(updated.energy, 6);
   assert.equal(capped.energy, 86400);
+});
+
+test("离线收益会立即结算并返回可展示摘要", () => {
+  const state = {
+    ...createInitialState(0),
+    energyPerSecond: 2,
+    multiplier: 1.5,
+    lastTick: 0
+  };
+
+  const result = settleOfflineProgress(state, 60_000);
+
+  assert.equal(result.state.energy, 180);
+  assert.equal(result.state.totalEnergy, 180);
+  assert.equal(result.state.lastTick, 60_000);
+  assert.deepEqual(result.summary, {
+    gained: 180,
+    elapsedSeconds: 60,
+    capped: false
+  });
 });
 
 test("当前目标会从第一次升级推进到自动采集", () => {

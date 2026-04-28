@@ -1,5 +1,26 @@
 # Decision
 
+## 2026-04-28 Product decision
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 与 manual-feedback 暂无真实玩家反馈，处于无反馈样本下的 Product decision。
+
+当前最大问题：自动产能已经能在离线期间累计，但玩家回到页面时缺少明确回收反馈，放置玩法的“回来有收获”不够可见。
+
+本轮决策：
+
+- 读取存档时立即结算离线收益，沿用现有 8 小时离线收益上限。
+- 当收益达到至少 1 能量且离线时间不少于 30 秒时，在主操作区显示一次离线回收提示。
+- 记录本地 `offline_gain` 事件，用于验证离线收益触发；发布前仍不得把本地事件当作真实线上指标。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-04-28 21:51 CST 查询到 0 个 open issue，#1 已关闭。
+- npm install 成功。
+- npm test 通过，覆盖离线收益结算摘要。
+- npm run build 生成 dist。
+
+下一步：等待真实玩家反馈；若仍无反馈，优先补充轻量目标或升级可读性，而不是引入复杂后端。
+
 ## 2026-04-28 Feedback Infra
 
 阶段判断：仓库已有 package.json、可玩游戏、构建脚本和 Vercel 发布版本；GitHub Pages 已可配置；游戏内尚缺少真实反馈入口，处于 Feedback infra。

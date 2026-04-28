@@ -11,3 +11,4 @@
 - 仓库已为 public，GitHub Pages 已启用 workflow 发布源；run 25056371852 已成功部署到 https://jassy930.github.io/codex-game-operator/
 - 补齐 GitHub Issue 标签：feedback、balance、idea、release、research、tech-debt。
 - 回复并关闭部署阻塞 issue #1。
+- 新增离线收益可见化：读取存档时立即结算离线自动产能，显示回收提示，并记录本地 offline_gain 事件。

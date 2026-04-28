@@ -157,6 +157,24 @@ h2 {
   transition: width 180ms ease;
 }
 
+.offline-notice {
+  width: min(100%, 560px);
+  min-height: 42px;
+  margin: -12px 0 0;
+  padding: 10px 14px;
+  border: 1px solid rgba(19, 181, 166, 0.42);
+  border-radius: 8px;
+  background: rgba(19, 181, 166, 0.12);
+  color: #fff7c2;
+  font-size: 0.92rem;
+  font-weight: 800;
+  text-align: center;
+}
+
+.offline-notice[hidden] {
+  display: none;
+}
+
 .core-button {
   position: relative;
   display: grid;

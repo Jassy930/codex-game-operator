@@ -7,6 +7,7 @@ import {
   getUpgradeCost,
   normalizeState,
   purchaseUpgrade,
+  settleOfflineProgress,
   tick
 } from "./game.js";
 import { buildFeedbackIssueUrl, createFeedbackEntry } from "./feedback.js";
@@ -26,6 +27,7 @@ const elements = {
   goalLabel: document.querySelector("#goalLabel"),
   goalValue: document.querySelector("#goalValue"),
   goalMeter: document.querySelector("#goalMeter"),
+  offlineNotice: document.querySelector("#offlineNotice"),
   upgradeList: document.querySelector("#upgradeList"),
   resetButton: document.querySelector("#resetButton"),
   feedbackForm: document.querySelector("#feedbackForm"),
@@ -35,15 +37,26 @@ const elements = {
   feedbackStatus: document.querySelector("#feedbackStatus")
 };
 
-let state = loadState();
+const loadedState = loadState();
+let state = loadedState.state;
+let offlineSummary = loadedState.offlineSummary;
 let lastFirstUpgradeAt = state.firstUpgradeAt;
 
 recordEvent("session", {
   startedAt: new Date().toISOString()
 });
+if (offlineSummary) {
+  recordEvent("offline_gain", {
+    gained: Math.round(offlineSummary.gained * 10) / 10,
+    elapsedSeconds: offlineSummary.elapsedSeconds,
+    capped: offlineSummary.capped
+  });
+}
+persistState();
 render();
 
 elements.coreButton.addEventListener("click", () => {
+  offlineSummary = null;
   state = clickCore(state);
   recordEvent("click", {
     energy: Math.floor(state.energy),
@@ -55,6 +68,7 @@ elements.coreButton.addEventListener("click", () => {
 
 elements.resetButton.addEventListener("click", () => {
   state = createInitialState();
+  offlineSummary = null;
   lastFirstUpgradeAt = null;
   recordEvent("reset");
   saveAndRender();
@@ -114,6 +128,7 @@ function render() {
   elements.goalLabel.textContent = goal.label;
   elements.goalValue.textContent = goal.value;
   elements.goalMeter.style.width = Math.round(goal.progress * 100) + "%";
+  renderOfflineNotice();
 
   elements.upgradeList.replaceChildren(
     ...UPGRADE_DEFS.map((upgrade) => renderUpgrade(upgrade, current))
@@ -129,6 +144,7 @@ function renderUpgrade(upgrade, current) {
   button.type = "button";
   button.disabled = !canBuy;
   button.addEventListener("click", () => {
+    offlineSummary = null;
     const result = purchaseUpgrade(state, upgrade.id);
     state = result.state;
     if (result.purchased) {
@@ -164,17 +180,58 @@ function renderUpgrade(upgrade, current) {
 }
 
 function saveAndRender() {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  persistState();
   render();
 }
 
 function loadState() {
   try {
+    const now = Date.now();
     const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) ?? "null");
-    return normalizeState(saved);
+    const result = settleOfflineProgress(normalizeState(saved, now), now);
+    return {
+      state: result.state,
+      offlineSummary: result.summary
+    };
   } catch {
-    return createInitialState();
+    return {
+      state: createInitialState(),
+      offlineSummary: null
+    };
   }
+}
+
+function persistState() {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+}
+
+function renderOfflineNotice() {
+  if (!offlineSummary) {
+    elements.offlineNotice.hidden = true;
+    elements.offlineNotice.textContent = "";
+    return;
+  }
+
+  const cappedText = offlineSummary.capped ? "，已按 8 小时上限结算" : "";
+  elements.offlineNotice.hidden = false;
+  elements.offlineNotice.textContent =
+    "离线 " +
+    formatElapsed(offlineSummary.elapsedSeconds) +
+    "，回收 " +
+    formatNumber(offlineSummary.gained) +
+    " 能量" +
+    cappedText +
+    "。";
+}
+
+function formatElapsed(seconds) {
+  if (seconds >= 3600) {
+    return Math.floor(seconds / 3600) + " 小时";
+  }
+  if (seconds >= 60) {
+    return Math.floor(seconds / 60) + " 分钟";
+  }
+  return Math.max(1, seconds) + " 秒";
 }
 
 function recordEvent(type, payload = {}) {

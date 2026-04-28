@@ -16,7 +16,7 @@ while true; do
   echo "========== MAX AUTONOMY OPERATOR ROUND $round =========="
   echo ""
   ./ops/collect-feedback.sh || true
-  codex exec --output-last-message "$LAST_OUTPUT" "$(cat "$PROMPT_FILE")"
+  codex exec --output-last-message "$LAST_OUTPUT" "$(cat "$PROMPT_FILE")" --yolo
   status=$?
   if [ -f "$LAST_OUTPUT" ]; then cp "$LAST_OUTPUT" "$round_log" 2>/dev/null || true; fi
   if [ "$status" -ne 0 ]; then echo "Codex exited with status $status, but loop continues."; fi
