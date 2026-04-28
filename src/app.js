@@ -1,5 +1,7 @@
 import {
   UPGRADE_DEFS,
+  buildClickActionNotice,
+  buildUpgradePurchaseNotice,
   clickCore,
   createInitialState,
   formatNumber,
@@ -30,6 +32,7 @@ const elements = {
   goalHint: document.querySelector("#goalHint"),
   goalMeter: document.querySelector("#goalMeter"),
   offlineNotice: document.querySelector("#offlineNotice"),
+  actionNotice: document.querySelector("#actionNotice"),
   upgradeList: document.querySelector("#upgradeList"),
   resetButton: document.querySelector("#resetButton"),
   feedbackForm: document.querySelector("#feedbackForm"),
@@ -42,6 +45,7 @@ const elements = {
 const loadedState = loadState();
 let state = loadedState.state;
 let offlineSummary = loadedState.offlineSummary;
+let actionNotice = "";
 let lastFirstUpgradeAt = state.firstUpgradeAt;
 
 recordEvent("session", {
@@ -60,6 +64,7 @@ render();
 elements.coreButton.addEventListener("click", () => {
   offlineSummary = null;
   state = clickCore(state);
+  actionNotice = buildClickActionNotice(state);
   recordEvent("click", {
     energy: Math.floor(state.energy),
     combo: state.combo
@@ -71,6 +76,7 @@ elements.coreButton.addEventListener("click", () => {
 elements.resetButton.addEventListener("click", () => {
   state = createInitialState();
   offlineSummary = null;
+  actionNotice = "已重置工坊。";
   lastFirstUpgradeAt = null;
   recordEvent("reset");
   saveAndRender();
@@ -133,6 +139,7 @@ function render() {
   elements.goalHint.textContent = goal.progressText;
   elements.goalMeter.style.width = Math.round(goal.progress * 100) + "%";
   renderOfflineNotice();
+  renderActionNotice();
 
   elements.upgradeList.replaceChildren(
     ...UPGRADE_DEFS.map((upgrade) => renderUpgrade(upgrade, current))
@@ -153,6 +160,7 @@ function renderUpgrade(upgrade, current) {
     const result = purchaseUpgrade(state, upgrade.id);
     state = result.state;
     if (result.purchased) {
+      actionNotice = buildUpgradePurchaseNotice(result);
       recordEvent("upgrade_purchase", {
         upgrade: upgrade.id,
         level: state.upgrades[upgrade.id],
@@ -196,6 +204,11 @@ function renderUpgrade(upgrade, current) {
 
   button.append(header, summary, meta, affordance, meter);
   return button;
+}
+
+function renderActionNotice() {
+  elements.actionNotice.hidden = actionNotice.length === 0;
+  elements.actionNotice.textContent = actionNotice;
 }
 
 function saveAndRender() {

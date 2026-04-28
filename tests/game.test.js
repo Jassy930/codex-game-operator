@@ -2,6 +2,8 @@ import test from "node:test";
 import assert from "node:assert/strict";
 
 import {
+  buildClickActionNotice,
+  buildUpgradePurchaseNotice,
   clickCore,
   createInitialState,
   formatNumber,
@@ -27,6 +29,8 @@ test("点击星核会增加能量与累计产出", () => {
   assert.equal(clicked.totalEnergy, 1);
   assert.equal(clicked.clicks, 1);
   assert.equal(clicked.combo, 1);
+  assert.equal(clicked.lastGain, 1);
+  assert.equal(buildClickActionNotice(clicked), "+1 能量");
 });
 
 test("第八次连击触发过载奖励", () => {
@@ -37,6 +41,8 @@ test("第八次连击触发过载奖励", () => {
 
   assert.equal(state.energy, 13);
   assert.equal(state.lastPulse, "过载 +5");
+  assert.equal(state.lastGain, 6);
+  assert.equal(buildClickActionNotice(state), "+6 能量（含过载）");
 });
 
 test("连击状态会返回过载进度和剩余点击数", () => {
@@ -79,6 +85,7 @@ test("购买聚能透镜会扣除成本并提升点击产能", () => {
   assert.equal(result.state.energy, 0);
   assert.equal(result.state.energyPerClick, 2);
   assert.equal(result.state.upgrades.lens, 1);
+  assert.equal(buildUpgradePurchaseNotice(result), "已购买聚能透镜 Lv.1，每次产能 2");
 });
 
 test("自动产能随 tick 增长并限制离线收益上限", () => {

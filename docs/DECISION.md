@@ -1,5 +1,27 @@
 # Decision
 
+## 2026-04-28 Product decision：操作反馈可见性
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 与 manual-feedback 仍无真实玩家反馈，继续处于无反馈样本下的 Product decision。
+
+当前最大问题：目标条和升级卡片已经说明下一步还差多少，但玩家完成点击或购买后仍需要从数值变化中反推本次行动收益，早期正反馈不够明确。
+
+本轮决策：
+
+- 点击星核后在主操作区显示本次获得的能量。
+- 第八次连击触发过载时，操作提示显示本次总收益并标明“含过载”。
+- 购买升级后显示已购买升级、新等级和当前产能结果。
+- 保持数值曲线、升级顺序、部署和反馈基础设施不变。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-04-28 22:51 CST 查询到 0 个 open issue、0 个 open feedback issue、0 个 open bug issue，#1 仍为 closed。
+- npm install 成功。
+- npm test 通过，覆盖点击收益提示和升级购买提示。
+- npm run build 生成 dist。
+
+下一步：等待真实玩家反馈；若仍无反馈，继续围绕 30 秒内的行动反馈、目标理解和反馈入口转化做小步优化。
+
 ## 2026-04-28 Product decision：目标行动提示
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 与 manual-feedback 仍无真实玩家反馈，继续处于无反馈样本下的 Product decision。

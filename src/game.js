@@ -112,6 +112,7 @@ export function createInitialState(now = Date.now()) {
     firstUpgradeAt: null,
     lastTick: now,
     lastPulse: "稳定",
+    lastGain: 0,
     upgrades: { ...INITIAL_UPGRADES }
   };
 }
@@ -134,6 +135,7 @@ export function normalizeState(state, now = Date.now()) {
     clicks: Math.max(0, Number(source.clicks ?? initial.clicks) || 0),
     createdAt: readNumber(source.createdAt, initial.createdAt),
     lastTick: readNumber(source.lastTick, now),
+    lastGain: Math.max(0, Number(source.lastGain ?? initial.lastGain) || 0),
     upgrades
   };
 }
@@ -193,7 +195,8 @@ export function clickCore(state, now = Date.now()) {
     combo,
     comboExpiresAt: now + 2200,
     clicks: current.clicks + 1,
-    lastPulse: overloadBonus > 0 ? "过载 +" + formatNumber(overloadBonus) : "稳定"
+    lastPulse: overloadBonus > 0 ? "过载 +" + formatNumber(overloadBonus) : "稳定",
+    lastGain: gain
   };
 }
 
@@ -291,6 +294,34 @@ export function getComboStatus(state, now = Date.now()) {
   };
 }
 
+export function buildClickActionNotice(state) {
+  const current = normalizeState(state);
+
+  if (current.lastGain <= 0) {
+    return "";
+  }
+
+  const overloadText = String(current.lastPulse).startsWith("过载") ? "（含过载）" : "";
+  return "+" + formatNumber(current.lastGain) + " 能量" + overloadText;
+}
+
+export function buildUpgradePurchaseNotice(result) {
+  if (!result?.purchased || !result.upgrade) {
+    return "";
+  }
+
+  const current = normalizeState(result.state);
+  const level = current.upgrades[result.upgrade.id] ?? 0;
+  return (
+    "已购买" +
+    result.upgrade.name +
+    " Lv." +
+    level +
+    "，" +
+    describeUpgradeProduction(result.upgrade.id, current)
+  );
+}
+
 export function formatNumber(value) {
   const number = Number(value) || 0;
   if (number < 1000) {
@@ -352,6 +383,19 @@ function buildUpgradeActionText(state, upgradeId) {
   }
 
   return "还差 " + formatNumber(affordability.remaining) + " 能量购买" + upgrade.name;
+}
+
+function describeUpgradeProduction(upgradeId, state) {
+  if (upgradeId === "lens") {
+    return "每次产能 " + formatNumber(state.energyPerClick * state.multiplier);
+  }
+  if (upgradeId === "collector") {
+    return "每秒产能 " + formatNumber(state.energyPerSecond * state.multiplier);
+  }
+  if (upgradeId === "stabilizer") {
+    return "总产能倍率 " + formatNumber(state.multiplier) + "x";
+  }
+  return "产能已提升";
 }
 
 function roundTo(value, precision) {

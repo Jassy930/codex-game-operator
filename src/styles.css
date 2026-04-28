@@ -181,6 +181,23 @@ h2 {
   display: none;
 }
 
+.action-notice {
+  width: min(100%, 560px);
+  min-height: 36px;
+  margin: -12px 0 0;
+  padding: 8px 14px;
+  border-radius: 8px;
+  background: rgba(248, 243, 231, 0.1);
+  color: #fff7c2;
+  font-size: 0.92rem;
+  font-weight: 850;
+  text-align: center;
+}
+
+.action-notice[hidden] {
+  display: none;
+}
+
 .core-button {
   position: relative;
   display: grid;
