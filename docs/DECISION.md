@@ -16,8 +16,10 @@
 
 - GitHub Issues 已同步：2026-04-29 05:38 CST 查询到 1 个 open issue、1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
 - bun install、bun run test、bun run build、npm install、npm test 和 npm run build 通过，覆盖日冕回廊完成后继续指向磁帆穹顶、25 段航线序号和全部完成总览。
+- GitHub Pages workflow 25079287266 已成功，线上地址返回 HTTP 200，且发布文件包含磁帆穹顶。
+- #2 已回复并保持 open，等待复测确认磁帆穹顶是否改善长尾内容丰富度。
 
-下一步：发布后回复 #2，并继续观察复测是否认为磁帆穹顶改善长尾内容丰富度。
+下一步：发布后继续观察 #2 复测是否认为磁帆穹顶改善长尾内容丰富度。
 
 ## 2026-04-29 Product decision：日冕回廊航段
 
