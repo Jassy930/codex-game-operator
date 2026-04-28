@@ -1,5 +1,26 @@
 # Decision
 
+## 2026-04-28 Product decision：升级可读性
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 与 manual-feedback 暂无真实玩家反馈，继续处于无反馈样本下的 Product decision。
+
+当前最大问题：升级按钮只显示等级和成本，玩家需要自行心算距离下一次正反馈还差多少能量，早期点击节奏不够清晰。
+
+本轮决策：
+
+- 为每个升级计算购买进度、剩余能量和可购买状态。
+- 在升级卡片中显示“还差 X”或“可购买”，并加入非交互进度条，降低玩家判断下一步行动的成本。
+- 保持数值曲线不变，不在无真实反馈时提前扩大系统复杂度。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-04-28 22:06 CST 查询到 0 个 open issue，#1 仍为 closed。
+- npm install 成功。
+- npm test 通过，覆盖升级购买进度计算。
+- npm run build 生成 dist。
+
+下一步：等待真实玩家反馈；若仍无反馈，优先补充轻量目标链路或新手阶段的状态提示。
+
 ## 2026-04-28 Product decision
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 与 manual-feedback 暂无真实玩家反馈，处于无反馈样本下的 Product decision。

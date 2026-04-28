@@ -6,6 +6,7 @@ import {
   createInitialState,
   formatNumber,
   getCurrentGoal,
+  getUpgradeAffordability,
   getUpgradeCost,
   purchaseUpgrade,
   settleOfflineProgress,
@@ -115,6 +116,24 @@ test("升级价格和数字格式稳定", () => {
 
   assert.equal(getUpgradeCost(state, "lens"), 24);
   assert.equal(formatNumber(1530), "1.5K");
+});
+
+test("升级购买进度会显示剩余能量和可购买状态", () => {
+  const state = {
+    ...createInitialState(0),
+    energy: 6
+  };
+
+  const waiting = getUpgradeAffordability(state, "lens");
+  const ready = getUpgradeAffordability({ ...state, energy: 12 }, "lens");
+
+  assert.equal(waiting.cost, 10);
+  assert.equal(waiting.remaining, 4);
+  assert.equal(waiting.progress, 0.6);
+  assert.equal(waiting.canBuy, false);
+  assert.equal(ready.remaining, 0);
+  assert.equal(ready.progress, 1);
+  assert.equal(ready.canBuy, true);
 });
 
 test("反馈入口会生成带游戏快照的 GitHub Issue 链接", () => {

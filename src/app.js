@@ -4,7 +4,7 @@ import {
   createInitialState,
   formatNumber,
   getCurrentGoal,
-  getUpgradeCost,
+  getUpgradeAffordability,
   normalizeState,
   purchaseUpgrade,
   settleOfflineProgress,
@@ -136,9 +136,10 @@ function render() {
 }
 
 function renderUpgrade(upgrade, current) {
-  const cost = getUpgradeCost(current, upgrade.id);
+  const affordability = getUpgradeAffordability(current, upgrade.id);
+  const cost = affordability.cost;
   const level = current.upgrades[upgrade.id] ?? 0;
-  const canBuy = current.energy >= cost;
+  const canBuy = affordability.canBuy;
   const button = document.createElement("button");
   button.className = "upgrade-card";
   button.type = "button";
@@ -173,9 +174,23 @@ function renderUpgrade(upgrade, current) {
 
   const meta = document.createElement("span");
   meta.className = "upgrade-meta";
-  meta.textContent = "Lv." + level + " · " + formatNumber(cost);
+  meta.textContent = "Lv." + level + " · 成本 " + formatNumber(cost);
 
-  button.append(header, summary, meta);
+  const affordance = document.createElement("span");
+  affordance.className = "upgrade-affordance";
+  affordance.textContent = canBuy
+    ? "可购买"
+    : "还差 " + formatNumber(affordability.remaining);
+
+  const meter = document.createElement("span");
+  meter.className = "upgrade-meter";
+  meter.setAttribute("aria-hidden", "true");
+
+  const fill = document.createElement("span");
+  fill.style.width = Math.round(affordability.progress * 100) + "%";
+  meter.append(fill);
+
+  button.append(header, summary, meta, affordance, meter);
   return button;
 }
 

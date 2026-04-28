@@ -274,7 +274,7 @@ h2 {
 .upgrade-card {
   display: grid;
   width: 100%;
-  min-height: 116px;
+  min-height: 142px;
   gap: 8px;
   justify-items: start;
   padding: 16px;
@@ -309,6 +309,29 @@ h2 {
 .upgrade-meta {
   color: #f4b23c;
   font-weight: 900;
+}
+
+.upgrade-affordance {
+  color: rgba(248, 243, 231, 0.82);
+  font-size: 0.86rem;
+  font-weight: 900;
+}
+
+.upgrade-meter {
+  display: block;
+  width: 100%;
+  height: 7px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: rgba(248, 243, 231, 0.12);
+}
+
+.upgrade-meter span {
+  display: block;
+  width: 0%;
+  height: 100%;
+  background: linear-gradient(90deg, #13b5a6, #f4b23c);
+  transition: width 160ms ease;
 }
 
 .feedback-form {

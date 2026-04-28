@@ -193,6 +193,21 @@ export function getUpgradeCost(state, upgradeId) {
   return Math.floor(upgrade.baseCost * upgrade.costGrowth ** level);
 }
 
+export function getUpgradeAffordability(state, upgradeId) {
+  const current = normalizeState(state);
+  const cost = getUpgradeCost(current, upgradeId);
+  const energy = Math.max(0, current.energy);
+  const remaining = Math.max(0, cost - energy);
+
+  return {
+    cost,
+    energy,
+    remaining,
+    progress: cost > 0 ? Math.min(1, energy / cost) : 1,
+    canBuy: remaining <= 0
+  };
+}
+
 export function purchaseUpgrade(state, upgradeId, now = Date.now()) {
   const current = tick(state, now);
   const upgrade = UPGRADE_DEFS.find((item) => item.id === upgradeId);

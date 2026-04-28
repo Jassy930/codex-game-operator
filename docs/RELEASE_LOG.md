@@ -12,3 +12,4 @@
 - 补齐 GitHub Issue 标签：feedback、balance、idea、release、research、tech-debt。
 - 回复并关闭部署阻塞 issue #1。
 - 新增离线收益可见化：读取存档时立即结算离线自动产能，显示回收提示，并记录本地 offline_gain 事件。
+- 新增升级购买进度提示：升级卡片显示成本、还差能量或可购买状态，并补充进度计算测试。

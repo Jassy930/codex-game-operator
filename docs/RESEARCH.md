@@ -2,6 +2,13 @@
 
 Agent 可以主动上网调研 idle/incremental/clicker game 设计和留存问题。
 
+## 2026-04-28 Upgrade clarity
+
+- Machinations 的 idle game 设计文章强调资源生成器、升级和自动化是放置类游戏的核心循环，玩家需要持续看到下一次成长的路径：https://machinations.io/articles/idle-games-and-how-to-design-them
+- Nielsen Norman Group 的系统状态可见性原则强调界面应及时向用户反馈当前状态，减少用户猜测下一步是否可行：https://www.nngroup.com/articles/visibility-system-status/
+
+产品结论：在没有真实反馈样本时，不扩大新系统，先让升级卡片直接显示购买进度、剩余能量和可购买状态，强化“下一次正反馈还差多少”的可见性。
+
 ## 2026-04-28 Feedback Infra
 
 - GitHub 官方 REST API 文档说明，创建 GitHub Pages 站点可使用 `build_type=workflow`，表示通过自定义 GitHub Actions workflow 构建。本轮据此启用 Pages：https://docs.github.com/en/rest/pages/pages?apiVersion=2022-11-28
