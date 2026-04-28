@@ -180,8 +180,8 @@ test("星图目标完成提示会确认项目奖励", () => {
     totalEnergy: 249_999,
     overloadBonus: 17,
     upgrades: {
-      lens: 12,
-      collector: 12,
+      lens: 14,
+      collector: 14,
       resonator: 6,
       stabilizer: 9
     }
@@ -376,13 +376,13 @@ test("星图项目会给中后段玩家新的可追目标", () => {
 
   assert.equal(projects[0].id, "stellar-map");
   assert.equal(projects[0].segmentIndex, 1);
-  assert.equal(projects[0].segmentTotal, 10);
-  assert.equal(projects[0].segmentText, "航段 1/10");
+  assert.equal(projects[0].segmentTotal, 13);
+  assert.equal(projects[0].segmentText, "航段 1/13");
   assert.equal(projects[0].completed, true);
   assert.equal(projects[0].isCurrent, false);
   assert.equal(projects[0].progressText, "进度 100K 能量 / 100K 能量 · 已完成");
   assert.equal(projects[1].id, "resonance-calibration");
-  assert.equal(projects[1].segmentText, "航段 2/10");
+  assert.equal(projects[1].segmentText, "航段 2/13");
   assert.equal(projects[1].isCurrent, true);
   assert.equal(projects[1].remaining, 6);
   assert.equal(projects[1].progressText, "进度 0 级 / 6 级 · 还差 6 级");
@@ -391,8 +391,10 @@ test("星图项目会给中后段玩家新的可追目标", () => {
   assert.equal(projects[2].remaining, 1);
   assert.equal(projects[3].id, "collector-grid");
   assert.equal(projects[3].remaining, 1);
-  assert.equal(projects[4].id, "starbridge-trial");
+  assert.equal(projects[4].id, "ignition-drill");
   assert.equal(projects[4].completed, false);
+  assert.equal(projects[5].id, "cruise-drill");
+  assert.equal(projects[6].id, "starbridge-trial");
 });
 
 test("星图总览会显示完成数和下一段奖励", () => {
@@ -410,7 +412,7 @@ test("星图总览会显示完成数和下一段奖励", () => {
   const overview = getProjectOverview(state);
 
   assert.equal(overview.completed, 1);
-  assert.equal(overview.total, 10);
+  assert.equal(overview.total, 13);
   assert.equal(overview.nextProjectId, "resonance-calibration");
   assert.deepEqual(overview.upcomingProjectIds, [
     "resonance-calibration",
@@ -419,7 +421,7 @@ test("星图总览会显示完成数和下一段奖励", () => {
   ]);
   assert.equal(
     overview.summaryText,
-    "星图进度 1/10 · 下一段 2/10：谐振校准 · 奖励 过载奖励 +20%"
+    "星图进度 1/13 · 下一段 2/13：谐振校准 · 奖励 过载奖励 +20%"
   );
   assert.equal(overview.detailText, "进度 0 级 / 6 级 · 还差 6 级");
   assert.equal(overview.bonusText, "生效加成：总产能 x1.12");
@@ -456,11 +458,11 @@ test("100K 后当前目标会指向下一个未完成星图项目", () => {
   assert.equal(goal.label, "星图计划");
   assert.equal(goal.value, "谐振校准");
   assert.equal(goal.segmentIndex, 2);
-  assert.equal(goal.segmentTotal, 10);
+  assert.equal(goal.segmentTotal, 13);
   assert.equal(goal.upgradeId, "resonator");
   assert.equal(
     goal.progressText,
-    "航段 2/10 · 进度 0 级 / 6 级 · 可购买星核谐振器 · 奖励 过载奖励 +20%"
+    "航段 2/13 · 进度 0 级 / 6 级 · 可购买星核谐振器 · 奖励 过载奖励 +20%"
   );
 });
 
@@ -485,11 +487,11 @@ test("星图主目标会直接显示项目奖励", () => {
   assert.equal(goal.reward, "自动产能 +18%");
   assert.equal(
     goal.progressText,
-    "航段 4/10 · 进度 11 级 / 12 级 · 可购买自动采集臂 · 奖励 自动产能 +18%"
+    "航段 4/13 · 进度 11 级 / 12 级 · 可购买自动采集臂 · 奖励 自动产能 +18%"
   );
 });
 
-test("首批星图项目完成后会继续指向稳定矩阵", () => {
+test("首批星图项目完成后会继续指向策略专精目标", () => {
   const state = {
     ...createInitialState(0),
     energy: 50_000,
@@ -505,12 +507,12 @@ test("首批星图项目完成后会继续指向稳定矩阵", () => {
 
   const goal = getCurrentGoal(state);
 
-  assert.equal(goal.id, "project-stabilizer-matrix");
-  assert.equal(goal.value, "稳定矩阵");
-  assert.equal(goal.upgradeId, "stabilizer");
+  assert.equal(goal.id, "project-ignition-drill");
+  assert.equal(goal.value, "点火航校");
+  assert.equal(goal.upgradeId, "lens");
   assert.equal(
     goal.progressText,
-    "航段 6/10 · 进度 9 级 / 12 级 · 可购买星核稳定器 · 奖励 总产能 +18%"
+    "航段 5/13 · 进度 12 级 / 14 级 · 可购买聚能透镜 · 奖励 点击产能 +16%"
   );
 });
 
@@ -520,10 +522,10 @@ test("500K 后星图会继续指向深空矿带", () => {
     totalEnergy: 600_000,
     overloadBonus: 17,
     upgrades: {
-      lens: 12,
-      collector: 12,
+      lens: 14,
+      collector: 14,
       resonator: 6,
-      stabilizer: 12
+      stabilizer: 14
     }
   };
 
@@ -533,7 +535,7 @@ test("500K 后星图会继续指向深空矿带", () => {
   assert.equal(goal.value, "深空矿带");
   assert.equal(
     goal.progressText,
-    "航段 8/10 · 进度 600K 能量 / 750K 能量 · 还差 150K 能量 · 奖励 点击产能 +26%"
+    "航段 11/13 · 进度 600K 能量 / 750K 能量 · 还差 150K 能量 · 奖励 点击产能 +26%"
   );
 });
 
@@ -597,7 +599,7 @@ test("深空航段完成后会继续叠加项目奖励", () => {
     totalEnergy: 1_200_000,
     overloadBonus: 17,
     upgrades: {
-      lens: 12,
+      lens: 14,
       collector: 16,
       resonator: 6,
       stabilizer: 16
@@ -611,20 +613,23 @@ test("深空航段完成后会继续叠加项目奖励", () => {
     "resonance-calibration",
     "lens-array",
     "collector-grid",
+    "ignition-drill",
+    "cruise-drill",
     "starbridge-trial",
     "stabilizer-matrix",
+    "balanced-tuning",
     "farstar-relay",
     "deep-space-mine",
     "orbital-foundry",
     "stellar-anchor"
   ]);
-  assert.equal(production.projectBonuses.completed, 10);
+  assert.equal(production.projectBonuses.completed, 13);
   assert.equal(production.projectBonuses.overloadMultiplier, 1.2);
-  assert.equal(production.projectBonuses.clickMultiplier, 1.4868);
-  assert.equal(production.projectBonuses.secondMultiplier, 1.9022);
-  assert.equal(production.perClick, 29.965);
-  assert.equal(production.perSecond, 38.3369);
-  assert.equal(production.overloadBonus, 61.1285);
+  assert.equal(production.projectBonuses.clickMultiplier, 1.7247);
+  assert.equal(production.projectBonuses.secondMultiplier, 2.2065);
+  assert.equal(production.perClick, 39.6267);
+  assert.equal(production.perSecond, 50.6965);
+  assert.equal(production.overloadBonus, 80.8385);
 });
 
 test("星图项目只会标记第一个未完成项目为当前航段", () => {
@@ -644,7 +649,7 @@ test("星图项目只会标记第一个未完成项目为当前航段", () => {
     totalEnergy: 1_200_000,
     overloadBonus: 17,
     upgrades: {
-      lens: 12,
+      lens: 14,
       collector: 16,
       resonator: 6,
       stabilizer: 16
@@ -653,7 +658,7 @@ test("星图项目只会标记第一个未完成项目为当前航段", () => {
 
   assert.deepEqual(
     active.filter((project) => project.isCurrent).map((project) => project.id),
-    ["stabilizer-matrix"]
+    ["ignition-drill"]
   );
   assert.deepEqual(
     completed.filter((project) => project.isCurrent).map((project) => project.id),
@@ -667,7 +672,7 @@ test("星图总览会显示全部完成状态", () => {
     totalEnergy: 1_200_000,
     overloadBonus: 17,
     upgrades: {
-      lens: 12,
+      lens: 14,
       collector: 16,
       resonator: 6,
       stabilizer: 16
@@ -676,17 +681,17 @@ test("星图总览会显示全部完成状态", () => {
 
   const overview = getProjectOverview(state);
 
-  assert.equal(overview.completed, 10);
-  assert.equal(overview.total, 10);
+  assert.equal(overview.completed, 13);
+  assert.equal(overview.total, 13);
   assert.equal(overview.nextProjectId, null);
-  assert.equal(overview.summaryText, "星图进度 10/10 · 全部航段已完成");
+  assert.equal(overview.summaryText, "星图进度 13/13 · 全部航段已完成");
   assert.equal(
     overview.detailText,
     "所有星图奖励已生效，继续累计能量等待下一段航线。"
   );
   assert.equal(
     overview.bonusText,
-    "生效加成：总产能 x2.02 · 点击 x1.49 · 自动 x1.90 · 过载 x1.20"
+    "生效加成：总产能 x2.30 · 点击 x1.72 · 自动 x2.21 · 过载 x1.20"
   );
   assert.equal(overview.forecastText, "航线预告：等待下一段航线");
 });

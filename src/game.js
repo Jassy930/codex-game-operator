@@ -204,6 +204,36 @@ export const PROJECT_DEFS = [
     }
   },
   {
+    id: "ignition-drill",
+    name: "点火航校",
+    summary: "将聚能透镜扩展到 14 级，配合点火优先航线。",
+    upgradeId: "lens",
+    unit: "级",
+    target: 14,
+    reward: "点击产能 +16%",
+    effect: {
+      clickMultiplier: 1.16
+    },
+    current(state) {
+      return state.upgrades.lens ?? 0;
+    }
+  },
+  {
+    id: "cruise-drill",
+    name: "巡航航校",
+    summary: "将自动采集臂扩展到 14 级，配合巡航优先航线。",
+    upgradeId: "collector",
+    unit: "级",
+    target: 14,
+    reward: "自动产能 +16%",
+    effect: {
+      secondMultiplier: 1.16
+    },
+    current(state) {
+      return state.upgrades.collector ?? 0;
+    }
+  },
+  {
     id: "starbridge-trial",
     name: "星桥试运行",
     summary: "累计 250K 能量，打开下一段循环。",
@@ -227,6 +257,21 @@ export const PROJECT_DEFS = [
     reward: "总产能 +18%",
     effect: {
       totalMultiplier: 1.18
+    },
+    current(state) {
+      return state.upgrades.stabilizer ?? 0;
+    }
+  },
+  {
+    id: "balanced-tuning",
+    name: "均衡校准",
+    summary: "将星核稳定器扩展到 14 级，强化均衡航线底盘。",
+    upgradeId: "stabilizer",
+    unit: "级",
+    target: 14,
+    reward: "总产能 +14%",
+    effect: {
+      totalMultiplier: 1.14
     },
     current(state) {
       return state.upgrades.stabilizer ?? 0;

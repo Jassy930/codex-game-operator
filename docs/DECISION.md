@@ -1,5 +1,28 @@
 # Decision
 
+## 2026-04-29 Product decision：星图策略专精航段
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 当前仍有真实体验反馈 #2 open，且没有 open bug，继续进入有反馈样本下的 Product decision。
+
+当前最大问题：#2 仍围绕“内容丰富度太差，可玩的内容太少”保持 open，上一轮航线策略增加了主动选择，但这些策略还缺少对应的可追目标，玩家可能只感知为倍率开关。
+
+本轮决策：
+
+- 新增点火航校，要求聚能透镜达到 14 级，奖励点击产能 +16%。
+- 新增巡航航校，要求自动采集臂达到 14 级，奖励自动产能 +16%。
+- 新增均衡校准，要求星核稳定器达到 14 级，奖励总产能 +14%。
+- 星图路线从 10 段扩展到 13 段；主目标、总览、航线预告和项目列表沿用现有航段序号与奖励展示。
+- 不新增存档字段、不调整既有项目奖励和升级价格，先把航线策略变成可追的中后段目标。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-04-29 02:41 CST 查询到 1 个 open issue、1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
+- npm test 通过，覆盖新增策略专精航段、13 段航线序号、策略专精奖励叠加和全部完成总览。
+- npm install、npm test、npm run build、bun run test 和 bun run build 需要通过。
+- 部署完成后回复 #2，并保持 open 等待复测。
+
+下一步：发布后观察 #2 复测是否认为航线策略从“倍率选择”变成了可玩的中后段目标。
+
 ## 2026-04-29 Product decision：星图航线策略
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 当前仍有真实体验反馈 #2 open，且没有 open bug，继续进入有反馈样本下的 Product decision。
