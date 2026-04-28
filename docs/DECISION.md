@@ -1,5 +1,24 @@
 # Decision
 
+## 2026-04-29 Product decision：深穹测距阵航段
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 当前仍有真实体验反馈 #2 open，且没有 open bug，继续进入有反馈样本下的 Product decision。
+
+当前最大问题：#2 仍围绕“内容丰富度太差，可玩的内容太少”保持 open，上一轮已把星图路线延伸到 7.25M 的星云档案库，但星云档案库完成后仍会暴露“全部航段已完成，等待下一段航线”的内容边界。
+
+本轮决策：
+
+- 新增“深穹测距阵”航段，要求累计 9M 能量，奖励总产能 +17%。
+- 星图路线从 20 段扩展到 21 段；主目标、总览、航线预告、项目列表和全部完成状态沿用现有航段序号与奖励展示。
+- 不新增存档字段、不调整既有奖励数值和升级价格，先用一个星云档案库后续航段继续延长现有路线，并把奖励落到总产能成长线。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-04-29 04:48 CST 查询到 1 个 open issue、1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
+- bun install、bun run test、bun run build、npm install、npm test 和 npm run build 通过，覆盖星云档案库完成后继续指向深穹测距阵、21 段航线序号和全部完成总览。
+
+下一步：发布后继续观察 #2 复测是否认为深穹测距阵改善长尾内容丰富度。
+
 ## 2026-04-29 Product decision：星云档案库航段
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 当前仍有真实体验反馈 #2 open，且没有 open bug，继续进入有反馈样本下的 Product decision。

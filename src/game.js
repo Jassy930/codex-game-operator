@@ -435,6 +435,20 @@ export const PROJECT_DEFS = [
     current(state) {
       return state.totalEnergy;
     }
+  },
+  {
+    id: "deep-sky-ranging-array",
+    name: "深穹测距阵",
+    summary: "累计 9M 能量，在星云档案库外部署深穹测距阵。",
+    unit: "能量",
+    target: 9_000_000,
+    reward: "总产能 +17%",
+    effect: {
+      totalMultiplier: 1.17
+    },
+    current(state) {
+      return state.totalEnergy;
+    }
   }
 ];
 
