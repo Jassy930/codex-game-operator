@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="星核工坊是一款浏览器端数值增长放置游戏。"
+    />
+    <title>星核工坊</title>
+    <link rel="stylesheet" href="./src/styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="status-band" aria-labelledby="game-title">
+        <div>
+          <p class="eyebrow">Codex Game Operator</p>
+          <h1 id="game-title">星核工坊</h1>
+        </div>
+        <dl class="score-grid" aria-label="当前产能">
+          <div>
+            <dt>能量</dt>
+            <dd id="energyValue">0</dd>
+          </div>
+          <div>
+            <dt>每秒</dt>
+            <dd id="perSecondValue">0</dd>
+          </div>
+          <div>
+            <dt>每次</dt>
+            <dd id="perClickValue">1</dd>
+          </div>
+        </dl>
+      </section>
+
+      <section class="play-layout" aria-label="星核工坊控制台">
+        <div class="core-zone">
+          <div class="goal-strip">
+            <span id="goalLabel">目标</span>
+            <strong id="goalValue">购买第一次升级</strong>
+            <div class="goal-meter" aria-hidden="true">
+              <span id="goalMeter"></span>
+            </div>
+          </div>
+
+          <button id="coreButton" class="core-button" type="button">
+            <svg
+              class="core-art"
+              viewBox="0 0 220 220"
+              role="img"
+              aria-label="发光的星核"
+            >
+              <defs>
+                <radialGradient id="coreGlow" cx="50%" cy="50%" r="52%">
+                  <stop offset="0%" stop-color="#fff7c2" />
+                  <stop offset="42%" stop-color="#f4b23c" />
+                  <stop offset="72%" stop-color="#e85d75" />
+                  <stop offset="100%" stop-color="#1a1815" />
+                </radialGradient>
+              </defs>
+              <circle cx="110" cy="110" r="92" fill="#1a1815" />
+              <circle cx="110" cy="110" r="72" fill="url(#coreGlow)" />
+              <path
+                d="M110 36 L123 93 L179 78 L136 117 L176 159 L121 142 L110 198 L99 142 L44 159 L84 117 L41 78 L97 93 Z"
+                fill="#fff7c2"
+                opacity="0.72"
+              />
+              <circle cx="110" cy="110" r="28" fill="#f8f3e7" />
+            </svg>
+            <span>点火</span>
+          </button>
+
+          <div class="combo-line">
+            <span id="comboValue">连击 0</span>
+            <span id="pulseValue">稳定</span>
+          </div>
+        </div>
+
+        <aside class="upgrade-panel" aria-labelledby="upgrade-title">
+          <div class="panel-header">
+            <h2 id="upgrade-title">升级</h2>
+            <button id="resetButton" class="ghost-button" type="button">重置</button>
+          </div>
+          <div id="upgradeList" class="upgrade-list"></div>
+        </aside>
+      </section>
+    </main>
+
+    <script type="module" src="./src/app.js"></script>
+  </body>
+</html>
