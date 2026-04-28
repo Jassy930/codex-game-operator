@@ -5,6 +5,8 @@
 - 新增 13.5M 后极昼折跃井航段：寂光中继环完成后继续出现累计能量目标，完成后奖励点击产能 +16%，星图路线扩展到 23 段。
 - 同步 GitHub Issues 反馈状态：当前 1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
 - 验证通过：bun install、bun run test、bun run build、npm install、npm test、npm run build。
+- GitHub Pages workflow 25078221692 已成功，线上地址返回 HTTP 200。
+- 已回复 #2，说明极昼折跃井航段已部署，并保持 issue open 等待复测。
 - 新增 11M 后寂光中继环航段：深穹测距阵完成后继续出现累计能量目标，完成后奖励过载奖励 +16%，星图路线扩展到 22 段。
 - 同步 GitHub Issues 反馈状态：当前 1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
 - 验证通过：bun install、bun run test、bun run build、npm install、npm test、npm run build。
