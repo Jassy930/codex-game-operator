@@ -14,12 +14,13 @@
 
 验收标准：
 
-- GitHub Issues 已同步：2026-04-29 01:01 CST 查询到 1 个 open issue、1 个 open feedback issue、0 个 open bug issue；#2 仍为 open。
+- GitHub Issues 已同步：2026-04-29 01:05 CST 查询到 1 个 open issue、1 个 open feedback issue、0 个 open bug issue；#2 仍为 open。
 - npm install 成功。
 - npm test 通过，覆盖星图总览的后续项目预告，以及全部项目完成后的预告状态。
 - npm run build 生成 dist。
+- GitHub Pages workflow 25066765644 已成功，线上地址返回 HTTP 200。
 
-下一步：部署后回复 #2，说明星图总览现在会显示接下来最多 3 个星图项目，并继续等待玩家复测内容丰富度。
+下一步：#2 已回复并保持 open；等待玩家复测星图航线预告是否改善内容丰富度和后续目标感知。
 
 ## 2026-04-29 Product decision：星图总览
 

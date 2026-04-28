@@ -2,9 +2,10 @@
 
 ## 2026-04-29
 
-- GitHub Issues：gh 可用且已认证；2026-04-29 01:01 CST 查询到 1 个 open issue、1 个 open feedback issue、0 个 open bug issue。
+- 本轮已回复 #2：说明星图总览新增“航线预告”，会列出接下来最多 3 个未完成星图项目；GitHub Pages workflow 25066765644 已成功；issue 保持 open，等待复测确认航线预告是否改善内容丰富度和后续目标感知。
+- GitHub Issues：gh 可用且已认证；2026-04-29 01:05 CST 查询到 1 个 open issue、1 个 open feedback issue、0 个 open bug issue。
 - #2 仍为 open，未出现新的复测结论或 bug；本轮继续围绕“内容丰富度太差，可玩的内容太少”增强星图总览，在下一段目标之外展示最多 3 个未完成项目的航线预告。
-- data/feedback/github-feedback.md 已同步本地快照。
+- data/feedback/github-feedback.md 已在回复 #2 后同步本地快照。
 - 本轮已回复 #2：说明星图计划列表前新增“星图进度 X/9”总览，显示下一段、奖励和进度详情；GitHub Pages workflow 25066081325 已成功；issue 保持 open，等待复测确认星图总览是否改善内容丰富度和后续目标感知。
 - GitHub Issues：gh 可用且已认证；2026-04-29 00:52 CST 查询到 1 个 open issue、1 个 open feedback issue、0 个 open bug issue。
 - data/feedback/github-feedback.md 已在回复 #2 后同步本地快照。
