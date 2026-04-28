@@ -2,6 +2,9 @@
 
 ## 2026-04-28
 
+- GitHub Issues：gh 可用且已认证；2026-04-28 23:43 CST 查询到 1 个 open issue、1 个 open feedback issue、0 个 open bug issue。
+- #2 仍为 open，未出现新的复测结论或 bug；继续将“内容丰富度太差，可玩的内容太少”作为本轮 Product decision 输入。
+- data/feedback/github-feedback.md 已同步本地快照。
 - GitHub Issues：gh 可用且已认证；2026-04-28 23:23 CST 查询到 1 个 open issue、1 个 open feedback issue、0 个 open bug issue。
 - #2 体验反馈：评分 3/5，玩家反馈“内容丰富度太差，可玩的内容太少”；快照显示玩家已到累计 114.5K 能量，升级为 lens:11、collector:11、stabilizer:9，当前处于循环累计能量目标。
 - 本轮已给 #2 补充 feedback 标签，并将其作为 Product decision 输入。

@@ -22,5 +22,6 @@
 - 根据真实反馈 #2 新增星图计划：100K 后显示中后段项目进度、奖励和完成状态，项目完成后自动提升有效产能。
 - 同步 GitHub Issues 反馈状态：#2 已标记为 feedback，当前 1 个 open feedback issue、0 个 open bug issue。
 - 已回复 #2，说明星图计划已发布，并保持 issue open 等待复测。
+- 改进星图计划可见性：100K 后下一个未完成星图项目会接管主目标条，升级型项目继续高亮对应升级卡片。
 - 改进反馈收集脚本：空 issue 分区会写入 None，并保留 closed issue 快照。
 - 修复发布脚本测试绕过：`ops/deploy.sh` 和 `ops/autopush.sh` 现在会在 `npm test` 失败时停止。

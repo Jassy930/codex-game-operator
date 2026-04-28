@@ -296,6 +296,45 @@ test("星图项目会给中后段玩家新的可追目标", () => {
   assert.equal(projects[3].completed, false);
 });
 
+test("100K 后当前目标会指向下一个未完成星图项目", () => {
+  const state = {
+    ...createInitialState(0),
+    energy: 87_030,
+    totalEnergy: 114_354.89,
+    upgrades: {
+      lens: 11,
+      collector: 11,
+      stabilizer: 9
+    }
+  };
+
+  const goal = getCurrentGoal(state);
+
+  assert.equal(goal.id, "project-lens-array");
+  assert.equal(goal.label, "星图计划");
+  assert.equal(goal.value, "透镜阵列");
+  assert.equal(goal.upgradeId, "lens");
+  assert.equal(goal.progressText, "进度 11 级 / 12 级 · 可购买聚能透镜");
+});
+
+test("100K 前当前目标仍保留短周期累计目标", () => {
+  const state = {
+    ...createInitialState(0),
+    totalEnergy: 99_500,
+    upgrades: {
+      lens: 11,
+      collector: 11,
+      stabilizer: 9
+    }
+  };
+
+  const goal = getCurrentGoal(state);
+
+  assert.equal(goal.id, "loop-100000");
+  assert.equal(goal.label, "当前目标");
+  assert.equal(goal.value, "累计 100K 能量");
+});
+
 test("已完成星图项目会提升有效产能", () => {
   const state = {
     ...createInitialState(0),

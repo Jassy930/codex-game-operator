@@ -1,5 +1,27 @@
 # Decision
 
+## 2026-04-28 Product decision：星图主目标
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 当前仍有真实体验反馈 #2 open，且没有 open bug，继续进入有反馈样本下的 Product decision。
+
+当前最大问题：上一轮已新增 100K 后星图计划，但主目标条在中后段仍可能回到“累计 X 能量”的循环目标。对反馈“内容丰富度太差”的玩家来说，新内容应进入主操作区，而不只是在侧栏等待玩家发现。
+
+本轮决策：
+
+- 100K 后且基础目标完成时，当前目标优先指向下一个未完成的星图计划项目。
+- 透镜阵列和采集阵列复用升级行动提示，并继续高亮对应升级卡片。
+- 100K 前仍保留短周期累计能量目标，避免过早把玩家推向跨度过大的长期目标。
+- 保持星图项目奖励、反馈入口、部署基础设施和数值曲线不变。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-04-28 23:43 CST 查询到 1 个 open issue、1 个 open feedback issue、0 个 open bug issue；#2 仍为 open。
+- npm install 成功。
+- npm test 通过，覆盖 100K 后星图项目接管当前目标，以及 100K 前仍保留短周期累计目标。
+- npm run build 生成 dist。
+
+下一步：回复 #2 并保持 open，等待玩家复测星图计划在主目标条出现后是否缓解内容不足感。
+
 ## 2026-04-28 Product decision：星图计划
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 出现真实体验反馈 #2，进入有反馈样本下的 Product decision。

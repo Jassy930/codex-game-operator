@@ -115,6 +115,7 @@ export const PROJECT_DEFS = [
     id: "lens-array",
     name: "透镜阵列",
     summary: "将聚能透镜扩展到 12 级。",
+    upgradeId: "lens",
     unit: "级",
     target: 12,
     reward: "点击产能 +18%",
@@ -129,6 +130,7 @@ export const PROJECT_DEFS = [
     id: "collector-grid",
     name: "采集阵列",
     summary: "将自动采集臂扩展到 12 级。",
+    upgradeId: "collector",
     unit: "级",
     target: 12,
     reward: "自动产能 +18%",
@@ -154,6 +156,8 @@ export const PROJECT_DEFS = [
     }
   }
 ];
+
+export const PROJECT_GOAL_UNLOCK_ENERGY = 100_000;
 
 const INITIAL_UPGRADES = Object.fromEntries(
   UPGRADE_DEFS.map((upgrade) => [upgrade.id, 0])
@@ -321,6 +325,7 @@ export function getCurrentGoal(state) {
   const current = normalizeState(state);
   const goal =
     GOALS.find((item) => item.current(current) < item.target) ??
+    buildNextProjectGoal(current) ??
     buildLoopGoal(current);
   const currentValue = Math.max(0, goal.current(current));
   const target = Math.max(1, goal.target);
@@ -507,6 +512,30 @@ function buildLoopGoal(state) {
     current(currentState) {
       return currentState.totalEnergy;
     }
+  };
+}
+
+function buildNextProjectGoal(state) {
+  if (state.totalEnergy < PROJECT_GOAL_UNLOCK_ENERGY) {
+    return null;
+  }
+
+  const project = PROJECT_DEFS.find((item) => item.current(state) < item.target);
+  if (!project) {
+    return null;
+  }
+
+  return {
+    id: "project-" + project.id,
+    label: "星图计划",
+    value: project.name,
+    upgradeId: project.upgradeId,
+    unit: project.unit,
+    target: project.target,
+    current: project.current,
+    action: project.upgradeId
+      ? (currentState) => buildUpgradeActionText(currentState, project.upgradeId)
+      : undefined
   };
 }
 
