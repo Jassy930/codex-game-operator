@@ -14,13 +14,14 @@
 
 验收标准：
 
-- GitHub Issues 已同步：2026-04-29 01:24 CST 查询到 1 个 open issue、1 个 open feedback issue、0 个 open bug issue；#2 仍为 open。
+- GitHub Issues 已同步：2026-04-29 01:29 CST 查询到 1 个 open issue、1 个 open feedback issue、0 个 open bug issue；#2 已回复并仍为 open。
 - npm install 成功。
 - npm test 通过，覆盖星图总览航线预告中的后续项目奖励文案。
 - npm run build 生成 dist。
 - bun run test 和 bun run build 通过。
+- GitHub Pages workflow 25067860271 已成功，线上地址返回 HTTP 200。
 
-下一步：推送后等待 GitHub Pages workflow 完成，并回复 #2 说明航线预告现在会直接展示后续项目奖励。
+下一步：#2 已回复并保持 open；等待玩家复测航线奖励预告是否改善内容丰富度和后续奖励感知。
 
 ## 2026-04-29 Product decision：星图加成总览
 

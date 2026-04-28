@@ -44,3 +44,4 @@
 - 已回复 #2，说明星图加成总览已部署，并保持 issue open 等待复测。
 - 同步 GitHub Issues 反馈状态：当前 1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
 - 增强星图航线预告：星图总览的后续项目预告现在会同时显示项目名称和对应奖励。
+- 已回复 #2，说明星图航线奖励预告已部署，并保持 issue open 等待复测。

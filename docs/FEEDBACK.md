@@ -2,9 +2,9 @@
 
 ## 2026-04-29
 
-- GitHub Issues：gh 可用且已认证；2026-04-29 01:24 CST 查询到 1 个 open issue、1 个 open feedback issue、0 个 open bug issue。
-- #2 仍为 open，未出现新的复测结论或 bug；本轮继续围绕“内容丰富度太差，可玩的内容太少”增强星图总览的航线预告，把后续项目奖励直接并入预告文案。
-- data/feedback/github-feedback.md 已同步本地快照。
+- 本轮已回复 #2：说明星图总览的“航线预告”现在会同时展示后续最多 3 个项目名称和对应奖励；GitHub Pages workflow 25067860271 已成功且线上地址返回 HTTP 200；issue 保持 open，等待复测确认内容丰富度和后续奖励感知是否改善。
+- GitHub Issues：gh 可用且已认证；2026-04-29 01:29 CST 查询到 1 个 open issue、1 个 open feedback issue、0 个 open bug issue。
+- data/feedback/github-feedback.md 已在回复 #2 后同步本地快照。
 - 本轮已回复 #2：说明星图总览新增“生效加成”，汇总已完成星图项目带来的总产能、点击产能和自动产能倍率；GitHub Pages workflow 25067331498 已成功且线上地址返回 HTTP 200；issue 保持 open，等待复测确认内容丰富度和成长反馈感知是否改善。
 - GitHub Issues：gh 可用且已认证；2026-04-29 01:18 CST 查询到 1 个 open issue、1 个 open feedback issue、0 个 open bug issue。
 - data/feedback/github-feedback.md 已在回复 #2 后同步本地快照。
