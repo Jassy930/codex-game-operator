@@ -6,6 +6,8 @@
 - 同步 GitHub Issues 反馈状态：当前 1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
 - 验证通过：bun install --no-save、bun run test、bun run build、npm install、npm test、npm run build。
 - 构建产物已包含晨渊观星台。
+- GitHub Pages workflow 25082177564 已成功，线上地址返回 HTTP 200，且发布文件包含晨渊观星台。
+- 已回复 #2，说明晨渊观星台航段已部署，并保持 issue open 等待复测。
 - 新增 65M 后星冠回声站航段：远曦灯塔完成后继续出现累计能量目标，完成后奖励过载奖励 +19%，星图路线扩展到 30 段。
 - 同步 GitHub Issues 反馈状态：当前 1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
 - 验证通过：bun install、bun run test、bun run build、npm install、npm test、npm run build。
