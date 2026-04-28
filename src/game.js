@@ -50,6 +50,9 @@ export const GOALS = [
     target: 1,
     current(state) {
       return getPurchasedUpgradeCount(state);
+    },
+    action(state) {
+      return buildUpgradeActionText(state, "lens");
     }
   },
   {
@@ -60,6 +63,9 @@ export const GOALS = [
     target: 1,
     current(state) {
       return state.upgrades.collector ?? 0;
+    },
+    action(state) {
+      return buildUpgradeActionText(state, "collector");
     }
   },
   {
@@ -80,6 +86,9 @@ export const GOALS = [
     target: 1,
     current(state) {
       return state.upgrades.stabilizer ?? 0;
+    },
+    action(state) {
+      return buildUpgradeActionText(state, "stabilizer");
     }
   }
 ];
@@ -253,7 +262,7 @@ export function getCurrentGoal(state) {
     currentValue,
     remaining,
     progress,
-    progressText: buildGoalProgressText(goal, currentValue, target, remaining)
+    progressText: buildGoalProgressText(goal, currentValue, target, remaining, current)
   };
 }
 
@@ -311,25 +320,38 @@ function buildLoopGoal(state) {
   };
 }
 
-function buildGoalProgressText(goal, currentValue, target, remaining) {
+function buildGoalProgressText(goal, currentValue, target, remaining, state) {
   const currentText = formatGoalAmount(goal, Math.min(currentValue, target));
   const targetText = formatGoalAmount(goal, target);
   if (remaining <= 0) {
     return "进度 " + targetText + " / " + targetText + " · 已完成";
   }
+  const actionText = typeof goal.action === "function" ? goal.action(state) : null;
+  const suffixText = actionText ?? "还差 " + formatGoalAmount(goal, remaining);
   return (
     "进度 " +
     currentText +
     " / " +
     targetText +
-    " · 还差 " +
-    formatGoalAmount(goal, remaining)
+    " · " +
+    suffixText
   );
 }
 
 function formatGoalAmount(goal, value) {
   const unit = goal.unit ? " " + goal.unit : "";
   return formatNumber(value) + unit;
+}
+
+function buildUpgradeActionText(state, upgradeId) {
+  const upgrade = UPGRADE_DEFS.find((item) => item.id === upgradeId);
+  const affordability = getUpgradeAffordability(state, upgradeId);
+
+  if (affordability.canBuy) {
+    return "可购买" + upgrade.name;
+  }
+
+  return "还差 " + formatNumber(affordability.remaining) + " 能量购买" + upgrade.name;
 }
 
 function roundTo(value, precision) {

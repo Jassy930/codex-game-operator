@@ -1,5 +1,26 @@
 # Decision
 
+## 2026-04-28 Product decision：目标行动提示
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 与 manual-feedback 仍无真实玩家反馈，继续处于无反馈样本下的 Product decision。
+
+当前最大问题：目标条已显示“进度/剩余量”，但购买型目标仍以“还差 1 次升级/1 级”表达，玩家需要再去升级区匹配下一步实际需要多少能量。
+
+本轮决策：
+
+- 为购买型目标补充关键升级行动提示：首次升级指向聚能透镜，自动产能指向自动采集臂，稳定器目标指向星核稳定器。
+- 目标条在未满足购买条件时显示“还差 X 能量购买 Y”，满足条件时显示“可购买 Y”。
+- 保持数值曲线、目标顺序和反馈基础设施不变，继续优先降低早期目标理解成本。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-04-28 22:37 CST 查询到 0 个 open issue、0 个 open feedback issue、0 个 open bug issue，#1 仍为 closed。
+- npm install 成功。
+- npm test 通过，覆盖购买型目标的能量缺口和可购买提示。
+- npm run build 生成 dist。
+
+下一步：等待真实玩家反馈；若仍无反馈，优先继续优化 30 秒内点击、购买与目标条之间的一致性。
+
 ## 2026-04-28 Product decision：过载进度可读性
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 与 manual-feedback 仍无真实玩家反馈，继续处于无反馈样本下的 Product decision。

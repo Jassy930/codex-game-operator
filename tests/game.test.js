@@ -151,6 +151,33 @@ test("当前目标会返回可读的进度和剩余量", () => {
   assert.equal(goal.progressText, "进度 42 能量 / 100 能量 · 还差 58 能量");
 });
 
+test("购买型当前目标会提示下一次关键升级所需能量", () => {
+  const waiting = getCurrentGoal({
+    ...createInitialState(0),
+    energy: 6
+  });
+  const ready = getCurrentGoal({
+    ...createInitialState(0),
+    energy: 10
+  });
+  const collector = getCurrentGoal({
+    ...createInitialState(0),
+    energy: 20,
+    upgrades: {
+      lens: 1,
+      collector: 0,
+      stabilizer: 0
+    }
+  });
+
+  assert.equal(
+    waiting.progressText,
+    "进度 0 次升级 / 1 次升级 · 还差 4 能量购买聚能透镜"
+  );
+  assert.equal(ready.progressText, "进度 0 次升级 / 1 次升级 · 可购买聚能透镜");
+  assert.equal(collector.progressText, "进度 0 级 / 1 级 · 还差 4 能量购买自动采集臂");
+});
+
 test("升级价格和数字格式稳定", () => {
   const state = {
     ...createInitialState(0),
