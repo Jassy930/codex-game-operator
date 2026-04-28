@@ -491,6 +491,20 @@ export const PROJECT_DEFS = [
     current(state) {
       return state.totalEnergy;
     }
+  },
+  {
+    id: "mag-sail-dome",
+    name: "磁帆穹顶",
+    summary: "累计 20M 能量，在日冕回廊外展开磁帆穹顶。",
+    unit: "能量",
+    target: 20_000_000,
+    reward: "总产能 +18%",
+    effect: {
+      totalMultiplier: 1.18
+    },
+    current(state) {
+      return state.totalEnergy;
+    }
   }
 ];
 
