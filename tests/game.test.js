@@ -481,6 +481,10 @@ test("星图总览会显示完成数和下一段奖励", () => {
     overview.trackText,
     "目标分轨：累计航段 星桥试运行（进度 114.4K 能量 / 250K 能量 · 还差 135.6K 能量）；升级航段 谐振校准（进度 0 级 / 6 级 · 还差 6 级）"
   );
+  assert.equal(
+    overview.compositionText,
+    "航线构成：22 个累计航段 · 9 个升级航段 · 奖励分布 总产能 10 段 / 点击 8 段 / 自动 8 段 / 过载 5 段"
+  );
   assert.equal(overview.bonusText, "生效加成：总产能 x1.12");
   assert.equal(
     overview.forecastText,
@@ -1166,6 +1170,10 @@ test("星图总览会显示全部完成状态", () => {
     "生效加成：总产能 x5.04 · 点击 x3.68 · 自动 x4.17 · 过载 x2.25"
   );
   assert.equal(overview.forecastText, "航线预告：等待下一段航线");
+  assert.equal(
+    overview.compositionText,
+    "航线构成：22 个累计航段 · 9 个升级航段 · 奖励分布 总产能 10 段 / 点击 8 段 / 自动 8 段 / 过载 5 段"
+  );
 });
 
 test("反馈入口会生成带游戏快照的 GitHub Issue 链接", () => {

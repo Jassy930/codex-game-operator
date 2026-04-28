@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+- 新增星图航线构成：星图总览显示 22 个累计航段、9 个升级航段，并汇总总产能 10 段、点击 8 段、自动 8 段、过载 5 段奖励分布。
+- 同步 GitHub Issues 反馈状态：当前 1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
+- 验证通过：bun install --no-save、bun run test、bun run build、npm install、npm test、npm run build。
+- 构建产物已包含“航线构成”文案和 projectOverviewComposition 渲染字段。
 - 新增星图目标分轨：星图总览同时显示下一个未完成累计航段和下一个未完成升级航段，让 100K 后玩家更快看到两条可追推进线。
 - 静态 HTML 初始星图总数同步到 31 段。
 - 验证通过：bun install --no-save、bun run test、bun run build、npm install、npm test、npm run build。

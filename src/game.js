@@ -842,6 +842,7 @@ export function getProjectOverview(state) {
   const completed = projects.filter((project) => project.completed).length;
   const nextProject = projects.find((project) => !project.completed) ?? null;
   const bonusText = buildProjectBonusText(getProjectBonusesFromStatuses(projects));
+  const compositionText = buildProjectCompositionText(projects);
 
   if (!nextProject) {
     return {
@@ -852,6 +853,7 @@ export function getProjectOverview(state) {
       summaryText: "星图进度 " + completed + "/" + projects.length + " · 全部航段已完成",
       detailText: "所有星图奖励已生效，继续累计能量等待下一段航线。",
       trackText: buildProjectTrackText(projects),
+      compositionText,
       bonusText,
       forecastText: "航线预告：等待下一段航线"
     };
@@ -879,6 +881,7 @@ export function getProjectOverview(state) {
       nextProject.reward,
     detailText: nextProject.progressText,
     trackText: buildProjectTrackText(projects),
+    compositionText,
     bonusText,
     forecastText:
       "航线预告：" + upcomingProjects.map(formatForecastProject).join("、")
@@ -1125,6 +1128,46 @@ function buildProjectTrackText(projects) {
     formatProjectTrack(energyProject) +
     "；升级航段" +
     formatProjectTrack(upgradeProject)
+  );
+}
+
+function buildProjectCompositionText(projects) {
+  const energyCount = projects.filter((project) => !project.upgradeId).length;
+  const upgradeCount = projects.length - energyCount;
+  const rewardCounts = projects.reduce(
+    (counts, project) => {
+      const effect = project.effect ?? {};
+      return {
+        total: counts.total + Number(Boolean(effect.totalMultiplier)),
+        click: counts.click + Number(Boolean(effect.clickMultiplier)),
+        second: counts.second + Number(Boolean(effect.secondMultiplier)),
+        overload: counts.overload + Number(Boolean(effect.overloadMultiplier))
+      };
+    },
+    {
+      total: 0,
+      click: 0,
+      second: 0,
+      overload: 0
+    }
+  );
+  const rewardText = [
+    ["总产能", rewardCounts.total],
+    ["点击", rewardCounts.click],
+    ["自动", rewardCounts.second],
+    ["过载", rewardCounts.overload]
+  ]
+    .filter(([, count]) => count > 0)
+    .map(([label, count]) => label + " " + count + " 段")
+    .join(" / ");
+
+  return (
+    "航线构成：" +
+    energyCount +
+    " 个累计航段 · " +
+    upgradeCount +
+    " 个升级航段 · 奖励分布 " +
+    rewardText
   );
 }
 

@@ -1,5 +1,25 @@
 # Decision
 
+## 2026-04-29 Product decision：星图航线构成
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 当前仍有真实体验反馈 #2 open，且没有 open bug，继续进入有反馈样本下的 Product decision。
+
+当前最大问题：#2 仍围绕“内容丰富度太差，可玩的内容太少”保持 open。上一轮已经补充“目标分轨”，继续只追加新终点会让内容感知更依赖线性长度，而不是让玩家理解现有 31 段星图由哪些目标类型和奖励方向组成。
+
+本轮决策：
+
+- 在星图总览中新增“航线构成”，显示 22 个累计航段和 9 个升级航段。
+- 同一行显示奖励分布：总产能 10 段、点击 8 段、自动 8 段、过载 5 段。
+- 不新增存档字段、不调整奖励数值和升级价格，不改变项目完成判定；先提升已有内容的结构可见性。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-04-29 07:27 CST 查询到 1 个 open issue、1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
+- bun install --no-save、bun run test、bun run build、npm install、npm test 和 npm run build 通过，覆盖星图总览航线构成和全部完成状态。
+- 构建产物 dist 包含“航线构成”和 `projectOverviewComposition` 渲染字段。
+
+下一步：发布后继续观察 #2 复测是否认为航线构成和奖励分布改善内容丰富度感知。
+
 ## 2026-04-29 Product decision：星图目标分轨
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 当前仍有真实体验反馈 #2 open，且没有 open bug，继续进入有反馈样本下的 Product decision。
