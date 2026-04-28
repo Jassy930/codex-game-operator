@@ -407,6 +407,20 @@ export const PROJECT_DEFS = [
     current(state) {
       return state.totalEnergy;
     }
+  },
+  {
+    id: "void-compass",
+    name: "虚空罗盘",
+    summary: "累计 5.75M 能量，在暗流观测站外校准远航罗盘。",
+    unit: "能量",
+    target: 5_750_000,
+    reward: "点击产能 +15%",
+    effect: {
+      clickMultiplier: 1.15
+    },
+    current(state) {
+      return state.totalEnergy;
+    }
   }
 ];
 
