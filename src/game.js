@@ -96,6 +96,65 @@ export const GOALS = [
   }
 ];
 
+export const PROJECT_DEFS = [
+  {
+    id: "stellar-map",
+    name: "点亮星图",
+    summary: "累计 100K 能量后展开星图计划。",
+    unit: "能量",
+    target: 100_000,
+    reward: "总产能 +12%",
+    effect: {
+      totalMultiplier: 1.12
+    },
+    current(state) {
+      return state.totalEnergy;
+    }
+  },
+  {
+    id: "lens-array",
+    name: "透镜阵列",
+    summary: "将聚能透镜扩展到 12 级。",
+    unit: "级",
+    target: 12,
+    reward: "点击产能 +18%",
+    effect: {
+      clickMultiplier: 1.18
+    },
+    current(state) {
+      return state.upgrades.lens ?? 0;
+    }
+  },
+  {
+    id: "collector-grid",
+    name: "采集阵列",
+    summary: "将自动采集臂扩展到 12 级。",
+    unit: "级",
+    target: 12,
+    reward: "自动产能 +18%",
+    effect: {
+      secondMultiplier: 1.18
+    },
+    current(state) {
+      return state.upgrades.collector ?? 0;
+    }
+  },
+  {
+    id: "starbridge-trial",
+    name: "星桥试运行",
+    summary: "累计 250K 能量，打开下一段循环。",
+    unit: "能量",
+    target: 250_000,
+    reward: "总产能 +25%",
+    effect: {
+      totalMultiplier: 1.25
+    },
+    current(state) {
+      return state.totalEnergy;
+    }
+  }
+];
+
 const INITIAL_UPGRADES = Object.fromEntries(
   UPGRADE_DEFS.map((upgrade) => [upgrade.id, 0])
 );
@@ -149,7 +208,8 @@ export function tick(state, now = Date.now()) {
     0,
     Math.min(MAX_OFFLINE_SECONDS, (now - current.lastTick) / 1000)
   );
-  const gain = current.energyPerSecond * current.multiplier * elapsedSeconds;
+  const production = getEffectiveProduction(current);
+  const gain = production.perSecond * elapsedSeconds;
 
   return {
     ...current,
@@ -189,7 +249,11 @@ export function clickCore(state, now = Date.now()) {
   const activeCombo = now <= current.comboExpiresAt ? current.combo : 0;
   const combo = activeCombo + 1;
   const overloadBonus = combo % OVERLOAD_INTERVAL === 0 ? 5 : 0;
-  const gain = (current.energyPerClick + overloadBonus) * current.multiplier;
+  const production = getEffectiveProduction(current);
+  const gain = roundTo(
+    (current.energyPerClick + overloadBonus) * production.clickGainMultiplier,
+    4
+  );
 
   return {
     ...current,
@@ -297,6 +361,76 @@ export function getComboStatus(state, now = Date.now()) {
   };
 }
 
+export function getProjectStatuses(state) {
+  const current = normalizeState(state);
+
+  return PROJECT_DEFS.map((project) => {
+    const currentValue = Math.max(0, project.current(current));
+    const target = Math.max(1, project.target);
+    const remaining = Math.max(0, target - currentValue);
+    const progress = Math.min(1, currentValue / target);
+    const completed = remaining <= 0;
+
+    return {
+      ...project,
+      currentValue,
+      remaining,
+      progress,
+      completed,
+      progressText: buildProjectProgressText(project, currentValue, target, remaining)
+    };
+  });
+}
+
+export function getProjectBonuses(state) {
+  const completedProjects = getProjectStatuses(state).filter((project) => project.completed);
+
+  return completedProjects.reduce(
+    (bonuses, project) => {
+      const effect = project.effect ?? {};
+      return {
+        totalMultiplier: roundTo(
+          bonuses.totalMultiplier * (effect.totalMultiplier ?? 1),
+          4
+        ),
+        clickMultiplier: roundTo(
+          bonuses.clickMultiplier * (effect.clickMultiplier ?? 1),
+          4
+        ),
+        secondMultiplier: roundTo(
+          bonuses.secondMultiplier * (effect.secondMultiplier ?? 1),
+          4
+        ),
+        completed: bonuses.completed + 1,
+        projectIds: [...bonuses.projectIds, project.id]
+      };
+    },
+    {
+      totalMultiplier: 1,
+      clickMultiplier: 1,
+      secondMultiplier: 1,
+      completed: 0,
+      projectIds: []
+    }
+  );
+}
+
+export function getEffectiveProduction(state) {
+  const current = normalizeState(state);
+  const bonuses = getProjectBonuses(current);
+  const clickGainMultiplier = current.multiplier * bonuses.totalMultiplier * bonuses.clickMultiplier;
+  const secondGainMultiplier = current.multiplier * bonuses.totalMultiplier * bonuses.secondMultiplier;
+
+  return {
+    perClick: roundTo(current.energyPerClick * clickGainMultiplier, 4),
+    perSecond: roundTo(current.energyPerSecond * secondGainMultiplier, 4),
+    totalMultiplier: roundTo(current.multiplier * bonuses.totalMultiplier, 4),
+    clickGainMultiplier: roundTo(clickGainMultiplier, 4),
+    secondGainMultiplier: roundTo(secondGainMultiplier, 4),
+    projectBonuses: bonuses
+  };
+}
+
 export function buildClickActionNotice(state) {
   const current = normalizeState(state);
 
@@ -399,6 +533,29 @@ function formatGoalAmount(goal, value) {
   return formatNumber(value) + unit;
 }
 
+function buildProjectProgressText(project, currentValue, target, remaining) {
+  const currentText = formatProjectAmount(project, Math.min(currentValue, target));
+  const targetText = formatProjectAmount(project, target);
+
+  if (remaining <= 0) {
+    return "进度 " + targetText + " / " + targetText + " · 已完成";
+  }
+
+  return (
+    "进度 " +
+    currentText +
+    " / " +
+    targetText +
+    " · 还差 " +
+    formatProjectAmount(project, remaining)
+  );
+}
+
+function formatProjectAmount(project, value) {
+  const unit = project.unit ? " " + project.unit : "";
+  return formatNumber(value) + unit;
+}
+
 function buildUpgradeActionText(state, upgradeId) {
   const upgrade = UPGRADE_DEFS.find((item) => item.id === upgradeId);
   const affordability = getUpgradeAffordability(state, upgradeId);
@@ -411,14 +568,16 @@ function buildUpgradeActionText(state, upgradeId) {
 }
 
 function describeUpgradeProduction(upgradeId, state) {
+  const production = getEffectiveProduction(state);
+
   if (upgradeId === "lens") {
-    return "每次产能 " + formatNumber(state.energyPerClick * state.multiplier);
+    return "每次产能 " + formatNumber(production.perClick);
   }
   if (upgradeId === "collector") {
-    return "每秒产能 " + formatNumber(state.energyPerSecond * state.multiplier);
+    return "每秒产能 " + formatNumber(production.perSecond);
   }
   if (upgradeId === "stabilizer") {
-    return "总产能倍率 " + formatNumber(state.multiplier) + "x";
+    return "总产能倍率 " + formatNumber(production.totalMultiplier) + "x";
   }
   return "产能已提升";
 }

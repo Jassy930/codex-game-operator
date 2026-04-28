@@ -8,6 +8,8 @@ import {
   formatNumber,
   getComboStatus,
   getCurrentGoal,
+  getEffectiveProduction,
+  getProjectStatuses,
   getUpgradeAffordability,
   normalizeState,
   purchaseUpgrade,
@@ -35,6 +37,7 @@ const elements = {
   offlineNotice: document.querySelector("#offlineNotice"),
   actionNotice: document.querySelector("#actionNotice"),
   upgradeList: document.querySelector("#upgradeList"),
+  projectList: document.querySelector("#projectList"),
   resetButton: document.querySelector("#resetButton"),
   feedbackForm: document.querySelector("#feedbackForm"),
   feedbackType: document.querySelector("#feedbackType"),
@@ -132,10 +135,11 @@ function render() {
   const current = normalizeState(state);
   const goal = getCurrentGoal(current);
   const combo = getComboStatus(current);
+  const production = getEffectiveProduction(current);
 
   elements.energy.textContent = formatNumber(current.energy);
-  elements.perSecond.textContent = formatNumber(current.energyPerSecond * current.multiplier);
-  elements.perClick.textContent = formatNumber(current.energyPerClick * current.multiplier);
+  elements.perSecond.textContent = formatNumber(production.perSecond);
+  elements.perClick.textContent = formatNumber(production.perClick);
   elements.combo.textContent = "连击 " + combo.count + " · " + combo.progressText;
   elements.pulse.textContent = combo.overloaded ? current.lastPulse : combo.hintText;
   elements.goalLabel.textContent = goal.label;
@@ -147,6 +151,9 @@ function render() {
 
   elements.upgradeList.replaceChildren(
     ...UPGRADE_DEFS.map((upgrade) => renderUpgrade(upgrade, current, goal))
+  );
+  elements.projectList.replaceChildren(
+    ...getProjectStatuses(current).map((project) => renderProject(project))
   );
 }
 
@@ -219,6 +226,37 @@ function renderUpgrade(upgrade, current, goal) {
 
   button.append(header, goalBadge, summary, meta, affordance, meter);
   return button;
+}
+
+function renderProject(project) {
+  const item = document.createElement("article");
+  item.className = project.completed ? "project-item is-complete" : "project-item";
+
+  const name = document.createElement("strong");
+  name.textContent = project.name;
+
+  const summary = document.createElement("span");
+  summary.className = "project-summary";
+  summary.textContent = project.summary;
+
+  const progress = document.createElement("span");
+  progress.className = "project-progress";
+  progress.textContent = project.progressText;
+
+  const reward = document.createElement("span");
+  reward.className = "project-reward";
+  reward.textContent = project.reward;
+
+  const meter = document.createElement("span");
+  meter.className = "project-meter";
+  meter.setAttribute("aria-hidden", "true");
+
+  const fill = document.createElement("span");
+  fill.style.width = Math.round(project.progress * 100) + "%";
+  meter.append(fill);
+
+  item.append(name, summary, progress, reward, meter);
+  return item;
 }
 
 function renderActionNotice() {

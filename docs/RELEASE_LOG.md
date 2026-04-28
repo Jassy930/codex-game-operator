@@ -19,5 +19,7 @@
 - 新增操作反馈提示：点击显示本次收益，过载标明含过载收益，购买升级显示新等级和产能结果。
 - 新增目标完成反馈：目标推进时显示已完成目标和下一目标，并记录本地 goal_complete 事件。
 - 新增目标升级推荐：当前目标对应的升级卡片会高亮并显示“目标推荐”。
+- 根据真实反馈 #2 新增星图计划：100K 后显示中后段项目进度、奖励和完成状态，项目完成后自动提升有效产能。
+- 同步 GitHub Issues 反馈状态：#2 已标记为 feedback，当前 1 个 open feedback issue、0 个 open bug issue。
 - 改进反馈收集脚本：空 issue 分区会写入 None，并保留 closed issue 快照。
 - 修复发布脚本测试绕过：`ops/deploy.sh` 和 `ops/autopush.sh` 现在会在 `npm test` 失败时停止。

@@ -11,6 +11,8 @@ import {
   formatNumber,
   getComboStatus,
   getCurrentGoal,
+  getEffectiveProduction,
+  getProjectStatuses,
   getUpgradeAffordability,
   getUpgradeCost,
   purchaseUpgrade,
@@ -267,6 +269,59 @@ test("升级购买进度会显示剩余能量和可购买状态", () => {
   assert.equal(ready.remaining, 0);
   assert.equal(ready.progress, 1);
   assert.equal(ready.canBuy, true);
+});
+
+test("星图项目会给中后段玩家新的可追目标", () => {
+  const state = {
+    ...createInitialState(0),
+    totalEnergy: 114_354.89,
+    upgrades: {
+      lens: 11,
+      collector: 11,
+      stabilizer: 9
+    }
+  };
+
+  const projects = getProjectStatuses(state);
+
+  assert.equal(projects[0].id, "stellar-map");
+  assert.equal(projects[0].completed, true);
+  assert.equal(projects[0].progressText, "进度 100K 能量 / 100K 能量 · 已完成");
+  assert.equal(projects[1].id, "lens-array");
+  assert.equal(projects[1].remaining, 1);
+  assert.equal(projects[1].progressText, "进度 11 级 / 12 级 · 还差 1 级");
+  assert.equal(projects[2].id, "collector-grid");
+  assert.equal(projects[2].remaining, 1);
+  assert.equal(projects[3].id, "starbridge-trial");
+  assert.equal(projects[3].completed, false);
+});
+
+test("已完成星图项目会提升有效产能", () => {
+  const state = {
+    ...createInitialState(0),
+    energyPerClick: 10,
+    energyPerSecond: 5,
+    multiplier: 2,
+    totalEnergy: 120_000,
+    upgrades: {
+      lens: 12,
+      collector: 12,
+      stabilizer: 0
+    }
+  };
+
+  const production = getEffectiveProduction(state);
+  const clicked = clickCore(state, 0);
+
+  assert.deepEqual(production.projectBonuses.projectIds, [
+    "stellar-map",
+    "lens-array",
+    "collector-grid"
+  ]);
+  assert.equal(production.totalMultiplier, 2.24);
+  assert.equal(production.perClick, 26.432);
+  assert.equal(production.perSecond, 13.216);
+  assert.equal(clicked.lastGain, 26.432);
 });
 
 test("反馈入口会生成带游戏快照的 GitHub Issue 链接", () => {

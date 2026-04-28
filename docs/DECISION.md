@@ -1,5 +1,27 @@
 # Decision
 
+## 2026-04-28 Product decision：星图计划
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 出现真实体验反馈 #2，进入有反馈样本下的 Product decision。
+
+当前最大问题：#2 评分 3/5，玩家在累计 114.5K 能量、升级 lens:11 / collector:11 / stabilizer:9 后反馈“内容丰富度太差，可玩的内容太少”。当前稳定器之后只剩循环累计目标，缺少新的中后段追逐对象。
+
+本轮决策：
+
+- 新增“星图计划”项目层，提供点亮星图、透镜阵列、采集阵列和星桥试运行 4 个中后段目标。
+- 项目按累计能量或升级等级自动完成，完成后提供总产能、点击产能或自动产能奖励。
+- 侧栏显示每个项目的进度、剩余量、完成状态和奖励，给 100K 以后玩家明确的下一步内容。
+- 保持反馈入口、部署基础设施和原有升级曲线不变，先用小型可验证内容层回应真实反馈。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-04-28 23:23 CST 查询到 1 个 open issue、1 个 open feedback issue、0 个 open bug issue；#2 已补充 feedback 标签。
+- npm install 成功。
+- npm test 通过，覆盖星图项目进度和项目奖励后的有效产能。
+- npm run build 生成 dist。
+
+下一步：回复 #2，说明已补中后段项目层；后续继续观察玩家是否仍认为内容不足，再决定是否引入主动选择、分支升级或重置循环。
+
 ## 2026-04-28 Product decision：目标升级推荐
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 与 manual-feedback 仍无真实玩家反馈，继续处于无反馈样本下的 Product decision。
