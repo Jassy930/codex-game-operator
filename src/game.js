@@ -533,6 +533,20 @@ export const PROJECT_DEFS = [
     current(state) {
       return state.totalEnergy;
     }
+  },
+  {
+    id: "glow-orbit-harbor",
+    name: "离辉轨道港",
+    summary: "累计 38M 能量，在脉冲航闸外建设离辉轨道港。",
+    unit: "能量",
+    target: 38_000_000,
+    reward: "自动产能 +18%",
+    effect: {
+      secondMultiplier: 1.18
+    },
+    current(state) {
+      return state.totalEnergy;
+    }
   }
 ];
 

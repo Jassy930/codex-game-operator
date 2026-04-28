@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+- 新增 38M 后离辉轨道港航段：脉冲航闸完成后继续出现累计能量目标，完成后奖励自动产能 +18%，星图路线扩展到 28 段。
+- 同步 GitHub Issues 反馈状态：当前 1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
+- 验证通过：bun install、bun run test、bun run build、npm install、npm test、npm run build。
+- 构建产物已包含离辉轨道港。
 - 新增 30M 后脉冲航闸航段：引潮星环完成后继续出现累计能量目标，完成后奖励点击产能 +18%，星图路线扩展到 27 段。
 - 同步 GitHub Issues 反馈状态：当前 1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
 - 验证通过：bun install、bun run test、bun run build、npm install、npm test、npm run build。
