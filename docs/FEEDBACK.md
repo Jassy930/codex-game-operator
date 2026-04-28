@@ -2,7 +2,9 @@
 
 ## 2026-04-29
 
-- GitHub Issues：gh 可用且已认证；2026-04-29 02:28 CST 查询到 1 个 open issue、1 个 open feedback issue、0 个 open bug issue。
+- 本轮已回复 #2：说明 100K 后新增星图航线策略，玩家可在均衡航线、点火优先和巡航优先之间切换；GitHub Pages workflow 25070815559 已成功且线上地址返回 HTTP 200；issue 保持 open，等待复测确认航线策略是否改善内容丰富度和主动选择感。
+- data/feedback/github-feedback.md 已在回复 #2 后同步本地快照。
+- GitHub Issues：gh 可用且已认证；2026-04-29 02:34 CST 查询到 1 个 open issue、1 个 open feedback issue、0 个 open bug issue。
 - #2 仍为 open，未出现新的复测结论或 bug；本轮继续围绕“内容丰富度太差，可玩的内容太少”新增 100K 后星图航线策略，让玩家能在点击、自动和默认节奏之间主动切换。
 - data/feedback/github-feedback.md 已同步本地快照。
 - 本轮已回复 #2：说明星图总览、主目标条和项目列表现在都会显示航段序号；GitHub Pages workflow 25070035103 已成功且线上地址返回 HTTP 200；issue 保持 open，等待复测确认航段序号是否改善内容规模感和目标定位。

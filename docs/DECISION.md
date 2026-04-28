@@ -16,11 +16,13 @@
 
 验收标准：
 
-- GitHub Issues 已同步：2026-04-29 02:28 CST 查询到 1 个 open issue、1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
+- GitHub Issues 已同步：2026-04-29 02:34 CST 查询到 1 个 open issue、1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
 - npm test 通过，覆盖 100K 后航线策略解锁、点火优先产能变化、旧存档未知策略兼容和反馈快照中的航线策略。
 - npm install、npm test、npm run build、bun run test 和 bun run build 通过。
+- GitHub Pages workflow 25070815559 已成功，线上地址返回 HTTP 200。
+- #2 已回复并仍为 open。
 
-下一步：部署后回复 #2，说明星图航线策略已上线，并继续等待玩家复测主动选择是否改善内容丰富度。
+下一步：#2 保持 open；等待玩家复测航线策略是否改善内容丰富度和主动选择感。
 
 ## 2026-04-29 Product decision：星图航段序号
 
