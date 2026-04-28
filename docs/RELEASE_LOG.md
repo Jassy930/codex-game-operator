@@ -6,6 +6,8 @@
 - 同步 GitHub Issues 反馈状态：当前 1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
 - 验证通过：bun install、bun run test、bun run build、npm install、npm test、npm run build。
 - 构建产物已包含远曦灯塔。
+- GitHub Pages workflow 25081269321 已成功，线上地址返回 HTTP 200，且发布文件包含远曦灯塔。
+- 已回复 #2，说明远曦灯塔航段已部署，并保持 issue open 等待复测。
 - 新增 38M 后离辉轨道港航段：脉冲航闸完成后继续出现累计能量目标，完成后奖励自动产能 +18%，星图路线扩展到 28 段。
 - 同步 GitHub Issues 反馈状态：当前 1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
 - 验证通过：bun install、bun run test、bun run build、npm install、npm test、npm run build。
