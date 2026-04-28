@@ -477,6 +477,20 @@ export const PROJECT_DEFS = [
     current(state) {
       return state.totalEnergy;
     }
+  },
+  {
+    id: "corona-corridor",
+    name: "日冕回廊",
+    summary: "累计 16.5M 能量，在极昼折跃井外铺设日冕回廊。",
+    unit: "能量",
+    target: 16_500_000,
+    reward: "自动产能 +16%",
+    effect: {
+      secondMultiplier: 1.16
+    },
+    current(state) {
+      return state.totalEnergy;
+    }
   }
 ];
 
