@@ -1,0 +1,103 @@
+export const FEEDBACK_TYPES = {
+  experience: {
+    label: "体验反馈",
+    labels: ["feedback"]
+  },
+  bug: {
+    label: "问题/Bug",
+    labels: ["feedback", "bug"]
+  },
+  balance: {
+    label: "平衡建议",
+    labels: ["feedback", "balance"]
+  },
+  idea: {
+    label: "新想法",
+    labels: ["feedback", "idea"]
+  }
+};
+
+const DEFAULT_ISSUE_URL =
+  "https://github.com/Jassy930/codex-game-operator/issues/new";
+const MAX_MESSAGE_LENGTH = 1200;
+
+export function createFeedbackEntry({
+  type,
+  rating,
+  message,
+  state,
+  goal,
+  sessionId,
+  createdAt = new Date().toISOString()
+}) {
+  const feedbackType = FEEDBACK_TYPES[type] ? type : "experience";
+  const currentState = state ?? {};
+  const currentGoal = goal ?? {};
+
+  return {
+    id:
+      globalThis.crypto?.randomUUID?.() ??
+      `${Date.now()}-${Math.random().toString(16).slice(2)}`,
+    type: feedbackType,
+    typeLabel: FEEDBACK_TYPES[feedbackType].label,
+    rating: clampRating(rating),
+    message: String(message ?? "").trim().slice(0, MAX_MESSAGE_LENGTH),
+    sessionId,
+    createdAt,
+    snapshot: {
+      energy: currentState.energy ?? 0,
+      totalEnergy: currentState.totalEnergy ?? 0,
+      energyPerSecond: currentState.energyPerSecond ?? 0,
+      energyPerClick: currentState.energyPerClick ?? 1,
+      multiplier: currentState.multiplier ?? 1,
+      combo: currentState.combo ?? 0,
+      goal: currentGoal.value ?? "未知",
+      upgrades: currentState.upgrades ?? {}
+    }
+  };
+}
+
+export function buildFeedbackIssueUrl(entry, baseUrl = DEFAULT_ISSUE_URL) {
+  const url = new URL(baseUrl);
+  url.searchParams.set("title", `[反馈] ${entry.typeLabel} - ${entry.rating}/5`);
+  url.searchParams.set("labels", FEEDBACK_TYPES[entry.type].labels.join(","));
+  url.searchParams.set("body", createFeedbackIssueBody(entry));
+  return url.toString();
+}
+
+export function createFeedbackIssueBody(entry) {
+  const snapshot = entry.snapshot;
+  const upgrades = Object.entries(snapshot.upgrades)
+    .map(([id, level]) => `${id}:${level}`)
+    .join(", ");
+
+  return [
+    "## 玩家反馈",
+    "",
+    `类型：${entry.typeLabel}`,
+    `评分：${entry.rating}/5`,
+    "",
+    entry.message,
+    "",
+    "## 游戏快照",
+    "",
+    `- 能量：${snapshot.energy}`,
+    `- 累计能量：${snapshot.totalEnergy}`,
+    `- 每秒产能：${snapshot.energyPerSecond}`,
+    `- 每次产能：${snapshot.energyPerClick}`,
+    `- 产能倍率：${snapshot.multiplier}`,
+    `- 连击：${snapshot.combo}`,
+    `- 当前目标：${snapshot.goal}`,
+    `- 升级：${upgrades || "无"}`,
+    `- Session：${entry.sessionId ?? "未知"}`,
+    `- 创建时间：${entry.createdAt}`
+  ].join("\n");
+}
+
+function clampRating(value) {
+  const number = Number(value);
+  if (!Number.isFinite(number)) {
+    return 3;
+  }
+  return Math.min(5, Math.max(1, Math.round(number)));
+}

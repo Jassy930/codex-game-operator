@@ -19,7 +19,8 @@ GitHub Pages：
 - 主分支 push 触发 `.github/workflows/pages.yml`。
 - workflow 必须完成 install、test、build 后才上传 `dist`。
 - 不允许用 `npm test || true` 绕过测试失败。
-- 当前仓库为 private，GitHub Pages 受计划限制，deploy job 仅在公开仓库执行。
+- 当前仓库为 public，GitHub Pages 已用 workflow 模式启用。
+- Pages 地址：https://jassy930.github.io/codex-game-operator/
 
 Vercel：
 

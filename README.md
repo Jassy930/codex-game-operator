@@ -22,7 +22,11 @@ npm run build
 
 ## 部署
 
-主分支 push 会通过 `.github/workflows/pages.yml` 构建并在公开仓库上部署 GitHub Pages。当前私有仓库先使用 Vercel：
+主分支 push 会通过 `.github/workflows/pages.yml` 构建并部署 GitHub Pages：
+
+https://jassy930.github.io/codex-game-operator/
+
+备用 Vercel 版本：
 
 https://dist-kblvoc9qq-wangf930-2746s-projects.vercel.app
 

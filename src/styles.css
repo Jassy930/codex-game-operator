@@ -293,6 +293,64 @@ h2 {
   font-weight: 900;
 }
 
+.feedback-form {
+  display: grid;
+  gap: 12px;
+  margin-top: 20px;
+  padding-top: 18px;
+  border-top: 1px solid rgba(248, 243, 231, 0.14);
+}
+
+.feedback-form label {
+  display: grid;
+  gap: 6px;
+  color: rgba(248, 243, 231, 0.68);
+  font-size: 0.82rem;
+  font-weight: 800;
+}
+
+.feedback-form select,
+.feedback-form textarea {
+  width: 100%;
+  border: 1px solid rgba(248, 243, 231, 0.18);
+  border-radius: 8px;
+  background: rgba(20, 17, 15, 0.78);
+  color: #f8f3e7;
+}
+
+.feedback-form select {
+  min-height: 38px;
+  padding: 0 10px;
+}
+
+.feedback-form textarea {
+  min-height: 104px;
+  resize: vertical;
+  padding: 10px;
+  line-height: 1.45;
+}
+
+.feedback-submit {
+  min-height: 42px;
+  border: 0;
+  border-radius: 8px;
+  background: #13b5a6;
+  color: #0f1413;
+  cursor: pointer;
+  font-weight: 900;
+}
+
+.feedback-submit:hover {
+  filter: brightness(1.08);
+}
+
+.feedback-status {
+  min-height: 20px;
+  margin: 0;
+  color: #fff7c2;
+  font-size: 0.86rem;
+}
+
 @keyframes coreSpin {
   from {
     transform: rotate(0deg);

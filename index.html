@@ -82,6 +82,41 @@
             <button id="resetButton" class="ghost-button" type="button">重置</button>
           </div>
           <div id="upgradeList" class="upgrade-list"></div>
+
+          <form id="feedbackForm" class="feedback-form" aria-labelledby="feedback-title">
+            <h2 id="feedback-title">反馈</h2>
+            <label for="feedbackType">
+              类型
+              <select id="feedbackType" name="feedbackType">
+                <option value="experience">体验反馈</option>
+                <option value="bug">问题/Bug</option>
+                <option value="balance">平衡建议</option>
+                <option value="idea">新想法</option>
+              </select>
+            </label>
+            <label for="feedbackRating">
+              评分
+              <select id="feedbackRating" name="feedbackRating">
+                <option value="5">5</option>
+                <option value="4">4</option>
+                <option value="3" selected>3</option>
+                <option value="2">2</option>
+                <option value="1">1</option>
+              </select>
+            </label>
+            <label for="feedbackMessage">
+              内容
+              <textarea
+                id="feedbackMessage"
+                name="feedbackMessage"
+                rows="4"
+                maxlength="1200"
+                required
+              ></textarea>
+            </label>
+            <button class="feedback-submit" type="submit">提交反馈</button>
+            <p id="feedbackStatus" class="feedback-status" aria-live="polite"></p>
+          </form>
         </aside>
       </section>
     </main>

@@ -10,6 +10,11 @@ import {
   purchaseUpgrade,
   tick
 } from "../src/game.js";
+import {
+  buildFeedbackIssueUrl,
+  createFeedbackEntry,
+  createFeedbackIssueBody
+} from "../src/feedback.js";
 
 test("点击星核会增加能量与累计产出", () => {
   const state = createInitialState(0);
@@ -89,4 +94,37 @@ test("升级价格和数字格式稳定", () => {
 
   assert.equal(getUpgradeCost(state, "lens"), 24);
   assert.equal(formatNumber(1530), "1.5K");
+});
+
+test("反馈入口会生成带游戏快照的 GitHub Issue 链接", () => {
+  const state = {
+    ...createInitialState(0),
+    energy: 42,
+    totalEnergy: 80,
+    energyPerSecond: 0.7,
+    upgrades: {
+      lens: 1,
+      collector: 1,
+      stabilizer: 0
+    }
+  };
+  const entry = createFeedbackEntry({
+    type: "bug",
+    rating: 5,
+    message: "升级按钮反馈不明显",
+    state,
+    goal: { value: "累计 100 能量" },
+    sessionId: "test-session",
+    createdAt: "2026-04-28T13:40:00.000Z"
+  });
+
+  const body = createFeedbackIssueBody(entry);
+  const url = new URL(buildFeedbackIssueUrl(entry));
+
+  assert.equal(url.origin + url.pathname, "https://github.com/Jassy930/codex-game-operator/issues/new");
+  assert.equal(url.searchParams.get("labels"), "feedback,bug");
+  assert.equal(url.searchParams.get("title"), "[反馈] 问题/Bug - 5/5");
+  assert.match(body, /升级按钮反馈不明显/);
+  assert.match(body, /当前目标：累计 100 能量/);
+  assert.match(body, /lens:1/);
 });

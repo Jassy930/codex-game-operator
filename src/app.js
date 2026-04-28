@@ -9,10 +9,12 @@ import {
   purchaseUpgrade,
   tick
 } from "./game.js";
+import { buildFeedbackIssueUrl, createFeedbackEntry } from "./feedback.js";
 
 const STORAGE_KEY = "codex-game-operator.state";
 const EVENT_KEY = "codex-game-operator.events";
-const SESSION_ID = crypto.randomUUID?.() ?? String(Date.now());
+const FEEDBACK_KEY = "codex-game-operator.feedback";
+const SESSION_ID = globalThis.crypto?.randomUUID?.() ?? String(Date.now());
 
 const elements = {
   energy: document.querySelector("#energyValue"),
@@ -25,7 +27,12 @@ const elements = {
   goalValue: document.querySelector("#goalValue"),
   goalMeter: document.querySelector("#goalMeter"),
   upgradeList: document.querySelector("#upgradeList"),
-  resetButton: document.querySelector("#resetButton")
+  resetButton: document.querySelector("#resetButton"),
+  feedbackForm: document.querySelector("#feedbackForm"),
+  feedbackType: document.querySelector("#feedbackType"),
+  feedbackRating: document.querySelector("#feedbackRating"),
+  feedbackMessage: document.querySelector("#feedbackMessage"),
+  feedbackStatus: document.querySelector("#feedbackStatus")
 };
 
 let state = loadState();
@@ -51,6 +58,43 @@ elements.resetButton.addEventListener("click", () => {
   lastFirstUpgradeAt = null;
   recordEvent("reset");
   saveAndRender();
+});
+
+elements.feedbackForm.addEventListener("submit", (event) => {
+  event.preventDefault();
+  const message = elements.feedbackMessage.value.trim();
+
+  if (message.length < 6) {
+    elements.feedbackStatus.textContent = "请至少写 6 个字。";
+    return;
+  }
+
+  const current = normalizeState(state);
+  const goal = getCurrentGoal(current);
+  const entry = createFeedbackEntry({
+    type: elements.feedbackType.value,
+    rating: elements.feedbackRating.value,
+    message,
+    state: current,
+    goal,
+    sessionId: SESSION_ID
+  });
+  const issueUrl = buildFeedbackIssueUrl(entry);
+
+  saveFeedbackEntry(entry);
+  recordEvent("feedback_sent", {
+    type: entry.type,
+    rating: entry.rating,
+    messageLength: entry.message.length
+  });
+
+  elements.feedbackStatus.textContent = "已生成 GitHub Issue 草稿。";
+  elements.feedbackMessage.value = "";
+
+  const feedbackWindow = window.open(issueUrl, "_blank", "noopener,noreferrer");
+  if (!feedbackWindow) {
+    window.location.href = issueUrl;
+  }
 });
 
 setInterval(() => {
@@ -145,6 +189,16 @@ function recordEvent(type, payload = {}) {
     localStorage.setItem(EVENT_KEY, JSON.stringify(events.slice(-200)));
   } catch {
     // Metrics are best-effort in the browser-only bootstrap.
+  }
+}
+
+function saveFeedbackEntry(entry) {
+  try {
+    const entries = JSON.parse(localStorage.getItem(FEEDBACK_KEY) ?? "[]");
+    entries.push(entry);
+    localStorage.setItem(FEEDBACK_KEY, JSON.stringify(entries.slice(-50)));
+  } catch {
+    // Feedback drafts still open in GitHub even if localStorage is unavailable.
   }
 }
 
