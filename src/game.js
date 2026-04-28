@@ -449,6 +449,20 @@ export const PROJECT_DEFS = [
     current(state) {
       return state.totalEnergy;
     }
+  },
+  {
+    id: "silent-light-relay",
+    name: "寂光中继环",
+    summary: "累计 11M 能量，在深穹测距阵外接入寂光中继环。",
+    unit: "能量",
+    target: 11_000_000,
+    reward: "过载奖励 +16%",
+    effect: {
+      overloadMultiplier: 1.16
+    },
+    current(state) {
+      return state.totalEnergy;
+    }
   }
 ];
 

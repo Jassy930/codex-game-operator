@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+- 新增 11M 后寂光中继环航段：深穹测距阵完成后继续出现累计能量目标，完成后奖励过载奖励 +16%，星图路线扩展到 22 段。
+- 同步 GitHub Issues 反馈状态：当前 1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
+- 验证通过：bun install、bun run test、bun run build、npm install、npm test、npm run build。
 - 新增 9M 后深穹测距阵航段：星云档案库完成后继续出现累计能量目标，完成后奖励总产能 +17%，星图路线扩展到 21 段。
 - 同步 GitHub Issues 反馈状态：当前 1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
 - 验证通过：bun install、bun run test、bun run build、npm install、npm test、npm run build。
