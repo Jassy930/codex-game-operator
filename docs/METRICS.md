@@ -6,6 +6,6 @@
 
 - 浏览器本地通过 localStorage 保存最近 200 条 session、click、first_upgrade_time、upgrade_purchase、goal_complete、reset 事件。
 - 浏览器本地在离线收益达到展示阈值时记录 offline_gain 事件。
-- 浏览器本地通过 localStorage 保存最近 50 条 feedback 草稿，提交反馈时记录 feedback_sent 事件。
+- 浏览器本地通过 localStorage 保存最近 50 条 feedback 草稿，提交反馈时记录 feedback_sent 事件；反馈快照包含当前过载奖励。
 - 星图计划完成状态当前由存档数值实时推导，暂不记录为真实线上指标。
 - 尚未接入远端指标上报；发布前不能把本地事件当作真实线上指标。

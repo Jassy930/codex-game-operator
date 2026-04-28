@@ -2,6 +2,9 @@
 
 ## 2026-04-29
 
+- GitHub Issues：gh 可用且已认证；2026-04-29 01:39 CST 查询到 1 个 open issue、1 个 open feedback issue、0 个 open bug issue。
+- #2 仍为 open，未出现新的复测结论或 bug；本轮继续围绕“内容丰富度太差，可玩的内容太少”新增过载谐振成长线，让 100K 后出现不同于点击/自动/总产能倍率的可追方向。
+- data/feedback/github-feedback.md 已同步本地快照。
 - 本轮已回复 #2：说明星图总览的“航线预告”现在会同时展示后续最多 3 个项目名称和对应奖励；GitHub Pages workflow 25067860271 已成功且线上地址返回 HTTP 200；issue 保持 open，等待复测确认内容丰富度和后续奖励感知是否改善。
 - GitHub Issues：gh 可用且已认证；2026-04-29 01:29 CST 查询到 1 个 open issue、1 个 open feedback issue、0 个 open bug issue。
 - data/feedback/github-feedback.md 已在回复 #2 后同步本地快照。

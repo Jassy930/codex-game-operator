@@ -1,5 +1,29 @@
 # Decision
 
+## 2026-04-29 Product decision：过载谐振线
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 当前仍有真实体验反馈 #2 open，且没有 open bug，继续进入有反馈样本下的 Product decision。
+
+当前最大问题：#2 仍围绕“内容丰富度太差，可玩的内容太少”保持 open。前序迭代已经扩展星图目标、奖励预告和生效加成，但中后段成长方向仍主要围绕点击产能、自动产能和总产能，早期的过载点击机制没有形成后续成长线。
+
+本轮决策：
+
+- 新增“星核谐振器”升级，提升每次过载触发的奖励。
+- 顶部产能区新增“过载”数值，让玩家能直接看到当前过载奖励。
+- 星图计划在点亮星图后新增“谐振校准”项目，要求星核谐振器达到 6 级，奖励过载奖励 +20%。
+- 反馈快照补充过载奖励字段，后续反馈能带上这条新成长线的状态。
+- 不调整 100K 前目标顺序、不改已有升级价格、不新增远端指标，先用一条小型可测试成长线回应内容不足反馈。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-04-29 01:39 CST 查询到 1 个 open issue、1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
+- npm test 通过，覆盖星核谐振器购买、100K 后谐振校准接管星图目标、星图总览预告和过载奖励叠加。
+- npm install 成功。
+- npm run build 生成 dist。
+- bun run test 和 bun run build 通过。
+
+下一步：完成 install/build 验证后回复 #2，说明本轮新增过载谐振成长线，并保持 issue open 等待复测。
+
 ## 2026-04-29 Product decision：星图航线奖励预告
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 当前仍有真实体验反馈 #2 open，且没有 open bug，继续进入有反馈样本下的 Product decision。

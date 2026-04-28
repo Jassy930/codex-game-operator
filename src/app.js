@@ -28,6 +28,7 @@ const elements = {
   energy: document.querySelector("#energyValue"),
   perSecond: document.querySelector("#perSecondValue"),
   perClick: document.querySelector("#perClickValue"),
+  overload: document.querySelector("#overloadValue"),
   coreButton: document.querySelector("#coreButton"),
   combo: document.querySelector("#comboValue"),
   pulse: document.querySelector("#pulseValue"),
@@ -146,6 +147,7 @@ function render() {
   elements.energy.textContent = formatNumber(current.energy);
   elements.perSecond.textContent = formatNumber(production.perSecond);
   elements.perClick.textContent = formatNumber(production.perClick);
+  elements.overload.textContent = "+" + formatNumber(production.overloadBonus);
   elements.combo.textContent = "连击 " + combo.count + " · " + combo.progressText;
   elements.pulse.textContent = combo.overloaded ? current.lastPulse : combo.hintText;
   elements.goalLabel.textContent = goal.label;

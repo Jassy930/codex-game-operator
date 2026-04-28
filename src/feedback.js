@@ -50,6 +50,7 @@ export function createFeedbackEntry({
       energyPerSecond: currentState.energyPerSecond ?? 0,
       energyPerClick: currentState.energyPerClick ?? 1,
       multiplier: currentState.multiplier ?? 1,
+      overloadBonus: currentState.overloadBonus ?? 5,
       combo: currentState.combo ?? 0,
       goal: currentGoal.value ?? "未知",
       upgrades: currentState.upgrades ?? {}
@@ -86,6 +87,7 @@ export function createFeedbackIssueBody(entry) {
     `- 每秒产能：${snapshot.energyPerSecond}`,
     `- 每次产能：${snapshot.energyPerClick}`,
     `- 产能倍率：${snapshot.multiplier}`,
+    `- 过载奖励：${snapshot.overloadBonus}`,
     `- 连击：${snapshot.combo}`,
     `- 当前目标：${snapshot.goal}`,
     `- 升级：${upgrades || "无"}`,

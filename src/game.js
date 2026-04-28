@@ -37,10 +37,24 @@ export const UPGRADE_DEFS = [
         multiplier: roundTo(state.multiplier * 1.18, 4)
       };
     }
+  },
+  {
+    id: "resonator",
+    name: "星核谐振器",
+    summary: "过载奖励 +2",
+    baseCost: 520,
+    costGrowth: 1.65,
+    apply(state) {
+      return {
+        ...state,
+        overloadBonus: roundTo(state.overloadBonus + 2, 4)
+      };
+    }
   }
 ];
 
 export const OVERLOAD_INTERVAL = 8;
+export const BASE_OVERLOAD_BONUS = 5;
 export const GOALS = [
   {
     id: "first-upgrade",
@@ -109,6 +123,21 @@ export const PROJECT_DEFS = [
     },
     current(state) {
       return state.totalEnergy;
+    }
+  },
+  {
+    id: "resonance-calibration",
+    name: "谐振校准",
+    summary: "将星核谐振器扩展到 6 级，强化主动点击节奏。",
+    upgradeId: "resonator",
+    unit: "级",
+    target: 6,
+    reward: "过载奖励 +20%",
+    effect: {
+      overloadMultiplier: 1.2
+    },
+    current(state) {
+      return state.upgrades.resonator ?? 0;
     }
   },
   {
@@ -244,6 +273,7 @@ export function createInitialState(now = Date.now()) {
     energyPerClick: 1,
     energyPerSecond: 0,
     multiplier: 1,
+    overloadBonus: BASE_OVERLOAD_BONUS,
     combo: 0,
     comboExpiresAt: 0,
     clicks: 0,
@@ -269,6 +299,10 @@ export function normalizeState(state, now = Date.now()) {
     energyPerClick: Math.max(1, Number(source.energyPerClick ?? initial.energyPerClick) || 1),
     energyPerSecond: Math.max(0, Number(source.energyPerSecond ?? initial.energyPerSecond) || 0),
     multiplier: Math.max(1, Number(source.multiplier ?? initial.multiplier) || 1),
+    overloadBonus: Math.max(
+      0,
+      Number(source.overloadBonus ?? initial.overloadBonus) || initial.overloadBonus
+    ),
     combo: Math.max(0, Number(source.combo ?? initial.combo) || 0),
     comboExpiresAt: readNumber(source.comboExpiresAt, initial.comboExpiresAt),
     clicks: Math.max(0, Number(source.clicks ?? initial.clicks) || 0),
@@ -325,12 +359,9 @@ export function clickCore(state, now = Date.now()) {
   const current = tick(state, now);
   const activeCombo = now <= current.comboExpiresAt ? current.combo : 0;
   const combo = activeCombo + 1;
-  const overloadBonus = combo % OVERLOAD_INTERVAL === 0 ? 5 : 0;
   const production = getEffectiveProduction(current);
-  const gain = roundTo(
-    (current.energyPerClick + overloadBonus) * production.clickGainMultiplier,
-    4
-  );
+  const overloadBonus = combo % OVERLOAD_INTERVAL === 0 ? production.overloadBonus : 0;
+  const gain = roundTo(production.perClick + overloadBonus, 4);
 
   return {
     ...current,
@@ -524,6 +555,10 @@ function getProjectBonusesFromStatuses(projects) {
           bonuses.secondMultiplier * (effect.secondMultiplier ?? 1),
           4
         ),
+        overloadMultiplier: roundTo(
+          bonuses.overloadMultiplier * (effect.overloadMultiplier ?? 1),
+          4
+        ),
         completed: bonuses.completed + 1,
         projectIds: [...bonuses.projectIds, project.id]
       };
@@ -532,6 +567,7 @@ function getProjectBonusesFromStatuses(projects) {
       totalMultiplier: 1,
       clickMultiplier: 1,
       secondMultiplier: 1,
+      overloadMultiplier: 1,
       completed: 0,
       projectIds: []
     }
@@ -543,10 +579,13 @@ export function getEffectiveProduction(state) {
   const bonuses = getProjectBonuses(current);
   const clickGainMultiplier = current.multiplier * bonuses.totalMultiplier * bonuses.clickMultiplier;
   const secondGainMultiplier = current.multiplier * bonuses.totalMultiplier * bonuses.secondMultiplier;
+  const overloadBonus =
+    current.overloadBonus * bonuses.overloadMultiplier * clickGainMultiplier;
 
   return {
     perClick: roundTo(current.energyPerClick * clickGainMultiplier, 4),
     perSecond: roundTo(current.energyPerSecond * secondGainMultiplier, 4),
+    overloadBonus: roundTo(overloadBonus, 4),
     totalMultiplier: roundTo(current.multiplier * bonuses.totalMultiplier, 4),
     clickGainMultiplier: roundTo(clickGainMultiplier, 4),
     secondGainMultiplier: roundTo(secondGainMultiplier, 4),
@@ -642,7 +681,8 @@ function buildProjectBonusText(bonuses) {
   const bonusParts = [
     ["总产能", bonuses.totalMultiplier],
     ["点击", bonuses.clickMultiplier],
-    ["自动", bonuses.secondMultiplier]
+    ["自动", bonuses.secondMultiplier],
+    ["过载", bonuses.overloadMultiplier]
   ]
     .filter(([, multiplier]) => multiplier > 1)
     .map(([label, multiplier]) => label + " x" + formatMultiplier(multiplier));
@@ -756,6 +796,9 @@ function describeUpgradeProduction(upgradeId, state) {
   }
   if (upgradeId === "stabilizer") {
     return "总产能倍率 " + formatNumber(production.totalMultiplier) + "x";
+  }
+  if (upgradeId === "resonator") {
+    return "过载奖励 +" + formatNumber(production.overloadBonus);
   }
   return "产能已提升";
 }
