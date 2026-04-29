@@ -431,11 +431,13 @@ test("星图项目会给中后段玩家新的可追目标", () => {
   assert.equal(projects[0].segmentIndex, 1);
   assert.equal(projects[0].segmentTotal, 31);
   assert.equal(projects[0].segmentText, "航段 1/31");
+  assert.equal(projects[0].chapterName, "首段星图");
   assert.equal(projects[0].completed, true);
   assert.equal(projects[0].isCurrent, false);
   assert.equal(projects[0].progressText, "进度 100K 能量 / 100K 能量 · 已完成");
   assert.equal(projects[1].id, "resonance-calibration");
   assert.equal(projects[1].segmentText, "航段 2/31");
+  assert.equal(projects[1].chapterName, "首段星图");
   assert.equal(projects[1].isCurrent, true);
   assert.equal(projects[1].remaining, 6);
   assert.equal(projects[1].progressText, "进度 0 级 / 6 级 · 还差 6 级");
@@ -448,6 +450,16 @@ test("星图项目会给中后段玩家新的可追目标", () => {
   assert.equal(projects[4].completed, false);
   assert.equal(projects[5].id, "cruise-drill");
   assert.equal(projects[6].id, "starbridge-trial");
+});
+
+test("星图项目会标记所属章节", () => {
+  const projects = getProjectStatuses(createInitialState(0));
+
+  assert.equal(projects[0].chapterName, "首段星图");
+  assert.equal(projects[4].chapterName, "专精校准");
+  assert.equal(projects[9].chapterName, "深空基建");
+  assert.equal(projects[13].chapterName, "远航长尾");
+  assert.equal(projects[30].chapterName, "远航长尾");
 });
 
 test("星图总览会显示完成数和下一段奖励", () => {

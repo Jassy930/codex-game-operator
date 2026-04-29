@@ -845,6 +845,7 @@ export function getProjectStatuses(state) {
       segmentIndex,
       segmentTotal,
       segmentText: buildProjectSegmentText(segmentIndex, segmentTotal),
+      chapterName: getProjectChapterName(project.id),
       currentValue,
       remaining,
       progress,
@@ -1246,6 +1247,27 @@ function getChapterProjects(projects, chapter) {
   }
 
   return projects.slice(startIndex, endIndex + 1);
+}
+
+function getProjectChapterName(projectId) {
+  const projectIndex = PROJECT_DEFS.findIndex((project) => project.id === projectId);
+  if (projectIndex < 0) {
+    return "未分组";
+  }
+
+  const chapter = PROJECT_CHAPTER_DEFS.find((item) => {
+    const startIndex = PROJECT_DEFS.findIndex((project) => project.id === item.startId);
+    const endIndex = PROJECT_DEFS.findIndex((project) => project.id === item.endId);
+
+    return (
+      startIndex >= 0 &&
+      endIndex >= startIndex &&
+      projectIndex >= startIndex &&
+      projectIndex <= endIndex
+    );
+  });
+
+  return chapter?.name ?? "未分组";
 }
 
 function formatProjectTrack(project) {

@@ -317,6 +317,10 @@ function renderProject(project) {
   segmentBadge.className = "project-segment-badge";
   segmentBadge.textContent = project.segmentText;
 
+  const chapterBadge = document.createElement("span");
+  chapterBadge.className = "project-chapter-badge";
+  chapterBadge.textContent = project.chapterName;
+
   const currentBadge = document.createElement("span");
   currentBadge.className = "project-current-badge";
   currentBadge.textContent = "当前航段";
@@ -342,7 +346,7 @@ function renderProject(project) {
   fill.style.width = Math.round(project.progress * 100) + "%";
   meter.append(fill);
 
-  header.append(name, segmentBadge, currentBadge);
+  header.append(name, segmentBadge, chapterBadge, currentBadge);
   item.append(header, summary, progress, reward, meter);
   return item;
 }

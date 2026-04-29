@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+- 新增星图项目章节标记：星图项目列表中每个项目都会显示所属章节，和总览阶段导航保持一致。
+- 同步 GitHub Issues 反馈状态：当前 1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
+- 验证通过：bun install --no-save、bun run test、bun run build、npm install、npm test、npm run build。
+- 构建产物已包含 `project-chapter-badge` 样式和 `chapterName` 渲染字段。
 - 新增星图阶段余量：阶段导航会显示当前阶段还剩几段，并提示下一阶段名称或最终阶段状态。
 - 同步 GitHub Issues 反馈状态：当前 1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
 - 验证通过：bun install --no-save、bun run test、bun run build、npm install、npm test、npm run build。

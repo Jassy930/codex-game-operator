@@ -508,6 +508,7 @@ h2 {
 }
 
 .project-segment-badge,
+.project-chapter-badge,
 .project-current-badge {
   flex: 0 0 auto;
   padding: 3px 8px;
@@ -519,6 +520,11 @@ h2 {
 .project-segment-badge {
   background: rgba(248, 243, 231, 0.1);
   color: rgba(248, 243, 231, 0.78);
+}
+
+.project-chapter-badge {
+  background: rgba(19, 181, 166, 0.16);
+  color: #bdf4eb;
 }
 
 .project-current-badge {
