@@ -246,6 +246,7 @@ test("轮换航线指令会触发航线连携收益", () => {
   assert.equal(first.chainMultiplier, 1);
   assert.equal(cruiseOption.recommended, true);
   assert.equal(cruiseOption.recommendationText, "轮换推荐");
+  assert.equal(cruiseOption.finisherRecommended, false);
   assert.equal(cruiseOption.previewText, "预计 +50.2 能量 · 航线连携 +12%");
   assert.equal(
     firstPlan.text,
@@ -263,6 +264,8 @@ test("轮换航线指令会触发航线连携收益", () => {
   );
   assert.equal(resonanceOption.recommended, true);
   assert.equal(resonanceOption.recommendationText, "轮换推荐");
+  assert.equal(resonanceOption.finisherRecommended, true);
+  assert.equal(resonanceOption.finisherRecommendationText, "策略终结");
   assert.equal(
     resonanceOption.previewText,
     "预计 +26.6 能量 · 航线连携 +24% · 轮换目标 +2.8 · 策略终结 +1.9 · 策略契合 +10%"
@@ -286,8 +289,14 @@ test("轮换航线指令会触发航线连携收益", () => {
     1000
   );
   const nonMatchedSecond = activateDirective(nonMatchedFirst.state, "cruise-cache", 2000);
+  const nonMatchedStatus = getDirectiveStatus(nonMatchedSecond.state, 3000);
+  const nonMatchedResonanceOption = nonMatchedStatus.options.find(
+    (option) => option.id === "resonance-pulse"
+  );
   const nonMatchedThird = activateDirective(nonMatchedSecond.state, "resonance-pulse", 3000);
 
+  assert.equal(nonMatchedResonanceOption.finisherRecommended, false);
+  assert.equal(nonMatchedResonanceOption.finisherRecommendationText, "");
   assert.equal(nonMatchedThird.chainStacks, 2);
   assert.equal(nonMatchedThird.rotationReward > 0, true);
   assert.equal(nonMatchedThird.stanceFinisherReward, 0);
@@ -840,15 +849,20 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(appJs, /directivePlan: document\.querySelector\("#directivePlan"\)/);
   assert.match(appJs, /elements\.directivePlan\.textContent = directives\.plan\.text/);
   assert.match(appJs, /option\.recommended \? "is-recommended" : ""/);
+  assert.match(appJs, /option\.finisherRecommended \? "is-finisher-recommended" : ""/);
   assert.match(appJs, /badges\.className = "directive-badges"/);
   assert.match(appJs, /recommendation\.className = "directive-recommendation"/);
   assert.match(appJs, /recommendation\.textContent = option\.recommendationText/);
+  assert.match(appJs, /finisherRecommendation\.className = "directive-finisher-recommendation"/);
+  assert.match(appJs, /finisherRecommendation\.textContent = option\.finisherRecommendationText/);
   assert.match(appJs, /stanceBonus\.className = "directive-stance-bonus"/);
   assert.match(appJs, /stanceBonus\.textContent = option\.stanceBonusText/);
   assert.match(styles, /\.directive-plan/);
   assert.match(styles, /\.directive-button \.directive-badges/);
   assert.match(styles, /\.directive-button\.is-recommended/);
+  assert.match(styles, /\.directive-button\.is-finisher-recommended/);
   assert.match(styles, /\.directive-button \.directive-recommendation/);
+  assert.match(styles, /\.directive-button \.directive-finisher-recommendation/);
   assert.match(styles, /\.directive-button \.directive-stance-bonus/);
 });
 

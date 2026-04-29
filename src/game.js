@@ -1780,6 +1780,10 @@ export function getDirectiveStatus(state, now = Date.now()) {
         formatDirectiveStanceFinisherReward(stanceFinisherReward);
       const stanceBonusText = formatDirectiveStanceBonus(stanceBonusRate);
       const recommended = unlocked && recommendedIds.has(directive.id);
+      const finisherRecommended =
+        recommended &&
+        chain.stacks >= DIRECTIVE_CHAIN_MAX_STACKS &&
+        stanceFinisherReward > 0;
       const ready = unlocked && remainingMs <= 0;
 
       return {
@@ -1815,6 +1819,8 @@ export function getDirectiveStatus(state, now = Date.now()) {
         ready,
         recommended,
         recommendationText: recommended ? (ready ? "轮换推荐" : "等待轮换") : "",
+        finisherRecommended,
+        finisherRecommendationText: finisherRecommended ? "策略终结" : "",
         disabled: !unlocked || remainingMs > 0
       };
     })

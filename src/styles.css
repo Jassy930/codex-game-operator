@@ -342,6 +342,15 @@ h2 {
   line-height: 1;
 }
 
+.directive-button .directive-finisher-recommendation {
+  padding: 3px 6px;
+  border-radius: 999px;
+  background: rgba(232, 93, 117, 0.18);
+  color: #ffc1cf;
+  font-size: 0.68rem;
+  line-height: 1;
+}
+
 .directive-button .directive-preview {
   color: #bdf4eb;
 }
@@ -358,6 +367,10 @@ h2 {
 .directive-button.is-recommended {
   border-color: rgba(244, 178, 60, 0.54);
   background: rgba(244, 178, 60, 0.11);
+}
+
+.directive-button.is-finisher-recommended {
+  border-color: rgba(232, 93, 117, 0.72);
 }
 
 .directive-button:disabled {

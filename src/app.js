@@ -310,7 +310,8 @@ function renderDirective(option) {
   button.className = [
     "directive-button",
     option.ready ? "is-ready" : "",
-    option.recommended ? "is-recommended" : ""
+    option.recommended ? "is-recommended" : "",
+    option.finisherRecommended ? "is-finisher-recommended" : ""
   ]
     .filter(Boolean)
     .join(" ");
@@ -355,12 +356,17 @@ function renderDirective(option) {
   recommendation.textContent = option.recommendationText;
   recommendation.hidden = !option.recommended;
 
+  const finisherRecommendation = document.createElement("span");
+  finisherRecommendation.className = "directive-finisher-recommendation";
+  finisherRecommendation.textContent = option.finisherRecommendationText;
+  finisherRecommendation.hidden = !option.finisherRecommended;
+
   const stanceBonus = document.createElement("span");
   stanceBonus.className = "directive-stance-bonus";
   stanceBonus.textContent = option.stanceBonusText;
   stanceBonus.hidden = !option.stanceMatched;
 
-  badges.append(recommendation, stanceBonus);
+  badges.append(recommendation, finisherRecommendation, stanceBonus);
   head.append(name, badges);
 
   const summary = document.createElement("span");

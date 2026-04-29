@@ -1,5 +1,29 @@
 # Decision
 
+## 2026-04-30 Product decision：策略终结按钮提示
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-04-30 04:03 CST 同步到 3 个 open feedback issue、0 个 open bug issue。#3 仍是最近更新的玩法反馈，继续指向“玩法太简单、只有点击和自动产能”；本轮继续进入有反馈样本下的 Product decision。
+
+当前最大问题：航线指令已有冷却、连携、轮换目标、3/3 奖励、按钮推荐、策略契合 +10% 和策略终结奖励，但“第三步如果是策略终结”主要体现在预计收益和提示句里。玩家点击按钮时还不能在按钮层直接区分普通轮换推荐和可触发策略终结的收束指令。
+
+本轮决策：
+
+- 在 `getDirectiveStatus` 中新增派生字段 `finisherRecommended` 与 `finisherRecommendationText`。
+- 当某个推荐指令会完成 3/3 轮换且可触发策略终结奖励时，按钮额外显示“策略终结”徽标，并增加 `is-finisher-recommended` 状态样式。
+- 本轮只调整航线指令按钮可读性；不新增存档字段，不改变升级价格、产能公式、星图 57 段路线、项目奖励、指令冷却、连携窗口、轮换目标奖励、策略契合 +10%、策略终结奖励数值、反馈入口或筛选规则。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-04-30 04:03 CST 查询到 3 个 open feedback issue、0 个 open bug issue；#3 作为本轮处理对象。
+- 连携 1/3 后，普通下一步指令保持 `recommended: true`，但 `finisherRecommended: false`。
+- 连携 2/3 后，能完成 3/3 且匹配当前策略的指令同时标记 `recommended: true`、`finisherRecommended: true` 和 `finisherRecommendationText: "策略终结"`。
+- 非策略契合指令即使能完成 3/3，也不显示策略终结徽标。
+- 运行期按钮渲染包含 `is-finisher-recommended` 和 `directive-finisher-recommendation`。
+- `bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build` 已通过。
+- 构建产物包含 `finisherRecommended`、`finisherRecommendationText`、`is-finisher-recommended`、`directive-finisher-recommendation` 和“策略终结”。
+
+下一步：发布并回复 #3，等待复测确认按钮层“策略终结”是否让第三步收束目标更明确。
+
 ## 2026-04-30 Product decision：航线策略终结奖励
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-04-30 03:45 CST 同步到 3 个 open feedback issue、0 个 open bug issue。#3 仍是更新时间最新的玩法反馈，核心问题仍是“玩法太简单、只有点击和自动产能”；本轮继续进入有反馈样本下的 Product decision。
