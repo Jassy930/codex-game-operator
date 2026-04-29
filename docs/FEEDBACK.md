@@ -6,6 +6,9 @@
 - #3 继续作为本轮 Product decision：航线指令已经能从收束起手、收束续航进入 3/3 策略终结，但完成轮换后按钮层仍显示普通“轮换推荐”，没有突出刚获得的 3 分钟指令熟练；本轮新增“熟练续航/满轮续航”推荐。
 - 本轮改动在 `src/game.js` 让 `getDirectivePlan` 在 3/3 轮换完成后返回 `recommendationText = "熟练续航"`（无熟练层时为“满轮续航”）和 `waitingRecommendationText = "等待续航"`；指令轮换提示会写入“进入熟练续航”；`index.html` 锁定态提示同步说明完成轮换后会用熟练续航提示下一步。本轮不新增存档字段，不改变升级价格、产能公式、星图 57 段路线、项目奖励、指令基础收益、冷却、连携窗口、轮换目标奖励、策略契合 +10%、策略终结奖励或指令熟练数值。
 - 本轮本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；构建产物已包含 `熟练续航`、`满轮续航` 和“完成轮换会累积指令熟练，并用熟练续航提示下一步”。
+- GitHub Pages workflow 25134436661 已成功，线上地址返回 HTTP 200；线上首页包含“完成轮换会累积指令熟练，并用熟练续航提示下一步”，线上 `game.js` 包含 `continuationLead`、“熟练续航”和“满轮续航”。
+- #3 已回复：说明 3/3 后熟练续航推荐已上线，提交 94fe1c0，issue 保持 open 等待复测。
+- 回复后同步 GitHub Issues：2026-04-30 05:20 CST 当前仍为 3 个 open feedback issue、0 个 open bug issue，#3 更新时间为 2026-04-29T21:20:09Z。
 
 - GitHub Issues：gh 可用且已认证；2026-04-30 04:54 CST 通过 REST API 同步到 3 个 open issue、3 个 open feedback issue、0 个 open bug issue。
 - #3 继续作为本轮 Product decision：0/3 已能推荐非契合指令起手，但 1/3 第二步仍可能提前推荐契合指令，导致第三步无法策略终结；本轮新增“收束续航”推荐。

@@ -8,6 +8,9 @@
 - 同步 GitHub Issues 反馈状态：当前 3 个 open feedback issue、0 个 open bug issue；#3 继续指向玩法单薄并作为本轮处理对象。
 - 验证通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`。
 - 构建产物已确认包含 `熟练续航`、`满轮续航` 和“完成轮换会累积指令熟练，并用熟练续航提示下一步”。
+- GitHub Pages workflow 25134436661 已成功，线上地址返回 HTTP 200，且线上首页和 `game.js` 已确认包含熟练续航相关标记。
+- 已回复 #3，说明 3/3 后熟练续航推荐已部署，并保持 issue open 等待复测。
+- 回复后同步 GitHub Issues 反馈状态：当前 3 个 open feedback issue、0 个 open bug issue；#3 更新时间为 2026-04-29T21:20:09Z。
 - 航线指令新增“收束续航”推荐：1/3 已起手且上一指令不是当前策略契合指令时，只推荐另一条非契合指令，把契合指令继续保留到 3/3 策略终结。
 - `src/game.js` 新增 `shouldPreserveStanceFinisher` 推导，让 `getDirectivePlan` 在第二步返回 `recommendationText = "收束续航"` 和 `waitingRecommendationText = "等待续航"`；首页静态锁定提示同步说明“第二步继续避开契合指令”。
 - 本轮只调整航线指令第二步推荐和提示文案；不新增存档字段，不改变升级价格、产能公式、星图 57 段路线、项目奖励、指令基础收益、冷却、连携窗口、轮换目标奖励、策略契合 +10%、策略终结奖励或指令熟练数值。

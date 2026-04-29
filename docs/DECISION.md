@@ -18,6 +18,9 @@
 - GitHub Issues 已同步：2026-04-30 05:10 CST 查询到 3 个 open feedback issue、0 个 open bug issue；#3 作为本轮处理对象。
 - `bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build` 已通过。
 - 测试覆盖 3/3 后“熟练续航”计划、按钮推荐和预计收益；构建产物包含“熟练续航”“满轮续航”和静态提示文案。
+- GitHub Pages workflow 25134436661 已成功，线上地址返回 HTTP 200；线上首页包含“完成轮换会累积指令熟练，并用熟练续航提示下一步”，线上 `game.js` 包含 `continuationLead`、“熟练续航”和“满轮续航”。
+- #3 已回复并继续保持 open，等待复测确认 3/3 后熟练续航是否让航线指令更像连续可规划的主动玩法链。
+- 回复后同步 GitHub Issues：2026-04-30 05:20 CST 当前仍为 3 个 open feedback issue、0 个 open bug issue；#3 更新时间为 2026-04-29T21:20:09Z。
 
 下一步：继续等待 #3 复测；若仍认为主动玩法不足，再评估短期任务、资源消耗型指令或更明确的指令构筑分支。
 
