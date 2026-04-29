@@ -18,8 +18,11 @@
 - 静态首页包含 `project-filter-drawer` 和 `projectFilterSummaryBrief`，且筛选详情默认不带 `open`。
 - `getProjectFilterBrief` 覆盖本章视图和空视图，完整筛选摘要仍由 `getProjectFilterSummary` 保留。
 - `bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build` 已通过。
+- GitHub Pages workflow 25126003982 已成功，线上地址返回 HTTP 200；线上首页包含 `project-filter-drawer`、`projectFilterSummaryBrief` 和“筛选摘要：全部 0/57”，线上 `game.js` 包含 `getProjectFilterBrief`，线上 `app.js` 包含 `projectFilterSummaryBrief`，线上 `styles.css` 包含 `project-filter-drawer`。
+- #4 已回复并继续保持 open，等待复测确认筛选摘要默认折叠是否降低星图区文字密度。
+- 回复后同步 GitHub Issues：2026-04-30 02:16 CST 当前仍为 3 个 open feedback issue、0 个 open bug issue；#4 更新时间为 2026-04-29T18:16:06Z。
 
-下一步：推送后验证 GitHub Pages 部署；若线上检查通过，回复 #4 并继续等待复测视觉密度是否改善。
+下一步：观察 #4 复测结论；若仍认为文字密度高，再评估项目列表默认收起非当前航段或进一步提升视觉资产占比。
 
 ## 2026-04-30 Product decision：航线指令轮换目标
 
