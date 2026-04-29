@@ -617,6 +617,20 @@ export const PROJECT_DEFS = [
     current(state) {
       return state.totalEnergy;
     }
+  },
+  {
+    id: "voidflare-resonator",
+    name: "虚曜谐振塔",
+    summary: "累计 190M 能量，在星渊回声门外架设虚曜谐振塔。",
+    unit: "能量",
+    target: 190_000_000,
+    reward: "过载奖励 +20%",
+    effect: {
+      overloadMultiplier: 1.2
+    },
+    current(state) {
+      return state.totalEnergy;
+    }
   }
 ];
 
@@ -639,7 +653,7 @@ export const PROJECT_CHAPTER_DEFS = [
   {
     name: "远航长尾",
     startId: "void-gate-expedition",
-    endId: "abyss-echo-gate"
+    endId: "voidflare-resonator"
   }
 ];
 
