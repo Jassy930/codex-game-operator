@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+- 新增星图里程碑：星图总览显示当前章节终点和终局航点的航段序号、奖励与进度，帮助玩家同时看到短期章节目标和长期路线终点。
+- 同步 GitHub Issues 反馈状态：当前 1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
+- 验证通过：bun install --no-save、bun run test、bun run build、npm install、npm test、npm run build。
+- 构建产物已包含“里程碑”、`projectOverviewMilestones` 和 `milestoneText`。
 - 新增星图奖励目标：星图总览按总产能、点击、自动和过载显示下一条未完成奖励航段、奖励内容和当前进度，帮助玩家把奖励进度转成具体追逐目标。
 - 同步 GitHub Issues 反馈状态：当前 1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
 - 验证通过：bun install --no-save、bun run test、bun run build、npm install、npm test、npm run build。

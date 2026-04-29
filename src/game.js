@@ -872,6 +872,7 @@ export function getProjectOverview(state) {
   const chapterRewardText = buildProjectChapterRewardText(projects);
   const rewardProgressText = buildProjectRewardProgressText(projects);
   const rewardTargetText = buildProjectRewardTargetText(projects);
+  const milestoneText = buildProjectMilestoneText(projects, nextProject);
 
   if (!nextProject) {
     return {
@@ -887,6 +888,7 @@ export function getProjectOverview(state) {
       chapterRewardText,
       rewardProgressText,
       rewardTargetText,
+      milestoneText,
       compositionText,
       bonusText,
       forecastText: "航线预告：等待下一段航线"
@@ -920,6 +922,7 @@ export function getProjectOverview(state) {
     chapterRewardText,
     rewardProgressText,
     rewardTargetText,
+    milestoneText,
     compositionText,
     bonusText,
     forecastText:
@@ -1265,6 +1268,32 @@ function buildProjectRewardTargetText(projects) {
   return "奖励目标：" + rewardTargets.join(" · ");
 }
 
+function buildProjectMilestoneText(projects, nextProject) {
+  const routeEndpoint = projects[projects.length - 1] ?? null;
+
+  if (!routeEndpoint) {
+    return "里程碑：等待星图航线";
+  }
+
+  if (!nextProject) {
+    return "里程碑：全部章节已完成 · 终局航点 " + routeEndpoint.name + "已完成";
+  }
+
+  const currentChapter = PROJECT_CHAPTER_DEFS.find((chapter) =>
+    getChapterProjects(projects, chapter).some((project) => project.id === nextProject.id)
+  );
+  const chapterProjects = currentChapter ? getChapterProjects(projects, currentChapter) : [];
+  const chapterEndpoint = chapterProjects[chapterProjects.length - 1] ?? nextProject;
+  const milestoneParts = [];
+
+  if (chapterEndpoint.id !== routeEndpoint.id) {
+    milestoneParts.push("本章终点 " + formatMilestoneProject(chapterEndpoint));
+  }
+  milestoneParts.push("终局航点 " + formatMilestoneProject(routeEndpoint));
+
+  return "里程碑：" + milestoneParts.join("；");
+}
+
 function countRewardProgress(count, completed, effectValue) {
   const hasReward = Boolean(effectValue);
 
@@ -1433,6 +1462,20 @@ function formatProjectTrack(project) {
 
 function formatForecastProject(project) {
   return project.name + "（" + project.reward + "）";
+}
+
+function formatMilestoneProject(project) {
+  const statusText = project.completed ? "已完成" : project.progressText;
+  return (
+    project.name +
+    "（" +
+    project.segmentText +
+    " · " +
+    project.reward +
+    " · " +
+    statusText +
+    "）"
+  );
 }
 
 function buildRouteStanceMasteryText(option, projects) {

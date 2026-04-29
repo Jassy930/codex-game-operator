@@ -2,6 +2,9 @@
 
 ## 2026-04-29
 
+- GitHub Issues：gh 可用且已认证；2026-04-29 09:31 CST 查询到 1 个 open issue、1 个 open feedback issue、0 个 open bug issue。
+- #2 仍为 open，未出现新的复测结论或 bug；本轮不追加第 32 段，改为在星图总览新增“里程碑”，显示当前章节终点和终局航点的航段序号、奖励与进度。
+- data/feedback/github-feedback.md 已同步本地快照。
 - GitHub Issues：gh 可用且已认证；2026-04-29 09:18 CST 查询到 1 个 open issue、1 个 open feedback issue、0 个 open bug issue。
 - #2 仍为 open，未出现新的复测结论或 bug；本轮不追加第 32 段，改为在星图总览新增“奖励目标”，按总产能、点击、自动和过载显示下一条未完成奖励航段、奖励内容和当前进度。
 - data/feedback/github-feedback.md 已同步本地快照。
