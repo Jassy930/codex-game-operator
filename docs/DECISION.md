@@ -1,5 +1,26 @@
 # Decision
 
+## 2026-04-29 Product decision：星图筛选推进构成
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 当前仍有真实体验反馈 #2 open，且没有 open bug，继续进入有反馈样本下的 Product decision。
+
+当前最大问题：#2 仍围绕“内容丰富度太差，可玩的内容太少”保持 open。上一轮筛选摘要已经显示奖励构成，但玩家切换本章、奖励类型、未完成或已完成视图时，仍需要从航段条件里判断这一组内容主要靠累计能量推进，还是需要回到升级卡片补等级。
+
+本轮决策：
+
+- 不追加第 58 段，先在星图筛选摘要中追加“推进构成”。
+- 推进构成按当前筛选视图统计累计航段和升级航段各有多少段。
+- 已完成筛选也显示推进构成，方便玩家复盘已完成内容主要来自等待/点火还是升级补强；空筛选仍只显示没有匹配航段。
+- 不新增存档字段，不改变项目完成判定、奖励数值、升级价格、航线策略、筛选规则和 57 段星图顺序。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-04-29 20:09 CST 查询到 1 个 open issue、1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
+- `bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build` 已通过，测试覆盖本章、升级、当前和已完成筛选的推进构成。
+- 构建产物已包含“推进构成 累计 48 段 / 升级 9 段”、`formatProjectFilterTrackMix` 和更新后的 `getProjectFilterSummary`。
+
+下一步：提交并发布后回复 #2，等待复测确认筛选推进构成是否降低 57 段星图在不同筛选视图里的操作方式判断成本。
+
 ## 2026-04-29 Product decision：星图筛选奖励构成
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 当前仍有真实体验反馈 #2 open，且没有 open bug，继续进入有反馈样本下的 Product decision。

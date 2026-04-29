@@ -1335,7 +1335,8 @@ export function getProjectFilterSummary(projects, filterId = DEFAULT_PROJECT_FIL
       " " +
       visibleProjects.length +
       " 段 · 全部已完成" +
-      formatProjectFilterRewardMix(visibleProjects)
+      formatProjectFilterRewardMix(visibleProjects) +
+      formatProjectFilterTrackMix(visibleProjects)
     );
   }
 
@@ -1349,6 +1350,7 @@ export function getProjectFilterSummary(projects, filterId = DEFAULT_PROJECT_FIL
     "/" +
     visibleProjects.length +
     formatProjectFilterRewardMix(visibleProjects) +
+    formatProjectFilterTrackMix(visibleProjects) +
     " · 下一条 " +
     nextProject.segmentText +
     " " +
@@ -2035,6 +2037,28 @@ function formatProjectFilterEndpoint(projects) {
 function formatProjectFilterRewardMix(projects) {
   const rewardText = formatProjectRewardCountText(getProjectRewardCounts(projects));
   return rewardText ? " · 奖励构成 " + rewardText : "";
+}
+
+function formatProjectFilterTrackMix(projects) {
+  const trackCounts = projects.reduce(
+    (counts, project) =>
+      project.upgradeId
+        ? { ...counts, upgrade: counts.upgrade + 1 }
+        : { ...counts, energy: counts.energy + 1 },
+    {
+      energy: 0,
+      upgrade: 0
+    }
+  );
+  const trackText = [
+    ["累计", trackCounts.energy],
+    ["升级", trackCounts.upgrade]
+  ]
+    .filter(([, count]) => count > 0)
+    .map(([label, count]) => label + " " + count + " 段")
+    .join(" / ");
+
+  return trackText ? " · 推进构成 " + trackText : "";
 }
 
 function getProjectRewardCounts(projects) {

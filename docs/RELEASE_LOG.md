@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+- 新增星图筛选推进构成：筛选摘要会按当前视图统计累计航段和升级航段各有多少段，例如全部视图会显示“推进构成 累计 48 段 / 升级 9 段”。
+- 推进构成仅改变星图筛选摘要展示；不新增存档字段，不改变 57 段星图路线、项目完成判定、奖励数值、升级价格、航线策略或筛选规则。
+- 同步 GitHub Issues 反馈状态：当前 1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
+- 验证通过：bun run test、bun run build、npm install、npm test、npm run build。
+- 构建产物已包含“推进构成 累计 48 段 / 升级 9 段”、`formatProjectFilterTrackMix` 和更新后的 `getProjectFilterSummary`。
 - 新增星图筛选奖励构成：筛选摘要会按当前视图统计总产能、点击、自动和过载奖励各有多少段，例如全部视图会显示“奖励构成 总产能 17 段 / 点击 14 段 / 自动 15 段 / 过载 11 段”。
 - 奖励构成仅改变星图筛选摘要展示；不新增存档字段，不改变 57 段星图路线、项目完成判定、奖励数值、升级价格、航线策略或筛选规则。
 - 同步 GitHub Issues 反馈状态：当前 1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
