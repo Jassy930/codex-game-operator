@@ -17,8 +17,11 @@
 - GitHub Issues 已同步：2026-04-29 18:18 CST 查询到 1 个 open issue、1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
 - `bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build` 已通过，测试覆盖总产能 17 段、点击 14 段、自动 15 段、过载 11 段筛选，以及过载奖励筛选的首批航段。
 - 构建产物已包含“总产能 17”、“点击 14”、“自动 15”、“过载 11”、`total-reward`、`click-reward`、`second-reward`、`overload-reward` 和 `PROJECT_REWARD_FILTER_EFFECTS`。
+- GitHub Pages workflow 25103602168 已成功，线上地址返回 HTTP 200，发布页面包含“总产能 17”、“点击 14”、“自动 15”和“过载 11”，线上脚本包含 `total-reward`、`click-reward`、`second-reward`、`overload-reward` 和 `PROJECT_REWARD_FILTER_EFFECTS`。
+- #2 已回复并保持 open，等待复测确认奖励类型筛选是否让 57 段星图更容易按成长线规划。
+- GitHub Issues 已在回复后同步：2026-04-29 18:26 CST 查询到 1 个 open issue、1 个 open feedback issue、0 个 open bug issue。
 
-下一步：回复 #2 并保持 open，等待复测确认奖励类型筛选是否让 57 段星图更容易按成长线规划。
+下一步：继续观察 #2 复测是否认为奖励类型筛选改善 57 段星图的成长线规划和内容操作成本。
 
 ## 2026-04-29 Product decision：星图本章筛选
 

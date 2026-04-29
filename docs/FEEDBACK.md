@@ -5,6 +5,9 @@
 - GitHub Issues：gh 可用且已认证；2026-04-29 18:18 CST 查询到 1 个 open issue、1 个 open feedback issue、0 个 open bug issue。
 - #2 仍为 open，最后更新时间停留在 2026-04-29 10:09:56 UTC，未出现新的玩家复测结论或 bug；本轮不继续追加第 58 段，改为新增星图奖励类型筛选，让现有 57 段可按总产能、点击、自动和过载成长线查看。
 - data/feedback/github-feedback.md 已同步本地快照。
+- 本轮已回复 #2：说明新增总产能、点击、自动和过载奖励类型筛选，GitHub Pages workflow 25103602168 已成功，线上地址返回 HTTP 200，发布页面包含“总产能 17”、“点击 14”、“自动 15”和“过载 11”，线上脚本包含 `total-reward`、`click-reward`、`second-reward`、`overload-reward` 和 `PROJECT_REWARD_FILTER_EFFECTS`；issue 保持 open，等待复测确认奖励类型筛选是否改善 57 段星图的成长线规划。
+- GitHub Issues：gh 可用且已认证；2026-04-29 18:26 CST 在回复后查询到 1 个 open issue、1 个 open feedback issue、0 个 open bug issue。
+- data/feedback/github-feedback.md 已在回复 #2 后同步本地快照。
 
 - GitHub Issues：gh 可用且已认证；2026-04-29 17:58 CST 查询到 1 个 open issue、1 个 open feedback issue、0 个 open bug issue。
 - #2 仍为 open，最后更新时间停留在 2026-04-29 09:52:35 UTC，未出现新的玩家复测结论或 bug；本轮不继续追加第 58 段，改为新增“本章”筛选，让现有 57 段星图可按当前航段所属章节收束查看。
