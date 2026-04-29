@@ -8,6 +8,9 @@
 - 同步 GitHub Issues 反馈状态：当前 3 个 open feedback issue、0 个 open bug issue；#3 继续指向玩法单薄并作为本轮处理对象。
 - 验证通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`。
 - 构建产物已确认包含 `finisherRecommended`、`finisherRecommendationText`、`is-finisher-recommended`、`directive-finisher-recommendation` 和“策略终结”。
+- GitHub Pages workflow 25131324928 已成功，线上地址返回 HTTP 200，且线上 `game.js`、`app.js` 和 `styles.css` 已确认包含按钮层策略终结相关标记。
+- 已回复 #3，说明按钮层策略终结徽标已部署，并保持 issue open 等待复测。
+- 回复后同步 GitHub Issues 反馈状态：当前 3 个 open feedback issue、0 个 open bug issue；#3 更新时间为 2026-04-29T20:11:54Z。
 - 航线指令新增“策略终结”奖励：完成 3/3 指令轮换且本次指令匹配当前航线策略时，额外获得基础指令收益 12%。
 - `src/game.js` 新增 `DIRECTIVE_STANCE_FINISHER_RATE`、策略终结奖励计算、预计收益/执行反馈/轮换提示文案；`src/app.js` 在本地 `directive` 事件记录 `stanceFinisherReward`；首页静态轮换提示同步说明“完成 3/3 并收束到契合指令”。
 - 本轮只调整航线指令短期目标；不新增存档字段，不改变升级价格、产能公式、星图 57 段路线、项目奖励、指令冷却、连携窗口、轮换目标奖励、策略契合 +10%、反馈入口或筛选规则。

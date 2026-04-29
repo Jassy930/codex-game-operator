@@ -6,6 +6,9 @@
 - #3 继续作为本轮 Product decision：航线指令已经有策略终结奖励，但按钮层仍只显示“轮换推荐”和“策略契合 +10%”；本轮让可触发 3/3 策略终结的指令按钮额外显示“策略终结”徽标。
 - 本轮改动在 `src/game.js` 新增 `finisherRecommended` / `finisherRecommendationText` 派生状态，在 `src/app.js` 渲染 `is-finisher-recommended` 和 `directive-finisher-recommendation`，在 `src/styles.css` 增加徽标和按钮边框样式；不新增存档字段，不改变升级价格、产能公式、星图 57 段路线、项目奖励、指令冷却、连携窗口、轮换目标奖励、策略契合 +10%、策略终结奖励数值、反馈入口或筛选规则。
 - 本轮本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；构建产物已包含 `finisherRecommended`、`finisherRecommendationText`、`is-finisher-recommended`、`directive-finisher-recommendation` 和“策略终结”。
+- GitHub Pages workflow 25131324928 已成功，线上地址返回 HTTP 200；线上 `game.js` 包含 `finisherRecommended`、`finisherRecommendationText` 和“策略终结”，线上 `app.js` 包含 `is-finisher-recommended` 和 `directive-finisher-recommendation`，线上 `styles.css` 包含对应样式。
+- #3 已回复：说明按钮层策略终结徽标已上线，提交 5228a38，issue 保持 open 等待复测。
+- 回复后同步 GitHub Issues：2026-04-30 04:12 CST 当前仍为 3 个 open feedback issue、0 个 open bug issue，#3 更新时间为 2026-04-29T20:11:54Z。
 
 - GitHub Issues：gh 可用且已认证；2026-04-30 03:45 CST 通过 REST API 同步到 3 个 open issue、3 个 open feedback issue、0 个 open bug issue。
 - #3 继续作为本轮 Product decision：航线指令已经补充冷却、连携、轮换目标、3/3 奖励、按钮推荐和策略契合 +10%，但第三步轮换仍缺少“按当前策略收束”的目标；本轮新增“策略终结”奖励。
