@@ -8,6 +8,9 @@
 - 同步 GitHub Issues 反馈状态：当前 3 个 open feedback issue、0 个 open bug issue；#3 继续指向玩法单薄并作为本轮处理对象。
 - 验证通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`。
 - 构建产物已确认包含 `收束续航`、`等待续航`、`第二步继续避开契合指令` 和 `shouldPreserveStanceFinisher`。
+- GitHub Pages workflow 25133712571 已成功，线上地址返回 HTTP 200，且线上首页和 `game.js` 已确认包含收束续航相关标记。
+- 已回复 #3，说明第二步收束续航推荐已部署，并保持 issue open 等待复测。
+- 回复后同步 GitHub Issues 反馈状态：当前 3 个 open feedback issue、0 个 open bug issue；#3 更新时间为 2026-04-29T21:03:45Z。
 - 航线指令新增“收束起手”推荐：0/3 未起步时会把当前策略契合指令保留为 3/3 策略终结收束，优先推荐另外两条指令作为起手。
 - `src/game.js` 让 `getDirectivePlan` 在起步阶段返回 `nextDirectiveIds`、`recommendationText = "收束起手"` 和 `waitingRecommendationText = "等待起手"`；`getDirectiveStatus` 复用计划文案渲染按钮推荐；首页静态锁定提示同步说明“非契合指令起手”。
 - 本轮只调整航线指令起手推荐和提示文案；不新增存档字段，不改变升级价格、产能公式、星图 57 段路线、项目奖励、指令基础收益、冷却、连携窗口、轮换目标奖励、策略契合 +10%、策略终结奖励、指令熟练或筛选规则。

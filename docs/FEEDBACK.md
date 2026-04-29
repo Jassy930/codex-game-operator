@@ -6,6 +6,9 @@
 - #3 继续作为本轮 Product decision：0/3 已能推荐非契合指令起手，但 1/3 第二步仍可能提前推荐契合指令，导致第三步无法策略终结；本轮新增“收束续航”推荐。
 - 本轮改动在 `src/game.js` 让 `getDirectivePlan` 在 1/3 且上一指令不是当前策略契合指令时，只推荐另一条非契合指令，并返回 `recommendationText = "收束续航"` 和 `waitingRecommendationText = "等待续航"`；`index.html` 锁定态提示同步说明“第二步继续避开契合指令”。本轮不新增存档字段，不改变升级价格、产能公式、星图 57 段路线、项目奖励、指令基础收益、冷却、连携窗口、轮换目标奖励、策略契合 +10%、策略终结奖励或指令熟练数值。
 - 本轮本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；构建产物已包含 `收束续航`、`等待续航`、`第二步继续避开契合指令` 和 `shouldPreserveStanceFinisher`。
+- GitHub Pages workflow 25133712571 已成功，线上地址返回 HTTP 200；线上首页包含“第二步继续避开契合指令”，线上 `game.js` 包含 `shouldPreserveStanceFinisher`、“收束续航”和“等待续航”。
+- #3 已回复：说明第二步收束续航推荐已上线，提交 3b127ae，issue 保持 open 等待复测。
+- 回复后同步 GitHub Issues：2026-04-30 05:04 CST 当前仍为 3 个 open feedback issue、0 个 open bug issue，#3 更新时间为 2026-04-29T21:03:45Z。
 
 - GitHub Issues：gh 可用且已认证；2026-04-30 04:37 CST 通过 REST API 同步到 3 个 open issue、3 个 open feedback issue、0 个 open bug issue。
 - #3 继续作为本轮 Product decision：策略终结要求第三步收束到当前策略契合指令，但 0/3 起步提示仍让玩家“先执行任意航线指令”；本轮新增“收束起手”推荐，把非契合指令标为起手，把契合指令留给 3/3 策略终结。
