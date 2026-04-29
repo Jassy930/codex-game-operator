@@ -659,6 +659,20 @@ export const PROJECT_DEFS = [
     current(state) {
       return state.totalEnergy;
     }
+  },
+  {
+    id: "starwave-confluence-court",
+    name: "星澜汇流庭",
+    summary: "累计 420M 能量，在辉潮巡航环外汇聚星澜航道。",
+    unit: "能量",
+    target: 420_000_000,
+    reward: "总产能 +22%",
+    effect: {
+      totalMultiplier: 1.22
+    },
+    current(state) {
+      return state.totalEnergy;
+    }
   }
 ];
 
@@ -681,7 +695,7 @@ export const PROJECT_CHAPTER_DEFS = [
   {
     name: "远航长尾",
     startId: "void-gate-expedition",
-    endId: "radiant-tide-cruise-ring"
+    endId: "starwave-confluence-court"
   }
 ];
 
