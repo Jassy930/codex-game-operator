@@ -1,5 +1,27 @@
 # Decision
 
+## 2026-04-29 Product decision：星图行动建议
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 当前仍有真实体验反馈 #2 open，且没有 open bug，继续进入有反馈样本下的 Product decision。
+
+当前最大问题：#2 仍围绕“内容丰富度太差，可玩的内容太少”保持 open。上一轮已新增目标类型筛选，让 57 段星图能按累计和升级拆开查看；但筛选解决的是“看哪组内容”，还没有把当前航段直接翻译成“现在点火、等待还是购买升级”。
+
+本轮决策：
+
+- 不追加第 58 段，先在星图总览新增“行动建议”。
+- 升级航段复用现有升级可购买/还差能量判断，直接提示应购买哪个升级并标出对应航段。
+- 累计航段提示继续点火或放置累计，显示剩余能量；已有自动产能时额外显示按当前每秒产能估算的所需时间。
+- 不新增存档字段，不改变项目完成判定、奖励数值、升级价格、航线策略和 57 段星图顺序。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-04-29 18:46 CST 查询到 1 个 open issue、1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
+- `bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build` 已通过，测试覆盖升级航段行动建议、累计航段行动建议和全部完成状态。
+- 构建产物已包含“行动建议”、`projectOverviewAction` 和 `formatDuration`。
+- 待完成：push 后验证 GitHub Pages workflow，回复 #2，并保持 issue open 等待复测。
+
+下一步：完成完整验证和发布后，继续观察 #2 复测是否认为行动建议降低 57 段星图的操作规划成本。
+
 ## 2026-04-29 Product decision：星图目标类型筛选
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 当前仍有真实体验反馈 #2 open，且没有 open bug，继续进入有反馈样本下的 Product decision。

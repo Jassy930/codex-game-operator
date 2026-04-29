@@ -56,6 +56,7 @@ const elements = {
   projectOverviewRouteFocus: document.querySelector("#projectOverviewRouteFocus"),
   projectOverviewComposition: document.querySelector("#projectOverviewComposition"),
   projectOverviewBonus: document.querySelector("#projectOverviewBonus"),
+  projectOverviewAction: document.querySelector("#projectOverviewAction"),
   projectOverviewForecast: document.querySelector("#projectOverviewForecast"),
   routeStanceList: document.querySelector("#routeStanceList"),
   projectFilterList: document.querySelector("#projectFilterList"),
@@ -187,6 +188,7 @@ function render() {
   elements.projectOverviewRouteFocus.textContent = projectOverview.routeFocusText;
   elements.projectOverviewComposition.textContent = projectOverview.compositionText;
   elements.projectOverviewBonus.textContent = projectOverview.bonusText;
+  elements.projectOverviewAction.textContent = projectOverview.actionText;
   elements.projectOverviewForecast.textContent = projectOverview.forecastText;
   renderRouteStances(routeStance);
   renderProjectFilters(projects);

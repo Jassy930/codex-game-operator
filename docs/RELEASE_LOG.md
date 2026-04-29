@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+- 新增星图行动建议：星图总览会把当前航段转成可执行提示，升级航段显示可购买或能量缺口，累计航段显示剩余能量，并在已有自动产能时显示预计时间。
+- 行动建议仅改变星图总览展示，不新增存档字段，不改变 57 段星图路线、项目完成判定、奖励数值、升级价格和航线策略。
+- 同步 GitHub Issues 反馈状态：当前 1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
+- 验证通过：bun install --no-save、bun run test、bun run build、npm install、npm test、npm run build。
+- 构建产物已包含“行动建议”、`projectOverviewAction` 和 `formatDuration`。
 - 新增星图目标类型筛选：项目列表可按累计航段和升级航段查看，把 57 段星图拆成 48 个累计目标与 9 个升级目标。
 - 目标类型筛选仅改变列表展示，不新增存档字段，不改变 57 段星图路线、项目完成判定、奖励数值和升级价格。
 - 同步 GitHub Issues 反馈状态：当前 1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。

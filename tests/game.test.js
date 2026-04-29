@@ -436,6 +436,7 @@ test("升级购买进度会显示剩余能量和可购买状态", () => {
 test("星图项目会给中后段玩家新的可追目标", () => {
   const state = {
     ...createInitialState(0),
+    energy: 87_030,
     totalEnergy: 114_354.89,
     upgrades: {
       lens: 11,
@@ -548,6 +549,7 @@ test("星图项目会标记所属章节", () => {
 test("星图总览会显示完成数和下一段奖励", () => {
   const state = {
     ...createInitialState(0),
+    energy: 87_030,
     totalEnergy: 114_354.89,
     upgrades: {
       lens: 11,
@@ -610,6 +612,10 @@ test("星图总览会显示完成数和下一段奖励", () => {
   );
   assert.equal(overview.bonusText, "生效加成：总产能 x1.12");
   assert.equal(
+    overview.actionText,
+    "行动建议：可购买星核谐振器，推进航段 2/57 谐振校准"
+  );
+  assert.equal(
     overview.forecastText,
     "航线预告：谐振校准（过载奖励 +20%）、透镜阵列（点击产能 +18%）、采集阵列（自动产能 +18%）"
   );
@@ -642,6 +648,30 @@ test("星图总览在首个项目前会提示等待奖励生效", () => {
   );
   assert.equal(overview.routeFocusText, "航线焦点：累计 100K 能量后解锁策略焦点");
   assert.equal(overview.bonusText, "生效加成：等待首个星图奖励");
+  assert.equal(
+    overview.actionText,
+    "行动建议：继续点火累计，推进航段 1/57 点亮星图，还差 100K 能量"
+  );
+});
+
+test("星图总览会给累计航段显示行动建议和预计时间", () => {
+  const overview = getProjectOverview({
+    ...createInitialState(0),
+    totalEnergy: 120_000,
+    energyPerSecond: 1000,
+    upgrades: {
+      lens: 14,
+      collector: 14,
+      resonator: 6,
+      stabilizer: 9
+    }
+  });
+
+  assert.equal(overview.nextProjectId, "starbridge-trial");
+  assert.equal(
+    overview.actionText,
+    "行动建议：继续点火或放置累计，推进航段 7/57 星桥试运行，还差 130K 能量，按当前每秒约 1.5K 需 1.4 分钟"
+  );
 });
 
 test("100K 后当前目标会指向下一个未完成星图项目", () => {
@@ -2003,6 +2033,10 @@ test("星图总览会显示全部完成状态", () => {
   assert.equal(
     overview.bonusText,
     "生效加成：总产能 x25.30 · 点击 x14.71 · 自动 x19.98 · 过载 x8.56"
+  );
+  assert.equal(
+    overview.actionText,
+    "行动建议：所有航段完成，继续累计能量等待下一段航线。"
   );
   assert.equal(overview.forecastText, "航线预告：等待下一段航线");
   assert.equal(

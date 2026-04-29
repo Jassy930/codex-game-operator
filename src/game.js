@@ -1344,6 +1344,7 @@ export function getProjectOverview(state) {
       routeFocusText,
       compositionText,
       bonusText,
+      actionText: buildProjectActionText(null, current),
       forecastText: "航线预告：等待下一段航线"
     };
   }
@@ -1379,6 +1380,7 @@ export function getProjectOverview(state) {
     routeFocusText,
     compositionText,
     bonusText,
+    actionText: buildProjectActionText(nextProject, current),
     forecastText:
       "航线预告：" + upcomingProjects.map(formatForecastProject).join("、")
   };
@@ -1613,6 +1615,42 @@ function buildProjectBonusText(bonuses) {
     .map(([label, multiplier]) => label + " x" + formatMultiplier(multiplier));
 
   return "生效加成：" + bonusParts.join(" · ");
+}
+
+function buildProjectActionText(project, state) {
+  if (!project) {
+    return "行动建议：所有航段完成，继续累计能量等待下一段航线。";
+  }
+
+  const targetText = project.segmentText + " " + project.name;
+
+  if (project.upgradeId) {
+    return (
+      "行动建议：" + buildUpgradeActionText(state, project.upgradeId) + "，推进" + targetText
+    );
+  }
+
+  if (project.remaining <= 0) {
+    return "行动建议：" + project.name + "已完成，等待下一段航线。";
+  }
+
+  const remainingText = formatProjectAmount(project, project.remaining);
+  const production = getEffectiveProduction(state);
+
+  if (production.perSecond > 0) {
+    return (
+      "行动建议：继续点火或放置累计，推进" +
+      targetText +
+      "，还差 " +
+      remainingText +
+      "，按当前每秒约 " +
+      formatNumber(production.perSecond) +
+      " 需 " +
+      formatDuration(project.remaining / production.perSecond)
+    );
+  }
+
+  return "行动建议：继续点火累计，推进" + targetText + "，还差 " + remainingText;
 }
 
 function buildProjectTrackText(projects) {
@@ -1985,6 +2023,25 @@ function formatMultiplier(value) {
     minimumFractionDigits: 2,
     maximumFractionDigits: 2
   });
+}
+
+function formatDuration(seconds) {
+  const value = Number(seconds);
+
+  if (!Number.isFinite(value) || value <= 0) {
+    return "片刻";
+  }
+  if (value >= 86_400) {
+    return roundTo(value / 86_400, value >= 864_000 ? 0 : 1) + " 天";
+  }
+  if (value >= 3_600) {
+    return roundTo(value / 3_600, value >= 36_000 ? 0 : 1) + " 小时";
+  }
+  if (value >= 60) {
+    return roundTo(value / 60, value >= 600 ? 0 : 1) + " 分钟";
+  }
+
+  return Math.ceil(value) + " 秒";
 }
 
 function buildNextProjectGoal(state) {
