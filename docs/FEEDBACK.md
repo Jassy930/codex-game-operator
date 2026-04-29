@@ -7,6 +7,9 @@
 - 本轮改动只新增 `src/assets/star-map-visual.svg`、首页图片引用和 `.project-scene-image` 样式；不改变存档、数值、星图 57 段路线、筛选规则、航线策略或航线指令。
 - 本轮本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`。
 - 构建产物已确认包含 `dist/src/assets/star-map-visual.svg`、`project-scene-image` 和 `star-map-visual.svg` 引用。
+- GitHub Pages workflow 25121080696 已成功，线上地址返回 HTTP 200，线上首页包含 `project-scene-image`、`star-map-visual.svg` 和星图插画 alt 文案；线上样式包含 `project-scene-image`；线上 SVG 包含“星核工坊星图航线插画”。
+- #4 已回复：说明星图插画资产已上线，提交 8fb68c3，issue 保持 open 等待复测。
+- data/feedback/github-feedback.md 已同步 00:31 CST 回复后快照；当前仍为 3 个 open feedback issue、0 个 open bug issue，#4 更新时间为 2026-04-29T16:31:18Z。
 
 ## 2026-04-29
 

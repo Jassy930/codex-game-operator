@@ -20,8 +20,10 @@
 - 静态首页包含 `project-scene-image`、`src/assets/star-map-visual.svg` 和星图插画 alt 文案。
 - 样式包含 `.project-scene-image`，构建产物包含 `dist/src/assets/star-map-visual.svg`。
 - 测试覆盖首页、样式和 SVG 资产引用链路。
+- GitHub Pages workflow 25121080696 已成功，线上地址返回 HTTP 200，线上首页、样式和 SVG 资源均包含星图插画相关内容。
+- #4 已回复并保持 open，等待复测确认插画资产是否比只有节点和文字更接近“生成一些图片、界面更好看”的诉求。
 
-下一步：push 后等待 GitHub Pages workflow；成功后回复 #4，说明已经补上项目内星图插画资产，并继续保持 issue open 等待复测。
+下一步：观察 #4 复测结论；若仍认为视觉不足，再考虑按章节或关键航段补充更具体的插图资产。
 
 ## 2026-04-29 Product decision：航线指令主动玩法
 

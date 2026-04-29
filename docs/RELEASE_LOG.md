@@ -8,6 +8,9 @@
 - 同步 GitHub Issues 反馈状态：当前 3 个 open feedback issue、0 个 open bug issue；#4 继续指向视觉密度和图片需求。
 - 验证通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`。
 - 静态测试覆盖首页、样式和 SVG 资产引用链路；构建产物已确认包含 `project-scene-image`、`star-map-visual.svg` 和“星核工坊星图航线插画”。
+- GitHub Pages workflow 25121080696 已成功，线上地址返回 HTTP 200，且发布文件包含 `project-scene-image`、`star-map-visual.svg` 和“星核工坊星图航线插画”。
+- 已回复 #4，说明星图插画资产已部署，并保持 issue open 等待复测。
+- 回复后同步 GitHub Issues 反馈状态：当前 3 个 open feedback issue、0 个 open bug issue；#4 更新时间为 2026-04-29T16:31:18Z。
 - 新增航线指令：100K 后解锁点火齐射、巡航回收和谐振脉冲三个主动操作。
 - 点火齐射立即结算 8 次当前点火收益，巡航回收立即回收 45 秒自动收益，谐振脉冲立即释放 2 次当前过载收益；每个指令都有独立冷却。
 - 航线指令只新增冷却时间戳和即时能量收益；旧存档会自动补齐默认冷却字段，不改变升级价格、星图 57 段路线、项目奖励、航线策略或筛选规则。
