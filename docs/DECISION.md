@@ -1,5 +1,25 @@
 # Decision
 
+## 2026-04-29 Product decision：星图奖励类型筛选
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 当前仍有真实体验反馈 #2 open，且没有 open bug，继续进入有反馈样本下的 Product decision。
+
+当前最大问题：#2 仍围绕“内容丰富度太差，可玩的内容太少”保持 open。上一轮已新增“本章”筛选，降低当前章节扫描成本；但如果玩家想按自己关心的成长线规划 57 段星图，仍需要在奖励目标、章节奖励和项目列表之间来回对照。
+
+本轮决策：
+
+- 不追加第 58 段，先新增奖励类型筛选：总产能、点击、自动、过载。
+- 奖励类型筛选按项目 effect 归类，只影响当前列表视图，不新增存档字段，不改变项目完成判定、奖励数值、升级价格和 57 段星图路线。
+- 静态 HTML 初始文案、README、产品说明、路线图、设计约束、研究记录、反馈记录和发布日志同步记录奖励类型筛选能力。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-04-29 18:18 CST 查询到 1 个 open issue、1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
+- `bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build` 已通过，测试覆盖总产能 17 段、点击 14 段、自动 15 段、过载 11 段筛选，以及过载奖励筛选的首批航段。
+- 构建产物已包含“总产能 17”、“点击 14”、“自动 15”、“过载 11”、`total-reward`、`click-reward`、`second-reward`、`overload-reward` 和 `PROJECT_REWARD_FILTER_EFFECTS`。
+
+下一步：回复 #2 并保持 open，等待复测确认奖励类型筛选是否让 57 段星图更容易按成长线规划。
+
 ## 2026-04-29 Product decision：星图本章筛选
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 当前仍有真实体验反馈 #2 open，且没有 open bug，继续进入有反馈样本下的 Product decision。

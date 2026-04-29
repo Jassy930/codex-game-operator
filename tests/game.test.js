@@ -1923,6 +1923,16 @@ test("星图项目筛选会区分当前、未完成和已完成航段", () => {
       "balanced-tuning"
     ]
   );
+  assert.equal(filterProjectStatuses(active, "total-reward").length, 17);
+  assert.equal(filterProjectStatuses(active, "click-reward").length, 14);
+  assert.equal(filterProjectStatuses(active, "second-reward").length, 15);
+  assert.equal(filterProjectStatuses(active, "overload-reward").length, 11);
+  assert.deepEqual(
+    filterProjectStatuses(active, "overload-reward")
+      .slice(0, 3)
+      .map((project) => project.id),
+    ["resonance-calibration", "dark-current-observatory", "silent-light-relay"]
+  );
   assert.equal(filterProjectStatuses(active, "completed").length, 5);
   assert.equal(filterProjectStatuses(active, "incomplete").length, 52);
   assert.deepEqual(filterProjectStatuses(completed, "current"), []);

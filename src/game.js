@@ -71,6 +71,22 @@ export const PROJECT_FILTER_DEFS = [
     name: "本章"
   },
   {
+    id: "total-reward",
+    name: "总产能"
+  },
+  {
+    id: "click-reward",
+    name: "点击"
+  },
+  {
+    id: "second-reward",
+    name: "自动"
+  },
+  {
+    id: "overload-reward",
+    name: "过载"
+  },
+  {
     id: "incomplete",
     name: "未完成"
   },
@@ -79,6 +95,12 @@ export const PROJECT_FILTER_DEFS = [
     name: "已完成"
   }
 ];
+const PROJECT_REWARD_FILTER_EFFECTS = {
+  "total-reward": "totalMultiplier",
+  "click-reward": "clickMultiplier",
+  "second-reward": "secondMultiplier",
+  "overload-reward": "overloadMultiplier"
+};
 export const ROUTE_STANCE_DEFS = [
   {
     id: DEFAULT_ROUTE_STANCE_ID,
@@ -1260,6 +1282,10 @@ export function filterProjectStatuses(projects, filterId = DEFAULT_PROJECT_FILTE
     return currentProject
       ? items.filter((project) => project.chapterName === currentProject.chapterName)
       : [];
+  }
+  if (PROJECT_REWARD_FILTER_EFFECTS[filter]) {
+    const effectKey = PROJECT_REWARD_FILTER_EFFECTS[filter];
+    return items.filter((project) => Boolean(project.effect?.[effectKey]));
   }
   if (filter === "incomplete") {
     return items.filter((project) => !project.completed);
