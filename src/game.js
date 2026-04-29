@@ -57,6 +57,7 @@ export const OVERLOAD_INTERVAL = 8;
 export const BASE_OVERLOAD_BONUS = 5;
 export const DEFAULT_ROUTE_STANCE_ID = "balanced";
 export const DEFAULT_PROJECT_FILTER_ID = "all";
+export const INITIAL_PROJECT_FILTER_ID = "current-chapter";
 export const PROJECT_FILTER_DEFS = [
   {
     id: DEFAULT_PROJECT_FILTER_ID,

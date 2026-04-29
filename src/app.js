@@ -1,5 +1,5 @@
 import {
-  DEFAULT_PROJECT_FILTER_ID,
+  INITIAL_PROJECT_FILTER_ID,
   PROJECT_FILTER_DEFS,
   UPGRADE_DEFS,
   activateDirective,
@@ -165,7 +165,7 @@ let state = loadedState.state;
 let offlineSummary = loadedState.offlineSummary;
 let actionNotice = "";
 let lastFirstUpgradeAt = state.firstUpgradeAt;
-let projectFilter = DEFAULT_PROJECT_FILTER_ID;
+let projectFilter = INITIAL_PROJECT_FILTER_ID;
 
 recordEvent("session", {
   startedAt: new Date().toISOString()

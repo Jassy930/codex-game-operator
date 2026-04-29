@@ -1,5 +1,27 @@
 # Decision
 
+## 2026-04-30 Product decision：星图列表默认本章筛选
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 当前有 3 个 open feedback issue、0 个 open bug issue。#3 刚完成航线指令、连携、轮换目标和 3/3 奖励，尚无复测结论；#4 仍指向“界面全是密密麻麻的文字、希望生成一些图片”，本轮继续进入有反馈样本下的 Product decision。
+
+当前最大问题：星图区已经有插画、视觉航线、筛选摘要折叠、项目图标和非当前航段详情折叠，但默认仍选中“全部”，首次进入星图列表时会一次性出现 57 张项目卡片。即使卡片详情已经折叠，长列表本身仍会造成文字密度和滚动压力。
+
+本轮决策：
+
+- 新增运行期初始筛选常量 `INITIAL_PROJECT_FILTER_ID = "current-chapter"`，让星图项目列表默认进入“本章”视图。
+- 静态首页同步把筛选按钮、星图视觉高亮和筛选摘要改为本章 4 段，玩家仍可一键切回“全部 0/57”查看完整星图。
+- 本轮只调整默认展示范围；不改变存档、升级价格、产能公式、星图 57 段路线、项目奖励、筛选规则、航线策略、航线指令或反馈入口。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-04-30 02:55 CST 查询到 3 个 open feedback issue、0 个 open bug issue；#4 继续作为视觉密度跟进对象。
+- 运行期 `projectFilter` 使用 `INITIAL_PROJECT_FILTER_ID`，默认值为 `current-chapter`。
+- 静态首页默认高亮“本章 0/4”，星图视觉显示“高亮：本章 4 段”，筛选摘要显示“本章 0/4”和终点“航段 4/57 · 首段星图 4/4 采集阵列”。
+- `bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build` 已通过。
+- 构建产物包含 `INITIAL_PROJECT_FILTER_ID`、`let projectFilter = INITIAL_PROJECT_FILTER_ID`、“高亮：本章 4 段”、“筛选摘要：本章 0/4”和“终点 航段 4/57”。
+
+下一步：发布后回复 #4；若仍认为星图列表密度高，再评估章节分页或只在列表默认显示当前航段。
+
 ## 2026-04-30 Product decision：航线轮换目标奖励
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 当前有 3 个 open feedback issue、0 个 open bug issue。#4 已连续处理视觉密度，#3 仍指向“玩法太简单、只有点击和自动产能”，本轮继续进入有反馈样本下的 Product decision。

@@ -26,6 +26,7 @@ import {
   getRouteStanceStatus,
   getUpgradeAffordability,
   getUpgradeCost,
+  INITIAL_PROJECT_FILTER_ID,
   purchaseUpgrade,
   setRouteStance,
   settleOfflineProgress,
@@ -830,10 +831,16 @@ test("静态首页会默认折叠星图筛选长摘要", () => {
   const appJs = readFileSync(new URL("../src/app.js", import.meta.url), "utf8");
   const styles = readFileSync(new URL("../src/styles.css", import.meta.url), "utf8");
 
+  assert.equal(INITIAL_PROJECT_FILTER_ID, "current-chapter");
   assert.match(indexHtml, /<details class="project-filter-drawer">/);
   assert.doesNotMatch(indexHtml, /<details class="project-filter-drawer" open>/);
   assert.match(indexHtml, /id="projectFilterSummaryBrief"/);
-  assert.match(indexHtml, /筛选摘要：全部 0\/57 · 下一条 航段 1\/57/);
+  assert.match(indexHtml, /高亮：本章 4 段/);
+  assert.match(indexHtml, /<button class="project-filter-button is-active" type="button" aria-pressed="true">本章 0\/4<\/button>/);
+  assert.match(indexHtml, /筛选摘要：本章 0\/4 · 下一条 航段 1\/57/);
+  assert.match(indexHtml, /终点 航段 4\/57 · 首段星图 4\/4 采集阵列/);
+  assert.match(appJs, /INITIAL_PROJECT_FILTER_ID/);
+  assert.match(appJs, /let projectFilter = INITIAL_PROJECT_FILTER_ID/);
   assert.match(appJs, /getProjectFilterBrief/);
   assert.match(appJs, /projectFilterSummaryBrief: document\.querySelector\("#projectFilterSummaryBrief"\)/);
   assert.match(styles, /\.project-filter-drawer/);
