@@ -268,7 +268,7 @@ function render() {
   elements.pulse.textContent = combo.overloaded ? current.lastPulse : combo.hintText;
   renderDirectives(directives);
   elements.directivePlan.textContent = directives.plan.text;
-  elements.directiveTask.textContent = directives.task.text;
+  renderDirectiveTask(directives.task);
   elements.goalLabel.textContent = goal.label;
   elements.goalValue.textContent = goal.value;
   elements.goalHint.textContent = goal.progressText;
@@ -309,6 +309,33 @@ function renderDirectives(directives) {
   elements.directiveList.replaceChildren(
     ...directives.options.map((option) => renderDirective(option))
   );
+}
+
+function renderDirectiveTask(task) {
+  const progress = Math.max(0, task.progress ?? 0);
+  const target = Math.max(1, task.target ?? 3);
+  const progressText = progress + "/" + target;
+  const meterValue = Math.min(100, Math.round((progress / target) * 100));
+
+  const text = document.createElement("span");
+  text.className = "directive-task-text";
+  text.textContent = task.text;
+
+  const meter = document.createElement("span");
+  meter.className = "directive-task-meter";
+  meter.setAttribute("role", "meter");
+  meter.setAttribute("aria-label", "航线委托进度");
+  meter.setAttribute("aria-valuemin", "0");
+  meter.setAttribute("aria-valuemax", String(target));
+  meter.setAttribute("aria-valuenow", String(Math.min(progress, target)));
+  meter.setAttribute("aria-valuetext", progressText);
+
+  const fill = document.createElement("span");
+  fill.style.width = meterValue + "%";
+  meter.append(fill);
+
+  elements.directiveTask.classList.toggle("is-completed", task.completed);
+  elements.directiveTask.replaceChildren(text, meter);
 }
 
 function renderDirective(option) {

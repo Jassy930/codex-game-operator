@@ -1,5 +1,28 @@
 # Decision
 
+## 2026-04-30 Product decision：航线委托进度条
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-04-30 07:38 CST 同步到 3 个 open feedback issue、0 个 open bug issue。没有新的 bug；#3 仍是最近更新的玩法反馈，上一轮已新增“航线委托”，本轮继续进入有反馈样本下的 Product decision。
+
+当前最大问题：航线委托已经把推荐轮换变成 0/3 到 3/3 的短期任务，但显示仍是一行文字。玩家需要读完整文案才能判断进度，任务感还不够像一个可扫视的主动目标。
+
+本轮决策：
+
+- 在航线委托区域新增固定高度进度条，使用 `getDirectiveTaskStatus` 既有 `progress` / `target` / `completed` 派生状态渲染 0/3、2/3、3/3。
+- 进度条提供 `role="meter"`、`aria-valuenow` 和 `aria-valuetext`；完成态切换 `is-completed` 样式。
+- 本轮只调整航线委托展示层；不新增存档字段，不改变升级价格、产能公式、星图 57 段路线、项目奖励、指令基础收益、冷却、连携窗口、轮换目标奖励、预案执行、策略契合、策略终结、指令熟练、满层回响、航线委托奖励或筛选规则。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-04-30 07:38 CST 查询到 3 个 open feedback issue、0 个 open bug issue；#3 作为本轮处理对象。
+- 静态首页 `directiveTask` 包含 `directive-task-meter`、`role="meter"` 和“航线委托进度”可访问标签。
+- 运行期 `renderDirectiveTask` 使用 `task.progress` / `task.target` 计算进度条宽度，并在 3/3 后给容器添加 `is-completed`。
+- `tests/game.test.js` 覆盖 2/3 未完成态和 3/3 完成态的 `progress` / `target` / `completed`。
+- `bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build` 已通过；测试数 102 项。
+- 构建产物包含 `directive-task-meter`、`renderDirectiveTask`、“航线委托进度”和 `is-completed`。
+
+下一步：部署并回复 #3，等待复测航线委托进度条是否让主动任务更容易扫视。
+
 ## 2026-04-30 Product decision：航线委托短期任务
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-04-30 07:24 CST 同步到 3 个 open feedback issue、0 个 open bug issue。没有新的玩家复测或 bug；#3 仍是最近更新的玩法反馈，继续进入有反馈样本下的 Product decision。

@@ -2,6 +2,12 @@
 
 ## 2026-04-30
 
+- GitHub Issues：gh 可用且已认证；2026-04-30 07:38 CST 通过 REST API 同步到 3 个 open issue、3 个 open feedback issue、0 个 open bug issue。
+- #3 继续作为本轮 Product decision：上一轮已新增“航线委托”短期任务，但任务区域仍主要是文字说明；本轮新增“航线委托进度条”。
+- 本轮改动让 `directiveTask` 从单纯文本变成文本 + `directive-task-meter`，运行期 `renderDirectiveTask` 使用 `task.progress` / `task.target` / `task.completed` 渲染 0/3、2/3、3/3，并在完成态切换 `is-completed`。本轮不新增存档字段，不改变升级价格、产能公式、星图 57 段路线、项目奖励、指令基础收益、冷却、连携窗口、轮换目标奖励、预案执行、策略契合、策略终结、指令熟练、满层回响、航线委托奖励或筛选规则。
+- 本轮本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数为 102 项。
+- 构建产物已包含 `directive-task-meter`、`renderDirectiveTask`、“航线委托进度”和 `is-completed`。
+
 - GitHub Issues：gh 可用且已认证；2026-04-30 07:24 CST 通过 REST API 同步到 3 个 open issue、3 个 open feedback issue、0 个 open bug issue。
 - #3 继续作为本轮 Product decision：航线指令已经有推荐预案、预案执行奖励、策略终结、指令熟练和满层回响，但仍缺少独立显示的短期任务目标；本轮新增“航线委托”。
 - 本轮改动新增 `DIRECTIVE_TASK_REWARD_RATE = 0.08` 和 `getDirectiveTaskStatus`，100K 后显示 3 步航线委托；当玩家按推荐预案把轮换从 2/3 完成到 3/3 时，额外获得有效基础指令收益 8% 的“委托完成”奖励，并在按钮徽标、预计收益、执行反馈和本地 `directive` 事件中记录 `taskReward` / `taskRewardRate`。本轮不新增存档字段，不改变升级价格、产能公式、星图 57 段路线、项目奖励、指令基础收益、冷却、连携窗口、轮换目标奖励、预案执行、策略契合、策略终结、指令熟练、满层回响或筛选规则。

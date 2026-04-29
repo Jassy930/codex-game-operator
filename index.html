@@ -111,9 +111,20 @@
           <p id="directivePlan" class="directive-plan">
             指令轮换：累计 100K 能量后解锁 90 秒连携目标 · 解锁后先从非契合指令起手，第二步继续避开契合指令，把契合指令留到 3/3 策略终结；按推荐预案执行会获得预案执行奖励；完成轮换会累积指令熟练，满层后用回响续航触发满层回响。
           </p>
-          <p id="directiveTask" class="directive-task">
-            航线委托：累计 100K 能量后解锁 3 步短期任务
-          </p>
+          <div id="directiveTask" class="directive-task">
+            <span class="directive-task-text">航线委托：累计 100K 能量后解锁 3 步短期任务</span>
+            <span
+              class="directive-task-meter"
+              role="meter"
+              aria-label="航线委托进度"
+              aria-valuemin="0"
+              aria-valuemax="3"
+              aria-valuenow="0"
+              aria-valuetext="0/3"
+            >
+              <span style="width: 0%"></span>
+            </span>
+          </div>
         </div>
 
         <aside class="upgrade-panel" aria-labelledby="upgrade-title">

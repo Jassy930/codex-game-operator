@@ -320,6 +320,9 @@ test("轮换航线指令会触发航线连携收益", () => {
     secondTask.text,
     "航线委托 2/3 · 下一步 谐振脉冲，完成 3/3 推荐轮换 · 完成奖励 委托完成 +8%"
   );
+  assert.equal(secondTask.progress, 2);
+  assert.equal(secondTask.target, 3);
+  assert.equal(secondTask.completed, false);
   assert.equal(resonanceOption.recommended, true);
   assert.equal(resonanceOption.recommendationText, "轮换推荐");
   assert.equal(resonanceOption.finisherRecommended, true);
@@ -355,6 +358,9 @@ test("轮换航线指令会触发航线连携收益", () => {
     continuationTask.text,
     "航线委托已完成 · 已达成 3/3 推荐轮换；重置或超时后开启下一轮委托，继续轮换可维持连携与熟练"
   );
+  assert.equal(continuationTask.progress, 3);
+  assert.equal(continuationTask.target, 3);
+  assert.equal(continuationTask.completed, true);
   assert.deepEqual(continuationPlan.nextDirectiveIds, ["ignition-salvo"]);
   assert.equal(continuationPlan.recommendationText, "熟练续航");
   assert.equal(continuationPlan.waitingRecommendationText, "等待续航");
@@ -1063,6 +1069,8 @@ test("静态首页会渲染航线指令轮换目标", () => {
 
   assert.match(indexHtml, /id="directivePlan"/);
   assert.match(indexHtml, /id="directiveTask"/);
+  assert.match(indexHtml, /class="directive-task-meter"/);
+  assert.match(indexHtml, /aria-label="航线委托进度"/);
   assert.match(indexHtml, /指令轮换：累计 100K 能量后解锁 90 秒连携目标/);
   assert.match(indexHtml, /航线委托：累计 100K 能量后解锁 3 步短期任务/);
   assert.match(indexHtml, /非契合指令起手/);
@@ -1086,7 +1094,12 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(appJs, /directivePlan: document\.querySelector\("#directivePlan"\)/);
   assert.match(appJs, /directiveTask: document\.querySelector\("#directiveTask"\)/);
   assert.match(appJs, /elements\.directivePlan\.textContent = directives\.plan\.text/);
-  assert.match(appJs, /elements\.directiveTask\.textContent = directives\.task\.text/);
+  assert.match(appJs, /renderDirectiveTask\(directives\.task\)/);
+  assert.match(appJs, /function renderDirectiveTask\(task\)/);
+  assert.match(appJs, /meter\.className = "directive-task-meter"/);
+  assert.match(appJs, /meter\.setAttribute\("role", "meter"\)/);
+  assert.match(appJs, /elements\.directiveTask\.classList\.toggle\("is-completed", task\.completed\)/);
+  assert.match(appJs, /elements\.directiveTask\.replaceChildren\(text, meter\)/);
   assert.match(appJs, /option\.recommended \? "is-recommended" : ""/);
   assert.match(appJs, /option\.finisherRecommended \? "is-finisher-recommended" : ""/);
   assert.match(appJs, /badges\.className = "directive-badges"/);
@@ -1105,6 +1118,8 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(appJs, /stanceBonus\.textContent = option\.stanceBonusText/);
   assert.match(styles, /\.directive-plan/);
   assert.match(styles, /\.directive-task/);
+  assert.match(styles, /\.directive-task-meter/);
+  assert.match(styles, /\.directive-task\.is-completed/);
   assert.match(styles, /\.directive-button \.directive-badges/);
   assert.match(styles, /\.directive-button\.is-recommended/);
   assert.match(styles, /\.directive-button\.is-finisher-recommended/);

@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+- 航线委托新增可访问进度条：运行期按 `progress/target/completed` 显示 0/3、2/3、3/3，并在完成态切换 `is-completed`。
+- `index.html` 静态委托区新增 `directive-task-meter`；`src/app.js` 新增 `renderDirectiveTask`；`src/styles.css` 新增进度条和完成态样式；`tests/game.test.js` 覆盖委托进度字段、静态 meter 和运行期渲染标记。
+- 本轮只调整航线委托展示层；不新增存档字段，不改变升级价格、产能公式、星图 57 段路线、项目奖励、指令基础收益、冷却、连携窗口、轮换目标奖励、预案执行、策略契合、策略终结、指令熟练、满层回响、航线委托奖励或筛选规则。
+- 同步 GitHub Issues 反馈状态：当前 3 个 open feedback issue、0 个 open bug issue；#3 继续指向玩法单薄并作为本轮处理对象。
+- 验证通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 102 项。
+- 构建产物已确认包含 `directive-task-meter`、`renderDirectiveTask`、“航线委托进度”和 `is-completed`。
 - 航线指令新增“航线委托”短期任务：100K 后显示 0/3 到 3/3 的推荐轮换委托，完成 3/3 推荐轮换时获得“委托完成”奖励。
 - `src/game.js` 新增 `DIRECTIVE_TASK_REWARD_RATE`、`getDirectiveTaskStatus`、委托完成收益计算和执行反馈；`index.html` / `src/app.js` 新增 `directiveTask` 展示；`src/styles.css` 新增 `directive-task` 与 `directive-task-bonus` 样式；`tests/game.test.js` 覆盖锁定态、0/3、2/3、3/3 完成态、按钮徽标、预计收益和执行反馈。
 - 本轮只调整航线指令短期任务和推荐收束奖励；不新增存档字段，不改变升级价格、产能公式、星图 57 段路线、项目奖励、指令基础收益、冷却、连携窗口、轮换目标奖励、预案执行、策略契合、策略终结、指令熟练、满层回响或筛选规则。
