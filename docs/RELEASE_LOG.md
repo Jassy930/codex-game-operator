@@ -7,6 +7,8 @@
 - 同步 GitHub Issues 反馈状态：当前 1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
 - 验证通过：bun install --no-save、bun run test、bun run build、npm install、npm test、npm run build。
 - 构建产物已包含“星焰引航环”、`starflame-pilot-ring`、“星图进度 0/47”、“38 个累计航段”和“点击 0/12”。
+- GitHub Pages workflow 25094523729 已成功，线上地址返回 HTTP 200，且发布文件包含“星焰引航环”、`starflame-pilot-ring`、“星图进度 0/47”、“38 个累计航段”和“点击 0/12”。
+- 已回复 #2，说明星焰引航环航段已部署，并保持 issue open 等待复测。
 - 新增 4.9B 后星瀑谐振门航段：星穹导航塔完成后继续出现累计能量目标，完成后奖励过载奖励 +26%，星图路线扩展到 46 段。
 - 同步星图总览、里程碑、章节、奖励进度、航线构成、项目列表、静态 HTML 初始文案和 README 到 46 段。
 - 同步 GitHub Issues 反馈状态：当前 1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
