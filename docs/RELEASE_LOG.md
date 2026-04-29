@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+- 新增 110M 后曜幕天穹航段：晨渊观星台完成后继续出现累计能量目标，完成后奖励自动产能 +20%，星图路线扩展到 32 段。
+- 同步星图总览、里程碑、章节、奖励进度、航线构成、项目列表和静态 HTML 初始文案到 32 段。
+- 同步 GitHub Issues 反馈状态：当前 1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
+- 验证通过：bun install --no-save、bun run test、bun run build、npm install、npm test、npm run build。
+- 构建产物已包含“曜幕天穹”、`solar-veil-dome`、“星图进度 0/32”和“23 个累计航段”。
 - 新增星图航线焦点：星图总览会根据当前均衡、点火或巡航策略显示对应专精航段、奖励和进度，让策略选择直接关联到可追目标。
 - 同步 GitHub Issues 反馈状态：当前 1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
 - 验证通过：bun install --no-save、bun run test、bun run build、npm install、npm test、npm run build。

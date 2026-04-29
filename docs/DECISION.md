@@ -1,5 +1,27 @@
 # Decision
 
+## 2026-04-29 Product decision：曜幕天穹航段
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 当前仍有真实体验反馈 #2 open，且没有 open bug，继续进入有反馈样本下的 Product decision。
+
+当前最大问题：#2 仍围绕“内容丰富度太差，可玩的内容太少”保持 open。前序多轮已经把 31 段星图的信息结构补到目标分轨、章节、奖励目标、里程碑和航线焦点；继续只添加说明性总览会增加信息密度，但不直接增加可玩的长尾目标。
+
+本轮决策：
+
+- 新增“曜幕天穹”航段，要求累计 110M 能量，奖励自动产能 +20%。
+- 星图路线从 31 段扩展到 32 段；远航长尾章节从 18 段扩展到 19 段。
+- 主目标、星图总览、里程碑、航线构成、章节奖励、奖励进度、项目列表和静态 HTML 初始文案同步到 32 段。
+- 不新增存档字段、不调整既有奖励数值和升级价格；只在晨渊观星台之后追加一个可验证尾段。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-04-29 10:08 CST 查询到 1 个 open issue、1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
+- bun install --no-save、bun run test、bun run build、npm install、npm test 和 npm run build 已通过，覆盖晨渊观星台完成后继续指向曜幕天穹、32 段航线序号、章节余量、奖励分布和全部完成状态。
+- 构建产物已包含“曜幕天穹”、`solar-veil-dome`、“星图进度 0/32”和“23 个累计航段”。
+- 待完成提交、推送、部署验证和 #2 回复。
+
+下一步：提交、推送并等待 GitHub Pages 发布，再回复 #2。
+
 ## 2026-04-29 Product decision：星图航线焦点
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 当前仍有真实体验反馈 #2 open，且没有 open bug，继续进入有反馈样本下的 Product decision。

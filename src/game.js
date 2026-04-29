@@ -589,6 +589,20 @@ export const PROJECT_DEFS = [
     current(state) {
       return state.totalEnergy;
     }
+  },
+  {
+    id: "solar-veil-dome",
+    name: "曜幕天穹",
+    summary: "累计 110M 能量，在晨渊观星台外展开曜幕天穹。",
+    unit: "能量",
+    target: 110_000_000,
+    reward: "自动产能 +20%",
+    effect: {
+      secondMultiplier: 1.2
+    },
+    current(state) {
+      return state.totalEnergy;
+    }
   }
 ];
 
@@ -611,7 +625,7 @@ export const PROJECT_CHAPTER_DEFS = [
   {
     name: "远航长尾",
     startId: "void-gate-expedition",
-    endId: "dawn-abyss-observatory"
+    endId: "solar-veil-dome"
   }
 ];
 
