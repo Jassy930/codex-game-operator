@@ -6,6 +6,9 @@
 - #3 继续作为本轮 Product decision：航线指令已经补充主动按钮、连携、轮换目标、轮换奖励、策略契合和策略终结，但完整轮换后缺少能延续到下一轮操作的短期成长状态；本轮新增“指令熟练”层。
 - 本轮改动在 `src/game.js` 新增 `directiveMastery`、3 分钟熟练窗口、每层指令收益 +5% 和最多 3 层的叠层/刷新逻辑；在 `src/app.js` 渲染 `directive-mastery-bonus` 并记录熟练事件字段；在 `src/feedback.js` 的反馈快照中加入“指令熟练：x/3”；不改变升级价格、产能公式、星图 57 段路线、项目奖励、指令冷却、连携窗口、轮换目标奖励、策略契合 +10%、策略终结奖励数值、反馈入口或筛选规则。
 - 本轮本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；构建产物已包含 `directiveMastery`、`DIRECTIVE_MASTERY_MAX_STACKS`、`directive-mastery-bonus` 和“指令熟练”。
+- GitHub Pages workflow 25132200302 已成功，线上地址返回 HTTP 200；线上 `game.js` 包含 `directiveMastery`、`DIRECTIVE_MASTERY_MAX_STACKS` 和“指令熟练”，线上 `app.js` 包含 `directive-mastery-bonus` 和 `masteryRewardStacks`，线上 `feedback.js` 包含“指令熟练”快照字段。
+- #3 已回复：说明完成 3/3 后会叠加 3 分钟短期指令熟练层，提交 790b437，issue 保持 open 等待复测。
+- 回复后同步 GitHub Issues：2026-04-30 04:31 CST 当前仍为 3 个 open feedback issue、0 个 open bug issue，#3 更新时间为 2026-04-29T20:31:11Z。
 
 - GitHub Issues：gh 可用且已认证；2026-04-30 04:03 CST 通过 REST API 同步到 3 个 open issue、3 个 open feedback issue、0 个 open bug issue。
 - #3 继续作为本轮 Product decision：航线指令已经有策略终结奖励，但按钮层仍只显示“轮换推荐”和“策略契合 +10%”；本轮让可触发 3/3 策略终结的指令按钮额外显示“策略终结”徽标。

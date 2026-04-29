@@ -22,8 +22,11 @@
 - 反馈快照包含“指令熟练：x/3”。
 - `bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build` 已通过。
 - 构建产物包含 `directiveMastery`、`DIRECTIVE_MASTERY_MAX_STACKS`、`directive-mastery-bonus` 和“指令熟练”。
+- GitHub Pages workflow 25132200302 已成功，线上地址返回 HTTP 200；线上 `game.js` 包含 `directiveMastery`、`DIRECTIVE_MASTERY_MAX_STACKS` 和“指令熟练”，线上 `app.js` 包含 `directive-mastery-bonus` 和 `masteryRewardStacks`，线上 `feedback.js` 包含“指令熟练”快照字段。
+- #3 已回复并继续保持 open，等待复测确认指令熟练层是否让 3/3 轮换形成连续操作目标。
+- 回复后同步 GitHub Issues：2026-04-30 04:31 CST 当前仍为 3 个 open feedback issue、0 个 open bug issue；#3 更新时间为 2026-04-29T20:31:11Z。
 
-下一步：提交并推送后等待 GitHub Pages workflow；部署成功后回复 #3，说明 3/3 轮换现在会沉淀为短期指令熟练层，issue 保持 open 等待复测。
+下一步：观察 #3 复测结论；若仍认为主动玩法不足，再评估资源消耗型指令、短期任务队列或更明确的指令构筑分支。
 
 ## 2026-04-30 Product decision：策略终结按钮提示
 

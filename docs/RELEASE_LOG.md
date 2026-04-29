@@ -8,6 +8,9 @@
 - 同步 GitHub Issues 反馈状态：当前 3 个 open feedback issue、0 个 open bug issue；#3 继续指向玩法单薄并作为本轮处理对象。
 - 验证通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`。
 - 构建产物已确认包含 `directiveMastery`、`DIRECTIVE_MASTERY_MAX_STACKS`、`directive-mastery-bonus` 和“指令熟练”。
+- GitHub Pages workflow 25132200302 已成功，线上地址返回 HTTP 200，且线上 `game.js`、`app.js` 和 `feedback.js` 已确认包含指令熟练相关标记。
+- 已回复 #3，说明指令熟练层已部署，并保持 issue open 等待复测。
+- 回复后同步 GitHub Issues 反馈状态：当前 3 个 open feedback issue、0 个 open bug issue；#3 更新时间为 2026-04-29T20:31:11Z。
 - 航线指令按钮新增“策略终结”徽标：当推荐指令会完成 3/3 轮换且匹配当前航线策略时，按钮会直接显示策略终结目标。
 - `src/game.js` 新增 `finisherRecommended` / `finisherRecommendationText` 派生状态；`src/app.js` 渲染 `is-finisher-recommended` 和 `directive-finisher-recommendation`；`src/styles.css` 新增策略终结徽标和按钮边框样式。
 - 本轮只调整航线指令按钮可读性；不新增存档字段，不改变升级价格、产能公式、星图 57 段路线、项目奖励、指令冷却、连携窗口、轮换目标奖励、策略契合 +10%、策略终结奖励数值、反馈入口或筛选规则。
