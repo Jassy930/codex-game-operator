@@ -20,8 +20,11 @@
 - 本地 `directive` 事件记录 `stanceFinisherReward`。
 - `bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build` 已通过。
 - 构建产物包含 `DIRECTIVE_STANCE_FINISHER_RATE`、`stanceFinisherReward`、“策略终结”和“完成 3/3 并收束”。
+- GitHub Pages workflow 25130644996 已成功，线上地址返回 HTTP 200；线上首页包含“完成 3/3 并收束到契合指令可获得策略终结奖励”，线上 `game.js` 包含 `DIRECTIVE_STANCE_FINISHER_RATE`、`stanceFinisherReward` 和“策略终结”，线上 `app.js` 包含 `stanceFinisherReward`。
+- #3 已回复并继续保持 open，等待复测确认策略终结奖励是否让航线指令更像需要规划顺序的主动玩法。
+- 回复后同步 GitHub Issues：2026-04-30 03:57 CST 当前仍为 3 个 open feedback issue、0 个 open bug issue；#3 更新时间为 2026-04-29T19:57:07Z。
 
-下一步：提交并推送后观察 #3 复测结论；若仍认为主动玩法不足，再评估资源消耗型指令或独立短期任务队列。
+下一步：观察 #3 复测结论；若仍认为主动玩法不足，再评估资源消耗型指令或独立短期任务队列。
 
 ## 2026-04-30 Product decision：航线策略契合指令
 

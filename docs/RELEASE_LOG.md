@@ -8,6 +8,9 @@
 - 同步 GitHub Issues 反馈状态：当前 3 个 open feedback issue、0 个 open bug issue；#3 继续指向玩法单薄并作为本轮处理对象。
 - 验证通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`。
 - 构建产物已确认包含 `DIRECTIVE_STANCE_FINISHER_RATE`、`stanceFinisherReward`、“策略终结”和“完成 3/3 并收束”。
+- GitHub Pages workflow 25130644996 已成功，线上地址返回 HTTP 200，且线上首页、`game.js` 和 `app.js` 已确认包含策略终结相关标记。
+- 已回复 #3，说明 3/3 轮换策略终结奖励已部署，并保持 issue open 等待复测。
+- 回复后同步 GitHub Issues 反馈状态：当前 3 个 open feedback issue、0 个 open bug issue；#3 更新时间为 2026-04-29T19:57:07Z。
 - 航线策略新增契合指令：均衡航线契合谐振脉冲，点火优先契合点火齐射，巡航优先契合巡航回收，匹配当前策略的航线指令获得“策略契合 +10%”收益。
 - `src/game.js` 新增 `DIRECTIVE_STANCE_BONUS_RATE`、策略契合收益计算和指令预计收益/执行反馈文案；`src/app.js` 在本地 `directive` 事件记录 `stanceBonus` 与 `stanceBonusRate`，并渲染 `directive-badges` / `directive-stance-bonus`；`src/styles.css` 新增策略契合徽标样式。
 - 本轮只打通航线策略和航线指令；不新增存档字段，不改变升级价格、产能公式、星图 57 段路线、项目奖励、指令冷却、连携窗口、轮换目标奖励、反馈入口或筛选规则。

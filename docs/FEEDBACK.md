@@ -6,6 +6,9 @@
 - #3 继续作为本轮 Product decision：航线指令已经补充冷却、连携、轮换目标、3/3 奖励、按钮推荐和策略契合 +10%，但第三步轮换仍缺少“按当前策略收束”的目标；本轮新增“策略终结”奖励。
 - 本轮改动在 `src/game.js` 新增 `DIRECTIVE_STANCE_FINISHER_RATE`、策略终结奖励计算、预计收益/执行反馈/轮换提示文案，在 `src/app.js` 的本地 `directive` 事件中记录 `stanceFinisherReward`，并同步首页静态轮换提示；不新增存档字段，不改变升级价格、产能公式、星图 57 段路线、项目奖励、指令冷却、连携窗口、轮换目标奖励、策略契合 +10%、反馈入口或筛选规则。
 - 本轮本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；构建产物已包含 `DIRECTIVE_STANCE_FINISHER_RATE`、`stanceFinisherReward`、“策略终结”和“完成 3/3 并收束”。
+- GitHub Pages workflow 25130644996 已成功，线上地址返回 HTTP 200；线上首页包含“完成 3/3 并收束到契合指令可获得策略终结奖励”，线上 `game.js` 包含 `DIRECTIVE_STANCE_FINISHER_RATE`、`stanceFinisherReward` 和“策略终结”，线上 `app.js` 包含 `stanceFinisherReward`。
+- #3 已回复：说明 3/3 轮换策略终结奖励已上线，提交 e7f96b8，issue 保持 open 等待复测。
+- 回复后同步 GitHub Issues：2026-04-30 03:57 CST 当前仍为 3 个 open feedback issue、0 个 open bug issue，#3 更新时间为 2026-04-29T19:57:07Z。
 
 - GitHub Issues：gh 可用且已认证；2026-04-30 03:26 CST 通过 REST API 同步到 3 个 open issue、3 个 open feedback issue、0 个 open bug issue。
 - #3 继续作为本轮 Product decision：航线指令已经补充冷却、连携、轮换目标、3/3 奖励和按钮推荐，但航线策略仍主要是被动倍率；本轮让当前航线策略绑定契合指令，匹配策略的航线指令获得“策略契合 +10%”。
