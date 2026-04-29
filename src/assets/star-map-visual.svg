@@ -1,0 +1,92 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 420" role="img" aria-labelledby="title desc">
+  <title id="title">星核工坊星图航线插画</title>
+  <desc id="desc">发光星核、航线节点、远航星门和深空航迹组成的星图画面。</desc>
+  <defs>
+    <radialGradient id="coreGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#fff7c2"/>
+      <stop offset="0.36" stop-color="#f4b23c"/>
+      <stop offset="0.7" stop-color="#e85d75"/>
+      <stop offset="1" stop-color="#3d181e"/>
+    </radialGradient>
+    <radialGradient id="gateGlow" cx="50%" cy="50%" r="55%">
+      <stop offset="0" stop-color="#bdf4eb"/>
+      <stop offset="0.58" stop-color="#13b5a6"/>
+      <stop offset="1" stop-color="#0b3d3c"/>
+    </radialGradient>
+    <linearGradient id="routeLine" x1="126" x2="838" y1="238" y2="158" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#f4b23c"/>
+      <stop offset="0.48" stop-color="#13b5a6"/>
+      <stop offset="1" stop-color="#e85d75"/>
+    </linearGradient>
+    <linearGradient id="panelShade" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#211b18"/>
+      <stop offset="1" stop-color="#0f1616"/>
+    </linearGradient>
+    <filter id="softGlow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="9" result="blur"/>
+      <feColorMatrix in="blur" type="matrix" values="1 0 0 0 0.96 0 1 0 0 0.56 0 0 1 0 0.22 0 0 0 0.65 0"/>
+      <feMerge>
+        <feMergeNode/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <rect width="960" height="420" rx="28" fill="url(#panelShade)"/>
+  <path d="M0 78 C170 36 318 48 468 98 C626 151 768 127 960 58 L960 0 L0 0 Z" fill="#22312e" opacity="0.5"/>
+  <path d="M0 344 C164 298 292 330 432 363 C594 401 762 379 960 313 L960 420 L0 420 Z" fill="#261d22" opacity="0.72"/>
+
+  <g opacity="0.85">
+    <circle cx="92" cy="78" r="2.5" fill="#fff7c2"/>
+    <circle cx="166" cy="128" r="2" fill="#bdf4eb"/>
+    <circle cx="242" cy="66" r="1.8" fill="#f8f3e7"/>
+    <circle cx="334" cy="104" r="2.2" fill="#f4b23c"/>
+    <circle cx="468" cy="62" r="2" fill="#f8f3e7"/>
+    <circle cx="594" cy="116" r="2.4" fill="#bdf4eb"/>
+    <circle cx="724" cy="72" r="2" fill="#fff7c2"/>
+    <circle cx="858" cy="118" r="2.5" fill="#f8f3e7"/>
+    <circle cx="888" cy="302" r="2" fill="#f4b23c"/>
+    <circle cx="714" cy="344" r="2.2" fill="#bdf4eb"/>
+    <circle cx="514" cy="320" r="1.8" fill="#f8f3e7"/>
+    <circle cx="294" cy="350" r="2.2" fill="#fff7c2"/>
+    <circle cx="128" cy="304" r="2" fill="#bdf4eb"/>
+  </g>
+
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M126 238 C224 168 294 164 372 202 S528 264 604 216 S746 120 838 158" stroke="url(#routeLine)" stroke-width="7" opacity="0.95"/>
+    <path d="M136 258 C242 212 306 215 390 244 S544 292 622 246 S748 166 826 188" stroke="#f8f3e7" stroke-width="2" opacity="0.22"/>
+    <path d="M186 150 C256 94 336 90 424 128" stroke="#13b5a6" stroke-width="2" opacity="0.32"/>
+    <path d="M524 124 C630 70 728 74 818 112" stroke="#e85d75" stroke-width="2" opacity="0.32"/>
+  </g>
+
+  <g filter="url(#softGlow)">
+    <circle cx="126" cy="238" r="52" fill="#2d221a"/>
+    <circle cx="126" cy="238" r="36" fill="url(#coreGlow)"/>
+    <path d="M126 196 L134 229 L168 218 L142 242 L166 269 L132 257 L126 291 L120 257 L86 269 L110 242 L84 218 L118 229 Z" fill="#fff7c2" opacity="0.72"/>
+  </g>
+
+  <g>
+    <circle cx="276" cy="184" r="18" fill="#13b5a6"/>
+    <circle cx="276" cy="184" r="31" fill="none" stroke="#bdf4eb" stroke-width="3" opacity="0.62"/>
+    <circle cx="414" cy="222" r="22" fill="#f4b23c"/>
+    <path d="M379 218 C401 235 431 237 454 220" fill="none" stroke="#fff7c2" stroke-width="3" opacity="0.6"/>
+    <circle cx="566" cy="238" r="19" fill="#e85d75"/>
+    <circle cx="566" cy="238" r="29" fill="none" stroke="#ffd4dc" stroke-width="3" opacity="0.55"/>
+    <circle cx="696" cy="172" r="20" fill="#bdf4eb"/>
+    <path d="M660 178 C682 159 715 158 738 176" fill="none" stroke="#13b5a6" stroke-width="4" opacity="0.72"/>
+  </g>
+
+  <g filter="url(#softGlow)">
+    <circle cx="838" cy="158" r="50" fill="url(#gateGlow)" opacity="0.9"/>
+    <circle cx="838" cy="158" r="35" fill="#102827"/>
+    <circle cx="838" cy="158" r="21" fill="none" stroke="#bdf4eb" stroke-width="6"/>
+    <path d="M808 120 L868 120 L888 158 L868 196 L808 196 L788 158 Z" fill="none" stroke="#f8f3e7" stroke-width="4" opacity="0.5"/>
+  </g>
+
+  <g opacity="0.66">
+    <rect x="84" y="320" width="126" height="10" rx="5" fill="#13b5a6"/>
+    <rect x="84" y="340" width="86" height="7" rx="3.5" fill="#f4b23c"/>
+    <rect x="710" y="276" width="142" height="10" rx="5" fill="#e85d75"/>
+    <rect x="756" y="296" width="96" height="7" rx="3.5" fill="#bdf4eb"/>
+  </g>
+</svg>

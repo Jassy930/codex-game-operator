@@ -472,6 +472,16 @@ h2 {
   border-block: 1px solid rgba(248, 243, 231, 0.12);
 }
 
+.project-scene-image {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 7;
+  object-fit: cover;
+  border: 1px solid rgba(248, 243, 231, 0.14);
+  border-radius: 8px;
+  background: #111615;
+}
+
 .project-map-headline {
   display: flex;
   min-width: 0;

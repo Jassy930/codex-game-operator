@@ -1,5 +1,13 @@
 # Feedback
 
+## 2026-04-30
+
+- GitHub Issues：gh 可用且已认证；2026-04-30 00:23 CST 通过 REST API 同步到 3 个 open issue、3 个 open feedback issue、0 个 open bug issue。
+- #4 继续作为本轮 Product decision：玩家要求减少“密密麻麻的文字”并希望生成图片；上一轮节点航线改善了状态扫视，本轮补项目内 SVG 星图插画资产，进一步降低星图区纯文字占比。
+- 本轮改动只新增 `src/assets/star-map-visual.svg`、首页图片引用和 `.project-scene-image` 样式；不改变存档、数值、星图 57 段路线、筛选规则、航线策略或航线指令。
+- 本轮本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`。
+- 构建产物已确认包含 `dist/src/assets/star-map-visual.svg`、`project-scene-image` 和 `star-map-visual.svg` 引用。
+
 ## 2026-04-29
 
 - GitHub Issues：gh 可用且已认证；2026-04-29 23:30 CST 通过 REST API 同步到 3 个 open issue、3 个 open feedback issue、0 个 open bug issue。

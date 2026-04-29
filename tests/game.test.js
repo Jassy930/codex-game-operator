@@ -1,5 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
+import { readFileSync } from "node:fs";
 
 import {
   activateDirective,
@@ -620,6 +621,22 @@ test("星图视觉图会返回全航线节点和筛选高亮", () => {
   assert.equal(currentMap.filterText, "高亮：当前 1 段");
   assert.equal(currentMap.nodes.filter((node) => node.selected).length, 1);
   assert.equal(currentMap.nodes[1].selected, false);
+});
+
+test("静态首页会引用星图插画资产", () => {
+  const indexHtml = readFileSync(new URL("../index.html", import.meta.url), "utf8");
+  const styles = readFileSync(new URL("../src/styles.css", import.meta.url), "utf8");
+  const asset = readFileSync(
+    new URL("../src/assets/star-map-visual.svg", import.meta.url),
+    "utf8"
+  );
+
+  assert.match(indexHtml, /project-scene-image/);
+  assert.match(indexHtml, /src="\.\/src\/assets\/star-map-visual\.svg"/);
+  assert.match(indexHtml, /星核、航线节点和远航星门组成的星图插画/);
+  assert.match(styles, /\.project-scene-image/);
+  assert.match(asset, /星核工坊星图航线插画/);
+  assert.match(asset, /routeLine/);
 });
 
 test("星图总览会显示完成数和下一段奖励", () => {
