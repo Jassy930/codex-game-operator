@@ -1056,6 +1056,9 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(appJs, /badges\.className = "directive-badges"/);
   assert.match(appJs, /recommendation\.className = "directive-recommendation"/);
   assert.match(appJs, /recommendation\.textContent = option\.recommendationText/);
+  assert.match(appJs, /planBonus\.className = "directive-plan-bonus"/);
+  assert.match(appJs, /planBonus\.textContent = option\.planRewardText/);
+  assert.match(appJs, /planBonus\.hidden = !option\.planRewardText/);
   assert.match(appJs, /finisherRecommendation\.className = "directive-finisher-recommendation"/);
   assert.match(appJs, /finisherRecommendation\.textContent = option\.finisherRecommendationText/);
   assert.match(appJs, /masteryBonus\.className = "directive-mastery-bonus"/);
@@ -1067,6 +1070,7 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(styles, /\.directive-button\.is-recommended/);
   assert.match(styles, /\.directive-button\.is-finisher-recommended/);
   assert.match(styles, /\.directive-button \.directive-recommendation/);
+  assert.match(styles, /\.directive-button \.directive-plan-bonus/);
   assert.match(styles, /\.directive-button \.directive-finisher-recommendation/);
   assert.match(styles, /\.directive-button \.directive-mastery-bonus/);
   assert.match(styles, /\.directive-button \.directive-stance-bonus/);

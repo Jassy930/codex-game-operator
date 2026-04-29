@@ -1,5 +1,27 @@
 # Decision
 
+## 2026-04-30 Product decision：预案执行按钮徽标
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-04-30 07:07 CST 同步到 3 个 open feedback issue、0 个 open bug issue。没有新的玩家复测或 bug；#3 仍是最近更新的玩法反馈，继续进入有反馈样本下的 Product decision。
+
+当前最大问题：航线指令已经有推荐预案、预案执行奖励、策略终结、指令熟练和满层回响，但“预案执行 +X”主要藏在预计收益行和执行反馈里。玩家扫按钮时仍先看到“收束起手/熟练续航”，不一定能立刻确认推荐按钮本身会带来额外收益。
+
+本轮决策：
+
+- 在航线指令按钮徽标区新增 `directive-plan-bonus`，当 `option.planRewardText` 存在时直接显示“预案执行 +X”。
+- 保留原有收益计算、预计收益、执行反馈和本地 `directive` 事件字段；本轮只提升按钮层的奖励可见性。
+- 不新增存档字段，不改变升级价格、产能公式、星图 57 段路线、项目奖励、指令基础收益、冷却、连携窗口、轮换目标奖励、策略契合、策略终结、指令熟练、满层回响或筛选规则。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-04-30 07:07 CST 查询到 3 个 open feedback issue、0 个 open bug issue；#3 作为本轮处理对象。
+- 推荐指令按钮会渲染 `directive-plan-bonus`，并把 `option.planRewardText` 显示为按钮徽标；没有预案奖励的指令不显示该徽标。
+- `src/styles.css` 包含 `directive-plan-bonus` 样式，让预案执行奖励在按钮徽标组中可扫视。
+- `bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build` 已通过；测试数 102 项。
+- 构建产物包含 `directive-plan-bonus`、`planBonus.textContent = option.planRewardText` 和“预案执行”。
+
+下一步：推送并回复 #3，等待复测确认按钮层预案执行徽标是否让推荐指令更有收益确认感。
+
 ## 2026-04-30 Product decision：航线指令预案执行奖励
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-04-30 06:54 CST 同步到 3 个 open feedback issue、0 个 open bug issue。没有新的 bug；#3 仍是最近更新的玩法反馈，继续进入有反馈样本下的 Product decision。

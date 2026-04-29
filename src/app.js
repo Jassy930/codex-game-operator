@@ -369,6 +369,11 @@ function renderDirective(option) {
   recommendation.textContent = option.recommendationText;
   recommendation.hidden = !option.recommended;
 
+  const planBonus = document.createElement("span");
+  planBonus.className = "directive-plan-bonus";
+  planBonus.textContent = option.planRewardText;
+  planBonus.hidden = !option.planRewardText;
+
   const finisherRecommendation = document.createElement("span");
   finisherRecommendation.className = "directive-finisher-recommendation";
   finisherRecommendation.textContent = option.finisherRecommendationText;
@@ -384,7 +389,7 @@ function renderDirective(option) {
   stanceBonus.textContent = option.stanceBonusText;
   stanceBonus.hidden = !option.stanceMatched;
 
-  badges.append(recommendation, finisherRecommendation, masteryBonus, stanceBonus);
+  badges.append(recommendation, planBonus, finisherRecommendation, masteryBonus, stanceBonus);
   head.append(name, badges);
 
   const summary = document.createElement("span");

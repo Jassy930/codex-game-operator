@@ -333,6 +333,15 @@ h2 {
   line-height: 1;
 }
 
+.directive-button .directive-plan-bonus {
+  padding: 3px 6px;
+  border-radius: 999px;
+  background: rgba(255, 217, 138, 0.16);
+  color: #fff1bc;
+  font-size: 0.68rem;
+  line-height: 1;
+}
+
 .directive-button .directive-stance-bonus {
   padding: 3px 6px;
   border-radius: 999px;
