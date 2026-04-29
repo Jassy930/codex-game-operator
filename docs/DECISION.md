@@ -21,8 +21,11 @@
 - 静态测试覆盖按钮推荐态渲染和样式。
 - `bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build` 已通过。
 - 构建产物包含 `is-recommended`、`directive-recommendation`、`recommendationText` 和“轮换推荐”。
+- GitHub Pages workflow 25129029268 已成功，线上地址返回 HTTP 200；线上 `app.js` 包含 `is-recommended`、`directive-recommendation` 和 `recommendationText`，线上 `game.js` 包含“轮换推荐/等待轮换”，线上 `styles.css` 包含 `.directive-button.is-recommended` 和 `.directive-recommendation`。
+- #3 已回复并继续保持 open，等待复测确认按钮层推荐是否让指令轮换更容易执行。
+- 回复后同步 GitHub Issues：2026-04-30 03:21 CST 当前仍为 3 个 open feedback issue、0 个 open bug issue；#3 更新时间为 2026-04-29T19:21:28Z。
 
-下一步：推送后等待 GitHub Pages workflow；线上确认按钮推荐态标记进入发布文件，再回复 #3 保持 open 等待复测。
+下一步：观察 #3 复测结论；若仍认为主动玩法不足，再评估轻量任务队列或指令消耗型分支。
 
 ## 2026-04-30 Product decision：星图列表默认本章筛选
 

@@ -6,6 +6,9 @@
 - #3 继续作为本轮 Product decision：航线指令、航线连携、指令轮换提示和 3/3 轮换奖励已经上线，但下一步建议仍只在提示行里，玩家需要把文字映射到具体按钮；本轮将轮换推荐直接标到指令按钮上。
 - 本轮改动在 `src/game.js` 让 `getDirectiveStatus` 基于 `getDirectivePlan.nextDirectiveIds` 输出 `recommended` 和 `recommendationText`，在 `src/app.js` 渲染 `is-recommended` 与 `directive-recommendation`，并在 `src/styles.css` 增加推荐态样式；不新增存档字段，不改变升级价格、星图 57 段路线、项目奖励、航线策略、指令基础收益、冷却、连携窗口、轮换目标奖励或反馈入口。
 - 本轮本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；构建产物已包含 `is-recommended`、`directive-recommendation`、`recommendationText` 和“轮换推荐”。
+- GitHub Pages workflow 25129029268 已成功，线上地址返回 HTTP 200；线上 `app.js` 包含 `is-recommended`、`directive-recommendation` 和 `recommendationText`，线上 `game.js` 包含“轮换推荐/等待轮换”，线上 `styles.css` 包含 `.directive-button.is-recommended` 和 `.directive-recommendation`。
+- #3 已回复：说明航线指令按钮轮换推荐已上线，提交 c4f9d10，issue 保持 open 等待复测。
+- 回复后同步 GitHub Issues：2026-04-30 03:21 CST 当前仍为 3 个 open feedback issue、0 个 open bug issue，#3 更新时间为 2026-04-29T19:21:28Z。
 
 - GitHub Issues：gh 可用且已认证；2026-04-30 02:55 CST 通过 REST API 同步到 3 个 open issue、3 个 open feedback issue、0 个 open bug issue。
 - #4 继续作为本轮 Product decision：星图视觉、插画、摘要折叠、项目图标和非当前航段详情折叠已经上线，但默认“全部”视图仍一次性展示 57 张项目卡片；本轮将星图列表初始筛选改为“本章”。
