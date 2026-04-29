@@ -851,14 +851,21 @@ test("静态首页会渲染星图章节视觉导航", () => {
   assert.match(indexHtml, /星图章节视觉导航/);
   assert.match(indexHtml, /project-chapter-tile is-current is-active/);
   assert.match(indexHtml, /<strong>远航长尾<\/strong>/);
+  assert.match(indexHtml, /project-chapter-visual is-long-tail/);
+  assert.match(indexHtml, /project-chapter-emblem/);
+  assert.match(indexHtml, /<span class="project-chapter-focus">远航航线<\/span>/);
   assert.match(indexHtml, /<span class="project-chapter-next">下一条 1\/44 星门远征<\/span>/);
   assert.match(appJs, /getProjectChapterVisuals/);
   assert.match(appJs, /function renderProjectChapterMap\(chapters\)/);
   assert.match(appJs, /projectChapterMap: document\.querySelector\("#projectChapterMap"\)/);
+  assert.match(appJs, /chapter\.visualClass/);
+  assert.match(appJs, /chapter\.focusText/);
   assert.match(appJs, /projectFilter = chapter\.filterId/);
   assert.match(styles, /\.project-chapter-map/);
   assert.match(styles, /\.project-chapter-tile/);
   assert.match(styles, /\.project-chapter-visual/);
+  assert.match(styles, /\.project-chapter-emblem/);
+  assert.match(styles, /\.project-chapter-focus/);
 });
 
 test("静态首页会引用主操作区工坊插画资产", () => {
@@ -2607,13 +2614,15 @@ test("星图章节视觉导航会返回章节进度和下一条目标", () => {
       chapter.filterId,
       chapter.progressText,
       chapter.status,
+      chapter.visualClass,
+      chapter.focusText,
       chapter.nextText
     ]),
     [
-      ["首段星图", "chapter-starter-map", "4/4", "completed", "已完成"],
-      ["专精校准", "chapter-mastery", "1/5", "current", "下一条 1/5 点火航校"],
-      ["深空基建", "chapter-deep-infra", "0/4", "pending", "下一条 1/4 远星中继"],
-      ["远航长尾", "chapter-long-tail", "0/44", "pending", "下一条 1/44 星门远征"]
+      ["首段星图", "chapter-starter-map", "4/4", "completed", "is-starter", "星核点亮", "已完成"],
+      ["专精校准", "chapter-mastery", "1/5", "current", "is-mastery", "策略校准", "下一条 1/5 点火航校"],
+      ["深空基建", "chapter-deep-infra", "0/4", "pending", "is-infra", "基建扩展", "下一条 1/4 远星中继"],
+      ["远航长尾", "chapter-long-tail", "0/44", "pending", "is-long-tail", "远航航线", "下一条 1/44 星门远征"]
     ]
   );
   assert.equal(getProjectChapterVisuals(active)[1].progress, 0.2);

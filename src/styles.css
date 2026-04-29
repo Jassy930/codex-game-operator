@@ -815,6 +815,48 @@ h2 {
   box-shadow: 0 0 18px rgba(244, 178, 60, 0.34);
 }
 
+.project-chapter-emblem {
+  position: absolute;
+  top: 5px;
+  right: 12px;
+  width: 25px;
+  height: 25px;
+  border: 2px solid currentColor;
+  color: #bdf4eb;
+}
+
+.project-chapter-visual.is-starter .project-chapter-emblem {
+  border-radius: 999px;
+  box-shadow:
+    inset 0 0 0 6px rgba(244, 178, 60, 0.18),
+    0 0 16px rgba(244, 178, 60, 0.24);
+}
+
+.project-chapter-visual.is-mastery .project-chapter-emblem {
+  width: 22px;
+  height: 22px;
+  transform: rotate(45deg);
+  border-radius: 5px;
+  color: #9bd3ff;
+}
+
+.project-chapter-visual.is-infra .project-chapter-emblem {
+  top: 8px;
+  width: 26px;
+  height: 18px;
+  border-top-width: 6px;
+  border-radius: 4px;
+  color: #96e7a8;
+}
+
+.project-chapter-visual.is-long-tail .project-chapter-emblem {
+  width: 28px;
+  height: 15px;
+  border-radius: 999px 999px 999px 2px;
+  color: #f1a0b0;
+  transform: rotate(-18deg);
+}
+
 .project-chapter-progress {
   position: absolute;
   right: 6px;
@@ -835,6 +877,7 @@ h2 {
 
 .project-chapter-tile strong,
 .project-chapter-meta,
+.project-chapter-focus,
 .project-chapter-next {
   min-width: 0;
   overflow-wrap: anywhere;
@@ -850,6 +893,12 @@ h2 {
 .project-chapter-meta {
   color: #bdf4eb;
   font-size: 0.78rem;
+  font-weight: 900;
+}
+
+.project-chapter-focus {
+  color: rgba(248, 243, 231, 0.82);
+  font-size: 0.7rem;
   font-weight: 900;
 }
 

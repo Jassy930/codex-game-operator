@@ -2,6 +2,12 @@
 
 ## 2026-04-30
 
+- GitHub Issues：gh 可用且已认证；2026-04-30 05:54 CST 通过 REST API 同步到 3 个 open issue、3 个 open feedback issue、0 个 open bug issue。
+- #4 继续作为本轮 Product decision：章节视觉导航已经可点击并显示进度，但四个章节的小图形仍共用同一种视觉语言，玩家仍主要依赖章节名和下一条目标文本区分阶段；本轮新增“星图章节视觉徽记”。
+- 本轮改动在 `PROJECT_CHAPTER_DEFS` 中为四个章节补充 `visualClass` 和 `focusText`：星核点亮、策略校准、基建扩展、远航航线；`src/app.js` 渲染 `project-chapter-emblem` 和 `project-chapter-focus`；`index.html` 与 `src/styles.css` 同步静态占位和四类徽记样式。本轮不新增存档字段，不改变升级价格、产能公式、星图 57 段路线、项目奖励、项目完成判定、航线策略、航线指令、反馈入口、筛选规则或章节点击逻辑。
+- 本轮本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数为 100 项。
+- 构建产物已包含 `project-chapter-emblem`、`project-chapter-focus`、`is-long-tail`、`visualClass`、`focusText` 和“远航航线”。
+
 - GitHub Issues：gh 可用且已认证；2026-04-30 05:39 CST 通过 REST API 同步到 3 个 open issue、3 个 open feedback issue、0 个 open bug issue。
 - #4 继续作为本轮 Product decision：已有星图插画、节点航线、折叠摘要、折叠详情和章节筛选，但玩家仍需要在筛选按钮与节点航线之间来回对应章节；本轮新增“星图章节视觉导航”。
 - 本轮改动在 `src/game.js` 新增 `getProjectChapterVisuals`，返回四个章节的完成进度、下一条目标、状态和对应筛选 id；`src/app.js` 渲染可点击的章节视觉按钮，点击后直接切换到对应章节筛选；`index.html` 和 `src/styles.css` 同步新增静态占位与固定尺寸视觉样式。本轮不新增存档字段，不改变升级价格、产能公式、星图 57 段路线、项目奖励、项目完成判定、航线策略、航线指令、反馈入口或既有筛选摘要结构。

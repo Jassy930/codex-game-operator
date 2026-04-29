@@ -1,5 +1,28 @@
 # Decision
 
+## 2026-04-30 Product decision：星图章节视觉徽记
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-04-30 05:54 CST 同步到 3 个 open feedback issue、0 个 open bug issue。没有新的 bug 或玩家复测结论；#4 仍是最近更新的视觉密度反馈，继续进入有反馈样本下的 Product decision。
+
+当前最大问题：星图已经有插画、节点航线、默认折叠摘要、非当前航段折叠、章节筛选入口和可点击章节视觉导航，但四个章节视觉按钮内部仍使用相同的轨道/核心小图形。玩家能点击章节，却还需要读章节名和下一条目标来区分“首段、专精、基建、远航”四个阶段。
+
+本轮决策：
+
+- 给四个章节补充不同的视觉徽记和短焦点标签：星核点亮、策略校准、基建扩展、远航航线。
+- `PROJECT_CHAPTER_DEFS` 作为单一数据源输出 `visualClass` 与 `focusText`，运行期和静态首页都复用这些视觉语义。
+- 视觉徽记只改变章节导航的扫视性；不新增存档字段，不改变升级价格、产能公式、星图 57 段路线、项目奖励、项目完成判定、航线策略、航线指令、反馈入口、筛选规则或章节点击逻辑。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-04-30 05:54 CST 查询到 3 个 open feedback issue、0 个 open bug issue；#4 作为本轮处理对象。
+- `getProjectChapterVisuals` 返回 `visualClass` 和 `focusText`；远航长尾为 `is-long-tail` 与“远航航线”。
+- 运行期章节视觉导航渲染 `project-chapter-emblem` 与 `project-chapter-focus`。
+- 静态首页包含 `project-chapter-visual is-long-tail`、`project-chapter-emblem` 和“远航航线”。
+- `bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build` 已通过；测试数 100 项。
+- 构建产物包含 `project-chapter-emblem`、`project-chapter-focus`、`is-long-tail`、`visualClass`、`focusText` 和“远航航线”。
+
+下一步：push 后等待 GitHub Pages workflow；线上验证通过后回复 #4，并继续保持 issue open 等待复测。
+
 ## 2026-04-30 Product decision：星图章节视觉导航
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-04-30 05:39 CST 同步到 3 个 open feedback issue、0 个 open bug issue。没有新的 bug 或玩家复测结论；#4 仍是最近更新的视觉密度反馈，继续进入有反馈样本下的 Product decision。

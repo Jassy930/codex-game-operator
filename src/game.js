@@ -1072,22 +1072,30 @@ export const PROJECT_CHAPTER_DEFS = [
   {
     name: "首段星图",
     startId: "stellar-map",
-    endId: "collector-grid"
+    endId: "collector-grid",
+    visualClass: "is-starter",
+    focusText: "星核点亮"
   },
   {
     name: "专精校准",
     startId: "ignition-drill",
-    endId: "balanced-tuning"
+    endId: "balanced-tuning",
+    visualClass: "is-mastery",
+    focusText: "策略校准"
   },
   {
     name: "深空基建",
     startId: "farstar-relay",
-    endId: "stellar-anchor"
+    endId: "stellar-anchor",
+    visualClass: "is-infra",
+    focusText: "基建扩展"
   },
   {
     name: "远航长尾",
     startId: "void-gate-expedition",
-    endId: "abyss-ark"
+    endId: "abyss-ark",
+    visualClass: "is-long-tail",
+    focusText: "远航航线"
   }
 ];
 
@@ -1734,6 +1742,8 @@ export function getProjectChapterVisuals(projects) {
       total,
       progress: total > 0 ? completed / total : 0,
       progressText: completed + "/" + total,
+      visualClass: chapter.visualClass,
+      focusText: chapter.focusText,
       nextText,
       status,
       title: chapter.name + " " + completed + "/" + total + " · " + nextText

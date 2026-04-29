@@ -602,7 +602,7 @@ function renderProjectChapterTile(chapter) {
   });
 
   const visual = document.createElement("span");
-  visual.className = "project-chapter-visual";
+  visual.className = ["project-chapter-visual", chapter.visualClass].filter(Boolean).join(" ");
   visual.setAttribute("aria-hidden", "true");
 
   const orbit = document.createElement("span");
@@ -611,13 +611,16 @@ function renderProjectChapterTile(chapter) {
   const core = document.createElement("span");
   core.className = "project-chapter-core";
 
+  const emblem = document.createElement("span");
+  emblem.className = "project-chapter-emblem";
+
   const progress = document.createElement("span");
   progress.className = "project-chapter-progress";
 
   const progressFill = document.createElement("span");
   progressFill.style.width = Math.round(chapter.progress * 100) + "%";
   progress.append(progressFill);
-  visual.append(orbit, core, progress);
+  visual.append(orbit, core, emblem, progress);
 
   const name = document.createElement("strong");
   name.textContent = chapter.name;
@@ -626,11 +629,15 @@ function renderProjectChapterTile(chapter) {
   meta.className = "project-chapter-meta";
   meta.textContent = chapter.progressText;
 
+  const focus = document.createElement("span");
+  focus.className = "project-chapter-focus";
+  focus.textContent = chapter.focusText;
+
   const next = document.createElement("span");
   next.className = "project-chapter-next";
   next.textContent = chapter.nextText;
 
-  button.append(visual, name, meta, next);
+  button.append(visual, name, meta, focus, next);
   return button;
 }
 
