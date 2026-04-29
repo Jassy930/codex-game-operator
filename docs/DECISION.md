@@ -1,5 +1,26 @@
 # Decision
 
+## 2026-04-29 Product decision：星渊回声门航段
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 当前仍有真实体验反馈 #2 open，且没有 open bug，继续进入有反馈样本下的 Product decision。
+
+当前最大问题：#2 仍围绕“内容丰富度太差，可玩的内容太少”保持 open。上一轮已把星图扩展到 32 段，但曜幕天穹完成后仍会再次暴露“全部完成，等待下一段航线”的边界；继续只补信息结构不会直接增加可玩的长尾目标。
+
+本轮决策：
+
+- 新增“星渊回声门”航段，要求累计 145M 能量，奖励总产能 +20%。
+- 星图路线从 32 段扩展到 33 段；远航长尾章节从 19 段扩展到 20 段。
+- 主目标、星图总览、里程碑、章节、奖励进度、航线构成、项目列表和静态 HTML 初始文案同步到 33 段。
+- 不新增存档字段、不调整既有奖励数值和升级价格；只在曜幕天穹之后追加一个可验证尾段。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-04-29 10:25 CST 查询到 1 个 open issue、1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
+- bun install --no-save、bun run test、bun run build、npm install、npm test 和 npm run build 已通过，覆盖曜幕天穹完成后继续指向星渊回声门、33 段航线序号、章节余量、奖励分布和全部完成状态。
+- 构建产物已包含“星渊回声门”、`abyss-echo-gate`、“星图进度 0/33”和“24 个累计航段”。
+
+下一步：完成发布和 #2 回复后，继续观察复测是否认为 145M 后续航段改善长尾内容丰富度。
+
 ## 2026-04-29 Product decision：曜幕天穹航段
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 当前仍有真实体验反馈 #2 open，且没有 open bug，继续进入有反馈样本下的 Product decision。

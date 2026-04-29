@@ -603,6 +603,20 @@ export const PROJECT_DEFS = [
     current(state) {
       return state.totalEnergy;
     }
+  },
+  {
+    id: "abyss-echo-gate",
+    name: "星渊回声门",
+    summary: "累计 145M 能量，在曜幕天穹外打开星渊回声门。",
+    unit: "能量",
+    target: 145_000_000,
+    reward: "总产能 +20%",
+    effect: {
+      totalMultiplier: 1.2
+    },
+    current(state) {
+      return state.totalEnergy;
+    }
   }
 ];
 
@@ -625,7 +639,7 @@ export const PROJECT_CHAPTER_DEFS = [
   {
     name: "远航长尾",
     startId: "void-gate-expedition",
-    endId: "solar-veil-dome"
+    endId: "abyss-echo-gate"
   }
 ];
 
