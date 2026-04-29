@@ -8,7 +8,9 @@
 - 同步 GitHub Issues 反馈状态：当前 3 个 open feedback issue、0 个 open bug issue；#4 继续指向视觉密度和图片需求。
 - 验证通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`。
 - 静态测试覆盖首页、样式和 SVG 资产引用链路；构建产物已确认包含 `workshop-scene-image`、`workshop-visual.svg`、“星核工坊主操作插画”和 `energyBeam`。
-- GitHub Pages 发布和 #4 回复待 push 后验证。
+- GitHub Pages workflow 25123181571 已成功，线上地址返回 HTTP 200，且发布文件包含 `workshop-scene-image`、`workshop-visual.svg`、“星核工坊主操作插画”和 `energyBeam`。
+- 已回复 #4，说明主操作区工坊插画已部署，并保持 issue open 等待复测。
+- 回复后同步 GitHub Issues 反馈状态：当前 3 个 open feedback issue、0 个 open bug issue；#4 更新时间为 2026-04-29T17:15:21Z。
 - 新增航线连携：100K 后轮换不同航线指令会在 90 秒内获得连携加成，第一次轮换 +12%，再次轮换封顶 +24%，重复同类或超时重置。
 - 航线指令预计收益和执行提示会显示“航线连携”加成，本地 `directive` 事件新增连携层数和连携倍率字段。
 - 旧存档会自动补齐 `directiveChain`；本轮不改变升级价格、星图 57 段路线、项目奖励、航线策略、指令基础冷却或筛选规则。

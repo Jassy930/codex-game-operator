@@ -19,8 +19,11 @@
 - 静态首页包含 `workshop-scene-image`、`src/assets/workshop-visual.svg` 和工坊插画 alt 文案。
 - 测试覆盖首页、样式和 SVG 资产引用链路。
 - `bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build` 通过；构建产物包含 `workshop-scene-image`、`workshop-visual.svg`、“星核工坊主操作插画”和 `energyBeam`。
+- GitHub Pages workflow 25123181571 已成功，线上地址返回 HTTP 200；线上首页包含 `workshop-scene-image` 和 `workshop-visual.svg`，线上样式包含 `workshop-scene-image`，线上 SVG 包含“星核工坊主操作插画”和 `energyBeam`。
+- #4 已回复并继续保持 open，等待复测确认主操作区工坊插画是否改善第一眼视觉观感。
+- 回复后同步 GitHub Issues：2026-04-30 01:15 CST 查询到 3 个 open feedback issue、0 个 open bug issue；#4 更新时间为 2026-04-29T17:15:21Z。
 
-下一步：push 后等待 GitHub Pages workflow，验证线上资源并回复 #4；若 #4 复测仍认为画面不足，再评估章节级插图或升级卡片图标化。
+下一步：观察 #4 复测结论；若仍认为画面不足，再评估章节级插图或升级卡片图标化。
 
 ## 2026-04-30 Product decision：航线连携
 
