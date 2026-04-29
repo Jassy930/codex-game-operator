@@ -517,6 +517,10 @@ test("星图总览会显示完成数和下一段奖励", () => {
     "章节奖励：首段星图 总产能 1 / 点击 1 / 自动 1 / 过载 1 · 专精校准 总产能 3 / 点击 1 / 自动 1 · 深空基建 总产能 1 / 点击 1 / 自动 2 · 远航长尾 总产能 5 / 点击 5 / 自动 4 / 过载 4"
   );
   assert.equal(
+    overview.rewardProgressText,
+    "奖励进度：总产能 1/10 · 点击 0/8 · 自动 0/8 · 过载 0/5"
+  );
+  assert.equal(
     overview.compositionText,
     "航线构成：22 个累计航段 · 9 个升级航段 · 奖励分布 总产能 10 段 / 点击 8 段 / 自动 8 段 / 过载 5 段"
   );
@@ -539,6 +543,10 @@ test("星图总览在首个项目前会提示等待奖励生效", () => {
   assert.equal(
     overview.chapterRewardText,
     "章节奖励：首段星图 总产能 1 / 点击 1 / 自动 1 / 过载 1 · 专精校准 总产能 3 / 点击 1 / 自动 1 · 深空基建 总产能 1 / 点击 1 / 自动 2 · 远航长尾 总产能 5 / 点击 5 / 自动 4 / 过载 4"
+  );
+  assert.equal(
+    overview.rewardProgressText,
+    "奖励进度：总产能 0/10 · 点击 0/8 · 自动 0/8 · 过载 0/5"
   );
   assert.equal(overview.bonusText, "生效加成：等待首个星图奖励");
 });
@@ -1219,6 +1227,10 @@ test("星图总览会显示全部完成状态", () => {
   assert.equal(
     overview.chapterRewardText,
     "章节奖励：首段星图 总产能 1 / 点击 1 / 自动 1 / 过载 1 · 专精校准 总产能 3 / 点击 1 / 自动 1 · 深空基建 总产能 1 / 点击 1 / 自动 2 · 远航长尾 总产能 5 / 点击 5 / 自动 4 / 过载 4"
+  );
+  assert.equal(
+    overview.rewardProgressText,
+    "奖励进度：总产能 10/10 · 点击 8/8 · 自动 8/8 · 过载 5/5"
   );
   assert.equal(
     overview.bonusText,

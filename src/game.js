@@ -870,6 +870,7 @@ export function getProjectOverview(state) {
   const chapterText = buildProjectChapterText(projects, nextProject);
   const chapterTargetText = buildProjectChapterTargetText(projects);
   const chapterRewardText = buildProjectChapterRewardText(projects);
+  const rewardProgressText = buildProjectRewardProgressText(projects);
 
   if (!nextProject) {
     return {
@@ -883,6 +884,7 @@ export function getProjectOverview(state) {
       chapterText,
       chapterTargetText,
       chapterRewardText,
+      rewardProgressText,
       compositionText,
       bonusText,
       forecastText: "航线预告：等待下一段航线"
@@ -914,6 +916,7 @@ export function getProjectOverview(state) {
     chapterText,
     chapterTargetText,
     chapterRewardText,
+    rewardProgressText,
     compositionText,
     bonusText,
     forecastText:
@@ -1202,6 +1205,50 @@ function buildProjectCompositionText(projects) {
     " 个升级航段 · 奖励分布 " +
     rewardText
   );
+}
+
+function buildProjectRewardProgressText(projects) {
+  const rewardCounts = projects.reduce(
+    (counts, project) => {
+      const effect = project.effect ?? {};
+      return {
+        total: countRewardProgress(counts.total, project.completed, effect.totalMultiplier),
+        click: countRewardProgress(counts.click, project.completed, effect.clickMultiplier),
+        second: countRewardProgress(counts.second, project.completed, effect.secondMultiplier),
+        overload: countRewardProgress(
+          counts.overload,
+          project.completed,
+          effect.overloadMultiplier
+        )
+      };
+    },
+    {
+      total: { completed: 0, total: 0 },
+      click: { completed: 0, total: 0 },
+      second: { completed: 0, total: 0 },
+      overload: { completed: 0, total: 0 }
+    }
+  );
+  const rewardText = [
+    ["总产能", rewardCounts.total],
+    ["点击", rewardCounts.click],
+    ["自动", rewardCounts.second],
+    ["过载", rewardCounts.overload]
+  ]
+    .filter(([, count]) => count.total > 0)
+    .map(([label, count]) => label + " " + count.completed + "/" + count.total)
+    .join(" · ");
+
+  return "奖励进度：" + rewardText;
+}
+
+function countRewardProgress(count, completed, effectValue) {
+  const hasReward = Boolean(effectValue);
+
+  return {
+    completed: count.completed + Number(hasReward && completed),
+    total: count.total + Number(hasReward)
+  };
 }
 
 function buildProjectChapterTargetText(projects) {
