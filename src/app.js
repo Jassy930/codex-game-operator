@@ -328,6 +328,7 @@ function renderDirective(option) {
         directive: option.id,
         gain: result.gain,
         rotationReward: result.rotationReward,
+        stanceFinisherReward: result.stanceFinisherReward,
         stanceBonus: result.stanceBonus,
         stanceBonusRate: result.stanceBonusRate,
         chainStacks: result.chainStacks,

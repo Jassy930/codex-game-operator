@@ -11,6 +11,7 @@ import {
   clickCore,
   createInitialState,
   DIRECTIVE_STANCE_BONUS_RATE,
+  DIRECTIVE_STANCE_FINISHER_RATE,
   filterProjectStatuses,
   formatNumber,
   getComboStatus,
@@ -190,11 +191,11 @@ test("航线指令会返回轮换目标提示", () => {
   assert.equal(locked.summaryText, "指令轮换：累计 100K 能量后解锁 90 秒连携目标");
   assert.equal(
     locked.text,
-    "指令轮换：累计 100K 能量后解锁 90 秒连携目标 · 解锁后轮换不同航线指令，匹配当前航线策略可获得策略契合加成，完成 3/3 获得轮换目标奖励。"
+    "指令轮换：累计 100K 能量后解锁 90 秒连携目标 · 解锁后轮换不同航线指令，匹配当前航线策略可获得策略契合加成，完成 3/3 并收束到契合指令可获得策略终结奖励。"
   );
   assert.equal(ready.progress, 0);
   assert.equal(ready.target, 3);
-  assert.equal(ready.text, "指令轮换 0/3 · 先执行任意航线指令 · 匹配当前航线策略可获得策略契合 +10% · 随后在 90 秒内切换不同指令，完成 3/3 获得轮换目标奖励。");
+  assert.equal(ready.text, "指令轮换 0/3 · 先执行任意航线指令 · 匹配当前航线策略可获得策略契合 +10% · 随后在 90 秒内切换不同指令，完成 3/3 并收束到契合指令可获得策略终结奖励。");
 });
 
 test("执行航线指令会获得即时收益并进入冷却", () => {
@@ -258,23 +259,39 @@ test("轮换航线指令会触发航线连携收益", () => {
   assert.equal(second.notice, "已执行巡航回收，航线连携 +12%，+50.2 能量。");
   assert.equal(
     secondPlan.text,
-    "指令轮换 2/3 · 当前 巡航回收 · 连携窗口 1.5 分钟 · 下一步切换到谐振脉冲，预计连携 +24%，并触发轮换目标奖励。"
+    "指令轮换 2/3 · 当前 巡航回收 · 连携窗口 1.5 分钟 · 下一步切换到谐振脉冲，预计连携 +24%，并触发轮换目标奖励；收束到谐振脉冲还会触发策略终结奖励。"
   );
   assert.equal(resonanceOption.recommended, true);
   assert.equal(resonanceOption.recommendationText, "轮换推荐");
   assert.equal(
     resonanceOption.previewText,
-    "预计 +24.5 能量 · 航线连携 +24% · 轮换目标 +2.8 · 策略契合 +10%"
+    "预计 +26.6 能量 · 航线连携 +24% · 轮换目标 +2.8 · 策略终结 +1.9 · 策略契合 +10%"
   );
   assert.equal(third.chainStacks, 2);
   assert.equal(third.chainMultiplier, 1.24);
   assert.equal(third.rotationReward, 2.8224);
-  assert.equal(third.stanceBonus, 2.2266);
-  assert.equal(third.gain, 24.4922);
+  assert.equal(third.stanceFinisherReward, 1.8816);
+  assert.equal(third.stanceBonus, 2.4147);
+  assert.equal(third.gain, 26.5619);
   assert.equal(third.chainBonusText, "航线连携 +24%");
   assert.equal(third.rotationRewardText, "轮换目标 +2.8");
+  assert.equal(third.stanceFinisherText, "策略终结 +1.9");
   assert.equal(third.stanceBonusText, "策略契合 +10%");
-  assert.equal(third.notice, "已执行谐振脉冲，航线连携 +24%，轮换目标 +2.8，策略契合 +10%，+24.5 能量。");
+  assert.equal(third.notice, "已执行谐振脉冲，航线连携 +24%，轮换目标 +2.8，策略终结 +1.9，策略契合 +10%，+26.6 能量。");
+  assert.equal(DIRECTIVE_STANCE_FINISHER_RATE, 0.12);
+
+  const nonMatchedFirst = activateDirective(
+    { ...state, routeStance: "ignition" },
+    "ignition-salvo",
+    1000
+  );
+  const nonMatchedSecond = activateDirective(nonMatchedFirst.state, "cruise-cache", 2000);
+  const nonMatchedThird = activateDirective(nonMatchedSecond.state, "resonance-pulse", 3000);
+
+  assert.equal(nonMatchedThird.chainStacks, 2);
+  assert.equal(nonMatchedThird.rotationReward > 0, true);
+  assert.equal(nonMatchedThird.stanceFinisherReward, 0);
+  assert.equal(nonMatchedThird.stanceFinisherText, "");
 });
 
 test("航线连携超时后会重置", () => {
@@ -816,8 +833,9 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(indexHtml, /id="directivePlan"/);
   assert.match(indexHtml, /指令轮换：累计 100K 能量后解锁 90 秒连携目标/);
   assert.match(indexHtml, /策略契合加成/);
-  assert.match(indexHtml, /完成 3\/3 获得轮换目标奖励/);
+  assert.match(indexHtml, /策略终结奖励/);
   assert.match(appJs, /rotationReward: result\.rotationReward/);
+  assert.match(appJs, /stanceFinisherReward: result\.stanceFinisherReward/);
   assert.match(appJs, /stanceBonus: result\.stanceBonus/);
   assert.match(appJs, /directivePlan: document\.querySelector\("#directivePlan"\)/);
   assert.match(appJs, /elements\.directivePlan\.textContent = directives\.plan\.text/);

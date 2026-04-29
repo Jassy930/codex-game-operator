@@ -1,5 +1,28 @@
 # Decision
 
+## 2026-04-30 Product decision：航线策略终结奖励
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-04-30 03:45 CST 同步到 3 个 open feedback issue、0 个 open bug issue。#3 仍是更新时间最新的玩法反馈，核心问题仍是“玩法太简单、只有点击和自动产能”；本轮继续进入有反馈样本下的 Product decision。
+
+当前最大问题：航线指令已经有冷却、连携、轮换目标、3/3 奖励、按钮推荐和策略契合 +10%，但 3/3 轮换的收束顺序仍可以随意完成。当前航线策略还没有把“第三步应该用哪个指令收束”变成明确目标。
+
+本轮决策：
+
+- 新增 `DIRECTIVE_STANCE_FINISHER_RATE = 0.12`，完成 3/3 轮换且本次指令匹配当前航线策略时，额外获得基础指令收益 12% 的“策略终结”奖励。
+- 指令预计收益、执行反馈、轮换目标提示和本地 `directive` 事件记录 `stanceFinisherReward`，让玩家看到“把轮换收束到契合指令”的收益。
+- 本轮只调整航线指令短期目标；不新增存档字段，不改变升级价格、产能公式、星图 57 段路线、项目奖励、指令冷却、连携窗口、轮换目标奖励、策略契合 +10%、反馈入口或筛选规则。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-04-30 03:45 CST 查询到 3 个 open feedback issue、0 个 open bug issue；#3 作为本轮处理对象。
+- 默认均衡航线下，以谐振脉冲完成第三步轮换时，预计收益同时显示“航线连携 +24%”“轮换目标 +2.8”“策略终结 +1.9”和“策略契合 +10%”，总预计收益为 26.6。
+- 非契合指令完成第三步轮换时仍获得轮换目标奖励，但 `stanceFinisherReward` 为 0。
+- 本地 `directive` 事件记录 `stanceFinisherReward`。
+- `bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build` 已通过。
+- 构建产物包含 `DIRECTIVE_STANCE_FINISHER_RATE`、`stanceFinisherReward`、“策略终结”和“完成 3/3 并收束”。
+
+下一步：提交并推送后观察 #3 复测结论；若仍认为主动玩法不足，再评估资源消耗型指令或独立短期任务队列。
+
 ## 2026-04-30 Product decision：航线策略契合指令
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-04-30 03:26 CST 同步到 3 个 open feedback issue、0 个 open bug issue。#3 更新时间晚于 #4，且仍指向“玩法太简单、只有点击和自动产能”；本轮继续进入有反馈样本下的 Product decision。

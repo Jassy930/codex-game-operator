@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+- 航线指令新增“策略终结”奖励：完成 3/3 指令轮换且本次指令匹配当前航线策略时，额外获得基础指令收益 12%。
+- `src/game.js` 新增 `DIRECTIVE_STANCE_FINISHER_RATE`、策略终结奖励计算、预计收益/执行反馈/轮换提示文案；`src/app.js` 在本地 `directive` 事件记录 `stanceFinisherReward`；首页静态轮换提示同步说明“完成 3/3 并收束到契合指令”。
+- 本轮只调整航线指令短期目标；不新增存档字段，不改变升级价格、产能公式、星图 57 段路线、项目奖励、指令冷却、连携窗口、轮换目标奖励、策略契合 +10%、反馈入口或筛选规则。
+- 同步 GitHub Issues 反馈状态：当前 3 个 open feedback issue、0 个 open bug issue；#3 继续指向玩法单薄并作为本轮处理对象。
+- 验证通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`。
+- 构建产物已确认包含 `DIRECTIVE_STANCE_FINISHER_RATE`、`stanceFinisherReward`、“策略终结”和“完成 3/3 并收束”。
 - 航线策略新增契合指令：均衡航线契合谐振脉冲，点火优先契合点火齐射，巡航优先契合巡航回收，匹配当前策略的航线指令获得“策略契合 +10%”收益。
 - `src/game.js` 新增 `DIRECTIVE_STANCE_BONUS_RATE`、策略契合收益计算和指令预计收益/执行反馈文案；`src/app.js` 在本地 `directive` 事件记录 `stanceBonus` 与 `stanceBonusRate`，并渲染 `directive-badges` / `directive-stance-bonus`；`src/styles.css` 新增策略契合徽标样式。
 - 本轮只打通航线策略和航线指令；不新增存档字段，不改变升级价格、产能公式、星图 57 段路线、项目奖励、指令冷却、连携窗口、轮换目标奖励、反馈入口或筛选规则。
