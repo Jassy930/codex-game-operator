@@ -757,6 +757,20 @@ export const PROJECT_DEFS = [
     current(state) {
       return state.totalEnergy;
     }
+  },
+  {
+    id: "radiant-wing-cruise-haven",
+    name: "辉翼巡航港",
+    summary: "累计 2.8B 能量，在星辉远港外铺设辉翼巡航港。",
+    unit: "能量",
+    target: 2_800_000_000,
+    reward: "自动产能 +25%",
+    effect: {
+      secondMultiplier: 1.25
+    },
+    current(state) {
+      return state.totalEnergy;
+    }
   }
 ];
 
@@ -779,7 +793,7 @@ export const PROJECT_CHAPTER_DEFS = [
   {
     name: "远航长尾",
     startId: "void-gate-expedition",
-    endId: "starglow-far-harbor"
+    endId: "radiant-wing-cruise-haven"
   }
 ];
 

@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+- 新增 2.8B 后辉翼巡航港航段：星辉远港完成后继续出现累计能量目标，完成后奖励自动产能 +25%，星图路线扩展到 44 段。
+- 同步星图总览、里程碑、章节、奖励进度、航线构成、项目列表、静态 HTML 初始文案和 README 到 44 段。
+- 同步 GitHub Issues 反馈状态：当前 1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
+- 验证通过：bun install --no-save、bun run test、bun run build、npm install、npm test、npm run build。
+- 构建产物已包含“辉翼巡航港”、`radiant-wing-cruise-haven`、“星图进度 0/44”、“35 个累计航段”和“自动 0/12”。
+- GitHub Pages 部署待主分支 push 后验证。
 - 新增 2.1B 后星辉远港航段：星潮谐振庭完成后继续出现累计能量目标，完成后奖励点击产能 +25%，星图路线扩展到 43 段。
 - 同步星图总览、里程碑、章节、奖励进度、航线构成、项目列表、静态 HTML 初始文案和 README 到 43 段。
 - 同步 GitHub Issues 反馈状态：当前 1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
