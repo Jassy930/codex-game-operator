@@ -20,8 +20,11 @@
 - `tests/game.test.js` 覆盖 2/3 未完成态和 3/3 完成态的 `progress` / `target` / `completed`。
 - `bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build` 已通过；测试数 102 项。
 - 构建产物包含 `directive-task-meter`、`renderDirectiveTask`、“航线委托进度”和 `is-completed`。
+- 提交 40efcb0 已推送；GitHub Pages workflow 25139616313 已成功，线上地址返回 HTTP 200；线上首页包含 `directive-task-meter` 和“航线委托进度”，线上 `app.js` 包含 `renderDirectiveTask`，线上 `styles.css` 包含 `directive-task-meter` 与完成态样式。
+- #3 已回复并继续保持 open，等待复测确认航线委托进度条是否让航线指令更像可完成、可扫视的短期主动任务。
+- 回复后同步 GitHub Issues：2026-04-30 07:44 CST 当前为 4 个 open feedback issue、0 个 open bug issue；本轮工作期间新增 #5，已补 `feedback` 标签并回复，下一轮优先评估点火按钮点击反馈、特效和点击欲望。
 
-下一步：部署并回复 #3，等待复测航线委托进度条是否让主动任务更容易扫视。
+下一步：优先处理 #5，围绕点火按钮即时反馈、连击前兆和轻量特效做最小可验证改动。
 
 ## 2026-04-30 Product decision：航线委托短期任务
 

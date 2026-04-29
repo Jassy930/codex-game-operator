@@ -7,6 +7,10 @@
 - 本轮改动让 `directiveTask` 从单纯文本变成文本 + `directive-task-meter`，运行期 `renderDirectiveTask` 使用 `task.progress` / `task.target` / `task.completed` 渲染 0/3、2/3、3/3，并在完成态切换 `is-completed`。本轮不新增存档字段，不改变升级价格、产能公式、星图 57 段路线、项目奖励、指令基础收益、冷却、连携窗口、轮换目标奖励、预案执行、策略契合、策略终结、指令熟练、满层回响、航线委托奖励或筛选规则。
 - 本轮本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数为 102 项。
 - 构建产物已包含 `directive-task-meter`、`renderDirectiveTask`、“航线委托进度”和 `is-completed`。
+- 提交 40efcb0 已推送；GitHub Pages workflow 25139616313 已成功，线上地址返回 HTTP 200；线上首页、`app.js` 和 `styles.css` 已确认包含航线委托进度条相关标记。
+- #3 已回复：说明航线委托进度条已部署，issue 保持 open 等待复测。
+- 回复后同步 GitHub Issues：2026-04-30 07:44 CST 当前为 4 个 open feedback issue、0 个 open bug issue；#3 更新时间为 2026-04-29T23:43:58Z。
+- 本轮工作期间新增 #5：“点火按钮太薄弱了，增加点击反馈，增加特效，增加点击欲望”。已补 `feedback` 标签并回复，issue 保持 open；下一轮优先处理点火按钮点击反馈。
 
 - GitHub Issues：gh 可用且已认证；2026-04-30 07:24 CST 通过 REST API 同步到 3 个 open issue、3 个 open feedback issue、0 个 open bug issue。
 - #3 继续作为本轮 Product decision：航线指令已经有推荐预案、预案执行奖励、策略终结、指令熟练和满层回响，但仍缺少独立显示的短期任务目标；本轮新增“航线委托”。

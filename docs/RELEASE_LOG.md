@@ -8,6 +8,9 @@
 - 同步 GitHub Issues 反馈状态：当前 3 个 open feedback issue、0 个 open bug issue；#3 继续指向玩法单薄并作为本轮处理对象。
 - 验证通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 102 项。
 - 构建产物已确认包含 `directive-task-meter`、`renderDirectiveTask`、“航线委托进度”和 `is-completed`。
+- GitHub Pages workflow 25139616313 已成功，线上地址返回 HTTP 200，且线上首页、`app.js` 和 `styles.css` 已确认包含航线委托进度条相关标记。
+- 已回复 #3，说明航线委托进度条已部署，并保持 issue open 等待复测。
+- 回复后同步 GitHub Issues 反馈状态：当前 4 个 open feedback issue、0 个 open bug issue；#5 已补 `feedback` 标签并回复，下一轮优先处理点火按钮点击反馈。
 - 航线指令新增“航线委托”短期任务：100K 后显示 0/3 到 3/3 的推荐轮换委托，完成 3/3 推荐轮换时获得“委托完成”奖励。
 - `src/game.js` 新增 `DIRECTIVE_TASK_REWARD_RATE`、`getDirectiveTaskStatus`、委托完成收益计算和执行反馈；`index.html` / `src/app.js` 新增 `directiveTask` 展示；`src/styles.css` 新增 `directive-task` 与 `directive-task-bonus` 样式；`tests/game.test.js` 覆盖锁定态、0/3、2/3、3/3 完成态、按钮徽标、预计收益和执行反馈。
 - 本轮只调整航线指令短期任务和推荐收束奖励；不新增存档字段，不改变升级价格、产能公式、星图 57 段路线、项目奖励、指令基础收益、冷却、连携窗口、轮换目标奖励、预案执行、策略契合、策略终结、指令熟练、满层回响或筛选规则。
