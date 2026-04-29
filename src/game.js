@@ -897,6 +897,20 @@ export const PROJECT_DEFS = [
     current(state) {
       return state.totalEnergy;
     }
+  },
+  {
+    id: "radiant-abyss-resonance-gate",
+    name: "曜渊谐振门",
+    summary: "累计 50B 能量，在曜翼星门外开启曜渊谐振门。",
+    unit: "能量",
+    target: 50_000_000_000,
+    reward: "过载奖励 +30%",
+    effect: {
+      overloadMultiplier: 1.3
+    },
+    current(state) {
+      return state.totalEnergy;
+    }
   }
 ];
 
@@ -919,7 +933,7 @@ export const PROJECT_CHAPTER_DEFS = [
   {
     name: "远航长尾",
     startId: "void-gate-expedition",
-    endId: "radiant-wing-stargate"
+    endId: "radiant-abyss-resonance-gate"
   }
 ];
 
