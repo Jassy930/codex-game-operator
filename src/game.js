@@ -687,6 +687,20 @@ export const PROJECT_DEFS = [
     current(state) {
       return state.totalEnergy;
     }
+  },
+  {
+    id: "aurora-spectrum-station",
+    name: "极光谱站",
+    summary: "累计 720M 能量，在穹海棱镜外校准极光谱站。",
+    unit: "能量",
+    target: 720_000_000,
+    reward: "点击产能 +23%",
+    effect: {
+      clickMultiplier: 1.23
+    },
+    current(state) {
+      return state.totalEnergy;
+    }
   }
 ];
 
@@ -709,7 +723,7 @@ export const PROJECT_CHAPTER_DEFS = [
   {
     name: "远航长尾",
     startId: "void-gate-expedition",
-    endId: "skysea-prism"
+    endId: "aurora-spectrum-station"
   }
 ];
 
