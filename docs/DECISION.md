@@ -1,5 +1,26 @@
 # Decision
 
+## 2026-04-29 Product decision：星图筛选状态构成
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 当前仍有真实体验反馈 #2 open，且没有 open bug，继续进入有反馈样本下的 Product decision。
+
+当前最大问题：#2 仍围绕“内容丰富度太差，可玩的内容太少”保持 open。上一轮已给每个星图项目卡片新增状态标签，但玩家切到全部、本章、升级、奖励类型或已完成视图后，仍需要扫描卡片才能知道当前视图里已完成、当前推进和待推进内容各有多少。
+
+本轮决策：
+
+- 不追加第 58 段，先让星图筛选摘要显示当前视图的状态构成。
+- 状态构成按当前筛选视图统计“已完成 / 当前 / 待推进”航段数，复用项目卡片已有的完成状态和第一个未完成航段判定。
+- 空筛选仍只显示没有匹配航段；已完成筛选只显示已完成段数；当前筛选只显示当前段数。
+- 不新增存档字段，不改变项目完成判定、奖励数值、升级价格、航线策略、筛选规则和 57 段星图顺序。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-04-29 22:04 CST 查询到 1 个 open issue、1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
+- `bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build` 已通过，测试覆盖本章、升级、当前和已完成筛选的状态构成。
+- 静态首页初始筛选摘要已包含“状态构成 当前 1 段 / 待推进 56 段”。
+
+下一步：推送后等待 GitHub Pages 部署，并回复 #2 说明筛选摘要状态构成已上线，继续等待复测确认。
+
 ## 2026-04-29 Product decision：星图项目状态标签
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 当前仍有真实体验反馈 #2 open，且没有 open bug，继续进入有反馈样本下的 Product decision。

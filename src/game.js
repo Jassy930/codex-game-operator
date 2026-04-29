@@ -1342,6 +1342,7 @@ export function getProjectFilterSummary(projects, filterId = DEFAULT_PROJECT_FIL
       visibleProjects.length +
       " 段 · 全部已完成" +
       formatProjectFilterCompletion(completed, visibleProjects.length) +
+      formatProjectFilterStatusMix(visibleProjects) +
       formatProjectFilterRewardMix(visibleProjects) +
       formatProjectFilterTrackMix(visibleProjects) +
       formatProjectFilterClaimedRewardMix(visibleProjects) +
@@ -1359,6 +1360,7 @@ export function getProjectFilterSummary(projects, filterId = DEFAULT_PROJECT_FIL
     "/" +
     visibleProjects.length +
     formatProjectFilterCompletion(completed, visibleProjects.length) +
+    formatProjectFilterStatusMix(visibleProjects) +
     formatProjectFilterRewardMix(visibleProjects) +
     formatProjectFilterTrackMix(visibleProjects) +
     formatProjectFilterClaimedRewardMix(visibleProjects) +
@@ -2042,6 +2044,31 @@ function formatProjectFilterCompletion(completed, total) {
   const percent = total > 0 ? Math.round((completed / total) * 100) : 0;
 
   return " · 完成率 " + percent + "% · 剩余 " + remaining + " 段";
+}
+
+function formatProjectFilterStatusMix(projects) {
+  const statusCounts = projects.reduce(
+    (counts, project) => ({
+      completed: counts.completed + Number(project.completed),
+      current: counts.current + Number(!project.completed && project.isCurrent),
+      pending: counts.pending + Number(!project.completed && !project.isCurrent)
+    }),
+    {
+      completed: 0,
+      current: 0,
+      pending: 0
+    }
+  );
+  const statusText = [
+    ["已完成", statusCounts.completed],
+    ["当前", statusCounts.current],
+    ["待推进", statusCounts.pending]
+  ]
+    .filter(([, count]) => count > 0)
+    .map(([label, count]) => label + " " + count + " 段")
+    .join(" / ");
+
+  return statusText ? " · 状态构成 " + statusText : "";
 }
 
 function formatProjectFilterPreview(projects) {
