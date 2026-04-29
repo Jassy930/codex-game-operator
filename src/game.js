@@ -925,6 +925,20 @@ export const PROJECT_DEFS = [
     current(state) {
       return state.totalEnergy;
     }
+  },
+  {
+    id: "abyss-cruise-ring",
+    name: "星渊巡航环",
+    summary: "累计 91B 能量，在星渊点火塔外铺设星渊巡航环。",
+    unit: "能量",
+    target: 91_000_000_000,
+    reward: "自动产能 +31%",
+    effect: {
+      secondMultiplier: 1.31
+    },
+    current(state) {
+      return state.totalEnergy;
+    }
   }
 ];
 
@@ -947,7 +961,7 @@ export const PROJECT_CHAPTER_DEFS = [
   {
     name: "远航长尾",
     startId: "void-gate-expedition",
-    endId: "abyss-ignition-spire"
+    endId: "abyss-cruise-ring"
   }
 ];
 
