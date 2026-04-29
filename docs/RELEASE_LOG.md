@@ -7,6 +7,9 @@
 - 旧存档会自动补齐 `directiveChain`；本轮不改变升级价格、星图 57 段路线、项目奖励、航线策略、指令基础冷却或筛选规则。
 - 同步 GitHub Issues 反馈状态：当前 3 个 open feedback issue、0 个 open bug issue；#3 继续指向玩法单薄并作为本轮处理对象。
 - 验证通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；新增测试覆盖航线连携预计收益、执行收益、+12%/+24% 层数和 90 秒超时重置，构建产物已包含 `DIRECTIVE_CHAIN_WINDOW_SECONDS`、`directiveChain` 和“航线连携”。
+- GitHub Pages workflow 25122478541 已成功，线上地址返回 HTTP 200，且线上脚本包含 `DIRECTIVE_CHAIN_WINDOW_SECONDS`、`directiveChain`、`chainMultiplier`、`chainStacks` 和“航线连携”。
+- 已回复 #3，说明航线连携已部署，并保持 issue open 等待复测。
+- 回复后同步 GitHub Issues 反馈状态：当前 3 个 open feedback issue、0 个 open bug issue；#3 更新时间为 2026-04-29T17:00:51Z。
 - 星图总览新增默认折叠的“星图明细”：主视图保留星图进度、当前进度、行动建议和航线预告，目标分轨、阶段导航、章节目标、章节奖励、奖励进度、奖励目标、里程碑、航线焦点、航线构成和生效加成移入可展开明细。
 - 新增 `project-detail-drawer` 和 `project-detail-grid` 样式，降低星图计划区域默认文字密度。
 - 本轮只调整展示结构和样式；不新增存档字段，不改变升级价格、星图 57 段路线、项目奖励、航线策略、航线指令或筛选规则。

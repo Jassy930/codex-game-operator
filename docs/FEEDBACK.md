@@ -6,6 +6,9 @@
 - #3 继续作为本轮 Product decision：玩家认为玩法“只有点击和自动产能”，上一轮航线指令已补主动按钮，但三个指令仍缺少顺序规划。本轮新增 90 秒“航线连携”，鼓励玩家轮换不同指令。
 - 本轮改动新增 `directiveChain` 存档字段、连携收益预览、执行提示和 `directive` 事件字段；不改变升级价格、星图 57 段路线、项目奖励、航线策略、指令基础冷却或筛选规则。
 - 本轮本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试覆盖航线连携预计收益、+12%/+24% 层数和 90 秒超时重置，构建产物已包含 `DIRECTIVE_CHAIN_WINDOW_SECONDS`、`directiveChain` 和“航线连携”。
+- GitHub Pages workflow 25122478541 已成功，线上地址返回 HTTP 200；线上脚本包含 `DIRECTIVE_CHAIN_WINDOW_SECONDS`、`directiveChain`、`chainMultiplier`、`chainStacks` 和“航线连携”。
+- #3 已回复：说明航线连携已上线，提交 4c79ef8，issue 保持 open 等待复测。
+- 回复后同步 GitHub Issues：2026-04-30 01:01 CST 当前仍为 3 个 open feedback issue、0 个 open bug issue，#3 更新时间为 2026-04-29T17:00:51Z。
 
 - GitHub Issues：gh 可用且已认证；2026-04-30 00:36 CST 通过 REST API 同步到 3 个 open issue、3 个 open feedback issue、0 个 open bug issue。
 - #4 继续作为本轮 Product decision：节点航线和星图插画已上线，但星图总览仍默认铺开长文本；本轮将高密度的分轨、章节、奖励、里程碑、航线构成和生效加成移入默认折叠的“星图明细”。

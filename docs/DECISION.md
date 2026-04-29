@@ -18,8 +18,9 @@
 - GitHub Issues 已同步：2026-04-30 00:53 CST 查询到 3 个 open issue、3 个 open feedback issue、0 个 open bug issue；#3 作为本轮处理对象。
 - 测试覆盖航线连携预计收益、执行收益、+12%/+24% 层数和 90 秒超时重置。
 - `bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build` 通过，构建产物包含 `DIRECTIVE_CHAIN_WINDOW_SECONDS`、`directiveChain` 和“航线连携”。
-- GitHub Pages 发布成功后，线上脚本包含航线连携相关常量、状态字段和文案。
-- #3 回复后继续保持 open，等待复测确认轮换指令是否比独立冷却按钮更有主动规划感。
+- GitHub Pages workflow 25122478541 已成功，线上地址返回 HTTP 200；线上脚本包含 `DIRECTIVE_CHAIN_WINDOW_SECONDS`、`directiveChain`、`chainMultiplier`、`chainStacks` 和“航线连携”。
+- #3 已回复并继续保持 open，等待复测确认轮换指令是否比独立冷却按钮更有主动规划感。
+- 回复后同步 GitHub Issues：2026-04-30 01:01 CST 查询到 3 个 open feedback issue、0 个 open bug issue；#3 更新时间为 2026-04-29T17:00:51Z。
 
 下一步：观察 #3 复测结论；若仍认为主动玩法不足，再考虑短期任务或资源消耗型指令分支。
 
