@@ -6,6 +6,8 @@
 - 同步 GitHub Issues 反馈状态：当前 1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
 - 验证通过：bun install --no-save、bun run test、bun run build、npm install、npm test、npm run build。
 - 构建产物已包含“奖励目标”、`projectOverviewRewardTargets` 和 `rewardTargetText`。
+- GitHub Pages workflow 25086307782 已成功，线上地址返回 HTTP 200，且发布文件包含“奖励目标”、`projectOverviewRewardTargets` 和 `rewardTargetText`。
+- 已回复 #2，说明奖励目标已部署，并保持 issue open 等待复测。
 - 新增星图奖励进度：星图总览按总产能、点击、自动和过载显示已生效奖励数/总奖励数，帮助玩家理解四条成长线还剩多少奖励可追。
 - 同步 GitHub Issues 反馈状态：当前 1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
 - 验证通过：bun install --no-save、bun run test、bun run build、npm install、npm test、npm run build。
