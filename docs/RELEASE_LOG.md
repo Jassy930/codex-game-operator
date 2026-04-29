@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+- 星图项目列表新增非当前航段详情折叠：当前航段保持说明、进度、奖励和进度条展开，其他航段默认只展示标题、图标、航段、章节、标签和状态。
+- `src/app.js` 新增 `renderProjectDetailNodes` 和 `project-card-drawer` 结构，`src/styles.css` 新增 `.project-card-drawer` 与 `.project-card-detail-grid` 样式。
+- 本轮只调整星图项目列表展示；不新增存档字段，不改变升级价格、产能公式、星图 57 段路线、项目奖励、筛选规则、航线策略、航线指令、反馈入口或数值逻辑。
+- 同步 GitHub Issues 反馈状态：当前 3 个 open feedback issue、0 个 open bug issue；#4 继续指向视觉密度和图片需求。
+- 验证通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`。
+- 静态测试覆盖 `project-card-drawer`、`project-card-detail-grid`、`renderProjectDetailNodes` 和“航段详情”；构建产物已确认包含这些标记。
 - 星图筛选摘要新增默认折叠：默认只显示一行 `projectFilterSummaryBrief`，完整筛选视图详情保留在 `project-filter-drawer` 中，降低星图筛选区的默认文字密度。
 - `src/game.js` 新增 `getProjectFilterBrief`，`index.html`、`src/app.js` 和 `src/styles.css` 新增筛选简短摘要挂载与折叠样式。
 - 本轮只调整星图筛选摘要展示；不新增存档字段，不改变升级价格、产能公式、星图 57 段路线、项目奖励、筛选规则、航线策略、航线指令、反馈入口或数值逻辑。

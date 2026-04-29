@@ -2,6 +2,11 @@
 
 ## 2026-04-30
 
+- GitHub Issues：gh 可用且已认证；2026-04-30 02:22 CST 通过 REST API 同步到 3 个 open issue、3 个 open feedback issue、0 个 open bug issue。
+- #4 继续作为本轮 Product decision：筛选摘要已经默认折叠，但 57 段项目列表仍默认铺开每张卡片的说明、进度、奖励和进度条；本轮将非当前航段详情收进默认折叠的 `project-card-drawer`，当前航段保持展开。
+- 本轮改动在 `src/app.js` 新增 `renderProjectDetailNodes` 和非当前航段 `details.project-card-drawer` 结构，在 `src/styles.css` 新增项目卡片折叠样式；不改变存档、数值、星图 57 段路线、筛选规则、航线策略、航线指令或反馈入口。
+- 本轮本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；静态测试覆盖 `project-card-drawer`、`project-card-detail-grid`、`renderProjectDetailNodes` 和“航段详情”，构建产物已包含这些标记。
+
 - GitHub Issues：gh 可用且已认证；2026-04-30 02:08 CST 通过 REST API 同步到 3 个 open issue、3 个 open feedback issue、0 个 open bug issue。
 - #4 继续作为本轮 Product decision：星图区已有插画、视觉航线、折叠明细和卡片图标，但筛选区仍默认展示一整段长摘要；本轮新增一行 `projectFilterSummaryBrief`，并把完整筛选摘要放入默认折叠的 `project-filter-drawer`。
 - 本轮改动在 `src/game.js` 新增 `getProjectFilterBrief`，在 `index.html` 和 `src/app.js` 新增简短摘要挂载，在 `src/styles.css` 新增筛选摘要折叠样式；不改变存档、数值、星图 57 段路线、筛选规则、航线策略、航线指令或反馈入口。

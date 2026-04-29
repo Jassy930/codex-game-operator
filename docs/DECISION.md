@@ -1,5 +1,28 @@
 # Decision
 
+## 2026-04-30 Product decision：星图项目详情折叠
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 当前有 3 个 open feedback issue、0 个 open bug issue。#4 仍指向“界面全是密密麻麻的文字、希望生成一些图片”，上一轮已折叠筛选长摘要，本轮继续进入有反馈样本下的 Product decision。
+
+当前最大问题：星图区已有插画、视觉航线、明细折叠、筛选摘要折叠和项目卡片图标，但 57 段项目列表仍默认展示每张卡片的说明、进度、奖励和进度条。玩家切到全部、未完成或奖励类型视图时，列表仍会形成连续长文本块。
+
+本轮决策：
+
+- 当前航段保持完整展开，继续直接显示说明、进度、奖励和进度条，保证下一步操作不被隐藏。
+- 非当前航段默认只展示标题、图标、航段、章节、推进/奖励标签和状态，完整说明、进度、奖励和进度条收进 `project-card-drawer`。
+- 本轮只调整运行期 DOM、样式和静态测试；不改变存档、升级价格、产能公式、星图 57 段路线、项目奖励、筛选规则、航线策略、航线指令或反馈入口。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-04-30 02:22 CST 查询到 3 个 open feedback issue、0 个 open bug issue；#4 继续作为视觉密度跟进对象。
+- 星图项目运行期包含 `project-card-drawer`、`project-card-detail-grid` 和 `renderProjectDetailNodes`。
+- `project.isCurrent` 项目保持详情展开，非当前项目使用默认不带 `open` 的 `details` 折叠航段详情。
+- 静态测试覆盖非当前航段详情折叠结构和样式。
+- `bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build` 已通过。
+- 构建产物包含 `project-card-drawer`、`project-card-detail-grid`、`renderProjectDetailNodes` 和“航段详情”。
+
+下一步：推送后等待 GitHub Pages 部署并回复 #4；若复测仍认为列表密度高，再评估按章节分页或只默认显示当前章节。
+
 ## 2026-04-30 Product decision：星图筛选摘要折叠
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 当前有 3 个 open feedback issue、0 个 open bug issue。#4 仍指向“界面全是密密麻麻的文字、希望生成一些图片”，本轮继续进入有反馈样本下的 Product decision。

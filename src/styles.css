@@ -845,6 +845,10 @@ h2 {
     rgba(248, 243, 231, 0.06);
 }
 
+.project-item:not(.is-current) {
+  min-height: 78px;
+}
+
 .project-header {
   display: flex;
   min-width: 0;
@@ -954,6 +958,45 @@ h2 {
 .project-status-badge.is-pending {
   background: rgba(248, 243, 231, 0.1);
   color: rgba(248, 243, 231, 0.72);
+}
+
+.project-card-drawer {
+  border-top: 1px solid rgba(248, 243, 231, 0.12);
+}
+
+.project-card-drawer summary {
+  min-height: 34px;
+  padding: 7px 28px 0 0;
+  color: rgba(248, 243, 231, 0.72);
+  cursor: pointer;
+  font-size: 0.78rem;
+  font-weight: 900;
+  line-height: 1.35;
+  list-style: none;
+  position: relative;
+}
+
+.project-card-drawer summary::-webkit-details-marker {
+  display: none;
+}
+
+.project-card-drawer summary::after {
+  content: "+";
+  position: absolute;
+  top: 7px;
+  right: 4px;
+  color: #13b5a6;
+  font-weight: 900;
+}
+
+.project-card-drawer[open] summary::after {
+  content: "-";
+}
+
+.project-card-detail-grid {
+  display: grid;
+  gap: 7px;
+  padding-top: 6px;
 }
 
 .project-summary,

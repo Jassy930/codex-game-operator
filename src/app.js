@@ -611,6 +611,30 @@ function renderProject(project) {
     .join(" ");
   statusBadge.textContent = project.statusText;
 
+  header.append(title, segmentBadge, chapterBadge, tagBadge, statusBadge);
+  item.append(header);
+
+  const detailNodes = renderProjectDetailNodes(project);
+  if (project.isCurrent) {
+    item.append(...detailNodes);
+  } else {
+    const details = document.createElement("details");
+    details.className = "project-card-drawer";
+
+    const detailSummary = document.createElement("summary");
+    detailSummary.textContent = "航段详情";
+
+    const detailGrid = document.createElement("div");
+    detailGrid.className = "project-card-detail-grid";
+    detailGrid.append(...detailNodes);
+
+    details.append(detailSummary, detailGrid);
+    item.append(details);
+  }
+  return item;
+}
+
+function renderProjectDetailNodes(project) {
   const summary = document.createElement("span");
   summary.className = "project-summary";
   summary.textContent = project.summary;
@@ -631,9 +655,7 @@ function renderProject(project) {
   fill.style.width = Math.round(project.progress * 100) + "%";
   meter.append(fill);
 
-  header.append(title, segmentBadge, chapterBadge, tagBadge, statusBadge);
-  item.append(header, summary, progress, reward, meter);
-  return item;
+  return [summary, progress, reward, meter];
 }
 
 function getProjectTrackIconId(project) {

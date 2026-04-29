@@ -773,6 +773,21 @@ test("星图项目卡片会渲染推进和奖励图标", () => {
   assert.match(styles, /\.project-card-icon-overload/);
 });
 
+test("星图项目卡片会默认折叠非当前航段详情", () => {
+  const appJs = readFileSync(new URL("../src/app.js", import.meta.url), "utf8");
+  const styles = readFileSync(new URL("../src/styles.css", import.meta.url), "utf8");
+
+  assert.match(appJs, /function renderProjectDetailNodes\(project\)/);
+  assert.match(appJs, /if \(project\.isCurrent\) \{/);
+  assert.match(appJs, /details\.className = "project-card-drawer"/);
+  assert.match(appJs, /detailGrid\.className = "project-card-detail-grid"/);
+  assert.match(appJs, /detailSummary\.textContent = "航段详情"/);
+  assert.match(styles, /\.project-item:not\(\.is-current\)/);
+  assert.match(styles, /\.project-card-drawer/);
+  assert.match(styles, /\.project-card-detail-grid/);
+  assert.match(styles, /\.project-card-drawer\[open\] summary::after/);
+});
+
 test("静态首页会渲染航线指令轮换目标", () => {
   const indexHtml = readFileSync(new URL("../index.html", import.meta.url), "utf8");
   const appJs = readFileSync(new URL("../src/app.js", import.meta.url), "utf8");
