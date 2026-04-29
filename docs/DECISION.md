@@ -20,8 +20,11 @@
 - `src/styles.css` 包含 `project-filter-controls` 和展开/收起符号样式。
 - `bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build` 已通过；测试数 100 项。
 - 构建产物包含 `project-filter-controls`、“筛选航段”和 `project-filter-controls[open]` 样式。
+- GitHub Pages workflow 25136621221 已成功，线上地址返回 HTTP 200；线上首页包含 `project-filter-controls`、“筛选航段”和 `project-filter-list`，线上 `styles.css` 包含 `project-filter-controls[open]`。
+- #4 已回复并继续保持 open，等待复测确认默认隐藏筛选按钮后是否进一步减少星图区文字按钮密度。
+- 回复后同步 GitHub Issues：2026-04-30 06:15 CST 当前仍为 3 个 open feedback issue、0 个 open bug issue；#4 更新时间为 2026-04-29T22:15:41Z。
 
-下一步：push 后等待 GitHub Pages workflow 部署；随后回复 #4，说明筛选按钮已默认折叠，并继续等待玩家复测默认星图区的文字密度。
+下一步：等待 #4 复测；若仍认为星图区文字密度过高，再评估章节分页、长尾分段折叠或更强的章节插图。
 
 ## 2026-04-30 Product decision：星图章节视觉徽记
 

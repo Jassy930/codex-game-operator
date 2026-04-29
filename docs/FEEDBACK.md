@@ -7,6 +7,9 @@
 - 本轮改动将 `projectFilterList` 包进默认关闭的 `project-filter-controls` 抽屉，首屏只显示“筛选航段”；展开后仍保留全部筛选按钮、当前筛选状态、章节视觉导航点击切换和筛选摘要。本轮不新增存档字段，不改变升级价格、产能公式、星图 57 段路线、项目奖励、项目完成判定、航线策略、航线指令、反馈入口、筛选定义或章节点击逻辑。
 - 本轮本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数为 100 项。
 - 构建产物已包含 `project-filter-controls`、“筛选航段”、`project-filter-list` 和 `project-filter-controls[open]`。
+- GitHub Pages workflow 25136621221 已成功，线上地址返回 HTTP 200；线上首页包含 `project-filter-controls`、“筛选航段”和 `project-filter-list`，线上 `styles.css` 包含 `project-filter-controls[open]`。
+- #4 已回复：说明星图筛选按钮已默认折叠，提交 bc2600c，issue 保持 open 等待复测。
+- 回复后同步 GitHub Issues：2026-04-30 06:15 CST 当前仍为 3 个 open feedback issue、0 个 open bug issue；#4 更新时间为 2026-04-29T22:15:41Z。
 
 - GitHub Issues：gh 可用且已认证；2026-04-30 05:54 CST 通过 REST API 同步到 3 个 open issue、3 个 open feedback issue、0 个 open bug issue。
 - #4 继续作为本轮 Product decision：章节视觉导航已经可点击并显示进度，但四个章节的小图形仍共用同一种视觉语言，玩家仍主要依赖章节名和下一条目标文本区分阶段；本轮新增“星图章节视觉徽记”。
