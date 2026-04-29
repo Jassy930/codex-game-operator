@@ -6,6 +6,8 @@
 - 同步 GitHub Issues 反馈状态：当前 1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
 - 验证通过：bun install --no-save、bun run test、bun run build、npm install、npm test、npm run build。
 - 构建产物已包含“章节奖励”、`projectOverviewChapterRewards` 和 `chapterRewardText`。
+- GitHub Pages workflow 25085541649 已成功，线上地址返回 HTTP 200，且发布文件包含“章节奖励”、`chapterRewardText` 和 `projectOverviewChapterRewards`。
+- 已回复 #2，说明章节奖励已部署，并保持 issue open 等待复测。
 - 新增星图章节目标：星图总览按首段星图、专精校准、深空基建、远航长尾列出各自下一段未完成目标，已完成章节显示“已完成”。
 - 同步 GitHub Issues 反馈状态：当前 1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
 - 验证通过：bun install --no-save、bun run test、bun run build、npm install、npm test、npm run build。

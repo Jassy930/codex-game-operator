@@ -17,8 +17,10 @@
 - GitHub Issues 已同步：2026-04-29 08:49 CST 查询到 1 个 open issue、1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
 - bun install --no-save、bun run test、bun run build、npm install、npm test 和 npm run build 已通过，覆盖章节奖励在初始状态、进行中状态和全部完成状态的文案。
 - 构建产物已包含“章节奖励”、`projectOverviewChapterRewards` 和 `chapterRewardText`。
+- GitHub Pages workflow 25085541649 已成功，线上地址返回 HTTP 200，发布文件包含“章节奖励”、`chapterRewardText` 和 `projectOverviewChapterRewards`。
+- #2 已回复并保持 open，等待复测确认章节奖励是否改善章节主题和奖励丰富度感知。
 
-下一步：push 后验证 GitHub Pages，并回复 #2 等待复测确认章节奖励是否改善章节主题和奖励丰富度感知。
+下一步：继续观察 #2 复测是否认为章节奖励改善章节主题和奖励丰富度感知。
 
 ## 2026-04-29 Product decision：星图章节目标
 
