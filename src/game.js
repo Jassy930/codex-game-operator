@@ -862,7 +862,8 @@ export function getProjectStatuses(state) {
 }
 
 export function getProjectOverview(state) {
-  const projects = getProjectStatuses(state);
+  const current = normalizeState(state);
+  const projects = getProjectStatuses(current);
   const completed = projects.filter((project) => project.completed).length;
   const nextProject = projects.find((project) => !project.completed) ?? null;
   const bonusText = buildProjectBonusText(getProjectBonusesFromStatuses(projects));
@@ -873,6 +874,7 @@ export function getProjectOverview(state) {
   const rewardProgressText = buildProjectRewardProgressText(projects);
   const rewardTargetText = buildProjectRewardTargetText(projects);
   const milestoneText = buildProjectMilestoneText(projects, nextProject);
+  const routeFocusText = buildProjectRouteFocusText(projects, current);
 
   if (!nextProject) {
     return {
@@ -889,6 +891,7 @@ export function getProjectOverview(state) {
       rewardProgressText,
       rewardTargetText,
       milestoneText,
+      routeFocusText,
       compositionText,
       bonusText,
       forecastText: "航线预告：等待下一段航线"
@@ -923,6 +926,7 @@ export function getProjectOverview(state) {
     rewardProgressText,
     rewardTargetText,
     milestoneText,
+    routeFocusText,
     compositionText,
     bonusText,
     forecastText:
@@ -1292,6 +1296,34 @@ function buildProjectMilestoneText(projects, nextProject) {
   milestoneParts.push("终局航点 " + formatMilestoneProject(routeEndpoint));
 
   return "里程碑：" + milestoneParts.join("；");
+}
+
+function buildProjectRouteFocusText(projects, state) {
+  const current = normalizeState(state);
+
+  if (current.totalEnergy < PROJECT_GOAL_UNLOCK_ENERGY) {
+    return "航线焦点：累计 100K 能量后解锁策略焦点";
+  }
+
+  const stance = getRouteStanceDef(current.routeStance);
+  const project = projects.find((item) => item.id === stance.masteryProjectId);
+
+  if (!project) {
+    return "航线焦点：" + stance.name + " · 等待后续专精航段";
+  }
+
+  const statusText = project.completed ? "已完成" : project.progressText;
+  return (
+    "航线焦点：" +
+    stance.name +
+    " -> " +
+    project.name +
+    "（" +
+    project.reward +
+    " · " +
+    statusText +
+    "）"
+  );
 }
 
 function countRewardProgress(count, completed, effectValue) {

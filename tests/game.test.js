@@ -177,6 +177,25 @@ test("星图航线策略会显示对应专精航段进度", () => {
   );
 });
 
+test("星图总览会显示当前航线策略焦点", () => {
+  const overview = getProjectOverview({
+    ...createInitialState(0),
+    routeStance: "ignition",
+    totalEnergy: 260_000,
+    upgrades: {
+      lens: 12,
+      collector: 12,
+      resonator: 6,
+      stabilizer: 9
+    }
+  });
+
+  assert.equal(
+    overview.routeFocusText,
+    "航线焦点：点火优先 -> 点火航校（点击产能 +16% · 进度 12 级 / 14 级 · 还差 2 级）"
+  );
+});
+
 test("已完成的航线策略专精会显示完成状态", () => {
   const status = getRouteStanceStatus({
     ...createInitialState(0),
@@ -529,6 +548,10 @@ test("星图总览会显示完成数和下一段奖励", () => {
     "里程碑：本章终点 采集阵列（航段 4/31 · 自动产能 +18% · 进度 11 级 / 12 级 · 还差 1 级）；终局航点 晨渊观星台（航段 31/31 · 点击产能 +19% · 进度 114.4K 能量 / 85M 能量 · 还差 84.9M 能量）"
   );
   assert.equal(
+    overview.routeFocusText,
+    "航线焦点：均衡航线 -> 均衡校准（总产能 +14% · 进度 9 级 / 14 级 · 还差 5 级）"
+  );
+  assert.equal(
     overview.compositionText,
     "航线构成：22 个累计航段 · 9 个升级航段 · 奖励分布 总产能 10 段 / 点击 8 段 / 自动 8 段 / 过载 5 段"
   );
@@ -564,6 +587,7 @@ test("星图总览在首个项目前会提示等待奖励生效", () => {
     overview.milestoneText,
     "里程碑：本章终点 采集阵列（航段 4/31 · 自动产能 +18% · 进度 0 级 / 12 级 · 还差 12 级）；终局航点 晨渊观星台（航段 31/31 · 点击产能 +19% · 进度 0 能量 / 85M 能量 · 还差 85M 能量）"
   );
+  assert.equal(overview.routeFocusText, "航线焦点：累计 100K 能量后解锁策略焦点");
   assert.equal(overview.bonusText, "生效加成：等待首个星图奖励");
 });
 
@@ -1255,6 +1279,10 @@ test("星图总览会显示全部完成状态", () => {
   assert.equal(
     overview.milestoneText,
     "里程碑：全部章节已完成 · 终局航点 晨渊观星台已完成"
+  );
+  assert.equal(
+    overview.routeFocusText,
+    "航线焦点：均衡航线 -> 均衡校准（总产能 +14% · 已完成）"
   );
   assert.equal(
     overview.bonusText,

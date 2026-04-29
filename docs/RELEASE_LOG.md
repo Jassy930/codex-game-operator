@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+- 新增星图航线焦点：星图总览会根据当前均衡、点火或巡航策略显示对应专精航段、奖励和进度，让策略选择直接关联到可追目标。
+- 同步 GitHub Issues 反馈状态：当前 1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
+- 验证通过：bun install --no-save、bun run test、bun run build、npm install、npm test、npm run build。
+- 构建产物已包含“航线焦点”、`projectOverviewRouteFocus` 和 `routeFocusText`。
 - 新增星图里程碑：星图总览显示当前章节终点和终局航点的航段序号、奖励与进度，帮助玩家同时看到短期章节目标和长期路线终点。
 - 同步 GitHub Issues 反馈状态：当前 1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
 - 验证通过：bun install --no-save、bun run test、bun run build、npm install、npm test、npm run build。

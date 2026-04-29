@@ -50,6 +50,7 @@ const elements = {
   projectOverviewRewardProgress: document.querySelector("#projectOverviewRewardProgress"),
   projectOverviewRewardTargets: document.querySelector("#projectOverviewRewardTargets"),
   projectOverviewMilestones: document.querySelector("#projectOverviewMilestones"),
+  projectOverviewRouteFocus: document.querySelector("#projectOverviewRouteFocus"),
   projectOverviewComposition: document.querySelector("#projectOverviewComposition"),
   projectOverviewBonus: document.querySelector("#projectOverviewBonus"),
   projectOverviewForecast: document.querySelector("#projectOverviewForecast"),
@@ -177,6 +178,7 @@ function render() {
   elements.projectOverviewRewardProgress.textContent = projectOverview.rewardProgressText;
   elements.projectOverviewRewardTargets.textContent = projectOverview.rewardTargetText;
   elements.projectOverviewMilestones.textContent = projectOverview.milestoneText;
+  elements.projectOverviewRouteFocus.textContent = projectOverview.routeFocusText;
   elements.projectOverviewComposition.textContent = projectOverview.compositionText;
   elements.projectOverviewBonus.textContent = projectOverview.bonusText;
   elements.projectOverviewForecast.textContent = projectOverview.forecastText;

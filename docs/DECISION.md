@@ -1,5 +1,25 @@
 # Decision
 
+## 2026-04-29 Product decision：星图航线焦点
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 当前仍有真实体验反馈 #2 open，且没有 open bug，继续进入有反馈样本下的 Product decision。
+
+当前最大问题：#2 仍围绕“内容丰富度太差，可玩的内容太少”保持 open。上一轮已在星图总览新增“里程碑”，当前章节终点和终局航点已经更清楚，但玩家选择均衡、点火或巡航后，仍需要在航线策略按钮和项目列表之间自行对照对应专精航段。
+
+本轮决策：
+
+- 在星图总览新增“航线焦点”，按当前航线策略显示对应专精航段、奖励和当前进度。
+- 不新增第 32 段，不调整奖励数值、升级价格和存档结构；继续把已有 31 段星图和可切换航线策略连成更明确的可追目标。
+- 静态 HTML 初始文案同步到航线焦点，避免加载前总览信息与运行态不一致。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-04-29 09:54 CST 查询到 1 个 open issue、1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
+- bun install --no-save、bun run test、bun run build、npm install、npm test 和 npm run build 已通过，覆盖锁定状态、当前策略专精、进行中状态和全部完成状态的航线焦点文案。
+- 构建产物已包含“航线焦点”、`projectOverviewRouteFocus` 和 `routeFocusText`。
+
+下一步：发布和回复 #2 后，继续观察复测是否认为航线焦点改善策略选择与内容目标之间的关联。
+
 ## 2026-04-29 Product decision：星图里程碑
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 当前仍有真实体验反馈 #2 open，且没有 open bug，继续进入有反馈样本下的 Product decision。
