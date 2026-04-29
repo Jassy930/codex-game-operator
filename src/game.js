@@ -729,6 +729,20 @@ export const PROJECT_DEFS = [
     current(state) {
       return state.totalEnergy;
     }
+  },
+  {
+    id: "startide-resonance-court",
+    name: "星潮谐振庭",
+    summary: "累计 1.6B 能量，在晨星方舟外接入星潮谐振庭。",
+    unit: "能量",
+    target: 1_600_000_000,
+    reward: "过载奖励 +24%",
+    effect: {
+      overloadMultiplier: 1.24
+    },
+    current(state) {
+      return state.totalEnergy;
+    }
   }
 ];
 
@@ -751,7 +765,7 @@ export const PROJECT_CHAPTER_DEFS = [
   {
     name: "远航长尾",
     startId: "void-gate-expedition",
-    endId: "morningstar-ark"
+    endId: "startide-resonance-court"
   }
 ];
 

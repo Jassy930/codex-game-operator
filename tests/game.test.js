@@ -448,8 +448,8 @@ test("星图项目会给中后段玩家新的可追目标", () => {
 
   assert.equal(projects[0].id, "stellar-map");
   assert.equal(projects[0].segmentIndex, 1);
-  assert.equal(projects[0].segmentTotal, 41);
-  assert.equal(projects[0].segmentText, "航段 1/41");
+  assert.equal(projects[0].segmentTotal, 42);
+  assert.equal(projects[0].segmentText, "航段 1/42");
   assert.equal(projects[0].chapterName, "首段星图");
   assert.equal(projects[0].chapterIndex, 1);
   assert.equal(projects[0].chapterTotal, 4);
@@ -458,7 +458,7 @@ test("星图项目会给中后段玩家新的可追目标", () => {
   assert.equal(projects[0].isCurrent, false);
   assert.equal(projects[0].progressText, "进度 100K 能量 / 100K 能量 · 已完成");
   assert.equal(projects[1].id, "resonance-calibration");
-  assert.equal(projects[1].segmentText, "航段 2/41");
+  assert.equal(projects[1].segmentText, "航段 2/42");
   assert.equal(projects[1].chapterName, "首段星图");
   assert.equal(projects[1].chapterIndex, 2);
   assert.equal(projects[1].chapterTotal, 4);
@@ -487,29 +487,31 @@ test("星图项目会标记所属章节", () => {
   assert.equal(projects[9].chapterName, "深空基建");
   assert.equal(projects[9].chapterText, "深空基建 1/4");
   assert.equal(projects[13].chapterName, "远航长尾");
-  assert.equal(projects[13].chapterText, "远航长尾 1/28");
+  assert.equal(projects[13].chapterText, "远航长尾 1/29");
   assert.equal(projects[30].chapterName, "远航长尾");
-  assert.equal(projects[30].chapterText, "远航长尾 18/28");
+  assert.equal(projects[30].chapterText, "远航长尾 18/29");
   assert.equal(projects[31].chapterName, "远航长尾");
-  assert.equal(projects[31].chapterText, "远航长尾 19/28");
+  assert.equal(projects[31].chapterText, "远航长尾 19/29");
   assert.equal(projects[32].chapterName, "远航长尾");
-  assert.equal(projects[32].chapterText, "远航长尾 20/28");
+  assert.equal(projects[32].chapterText, "远航长尾 20/29");
   assert.equal(projects[33].chapterName, "远航长尾");
-  assert.equal(projects[33].chapterText, "远航长尾 21/28");
+  assert.equal(projects[33].chapterText, "远航长尾 21/29");
   assert.equal(projects[34].chapterName, "远航长尾");
-  assert.equal(projects[34].chapterText, "远航长尾 22/28");
+  assert.equal(projects[34].chapterText, "远航长尾 22/29");
   assert.equal(projects[35].chapterName, "远航长尾");
-  assert.equal(projects[35].chapterText, "远航长尾 23/28");
+  assert.equal(projects[35].chapterText, "远航长尾 23/29");
   assert.equal(projects[36].chapterName, "远航长尾");
-  assert.equal(projects[36].chapterText, "远航长尾 24/28");
+  assert.equal(projects[36].chapterText, "远航长尾 24/29");
   assert.equal(projects[37].chapterName, "远航长尾");
-  assert.equal(projects[37].chapterText, "远航长尾 25/28");
+  assert.equal(projects[37].chapterText, "远航长尾 25/29");
   assert.equal(projects[38].chapterName, "远航长尾");
-  assert.equal(projects[38].chapterText, "远航长尾 26/28");
+  assert.equal(projects[38].chapterText, "远航长尾 26/29");
   assert.equal(projects[39].chapterName, "远航长尾");
-  assert.equal(projects[39].chapterText, "远航长尾 27/28");
+  assert.equal(projects[39].chapterText, "远航长尾 27/29");
   assert.equal(projects[40].chapterName, "远航长尾");
-  assert.equal(projects[40].chapterText, "远航长尾 28/28");
+  assert.equal(projects[40].chapterText, "远航长尾 28/29");
+  assert.equal(projects[41].chapterName, "远航长尾");
+  assert.equal(projects[41].chapterText, "远航长尾 29/29");
 });
 
 test("星图总览会显示完成数和下一段奖励", () => {
@@ -527,7 +529,7 @@ test("星图总览会显示完成数和下一段奖励", () => {
   const overview = getProjectOverview(state);
 
   assert.equal(overview.completed, 1);
-  assert.equal(overview.total, 41);
+  assert.equal(overview.total, 42);
   assert.equal(overview.nextProjectId, "resonance-calibration");
   assert.deepEqual(overview.upcomingProjectIds, [
     "resonance-calibration",
@@ -536,7 +538,7 @@ test("星图总览会显示完成数和下一段奖励", () => {
   ]);
   assert.equal(
     overview.summaryText,
-    "星图进度 1/41 · 下一段 2/41：谐振校准 · 奖励 过载奖励 +20%"
+    "星图进度 1/42 · 下一段 2/42：谐振校准 · 奖励 过载奖励 +20%"
   );
   assert.equal(overview.detailText, "进度 0 级 / 6 级 · 还差 6 级");
   assert.equal(
@@ -545,19 +547,19 @@ test("星图总览会显示完成数和下一段奖励", () => {
   );
   assert.equal(
     overview.chapterText,
-    "阶段导航：首段星图 1/4 · 专精校准 0/5 · 深空基建 0/4 · 远航长尾 0/28；当前 首段星图 2/4 · 航段 2/41 谐振校准 · 本阶段还剩 3 段 · 下一阶段 专精校准"
+    "阶段导航：首段星图 1/4 · 专精校准 0/5 · 深空基建 0/4 · 远航长尾 0/29；当前 首段星图 2/4 · 航段 2/42 谐振校准 · 本阶段还剩 3 段 · 下一阶段 专精校准"
   );
   assert.equal(
     overview.chapterTargetText,
-    "章节目标：首段星图 2/4 谐振校准 · 专精校准 1/5 点火航校 · 深空基建 1/4 远星中继 · 远航长尾 1/28 星门远征"
+    "章节目标：首段星图 2/4 谐振校准 · 专精校准 1/5 点火航校 · 深空基建 1/4 远星中继 · 远航长尾 1/29 星门远征"
   );
   assert.equal(
     overview.chapterRewardText,
-    "章节奖励：首段星图 总产能 1 / 点击 1 / 自动 1 / 过载 1 · 专精校准 总产能 3 / 点击 1 / 自动 1 · 深空基建 总产能 1 / 点击 1 / 自动 2 · 远航长尾 总产能 8 / 点击 7 / 自动 7 / 过载 6"
+    "章节奖励：首段星图 总产能 1 / 点击 1 / 自动 1 / 过载 1 · 专精校准 总产能 3 / 点击 1 / 自动 1 · 深空基建 总产能 1 / 点击 1 / 自动 2 · 远航长尾 总产能 8 / 点击 7 / 自动 7 / 过载 7"
   );
   assert.equal(
     overview.rewardProgressText,
-    "奖励进度：总产能 1/13 · 点击 0/10 · 自动 0/11 · 过载 0/7"
+    "奖励进度：总产能 1/13 · 点击 0/10 · 自动 0/11 · 过载 0/8"
   );
   assert.equal(
     overview.rewardTargetText,
@@ -565,7 +567,7 @@ test("星图总览会显示完成数和下一段奖励", () => {
   );
   assert.equal(
     overview.milestoneText,
-    "里程碑：本章终点 采集阵列（航段 4/41 · 自动产能 +18% · 进度 11 级 / 12 级 · 还差 1 级）；终局航点 晨星方舟（航段 41/41 · 总产能 +24% · 进度 114.4K 能量 / 1.2B 能量 · 还差 1.2B 能量）"
+    "里程碑：本章终点 采集阵列（航段 4/42 · 自动产能 +18% · 进度 11 级 / 12 级 · 还差 1 级）；终局航点 星潮谐振庭（航段 42/42 · 过载奖励 +24% · 进度 114.4K 能量 / 1.6B 能量 · 还差 1.6B 能量）"
   );
   assert.equal(
     overview.routeFocusText,
@@ -573,7 +575,7 @@ test("星图总览会显示完成数和下一段奖励", () => {
   );
   assert.equal(
     overview.compositionText,
-    "航线构成：32 个累计航段 · 9 个升级航段 · 奖励分布 总产能 13 段 / 点击 10 段 / 自动 11 段 / 过载 7 段"
+    "航线构成：33 个累计航段 · 9 个升级航段 · 奖励分布 总产能 13 段 / 点击 10 段 / 自动 11 段 / 过载 8 段"
   );
   assert.equal(overview.bonusText, "生效加成：总产能 x1.12");
   assert.equal(
@@ -589,15 +591,15 @@ test("星图总览在首个项目前会提示等待奖励生效", () => {
   assert.equal(overview.nextProjectId, "stellar-map");
   assert.equal(
     overview.chapterTargetText,
-    "章节目标：首段星图 1/4 点亮星图 · 专精校准 1/5 点火航校 · 深空基建 1/4 远星中继 · 远航长尾 1/28 星门远征"
+    "章节目标：首段星图 1/4 点亮星图 · 专精校准 1/5 点火航校 · 深空基建 1/4 远星中继 · 远航长尾 1/29 星门远征"
   );
   assert.equal(
     overview.chapterRewardText,
-    "章节奖励：首段星图 总产能 1 / 点击 1 / 自动 1 / 过载 1 · 专精校准 总产能 3 / 点击 1 / 自动 1 · 深空基建 总产能 1 / 点击 1 / 自动 2 · 远航长尾 总产能 8 / 点击 7 / 自动 7 / 过载 6"
+    "章节奖励：首段星图 总产能 1 / 点击 1 / 自动 1 / 过载 1 · 专精校准 总产能 3 / 点击 1 / 自动 1 · 深空基建 总产能 1 / 点击 1 / 自动 2 · 远航长尾 总产能 8 / 点击 7 / 自动 7 / 过载 7"
   );
   assert.equal(
     overview.rewardProgressText,
-    "奖励进度：总产能 0/13 · 点击 0/10 · 自动 0/11 · 过载 0/7"
+    "奖励进度：总产能 0/13 · 点击 0/10 · 自动 0/11 · 过载 0/8"
   );
   assert.equal(
     overview.rewardTargetText,
@@ -605,7 +607,7 @@ test("星图总览在首个项目前会提示等待奖励生效", () => {
   );
   assert.equal(
     overview.milestoneText,
-    "里程碑：本章终点 采集阵列（航段 4/41 · 自动产能 +18% · 进度 0 级 / 12 级 · 还差 12 级）；终局航点 晨星方舟（航段 41/41 · 总产能 +24% · 进度 0 能量 / 1.2B 能量 · 还差 1.2B 能量）"
+    "里程碑：本章终点 采集阵列（航段 4/42 · 自动产能 +18% · 进度 0 级 / 12 级 · 还差 12 级）；终局航点 星潮谐振庭（航段 42/42 · 过载奖励 +24% · 进度 0 能量 / 1.6B 能量 · 还差 1.6B 能量）"
   );
   assert.equal(overview.routeFocusText, "航线焦点：累计 100K 能量后解锁策略焦点");
   assert.equal(overview.bonusText, "生效加成：等待首个星图奖励");
@@ -630,11 +632,11 @@ test("100K 后当前目标会指向下一个未完成星图项目", () => {
   assert.equal(goal.label, "星图计划");
   assert.equal(goal.value, "谐振校准");
   assert.equal(goal.segmentIndex, 2);
-  assert.equal(goal.segmentTotal, 41);
+  assert.equal(goal.segmentTotal, 42);
   assert.equal(goal.upgradeId, "resonator");
   assert.equal(
     goal.progressText,
-    "航段 2/41 · 进度 0 级 / 6 级 · 可购买星核谐振器 · 奖励 过载奖励 +20%"
+    "航段 2/42 · 进度 0 级 / 6 级 · 可购买星核谐振器 · 奖励 过载奖励 +20%"
   );
 });
 
@@ -659,7 +661,7 @@ test("星图主目标会直接显示项目奖励", () => {
   assert.equal(goal.reward, "自动产能 +18%");
   assert.equal(
     goal.progressText,
-    "航段 4/41 · 进度 11 级 / 12 级 · 可购买自动采集臂 · 奖励 自动产能 +18%"
+    "航段 4/42 · 进度 11 级 / 12 级 · 可购买自动采集臂 · 奖励 自动产能 +18%"
   );
 });
 
@@ -684,7 +686,7 @@ test("首批星图项目完成后会继续指向策略专精目标", () => {
   assert.equal(goal.upgradeId, "lens");
   assert.equal(
     goal.progressText,
-    "航段 5/41 · 进度 12 级 / 14 级 · 可购买聚能透镜 · 奖励 点击产能 +16%"
+    "航段 5/42 · 进度 12 级 / 14 级 · 可购买聚能透镜 · 奖励 点击产能 +16%"
   );
 });
 
@@ -707,7 +709,7 @@ test("500K 后星图会继续指向深空矿带", () => {
   assert.equal(goal.value, "深空矿带");
   assert.equal(
     goal.progressText,
-    "航段 11/41 · 进度 600K 能量 / 750K 能量 · 还差 150K 能量 · 奖励 点击产能 +26%"
+    "航段 11/42 · 进度 600K 能量 / 750K 能量 · 还差 150K 能量 · 奖励 点击产能 +26%"
   );
 });
 
@@ -730,7 +732,7 @@ test("深空航段完成后会继续指向星门远征", () => {
   assert.equal(goal.value, "星门远征");
   assert.equal(
     goal.progressText,
-    "航段 14/41 · 进度 1.2M 能量 / 1.5M 能量 · 还差 300K 能量 · 奖励 总产能 +16%"
+    "航段 14/42 · 进度 1.2M 能量 / 1.5M 能量 · 还差 300K 能量 · 奖励 总产能 +16%"
   );
 });
 
@@ -753,7 +755,7 @@ test("星门远征完成后会继续指向外环信标", () => {
   assert.equal(goal.value, "外环信标");
   assert.equal(
     goal.progressText,
-    "航段 15/41 · 进度 1.6M 能量 / 2M 能量 · 还差 400K 能量 · 奖励 点击产能 +14%"
+    "航段 15/42 · 进度 1.6M 能量 / 2M 能量 · 还差 400K 能量 · 奖励 点击产能 +14%"
   );
 });
 
@@ -776,7 +778,7 @@ test("外环信标完成后会继续指向彗尾船坞", () => {
   assert.equal(goal.value, "彗尾船坞");
   assert.equal(
     goal.progressText,
-    "航段 16/41 · 进度 2.1M 能量 / 2.8M 能量 · 还差 650K 能量 · 奖励 自动产能 +18%"
+    "航段 16/42 · 进度 2.1M 能量 / 2.8M 能量 · 还差 650K 能量 · 奖励 自动产能 +18%"
   );
 });
 
@@ -799,7 +801,7 @@ test("彗尾船坞完成后会继续指向引力航标", () => {
   assert.equal(goal.value, "引力航标");
   assert.equal(
     goal.progressText,
-    "航段 17/41 · 进度 3M 能量 / 3.5M 能量 · 还差 500K 能量 · 奖励 总产能 +15%"
+    "航段 17/42 · 进度 3M 能量 / 3.5M 能量 · 还差 500K 能量 · 奖励 总产能 +15%"
   );
 });
 
@@ -822,7 +824,7 @@ test("引力航标完成后会继续指向暗流观测站", () => {
   assert.equal(goal.value, "暗流观测站");
   assert.equal(
     goal.progressText,
-    "航段 18/41 · 进度 3.8M 能量 / 4.5M 能量 · 还差 700K 能量 · 奖励 过载奖励 +15%"
+    "航段 18/42 · 进度 3.8M 能量 / 4.5M 能量 · 还差 700K 能量 · 奖励 过载奖励 +15%"
   );
 });
 
@@ -845,7 +847,7 @@ test("暗流观测站完成后会继续指向虚空罗盘", () => {
   assert.equal(goal.value, "虚空罗盘");
   assert.equal(
     goal.progressText,
-    "航段 19/41 · 进度 4.9M 能量 / 5.8M 能量 · 还差 850K 能量 · 奖励 点击产能 +15%"
+    "航段 19/42 · 进度 4.9M 能量 / 5.8M 能量 · 还差 850K 能量 · 奖励 点击产能 +15%"
   );
 });
 
@@ -868,7 +870,7 @@ test("虚空罗盘完成后会继续指向星云档案库", () => {
   assert.equal(goal.value, "星云档案库");
   assert.equal(
     goal.progressText,
-    "航段 20/41 · 进度 6.2M 能量 / 7.3M 能量 · 还差 1.1M 能量 · 奖励 自动产能 +17%"
+    "航段 20/42 · 进度 6.2M 能量 / 7.3M 能量 · 还差 1.1M 能量 · 奖励 自动产能 +17%"
   );
 });
 
@@ -891,7 +893,7 @@ test("星云档案库完成后会继续指向深穹测距阵", () => {
   assert.equal(goal.value, "深穹测距阵");
   assert.equal(
     goal.progressText,
-    "航段 21/41 · 进度 7.6M 能量 / 9M 能量 · 还差 1.4M 能量 · 奖励 总产能 +17%"
+    "航段 21/42 · 进度 7.6M 能量 / 9M 能量 · 还差 1.4M 能量 · 奖励 总产能 +17%"
   );
 });
 
@@ -914,7 +916,7 @@ test("深穹测距阵完成后会继续指向寂光中继环", () => {
   assert.equal(goal.value, "寂光中继环");
   assert.equal(
     goal.progressText,
-    "航段 22/41 · 进度 9.5M 能量 / 11M 能量 · 还差 1.5M 能量 · 奖励 过载奖励 +16%"
+    "航段 22/42 · 进度 9.5M 能量 / 11M 能量 · 还差 1.5M 能量 · 奖励 过载奖励 +16%"
   );
 });
 
@@ -937,7 +939,7 @@ test("寂光中继环完成后会继续指向极昼折跃井", () => {
   assert.equal(goal.value, "极昼折跃井");
   assert.equal(
     goal.progressText,
-    "航段 23/41 · 进度 11.5M 能量 / 13.5M 能量 · 还差 2M 能量 · 奖励 点击产能 +16%"
+    "航段 23/42 · 进度 11.5M 能量 / 13.5M 能量 · 还差 2M 能量 · 奖励 点击产能 +16%"
   );
 });
 
@@ -960,7 +962,7 @@ test("极昼折跃井完成后会继续指向日冕回廊", () => {
   assert.equal(goal.value, "日冕回廊");
   assert.equal(
     goal.progressText,
-    "航段 24/41 · 进度 14M 能量 / 16.5M 能量 · 还差 2.5M 能量 · 奖励 自动产能 +16%"
+    "航段 24/42 · 进度 14M 能量 / 16.5M 能量 · 还差 2.5M 能量 · 奖励 自动产能 +16%"
   );
 });
 
@@ -983,7 +985,7 @@ test("日冕回廊完成后会继续指向磁帆穹顶", () => {
   assert.equal(goal.value, "磁帆穹顶");
   assert.equal(
     goal.progressText,
-    "航段 25/41 · 进度 17M 能量 / 20M 能量 · 还差 3M 能量 · 奖励 总产能 +18%"
+    "航段 25/42 · 进度 17M 能量 / 20M 能量 · 还差 3M 能量 · 奖励 总产能 +18%"
   );
 });
 
@@ -1006,7 +1008,7 @@ test("磁帆穹顶完成后会继续指向引潮星环", () => {
   assert.equal(goal.value, "引潮星环");
   assert.equal(
     goal.progressText,
-    "航段 26/41 · 进度 21M 能量 / 24M 能量 · 还差 3M 能量 · 奖励 过载奖励 +18%"
+    "航段 26/42 · 进度 21M 能量 / 24M 能量 · 还差 3M 能量 · 奖励 过载奖励 +18%"
   );
 });
 
@@ -1029,7 +1031,7 @@ test("引潮星环完成后会继续指向脉冲航闸", () => {
   assert.equal(goal.value, "脉冲航闸");
   assert.equal(
     goal.progressText,
-    "航段 27/41 · 进度 25M 能量 / 30M 能量 · 还差 5M 能量 · 奖励 点击产能 +18%"
+    "航段 27/42 · 进度 25M 能量 / 30M 能量 · 还差 5M 能量 · 奖励 点击产能 +18%"
   );
 });
 
@@ -1052,7 +1054,7 @@ test("脉冲航闸完成后会继续指向离辉轨道港", () => {
   assert.equal(goal.value, "离辉轨道港");
   assert.equal(
     goal.progressText,
-    "航段 28/41 · 进度 31M 能量 / 38M 能量 · 还差 7M 能量 · 奖励 自动产能 +18%"
+    "航段 28/42 · 进度 31M 能量 / 38M 能量 · 还差 7M 能量 · 奖励 自动产能 +18%"
   );
 });
 
@@ -1075,7 +1077,7 @@ test("离辉轨道港完成后会继续指向远曦灯塔", () => {
   assert.equal(goal.value, "远曦灯塔");
   assert.equal(
     goal.progressText,
-    "航段 29/41 · 进度 39M 能量 / 50M 能量 · 还差 11M 能量 · 奖励 总产能 +19%"
+    "航段 29/42 · 进度 39M 能量 / 50M 能量 · 还差 11M 能量 · 奖励 总产能 +19%"
   );
 });
 
@@ -1098,7 +1100,7 @@ test("远曦灯塔完成后会继续指向星冠回声站", () => {
   assert.equal(goal.value, "星冠回声站");
   assert.equal(
     goal.progressText,
-    "航段 30/41 · 进度 52M 能量 / 65M 能量 · 还差 13M 能量 · 奖励 过载奖励 +19%"
+    "航段 30/42 · 进度 52M 能量 / 65M 能量 · 还差 13M 能量 · 奖励 过载奖励 +19%"
   );
 });
 
@@ -1121,7 +1123,7 @@ test("星冠回声站完成后会继续指向晨渊观星台", () => {
   assert.equal(goal.value, "晨渊观星台");
   assert.equal(
     goal.progressText,
-    "航段 31/41 · 进度 66M 能量 / 85M 能量 · 还差 19M 能量 · 奖励 点击产能 +19%"
+    "航段 31/42 · 进度 66M 能量 / 85M 能量 · 还差 19M 能量 · 奖励 点击产能 +19%"
   );
 });
 
@@ -1144,7 +1146,7 @@ test("晨渊观星台完成后会继续指向曜幕天穹", () => {
   assert.equal(goal.value, "曜幕天穹");
   assert.equal(
     goal.progressText,
-    "航段 32/41 · 进度 86M 能量 / 110M 能量 · 还差 24M 能量 · 奖励 自动产能 +20%"
+    "航段 32/42 · 进度 86M 能量 / 110M 能量 · 还差 24M 能量 · 奖励 自动产能 +20%"
   );
 });
 
@@ -1167,7 +1169,7 @@ test("曜幕天穹完成后会继续指向星渊回声门", () => {
   assert.equal(goal.value, "星渊回声门");
   assert.equal(
     goal.progressText,
-    "航段 33/41 · 进度 111M 能量 / 145M 能量 · 还差 34M 能量 · 奖励 总产能 +20%"
+    "航段 33/42 · 进度 111M 能量 / 145M 能量 · 还差 34M 能量 · 奖励 总产能 +20%"
   );
 });
 
@@ -1190,7 +1192,7 @@ test("星渊回声门完成后会继续指向虚曜谐振塔", () => {
   assert.equal(goal.value, "虚曜谐振塔");
   assert.equal(
     goal.progressText,
-    "航段 34/41 · 进度 146M 能量 / 190M 能量 · 还差 44M 能量 · 奖励 过载奖励 +20%"
+    "航段 34/42 · 进度 146M 能量 / 190M 能量 · 还差 44M 能量 · 奖励 过载奖励 +20%"
   );
 });
 
@@ -1213,7 +1215,7 @@ test("虚曜谐振塔完成后会继续指向烁影星匣", () => {
   assert.equal(goal.value, "烁影星匣");
   assert.equal(
     goal.progressText,
-    "航段 35/41 · 进度 191M 能量 / 250M 能量 · 还差 59M 能量 · 奖励 点击产能 +21%"
+    "航段 35/42 · 进度 191M 能量 / 250M 能量 · 还差 59M 能量 · 奖励 点击产能 +21%"
   );
 });
 
@@ -1236,7 +1238,7 @@ test("烁影星匣完成后会继续指向辉潮巡航环", () => {
   assert.equal(goal.value, "辉潮巡航环");
   assert.equal(
     goal.progressText,
-    "航段 36/41 · 进度 251M 能量 / 320M 能量 · 还差 69M 能量 · 奖励 自动产能 +21%"
+    "航段 36/42 · 进度 251M 能量 / 320M 能量 · 还差 69M 能量 · 奖励 自动产能 +21%"
   );
 });
 
@@ -1259,7 +1261,7 @@ test("辉潮巡航环完成后会继续指向星澜汇流庭", () => {
   assert.equal(goal.value, "星澜汇流庭");
   assert.equal(
     goal.progressText,
-    "航段 37/41 · 进度 321M 能量 / 420M 能量 · 还差 99M 能量 · 奖励 总产能 +22%"
+    "航段 37/42 · 进度 321M 能量 / 420M 能量 · 还差 99M 能量 · 奖励 总产能 +22%"
   );
 });
 
@@ -1282,7 +1284,7 @@ test("星澜汇流庭完成后会继续指向穹海棱镜", () => {
   assert.equal(goal.value, "穹海棱镜");
   assert.equal(
     goal.progressText,
-    "航段 38/41 · 进度 421M 能量 / 550M 能量 · 还差 129M 能量 · 奖励 过载奖励 +22%"
+    "航段 38/42 · 进度 421M 能量 / 550M 能量 · 还差 129M 能量 · 奖励 过载奖励 +22%"
   );
 });
 
@@ -1305,7 +1307,7 @@ test("穹海棱镜完成后会继续指向极光谱站", () => {
   assert.equal(goal.value, "极光谱站");
   assert.equal(
     goal.progressText,
-    "航段 39/41 · 进度 551M 能量 / 720M 能量 · 还差 169M 能量 · 奖励 点击产能 +23%"
+    "航段 39/42 · 进度 551M 能量 / 720M 能量 · 还差 169M 能量 · 奖励 点击产能 +23%"
   );
 });
 
@@ -1328,7 +1330,7 @@ test("极光谱站完成后会继续指向银翼曙环", () => {
   assert.equal(goal.value, "银翼曙环");
   assert.equal(
     goal.progressText,
-    "航段 40/41 · 进度 721M 能量 / 950M 能量 · 还差 229M 能量 · 奖励 自动产能 +23%"
+    "航段 40/42 · 进度 721M 能量 / 950M 能量 · 还差 229M 能量 · 奖励 自动产能 +23%"
   );
 });
 
@@ -1351,7 +1353,30 @@ test("银翼曙环完成后会继续指向晨星方舟", () => {
   assert.equal(goal.value, "晨星方舟");
   assert.equal(
     goal.progressText,
-    "航段 41/41 · 进度 951M 能量 / 1.2B 能量 · 还差 249M 能量 · 奖励 总产能 +24%"
+    "航段 41/42 · 进度 951M 能量 / 1.2B 能量 · 还差 249M 能量 · 奖励 总产能 +24%"
+  );
+});
+
+test("晨星方舟完成后会继续指向星潮谐振庭", () => {
+  const state = {
+    ...createInitialState(0),
+    totalEnergy: 1_201_000_000,
+    overloadBonus: 17,
+    upgrades: {
+      lens: 14,
+      collector: 16,
+      resonator: 6,
+      stabilizer: 16
+    }
+  };
+
+  const goal = getCurrentGoal(state);
+
+  assert.equal(goal.id, "project-startide-resonance-court");
+  assert.equal(goal.value, "星潮谐振庭");
+  assert.equal(
+    goal.progressText,
+    "航段 42/42 · 进度 1.2B 能量 / 1.6B 能量 · 还差 399M 能量 · 奖励 过载奖励 +24%"
   );
 });
 
@@ -1462,7 +1487,7 @@ test("星图项目只会标记第一个未完成项目为当前航段", () => {
   });
   const completed = getProjectStatuses({
     ...createInitialState(0),
-    totalEnergy: 1_201_000_000,
+    totalEnergy: 1_601_000_000,
     overloadBonus: 17,
     upgrades: {
       lens: 14,
@@ -1485,7 +1510,7 @@ test("星图项目只会标记第一个未完成项目为当前航段", () => {
 test("星图总览会显示全部完成状态", () => {
   const state = {
     ...createInitialState(0),
-    totalEnergy: 1_201_000_000,
+    totalEnergy: 1_601_000_000,
     overloadBonus: 17,
     upgrades: {
       lens: 14,
@@ -1497,10 +1522,10 @@ test("星图总览会显示全部完成状态", () => {
 
   const overview = getProjectOverview(state);
 
-  assert.equal(overview.completed, 41);
-  assert.equal(overview.total, 41);
+  assert.equal(overview.completed, 42);
+  assert.equal(overview.total, 42);
   assert.equal(overview.nextProjectId, null);
-  assert.equal(overview.summaryText, "星图进度 41/41 · 全部航段已完成");
+  assert.equal(overview.summaryText, "星图进度 42/42 · 全部航段已完成");
   assert.equal(
     overview.detailText,
     "所有星图奖励已生效，继续累计能量等待下一段航线。"
@@ -1508,7 +1533,7 @@ test("星图总览会显示全部完成状态", () => {
   assert.equal(overview.trackText, "目标分轨：累计航段 全部完成；升级航段 全部完成");
   assert.equal(
     overview.chapterText,
-    "阶段导航：首段星图 4/4 · 专精校准 5/5 · 深空基建 4/4 · 远航长尾 28/28；全部阶段完成"
+    "阶段导航：首段星图 4/4 · 专精校准 5/5 · 深空基建 4/4 · 远航长尾 29/29；全部阶段完成"
   );
   assert.equal(
     overview.chapterTargetText,
@@ -1516,11 +1541,11 @@ test("星图总览会显示全部完成状态", () => {
   );
   assert.equal(
     overview.chapterRewardText,
-    "章节奖励：首段星图 总产能 1 / 点击 1 / 自动 1 / 过载 1 · 专精校准 总产能 3 / 点击 1 / 自动 1 · 深空基建 总产能 1 / 点击 1 / 自动 2 · 远航长尾 总产能 8 / 点击 7 / 自动 7 / 过载 6"
+    "章节奖励：首段星图 总产能 1 / 点击 1 / 自动 1 / 过载 1 · 专精校准 总产能 3 / 点击 1 / 自动 1 · 深空基建 总产能 1 / 点击 1 / 自动 2 · 远航长尾 总产能 8 / 点击 7 / 自动 7 / 过载 7"
   );
   assert.equal(
     overview.rewardProgressText,
-    "奖励进度：总产能 13/13 · 点击 10/10 · 自动 11/11 · 过载 7/7"
+    "奖励进度：总产能 13/13 · 点击 10/10 · 自动 11/11 · 过载 8/8"
   );
   assert.equal(
     overview.rewardTargetText,
@@ -1528,7 +1553,7 @@ test("星图总览会显示全部完成状态", () => {
   );
   assert.equal(
     overview.milestoneText,
-    "里程碑：全部章节已完成 · 终局航点 晨星方舟已完成"
+    "里程碑：全部章节已完成 · 终局航点 星潮谐振庭已完成"
   );
   assert.equal(
     overview.routeFocusText,
@@ -1536,12 +1561,12 @@ test("星图总览会显示全部完成状态", () => {
   );
   assert.equal(
     overview.bonusText,
-    "生效加成：总产能 x9.14 · 点击 x5.48 · 自动 x7.45 · 过载 x3.29"
+    "生效加成：总产能 x9.14 · 点击 x5.48 · 自动 x7.45 · 过载 x4.08"
   );
   assert.equal(overview.forecastText, "航线预告：等待下一段航线");
   assert.equal(
     overview.compositionText,
-    "航线构成：32 个累计航段 · 9 个升级航段 · 奖励分布 总产能 13 段 / 点击 10 段 / 自动 11 段 / 过载 7 段"
+    "航线构成：33 个累计航段 · 9 个升级航段 · 奖励分布 总产能 13 段 / 点击 10 段 / 自动 11 段 / 过载 8 段"
   );
 });
 
@@ -1560,7 +1585,7 @@ test("星图阶段导航会显示最终阶段余量", () => {
 
   assert.equal(
     overview.chapterText,
-    "阶段导航：首段星图 4/4 · 专精校准 5/5 · 深空基建 4/4 · 远航长尾 17/28；当前 远航长尾 18/28 · 航段 31/41 晨渊观星台 · 本阶段还剩 11 段 · 最终阶段"
+    "阶段导航：首段星图 4/4 · 专精校准 5/5 · 深空基建 4/4 · 远航长尾 17/29；当前 远航长尾 18/29 · 航段 31/42 晨渊观星台 · 本阶段还剩 12 段 · 最终阶段"
   );
 });
 
