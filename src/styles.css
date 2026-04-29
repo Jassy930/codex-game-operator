@@ -548,7 +548,7 @@ h2 {
 .project-segment-badge,
 .project-chapter-badge,
 .project-tag-badge,
-.project-current-badge {
+.project-status-badge {
   flex: 0 0 auto;
   padding: 3px 8px;
   border-radius: 999px;
@@ -571,13 +571,19 @@ h2 {
   color: #ffd4dc;
 }
 
-.project-current-badge {
+.project-status-badge.is-current {
   background: rgba(244, 178, 60, 0.18);
   color: #fff7c2;
 }
 
-.project-current-badge[hidden] {
-  display: none;
+.project-status-badge.is-complete {
+  background: rgba(19, 181, 166, 0.16);
+  color: #bdf4eb;
+}
+
+.project-status-badge.is-pending {
+  background: rgba(248, 243, 231, 0.1);
+  color: rgba(248, 243, 231, 0.72);
 }
 
 .project-summary,

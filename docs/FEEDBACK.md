@@ -2,6 +2,10 @@
 
 ## 2026-04-29
 
+- GitHub Issues：gh 可用且已认证；2026-04-29 21:48 CST 查询到 1 个 open issue、1 个 open feedback issue、0 个 open bug issue。
+- #2 仍为 open，最后更新时间停留在 2026-04-29 13:38:36 UTC，未出现新的玩家复测结论或 bug；本轮不继续追加第 58 段，改为给星图项目卡片新增“已完成 / 当前航段 / 待推进”状态标签，减少玩家扫描 57 段列表时判断卡片状态的成本。
+- data/feedback/github-feedback.md 已同步本地快照。
+
 - GitHub Issues：gh 可用且已认证；2026-04-29 21:30 CST 查询到 1 个 open issue、1 个 open feedback issue、0 个 open bug issue。
 - #2 仍为 open，最后更新时间停留在 2026-04-29 13:20:41 UTC，未出现新的玩家复测结论或 bug；本轮不继续追加第 58 段，改为让星图筛选摘要在混合完成/未完成视图中显示已领取奖励构成，减少玩家从奖励构成和待领取奖励中反推已获得成长线的成本。
 - data/feedback/github-feedback.md 已同步本地快照。

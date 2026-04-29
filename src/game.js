@@ -1279,10 +1279,15 @@ export function getProjectStatuses(state) {
   });
   const currentIndex = statuses.findIndex((project) => !project.completed);
 
-  return statuses.map((project, index) => ({
-    ...project,
-    isCurrent: index === currentIndex
-  }));
+  return statuses.map((project, index) => {
+    const isCurrent = index === currentIndex;
+
+    return {
+      ...project,
+      isCurrent,
+      statusText: project.completed ? "已完成" : isCurrent ? "当前航段" : "待推进"
+    };
+  });
 }
 
 export function filterProjectStatuses(projects, filterId = DEFAULT_PROJECT_FILTER_ID) {

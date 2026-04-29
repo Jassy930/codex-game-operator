@@ -385,10 +385,16 @@ function renderProject(project) {
   tagBadge.className = "project-tag-badge";
   tagBadge.textContent = project.tagText;
 
-  const currentBadge = document.createElement("span");
-  currentBadge.className = "project-current-badge";
-  currentBadge.textContent = "当前航段";
-  currentBadge.hidden = !project.isCurrent;
+  const statusBadge = document.createElement("span");
+  statusBadge.className = [
+    "project-status-badge",
+    project.completed ? "is-complete" : "",
+    project.isCurrent ? "is-current" : "",
+    !project.completed && !project.isCurrent ? "is-pending" : ""
+  ]
+    .filter(Boolean)
+    .join(" ");
+  statusBadge.textContent = project.statusText;
 
   const summary = document.createElement("span");
   summary.className = "project-summary";
@@ -410,7 +416,7 @@ function renderProject(project) {
   fill.style.width = Math.round(project.progress * 100) + "%";
   meter.append(fill);
 
-  header.append(name, segmentBadge, chapterBadge, tagBadge, currentBadge);
+  header.append(name, segmentBadge, chapterBadge, tagBadge, statusBadge);
   item.append(header, summary, progress, reward, meter);
   return item;
 }

@@ -459,6 +459,7 @@ test("星图项目会给中后段玩家新的可追目标", () => {
   assert.equal(projects[0].chapterTotal, 4);
   assert.equal(projects[0].chapterText, "首段星图 1/4");
   assert.equal(projects[0].tagText, "累计航段 · 总产能奖励");
+  assert.equal(projects[0].statusText, "已完成");
   assert.equal(projects[0].completed, true);
   assert.equal(projects[0].isCurrent, false);
   assert.equal(projects[0].progressText, "进度 100K 能量 / 100K 能量 · 已完成");
@@ -469,11 +470,13 @@ test("星图项目会给中后段玩家新的可追目标", () => {
   assert.equal(projects[1].chapterTotal, 4);
   assert.equal(projects[1].chapterText, "首段星图 2/4");
   assert.equal(projects[1].tagText, "升级航段 · 过载奖励");
+  assert.equal(projects[1].statusText, "当前航段");
   assert.equal(projects[1].isCurrent, true);
   assert.equal(projects[1].remaining, 6);
   assert.equal(projects[1].progressText, "进度 0 级 / 6 级 · 还差 6 级");
   assert.equal(projects[2].id, "lens-array");
   assert.equal(projects[2].tagText, "升级航段 · 点击奖励");
+  assert.equal(projects[2].statusText, "待推进");
   assert.equal(projects[2].isCurrent, false);
   assert.equal(projects[2].remaining, 1);
   assert.equal(projects[3].id, "collector-grid");
