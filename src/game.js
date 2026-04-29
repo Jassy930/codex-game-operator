@@ -883,6 +883,20 @@ export const PROJECT_DEFS = [
     current(state) {
       return state.totalEnergy;
     }
+  },
+  {
+    id: "radiant-wing-stargate",
+    name: "曜翼星门",
+    summary: "累计 37.2B 能量，在星翼远航港外开启曜翼星门。",
+    unit: "能量",
+    target: 37_200_000_000,
+    reward: "总产能 +30%",
+    effect: {
+      totalMultiplier: 1.3
+    },
+    current(state) {
+      return state.totalEnergy;
+    }
   }
 ];
 
@@ -905,7 +919,7 @@ export const PROJECT_CHAPTER_DEFS = [
   {
     name: "远航长尾",
     startId: "void-gate-expedition",
-    endId: "starwing-voyage-haven"
+    endId: "radiant-wing-stargate"
   }
 ];
 

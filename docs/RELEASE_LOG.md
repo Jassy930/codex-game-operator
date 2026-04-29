@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+- 新增 37.2B 后曜翼星门航段：星翼远航港完成后继续出现累计能量目标，完成后奖励总产能 +30%，星图路线扩展到 53 段。
+- 同步星图总览、里程碑、章节、奖励进度、航线构成、项目列表、静态 HTML 初始文案、README、产品说明、路线图和设计约束到 53 段。
+- 同步 GitHub Issues 反馈状态：当前 1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
+- 验证通过：bun install --no-save、bun run test、bun run build、npm install、npm test、npm run build。
+- 构建产物已包含“曜翼星门”、`radiant-wing-stargate`、“星图进度 0/53”、“44 个累计航段”、“总产能 0/16”和“37.2B”。
 - 新增 27.5B 后星翼远航港航段：星耀跃迁塔完成后继续出现累计能量目标，完成后奖励自动产能 +29%，星图路线扩展到 52 段。
 - 同步星图总览、里程碑、章节、奖励进度、航线构成、项目列表、静态 HTML 初始文案、README、产品说明、路线图和设计约束到 52 段。
 - 同步 GitHub Issues 反馈状态：当前 1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
