@@ -771,6 +771,20 @@ export const PROJECT_DEFS = [
     current(state) {
       return state.totalEnergy;
     }
+  },
+  {
+    id: "stardome-navigation-spire",
+    name: "星穹导航塔",
+    summary: "累计 3.7B 能量，在辉翼巡航港外立起星穹导航塔。",
+    unit: "能量",
+    target: 3_700_000_000,
+    reward: "总产能 +26%",
+    effect: {
+      totalMultiplier: 1.26
+    },
+    current(state) {
+      return state.totalEnergy;
+    }
   }
 ];
 
@@ -793,7 +807,7 @@ export const PROJECT_CHAPTER_DEFS = [
   {
     name: "远航长尾",
     startId: "void-gate-expedition",
-    endId: "radiant-wing-cruise-haven"
+    endId: "stardome-navigation-spire"
   }
 ];
 
