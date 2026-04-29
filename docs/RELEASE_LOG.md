@@ -7,6 +7,8 @@
 - 同步 GitHub Issues 反馈状态：当前 1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
 - 验证通过：bun install --no-save、bun run test、bun run build、npm install、npm test、npm run build。
 - 构建产物已包含“待领取奖励 总产能 17 段 / 点击 14 段 / 自动 15 段 / 过载 11 段”和 `formatProjectFilterPendingRewardMix`。
+- GitHub Pages workflow 25111260326 已成功，线上地址返回 HTTP 200，且发布文件包含“待领取奖励 总产能 17 段 / 点击 14 段 / 自动 15 段 / 过载 11 段”和 `formatProjectFilterPendingRewardMix`。
+- 已回复 #2，说明星图筛选摘要待领取奖励已部署，并保持 issue open 等待复测。
 - 新增星图筛选摘要剩余量：有匹配航段的筛选摘要会显示完成率和剩余航段数，例如“完成率 20% · 剩余 4 段”。
 - 空筛选仍显示没有匹配航段；摘要剩余量仅改变筛选视图展示，不新增存档字段，不改变 57 段星图路线、项目完成判定、奖励数值、升级价格、航线策略或筛选规则。
 - 同步 GitHub Issues 反馈状态：当前 1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
