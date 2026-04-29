@@ -631,6 +631,20 @@ export const PROJECT_DEFS = [
     current(state) {
       return state.totalEnergy;
     }
+  },
+  {
+    id: "glimmer-shadow-vault",
+    name: "烁影星匣",
+    summary: "累计 250M 能量，在虚曜谐振塔外封存烁影星匣。",
+    unit: "能量",
+    target: 250_000_000,
+    reward: "点击产能 +21%",
+    effect: {
+      clickMultiplier: 1.21
+    },
+    current(state) {
+      return state.totalEnergy;
+    }
   }
 ];
 
@@ -653,7 +667,7 @@ export const PROJECT_CHAPTER_DEFS = [
   {
     name: "远航长尾",
     startId: "void-gate-expedition",
-    endId: "voidflare-resonator"
+    endId: "glimmer-shadow-vault"
   }
 ];
 
