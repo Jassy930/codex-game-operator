@@ -20,8 +20,11 @@
 - 静态首页包含 `project-chapter-visual is-long-tail`、`project-chapter-emblem` 和“远航航线”。
 - `bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build` 已通过；测试数 100 项。
 - 构建产物包含 `project-chapter-emblem`、`project-chapter-focus`、`is-long-tail`、`visualClass`、`focusText` 和“远航航线”。
+- GitHub Pages workflow 25136175855 已成功，线上地址返回 HTTP 200；线上首页、`app.js`、`game.js` 和 `styles.css` 已确认包含章节视觉徽记、焦点标签、数据推导和样式。
+- #4 已回复并继续保持 open，等待复测确认章节徽记和焦点标签是否让星图章节导航更像可扫视的视觉入口。
+- 回复后同步 GitHub Issues：2026-04-30 06:03 CST 当前仍为 3 个 open feedback issue、0 个 open bug issue；#4 更新时间为 2026-04-29T22:03:01Z。
 
-下一步：push 后等待 GitHub Pages workflow；线上验证通过后回复 #4，并继续保持 issue open 等待复测。
+下一步：等待 #4 复测；若仍认为星图区文字密度过高，再评估更强的章节插图、章节分页或长尾分段折叠。
 
 ## 2026-04-30 Product decision：星图章节视觉导航
 

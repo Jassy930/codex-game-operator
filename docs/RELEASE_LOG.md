@@ -8,6 +8,9 @@
 - 同步 GitHub Issues 反馈状态：当前 3 个 open feedback issue、0 个 open bug issue；#4 继续指向视觉密度和图片需求。
 - 验证通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 100 项。
 - 构建产物已确认包含 `project-chapter-emblem`、`project-chapter-focus`、`is-long-tail`、`visualClass`、`focusText` 和“远航航线”。
+- GitHub Pages workflow 25136175855 已成功，线上地址返回 HTTP 200，且线上首页、`app.js`、`game.js` 和 `styles.css` 已确认包含章节视觉徽记相关标记。
+- 已回复 #4，说明星图章节视觉徽记已部署，并保持 issue open 等待复测。
+- 回复后同步 GitHub Issues 反馈状态：当前 3 个 open feedback issue、0 个 open bug issue；#4 更新时间为 2026-04-29T22:03:01Z。
 - 星图视觉航线下新增“星图章节视觉导航”：四个章节以固定尺寸视觉按钮展示完成进度、下一条目标和小型进度轨，点击可直接切换到对应章节筛选。
 - `src/game.js` 新增 `getProjectChapterVisuals`，从现有项目状态推导章节进度、状态、下一条目标和筛选 id；`src/app.js` 渲染 `projectChapterMap` / `project-chapter-tile` 并复用现有 `projectFilter`；`index.html` 和 `src/styles.css` 同步新增静态结构与样式。
 - 本轮只调整星图导航和视觉呈现；不新增存档字段，不改变升级价格、产能公式、星图 57 段路线、项目奖励、项目完成判定、航线策略、航线指令、反馈入口或既有筛选摘要结构。
