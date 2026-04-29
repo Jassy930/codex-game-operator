@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+- 新增 4.9B 后星瀑谐振门航段：星穹导航塔完成后继续出现累计能量目标，完成后奖励过载奖励 +26%，星图路线扩展到 46 段。
+- 同步星图总览、里程碑、章节、奖励进度、航线构成、项目列表、静态 HTML 初始文案和 README 到 46 段。
+- 同步 GitHub Issues 反馈状态：当前 1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
+- 验证通过：bun install --no-save、bun run test、bun run build、npm install、npm test、npm run build。
+- 构建产物已包含“星瀑谐振门”、`starfall-resonance-gate`、“星图进度 0/46”、“37 个累计航段”和“过载 0/9”。
 - 新增 3.7B 后星穹导航塔航段：辉翼巡航港完成后继续出现累计能量目标，完成后奖励总产能 +26%，星图路线扩展到 45 段。
 - 同步星图总览、里程碑、章节、奖励进度、航线构成、项目列表、静态 HTML 初始文案和 README 到 45 段。
 - 同步 GitHub Issues 反馈状态：当前 1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。

@@ -785,6 +785,20 @@ export const PROJECT_DEFS = [
     current(state) {
       return state.totalEnergy;
     }
+  },
+  {
+    id: "starfall-resonance-gate",
+    name: "星瀑谐振门",
+    summary: "累计 4.9B 能量，在星穹导航塔外开启星瀑谐振门。",
+    unit: "能量",
+    target: 4_900_000_000,
+    reward: "过载奖励 +26%",
+    effect: {
+      overloadMultiplier: 1.26
+    },
+    current(state) {
+      return state.totalEnergy;
+    }
   }
 ];
 
@@ -807,7 +821,7 @@ export const PROJECT_CHAPTER_DEFS = [
   {
     name: "远航长尾",
     startId: "void-gate-expedition",
-    endId: "stardome-navigation-spire"
+    endId: "starfall-resonance-gate"
   }
 ];
 
