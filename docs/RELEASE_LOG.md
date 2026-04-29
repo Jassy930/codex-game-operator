@@ -7,6 +7,8 @@
 - 同步 GitHub Issues 反馈状态：当前 1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
 - 验证通过：bun install --no-save、bun run test、bun run build、npm install、npm test、npm run build。
 - 构建产物已包含“烁影星匣”、`glimmer-shadow-vault`、“星图进度 0/35”、“26 个累计航段”和“点击 0/9”。
+- GitHub Pages workflow 25088946556 已成功，线上地址返回 HTTP 200，且发布文件包含“烁影星匣”、`glimmer-shadow-vault`、“星图进度 0/35”、“26 个累计航段”和“点击 0/9”。
+- 已回复 #2，说明烁影星匣航段已部署，并保持 issue open 等待复测。
 - 新增 190M 后虚曜谐振塔航段：星渊回声门完成后继续出现累计能量目标，完成后奖励过载奖励 +20%，星图路线扩展到 34 段。
 - 同步星图总览、里程碑、章节、奖励进度、航线构成、项目列表和静态 HTML 初始文案到 34 段。
 - 同步 GitHub Issues 反馈状态：当前 1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
