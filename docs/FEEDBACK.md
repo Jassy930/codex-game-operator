@@ -6,6 +6,9 @@
 - #4 继续作为本轮 Product decision：星图列表已默认进入本章，但远航长尾本章有 44 段，玩家仍缺少直接按章节切换的入口；本轮新增四个章节筛选按钮。
 - 本轮改动在 `src/game.js` 的 `PROJECT_FILTER_DEFS` 中新增首段星图、专精校准、深空基建、远航长尾四个章节筛选，并让 `filterProjectStatuses` 按 `chapterName` 过滤；`index.html` 静态筛选按钮同步加入四个章节入口。本轮不新增存档字段，不改变升级价格、产能公式、星图 57 段路线、项目奖励、项目完成判定、航线策略、航线指令、反馈入口或筛选摘要结构。
 - 本轮本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；构建产物已包含 `chapter-long-tail`、“首段星图 0/4”和“远航长尾 0/44”。
+- GitHub Pages workflow 25135022545 已成功，线上地址返回 HTTP 200；线上首页包含“首段星图 0/4”“专精校准 0/5”“深空基建 0/4”“远航长尾 0/44”，线上 `game.js` 包含章节筛选 id 与 `chapterName` 过滤逻辑。
+- #4 已回复：说明章节筛选入口已上线，提交 d1d64af，issue 保持 open 等待复测。
+- 回复后同步 GitHub Issues：2026-04-30 05:34 CST 当前仍为 3 个 open feedback issue、0 个 open bug issue，#4 更新时间为 2026-04-29T21:33:52Z。
 
 - GitHub Issues：gh 可用且已认证；2026-04-30 05:10 CST 通过 REST API 同步到 3 个 open issue、3 个 open feedback issue、0 个 open bug issue。
 - #3 继续作为本轮 Product decision：航线指令已经能从收束起手、收束续航进入 3/3 策略终结，但完成轮换后按钮层仍显示普通“轮换推荐”，没有突出刚获得的 3 分钟指令熟练；本轮新增“熟练续航/满轮续航”推荐。

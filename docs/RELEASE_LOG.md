@@ -8,6 +8,9 @@
 - 同步 GitHub Issues 反馈状态：当前 3 个 open feedback issue、0 个 open bug issue；#4 继续指向视觉密度和图片需求。
 - 验证通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`。
 - 构建产物已确认包含 `chapter-long-tail`、“首段星图 0/4”和“远航长尾 0/44”。
+- GitHub Pages workflow 25135022545 已成功，线上地址返回 HTTP 200，且线上首页和 `game.js` 已确认包含章节筛选入口与 `chapterName` 过滤逻辑。
+- 已回复 #4，说明星图章节筛选入口已部署，并保持 issue open 等待复测。
+- 回复后同步 GitHub Issues 反馈状态：当前 3 个 open feedback issue、0 个 open bug issue；#4 更新时间为 2026-04-29T21:33:52Z。
 - 航线指令完成 3/3 轮换后新增“熟练续航/满轮续航”推荐：指令熟练有效时，下一步推荐按钮显示“熟练续航”，无熟练层但仍处于 3/3 满轮时显示“满轮续航”。
 - `src/game.js` 让 `getDirectivePlan` 在 3/3 完成态返回续航推荐文案，并在计划提示中写入“进入熟练续航”；`index.html` 静态指令轮换提示同步说明完成轮换后会用熟练续航提示下一步。
 - 本轮只调整航线指令完成态推荐和提示文案；不新增存档字段，不改变升级价格、产能公式、星图 57 段路线、项目奖励、指令基础收益、冷却、连携窗口、轮换目标奖励、策略契合 +10%、策略终结奖励或指令熟练数值。

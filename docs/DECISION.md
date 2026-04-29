@@ -21,8 +21,11 @@
 - 远航长尾筛选摘要显示“远航长尾 0/44”、下一条“航段 14/57 · 远航长尾 1/44 星门远征”和终点“航段 57/57 · 远航长尾 44/44 星渊方舟”。
 - `bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build` 已通过。
 - 构建产物包含 `chapter-long-tail`、“首段星图 0/4”和“远航长尾 0/44”。
+- GitHub Pages workflow 25135022545 已成功，线上地址返回 HTTP 200；线上首页包含“首段星图 0/4”“专精校准 0/5”“深空基建 0/4”“远航长尾 0/44”，线上 `game.js` 包含四个章节筛选 id 和 `chapterName` 过滤逻辑。
+- #4 已回复并继续保持 open，等待复测确认章节筛选是否让星图列表尤其是远航长尾阶段不再像一次性铺开的文字墙。
+- 回复后同步 GitHub Issues：2026-04-30 05:34 CST 当前仍为 3 个 open feedback issue、0 个 open bug issue；#4 更新时间为 2026-04-29T21:33:52Z。
 
-下一步：推送后等待 GitHub Pages 部署，验证线上首页和脚本包含章节筛选入口，并回复 #4 继续等待复测。
+下一步：等待 #4 复测；若仍认为文字密度过高，再评估章节分页、章节插图或长尾分段折叠。
 
 ## 2026-04-30 Product decision：指令熟练续航推荐
 
