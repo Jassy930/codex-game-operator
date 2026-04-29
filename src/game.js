@@ -56,6 +56,25 @@ export const UPGRADE_DEFS = [
 export const OVERLOAD_INTERVAL = 8;
 export const BASE_OVERLOAD_BONUS = 5;
 export const DEFAULT_ROUTE_STANCE_ID = "balanced";
+export const DEFAULT_PROJECT_FILTER_ID = "all";
+export const PROJECT_FILTER_DEFS = [
+  {
+    id: DEFAULT_PROJECT_FILTER_ID,
+    name: "全部"
+  },
+  {
+    id: "current",
+    name: "当前"
+  },
+  {
+    id: "incomplete",
+    name: "未完成"
+  },
+  {
+    id: "completed",
+    name: "已完成"
+  }
+];
 export const ROUTE_STANCE_DEFS = [
   {
     id: DEFAULT_ROUTE_STANCE_ID,
@@ -1225,6 +1244,23 @@ export function getProjectStatuses(state) {
   }));
 }
 
+export function filterProjectStatuses(projects, filterId = DEFAULT_PROJECT_FILTER_ID) {
+  const filter = getValidProjectFilterId(filterId);
+  const items = Array.isArray(projects) ? projects : [];
+
+  if (filter === "current") {
+    return items.filter((project) => project.isCurrent);
+  }
+  if (filter === "incomplete") {
+    return items.filter((project) => !project.completed);
+  }
+  if (filter === "completed") {
+    return items.filter((project) => project.completed);
+  }
+
+  return items;
+}
+
 export function getProjectOverview(state) {
   const current = normalizeState(state);
   const projects = getProjectStatuses(current);
@@ -2001,6 +2037,12 @@ function getValidRouteStanceId(routeStanceId) {
   return ROUTE_STANCE_DEFS.some((item) => item.id === routeStanceId)
     ? routeStanceId
     : DEFAULT_ROUTE_STANCE_ID;
+}
+
+function getValidProjectFilterId(filterId) {
+  return PROJECT_FILTER_DEFS.some((item) => item.id === filterId)
+    ? filterId
+    : DEFAULT_PROJECT_FILTER_ID;
 }
 
 function getRouteStanceDef(routeStanceId) {

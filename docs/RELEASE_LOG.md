@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+- 新增星图航段筛选：项目列表可按全部、当前、未完成和已完成筛选，当前筛选用于直接定位正在推进的航段，已完成筛选用于复盘已获得奖励。
+- 筛选仅改变列表展示，不新增存档字段，不改变 57 段星图路线、项目完成判定、奖励数值和升级价格。
+- 同步 GitHub Issues 反馈状态：当前 1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
+- 验证通过：bun install --no-save、bun run test、bun run build、npm install、npm test、npm run build。
+- 构建产物已包含 `projectFilterList`、`project-filter-button`、`filterProjectStatuses` 和“星图航段筛选”。
 - 新增 122B 后星渊方舟航段：星渊巡航环完成后继续出现累计能量目标，完成后奖励总产能 +32%，星图路线扩展到 57 段。
 - 同步星图总览、里程碑、章节、奖励进度、航线构成、项目列表、静态 HTML 初始文案、README、产品说明、路线图和设计约束到 57 段。
 - 同步 GitHub Issues 反馈状态：当前 1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。

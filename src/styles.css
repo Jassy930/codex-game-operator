@@ -463,6 +463,31 @@ h2 {
   opacity: 0.56;
 }
 
+.project-filter-list {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.project-filter-button {
+  min-height: 36px;
+  padding: 0 8px;
+  border: 1px solid rgba(248, 243, 231, 0.14);
+  border-radius: 8px;
+  background: rgba(248, 243, 231, 0.06);
+  color: rgba(248, 243, 231, 0.76);
+  cursor: pointer;
+  font-size: 0.78rem;
+  font-weight: 900;
+}
+
+.project-filter-button:hover,
+.project-filter-button.is-active {
+  border-color: rgba(19, 181, 166, 0.7);
+  background: rgba(19, 181, 166, 0.14);
+  color: #bdf4eb;
+}
+
 .project-list {
   display: grid;
   gap: 10px;
@@ -566,6 +591,19 @@ h2 {
   transition: width 160ms ease;
 }
 
+.project-empty-state {
+  min-height: 64px;
+  margin: 0;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(248, 243, 231, 0.12);
+  border-radius: 8px;
+  background: rgba(248, 243, 231, 0.04);
+  color: rgba(248, 243, 231, 0.66);
+  font-size: 0.86rem;
+  font-weight: 850;
+}
+
 .feedback-form {
   display: grid;
   gap: 12px;
@@ -656,6 +694,10 @@ h2 {
 
   .route-stance-list {
     grid-template-columns: 1fr;
+  }
+
+  .project-filter-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .core-zone,

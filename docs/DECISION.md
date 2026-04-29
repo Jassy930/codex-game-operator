@@ -1,5 +1,26 @@
 # Decision
 
+## 2026-04-29 Product decision：星图航段筛选
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 当前仍有真实体验反馈 #2 open，且没有 open bug，继续进入有反馈样本下的 Product decision。
+
+当前最大问题：#2 仍围绕“内容丰富度太差，可玩的内容太少”保持 open。上一轮已把星图扩展到 57 段，如果继续只追加第 58 段，会继续后移内容边界，但也会让项目列表更长、更难定位当前可玩的内容。
+
+本轮决策：
+
+- 不追加新航段，先新增星图航段筛选：全部、当前、未完成、已完成。
+- 筛选只影响当前列表视图，不新增存档字段，不改变项目完成判定、奖励数值、升级价格和 57 段星图路线。
+- 当前筛选让玩家直接定位正在推进的航段；未完成筛选保留后续追逐目标；已完成筛选支持复盘已获得奖励。
+- 静态 HTML 初始文案、README、产品说明、路线图、设计约束和发布日志同步记录筛选能力。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-04-29 17:43 CST 查询到 1 个 open issue、1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
+- `bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build` 已通过，覆盖全部/当前/未完成/已完成筛选、非法筛选回退和全部完成时当前筛选为空。
+- 构建产物已包含 `projectFilterList`、`project-filter-button`、`filterProjectStatuses` 和“星图航段筛选”。
+
+下一步：push 后等待 GitHub Pages workflow 部署，并回复 #2 说明本轮筛选改动。
+
 ## 2026-04-29 Product decision：星渊方舟航段
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 当前仍有真实体验反馈 #2 open，且没有 open bug，继续进入有反馈样本下的 Product decision。

@@ -8,6 +8,7 @@ import {
   buildUpgradePurchaseNotice,
   clickCore,
   createInitialState,
+  filterProjectStatuses,
   formatNumber,
   getComboStatus,
   getCurrentGoal,
@@ -1880,6 +1881,42 @@ test("星图项目只会标记第一个未完成项目为当前航段", () => {
     completed.filter((project) => project.isCurrent).map((project) => project.id),
     []
   );
+});
+
+test("星图项目筛选会区分当前、未完成和已完成航段", () => {
+  const active = getProjectStatuses({
+    ...createInitialState(0),
+    totalEnergy: 260_000,
+    overloadBonus: 17,
+    upgrades: {
+      lens: 12,
+      collector: 12,
+      resonator: 6,
+      stabilizer: 9
+    }
+  });
+  const completed = getProjectStatuses({
+    ...createInitialState(0),
+    totalEnergy: 122_001_000_000,
+    overloadBonus: 17,
+    upgrades: {
+      lens: 14,
+      collector: 16,
+      resonator: 6,
+      stabilizer: 16
+    }
+  });
+
+  assert.equal(filterProjectStatuses(active, "all").length, 57);
+  assert.equal(filterProjectStatuses(active, "invalid").length, 57);
+  assert.deepEqual(
+    filterProjectStatuses(active, "current").map((project) => project.id),
+    ["ignition-drill"]
+  );
+  assert.equal(filterProjectStatuses(active, "completed").length, 5);
+  assert.equal(filterProjectStatuses(active, "incomplete").length, 52);
+  assert.deepEqual(filterProjectStatuses(completed, "current"), []);
+  assert.equal(filterProjectStatuses(completed, "completed").length, 57);
 });
 
 test("星图总览会显示全部完成状态", () => {

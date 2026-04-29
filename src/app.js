@@ -1,10 +1,13 @@
 import {
+  DEFAULT_PROJECT_FILTER_ID,
+  PROJECT_FILTER_DEFS,
   UPGRADE_DEFS,
   buildActionNoticeWithGoalTransition,
   buildClickActionNotice,
   buildUpgradePurchaseNotice,
   clickCore,
   createInitialState,
+  filterProjectStatuses,
   formatNumber,
   getComboStatus,
   getCurrentGoal,
@@ -55,6 +58,7 @@ const elements = {
   projectOverviewBonus: document.querySelector("#projectOverviewBonus"),
   projectOverviewForecast: document.querySelector("#projectOverviewForecast"),
   routeStanceList: document.querySelector("#routeStanceList"),
+  projectFilterList: document.querySelector("#projectFilterList"),
   projectList: document.querySelector("#projectList"),
   resetButton: document.querySelector("#resetButton"),
   feedbackForm: document.querySelector("#feedbackForm"),
@@ -69,6 +73,7 @@ let state = loadedState.state;
 let offlineSummary = loadedState.offlineSummary;
 let actionNotice = "";
 let lastFirstUpgradeAt = state.firstUpgradeAt;
+let projectFilter = DEFAULT_PROJECT_FILTER_ID;
 
 recordEvent("session", {
   startedAt: new Date().toISOString()
@@ -155,6 +160,7 @@ function render() {
   const combo = getComboStatus(current);
   const production = getEffectiveProduction(current);
   const projectOverview = getProjectOverview(current);
+  const projects = getProjectStatuses(current);
   const routeStance = getRouteStanceStatus(current);
 
   elements.energy.textContent = formatNumber(current.energy);
@@ -183,13 +189,12 @@ function render() {
   elements.projectOverviewBonus.textContent = projectOverview.bonusText;
   elements.projectOverviewForecast.textContent = projectOverview.forecastText;
   renderRouteStances(routeStance);
+  renderProjectFilters(projects);
 
   elements.upgradeList.replaceChildren(
     ...UPGRADE_DEFS.map((upgrade) => renderUpgrade(upgrade, current, goal))
   );
-  elements.projectList.replaceChildren(
-    ...getProjectStatuses(current).map((project) => renderProject(project))
-  );
+  renderProjectList(projects);
 }
 
 function renderUpgrade(upgrade, current, goal) {
@@ -307,6 +312,44 @@ function renderRouteStance(option, routeStance) {
 
   button.append(name, summary, mastery);
   return button;
+}
+
+function renderProjectFilters(projects) {
+  elements.projectFilterList.replaceChildren(
+    ...PROJECT_FILTER_DEFS.map((filter) => renderProjectFilter(filter, projects))
+  );
+}
+
+function renderProjectFilter(filter, projects) {
+  const visibleCount = filterProjectStatuses(projects, filter.id).length;
+  const button = document.createElement("button");
+  button.className =
+    filter.id === projectFilter ? "project-filter-button is-active" : "project-filter-button";
+  button.type = "button";
+  button.setAttribute("aria-pressed", filter.id === projectFilter ? "true" : "false");
+  button.textContent = filter.name + " " + visibleCount;
+  button.addEventListener("click", () => {
+    projectFilter = filter.id;
+    render();
+  });
+
+  return button;
+}
+
+function renderProjectList(projects) {
+  const visibleProjects = filterProjectStatuses(projects, projectFilter);
+  const children = visibleProjects.length
+    ? visibleProjects.map((project) => renderProject(project))
+    : [renderProjectEmptyState()];
+
+  elements.projectList.replaceChildren(...children);
+}
+
+function renderProjectEmptyState() {
+  const item = document.createElement("p");
+  item.className = "project-empty-state";
+  item.textContent = "没有匹配航段。";
+  return item;
 }
 
 function renderProject(project) {
