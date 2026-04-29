@@ -6,6 +6,8 @@
 - 同步 GitHub Issues 反馈状态：当前 1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
 - 验证通过：bun install --no-save、bun run test、bun run build、npm install、npm test、npm run build。
 - 构建产物已包含“章节目标”、`projectOverviewChapterTargets` 和 `chapterTargetText`。
+- GitHub Pages workflow 25085160189 已成功，线上地址返回 HTTP 200，且发布文件包含“章节目标”、`projectOverviewChapterTargets` 和 `chapterTargetText`。
+- 已回复 #2，说明章节目标已部署，并保持 issue open 等待复测。
 - 新增星图章节内位置：星图项目列表章节徽标会显示“首段星图 2/4”这类章节内序号，阶段导航当前项同步显示章节内位置和全局航段号。
 - 同步 GitHub Issues 反馈状态：当前 1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
 - 验证通过：bun install --no-save、bun run test、bun run build、npm install、npm test、npm run build。

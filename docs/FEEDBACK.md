@@ -5,6 +5,9 @@
 - GitHub Issues：gh 可用且已认证；2026-04-29 08:35 CST 查询到 1 个 open issue、1 个 open feedback issue、0 个 open bug issue。
 - #2 仍为 open，未出现新的复测结论或 bug；本轮不追加第 32 段，改为在星图总览新增“章节目标”，按四个章节列出各自下一段未完成目标，让玩家不用扫描完整列表也能看到后续章节内容。
 - data/feedback/github-feedback.md 已同步本地快照。
+- 本轮已回复 #2：说明星图总览新增章节目标，GitHub Pages workflow 25085160189 已成功且线上地址返回 HTTP 200，发布文件包含“章节目标”、`projectOverviewChapterTargets` 和 `chapterTargetText`；issue 保持 open，等待复测确认章节目标是否改善跨章节内容预期和内容丰富度感知。
+- GitHub Issues：gh 可用且已认证；2026-04-29 08:43 CST 在回复后查询到 1 个 open issue、1 个 open feedback issue、0 个 open bug issue。
+- data/feedback/github-feedback.md 已在回复 #2 后同步本地快照。
 - GitHub Issues：gh 可用且已认证；2026-04-29 08:21 CST 查询到 1 个 open issue、1 个 open feedback issue、0 个 open bug issue。
 - #2 仍为 open，未出现新的复测结论或 bug；本轮不追加第 32 段，改为在星图项目列表和阶段导航当前项中显示章节内位置，例如“首段星图 2/4”，让 31 段路线更容易按章节扫描。
 - data/feedback/github-feedback.md 已同步本地快照。
