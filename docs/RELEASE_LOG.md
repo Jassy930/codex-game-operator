@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+- 新增星图筛选终点提示：筛选摘要在下一条和后续预告后，会显示当前筛选视图的终点航段，例如全部视图可直接看到“终点 航段 57/57 星渊方舟”。
+- 终点提示仅改变星图列表辅助展示；当前筛选只有少量未完成航段时不会重复追加终点，不新增存档字段，不改变 57 段星图路线、项目完成判定、奖励数值、升级价格、航线策略或筛选规则。
+- 同步 GitHub Issues 反馈状态：当前 1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
+- 验证通过：bun install --no-save、bun run test、bun run build、npm install、npm test、npm run build。
+- 构建产物已包含“终点 航段 57/57 星渊方舟”和更新后的 `getProjectFilterSummary`。
 - 新增星图筛选后续预告：筛选摘要在下一条可推进航段后，会追加当前筛选视图里最多两条后续未完成航段。
 - 后续预告仅改变星图列表辅助展示；当前筛选只有一条、已完成筛选或空筛选不会追加后续内容，不新增存档字段，不改变 57 段星图路线、项目完成判定、奖励数值、升级价格、航线策略或筛选规则。
 - 同步 GitHub Issues 反馈状态：当前 1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。

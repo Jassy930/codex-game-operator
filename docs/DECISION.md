@@ -1,5 +1,26 @@
 # Decision
 
+## 2026-04-29 Product decision：星图筛选终点提示
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 当前仍有真实体验反馈 #2 open，且没有 open bug，继续进入有反馈样本下的 Product decision。
+
+当前最大问题：#2 仍围绕“内容丰富度太差，可玩的内容太少”保持 open。上一轮筛选摘要已经显示下一条和最多两条后续航段，但玩家切换本章、累计、升级或奖励类型筛选后，仍需要扫描列表末尾才能判断当前视图最终通向哪个航点。
+
+本轮决策：
+
+- 不追加第 58 段，先在星图筛选摘要中追加“终点”提示。
+- 终点提示显示当前筛选视图最后一个匹配航段的航段号和名称。
+- 仅当当前筛选还有 4 条及以上未完成航段时显示终点，避免与下一条或后续两条预告重复。
+- 不新增存档字段，不改变项目完成判定、奖励数值、升级价格、航线策略、筛选规则和 57 段星图顺序。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-04-29 19:36 CST 查询到 1 个 open issue、1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
+- `bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build` 已通过，新增测试覆盖本章筛选终点和升级筛选终点，并确认当前单航段不追加终点。
+- 构建产物已包含“终点 航段 57/57 星渊方舟”和更新后的 `getProjectFilterSummary`。
+
+下一步：push 后等待 GitHub Pages 部署，并回复 #2 说明筛选终点提示已上线。
+
 ## 2026-04-29 Product decision：星图筛选后续预告
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 当前仍有真实体验反馈 #2 open，且没有 open bug，继续进入有反馈样本下的 Product decision。

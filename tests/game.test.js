@@ -1979,7 +1979,7 @@ test("星图项目筛选会区分当前、未完成和已完成航段", () => {
   assert.equal(filterProjectStatuses(completed, "completed").length, 57);
 });
 
-test("星图筛选摘要会显示当前筛选的下一条航段", () => {
+test("星图筛选摘要会显示当前筛选的下一条和终点航段", () => {
   const active = getProjectStatuses({
     ...createInitialState(0),
     totalEnergy: 260_000,
@@ -2005,11 +2005,11 @@ test("星图筛选摘要会显示当前筛选的下一条航段", () => {
 
   assert.equal(
     getProjectFilterSummary(active, "current-chapter"),
-    "筛选视图：本章 5 段 · 已完成 1/5 · 下一条 航段 5/57 点火航校（点击产能 +16% · 进度 12 级 / 14 级 · 还差 2 级）；后续 航段 6/57 巡航航校、航段 8/57 稳定矩阵"
+    "筛选视图：本章 5 段 · 已完成 1/5 · 下一条 航段 5/57 点火航校（点击产能 +16% · 进度 12 级 / 14 级 · 还差 2 级）；后续 航段 6/57 巡航航校、航段 8/57 稳定矩阵；终点 航段 9/57 均衡校准"
   );
   assert.equal(
     getProjectFilterSummary(active, "upgrade-track"),
-    "筛选视图：升级 9 段 · 已完成 3/9 · 下一条 航段 5/57 点火航校（点击产能 +16% · 进度 12 级 / 14 级 · 还差 2 级）；后续 航段 6/57 巡航航校、航段 8/57 稳定矩阵"
+    "筛选视图：升级 9 段 · 已完成 3/9 · 下一条 航段 5/57 点火航校（点击产能 +16% · 进度 12 级 / 14 级 · 还差 2 级）；后续 航段 6/57 巡航航校、航段 8/57 稳定矩阵；终点 航段 13/57 恒星锚点"
   );
   assert.equal(
     getProjectFilterSummary(active, "current"),

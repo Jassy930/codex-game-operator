@@ -1344,7 +1344,8 @@ export function getProjectFilterSummary(projects, filterId = DEFAULT_PROJECT_FIL
     " · " +
     nextProject.progressText +
     "）" +
-    formatProjectFilterPreview(visibleProjects)
+    formatProjectFilterPreview(visibleProjects) +
+    formatProjectFilterEndpoint(visibleProjects)
   );
 }
 
@@ -2034,6 +2035,17 @@ function formatProjectFilterPreview(projects) {
       .map((project) => project.segmentText + " " + project.name)
       .join("、")
   );
+}
+
+function formatProjectFilterEndpoint(projects) {
+  const upcomingProjects = projects.filter((project) => !project.completed);
+  const endpoint = projects[projects.length - 1];
+
+  if (!endpoint || endpoint.completed || upcomingProjects.length <= 3) {
+    return "";
+  }
+
+  return "；终点 " + endpoint.segmentText + " " + endpoint.name;
 }
 
 function formatMilestoneProject(project) {
