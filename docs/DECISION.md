@@ -19,9 +19,10 @@
 - `bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build` 通过。
 - 静态首页包含 `directiveList`、“点火齐射”“巡航回收”“谐振脉冲”和“累计 100K 能量后解锁航线指令”。
 - 测试覆盖航线指令 100K 解锁、预计收益、即时收益和冷却阻挡。
-- 发布后回复 #3，说明本轮只补主动玩法分支，保持 issue open 等待复测。
+- GitHub Pages workflow 25118696821 已成功，线上地址返回 HTTP 200，线上首页、脚本和样式均包含航线指令相关内容。
+- #3 已回复并保持 open，等待复测确认航线指令是否缓解中后段玩法单薄。
 
-下一步：push 后等待 GitHub Pages workflow 完成，线上验证航线指令内容，再回复 #3。
+下一步：观察 #3 复测结论；若仍认为主动玩法不足，再考虑把航线指令扩展成可组合的短期任务或资源消耗型分支。
 
 ## 2026-04-29 Product decision：星图视觉航线
 

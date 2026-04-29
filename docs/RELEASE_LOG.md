@@ -8,6 +8,9 @@
 - 浏览器本地新增 `directive` 事件，记录执行的指令 id 和本次即时收益。
 - 同步 GitHub Issues 反馈状态：当前 3 个 open feedback issue、0 个 open bug issue；#3 指向玩法单薄并作为本轮处理对象。
 - 验证通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`。
+- GitHub Pages workflow 25118696821 已成功，线上地址返回 HTTP 200，且发布文件包含 `directiveList`、点火齐射、巡航回收、谐振脉冲、`activateDirective`、`getDirectiveStatus`、`directive` 事件记录和 `directive-button`。
+- 已回复 #3，说明航线指令已部署，并保持 issue open 等待复测。
+- 回复后同步 GitHub Issues 反馈状态：当前 3 个 open feedback issue、0 个 open bug issue；#3 更新时间为 2026-04-29T15:45:09Z。
 - 新增星图视觉航线：星图区会把 57 段压缩成节点航线，区分已完成、当前和待推进状态。
 - 星图视觉航线会随当前筛选高亮命中航段，帮助玩家先扫视当前视图覆盖范围，再决定是否阅读筛选摘要和项目列表。
 - 视觉航线仅改变展示；不新增存档字段，不改变 57 段星图路线、项目完成判定、奖励数值、升级价格、航线策略或筛选规则。
