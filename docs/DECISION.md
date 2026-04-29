@@ -18,9 +18,11 @@
 - GitHub Issues 已同步：2026-04-29 18:46 CST 查询到 1 个 open issue、1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
 - `bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build` 已通过，测试覆盖升级航段行动建议、累计航段行动建议和全部完成状态。
 - 构建产物已包含“行动建议”、`projectOverviewAction` 和 `formatDuration`。
-- 待完成：push 后验证 GitHub Pages workflow，回复 #2，并保持 issue open 等待复测。
+- GitHub Pages workflow 25104944364 已成功，线上地址返回 HTTP 200，发布页面包含“行动建议”和 `projectOverviewAction`，线上脚本包含 `formatDuration`。
+- #2 已回复并保持 open，等待复测确认行动建议是否降低 57 段星图的操作规划成本。
+- GitHub Issues 已在回复后同步：2026-04-29 18:58 CST 查询到 1 个 open issue、1 个 open feedback issue、0 个 open bug issue。
 
-下一步：完成完整验证和发布后，继续观察 #2 复测是否认为行动建议降低 57 段星图的操作规划成本。
+下一步：继续观察 #2 复测是否认为行动建议降低 57 段星图的操作规划成本。
 
 ## 2026-04-29 Product decision：星图目标类型筛选
 

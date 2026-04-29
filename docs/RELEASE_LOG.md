@@ -7,6 +7,8 @@
 - 同步 GitHub Issues 反馈状态：当前 1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
 - 验证通过：bun install --no-save、bun run test、bun run build、npm install、npm test、npm run build。
 - 构建产物已包含“行动建议”、`projectOverviewAction` 和 `formatDuration`。
+- GitHub Pages workflow 25104944364 已成功，线上地址返回 HTTP 200，且发布页面包含“行动建议”和 `projectOverviewAction`，线上脚本包含 `formatDuration`。
+- 已回复 #2，说明星图行动建议已部署，并保持 issue open 等待复测。
 - 新增星图目标类型筛选：项目列表可按累计航段和升级航段查看，把 57 段星图拆成 48 个累计目标与 9 个升级目标。
 - 目标类型筛选仅改变列表展示，不新增存档字段，不改变 57 段星图路线、项目完成判定、奖励数值和升级价格。
 - 同步 GitHub Issues 反馈状态：当前 1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
