@@ -19,8 +19,11 @@
 - 图标具备可访问标签：聚能透镜图标、自动采集臂图标、星核稳定器图标和星核谐振器图标。
 - 静态测试覆盖 `src/app.js` 图标定义和 `src/styles.css` 图标样式。
 - `bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build` 通过；构建产物包含 `UPGRADE_ICON_DEFS`、`upgrade-icon`、`聚能透镜图标` 和 `星核谐振器图标`。
+- GitHub Pages workflow 25123861697 已成功，线上地址返回 HTTP 200；线上 `app.js` 包含 `UPGRADE_ICON_DEFS`、`upgrade-icon`、`聚能透镜图标` 和 `星核谐振器图标`，线上 `styles.css` 包含 `upgrade-card-head`、`upgrade-icon` 和 `upgrade-icon-resonator`。
+- #4 已回复并继续保持 open，等待复测确认升级面板图标是否改善右侧卡片的扫视感。
+- 回复后同步 GitHub Issues：2026-04-30 01:30 CST 查询到 3 个 open feedback issue、0 个 open bug issue；#4 更新时间为 2026-04-29T17:30:10Z。
 
-下一步：push 后等待 GitHub Pages workflow；部署成功后回复 #4，并继续观察升级卡片图标是否改善右侧面板的扫视感。
+下一步：观察 #4 复测结论；若仍认为视觉不足，再评估项目卡片图标化或章节级插图。
 
 ## 2026-04-30 Product decision：主操作区工坊插画
 

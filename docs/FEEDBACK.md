@@ -6,6 +6,9 @@
 - #4 继续作为本轮 Product decision：星图区和主操作区已有视觉资产，但升级面板仍是四张相似文字卡片；本轮新增升级卡片图标，继续回应“生成一些图片、界面更好看”的反馈。
 - 本轮改动在 `src/app.js` 新增 `UPGRADE_ICON_DEFS`、`renderUpgradeIcon` 和 `upgrade-card-head` 结构，在 `src/styles.css` 新增四类 `upgrade-icon-*` 样式；不改变存档、数值、星图 57 段路线、筛选规则、航线策略、航线指令或反馈入口。
 - 本轮本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；静态测试覆盖升级图标定义和样式，构建产物已包含 `UPGRADE_ICON_DEFS`、`upgrade-icon`、`聚能透镜图标` 和 `星核谐振器图标`。
+- GitHub Pages workflow 25123861697 已成功，线上地址返回 HTTP 200；线上 `app.js` 包含 `UPGRADE_ICON_DEFS`、`upgrade-icon`、`聚能透镜图标` 和 `星核谐振器图标`，线上 `styles.css` 包含 `upgrade-card-head`、`upgrade-icon` 和 `upgrade-icon-resonator`。
+- #4 已回复：说明升级卡片图标化已上线，提交 b1f01ec，issue 保持 open 等待复测。
+- 回复后同步 GitHub Issues：2026-04-30 01:30 CST 当前仍为 3 个 open feedback issue、0 个 open bug issue，#4 更新时间为 2026-04-29T17:30:10Z。
 
 - GitHub Issues：gh 可用且已认证；2026-04-30 01:07 CST 通过 REST API 同步到 3 个 open issue、3 个 open feedback issue、0 个 open bug issue。
 - #4 继续作为本轮 Product decision：星图区域已有视觉航线、插画和默认折叠明细，但主操作区仍主要是文字提示和按钮；本轮新增主操作区工坊插画，继续回应“生成一些图片、界面更好看”的反馈。
