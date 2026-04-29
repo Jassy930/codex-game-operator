@@ -1,5 +1,26 @@
 # Decision
 
+## 2026-04-29 Product decision：星图筛选摘要剩余量
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 当前仍有真实体验反馈 #2 open，且没有 open bug，继续进入有反馈样本下的 Product decision。
+
+当前最大问题：#2 仍围绕“内容丰富度太差，可玩的内容太少”保持 open。上一轮已让筛选按钮显示完成进度，但玩家切到某个筛选视图后，摘要仍只显示已完成数，需要自行反推出这组内容的完成率和剩余航段数。
+
+本轮决策：
+
+- 不追加第 58 段，先让星图筛选摘要显示完成率和剩余航段数。
+- 有匹配航段的筛选摘要统一追加“完成率 X% · 剩余 N 段”；已完成筛选显示 100% 和剩余 0 段。
+- 空筛选继续显示“没有匹配航段”，避免给全部完成后的本章视图制造不存在的剩余目标。
+- 不新增存档字段，不改变项目完成判定、奖励数值、升级价格、航线策略、筛选规则和 57 段星图顺序。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-04-29 20:56 CST 查询到 1 个 open issue、1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
+- `bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build` 已通过，测试覆盖本章、升级、当前、已完成和全部完成后空本章筛选摘要。
+- 构建产物已包含“完成率 0% · 剩余 57 段”和 `formatProjectFilterCompletion`。
+
+下一步：运行完整 install/test/build，发布后回复 #2，等待复测确认筛选摘要剩余量是否降低玩家判断 57 段内容余量的成本。
+
 ## 2026-04-29 Product decision：星图筛选按钮进度
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 当前仍有真实体验反馈 #2 open，且没有 open bug，继续进入有反馈样本下的 Product decision。

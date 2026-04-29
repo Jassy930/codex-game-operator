@@ -1336,6 +1336,7 @@ export function getProjectFilterSummary(projects, filterId = DEFAULT_PROJECT_FIL
       " " +
       visibleProjects.length +
       " 段 · 全部已完成" +
+      formatProjectFilterCompletion(completed, visibleProjects.length) +
       formatProjectFilterRewardMix(visibleProjects) +
       formatProjectFilterTrackMix(visibleProjects)
     );
@@ -1350,6 +1351,7 @@ export function getProjectFilterSummary(projects, filterId = DEFAULT_PROJECT_FIL
     completed +
     "/" +
     visibleProjects.length +
+    formatProjectFilterCompletion(completed, visibleProjects.length) +
     formatProjectFilterRewardMix(visibleProjects) +
     formatProjectFilterTrackMix(visibleProjects) +
     " · 下一条 " +
@@ -2024,6 +2026,13 @@ function formatProjectTrack(project) {
 
 function formatForecastProject(project) {
   return project.name + "（" + project.reward + "）";
+}
+
+function formatProjectFilterCompletion(completed, total) {
+  const remaining = Math.max(0, total - completed);
+  const percent = total > 0 ? Math.round((completed / total) * 100) : 0;
+
+  return " · 完成率 " + percent + "% · 剩余 " + remaining + " 段";
 }
 
 function formatProjectFilterPreview(projects) {
