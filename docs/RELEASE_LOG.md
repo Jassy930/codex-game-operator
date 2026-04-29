@@ -7,6 +7,8 @@
 - 同步 GitHub Issues 反馈状态：当前 1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
 - 验证通过：bun install --no-save、bun run test、bun run build、npm install、npm test、npm run build。
 - 构建产物已包含“辉潮巡航环”、`radiant-tide-cruise-ring`、“星图进度 0/36”、“27 个累计航段”和“自动 0/10”。
+- GitHub Pages workflow 25089421473 已成功，线上地址返回 HTTP 200，且发布文件包含“辉潮巡航环”、`radiant-tide-cruise-ring`、“星图进度 0/36”、“27 个累计航段”和“自动 0/10”。
+- 已回复 #2，说明辉潮巡航环航段已部署，并保持 issue open 等待复测。
 - 新增 250M 后烁影星匣航段：虚曜谐振塔完成后继续出现累计能量目标，完成后奖励点击产能 +21%，星图路线扩展到 35 段。
 - 同步星图总览、里程碑、章节、奖励进度、航线构成、项目列表和静态 HTML 初始文案到 35 段。
 - 同步 GitHub Issues 反馈状态：当前 1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
