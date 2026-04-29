@@ -5,6 +5,9 @@
 - GitHub Issues：gh 可用且已认证；2026-04-29 20:40 CST 查询到 1 个 open issue、1 个 open feedback issue、0 个 open bug issue。
 - #2 仍为 open，最后更新时间停留在 2026-04-29 12:31:30 UTC，未出现新的玩家复测结论或 bug；本轮不继续追加第 58 段，改为让星图筛选按钮直接显示内容视图的完成进度，减少玩家点击筛选前判断各组内容剩余量的成本。
 - data/feedback/github-feedback.md 已同步本地快照。
+- 本轮已回复 #2：说明星图筛选按钮新增完成进度，GitHub Pages workflow 25109646272 已成功，线上地址返回 HTTP 200，发布页面包含“全部 0/57”“本章 0/4”“累计 0/48”“升级 0/9”，线上脚本包含 `getProjectFilterButtonText` 和按钮渲染调用；issue 保持 open，等待复测确认筛选按钮进度是否降低 57 段星图各组内容剩余量的判断成本。
+- GitHub Issues：gh 可用且已认证；2026-04-29 20:48 CST 在回复后查询到 1 个 open issue、1 个 open feedback issue、0 个 open bug issue。
+- data/feedback/github-feedback.md 已在回复 #2 后同步本地快照。
 
 - GitHub Issues：gh 可用且已认证；2026-04-29 20:21 CST 查询到 1 个 open issue、1 个 open feedback issue、0 个 open bug issue。
 - #2 仍为 open，最后更新时间停留在 2026-04-29 12:16:21 UTC，未出现新的玩家复测结论或 bug；本轮不继续追加第 58 段，改为让每个星图项目卡片直接显示“累计/升级航段”和奖励类型，减少玩家扫描 57 段列表时判断操作方式与成长线的成本。

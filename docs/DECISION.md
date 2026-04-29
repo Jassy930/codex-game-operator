@@ -18,8 +18,11 @@
 - GitHub Issues 已同步：2026-04-29 20:40 CST 查询到 1 个 open issue、1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
 - `bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build` 已通过，测试覆盖全部、当前、本章、累计、升级、四类奖励、未完成、已完成和全部完成后空本章筛选按钮文案。
 - 构建产物已包含 `getProjectFilterButtonText`、`全部 0/57` 和更新后的筛选按钮渲染。
+- GitHub Pages workflow 25109646272 已成功，线上地址返回 HTTP 200，线上页面包含“全部 0/57”“本章 0/4”“累计 0/48”“升级 0/9”，线上脚本包含 `getProjectFilterButtonText` 和按钮渲染调用。
+- #2 已回复并保持 open，等待复测确认筛选按钮进度是否降低 57 段星图各组内容剩余量的判断成本。
+- GitHub Issues 已在回复后同步：2026-04-29 20:48 CST 查询到 1 个 open issue、1 个 open feedback issue、0 个 open bug issue。
 
-下一步：push 后等待 GitHub Pages 部署，验证线上筛选按钮进度文案并回复 #2。
+下一步：继续观察 #2 复测是否认为筛选按钮进度降低 57 段星图各组内容剩余量判断成本。
 
 ## 2026-04-29 Product decision：星图项目标签
 
