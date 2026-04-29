@@ -1339,6 +1339,7 @@ export function getProjectFilterSummary(projects, filterId = DEFAULT_PROJECT_FIL
       formatProjectFilterCompletion(completed, visibleProjects.length) +
       formatProjectFilterRewardMix(visibleProjects) +
       formatProjectFilterTrackMix(visibleProjects) +
+      formatProjectFilterClaimedRewardMix(visibleProjects) +
       formatProjectFilterPendingRewardMix(visibleProjects)
     );
   }
@@ -1355,6 +1356,7 @@ export function getProjectFilterSummary(projects, filterId = DEFAULT_PROJECT_FIL
     formatProjectFilterCompletion(completed, visibleProjects.length) +
     formatProjectFilterRewardMix(visibleProjects) +
     formatProjectFilterTrackMix(visibleProjects) +
+    formatProjectFilterClaimedRewardMix(visibleProjects) +
     formatProjectFilterPendingRewardMix(visibleProjects) +
     " · 下一条 " +
     nextProject.segmentText +
@@ -2073,6 +2075,18 @@ function formatProjectFilterPendingRewardMix(projects) {
     getProjectRewardCounts(projects.filter((project) => !project.completed))
   );
   return rewardText ? " · 待领取奖励 " + rewardText : "";
+}
+
+function formatProjectFilterClaimedRewardMix(projects) {
+  const completedProjects = projects.filter((project) => project.completed);
+  const pendingProjects = projects.filter((project) => !project.completed);
+
+  if (!completedProjects.length || !pendingProjects.length) {
+    return "";
+  }
+
+  const rewardText = formatProjectRewardCountText(getProjectRewardCounts(completedProjects));
+  return rewardText ? " · 已领取奖励 " + rewardText : "";
 }
 
 function formatProjectFilterTrackMix(projects) {
