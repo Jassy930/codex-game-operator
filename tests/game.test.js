@@ -171,8 +171,14 @@ test("航线指令会在 100K 后解锁并返回预计收益", () => {
   assert.equal(unlocked.unlocked, true);
   assert.equal(unlocked.options[0].ready, true);
   assert.equal(unlocked.options[0].previewText, "预计 +89.6 能量");
+  assert.equal(unlocked.options[0].recommended, true);
+  assert.equal(unlocked.options[0].recommendationText, "收束起手");
   assert.equal(unlocked.options[1].previewText, "预计 +252 能量");
+  assert.equal(unlocked.options[1].recommended, true);
+  assert.equal(unlocked.options[1].recommendationText, "收束起手");
   assert.equal(unlocked.options[2].previewText, "预计 +17.2 能量 · 策略契合 +10%");
+  assert.equal(unlocked.options[2].recommended, false);
+  assert.equal(unlocked.options[2].recommendationText, "");
   assert.equal(unlocked.options[2].stanceMatched, true);
   assert.equal(unlocked.options[2].stanceBonusRate, DIRECTIVE_STANCE_BONUS_RATE);
   assert.equal(unlocked.options[2].stanceBonusText, "策略契合 +10%");
@@ -192,13 +198,16 @@ test("航线指令会返回轮换目标提示", () => {
   assert.equal(locked.summaryText, "指令轮换：累计 100K 能量后解锁 90 秒连携目标");
   assert.equal(
     locked.text,
-    "指令轮换：累计 100K 能量后解锁 90 秒连携目标 · 解锁后轮换不同航线指令，匹配当前航线策略可获得策略契合加成，完成 3/3 并收束到契合指令可获得策略终结奖励；完成轮换还会累积指令熟练。"
+    "指令轮换：累计 100K 能量后解锁 90 秒连携目标 · 解锁后先从非契合指令起手，轮换不同航线指令，把契合指令留到 3/3 策略终结；完成轮换还会累积指令熟练。"
   );
   assert.equal(ready.progress, 0);
   assert.equal(ready.target, 3);
+  assert.deepEqual(ready.nextDirectiveIds, ["ignition-salvo", "cruise-cache"]);
+  assert.equal(ready.recommendationText, "收束起手");
+  assert.equal(ready.waitingRecommendationText, "等待起手");
   assert.equal(
     ready.text,
-    "指令轮换 0/3 · 先执行任意航线指令 · 匹配当前航线策略可获得策略契合 +10% · 随后在 90 秒内切换不同指令，完成 3/3 并收束到契合指令可获得策略终结奖励 · 完成 3/3 轮换会累积 3 分钟指令熟练，每层指令收益 +5%，最多 3 层。"
+    "指令轮换 0/3 · 先执行点火齐射或巡航回收，保留谐振脉冲完成 3/3 策略终结 · 匹配当前航线策略可获得策略契合 +10% · 随后在 90 秒内切换不同指令 · 完成 3/3 轮换会累积 3 分钟指令熟练，每层指令收益 +5%，最多 3 层。"
   );
 });
 
@@ -310,7 +319,7 @@ test("轮换航线指令会触发航线连携收益", () => {
   assert.equal(masteredResonanceOption.previewText, "预计 +18.1 能量 · 指令熟练 +5% · 策略契合 +10%");
   assert.equal(
     masteredPlan.text,
-    "指令轮换 0/3 · 先执行任意航线指令 · 匹配当前航线策略可获得策略契合 +10% · 随后在 90 秒内切换不同指令，完成 3/3 并收束到契合指令可获得策略终结奖励 · 当前指令熟练 1/3，下一次指令 +5%，剩余 3 分钟。"
+    "指令轮换 0/3 · 等待冷却后执行点火齐射或巡航回收，保留谐振脉冲完成 3/3 策略终结 · 匹配当前航线策略可获得策略契合 +10% · 随后在 90 秒内切换不同指令 · 当前指令熟练 1/3，下一次指令 +5%，剩余 3 分钟。"
   );
 
   const expiredStatus = getDirectiveStatus(third.state, 184_000);
@@ -879,8 +888,8 @@ test("静态首页会渲染航线指令轮换目标", () => {
 
   assert.match(indexHtml, /id="directivePlan"/);
   assert.match(indexHtml, /指令轮换：累计 100K 能量后解锁 90 秒连携目标/);
-  assert.match(indexHtml, /策略契合加成/);
-  assert.match(indexHtml, /策略终结奖励/);
+  assert.match(indexHtml, /非契合指令起手/);
+  assert.match(indexHtml, /3\/3 策略终结/);
   assert.match(indexHtml, /指令熟练/);
   assert.match(appJs, /rotationReward: result\.rotationReward/);
   assert.match(appJs, /stanceFinisherReward: result\.stanceFinisherReward/);

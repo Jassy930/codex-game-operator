@@ -1,5 +1,30 @@
 # Decision
 
+## 2026-04-30 Product decision：航线指令收束起手推荐
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-04-30 04:37 CST 同步到 3 个 open feedback issue、0 个 open bug issue。#3 仍是最近更新的玩法反馈，继续指向“玩法太简单、只有点击和自动产能”；本轮继续进入有反馈样本下的 Product decision。
+
+当前最大问题：航线指令已经有策略契合、策略终结、按钮推荐和指令熟练，但 0/3 起步提示仍让玩家“先执行任意航线指令”。由于策略终结要求第三步收束到当前策略契合指令，如果玩家一开始就按契合指令，反而无法在这一轮 3/3 中拿到策略终结奖励。
+
+本轮决策：
+
+- `getDirectivePlan` 在 0/3 且无有效连携时，根据当前航线策略把契合指令保留为收束指令，优先推荐另外两条指令作为“收束起手”。
+- `getDirectiveStatus` 复用计划里的 `recommendationText` / `waitingRecommendationText`，让按钮在起步阶段显示“收束起手”或“等待起手”，连携阶段继续显示“轮换推荐/等待轮换”。
+- 锁定态首页和计划提示同步说明“先从非契合指令起手，把契合指令留到 3/3 策略终结”。
+- 本轮只调整起手推荐和提示文案；不新增存档字段，不改变升级价格、产能公式、星图 57 段路线、项目奖励、指令基础收益、冷却、连携窗口、轮换目标奖励、策略契合 +10%、策略终结奖励、指令熟练或筛选规则。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-04-30 04:37 CST 查询到 3 个 open feedback issue、0 个 open bug issue；#3 作为本轮处理对象。
+- 默认均衡航线、0/3 未起步时，点火齐射和巡航回收按钮标记 `recommended: true` 且显示“收束起手”，谐振脉冲保留策略契合但不作为起手推荐。
+- `getDirectivePlan` 在 0/3 返回 `nextDirectiveIds = ["ignition-salvo", "cruise-cache"]`、`recommendationText = "收束起手"` 和 `waitingRecommendationText = "等待起手"`。
+- 完成上一轮 3/3 后，若两个起手指令仍在冷却，轮换提示显示“等待冷却后执行点火齐射或巡航回收，保留谐振脉冲完成 3/3 策略终结”。
+- 锁定态首页提示包含“非契合指令起手”和“3/3 策略终结”。
+- `bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build` 已通过。
+- 构建产物包含 `收束起手`、`等待起手`、`非契合指令起手`、`recommendationText` 和 `waitingRecommendationText`。
+
+下一步：推送并等待 GitHub Pages workflow；发布成功后回复 #3，说明起手推荐已经改为“非契合起手、契合收束”，请玩家复测是否更容易完成策略终结轮换。
+
 ## 2026-04-30 Product decision：航线指令熟练层
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-04-30 04:17 CST 同步到 3 个 open feedback issue、0 个 open bug issue。#3 仍是最近更新的玩法反馈，继续指向“玩法太简单、只有点击和自动产能”；本轮继续进入有反馈样本下的 Product decision。

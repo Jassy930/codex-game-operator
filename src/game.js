@@ -1787,6 +1787,8 @@ export function getDirectiveStatus(state, now = Date.now()) {
   const recommendedIds = new Set(plan.nextDirectiveIds ?? []);
   const mastery = getDirectiveMastery(current, now);
   const masteryBonusText = formatDirectiveMasteryBonus(mastery);
+  const recommendationText = plan.recommendationText ?? "轮换推荐";
+  const waitingRecommendationText = plan.waitingRecommendationText ?? "等待轮换";
 
   return {
     unlocked,
@@ -1869,7 +1871,11 @@ export function getDirectiveStatus(state, now = Date.now()) {
         remainingSeconds,
         ready,
         recommended,
-        recommendationText: recommended ? (ready ? "轮换推荐" : "等待轮换") : "",
+        recommendationText: recommended
+          ? ready
+            ? recommendationText
+            : waitingRecommendationText
+          : "",
         finisherRecommended,
         finisherRecommendationText: finisherRecommended ? "策略终结" : "",
         disabled: !unlocked || remainingMs > 0
@@ -1890,9 +1896,9 @@ export function getDirectivePlan(state, now = Date.now()) {
       progress: 0,
       target: targetSteps,
       summaryText: "指令轮换：累计 100K 能量后解锁 90 秒连携目标",
-      hintText: "解锁后轮换不同航线指令，匹配当前航线策略可获得策略契合加成，完成 3/3 并收束到契合指令可获得策略终结奖励；完成轮换还会累积指令熟练。",
+      hintText: "解锁后先从非契合指令起手，轮换不同航线指令，把契合指令留到 3/3 策略终结；完成轮换还会累积指令熟练。",
       text:
-        "指令轮换：累计 100K 能量后解锁 90 秒连携目标 · 解锁后轮换不同航线指令，匹配当前航线策略可获得策略契合加成，完成 3/3 并收束到契合指令可获得策略终结奖励；完成轮换还会累积指令熟练。"
+        "指令轮换：累计 100K 能量后解锁 90 秒连携目标 · 解锁后先从非契合指令起手，轮换不同航线指令，把契合指令留到 3/3 策略终结；完成轮换还会累积指令熟练。"
     };
   }
 
@@ -1900,18 +1906,45 @@ export function getDirectivePlan(state, now = Date.now()) {
   const active = Boolean(chain.lastDirectiveId && chain.expiresAt >= now);
 
   if (!active) {
+    const routeStance = getRouteStanceStatus(current);
+    const stanceDirective = getDirectiveDef(routeStance.active?.directiveId);
+    const openerDirectives = stanceDirective
+      ? DIRECTIVE_DEFS.filter((directive) => directive.id !== stanceDirective.id)
+      : DIRECTIVE_DEFS;
+    const readyOpeners = openerDirectives.filter((directive) =>
+      isDirectiveReady(current, directive, now)
+    );
+    const nextDirectivePool = readyOpeners.length ? readyOpeners : openerDirectives;
+    const openerNames = formatDirectiveNameList(
+      nextDirectivePool.map((directive) => directive.name)
+    );
+    const openerPrefix = readyOpeners.length ? "先执行" : "等待冷却后执行";
+    const finisherHint = stanceDirective
+      ? "，保留" + stanceDirective.name + "完成 3/3 策略终结"
+      : "";
+
     return {
       unlocked: true,
       progress: 0,
       target: targetSteps,
-      summaryText: "指令轮换 0/" + targetSteps + " · 先执行任意航线指令",
+      nextDirectiveIds: nextDirectivePool.map((directive) => directive.id),
+      recommendationText: "收束起手",
+      waitingRecommendationText: "等待起手",
+      summaryText: "指令轮换 0/" + targetSteps + " · 收束起手 " + openerNames,
       hintText:
-        "匹配当前航线策略可获得策略契合 +10%；随后在 90 秒内切换不同指令，完成 3/3 并收束到契合指令可获得策略终结奖励；" +
+        openerPrefix +
+        openerNames +
+        finisherHint +
+        "；匹配当前航线策略可获得策略契合 +10%；随后在 90 秒内切换不同指令；" +
         masteryHint,
       text:
         "指令轮换 0/" +
         targetSteps +
-        " · 先执行任意航线指令 · 匹配当前航线策略可获得策略契合 +10% · 随后在 90 秒内切换不同指令，完成 3/3 并收束到契合指令可获得策略终结奖励 · " +
+        " · " +
+        openerPrefix +
+        openerNames +
+        finisherHint +
+        " · 匹配当前航线策略可获得策略契合 +10% · 随后在 90 秒内切换不同指令 · " +
         masteryHint
     };
   }

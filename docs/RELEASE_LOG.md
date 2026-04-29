@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+- 航线指令新增“收束起手”推荐：0/3 未起步时会把当前策略契合指令保留为 3/3 策略终结收束，优先推荐另外两条指令作为起手。
+- `src/game.js` 让 `getDirectivePlan` 在起步阶段返回 `nextDirectiveIds`、`recommendationText = "收束起手"` 和 `waitingRecommendationText = "等待起手"`；`getDirectiveStatus` 复用计划文案渲染按钮推荐；首页静态锁定提示同步说明“非契合指令起手”。
+- 本轮只调整航线指令起手推荐和提示文案；不新增存档字段，不改变升级价格、产能公式、星图 57 段路线、项目奖励、指令基础收益、冷却、连携窗口、轮换目标奖励、策略契合 +10%、策略终结奖励、指令熟练或筛选规则。
+- 同步 GitHub Issues 反馈状态：当前 3 个 open feedback issue、0 个 open bug issue；#3 继续指向玩法单薄并作为本轮处理对象。
+- 验证通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`。
+- 构建产物已确认包含 `收束起手`、`等待起手`、`非契合指令起手`、`recommendationText` 和 `waitingRecommendationText`。
 - 航线指令新增“指令熟练”短期成长：完成 3/3 指令轮换后获得 3 分钟熟练层，每层让后续指令收益 +5%，最多 3 层，再次完成轮换会叠层或刷新时长。
 - `src/game.js` 新增 `directiveMastery` 存档字段、熟练收益计算和熟练提示；`src/app.js` 渲染 `directive-mastery-bonus` 并在本地 `directive` 事件记录熟练字段；`src/feedback.js` 的反馈快照新增“指令熟练：x/3”。
 - 本轮只调整航线指令短期成长；不改变升级价格、产能公式、星图 57 段路线、项目奖励、指令冷却、连携窗口、轮换目标奖励、策略契合 +10%、策略终结奖励数值、反馈入口或筛选规则。
