@@ -198,7 +198,7 @@ test("航线指令会返回轮换目标提示", () => {
   assert.equal(locked.summaryText, "指令轮换：累计 100K 能量后解锁 90 秒连携目标");
   assert.equal(
     locked.text,
-    "指令轮换：累计 100K 能量后解锁 90 秒连携目标 · 解锁后先从非契合指令起手，第二步继续避开契合指令，把契合指令留到 3/3 策略终结；完成轮换还会累积指令熟练。"
+    "指令轮换：累计 100K 能量后解锁 90 秒连携目标 · 解锁后先从非契合指令起手，第二步继续避开契合指令，把契合指令留到 3/3 策略终结；完成轮换会累积指令熟练，并用熟练续航提示下一步。"
   );
   assert.equal(ready.progress, 0);
   assert.equal(ready.target, 3);
@@ -255,6 +255,11 @@ test("轮换航线指令会触发航线连携收益", () => {
   const secondStatus = getDirectiveStatus(second.state, 3000);
   const resonanceOption = secondStatus.options.find((option) => option.id === "resonance-pulse");
   const third = activateDirective(second.state, "resonance-pulse", 3000);
+  const continuationStatus = getDirectiveStatus(third.state, 40_000);
+  const continuationPlan = getDirectivePlan(third.state, 40_000);
+  const ignitionContinuationOption = continuationStatus.options.find(
+    (option) => option.id === "ignition-salvo"
+  );
 
   assert.equal(first.chainStacks, 0);
   assert.equal(first.chainMultiplier, 1);
@@ -304,6 +309,20 @@ test("轮换航线指令会触发航线连携收益", () => {
   assert.equal(third.state.directiveMastery.stacks, 1);
   assert.equal(third.notice, "已执行谐振脉冲，航线连携 +24%，轮换目标 +2.8，策略终结 +1.9，策略契合 +10%，指令熟练 +1 层 (1/3)，+26.6 能量。");
   assert.equal(DIRECTIVE_STANCE_FINISHER_RATE, 0.12);
+  assert.equal(continuationPlan.progress, 3);
+  assert.deepEqual(continuationPlan.nextDirectiveIds, ["ignition-salvo"]);
+  assert.equal(continuationPlan.recommendationText, "熟练续航");
+  assert.equal(continuationPlan.waitingRecommendationText, "等待续航");
+  assert.equal(
+    continuationPlan.text,
+    "指令轮换 3/3 · 当前 谐振脉冲 · 连携窗口 53 秒 · 下一步切换到点火齐射进入熟练续航，可维持连携 +24%，并继续触发轮换目标奖励；重复同类会重置；当前指令熟练 1/3，下一次指令 +5%，剩余 2.4 分钟。"
+  );
+  assert.equal(ignitionContinuationOption.recommended, true);
+  assert.equal(ignitionContinuationOption.recommendationText, "熟练续航");
+  assert.equal(
+    ignitionContinuationOption.previewText,
+    "预计 +133.6 能量 · 指令熟练 +5% · 航线连携 +24% · 轮换目标 +16.9"
+  );
 
   const masteredState = {
     ...third.state,

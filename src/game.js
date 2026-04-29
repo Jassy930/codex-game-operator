@@ -1896,9 +1896,9 @@ export function getDirectivePlan(state, now = Date.now()) {
       progress: 0,
       target: targetSteps,
       summaryText: "指令轮换：累计 100K 能量后解锁 90 秒连携目标",
-      hintText: "解锁后先从非契合指令起手，第二步继续避开契合指令，把契合指令留到 3/3 策略终结；完成轮换还会累积指令熟练。",
+      hintText: "解锁后先从非契合指令起手，第二步继续避开契合指令，把契合指令留到 3/3 策略终结；完成轮换会累积指令熟练，并用熟练续航提示下一步。",
       text:
-        "指令轮换：累计 100K 能量后解锁 90 秒连携目标 · 解锁后先从非契合指令起手，第二步继续避开契合指令，把契合指令留到 3/3 策略终结；完成轮换还会累积指令熟练。"
+        "指令轮换：累计 100K 能量后解锁 90 秒连携目标 · 解锁后先从非契合指令起手，第二步继续避开契合指令，把契合指令留到 3/3 策略终结；完成轮换会累积指令熟练，并用熟练续航提示下一步。"
     };
   }
 
@@ -1995,11 +1995,15 @@ export function getDirectivePlan(state, now = Date.now()) {
   const preserveStanceHint = shouldPreserveStanceFinisher
     ? "，继续保留" + stanceDirective.name + "做 3/3 策略终结"
     : "";
+  const completedRotation = stacks >= DIRECTIVE_CHAIN_MAX_STACKS;
+  const masteryContinuation = completedRotation && mastery.stacks > 0;
+  const continuationLead = masteryContinuation ? "进入熟练续航，" : "";
   const hintText =
-    stacks >= DIRECTIVE_CHAIN_MAX_STACKS
+    completedRotation
       ? waitingPrefix +
         nextNames +
-        "可维持 " +
+        continuationLead +
+        "可维持" +
         nextBonusText +
         "，并继续触发轮换目标奖励" +
         (nextIncludesStanceDirective
@@ -2025,8 +2029,15 @@ export function getDirectivePlan(state, now = Date.now()) {
     target: targetSteps,
     remainingSeconds: Math.ceil(Math.max(0, (chain.expiresAt - now) / 1000)),
     nextDirectiveIds: nextDirectivePool.map((directive) => directive.id),
-    recommendationText: shouldPreserveStanceFinisher ? "收束续航" : undefined,
-    waitingRecommendationText: shouldPreserveStanceFinisher ? "等待续航" : undefined,
+    recommendationText: completedRotation
+      ? masteryContinuation
+        ? "熟练续航"
+        : "满轮续航"
+      : shouldPreserveStanceFinisher
+        ? "收束续航"
+        : undefined,
+    waitingRecommendationText:
+      completedRotation || shouldPreserveStanceFinisher ? "等待续航" : undefined,
     summaryText,
     hintText,
     text: summaryText + " · " + hintText
