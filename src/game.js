@@ -871,6 +871,7 @@ export function getProjectOverview(state) {
   const chapterTargetText = buildProjectChapterTargetText(projects);
   const chapterRewardText = buildProjectChapterRewardText(projects);
   const rewardProgressText = buildProjectRewardProgressText(projects);
+  const rewardTargetText = buildProjectRewardTargetText(projects);
 
   if (!nextProject) {
     return {
@@ -885,6 +886,7 @@ export function getProjectOverview(state) {
       chapterTargetText,
       chapterRewardText,
       rewardProgressText,
+      rewardTargetText,
       compositionText,
       bonusText,
       forecastText: "航线预告：等待下一段航线"
@@ -917,6 +919,7 @@ export function getProjectOverview(state) {
     chapterTargetText,
     chapterRewardText,
     rewardProgressText,
+    rewardTargetText,
     compositionText,
     bonusText,
     forecastText:
@@ -1240,6 +1243,26 @@ function buildProjectRewardProgressText(projects) {
     .join(" · ");
 
   return "奖励进度：" + rewardText;
+}
+
+function buildProjectRewardTargetText(projects) {
+  const rewardTargets = [
+    ["总产能", "totalMultiplier"],
+    ["点击", "clickMultiplier"],
+    ["自动", "secondMultiplier"],
+    ["过载", "overloadMultiplier"]
+  ].map(([label, effectKey]) => {
+    const project = projects.find(
+      (item) => !item.completed && Boolean(item.effect?.[effectKey])
+    );
+    const targetText = project
+      ? project.name + "（" + project.reward + " · " + project.progressText + "）"
+      : "已完成";
+
+    return label + " " + targetText;
+  });
+
+  return "奖励目标：" + rewardTargets.join(" · ");
 }
 
 function countRewardProgress(count, completed, effectValue) {

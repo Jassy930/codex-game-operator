@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+- 新增星图奖励目标：星图总览按总产能、点击、自动和过载显示下一条未完成奖励航段、奖励内容和当前进度，帮助玩家把奖励进度转成具体追逐目标。
+- 同步 GitHub Issues 反馈状态：当前 1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
+- 验证通过：bun install --no-save、bun run test、bun run build、npm install、npm test、npm run build。
+- 构建产物已包含“奖励目标”、`projectOverviewRewardTargets` 和 `rewardTargetText`。
 - 新增星图奖励进度：星图总览按总产能、点击、自动和过载显示已生效奖励数/总奖励数，帮助玩家理解四条成长线还剩多少奖励可追。
 - 同步 GitHub Issues 反馈状态：当前 1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
 - 验证通过：bun install --no-save、bun run test、bun run build、npm install、npm test、npm run build。

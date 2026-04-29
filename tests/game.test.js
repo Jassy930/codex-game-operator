@@ -521,6 +521,10 @@ test("星图总览会显示完成数和下一段奖励", () => {
     "奖励进度：总产能 1/10 · 点击 0/8 · 自动 0/8 · 过载 0/5"
   );
   assert.equal(
+    overview.rewardTargetText,
+    "奖励目标：总产能 星桥试运行（总产能 +25% · 进度 114.4K 能量 / 250K 能量 · 还差 135.6K 能量） · 点击 透镜阵列（点击产能 +18% · 进度 11 级 / 12 级 · 还差 1 级） · 自动 采集阵列（自动产能 +18% · 进度 11 级 / 12 级 · 还差 1 级） · 过载 谐振校准（过载奖励 +20% · 进度 0 级 / 6 级 · 还差 6 级）"
+  );
+  assert.equal(
     overview.compositionText,
     "航线构成：22 个累计航段 · 9 个升级航段 · 奖励分布 总产能 10 段 / 点击 8 段 / 自动 8 段 / 过载 5 段"
   );
@@ -547,6 +551,10 @@ test("星图总览在首个项目前会提示等待奖励生效", () => {
   assert.equal(
     overview.rewardProgressText,
     "奖励进度：总产能 0/10 · 点击 0/8 · 自动 0/8 · 过载 0/5"
+  );
+  assert.equal(
+    overview.rewardTargetText,
+    "奖励目标：总产能 点亮星图（总产能 +12% · 进度 0 能量 / 100K 能量 · 还差 100K 能量） · 点击 透镜阵列（点击产能 +18% · 进度 0 级 / 12 级 · 还差 12 级） · 自动 采集阵列（自动产能 +18% · 进度 0 级 / 12 级 · 还差 12 级） · 过载 谐振校准（过载奖励 +20% · 进度 0 级 / 6 级 · 还差 6 级）"
   );
   assert.equal(overview.bonusText, "生效加成：等待首个星图奖励");
 });
@@ -1231,6 +1239,10 @@ test("星图总览会显示全部完成状态", () => {
   assert.equal(
     overview.rewardProgressText,
     "奖励进度：总产能 10/10 · 点击 8/8 · 自动 8/8 · 过载 5/5"
+  );
+  assert.equal(
+    overview.rewardTargetText,
+    "奖励目标：总产能 已完成 · 点击 已完成 · 自动 已完成 · 过载 已完成"
   );
   assert.equal(
     overview.bonusText,
