@@ -109,6 +109,12 @@ const PROJECT_REWARD_FILTER_EFFECTS = {
   "second-reward": "secondMultiplier",
   "overload-reward": "overloadMultiplier"
 };
+const PROJECT_REWARD_SUMMARY_DEFS = [
+  ["总产能", "totalMultiplier", "total"],
+  ["点击", "clickMultiplier", "click"],
+  ["自动", "secondMultiplier", "second"],
+  ["过载", "overloadMultiplier", "overload"]
+];
 export const ROUTE_STANCE_DEFS = [
   {
     id: DEFAULT_ROUTE_STANCE_ID,
@@ -1323,7 +1329,14 @@ export function getProjectFilterSummary(projects, filterId = DEFAULT_PROJECT_FIL
   const nextProject = visibleProjects.find((project) => !project.completed);
 
   if (!nextProject) {
-    return "筛选视图：" + filter.name + " " + visibleProjects.length + " 段 · 全部已完成";
+    return (
+      "筛选视图：" +
+      filter.name +
+      " " +
+      visibleProjects.length +
+      " 段 · 全部已完成" +
+      formatProjectFilterRewardMix(visibleProjects)
+    );
   }
 
   return (
@@ -1335,6 +1348,7 @@ export function getProjectFilterSummary(projects, filterId = DEFAULT_PROJECT_FIL
     completed +
     "/" +
     visibleProjects.length +
+    formatProjectFilterRewardMix(visibleProjects) +
     " · 下一条 " +
     nextProject.segmentText +
     " " +
@@ -1706,32 +1720,7 @@ function buildProjectTrackText(projects) {
 function buildProjectCompositionText(projects) {
   const energyCount = projects.filter((project) => !project.upgradeId).length;
   const upgradeCount = projects.length - energyCount;
-  const rewardCounts = projects.reduce(
-    (counts, project) => {
-      const effect = project.effect ?? {};
-      return {
-        total: counts.total + Number(Boolean(effect.totalMultiplier)),
-        click: counts.click + Number(Boolean(effect.clickMultiplier)),
-        second: counts.second + Number(Boolean(effect.secondMultiplier)),
-        overload: counts.overload + Number(Boolean(effect.overloadMultiplier))
-      };
-    },
-    {
-      total: 0,
-      click: 0,
-      second: 0,
-      overload: 0
-    }
-  );
-  const rewardText = [
-    ["总产能", rewardCounts.total],
-    ["点击", rewardCounts.click],
-    ["自动", rewardCounts.second],
-    ["过载", rewardCounts.overload]
-  ]
-    .filter(([, count]) => count > 0)
-    .map(([label, count]) => label + " " + count + " 段")
-    .join(" / ");
+  const rewardText = formatProjectRewardCountText(getProjectRewardCounts(projects));
 
   return (
     "航线构成：" +
@@ -1779,12 +1768,7 @@ function buildProjectRewardProgressText(projects) {
 }
 
 function buildProjectRewardTargetText(projects) {
-  const rewardTargets = [
-    ["总产能", "totalMultiplier"],
-    ["点击", "clickMultiplier"],
-    ["自动", "secondMultiplier"],
-    ["过载", "overloadMultiplier"]
-  ].map(([label, effectKey]) => {
+  const rewardTargets = PROJECT_REWARD_SUMMARY_DEFS.map(([label, effectKey]) => {
     const project = projects.find(
       (item) => !item.completed && Boolean(item.effect?.[effectKey])
     );
@@ -2046,6 +2030,42 @@ function formatProjectFilterEndpoint(projects) {
   }
 
   return "；终点 " + endpoint.segmentText + " " + endpoint.name;
+}
+
+function formatProjectFilterRewardMix(projects) {
+  const rewardText = formatProjectRewardCountText(getProjectRewardCounts(projects));
+  return rewardText ? " · 奖励构成 " + rewardText : "";
+}
+
+function getProjectRewardCounts(projects) {
+  return projects.reduce(
+    (counts, project) => {
+      const effect = project.effect ?? {};
+      return PROJECT_REWARD_SUMMARY_DEFS.reduce(
+        (nextCounts, [, effectKey, countKey]) => ({
+          ...nextCounts,
+          [countKey]: nextCounts[countKey] + Number(Boolean(effect[effectKey]))
+        }),
+        counts
+      );
+    },
+    {
+      total: 0,
+      click: 0,
+      second: 0,
+      overload: 0
+    }
+  );
+}
+
+function formatProjectRewardCountText(rewardCounts) {
+  return PROJECT_REWARD_SUMMARY_DEFS.map(([label, , countKey]) => [
+    label,
+    rewardCounts[countKey]
+  ])
+    .filter(([, count]) => count > 0)
+    .map(([label, count]) => label + " " + count + " 段")
+    .join(" / ");
 }
 
 function formatMilestoneProject(project) {
