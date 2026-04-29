@@ -1,5 +1,31 @@
 # Decision
 
+## 2026-04-30 Product decision：航线委托短期任务
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-04-30 07:24 CST 同步到 3 个 open feedback issue、0 个 open bug issue。没有新的玩家复测或 bug；#3 仍是最近更新的玩法反馈，继续进入有反馈样本下的 Product decision。
+
+当前最大问题：航线指令已经有主动按钮、连携、推荐预案、预案执行奖励、策略终结、指令熟练和满层回响，但这些能力仍主要附着在按钮收益和轮换说明里。玩家缺少一个独立的短期任务行来确认“我现在正在做一轮 3 步委托，完成后有额外奖励”。
+
+本轮决策：
+
+- 新增“航线委托”短期任务，100K 后显示 0/3 到 3/3 的推荐轮换委托。
+- 新增 `DIRECTIVE_TASK_REWARD_RATE = 0.08`：当玩家按推荐预案把轮换从 2/3 完成到 3/3 时，额外获得有效基础指令收益 8% 的“委托完成”奖励。
+- `getDirectiveTaskStatus` 只从现有指令链、推荐预案和冷却状态推导；按钮徽标、预计收益、执行反馈和本地 `directive` 事件记录 `taskReward` / `taskRewardRate`。
+- 本轮不新增存档字段，不改变升级价格、产能公式、星图 57 段路线、项目奖励、指令基础收益、冷却、连携窗口、轮换目标奖励、预案执行、策略契合、策略终结、指令熟练、满层回响或筛选规则。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-04-30 07:24 CST 查询到 3 个 open feedback issue、0 个 open bug issue；#3 作为本轮处理对象。
+- 锁定态显示“航线委托：累计 100K 能量后解锁 3 步短期任务”。
+- 0/3 解锁态显示“航线委托 0/3 · 下一步 点火齐射或巡航回收，完成 3/3 推荐轮换 · 完成奖励 委托完成 +8%”。
+- 2/3 推荐收束指令按钮显示 `directive-task-bonus`，预计收益包含“委托完成 +1.3”示例奖励。
+- 执行 2/3 到 3/3 的推荐指令会返回 `taskReward = 1.2544`、`taskRewardRate = 0.08`，执行反馈写入“委托完成 +1.3”。
+- 3/3 后委托状态显示已完成，并提示重置或超时后开启下一轮委托。
+- `bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build` 已通过；测试数 102 项。
+- 构建产物包含 `DIRECTIVE_TASK_REWARD_RATE`、`getDirectiveTaskStatus`、`directiveTask`、`directive-task-bonus`、“航线委托”和“委托完成”。
+
+下一步：提交并推送；等待 GitHub Pages workflow 成功后回复 #3。
+
 ## 2026-04-30 Product decision：预案执行按钮徽标
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-04-30 07:07 CST 同步到 3 个 open feedback issue、0 个 open bug issue。没有新的玩家复测或 bug；#3 仍是最近更新的玩法反馈，继续进入有反馈样本下的 Product decision。

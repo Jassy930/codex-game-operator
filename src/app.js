@@ -125,6 +125,7 @@ const elements = {
   pulse: document.querySelector("#pulseValue"),
   directiveList: document.querySelector("#directiveList"),
   directivePlan: document.querySelector("#directivePlan"),
+  directiveTask: document.querySelector("#directiveTask"),
   goalLabel: document.querySelector("#goalLabel"),
   goalValue: document.querySelector("#goalValue"),
   goalHint: document.querySelector("#goalHint"),
@@ -267,6 +268,7 @@ function render() {
   elements.pulse.textContent = combo.overloaded ? current.lastPulse : combo.hintText;
   renderDirectives(directives);
   elements.directivePlan.textContent = directives.plan.text;
+  elements.directiveTask.textContent = directives.task.text;
   elements.goalLabel.textContent = goal.label;
   elements.goalValue.textContent = goal.value;
   elements.goalHint.textContent = goal.progressText;
@@ -337,6 +339,8 @@ function renderDirective(option) {
         masteryStacks: result.masteryStacks,
         planReward: result.planReward,
         planBonusRate: result.planBonusRate,
+        taskReward: result.taskReward,
+        taskRewardRate: result.taskRewardRate,
         masteryRewardGained: result.masteryRewardGained,
         masteryRewardStacks: result.masteryRewardStacks,
         rotationReward: result.rotationReward,
@@ -374,6 +378,11 @@ function renderDirective(option) {
   planBonus.textContent = option.planRewardText;
   planBonus.hidden = !option.planRewardText;
 
+  const taskBonus = document.createElement("span");
+  taskBonus.className = "directive-task-bonus";
+  taskBonus.textContent = option.taskRewardText;
+  taskBonus.hidden = !option.taskRewardText;
+
   const finisherRecommendation = document.createElement("span");
   finisherRecommendation.className = "directive-finisher-recommendation";
   finisherRecommendation.textContent = option.finisherRecommendationText;
@@ -389,7 +398,14 @@ function renderDirective(option) {
   stanceBonus.textContent = option.stanceBonusText;
   stanceBonus.hidden = !option.stanceMatched;
 
-  badges.append(recommendation, planBonus, finisherRecommendation, masteryBonus, stanceBonus);
+  badges.append(
+    recommendation,
+    planBonus,
+    taskBonus,
+    finisherRecommendation,
+    masteryBonus,
+    stanceBonus
+  );
   head.append(name, badges);
 
   const summary = document.createElement("span");

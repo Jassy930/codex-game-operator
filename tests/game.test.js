@@ -15,12 +15,14 @@ import {
   DIRECTIVE_PLAN_BONUS_RATE,
   DIRECTIVE_STANCE_BONUS_RATE,
   DIRECTIVE_STANCE_FINISHER_RATE,
+  DIRECTIVE_TASK_REWARD_RATE,
   filterProjectStatuses,
   formatNumber,
   getComboStatus,
   getCurrentGoal,
   getDirectivePlan,
   getDirectiveStatus,
+  getDirectiveTaskStatus,
   getEffectiveProduction,
   getProjectFilterBrief,
   getProjectFilterButtonText,
@@ -195,7 +197,15 @@ test("航线指令会在 100K 后解锁并返回预计收益", () => {
 
 test("航线指令会返回轮换目标提示", () => {
   const locked = getDirectivePlan(createInitialState(0), 0);
+  const lockedTask = getDirectiveTaskStatus(createInitialState(0), 0);
   const ready = getDirectivePlan(
+    {
+      ...createInitialState(0),
+      totalEnergy: 100_000
+    },
+    0
+  );
+  const readyTask = getDirectiveTaskStatus(
     {
       ...createInitialState(0),
       totalEnergy: 100_000
@@ -209,6 +219,7 @@ test("航线指令会返回轮换目标提示", () => {
     locked.text,
     "指令轮换：累计 100K 能量后解锁 90 秒连携目标 · 解锁后先从非契合指令起手，第二步继续避开契合指令，把契合指令留到 3/3 策略终结；完成轮换会累积指令熟练，满层后用回响续航触发满层回响。"
   );
+  assert.equal(lockedTask.text, "航线委托：累计 100K 能量后解锁 3 步短期任务");
   assert.equal(ready.progress, 0);
   assert.equal(ready.target, 3);
   assert.deepEqual(ready.nextDirectiveIds, ["ignition-salvo", "cruise-cache"]);
@@ -217,6 +228,11 @@ test("航线指令会返回轮换目标提示", () => {
   assert.equal(
     ready.text,
     "指令轮换 0/3 · 先执行点火齐射或巡航回收，保留谐振脉冲完成 3/3 策略终结 · 匹配当前航线策略可获得策略契合 +10% · 随后在 90 秒内切换不同指令 · 完成 3/3 轮换会累积 3 分钟指令熟练，每层指令收益 +5%，最多 3 层；满层后继续完成 3/3 会触发满层回响 +10%。"
+  );
+  assert.equal(DIRECTIVE_TASK_REWARD_RATE, 0.08);
+  assert.equal(
+    readyTask.text,
+    "航线委托 0/3 · 下一步 点火齐射或巡航回收，完成 3/3 推荐轮换 · 完成奖励 委托完成 +8%"
   );
 });
 
@@ -264,11 +280,13 @@ test("轮换航线指令会触发航线连携收益", () => {
   const firstPlan = getDirectivePlan(first.state, 2000);
   const second = activateDirective(first.state, "cruise-cache", 2000);
   const secondPlan = getDirectivePlan(second.state, 3000);
+  const secondTask = getDirectiveTaskStatus(second.state, 3000);
   const secondStatus = getDirectiveStatus(second.state, 3000);
   const resonanceOption = secondStatus.options.find((option) => option.id === "resonance-pulse");
   const third = activateDirective(second.state, "resonance-pulse", 3000);
   const continuationStatus = getDirectiveStatus(third.state, 40_000);
   const continuationPlan = getDirectivePlan(third.state, 40_000);
+  const continuationTask = getDirectiveTaskStatus(third.state, 40_000);
   const ignitionContinuationOption = continuationStatus.options.find(
     (option) => option.id === "ignition-salvo"
   );
@@ -298,21 +316,29 @@ test("轮换航线指令会触发航线连携收益", () => {
     secondPlan.text,
     "指令轮换 2/3 · 当前 巡航回收 · 连携窗口 1.5 分钟 · 下一步切换到谐振脉冲，预计连携 +24%，并触发轮换目标奖励；收束到谐振脉冲还会触发策略终结奖励；完成 3/3 轮换会累积 3 分钟指令熟练，每层指令收益 +5%，最多 3 层；满层后继续完成 3/3 会触发满层回响 +10%。"
   );
+  assert.equal(
+    secondTask.text,
+    "航线委托 2/3 · 下一步 谐振脉冲，完成 3/3 推荐轮换 · 完成奖励 委托完成 +8%"
+  );
   assert.equal(resonanceOption.recommended, true);
   assert.equal(resonanceOption.recommendationText, "轮换推荐");
   assert.equal(resonanceOption.finisherRecommended, true);
   assert.equal(resonanceOption.finisherRecommendationText, "策略终结");
+  assert.equal(resonanceOption.taskReward, 1.2544);
+  assert.equal(resonanceOption.taskRewardText, "委托完成 +1.3");
   assert.equal(
     resonanceOption.previewText,
-    "预计 +27.6 能量 · 预案执行 +0.9 · 航线连携 +24% · 轮换目标 +2.8 · 策略终结 +1.9 · 策略契合 +10%"
+    "预计 +29 能量 · 预案执行 +0.9 · 委托完成 +1.3 · 航线连携 +24% · 轮换目标 +2.8 · 策略终结 +1.9 · 策略契合 +10%"
   );
   assert.equal(third.chainStacks, 2);
   assert.equal(third.chainMultiplier, 1.24);
   assert.equal(third.planReward, 0.9408);
+  assert.equal(third.taskReward, 1.2544);
+  assert.equal(third.taskRewardText, "委托完成 +1.3");
   assert.equal(third.rotationReward, 2.8224);
   assert.equal(third.stanceFinisherReward, 1.8816);
-  assert.equal(third.stanceBonus, 2.5088);
-  assert.equal(third.gain, 27.5968);
+  assert.equal(third.stanceBonus, 2.6342);
+  assert.equal(third.gain, 28.9766);
   assert.equal(third.planRewardText, "预案执行 +0.9");
   assert.equal(third.chainBonusText, "航线连携 +24%");
   assert.equal(third.rotationRewardText, "轮换目标 +2.8");
@@ -322,9 +348,13 @@ test("轮换航线指令会触发航线连携收益", () => {
   assert.equal(third.masteryRewardStacks, 1);
   assert.equal(third.masteryRewardText, "指令熟练 +1 层 (1/3)");
   assert.equal(third.state.directiveMastery.stacks, 1);
-  assert.equal(third.notice, "已执行谐振脉冲，预案执行 +0.9，航线连携 +24%，轮换目标 +2.8，策略终结 +1.9，策略契合 +10%，指令熟练 +1 层 (1/3)，+27.6 能量。");
+  assert.equal(third.notice, "已执行谐振脉冲，预案执行 +0.9，委托完成 +1.3，航线连携 +24%，轮换目标 +2.8，策略终结 +1.9，策略契合 +10%，指令熟练 +1 层 (1/3)，+29 能量。");
   assert.equal(DIRECTIVE_STANCE_FINISHER_RATE, 0.12);
   assert.equal(continuationPlan.progress, 3);
+  assert.equal(
+    continuationTask.text,
+    "航线委托已完成 · 已达成 3/3 推荐轮换；重置或超时后开启下一轮委托，继续轮换可维持连携与熟练"
+  );
   assert.deepEqual(continuationPlan.nextDirectiveIds, ["ignition-salvo"]);
   assert.equal(continuationPlan.recommendationText, "熟练续航");
   assert.equal(continuationPlan.waitingRecommendationText, "等待续航");
@@ -1032,7 +1062,9 @@ test("静态首页会渲染航线指令轮换目标", () => {
   const styles = readFileSync(new URL("../src/styles.css", import.meta.url), "utf8");
 
   assert.match(indexHtml, /id="directivePlan"/);
+  assert.match(indexHtml, /id="directiveTask"/);
   assert.match(indexHtml, /指令轮换：累计 100K 能量后解锁 90 秒连携目标/);
+  assert.match(indexHtml, /航线委托：累计 100K 能量后解锁 3 步短期任务/);
   assert.match(indexHtml, /非契合指令起手/);
   assert.match(indexHtml, /第二步继续避开契合指令/);
   assert.match(indexHtml, /3\/3 策略终结/);
@@ -1043,6 +1075,8 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(appJs, /rotationReward: result\.rotationReward/);
   assert.match(appJs, /planReward: result\.planReward/);
   assert.match(appJs, /planBonusRate: result\.planBonusRate/);
+  assert.match(appJs, /taskReward: result\.taskReward/);
+  assert.match(appJs, /taskRewardRate: result\.taskRewardRate/);
   assert.match(appJs, /masteryCapstoneReward: result\.masteryCapstoneReward/);
   assert.match(appJs, /masteryCapstoneRate: result\.masteryCapstoneRate/);
   assert.match(appJs, /stanceFinisherReward: result\.stanceFinisherReward/);
@@ -1050,7 +1084,9 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(appJs, /masteryBonus: result\.masteryBonus/);
   assert.match(appJs, /masteryRewardStacks: result\.masteryRewardStacks/);
   assert.match(appJs, /directivePlan: document\.querySelector\("#directivePlan"\)/);
+  assert.match(appJs, /directiveTask: document\.querySelector\("#directiveTask"\)/);
   assert.match(appJs, /elements\.directivePlan\.textContent = directives\.plan\.text/);
+  assert.match(appJs, /elements\.directiveTask\.textContent = directives\.task\.text/);
   assert.match(appJs, /option\.recommended \? "is-recommended" : ""/);
   assert.match(appJs, /option\.finisherRecommended \? "is-finisher-recommended" : ""/);
   assert.match(appJs, /badges\.className = "directive-badges"/);
@@ -1059,6 +1095,8 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(appJs, /planBonus\.className = "directive-plan-bonus"/);
   assert.match(appJs, /planBonus\.textContent = option\.planRewardText/);
   assert.match(appJs, /planBonus\.hidden = !option\.planRewardText/);
+  assert.match(appJs, /taskBonus\.className = "directive-task-bonus"/);
+  assert.match(appJs, /taskBonus\.textContent = option\.taskRewardText/);
   assert.match(appJs, /finisherRecommendation\.className = "directive-finisher-recommendation"/);
   assert.match(appJs, /finisherRecommendation\.textContent = option\.finisherRecommendationText/);
   assert.match(appJs, /masteryBonus\.className = "directive-mastery-bonus"/);
@@ -1066,11 +1104,13 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(appJs, /stanceBonus\.className = "directive-stance-bonus"/);
   assert.match(appJs, /stanceBonus\.textContent = option\.stanceBonusText/);
   assert.match(styles, /\.directive-plan/);
+  assert.match(styles, /\.directive-task/);
   assert.match(styles, /\.directive-button \.directive-badges/);
   assert.match(styles, /\.directive-button\.is-recommended/);
   assert.match(styles, /\.directive-button\.is-finisher-recommended/);
   assert.match(styles, /\.directive-button \.directive-recommendation/);
   assert.match(styles, /\.directive-button \.directive-plan-bonus/);
+  assert.match(styles, /\.directive-button \.directive-task-bonus/);
   assert.match(styles, /\.directive-button \.directive-finisher-recommendation/);
   assert.match(styles, /\.directive-button \.directive-mastery-bonus/);
   assert.match(styles, /\.directive-button \.directive-stance-bonus/);
