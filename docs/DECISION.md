@@ -1,5 +1,26 @@
 # Decision
 
+## 2026-04-29 Product decision：星图筛选待领取奖励
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 当前仍有真实体验反馈 #2 open，且没有 open bug，继续进入有反馈样本下的 Product decision。
+
+当前最大问题：#2 仍围绕“内容丰富度太差，可玩的内容太少”保持 open。上一轮已让筛选摘要显示完成率和剩余航段数，但玩家切到某个筛选视图后，仍需要从已完成航段和奖励构成中推断剩余内容还会给哪些成长线。
+
+本轮决策：
+
+- 不追加第 58 段，先让星图筛选摘要显示当前视图的待领取奖励构成。
+- 有未完成航段的筛选摘要追加“待领取奖励 X 段”，只统计当前筛选视图里尚未完成航段的总产能、点击、自动和过载奖励。
+- 已完成筛选不显示待领取奖励，避免把已领取奖励误读成剩余奖励。
+- 不新增存档字段，不改变项目完成判定、奖励数值、升级价格、航线策略、筛选规则和 57 段星图顺序。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-04-29 21:10 CST 查询到 1 个 open issue、1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
+- `bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build` 已通过，测试覆盖本章、升级、当前、已完成和全部完成后空本章筛选摘要。
+- 构建产物已包含“待领取奖励 总产能 17 段 / 点击 14 段 / 自动 15 段 / 过载 11 段”和 `formatProjectFilterPendingRewardMix`。
+
+下一步：push 后等待 GitHub Pages workflow，通过后回复 #2，说明筛选摘要待领取奖励已部署并等待复测。
+
 ## 2026-04-29 Product decision：星图筛选摘要剩余量
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 当前仍有真实体验反馈 #2 open，且没有 open bug，继续进入有反馈样本下的 Product decision。

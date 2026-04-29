@@ -2,6 +2,10 @@
 
 ## 2026-04-29
 
+- GitHub Issues：gh 可用且已认证；2026-04-29 21:10 CST 查询到 1 个 open issue、1 个 open feedback issue、0 个 open bug issue。
+- #2 仍为 open，最后更新时间停留在 2026-04-29 13:04:37 UTC，未出现新的玩家复测结论或 bug；本轮不继续追加第 58 段，改为让星图筛选摘要显示当前视图的待领取奖励构成，减少玩家从已完成数和奖励构成中反推剩余成长线的成本。
+- data/feedback/github-feedback.md 已同步本地快照。
+
 - GitHub Issues：gh 可用且已认证；2026-04-29 20:56 CST 查询到 1 个 open issue、1 个 open feedback issue、0 个 open bug issue。
 - #2 仍为 open，最后更新时间停留在 2026-04-29 12:47:54 UTC，未出现新的玩家复测结论或 bug；本轮不继续追加第 58 段，改为让星图筛选摘要显示完成率和剩余航段数，减少玩家进入任意筛选视图后反推内容余量的成本。
 - data/feedback/github-feedback.md 已同步本地快照。
