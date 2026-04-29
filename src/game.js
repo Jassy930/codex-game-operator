@@ -715,6 +715,20 @@ export const PROJECT_DEFS = [
     current(state) {
       return state.totalEnergy;
     }
+  },
+  {
+    id: "morningstar-ark",
+    name: "晨星方舟",
+    summary: "累计 1.2B 能量，在银翼曙环外启航晨星方舟。",
+    unit: "能量",
+    target: 1_200_000_000,
+    reward: "总产能 +24%",
+    effect: {
+      totalMultiplier: 1.24
+    },
+    current(state) {
+      return state.totalEnergy;
+    }
   }
 ];
 
@@ -737,7 +751,7 @@ export const PROJECT_CHAPTER_DEFS = [
   {
     name: "远航长尾",
     startId: "void-gate-expedition",
-    endId: "silverwing-dawn-ring"
+    endId: "morningstar-ark"
   }
 ];
 

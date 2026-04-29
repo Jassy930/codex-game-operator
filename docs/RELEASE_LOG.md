@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+- 新增 1.2B 后晨星方舟航段：银翼曙环完成后继续出现累计能量目标，完成后奖励总产能 +24%，星图路线扩展到 41 段。
+- 同步星图总览、里程碑、章节、奖励进度、航线构成、项目列表、静态 HTML 初始文案和 README 到 41 段。
+- 同步 GitHub Issues 反馈状态：当前 1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
+- 验证通过：bun install --no-save、bun run test、bun run build、npm install、npm test、npm run build。
+- 构建产物已包含“晨星方舟”、`morningstar-ark`、“星图进度 0/41”、“32 个累计航段”和“总产能 0/13”。
 - 新增 950M 后银翼曙环航段：极光谱站完成后继续出现累计能量目标，完成后奖励自动产能 +23%，星图路线扩展到 40 段。
 - 同步星图总览、里程碑、章节、奖励进度、航线构成、项目列表、静态 HTML 初始文案和 README 到 40 段。
 - 同步 GitHub Issues 反馈状态：当前 1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
