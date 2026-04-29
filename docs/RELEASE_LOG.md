@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+- 星图总览新增默认折叠的“星图明细”：主视图保留星图进度、当前进度、行动建议和航线预告，目标分轨、阶段导航、章节目标、章节奖励、奖励进度、奖励目标、里程碑、航线焦点、航线构成和生效加成移入可展开明细。
+- 新增 `project-detail-drawer` 和 `project-detail-grid` 样式，降低星图计划区域默认文字密度。
+- 本轮只调整展示结构和样式；不新增存档字段，不改变升级价格、星图 57 段路线、项目奖励、航线策略、航线指令或筛选规则。
+- 同步 GitHub Issues 反馈状态：当前 3 个 open feedback issue、0 个 open bug issue；#4 继续指向视觉密度和图片需求。
+- 静态测试已覆盖星图详细文本默认折叠、`project-detail-drawer`、`project-detail-grid` 和“星图明细”。
+- 验证通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；构建产物已包含 `project-detail-drawer`、`project-detail-grid` 和“星图明细”。
 - 新增星图插画资产：星图视觉航线前加入 `src/assets/star-map-visual.svg`，展示星核、航线节点、远航星门和深空航迹。
 - 首页新增 `project-scene-image` 图片引用，样式新增 `.project-scene-image`，构建产物会携带 `dist/src/assets/star-map-visual.svg`。
 - 本轮只调整视觉呈现和静态资源；不新增存档字段，不改变升级价格、星图 57 段路线、项目奖励、航线策略、航线指令或筛选规则。

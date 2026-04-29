@@ -639,6 +639,20 @@ test("静态首页会引用星图插画资产", () => {
   assert.match(asset, /routeLine/);
 });
 
+test("静态首页会默认折叠星图详细文本", () => {
+  const indexHtml = readFileSync(new URL("../index.html", import.meta.url), "utf8");
+  const styles = readFileSync(new URL("../src/styles.css", import.meta.url), "utf8");
+
+  assert.match(indexHtml, /<details class="project-detail-drawer">/);
+  assert.doesNotMatch(indexHtml, /<details class="project-detail-drawer" open>/);
+  assert.match(indexHtml, /<summary>星图明细<\/summary>/);
+  assert.match(indexHtml, /projectOverviewTracks/);
+  assert.match(indexHtml, /projectOverviewAction/);
+  assert.match(indexHtml, /projectOverviewForecast/);
+  assert.match(styles, /\.project-detail-drawer/);
+  assert.match(styles, /\.project-detail-grid/);
+});
+
 test("星图总览会显示完成数和下一段奖励", () => {
   const state = {
     ...createInitialState(0),

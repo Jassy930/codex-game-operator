@@ -465,6 +465,42 @@ h2 {
   line-height: 1.35;
 }
 
+.project-detail-drawer {
+  overflow: hidden;
+  border: 1px solid rgba(248, 243, 231, 0.12);
+  border-radius: 8px;
+  background: rgba(20, 17, 15, 0.36);
+}
+
+.project-detail-drawer summary {
+  display: flex;
+  min-height: 38px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 10px;
+  color: #bdf4eb;
+  cursor: pointer;
+  font-size: 0.8rem;
+  font-weight: 900;
+}
+
+.project-detail-drawer summary::after {
+  content: "+";
+  color: #f4b23c;
+  font-size: 1rem;
+}
+
+.project-detail-drawer[open] summary::after {
+  content: "-";
+}
+
+.project-detail-grid {
+  display: grid;
+  gap: 6px;
+  padding: 8px 10px 10px;
+  border-top: 1px solid rgba(248, 243, 231, 0.1);
+}
+
 .project-map-view {
   display: grid;
   gap: 10px;

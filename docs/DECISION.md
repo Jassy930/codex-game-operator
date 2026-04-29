@@ -1,5 +1,26 @@
 # Decision
 
+## 2026-04-30 Product decision：星图明细折叠
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 当前有 3 个 open feedback issue，0 个 open bug issue。#4 已上线节点航线和星图插画，但仍围绕界面文字密度保持 open，本轮继续进入有反馈样本下的 Product decision。
+
+当前最大问题：星图插画改善了第一眼画面，但星图总览仍默认展示目标分轨、阶段导航、章节目标、章节奖励、奖励进度、奖励目标、里程碑、航线焦点、航线构成和生效加成等长文本。继续加图片会增加视觉资源，删除信息又会损失玩家追踪 57 段星图的能力。
+
+本轮决策：
+
+- 星图总览主视图只保留星图进度、当前进度、行动建议和航线预告。
+- 将目标分轨、阶段导航、章节目标、章节奖励、奖励进度、奖励目标、里程碑、航线焦点、航线构成和生效加成移动到默认折叠的“星图明细”。
+- 本轮只调整 HTML 结构、样式和静态测试；不改变存档、升级价格、星图 57 段路线、项目奖励、航线策略、航线指令或筛选规则。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-04-30 00:36 CST 查询到 3 个 open issue、3 个 open feedback issue、0 个 open bug issue；#4 继续作为视觉密度跟进对象。
+- 静态首页包含 `project-detail-drawer`、`project-detail-grid` 和“星图明细”，且详情区默认不带 `open` 属性。
+- 测试覆盖首页默认折叠星图详细文本和样式类。
+- `bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build` 通过，构建产物包含 `project-detail-drawer`、`project-detail-grid` 和“星图明细”。
+
+下一步：发布并回复 #4；若 #4 复测仍认为文字压力大，再评估筛选摘要或项目列表的默认折叠策略。
+
 ## 2026-04-30 Product decision：星图插画资产
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 当前有 3 个 open feedback issue，0 个 open bug issue。#3 和 #4 已各自完成第一轮回复，但 #4 明确要求“生成一些图片”，上一轮只新增节点化视觉航线，本轮继续进入有反馈样本下的 Product decision。

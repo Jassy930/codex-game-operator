@@ -2,6 +2,11 @@
 
 ## 2026-04-30
 
+- GitHub Issues：gh 可用且已认证；2026-04-30 00:36 CST 通过 REST API 同步到 3 个 open issue、3 个 open feedback issue、0 个 open bug issue。
+- #4 继续作为本轮 Product decision：节点航线和星图插画已上线，但星图总览仍默认铺开长文本；本轮将高密度的分轨、章节、奖励、里程碑、航线构成和生效加成移入默认折叠的“星图明细”。
+- 本轮改动只调整 `index.html` 的星图总览结构、`src/styles.css` 的折叠区样式和静态测试；不改变存档、数值、星图 57 段路线、筛选规则、航线策略或航线指令。
+- 本轮本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；静态测试覆盖 `project-detail-drawer`、`project-detail-grid`、“星图明细”和详情区默认不带 `open` 属性，构建产物已包含折叠区标记与样式。
+
 - GitHub Issues：gh 可用且已认证；2026-04-30 00:23 CST 通过 REST API 同步到 3 个 open issue、3 个 open feedback issue、0 个 open bug issue。
 - #4 继续作为本轮 Product decision：玩家要求减少“密密麻麻的文字”并希望生成图片；上一轮节点航线改善了状态扫视，本轮补项目内 SVG 星图插画资产，进一步降低星图区纯文字占比。
 - 本轮改动只新增 `src/assets/star-map-visual.svg`、首页图片引用和 `.project-scene-image` 样式；不改变存档、数值、星图 57 段路线、筛选规则、航线策略或航线指令。
