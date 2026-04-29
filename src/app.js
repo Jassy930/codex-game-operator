@@ -338,6 +338,8 @@ function renderDirective(option) {
         masteryRewardGained: result.masteryRewardGained,
         masteryRewardStacks: result.masteryRewardStacks,
         rotationReward: result.rotationReward,
+        masteryCapstoneReward: result.masteryCapstoneReward,
+        masteryCapstoneRate: result.masteryCapstoneRate,
         stanceFinisherReward: result.stanceFinisherReward,
         stanceBonus: result.stanceBonus,
         stanceBonusRate: result.stanceBonusRate,

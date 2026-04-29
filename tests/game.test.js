@@ -10,6 +10,7 @@ import {
   buildUpgradePurchaseNotice,
   clickCore,
   createInitialState,
+  DIRECTIVE_MASTERY_CAPSTONE_RATE,
   DIRECTIVE_MASTERY_MAX_STACKS,
   DIRECTIVE_STANCE_BONUS_RATE,
   DIRECTIVE_STANCE_FINISHER_RATE,
@@ -202,7 +203,7 @@ test("航线指令会返回轮换目标提示", () => {
   assert.equal(locked.summaryText, "指令轮换：累计 100K 能量后解锁 90 秒连携目标");
   assert.equal(
     locked.text,
-    "指令轮换：累计 100K 能量后解锁 90 秒连携目标 · 解锁后先从非契合指令起手，第二步继续避开契合指令，把契合指令留到 3/3 策略终结；完成轮换会累积指令熟练，并用熟练续航提示下一步。"
+    "指令轮换：累计 100K 能量后解锁 90 秒连携目标 · 解锁后先从非契合指令起手，第二步继续避开契合指令，把契合指令留到 3/3 策略终结；完成轮换会累积指令熟练，满层后用回响续航触发满层回响。"
   );
   assert.equal(ready.progress, 0);
   assert.equal(ready.target, 3);
@@ -211,7 +212,7 @@ test("航线指令会返回轮换目标提示", () => {
   assert.equal(ready.waitingRecommendationText, "等待起手");
   assert.equal(
     ready.text,
-    "指令轮换 0/3 · 先执行点火齐射或巡航回收，保留谐振脉冲完成 3/3 策略终结 · 匹配当前航线策略可获得策略契合 +10% · 随后在 90 秒内切换不同指令 · 完成 3/3 轮换会累积 3 分钟指令熟练，每层指令收益 +5%，最多 3 层。"
+    "指令轮换 0/3 · 先执行点火齐射或巡航回收，保留谐振脉冲完成 3/3 策略终结 · 匹配当前航线策略可获得策略契合 +10% · 随后在 90 秒内切换不同指令 · 完成 3/3 轮换会累积 3 分钟指令熟练，每层指令收益 +5%，最多 3 层；满层后继续完成 3/3 会触发满层回响 +10%。"
   );
 });
 
@@ -277,7 +278,7 @@ test("轮换航线指令会触发航线连携收益", () => {
   assert.equal(firstPlan.waitingRecommendationText, "等待续航");
   assert.equal(
     firstPlan.text,
-    "指令轮换 1/3 · 当前 点火齐射 · 连携窗口 1.5 分钟 · 下一步切换到巡航回收，继续保留谐振脉冲做 3/3 策略终结，预计连携 +12%；完成 3/3 轮换会累积 3 分钟指令熟练，每层指令收益 +5%，最多 3 层。"
+    "指令轮换 1/3 · 当前 点火齐射 · 连携窗口 1.5 分钟 · 下一步切换到巡航回收，继续保留谐振脉冲做 3/3 策略终结，预计连携 +12%；完成 3/3 轮换会累积 3 分钟指令熟练，每层指令收益 +5%，最多 3 层；满层后继续完成 3/3 会触发满层回响 +10%。"
   );
   assert.equal(second.activated, true);
   assert.equal(second.baseGain, 44.8);
@@ -287,7 +288,7 @@ test("轮换航线指令会触发航线连携收益", () => {
   assert.equal(second.notice, "已执行巡航回收，航线连携 +12%，+50.2 能量。");
   assert.equal(
     secondPlan.text,
-    "指令轮换 2/3 · 当前 巡航回收 · 连携窗口 1.5 分钟 · 下一步切换到谐振脉冲，预计连携 +24%，并触发轮换目标奖励；收束到谐振脉冲还会触发策略终结奖励；完成 3/3 轮换会累积 3 分钟指令熟练，每层指令收益 +5%，最多 3 层。"
+    "指令轮换 2/3 · 当前 巡航回收 · 连携窗口 1.5 分钟 · 下一步切换到谐振脉冲，预计连携 +24%，并触发轮换目标奖励；收束到谐振脉冲还会触发策略终结奖励；完成 3/3 轮换会累积 3 分钟指令熟练，每层指令收益 +5%，最多 3 层；满层后继续完成 3/3 会触发满层回响 +10%。"
   );
   assert.equal(resonanceOption.recommended, true);
   assert.equal(resonanceOption.recommendationText, "轮换推荐");
@@ -376,6 +377,53 @@ test("轮换航线指令会触发航线连携收益", () => {
   assert.equal(nonMatchedThird.rotationReward > 0, true);
   assert.equal(nonMatchedThird.stanceFinisherReward, 0);
   assert.equal(nonMatchedThird.stanceFinisherText, "");
+});
+
+test("满层指令熟练会触发回响续航奖励", () => {
+  const state = {
+    ...createInitialState(0),
+    totalEnergy: 100_000,
+    energyPerClick: 10,
+    energyPerSecond: 0,
+    overloadBonus: 7,
+    directiveChain: {
+      lastDirectiveId: "resonance-pulse",
+      stacks: 2,
+      expiresAt: 94_000
+    },
+    directiveMastery: {
+      stacks: 3,
+      expiresAt: 184_000
+    }
+  };
+
+  const plan = getDirectivePlan(state, 4000);
+  const status = getDirectiveStatus(state, 4000);
+  const ignitionOption = status.options.find((option) => option.id === "ignition-salvo");
+  const result = activateDirective(state, "ignition-salvo", 4000);
+
+  assert.equal(DIRECTIVE_MASTERY_CAPSTONE_RATE, 0.1);
+  assert.equal(plan.recommendationText, "回响续航");
+  assert.equal(plan.waitingRecommendationText, "等待回响");
+  assert.deepEqual(plan.nextDirectiveIds, ["ignition-salvo", "cruise-cache"]);
+  assert.equal(
+    plan.text,
+    "指令轮换 3/3 · 当前 谐振脉冲 · 连携窗口 1.5 分钟 · 下一步切换到点火齐射或巡航回收进入回响续航，可维持连携 +24%，并继续触发轮换目标奖励与满层回响；重复同类会重置；当前指令熟练 3/3，下一次指令 +15%，完成 3/3 可触发满层回响 +10%，剩余 3 分钟。"
+  );
+  assert.equal(ignitionOption.recommended, true);
+  assert.equal(ignitionOption.recommendationText, "回响续航");
+  assert.equal(ignitionOption.masteryCapstoneReward, 10.304);
+  assert.equal(ignitionOption.masteryCapstoneText, "满层回响 +10.3");
+  assert.equal(
+    ignitionOption.previewText,
+    "预计 +156.6 能量 · 指令熟练 +15% · 航线连携 +24% · 轮换目标 +18.5 · 满层回响 +10.3"
+  );
+  assert.equal(result.masteryCapstoneReward, 10.304);
+  assert.equal(result.masteryCapstoneText, "满层回响 +10.3");
+  assert.equal(
+    result.notice,
+    "已执行点火齐射，指令熟练 +15%，航线连携 +24%，轮换目标 +18.5，满层回响 +10.3，指令熟练刷新 (3/3)，+156.6 能量。"
+  );
 });
 
 test("航线连携超时后会重置", () => {
@@ -974,7 +1022,11 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(indexHtml, /第二步继续避开契合指令/);
   assert.match(indexHtml, /3\/3 策略终结/);
   assert.match(indexHtml, /指令熟练/);
+  assert.match(indexHtml, /回响续航/);
+  assert.match(indexHtml, /满层回响/);
   assert.match(appJs, /rotationReward: result\.rotationReward/);
+  assert.match(appJs, /masteryCapstoneReward: result\.masteryCapstoneReward/);
+  assert.match(appJs, /masteryCapstoneRate: result\.masteryCapstoneRate/);
   assert.match(appJs, /stanceFinisherReward: result\.stanceFinisherReward/);
   assert.match(appJs, /stanceBonus: result\.stanceBonus/);
   assert.match(appJs, /masteryBonus: result\.masteryBonus/);

@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+- 航线指令新增“满层回响”：指令熟练已满 3/3 且本次指令完成 3/3 轮换时，额外获得有效基础指令收益 10% 的回响奖励。
+- `src/game.js` 新增 `DIRECTIVE_MASTERY_CAPSTONE_RATE`、满层回响收益预览和执行反馈；`src/app.js` 在本地 `directive` 事件中记录 `masteryCapstoneReward` / `masteryCapstoneRate`；`index.html` 静态锁定提示同步说明回响续航。
+- 本轮只调整航线指令满层续航奖励和提示；不新增存档字段，不改变升级价格、产能公式、星图 57 段路线、项目奖励、指令基础收益、冷却、连携窗口、轮换目标奖励、策略契合、策略终结或指令熟练层数上限。
+- 同步 GitHub Issues 反馈状态：当前 3 个 open feedback issue、0 个 open bug issue；#3 继续指向玩法单薄并作为本轮处理对象。
+- 验证通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 102 项。
+- 构建产物已确认包含 `DIRECTIVE_MASTERY_CAPSTONE_RATE`、`masteryCapstoneReward`、“回响续航”和“满层回响”。
 - 星图项目列表新增默认短窗口：筛选结果超过 8 段时，只直接显示包含当前航段的 8 段，其余航段收进“已收起 X 段”的可展开区域。
 - `src/game.js` 新增 `PROJECT_LIST_PREVIEW_LIMIT` 和 `getProjectListWindow`；`src/app.js` 新增 `project-list-drawer` 渲染；`src/styles.css` 新增项目列表抽屉样式；`tests/game.test.js` 覆盖 57 段、远航长尾 44 段和短列表场景。
 - 本轮只调整星图项目列表默认可见密度；不新增存档字段，不改变升级价格、产能公式、星图 57 段路线、项目奖励、项目完成判定、航线策略、航线指令、反馈入口、筛选定义或章节点击逻辑。

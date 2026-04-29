@@ -2,6 +2,12 @@
 
 ## 2026-04-30
 
+- GitHub Issues：gh 可用且已认证；2026-04-30 06:32 CST 通过 REST API 同步到 3 个 open issue、3 个 open feedback issue、0 个 open bug issue。
+- #3 进入本轮 Product decision：航线指令已经有完整 3/3 轮换、策略终结和指令熟练，但满层 3/3 后继续轮换只刷新时长，缺少满层后的继续操作目标；本轮新增“指令满层回响续航”。
+- 本轮改动新增 `DIRECTIVE_MASTERY_CAPSTONE_RATE = 0.1`，当指令熟练已满 3/3 且本次指令完成 3/3 轮换时，额外获得有效基础指令收益 10% 的“满层回响”；满层完成态推荐显示“回响续航”，冷却中显示“等待回响”。本轮不新增存档字段，不改变升级价格、产能公式、星图 57 段路线、项目奖励、指令基础收益、冷却、连携窗口、轮换目标奖励、策略契合、策略终结或指令熟练层数上限。
+- 本轮本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数为 102 项。
+- 构建产物已包含 `DIRECTIVE_MASTERY_CAPSTONE_RATE`、`masteryCapstoneReward`、“回响续航”和“满层回响”。
+
 - GitHub Issues：gh 可用且已认证；2026-04-30 06:20 CST 通过 REST API 同步到 3 个 open issue、3 个 open feedback issue、0 个 open bug issue。
 - #4 继续作为本轮 Product decision：星图区筛选按钮和摘要已默认折叠，但“全部”“未完成”“远航长尾”等视图仍可能一次性铺开 44 到 57 张项目卡片；本轮新增“星图项目长列表收起”。
 - 本轮改动新增 `getProjectListWindow`，筛选结果超过 8 段时只直接显示包含当前航段的 8 段窗口，其余航段收进默认关闭的 `project-list-drawer`，summary 显示已收起数量和当前显示范围。本轮不新增存档字段，不改变升级价格、产能公式、星图 57 段路线、项目奖励、项目完成判定、航线策略、航线指令、反馈入口、筛选定义或章节点击逻辑。

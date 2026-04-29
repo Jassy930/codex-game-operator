@@ -1,5 +1,29 @@
 # Decision
 
+## 2026-04-30 Product decision：指令满层回响续航
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-04-30 06:32 CST 同步到 3 个 open feedback issue、0 个 open bug issue。没有新的玩家复测或 bug；#3 仍指向“玩法太简单、只有点击和自动产能”，本轮进入有反馈样本下的 Product decision。
+
+当前最大问题：航线指令已经有主动按钮、连携、轮换目标、策略契合、策略终结、指令熟练和熟练续航，但当指令熟练叠到 3/3 后，继续完成 3/3 轮换只刷新熟练时长。玩家达到满层后缺少继续按完整轮换操作的额外短期目标。
+
+本轮决策：
+
+- 新增 `DIRECTIVE_MASTERY_CAPSTONE_RATE = 0.1`，当指令熟练已满 3/3 且本次指令完成 3/3 轮换时，额外获得有效基础指令收益 10% 的“满层回响”。
+- 满层熟练下的完成态推荐从“熟练续航”升级为“回响续航”，冷却中显示“等待回响”。
+- 预计收益、执行反馈、本地 `directive` 事件和静态锁定提示都显示满层回响相关信息。
+- 本轮只调整航线指令满层续航奖励和提示；不新增存档字段，不改变升级价格、产能公式、星图 57 段路线、项目奖励、指令基础收益、冷却、连携窗口、轮换目标奖励、策略契合、策略终结或指令熟练层数上限。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-04-30 06:32 CST 查询到 3 个 open feedback issue、0 个 open bug issue；#3 作为本轮处理对象。
+- 满层指令熟练 3/3 且连携已完成 3/3 时，`getDirectivePlan` 返回“回响续航”和“等待回响”。
+- 满层状态下继续执行推荐指令会获得“满层回响 +10.3”示例奖励，执行提示写入满层回响并刷新指令熟练。
+- 本地 `directive` 事件记录 `masteryCapstoneReward` 和 `masteryCapstoneRate`。
+- `bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build` 已通过；测试数 102 项。
+- 构建产物包含 `DIRECTIVE_MASTERY_CAPSTONE_RATE`、`masteryCapstoneReward`、“回响续航”和“满层回响”。
+
+下一步：推送部署并回复 #3，等待复测确认满层回响是否让指令熟练满层后仍有继续轮换的目标。
+
 ## 2026-04-30 Product decision：星图项目长列表收起
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-04-30 06:20 CST 同步到 3 个 open feedback issue、0 个 open bug issue。没有新的 bug 或玩家复测结论；#4 仍是最近更新的视觉密度反馈，继续进入有反馈样本下的 Product decision。
