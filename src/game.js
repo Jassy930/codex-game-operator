@@ -855,6 +855,20 @@ export const PROJECT_DEFS = [
     current(state) {
       return state.totalEnergy;
     }
+  },
+  {
+    id: "starflare-transition-spire",
+    name: "星耀跃迁塔",
+    summary: "累计 20.4B 能量，在曜潮谐振门外点亮星耀跃迁塔。",
+    unit: "能量",
+    target: 20_400_000_000,
+    reward: "点击产能 +29%",
+    effect: {
+      clickMultiplier: 1.29
+    },
+    current(state) {
+      return state.totalEnergy;
+    }
   }
 ];
 
@@ -877,7 +891,7 @@ export const PROJECT_CHAPTER_DEFS = [
   {
     name: "远航长尾",
     startId: "void-gate-expedition",
-    endId: "radiant-tide-resonance-gate"
+    endId: "starflare-transition-spire"
   }
 ];
 
