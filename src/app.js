@@ -14,6 +14,7 @@ import {
   getCurrentGoal,
   getDirectiveStatus,
   getEffectiveProduction,
+  getProjectFilterBrief,
   getProjectFilterSummary,
   getProjectFilterButtonText,
   getProjectOverview,
@@ -148,6 +149,7 @@ const elements = {
   projectMapTrack: document.querySelector("#projectMapTrack"),
   routeStanceList: document.querySelector("#routeStanceList"),
   projectFilterList: document.querySelector("#projectFilterList"),
+  projectFilterSummaryBrief: document.querySelector("#projectFilterSummaryBrief"),
   projectFilterSummary: document.querySelector("#projectFilterSummary"),
   projectList: document.querySelector("#projectList"),
   resetButton: document.querySelector("#resetButton"),
@@ -285,6 +287,10 @@ function render() {
   renderProjectMap(getProjectVisualMap(projects, projectFilter));
   renderRouteStances(routeStance);
   renderProjectFilters(projects);
+  elements.projectFilterSummaryBrief.textContent = getProjectFilterBrief(
+    projects,
+    projectFilter
+  );
   elements.projectFilterSummary.textContent = getProjectFilterSummary(projects, projectFilter);
 
   elements.upgradeList.replaceChildren(

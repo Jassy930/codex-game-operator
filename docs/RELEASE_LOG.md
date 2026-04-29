@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+- 星图筛选摘要新增默认折叠：默认只显示一行 `projectFilterSummaryBrief`，完整筛选视图详情保留在 `project-filter-drawer` 中，降低星图筛选区的默认文字密度。
+- `src/game.js` 新增 `getProjectFilterBrief`，`index.html`、`src/app.js` 和 `src/styles.css` 新增筛选简短摘要挂载与折叠样式。
+- 本轮只调整星图筛选摘要展示；不新增存档字段，不改变升级价格、产能公式、星图 57 段路线、项目奖励、筛选规则、航线策略、航线指令、反馈入口或数值逻辑。
+- 同步 GitHub Issues 反馈状态：当前 3 个 open feedback issue、0 个 open bug issue；#4 继续指向视觉密度和图片需求。
+- 验证通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`。
+- 静态测试覆盖 `project-filter-drawer`、`projectFilterSummaryBrief` 和详情默认不带 `open`；逻辑测试覆盖本章筛选与空筛选的一行摘要。
 - 航线指令新增“指令轮换”目标提示：锁定时提示 100K 解锁，解锁后显示 0/3 起步目标，连携窗口内显示当前指令、轮换进度、窗口时间、下一步建议和预计连携加成。
 - `src/game.js` 新增 `getDirectivePlan` 并让 `getDirectiveStatus` 返回 `plan`，`index.html`、`src/app.js` 和 `src/styles.css` 新增 `directivePlan` 展示与样式。
 - 本轮只调整航线指令可读性；不新增存档字段，不改变升级价格、星图 57 段路线、项目奖励、航线策略、指令基础收益、冷却、反馈入口或数值逻辑。

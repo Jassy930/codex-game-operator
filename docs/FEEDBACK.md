@@ -2,6 +2,11 @@
 
 ## 2026-04-30
 
+- GitHub Issues：gh 可用且已认证；2026-04-30 02:08 CST 通过 REST API 同步到 3 个 open issue、3 个 open feedback issue、0 个 open bug issue。
+- #4 继续作为本轮 Product decision：星图区已有插画、视觉航线、折叠明细和卡片图标，但筛选区仍默认展示一整段长摘要；本轮新增一行 `projectFilterSummaryBrief`，并把完整筛选摘要放入默认折叠的 `project-filter-drawer`。
+- 本轮改动在 `src/game.js` 新增 `getProjectFilterBrief`，在 `index.html` 和 `src/app.js` 新增简短摘要挂载，在 `src/styles.css` 新增筛选摘要折叠样式；不改变存档、数值、星图 57 段路线、筛选规则、航线策略、航线指令或反馈入口。
+- 本轮本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；静态测试覆盖 `project-filter-drawer`、`projectFilterSummaryBrief` 和默认不带 `open`，逻辑测试覆盖本章视图与空视图的一行摘要。
+
 - GitHub Issues：gh 可用且已认证；2026-04-30 01:50 CST 通过 REST API 同步到 3 个 open issue、3 个 open feedback issue、0 个 open bug issue。
 - #3 继续作为本轮 Product decision：航线指令和航线连携已上线，但主动玩法仍需要玩家自己理解“下一步该按哪个”。本轮新增“指令轮换”目标提示，直接显示 0/3 到 3/3 的轮换进度、连携窗口、下一步建议和预计连携加成。
 - 本轮改动在 `src/game.js` 新增 `getDirectivePlan`，在 `index.html`、`src/app.js` 和 `src/styles.css` 新增 `directivePlan` 展示；不新增存档字段，不改变升级价格、星图 57 段路线、项目奖励、航线策略、指令基础收益、冷却或反馈入口。

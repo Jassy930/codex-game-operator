@@ -1,5 +1,26 @@
 # Decision
 
+## 2026-04-30 Product decision：星图筛选摘要折叠
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 当前有 3 个 open feedback issue、0 个 open bug issue。#4 仍指向“界面全是密密麻麻的文字、希望生成一些图片”，本轮继续进入有反馈样本下的 Product decision。
+
+当前最大问题：星图总览明细已经默认折叠，项目卡片也已补图标，但筛选区仍默认展示一整段长摘要，包含完成率、状态构成、奖励构成、推进构成、章节构成、待领取奖励、下一条、后续和终点。它保留了完整信息，但第一眼仍会形成一块高密度文字。
+
+本轮决策：
+
+- 新增 `getProjectFilterBrief`，把当前筛选视图压缩成一行“筛选摘要”：筛选名、完成数、下一条航段和剩余段数。
+- 将原完整 `getProjectFilterSummary` 放入默认折叠的 `project-filter-drawer`，保留详细信息但不再默认铺开。
+- 本轮只调整筛选摘要展示结构和静态测试；不改变存档、升级价格、产能公式、星图 57 段路线、项目奖励、筛选规则、航线策略、航线指令或反馈入口。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-04-30 02:08 CST 查询到 3 个 open feedback issue、0 个 open bug issue；#4 继续作为视觉密度跟进对象。
+- 静态首页包含 `project-filter-drawer` 和 `projectFilterSummaryBrief`，且筛选详情默认不带 `open`。
+- `getProjectFilterBrief` 覆盖本章视图和空视图，完整筛选摘要仍由 `getProjectFilterSummary` 保留。
+- `bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build` 已通过。
+
+下一步：推送后验证 GitHub Pages 部署；若线上检查通过，回复 #4 并继续等待复测视觉密度是否改善。
+
 ## 2026-04-30 Product decision：航线指令轮换目标
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 当前有 3 个 open feedback issue、0 个 open bug issue。#4 已连续处理视觉密度，#3 仍指向“玩法太简单、只有点击和自动产能”，本轮继续进入有反馈样本下的 Product decision。

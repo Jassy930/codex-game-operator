@@ -1527,6 +1527,37 @@ export function getProjectFilterSummary(projects, filterId = DEFAULT_PROJECT_FIL
   );
 }
 
+export function getProjectFilterBrief(projects, filterId = DEFAULT_PROJECT_FILTER_ID) {
+  const filter = getProjectFilterDef(filterId);
+  const visibleProjects = filterProjectStatuses(projects, filter.id);
+
+  if (!visibleProjects.length) {
+    return "筛选摘要：" + filter.name + " 0 段 · 无匹配";
+  }
+
+  const completed = visibleProjects.filter((project) => project.completed).length;
+  const remaining = visibleProjects.length - completed;
+  const nextProject = visibleProjects.find((project) => !project.completed);
+
+  if (!nextProject) {
+    return "筛选摘要：" + filter.name + " " + visibleProjects.length + " 段 · 全部已完成";
+  }
+
+  return (
+    "筛选摘要：" +
+    filter.name +
+    " " +
+    completed +
+    "/" +
+    visibleProjects.length +
+    " · 下一条 " +
+    formatProjectFilterProjectLabel(nextProject) +
+    " · 剩余 " +
+    remaining +
+    " 段"
+  );
+}
+
 export function getProjectFilterButtonText(projects, filterId = DEFAULT_PROJECT_FILTER_ID) {
   const filter = getProjectFilterDef(filterId);
   const visibleProjects = filterProjectStatuses(projects, filter.id);
