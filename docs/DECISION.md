@@ -1,5 +1,28 @@
 # Decision
 
+## 2026-04-30 Product decision：星图项目长列表收起
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-04-30 06:20 CST 同步到 3 个 open feedback issue、0 个 open bug issue。没有新的 bug 或玩家复测结论；#4 仍是最近更新的视觉密度反馈，继续进入有反馈样本下的 Product decision。
+
+当前最大问题：星图区已经有插画、节点航线、章节视觉导航、章节徽记、默认本章列表、折叠筛选按钮和折叠摘要，但当玩家切到“全部”“未完成”或“远航长尾”时，项目列表仍可能一次性铺开 44 到 57 张卡片。即使非当前航段详情默认折叠，长列表本身仍会形成明显的文字墙。
+
+本轮决策：
+
+- 新增 `getProjectListWindow`，当筛选结果超过 8 段时，只直接显示包含当前航段的 8 段窗口。
+- 其余航段收进默认关闭的 `project-list-drawer`，summary 显示已收起数量和当前显示范围。
+- 本轮只调整星图项目列表默认展示密度；不新增存档字段，不改变升级价格、产能公式、星图 57 段路线、项目奖励、项目完成判定、航线策略、航线指令、反馈入口、筛选定义或章节点击逻辑。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-04-30 06:20 CST 查询到 3 个 open feedback issue、0 个 open bug issue；#4 作为本轮处理对象。
+- 全部 57 段初始视图通过 `getProjectListWindow` 默认显示 8 段、收起 49 段，并保留当前航段可见。
+- 远航长尾 44 段默认显示 8 段、收起 36 段；4 段以内的小视图不出现列表抽屉。
+- 运行期 `src/app.js` 渲染 `project-list-drawer` 和 `project-list-drawer-grid`；`src/styles.css` 包含默认收起和展开符号样式。
+- `bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build` 已通过；测试数 101 项。
+- 构建产物包含 `getProjectListWindow`、`project-list-drawer`、`project-list-drawer-grid` 和“已收起”文案。
+
+下一步：等待 #4 复测；若长尾列表仍显拥挤，再评估章节内分页或更强的长尾分组导航。
+
 ## 2026-04-30 Product decision：星图筛选控件折叠
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-04-30 06:08 CST 同步到 3 个 open feedback issue、0 个 open bug issue。没有新的 bug 或玩家复测结论；#4 仍是最近更新的视觉密度反馈，继续进入有反馈样本下的 Product decision。

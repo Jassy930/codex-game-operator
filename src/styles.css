@@ -1071,6 +1071,48 @@ h2 {
   gap: 10px;
 }
 
+.project-list-drawer {
+  border: 1px solid rgba(248, 243, 231, 0.14);
+  border-radius: 8px;
+  background: rgba(248, 243, 231, 0.05);
+}
+
+.project-list-drawer summary {
+  min-height: 42px;
+  padding: 10px 34px 10px 12px;
+  color: rgba(248, 243, 231, 0.78);
+  cursor: pointer;
+  font-size: 0.82rem;
+  font-weight: 900;
+  line-height: 1.35;
+  list-style: none;
+  position: relative;
+}
+
+.project-list-drawer summary::-webkit-details-marker {
+  display: none;
+}
+
+.project-list-drawer summary::after {
+  content: "+";
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  color: #13b5a6;
+  font-weight: 900;
+}
+
+.project-list-drawer[open] summary::after {
+  content: "-";
+}
+
+.project-list-drawer-grid {
+  display: grid;
+  gap: 10px;
+  padding: 10px;
+  border-top: 1px solid rgba(248, 243, 231, 0.12);
+}
+
 .project-item {
   display: grid;
   min-height: 128px;

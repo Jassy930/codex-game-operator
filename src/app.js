@@ -18,6 +18,7 @@ import {
   getProjectFilterSummary,
   getProjectFilterButtonText,
   getProjectChapterVisuals,
+  getProjectListWindow,
   getProjectOverview,
   getProjectStatuses,
   getProjectVisualMap,
@@ -658,9 +659,14 @@ function renderProjectFilter(filter, projects) {
 
 function renderProjectList(projects) {
   const visibleProjects = filterProjectStatuses(projects, projectFilter);
-  const children = visibleProjects.length
-    ? visibleProjects.map((project) => renderProject(project))
+  const projectWindow = getProjectListWindow(visibleProjects);
+  const children = projectWindow.visibleProjects.length
+    ? projectWindow.visibleProjects.map((project) => renderProject(project))
     : [renderProjectEmptyState()];
+
+  if (projectWindow.collapsedProjects.length > 0) {
+    children.push(renderProjectListDrawer(projectWindow));
+  }
 
   elements.projectList.replaceChildren(...children);
 }
@@ -670,6 +676,21 @@ function renderProjectEmptyState() {
   item.className = "project-empty-state";
   item.textContent = "没有匹配航段。";
   return item;
+}
+
+function renderProjectListDrawer(projectWindow) {
+  const details = document.createElement("details");
+  details.className = "project-list-drawer";
+
+  const summary = document.createElement("summary");
+  summary.textContent = projectWindow.summaryText;
+
+  const grid = document.createElement("div");
+  grid.className = "project-list-drawer-grid";
+  grid.append(...projectWindow.collapsedProjects.map((project) => renderProject(project)));
+
+  details.append(summary, grid);
+  return details;
 }
 
 function renderProject(project) {

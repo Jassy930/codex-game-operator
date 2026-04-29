@@ -2,6 +2,12 @@
 
 ## 2026-04-30
 
+- GitHub Issues：gh 可用且已认证；2026-04-30 06:20 CST 通过 REST API 同步到 3 个 open issue、3 个 open feedback issue、0 个 open bug issue。
+- #4 继续作为本轮 Product decision：星图区筛选按钮和摘要已默认折叠，但“全部”“未完成”“远航长尾”等视图仍可能一次性铺开 44 到 57 张项目卡片；本轮新增“星图项目长列表收起”。
+- 本轮改动新增 `getProjectListWindow`，筛选结果超过 8 段时只直接显示包含当前航段的 8 段窗口，其余航段收进默认关闭的 `project-list-drawer`，summary 显示已收起数量和当前显示范围。本轮不新增存档字段，不改变升级价格、产能公式、星图 57 段路线、项目奖励、项目完成判定、航线策略、航线指令、反馈入口、筛选定义或章节点击逻辑。
+- 本轮本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数为 101 项。
+- 构建产物已包含 `getProjectListWindow`、`project-list-drawer`、`project-list-drawer-grid` 和“已收起”文案。
+
 - GitHub Issues：gh 可用且已认证；2026-04-30 06:08 CST 通过 REST API 同步到 3 个 open issue、3 个 open feedback issue、0 个 open bug issue。
 - #4 继续作为本轮 Product decision：星图区已有插画、节点航线、章节视觉导航和章节徽记，但 15 个筛选按钮仍默认外露，和筛选摘要一起形成新的文字密集块；本轮新增“星图筛选控件折叠”。
 - 本轮改动将 `projectFilterList` 包进默认关闭的 `project-filter-controls` 抽屉，首屏只显示“筛选航段”；展开后仍保留全部筛选按钮、当前筛选状态、章节视觉导航点击切换和筛选摘要。本轮不新增存档字段，不改变升级价格、产能公式、星图 57 段路线、项目奖励、项目完成判定、航线策略、航线指令、反馈入口、筛选定义或章节点击逻辑。

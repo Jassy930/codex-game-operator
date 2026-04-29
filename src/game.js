@@ -58,6 +58,7 @@ export const BASE_OVERLOAD_BONUS = 5;
 export const DEFAULT_ROUTE_STANCE_ID = "balanced";
 export const DEFAULT_PROJECT_FILTER_ID = "all";
 export const INITIAL_PROJECT_FILTER_ID = "current-chapter";
+export const PROJECT_LIST_PREVIEW_LIMIT = 8;
 export const PROJECT_FILTER_DEFS = [
   {
     id: DEFAULT_PROJECT_FILTER_ID,
@@ -1573,6 +1574,47 @@ export function filterProjectStatuses(projects, filterId = DEFAULT_PROJECT_FILTE
   }
 
   return items;
+}
+
+export function getProjectListWindow(projects, limit = PROJECT_LIST_PREVIEW_LIMIT) {
+  const items = Array.isArray(projects) ? projects : [];
+  const safeLimit = Math.max(1, Math.floor(Number(limit) || PROJECT_LIST_PREVIEW_LIMIT));
+
+  if (items.length <= safeLimit) {
+    return {
+      visibleProjects: items,
+      collapsedProjects: [],
+      summaryText: ""
+    };
+  }
+
+  const currentIndex = items.findIndex((project) => project.isCurrent);
+  let startIndex = currentIndex >= 0 ? currentIndex : 0;
+
+  if (startIndex + safeLimit > items.length) {
+    startIndex = Math.max(0, items.length - safeLimit);
+  }
+
+  const endIndex = Math.min(items.length, startIndex + safeLimit);
+  const visibleProjects = items.slice(startIndex, endIndex);
+  const collapsedProjects = [
+    ...items.slice(0, startIndex),
+    ...items.slice(endIndex)
+  ];
+
+  return {
+    visibleProjects,
+    collapsedProjects,
+    summaryText:
+      "已收起 " +
+      collapsedProjects.length +
+      " 段 · 当前显示 " +
+      (startIndex + 1) +
+      "-" +
+      endIndex +
+      "/" +
+      items.length
+  };
 }
 
 export function getProjectFilterSummary(projects, filterId = DEFAULT_PROJECT_FILTER_ID) {

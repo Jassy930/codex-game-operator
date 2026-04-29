@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+- 星图项目列表新增默认短窗口：筛选结果超过 8 段时，只直接显示包含当前航段的 8 段，其余航段收进“已收起 X 段”的可展开区域。
+- `src/game.js` 新增 `PROJECT_LIST_PREVIEW_LIMIT` 和 `getProjectListWindow`；`src/app.js` 新增 `project-list-drawer` 渲染；`src/styles.css` 新增项目列表抽屉样式；`tests/game.test.js` 覆盖 57 段、远航长尾 44 段和短列表场景。
+- 本轮只调整星图项目列表默认可见密度；不新增存档字段，不改变升级价格、产能公式、星图 57 段路线、项目奖励、项目完成判定、航线策略、航线指令、反馈入口、筛选定义或章节点击逻辑。
+- 同步 GitHub Issues 反馈状态：当前 3 个 open feedback issue、0 个 open bug issue；#4 继续指向视觉密度和图片需求。
+- 验证通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 101 项。
+- 构建产物已确认包含 `getProjectListWindow`、`project-list-drawer`、`project-list-drawer-grid` 和“已收起”文案。
 - 星图筛选按钮默认收进“筛选航段”抽屉：首屏不再直接铺开全部、当前、本章、章节、成长线、未完成和已完成等 15 个筛选按钮。
 - `index.html` 用默认关闭的 `project-filter-controls` 包裹 `projectFilterList`；`src/styles.css` 新增抽屉边框、summary 和展开符号样式；`tests/game.test.js` 覆盖筛选控件默认折叠结构。
 - 本轮只调整星图筛选控件默认可见密度；不新增存档字段，不改变升级价格、产能公式、星图 57 段路线、项目奖励、项目完成判定、航线策略、航线指令、反馈入口、筛选定义或章节点击逻辑。

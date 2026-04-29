@@ -24,6 +24,7 @@ import {
   getProjectFilterButtonText,
   getProjectFilterSummary,
   getProjectChapterVisuals,
+  getProjectListWindow,
   getProjectOverview,
   getProjectStatuses,
   getProjectVisualMap,
@@ -31,6 +32,7 @@ import {
   getUpgradeAffordability,
   getUpgradeCost,
   INITIAL_PROJECT_FILTER_ID,
+  PROJECT_LIST_PREVIEW_LIMIT,
   PROJECT_FILTER_DEFS,
   purchaseUpgrade,
   setRouteStance,
@@ -931,6 +933,34 @@ test("星图项目卡片会默认折叠非当前航段详情", () => {
   assert.match(styles, /\.project-card-drawer/);
   assert.match(styles, /\.project-card-detail-grid/);
   assert.match(styles, /\.project-card-drawer\[open\] summary::after/);
+});
+
+test("星图项目长列表会默认收起超出窗口的航段", () => {
+  const projects = getProjectStatuses(createInitialState(0));
+  const longTailProjects = filterProjectStatuses(projects, "chapter-long-tail");
+  const allWindow = getProjectListWindow(projects);
+  const longTailWindow = getProjectListWindow(longTailProjects);
+  const compactWindow = getProjectListWindow(longTailProjects.slice(0, 4));
+  const appJs = readFileSync(new URL("../src/app.js", import.meta.url), "utf8");
+  const styles = readFileSync(new URL("../src/styles.css", import.meta.url), "utf8");
+
+  assert.equal(PROJECT_LIST_PREVIEW_LIMIT, 8);
+  assert.equal(allWindow.visibleProjects.length, 8);
+  assert.equal(allWindow.collapsedProjects.length, 49);
+  assert.equal(allWindow.visibleProjects[0].isCurrent, true);
+  assert.equal(allWindow.summaryText, "已收起 49 段 · 当前显示 1-8/57");
+  assert.equal(longTailWindow.visibleProjects.length, 8);
+  assert.equal(longTailWindow.collapsedProjects.length, 36);
+  assert.equal(longTailWindow.summaryText, "已收起 36 段 · 当前显示 1-8/44");
+  assert.equal(compactWindow.visibleProjects.length, 4);
+  assert.equal(compactWindow.collapsedProjects.length, 0);
+  assert.match(appJs, /getProjectListWindow/);
+  assert.match(appJs, /function renderProjectListDrawer\(projectWindow\)/);
+  assert.match(appJs, /details\.className = "project-list-drawer"/);
+  assert.match(appJs, /grid\.className = "project-list-drawer-grid"/);
+  assert.match(styles, /\.project-list-drawer/);
+  assert.match(styles, /\.project-list-drawer-grid/);
+  assert.match(styles, /\.project-list-drawer\[open\] summary::after/);
 });
 
 test("静态首页会渲染航线指令轮换目标", () => {
