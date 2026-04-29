@@ -6,6 +6,9 @@
 - #4 继续作为本轮 Product decision：筛选摘要已经默认折叠，但 57 段项目列表仍默认铺开每张卡片的说明、进度、奖励和进度条；本轮将非当前航段详情收进默认折叠的 `project-card-drawer`，当前航段保持展开。
 - 本轮改动在 `src/app.js` 新增 `renderProjectDetailNodes` 和非当前航段 `details.project-card-drawer` 结构，在 `src/styles.css` 新增项目卡片折叠样式；不改变存档、数值、星图 57 段路线、筛选规则、航线策略、航线指令或反馈入口。
 - 本轮本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；静态测试覆盖 `project-card-drawer`、`project-card-detail-grid`、`renderProjectDetailNodes` 和“航段详情”，构建产物已包含这些标记。
+- GitHub Pages workflow 25126720795 已成功，线上地址返回 HTTP 200；线上 `app.js` 包含 `project-card-drawer`、`project-card-detail-grid`、`renderProjectDetailNodes` 和“航段详情”，线上 `styles.css` 包含 `project-card-drawer` 和 `project-card-detail-grid`。
+- #4 已回复：说明非当前航段详情默认折叠已上线，提交 318444e，issue 保持 open 等待复测。
+- 回复后同步 GitHub Issues：2026-04-30 02:31 CST 当前仍为 3 个 open feedback issue、0 个 open bug issue，#4 更新时间为 2026-04-29T18:31:35Z。
 
 - GitHub Issues：gh 可用且已认证；2026-04-30 02:08 CST 通过 REST API 同步到 3 个 open issue、3 个 open feedback issue、0 个 open bug issue。
 - #4 继续作为本轮 Product decision：星图区已有插画、视觉航线、折叠明细和卡片图标，但筛选区仍默认展示一整段长摘要；本轮新增一行 `projectFilterSummaryBrief`，并把完整筛选摘要放入默认折叠的 `project-filter-drawer`。
