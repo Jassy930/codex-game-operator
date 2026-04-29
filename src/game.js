@@ -1345,6 +1345,7 @@ export function getProjectFilterSummary(projects, filterId = DEFAULT_PROJECT_FIL
       formatProjectFilterStatusMix(visibleProjects) +
       formatProjectFilterRewardMix(visibleProjects) +
       formatProjectFilterTrackMix(visibleProjects) +
+      formatProjectFilterChapterMix(visibleProjects) +
       formatProjectFilterClaimedRewardMix(visibleProjects) +
       formatProjectFilterPendingRewardMix(visibleProjects)
     );
@@ -1363,6 +1364,7 @@ export function getProjectFilterSummary(projects, filterId = DEFAULT_PROJECT_FIL
     formatProjectFilterStatusMix(visibleProjects) +
     formatProjectFilterRewardMix(visibleProjects) +
     formatProjectFilterTrackMix(visibleProjects) +
+    formatProjectFilterChapterMix(visibleProjects) +
     formatProjectFilterClaimedRewardMix(visibleProjects) +
     formatProjectFilterPendingRewardMix(visibleProjects) +
     " · 下一条 " +
@@ -2141,6 +2143,18 @@ function formatProjectFilterTrackMix(projects) {
     .join(" / ");
 
   return trackText ? " · 推进构成 " + trackText : "";
+}
+
+function formatProjectFilterChapterMix(projects) {
+  const chapterText = PROJECT_CHAPTER_DEFS.map((chapter) => [
+    chapter.name,
+    projects.filter((project) => project.chapterName === chapter.name).length
+  ])
+    .filter(([, count]) => count > 0)
+    .map(([label, count]) => label + " " + count + " 段")
+    .join(" / ");
+
+  return chapterText ? " · 章节构成 " + chapterText : "";
 }
 
 function getProjectRewardCounts(projects) {

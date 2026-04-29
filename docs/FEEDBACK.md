@@ -2,6 +2,11 @@
 
 ## 2026-04-29
 
+- GitHub Issues：gh 可用且已认证；2026-04-29 22:23 CST 查询到 1 个 open issue、1 个 open feedback issue、0 个 open bug issue。
+- #2 仍为 open，最后更新时间停留在 2026-04-29 14:13:02 UTC，未出现新的玩家复测结论或 bug；本轮不继续追加第 58 段，改为让星图筛选摘要显示“章节构成”，减少玩家切换筛选视图后判断内容分布在哪些阶段的成本。
+- data/feedback/github-feedback.md 已同步本地快照。
+- 本轮本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`。
+
 - GitHub Issues：gh 可用且已认证；2026-04-29 22:04 CST 查询到 1 个 open issue、1 个 open feedback issue、0 个 open bug issue。
 - #2 仍为 open，最后更新时间停留在 2026-04-29 13:55:47 UTC，未出现新的玩家复测结论或 bug；本轮不继续追加第 58 段，改为让星图筛选摘要显示“状态构成”，减少玩家切换筛选视图后扫描已完成、当前和待推进卡片数量的成本。
 - data/feedback/github-feedback.md 已同步本地快照。

@@ -1,5 +1,27 @@
 # Decision
 
+## 2026-04-29 Product decision：星图筛选章节构成
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 当前仍有真实体验反馈 #2 open，且没有 open bug，继续进入有反馈样本下的 Product decision。
+
+当前最大问题：#2 仍围绕“内容丰富度太差，可玩的内容太少”保持 open。上一轮已让筛选摘要显示状态构成，但玩家切到全部、升级、奖励类型、未完成或已完成视图后，仍需要从航段名称和章节徽标里判断这组内容集中在哪些阶段。
+
+本轮决策：
+
+- 不追加第 58 段，先让星图筛选摘要显示当前视图的章节构成。
+- 章节构成按现有首段星图、专精校准、深空基建、远航长尾顺序统计当前筛选视图中各章节航段数。
+- 空筛选仍只显示没有匹配航段；当前、已完成、升级、奖励类型等筛选只显示命中的章节。
+- 不新增存档字段，不改变项目完成判定、奖励数值、升级价格、航线策略、筛选规则和 57 段星图顺序。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-04-29 22:23 CST 查询到 1 个 open issue、1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
+- `bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build` 已通过，测试覆盖本章、升级、当前和已完成筛选的章节构成。
+- 静态首页初始筛选摘要已包含“章节构成 首段星图 4 段 / 专精校准 5 段 / 深空基建 4 段 / 远航长尾 44 段”。
+- 构建产物已包含 `formatProjectFilterChapterMix` 和“章节构成”。
+
+下一步：push 后等待 GitHub Pages 发布，再回复 #2 请求复测章节构成是否降低不同筛选视图的阶段判断成本。
+
 ## 2026-04-29 Product decision：星图筛选状态构成
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 当前仍有真实体验反馈 #2 open，且没有 open bug，继续进入有反馈样本下的 Product decision。
