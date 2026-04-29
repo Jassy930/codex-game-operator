@@ -7,6 +7,8 @@
 - 同步 GitHub Issues 反馈状态：当前 1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
 - 验证通过：bun install --no-save、bun run test、bun run build、npm install、npm test、npm run build。
 - 构建产物已包含“奖励构成 总产能 17 段 / 点击 14 段 / 自动 15 段 / 过载 11 段”、`PROJECT_REWARD_SUMMARY_DEFS`、`formatProjectFilterRewardMix` 和更新后的 `getProjectFilterSummary`。
+- GitHub Pages workflow 25107604800 已成功，线上地址返回 HTTP 200，且发布文件包含“奖励构成 总产能 17 段 / 点击 14 段 / 自动 15 段 / 过载 11 段”、`PROJECT_REWARD_SUMMARY_DEFS`、`formatProjectFilterRewardMix` 和 `getProjectFilterSummary`。
+- 已回复 #2，说明星图筛选奖励构成已部署，并保持 issue open 等待复测。
 - 新增星图筛选终点提示：筛选摘要在下一条和后续预告后，会显示当前筛选视图的终点航段，例如全部视图可直接看到“终点 航段 57/57 星渊方舟”。
 - 终点提示仅改变星图列表辅助展示；当前筛选只有少量未完成航段时不会重复追加终点，不新增存档字段，不改变 57 段星图路线、项目完成判定、奖励数值、升级价格、航线策略或筛选规则。
 - 同步 GitHub Issues 反馈状态：当前 1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
