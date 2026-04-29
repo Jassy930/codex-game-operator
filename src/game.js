@@ -799,6 +799,20 @@ export const PROJECT_DEFS = [
     current(state) {
       return state.totalEnergy;
     }
+  },
+  {
+    id: "starflame-pilot-ring",
+    name: "星焰引航环",
+    summary: "累计 6.5B 能量，在星瀑谐振门外点亮星焰引航环。",
+    unit: "能量",
+    target: 6_500_000_000,
+    reward: "点击产能 +27%",
+    effect: {
+      clickMultiplier: 1.27
+    },
+    current(state) {
+      return state.totalEnergy;
+    }
   }
 ];
 
@@ -821,7 +835,7 @@ export const PROJECT_CHAPTER_DEFS = [
   {
     name: "远航长尾",
     startId: "void-gate-expedition",
-    endId: "starfall-resonance-gate"
+    endId: "starflame-pilot-ring"
   }
 ];
 
