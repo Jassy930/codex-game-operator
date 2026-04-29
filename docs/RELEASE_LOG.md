@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+- 新增 550M 后穹海棱镜航段：星澜汇流庭完成后继续出现累计能量目标，完成后奖励过载奖励 +22%，星图路线扩展到 38 段。
+- 同步星图总览、里程碑、章节、奖励进度、航线构成、项目列表、静态 HTML 初始文案和 README 到 38 段。
+- 同步 GitHub Issues 反馈状态：当前 1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
+- 验证通过：bun install --no-save、bun run test、bun run build、npm install、npm test、npm run build。
+- 构建产物已包含“穹海棱镜”、`skysea-prism`、“星图进度 0/38”、“29 个累计航段”和“过载 0/7”。
 - 新增 420M 后星澜汇流庭航段：辉潮巡航环完成后继续出现累计能量目标，完成后奖励总产能 +22%，星图路线扩展到 37 段。
 - 同步星图总览、里程碑、章节、奖励进度、航线构成、项目列表和静态 HTML 初始文案到 37 段。
 - 同步 GitHub Issues 反馈状态：当前 1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。

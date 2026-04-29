@@ -673,6 +673,20 @@ export const PROJECT_DEFS = [
     current(state) {
       return state.totalEnergy;
     }
+  },
+  {
+    id: "skysea-prism",
+    name: "穹海棱镜",
+    summary: "累计 550M 能量，在星澜汇流庭外折射穹海航路。",
+    unit: "能量",
+    target: 550_000_000,
+    reward: "过载奖励 +22%",
+    effect: {
+      overloadMultiplier: 1.22
+    },
+    current(state) {
+      return state.totalEnergy;
+    }
   }
 ];
 
@@ -695,7 +709,7 @@ export const PROJECT_CHAPTER_DEFS = [
   {
     name: "远航长尾",
     startId: "void-gate-expedition",
-    endId: "starwave-confluence-court"
+    endId: "skysea-prism"
   }
 ];
 
