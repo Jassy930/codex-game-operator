@@ -6,6 +6,8 @@
 - 同步 GitHub Issues 反馈状态：当前 1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
 - 验证通过：bun install --no-save、bun run test、bun run build、npm install、npm test、npm run build。
 - 构建产物已包含“航线焦点”、`projectOverviewRouteFocus` 和 `routeFocusText`。
+- GitHub Pages workflow 25087158534 已成功，线上地址返回 HTTP 200，且发布文件包含“航线焦点”、`projectOverviewRouteFocus` 和 `routeFocusText`。
+- 已回复 #2，说明航线焦点已部署，并保持 issue open 等待复测。
 - 新增星图里程碑：星图总览显示当前章节终点和终局航点的航段序号、奖励与进度，帮助玩家同时看到短期章节目标和长期路线终点。
 - 同步 GitHub Issues 反馈状态：当前 1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
 - 验证通过：bun install --no-save、bun run test、bun run build、npm install、npm test、npm run build。

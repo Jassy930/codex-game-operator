@@ -17,8 +17,10 @@
 - GitHub Issues 已同步：2026-04-29 09:54 CST 查询到 1 个 open issue、1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
 - bun install --no-save、bun run test、bun run build、npm install、npm test 和 npm run build 已通过，覆盖锁定状态、当前策略专精、进行中状态和全部完成状态的航线焦点文案。
 - 构建产物已包含“航线焦点”、`projectOverviewRouteFocus` 和 `routeFocusText`。
+- GitHub Pages workflow 25087158534 已成功，线上地址返回 HTTP 200，发布文件包含“航线焦点”、`projectOverviewRouteFocus` 和 `routeFocusText`。
+- #2 已回复并保持 open，等待复测确认航线焦点是否改善策略选择与内容目标之间的关联。
 
-下一步：发布和回复 #2 后，继续观察复测是否认为航线焦点改善策略选择与内容目标之间的关联。
+下一步：继续观察 #2 复测是否认为航线焦点改善策略选择与内容目标之间的关联。
 
 ## 2026-04-29 Product decision：星图里程碑
 
