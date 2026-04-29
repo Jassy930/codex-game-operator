@@ -7,6 +7,8 @@
 - 同步 GitHub Issues 反馈状态：当前 1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
 - 验证通过：bun install --no-save、bun run test、bun run build、npm install、npm test、npm run build。
 - 构建产物已包含“完成率 0% · 剩余 57 段”和 `formatProjectFilterCompletion`。
+- GitHub Pages workflow 25110458028 已成功，线上地址返回 HTTP 200，且发布文件包含“完成率 0% · 剩余 57 段”和 `formatProjectFilterCompletion`。
+- 已回复 #2，说明星图筛选摘要剩余量已部署，并保持 issue open 等待复测。
 - 新增星图筛选按钮进度：全部、本章、累计、升级和奖励类型等筛选按钮会显示已完成/总数，例如“全部 5/57”“本章 1/5”“累计 2/48”。
 - 当前、未完成和已完成筛选继续显示直接数量；按钮进度仅改变筛选入口展示，不新增存档字段，不改变 57 段星图路线、项目完成判定、奖励数值、升级价格、航线策略或筛选规则。
 - 同步 GitHub Issues 反馈状态：当前 1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
