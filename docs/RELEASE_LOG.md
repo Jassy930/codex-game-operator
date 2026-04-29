@@ -7,7 +7,8 @@
 - 同步 GitHub Issues 反馈状态：当前 1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
 - 验证通过：bun install --no-save、bun run test、bun run build、npm install、npm test、npm run build。
 - 构建产物已包含“虚曜谐振塔”、`voidflare-resonator`、“星图进度 0/34”、“25 个累计航段”和“过载 0/6”。
-- 待 GitHub Pages workflow 发布后回复 #2，并保持 issue open 等待复测。
+- GitHub Pages workflow 25088478958 已成功，线上地址返回 HTTP 200，且发布文件包含“虚曜谐振塔”、`voidflare-resonator`、“星图进度 0/34”、“25 个累计航段”和“过载 0/6”。
+- 已回复 #2，说明虚曜谐振塔航段已部署，并保持 issue open 等待复测。
 - 新增 145M 后星渊回声门航段：曜幕天穹完成后继续出现累计能量目标，完成后奖励总产能 +20%，星图路线扩展到 33 段。
 - 同步星图总览、里程碑、章节、奖励进度、航线构成、项目列表和静态 HTML 初始文案到 33 段。
 - 同步 GitHub Issues 反馈状态：当前 1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
