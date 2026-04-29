@@ -5,6 +5,9 @@
 - GitHub Issues：gh 可用且已认证；2026-04-29 21:48 CST 查询到 1 个 open issue、1 个 open feedback issue、0 个 open bug issue。
 - #2 仍为 open，最后更新时间停留在 2026-04-29 13:38:36 UTC，未出现新的玩家复测结论或 bug；本轮不继续追加第 58 段，改为给星图项目卡片新增“已完成 / 当前航段 / 待推进”状态标签，减少玩家扫描 57 段列表时判断卡片状态的成本。
 - data/feedback/github-feedback.md 已同步本地快照。
+- 本轮已回复 #2：说明星图项目卡片新增状态标签，GitHub Pages workflow 25113075342 已成功，线上地址返回 HTTP 200，线上脚本包含 `project-status-badge`、`statusText`、“当前航段”和“待推进”，线上样式包含 `project-status-badge`；issue 保持 open，等待复测确认项目状态标签是否降低 57 段星图列表的状态判断成本。
+- GitHub Issues：gh 可用且已认证；2026-04-29 21:56 CST 在回复后查询到 1 个 open issue、1 个 open feedback issue、0 个 open bug issue。
+- data/feedback/github-feedback.md 已在回复 #2 后同步本地快照。
 
 - GitHub Issues：gh 可用且已认证；2026-04-29 21:30 CST 查询到 1 个 open issue、1 个 open feedback issue、0 个 open bug issue。
 - #2 仍为 open，最后更新时间停留在 2026-04-29 13:20:41 UTC，未出现新的玩家复测结论或 bug；本轮不继续追加第 58 段，改为让星图筛选摘要在混合完成/未完成视图中显示已领取奖励构成，减少玩家从奖励构成和待领取奖励中反推已获得成长线的成本。

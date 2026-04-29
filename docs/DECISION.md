@@ -18,8 +18,11 @@
 - GitHub Issues 已同步：2026-04-29 21:48 CST 查询到 1 个 open issue、1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
 - `bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build` 已通过，测试覆盖已完成、当前航段和待推进三类状态文本。
 - 构建产物已包含 `project-status-badge`、`statusText`、“当前航段”和“待推进”。
+- GitHub Pages workflow 25113075342 已成功，线上地址返回 HTTP 200，线上脚本包含 `project-status-badge`、`statusText`、“当前航段”和“待推进”，线上样式包含 `project-status-badge`。
+- #2 已回复并保持 open，等待复测确认项目状态标签是否降低 57 段星图列表的状态判断成本。
+- GitHub Issues 已在回复后同步：2026-04-29 21:56 CST 查询到 1 个 open issue、1 个 open feedback issue、0 个 open bug issue。
 
-下一步：push 后等待 GitHub Pages workflow，验证线上脚本和样式包含项目状态标签，再回复 #2 等待复测。
+下一步：继续观察 #2 复测是否认为项目状态标签降低 57 段星图列表的状态判断成本。
 
 ## 2026-04-29 Product decision：星图筛选已领取奖励
 

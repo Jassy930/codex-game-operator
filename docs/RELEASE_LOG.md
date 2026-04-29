@@ -7,6 +7,8 @@
 - 同步 GitHub Issues 反馈状态：当前 1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
 - 验证通过：bun install --no-save、bun run test、bun run build、npm install、npm test、npm run build。
 - 构建产物已包含 `project-status-badge`、`statusText`、“当前航段”和“待推进”。
+- GitHub Pages workflow 25113075342 已成功，线上地址返回 HTTP 200，且发布脚本包含 `project-status-badge`、`statusText`、“当前航段”和“待推进”，线上样式包含 `project-status-badge`。
+- 已回复 #2，说明星图项目状态标签已部署，并保持 issue open 等待复测。
 - 新增星图筛选已领取奖励：当当前筛选视图同时包含已完成和未完成航段时，筛选摘要会显示已领取的总产能、点击、自动和过载奖励构成。
 - 当前视图没有已完成航段、没有未完成航段或已完成筛选全为已领取内容时不重复显示；本轮仅改变筛选摘要展示，不新增存档字段，不改变 57 段星图路线、项目完成判定、奖励数值、升级价格、航线策略或筛选规则。
 - 同步 GitHub Issues 反馈状态：当前 1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
