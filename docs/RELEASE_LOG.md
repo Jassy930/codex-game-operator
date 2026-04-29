@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+- 航线指令新增“指令熟练”短期成长：完成 3/3 指令轮换后获得 3 分钟熟练层，每层让后续指令收益 +5%，最多 3 层，再次完成轮换会叠层或刷新时长。
+- `src/game.js` 新增 `directiveMastery` 存档字段、熟练收益计算和熟练提示；`src/app.js` 渲染 `directive-mastery-bonus` 并在本地 `directive` 事件记录熟练字段；`src/feedback.js` 的反馈快照新增“指令熟练：x/3”。
+- 本轮只调整航线指令短期成长；不改变升级价格、产能公式、星图 57 段路线、项目奖励、指令冷却、连携窗口、轮换目标奖励、策略契合 +10%、策略终结奖励数值、反馈入口或筛选规则。
+- 同步 GitHub Issues 反馈状态：当前 3 个 open feedback issue、0 个 open bug issue；#3 继续指向玩法单薄并作为本轮处理对象。
+- 验证通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`。
+- 构建产物已确认包含 `directiveMastery`、`DIRECTIVE_MASTERY_MAX_STACKS`、`directive-mastery-bonus` 和“指令熟练”。
 - 航线指令按钮新增“策略终结”徽标：当推荐指令会完成 3/3 轮换且匹配当前航线策略时，按钮会直接显示策略终结目标。
 - `src/game.js` 新增 `finisherRecommended` / `finisherRecommendationText` 派生状态；`src/app.js` 渲染 `is-finisher-recommended` 和 `directive-finisher-recommendation`；`src/styles.css` 新增策略终结徽标和按钮边框样式。
 - 本轮只调整航线指令按钮可读性；不新增存档字段，不改变升级价格、产能公式、星图 57 段路线、项目奖励、指令冷却、连携窗口、轮换目标奖励、策略契合 +10%、策略终结奖励数值、反馈入口或筛选规则。

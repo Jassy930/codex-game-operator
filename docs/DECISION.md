@@ -1,5 +1,30 @@
 # Decision
 
+## 2026-04-30 Product decision：航线指令熟练层
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-04-30 04:17 CST 同步到 3 个 open feedback issue、0 个 open bug issue。#3 仍是最近更新的玩法反馈，继续指向“玩法太简单、只有点击和自动产能”；本轮继续进入有反馈样本下的 Product decision。
+
+当前最大问题：航线指令已经有冷却、连携、轮换目标、3/3 奖励、按钮推荐、策略契合和策略终结，但完成一次完整轮换后缺少可延续的短期成长状态。玩家完成 3/3 后得到即时奖励，却没有把这次操作沉淀成下一轮指令收益。
+
+本轮决策：
+
+- 新增 `directiveMastery` 存档字段，旧存档自动补齐为 0 层。
+- 完成 3/3 指令轮换后获得 3 分钟“指令熟练”，每层让后续指令收益 +5%，最多 3 层；再次完成轮换会叠层或刷新时长。
+- 指令预计收益、按钮徽标、执行反馈、本地 `directive` 事件和反馈快照都显示/记录指令熟练。
+- 本轮只调整航线指令短期成长；不改变升级价格、产能公式、星图 57 段路线、项目奖励、指令冷却、连携窗口、轮换目标奖励、策略契合 +10%、策略终结奖励数值或筛选规则。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-04-30 04:17 CST 查询到 3 个 open feedback issue、0 个 open bug issue；#3 作为本轮处理对象。
+- 第三步完成 3/3 轮换后，状态写入 `directiveMastery.stacks = 1` 并提示“指令熟练 +1 层 (1/3)”。
+- 指令熟练有效期内，按钮预计收益显示“指令熟练 +5%”，轮换提示显示当前层数、下一次指令加成和剩余时间。
+- 指令熟练过期后，预计收益不再显示熟练加成。
+- 反馈快照包含“指令熟练：x/3”。
+- `bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build` 已通过。
+- 构建产物包含 `directiveMastery`、`DIRECTIVE_MASTERY_MAX_STACKS`、`directive-mastery-bonus` 和“指令熟练”。
+
+下一步：提交并推送后等待 GitHub Pages workflow；部署成功后回复 #3，说明 3/3 轮换现在会沉淀为短期指令熟练层，issue 保持 open 等待复测。
+
 ## 2026-04-30 Product decision：策略终结按钮提示
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-04-30 04:03 CST 同步到 3 个 open feedback issue、0 个 open bug issue。#3 仍是最近更新的玩法反馈，继续指向“玩法太简单、只有点击和自动产能”；本轮继续进入有反馈样本下的 Product decision。

@@ -328,6 +328,11 @@ function renderDirective(option) {
       recordEvent("directive", {
         directive: option.id,
         gain: result.gain,
+        masteryBonus: result.masteryBonus,
+        masteryBonusRate: result.masteryBonusRate,
+        masteryStacks: result.masteryStacks,
+        masteryRewardGained: result.masteryRewardGained,
+        masteryRewardStacks: result.masteryRewardStacks,
         rotationReward: result.rotationReward,
         stanceFinisherReward: result.stanceFinisherReward,
         stanceBonus: result.stanceBonus,
@@ -361,12 +366,17 @@ function renderDirective(option) {
   finisherRecommendation.textContent = option.finisherRecommendationText;
   finisherRecommendation.hidden = !option.finisherRecommended;
 
+  const masteryBonus = document.createElement("span");
+  masteryBonus.className = "directive-mastery-bonus";
+  masteryBonus.textContent = option.masteryBonusText;
+  masteryBonus.hidden = !option.masteryMatched;
+
   const stanceBonus = document.createElement("span");
   stanceBonus.className = "directive-stance-bonus";
   stanceBonus.textContent = option.stanceBonusText;
   stanceBonus.hidden = !option.stanceMatched;
 
-  badges.append(recommendation, finisherRecommendation, stanceBonus);
+  badges.append(recommendation, finisherRecommendation, masteryBonus, stanceBonus);
   head.append(name, badges);
 
   const summary = document.createElement("span");

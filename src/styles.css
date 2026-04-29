@@ -351,6 +351,15 @@ h2 {
   line-height: 1;
 }
 
+.directive-button .directive-mastery-bonus {
+  padding: 3px 6px;
+  border-radius: 999px;
+  background: rgba(124, 201, 255, 0.16);
+  color: #caeaff;
+  font-size: 0.68rem;
+  line-height: 1;
+}
+
 .directive-button .directive-preview {
   color: #bdf4eb;
 }

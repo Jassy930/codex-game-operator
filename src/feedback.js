@@ -1,4 +1,8 @@
-import { DEFAULT_ROUTE_STANCE_ID, ROUTE_STANCE_DEFS } from "./game.js";
+import {
+  DEFAULT_ROUTE_STANCE_ID,
+  DIRECTIVE_MASTERY_MAX_STACKS,
+  ROUTE_STANCE_DEFS
+} from "./game.js";
 
 export const FEEDBACK_TYPES = {
   experience: {
@@ -54,6 +58,7 @@ export function createFeedbackEntry({
       multiplier: currentState.multiplier ?? 1,
       overloadBonus: currentState.overloadBonus ?? 5,
       routeStance: getFeedbackRouteStanceId(currentState.routeStance),
+      directiveMastery: getFeedbackDirectiveMastery(currentState.directiveMastery),
       combo: currentState.combo ?? 0,
       goal: currentGoal.value ?? "未知",
       upgrades: currentState.upgrades ?? {}
@@ -92,6 +97,7 @@ export function createFeedbackIssueBody(entry) {
     `- 产能倍率：${snapshot.multiplier}`,
     `- 过载奖励：${snapshot.overloadBonus}`,
     `- 航线策略：${getFeedbackRouteStanceName(snapshot.routeStance)}`,
+    `- 指令熟练：${snapshot.directiveMastery.stacks}/${DIRECTIVE_MASTERY_MAX_STACKS}`,
     `- 连击：${snapshot.combo}`,
     `- 当前目标：${snapshot.goal}`,
     `- 升级：${upgrades || "无"}`,
@@ -111,6 +117,16 @@ function getFeedbackRouteStanceName(routeStanceId) {
     ROUTE_STANCE_DEFS.find((item) => item.id === routeStanceId)?.name ??
     ROUTE_STANCE_DEFS[0].name
   );
+}
+
+function getFeedbackDirectiveMastery(directiveMastery) {
+  const stacks = Number(directiveMastery?.stacks ?? 0);
+
+  return {
+    stacks: Number.isFinite(stacks)
+      ? Math.min(DIRECTIVE_MASTERY_MAX_STACKS, Math.max(0, Math.floor(stacks)))
+      : 0
+  };
 }
 
 function clampRating(value) {

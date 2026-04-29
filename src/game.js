@@ -1079,6 +1079,9 @@ export const DIRECTIVE_CHAIN_MAX_STACKS = 2;
 export const DIRECTIVE_ROTATION_REWARD_RATE = 0.18;
 export const DIRECTIVE_STANCE_BONUS_RATE = 0.1;
 export const DIRECTIVE_STANCE_FINISHER_RATE = 0.12;
+export const DIRECTIVE_MASTERY_WINDOW_SECONDS = 180;
+export const DIRECTIVE_MASTERY_BONUS_STEP = 0.05;
+export const DIRECTIVE_MASTERY_MAX_STACKS = 3;
 
 const INITIAL_UPGRADES = Object.fromEntries(
   UPGRADE_DEFS.map((upgrade) => [upgrade.id, 0])
@@ -1107,6 +1110,10 @@ export function createInitialState(now = Date.now()) {
     lastGain: 0,
     directiveChain: {
       lastDirectiveId: null,
+      stacks: 0,
+      expiresAt: 0
+    },
+    directiveMastery: {
       stacks: 0,
       expiresAt: 0
     },
@@ -1139,6 +1146,21 @@ export function normalizeState(state, now = Date.now()) {
     ),
     expiresAt: readNumber(sourceDirectiveChain.expiresAt, 0)
   };
+  const sourceDirectiveMastery =
+    source.directiveMastery && typeof source.directiveMastery === "object"
+      ? source.directiveMastery
+      : {};
+  const directiveMasteryExpiresAt = readNumber(sourceDirectiveMastery.expiresAt, 0);
+  const directiveMasteryActive = directiveMasteryExpiresAt >= now;
+  const directiveMastery = {
+    stacks: directiveMasteryActive
+      ? Math.min(
+          DIRECTIVE_MASTERY_MAX_STACKS,
+          Math.max(0, Math.floor(readNumber(sourceDirectiveMastery.stacks, 0)))
+        )
+      : 0,
+    expiresAt: directiveMasteryActive ? directiveMasteryExpiresAt : 0
+  };
 
   return {
     ...initial,
@@ -1160,6 +1182,7 @@ export function normalizeState(state, now = Date.now()) {
     lastTick: readNumber(source.lastTick, now),
     lastGain: Math.max(0, Number(source.lastGain ?? initial.lastGain) || 0),
     directiveChain,
+    directiveMastery,
     directives,
     upgrades
   };
@@ -1321,20 +1344,24 @@ export function activateDirective(state, directiveId, now = Date.now()) {
 
   const production = getEffectiveProduction(current);
   const baseGain = roundTo(Math.max(0, directive.getGain(current, production)), 4);
+  const mastery = getDirectiveMastery(current, now);
+  const masteryBonus = getDirectiveMasteryBonus(baseGain, mastery);
+  const effectiveBaseGain = roundTo(baseGain + masteryBonus, 4);
   const chain = getDirectiveChainForUse(current, directive.id, now);
-  const rotationReward = getDirectiveRotationReward(baseGain, chain);
+  const rotationReward = getDirectiveRotationReward(effectiveBaseGain, chain);
   const stanceBonusRate = getDirectiveStanceBonusRate(production.routeStance, directive);
   const stanceFinisherReward = getDirectiveStanceFinisherReward(
-    baseGain,
+    effectiveBaseGain,
     chain,
     stanceBonusRate
   );
   const preStanceGain = roundTo(
-    baseGain * chain.multiplier + rotationReward + stanceFinisherReward,
+    effectiveBaseGain * chain.multiplier + rotationReward + stanceFinisherReward,
     4
   );
   const stanceBonus = roundTo(preStanceGain * stanceBonusRate, 4);
   const gain = roundTo(preStanceGain + stanceBonus, 4);
+  const masteryReward = getNextDirectiveMastery(mastery, chain, now);
   const nextState = {
     ...current,
     energy: current.energy + gain,
@@ -1348,38 +1375,51 @@ export function activateDirective(state, directiveId, now = Date.now()) {
       stacks: chain.stacks,
       expiresAt: now + DIRECTIVE_CHAIN_WINDOW_SECONDS * 1000
     },
+    directiveMastery: masteryReward.mastery,
     lastGain: gain,
     lastPulse: directive.name
   };
+  const masteryBonusText = formatDirectiveMasteryBonus(mastery);
   const chainText = formatDirectiveChainBonus(chain);
   const rotationRewardText = formatDirectiveRotationReward(rotationReward);
   const stanceFinisherText = formatDirectiveStanceFinisherReward(stanceFinisherReward);
   const stanceBonusText = formatDirectiveStanceBonus(stanceBonusRate);
+  const masteryRewardText = formatDirectiveMasteryReward(masteryReward);
 
   return {
     activated: true,
     directive,
     baseGain,
+    effectiveBaseGain,
     gain,
+    masteryBonus,
+    masteryBonusRate: mastery.bonusRate,
+    masteryStacks: mastery.stacks,
+    masteryRewardGained: masteryReward.gained,
+    masteryRewardStacks: masteryReward.mastery.stacks,
     rotationReward,
     stanceFinisherReward,
     stanceBonus,
     stanceBonusRate,
     chainStacks: chain.stacks,
     chainMultiplier: chain.multiplier,
+    masteryBonusText,
     chainBonusText: chainText,
     rotationRewardText,
     stanceFinisherText,
     stanceBonusText,
+    masteryRewardText,
     state: nextState,
     notice:
       "已执行" +
       directive.name +
       "，" +
+      (masteryBonusText ? masteryBonusText + "，" : "") +
       (chainText ? chainText + "，" : "") +
       (rotationRewardText ? rotationRewardText + "，" : "") +
       (stanceFinisherText ? stanceFinisherText + "，" : "") +
       (stanceBonusText ? stanceBonusText + "，" : "") +
+      (masteryRewardText ? masteryRewardText + "，" : "") +
       "+" +
       formatNumber(gain) +
       " 能量。"
@@ -1745,6 +1785,8 @@ export function getDirectiveStatus(state, now = Date.now()) {
   const unlockText = unlocked ? "航线指令已解锁" : "累计 100K 能量后解锁航线指令";
   const plan = getDirectivePlan(current, now);
   const recommendedIds = new Set(plan.nextDirectiveIds ?? []);
+  const mastery = getDirectiveMastery(current, now);
+  const masteryBonusText = formatDirectiveMasteryBonus(mastery);
 
   return {
     unlocked,
@@ -1760,16 +1802,18 @@ export function getDirectiveStatus(state, now = Date.now()) {
         : cooldownMs;
       const remainingSeconds = Math.ceil(remainingMs / 1000);
       const baseGain = roundTo(Math.max(0, directive.getGain(current, production)), 4);
+      const masteryBonus = getDirectiveMasteryBonus(baseGain, mastery);
+      const effectiveBaseGain = roundTo(baseGain + masteryBonus, 4);
       const chain = getDirectiveChainForUse(current, directive.id, now);
-      const rotationReward = getDirectiveRotationReward(baseGain, chain);
+      const rotationReward = getDirectiveRotationReward(effectiveBaseGain, chain);
       const stanceBonusRate = getDirectiveStanceBonusRate(production.routeStance, directive);
       const stanceFinisherReward = getDirectiveStanceFinisherReward(
-        baseGain,
+        effectiveBaseGain,
         chain,
         stanceBonusRate
       );
       const preStanceGain = roundTo(
-        baseGain * chain.multiplier + rotationReward + stanceFinisherReward,
+        effectiveBaseGain * chain.multiplier + rotationReward + stanceFinisherReward,
         4
       );
       const stanceBonus = roundTo(preStanceGain * stanceBonusRate, 4);
@@ -1789,7 +1833,11 @@ export function getDirectiveStatus(state, now = Date.now()) {
       return {
         ...directive,
         baseGain,
+        effectiveBaseGain,
         gain,
+        masteryBonus,
+        masteryBonusRate: mastery.bonusRate,
+        masteryStacks: mastery.stacks,
         rotationReward,
         stanceFinisherReward,
         stanceBonus,
@@ -1800,11 +1848,14 @@ export function getDirectiveStatus(state, now = Date.now()) {
         rotationRewardText,
         stanceFinisherText,
         stanceBonusText,
+        masteryBonusText,
+        masteryMatched: mastery.stacks > 0,
         stanceMatched: stanceBonusRate > 0,
         previewText: unlocked
           ? "预计 +" +
             formatNumber(gain) +
             " 能量" +
+            (masteryBonusText ? " · " + masteryBonusText : "") +
             (chainText ? " · " + chainText : "") +
             (rotationRewardText ? " · " + rotationRewardText : "") +
             (stanceFinisherText ? " · " + stanceFinisherText : "") +
@@ -1830,6 +1881,8 @@ export function getDirectiveStatus(state, now = Date.now()) {
 export function getDirectivePlan(state, now = Date.now()) {
   const current = normalizeState(state, now);
   const targetSteps = DIRECTIVE_CHAIN_MAX_STACKS + 1;
+  const mastery = getDirectiveMastery(current, now);
+  const masteryHint = formatDirectiveMasteryHint(mastery);
 
   if (current.totalEnergy < DIRECTIVE_UNLOCK_ENERGY) {
     return {
@@ -1837,9 +1890,9 @@ export function getDirectivePlan(state, now = Date.now()) {
       progress: 0,
       target: targetSteps,
       summaryText: "指令轮换：累计 100K 能量后解锁 90 秒连携目标",
-      hintText: "解锁后轮换不同航线指令，匹配当前航线策略可获得策略契合加成，完成 3/3 并收束到契合指令可获得策略终结奖励。",
+      hintText: "解锁后轮换不同航线指令，匹配当前航线策略可获得策略契合加成，完成 3/3 并收束到契合指令可获得策略终结奖励；完成轮换还会累积指令熟练。",
       text:
-        "指令轮换：累计 100K 能量后解锁 90 秒连携目标 · 解锁后轮换不同航线指令，匹配当前航线策略可获得策略契合加成，完成 3/3 并收束到契合指令可获得策略终结奖励。"
+        "指令轮换：累计 100K 能量后解锁 90 秒连携目标 · 解锁后轮换不同航线指令，匹配当前航线策略可获得策略契合加成，完成 3/3 并收束到契合指令可获得策略终结奖励；完成轮换还会累积指令熟练。"
     };
   }
 
@@ -1852,11 +1905,14 @@ export function getDirectivePlan(state, now = Date.now()) {
       progress: 0,
       target: targetSteps,
       summaryText: "指令轮换 0/" + targetSteps + " · 先执行任意航线指令",
-      hintText: "匹配当前航线策略可获得策略契合 +10%；随后在 90 秒内切换不同指令，完成 3/3 并收束到契合指令可获得策略终结奖励。",
+      hintText:
+        "匹配当前航线策略可获得策略契合 +10%；随后在 90 秒内切换不同指令，完成 3/3 并收束到契合指令可获得策略终结奖励；" +
+        masteryHint,
       text:
         "指令轮换 0/" +
         targetSteps +
-        " · 先执行任意航线指令 · 匹配当前航线策略可获得策略契合 +10% · 随后在 90 秒内切换不同指令，完成 3/3 并收束到契合指令可获得策略终结奖励。"
+        " · 先执行任意航线指令 · 匹配当前航线策略可获得策略契合 +10% · 随后在 90 秒内切换不同指令，完成 3/3 并收束到契合指令可获得策略终结奖励 · " +
+        masteryHint
     };
   }
 
@@ -1904,7 +1960,8 @@ export function getDirectivePlan(state, now = Date.now()) {
         (nextIncludesStanceDirective
           ? "；切到" + stanceDirective.name + "还会触发策略终结奖励"
           : "") +
-        "；重复同类会重置。"
+        "；重复同类会重置；" +
+        masteryHint
       : waitingPrefix +
         nextNames +
         "，预计" +
@@ -1913,7 +1970,8 @@ export function getDirectivePlan(state, now = Date.now()) {
         (nextStacks >= DIRECTIVE_CHAIN_MAX_STACKS && nextIncludesStanceDirective
           ? "；收束到" + stanceDirective.name + "还会触发策略终结奖励"
           : "") +
-        "。";
+        "；" +
+        masteryHint;
 
   return {
     unlocked: true,
@@ -2822,6 +2880,54 @@ function getDirectiveChainForUse(state, directiveId, now) {
   };
 }
 
+function getDirectiveMastery(state, now) {
+  const current = normalizeState(state, now);
+  const mastery = current.directiveMastery;
+  const active = mastery.expiresAt >= now && mastery.stacks > 0;
+  const stacks = active ? mastery.stacks : 0;
+  const bonusRate = roundTo(stacks * DIRECTIVE_MASTERY_BONUS_STEP, 4);
+
+  return {
+    stacks,
+    expiresAt: active ? mastery.expiresAt : 0,
+    remainingSeconds: active ? Math.ceil((mastery.expiresAt - now) / 1000) : 0,
+    bonusRate,
+    multiplier: roundTo(1 + bonusRate, 4)
+  };
+}
+
+function getDirectiveMasteryBonus(baseGain, mastery) {
+  if (mastery.bonusRate <= 0) {
+    return 0;
+  }
+
+  return roundTo(baseGain * mastery.bonusRate, 4);
+}
+
+function getNextDirectiveMastery(mastery, chain, now) {
+  if (chain.stacks < DIRECTIVE_CHAIN_MAX_STACKS) {
+    return {
+      mastery: {
+        stacks: mastery.stacks,
+        expiresAt: mastery.expiresAt
+      },
+      gained: 0,
+      completed: false
+    };
+  }
+
+  const nextStacks = Math.min(DIRECTIVE_MASTERY_MAX_STACKS, mastery.stacks + 1);
+
+  return {
+    mastery: {
+      stacks: nextStacks,
+      expiresAt: now + DIRECTIVE_MASTERY_WINDOW_SECONDS * 1000
+    },
+    gained: nextStacks > mastery.stacks ? 1 : 0,
+    completed: true
+  };
+}
+
 function isDirectiveReady(state, directive, now) {
   const lastUsedAt = state.directives[directive.id] ?? 0;
   return lastUsedAt <= 0 || lastUsedAt + directive.cooldownSeconds * 1000 <= now;
@@ -2841,6 +2947,55 @@ function formatDirectiveChainBonus(chain) {
   }
 
   return "航线连携 +" + Math.round((chain.multiplier - 1) * 100) + "%";
+}
+
+function formatDirectiveMasteryBonus(mastery) {
+  if (mastery.stacks <= 0) {
+    return "";
+  }
+
+  return "指令熟练 +" + Math.round(mastery.bonusRate * 100) + "%";
+}
+
+function formatDirectiveMasteryReward(masteryReward) {
+  if (!masteryReward.completed) {
+    return "";
+  }
+
+  const stackText =
+    masteryReward.mastery.stacks + "/" + DIRECTIVE_MASTERY_MAX_STACKS;
+
+  if (masteryReward.gained > 0) {
+    return "指令熟练 +1 层 (" + stackText + ")";
+  }
+
+  return "指令熟练刷新 (" + stackText + ")";
+}
+
+function formatDirectiveMasteryHint(mastery) {
+  if (mastery.stacks > 0) {
+    return (
+      "当前指令熟练 " +
+      mastery.stacks +
+      "/" +
+      DIRECTIVE_MASTERY_MAX_STACKS +
+      "，下一次指令 +" +
+      Math.round(mastery.bonusRate * 100) +
+      "%，剩余 " +
+      formatDuration(mastery.remainingSeconds) +
+      "。"
+    );
+  }
+
+  return (
+    "完成 3/3 轮换会累积 " +
+    formatDuration(DIRECTIVE_MASTERY_WINDOW_SECONDS) +
+    "指令熟练，每层指令收益 +" +
+    Math.round(DIRECTIVE_MASTERY_BONUS_STEP * 100) +
+    "%，最多 " +
+    DIRECTIVE_MASTERY_MAX_STACKS +
+    " 层。"
+  );
 }
 
 function getDirectiveRotationReward(baseGain, chain) {
