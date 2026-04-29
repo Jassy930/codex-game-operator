@@ -13,6 +13,7 @@ import {
   getCurrentGoal,
   getEffectiveProduction,
   getProjectFilterSummary,
+  getProjectFilterButtonText,
   getProjectOverview,
   getProjectStatuses,
   getRouteStanceStatus,
@@ -326,13 +327,12 @@ function renderProjectFilters(projects) {
 }
 
 function renderProjectFilter(filter, projects) {
-  const visibleCount = filterProjectStatuses(projects, filter.id).length;
   const button = document.createElement("button");
   button.className =
     filter.id === projectFilter ? "project-filter-button is-active" : "project-filter-button";
   button.type = "button";
   button.setAttribute("aria-pressed", filter.id === projectFilter ? "true" : "false");
-  button.textContent = filter.name + " " + visibleCount;
+  button.textContent = getProjectFilterButtonText(projects, filter.id);
   button.addEventListener("click", () => {
     projectFilter = filter.id;
     render();

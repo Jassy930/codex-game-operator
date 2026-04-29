@@ -1,5 +1,26 @@
 # Decision
 
+## 2026-04-29 Product decision：星图筛选按钮进度
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 当前仍有真实体验反馈 #2 open，且没有 open bug，继续进入有反馈样本下的 Product decision。
+
+当前最大问题：#2 仍围绕“内容丰富度太差，可玩的内容太少”保持 open。上一轮已让项目卡片显示推进方式和奖励类型，但玩家在点击筛选前，仍只能从按钮看到匹配数量，不能直接判断每组筛选内容已经推进到什么程度、还剩多少内容。
+
+本轮决策：
+
+- 不追加第 58 段，先让星图筛选按钮显示完成进度。
+- 全部、本章、累计、升级和奖励类型筛选显示“已完成/总数”，例如“全部 5/57”“本章 1/5”“累计 2/48”。
+- 当前、未完成和已完成筛选继续显示直接数量，保持定位当前航段、查看剩余和复盘已完成内容的按钮语义。
+- 按钮文案由 `getProjectFilterButtonText` 基于现有筛选结果自动生成；不新增存档字段，不改变项目完成判定、奖励数值、升级价格、航线策略、筛选规则和 57 段星图顺序。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-04-29 20:40 CST 查询到 1 个 open issue、1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
+- `bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build` 已通过，测试覆盖全部、当前、本章、累计、升级、四类奖励、未完成、已完成和全部完成后空本章筛选按钮文案。
+- 构建产物已包含 `getProjectFilterButtonText`、`全部 0/57` 和更新后的筛选按钮渲染。
+
+下一步：push 后等待 GitHub Pages 部署，验证线上筛选按钮进度文案并回复 #2。
+
 ## 2026-04-29 Product decision：星图项目标签
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 当前仍有真实体验反馈 #2 open，且没有 open bug，继续进入有反馈样本下的 Product decision。

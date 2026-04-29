@@ -13,6 +13,7 @@ import {
   getComboStatus,
   getCurrentGoal,
   getEffectiveProduction,
+  getProjectFilterButtonText,
   getProjectFilterSummary,
   getProjectOverview,
   getProjectStatuses,
@@ -1980,6 +1981,44 @@ test("星图项目筛选会区分当前、未完成和已完成航段", () => {
   assert.deepEqual(filterProjectStatuses(completed, "current"), []);
   assert.deepEqual(filterProjectStatuses(completed, "current-chapter"), []);
   assert.equal(filterProjectStatuses(completed, "completed").length, 57);
+});
+
+test("星图筛选按钮会显示筛选视图完成进度", () => {
+  const active = getProjectStatuses({
+    ...createInitialState(0),
+    totalEnergy: 260_000,
+    overloadBonus: 17,
+    upgrades: {
+      lens: 12,
+      collector: 12,
+      resonator: 6,
+      stabilizer: 9
+    }
+  });
+  const completed = getProjectStatuses({
+    ...createInitialState(0),
+    totalEnergy: 122_001_000_000,
+    overloadBonus: 17,
+    upgrades: {
+      lens: 14,
+      collector: 16,
+      resonator: 6,
+      stabilizer: 16
+    }
+  });
+
+  assert.equal(getProjectFilterButtonText(active, "all"), "全部 5/57");
+  assert.equal(getProjectFilterButtonText(active, "current"), "当前 1");
+  assert.equal(getProjectFilterButtonText(active, "current-chapter"), "本章 1/5");
+  assert.equal(getProjectFilterButtonText(active, "energy-track"), "累计 2/48");
+  assert.equal(getProjectFilterButtonText(active, "upgrade-track"), "升级 3/9");
+  assert.equal(getProjectFilterButtonText(active, "total-reward"), "总产能 2/17");
+  assert.equal(getProjectFilterButtonText(active, "click-reward"), "点击 1/14");
+  assert.equal(getProjectFilterButtonText(active, "second-reward"), "自动 1/15");
+  assert.equal(getProjectFilterButtonText(active, "overload-reward"), "过载 1/11");
+  assert.equal(getProjectFilterButtonText(active, "incomplete"), "未完成 52");
+  assert.equal(getProjectFilterButtonText(active, "completed"), "已完成 5");
+  assert.equal(getProjectFilterButtonText(completed, "current-chapter"), "本章 0");
 });
 
 test("星图筛选摘要会显示奖励构成、推进构成、下一条和终点航段", () => {

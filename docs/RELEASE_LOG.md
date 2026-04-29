@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+- 新增星图筛选按钮进度：全部、本章、累计、升级和奖励类型等筛选按钮会显示已完成/总数，例如“全部 5/57”“本章 1/5”“累计 2/48”。
+- 当前、未完成和已完成筛选继续显示直接数量；按钮进度仅改变筛选入口展示，不新增存档字段，不改变 57 段星图路线、项目完成判定、奖励数值、升级价格、航线策略或筛选规则。
+- 同步 GitHub Issues 反馈状态：当前 1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
+- 验证通过：bun install --no-save、bun run test、bun run build、npm install、npm test、npm run build。
+- 构建产物已包含 `getProjectFilterButtonText`、`全部 0/57` 和更新后的筛选按钮渲染。
 - 新增星图项目标签：每个星图项目卡片会直接显示“累计航段/升级航段”和奖励类型，例如“累计航段 · 总产能奖励”“升级航段 · 过载奖励”。
 - 项目标签仅改变列表展示；不新增存档字段，不改变 57 段星图路线、项目完成判定、奖励数值、升级价格、航线策略或筛选规则。
 - 同步 GitHub Issues 反馈状态：当前 1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。

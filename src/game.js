@@ -1366,6 +1366,23 @@ export function getProjectFilterSummary(projects, filterId = DEFAULT_PROJECT_FIL
   );
 }
 
+export function getProjectFilterButtonText(projects, filterId = DEFAULT_PROJECT_FILTER_ID) {
+  const filter = getProjectFilterDef(filterId);
+  const visibleProjects = filterProjectStatuses(projects, filter.id);
+
+  if (
+    !visibleProjects.length ||
+    filter.id === "current" ||
+    filter.id === "incomplete" ||
+    filter.id === "completed"
+  ) {
+    return filter.name + " " + visibleProjects.length;
+  }
+
+  const completed = visibleProjects.filter((project) => project.completed).length;
+  return filter.name + " " + completed + "/" + visibleProjects.length;
+}
+
 export function getProjectOverview(state) {
   const current = normalizeState(state);
   const projects = getProjectStatuses(current);
