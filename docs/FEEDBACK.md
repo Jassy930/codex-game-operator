@@ -2,6 +2,11 @@
 
 ## 2026-04-30
 
+- GitHub Issues：gh 可用且已认证；2026-04-30 05:28 CST 通过 REST API 同步到 3 个 open issue、3 个 open feedback issue、0 个 open bug issue。
+- #4 继续作为本轮 Product decision：星图列表已默认进入本章，但远航长尾本章有 44 段，玩家仍缺少直接按章节切换的入口；本轮新增四个章节筛选按钮。
+- 本轮改动在 `src/game.js` 的 `PROJECT_FILTER_DEFS` 中新增首段星图、专精校准、深空基建、远航长尾四个章节筛选，并让 `filterProjectStatuses` 按 `chapterName` 过滤；`index.html` 静态筛选按钮同步加入四个章节入口。本轮不新增存档字段，不改变升级价格、产能公式、星图 57 段路线、项目奖励、项目完成判定、航线策略、航线指令、反馈入口或筛选摘要结构。
+- 本轮本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；构建产物已包含 `chapter-long-tail`、“首段星图 0/4”和“远航长尾 0/44”。
+
 - GitHub Issues：gh 可用且已认证；2026-04-30 05:10 CST 通过 REST API 同步到 3 个 open issue、3 个 open feedback issue、0 个 open bug issue。
 - #3 继续作为本轮 Product decision：航线指令已经能从收束起手、收束续航进入 3/3 策略终结，但完成轮换后按钮层仍显示普通“轮换推荐”，没有突出刚获得的 3 分钟指令熟练；本轮新增“熟练续航/满轮续航”推荐。
 - 本轮改动在 `src/game.js` 让 `getDirectivePlan` 在 3/3 轮换完成后返回 `recommendationText = "熟练续航"`（无熟练层时为“满轮续航”）和 `waitingRecommendationText = "等待续航"`；指令轮换提示会写入“进入熟练续航”；`index.html` 锁定态提示同步说明完成轮换后会用熟练续航提示下一步。本轮不新增存档字段，不改变升级价格、产能公式、星图 57 段路线、项目奖励、指令基础收益、冷却、连携窗口、轮换目标奖励、策略契合 +10%、策略终结奖励或指令熟练数值。

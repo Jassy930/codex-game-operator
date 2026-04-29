@@ -1,5 +1,29 @@
 # Decision
 
+## 2026-04-30 Product decision：星图章节筛选入口
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-04-30 05:28 CST 同步到 3 个 open feedback issue、0 个 open bug issue。没有新的 bug 或玩家复测结论；#4 仍指向“界面密密麻麻、希望生成图片、更好看”，本轮回到视觉密度问题做 Product decision。
+
+当前最大问题：星图列表已默认进入“本章”，首段星图和专精校准阶段能明显压缩默认列表，但远航长尾本章本身有 44 段；玩家如果想按章节定位，只能依赖筛选摘要里的章节构成和项目卡片徽标，不能直接切到某个章节。
+
+本轮决策：
+
+- 在星图筛选按钮中新增四个章节入口：首段星图、专精校准、深空基建、远航长尾。
+- 章节筛选复用现有项目 `chapterName`、筛选摘要、星图高亮和按钮完成数逻辑。
+- 首页静态筛选按钮同步加入四个章节入口，保持首屏默认仍为“本章”。
+- 本轮只调整星图列表导航和筛选展示；不新增存档字段，不改变升级价格、产能公式、星图 57 段路线、项目奖励、项目完成判定、航线策略、航线指令、反馈入口或筛选摘要结构。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-04-30 05:28 CST 查询到 3 个 open feedback issue、0 个 open bug issue；#4 作为本轮处理对象。
+- `filterProjectStatuses` 支持 `chapter-starter-map`、`chapter-mastery`、`chapter-deep-infra` 和 `chapter-long-tail`，其中远航长尾返回 44 段。
+- 筛选按钮显示“首段星图 4/4”“专精校准 1/5”“深空基建 0/4”“远航长尾 0/44”等完成进度。
+- 远航长尾筛选摘要显示“远航长尾 0/44”、下一条“航段 14/57 · 远航长尾 1/44 星门远征”和终点“航段 57/57 · 远航长尾 44/44 星渊方舟”。
+- `bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build` 已通过。
+- 构建产物包含 `chapter-long-tail`、“首段星图 0/4”和“远航长尾 0/44”。
+
+下一步：推送后等待 GitHub Pages 部署，验证线上首页和脚本包含章节筛选入口，并回复 #4 继续等待复测。
+
 ## 2026-04-30 Product decision：指令熟练续航推荐
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-04-30 05:10 CST 同步到 3 个 open feedback issue、0 个 open bug issue。#3 仍是最近更新的玩法反馈，继续指向“玩法太简单、只有点击和自动产能”；本轮继续进入有反馈样本下的 Product decision。

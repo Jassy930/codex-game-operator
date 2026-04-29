@@ -72,6 +72,26 @@ export const PROJECT_FILTER_DEFS = [
     name: "本章"
   },
   {
+    id: "chapter-starter-map",
+    name: "首段星图",
+    chapterName: "首段星图"
+  },
+  {
+    id: "chapter-mastery",
+    name: "专精校准",
+    chapterName: "专精校准"
+  },
+  {
+    id: "chapter-deep-infra",
+    name: "深空基建",
+    chapterName: "深空基建"
+  },
+  {
+    id: "chapter-long-tail",
+    name: "远航长尾",
+    chapterName: "远航长尾"
+  },
+  {
     id: "energy-track",
     name: "累计"
   },
@@ -1511,7 +1531,8 @@ export function getProjectStatuses(state) {
 }
 
 export function filterProjectStatuses(projects, filterId = DEFAULT_PROJECT_FILTER_ID) {
-  const filter = getValidProjectFilterId(filterId);
+  const filterDef = getProjectFilterDef(filterId);
+  const filter = filterDef.id;
   const items = Array.isArray(projects) ? projects : [];
 
   if (filter === "current") {
@@ -1522,6 +1543,9 @@ export function filterProjectStatuses(projects, filterId = DEFAULT_PROJECT_FILTE
     return currentProject
       ? items.filter((project) => project.chapterName === currentProject.chapterName)
       : [];
+  }
+  if (filterDef.chapterName) {
+    return items.filter((project) => project.chapterName === filterDef.chapterName);
   }
   if (PROJECT_REWARD_FILTER_EFFECTS[filter]) {
     const effectKey = PROJECT_REWARD_FILTER_EFFECTS[filter];
