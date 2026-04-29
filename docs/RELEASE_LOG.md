@@ -7,6 +7,8 @@
 - 同步 GitHub Issues 反馈状态：当前 1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
 - 验证通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`。
 - 静态首页初始文案已包含“章节构成 首段星图 4 段 / 专精校准 5 段 / 深空基建 4 段 / 远航长尾 44 段”，测试覆盖本章、升级、当前和已完成筛选摘要。
+- GitHub Pages workflow 25115037486 已成功，线上地址返回 HTTP 200，且发布文件包含“章节构成 首段星图 4 段 / 专精校准 5 段 / 深空基建 4 段 / 远航长尾 44 段”和 `formatProjectFilterChapterMix`。
+- 已回复 #2，说明星图筛选摘要章节构成已部署，并保持 issue open 等待复测。
 - 新增星图筛选状态构成：筛选摘要会按当前视图显示“已完成 / 当前 / 待推进”航段数，例如全部初始视图会显示“状态构成 当前 1 段 / 待推进 56 段”。
 - 状态构成仅改变筛选摘要展示；不新增存档字段，不改变 57 段星图路线、项目完成判定、奖励数值、升级价格、航线策略或筛选规则。
 - 同步 GitHub Issues 反馈状态：当前 1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。

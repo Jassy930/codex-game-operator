@@ -6,6 +6,9 @@
 - #2 仍为 open，最后更新时间停留在 2026-04-29 14:13:02 UTC，未出现新的玩家复测结论或 bug；本轮不继续追加第 58 段，改为让星图筛选摘要显示“章节构成”，减少玩家切换筛选视图后判断内容分布在哪些阶段的成本。
 - data/feedback/github-feedback.md 已同步本地快照。
 - 本轮本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`。
+- 本轮已回复 #2：说明星图筛选摘要新增章节构成，GitHub Pages workflow 25115037486 已成功，线上地址返回 HTTP 200，线上首页包含“章节构成 首段星图 4 段 / 专精校准 5 段 / 深空基建 4 段 / 远航长尾 44 段”，线上脚本包含 `formatProjectFilterChapterMix`；issue 保持 open，等待复测确认筛选摘要章节构成是否降低 57 段星图在不同视图里的阶段判断成本。
+- GitHub Issues：gh 可用且已认证；2026-04-29 22:33 CST 在回复后查询到 1 个 open issue、1 个 open feedback issue、0 个 open bug issue。
+- data/feedback/github-feedback.md 已在回复 #2 后同步本地快照。
 
 - GitHub Issues：gh 可用且已认证；2026-04-29 22:04 CST 查询到 1 个 open issue、1 个 open feedback issue、0 个 open bug issue。
 - #2 仍为 open，最后更新时间停留在 2026-04-29 13:55:47 UTC，未出现新的玩家复测结论或 bug；本轮不继续追加第 58 段，改为让星图筛选摘要显示“状态构成”，减少玩家切换筛选视图后扫描已完成、当前和待推进卡片数量的成本。
