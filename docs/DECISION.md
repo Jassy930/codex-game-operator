@@ -21,8 +21,11 @@
 - 静态首页包含 `projectChapterMap`、“星图章节视觉导航”和远航长尾下一条目标。
 - `bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build` 已通过；测试数 100 项。
 - 构建产物包含 `projectChapterMap`、`project-chapter-tile`、`getProjectChapterVisuals` 和“下一条 1/44 星门远征”。
+- GitHub Pages workflow 25135611407 已成功，线上地址返回 HTTP 200；线上首页、`app.js`、`game.js` 和 `styles.css` 已确认包含章节视觉导航、数据推导和点击切换逻辑。
+- #4 已回复并继续保持 open，等待复测确认章节视觉导航是否比只看筛选按钮更容易定位星图阶段，并进一步降低星图区文字密度。
+- 回复后同步 GitHub Issues：2026-04-30 05:48 CST 当前仍为 3 个 open feedback issue、0 个 open bug issue；#4 更新时间为 2026-04-29T21:48:36Z。
 
-下一步：提交并推送后等待 GitHub Pages 发布；发布成功后回复 #4，请玩家复测章节视觉导航是否比只看筛选按钮更容易定位星图阶段。
+下一步：等待 #4 复测；若仍认为文字密度过高，再评估更强的章节插图、章节分页或长尾分段折叠。
 
 ## 2026-04-30 Product decision：星图章节筛选入口
 

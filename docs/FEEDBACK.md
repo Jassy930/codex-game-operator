@@ -7,6 +7,9 @@
 - 本轮改动在 `src/game.js` 新增 `getProjectChapterVisuals`，返回四个章节的完成进度、下一条目标、状态和对应筛选 id；`src/app.js` 渲染可点击的章节视觉按钮，点击后直接切换到对应章节筛选；`index.html` 和 `src/styles.css` 同步新增静态占位与固定尺寸视觉样式。本轮不新增存档字段，不改变升级价格、产能公式、星图 57 段路线、项目奖励、项目完成判定、航线策略、航线指令、反馈入口或既有筛选摘要结构。
 - 本轮本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数为 100 项。
 - 构建产物已包含 `projectChapterMap`、`project-chapter-tile`、`getProjectChapterVisuals` 和“下一条 1/44 星门远征”。
+- GitHub Pages workflow 25135611407 已成功，线上地址返回 HTTP 200；线上首页包含 `projectChapterMap`、“星图章节视觉导航”和“下一条 1/44 星门远征”，线上 `app.js` 包含 `getProjectChapterVisuals`、`projectChapterMap` 和章节点击切换逻辑，线上 `styles.css` 包含章节视觉导航样式。
+- #4 已回复：说明章节视觉导航已上线，提交 16f2d22，issue 保持 open 等待复测。
+- 回复后同步 GitHub Issues：2026-04-30 05:48 CST 当前仍为 3 个 open feedback issue、0 个 open bug issue；#4 更新时间为 2026-04-29T21:48:36Z。
 
 - GitHub Issues：gh 可用且已认证；2026-04-30 05:28 CST 通过 REST API 同步到 3 个 open issue、3 个 open feedback issue、0 个 open bug issue。
 - #4 继续作为本轮 Product decision：星图列表已默认进入本章，但远航长尾本章有 44 段，玩家仍缺少直接按章节切换的入口；本轮新增四个章节筛选按钮。
