@@ -6,6 +6,8 @@
 - 同步 GitHub Issues 反馈状态：当前 1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
 - 验证通过：bun install --no-save、bun run test、bun run build、npm install、npm test、npm run build。
 - 构建产物已包含“本阶段还剩”文案和 projectOverviewChapter 渲染字段。
+- GitHub Pages workflow 25083929387 已成功，线上地址返回 HTTP 200，且发布文件包含“本阶段还剩”。
+- 已回复 #2，说明阶段余量已部署，并保持 issue open 等待复测。
 - 新增星图阶段导航：星图总览把 31 段路线拆成首段星图、专精校准、深空基建、远航长尾四个阶段，显示各阶段已完成数/总数和当前所在阶段。
 - 同步 GitHub Issues 反馈状态：当前 1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
 - 验证通过：bun install --no-save、bun run test、bun run build、npm install、npm test、npm run build。

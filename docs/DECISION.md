@@ -17,10 +17,10 @@
 - GitHub Issues 已同步：2026-04-29 07:53 CST 查询到 1 个 open issue、1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
 - bun install --no-save、bun run test、bun run build、npm install、npm test 和 npm run build 已通过，覆盖当前阶段余量和最终阶段余量。
 - 构建产物 dist 包含“本阶段还剩”和 `projectOverviewChapter` 渲染字段。
-- 发布后需要验证 GitHub Pages 线上地址返回 HTTP 200，且发布文件包含“本阶段还剩”。
-- #2 需要回复并保持 open，等待复测确认阶段余量是否改善内容层次感和后续内容感知。
+- GitHub Pages workflow 25083929387 已成功，线上地址返回 HTTP 200，且发布文件包含“本阶段还剩”。
+- #2 已回复并保持 open，等待复测确认阶段余量是否改善内容层次感和后续内容感知。
 
-下一步：完成验证、发布和反馈回复后，继续观察 #2 复测结论。
+下一步：继续观察 #2 复测是否认为阶段余量改善内容层次感和后续内容感知。
 
 ## 2026-04-29 Product decision：星图阶段导航
 
