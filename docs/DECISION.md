@@ -1,5 +1,25 @@
 # Decision
 
+## 2026-04-29 Product decision：星图章节奖励
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 当前仍有真实体验反馈 #2 open，且没有 open bug，继续进入有反馈样本下的 Product decision。
+
+当前最大问题：#2 仍围绕“内容丰富度太差，可玩的内容太少”保持 open。上一轮已在星图总览按章节列出各自下一段目标，但玩家仍需要把章节目标、航线构成和奖励分布自行合并，才能判断每个章节分别提供哪些成长方向。
+
+本轮决策：
+
+- 在星图总览新增“章节奖励”，按首段星图、专精校准、深空基建、远航长尾汇总各章节的总产能、点击、自动和过载奖励数量。
+- 不新增第 32 段，不调整奖励数值、升级价格和存档结构；继续提升已有 31 段星图的章节主题和奖励主题可见性。
+- 静态 HTML 初始文案同步到章节奖励，避免加载前总览信息与运行态不一致。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-04-29 08:49 CST 查询到 1 个 open issue、1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
+- bun install --no-save、bun run test、bun run build、npm install、npm test 和 npm run build 已通过，覆盖章节奖励在初始状态、进行中状态和全部完成状态的文案。
+- 构建产物已包含“章节奖励”、`projectOverviewChapterRewards` 和 `chapterRewardText`。
+
+下一步：push 后验证 GitHub Pages，并回复 #2 等待复测确认章节奖励是否改善章节主题和奖励丰富度感知。
+
 ## 2026-04-29 Product decision：星图章节目标
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 当前仍有真实体验反馈 #2 open，且没有 open bug，继续进入有反馈样本下的 Product decision。

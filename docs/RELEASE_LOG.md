@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+- 新增星图章节奖励：星图总览按首段星图、专精校准、深空基建、远航长尾汇总总产能、点击、自动和过载奖励数量，帮助玩家理解每个章节的成长主题。
+- 同步 GitHub Issues 反馈状态：当前 1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
+- 验证通过：bun install --no-save、bun run test、bun run build、npm install、npm test、npm run build。
+- 构建产物已包含“章节奖励”、`projectOverviewChapterRewards` 和 `chapterRewardText`。
 - 新增星图章节目标：星图总览按首段星图、专精校准、深空基建、远航长尾列出各自下一段未完成目标，已完成章节显示“已完成”。
 - 同步 GitHub Issues 反馈状态：当前 1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
 - 验证通过：bun install --no-save、bun run test、bun run build、npm install、npm test、npm run build。

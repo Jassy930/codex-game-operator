@@ -869,6 +869,7 @@ export function getProjectOverview(state) {
   const compositionText = buildProjectCompositionText(projects);
   const chapterText = buildProjectChapterText(projects, nextProject);
   const chapterTargetText = buildProjectChapterTargetText(projects);
+  const chapterRewardText = buildProjectChapterRewardText(projects);
 
   if (!nextProject) {
     return {
@@ -881,6 +882,7 @@ export function getProjectOverview(state) {
       trackText: buildProjectTrackText(projects),
       chapterText,
       chapterTargetText,
+      chapterRewardText,
       compositionText,
       bonusText,
       forecastText: "航线预告：等待下一段航线"
@@ -911,6 +913,7 @@ export function getProjectOverview(state) {
     trackText: buildProjectTrackText(projects),
     chapterText,
     chapterTargetText,
+    chapterRewardText,
     compositionText,
     bonusText,
     forecastText:
@@ -1214,6 +1217,41 @@ function buildProjectChapterTargetText(projects) {
   });
 
   return "章节目标：" + chapterParts.join(" · ");
+}
+
+function buildProjectChapterRewardText(projects) {
+  const chapterParts = PROJECT_CHAPTER_DEFS.map((chapter) => {
+    const rewardCounts = getChapterProjects(projects, chapter).reduce(
+      (counts, project) => {
+        const effect = project.effect ?? {};
+        return {
+          total: counts.total + Number(Boolean(effect.totalMultiplier)),
+          click: counts.click + Number(Boolean(effect.clickMultiplier)),
+          second: counts.second + Number(Boolean(effect.secondMultiplier)),
+          overload: counts.overload + Number(Boolean(effect.overloadMultiplier))
+        };
+      },
+      {
+        total: 0,
+        click: 0,
+        second: 0,
+        overload: 0
+      }
+    );
+    const rewardText = [
+      ["总产能", rewardCounts.total],
+      ["点击", rewardCounts.click],
+      ["自动", rewardCounts.second],
+      ["过载", rewardCounts.overload]
+    ]
+      .filter(([, count]) => count > 0)
+      .map(([label, count]) => label + " " + count)
+      .join(" / ");
+
+    return chapter.name + " " + (rewardText || "暂无奖励");
+  });
+
+  return "章节奖励：" + chapterParts.join(" · ");
 }
 
 function buildProjectChapterText(projects, nextProject) {
