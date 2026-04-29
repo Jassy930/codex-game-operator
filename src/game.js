@@ -911,6 +911,20 @@ export const PROJECT_DEFS = [
     current(state) {
       return state.totalEnergy;
     }
+  },
+  {
+    id: "abyss-ignition-spire",
+    name: "星渊点火塔",
+    summary: "累计 67.5B 能量，在曜渊谐振门外点亮星渊点火塔。",
+    unit: "能量",
+    target: 67_500_000_000,
+    reward: "点击产能 +31%",
+    effect: {
+      clickMultiplier: 1.31
+    },
+    current(state) {
+      return state.totalEnergy;
+    }
   }
 ];
 
@@ -933,7 +947,7 @@ export const PROJECT_CHAPTER_DEFS = [
   {
     name: "远航长尾",
     startId: "void-gate-expedition",
-    endId: "radiant-abyss-resonance-gate"
+    endId: "abyss-ignition-spire"
   }
 ];
 
