@@ -7,6 +7,8 @@
 - 同步 GitHub Issues 反馈状态：当前 1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
 - 验证通过：bun install --no-save、bun run test、bun run build、npm install、npm test、npm run build。
 - 构建产物已包含“星翼远航港”、`starwing-voyage-haven`、“星图进度 0/52”、“43 个累计航段”和“自动 0/14”。
+- GitHub Pages workflow 25097861346 已成功，线上地址返回 HTTP 200，且发布文件包含“星翼远航港”、`starwing-voyage-haven`、“星图进度 0/52”、“43 个累计航段”和“自动 0/14”。
+- 已回复 #2，说明星翼远航港航段已部署，并保持 issue open 等待复测。
 - 新增 20.4B 后星耀跃迁塔航段：曜潮谐振门完成后继续出现累计能量目标，完成后奖励点击产能 +29%，星图路线扩展到 51 段。
 - 同步星图总览、里程碑、章节、奖励进度、航线构成、项目列表、静态 HTML 初始文案、README、产品说明、路线图和设计约束到 51 段。
 - 同步 GitHub Issues 反馈状态：当前 1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。

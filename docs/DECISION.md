@@ -18,10 +18,11 @@
 - GitHub Issues 已同步：2026-04-29 16:02 CST 查询到 1 个 open issue、1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
 - bun install --no-save、bun run test、bun run build、npm install、npm test 和 npm run build 已通过，覆盖星耀跃迁塔完成后继续指向星翼远航港、52 段航线序号、章节余量、奖励分布和全部完成状态。
 - 构建产物已包含“星翼远航港”、`starwing-voyage-haven`、“星图进度 0/52”、“43 个累计航段”和“自动 0/14”。
-- 待 push 后由 GitHub Pages workflow 验证线上发布文件。
-- #2 待部署验证后回复，并保持 open 等待复测确认 27.5B 后续航段是否改善长尾内容丰富度。
+- GitHub Pages workflow 25097861346 已成功，线上地址返回 HTTP 200，发布页面包含“星翼远航港”、“星图进度 0/52”、“43 个累计航段”、“自动 0/14”和“27.5B”，线上脚本包含 `starwing-voyage-haven`。
+- #2 已回复并保持 open，等待复测确认 27.5B 后续航段是否改善长尾内容丰富度。
+- GitHub Issues 已在回复后同步：2026-04-29 16:09 CST 查询到 1 个 open issue、1 个 open feedback issue、0 个 open bug issue。
 
-下一步：推送并等待 GitHub Pages workflow 成功后回复 #2。
+下一步：继续观察 #2 复测是否认为星翼远航港改善长尾内容丰富度。
 
 ## 2026-04-29 Product decision：星耀跃迁塔航段
 
