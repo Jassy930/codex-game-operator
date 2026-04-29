@@ -17,9 +17,10 @@
 - GitHub Issues 已同步：2026-04-29 09:31 CST 查询到 1 个 open issue、1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
 - bun install --no-save、bun run test、bun run build、npm install、npm test 和 npm run build 已通过，覆盖初始状态、进行中状态和全部完成状态的里程碑文案。
 - 构建产物已包含“里程碑”、`projectOverviewMilestones` 和 `milestoneText`。
-- 发布后回复 #2 并保持 open，等待复测确认里程碑是否改善章节目标和长期路线的内容丰富度感知。
+- GitHub Pages workflow 25086687155 已成功，线上地址返回 HTTP 200，发布文件包含“里程碑”、`projectOverviewMilestones` 和 `milestoneText`。
+- #2 已回复并保持 open，等待复测确认里程碑是否改善章节目标和长期路线的内容丰富度感知。
 
-下一步：push 后等待 GitHub Pages workflow 完成，再回复 #2 说明本轮里程碑已上线。
+下一步：继续观察 #2 复测是否认为里程碑改善章节目标和长期路线的内容丰富度感知。
 
 ## 2026-04-29 Product decision：星图奖励目标
 

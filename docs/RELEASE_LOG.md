@@ -6,6 +6,8 @@
 - 同步 GitHub Issues 反馈状态：当前 1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
 - 验证通过：bun install --no-save、bun run test、bun run build、npm install、npm test、npm run build。
 - 构建产物已包含“里程碑”、`projectOverviewMilestones` 和 `milestoneText`。
+- GitHub Pages workflow 25086687155 已成功，线上地址返回 HTTP 200，且发布文件包含“里程碑”、`projectOverviewMilestones` 和 `milestoneText`。
+- 已回复 #2，说明星图里程碑已部署，并保持 issue open 等待复测。
 - 新增星图奖励目标：星图总览按总产能、点击、自动和过载显示下一条未完成奖励航段、奖励内容和当前进度，帮助玩家把奖励进度转成具体追逐目标。
 - 同步 GitHub Issues 反馈状态：当前 1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
 - 验证通过：bun install --no-save、bun run test、bun run build、npm install、npm test、npm run build。
