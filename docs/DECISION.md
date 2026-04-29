@@ -17,8 +17,10 @@
 - GitHub Issues 已同步：2026-04-29 08:21 CST 查询到 1 个 open issue、1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
 - bun install --no-save、bun run test、bun run build、npm install、npm test 和 npm run build 已通过，覆盖章节内序号、最终阶段余量和项目列表章节文本。
 - 构建产物已包含 `chapterText` 渲染字段和“首段星图 1/4”静态初始文案。
+- GitHub Pages workflow 25084767463 已成功，线上地址返回 HTTP 200，发布文件包含“首段星图 1/4”和 `chapterText`。
+- #2 已回复并保持 open，等待复测确认章节内位置是否改善项目列表扫描和后续内容感知。
 
-下一步：发布后回复 #2，等待复测确认章节内位置是否改善项目列表的章节扫描和后续内容感知。
+下一步：继续观察 #2 复测是否认为章节内位置改善项目列表扫描和后续内容感知。
 
 ## 2026-04-29 Product decision：星图项目章节标记
 
