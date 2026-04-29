@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+- 新增 8.6B 后星冕远航港航段：星焰引航环完成后继续出现累计能量目标，完成后奖励自动产能 +27%，星图路线扩展到 48 段。
+- 同步星图总览、里程碑、章节、奖励进度、航线构成、项目列表、静态 HTML 初始文案和 README 到 48 段。
+- 同步 GitHub Issues 反馈状态：当前 1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
+- 验证通过：bun install --no-save、bun run test、bun run build、npm install、npm test、npm run build。
+- 构建产物已包含“星冕远航港”、`starcrown-voyage-harbor`、“星图进度 0/48”、“39 个累计航段”和“自动 0/13”。
+- 待 push 触发 GitHub Pages 后完成线上校验并回复 #2。
 - 新增 6.5B 后星焰引航环航段：星瀑谐振门完成后继续出现累计能量目标，完成后奖励点击产能 +27%，星图路线扩展到 47 段。
 - 同步星图总览、里程碑、章节、奖励进度、航线构成、项目列表、静态 HTML 初始文案和 README 到 47 段。
 - 同步 GitHub Issues 反馈状态：当前 1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。

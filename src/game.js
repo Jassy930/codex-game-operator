@@ -813,6 +813,20 @@ export const PROJECT_DEFS = [
     current(state) {
       return state.totalEnergy;
     }
+  },
+  {
+    id: "starcrown-voyage-harbor",
+    name: "星冕远航港",
+    summary: "累计 8.6B 能量，在星焰引航环外建设星冕远航港。",
+    unit: "能量",
+    target: 8_600_000_000,
+    reward: "自动产能 +27%",
+    effect: {
+      secondMultiplier: 1.27
+    },
+    current(state) {
+      return state.totalEnergy;
+    }
   }
 ];
 
@@ -835,7 +849,7 @@ export const PROJECT_CHAPTER_DEFS = [
   {
     name: "远航长尾",
     startId: "void-gate-expedition",
-    endId: "starflame-pilot-ring"
+    endId: "starcrown-voyage-harbor"
   }
 ];
 
