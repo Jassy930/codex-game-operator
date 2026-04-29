@@ -2,6 +2,13 @@
 
 ## 2026-04-30
 
+- GitHub Issues：gh 可用且已认证；2026-04-30 07:54 CST 通过 `ops/collect-feedback.sh` 同步到 4 个 open issue、4 个 open feedback issue、0 个 open bug issue。
+- #5 进入本轮 Product decision：玩家反馈“点火按钮太薄弱了，增加点击反馈，增加特效，增加点击欲望”；快照显示累计能量约 138K、当前目标为谐振校准。
+- 本轮改动增强主点火按钮即时反馈：`coreButton` 增加 `core-feedback-layer`、`core-label` 和 `data-combo-step`；运行期 `renderCoreFeedback` 根据连击状态切换 `is-combo-charging`、`is-overload-ready`、`is-overload-hit`，第 7 次连击高亮过载前兆，第 8 次过载后保留强反馈状态；`animateCore` 在过载点击时额外触发 `is-overload-impact`。
+- `src/styles.css` 新增环形蓄能、普通点击冲击波、过载冲击波、粒子层和 `pulseValue` 高亮样式。本轮只调整展示与交互反馈，不新增存档字段，不改变升级价格、产能公式、星图 57 段路线、项目奖励、连击窗口、过载奖励、航线策略、航线指令或反馈入口。
+- 本轮本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数为 103 项。
+- 构建产物已包含 `core-feedback-layer`、`renderCoreFeedback`、`is-overload-ready`、`coreShockwave`、`coreOverloadShockwave` 和 `coreSparks`。
+
 - GitHub Issues：gh 可用且已认证；2026-04-30 07:38 CST 通过 REST API 同步到 3 个 open issue、3 个 open feedback issue、0 个 open bug issue。
 - #3 继续作为本轮 Product decision：上一轮已新增“航线委托”短期任务，但任务区域仍主要是文字说明；本轮新增“航线委托进度条”。
 - 本轮改动让 `directiveTask` 从单纯文本变成文本 + `directive-task-meter`，运行期 `renderDirectiveTask` 使用 `task.progress` / `task.target` / `task.completed` 渲染 0/3、2/3、3/3，并在完成态切换 `is-completed`。本轮不新增存档字段，不改变升级价格、产能公式、星图 57 段路线、项目奖励、指令基础收益、冷却、连携窗口、轮换目标奖励、预案执行、策略契合、策略终结、指令熟练、满层回响、航线委托奖励或筛选规则。

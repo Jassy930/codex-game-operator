@@ -57,7 +57,7 @@
             loading="lazy"
           />
 
-          <button id="coreButton" class="core-button" type="button">
+          <button id="coreButton" class="core-button" type="button" data-combo-step="0">
             <svg
               class="core-art"
               viewBox="0 0 220 220"
@@ -81,7 +81,8 @@
               />
               <circle cx="110" cy="110" r="28" fill="#f8f3e7" />
             </svg>
-            <span>点火</span>
+            <span class="core-feedback-layer" aria-hidden="true"></span>
+            <span class="core-label">点火</span>
           </button>
 
           <div class="combo-line">

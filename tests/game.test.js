@@ -985,6 +985,32 @@ test("静态首页会引用主操作区工坊插画资产", () => {
   assert.match(asset, /energyBeam/);
 });
 
+test("点火按钮会渲染点击反馈和过载前兆效果", () => {
+  const indexHtml = readFileSync(new URL("../index.html", import.meta.url), "utf8");
+  const appJs = readFileSync(new URL("../src/app.js", import.meta.url), "utf8");
+  const styles = readFileSync(new URL("../src/styles.css", import.meta.url), "utf8");
+
+  assert.match(indexHtml, /id="coreButton" class="core-button" type="button" data-combo-step="0"/);
+  assert.match(indexHtml, /class="core-feedback-layer"/);
+  assert.match(indexHtml, /class="core-label">点火<\/span>/);
+  assert.match(appJs, /function renderCoreFeedback\(combo\)/);
+  assert.match(appJs, /elements\.coreButton\.dataset\.comboStep = String\(combo\.step\)/);
+  assert.match(appJs, /is-combo-charging/);
+  assert.match(appJs, /is-overload-ready/);
+  assert.match(appJs, /is-overload-hit/);
+  assert.match(appJs, /is-overload-impact/);
+  assert.match(appJs, /window\.setTimeout/);
+  assert.match(styles, /\.core-button::before/);
+  assert.match(styles, /\.core-feedback-layer/);
+  assert.match(styles, /\.core-label/);
+  assert.match(styles, /\.core-button\.is-overload-ready/);
+  assert.match(styles, /\.core-button\.is-overload-impact::after/);
+  assert.match(styles, /\.combo-line span\.is-overload-ready/);
+  assert.match(styles, /@keyframes coreShockwave/);
+  assert.match(styles, /@keyframes coreOverloadShockwave/);
+  assert.match(styles, /@keyframes coreSparks/);
+});
+
 test("升级卡片会渲染可扫视图标", () => {
   const appJs = readFileSync(new URL("../src/app.js", import.meta.url), "utf8");
   const styles = readFileSync(new URL("../src/styles.css", import.meta.url), "utf8");

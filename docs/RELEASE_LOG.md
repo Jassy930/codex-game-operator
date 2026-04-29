@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+- 点火按钮新增即时视觉反馈：普通点击触发按钮脉冲和粒子层，第 7 次连击显示过载前兆，第 8 次过载触发更强冲击波。
+- `index.html` 为 `coreButton` 新增 `data-combo-step`、`core-feedback-layer` 和 `core-label`；`src/app.js` 新增 `renderCoreFeedback` 并扩展 `animateCore`；`src/styles.css` 新增环形蓄能、普通/过载冲击波、粒子层和连击提示高亮；`tests/game.test.js` 覆盖静态结构、运行期 class 和样式标记。
+- 本轮只调整点火按钮展示与交互反馈；不新增存档字段，不改变升级价格、产能公式、星图 57 段路线、项目奖励、连击窗口、过载奖励、航线策略、航线指令或反馈入口。
+- 同步 GitHub Issues 反馈状态：当前 4 个 open feedback issue、0 个 open bug issue；#5 指向点火按钮点击反馈、特效和点击欲望，并作为本轮处理对象。
+- 验证通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 103 项。
+- 构建产物已确认包含 `core-feedback-layer`、`renderCoreFeedback`、`is-overload-ready`、`coreShockwave`、`coreOverloadShockwave` 和 `coreSparks`。
 - 航线委托新增可访问进度条：运行期按 `progress/target/completed` 显示 0/3、2/3、3/3，并在完成态切换 `is-completed`。
 - `index.html` 静态委托区新增 `directive-task-meter`；`src/app.js` 新增 `renderDirectiveTask`；`src/styles.css` 新增进度条和完成态样式；`tests/game.test.js` 覆盖委托进度字段、静态 meter 和运行期渲染标记。
 - 本轮只调整航线委托展示层；不新增存档字段，不改变升级价格、产能公式、星图 57 段路线、项目奖励、指令基础收益、冷却、连携窗口、轮换目标奖励、预案执行、策略契合、策略终结、指令熟练、满层回响、航线委托奖励或筛选规则。

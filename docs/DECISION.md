@@ -1,5 +1,30 @@
 # Decision
 
+## 2026-04-30 Product decision：点火按钮即时反馈
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-04-30 07:54 CST 同步到 4 个 open feedback issue、0 个 open bug issue。没有新的 bug；#5 是最新反馈，明确指出“点火按钮太薄弱了，增加点击反馈，增加特效，增加点击欲望”，本轮进入有反馈样本下的 Product decision。
+
+当前最大问题：主操作区已有工坊插画、连击/过载文本和行动提示，但点火按钮本身按下后的视觉反馈仍偏弱。玩家需要从数字和文字确认收益，按钮没有足够的按下脉冲、连击蓄势和过载触发差异。
+
+本轮决策：
+
+- 给 `coreButton` 增加静态 `data-combo-step` 与 `core-feedback-layer`，把“点火”文字改为明确的 `core-label`，为按钮内粒子层和冲击波留出稳定结构。
+- 新增 `renderCoreFeedback`：按 `getComboStatus` 派生 `is-combo-charging`、`is-overload-ready`、`is-overload-hit`，并同步高亮 `pulseValue`，让第 7 次连击时出现过载前兆，第 8 次过载后保留强反馈状态。
+- 扩展 `animateCore`：普通点击触发短脉冲，过载点击额外触发 `is-overload-impact`，并在动画结束后自动清理临时 class。
+- 新增按钮环形蓄能、点击冲击波、过载冲击波和粒子层 CSS 动画；本轮只调整展示与交互反馈，不新增存档字段，不改变升级价格、产能公式、星图 57 段路线、项目奖励、连击窗口、过载奖励、航线策略、航线指令或反馈入口。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-04-30 07:54 CST 当前 4 个 open feedback issue、0 个 open bug issue；#5 作为本轮处理对象。
+- 静态首页 `coreButton` 包含 `data-combo-step="0"`、`core-feedback-layer` 和 `core-label`。
+- 运行期 `renderCoreFeedback` 会写入 `dataset.comboStep`，并切换 `is-combo-charging`、`is-overload-ready`、`is-overload-hit`。
+- `animateCore` 会按是否过载切换 `is-pulsing` / `is-overload-impact`，并用定时器清理临时动画状态。
+- `src/styles.css` 包含 `coreShockwave`、`coreOverloadShockwave`、`coreSparks`、过载前兆按钮样式和 `pulseValue` 高亮样式。
+- `tests/game.test.js` 新增点火按钮反馈测试；`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build` 已通过；测试数 103 项。
+- 构建产物包含 `core-feedback-layer`、`renderCoreFeedback`、`is-overload-ready`、`coreShockwave`、`coreOverloadShockwave` 和 `coreSparks`。
+
+下一步：提交并推送后回复 #5，等待复测确认点火按钮的按下反馈、过载前兆和过载触发特效是否提升点击欲望。
+
 ## 2026-04-30 Product decision：航线委托进度条
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-04-30 07:38 CST 同步到 3 个 open feedback issue、0 个 open bug issue。没有新的 bug；#3 仍是最近更新的玩法反馈，上一轮已新增“航线委托”，本轮继续进入有反馈样本下的 Product decision。

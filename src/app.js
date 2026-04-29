@@ -170,6 +170,7 @@ let offlineSummary = loadedState.offlineSummary;
 let actionNotice = "";
 let lastFirstUpgradeAt = state.firstUpgradeAt;
 let projectFilter = INITIAL_PROJECT_FILTER_ID;
+let corePulseTimer = 0;
 
 recordEvent("session", {
   startedAt: new Date().toISOString()
@@ -193,7 +194,9 @@ elements.coreButton.addEventListener("click", () => {
     energy: Math.floor(state.energy),
     combo: state.combo
   });
-  animateCore();
+  animateCore({
+    overloaded: String(state.lastPulse).startsWith("过载")
+  });
   saveAndRender();
 });
 
@@ -260,6 +263,7 @@ function render() {
   const routeStance = getRouteStanceStatus(current);
   const directives = getDirectiveStatus(current);
 
+  renderCoreFeedback(combo);
   elements.energy.textContent = formatNumber(current.energy);
   elements.perSecond.textContent = formatNumber(production.perSecond);
   elements.perClick.textContent = formatNumber(production.perClick);
@@ -303,6 +307,18 @@ function render() {
     ...UPGRADE_DEFS.map((upgrade) => renderUpgrade(upgrade, current, goal))
   );
   renderProjectList(projects);
+}
+
+function renderCoreFeedback(combo) {
+  const isCharging = combo.count > 0 && !combo.overloaded;
+  const isOverloadReady = isCharging && combo.remaining === 1;
+
+  elements.coreButton.dataset.comboStep = String(combo.step);
+  elements.coreButton.classList.toggle("is-combo-charging", isCharging);
+  elements.coreButton.classList.toggle("is-overload-ready", isOverloadReady);
+  elements.coreButton.classList.toggle("is-overload-hit", combo.overloaded);
+  elements.pulse.classList.toggle("is-overload-ready", isOverloadReady);
+  elements.pulse.classList.toggle("is-overload-hit", combo.overloaded);
 }
 
 function renderDirectives(directives) {
@@ -986,9 +1002,17 @@ function saveFeedbackEntry(entry) {
   }
 }
 
-function animateCore() {
-  elements.coreButton.classList.remove("is-pulsing");
+function animateCore({ overloaded = false } = {}) {
+  window.clearTimeout(corePulseTimer);
+  elements.coreButton.classList.remove("is-pulsing", "is-overload-impact");
   requestAnimationFrame(() => {
     elements.coreButton.classList.add("is-pulsing");
+    elements.coreButton.classList.toggle("is-overload-impact", overloaded);
+    corePulseTimer = window.setTimeout(
+      () => {
+        elements.coreButton.classList.remove("is-pulsing", "is-overload-impact");
+      },
+      overloaded ? 520 : 360
+    );
   });
 }
