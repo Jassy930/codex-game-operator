@@ -939,6 +939,20 @@ export const PROJECT_DEFS = [
     current(state) {
       return state.totalEnergy;
     }
+  },
+  {
+    id: "abyss-ark",
+    name: "星渊方舟",
+    summary: "累计 122B 能量，在星渊巡航环外启航星渊方舟。",
+    unit: "能量",
+    target: 122_000_000_000,
+    reward: "总产能 +32%",
+    effect: {
+      totalMultiplier: 1.32
+    },
+    current(state) {
+      return state.totalEnergy;
+    }
   }
 ];
 
@@ -961,7 +975,7 @@ export const PROJECT_CHAPTER_DEFS = [
   {
     name: "远航长尾",
     startId: "void-gate-expedition",
-    endId: "abyss-cruise-ring"
+    endId: "abyss-ark"
   }
 ];
 
