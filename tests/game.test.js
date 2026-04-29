@@ -1923,6 +1923,14 @@ test("星图项目筛选会区分当前、未完成和已完成航段", () => {
       "balanced-tuning"
     ]
   );
+  assert.equal(filterProjectStatuses(active, "energy-track").length, 48);
+  assert.equal(filterProjectStatuses(active, "upgrade-track").length, 9);
+  assert.deepEqual(
+    filterProjectStatuses(active, "upgrade-track")
+      .slice(0, 4)
+      .map((project) => project.id),
+    ["resonance-calibration", "lens-array", "collector-grid", "ignition-drill"]
+  );
   assert.equal(filterProjectStatuses(active, "total-reward").length, 17);
   assert.equal(filterProjectStatuses(active, "click-reward").length, 14);
   assert.equal(filterProjectStatuses(active, "second-reward").length, 15);

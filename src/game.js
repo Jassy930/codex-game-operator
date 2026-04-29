@@ -71,6 +71,14 @@ export const PROJECT_FILTER_DEFS = [
     name: "本章"
   },
   {
+    id: "energy-track",
+    name: "累计"
+  },
+  {
+    id: "upgrade-track",
+    name: "升级"
+  },
+  {
     id: "total-reward",
     name: "总产能"
   },
@@ -1286,6 +1294,12 @@ export function filterProjectStatuses(projects, filterId = DEFAULT_PROJECT_FILTE
   if (PROJECT_REWARD_FILTER_EFFECTS[filter]) {
     const effectKey = PROJECT_REWARD_FILTER_EFFECTS[filter];
     return items.filter((project) => Boolean(project.effect?.[effectKey]));
+  }
+  if (filter === "energy-track") {
+    return items.filter((project) => !project.upgradeId);
+  }
+  if (filter === "upgrade-track") {
+    return items.filter((project) => Boolean(project.upgradeId));
   }
   if (filter === "incomplete") {
     return items.filter((project) => !project.completed);

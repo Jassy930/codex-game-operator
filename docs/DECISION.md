@@ -1,5 +1,26 @@
 # Decision
 
+## 2026-04-29 Product decision：星图目标类型筛选
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 当前仍有真实体验反馈 #2 open，且没有 open bug，继续进入有反馈样本下的 Product decision。
+
+当前最大问题：#2 仍围绕“内容丰富度太差，可玩的内容太少”保持 open。上一轮已新增奖励类型筛选，让 57 段星图可按成长线查看；但玩家如果想按“累计能量推进”或“补升级等级”安排操作，仍需要在目标分轨和项目列表之间对照。
+
+本轮决策：
+
+- 不追加第 58 段，先新增目标类型筛选：累计、升级。
+- 累计筛选显示不依赖升级等级的航段；升级筛选显示带 upgradeId 的航段。
+- 筛选只影响当前列表视图，不新增存档字段，不改变项目完成判定、奖励数值、升级价格和 57 段星图路线。
+- 静态 HTML 初始文案、README、产品说明、路线图、设计约束、研究记录、反馈记录和发布日志同步记录目标类型筛选能力。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-04-29 18:31 CST 查询到 1 个 open issue、1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
+- `bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build` 已通过，测试覆盖累计 48 段、升级 9 段，以及升级筛选的首批航段。
+- 构建产物已包含“累计 48”、“升级 9”、`energy-track` 和 `upgrade-track`。
+
+下一步：推送后验证 GitHub Pages，并回复 #2 说明目标类型筛选已上线，继续等待复测。
+
 ## 2026-04-29 Product decision：星图奖励类型筛选
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 当前仍有真实体验反馈 #2 open，且没有 open bug，继续进入有反馈样本下的 Product decision。

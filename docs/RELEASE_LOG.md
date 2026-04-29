@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+- 新增星图目标类型筛选：项目列表可按累计航段和升级航段查看，把 57 段星图拆成 48 个累计目标与 9 个升级目标。
+- 目标类型筛选仅改变列表展示，不新增存档字段，不改变 57 段星图路线、项目完成判定、奖励数值和升级价格。
+- 同步 GitHub Issues 反馈状态：当前 1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
+- 验证通过：bun install --no-save、bun run test、bun run build、npm install、npm test、npm run build。
+- 构建产物已包含“累计 48”、“升级 9”、`energy-track` 和 `upgrade-track`。
 - 新增星图奖励类型筛选：项目列表可按总产能、点击、自动和过载奖励航段查看，让 57 段星图能按成长线规划。
 - 奖励类型筛选仅改变列表展示，不新增存档字段，不改变 57 段星图路线、项目完成判定、奖励数值和升级价格。
 - 同步 GitHub Issues 反馈状态：当前 1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
