@@ -488,6 +488,19 @@ h2 {
   color: #bdf4eb;
 }
 
+.project-filter-summary {
+  min-height: 42px;
+  margin: 0;
+  padding: 10px 12px;
+  border: 1px solid rgba(19, 181, 166, 0.24);
+  border-radius: 8px;
+  background: rgba(19, 181, 166, 0.08);
+  color: rgba(248, 243, 231, 0.82);
+  font-size: 0.82rem;
+  font-weight: 850;
+  line-height: 1.35;
+}
+
 .project-list {
   display: grid;
   gap: 10px;

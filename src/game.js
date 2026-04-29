@@ -1311,6 +1311,42 @@ export function filterProjectStatuses(projects, filterId = DEFAULT_PROJECT_FILTE
   return items;
 }
 
+export function getProjectFilterSummary(projects, filterId = DEFAULT_PROJECT_FILTER_ID) {
+  const filter = getProjectFilterDef(filterId);
+  const visibleProjects = filterProjectStatuses(projects, filter.id);
+
+  if (!visibleProjects.length) {
+    return "筛选视图：" + filter.name + " 0 段 · 没有匹配航段";
+  }
+
+  const completed = visibleProjects.filter((project) => project.completed).length;
+  const nextProject = visibleProjects.find((project) => !project.completed);
+
+  if (!nextProject) {
+    return "筛选视图：" + filter.name + " " + visibleProjects.length + " 段 · 全部已完成";
+  }
+
+  return (
+    "筛选视图：" +
+    filter.name +
+    " " +
+    visibleProjects.length +
+    " 段 · 已完成 " +
+    completed +
+    "/" +
+    visibleProjects.length +
+    " · 下一条 " +
+    nextProject.segmentText +
+    " " +
+    nextProject.name +
+    "（" +
+    nextProject.reward +
+    " · " +
+    nextProject.progressText +
+    "）"
+  );
+}
+
 export function getProjectOverview(state) {
   const current = normalizeState(state);
   const projects = getProjectStatuses(current);
@@ -2150,6 +2186,11 @@ function getValidProjectFilterId(filterId) {
   return PROJECT_FILTER_DEFS.some((item) => item.id === filterId)
     ? filterId
     : DEFAULT_PROJECT_FILTER_ID;
+}
+
+function getProjectFilterDef(filterId) {
+  const validId = getValidProjectFilterId(filterId);
+  return PROJECT_FILTER_DEFS.find((item) => item.id === validId) ?? PROJECT_FILTER_DEFS[0];
 }
 
 function getRouteStanceDef(routeStanceId) {

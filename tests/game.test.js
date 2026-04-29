@@ -13,6 +13,7 @@ import {
   getComboStatus,
   getCurrentGoal,
   getEffectiveProduction,
+  getProjectFilterSummary,
   getProjectOverview,
   getProjectStatuses,
   getRouteStanceStatus,
@@ -1976,6 +1977,48 @@ test("星图项目筛选会区分当前、未完成和已完成航段", () => {
   assert.deepEqual(filterProjectStatuses(completed, "current"), []);
   assert.deepEqual(filterProjectStatuses(completed, "current-chapter"), []);
   assert.equal(filterProjectStatuses(completed, "completed").length, 57);
+});
+
+test("星图筛选摘要会显示当前筛选的下一条航段", () => {
+  const active = getProjectStatuses({
+    ...createInitialState(0),
+    totalEnergy: 260_000,
+    overloadBonus: 17,
+    upgrades: {
+      lens: 12,
+      collector: 12,
+      resonator: 6,
+      stabilizer: 9
+    }
+  });
+  const completed = getProjectStatuses({
+    ...createInitialState(0),
+    totalEnergy: 122_001_000_000,
+    overloadBonus: 17,
+    upgrades: {
+      lens: 14,
+      collector: 16,
+      resonator: 6,
+      stabilizer: 16
+    }
+  });
+
+  assert.equal(
+    getProjectFilterSummary(active, "current-chapter"),
+    "筛选视图：本章 5 段 · 已完成 1/5 · 下一条 航段 5/57 点火航校（点击产能 +16% · 进度 12 级 / 14 级 · 还差 2 级）"
+  );
+  assert.equal(
+    getProjectFilterSummary(active, "upgrade-track"),
+    "筛选视图：升级 9 段 · 已完成 3/9 · 下一条 航段 5/57 点火航校（点击产能 +16% · 进度 12 级 / 14 级 · 还差 2 级）"
+  );
+  assert.equal(
+    getProjectFilterSummary(active, "completed"),
+    "筛选视图：已完成 5 段 · 全部已完成"
+  );
+  assert.equal(
+    getProjectFilterSummary(completed, "current-chapter"),
+    "筛选视图：本章 0 段 · 没有匹配航段"
+  );
 });
 
 test("星图总览会显示全部完成状态", () => {

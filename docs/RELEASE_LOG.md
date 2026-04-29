@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+- 新增星图筛选摘要：筛选按钮下方会显示当前视图的航段数、完成数和下一条可推进航段，覆盖本章、累计、升级、奖励类型、未完成和已完成等筛选视图。
+- 筛选摘要仅改变星图列表辅助展示，不新增存档字段，不改变 57 段星图路线、项目完成判定、奖励数值、升级价格、航线策略或筛选规则。
+- 同步 GitHub Issues 反馈状态：当前 1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
+- 验证通过：bun install --no-save、bun run test、bun run build、npm install、npm test、npm run build。
+- 构建产物已包含“筛选视图”、`projectFilterSummary`、`project-filter-summary` 和 `getProjectFilterSummary`。
 - 新增星图行动建议：星图总览会把当前航段转成可执行提示，升级航段显示可购买或能量缺口，累计航段显示剩余能量，并在已有自动产能时显示预计时间。
 - 行动建议仅改变星图总览展示，不新增存档字段，不改变 57 段星图路线、项目完成判定、奖励数值、升级价格和航线策略。
 - 同步 GitHub Issues 反馈状态：当前 1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。

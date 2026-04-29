@@ -12,6 +12,7 @@ import {
   getComboStatus,
   getCurrentGoal,
   getEffectiveProduction,
+  getProjectFilterSummary,
   getProjectOverview,
   getProjectStatuses,
   getRouteStanceStatus,
@@ -60,6 +61,7 @@ const elements = {
   projectOverviewForecast: document.querySelector("#projectOverviewForecast"),
   routeStanceList: document.querySelector("#routeStanceList"),
   projectFilterList: document.querySelector("#projectFilterList"),
+  projectFilterSummary: document.querySelector("#projectFilterSummary"),
   projectList: document.querySelector("#projectList"),
   resetButton: document.querySelector("#resetButton"),
   feedbackForm: document.querySelector("#feedbackForm"),
@@ -192,6 +194,7 @@ function render() {
   elements.projectOverviewForecast.textContent = projectOverview.forecastText;
   renderRouteStances(routeStance);
   renderProjectFilters(projects);
+  elements.projectFilterSummary.textContent = getProjectFilterSummary(projects, projectFilter);
 
   elements.upgradeList.replaceChildren(
     ...UPGRADE_DEFS.map((upgrade) => renderUpgrade(upgrade, current, goal))
