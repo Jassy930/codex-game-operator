@@ -6,6 +6,9 @@
 - #4 继续作为本轮 Product decision：星图视觉、插画、摘要折叠、项目图标和非当前航段详情折叠已经上线，但默认“全部”视图仍一次性展示 57 张项目卡片；本轮将星图列表初始筛选改为“本章”。
 - 本轮改动在 `src/game.js` 新增 `INITIAL_PROJECT_FILTER_ID = "current-chapter"`，在 `src/app.js` 用它初始化 `projectFilter`，并同步首页静态筛选按钮、星图高亮和筛选摘要；不改变存档、数值、星图 57 段路线、项目奖励、筛选规则、航线策略、航线指令或反馈入口。
 - 本轮本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；构建产物已包含 `INITIAL_PROJECT_FILTER_ID`、`let projectFilter = INITIAL_PROJECT_FILTER_ID`、“高亮：本章 4 段”、“筛选摘要：本章 0/4”和“终点 航段 4/57”。
+- GitHub Pages workflow 25128378775 已成功，线上地址返回 HTTP 200；线上首页包含“高亮：本章 4 段”“筛选摘要：本章 0/4”和“终点 航段 4/57”，线上脚本包含 `INITIAL_PROJECT_FILTER_ID` 和 `let projectFilter = INITIAL_PROJECT_FILTER_ID`。
+- #4 已回复：说明星图列表默认本章筛选已上线，提交 b0961ab，issue 保持 open 等待复测。
+- 回复后同步 GitHub Issues：2026-04-30 03:07 CST 当前仍为 3 个 open feedback issue、0 个 open bug issue，#4 更新时间为 2026-04-29T19:07:02Z。
 
 - GitHub Issues：gh 可用且已认证；2026-04-30 02:37 CST 通过 REST API 同步到 3 个 open issue、3 个 open feedback issue、0 个 open bug issue。
 - #3 继续作为本轮 Product decision：航线指令、航线连携和指令轮换提示已经上线，但完成 3/3 轮换缺少明确收束奖励；本轮新增“轮换目标奖励”，让第三步轮换在 +24% 连携之外额外获得 18% 基础指令收益。

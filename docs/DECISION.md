@@ -19,8 +19,11 @@
 - 静态首页默认高亮“本章 0/4”，星图视觉显示“高亮：本章 4 段”，筛选摘要显示“本章 0/4”和终点“航段 4/57 · 首段星图 4/4 采集阵列”。
 - `bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build` 已通过。
 - 构建产物包含 `INITIAL_PROJECT_FILTER_ID`、`let projectFilter = INITIAL_PROJECT_FILTER_ID`、“高亮：本章 4 段”、“筛选摘要：本章 0/4”和“终点 航段 4/57”。
+- GitHub Pages workflow 25128378775 已成功，线上地址返回 HTTP 200；线上首页包含“高亮：本章 4 段”“筛选摘要：本章 0/4”和“终点 航段 4/57”，线上脚本包含 `INITIAL_PROJECT_FILTER_ID` 和 `let projectFilter = INITIAL_PROJECT_FILTER_ID`。
+- #4 已回复并继续保持 open，等待复测确认默认本章筛选是否降低 57 段星图项目列表的文字密度。
+- 回复后同步 GitHub Issues：2026-04-30 03:07 CST 当前仍为 3 个 open feedback issue、0 个 open bug issue；#4 更新时间为 2026-04-29T19:07:02Z。
 
-下一步：发布后回复 #4；若仍认为星图列表密度高，再评估章节分页或只在列表默认显示当前航段。
+下一步：观察 #4 复测结论；若仍认为星图列表密度高，再评估章节分页或只在列表默认显示当前航段。
 
 ## 2026-04-30 Product decision：航线轮换目标奖励
 

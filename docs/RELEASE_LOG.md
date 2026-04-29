@@ -8,6 +8,9 @@
 - 同步 GitHub Issues 反馈状态：当前 3 个 open feedback issue、0 个 open bug issue；#4 继续指向视觉密度和图片需求。
 - 验证通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`。
 - 构建产物已确认包含 `INITIAL_PROJECT_FILTER_ID`、`let projectFilter = INITIAL_PROJECT_FILTER_ID`、“高亮：本章 4 段”、“筛选摘要：本章 0/4”和“终点 航段 4/57”。
+- GitHub Pages workflow 25128378775 已成功，线上地址返回 HTTP 200，且线上首页和脚本已确认包含本章默认筛选相关标记。
+- 已回复 #4，说明星图列表默认本章筛选已部署，并保持 issue open 等待复测。
+- 回复后同步 GitHub Issues 反馈状态：当前 3 个 open feedback issue、0 个 open bug issue；#4 更新时间为 2026-04-29T19:07:02Z。
 - 航线指令新增“轮换目标奖励”：完成 3/3 指令轮换时，在既有 +24% 航线连携之外，额外获得基础指令收益 18% 的能量奖励。
 - `src/game.js` 新增 `DIRECTIVE_ROTATION_REWARD_RATE`、轮换奖励计算、预计收益文案和执行反馈，`src/app.js` 的本地 `directive` 事件新增 `rotationReward` 字段，首页指令轮换初始文案同步为 3/3 奖励目标。
 - 本轮只调整航线指令短期目标奖励与展示；不新增存档字段，不改变升级价格、产能公式、星图 57 段路线、项目奖励、航线策略、指令基础收益、冷却、反馈入口或筛选规则。
