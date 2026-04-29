@@ -5,6 +5,9 @@
 - GitHub Issues：gh 可用且已认证；2026-04-29 09:02 CST 查询到 1 个 open issue、1 个 open feedback issue、0 个 open bug issue。
 - #2 仍为 open，未出现新的复测结论或 bug；本轮不追加第 32 段，改为在星图总览新增“奖励进度”，按总产能、点击、自动和过载显示已生效奖励数/总奖励数，让已有 31 段星图的成长线余量更直接。
 - data/feedback/github-feedback.md 已同步本地快照。
+- 本轮已回复 #2：说明星图总览新增奖励进度，GitHub Pages workflow 25085902738 已成功且线上地址返回 HTTP 200，发布文件包含“奖励进度”、`projectOverviewRewardProgress` 和 `rewardProgressText`；issue 保持 open，等待复测确认奖励进度是否改善成长线余量和内容丰富度感知。
+- GitHub Issues：gh 可用且已认证；2026-04-29 09:10 CST 在回复后查询到 1 个 open issue、1 个 open feedback issue、0 个 open bug issue。
+- data/feedback/github-feedback.md 已在回复 #2 后同步本地快照。
 - GitHub Issues：gh 可用且已认证；2026-04-29 08:49 CST 查询到 1 个 open issue、1 个 open feedback issue、0 个 open bug issue。
 - #2 仍为 open，未出现新的复测结论或 bug；本轮不追加第 32 段，改为在星图总览新增“章节奖励”，按四个章节汇总总产能、点击、自动和过载奖励数量，让已有 31 段星图的章节奖励主题更直接。
 - data/feedback/github-feedback.md 已同步本地快照。

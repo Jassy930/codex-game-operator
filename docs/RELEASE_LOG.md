@@ -6,6 +6,8 @@
 - 同步 GitHub Issues 反馈状态：当前 1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
 - 验证通过：bun install --no-save、bun run test、bun run build、npm install、npm test、npm run build。
 - 构建产物已包含“奖励进度”、`projectOverviewRewardProgress` 和 `rewardProgressText`。
+- GitHub Pages workflow 25085902738 已成功，线上地址返回 HTTP 200，且发布文件包含“奖励进度”、`projectOverviewRewardProgress` 和 `rewardProgressText`。
+- 已回复 #2，说明奖励进度已部署，并保持 issue open 等待复测。
 - 新增星图章节奖励：星图总览按首段星图、专精校准、深空基建、远航长尾汇总总产能、点击、自动和过载奖励数量，帮助玩家理解每个章节的成长主题。
 - 同步 GitHub Issues 反馈状态：当前 1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
 - 验证通过：bun install --no-save、bun run test、bun run build、npm install、npm test、npm run build。
