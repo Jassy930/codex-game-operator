@@ -720,6 +720,26 @@ test("升级卡片会渲染可扫视图标", () => {
   assert.match(styles, /\.upgrade-icon-resonator/);
 });
 
+test("星图项目卡片会渲染推进和奖励图标", () => {
+  const appJs = readFileSync(new URL("../src/app.js", import.meta.url), "utf8");
+  const styles = readFileSync(new URL("../src/styles.css", import.meta.url), "utf8");
+
+  assert.match(appJs, /PROJECT_CARD_ICON_DEFS/);
+  assert.match(appJs, /project-card-icons/);
+  assert.match(appJs, /renderProjectCardIcon\(getProjectTrackIconId\(project\), "track"\)/);
+  assert.match(appJs, /renderProjectCardIcon\(getProjectRewardIconId\(project\), "reward"\)/);
+  assert.match(appJs, /累计航段图标/);
+  assert.match(appJs, /升级航段图标/);
+  assert.match(appJs, /总产能奖励图标/);
+  assert.match(appJs, /过载奖励图标/);
+  assert.match(styles, /\.project-title/);
+  assert.match(styles, /\.project-card-icon/);
+  assert.match(styles, /\.project-card-icon-track/);
+  assert.match(styles, /\.project-card-icon-reward/);
+  assert.match(styles, /\.project-card-icon-second/);
+  assert.match(styles, /\.project-card-icon-overload/);
+});
+
 test("静态首页会默认折叠星图详细文本", () => {
   const indexHtml = readFileSync(new URL("../index.html", import.meta.url), "utf8");
   const styles = readFileSync(new URL("../src/styles.css", import.meta.url), "utf8");

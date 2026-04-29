@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+- 星图项目卡片新增推进方式和奖励方向内联 SVG 图标：累计/升级航段、总产能/点击/自动/过载奖励分别具备固定尺寸图形和可访问标签，降低 57 段列表的纯文字扫描压力。
+- `src/app.js` 新增 `PROJECT_CARD_ICON_DEFS`、`renderProjectCardIcon` 和项目标题图标组，`src/styles.css` 新增 `.project-title`、`.project-card-icons` 与 `.project-card-icon-*` 样式。
+- 本轮只调整星图项目卡片视觉呈现；不新增存档字段，不改变升级价格、产能公式、星图 57 段路线、项目奖励、筛选规则、航线策略、航线指令、反馈入口或数值逻辑。
+- 同步 GitHub Issues 反馈状态：当前 3 个 open feedback issue、0 个 open bug issue；#4 继续指向视觉密度和图片需求。
+- 验证通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`。
+- 静态测试覆盖项目卡片图标定义和样式；构建产物已确认包含 `PROJECT_CARD_ICON_DEFS`、`project-card-icons`、`project-card-icon`、`累计航段图标` 和 `过载奖励图标`。
 - 升级卡片新增内联 SVG 图标：聚能透镜、自动采集臂、星核稳定器和星核谐振器分别使用固定尺寸图形和配色，降低右侧升级面板的纯文字密度。
 - `src/app.js` 新增 `UPGRADE_ICON_DEFS`、`renderUpgradeIcon` 和 `upgrade-card-head` 结构，`src/styles.css` 新增 `.upgrade-icon` 与四类升级图标样式。
 - 本轮只调整升级卡片视觉呈现；不新增存档字段，不改变升级价格、产能公式、星图 57 段路线、项目奖励、航线策略、航线指令、反馈入口或筛选规则。

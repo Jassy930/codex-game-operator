@@ -808,10 +808,65 @@ h2 {
   justify-content: flex-start;
 }
 
-.project-header strong {
-  min-width: 0;
+.project-title {
+  display: inline-flex;
+  min-width: min(100%, 190px);
   margin-right: auto;
+  gap: 9px;
+  align-items: center;
+}
+
+.project-title strong {
+  min-width: 0;
   font-size: 0.98rem;
+}
+
+.project-card-icons {
+  display: inline-flex;
+  flex: 0 0 auto;
+  gap: 4px;
+  align-items: center;
+}
+
+.project-card-icon {
+  display: inline-grid;
+  width: 28px;
+  height: 28px;
+  place-items: center;
+  border: 1px solid currentColor;
+  border-radius: 8px;
+  background: rgba(248, 243, 231, 0.08);
+  box-shadow: inset 0 0 16px rgba(248, 243, 231, 0.06);
+}
+
+.project-card-icon svg {
+  display: block;
+  width: 18px;
+  height: 18px;
+}
+
+.project-card-icon-track {
+  color: #bdf4eb;
+}
+
+.project-card-icon-reward {
+  color: #fff7c2;
+}
+
+.project-card-icon-click {
+  color: #f4b23c;
+}
+
+.project-card-icon-second {
+  color: #13b5a6;
+}
+
+.project-card-icon-overload {
+  color: #e85d75;
+}
+
+.project-card-icon-total {
+  color: #f8f3e7;
 }
 
 .project-segment-badge,

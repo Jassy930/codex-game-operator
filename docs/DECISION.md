@@ -1,5 +1,27 @@
 # Decision
 
+## 2026-04-30 Product decision：星图项目卡片图标化
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 当前有 3 个 open feedback issue、0 个 open bug issue。#4 仍是最新反馈主题，指向“密密麻麻的文字”和“生成一些图片”，本轮继续进入有反馈样本下的 Product decision。
+
+当前最大问题：星图区已有视觉航线、插画和默认折叠明细，升级面板也已经图标化，但星图项目列表仍主要依赖航段、章节、推进、奖励和状态文字标签。57 段列表在筛选后仍需要玩家阅读“累计航段/升级航段”和“总产能/点击/自动/过载奖励”来判断卡片性质。
+
+本轮决策：
+
+- 为星图项目卡片新增两个固定尺寸内联 SVG 图标：一个表示推进方式（累计航段或升级航段），一个表示奖励方向（总产能、点击、自动或过载）。
+- 图标放在项目标题前，与项目名称同层，保留原有文字标签用于可读性和可访问性。
+- 本轮只调整运行期 DOM、样式和静态测试；不改变存档、升级价格、产能公式、星图 57 段路线、项目奖励、筛选规则、航线策略、航线指令或反馈入口。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-04-30 01:35 CST 查询到 3 个 open feedback issue、0 个 open bug issue；#4 继续作为视觉密度跟进对象。
+- 星图项目运行期包含 `PROJECT_CARD_ICON_DEFS`、`project-card-icons`、`project-card-icon-track` 和 `project-card-icon-reward`。
+- 图标具备可访问标签：累计航段图标、升级航段图标、总产能奖励图标、点击奖励图标、自动奖励图标和过载奖励图标。
+- 静态测试覆盖 `src/app.js` 项目卡片图标定义和 `src/styles.css` 图标样式。
+- `bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build` 已通过；构建产物包含 `PROJECT_CARD_ICON_DEFS`、`project-card-icons`、`project-card-icon`、`累计航段图标` 和 `过载奖励图标`。
+
+下一步：push 后等待 GitHub Pages workflow，线上检查通过后回复 #4；若 #4 复测仍认为视觉不足，再评估章节级插图或项目列表默认折叠策略。
+
 ## 2026-04-30 Product decision：升级卡片图标化
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 当前有 3 个 open feedback issue、0 个 open bug issue。#4 已处理星图视觉航线、星图插画、星图明细折叠和主操作区工坊插画，但没有新的复测结论；本轮继续进入有反馈样本下的 Product decision。

@@ -2,6 +2,11 @@
 
 ## 2026-04-30
 
+- GitHub Issues：gh 可用且已认证；2026-04-30 01:35 CST 通过 REST API 同步到 3 个 open issue、3 个 open feedback issue、0 个 open bug issue。
+- #4 继续作为本轮 Product decision：星图和升级区已有视觉资产，但 57 段星图项目卡片仍依赖推进/奖励文字标签；本轮新增项目卡片推进方式和奖励方向图标，继续回应“密密麻麻的文字、希望生成图片”的反馈。
+- 本轮改动在 `src/app.js` 新增 `PROJECT_CARD_ICON_DEFS`、`renderProjectCardIcon`、`project-card-icons` 和推进/奖励图标选择逻辑，在 `src/styles.css` 新增 `project-title` 与 `project-card-icon-*` 样式；不改变存档、数值、星图 57 段路线、筛选规则、航线策略、航线指令或反馈入口。
+- 本轮本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；静态测试覆盖项目卡片图标定义和样式，构建产物已包含 `PROJECT_CARD_ICON_DEFS`、`project-card-icons`、`project-card-icon`、`累计航段图标` 和 `过载奖励图标`。
+
 - GitHub Issues：gh 可用且已认证；2026-04-30 01:20 CST 通过 REST API 同步到 3 个 open issue、3 个 open feedback issue、0 个 open bug issue。
 - #4 继续作为本轮 Product decision：星图区和主操作区已有视觉资产，但升级面板仍是四张相似文字卡片；本轮新增升级卡片图标，继续回应“生成一些图片、界面更好看”的反馈。
 - 本轮改动在 `src/app.js` 新增 `UPGRADE_ICON_DEFS`、`renderUpgradeIcon` 和 `upgrade-card-head` 结构，在 `src/styles.css` 新增四类 `upgrade-icon-*` 样式；不改变存档、数值、星图 57 段路线、筛选规则、航线策略、航线指令或反馈入口。

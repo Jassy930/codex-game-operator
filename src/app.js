@@ -69,6 +69,48 @@ const UPGRADE_ICON_DEFS = {
     ]
   }
 };
+const PROJECT_CARD_ICON_DEFS = {
+  energy: {
+    label: "累计航段图标",
+    nodes: [
+      ["path", { d: "M24 5l13 15-13 23L11 20z", fill: "none", stroke: "currentColor", "stroke-width": 4, "stroke-linejoin": "round" }],
+      ["path", { d: "M24 12v24M15 21h18", stroke: "currentColor", "stroke-width": 3, "stroke-linecap": "round" }]
+    ]
+  },
+  upgrade: {
+    label: "升级航段图标",
+    nodes: [
+      ["path", { d: "M12 34h24", stroke: "currentColor", "stroke-width": 4, "stroke-linecap": "round" }],
+      ["path", { d: "M24 8v26M15 17l9-9 9 9", fill: "none", stroke: "currentColor", "stroke-width": 4, "stroke-linecap": "round", "stroke-linejoin": "round" }]
+    ]
+  },
+  total: {
+    label: "总产能奖励图标",
+    nodes: [
+      ["circle", { cx: 24, cy: 24, r: 13, fill: "none", stroke: "currentColor", "stroke-width": 4 }],
+      ["path", { d: "M24 7v6M24 35v6M7 24h6M35 24h6", stroke: "currentColor", "stroke-width": 3, "stroke-linecap": "round" }]
+    ]
+  },
+  click: {
+    label: "点击奖励图标",
+    nodes: [
+      ["path", { d: "M17 10l14 14-7 2 5 11-5 2-5-11-6 5z", fill: "none", stroke: "currentColor", "stroke-width": 4, "stroke-linejoin": "round" }]
+    ]
+  },
+  second: {
+    label: "自动奖励图标",
+    nodes: [
+      ["path", { d: "M14 32a12 12 0 1 1 20 0", fill: "none", stroke: "currentColor", "stroke-width": 4, "stroke-linecap": "round" }],
+      ["path", { d: "M24 13v12l8 4", fill: "none", stroke: "currentColor", "stroke-width": 4, "stroke-linecap": "round", "stroke-linejoin": "round" }]
+    ]
+  },
+  overload: {
+    label: "过载奖励图标",
+    nodes: [
+      ["path", { d: "M27 5L12 27h11l-2 16 15-23H25z", fill: "none", stroke: "currentColor", "stroke-width": 4, "stroke-linejoin": "round" }]
+    ]
+  }
+};
 
 const elements = {
   energy: document.querySelector("#energyValue"),
@@ -526,6 +568,18 @@ function renderProject(project) {
   const name = document.createElement("strong");
   name.textContent = project.name;
 
+  const title = document.createElement("span");
+  title.className = "project-title";
+
+  const cardIcons = document.createElement("span");
+  cardIcons.className = "project-card-icons";
+  cardIcons.append(
+    renderProjectCardIcon(getProjectTrackIconId(project), "track"),
+    renderProjectCardIcon(getProjectRewardIconId(project), "reward")
+  );
+
+  title.append(cardIcons, name);
+
   const segmentBadge = document.createElement("span");
   segmentBadge.className = "project-segment-badge";
   segmentBadge.textContent = project.segmentText;
@@ -569,9 +623,51 @@ function renderProject(project) {
   fill.style.width = Math.round(project.progress * 100) + "%";
   meter.append(fill);
 
-  header.append(name, segmentBadge, chapterBadge, tagBadge, statusBadge);
+  header.append(title, segmentBadge, chapterBadge, tagBadge, statusBadge);
   item.append(header, summary, progress, reward, meter);
   return item;
+}
+
+function getProjectTrackIconId(project) {
+  return project.upgradeId ? "upgrade" : "energy";
+}
+
+function getProjectRewardIconId(project) {
+  const effect = project.effect ?? {};
+
+  if (effect.clickMultiplier) {
+    return "click";
+  }
+  if (effect.secondMultiplier) {
+    return "second";
+  }
+  if (effect.overloadMultiplier) {
+    return "overload";
+  }
+  return "total";
+}
+
+function renderProjectCardIcon(iconId, variant) {
+  const iconDef = PROJECT_CARD_ICON_DEFS[iconId] ?? PROJECT_CARD_ICON_DEFS.total;
+  const wrapper = document.createElement("span");
+  wrapper.className = [
+    "project-card-icon",
+    "project-card-icon-" + variant,
+    "project-card-icon-" + iconId
+  ].join(" ");
+  wrapper.setAttribute("role", "img");
+  wrapper.setAttribute("aria-label", iconDef.label);
+
+  const svg = document.createElementNS(SVG_NS, "svg");
+  svg.setAttribute("viewBox", "0 0 48 48");
+  svg.setAttribute("aria-hidden", "true");
+  svg.setAttribute("focusable", "false");
+  iconDef.nodes.forEach(([tagName, attributes]) => {
+    svg.append(createSvgElement(tagName, attributes));
+  });
+
+  wrapper.append(svg);
+  return wrapper;
 }
 
 function renderActionNotice() {
