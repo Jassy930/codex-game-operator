@@ -509,6 +509,10 @@ test("星图总览会显示完成数和下一段奖励", () => {
     "阶段导航：首段星图 1/4 · 专精校准 0/5 · 深空基建 0/4 · 远航长尾 0/18；当前 首段星图 2/4 · 航段 2/31 谐振校准 · 本阶段还剩 3 段 · 下一阶段 专精校准"
   );
   assert.equal(
+    overview.chapterTargetText,
+    "章节目标：首段星图 2/4 谐振校准 · 专精校准 1/5 点火航校 · 深空基建 1/4 远星中继 · 远航长尾 1/18 星门远征"
+  );
+  assert.equal(
     overview.compositionText,
     "航线构成：22 个累计航段 · 9 个升级航段 · 奖励分布 总产能 10 段 / 点击 8 段 / 自动 8 段 / 过载 5 段"
   );
@@ -524,6 +528,10 @@ test("星图总览在首个项目前会提示等待奖励生效", () => {
 
   assert.equal(overview.completed, 0);
   assert.equal(overview.nextProjectId, "stellar-map");
+  assert.equal(
+    overview.chapterTargetText,
+    "章节目标：首段星图 1/4 点亮星图 · 专精校准 1/5 点火航校 · 深空基建 1/4 远星中继 · 远航长尾 1/18 星门远征"
+  );
   assert.equal(overview.bonusText, "生效加成：等待首个星图奖励");
 });
 
@@ -1195,6 +1203,10 @@ test("星图总览会显示全部完成状态", () => {
   assert.equal(
     overview.chapterText,
     "阶段导航：首段星图 4/4 · 专精校准 5/5 · 深空基建 4/4 · 远航长尾 18/18；全部阶段完成"
+  );
+  assert.equal(
+    overview.chapterTargetText,
+    "章节目标：首段星图 已完成 · 专精校准 已完成 · 深空基建 已完成 · 远航长尾 已完成"
   );
   assert.equal(
     overview.bonusText,

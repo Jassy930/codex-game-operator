@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+- 新增星图章节目标：星图总览按首段星图、专精校准、深空基建、远航长尾列出各自下一段未完成目标，已完成章节显示“已完成”。
+- 同步 GitHub Issues 反馈状态：当前 1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
+- 验证通过：bun install --no-save、bun run test、bun run build、npm install、npm test、npm run build。
+- 构建产物已包含“章节目标”、`projectOverviewChapterTargets` 和 `chapterTargetText`。
 - 新增星图章节内位置：星图项目列表章节徽标会显示“首段星图 2/4”这类章节内序号，阶段导航当前项同步显示章节内位置和全局航段号。
 - 同步 GitHub Issues 反馈状态：当前 1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
 - 验证通过：bun install --no-save、bun run test、bun run build、npm install、npm test、npm run build。

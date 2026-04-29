@@ -868,6 +868,7 @@ export function getProjectOverview(state) {
   const bonusText = buildProjectBonusText(getProjectBonusesFromStatuses(projects));
   const compositionText = buildProjectCompositionText(projects);
   const chapterText = buildProjectChapterText(projects, nextProject);
+  const chapterTargetText = buildProjectChapterTargetText(projects);
 
   if (!nextProject) {
     return {
@@ -879,6 +880,7 @@ export function getProjectOverview(state) {
       detailText: "所有星图奖励已生效，继续累计能量等待下一段航线。",
       trackText: buildProjectTrackText(projects),
       chapterText,
+      chapterTargetText,
       compositionText,
       bonusText,
       forecastText: "航线预告：等待下一段航线"
@@ -908,6 +910,7 @@ export function getProjectOverview(state) {
     detailText: nextProject.progressText,
     trackText: buildProjectTrackText(projects),
     chapterText,
+    chapterTargetText,
     compositionText,
     bonusText,
     forecastText:
@@ -1196,6 +1199,21 @@ function buildProjectCompositionText(projects) {
     " 个升级航段 · 奖励分布 " +
     rewardText
   );
+}
+
+function buildProjectChapterTargetText(projects) {
+  const chapterParts = PROJECT_CHAPTER_DEFS.map((chapter) => {
+    const nextProject = getChapterProjects(projects, chapter).find(
+      (project) => !project.completed
+    );
+    const targetText = nextProject
+      ? nextProject.chapterIndex + "/" + nextProject.chapterTotal + " " + nextProject.name
+      : "已完成";
+
+    return chapter.name + " " + targetText;
+  });
+
+  return "章节目标：" + chapterParts.join(" · ");
 }
 
 function buildProjectChapterText(projects, nextProject) {

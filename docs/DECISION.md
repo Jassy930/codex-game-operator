@@ -1,5 +1,25 @@
 # Decision
 
+## 2026-04-29 Product decision：星图章节目标
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 当前仍有真实体验反馈 #2 open，且没有 open bug，继续进入有反馈样本下的 Product decision。
+
+当前最大问题：#2 仍围绕“内容丰富度太差，可玩的内容太少”保持 open。上一轮已把章节内位置下沉到项目列表和阶段导航当前项，但星图总览仍只突出当前章节的位置，玩家要理解其他章节“下一段是什么”仍需要扫描完整项目列表。
+
+本轮决策：
+
+- 在星图总览新增“章节目标”，按首段星图、专精校准、深空基建、远航长尾列出每个章节的下一段未完成目标，已完成章节显示“已完成”。
+- 不新增第 32 段，不调整奖励数值、升级价格和存档结构；继续提升已有 31 段星图的跨章节内容预期。
+- 静态 HTML 初始文案同步到章节目标，避免加载前总览信息与运行态不一致。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-04-29 08:35 CST 查询到 1 个 open issue、1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
+- bun install --no-save、bun run test、bun run build、npm install、npm test 和 npm run build 已通过，覆盖章节目标在初始状态、进行中状态和全部完成状态的文案。
+- 构建产物已包含“章节目标”、`projectOverviewChapterTargets` 和 `chapterTargetText`。
+
+下一步：push 后验证 GitHub Pages，并回复 #2 等待复测确认章节目标是否改善跨章节内容预期。
+
 ## 2026-04-29 Product decision：星图章节内位置
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 当前仍有真实体验反馈 #2 open，且没有 open bug，继续进入有反馈样本下的 Product decision。

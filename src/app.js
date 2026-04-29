@@ -45,6 +45,7 @@ const elements = {
   projectOverviewDetail: document.querySelector("#projectOverviewDetail"),
   projectOverviewTracks: document.querySelector("#projectOverviewTracks"),
   projectOverviewChapter: document.querySelector("#projectOverviewChapter"),
+  projectOverviewChapterTargets: document.querySelector("#projectOverviewChapterTargets"),
   projectOverviewComposition: document.querySelector("#projectOverviewComposition"),
   projectOverviewBonus: document.querySelector("#projectOverviewBonus"),
   projectOverviewForecast: document.querySelector("#projectOverviewForecast"),
@@ -167,6 +168,7 @@ function render() {
   elements.projectOverviewDetail.textContent = projectOverview.detailText;
   elements.projectOverviewTracks.textContent = projectOverview.trackText;
   elements.projectOverviewChapter.textContent = projectOverview.chapterText;
+  elements.projectOverviewChapterTargets.textContent = projectOverview.chapterTargetText;
   elements.projectOverviewComposition.textContent = projectOverview.compositionText;
   elements.projectOverviewBonus.textContent = projectOverview.bonusText;
   elements.projectOverviewForecast.textContent = projectOverview.forecastText;
