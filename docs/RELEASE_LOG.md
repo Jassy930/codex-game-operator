@@ -7,6 +7,8 @@
 - 同步 GitHub Issues 反馈状态：当前 1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
 - 验证通过：bun install --no-save、bun run test、bun run build、npm install、npm test、npm run build。
 - 构建产物已包含“星穹导航塔”、`stardome-navigation-spire`、“星图进度 0/45”、“36 个累计航段”和“总产能 0/14”。
+- GitHub Pages workflow 25093603685 已成功，线上地址返回 HTTP 200，且发布文件包含“星穹导航塔”、`stardome-navigation-spire`、“星图进度 0/45”、“36 个累计航段”和“总产能 0/14”。
+- 已回复 #2，说明星穹导航塔航段已部署，并保持 issue open 等待复测。
 - 新增 2.8B 后辉翼巡航港航段：星辉远港完成后继续出现累计能量目标，完成后奖励自动产能 +25%，星图路线扩展到 44 段。
 - 同步星图总览、里程碑、章节、奖励进度、航线构成、项目列表、静态 HTML 初始文案和 README 到 44 段。
 - 同步 GitHub Issues 反馈状态：当前 1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
