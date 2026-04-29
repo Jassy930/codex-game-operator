@@ -7,6 +7,8 @@
 - 同步 GitHub Issues 反馈状态：当前 1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
 - 验证通过：bun install --no-save、bun run test、bun run build、npm install、npm test、npm run build。
 - 构建产物已包含“星渊点火塔”、`abyss-ignition-spire`、“星图进度 0/55”、“46 个累计航段”、“点击 0/14”和“67.5B”。
+- GitHub Pages workflow 25100046206 已成功，线上地址返回 HTTP 200，且发布文件包含“星渊点火塔”、`abyss-ignition-spire`、“星图进度 0/55”、“46 个累计航段”、“点击 0/14”和“67.5B”。
+- 已回复 #2，说明星渊点火塔航段已部署，并保持 issue open 等待复测。
 - 新增 50B 后曜渊谐振门航段：曜翼星门完成后继续出现累计能量目标，完成后奖励过载奖励 +30%，星图路线扩展到 54 段。
 - 同步星图总览、里程碑、章节、奖励进度、航线构成、项目列表、静态 HTML 初始文案、README、产品说明、路线图和设计约束到 54 段。
 - 同步 GitHub Issues 反馈状态：当前 1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
