@@ -18,8 +18,11 @@
 - GitHub Issues 已同步：2026-04-29 17:43 CST 查询到 1 个 open issue、1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
 - `bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build` 已通过，覆盖全部/当前/未完成/已完成筛选、非法筛选回退和全部完成时当前筛选为空。
 - 构建产物已包含 `projectFilterList`、`project-filter-button`、`filterProjectStatuses` 和“星图航段筛选”。
+- GitHub Pages workflow 25102148181 已成功，线上地址返回 HTTP 200，发布页面包含“星图航段筛选”、`projectFilterList`、`project-filter-button` 和筛选逻辑 `filterProjectStatuses`。
+- #2 已回复并保持 open，等待复测确认筛选是否让 57 段星图内容更容易操作。
+- GitHub Issues 已在回复后同步：2026-04-29 17:52 CST 查询到 1 个 open issue、1 个 open feedback issue、0 个 open bug issue。
 
-下一步：push 后等待 GitHub Pages workflow 部署，并回复 #2 说明本轮筛选改动。
+下一步：继续观察 #2 复测是否认为星图航段筛选改善现有内容的可操作性。
 
 ## 2026-04-29 Product decision：星渊方舟航段
 
