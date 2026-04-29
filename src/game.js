@@ -645,6 +645,20 @@ export const PROJECT_DEFS = [
     current(state) {
       return state.totalEnergy;
     }
+  },
+  {
+    id: "radiant-tide-cruise-ring",
+    name: "辉潮巡航环",
+    summary: "累计 320M 能量，在烁影星匣外铺设辉潮巡航环。",
+    unit: "能量",
+    target: 320_000_000,
+    reward: "自动产能 +21%",
+    effect: {
+      secondMultiplier: 1.21
+    },
+    current(state) {
+      return state.totalEnergy;
+    }
   }
 ];
 
@@ -667,7 +681,7 @@ export const PROJECT_CHAPTER_DEFS = [
   {
     name: "远航长尾",
     startId: "void-gate-expedition",
-    endId: "glimmer-shadow-vault"
+    endId: "radiant-tide-cruise-ring"
   }
 ];
 
