@@ -6,6 +6,9 @@
 - #3 继续作为本轮 Product decision：策略终结要求第三步收束到当前策略契合指令，但 0/3 起步提示仍让玩家“先执行任意航线指令”；本轮新增“收束起手”推荐，把非契合指令标为起手，把契合指令留给 3/3 策略终结。
 - 本轮改动在 `src/game.js` 让 `getDirectivePlan` 起步阶段返回非契合指令的 `nextDirectiveIds`、`recommendationText = "收束起手"` 和 `waitingRecommendationText = "等待起手"`，并让 `getDirectiveStatus` 复用计划文案渲染按钮推荐；`index.html` 锁定态提示同步说明“非契合指令起手”。本轮不新增存档字段，不改变升级价格、产能公式、星图 57 段路线、项目奖励、指令基础收益、冷却、连携窗口、轮换目标奖励、策略契合 +10%、策略终结奖励、指令熟练或筛选规则。
 - 本轮本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；构建产物已包含 `收束起手`、`等待起手`、`非契合指令起手`、`recommendationText` 和 `waitingRecommendationText`。
+- GitHub Pages workflow 25132973346 已成功，线上地址返回 HTTP 200；线上首页包含“非契合指令起手”和“3/3 策略终结”，线上 `game.js` 包含“收束起手”“等待起手”和 `waitingRecommendationText`，线上 `app.js` 继续渲染 `directive-recommendation`。
+- #3 已回复：说明 0/3 起步推荐已改为非契合起手、契合收束，提交 bc00acd，issue 保持 open 等待复测。
+- 回复后同步 GitHub Issues：2026-04-30 04:48 CST 当前仍为 3 个 open feedback issue、0 个 open bug issue，#3 更新时间为 2026-04-29T20:47:49Z。
 
 - GitHub Issues：gh 可用且已认证；2026-04-30 04:17 CST 通过 REST API 同步到 3 个 open issue、3 个 open feedback issue、0 个 open bug issue。
 - #3 继续作为本轮 Product decision：航线指令已经补充主动按钮、连携、轮换目标、轮换奖励、策略契合和策略终结，但完整轮换后缺少能延续到下一轮操作的短期成长状态；本轮新增“指令熟练”层。
