@@ -1,5 +1,27 @@
 # Decision
 
+## 2026-04-29 Product decision：星图筛选航段章节位置
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 当前仍有真实体验反馈 #2 open，且没有 open bug，继续进入有反馈样本下的 Product decision。
+
+当前最大问题：#2 仍围绕“内容丰富度太差，可玩的内容太少”保持 open。上一轮已让筛选摘要显示章节构成，但摘要里的下一条、后续和终点仍只显示全局航段号，玩家想判断这些目标分别落在章节内第几段时，仍需要和章节构成或项目列表做二次对照。
+
+本轮决策：
+
+- 不追加第 58 段，先让筛选摘要里的下一条、后续和终点航段统一显示“航段 N/57 · 章节 X/Y 名称”。
+- 复用项目状态已有的 `segmentText` 和 `chapterText`，避免新增存档字段或重复维护章节映射。
+- 覆盖全部、本章、升级、奖励类型、未完成等仍有下一条/后续/终点的筛选视图；已完成和空筛选保持原有行为。
+- 不改变项目完成判定、奖励数值、升级价格、航线策略、筛选规则和 57 段星图顺序。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-04-29 22:39 CST 查询到 1 个 open issue、1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
+- `bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build` 已通过，测试覆盖本章、升级、当前和已完成筛选摘要。
+- 静态首页初始筛选摘要已包含“下一条 航段 1/57 · 首段星图 1/4 点亮星图”“后续 航段 2/57 · 首段星图 2/4 谐振校准”和“终点 航段 57/57 · 远航长尾 44/44 星渊方舟”。
+- 构建产物已包含 `formatProjectFilterProjectLabel`、“下一条 航段 1/57 · 首段星图 1/4 点亮星图”和“终点 航段 57/57 · 远航长尾 44/44 星渊方舟”。
+
+下一步：完成本轮安装、测试、构建和发布验证后，再回复 #2 等待复测确认章节位置是否降低 57 段星图在筛选摘要里的定位成本。
+
 ## 2026-04-29 Product decision：星图筛选章节构成
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 当前仍有真实体验反馈 #2 open，且没有 open bug，继续进入有反馈样本下的 Product decision。

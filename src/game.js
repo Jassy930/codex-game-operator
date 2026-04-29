@@ -1368,9 +1368,7 @@ export function getProjectFilterSummary(projects, filterId = DEFAULT_PROJECT_FIL
     formatProjectFilterClaimedRewardMix(visibleProjects) +
     formatProjectFilterPendingRewardMix(visibleProjects) +
     " · 下一条 " +
-    nextProject.segmentText +
-    " " +
-    nextProject.name +
+    formatProjectFilterProjectLabel(nextProject) +
     "（" +
     nextProject.reward +
     " · " +
@@ -2083,7 +2081,7 @@ function formatProjectFilterPreview(projects) {
   return (
     "；后续 " +
     upcomingProjects
-      .map((project) => project.segmentText + " " + project.name)
+      .map((project) => formatProjectFilterProjectLabel(project))
       .join("、")
   );
 }
@@ -2096,7 +2094,7 @@ function formatProjectFilterEndpoint(projects) {
     return "";
   }
 
-  return "；终点 " + endpoint.segmentText + " " + endpoint.name;
+  return "；终点 " + formatProjectFilterProjectLabel(endpoint);
 }
 
 function formatProjectFilterRewardMix(projects) {
@@ -2155,6 +2153,11 @@ function formatProjectFilterChapterMix(projects) {
     .join(" / ");
 
   return chapterText ? " · 章节构成 " + chapterText : "";
+}
+
+function formatProjectFilterProjectLabel(project) {
+  const positionText = [project.segmentText, project.chapterText].filter(Boolean).join(" · ");
+  return positionText ? positionText + " " + project.name : project.name;
 }
 
 function getProjectRewardCounts(projects) {
