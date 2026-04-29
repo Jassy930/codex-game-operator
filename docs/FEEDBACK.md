@@ -2,6 +2,12 @@
 
 ## 2026-04-30
 
+- GitHub Issues：gh 可用且已认证；2026-04-30 06:08 CST 通过 REST API 同步到 3 个 open issue、3 个 open feedback issue、0 个 open bug issue。
+- #4 继续作为本轮 Product decision：星图区已有插画、节点航线、章节视觉导航和章节徽记，但 15 个筛选按钮仍默认外露，和筛选摘要一起形成新的文字密集块；本轮新增“星图筛选控件折叠”。
+- 本轮改动将 `projectFilterList` 包进默认关闭的 `project-filter-controls` 抽屉，首屏只显示“筛选航段”；展开后仍保留全部筛选按钮、当前筛选状态、章节视觉导航点击切换和筛选摘要。本轮不新增存档字段，不改变升级价格、产能公式、星图 57 段路线、项目奖励、项目完成判定、航线策略、航线指令、反馈入口、筛选定义或章节点击逻辑。
+- 本轮本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数为 100 项。
+- 构建产物已包含 `project-filter-controls`、“筛选航段”、`project-filter-list` 和 `project-filter-controls[open]`。
+
 - GitHub Issues：gh 可用且已认证；2026-04-30 05:54 CST 通过 REST API 同步到 3 个 open issue、3 个 open feedback issue、0 个 open bug issue。
 - #4 继续作为本轮 Product decision：章节视觉导航已经可点击并显示进度，但四个章节的小图形仍共用同一种视觉语言，玩家仍主要依赖章节名和下一条目标文本区分阶段；本轮新增“星图章节视觉徽记”。
 - 本轮改动在 `PROJECT_CHAPTER_DEFS` 中为四个章节补充 `visualClass` 和 `focusText`：星核点亮、策略校准、基建扩展、远航航线；`src/app.js` 渲染 `project-chapter-emblem` 和 `project-chapter-focus`；`index.html` 与 `src/styles.css` 同步静态占位和四类徽记样式。本轮不新增存档字段，不改变升级价格、产能公式、星图 57 段路线、项目奖励、项目完成判定、航线策略、航线指令、反馈入口、筛选规则或章节点击逻辑。

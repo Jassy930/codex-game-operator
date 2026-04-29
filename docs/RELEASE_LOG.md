@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+- 星图筛选按钮默认收进“筛选航段”抽屉：首屏不再直接铺开全部、当前、本章、章节、成长线、未完成和已完成等 15 个筛选按钮。
+- `index.html` 用默认关闭的 `project-filter-controls` 包裹 `projectFilterList`；`src/styles.css` 新增抽屉边框、summary 和展开符号样式；`tests/game.test.js` 覆盖筛选控件默认折叠结构。
+- 本轮只调整星图筛选控件默认可见密度；不新增存档字段，不改变升级价格、产能公式、星图 57 段路线、项目奖励、项目完成判定、航线策略、航线指令、反馈入口、筛选定义或章节点击逻辑。
+- 同步 GitHub Issues 反馈状态：当前 3 个 open feedback issue、0 个 open bug issue；#4 继续指向视觉密度和图片需求。
+- 验证通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 100 项。
+- 构建产物已确认包含 `project-filter-controls`、“筛选航段”、`project-filter-list` 和 `project-filter-controls[open]`。
 - 星图章节视觉导航新增四类章节徽记和焦点标签：首段星图显示“星核点亮”，专精校准显示“策略校准”，深空基建显示“基建扩展”，远航长尾显示“远航航线”。
 - `PROJECT_CHAPTER_DEFS` 新增 `visualClass` 与 `focusText`，`src/app.js` 渲染 `project-chapter-emblem` / `project-chapter-focus`，`index.html` 与 `src/styles.css` 同步静态结构和四类徽记样式。
 - 本轮只调整章节导航视觉区分度；不新增存档字段，不改变升级价格、产能公式、星图 57 段路线、项目奖励、项目完成判定、航线策略、航线指令、反馈入口、筛选规则或章节点击逻辑。

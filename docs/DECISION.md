@@ -1,5 +1,28 @@
 # Decision
 
+## 2026-04-30 Product decision：星图筛选控件折叠
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-04-30 06:08 CST 同步到 3 个 open feedback issue、0 个 open bug issue。没有新的 bug 或玩家复测结论；#4 仍是最近更新的视觉密度反馈，继续进入有反馈样本下的 Product decision。
+
+当前最大问题：星图区已经有插画、节点航线、章节视觉导航、章节徽记、默认本章列表和多处默认折叠，但旧的 15 个星图筛选按钮仍在章节视觉导航下方全部外露。玩家第一眼会同时看到视觉导航、航线策略、筛选按钮和筛选摘要，筛选按钮本身再次形成一块密集文字区。
+
+本轮决策：
+
+- 将 `projectFilterList` 外层改为默认关闭的 `project-filter-controls` 抽屉，首屏只保留“筛选航段”入口。
+- 保留原有 15 个筛选按钮、`projectFilter` 状态、章节视觉导航点击切换、筛选摘要和所有筛选逻辑；展开抽屉后仍可直接访问全部筛选。
+- 本轮只调整星图筛选控件的默认展示密度；不新增存档字段，不改变升级价格、产能公式、星图 57 段路线、项目奖励、项目完成判定、航线策略、航线指令、反馈入口、筛选定义或章节点击逻辑。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-04-30 06:08 CST 查询到 3 个 open feedback issue、0 个 open bug issue；#4 作为本轮处理对象。
+- 静态首页包含默认关闭的 `<details class="project-filter-controls">` 和“筛选航段”，并且不带 `open` 属性。
+- `projectFilterList` 仍保留原有筛选按钮容器，运行期 `src/app.js` 不需要重写筛选渲染逻辑。
+- `src/styles.css` 包含 `project-filter-controls` 和展开/收起符号样式。
+- `bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build` 已通过；测试数 100 项。
+- 构建产物包含 `project-filter-controls`、“筛选航段”和 `project-filter-controls[open]` 样式。
+
+下一步：push 后等待 GitHub Pages workflow 部署；随后回复 #4，说明筛选按钮已默认折叠，并继续等待玩家复测默认星图区的文字密度。
+
 ## 2026-04-30 Product decision：星图章节视觉徽记
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-04-30 05:54 CST 同步到 3 个 open feedback issue、0 个 open bug issue。没有新的 bug 或玩家复测结论；#4 仍是最近更新的视觉密度反馈，继续进入有反馈样本下的 Product decision。

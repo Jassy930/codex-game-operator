@@ -225,27 +225,30 @@
               class="route-stance-list"
               aria-label="航线策略"
             ></div>
-            <div
-              id="projectFilterList"
-              class="project-filter-list"
-              aria-label="星图航段筛选"
-            >
-              <button class="project-filter-button" type="button" aria-pressed="false">全部 0/57</button>
-              <button class="project-filter-button" type="button" aria-pressed="false">当前 1</button>
-              <button class="project-filter-button is-active" type="button" aria-pressed="true">本章 0/4</button>
-              <button class="project-filter-button" type="button" aria-pressed="false">首段星图 0/4</button>
-              <button class="project-filter-button" type="button" aria-pressed="false">专精校准 0/5</button>
-              <button class="project-filter-button" type="button" aria-pressed="false">深空基建 0/4</button>
-              <button class="project-filter-button" type="button" aria-pressed="false">远航长尾 0/44</button>
-              <button class="project-filter-button" type="button" aria-pressed="false">累计 0/48</button>
-              <button class="project-filter-button" type="button" aria-pressed="false">升级 0/9</button>
-              <button class="project-filter-button" type="button" aria-pressed="false">总产能 0/17</button>
-              <button class="project-filter-button" type="button" aria-pressed="false">点击 0/14</button>
-              <button class="project-filter-button" type="button" aria-pressed="false">自动 0/15</button>
-              <button class="project-filter-button" type="button" aria-pressed="false">过载 0/11</button>
-              <button class="project-filter-button" type="button" aria-pressed="false">未完成 57</button>
-              <button class="project-filter-button" type="button" aria-pressed="false">已完成 0</button>
-            </div>
+            <details class="project-filter-controls">
+              <summary>筛选航段</summary>
+              <div
+                id="projectFilterList"
+                class="project-filter-list"
+                aria-label="星图航段筛选"
+              >
+                <button class="project-filter-button" type="button" aria-pressed="false">全部 0/57</button>
+                <button class="project-filter-button" type="button" aria-pressed="false">当前 1</button>
+                <button class="project-filter-button is-active" type="button" aria-pressed="true">本章 0/4</button>
+                <button class="project-filter-button" type="button" aria-pressed="false">首段星图 0/4</button>
+                <button class="project-filter-button" type="button" aria-pressed="false">专精校准 0/5</button>
+                <button class="project-filter-button" type="button" aria-pressed="false">深空基建 0/4</button>
+                <button class="project-filter-button" type="button" aria-pressed="false">远航长尾 0/44</button>
+                <button class="project-filter-button" type="button" aria-pressed="false">累计 0/48</button>
+                <button class="project-filter-button" type="button" aria-pressed="false">升级 0/9</button>
+                <button class="project-filter-button" type="button" aria-pressed="false">总产能 0/17</button>
+                <button class="project-filter-button" type="button" aria-pressed="false">点击 0/14</button>
+                <button class="project-filter-button" type="button" aria-pressed="false">自动 0/15</button>
+                <button class="project-filter-button" type="button" aria-pressed="false">过载 0/11</button>
+                <button class="project-filter-button" type="button" aria-pressed="false">未完成 57</button>
+                <button class="project-filter-button" type="button" aria-pressed="false">已完成 0</button>
+              </div>
+            </details>
             <details class="project-filter-drawer">
               <summary id="projectFilterSummaryBrief">筛选摘要：本章 0/4 · 下一条 航段 1/57 · 首段星图 1/4 点亮星图 · 剩余 4 段</summary>
               <p id="projectFilterSummary" class="project-filter-summary">筛选视图：本章 4 段 · 已完成 0/4 · 完成率 0% · 剩余 4 段 · 状态构成 当前 1 段 / 待推进 3 段 · 奖励构成 总产能 1 段 / 点击 1 段 / 自动 1 段 / 过载 1 段 · 推进构成 累计 1 段 / 升级 3 段 · 章节构成 首段星图 4 段 · 待领取奖励 总产能 1 段 / 点击 1 段 / 自动 1 段 / 过载 1 段 · 下一条 航段 1/57 · 首段星图 1/4 点亮星图（总产能 +12% · 进度 0 能量 / 100K 能量 · 还差 100K 能量）；后续 航段 2/57 · 首段星图 2/4 谐振校准、航段 3/57 · 首段星图 3/4 透镜阵列；终点 航段 4/57 · 首段星图 4/4 采集阵列</p>

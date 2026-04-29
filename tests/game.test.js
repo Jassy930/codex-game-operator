@@ -992,6 +992,9 @@ test("静态首页会默认折叠星图筛选长摘要", () => {
   const styles = readFileSync(new URL("../src/styles.css", import.meta.url), "utf8");
 
   assert.equal(INITIAL_PROJECT_FILTER_ID, "current-chapter");
+  assert.match(indexHtml, /<details class="project-filter-controls">/);
+  assert.doesNotMatch(indexHtml, /<details class="project-filter-controls" open>/);
+  assert.match(indexHtml, /<summary>筛选航段<\/summary>/);
   assert.match(indexHtml, /<details class="project-filter-drawer">/);
   assert.doesNotMatch(indexHtml, /<details class="project-filter-drawer" open>/);
   assert.match(indexHtml, /id="projectFilterSummaryBrief"/);
@@ -1005,6 +1008,8 @@ test("静态首页会默认折叠星图筛选长摘要", () => {
   assert.match(appJs, /let projectFilter = INITIAL_PROJECT_FILTER_ID/);
   assert.match(appJs, /getProjectFilterBrief/);
   assert.match(appJs, /projectFilterSummaryBrief: document\.querySelector\("#projectFilterSummaryBrief"\)/);
+  assert.match(styles, /\.project-filter-controls/);
+  assert.match(styles, /\.project-filter-controls\[open\] summary::after/);
   assert.match(styles, /\.project-filter-drawer/);
   assert.match(styles, /\.project-filter-drawer\[open\] summary::after/);
 });
