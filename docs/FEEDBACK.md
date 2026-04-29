@@ -7,6 +7,9 @@
 - 本轮改动在航线指令按钮徽标组中新增 `directive-plan-bonus`，当 `option.planRewardText` 存在时直接显示“预案执行 +X”；无预案奖励的按钮保持隐藏。本轮不新增存档字段，不改变升级价格、产能公式、星图 57 段路线、项目奖励、指令基础收益、冷却、连携窗口、轮换目标奖励、策略契合、策略终结、指令熟练、满层回响或筛选规则。
 - 本轮本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数为 102 项。
 - 构建产物已包含 `directive-plan-bonus`、`planBonus.textContent = option.planRewardText` 和“预案执行”。
+- GitHub Pages workflow 25138711061 已成功，线上地址返回 HTTP 200；线上 `app.js` 包含 `directive-plan-bonus` 与 `planBonus.textContent = option.planRewardText`，线上 `styles.css` 包含 `directive-plan-bonus`。
+- #3 已回复：说明推荐预案中的指令会在按钮徽标区直接显示“预案执行 +X”，提交 8eb92b6，issue 保持 open 等待复测。
+- 回复后同步 GitHub Issues：2026-04-30 07:14 CST 当前仍为 3 个 open feedback issue、0 个 open bug issue；#3 更新时间为 2026-04-29T23:14:33Z。
 
 - GitHub Issues：gh 可用且已认证；2026-04-30 06:54 CST 通过 REST API 同步到 3 个 open issue、3 个 open feedback issue、0 个 open bug issue。
 - #3 进入本轮 Product decision：航线指令已经有完整推荐链、策略终结、指令熟练和满层回响，但按钮推荐仍主要是提示；本轮新增“预案执行”奖励，让按推荐指令操作产生独立即时收益。

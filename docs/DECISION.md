@@ -19,8 +19,11 @@
 - `src/styles.css` 包含 `directive-plan-bonus` 样式，让预案执行奖励在按钮徽标组中可扫视。
 - `bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build` 已通过；测试数 102 项。
 - 构建产物包含 `directive-plan-bonus`、`planBonus.textContent = option.planRewardText` 和“预案执行”。
+- 提交 8eb92b6 已推送；GitHub Pages workflow 25138711061 已成功，线上地址返回 HTTP 200；线上 `app.js` 包含 `directive-plan-bonus` 与 `planBonus.textContent = option.planRewardText`，线上 `styles.css` 包含 `directive-plan-bonus`。
+- #3 已回复并继续保持 open，等待复测确认按钮层“预案执行 +X”是否让推荐指令更像有明确收益的主动选择。
+- 回复后同步 GitHub Issues：2026-04-30 07:14 CST 当前仍为 3 个 open feedback issue、0 个 open bug issue；#3 更新时间为 2026-04-29T23:14:33Z。
 
-下一步：推送并回复 #3，等待复测确认按钮层预案执行徽标是否让推荐指令更有收益确认感。
+下一步：等待 #3 复测；若仍认为主动玩法不足，再评估短期任务、资源消耗型指令或更明确的指令构筑分支。
 
 ## 2026-04-30 Product decision：航线指令预案执行奖励
 

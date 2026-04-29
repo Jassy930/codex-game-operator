@@ -8,6 +8,9 @@
 - 同步 GitHub Issues 反馈状态：当前 3 个 open feedback issue、0 个 open bug issue；#3 继续指向玩法单薄并作为本轮处理对象。
 - 验证通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 102 项。
 - 构建产物已确认包含 `directive-plan-bonus`、`planBonus.textContent = option.planRewardText` 和“预案执行”。
+- GitHub Pages workflow 25138711061 已成功，线上地址返回 HTTP 200，且线上 `app.js` 与 `styles.css` 已确认包含预案执行按钮徽标相关标记。
+- 已回复 #3，说明预案执行按钮徽标已部署，并保持 issue open 等待复测。
+- 回复后同步 GitHub Issues 反馈状态：当前 3 个 open feedback issue、0 个 open bug issue；#3 更新时间为 2026-04-29T23:14:33Z。
 - 航线指令新增“预案执行”：执行当前推荐预案中的指令时，额外获得有效基础指令收益 6% 的即时奖励。
 - `src/game.js` 新增 `DIRECTIVE_PLAN_BONUS_RATE`、预案执行收益预览和执行反馈；`src/app.js` 在本地 `directive` 事件中记录 `planReward` / `planBonusRate`；`index.html` 静态锁定提示同步说明预案执行奖励。
 - 本轮只调整航线指令推荐预案的即时奖励和提示；不新增存档字段，不改变升级价格、产能公式、星图 57 段路线、项目奖励、指令基础收益、冷却、连携窗口、轮换目标奖励、策略契合、策略终结、指令熟练、满层回响或筛选规则。
