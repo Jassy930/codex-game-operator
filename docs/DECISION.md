@@ -1,5 +1,29 @@
 # Decision
 
+## 2026-04-30 Product decision：航线指令按钮轮换推荐
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 当前有 3 个 open feedback issue、0 个 open bug issue。#4 已连续处理视觉密度，#3 仍指向“玩法太简单、只有点击和自动产能”，上一轮已给 3/3 指令轮换补明确奖励，本轮继续进入有反馈样本下的 Product decision。
+
+当前最大问题：指令轮换目标已经在提示行里说明“下一步切换到哪些指令”，但玩家实际点击时仍要把提示文字映射到三个按钮。主动玩法的下一步建议还没有落到可操作控件本身。
+
+本轮决策：
+
+- `getDirectiveStatus` 复用 `getDirectivePlan` 的 `nextDirectiveIds`，给推荐的下一条不同指令增加 `recommended` 和 `recommendationText`。
+- 运行期指令按钮增加 `is-recommended` 和 `directive-recommendation` 标记，可执行时显示“轮换推荐”，仍在冷却时显示“等待轮换”。
+- 本轮只调整航线指令按钮可读性和静态测试；不新增存档字段，不改变升级价格、产能公式、星图 57 段路线、项目奖励、航线策略、指令基础收益、冷却、连携窗口、轮换目标奖励或反馈入口。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-04-30 03:16 CST 查询到 3 个 open feedback issue、0 个 open bug issue；#3 作为本轮处理对象。
+- 连携 1/3 后，两个不同且可执行的指令按钮会标记 `recommended: true` 和 `recommendationText: "轮换推荐"`。
+- 连携 2/3 后，下一条可触发 3/3 奖励的指令按钮会标记 `recommended: true` 和 `recommendationText: "轮换推荐"`。
+- 运行期按钮渲染包含 `is-recommended`、`directive-head` 和 `directive-recommendation`。
+- 静态测试覆盖按钮推荐态渲染和样式。
+- `bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build` 已通过。
+- 构建产物包含 `is-recommended`、`directive-recommendation`、`recommendationText` 和“轮换推荐”。
+
+下一步：推送后等待 GitHub Pages workflow；线上确认按钮推荐态标记进入发布文件，再回复 #3 保持 open 等待复测。
+
 ## 2026-04-30 Product decision：星图列表默认本章筛选
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 当前有 3 个 open feedback issue、0 个 open bug issue。#3 刚完成航线指令、连携、轮换目标和 3/3 奖励，尚无复测结论；#4 仍指向“界面全是密密麻麻的文字、希望生成一些图片”，本轮继续进入有反馈样本下的 Product decision。

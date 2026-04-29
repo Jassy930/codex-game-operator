@@ -1718,11 +1718,13 @@ export function getDirectiveStatus(state, now = Date.now()) {
   const unlocked = current.totalEnergy >= DIRECTIVE_UNLOCK_ENERGY;
   const production = getEffectiveProduction(current);
   const unlockText = unlocked ? "航线指令已解锁" : "累计 100K 能量后解锁航线指令";
+  const plan = getDirectivePlan(current, now);
+  const recommendedIds = new Set(plan.nextDirectiveIds ?? []);
 
   return {
     unlocked,
     unlockText,
-    plan: getDirectivePlan(current, now),
+    plan,
     options: DIRECTIVE_DEFS.map((directive) => {
       const cooldownMs = directive.cooldownSeconds * 1000;
       const lastUsedAt = current.directives[directive.id] ?? 0;
@@ -1738,6 +1740,8 @@ export function getDirectiveStatus(state, now = Date.now()) {
       const gain = roundTo(baseGain * chain.multiplier + rotationReward, 4);
       const chainText = formatDirectiveChainBonus(chain);
       const rotationRewardText = formatDirectiveRotationReward(rotationReward);
+      const recommended = unlocked && recommendedIds.has(directive.id);
+      const ready = unlocked && remainingMs <= 0;
 
       return {
         ...directive,
@@ -1761,7 +1765,9 @@ export function getDirectiveStatus(state, now = Date.now()) {
             ? "冷却 " + formatDuration(remainingMs / 1000)
             : "可执行",
         remainingSeconds,
-        ready: unlocked && remainingMs <= 0,
+        ready,
+        recommended,
+        recommendationText: recommended ? (ready ? "轮换推荐" : "等待轮换") : "",
         disabled: !unlocked || remainingMs > 0
       };
     })

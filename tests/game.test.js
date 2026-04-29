@@ -239,6 +239,8 @@ test("轮换航线指令会触发航线连携收益", () => {
 
   assert.equal(first.chainStacks, 0);
   assert.equal(first.chainMultiplier, 1);
+  assert.equal(cruiseOption.recommended, true);
+  assert.equal(cruiseOption.recommendationText, "轮换推荐");
   assert.equal(cruiseOption.previewText, "预计 +50.2 能量 · 航线连携 +12%");
   assert.equal(
     firstPlan.text,
@@ -254,6 +256,8 @@ test("轮换航线指令会触发航线连携收益", () => {
     secondPlan.text,
     "指令轮换 2/3 · 当前 巡航回收 · 连携窗口 1.5 分钟 · 下一步切换到谐振脉冲，预计连携 +24%，并触发轮换目标奖励。"
   );
+  assert.equal(resonanceOption.recommended, true);
+  assert.equal(resonanceOption.recommendationText, "轮换推荐");
   assert.equal(
     resonanceOption.previewText,
     "预计 +22.3 能量 · 航线连携 +24% · 轮换目标 +2.8"
@@ -809,7 +813,12 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(appJs, /rotationReward: result\.rotationReward/);
   assert.match(appJs, /directivePlan: document\.querySelector\("#directivePlan"\)/);
   assert.match(appJs, /elements\.directivePlan\.textContent = directives\.plan\.text/);
+  assert.match(appJs, /option\.recommended \? "is-recommended" : ""/);
+  assert.match(appJs, /recommendation\.className = "directive-recommendation"/);
+  assert.match(appJs, /recommendation\.textContent = option\.recommendationText/);
   assert.match(styles, /\.directive-plan/);
+  assert.match(styles, /\.directive-button\.is-recommended/);
+  assert.match(styles, /\.directive-button \.directive-recommendation/);
 });
 
 test("静态首页会默认折叠星图详细文本", () => {

@@ -307,7 +307,13 @@ function renderDirectives(directives) {
 
 function renderDirective(option) {
   const button = document.createElement("button");
-  button.className = option.ready ? "directive-button is-ready" : "directive-button";
+  button.className = [
+    "directive-button",
+    option.ready ? "is-ready" : "",
+    option.recommended ? "is-recommended" : ""
+  ]
+    .filter(Boolean)
+    .join(" ");
   button.type = "button";
   button.disabled = option.disabled;
   button.addEventListener("click", () => {
@@ -335,6 +341,16 @@ function renderDirective(option) {
   const name = document.createElement("strong");
   name.textContent = option.name;
 
+  const head = document.createElement("span");
+  head.className = "directive-head";
+
+  const recommendation = document.createElement("span");
+  recommendation.className = "directive-recommendation";
+  recommendation.textContent = option.recommendationText;
+  recommendation.hidden = !option.recommended;
+
+  head.append(name, recommendation);
+
   const summary = document.createElement("span");
   summary.textContent = option.summary;
 
@@ -346,7 +362,7 @@ function renderDirective(option) {
   status.className = "directive-status";
   status.textContent = option.statusText;
 
-  button.append(name, summary, preview, status);
+  button.append(head, summary, preview, status);
   return button;
 }
 
