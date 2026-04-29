@@ -6,6 +6,9 @@
 - #3 继续作为本轮 Product decision：航线指令和航线连携已上线，但主动玩法仍需要玩家自己理解“下一步该按哪个”。本轮新增“指令轮换”目标提示，直接显示 0/3 到 3/3 的轮换进度、连携窗口、下一步建议和预计连携加成。
 - 本轮改动在 `src/game.js` 新增 `getDirectivePlan`，在 `index.html`、`src/app.js` 和 `src/styles.css` 新增 `directivePlan` 展示；不新增存档字段，不改变升级价格、星图 57 段路线、项目奖励、航线策略、指令基础收益、冷却或反馈入口。
 - 本轮本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；静态测试覆盖 `directivePlan` 首页挂载和样式，逻辑测试覆盖锁定、起步、轮换进度和下一步建议。
+- GitHub Pages workflow 25125372756 已成功，线上地址返回 HTTP 200；线上首页包含 `directivePlan` 和“指令轮换：累计 100K 能量后解锁 90 秒连携目标”，线上 `game.js` 包含 `getDirectivePlan`，线上 `app.js` 包含 `directives.plan.text`，线上 `styles.css` 包含 `directive-plan`。
+- #3 已回复：说明指令轮换目标已上线，提交 39db10d，issue 保持 open 等待复测。
+- 回复后同步 GitHub Issues：2026-04-30 02:02 CST 当前仍为 3 个 open feedback issue、0 个 open bug issue，#3 更新时间为 2026-04-29T18:02:20Z。
 
 - GitHub Issues：gh 可用且已认证；2026-04-30 01:35 CST 通过 REST API 同步到 3 个 open issue、3 个 open feedback issue、0 个 open bug issue。
 - #4 继续作为本轮 Product decision：星图和升级区已有视觉资产，但 57 段星图项目卡片仍依赖推进/奖励文字标签；本轮新增项目卡片推进方式和奖励方向图标，继续回应“密密麻麻的文字、希望生成图片”的反馈。

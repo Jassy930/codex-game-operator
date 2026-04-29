@@ -8,6 +8,9 @@
 - 同步 GitHub Issues 反馈状态：当前 3 个 open feedback issue、0 个 open bug issue；#3 继续指向玩法单薄并作为本轮处理对象。
 - 验证通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`。
 - 静态测试覆盖 `directivePlan` 首页挂载和 `.directive-plan` 样式；逻辑测试覆盖锁定、起步、轮换进度和下一步建议。
+- GitHub Pages workflow 25125372756 已成功，线上地址返回 HTTP 200，且线上文件包含 `directivePlan`、`getDirectivePlan`、`directives.plan.text` 和 `directive-plan`。
+- 已回复 #3，说明指令轮换目标已部署，并保持 issue open 等待复测。
+- 回复后同步 GitHub Issues 反馈状态：当前 3 个 open feedback issue、0 个 open bug issue；#3 更新时间为 2026-04-29T18:02:20Z。
 - 星图项目卡片新增推进方式和奖励方向内联 SVG 图标：累计/升级航段、总产能/点击/自动/过载奖励分别具备固定尺寸图形和可访问标签，降低 57 段列表的纯文字扫描压力。
 - `src/app.js` 新增 `PROJECT_CARD_ICON_DEFS`、`renderProjectCardIcon` 和项目标题图标组，`src/styles.css` 新增 `.project-title`、`.project-card-icons` 与 `.project-card-icon-*` 样式。
 - 本轮只调整星图项目卡片视觉呈现；不新增存档字段，不改变升级价格、产能公式、星图 57 段路线、项目奖励、筛选规则、航线策略、航线指令、反馈入口或数值逻辑。
