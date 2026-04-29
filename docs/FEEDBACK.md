@@ -5,6 +5,9 @@
 - GitHub Issues：gh 可用且已认证；2026-04-29 20:21 CST 查询到 1 个 open issue、1 个 open feedback issue、0 个 open bug issue。
 - #2 仍为 open，最后更新时间停留在 2026-04-29 12:16:21 UTC，未出现新的玩家复测结论或 bug；本轮不继续追加第 58 段，改为让每个星图项目卡片直接显示“累计/升级航段”和奖励类型，减少玩家扫描 57 段列表时判断操作方式与成长线的成本。
 - data/feedback/github-feedback.md 已同步本地快照。
+- 本轮已回复 #2：说明星图项目卡片新增推进方式和奖励类型标签，GitHub Pages workflow 25108907209 已成功，线上地址返回 HTTP 200，线上脚本包含 `buildProjectTagText`、`tagText` 和 `project-tag-badge`，线上样式包含 `project-tag-badge`；issue 保持 open，等待复测确认项目标签是否降低 57 段星图列表的操作方式和成长线判断成本。
+- GitHub Issues：gh 可用且已认证；2026-04-29 20:31 CST 在回复后查询到 1 个 open issue、1 个 open feedback issue、0 个 open bug issue。
+- data/feedback/github-feedback.md 已在回复 #2 后同步本地快照。
 
 - GitHub Issues：gh 可用且已认证；2026-04-29 20:09 CST 查询到 1 个 open issue、1 个 open feedback issue、0 个 open bug issue。
 - #2 仍为 open，最后更新时间停留在 2026-04-29 12:01:59 UTC，未出现新的玩家复测结论或 bug；本轮不继续追加第 58 段，改为让星图筛选摘要显示当前视图的推进构成，减少玩家判断本章、奖励类型、未完成或已完成视图主要靠累计能量还是升级补强推进时的逐条扫描成本。
