@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+- 新增主操作区工坊插画：`src/assets/workshop-visual.svg` 展示星核、聚能透镜、自动采集臂、稳定器和谐振环，补足点火主循环的第一眼画面。
+- 首页新增 `workshop-scene-image` 图片引用，样式新增 `.workshop-scene-image`，构建产物会携带 `dist/src/assets/workshop-visual.svg`。
+- 本轮只调整视觉呈现和静态资源；不新增存档字段，不改变升级价格、星图 57 段路线、项目奖励、航线策略、航线指令、反馈入口或筛选规则。
+- 同步 GitHub Issues 反馈状态：当前 3 个 open feedback issue、0 个 open bug issue；#4 继续指向视觉密度和图片需求。
+- 验证通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`。
+- 静态测试覆盖首页、样式和 SVG 资产引用链路；构建产物已确认包含 `workshop-scene-image`、`workshop-visual.svg`、“星核工坊主操作插画”和 `energyBeam`。
+- GitHub Pages 发布和 #4 回复待 push 后验证。
 - 新增航线连携：100K 后轮换不同航线指令会在 90 秒内获得连携加成，第一次轮换 +12%，再次轮换封顶 +24%，重复同类或超时重置。
 - 航线指令预计收益和执行提示会显示“航线连携”加成，本地 `directive` 事件新增连携层数和连携倍率字段。
 - 旧存档会自动补齐 `directiveChain`；本轮不改变升级价格、星图 57 段路线、项目奖励、航线策略、指令基础冷却或筛选规则。

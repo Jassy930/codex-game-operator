@@ -2,6 +2,12 @@
 
 ## 2026-04-30
 
+- GitHub Issues：gh 可用且已认证；2026-04-30 01:07 CST 通过 REST API 同步到 3 个 open issue、3 个 open feedback issue、0 个 open bug issue。
+- #4 继续作为本轮 Product decision：星图区域已有视觉航线、插画和默认折叠明细，但主操作区仍主要是文字提示和按钮；本轮新增主操作区工坊插画，继续回应“生成一些图片、界面更好看”的反馈。
+- 本轮改动新增 `src/assets/workshop-visual.svg`、首页图片引用和 `.workshop-scene-image` 样式；不改变存档、数值、星图 57 段路线、筛选规则、航线策略、航线指令或反馈入口。
+- 本轮本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；静态测试覆盖首页、样式和 SVG 资产引用链路，构建产物已包含 `workshop-scene-image`、`workshop-visual.svg`、“星核工坊主操作插画”和 `energyBeam`。
+- 发布与 issue 回复待 push 后的 GitHub Pages workflow 验证。
+
 - GitHub Issues：gh 可用且已认证；2026-04-30 00:53 CST 通过 REST API 同步到 3 个 open issue、3 个 open feedback issue、0 个 open bug issue。
 - #3 继续作为本轮 Product decision：玩家认为玩法“只有点击和自动产能”，上一轮航线指令已补主动按钮，但三个指令仍缺少顺序规划。本轮新增 90 秒“航线连携”，鼓励玩家轮换不同指令。
 - 本轮改动新增 `directiveChain` 存档字段、连携收益预览、执行提示和 `directive` 事件字段；不改变升级价格、星图 57 段路线、项目奖励、航线策略、指令基础冷却或筛选规则。

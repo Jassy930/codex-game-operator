@@ -690,6 +690,22 @@ test("静态首页会引用星图插画资产", () => {
   assert.match(asset, /routeLine/);
 });
 
+test("静态首页会引用主操作区工坊插画资产", () => {
+  const indexHtml = readFileSync(new URL("../index.html", import.meta.url), "utf8");
+  const styles = readFileSync(new URL("../src/styles.css", import.meta.url), "utf8");
+  const asset = readFileSync(
+    new URL("../src/assets/workshop-visual.svg", import.meta.url),
+    "utf8"
+  );
+
+  assert.match(indexHtml, /workshop-scene-image/);
+  assert.match(indexHtml, /src="\.\/src\/assets\/workshop-visual\.svg"/);
+  assert.match(indexHtml, /星核、聚能透镜、自动采集臂、稳定器和谐振环组成的工坊插画/);
+  assert.match(styles, /\.workshop-scene-image/);
+  assert.match(asset, /星核工坊主操作插画/);
+  assert.match(asset, /energyBeam/);
+});
+
 test("静态首页会默认折叠星图详细文本", () => {
   const indexHtml = readFileSync(new URL("../index.html", import.meta.url), "utf8");
   const styles = readFileSync(new URL("../src/styles.css", import.meta.url), "utf8");

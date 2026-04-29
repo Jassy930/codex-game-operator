@@ -1,0 +1,94 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 360" role="img" aria-labelledby="title desc">
+  <title id="title">星核工坊主操作插画</title>
+  <desc id="desc">星核、聚能透镜、自动采集臂、稳定器和谐振环组成的工坊画面。</desc>
+  <defs>
+    <radialGradient id="coreGlow" cx="48%" cy="44%" r="54%">
+      <stop offset="0" stop-color="#fff7c2"/>
+      <stop offset="0.4" stop-color="#f4b23c"/>
+      <stop offset="0.72" stop-color="#e85d75"/>
+      <stop offset="1" stop-color="#3a171d"/>
+    </radialGradient>
+    <linearGradient id="benchShade" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#251d1a"/>
+      <stop offset="1" stop-color="#0f1616"/>
+    </linearGradient>
+    <linearGradient id="energyBeam" x1="170" x2="802" y1="162" y2="162" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#13b5a6"/>
+      <stop offset="0.5" stop-color="#fff7c2"/>
+      <stop offset="1" stop-color="#e85d75"/>
+    </linearGradient>
+    <filter id="softGlow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="10" result="blur"/>
+      <feColorMatrix in="blur" type="matrix" values="1 0 0 0 0.95 0 1 0 0 0.56 0 0 1 0 0.26 0 0 0 0.64 0"/>
+      <feMerge>
+        <feMergeNode/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <rect width="960" height="360" rx="28" fill="url(#benchShade)"/>
+  <path d="M0 86 C168 42 320 54 484 104 C626 148 770 124 960 54 L960 0 L0 0 Z" fill="#21332f" opacity="0.58"/>
+  <path d="M0 278 C160 232 306 258 474 294 C632 328 782 314 960 246 L960 360 L0 360 Z" fill="#281d23" opacity="0.7"/>
+
+  <g opacity="0.78">
+    <circle cx="82" cy="72" r="2.2" fill="#fff7c2"/>
+    <circle cx="164" cy="112" r="1.8" fill="#bdf4eb"/>
+    <circle cx="282" cy="62" r="2.4" fill="#f4b23c"/>
+    <circle cx="412" cy="86" r="1.8" fill="#f8f3e7"/>
+    <circle cx="558" cy="56" r="2.3" fill="#bdf4eb"/>
+    <circle cx="706" cy="92" r="2" fill="#fff7c2"/>
+    <circle cx="842" cy="64" r="2.5" fill="#f8f3e7"/>
+    <circle cx="884" cy="244" r="2" fill="#f4b23c"/>
+    <circle cx="732" cy="304" r="2.1" fill="#bdf4eb"/>
+    <circle cx="488" cy="314" r="1.8" fill="#f8f3e7"/>
+    <circle cx="226" cy="298" r="2.2" fill="#fff7c2"/>
+  </g>
+
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M162 162 C274 112 394 116 480 158 S676 230 804 158" stroke="url(#energyBeam)" stroke-width="8" opacity="0.94"/>
+    <path d="M164 186 C296 144 386 154 494 188 S664 230 802 184" stroke="#f8f3e7" stroke-width="2" opacity="0.22"/>
+    <path d="M302 88 C380 60 460 66 542 106" stroke="#13b5a6" stroke-width="2" opacity="0.3"/>
+    <path d="M560 110 C648 74 742 80 824 116" stroke="#e85d75" stroke-width="2" opacity="0.28"/>
+  </g>
+
+  <g filter="url(#softGlow)">
+    <circle cx="480" cy="170" r="74" fill="#201816"/>
+    <circle cx="480" cy="170" r="54" fill="url(#coreGlow)"/>
+    <path d="M480 108 L492 154 L538 140 L504 174 L534 218 L490 201 L480 248 L470 201 L426 218 L456 174 L422 140 L468 154 Z" fill="#fff7c2" opacity="0.74"/>
+    <circle cx="480" cy="170" r="20" fill="#f8f3e7"/>
+  </g>
+
+  <g>
+    <circle cx="164" cy="162" r="35" fill="#101b1a" stroke="#13b5a6" stroke-width="5"/>
+    <circle cx="164" cy="162" r="17" fill="#bdf4eb"/>
+    <path d="M112 132 L142 162 L112 192" fill="none" stroke="#f4b23c" stroke-width="7" stroke-linecap="round"/>
+    <path d="M216 132 L186 162 L216 192" fill="none" stroke="#f4b23c" stroke-width="7" stroke-linecap="round"/>
+  </g>
+
+  <g>
+    <path d="M652 206 L742 132" fill="none" stroke="#bdf4eb" stroke-width="12" stroke-linecap="round"/>
+    <circle cx="748" cy="126" r="24" fill="#13b5a6"/>
+    <circle cx="748" cy="126" r="10" fill="#f8f3e7"/>
+    <path d="M624 230 L678 206 L690 232 L636 256 Z" fill="#332520" stroke="#f4b23c" stroke-width="4"/>
+  </g>
+
+  <g>
+    <rect x="304" y="224" width="96" height="36" rx="10" fill="#151f1e" stroke="#13b5a6" stroke-width="4"/>
+    <path d="M322 242 L382 242" stroke="#bdf4eb" stroke-width="6" stroke-linecap="round"/>
+    <path d="M332 224 L344 196 L360 224" fill="#e85d75" opacity="0.8"/>
+  </g>
+
+  <g>
+    <circle cx="804" cy="158" r="46" fill="#1a1514" stroke="#e85d75" stroke-width="5"/>
+    <circle cx="804" cy="158" r="28" fill="none" stroke="#ffd4dc" stroke-width="5"/>
+    <path d="M778 158 C792 136 816 136 830 158 C816 180 792 180 778 158 Z" fill="#f4b23c" opacity="0.78"/>
+  </g>
+
+  <g opacity="0.72">
+    <rect x="90" y="284" width="158" height="10" rx="5" fill="#13b5a6"/>
+    <rect x="90" y="306" width="104" height="7" rx="3.5" fill="#f4b23c"/>
+    <rect x="688" y="272" width="168" height="10" rx="5" fill="#e85d75"/>
+    <rect x="744" y="294" width="112" height="7" rx="3.5" fill="#bdf4eb"/>
+  </g>
+</svg>

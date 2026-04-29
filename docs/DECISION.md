@@ -1,5 +1,27 @@
 # Decision
 
+## 2026-04-30 Product decision：主操作区工坊插画
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 当前有 3 个 open feedback issue、0 个 open bug issue。#4 已连续处理星图视觉航线、星图插画和星图明细折叠，但反馈主题仍是“界面全是密密麻麻的文字、希望生成图片”，本轮继续进入有反馈样本下的 Product decision。
+
+当前最大问题：前几轮视觉改动都集中在星图区域，主操作区仍主要由目标条、提示、点火按钮、连击状态和航线指令文字构成。继续只折叠星图文本会边际递减，玩家进入页面时的主要操作区域仍缺少“工坊正在运行”的画面信号。
+
+本轮决策：
+
+- 在主操作区新增项目内 SVG 工坊插画资产 `src/assets/workshop-visual.svg`。
+- 插画表现星核、聚能透镜、自动采集臂、稳定器和谐振环，补足点火主循环的第一眼画面。
+- 静态首页通过 `.workshop-scene-image` 引用本地资产，随现有 `src/` 构建进入 `dist/`。
+- 本轮只调整视觉呈现和静态测试；不改变存档、升级价格、星图 57 段路线、项目奖励、航线策略、航线指令、反馈入口或筛选规则。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-04-30 01:07 CST 查询到 3 个 open feedback issue、0 个 open bug issue；#4 继续作为视觉密度跟进对象。
+- 静态首页包含 `workshop-scene-image`、`src/assets/workshop-visual.svg` 和工坊插画 alt 文案。
+- 测试覆盖首页、样式和 SVG 资产引用链路。
+- `bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build` 通过；构建产物包含 `workshop-scene-image`、`workshop-visual.svg`、“星核工坊主操作插画”和 `energyBeam`。
+
+下一步：push 后等待 GitHub Pages workflow，验证线上资源并回复 #4；若 #4 复测仍认为画面不足，再评估章节级插图或升级卡片图标化。
+
 ## 2026-04-30 Product decision：航线连携
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 当前有 3 个 open feedback issue，0 个 open bug issue。#4 已连续处理视觉密度，#3 仍围绕“玩法太简单、只有点击和自动产能”保持 open，本轮进入有反馈样本下的 Product decision。

@@ -198,6 +198,16 @@ h2 {
   display: none;
 }
 
+.workshop-scene-image {
+  display: block;
+  width: min(100%, 560px);
+  aspect-ratio: 8 / 3;
+  object-fit: cover;
+  border: 1px solid rgba(248, 243, 231, 0.12);
+  border-radius: 8px;
+  background: #111615;
+}
+
 .core-button {
   position: relative;
   display: grid;
