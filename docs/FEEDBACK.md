@@ -5,6 +5,9 @@
 - GitHub Issues：gh 可用且已认证；2026-04-29 19:36 CST 查询到 1 个 open issue、1 个 open feedback issue、0 个 open bug issue。
 - #2 仍为 open，最后更新时间停留在 2026-04-29 11:30:37 UTC，未出现新的玩家复测结论或 bug；本轮不继续追加第 58 段，改为让星图筛选摘要追加当前筛选视图的终点航段，减少玩家判断本章、升级、奖励类型或全部视图跨度时的列表扫描成本。
 - data/feedback/github-feedback.md 已同步本地快照。
+- 本轮已回复 #2：说明筛选摘要新增终点提示，GitHub Pages workflow 25106925998 已成功，线上地址返回 HTTP 200，发布页面包含“终点 航段 57/57 星渊方舟”和 `projectFilterSummary`，线上脚本包含 `formatProjectFilterEndpoint` 和 `getProjectFilterSummary`；issue 保持 open，等待复测确认筛选终点提示是否降低 57 段星图在不同筛选视图里的跨度判断成本。
+- GitHub Issues：gh 可用且已认证；2026-04-29 19:46 CST 在回复后查询到 1 个 open issue、1 个 open feedback issue、0 个 open bug issue。
+- data/feedback/github-feedback.md 已在回复 #2 后同步本地快照。
 
 - GitHub Issues：gh 可用且已认证；2026-04-29 19:22 CST 查询到 1 个 open issue、1 个 open feedback issue、0 个 open bug issue。
 - #2 仍为 open，最后更新时间停留在 2026-04-29 11:15:23 UTC，未出现新的玩家复测结论或 bug；本轮不继续追加第 58 段，改为让星图筛选摘要追加最多两条后续未完成航段，减少切换筛选后的连续目标扫描成本。
