@@ -19,8 +19,11 @@
 - 图标具备可访问标签：累计航段图标、升级航段图标、总产能奖励图标、点击奖励图标、自动奖励图标和过载奖励图标。
 - 静态测试覆盖 `src/app.js` 项目卡片图标定义和 `src/styles.css` 图标样式。
 - `bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build` 已通过；构建产物包含 `PROJECT_CARD_ICON_DEFS`、`project-card-icons`、`project-card-icon`、`累计航段图标` 和 `过载奖励图标`。
+- GitHub Pages workflow 25124547651 已成功，线上地址返回 HTTP 200；线上 `app.js` 包含 `PROJECT_CARD_ICON_DEFS`、`project-card-icons`、`累计航段图标` 和 `过载奖励图标`，线上 `styles.css` 包含 `project-card-icon-track`、`project-card-icon-reward` 和 `project-card-icon-overload`。
+- #4 已回复并继续保持 open，等待复测确认星图项目卡片图标是否改善 57 段列表扫视感。
+- 回复后同步 GitHub Issues：2026-04-30 01:45 CST 查询到 3 个 open feedback issue、0 个 open bug issue；#4 更新时间为 2026-04-29T17:44:51Z。
 
-下一步：push 后等待 GitHub Pages workflow，线上检查通过后回复 #4；若 #4 复测仍认为视觉不足，再评估章节级插图或项目列表默认折叠策略。
+下一步：观察 #4 复测结论；若仍认为视觉不足，再评估章节级插图或项目列表默认折叠策略。
 
 ## 2026-04-30 Product decision：升级卡片图标化
 
