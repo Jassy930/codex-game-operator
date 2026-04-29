@@ -6,7 +6,9 @@
 - #2 仍为 open，最后更新时间停留在 2026-04-29 13:55:47 UTC，未出现新的玩家复测结论或 bug；本轮不继续追加第 58 段，改为让星图筛选摘要显示“状态构成”，减少玩家切换筛选视图后扫描已完成、当前和待推进卡片数量的成本。
 - data/feedback/github-feedback.md 已同步本地快照。
 - 本轮已完成本地验证：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build` 已通过。
-- 待推送后回复 #2：说明星图筛选摘要新增状态构成，并保持 issue open 等待复测确认。
+- 本轮已回复 #2：说明星图筛选摘要新增状态构成，GitHub Pages workflow 25113972752 已成功，线上地址返回 HTTP 200，线上首页包含“状态构成 当前 1 段 / 待推进 56 段”，线上脚本包含 `formatProjectFilterStatusMix`；issue 保持 open，等待复测确认筛选摘要状态构成是否降低 57 段星图在不同视图里的状态判断成本。
+- GitHub Issues：gh 可用且已认证；2026-04-29 22:13 CST 在回复后查询到 1 个 open issue、1 个 open feedback issue、0 个 open bug issue。
+- data/feedback/github-feedback.md 已在回复 #2 后同步本地快照。
 
 - GitHub Issues：gh 可用且已认证；2026-04-29 21:48 CST 查询到 1 个 open issue、1 个 open feedback issue、0 个 open bug issue。
 - #2 仍为 open，最后更新时间停留在 2026-04-29 13:38:36 UTC，未出现新的玩家复测结论或 bug；本轮不继续追加第 58 段，改为给星图项目卡片新增“已完成 / 当前航段 / 待推进”状态标签，减少玩家扫描 57 段列表时判断卡片状态的成本。

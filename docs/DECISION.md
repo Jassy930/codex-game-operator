@@ -18,8 +18,11 @@
 - GitHub Issues 已同步：2026-04-29 22:04 CST 查询到 1 个 open issue、1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
 - `bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build` 已通过，测试覆盖本章、升级、当前和已完成筛选的状态构成。
 - 静态首页初始筛选摘要已包含“状态构成 当前 1 段 / 待推进 56 段”。
+- GitHub Pages workflow 25113972752 已成功，线上地址返回 HTTP 200，线上首页包含“状态构成 当前 1 段 / 待推进 56 段”，线上脚本包含 `formatProjectFilterStatusMix`。
+- #2 已回复并保持 open，等待复测确认筛选摘要状态构成是否降低 57 段星图在不同视图里的状态判断成本。
+- GitHub Issues 已在回复后同步：2026-04-29 22:13 CST 查询到 1 个 open issue、1 个 open feedback issue、0 个 open bug issue。
 
-下一步：推送后等待 GitHub Pages 部署，并回复 #2 说明筛选摘要状态构成已上线，继续等待复测确认。
+下一步：继续观察 #2 复测是否认为筛选摘要状态构成降低 57 段星图在不同筛选视图里的状态判断成本。
 
 ## 2026-04-29 Product decision：星图项目状态标签
 
