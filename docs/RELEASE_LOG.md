@@ -7,6 +7,8 @@
 - 同步 GitHub Issues 反馈状态：当前 1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
 - 验证通过：bun install --no-save、bun run test、bun run build、npm install、npm test、npm run build。
 - 构建产物已包含 `current-chapter`、“本章”、`PROJECT_FILTER_DEFS`、`filterProjectStatuses` 和静态筛选按钮“本章 4”。
+- GitHub Pages workflow 25102939695 已成功，线上地址返回 HTTP 200，且发布文件包含“本章 4”、`current-chapter` 和 `filterProjectStatuses`。
+- 已回复 #2，说明星图本章筛选已部署，并保持 issue open 等待复测。
 - 新增星图航段筛选：项目列表可按全部、当前、未完成和已完成筛选，当前筛选用于直接定位正在推进的航段，已完成筛选用于复盘已获得奖励。
 - 筛选仅改变列表展示，不新增存档字段，不改变 57 段星图路线、项目完成判定、奖励数值和升级价格。
 - 同步 GitHub Issues 反馈状态：当前 1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。

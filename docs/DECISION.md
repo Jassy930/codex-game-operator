@@ -18,8 +18,11 @@
 - GitHub Issues 已同步：2026-04-29 17:58 CST 查询到 1 个 open issue、1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
 - `bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build` 已通过，覆盖本章筛选返回当前章节 5 段、非法筛选回退和全部完成时本章筛选为空。
 - 构建产物已包含 `current-chapter`、“本章”、`PROJECT_FILTER_DEFS`、`filterProjectStatuses` 和静态筛选按钮“本章 4”。
+- GitHub Pages workflow 25102939695 已成功，线上地址返回 HTTP 200，发布页面包含“本章 4”，线上脚本包含 `current-chapter` 和 `filterProjectStatuses`。
+- #2 已回复并保持 open，等待复测确认本章筛选是否降低 57 段星图的章节扫描成本。
+- GitHub Issues 已在回复后同步：2026-04-29 18:10 CST 查询到 1 个 open issue、1 个 open feedback issue、0 个 open bug issue。
 
-下一步：完成全量安装、测试、构建、发布和 #2 回复后，再观察本章筛选是否降低 57 段星图的章节扫描成本。
+下一步：继续观察 #2 复测是否认为本章筛选改善 57 段星图的章节扫描和内容操作成本。
 
 ## 2026-04-29 Product decision：星图航段筛选
 

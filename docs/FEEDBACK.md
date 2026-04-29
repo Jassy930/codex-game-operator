@@ -5,6 +5,9 @@
 - GitHub Issues：gh 可用且已认证；2026-04-29 17:58 CST 查询到 1 个 open issue、1 个 open feedback issue、0 个 open bug issue。
 - #2 仍为 open，最后更新时间停留在 2026-04-29 09:52:35 UTC，未出现新的玩家复测结论或 bug；本轮不继续追加第 58 段，改为新增“本章”筛选，让现有 57 段星图可按当前航段所属章节收束查看。
 - data/feedback/github-feedback.md 已同步本地快照。
+- 本轮已回复 #2：说明新增“本章”筛选，GitHub Pages workflow 25102939695 已成功，线上地址返回 HTTP 200，发布页面包含“本章 4”，线上脚本包含 `current-chapter` 和 `filterProjectStatuses`；issue 保持 open，等待复测确认本章筛选是否降低 57 段星图的章节扫描成本。
+- GitHub Issues：gh 可用且已认证；2026-04-29 18:10 CST 在回复后查询到 1 个 open issue、1 个 open feedback issue、0 个 open bug issue。
+- data/feedback/github-feedback.md 已在回复 #2 后同步本地快照。
 
 - GitHub Issues：gh 可用且已认证；2026-04-29 17:43 CST 查询到 1 个 open issue、1 个 open feedback issue、0 个 open bug issue。
 - #2 仍为 open，最后更新时间停留在 2026-04-29 09:35:28 UTC，未出现新的玩家复测结论或 bug；本轮不继续追加第 58 段，改为新增星图航段筛选，让现有 57 段内容可按全部、当前、未完成和已完成快速定位。
