@@ -706,6 +706,20 @@ test("静态首页会引用主操作区工坊插画资产", () => {
   assert.match(asset, /energyBeam/);
 });
 
+test("升级卡片会渲染可扫视图标", () => {
+  const appJs = readFileSync(new URL("../src/app.js", import.meta.url), "utf8");
+  const styles = readFileSync(new URL("../src/styles.css", import.meta.url), "utf8");
+
+  assert.match(appJs, /UPGRADE_ICON_DEFS/);
+  assert.match(appJs, /upgrade-card-head/);
+  assert.match(appJs, /upgrade-icon-/);
+  assert.match(appJs, /聚能透镜图标/);
+  assert.match(appJs, /星核谐振器图标/);
+  assert.match(styles, /\.upgrade-icon/);
+  assert.match(styles, /\.upgrade-icon-lens/);
+  assert.match(styles, /\.upgrade-icon-resonator/);
+});
+
 test("静态首页会默认折叠星图详细文本", () => {
   const indexHtml = readFileSync(new URL("../index.html", import.meta.url), "utf8");
   const styles = readFileSync(new URL("../src/styles.css", import.meta.url), "utf8");

@@ -1,5 +1,27 @@
 # Decision
 
+## 2026-04-30 Product decision：升级卡片图标化
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 当前有 3 个 open feedback issue、0 个 open bug issue。#4 已处理星图视觉航线、星图插画、星图明细折叠和主操作区工坊插画，但没有新的复测结论；本轮继续进入有反馈样本下的 Product decision。
+
+当前最大问题：#4 的核心是“界面全是密密麻麻的文字、希望生成图片”。上一轮已经覆盖星图区和主操作区的大画面，但升级面板仍由四张文字卡片组成，玩家需要阅读名称、说明、等级、成本和状态来区分点击、自动、总产能和过载四条成长线。
+
+本轮决策：
+
+- 为四个升级卡片新增固定尺寸内联 SVG 图标：聚能透镜、自动采集臂、星核稳定器和星核谐振器分别使用不同图形与配色。
+- 图标放入卡片头部，与升级名称和“目标推荐”标记同层，提升扫视识别，不引入远端图片依赖或新资源管线。
+- 本轮只调整运行期 DOM、样式和静态测试；不改变存档、升级价格、产能公式、星图 57 段路线、航线策略、航线指令、反馈入口或筛选规则。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-04-30 01:20 CST 查询到 3 个 open feedback issue、0 个 open bug issue；#4 继续作为视觉密度跟进对象。
+- 升级卡片运行期包含 `upgrade-card-head`、`upgrade-icon`、`upgrade-icon-lens`、`upgrade-icon-collector`、`upgrade-icon-stabilizer` 和 `upgrade-icon-resonator`。
+- 图标具备可访问标签：聚能透镜图标、自动采集臂图标、星核稳定器图标和星核谐振器图标。
+- 静态测试覆盖 `src/app.js` 图标定义和 `src/styles.css` 图标样式。
+- `bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build` 通过；构建产物包含 `UPGRADE_ICON_DEFS`、`upgrade-icon`、`聚能透镜图标` 和 `星核谐振器图标`。
+
+下一步：push 后等待 GitHub Pages workflow；部署成功后回复 #4，并继续观察升级卡片图标是否改善右侧面板的扫视感。
+
 ## 2026-04-30 Product decision：主操作区工坊插画
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 当前有 3 个 open feedback issue、0 个 open bug issue。#4 已连续处理星图视觉航线、星图插画和星图明细折叠，但反馈主题仍是“界面全是密密麻麻的文字、希望生成图片”，本轮继续进入有反馈样本下的 Product decision。

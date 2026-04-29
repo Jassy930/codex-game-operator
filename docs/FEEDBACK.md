@@ -2,6 +2,11 @@
 
 ## 2026-04-30
 
+- GitHub Issues：gh 可用且已认证；2026-04-30 01:20 CST 通过 REST API 同步到 3 个 open issue、3 个 open feedback issue、0 个 open bug issue。
+- #4 继续作为本轮 Product decision：星图区和主操作区已有视觉资产，但升级面板仍是四张相似文字卡片；本轮新增升级卡片图标，继续回应“生成一些图片、界面更好看”的反馈。
+- 本轮改动在 `src/app.js` 新增 `UPGRADE_ICON_DEFS`、`renderUpgradeIcon` 和 `upgrade-card-head` 结构，在 `src/styles.css` 新增四类 `upgrade-icon-*` 样式；不改变存档、数值、星图 57 段路线、筛选规则、航线策略、航线指令或反馈入口。
+- 本轮本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；静态测试覆盖升级图标定义和样式，构建产物已包含 `UPGRADE_ICON_DEFS`、`upgrade-icon`、`聚能透镜图标` 和 `星核谐振器图标`。
+
 - GitHub Issues：gh 可用且已认证；2026-04-30 01:07 CST 通过 REST API 同步到 3 个 open issue、3 个 open feedback issue、0 个 open bug issue。
 - #4 继续作为本轮 Product decision：星图区域已有视觉航线、插画和默认折叠明细，但主操作区仍主要是文字提示和按钮；本轮新增主操作区工坊插画，继续回应“生成一些图片、界面更好看”的反馈。
 - 本轮改动新增 `src/assets/workshop-visual.svg`、首页图片引用和 `.workshop-scene-image` 样式；不改变存档、数值、星图 57 段路线、筛选规则、航线策略、航线指令或反馈入口。

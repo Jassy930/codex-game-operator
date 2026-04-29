@@ -33,6 +33,42 @@ const STORAGE_KEY = "codex-game-operator.state";
 const EVENT_KEY = "codex-game-operator.events";
 const FEEDBACK_KEY = "codex-game-operator.feedback";
 const SESSION_ID = globalThis.crypto?.randomUUID?.() ?? String(Date.now());
+const SVG_NS = "http://www.w3.org/2000/svg";
+const UPGRADE_ICON_DEFS = {
+  lens: {
+    label: "聚能透镜图标",
+    nodes: [
+      ["circle", { cx: 24, cy: 24, r: 10, fill: "none", stroke: "currentColor", "stroke-width": 4 }],
+      ["circle", { cx: 24, cy: 24, r: 4, fill: "currentColor", opacity: 0.36 }],
+      ["path", { d: "M7 24h8M33 24h8M24 7v8M24 33v8", stroke: "currentColor", "stroke-width": 4, "stroke-linecap": "round" }]
+    ]
+  },
+  collector: {
+    label: "自动采集臂图标",
+    nodes: [
+      ["path", { d: "M10 36h28", stroke: "currentColor", "stroke-width": 5, "stroke-linecap": "round" }],
+      ["path", { d: "M14 34l10-12 10 12", fill: "none", stroke: "currentColor", "stroke-width": 4, "stroke-linejoin": "round" }],
+      ["circle", { cx: 24, cy: 19, r: 6, fill: "none", stroke: "currentColor", "stroke-width": 4 }],
+      ["path", { d: "M18 13l-4-4M30 13l4-4", stroke: "currentColor", "stroke-width": 3, "stroke-linecap": "round" }]
+    ]
+  },
+  stabilizer: {
+    label: "星核稳定器图标",
+    nodes: [
+      ["path", { d: "M24 6l15 8v12c0 8-6 14-15 18C15 40 9 34 9 26V14z", fill: "none", stroke: "currentColor", "stroke-width": 4, "stroke-linejoin": "round" }],
+      ["path", { d: "M17 25l5 5 10-12", fill: "none", stroke: "currentColor", "stroke-width": 4, "stroke-linecap": "round", "stroke-linejoin": "round" }]
+    ]
+  },
+  resonator: {
+    label: "星核谐振器图标",
+    nodes: [
+      ["circle", { cx: 24, cy: 24, r: 5, fill: "currentColor", opacity: 0.34 }],
+      ["circle", { cx: 24, cy: 24, r: 12, fill: "none", stroke: "currentColor", "stroke-width": 4 }],
+      ["circle", { cx: 24, cy: 24, r: 19, fill: "none", stroke: "currentColor", "stroke-width": 3, "stroke-dasharray": "4 5" }],
+      ["path", { d: "M24 5v6M24 37v6M5 24h6M37 24h6", stroke: "currentColor", "stroke-width": 3, "stroke-linecap": "round" }]
+    ]
+  }
+};
 
 const elements = {
   energy: document.querySelector("#energyValue"),
@@ -308,6 +344,15 @@ function renderUpgrade(upgrade, current, goal) {
   goalBadge.textContent = "目标推荐";
   goalBadge.hidden = !isGoalTarget;
 
+  const head = document.createElement("span");
+  head.className = "upgrade-card-head";
+
+  const titleGroup = document.createElement("span");
+  titleGroup.className = "upgrade-title-group";
+  titleGroup.append(header, goalBadge);
+
+  head.append(renderUpgradeIcon(upgrade), titleGroup);
+
   const summary = document.createElement("span");
   summary.className = "upgrade-summary";
   summary.textContent = upgrade.summary;
@@ -330,8 +375,35 @@ function renderUpgrade(upgrade, current, goal) {
   fill.style.width = Math.round(affordability.progress * 100) + "%";
   meter.append(fill);
 
-  button.append(header, goalBadge, summary, meta, affordance, meter);
+  button.append(head, summary, meta, affordance, meter);
   return button;
+}
+
+function renderUpgradeIcon(upgrade) {
+  const iconDef = UPGRADE_ICON_DEFS[upgrade.id] ?? UPGRADE_ICON_DEFS.stabilizer;
+  const wrapper = document.createElement("span");
+  wrapper.className = "upgrade-icon upgrade-icon-" + upgrade.id;
+  wrapper.setAttribute("role", "img");
+  wrapper.setAttribute("aria-label", iconDef.label);
+
+  const svg = document.createElementNS(SVG_NS, "svg");
+  svg.setAttribute("viewBox", "0 0 48 48");
+  svg.setAttribute("aria-hidden", "true");
+  svg.setAttribute("focusable", "false");
+  iconDef.nodes.forEach(([tagName, attributes]) => {
+    svg.append(createSvgElement(tagName, attributes));
+  });
+
+  wrapper.append(svg);
+  return wrapper;
+}
+
+function createSvgElement(tagName, attributes) {
+  const element = document.createElementNS(SVG_NS, tagName);
+  Object.entries(attributes).forEach(([name, value]) => {
+    element.setAttribute(name, String(value));
+  });
+  return element;
 }
 
 function renderRouteStances(routeStance) {
