@@ -2,6 +2,12 @@
 
 ## 2026-04-29
 
+- GitHub Issues：2026-04-29 22:51 CST 在回复 #2 后重新同步，当前 3 个 open issue、3 个 open feedback issue、0 个 open bug issue。
+- #2 已回复：说明筛选摘要下一条、后续和终点已新增章节内位置，GitHub Pages workflow 25115992745 已成功，线上地址返回 HTTP 200，线上首页包含“下一条 航段 1/57 · 首段星图 1/4 点亮星图”和“终点 航段 57/57 · 远航长尾 44/44 星渊方舟”，线上脚本包含 `formatProjectFilterProjectLabel`；issue 保持 open，等待复测。
+- 新增 #3：玩家反馈“游戏玩法太简单了，不够丰富，就只有点击和自动产能这样的东西”，快照位于累计 3.88M、巡航优先、当前目标巡航航校，指向玩法层需要新增主动选择或分支，不只是继续扩充文本说明。
+- 新增 #4：玩家反馈“现在界面里全是密密麻麻的文字，能不能生成一些图片？让界面变得更好看一些”，快照位于累计 11.7M、巡航优先、当前目标巡航航校，指向视觉资产和信息密度问题。
+- data/feedback/github-feedback.md 已同步回复后快照；下一轮优先在 #4 的视觉密度问题和 #3 的玩法单薄问题之间做 Product decision。
+
 - GitHub Issues：gh 可用且已认证；2026-04-29 22:39 CST 查询到 1 个 open issue、1 个 open feedback issue、0 个 open bug issue。
 - #2 仍为 open，最后更新时间停留在 2026-04-29 14:33:01 UTC，未出现新的玩家复测结论或 bug；本轮不继续追加第 58 段，改为让筛选摘要里的下一条、后续和终点航段显示章节内位置，减少玩家在全局航段号和章节构成之间来回对照的成本。
 - data/feedback/github-feedback.md 已同步本地快照。

@@ -7,6 +7,9 @@
 - 同步 GitHub Issues 反馈状态：当前 1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
 - 验证通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`。
 - 构建产物已包含 `formatProjectFilterProjectLabel`、“下一条 航段 1/57 · 首段星图 1/4 点亮星图”和“终点 航段 57/57 · 远航长尾 44/44 星渊方舟”。
+- GitHub Pages workflow 25115992745 已成功，线上地址返回 HTTP 200，且发布文件包含“下一条 航段 1/57 · 首段星图 1/4 点亮星图”“终点 航段 57/57 · 远航长尾 44/44 星渊方舟”和 `formatProjectFilterProjectLabel`。
+- 已回复 #2，说明筛选摘要航段章节位置已部署，并保持 issue open 等待复测。
+- 回复后同步 GitHub Issues 反馈状态：当前 3 个 open feedback issue、0 个 open bug issue；新增 #3 指向玩法太简单，新增 #4 指向界面文字密度和图片需求。
 - 新增星图筛选章节构成：筛选摘要会按当前视图显示各章节航段数，例如全部初始视图会显示“章节构成 首段星图 4 段 / 专精校准 5 段 / 深空基建 4 段 / 远航长尾 44 段”。
 - 章节构成仅改变筛选摘要展示；不新增存档字段，不改变 57 段星图路线、项目完成判定、奖励数值、升级价格、航线策略或筛选规则。
 - 同步 GitHub Issues 反馈状态：当前 1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
