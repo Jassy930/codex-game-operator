@@ -335,6 +335,8 @@ function renderDirective(option) {
         masteryBonus: result.masteryBonus,
         masteryBonusRate: result.masteryBonusRate,
         masteryStacks: result.masteryStacks,
+        planReward: result.planReward,
+        planBonusRate: result.planBonusRate,
         masteryRewardGained: result.masteryRewardGained,
         masteryRewardStacks: result.masteryRewardStacks,
         rotationReward: result.rotationReward,

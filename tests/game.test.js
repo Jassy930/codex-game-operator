@@ -12,6 +12,7 @@ import {
   createInitialState,
   DIRECTIVE_MASTERY_CAPSTONE_RATE,
   DIRECTIVE_MASTERY_MAX_STACKS,
+  DIRECTIVE_PLAN_BONUS_RATE,
   DIRECTIVE_STANCE_BONUS_RATE,
   DIRECTIVE_STANCE_FINISHER_RATE,
   filterProjectStatuses,
@@ -175,10 +176,13 @@ test("航线指令会在 100K 后解锁并返回预计收益", () => {
   assert.equal(locked.options[0].previewText, "累计 100K 能量后解锁航线指令");
   assert.equal(unlocked.unlocked, true);
   assert.equal(unlocked.options[0].ready, true);
-  assert.equal(unlocked.options[0].previewText, "预计 +89.6 能量");
+  assert.equal(unlocked.options[0].previewText, "预计 +95 能量 · 预案执行 +5.4");
   assert.equal(unlocked.options[0].recommended, true);
   assert.equal(unlocked.options[0].recommendationText, "收束起手");
-  assert.equal(unlocked.options[1].previewText, "预计 +252 能量");
+  assert.equal(unlocked.options[0].planReward, 5.376);
+  assert.equal(unlocked.options[0].planRewardText, "预案执行 +5.4");
+  assert.equal(unlocked.options[0].planBonusRate, DIRECTIVE_PLAN_BONUS_RATE);
+  assert.equal(unlocked.options[1].previewText, "预计 +267.1 能量 · 预案执行 +15.1");
   assert.equal(unlocked.options[1].recommended, true);
   assert.equal(unlocked.options[1].recommendationText, "收束起手");
   assert.equal(unlocked.options[2].previewText, "预计 +17.2 能量 · 策略契合 +10%");
@@ -230,10 +234,13 @@ test("执行航线指令会获得即时收益并进入冷却", () => {
   const blocked = activateDirective(result.state, "ignition-salvo", 11_000);
 
   assert.equal(result.activated, true);
-  assert.equal(result.gain, 89.6);
-  assert.equal(result.state.energy, 89.6);
-  assert.equal(result.state.totalEnergy, 100_089.6);
-  assert.equal(result.notice, "已执行点火齐射，+89.6 能量。");
+  assert.equal(result.gain, 94.976);
+  assert.equal(result.planReward, 5.376);
+  assert.equal(result.planRewardText, "预案执行 +5.4");
+  assert.equal(result.planBonusRate, DIRECTIVE_PLAN_BONUS_RATE);
+  assert.equal(result.state.energy, 94.976);
+  assert.equal(result.state.totalEnergy, 100_094.976);
+  assert.equal(result.notice, "已执行点火齐射，预案执行 +5.4，+95 能量。");
   assert.equal(status.options[0].ready, false);
   assert.equal(status.options[0].statusText, "冷却 35 秒");
   assert.equal(blocked.activated, false);
@@ -271,7 +278,7 @@ test("轮换航线指令会触发航线连携收益", () => {
   assert.equal(cruiseOption.recommended, true);
   assert.equal(cruiseOption.recommendationText, "收束续航");
   assert.equal(cruiseOption.finisherRecommended, false);
-  assert.equal(cruiseOption.previewText, "预计 +50.2 能量 · 航线连携 +12%");
+  assert.equal(cruiseOption.previewText, "预计 +52.9 能量 · 预案执行 +2.7 · 航线连携 +12%");
   assert.equal(earlyResonanceOption.recommended, false);
   assert.deepEqual(firstPlan.nextDirectiveIds, ["cruise-cache"]);
   assert.equal(firstPlan.recommendationText, "收束续航");
@@ -284,8 +291,9 @@ test("轮换航线指令会触发航线连携收益", () => {
   assert.equal(second.baseGain, 44.8);
   assert.equal(second.chainStacks, 1);
   assert.equal(second.chainMultiplier, 1.12);
-  assert.equal(second.gain, 50.176);
-  assert.equal(second.notice, "已执行巡航回收，航线连携 +12%，+50.2 能量。");
+  assert.equal(second.planReward, 2.688);
+  assert.equal(second.gain, 52.864);
+  assert.equal(second.notice, "已执行巡航回收，预案执行 +2.7，航线连携 +12%，+52.9 能量。");
   assert.equal(
     secondPlan.text,
     "指令轮换 2/3 · 当前 巡航回收 · 连携窗口 1.5 分钟 · 下一步切换到谐振脉冲，预计连携 +24%，并触发轮换目标奖励；收束到谐振脉冲还会触发策略终结奖励；完成 3/3 轮换会累积 3 分钟指令熟练，每层指令收益 +5%，最多 3 层；满层后继续完成 3/3 会触发满层回响 +10%。"
@@ -296,14 +304,16 @@ test("轮换航线指令会触发航线连携收益", () => {
   assert.equal(resonanceOption.finisherRecommendationText, "策略终结");
   assert.equal(
     resonanceOption.previewText,
-    "预计 +26.6 能量 · 航线连携 +24% · 轮换目标 +2.8 · 策略终结 +1.9 · 策略契合 +10%"
+    "预计 +27.6 能量 · 预案执行 +0.9 · 航线连携 +24% · 轮换目标 +2.8 · 策略终结 +1.9 · 策略契合 +10%"
   );
   assert.equal(third.chainStacks, 2);
   assert.equal(third.chainMultiplier, 1.24);
+  assert.equal(third.planReward, 0.9408);
   assert.equal(third.rotationReward, 2.8224);
   assert.equal(third.stanceFinisherReward, 1.8816);
-  assert.equal(third.stanceBonus, 2.4147);
-  assert.equal(third.gain, 26.5619);
+  assert.equal(third.stanceBonus, 2.5088);
+  assert.equal(third.gain, 27.5968);
+  assert.equal(third.planRewardText, "预案执行 +0.9");
   assert.equal(third.chainBonusText, "航线连携 +24%");
   assert.equal(third.rotationRewardText, "轮换目标 +2.8");
   assert.equal(third.stanceFinisherText, "策略终结 +1.9");
@@ -312,7 +322,7 @@ test("轮换航线指令会触发航线连携收益", () => {
   assert.equal(third.masteryRewardStacks, 1);
   assert.equal(third.masteryRewardText, "指令熟练 +1 层 (1/3)");
   assert.equal(third.state.directiveMastery.stacks, 1);
-  assert.equal(third.notice, "已执行谐振脉冲，航线连携 +24%，轮换目标 +2.8，策略终结 +1.9，策略契合 +10%，指令熟练 +1 层 (1/3)，+26.6 能量。");
+  assert.equal(third.notice, "已执行谐振脉冲，预案执行 +0.9，航线连携 +24%，轮换目标 +2.8，策略终结 +1.9，策略契合 +10%，指令熟练 +1 层 (1/3)，+27.6 能量。");
   assert.equal(DIRECTIVE_STANCE_FINISHER_RATE, 0.12);
   assert.equal(continuationPlan.progress, 3);
   assert.deepEqual(continuationPlan.nextDirectiveIds, ["ignition-salvo"]);
@@ -326,7 +336,7 @@ test("轮换航线指令会触发航线连携收益", () => {
   assert.equal(ignitionContinuationOption.recommendationText, "熟练续航");
   assert.equal(
     ignitionContinuationOption.previewText,
-    "预计 +133.6 能量 · 指令熟练 +5% · 航线连携 +24% · 轮换目标 +16.9"
+    "预计 +139.2 能量 · 指令熟练 +5% · 预案执行 +5.6 · 航线连携 +24% · 轮换目标 +16.9"
   );
 
   const masteredState = {
@@ -412,17 +422,21 @@ test("满层指令熟练会触发回响续航奖励", () => {
   );
   assert.equal(ignitionOption.recommended, true);
   assert.equal(ignitionOption.recommendationText, "回响续航");
+  assert.equal(ignitionOption.planReward, 6.1824);
+  assert.equal(ignitionOption.planRewardText, "预案执行 +6.2");
   assert.equal(ignitionOption.masteryCapstoneReward, 10.304);
   assert.equal(ignitionOption.masteryCapstoneText, "满层回响 +10.3");
   assert.equal(
     ignitionOption.previewText,
-    "预计 +156.6 能量 · 指令熟练 +15% · 航线连携 +24% · 轮换目标 +18.5 · 满层回响 +10.3"
+    "预计 +162.8 能量 · 指令熟练 +15% · 预案执行 +6.2 · 航线连携 +24% · 轮换目标 +18.5 · 满层回响 +10.3"
   );
+  assert.equal(result.planReward, 6.1824);
+  assert.equal(result.planRewardText, "预案执行 +6.2");
   assert.equal(result.masteryCapstoneReward, 10.304);
   assert.equal(result.masteryCapstoneText, "满层回响 +10.3");
   assert.equal(
     result.notice,
-    "已执行点火齐射，指令熟练 +15%，航线连携 +24%，轮换目标 +18.5，满层回响 +10.3，指令熟练刷新 (3/3)，+156.6 能量。"
+    "已执行点火齐射，指令熟练 +15%，预案执行 +6.2，航线连携 +24%，轮换目标 +18.5，满层回响 +10.3，指令熟练刷新 (3/3)，+162.8 能量。"
   );
 });
 
@@ -440,11 +454,12 @@ test("航线连携超时后会重置", () => {
   const cruiseOption = status.options.find((option) => option.id === "cruise-cache");
   const expired = activateDirective(first.state, "cruise-cache", 92_000);
 
-  assert.equal(cruiseOption.previewText, "预计 +44.8 能量");
+  assert.equal(cruiseOption.previewText, "预计 +47.5 能量 · 预案执行 +2.7");
   assert.equal(expired.chainStacks, 0);
   assert.equal(expired.chainMultiplier, 1);
-  assert.equal(expired.gain, 44.8);
-  assert.equal(expired.notice, "已执行巡航回收，+44.8 能量。");
+  assert.equal(expired.planReward, 2.688);
+  assert.equal(expired.gain, 47.488);
+  assert.equal(expired.notice, "已执行巡航回收，预案执行 +2.7，+47.5 能量。");
 });
 
 test("星图航线策略会兼容旧存档和未知策略", () => {
@@ -1021,10 +1036,13 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(indexHtml, /非契合指令起手/);
   assert.match(indexHtml, /第二步继续避开契合指令/);
   assert.match(indexHtml, /3\/3 策略终结/);
+  assert.match(indexHtml, /预案执行奖励/);
   assert.match(indexHtml, /指令熟练/);
   assert.match(indexHtml, /回响续航/);
   assert.match(indexHtml, /满层回响/);
   assert.match(appJs, /rotationReward: result\.rotationReward/);
+  assert.match(appJs, /planReward: result\.planReward/);
+  assert.match(appJs, /planBonusRate: result\.planBonusRate/);
   assert.match(appJs, /masteryCapstoneReward: result\.masteryCapstoneReward/);
   assert.match(appJs, /masteryCapstoneRate: result\.masteryCapstoneRate/);
   assert.match(appJs, /stanceFinisherReward: result\.stanceFinisherReward/);

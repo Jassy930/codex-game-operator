@@ -1,5 +1,29 @@
 # Decision
 
+## 2026-04-30 Product decision：航线指令预案执行奖励
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-04-30 06:54 CST 同步到 3 个 open feedback issue、0 个 open bug issue。没有新的 bug；#3 仍是最近更新的玩法反馈，继续进入有反馈样本下的 Product decision。
+
+当前最大问题：航线指令已经有主动按钮、连携、轮换目标、策略契合、策略终结、指令熟练、熟练续航和满层回响，但按钮推荐本身仍主要是提示。玩家按推荐顺序操作时，系统还缺少一个明确的“我执行了预案”的即时奖励反馈。
+
+本轮决策：
+
+- 新增 `DIRECTIVE_PLAN_BONUS_RATE = 0.06`，当玩家执行的指令位于 `getDirectivePlan.nextDirectiveIds` 推荐预案中时，额外获得有效基础指令收益 6% 的“预案执行”奖励。
+- 预计收益、执行反馈和本地 `directive` 事件记录 `planReward` / `planBonusRate`；静态锁定提示同步说明按推荐预案执行有奖励。
+- 本轮只调整航线指令推荐预案的即时奖励和提示；不新增存档字段，不改变升级价格、产能公式、星图 57 段路线、项目奖励、指令基础收益、冷却、连携窗口、轮换目标奖励、策略契合、策略终结、指令熟练、满层回响或筛选规则。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-04-30 06:54 CST 查询到 3 个 open feedback issue、0 个 open bug issue；#3 作为本轮处理对象。
+- 0/3 均衡航线下，推荐的点火齐射预计收益显示“预计 +95 能量 · 预案执行 +5.4”，非推荐的谐振脉冲不获得预案执行奖励。
+- 执行推荐点火齐射会返回 `planReward = 5.376`、`planBonusRate = 0.06`，执行提示为“已执行点火齐射，预案执行 +5.4，+95 能量。”。
+- 3/3 满层熟练回响续航下，推荐点火齐射同时显示指令熟练、预案执行、航线连携、轮换目标和满层回响。
+- `src/app.js` 的本地 `directive` 事件记录 `planReward` 和 `planBonusRate`。
+- `bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build` 已通过；测试数 102 项。
+- 构建产物包含 `DIRECTIVE_PLAN_BONUS_RATE`、`planReward`、`planBonusRate`、“预案执行”和“预案执行奖励”。
+
+下一步：推送并等待 GitHub Pages workflow；部署成功后回复 #3，等待玩家复测预案执行奖励是否让主动指令顺序更有操作确认感。
+
 ## 2026-04-30 Product decision：指令满层回响续航
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-04-30 06:32 CST 同步到 3 个 open feedback issue、0 个 open bug issue。没有新的玩家复测或 bug；#3 仍指向“玩法太简单、只有点击和自动产能”，本轮进入有反馈样本下的 Product decision。

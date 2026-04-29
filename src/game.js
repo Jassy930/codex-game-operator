@@ -1106,6 +1106,7 @@ export const DIRECTIVE_CHAIN_WINDOW_SECONDS = 90;
 export const DIRECTIVE_CHAIN_BONUS_STEP = 0.12;
 export const DIRECTIVE_CHAIN_MAX_STACKS = 2;
 export const DIRECTIVE_ROTATION_REWARD_RATE = 0.18;
+export const DIRECTIVE_PLAN_BONUS_RATE = 0.06;
 export const DIRECTIVE_STANCE_BONUS_RATE = 0.1;
 export const DIRECTIVE_STANCE_FINISHER_RATE = 0.12;
 export const DIRECTIVE_MASTERY_WINDOW_SECONDS = 180;
@@ -1377,6 +1378,8 @@ export function activateDirective(state, directiveId, now = Date.now()) {
   const mastery = getDirectiveMastery(current, now);
   const masteryBonus = getDirectiveMasteryBonus(baseGain, mastery);
   const effectiveBaseGain = roundTo(baseGain + masteryBonus, 4);
+  const plan = getDirectivePlan(current, now);
+  const planReward = getDirectivePlanReward(effectiveBaseGain, plan, directive.id);
   const chain = getDirectiveChainForUse(current, directive.id, now);
   const rotationReward = getDirectiveRotationReward(effectiveBaseGain, chain);
   const masteryCapstoneReward = getDirectiveMasteryCapstoneReward(
@@ -1392,6 +1395,7 @@ export function activateDirective(state, directiveId, now = Date.now()) {
   );
   const preStanceGain = roundTo(
     effectiveBaseGain * chain.multiplier +
+      planReward +
       rotationReward +
       masteryCapstoneReward +
       stanceFinisherReward,
@@ -1418,6 +1422,7 @@ export function activateDirective(state, directiveId, now = Date.now()) {
     lastPulse: directive.name
   };
   const masteryBonusText = formatDirectiveMasteryBonus(mastery);
+  const planRewardText = formatDirectivePlanReward(planReward);
   const chainText = formatDirectiveChainBonus(chain);
   const rotationRewardText = formatDirectiveRotationReward(rotationReward);
   const masteryCapstoneText =
@@ -1435,6 +1440,8 @@ export function activateDirective(state, directiveId, now = Date.now()) {
     masteryBonus,
     masteryBonusRate: mastery.bonusRate,
     masteryStacks: mastery.stacks,
+    planReward,
+    planBonusRate: DIRECTIVE_PLAN_BONUS_RATE,
     masteryRewardGained: masteryReward.gained,
     masteryRewardStacks: masteryReward.mastery.stacks,
     rotationReward,
@@ -1446,6 +1453,7 @@ export function activateDirective(state, directiveId, now = Date.now()) {
     chainStacks: chain.stacks,
     chainMultiplier: chain.multiplier,
     masteryBonusText,
+    planRewardText,
     chainBonusText: chainText,
     rotationRewardText,
     masteryCapstoneText,
@@ -1458,6 +1466,7 @@ export function activateDirective(state, directiveId, now = Date.now()) {
       directive.name +
       "，" +
       (masteryBonusText ? masteryBonusText + "，" : "") +
+      (planRewardText ? planRewardText + "，" : "") +
       (chainText ? chainText + "，" : "") +
       (rotationRewardText ? rotationRewardText + "，" : "") +
       (masteryCapstoneText ? masteryCapstoneText + "，" : "") +
@@ -1937,6 +1946,7 @@ export function getDirectiveStatus(state, now = Date.now()) {
       const masteryBonus = getDirectiveMasteryBonus(baseGain, mastery);
       const effectiveBaseGain = roundTo(baseGain + masteryBonus, 4);
       const chain = getDirectiveChainForUse(current, directive.id, now);
+      const planReward = getDirectivePlanReward(effectiveBaseGain, plan, directive.id);
       const rotationReward = getDirectiveRotationReward(effectiveBaseGain, chain);
       const masteryCapstoneReward = getDirectiveMasteryCapstoneReward(
         effectiveBaseGain,
@@ -1951,6 +1961,7 @@ export function getDirectiveStatus(state, now = Date.now()) {
       );
       const preStanceGain = roundTo(
         effectiveBaseGain * chain.multiplier +
+          planReward +
           rotationReward +
           masteryCapstoneReward +
           stanceFinisherReward,
@@ -1958,6 +1969,7 @@ export function getDirectiveStatus(state, now = Date.now()) {
       );
       const stanceBonus = roundTo(preStanceGain * stanceBonusRate, 4);
       const gain = roundTo(preStanceGain + stanceBonus, 4);
+      const planRewardText = formatDirectivePlanReward(planReward);
       const chainText = formatDirectiveChainBonus(chain);
       const rotationRewardText = formatDirectiveRotationReward(rotationReward);
       const masteryCapstoneText =
@@ -1980,6 +1992,8 @@ export function getDirectiveStatus(state, now = Date.now()) {
         masteryBonus,
         masteryBonusRate: mastery.bonusRate,
         masteryStacks: mastery.stacks,
+        planReward,
+        planBonusRate: DIRECTIVE_PLAN_BONUS_RATE,
         rotationReward,
         masteryCapstoneReward,
         masteryCapstoneRate: DIRECTIVE_MASTERY_CAPSTONE_RATE,
@@ -1988,6 +2002,7 @@ export function getDirectiveStatus(state, now = Date.now()) {
         stanceBonusRate,
         chainStacks: chain.stacks,
         chainMultiplier: chain.multiplier,
+        planRewardText,
         chainBonusText: chainText,
         rotationRewardText,
         masteryCapstoneText,
@@ -2001,6 +2016,7 @@ export function getDirectiveStatus(state, now = Date.now()) {
             formatNumber(gain) +
             " 能量" +
             (masteryBonusText ? " · " + masteryBonusText : "") +
+            (planRewardText ? " · " + planRewardText : "") +
             (chainText ? " · " + chainText : "") +
             (rotationRewardText ? " · " + rotationRewardText : "") +
             (masteryCapstoneText ? " · " + masteryCapstoneText : "") +
@@ -3243,6 +3259,26 @@ function formatDirectiveMasteryCapstoneReward(masteryCapstoneReward) {
   }
 
   return "满层回响 +" + formatNumber(masteryCapstoneReward);
+}
+
+function getDirectivePlanReward(baseGain, plan, directiveId) {
+  const nextDirectiveIds = Array.isArray(plan?.nextDirectiveIds)
+    ? plan.nextDirectiveIds
+    : [];
+
+  if (!nextDirectiveIds.includes(directiveId)) {
+    return 0;
+  }
+
+  return roundTo(baseGain * DIRECTIVE_PLAN_BONUS_RATE, 4);
+}
+
+function formatDirectivePlanReward(planReward) {
+  if (!planReward) {
+    return "";
+  }
+
+  return "预案执行 +" + formatNumber(planReward);
 }
 
 function getDirectiveRotationReward(baseGain, chain) {

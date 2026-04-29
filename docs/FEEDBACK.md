@@ -2,6 +2,12 @@
 
 ## 2026-04-30
 
+- GitHub Issues：gh 可用且已认证；2026-04-30 06:54 CST 通过 REST API 同步到 3 个 open issue、3 个 open feedback issue、0 个 open bug issue。
+- #3 进入本轮 Product decision：航线指令已经有完整推荐链、策略终结、指令熟练和满层回响，但按钮推荐仍主要是提示；本轮新增“预案执行”奖励，让按推荐指令操作产生独立即时收益。
+- 本轮改动新增 `DIRECTIVE_PLAN_BONUS_RATE = 0.06`，当执行的指令位于 `getDirectivePlan.nextDirectiveIds` 中时，额外获得有效基础指令收益 6% 的“预案执行”；预计收益、执行反馈和本地 `directive` 事件记录 `planReward` / `planBonusRate`。本轮不新增存档字段，不改变升级价格、产能公式、星图 57 段路线、项目奖励、指令基础收益、冷却、连携窗口、轮换目标奖励、策略契合、策略终结、指令熟练、满层回响或筛选规则。
+- 本轮本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数为 102 项。
+- 构建产物已包含 `DIRECTIVE_PLAN_BONUS_RATE`、`planReward`、`planBonusRate`、“预案执行”和“预案执行奖励”。
+
 - GitHub Issues：gh 可用且已认证；2026-04-30 06:32 CST 通过 REST API 同步到 3 个 open issue、3 个 open feedback issue、0 个 open bug issue。
 - #3 进入本轮 Product decision：航线指令已经有完整 3/3 轮换、策略终结和指令熟练，但满层 3/3 后继续轮换只刷新时长，缺少满层后的继续操作目标；本轮新增“指令满层回响续航”。
 - 本轮改动新增 `DIRECTIVE_MASTERY_CAPSTONE_RATE = 0.1`，当指令熟练已满 3/3 且本次指令完成 3/3 轮换时，额外获得有效基础指令收益 10% 的“满层回响”；满层完成态推荐显示“回响续航”，冷却中显示“等待回响”。本轮不新增存档字段，不改变升级价格、产能公式、星图 57 段路线、项目奖励、指令基础收益、冷却、连携窗口、轮换目标奖励、策略契合、策略终结或指令熟练层数上限。
