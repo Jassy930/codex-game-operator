@@ -827,6 +827,20 @@ export const PROJECT_DEFS = [
     current(state) {
       return state.totalEnergy;
     }
+  },
+  {
+    id: "radiant-crown-stargate",
+    name: "曜冕星门",
+    summary: "累计 11.4B 能量，在星冕远航港外开启曜冕星门。",
+    unit: "能量",
+    target: 11_400_000_000,
+    reward: "总产能 +28%",
+    effect: {
+      totalMultiplier: 1.28
+    },
+    current(state) {
+      return state.totalEnergy;
+    }
   }
 ];
 
@@ -849,7 +863,7 @@ export const PROJECT_CHAPTER_DEFS = [
   {
     name: "远航长尾",
     startId: "void-gate-expedition",
-    endId: "starcrown-voyage-harbor"
+    endId: "radiant-crown-stargate"
   }
 ];
 

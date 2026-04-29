@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+- 新增 11.4B 后曜冕星门航段：星冕远航港完成后继续出现累计能量目标，完成后奖励总产能 +28%，星图路线扩展到 49 段。
+- 同步星图总览、里程碑、章节、奖励进度、航线构成、项目列表、静态 HTML 初始文案和 README 到 49 段。
+- 同步 GitHub Issues 反馈状态：当前 1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
+- 验证通过：bun install --no-save、bun run test、bun run build、npm install、npm test、npm run build。
+- 构建产物已包含“曜冕星门”、`radiant-crown-stargate`、“星图进度 0/49”、“40 个累计航段”和“总产能 0/15”。
 - 新增 8.6B 后星冕远航港航段：星焰引航环完成后继续出现累计能量目标，完成后奖励自动产能 +27%，星图路线扩展到 48 段。
 - 同步星图总览、里程碑、章节、奖励进度、航线构成、项目列表、静态 HTML 初始文案和 README 到 48 段。
 - 同步 GitHub Issues 反馈状态：当前 1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
