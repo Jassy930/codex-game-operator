@@ -20,8 +20,11 @@
 - 本地 `directive` 事件记录 `rotationReward`。
 - `bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build` 已通过。
 - 构建产物包含 `DIRECTIVE_ROTATION_REWARD_RATE`、`rotationReward`、“轮换目标”和“完成 3/3”。
+- GitHub Pages workflow 25127536220 已成功，线上地址返回 HTTP 200；线上首页包含“完成 3/3 获得轮换目标奖励”，线上 `app.js` 包含 `rotationReward`，线上 `game.js` 包含 `DIRECTIVE_ROTATION_REWARD_RATE` 和“轮换目标”。
+- #3 已回复并继续保持 open，等待复测确认 3/3 轮换目标奖励是否让航线指令更像有完成回报的短期主动玩法。
+- 回复后同步 GitHub Issues：2026-04-30 02:49 CST 当前仍为 3 个 open feedback issue、0 个 open bug issue；#3 更新时间为 2026-04-29T18:49:07Z。
 
-下一步：发布后回复 #3；若复测后仍认为主动玩法不足，再评估短期任务列表或资源消耗型指令分支。
+下一步：观察 #3 复测结论；若仍认为主动玩法不足，再评估短期任务列表或资源消耗型指令分支。
 
 ## 2026-04-30 Product decision：星图项目详情折叠
 
