@@ -1,5 +1,26 @@
 # Decision
 
+## 2026-04-29 Product decision：星图筛选后续预告
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 当前仍有真实体验反馈 #2 open，且没有 open bug，继续进入有反馈样本下的 Product decision。
+
+当前最大问题：#2 仍围绕“内容丰富度太差，可玩的内容太少”保持 open。上一轮筛选摘要已经能显示当前筛选视图的下一条可推进航段，但玩家如果想判断本章、升级或奖励类型筛选里是否还有连续目标，仍需要继续扫描列表。
+
+本轮决策：
+
+- 不追加第 58 段，先在星图筛选摘要中追加“后续”预告。
+- 后续预告最多显示两条当前筛选视图里的未完成航段，包含航段号和名称。
+- 当前筛选只有一条、已完成筛选或空筛选不显示后续预告，避免制造不存在的连续目标。
+- 不新增存档字段，不改变项目完成判定、奖励数值、升级价格、航线策略、筛选规则和 57 段星图顺序。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-04-29 19:22 CST 查询到 1 个 open issue、1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
+- `bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build` 已通过，新增测试覆盖本章筛选后续预告、升级筛选后续预告和当前单航段不追加后续预告。
+- 构建产物已包含“后续 航段 2/57 谐振校准”、`formatProjectFilterPreview` 和更新后的 `getProjectFilterSummary`。
+
+下一步：推送后等待 GitHub Pages 发布，并回复 #2 说明筛选摘要已能显示当前视图的后续连续航段。
+
 ## 2026-04-29 Product decision：星图筛选摘要
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 当前仍有真实体验反馈 #2 open，且没有 open bug，继续进入有反馈样本下的 Product decision。

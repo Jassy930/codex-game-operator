@@ -1343,7 +1343,8 @@ export function getProjectFilterSummary(projects, filterId = DEFAULT_PROJECT_FIL
     nextProject.reward +
     " · " +
     nextProject.progressText +
-    "）"
+    "）" +
+    formatProjectFilterPreview(visibleProjects)
   );
 }
 
@@ -2018,6 +2019,21 @@ function formatProjectTrack(project) {
 
 function formatForecastProject(project) {
   return project.name + "（" + project.reward + "）";
+}
+
+function formatProjectFilterPreview(projects) {
+  const upcomingProjects = projects.filter((project) => !project.completed).slice(1, 3);
+
+  if (!upcomingProjects.length) {
+    return "";
+  }
+
+  return (
+    "；后续 " +
+    upcomingProjects
+      .map((project) => project.segmentText + " " + project.name)
+      .join("、")
+  );
 }
 
 function formatMilestoneProject(project) {
