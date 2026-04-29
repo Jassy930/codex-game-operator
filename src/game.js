@@ -743,6 +743,20 @@ export const PROJECT_DEFS = [
     current(state) {
       return state.totalEnergy;
     }
+  },
+  {
+    id: "starglow-far-harbor",
+    name: "星辉远港",
+    summary: "累计 2.1B 能量，在星潮谐振庭外建设星辉远港。",
+    unit: "能量",
+    target: 2_100_000_000,
+    reward: "点击产能 +25%",
+    effect: {
+      clickMultiplier: 1.25
+    },
+    current(state) {
+      return state.totalEnergy;
+    }
   }
 ];
 
@@ -765,7 +779,7 @@ export const PROJECT_CHAPTER_DEFS = [
   {
     name: "远航长尾",
     startId: "void-gate-expedition",
-    endId: "startide-resonance-court"
+    endId: "starglow-far-harbor"
   }
 ];
 
