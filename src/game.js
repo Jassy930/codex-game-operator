@@ -701,6 +701,20 @@ export const PROJECT_DEFS = [
     current(state) {
       return state.totalEnergy;
     }
+  },
+  {
+    id: "silverwing-dawn-ring",
+    name: "银翼曙环",
+    summary: "累计 950M 能量，在极光谱站外铺设银翼曙环。",
+    unit: "能量",
+    target: 950_000_000,
+    reward: "自动产能 +23%",
+    effect: {
+      secondMultiplier: 1.23
+    },
+    current(state) {
+      return state.totalEnergy;
+    }
   }
 ];
 
@@ -723,7 +737,7 @@ export const PROJECT_CHAPTER_DEFS = [
   {
     name: "远航长尾",
     startId: "void-gate-expedition",
-    endId: "aurora-spectrum-station"
+    endId: "silverwing-dawn-ring"
   }
 ];
 

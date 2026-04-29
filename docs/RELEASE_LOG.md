@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+- 新增 950M 后银翼曙环航段：极光谱站完成后继续出现累计能量目标，完成后奖励自动产能 +23%，星图路线扩展到 40 段。
+- 同步星图总览、里程碑、章节、奖励进度、航线构成、项目列表、静态 HTML 初始文案和 README 到 40 段。
+- 同步 GitHub Issues 反馈状态：当前 1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
+- 验证通过：bun install --no-save、bun run test、bun run build、npm install、npm test、npm run build。
+- 构建产物已包含“银翼曙环”、`silverwing-dawn-ring`、“星图进度 0/40”、“31 个累计航段”和“自动 0/11”。
 - 新增 720M 后极光谱站航段：穹海棱镜完成后继续出现累计能量目标，完成后奖励点击产能 +23%，星图路线扩展到 39 段。
 - 同步星图总览、里程碑、章节、奖励进度、航线构成、项目列表、静态 HTML 初始文案和 README 到 39 段。
 - 同步 GitHub Issues 反馈状态：当前 1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
