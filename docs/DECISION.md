@@ -16,12 +16,14 @@
 
 验收标准：
 
-- GitHub Issues 已同步：2026-04-29 23:14 CST 查询到 3 个 open issue、3 个 open feedback issue、0 个 open bug issue；#4 为本轮处理对象，#3 留到后续玩法分支。
+- GitHub Issues 已同步：2026-04-29 23:18 CST 查询到 3 个 open issue、3 个 open feedback issue、0 个 open bug issue；#4 为本轮处理对象，#3 留到后续玩法分支。
 - `bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build` 已通过，新增测试覆盖星图视觉图的 57 个节点、当前节点和当前筛选高亮。
 - 静态首页包含 `projectMapSummary`、`projectMapTrack` 和“星图视觉 0/57 · 当前 航段 1/57 · 首段星图 1/4 点亮星图”。
 - 运行期渲染会生成 `project-map-node`，并按 `is-complete`、`is-current`、`is-pending` 和 `is-dimmed` 区分状态与筛选高亮。
+- GitHub Pages workflow 25117381991 已成功，线上地址返回 HTTP 200，线上首页、脚本和样式均包含星图视觉航线相关内容。
+- #4 已回复并保持 open，等待复测确认星图视觉航线是否缓解星图区纯文字密度。
 
-下一步：完成安装、测试、构建和发布；部署后回复 #4，说明星图视觉航线已上线，并继续保留 #3 作为下一轮主动玩法分支依据。
+下一步：优先评估 #3 的主动玩法分支；若 #4 复测仍认为视觉不足，再基于现有星图视觉结构补充位图氛围资产或章节插图。
 
 ## 2026-04-29 Product decision：星图筛选航段章节位置
 

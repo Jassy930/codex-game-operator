@@ -8,6 +8,9 @@
 - 修复 GitHub 反馈同步脚本：`ops/collect-feedback.sh` 改用 `gh api --method GET` 读取 Issues，避免默认 `gh issue list` 在当前 token 下触发 GraphQL 401。
 - 同步 GitHub Issues 反馈状态：当前 3 个 open feedback issue、0 个 open bug issue；#4 指向视觉密度和图片需求，#3 指向玩法单薄。
 - 验证通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`。
+- GitHub Pages workflow 25117381991 已成功，线上地址返回 HTTP 200，且发布文件包含“星图视觉 0/57 · 当前 航段 1/57 · 首段星图 1/4 点亮星图”“高亮：全部 57 段”、`getProjectVisualMap` 和 `project-map-node`。
+- 已回复 #4，说明星图视觉航线已部署，并保持 issue open 等待复测。
+- 回复后同步 GitHub Issues 反馈状态：当前 3 个 open feedback issue、0 个 open bug issue；#4 更新时间为 2026-04-29T15:18:20Z。
 - 新增星图筛选航段章节位置：筛选摘要的下一条、后续和终点会同时显示全局航段号和章节内位置，例如“航段 1/57 · 首段星图 1/4 点亮星图”。
 - 航段章节位置仅改变筛选摘要展示；不新增存档字段，不改变 57 段星图路线、项目完成判定、奖励数值、升级价格、航线策略或筛选规则。
 - 同步 GitHub Issues 反馈状态：当前 1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
