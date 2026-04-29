@@ -1,5 +1,26 @@
 # Decision
 
+## 2026-04-30 Product decision：航线指令轮换目标
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 当前有 3 个 open feedback issue、0 个 open bug issue。#4 已连续处理视觉密度，#3 仍指向“玩法太简单、只有点击和自动产能”，本轮继续进入有反馈样本下的 Product decision。
+
+当前最大问题：航线指令和 90 秒航线连携已经让中后段不只剩点击与等待，但玩家仍需要从三个按钮的收益和冷却中自行推断“现在处于连携第几步、下一步应该换哪个指令”。这会削弱主动玩法的可读性。
+
+本轮决策：
+
+- 在航线指令下方新增“指令轮换”目标提示。
+- 锁定时提示 100K 解锁；解锁后显示 0/3 起步目标；连携窗口内显示当前指令、轮换进度、窗口时间、下一步建议和预计连携加成。
+- 本轮只新增派生展示和静态测试；不新增存档字段，不改变升级价格、星图 57 段路线、项目奖励、航线策略、指令基础收益、冷却或反馈入口。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-04-30 01:50 CST 查询到 3 个 open feedback issue、0 个 open bug issue；#3 作为本轮处理对象。
+- `getDirectiveStatus` 返回 `plan`，`getDirectivePlan` 覆盖锁定、起步、轮换进度和下一步建议。
+- 静态首页包含 `directivePlan` 和 `directive-plan` 样式。
+- `bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build` 已通过。
+
+下一步：push 后等待 GitHub Pages workflow；若成功，再回复 #3 并保持 issue open 等待复测。
+
 ## 2026-04-30 Product decision：星图项目卡片图标化
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 当前有 3 个 open feedback issue、0 个 open bug issue。#4 仍是最新反馈主题，指向“密密麻麻的文字”和“生成一些图片”，本轮继续进入有反馈样本下的 Product decision。

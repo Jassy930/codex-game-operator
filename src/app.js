@@ -121,6 +121,7 @@ const elements = {
   combo: document.querySelector("#comboValue"),
   pulse: document.querySelector("#pulseValue"),
   directiveList: document.querySelector("#directiveList"),
+  directivePlan: document.querySelector("#directivePlan"),
   goalLabel: document.querySelector("#goalLabel"),
   goalValue: document.querySelector("#goalValue"),
   goalHint: document.querySelector("#goalHint"),
@@ -260,6 +261,7 @@ function render() {
   elements.combo.textContent = "连击 " + combo.count + " · " + combo.progressText;
   elements.pulse.textContent = combo.overloaded ? current.lastPulse : combo.hintText;
   renderDirectives(directives);
+  elements.directivePlan.textContent = directives.plan.text;
   elements.goalLabel.textContent = goal.label;
   elements.goalValue.textContent = goal.value;
   elements.goalHint.textContent = goal.progressText;

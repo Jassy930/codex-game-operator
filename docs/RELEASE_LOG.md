@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+- 航线指令新增“指令轮换”目标提示：锁定时提示 100K 解锁，解锁后显示 0/3 起步目标，连携窗口内显示当前指令、轮换进度、窗口时间、下一步建议和预计连携加成。
+- `src/game.js` 新增 `getDirectivePlan` 并让 `getDirectiveStatus` 返回 `plan`，`index.html`、`src/app.js` 和 `src/styles.css` 新增 `directivePlan` 展示与样式。
+- 本轮只调整航线指令可读性；不新增存档字段，不改变升级价格、星图 57 段路线、项目奖励、航线策略、指令基础收益、冷却、反馈入口或数值逻辑。
+- 同步 GitHub Issues 反馈状态：当前 3 个 open feedback issue、0 个 open bug issue；#3 继续指向玩法单薄并作为本轮处理对象。
+- 验证通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`。
+- 静态测试覆盖 `directivePlan` 首页挂载和 `.directive-plan` 样式；逻辑测试覆盖锁定、起步、轮换进度和下一步建议。
 - 星图项目卡片新增推进方式和奖励方向内联 SVG 图标：累计/升级航段、总产能/点击/自动/过载奖励分别具备固定尺寸图形和可访问标签，降低 57 段列表的纯文字扫描压力。
 - `src/app.js` 新增 `PROJECT_CARD_ICON_DEFS`、`renderProjectCardIcon` 和项目标题图标组，`src/styles.css` 新增 `.project-title`、`.project-card-icons` 与 `.project-card-icon-*` 样式。
 - 本轮只调整星图项目卡片视觉呈现；不新增存档字段，不改变升级价格、产能公式、星图 57 段路线、项目奖励、筛选规则、航线策略、航线指令、反馈入口或数值逻辑。

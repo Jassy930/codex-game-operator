@@ -326,6 +326,19 @@ h2 {
   opacity: 0.52;
 }
 
+.directive-plan {
+  width: min(100%, 560px);
+  margin: 0;
+  padding: 10px 12px;
+  border: 1px solid rgba(189, 244, 235, 0.22);
+  border-radius: 8px;
+  background: rgba(19, 181, 166, 0.1);
+  color: rgba(248, 243, 231, 0.82);
+  font-size: 0.82rem;
+  font-weight: 800;
+  line-height: 1.45;
+}
+
 .upgrade-panel {
   display: flex;
   flex-direction: column;

@@ -14,6 +14,7 @@ import {
   formatNumber,
   getComboStatus,
   getCurrentGoal,
+  getDirectivePlan,
   getDirectiveStatus,
   getEffectiveProduction,
   getProjectFilterButtonText,
@@ -169,6 +170,27 @@ test("航线指令会在 100K 后解锁并返回预计收益", () => {
   assert.equal(unlocked.options[2].previewText, "预计 +15.7 能量");
 });
 
+test("航线指令会返回轮换目标提示", () => {
+  const locked = getDirectivePlan(createInitialState(0), 0);
+  const ready = getDirectivePlan(
+    {
+      ...createInitialState(0),
+      totalEnergy: 100_000
+    },
+    0
+  );
+
+  assert.equal(locked.progress, 0);
+  assert.equal(locked.summaryText, "指令轮换：累计 100K 能量后解锁 90 秒连携目标");
+  assert.equal(
+    locked.text,
+    "指令轮换：累计 100K 能量后解锁 90 秒连携目标 · 解锁后轮换不同航线指令，获得 +12%/+24% 连携收益。"
+  );
+  assert.equal(ready.progress, 0);
+  assert.equal(ready.target, 3);
+  assert.equal(ready.text, "指令轮换 0/3 · 先执行任意航线指令 · 随后在 90 秒内切换不同指令，叠加 +12%/+24% 连携。");
+});
+
 test("执行航线指令会获得即时收益并进入冷却", () => {
   const state = {
     ...createInitialState(0),
@@ -206,18 +228,28 @@ test("轮换航线指令会触发航线连携收益", () => {
   const first = activateDirective(state, "ignition-salvo", 1000);
   const status = getDirectiveStatus(first.state, 2000);
   const cruiseOption = status.options.find((option) => option.id === "cruise-cache");
+  const firstPlan = getDirectivePlan(first.state, 2000);
   const second = activateDirective(first.state, "cruise-cache", 2000);
+  const secondPlan = getDirectivePlan(second.state, 3000);
   const third = activateDirective(second.state, "resonance-pulse", 3000);
 
   assert.equal(first.chainStacks, 0);
   assert.equal(first.chainMultiplier, 1);
   assert.equal(cruiseOption.previewText, "预计 +50.2 能量 · 航线连携 +12%");
+  assert.equal(
+    firstPlan.text,
+    "指令轮换 1/3 · 当前 点火齐射 · 连携窗口 1.5 分钟 · 下一步切换到巡航回收或谐振脉冲，预计连携 +12%。"
+  );
   assert.equal(second.activated, true);
   assert.equal(second.baseGain, 44.8);
   assert.equal(second.chainStacks, 1);
   assert.equal(second.chainMultiplier, 1.12);
   assert.equal(second.gain, 50.176);
   assert.equal(second.notice, "已执行巡航回收，航线连携 +12%，+50.2 能量。");
+  assert.equal(
+    secondPlan.text,
+    "指令轮换 2/3 · 当前 巡航回收 · 连携窗口 1.5 分钟 · 下一步切换到谐振脉冲，预计连携 +24%。"
+  );
   assert.equal(third.chainStacks, 2);
   assert.equal(third.chainMultiplier, 1.24);
   assert.equal(third.gain, 19.4432);
@@ -738,6 +770,18 @@ test("星图项目卡片会渲染推进和奖励图标", () => {
   assert.match(styles, /\.project-card-icon-reward/);
   assert.match(styles, /\.project-card-icon-second/);
   assert.match(styles, /\.project-card-icon-overload/);
+});
+
+test("静态首页会渲染航线指令轮换目标", () => {
+  const indexHtml = readFileSync(new URL("../index.html", import.meta.url), "utf8");
+  const appJs = readFileSync(new URL("../src/app.js", import.meta.url), "utf8");
+  const styles = readFileSync(new URL("../src/styles.css", import.meta.url), "utf8");
+
+  assert.match(indexHtml, /id="directivePlan"/);
+  assert.match(indexHtml, /指令轮换：累计 100K 能量后解锁 90 秒连携目标/);
+  assert.match(appJs, /directivePlan: document\.querySelector\("#directivePlan"\)/);
+  assert.match(appJs, /elements\.directivePlan\.textContent = directives\.plan\.text/);
+  assert.match(styles, /\.directive-plan/);
 });
 
 test("静态首页会默认折叠星图详细文本", () => {

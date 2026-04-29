@@ -1684,6 +1684,7 @@ export function getDirectiveStatus(state, now = Date.now()) {
   return {
     unlocked,
     unlockText,
+    plan: getDirectivePlan(current, now),
     options: DIRECTIVE_DEFS.map((directive) => {
       const cooldownMs = directive.cooldownSeconds * 1000;
       const lastUsedAt = current.directives[directive.id] ?? 0;
@@ -1718,6 +1719,87 @@ export function getDirectiveStatus(state, now = Date.now()) {
         disabled: !unlocked || remainingMs > 0
       };
     })
+  };
+}
+
+export function getDirectivePlan(state, now = Date.now()) {
+  const current = normalizeState(state, now);
+  const targetSteps = DIRECTIVE_CHAIN_MAX_STACKS + 1;
+
+  if (current.totalEnergy < DIRECTIVE_UNLOCK_ENERGY) {
+    return {
+      unlocked: false,
+      progress: 0,
+      target: targetSteps,
+      summaryText: "指令轮换：累计 100K 能量后解锁 90 秒连携目标",
+      hintText: "解锁后轮换不同航线指令，获得 +12%/+24% 连携收益。",
+      text:
+        "指令轮换：累计 100K 能量后解锁 90 秒连携目标 · 解锁后轮换不同航线指令，获得 +12%/+24% 连携收益。"
+    };
+  }
+
+  const chain = current.directiveChain;
+  const active = Boolean(chain.lastDirectiveId && chain.expiresAt >= now);
+
+  if (!active) {
+    return {
+      unlocked: true,
+      progress: 0,
+      target: targetSteps,
+      summaryText: "指令轮换 0/" + targetSteps + " · 先执行任意航线指令",
+      hintText: "随后在 90 秒内切换不同指令，叠加 +12%/+24% 连携。",
+      text:
+        "指令轮换 0/" +
+        targetSteps +
+        " · 先执行任意航线指令 · 随后在 90 秒内切换不同指令，叠加 +12%/+24% 连携。"
+    };
+  }
+
+  const lastDirective = getDirectiveDef(chain.lastDirectiveId);
+  const stacks = Math.min(DIRECTIVE_CHAIN_MAX_STACKS, Math.max(0, chain.stacks));
+  const progress = Math.min(targetSteps, stacks + 1);
+  const nextStacks = Math.min(DIRECTIVE_CHAIN_MAX_STACKS, stacks + 1);
+  const nextMultiplier = roundTo(1 + nextStacks * DIRECTIVE_CHAIN_BONUS_STEP, 4);
+  const nextBonusText =
+    "连携 +" + Math.round((nextMultiplier - 1) * 100) + "%";
+  const differentDirectives = DIRECTIVE_DEFS.filter(
+    (directive) => directive.id !== chain.lastDirectiveId
+  );
+  const readyDirectives = differentDirectives.filter((directive) =>
+    isDirectiveReady(current, directive, now)
+  );
+  const nextNames = formatDirectiveNameList(
+    (readyDirectives.length ? readyDirectives : differentDirectives).map(
+      (directive) => directive.name
+    )
+  );
+  const windowText = formatDuration((chain.expiresAt - now) / 1000);
+  const summaryText =
+    "指令轮换 " +
+    progress +
+    "/" +
+    targetSteps +
+    " · 当前 " +
+    (lastDirective?.name ?? "未知指令") +
+    " · 连携窗口 " +
+    windowText;
+  const waitingPrefix = readyDirectives.length ? "下一步切换到" : "等待冷却后切换到";
+  const hintText =
+    stacks >= DIRECTIVE_CHAIN_MAX_STACKS
+      ? waitingPrefix + nextNames + "可维持 " + nextBonusText + "；重复同类会重置。"
+      : waitingPrefix + nextNames + "，预计" + nextBonusText + "。";
+
+  return {
+    unlocked: true,
+    progress,
+    target: targetSteps,
+    remainingSeconds: Math.ceil(Math.max(0, (chain.expiresAt - now) / 1000)),
+    nextDirectiveIds: (readyDirectives.length ? readyDirectives : differentDirectives).map(
+      (directive) => directive.id
+    ),
+    summaryText,
+    hintText,
+    text: summaryText + " · " + hintText
   };
 }
 
@@ -2614,6 +2696,19 @@ function getDirectiveChainForUse(state, directiveId, now) {
     stacks,
     multiplier: roundTo(1 + stacks * DIRECTIVE_CHAIN_BONUS_STEP, 4)
   };
+}
+
+function isDirectiveReady(state, directive, now) {
+  const lastUsedAt = state.directives[directive.id] ?? 0;
+  return lastUsedAt <= 0 || lastUsedAt + directive.cooldownSeconds * 1000 <= now;
+}
+
+function formatDirectiveNameList(names) {
+  if (names.length <= 1) {
+    return names[0] ?? "不同指令";
+  }
+
+  return names.join("或");
 }
 
 function formatDirectiveChainBonus(chain) {
