@@ -1,5 +1,28 @@
 # Decision
 
+## 2026-04-29 Product decision：航线指令主动玩法
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 当前有 3 个 open feedback issue，0 个 open bug issue。#4 已在上一轮处理并回复，本轮转向尚未回复的 #3，进入有反馈样本下的 Product decision。
+
+当前最大问题：#3 指出“游戏玩法太简单了，不够丰富，就只有点击和自动产能这样的东西”。现有星图已经提供长线目标、筛选、视觉航线和航线策略，但玩家在主循环里仍主要是点火、等待自动产能、购买升级；继续追加星图文字或第 58 段不能直接解决主动操作单薄。
+
+本轮决策：
+
+- 100K 后新增“航线指令”，让中后段玩家在点火和等待之外多一个主动选择层。
+- 首批提供 3 个带冷却的即时指令：点火齐射、巡航回收、谐振脉冲，分别对应点击、自动和过载收益。
+- 指令只保存各自上次使用时间戳，旧存档由 `normalizeState` 自动补齐默认冷却字段。
+- 指令只增加即时能量与本地 `directive` 事件；不改变升级价格、星图 57 段路线、项目完成判定、项目奖励、航线策略和筛选规则。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-04-29 23:30 CST 查询到 3 个 open issue、3 个 open feedback issue、0 个 open bug issue；#3 为本轮处理对象。
+- `bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build` 通过。
+- 静态首页包含 `directiveList`、“点火齐射”“巡航回收”“谐振脉冲”和“累计 100K 能量后解锁航线指令”。
+- 测试覆盖航线指令 100K 解锁、预计收益、即时收益和冷却阻挡。
+- 发布后回复 #3，说明本轮只补主动玩法分支，保持 issue open 等待复测。
+
+下一步：push 后等待 GitHub Pages workflow 完成，线上验证航线指令内容，再回复 #3。
+
 ## 2026-04-29 Product decision：星图视觉航线
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 当前有 3 个 open feedback issue，0 个 open bug issue。本轮优先处理 #4 的视觉密度反馈，进入有反馈样本下的 Product decision。

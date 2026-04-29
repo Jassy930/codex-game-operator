@@ -2,6 +2,7 @@ import {
   DEFAULT_PROJECT_FILTER_ID,
   PROJECT_FILTER_DEFS,
   UPGRADE_DEFS,
+  activateDirective,
   buildActionNoticeWithGoalTransition,
   buildClickActionNotice,
   buildUpgradePurchaseNotice,
@@ -11,6 +12,7 @@ import {
   formatNumber,
   getComboStatus,
   getCurrentGoal,
+  getDirectiveStatus,
   getEffectiveProduction,
   getProjectFilterSummary,
   getProjectFilterButtonText,
@@ -40,6 +42,7 @@ const elements = {
   coreButton: document.querySelector("#coreButton"),
   combo: document.querySelector("#comboValue"),
   pulse: document.querySelector("#pulseValue"),
+  directiveList: document.querySelector("#directiveList"),
   goalLabel: document.querySelector("#goalLabel"),
   goalValue: document.querySelector("#goalValue"),
   goalHint: document.querySelector("#goalHint"),
@@ -170,6 +173,7 @@ function render() {
   const projectOverview = getProjectOverview(current);
   const projects = getProjectStatuses(current);
   const routeStance = getRouteStanceStatus(current);
+  const directives = getDirectiveStatus(current);
 
   elements.energy.textContent = formatNumber(current.energy);
   elements.perSecond.textContent = formatNumber(production.perSecond);
@@ -177,6 +181,7 @@ function render() {
   elements.overload.textContent = "+" + formatNumber(production.overloadBonus);
   elements.combo.textContent = "连击 " + combo.count + " · " + combo.progressText;
   elements.pulse.textContent = combo.overloaded ? current.lastPulse : combo.hintText;
+  renderDirectives(directives);
   elements.goalLabel.textContent = goal.label;
   elements.goalValue.textContent = goal.value;
   elements.goalHint.textContent = goal.progressText;
@@ -206,6 +211,54 @@ function render() {
     ...UPGRADE_DEFS.map((upgrade) => renderUpgrade(upgrade, current, goal))
   );
   renderProjectList(projects);
+}
+
+function renderDirectives(directives) {
+  elements.directiveList.replaceChildren(
+    ...directives.options.map((option) => renderDirective(option))
+  );
+}
+
+function renderDirective(option) {
+  const button = document.createElement("button");
+  button.className = option.ready ? "directive-button is-ready" : "directive-button";
+  button.type = "button";
+  button.disabled = option.disabled;
+  button.addEventListener("click", () => {
+    offlineSummary = null;
+    const previousGoal = getCurrentGoal(state);
+    const result = activateDirective(state, option.id);
+    state = result.state;
+
+    if (result.activated) {
+      applyActionNoticeWithGoalTransition(previousGoal, state, result.notice);
+      recordEvent("directive", {
+        directive: option.id,
+        gain: result.gain
+      });
+    } else {
+      actionNotice = result.notice;
+    }
+
+    saveAndRender();
+  });
+
+  const name = document.createElement("strong");
+  name.textContent = option.name;
+
+  const summary = document.createElement("span");
+  summary.textContent = option.summary;
+
+  const preview = document.createElement("span");
+  preview.className = "directive-preview";
+  preview.textContent = option.previewText;
+
+  const status = document.createElement("span");
+  status.className = "directive-status";
+  status.textContent = option.statusText;
+
+  button.append(name, summary, preview, status);
+  return button;
 }
 
 function renderUpgrade(upgrade, current, goal) {

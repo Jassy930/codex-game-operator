@@ -1,11 +1,12 @@
 # Metrics
 
-需要采集 session、click、first_upgrade_time、upgrade_purchase、offline_gain、goal_complete、route_stance、feedback_sent。
+需要采集 session、click、first_upgrade_time、upgrade_purchase、offline_gain、goal_complete、route_stance、directive、feedback_sent。
 
 当前实现：
 
 - 浏览器本地通过 localStorage 保存最近 200 条 session、click、first_upgrade_time、upgrade_purchase、goal_complete、reset 事件。
 - 浏览器本地在玩家切换星图航线策略时记录 route_stance 事件。
+- 浏览器本地在玩家执行航线指令时记录 directive 事件，包含指令 id 和本次即时收益。
 - 浏览器本地在离线收益达到展示阈值时记录 offline_gain 事件。
 - 浏览器本地通过 localStorage 保存最近 50 条 feedback 草稿，提交反馈时记录 feedback_sent 事件；反馈快照包含当前过载奖励和航线策略。
 - 星图计划完成状态当前由存档数值实时推导，暂不记录为真实线上指标。

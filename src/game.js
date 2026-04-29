@@ -150,6 +150,35 @@ export const ROUTE_STANCE_DEFS = [
     }
   }
 ];
+export const DIRECTIVE_DEFS = [
+  {
+    id: "ignition-salvo",
+    name: "点火齐射",
+    summary: "立即结算 8 次点火收益",
+    cooldownSeconds: 35,
+    getGain(_state, production) {
+      return production.perClick * 8;
+    }
+  },
+  {
+    id: "cruise-cache",
+    name: "巡航回收",
+    summary: "立即回收 45 秒自动收益",
+    cooldownSeconds: 60,
+    getGain(_state, production) {
+      return Math.max(production.perSecond * 45, production.perClick * 4);
+    }
+  },
+  {
+    id: "resonance-pulse",
+    name: "谐振脉冲",
+    summary: "立即释放 2 次过载收益",
+    cooldownSeconds: 75,
+    getGain(_state, production) {
+      return production.overloadBonus * 2;
+    }
+  }
+];
 export const GOALS = [
   {
     id: "first-upgrade",
@@ -1039,9 +1068,13 @@ export const PROJECT_CHAPTER_DEFS = [
 ];
 
 export const PROJECT_GOAL_UNLOCK_ENERGY = 100_000;
+export const DIRECTIVE_UNLOCK_ENERGY = PROJECT_GOAL_UNLOCK_ENERGY;
 
 const INITIAL_UPGRADES = Object.fromEntries(
   UPGRADE_DEFS.map((upgrade) => [upgrade.id, 0])
+);
+const INITIAL_DIRECTIVES = Object.fromEntries(
+  DIRECTIVE_DEFS.map((directive) => [directive.id, 0])
 );
 export const MAX_OFFLINE_SECONDS = 8 * 60 * 60;
 
@@ -1062,6 +1095,7 @@ export function createInitialState(now = Date.now()) {
     lastTick: now,
     lastPulse: "稳定",
     lastGain: 0,
+    directives: { ...INITIAL_DIRECTIVES },
     upgrades: { ...INITIAL_UPGRADES }
   };
 }
@@ -1070,6 +1104,14 @@ export function normalizeState(state, now = Date.now()) {
   const initial = createInitialState(now);
   const source = state && typeof state === "object" ? state : {};
   const upgrades = { ...INITIAL_UPGRADES, ...(source.upgrades ?? {}) };
+  const sourceDirectives =
+    source.directives && typeof source.directives === "object" ? source.directives : {};
+  const directives = Object.fromEntries(
+    DIRECTIVE_DEFS.map((directive) => [
+      directive.id,
+      Math.max(0, readNumber(sourceDirectives[directive.id], 0))
+    ])
+  );
 
   return {
     ...initial,
@@ -1090,6 +1132,7 @@ export function normalizeState(state, now = Date.now()) {
     createdAt: readNumber(source.createdAt, initial.createdAt),
     lastTick: readNumber(source.lastTick, now),
     lastGain: Math.max(0, Number(source.lastGain ?? initial.lastGain) || 0),
+    directives,
     upgrades
   };
 }
@@ -1204,6 +1247,71 @@ export function purchaseUpgrade(state, upgradeId, now = Date.now()) {
   });
 
   return { purchased: true, state: upgraded, cost, upgrade };
+}
+
+export function activateDirective(state, directiveId, now = Date.now()) {
+  const current = tick(state, now);
+  const directive = getDirectiveDef(directiveId);
+
+  if (!directive) {
+    return {
+      activated: false,
+      reason: "unknown-directive",
+      state: current,
+      notice: "未知航线指令。"
+    };
+  }
+
+  if (current.totalEnergy < DIRECTIVE_UNLOCK_ENERGY) {
+    return {
+      activated: false,
+      reason: "locked",
+      directive,
+      state: current,
+      notice: "累计 100K 能量后解锁航线指令。"
+    };
+  }
+
+  const cooldownMs = directive.cooldownSeconds * 1000;
+  const lastUsedAt = current.directives[directive.id] ?? 0;
+  const remainingMs = lastUsedAt > 0 ? Math.max(0, lastUsedAt + cooldownMs - now) : 0;
+
+  if (remainingMs > 0) {
+    return {
+      activated: false,
+      reason: "cooldown",
+      directive,
+      state: current,
+      remainingSeconds: Math.ceil(remainingMs / 1000),
+      notice:
+        directive.name +
+        "冷却中，还需 " +
+        formatDuration(remainingMs / 1000) +
+        "。"
+    };
+  }
+
+  const production = getEffectiveProduction(current);
+  const gain = roundTo(Math.max(0, directive.getGain(current, production)), 4);
+  const nextState = {
+    ...current,
+    energy: current.energy + gain,
+    totalEnergy: current.totalEnergy + gain,
+    directives: {
+      ...current.directives,
+      [directive.id]: now
+    },
+    lastGain: gain,
+    lastPulse: directive.name
+  };
+
+  return {
+    activated: true,
+    directive,
+    gain,
+    state: nextState,
+    notice: "已执行" + directive.name + "，+" + formatNumber(gain) + " 能量。"
+  };
 }
 
 export function getCurrentGoal(state) {
@@ -1524,6 +1632,45 @@ export function getRouteStanceStatus(state) {
       selected: option.id === activeId,
       disabled: !unlocked
     }))
+  };
+}
+
+export function getDirectiveStatus(state, now = Date.now()) {
+  const current = normalizeState(state, now);
+  const unlocked = current.totalEnergy >= DIRECTIVE_UNLOCK_ENERGY;
+  const production = getEffectiveProduction(current);
+  const unlockText = unlocked ? "航线指令已解锁" : "累计 100K 能量后解锁航线指令";
+
+  return {
+    unlocked,
+    unlockText,
+    options: DIRECTIVE_DEFS.map((directive) => {
+      const cooldownMs = directive.cooldownSeconds * 1000;
+      const lastUsedAt = current.directives[directive.id] ?? 0;
+      const remainingMs = unlocked
+        ? lastUsedAt > 0
+          ? Math.max(0, lastUsedAt + cooldownMs - now)
+          : 0
+        : cooldownMs;
+      const remainingSeconds = Math.ceil(remainingMs / 1000);
+      const gain = roundTo(Math.max(0, directive.getGain(current, production)), 4);
+
+      return {
+        ...directive,
+        gain,
+        previewText: unlocked
+          ? "预计 +" + formatNumber(gain) + " 能量"
+          : unlockText,
+        statusText: !unlocked
+          ? "未解锁"
+          : remainingMs > 0
+            ? "冷却 " + formatDuration(remainingMs / 1000)
+            : "可执行",
+        remainingSeconds,
+        ready: unlocked && remainingMs <= 0,
+        disabled: !unlocked || remainingMs > 0
+      };
+    })
   };
 }
 
@@ -2399,6 +2546,10 @@ function getValidProjectFilterId(filterId) {
   return PROJECT_FILTER_DEFS.some((item) => item.id === filterId)
     ? filterId
     : DEFAULT_PROJECT_FILTER_ID;
+}
+
+function getDirectiveDef(directiveId) {
+  return DIRECTIVE_DEFS.find((item) => item.id === directiveId) ?? null;
 }
 
 function getProjectFilterDef(filterId) {

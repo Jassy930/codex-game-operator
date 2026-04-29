@@ -2,6 +2,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 
 import {
+  activateDirective,
   buildActionNoticeWithGoalTransition,
   buildClickActionNotice,
   buildGoalCompletionNotice,
@@ -12,6 +13,7 @@ import {
   formatNumber,
   getComboStatus,
   getCurrentGoal,
+  getDirectiveStatus,
   getEffectiveProduction,
   getProjectFilterButtonText,
   getProjectFilterSummary,
@@ -141,6 +143,54 @@ test("星图航线策略会在 100K 后解锁并影响产能", () => {
   assert.equal(production.perClick, 12.768);
   assert.equal(production.perSecond, 11.2);
   assert.equal(production.overloadBonus, 6.8947);
+});
+
+test("航线指令会在 100K 后解锁并返回预计收益", () => {
+  const locked = getDirectiveStatus(createInitialState(0), 0);
+  const unlocked = getDirectiveStatus(
+    {
+      ...createInitialState(0),
+      totalEnergy: 100_000,
+      energyPerClick: 10,
+      energyPerSecond: 5,
+      overloadBonus: 7
+    },
+    0
+  );
+
+  assert.equal(locked.unlocked, false);
+  assert.equal(locked.options[0].disabled, true);
+  assert.equal(locked.options[0].previewText, "累计 100K 能量后解锁航线指令");
+  assert.equal(unlocked.unlocked, true);
+  assert.equal(unlocked.options[0].ready, true);
+  assert.equal(unlocked.options[0].previewText, "预计 +89.6 能量");
+  assert.equal(unlocked.options[1].previewText, "预计 +252 能量");
+  assert.equal(unlocked.options[2].previewText, "预计 +15.7 能量");
+});
+
+test("执行航线指令会获得即时收益并进入冷却", () => {
+  const state = {
+    ...createInitialState(0),
+    totalEnergy: 100_000,
+    energyPerClick: 10,
+    energyPerSecond: 0,
+    overloadBonus: 7
+  };
+
+  const result = activateDirective(state, "ignition-salvo", 1000);
+  const status = getDirectiveStatus(result.state, 1000);
+  const blocked = activateDirective(result.state, "ignition-salvo", 11_000);
+
+  assert.equal(result.activated, true);
+  assert.equal(result.gain, 89.6);
+  assert.equal(result.state.energy, 89.6);
+  assert.equal(result.state.totalEnergy, 100_089.6);
+  assert.equal(result.notice, "已执行点火齐射，+89.6 能量。");
+  assert.equal(status.options[0].ready, false);
+  assert.equal(status.options[0].statusText, "冷却 35 秒");
+  assert.equal(blocked.activated, false);
+  assert.equal(blocked.reason, "cooldown");
+  assert.equal(blocked.notice, "点火齐射冷却中，还需 25 秒。");
 });
 
 test("星图航线策略会兼容旧存档和未知策略", () => {

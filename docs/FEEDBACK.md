@@ -2,6 +2,11 @@
 
 ## 2026-04-29
 
+- GitHub Issues：gh 可用且已认证；2026-04-29 23:30 CST 通过 REST API 同步到 3 个 open issue、3 个 open feedback issue、0 个 open bug issue。
+- #3 进入本轮 Product decision：玩家认为玩法“只有点击和自动产能”，本轮新增 100K 后解锁的航线指令，让中后段玩家可以主动执行点火齐射、巡航回收和谐振脉冲。
+- 本轮改动只新增指令冷却和即时收益，不改变升级价格、星图 57 段路线、项目奖励、航线策略或筛选规则；#4 和 #2 继续保持 open 等待复测。
+- data/feedback/github-feedback.md 已同步 23:30 CST 快照；本轮完成后需要回复 #3，并说明 issue 继续保持 open 等待复测。
+
 - GitHub Issues：gh 可用且已认证；2026-04-29 23:18 CST 在回复 #4 后通过 REST API 同步到 3 个 open issue、3 个 open feedback issue、0 个 open bug issue。
 - #4 进入本轮 Product decision：玩家认为界面“全是密密麻麻的文字”，并希望生成图片；本轮选择先新增星图视觉航线，把 57 段压缩成状态节点，随筛选高亮，减少星图区纯文字扫描压力。
 - #4 已回复：说明星图视觉航线已上线，GitHub Pages workflow 25117381991 已成功，线上地址返回 HTTP 200，线上首页包含“星图视觉 0/57 · 当前 航段 1/57 · 首段星图 1/4 点亮星图”和“高亮：全部 57 段”，线上脚本包含 `getProjectVisualMap` 与 `project-map-node`，线上样式包含 `project-map-node`；issue 保持 open，等待复测。
