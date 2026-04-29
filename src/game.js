@@ -869,6 +869,20 @@ export const PROJECT_DEFS = [
     current(state) {
       return state.totalEnergy;
     }
+  },
+  {
+    id: "starwing-voyage-haven",
+    name: "星翼远航港",
+    summary: "累计 27.5B 能量，在星耀跃迁塔外建设星翼远航港。",
+    unit: "能量",
+    target: 27_500_000_000,
+    reward: "自动产能 +29%",
+    effect: {
+      secondMultiplier: 1.29
+    },
+    current(state) {
+      return state.totalEnergy;
+    }
   }
 ];
 
@@ -891,7 +905,7 @@ export const PROJECT_CHAPTER_DEFS = [
   {
     name: "远航长尾",
     startId: "void-gate-expedition",
-    endId: "starflare-transition-spire"
+    endId: "starwing-voyage-haven"
   }
 ];
 

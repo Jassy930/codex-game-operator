@@ -1,5 +1,28 @@
 # Decision
 
+## 2026-04-29 Product decision：星翼远航港航段
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 当前仍有真实体验反馈 #2 open，且没有 open bug，继续进入有反馈样本下的 Product decision。
+
+当前最大问题：#2 仍围绕“内容丰富度太差，可玩的内容太少”保持 open。上一轮已把星图扩展到 51 段，但星耀跃迁塔完成后仍会再次暴露“全部完成，等待下一段航线”的边界；继续只补说明性总览不会直接增加可玩的长尾目标。
+
+本轮决策：
+
+- 新增“星翼远航港”航段，要求累计 27.5B 能量，奖励自动产能 +29%。
+- 星图路线从 51 段扩展到 52 段；远航长尾章节从 38 段扩展到 39 段。
+- 主目标、星图总览、里程碑、章节、奖励进度、航线构成、项目列表、静态 HTML 初始文案、README、产品说明、路线图和设计约束同步到 52 段。
+- 不新增存档字段、不调整既有奖励数值和升级价格；只在星耀跃迁塔之后追加一个可验证尾段。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-04-29 16:02 CST 查询到 1 个 open issue、1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
+- bun install --no-save、bun run test、bun run build、npm install、npm test 和 npm run build 已通过，覆盖星耀跃迁塔完成后继续指向星翼远航港、52 段航线序号、章节余量、奖励分布和全部完成状态。
+- 构建产物已包含“星翼远航港”、`starwing-voyage-haven`、“星图进度 0/52”、“43 个累计航段”和“自动 0/14”。
+- 待 push 后由 GitHub Pages workflow 验证线上发布文件。
+- #2 待部署验证后回复，并保持 open 等待复测确认 27.5B 后续航段是否改善长尾内容丰富度。
+
+下一步：推送并等待 GitHub Pages workflow 成功后回复 #2。
+
 ## 2026-04-29 Product decision：星耀跃迁塔航段
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 当前仍有真实体验反馈 #2 open，且没有 open bug，继续进入有反馈样本下的 Product decision。
