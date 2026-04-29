@@ -1069,6 +1069,9 @@ export const PROJECT_CHAPTER_DEFS = [
 
 export const PROJECT_GOAL_UNLOCK_ENERGY = 100_000;
 export const DIRECTIVE_UNLOCK_ENERGY = PROJECT_GOAL_UNLOCK_ENERGY;
+export const DIRECTIVE_CHAIN_WINDOW_SECONDS = 90;
+export const DIRECTIVE_CHAIN_BONUS_STEP = 0.12;
+export const DIRECTIVE_CHAIN_MAX_STACKS = 2;
 
 const INITIAL_UPGRADES = Object.fromEntries(
   UPGRADE_DEFS.map((upgrade) => [upgrade.id, 0])
@@ -1095,6 +1098,11 @@ export function createInitialState(now = Date.now()) {
     lastTick: now,
     lastPulse: "稳定",
     lastGain: 0,
+    directiveChain: {
+      lastDirectiveId: null,
+      stacks: 0,
+      expiresAt: 0
+    },
     directives: { ...INITIAL_DIRECTIVES },
     upgrades: { ...INITIAL_UPGRADES }
   };
@@ -1112,6 +1120,18 @@ export function normalizeState(state, now = Date.now()) {
       Math.max(0, readNumber(sourceDirectives[directive.id], 0))
     ])
   );
+  const sourceDirectiveChain =
+    source.directiveChain && typeof source.directiveChain === "object"
+      ? source.directiveChain
+      : {};
+  const directiveChain = {
+    lastDirectiveId: getValidDirectiveId(sourceDirectiveChain.lastDirectiveId),
+    stacks: Math.min(
+      DIRECTIVE_CHAIN_MAX_STACKS,
+      Math.max(0, Math.floor(readNumber(sourceDirectiveChain.stacks, 0)))
+    ),
+    expiresAt: readNumber(sourceDirectiveChain.expiresAt, 0)
+  };
 
   return {
     ...initial,
@@ -1132,6 +1152,7 @@ export function normalizeState(state, now = Date.now()) {
     createdAt: readNumber(source.createdAt, initial.createdAt),
     lastTick: readNumber(source.lastTick, now),
     lastGain: Math.max(0, Number(source.lastGain ?? initial.lastGain) || 0),
+    directiveChain,
     directives,
     upgrades
   };
@@ -1292,7 +1313,9 @@ export function activateDirective(state, directiveId, now = Date.now()) {
   }
 
   const production = getEffectiveProduction(current);
-  const gain = roundTo(Math.max(0, directive.getGain(current, production)), 4);
+  const baseGain = roundTo(Math.max(0, directive.getGain(current, production)), 4);
+  const chain = getDirectiveChainForUse(current, directive.id, now);
+  const gain = roundTo(baseGain * chain.multiplier, 4);
   const nextState = {
     ...current,
     energy: current.energy + gain,
@@ -1301,16 +1324,33 @@ export function activateDirective(state, directiveId, now = Date.now()) {
       ...current.directives,
       [directive.id]: now
     },
+    directiveChain: {
+      lastDirectiveId: directive.id,
+      stacks: chain.stacks,
+      expiresAt: now + DIRECTIVE_CHAIN_WINDOW_SECONDS * 1000
+    },
     lastGain: gain,
     lastPulse: directive.name
   };
+  const chainText = formatDirectiveChainBonus(chain);
 
   return {
     activated: true,
     directive,
+    baseGain,
     gain,
+    chainStacks: chain.stacks,
+    chainMultiplier: chain.multiplier,
+    chainBonusText: chainText,
     state: nextState,
-    notice: "已执行" + directive.name + "，+" + formatNumber(gain) + " 能量。"
+    notice:
+      "已执行" +
+      directive.name +
+      "，" +
+      (chainText ? chainText + "，" : "") +
+      "+" +
+      formatNumber(gain) +
+      " 能量。"
   };
 }
 
@@ -1653,13 +1693,20 @@ export function getDirectiveStatus(state, now = Date.now()) {
           : 0
         : cooldownMs;
       const remainingSeconds = Math.ceil(remainingMs / 1000);
-      const gain = roundTo(Math.max(0, directive.getGain(current, production)), 4);
+      const baseGain = roundTo(Math.max(0, directive.getGain(current, production)), 4);
+      const chain = getDirectiveChainForUse(current, directive.id, now);
+      const gain = roundTo(baseGain * chain.multiplier, 4);
+      const chainText = formatDirectiveChainBonus(chain);
 
       return {
         ...directive,
+        baseGain,
         gain,
+        chainStacks: chain.stacks,
+        chainMultiplier: chain.multiplier,
+        chainBonusText: chainText,
         previewText: unlocked
-          ? "预计 +" + formatNumber(gain) + " 能量"
+          ? "预计 +" + formatNumber(gain) + " 能量" + (chainText ? " · " + chainText : "")
           : unlockText,
         statusText: !unlocked
           ? "未解锁"
@@ -2550,6 +2597,31 @@ function getValidProjectFilterId(filterId) {
 
 function getDirectiveDef(directiveId) {
   return DIRECTIVE_DEFS.find((item) => item.id === directiveId) ?? null;
+}
+
+function getValidDirectiveId(directiveId) {
+  return DIRECTIVE_DEFS.some((item) => item.id === directiveId) ? directiveId : null;
+}
+
+function getDirectiveChainForUse(state, directiveId, now) {
+  const current = normalizeState(state, now);
+  const chain = current.directiveChain;
+  const active = chain.expiresAt >= now && chain.lastDirectiveId;
+  const shouldChain = active && chain.lastDirectiveId !== directiveId;
+  const stacks = shouldChain ? Math.min(DIRECTIVE_CHAIN_MAX_STACKS, chain.stacks + 1) : 0;
+
+  return {
+    stacks,
+    multiplier: roundTo(1 + stacks * DIRECTIVE_CHAIN_BONUS_STEP, 4)
+  };
+}
+
+function formatDirectiveChainBonus(chain) {
+  if (!chain.stacks) {
+    return "";
+  }
+
+  return "航线连携 +" + Math.round((chain.multiplier - 1) * 100) + "%";
 }
 
 function getProjectFilterDef(filterId) {

@@ -1,5 +1,28 @@
 # Decision
 
+## 2026-04-30 Product decision：航线连携
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 当前有 3 个 open feedback issue，0 个 open bug issue。#4 已连续处理视觉密度，#3 仍围绕“玩法太简单、只有点击和自动产能”保持 open，本轮进入有反馈样本下的 Product decision。
+
+当前最大问题：上一轮为 #3 新增了点火齐射、巡航回收和谐振脉冲，但三个指令仍主要是独立冷却按钮。玩家可以看到更多主动按钮，却缺少“先用哪个、接下来切到哪个”的短期决策。
+
+本轮决策：
+
+- 100K 后航线指令新增“航线连携”：90 秒内轮换到不同指令时获得连携加成。
+- 第一次轮换加成 +12%，再次轮换封顶 +24%；重复同一指令或超过 90 秒会重置连携。
+- 指令预计收益和执行提示直接显示连携加成，本地 `directive` 事件记录连携层数与倍率。
+- 旧存档由 `normalizeState` 自动补齐 `directiveChain`；本轮不改变升级价格、星图 57 段路线、项目奖励、航线策略、指令基础冷却或筛选规则。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-04-30 00:53 CST 查询到 3 个 open issue、3 个 open feedback issue、0 个 open bug issue；#3 作为本轮处理对象。
+- 测试覆盖航线连携预计收益、执行收益、+12%/+24% 层数和 90 秒超时重置。
+- `bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build` 通过，构建产物包含 `DIRECTIVE_CHAIN_WINDOW_SECONDS`、`directiveChain` 和“航线连携”。
+- GitHub Pages 发布成功后，线上脚本包含航线连携相关常量、状态字段和文案。
+- #3 回复后继续保持 open，等待复测确认轮换指令是否比独立冷却按钮更有主动规划感。
+
+下一步：观察 #3 复测结论；若仍认为主动玩法不足，再考虑短期任务或资源消耗型指令分支。
+
 ## 2026-04-30 Product decision：星图明细折叠
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 当前有 3 个 open feedback issue，0 个 open bug issue。#4 已上线节点航线和星图插画，但仍围绕界面文字密度保持 open，本轮继续进入有反馈样本下的 Product decision。

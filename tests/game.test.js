@@ -194,6 +194,57 @@ test("执行航线指令会获得即时收益并进入冷却", () => {
   assert.equal(blocked.notice, "点火齐射冷却中，还需 25 秒。");
 });
 
+test("轮换航线指令会触发航线连携收益", () => {
+  const state = {
+    ...createInitialState(0),
+    totalEnergy: 100_000,
+    energyPerClick: 10,
+    energyPerSecond: 0,
+    overloadBonus: 7
+  };
+
+  const first = activateDirective(state, "ignition-salvo", 1000);
+  const status = getDirectiveStatus(first.state, 2000);
+  const cruiseOption = status.options.find((option) => option.id === "cruise-cache");
+  const second = activateDirective(first.state, "cruise-cache", 2000);
+  const third = activateDirective(second.state, "resonance-pulse", 3000);
+
+  assert.equal(first.chainStacks, 0);
+  assert.equal(first.chainMultiplier, 1);
+  assert.equal(cruiseOption.previewText, "预计 +50.2 能量 · 航线连携 +12%");
+  assert.equal(second.activated, true);
+  assert.equal(second.baseGain, 44.8);
+  assert.equal(second.chainStacks, 1);
+  assert.equal(second.chainMultiplier, 1.12);
+  assert.equal(second.gain, 50.176);
+  assert.equal(second.notice, "已执行巡航回收，航线连携 +12%，+50.2 能量。");
+  assert.equal(third.chainStacks, 2);
+  assert.equal(third.chainMultiplier, 1.24);
+  assert.equal(third.gain, 19.4432);
+  assert.equal(third.chainBonusText, "航线连携 +24%");
+});
+
+test("航线连携超时后会重置", () => {
+  const state = {
+    ...createInitialState(0),
+    totalEnergy: 100_000,
+    energyPerClick: 10,
+    energyPerSecond: 0,
+    overloadBonus: 7
+  };
+
+  const first = activateDirective(state, "ignition-salvo", 1000);
+  const status = getDirectiveStatus(first.state, 92_000);
+  const cruiseOption = status.options.find((option) => option.id === "cruise-cache");
+  const expired = activateDirective(first.state, "cruise-cache", 92_000);
+
+  assert.equal(cruiseOption.previewText, "预计 +44.8 能量");
+  assert.equal(expired.chainStacks, 0);
+  assert.equal(expired.chainMultiplier, 1);
+  assert.equal(expired.gain, 44.8);
+  assert.equal(expired.notice, "已执行巡航回收，+44.8 能量。");
+});
+
 test("星图航线策略会兼容旧存档和未知策略", () => {
   const status = getRouteStanceStatus({
     ...createInitialState(0),

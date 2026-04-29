@@ -234,7 +234,9 @@ function renderDirective(option) {
       applyActionNoticeWithGoalTransition(previousGoal, state, result.notice);
       recordEvent("directive", {
         directive: option.id,
-        gain: result.gain
+        gain: result.gain,
+        chainStacks: result.chainStacks,
+        chainMultiplier: result.chainMultiplier
       });
     } else {
       actionNotice = result.notice;
