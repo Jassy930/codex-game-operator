@@ -8,6 +8,9 @@
 - 同步 GitHub Issues 反馈状态：当前 3 个 open feedback issue、0 个 open bug issue；#4 继续指向视觉密度和图片需求。
 - 静态测试已覆盖星图详细文本默认折叠、`project-detail-drawer`、`project-detail-grid` 和“星图明细”。
 - 验证通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；构建产物已包含 `project-detail-drawer`、`project-detail-grid` 和“星图明细”。
+- GitHub Pages workflow 25121814199 已成功，线上地址返回 HTTP 200，且发布文件包含 `project-detail-drawer`、`project-detail-grid` 和“星图明细”，详情区默认不带 `open`。
+- 已回复 #4，说明星图明细默认折叠已部署，并保持 issue open 等待复测。
+- 回复后同步 GitHub Issues 反馈状态：当前 3 个 open feedback issue、0 个 open bug issue；#4 更新时间为 2026-04-29T16:46:27Z。
 - 新增星图插画资产：星图视觉航线前加入 `src/assets/star-map-visual.svg`，展示星核、航线节点、远航星门和深空航迹。
 - 首页新增 `project-scene-image` 图片引用，样式新增 `.project-scene-image`，构建产物会携带 `dist/src/assets/star-map-visual.svg`。
 - 本轮只调整视觉呈现和静态资源；不新增存档字段，不改变升级价格、星图 57 段路线、项目奖励、航线策略、航线指令或筛选规则。

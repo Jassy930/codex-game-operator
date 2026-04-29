@@ -18,8 +18,10 @@
 - 静态首页包含 `project-detail-drawer`、`project-detail-grid` 和“星图明细”，且详情区默认不带 `open` 属性。
 - 测试覆盖首页默认折叠星图详细文本和样式类。
 - `bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build` 通过，构建产物包含 `project-detail-drawer`、`project-detail-grid` 和“星图明细”。
+- GitHub Pages workflow 25121814199 已成功，线上地址返回 HTTP 200；线上首页和样式均包含星图明细折叠相关内容。
+- #4 已回复并保持 open，等待复测确认默认折叠星图明细是否降低星图区第一眼文字压力。
 
-下一步：发布并回复 #4；若 #4 复测仍认为文字压力大，再评估筛选摘要或项目列表的默认折叠策略。
+下一步：观察 #4 复测结论；若仍认为文字压力大，再评估筛选摘要或项目列表的默认折叠策略。
 
 ## 2026-04-30 Product decision：星图插画资产
 
