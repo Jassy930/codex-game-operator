@@ -8,6 +8,9 @@
 - 同步 GitHub Issues 反馈状态：当前 3 个 open feedback issue、0 个 open bug issue；#4 继续指向视觉密度和图片需求。
 - 验证通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 101 项。
 - 构建产物已确认包含 `getProjectListWindow`、`project-list-drawer`、`project-list-drawer-grid` 和“已收起”文案。
+- GitHub Pages workflow 25137109823 已成功，线上地址返回 HTTP 200，且线上 `game.js`、`app.js` 和 `styles.css` 已确认包含项目长列表收起相关标记。
+- 已回复 #4，说明星图项目长列表已默认收起，并保持 issue open 等待复测。
+- 回复后同步 GitHub Issues 反馈状态：当前 3 个 open feedback issue、0 个 open bug issue；#4 更新时间为 2026-04-29T22:28:03Z。
 - 星图筛选按钮默认收进“筛选航段”抽屉：首屏不再直接铺开全部、当前、本章、章节、成长线、未完成和已完成等 15 个筛选按钮。
 - `index.html` 用默认关闭的 `project-filter-controls` 包裹 `projectFilterList`；`src/styles.css` 新增抽屉边框、summary 和展开符号样式；`tests/game.test.js` 覆盖筛选控件默认折叠结构。
 - 本轮只调整星图筛选控件默认可见密度；不新增存档字段，不改变升级价格、产能公式、星图 57 段路线、项目奖励、项目完成判定、航线策略、航线指令、反馈入口、筛选定义或章节点击逻辑。

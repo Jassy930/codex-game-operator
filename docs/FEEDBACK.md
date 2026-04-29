@@ -7,6 +7,9 @@
 - 本轮改动新增 `getProjectListWindow`，筛选结果超过 8 段时只直接显示包含当前航段的 8 段窗口，其余航段收进默认关闭的 `project-list-drawer`，summary 显示已收起数量和当前显示范围。本轮不新增存档字段，不改变升级价格、产能公式、星图 57 段路线、项目奖励、项目完成判定、航线策略、航线指令、反馈入口、筛选定义或章节点击逻辑。
 - 本轮本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数为 101 项。
 - 构建产物已包含 `getProjectListWindow`、`project-list-drawer`、`project-list-drawer-grid` 和“已收起”文案。
+- GitHub Pages workflow 25137109823 已成功，线上地址返回 HTTP 200；线上 `game.js` 包含 `getProjectListWindow`、`PROJECT_LIST_PREVIEW_LIMIT` 和“已收起”，线上 `app.js` 包含 `project-list-drawer`，线上 `styles.css` 包含 `project-list-drawer-grid`。
+- #4 已回复：说明星图项目长列表已默认收起，提交 185e7ef，issue 保持 open 等待复测。
+- 回复后同步 GitHub Issues：2026-04-30 06:28 CST 当前仍为 3 个 open feedback issue、0 个 open bug issue；#4 更新时间为 2026-04-29T22:28:03Z。
 
 - GitHub Issues：gh 可用且已认证；2026-04-30 06:08 CST 通过 REST API 同步到 3 个 open issue、3 个 open feedback issue、0 个 open bug issue。
 - #4 继续作为本轮 Product decision：星图区已有插画、节点航线、章节视觉导航和章节徽记，但 15 个筛选按钮仍默认外露，和筛选摘要一起形成新的文字密集块；本轮新增“星图筛选控件折叠”。

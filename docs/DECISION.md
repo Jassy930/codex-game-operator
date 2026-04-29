@@ -20,6 +20,9 @@
 - 运行期 `src/app.js` 渲染 `project-list-drawer` 和 `project-list-drawer-grid`；`src/styles.css` 包含默认收起和展开符号样式。
 - `bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build` 已通过；测试数 101 项。
 - 构建产物包含 `getProjectListWindow`、`project-list-drawer`、`project-list-drawer-grid` 和“已收起”文案。
+- GitHub Pages workflow 25137109823 已成功，线上地址返回 HTTP 200；线上 `game.js` 包含 `getProjectListWindow`、`PROJECT_LIST_PREVIEW_LIMIT` 和“已收起”，线上 `app.js` 包含 `project-list-drawer`，线上 `styles.css` 包含 `project-list-drawer-grid`。
+- #4 已回复并继续保持 open，等待复测确认长列表默认只露出 8 段后，全部、未完成或远航长尾视图是否不再像卡片墙。
+- 回复后同步 GitHub Issues：2026-04-30 06:28 CST 当前仍为 3 个 open feedback issue、0 个 open bug issue；#4 更新时间为 2026-04-29T22:28:03Z。
 
 下一步：等待 #4 复测；若长尾列表仍显拥挤，再评估章节内分页或更强的长尾分组导航。
 
