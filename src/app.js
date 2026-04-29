@@ -319,7 +319,7 @@ function renderProject(project) {
 
   const chapterBadge = document.createElement("span");
   chapterBadge.className = "project-chapter-badge";
-  chapterBadge.textContent = project.chapterName;
+  chapterBadge.textContent = project.chapterText;
 
   const currentBadge = document.createElement("span");
   currentBadge.className = "project-current-badge";

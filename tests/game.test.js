@@ -432,12 +432,18 @@ test("星图项目会给中后段玩家新的可追目标", () => {
   assert.equal(projects[0].segmentTotal, 31);
   assert.equal(projects[0].segmentText, "航段 1/31");
   assert.equal(projects[0].chapterName, "首段星图");
+  assert.equal(projects[0].chapterIndex, 1);
+  assert.equal(projects[0].chapterTotal, 4);
+  assert.equal(projects[0].chapterText, "首段星图 1/4");
   assert.equal(projects[0].completed, true);
   assert.equal(projects[0].isCurrent, false);
   assert.equal(projects[0].progressText, "进度 100K 能量 / 100K 能量 · 已完成");
   assert.equal(projects[1].id, "resonance-calibration");
   assert.equal(projects[1].segmentText, "航段 2/31");
   assert.equal(projects[1].chapterName, "首段星图");
+  assert.equal(projects[1].chapterIndex, 2);
+  assert.equal(projects[1].chapterTotal, 4);
+  assert.equal(projects[1].chapterText, "首段星图 2/4");
   assert.equal(projects[1].isCurrent, true);
   assert.equal(projects[1].remaining, 6);
   assert.equal(projects[1].progressText, "进度 0 级 / 6 级 · 还差 6 级");
@@ -456,10 +462,15 @@ test("星图项目会标记所属章节", () => {
   const projects = getProjectStatuses(createInitialState(0));
 
   assert.equal(projects[0].chapterName, "首段星图");
+  assert.equal(projects[0].chapterText, "首段星图 1/4");
   assert.equal(projects[4].chapterName, "专精校准");
+  assert.equal(projects[4].chapterText, "专精校准 1/5");
   assert.equal(projects[9].chapterName, "深空基建");
+  assert.equal(projects[9].chapterText, "深空基建 1/4");
   assert.equal(projects[13].chapterName, "远航长尾");
+  assert.equal(projects[13].chapterText, "远航长尾 1/18");
   assert.equal(projects[30].chapterName, "远航长尾");
+  assert.equal(projects[30].chapterText, "远航长尾 18/18");
 });
 
 test("星图总览会显示完成数和下一段奖励", () => {
@@ -495,7 +506,7 @@ test("星图总览会显示完成数和下一段奖励", () => {
   );
   assert.equal(
     overview.chapterText,
-    "阶段导航：首段星图 1/4 · 专精校准 0/5 · 深空基建 0/4 · 远航长尾 0/18；当前 首段星图 2/31 谐振校准 · 本阶段还剩 3 段 · 下一阶段 专精校准"
+    "阶段导航：首段星图 1/4 · 专精校准 0/5 · 深空基建 0/4 · 远航长尾 0/18；当前 首段星图 2/4 · 航段 2/31 谐振校准 · 本阶段还剩 3 段 · 下一阶段 专精校准"
   );
   assert.equal(
     overview.compositionText,
@@ -1211,7 +1222,7 @@ test("星图阶段导航会显示最终阶段余量", () => {
 
   assert.equal(
     overview.chapterText,
-    "阶段导航：首段星图 4/4 · 专精校准 5/5 · 深空基建 4/4 · 远航长尾 17/18；当前 远航长尾 31/31 晨渊观星台 · 本阶段还剩 1 段 · 最终阶段"
+    "阶段导航：首段星图 4/4 · 专精校准 5/5 · 深空基建 4/4 · 远航长尾 17/18；当前 远航长尾 18/18 · 航段 31/31 晨渊观星台 · 本阶段还剩 1 段 · 最终阶段"
   );
 });
 

@@ -2,6 +2,9 @@
 
 ## 2026-04-29
 
+- GitHub Issues：gh 可用且已认证；2026-04-29 08:21 CST 查询到 1 个 open issue、1 个 open feedback issue、0 个 open bug issue。
+- #2 仍为 open，未出现新的复测结论或 bug；本轮不追加第 32 段，改为在星图项目列表和阶段导航当前项中显示章节内位置，例如“首段星图 2/4”，让 31 段路线更容易按章节扫描。
+- data/feedback/github-feedback.md 已同步本地快照。
 - GitHub Issues：gh 可用且已认证；2026-04-29 08:07 CST 查询到 1 个 open issue、1 个 open feedback issue、0 个 open bug issue。
 - #2 仍为 open，未出现新的复测结论或 bug；本轮不追加第 32 段，改为在星图项目列表中为每个项目显示所属章节，让下方 31 段列表与总览阶段导航一致。
 - data/feedback/github-feedback.md 已同步本地快照。

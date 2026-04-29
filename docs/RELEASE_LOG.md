@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+- 新增星图章节内位置：星图项目列表章节徽标会显示“首段星图 2/4”这类章节内序号，阶段导航当前项同步显示章节内位置和全局航段号。
+- 同步 GitHub Issues 反馈状态：当前 1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
+- 验证通过：bun install --no-save、bun run test、bun run build、npm install、npm test、npm run build。
+- 构建产物已包含 `chapterText` 渲染字段和“首段星图 1/4”静态初始文案。
 - 新增星图项目章节标记：星图项目列表中每个项目都会显示所属章节，和总览阶段导航保持一致。
 - 同步 GitHub Issues 反馈状态：当前 1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
 - 验证通过：bun install --no-save、bun run test、bun run build、npm install、npm test、npm run build。

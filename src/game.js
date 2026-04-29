@@ -845,7 +845,7 @@ export function getProjectStatuses(state) {
       segmentIndex,
       segmentTotal,
       segmentText: buildProjectSegmentText(segmentIndex, segmentTotal),
-      chapterName: getProjectChapterName(project.id),
+      ...getProjectChapterInfo(project.id),
       currentValue,
       remaining,
       progress,
@@ -1215,8 +1215,8 @@ function buildProjectChapterText(projects, nextProject) {
   const currentText =
     nextProject && currentChapter
       ? "当前 " +
-        currentChapter.name +
-        " " +
+        nextProject.chapterText +
+        " · 航段 " +
         nextProject.segmentIndex +
         "/" +
         nextProject.segmentTotal +
@@ -1249,25 +1249,52 @@ function getChapterProjects(projects, chapter) {
   return projects.slice(startIndex, endIndex + 1);
 }
 
-function getProjectChapterName(projectId) {
+function getProjectChapterInfo(projectId) {
   const projectIndex = PROJECT_DEFS.findIndex((project) => project.id === projectId);
   if (projectIndex < 0) {
-    return "未分组";
+    return {
+      chapterName: "未分组",
+      chapterIndex: 0,
+      chapterTotal: 0,
+      chapterText: "未分组"
+    };
   }
 
-  const chapter = PROJECT_CHAPTER_DEFS.find((item) => {
+  const chapterInfo = PROJECT_CHAPTER_DEFS.map((item) => {
     const startIndex = PROJECT_DEFS.findIndex((project) => project.id === item.startId);
     const endIndex = PROJECT_DEFS.findIndex((project) => project.id === item.endId);
 
-    return (
-      startIndex >= 0 &&
-      endIndex >= startIndex &&
-      projectIndex >= startIndex &&
-      projectIndex <= endIndex
-    );
-  });
+    return {
+      ...item,
+      startIndex,
+      endIndex
+    };
+  }).find(
+    (item) =>
+      item.startIndex >= 0 &&
+      item.endIndex >= item.startIndex &&
+      projectIndex >= item.startIndex &&
+      projectIndex <= item.endIndex
+  );
 
-  return chapter?.name ?? "未分组";
+  if (!chapterInfo) {
+    return {
+      chapterName: "未分组",
+      chapterIndex: 0,
+      chapterTotal: 0,
+      chapterText: "未分组"
+    };
+  }
+
+  const chapterIndex = projectIndex - chapterInfo.startIndex + 1;
+  const chapterTotal = chapterInfo.endIndex - chapterInfo.startIndex + 1;
+
+  return {
+    chapterName: chapterInfo.name,
+    chapterIndex,
+    chapterTotal,
+    chapterText: chapterInfo.name + " " + chapterIndex + "/" + chapterTotal
+  };
 }
 
 function formatProjectTrack(project) {
