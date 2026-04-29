@@ -308,6 +308,14 @@ h2 {
   gap: 8px;
 }
 
+.directive-button .directive-badges {
+  display: flex;
+  flex: 0 0 auto;
+  flex-wrap: wrap;
+  gap: 4px;
+  justify-content: flex-end;
+}
+
 .directive-button span {
   min-width: 0;
   color: rgba(248, 243, 231, 0.66);
@@ -317,11 +325,19 @@ h2 {
 }
 
 .directive-button .directive-recommendation {
-  flex: 0 0 auto;
   padding: 3px 6px;
   border-radius: 999px;
   background: rgba(244, 178, 60, 0.16);
   color: #ffd98a;
+  font-size: 0.68rem;
+  line-height: 1;
+}
+
+.directive-button .directive-stance-bonus {
+  padding: 3px 6px;
+  border-radius: 999px;
+  background: rgba(19, 181, 166, 0.16);
+  color: #bdf4eb;
   font-size: 0.68rem;
   line-height: 1;
 }

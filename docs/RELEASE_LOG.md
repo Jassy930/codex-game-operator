@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+- 航线策略新增契合指令：均衡航线契合谐振脉冲，点火优先契合点火齐射，巡航优先契合巡航回收，匹配当前策略的航线指令获得“策略契合 +10%”收益。
+- `src/game.js` 新增 `DIRECTIVE_STANCE_BONUS_RATE`、策略契合收益计算和指令预计收益/执行反馈文案；`src/app.js` 在本地 `directive` 事件记录 `stanceBonus` 与 `stanceBonusRate`，并渲染 `directive-badges` / `directive-stance-bonus`；`src/styles.css` 新增策略契合徽标样式。
+- 本轮只打通航线策略和航线指令；不新增存档字段，不改变升级价格、产能公式、星图 57 段路线、项目奖励、指令冷却、连携窗口、轮换目标奖励、反馈入口或筛选规则。
+- 同步 GitHub Issues 反馈状态：当前 3 个 open feedback issue、0 个 open bug issue；#3 继续指向玩法单薄并作为本轮处理对象。
+- 验证通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`。
+- 浏览器级检查通过：本地解锁状态下谐振脉冲按钮真实渲染“策略契合 +10%”徽标；构建产物已确认包含 `DIRECTIVE_STANCE_BONUS_RATE`、`stanceBonus`、`directive-stance-bonus` 和“策略契合”。
 - 航线指令按钮新增轮换推荐态：连携窗口内，符合下一步轮换目标的指令按钮会显示“轮换推荐”，若推荐指令仍在冷却则显示“等待轮换”，让 #3 的主动玩法提示直接落到可点击控件。
 - `src/game.js` 让 `getDirectiveStatus` 复用 `getDirectivePlan.nextDirectiveIds` 输出 `recommended` 和 `recommendationText`，`src/app.js` 渲染 `is-recommended`、`directive-head` 和 `directive-recommendation`，`src/styles.css` 增加推荐态样式。
 - 本轮只调整航线指令可读性；不新增存档字段，不改变升级价格、产能公式、星图 57 段路线、项目奖励、航线策略、指令基础收益、冷却、连携窗口、轮换目标奖励、反馈入口或数值逻辑。

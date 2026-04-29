@@ -328,6 +328,8 @@ function renderDirective(option) {
         directive: option.id,
         gain: result.gain,
         rotationReward: result.rotationReward,
+        stanceBonus: result.stanceBonus,
+        stanceBonusRate: result.stanceBonusRate,
         chainStacks: result.chainStacks,
         chainMultiplier: result.chainMultiplier
       });
@@ -344,12 +346,21 @@ function renderDirective(option) {
   const head = document.createElement("span");
   head.className = "directive-head";
 
+  const badges = document.createElement("span");
+  badges.className = "directive-badges";
+
   const recommendation = document.createElement("span");
   recommendation.className = "directive-recommendation";
   recommendation.textContent = option.recommendationText;
   recommendation.hidden = !option.recommended;
 
-  head.append(name, recommendation);
+  const stanceBonus = document.createElement("span");
+  stanceBonus.className = "directive-stance-bonus";
+  stanceBonus.textContent = option.stanceBonusText;
+  stanceBonus.hidden = !option.stanceMatched;
+
+  badges.append(recommendation, stanceBonus);
+  head.append(name, badges);
 
   const summary = document.createElement("span");
   summary.textContent = option.summary;

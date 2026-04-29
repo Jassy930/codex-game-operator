@@ -120,8 +120,9 @@ export const ROUTE_STANCE_DEFS = [
   {
     id: DEFAULT_ROUTE_STANCE_ID,
     name: "均衡航线",
-    summary: "保持当前产能分配",
+    summary: "保持当前产能分配，谐振脉冲 +10%",
     masteryProjectId: "balanced-tuning",
+    directiveId: "resonance-pulse",
     effect: {
       clickMultiplier: 1,
       secondMultiplier: 1,
@@ -131,8 +132,9 @@ export const ROUTE_STANCE_DEFS = [
   {
     id: "ignition",
     name: "点火优先",
-    summary: "点击产能 +14%，过载奖励 +8%",
+    summary: "点击产能 +14%，过载奖励 +8%，点火齐射 +10%",
     masteryProjectId: "ignition-drill",
+    directiveId: "ignition-salvo",
     effect: {
       clickMultiplier: 1.14,
       secondMultiplier: 1,
@@ -142,8 +144,9 @@ export const ROUTE_STANCE_DEFS = [
   {
     id: "cruise",
     name: "巡航优先",
-    summary: "自动产能 +16%",
+    summary: "自动产能 +16%，巡航回收 +10%",
     masteryProjectId: "cruise-drill",
+    directiveId: "cruise-cache",
     effect: {
       clickMultiplier: 1,
       secondMultiplier: 1.16,
@@ -1074,6 +1077,7 @@ export const DIRECTIVE_CHAIN_WINDOW_SECONDS = 90;
 export const DIRECTIVE_CHAIN_BONUS_STEP = 0.12;
 export const DIRECTIVE_CHAIN_MAX_STACKS = 2;
 export const DIRECTIVE_ROTATION_REWARD_RATE = 0.18;
+export const DIRECTIVE_STANCE_BONUS_RATE = 0.1;
 
 const INITIAL_UPGRADES = Object.fromEntries(
   UPGRADE_DEFS.map((upgrade) => [upgrade.id, 0])
@@ -1318,7 +1322,10 @@ export function activateDirective(state, directiveId, now = Date.now()) {
   const baseGain = roundTo(Math.max(0, directive.getGain(current, production)), 4);
   const chain = getDirectiveChainForUse(current, directive.id, now);
   const rotationReward = getDirectiveRotationReward(baseGain, chain);
-  const gain = roundTo(baseGain * chain.multiplier + rotationReward, 4);
+  const stanceBonusRate = getDirectiveStanceBonusRate(production.routeStance, directive);
+  const preStanceGain = roundTo(baseGain * chain.multiplier + rotationReward, 4);
+  const stanceBonus = roundTo(preStanceGain * stanceBonusRate, 4);
+  const gain = roundTo(preStanceGain + stanceBonus, 4);
   const nextState = {
     ...current,
     energy: current.energy + gain,
@@ -1337,6 +1344,7 @@ export function activateDirective(state, directiveId, now = Date.now()) {
   };
   const chainText = formatDirectiveChainBonus(chain);
   const rotationRewardText = formatDirectiveRotationReward(rotationReward);
+  const stanceBonusText = formatDirectiveStanceBonus(stanceBonusRate);
 
   return {
     activated: true,
@@ -1344,10 +1352,13 @@ export function activateDirective(state, directiveId, now = Date.now()) {
     baseGain,
     gain,
     rotationReward,
+    stanceBonus,
+    stanceBonusRate,
     chainStacks: chain.stacks,
     chainMultiplier: chain.multiplier,
     chainBonusText: chainText,
     rotationRewardText,
+    stanceBonusText,
     state: nextState,
     notice:
       "已执行" +
@@ -1355,6 +1366,7 @@ export function activateDirective(state, directiveId, now = Date.now()) {
       "，" +
       (chainText ? chainText + "，" : "") +
       (rotationRewardText ? rotationRewardText + "，" : "") +
+      (stanceBonusText ? stanceBonusText + "，" : "") +
       "+" +
       formatNumber(gain) +
       " 能量。"
@@ -1737,9 +1749,13 @@ export function getDirectiveStatus(state, now = Date.now()) {
       const baseGain = roundTo(Math.max(0, directive.getGain(current, production)), 4);
       const chain = getDirectiveChainForUse(current, directive.id, now);
       const rotationReward = getDirectiveRotationReward(baseGain, chain);
-      const gain = roundTo(baseGain * chain.multiplier + rotationReward, 4);
+      const stanceBonusRate = getDirectiveStanceBonusRate(production.routeStance, directive);
+      const preStanceGain = roundTo(baseGain * chain.multiplier + rotationReward, 4);
+      const stanceBonus = roundTo(preStanceGain * stanceBonusRate, 4);
+      const gain = roundTo(preStanceGain + stanceBonus, 4);
       const chainText = formatDirectiveChainBonus(chain);
       const rotationRewardText = formatDirectiveRotationReward(rotationReward);
+      const stanceBonusText = formatDirectiveStanceBonus(stanceBonusRate);
       const recommended = unlocked && recommendedIds.has(directive.id);
       const ready = unlocked && remainingMs <= 0;
 
@@ -1748,16 +1764,21 @@ export function getDirectiveStatus(state, now = Date.now()) {
         baseGain,
         gain,
         rotationReward,
+        stanceBonus,
+        stanceBonusRate,
         chainStacks: chain.stacks,
         chainMultiplier: chain.multiplier,
         chainBonusText: chainText,
         rotationRewardText,
+        stanceBonusText,
+        stanceMatched: stanceBonusRate > 0,
         previewText: unlocked
           ? "预计 +" +
             formatNumber(gain) +
             " 能量" +
             (chainText ? " · " + chainText : "") +
-            (rotationRewardText ? " · " + rotationRewardText : "")
+            (rotationRewardText ? " · " + rotationRewardText : "") +
+            (stanceBonusText ? " · " + stanceBonusText : "")
           : unlockText,
         statusText: !unlocked
           ? "未解锁"
@@ -1784,9 +1805,9 @@ export function getDirectivePlan(state, now = Date.now()) {
       progress: 0,
       target: targetSteps,
       summaryText: "指令轮换：累计 100K 能量后解锁 90 秒连携目标",
-      hintText: "解锁后轮换不同航线指令，完成 3/3 获得轮换目标奖励。",
+      hintText: "解锁后轮换不同航线指令，匹配当前航线策略可获得策略契合加成，完成 3/3 获得轮换目标奖励。",
       text:
-        "指令轮换：累计 100K 能量后解锁 90 秒连携目标 · 解锁后轮换不同航线指令，完成 3/3 获得轮换目标奖励。"
+        "指令轮换：累计 100K 能量后解锁 90 秒连携目标 · 解锁后轮换不同航线指令，匹配当前航线策略可获得策略契合加成，完成 3/3 获得轮换目标奖励。"
     };
   }
 
@@ -1799,11 +1820,11 @@ export function getDirectivePlan(state, now = Date.now()) {
       progress: 0,
       target: targetSteps,
       summaryText: "指令轮换 0/" + targetSteps + " · 先执行任意航线指令",
-      hintText: "随后在 90 秒内切换不同指令，完成 3/3 获得轮换目标奖励。",
+      hintText: "匹配当前航线策略可获得策略契合 +10%；随后在 90 秒内切换不同指令，完成 3/3 获得轮换目标奖励。",
       text:
         "指令轮换 0/" +
         targetSteps +
-        " · 先执行任意航线指令 · 随后在 90 秒内切换不同指令，完成 3/3 获得轮换目标奖励。"
+        " · 先执行任意航线指令 · 匹配当前航线策略可获得策略契合 +10% · 随后在 90 秒内切换不同指令，完成 3/3 获得轮换目标奖励。"
     };
   }
 
@@ -2790,6 +2811,22 @@ function formatDirectiveRotationReward(rotationReward) {
   }
 
   return "轮换目标 +" + formatNumber(rotationReward);
+}
+
+function getDirectiveStanceBonusRate(routeStance, directive) {
+  if (!routeStance?.unlocked || routeStance.active?.directiveId !== directive.id) {
+    return 0;
+  }
+
+  return DIRECTIVE_STANCE_BONUS_RATE;
+}
+
+function formatDirectiveStanceBonus(stanceBonusRate) {
+  if (stanceBonusRate <= 0) {
+    return "";
+  }
+
+  return "策略契合 +" + Math.round(stanceBonusRate * 100) + "%";
 }
 
 function getProjectFilterDef(filterId) {

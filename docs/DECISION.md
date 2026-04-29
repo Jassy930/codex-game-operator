@@ -1,5 +1,30 @@
 # Decision
 
+## 2026-04-30 Product decision：航线策略契合指令
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-04-30 03:26 CST 同步到 3 个 open feedback issue、0 个 open bug issue。#3 更新时间晚于 #4，且仍指向“玩法太简单、只有点击和自动产能”；本轮继续进入有反馈样本下的 Product decision。
+
+当前最大问题：航线指令已经有冷却、连携、轮换目标、3/3 奖励和按钮推荐，但航线策略仍主要是被动倍率选择。策略选择和主动指令之间缺少直接收益关系，玩家还没有理由基于当前策略决定优先按哪个指令。
+
+本轮决策：
+
+- 三个航线策略各绑定一个契合指令：均衡航线 -> 谐振脉冲，点火优先 -> 点火齐射，巡航优先 -> 巡航回收。
+- 匹配当前航线策略的指令获得 `DIRECTIVE_STANCE_BONUS_RATE = 0.1` 的策略契合加成，按指令本次总收益额外增加 10%。
+- 指令预计收益、执行反馈、按钮徽标和本地 `directive` 事件记录 `stanceBonus` / `stanceBonusRate`。
+- 本轮只打通航线策略和航线指令；不新增存档字段，不改变升级价格、产能公式、星图 57 段路线、项目奖励、指令冷却、连携窗口、轮换目标奖励、反馈入口或筛选规则。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-04-30 03:26 CST 查询到 3 个 open feedback issue、0 个 open bug issue；#3 作为本轮处理对象。
+- 默认均衡航线下，谐振脉冲显示 `策略契合 +10%`，预计收益从 15.7 提升到 17.2。
+- 完成 3/3 轮换并使用均衡契合的谐振脉冲时，预计收益同时包含“航线连携 +24%”“轮换目标 +2.8”和“策略契合 +10%”。
+- 运行期按钮渲染包含 `directive-badges` 和 `directive-stance-bonus`，本地 `directive` 事件记录 `stanceBonus` 与 `stanceBonusRate`。
+- `bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build` 已通过。
+- 浏览器级检查已通过：本地解锁状态下谐振脉冲按钮真实渲染“策略契合 +10%”徽标。
+- 构建产物包含 `DIRECTIVE_STANCE_BONUS_RATE`、`stanceBonus`、`directive-stance-bonus` 和“策略契合”。
+
+下一步：推送后等待 GitHub Pages workflow；线上验证通过后回复 #3，并记录部署结果。
+
 ## 2026-04-30 Product decision：航线指令按钮轮换推荐
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 当前有 3 个 open feedback issue、0 个 open bug issue。#4 已连续处理视觉密度，#3 仍指向“玩法太简单、只有点击和自动产能”，上一轮已给 3/3 指令轮换补明确奖励，本轮继续进入有反馈样本下的 Product decision。
