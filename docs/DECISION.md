@@ -1,5 +1,26 @@
 # Decision
 
+## 2026-04-29 Product decision：星图本章筛选
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 当前仍有真实体验反馈 #2 open，且没有 open bug，继续进入有反馈样本下的 Product decision。
+
+当前最大问题：#2 仍围绕“内容丰富度太差，可玩的内容太少”保持 open。上一轮已新增全部、当前、未完成和已完成筛选，但在 57 段星图中，“未完成”仍可能是一条很长的跨章节列表；继续追加第 58 段会后移边界，却不会降低当前章节内的扫描成本。
+
+本轮决策：
+
+- 不追加新航段，先新增“本章”航段筛选。
+- “本章”按当前航段所属章节展示同章项目；全部完成时不显示本章航段，避免制造不存在的当前章节。
+- 筛选只影响当前列表视图，不新增存档字段，不改变项目完成判定、奖励数值、升级价格和 57 段星图路线。
+- 静态 HTML 初始文案、README、产品说明、路线图、设计约束、研究记录和发布日志同步记录本章筛选能力。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-04-29 17:58 CST 查询到 1 个 open issue、1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
+- `bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build` 已通过，覆盖本章筛选返回当前章节 5 段、非法筛选回退和全部完成时本章筛选为空。
+- 构建产物已包含 `current-chapter`、“本章”、`PROJECT_FILTER_DEFS`、`filterProjectStatuses` 和静态筛选按钮“本章 4”。
+
+下一步：完成全量安装、测试、构建、发布和 #2 回复后，再观察本章筛选是否降低 57 段星图的章节扫描成本。
+
 ## 2026-04-29 Product decision：星图航段筛选
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 当前仍有真实体验反馈 #2 open，且没有 open bug，继续进入有反馈样本下的 Product decision。

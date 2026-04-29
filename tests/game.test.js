@@ -1913,9 +1913,20 @@ test("星图项目筛选会区分当前、未完成和已完成航段", () => {
     filterProjectStatuses(active, "current").map((project) => project.id),
     ["ignition-drill"]
   );
+  assert.deepEqual(
+    filterProjectStatuses(active, "current-chapter").map((project) => project.id),
+    [
+      "ignition-drill",
+      "cruise-drill",
+      "starbridge-trial",
+      "stabilizer-matrix",
+      "balanced-tuning"
+    ]
+  );
   assert.equal(filterProjectStatuses(active, "completed").length, 5);
   assert.equal(filterProjectStatuses(active, "incomplete").length, 52);
   assert.deepEqual(filterProjectStatuses(completed, "current"), []);
+  assert.deepEqual(filterProjectStatuses(completed, "current-chapter"), []);
   assert.equal(filterProjectStatuses(completed, "completed").length, 57);
 });
 

@@ -67,6 +67,10 @@ export const PROJECT_FILTER_DEFS = [
     name: "当前"
   },
   {
+    id: "current-chapter",
+    name: "本章"
+  },
+  {
     id: "incomplete",
     name: "未完成"
   },
@@ -1250,6 +1254,12 @@ export function filterProjectStatuses(projects, filterId = DEFAULT_PROJECT_FILTE
 
   if (filter === "current") {
     return items.filter((project) => project.isCurrent);
+  }
+  if (filter === "current-chapter") {
+    const currentProject = items.find((project) => project.isCurrent);
+    return currentProject
+      ? items.filter((project) => project.chapterName === currentProject.chapterName)
+      : [];
   }
   if (filter === "incomplete") {
     return items.filter((project) => !project.completed);
