@@ -7,6 +7,9 @@
 - 本轮改动新增 `DIRECTIVE_MASTERY_CAPSTONE_RATE = 0.1`，当指令熟练已满 3/3 且本次指令完成 3/3 轮换时，额外获得有效基础指令收益 10% 的“满层回响”；满层完成态推荐显示“回响续航”，冷却中显示“等待回响”。本轮不新增存档字段，不改变升级价格、产能公式、星图 57 段路线、项目奖励、指令基础收益、冷却、连携窗口、轮换目标奖励、策略契合、策略终结或指令熟练层数上限。
 - 本轮本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数为 102 项。
 - 构建产物已包含 `DIRECTIVE_MASTERY_CAPSTONE_RATE`、`masteryCapstoneReward`、“回响续航”和“满层回响”。
+- GitHub Pages workflow 25137727635 已成功，线上地址返回 HTTP 200；线上首页包含“回响续航”和“满层回响”，线上 `game.js` 包含 `DIRECTIVE_MASTERY_CAPSTONE_RATE`、`masteryCapstoneReward`、“回响续航”和“满层回响”，线上 `app.js` 包含 `masteryCapstoneReward` 和 `masteryCapstoneRate`。
+- #3 已回复：说明指令熟练满层后继续完成 3/3 轮换会触发满层回响，提交 fd2a655，issue 保持 open 等待复测。
+- 回复后同步 GitHub Issues：2026-04-30 06:45 CST 当前仍为 3 个 open feedback issue、0 个 open bug issue；#3 更新时间为 2026-04-29T22:45:18Z。
 
 - GitHub Issues：gh 可用且已认证；2026-04-30 06:20 CST 通过 REST API 同步到 3 个 open issue、3 个 open feedback issue、0 个 open bug issue。
 - #4 继续作为本轮 Product decision：星图区筛选按钮和摘要已默认折叠，但“全部”“未完成”“远航长尾”等视图仍可能一次性铺开 44 到 57 张项目卡片；本轮新增“星图项目长列表收起”。

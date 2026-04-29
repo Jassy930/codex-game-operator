@@ -21,8 +21,11 @@
 - 本地 `directive` 事件记录 `masteryCapstoneReward` 和 `masteryCapstoneRate`。
 - `bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build` 已通过；测试数 102 项。
 - 构建产物包含 `DIRECTIVE_MASTERY_CAPSTONE_RATE`、`masteryCapstoneReward`、“回响续航”和“满层回响”。
+- GitHub Pages workflow 25137727635 已成功，线上地址返回 HTTP 200；线上首页包含“回响续航”和“满层回响”，线上 `game.js` 包含 `DIRECTIVE_MASTERY_CAPSTONE_RATE`、`masteryCapstoneReward`、“回响续航”和“满层回响”，线上 `app.js` 包含 `masteryCapstoneReward` 和 `masteryCapstoneRate`。
+- #3 已回复并继续保持 open，等待复测确认满层回响是否让指令熟练到 3/3 后仍有继续完整轮换的目标和奖励感。
+- 回复后同步 GitHub Issues：2026-04-30 06:45 CST 当前仍为 3 个 open feedback issue、0 个 open bug issue；#3 更新时间为 2026-04-29T22:45:18Z。
 
-下一步：推送部署并回复 #3，等待复测确认满层回响是否让指令熟练满层后仍有继续轮换的目标。
+下一步：等待 #3 复测；若仍认为主动玩法不足，再评估小型委托、资源消耗型指令或更明确的长期主动分支。
 
 ## 2026-04-30 Product decision：星图项目长列表收起
 
