@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+- 新增星图视觉航线：星图区会把 57 段压缩成节点航线，区分已完成、当前和待推进状态。
+- 星图视觉航线会随当前筛选高亮命中航段，帮助玩家先扫视当前视图覆盖范围，再决定是否阅读筛选摘要和项目列表。
+- 视觉航线仅改变展示；不新增存档字段，不改变 57 段星图路线、项目完成判定、奖励数值、升级价格、航线策略或筛选规则。
+- 修复 GitHub 反馈同步脚本：`ops/collect-feedback.sh` 改用 `gh api --method GET` 读取 Issues，避免默认 `gh issue list` 在当前 token 下触发 GraphQL 401。
+- 同步 GitHub Issues 反馈状态：当前 3 个 open feedback issue、0 个 open bug issue；#4 指向视觉密度和图片需求，#3 指向玩法单薄。
+- 验证通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`。
 - 新增星图筛选航段章节位置：筛选摘要的下一条、后续和终点会同时显示全局航段号和章节内位置，例如“航段 1/57 · 首段星图 1/4 点亮星图”。
 - 航段章节位置仅改变筛选摘要展示；不新增存档字段，不改变 57 段星图路线、项目完成判定、奖励数值、升级价格、航线策略或筛选规则。
 - 同步 GitHub Issues 反馈状态：当前 1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。

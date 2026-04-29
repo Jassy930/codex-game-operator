@@ -2,6 +2,13 @@
 
 ## 2026-04-29
 
+- GitHub Issues：gh 可用且已认证；2026-04-29 23:14 CST 通过 REST API 同步到 3 个 open issue、3 个 open feedback issue、0 个 open bug issue。
+- #4 进入本轮 Product decision：玩家认为界面“全是密密麻麻的文字”，并希望生成图片；本轮选择先新增星图视觉航线，把 57 段压缩成状态节点，随筛选高亮，减少星图区纯文字扫描压力。
+- #3 仍保持 open，指向“只有点击和自动产能”的玩法单薄问题；本轮不同时改玩法系统，避免把视觉密度和主动玩法两个风险混在一起。
+- #2 仍保持 open，上一轮章节位置已回复，等待复测。
+- 本轮本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`。
+- data/feedback/github-feedback.md 已同步 23:14 CST 快照；ops/collect-feedback.sh 已改用 `gh api --method GET` 读取 Issues，避开默认 `gh issue list` 在当前 token 下触发 GraphQL 401 的路径。
+
 - GitHub Issues：2026-04-29 22:51 CST 在回复 #2 后重新同步，当前 3 个 open issue、3 个 open feedback issue、0 个 open bug issue。
 - #2 已回复：说明筛选摘要下一条、后续和终点已新增章节内位置，GitHub Pages workflow 25115992745 已成功，线上地址返回 HTTP 200，线上首页包含“下一条 航段 1/57 · 首段星图 1/4 点亮星图”和“终点 航段 57/57 · 远航长尾 44/44 星渊方舟”，线上脚本包含 `formatProjectFilterProjectLabel`；issue 保持 open，等待复测。
 - 新增 #3：玩家反馈“游戏玩法太简单了，不够丰富，就只有点击和自动产能这样的东西”，快照位于累计 3.88M、巡航优先、当前目标巡航航校，指向玩法层需要新增主动选择或分支，不只是继续扩充文本说明。

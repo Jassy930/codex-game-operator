@@ -16,6 +16,7 @@ import {
   getProjectFilterButtonText,
   getProjectOverview,
   getProjectStatuses,
+  getProjectVisualMap,
   getRouteStanceStatus,
   getUpgradeAffordability,
   normalizeState,
@@ -60,6 +61,9 @@ const elements = {
   projectOverviewBonus: document.querySelector("#projectOverviewBonus"),
   projectOverviewAction: document.querySelector("#projectOverviewAction"),
   projectOverviewForecast: document.querySelector("#projectOverviewForecast"),
+  projectMapSummary: document.querySelector("#projectMapSummary"),
+  projectMapFilter: document.querySelector("#projectMapFilter"),
+  projectMapTrack: document.querySelector("#projectMapTrack"),
   routeStanceList: document.querySelector("#routeStanceList"),
   projectFilterList: document.querySelector("#projectFilterList"),
   projectFilterSummary: document.querySelector("#projectFilterSummary"),
@@ -193,6 +197,7 @@ function render() {
   elements.projectOverviewBonus.textContent = projectOverview.bonusText;
   elements.projectOverviewAction.textContent = projectOverview.actionText;
   elements.projectOverviewForecast.textContent = projectOverview.forecastText;
+  renderProjectMap(getProjectVisualMap(projects, projectFilter));
   renderRouteStances(routeStance);
   renderProjectFilters(projects);
   elements.projectFilterSummary.textContent = getProjectFilterSummary(projects, projectFilter);
@@ -324,6 +329,27 @@ function renderProjectFilters(projects) {
   elements.projectFilterList.replaceChildren(
     ...PROJECT_FILTER_DEFS.map((filter) => renderProjectFilter(filter, projects))
   );
+}
+
+function renderProjectMap(map) {
+  elements.projectMapSummary.textContent = map.summaryText;
+  elements.projectMapFilter.textContent = map.filterText;
+  elements.projectMapTrack.replaceChildren(...map.nodes.map(renderProjectMapNode));
+}
+
+function renderProjectMapNode(node) {
+  const item = document.createElement("span");
+  item.className = [
+    "project-map-node",
+    "is-" + node.status,
+    node.selected ? "" : "is-dimmed"
+  ]
+    .filter(Boolean)
+    .join(" ");
+  item.setAttribute("role", "listitem");
+  item.title = node.title;
+  item.setAttribute("aria-label", node.title);
+  return item;
 }
 
 function renderProjectFilter(filter, projects) {

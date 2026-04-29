@@ -108,6 +108,23 @@
               <span id="projectOverviewAction">行动建议：继续点火累计，推进航段 1/57 点亮星图，还差 100K 能量</span>
               <em id="projectOverviewForecast">航线预告：点亮星图（总产能 +12%）、谐振校准（过载奖励 +20%）、透镜阵列（点击产能 +18%）</em>
             </div>
+            <div class="project-map-view" aria-label="星图视觉航线">
+              <div class="project-map-headline">
+                <strong id="projectMapSummary">星图视觉 0/57 · 当前 航段 1/57 · 首段星图 1/4 点亮星图</strong>
+                <span id="projectMapFilter">高亮：全部 57 段</span>
+              </div>
+              <div
+                id="projectMapTrack"
+                class="project-map-track"
+                role="list"
+                aria-label="星图航线节点"
+              ></div>
+              <div class="project-map-legend" aria-hidden="true">
+                <span class="project-map-key is-complete">已完成</span>
+                <span class="project-map-key is-current">当前</span>
+                <span class="project-map-key is-pending">待推进</span>
+              </div>
+            </div>
             <div
               id="routeStanceList"
               class="route-stance-list"

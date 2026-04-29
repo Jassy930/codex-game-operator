@@ -17,6 +17,7 @@ import {
   getProjectFilterSummary,
   getProjectOverview,
   getProjectStatuses,
+  getProjectVisualMap,
   getRouteStanceStatus,
   getUpgradeAffordability,
   getUpgradeCost,
@@ -552,6 +553,23 @@ test("星图项目会标记所属章节", () => {
   assert.equal(projects[55].chapterText, "远航长尾 43/44");
   assert.equal(projects[56].chapterName, "远航长尾");
   assert.equal(projects[56].chapterText, "远航长尾 44/44");
+});
+
+test("星图视觉图会返回全航线节点和筛选高亮", () => {
+  const projects = getProjectStatuses(createInitialState(0));
+  const map = getProjectVisualMap(projects);
+  const currentMap = getProjectVisualMap(projects, "current");
+
+  assert.equal(map.summaryText, "星图视觉 0/57 · 当前 航段 1/57 · 首段星图 1/4 点亮星图");
+  assert.equal(map.filterText, "高亮：全部 57 段");
+  assert.equal(map.nodes.length, 57);
+  assert.equal(map.nodes[0].label, "航段 1/57 · 首段星图 1/4 点亮星图");
+  assert.equal(map.nodes[0].status, "current");
+  assert.equal(map.nodes[0].selected, true);
+  assert.equal(map.nodes[1].status, "pending");
+  assert.equal(currentMap.filterText, "高亮：当前 1 段");
+  assert.equal(currentMap.nodes.filter((node) => node.selected).length, 1);
+  assert.equal(currentMap.nodes[1].selected, false);
 });
 
 test("星图总览会显示完成数和下一段奖励", () => {

@@ -1396,6 +1396,37 @@ export function getProjectFilterButtonText(projects, filterId = DEFAULT_PROJECT_
   return filter.name + " " + completed + "/" + visibleProjects.length;
 }
 
+export function getProjectVisualMap(projects, filterId = DEFAULT_PROJECT_FILTER_ID) {
+  const filter = getProjectFilterDef(filterId);
+  const items = Array.isArray(projects) ? projects : [];
+  const visibleProjectIds = new Set(
+    filterProjectStatuses(items, filter.id).map((project) => project.id)
+  );
+  const completed = items.filter((project) => project.completed).length;
+  const currentProject = items.find((project) => project.isCurrent) ?? null;
+  const currentText = currentProject
+    ? formatProjectFilterProjectLabel(currentProject)
+    : "全部航段已完成";
+
+  return {
+    summaryText: "星图视觉 " + completed + "/" + items.length + " · 当前 " + currentText,
+    filterText: "高亮：" + filter.name + " " + visibleProjectIds.size + " 段",
+    nodes: items.map((project) => ({
+      id: project.id,
+      label: formatProjectFilterProjectLabel(project),
+      title:
+        formatProjectFilterProjectLabel(project) +
+        " · " +
+        project.statusText +
+        " · " +
+        project.reward,
+      status: project.completed ? "completed" : project.isCurrent ? "current" : "pending",
+      selected: visibleProjectIds.has(project.id),
+      chapterName: project.chapterName
+    }))
+  };
+}
+
 export function getProjectOverview(state) {
   const current = normalizeState(state);
   const projects = getProjectStatuses(current);

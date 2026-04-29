@@ -1,5 +1,28 @@
 # Decision
 
+## 2026-04-29 Product decision：星图视觉航线
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 当前有 3 个 open feedback issue，0 个 open bug issue。本轮优先处理 #4 的视觉密度反馈，进入有反馈样本下的 Product decision。
+
+当前最大问题：#4 指出界面“全是密密麻麻的文字”，并希望生成图片。现有星图已经有 57 段、筛选摘要、章节、奖励和后续预告，但这些信息主要以文本呈现；继续追加说明会直接放大 #4 反馈的问题。
+
+本轮决策：
+
+- 新增“星图视觉航线”，把 57 段显示为已完成、当前和待推进节点。
+- 视觉航线随当前星图筛选高亮命中航段，让玩家不用先读完整筛选摘要也能看到当前视图覆盖范围。
+- 保持节点为代码原生 UI，不引入外部图片依赖；本轮先解决可扫视结构，后续再评估是否补充位图氛围资产。
+- 同步修复 `ops/collect-feedback.sh`：改用 `gh api --method GET` 读取 Issues，避免当前 token 下默认 `gh issue list` 触发 GraphQL 401。
+- 不改变存档字段、星图完成判定、奖励数值、升级价格、航线策略、筛选规则和 57 段顺序。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-04-29 23:14 CST 查询到 3 个 open issue、3 个 open feedback issue、0 个 open bug issue；#4 为本轮处理对象，#3 留到后续玩法分支。
+- `bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build` 已通过，新增测试覆盖星图视觉图的 57 个节点、当前节点和当前筛选高亮。
+- 静态首页包含 `projectMapSummary`、`projectMapTrack` 和“星图视觉 0/57 · 当前 航段 1/57 · 首段星图 1/4 点亮星图”。
+- 运行期渲染会生成 `project-map-node`，并按 `is-complete`、`is-current`、`is-pending` 和 `is-dimmed` 区分状态与筛选高亮。
+
+下一步：完成安装、测试、构建和发布；部署后回复 #4，说明星图视觉航线已上线，并继续保留 #3 作为下一轮主动玩法分支依据。
+
 ## 2026-04-29 Product decision：星图筛选航段章节位置
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 当前仍有真实体验反馈 #2 open，且没有 open bug，继续进入有反馈样本下的 Product decision。
