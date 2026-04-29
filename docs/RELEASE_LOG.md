@@ -8,6 +8,9 @@
 - 同步 GitHub Issues 反馈状态：当前 3 个 open feedback issue、0 个 open bug issue；#3 继续指向玩法单薄并作为本轮处理对象。
 - 验证通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 102 项。
 - 构建产物已确认包含 `DIRECTIVE_TASK_REWARD_RATE`、`getDirectiveTaskStatus`、`directiveTask`、`directive-task-bonus`、“航线委托”和“委托完成”。
+- GitHub Pages workflow 25139224153 已成功，线上地址返回 HTTP 200，且线上首页、`game.js`、`app.js` 和 `styles.css` 已确认包含航线委托相关标记。
+- 已回复 #3，说明航线委托短期任务已部署，并保持 issue open 等待复测。
+- 回复后同步 GitHub Issues 反馈状态：当前 3 个 open feedback issue、0 个 open bug issue；#3 更新时间为 2026-04-29T23:31:14Z。
 - 航线指令按钮新增“预案执行”奖励徽标：推荐预案中的指令会在按钮徽标区直接显示“预案执行 +X”。
 - `src/app.js` 新增 `directive-plan-bonus` 渲染，`src/styles.css` 新增对应徽标样式，`tests/game.test.js` 覆盖运行期渲染和样式标记。
 - 本轮只调整航线指令按钮层奖励可见性；不新增存档字段，不改变升级价格、产能公式、星图 57 段路线、项目奖励、指令基础收益、冷却、连携窗口、轮换目标奖励、策略契合、策略终结、指令熟练、满层回响或筛选规则。

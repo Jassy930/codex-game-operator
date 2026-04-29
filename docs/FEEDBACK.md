@@ -7,6 +7,9 @@
 - 本轮改动新增 `DIRECTIVE_TASK_REWARD_RATE = 0.08` 和 `getDirectiveTaskStatus`，100K 后显示 3 步航线委托；当玩家按推荐预案把轮换从 2/3 完成到 3/3 时，额外获得有效基础指令收益 8% 的“委托完成”奖励，并在按钮徽标、预计收益、执行反馈和本地 `directive` 事件中记录 `taskReward` / `taskRewardRate`。本轮不新增存档字段，不改变升级价格、产能公式、星图 57 段路线、项目奖励、指令基础收益、冷却、连携窗口、轮换目标奖励、预案执行、策略契合、策略终结、指令熟练、满层回响或筛选规则。
 - 本轮本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数为 102 项。
 - 构建产物已包含 `DIRECTIVE_TASK_REWARD_RATE`、`getDirectiveTaskStatus`、`directiveTask`、`directive-task-bonus`、“航线委托”和“委托完成”。
+- 提交 6d29667 已推送；GitHub Pages workflow 25139224153 已成功，线上地址返回 HTTP 200；线上首页包含 `directiveTask` 和“航线委托”，线上 `game.js` 包含 `DIRECTIVE_TASK_REWARD_RATE`、`getDirectiveTaskStatus`、`taskReward` 和“委托完成”，线上 `app.js` 包含 `directiveTask`、`taskReward` 和 `directive-task-bonus`，线上 `styles.css` 包含 `directive-task` 与 `directive-task-bonus`。
+- #3 已回复：说明航线委托短期任务已部署，issue 保持 open 等待复测。
+- 回复后同步 GitHub Issues：2026-04-30 07:31 CST 当前仍为 3 个 open feedback issue、0 个 open bug issue；#3 更新时间为 2026-04-29T23:31:14Z。
 
 - GitHub Issues：gh 可用且已认证；2026-04-30 07:07 CST 通过 REST API 同步到 3 个 open issue、3 个 open feedback issue、0 个 open bug issue。
 - #3 继续作为本轮 Product decision：上一轮已让推荐预案提供“预案执行”即时奖励，但按钮徽标区还没有直接标出这份奖励；本轮新增“预案执行按钮徽标”。
