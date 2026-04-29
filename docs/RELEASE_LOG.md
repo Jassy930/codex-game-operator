@@ -6,6 +6,8 @@
 - 同步 GitHub Issues 反馈状态：当前 1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
 - 验证通过：bun install --no-save、bun run test、bun run build、npm install、npm test、npm run build。
 - 构建产物已包含 `project-chapter-badge` 样式和 `chapterName` 渲染字段。
+- GitHub Pages workflow 25084357042 已成功，线上地址返回 HTTP 200，且发布文件包含 `project-chapter-badge` 和 `chapterName`。
+- 已回复 #2，说明项目列表章节标记已部署，并保持 issue open 等待复测。
 - 新增星图阶段余量：阶段导航会显示当前阶段还剩几段，并提示下一阶段名称或最终阶段状态。
 - 同步 GitHub Issues 反馈状态：当前 1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
 - 验证通过：bun install --no-save、bun run test、bun run build、npm install、npm test、npm run build。

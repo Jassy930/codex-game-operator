@@ -17,8 +17,10 @@
 - GitHub Issues 已同步：2026-04-29 08:07 CST 查询到 1 个 open issue、1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
 - bun install --no-save、bun run test、bun run build、npm install、npm test 和 npm run build 已通过，覆盖项目章节映射。
 - 构建产物已包含 `project-chapter-badge` 渲染样式和 `chapterName` 渲染字段。
+- GitHub Pages workflow 25084357042 已成功，线上地址返回 HTTP 200，且发布文件包含 `project-chapter-badge` 和 `chapterName`。
+- #2 已回复并保持 open，等待复测确认项目列表章节标记是否改善内容层次感和后续内容感知。
 
-下一步：发布后回复 #2，说明项目列表章节标记已上线，并等待复测确认列表层次感是否改善。
+下一步：继续观察 #2 复测是否认为项目列表章节标记改善内容层次感和后续内容感知。
 
 ## 2026-04-29 Product decision：星图阶段余量
 
