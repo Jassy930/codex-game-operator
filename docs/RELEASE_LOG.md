@@ -7,7 +7,8 @@
 - 同步 GitHub Issues 反馈状态：当前 1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
 - 验证通过：bun install --no-save、bun run test、bun run build、npm install、npm test、npm run build。
 - 构建产物已包含“星辉远港”、`starglow-far-harbor`、“星图进度 0/43”、“34 个累计航段”和“点击 0/11”。
-- 待 push 后由 GitHub Pages workflow 发布，并在成功后回复 #2。
+- GitHub Pages workflow 25092643630 已成功，线上地址返回 HTTP 200，且发布文件包含“星辉远港”、`starglow-far-harbor`、“星图进度 0/43”、“34 个累计航段”和“点击 0/11”。
+- 已回复 #2，说明星辉远港航段已部署，并保持 issue open 等待复测。
 - 新增 1.6B 后星潮谐振庭航段：晨星方舟完成后继续出现累计能量目标，完成后奖励过载奖励 +24%，星图路线扩展到 42 段。
 - 同步星图总览、里程碑、章节、奖励进度、航线构成、项目列表、静态 HTML 初始文案和 README 到 42 段。
 - 同步 GitHub Issues 反馈状态：当前 1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
