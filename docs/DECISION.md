@@ -1,5 +1,28 @@
 # Decision
 
+## 2026-04-30 Product decision：航线轮换目标奖励
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 当前有 3 个 open feedback issue、0 个 open bug issue。#4 已连续处理视觉密度，#3 仍指向“玩法太简单、只有点击和自动产能”，本轮继续进入有反馈样本下的 Product decision。
+
+当前最大问题：航线指令、90 秒航线连携和“指令轮换”目标提示已经让玩家知道下一步该切换哪个指令，但完成 3/3 轮换时只体现为 +24% 收益，没有独立的完成奖励。短期目标的“收束感”仍偏弱。
+
+本轮决策：
+
+- 完成 3/3 指令轮换时，在既有 +24% 航线连携之外，额外获得一次“轮换目标奖励”，数值为该指令基础收益的 18%。
+- 预计收益、执行反馈和本地 `directive` 事件都显示/记录 `rotationReward`，让玩家能看到完成 3/3 带来的额外收益。
+- 本轮只调整航线指令收益收束、展示文案和本地事件；不新增存档字段，不改变升级价格、星图 57 段路线、项目奖励、航线策略、指令基础收益、冷却、反馈入口或筛选规则。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-04-30 02:37 CST 查询到 3 个 open feedback issue、0 个 open bug issue；#3 作为本轮处理对象。
+- `DIRECTIVE_ROTATION_REWARD_RATE` 固定为 0.18，只在 `chain.stacks >= DIRECTIVE_CHAIN_MAX_STACKS` 时生效。
+- 第三步轮换的预计收益包含“航线连携 +24%”和“轮换目标 +N”，执行反馈包含同样的奖励说明。
+- 本地 `directive` 事件记录 `rotationReward`。
+- `bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build` 已通过。
+- 构建产物包含 `DIRECTIVE_ROTATION_REWARD_RATE`、`rotationReward`、“轮换目标”和“完成 3/3”。
+
+下一步：发布后回复 #3；若复测后仍认为主动玩法不足，再评估短期任务列表或资源消耗型指令分支。
+
 ## 2026-04-30 Product decision：星图项目详情折叠
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 当前有 3 个 open feedback issue、0 个 open bug issue。#4 仍指向“界面全是密密麻麻的文字、希望生成一些图片”，上一轮已折叠筛选长摘要，本轮继续进入有反馈样本下的 Product decision。

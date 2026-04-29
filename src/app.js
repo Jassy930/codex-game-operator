@@ -321,6 +321,7 @@ function renderDirective(option) {
       recordEvent("directive", {
         directive: option.id,
         gain: result.gain,
+        rotationReward: result.rotationReward,
         chainStacks: result.chainStacks,
         chainMultiplier: result.chainMultiplier
       });

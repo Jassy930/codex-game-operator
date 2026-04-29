@@ -1072,6 +1072,7 @@ export const DIRECTIVE_UNLOCK_ENERGY = PROJECT_GOAL_UNLOCK_ENERGY;
 export const DIRECTIVE_CHAIN_WINDOW_SECONDS = 90;
 export const DIRECTIVE_CHAIN_BONUS_STEP = 0.12;
 export const DIRECTIVE_CHAIN_MAX_STACKS = 2;
+export const DIRECTIVE_ROTATION_REWARD_RATE = 0.18;
 
 const INITIAL_UPGRADES = Object.fromEntries(
   UPGRADE_DEFS.map((upgrade) => [upgrade.id, 0])
@@ -1315,7 +1316,8 @@ export function activateDirective(state, directiveId, now = Date.now()) {
   const production = getEffectiveProduction(current);
   const baseGain = roundTo(Math.max(0, directive.getGain(current, production)), 4);
   const chain = getDirectiveChainForUse(current, directive.id, now);
-  const gain = roundTo(baseGain * chain.multiplier, 4);
+  const rotationReward = getDirectiveRotationReward(baseGain, chain);
+  const gain = roundTo(baseGain * chain.multiplier + rotationReward, 4);
   const nextState = {
     ...current,
     energy: current.energy + gain,
@@ -1333,21 +1335,25 @@ export function activateDirective(state, directiveId, now = Date.now()) {
     lastPulse: directive.name
   };
   const chainText = formatDirectiveChainBonus(chain);
+  const rotationRewardText = formatDirectiveRotationReward(rotationReward);
 
   return {
     activated: true,
     directive,
     baseGain,
     gain,
+    rotationReward,
     chainStacks: chain.stacks,
     chainMultiplier: chain.multiplier,
     chainBonusText: chainText,
+    rotationRewardText,
     state: nextState,
     notice:
       "已执行" +
       directive.name +
       "，" +
       (chainText ? chainText + "，" : "") +
+      (rotationRewardText ? rotationRewardText + "，" : "") +
       "+" +
       formatNumber(gain) +
       " 能量。"
@@ -1727,18 +1733,26 @@ export function getDirectiveStatus(state, now = Date.now()) {
       const remainingSeconds = Math.ceil(remainingMs / 1000);
       const baseGain = roundTo(Math.max(0, directive.getGain(current, production)), 4);
       const chain = getDirectiveChainForUse(current, directive.id, now);
-      const gain = roundTo(baseGain * chain.multiplier, 4);
+      const rotationReward = getDirectiveRotationReward(baseGain, chain);
+      const gain = roundTo(baseGain * chain.multiplier + rotationReward, 4);
       const chainText = formatDirectiveChainBonus(chain);
+      const rotationRewardText = formatDirectiveRotationReward(rotationReward);
 
       return {
         ...directive,
         baseGain,
         gain,
+        rotationReward,
         chainStacks: chain.stacks,
         chainMultiplier: chain.multiplier,
         chainBonusText: chainText,
+        rotationRewardText,
         previewText: unlocked
-          ? "预计 +" + formatNumber(gain) + " 能量" + (chainText ? " · " + chainText : "")
+          ? "预计 +" +
+            formatNumber(gain) +
+            " 能量" +
+            (chainText ? " · " + chainText : "") +
+            (rotationRewardText ? " · " + rotationRewardText : "")
           : unlockText,
         statusText: !unlocked
           ? "未解锁"
@@ -1763,9 +1777,9 @@ export function getDirectivePlan(state, now = Date.now()) {
       progress: 0,
       target: targetSteps,
       summaryText: "指令轮换：累计 100K 能量后解锁 90 秒连携目标",
-      hintText: "解锁后轮换不同航线指令，获得 +12%/+24% 连携收益。",
+      hintText: "解锁后轮换不同航线指令，完成 3/3 获得轮换目标奖励。",
       text:
-        "指令轮换：累计 100K 能量后解锁 90 秒连携目标 · 解锁后轮换不同航线指令，获得 +12%/+24% 连携收益。"
+        "指令轮换：累计 100K 能量后解锁 90 秒连携目标 · 解锁后轮换不同航线指令，完成 3/3 获得轮换目标奖励。"
     };
   }
 
@@ -1778,11 +1792,11 @@ export function getDirectivePlan(state, now = Date.now()) {
       progress: 0,
       target: targetSteps,
       summaryText: "指令轮换 0/" + targetSteps + " · 先执行任意航线指令",
-      hintText: "随后在 90 秒内切换不同指令，叠加 +12%/+24% 连携。",
+      hintText: "随后在 90 秒内切换不同指令，完成 3/3 获得轮换目标奖励。",
       text:
         "指令轮换 0/" +
         targetSteps +
-        " · 先执行任意航线指令 · 随后在 90 秒内切换不同指令，叠加 +12%/+24% 连携。"
+        " · 先执行任意航线指令 · 随后在 90 秒内切换不同指令，完成 3/3 获得轮换目标奖励。"
     };
   }
 
@@ -1817,8 +1831,13 @@ export function getDirectivePlan(state, now = Date.now()) {
   const waitingPrefix = readyDirectives.length ? "下一步切换到" : "等待冷却后切换到";
   const hintText =
     stacks >= DIRECTIVE_CHAIN_MAX_STACKS
-      ? waitingPrefix + nextNames + "可维持 " + nextBonusText + "；重复同类会重置。"
-      : waitingPrefix + nextNames + "，预计" + nextBonusText + "。";
+      ? waitingPrefix + nextNames + "可维持 " + nextBonusText + "，并继续触发轮换目标奖励；重复同类会重置。"
+      : waitingPrefix +
+        nextNames +
+        "，预计" +
+        nextBonusText +
+        (nextStacks >= DIRECTIVE_CHAIN_MAX_STACKS ? "，并触发轮换目标奖励" : "") +
+        "。";
 
   return {
     unlocked: true,
@@ -2748,6 +2767,22 @@ function formatDirectiveChainBonus(chain) {
   }
 
   return "航线连携 +" + Math.round((chain.multiplier - 1) * 100) + "%";
+}
+
+function getDirectiveRotationReward(baseGain, chain) {
+  if (chain.stacks < DIRECTIVE_CHAIN_MAX_STACKS) {
+    return 0;
+  }
+
+  return roundTo(baseGain * DIRECTIVE_ROTATION_REWARD_RATE, 4);
+}
+
+function formatDirectiveRotationReward(rotationReward) {
+  if (!rotationReward) {
+    return "";
+  }
+
+  return "轮换目标 +" + formatNumber(rotationReward);
 }
 
 function getProjectFilterDef(filterId) {

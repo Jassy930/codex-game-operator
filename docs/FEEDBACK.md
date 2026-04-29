@@ -2,6 +2,11 @@
 
 ## 2026-04-30
 
+- GitHub Issues：gh 可用且已认证；2026-04-30 02:37 CST 通过 REST API 同步到 3 个 open issue、3 个 open feedback issue、0 个 open bug issue。
+- #3 继续作为本轮 Product decision：航线指令、航线连携和指令轮换提示已经上线，但完成 3/3 轮换缺少明确收束奖励；本轮新增“轮换目标奖励”，让第三步轮换在 +24% 连携之外额外获得 18% 基础指令收益。
+- 本轮改动在 `src/game.js` 新增 `DIRECTIVE_ROTATION_REWARD_RATE`、轮换目标奖励计算、预计收益文案和执行反馈，在 `src/app.js` 的本地 `directive` 事件中记录 `rotationReward`，并更新首页指令轮换初始文案；不新增存档字段，不改变升级价格、星图 57 段路线、项目奖励、航线策略、指令基础收益、冷却、反馈入口或筛选规则。
+- 本轮本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；构建产物已包含 `DIRECTIVE_ROTATION_REWARD_RATE`、`rotationReward`、“轮换目标”和“完成 3/3”。
+
 - GitHub Issues：gh 可用且已认证；2026-04-30 02:22 CST 通过 REST API 同步到 3 个 open issue、3 个 open feedback issue、0 个 open bug issue。
 - #4 继续作为本轮 Product decision：筛选摘要已经默认折叠，但 57 段项目列表仍默认铺开每张卡片的说明、进度、奖励和进度条；本轮将非当前航段详情收进默认折叠的 `project-card-drawer`，当前航段保持展开。
 - 本轮改动在 `src/app.js` 新增 `renderProjectDetailNodes` 和非当前航段 `details.project-card-drawer` 结构，在 `src/styles.css` 新增项目卡片折叠样式；不改变存档、数值、星图 57 段路线、筛选规则、航线策略、航线指令或反馈入口。

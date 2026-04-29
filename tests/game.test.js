@@ -185,11 +185,11 @@ test("航线指令会返回轮换目标提示", () => {
   assert.equal(locked.summaryText, "指令轮换：累计 100K 能量后解锁 90 秒连携目标");
   assert.equal(
     locked.text,
-    "指令轮换：累计 100K 能量后解锁 90 秒连携目标 · 解锁后轮换不同航线指令，获得 +12%/+24% 连携收益。"
+    "指令轮换：累计 100K 能量后解锁 90 秒连携目标 · 解锁后轮换不同航线指令，完成 3/3 获得轮换目标奖励。"
   );
   assert.equal(ready.progress, 0);
   assert.equal(ready.target, 3);
-  assert.equal(ready.text, "指令轮换 0/3 · 先执行任意航线指令 · 随后在 90 秒内切换不同指令，叠加 +12%/+24% 连携。");
+  assert.equal(ready.text, "指令轮换 0/3 · 先执行任意航线指令 · 随后在 90 秒内切换不同指令，完成 3/3 获得轮换目标奖励。");
 });
 
 test("执行航线指令会获得即时收益并进入冷却", () => {
@@ -232,6 +232,8 @@ test("轮换航线指令会触发航线连携收益", () => {
   const firstPlan = getDirectivePlan(first.state, 2000);
   const second = activateDirective(first.state, "cruise-cache", 2000);
   const secondPlan = getDirectivePlan(second.state, 3000);
+  const secondStatus = getDirectiveStatus(second.state, 3000);
+  const resonanceOption = secondStatus.options.find((option) => option.id === "resonance-pulse");
   const third = activateDirective(second.state, "resonance-pulse", 3000);
 
   assert.equal(first.chainStacks, 0);
@@ -249,12 +251,19 @@ test("轮换航线指令会触发航线连携收益", () => {
   assert.equal(second.notice, "已执行巡航回收，航线连携 +12%，+50.2 能量。");
   assert.equal(
     secondPlan.text,
-    "指令轮换 2/3 · 当前 巡航回收 · 连携窗口 1.5 分钟 · 下一步切换到谐振脉冲，预计连携 +24%。"
+    "指令轮换 2/3 · 当前 巡航回收 · 连携窗口 1.5 分钟 · 下一步切换到谐振脉冲，预计连携 +24%，并触发轮换目标奖励。"
+  );
+  assert.equal(
+    resonanceOption.previewText,
+    "预计 +22.3 能量 · 航线连携 +24% · 轮换目标 +2.8"
   );
   assert.equal(third.chainStacks, 2);
   assert.equal(third.chainMultiplier, 1.24);
-  assert.equal(third.gain, 19.4432);
+  assert.equal(third.rotationReward, 2.8224);
+  assert.equal(third.gain, 22.2656);
   assert.equal(third.chainBonusText, "航线连携 +24%");
+  assert.equal(third.rotationRewardText, "轮换目标 +2.8");
+  assert.equal(third.notice, "已执行谐振脉冲，航线连携 +24%，轮换目标 +2.8，+22.3 能量。");
 });
 
 test("航线连携超时后会重置", () => {
@@ -795,6 +804,8 @@ test("静态首页会渲染航线指令轮换目标", () => {
 
   assert.match(indexHtml, /id="directivePlan"/);
   assert.match(indexHtml, /指令轮换：累计 100K 能量后解锁 90 秒连携目标/);
+  assert.match(indexHtml, /完成 3\/3 获得轮换目标奖励/);
+  assert.match(appJs, /rotationReward: result\.rotationReward/);
   assert.match(appJs, /directivePlan: document\.querySelector\("#directivePlan"\)/);
   assert.match(appJs, /elements\.directivePlan\.textContent = directives\.plan\.text/);
   assert.match(styles, /\.directive-plan/);
