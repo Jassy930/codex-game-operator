@@ -841,6 +841,20 @@ export const PROJECT_DEFS = [
     current(state) {
       return state.totalEnergy;
     }
+  },
+  {
+    id: "radiant-tide-resonance-gate",
+    name: "曜潮谐振门",
+    summary: "累计 15.2B 能量，在曜冕星门外开启曜潮谐振门。",
+    unit: "能量",
+    target: 15_200_000_000,
+    reward: "过载奖励 +28%",
+    effect: {
+      overloadMultiplier: 1.28
+    },
+    current(state) {
+      return state.totalEnergy;
+    }
   }
 ];
 
@@ -863,7 +877,7 @@ export const PROJECT_CHAPTER_DEFS = [
   {
     name: "远航长尾",
     startId: "void-gate-expedition",
-    endId: "radiant-crown-stargate"
+    endId: "radiant-tide-resonance-gate"
   }
 ];
 
