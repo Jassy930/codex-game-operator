@@ -7,6 +7,8 @@
 - 同步 GitHub Issues 反馈状态：当前 1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
 - 验证通过：bun install --no-save、bun run test、bun run build、npm install、npm test、npm run build。
 - 构建产物已包含“曜幕天穹”、`solar-veil-dome`、“星图进度 0/32”和“23 个累计航段”。
+- GitHub Pages workflow 25087650173 已成功，线上地址返回 HTTP 200，且发布文件包含“曜幕天穹”、`solar-veil-dome`、“星图进度 0/32”和“23 个累计航段”。
+- 已回复 #2，说明曜幕天穹航段已部署，并保持 issue open 等待复测。
 - 新增星图航线焦点：星图总览会根据当前均衡、点火或巡航策略显示对应专精航段、奖励和进度，让策略选择直接关联到可追目标。
 - 同步 GitHub Issues 反馈状态：当前 1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
 - 验证通过：bun install --no-save、bun run test、bun run build、npm install、npm test、npm run build。
