@@ -1273,7 +1273,8 @@ export function getProjectStatuses(state) {
       remaining,
       progress,
       completed,
-      progressText: buildProjectProgressText(project, currentValue, target, remaining)
+      progressText: buildProjectProgressText(project, currentValue, target, remaining),
+      tagText: buildProjectTagText(project)
     };
   });
   const currentIndex = statuses.findIndex((project) => !project.completed);
@@ -2230,6 +2231,17 @@ function buildProjectProgressText(project, currentValue, target, remaining) {
     " · 还差 " +
     formatProjectAmount(project, remaining)
   );
+}
+
+function buildProjectTagText(project) {
+  const trackText = project.upgradeId ? "升级航段" : "累计航段";
+  const rewardTypes = PROJECT_REWARD_SUMMARY_DEFS.filter(([, effectKey]) =>
+    Boolean(project.effect?.[effectKey])
+  )
+    .map(([label]) => label)
+    .join("/");
+
+  return rewardTypes ? trackText + " · " + rewardTypes + "奖励" : trackText;
 }
 
 function formatProjectAmount(project, value) {

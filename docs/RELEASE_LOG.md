@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+- 新增星图项目标签：每个星图项目卡片会直接显示“累计航段/升级航段”和奖励类型，例如“累计航段 · 总产能奖励”“升级航段 · 过载奖励”。
+- 项目标签仅改变列表展示；不新增存档字段，不改变 57 段星图路线、项目完成判定、奖励数值、升级价格、航线策略或筛选规则。
+- 同步 GitHub Issues 反馈状态：当前 1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
+- 验证通过：bun install --no-save、bun run test、bun run build、npm install、npm test、npm run build。
+- 构建产物已包含 `buildProjectTagText`、`project-tag-badge` 和新增的项目卡片标签渲染。
 - 新增星图筛选推进构成：筛选摘要会按当前视图统计累计航段和升级航段各有多少段，例如全部视图会显示“推进构成 累计 48 段 / 升级 9 段”。
 - 推进构成仅改变星图筛选摘要展示；不新增存档字段，不改变 57 段星图路线、项目完成判定、奖励数值、升级价格、航线策略或筛选规则。
 - 同步 GitHub Issues 反馈状态：当前 1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。

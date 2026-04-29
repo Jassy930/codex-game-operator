@@ -1,5 +1,25 @@
 # Decision
 
+## 2026-04-29 Product decision：星图项目标签
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 当前仍有真实体验反馈 #2 open，且没有 open bug，继续进入有反馈样本下的 Product decision。
+
+当前最大问题：#2 仍围绕“内容丰富度太差，可玩的内容太少”保持 open。上一轮筛选摘要已经显示推进构成，但玩家实际浏览 57 段项目卡片时，仍需要分别阅读目标条件和奖励文本，才能判断某一段是累计推进还是升级补强、奖励落到哪条成长线。
+
+本轮决策：
+
+- 不追加第 58 段，先给每个星图项目卡片新增“累计/升级航段 · 奖励类型”标签。
+- 标签由项目是否带 upgradeId 和 effect 类型自动推导，例如“累计航段 · 总产能奖励”“升级航段 · 过载奖励”。
+- 标签只改变项目列表展示；不新增存档字段，不改变项目完成判定、奖励数值、升级价格、航线策略、筛选规则和 57 段星图顺序。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-04-29 20:21 CST 查询到 1 个 open issue、1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
+- `bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build` 已通过，测试覆盖累计/升级航段及总产能、过载、点击奖励标签。
+- 构建产物已包含 `buildProjectTagText`、`project-tag-badge` 和新增的项目卡片标签渲染。
+
+下一步：push 后等待 GitHub Pages workflow 完成，验证线上文件并回复 #2。
+
 ## 2026-04-29 Product decision：星图筛选推进构成
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 当前仍有真实体验反馈 #2 open，且没有 open bug，继续进入有反馈样本下的 Product decision。
