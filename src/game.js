@@ -1702,6 +1702,45 @@ export function getProjectVisualMap(projects, filterId = DEFAULT_PROJECT_FILTER_
   };
 }
 
+export function getProjectChapterVisuals(projects) {
+  const items = Array.isArray(projects) ? projects : [];
+
+  return PROJECT_CHAPTER_DEFS.map((chapter) => {
+    const chapterProjects = getChapterProjects(items, chapter);
+    const completed = chapterProjects.filter((project) => project.completed).length;
+    const total = chapterProjects.length;
+    const nextProject = chapterProjects.find((project) => !project.completed) ?? null;
+    const isCurrent = chapterProjects.some((project) => project.isCurrent);
+    const filterId =
+      PROJECT_FILTER_DEFS.find((filter) => filter.chapterName === chapter.name)?.id ??
+      DEFAULT_PROJECT_FILTER_ID;
+    const nextText = nextProject
+      ? "下一条 " + nextProject.chapterIndex + "/" + nextProject.chapterTotal + " " + nextProject.name
+      : "已完成";
+    const status =
+      total > 0 && completed === total
+        ? "completed"
+        : isCurrent
+          ? "current"
+          : completed > 0
+            ? "active"
+            : "pending";
+
+    return {
+      id: chapter.name,
+      name: chapter.name,
+      filterId,
+      completed,
+      total,
+      progress: total > 0 ? completed / total : 0,
+      progressText: completed + "/" + total,
+      nextText,
+      status,
+      title: chapter.name + " " + completed + "/" + total + " · " + nextText
+    };
+  });
+}
+
 export function getProjectOverview(state) {
   const current = normalizeState(state);
   const projects = getProjectStatuses(current);

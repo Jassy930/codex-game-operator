@@ -17,6 +17,7 @@ import {
   getProjectFilterBrief,
   getProjectFilterSummary,
   getProjectFilterButtonText,
+  getProjectChapterVisuals,
   getProjectOverview,
   getProjectStatuses,
   getProjectVisualMap,
@@ -147,6 +148,7 @@ const elements = {
   projectMapSummary: document.querySelector("#projectMapSummary"),
   projectMapFilter: document.querySelector("#projectMapFilter"),
   projectMapTrack: document.querySelector("#projectMapTrack"),
+  projectChapterMap: document.querySelector("#projectChapterMap"),
   routeStanceList: document.querySelector("#routeStanceList"),
   projectFilterList: document.querySelector("#projectFilterList"),
   projectFilterSummaryBrief: document.querySelector("#projectFilterSummaryBrief"),
@@ -285,6 +287,7 @@ function render() {
   elements.projectOverviewAction.textContent = projectOverview.actionText;
   elements.projectOverviewForecast.textContent = projectOverview.forecastText;
   renderProjectMap(getProjectVisualMap(projects, projectFilter));
+  renderProjectChapterMap(getProjectChapterVisuals(projects));
   renderRouteStances(routeStance);
   renderProjectFilters(projects);
   elements.projectFilterSummaryBrief.textContent = getProjectFilterBrief(
@@ -572,6 +575,63 @@ function renderProjectMapNode(node) {
   item.title = node.title;
   item.setAttribute("aria-label", node.title);
   return item;
+}
+
+function renderProjectChapterMap(chapters) {
+  elements.projectChapterMap.replaceChildren(...chapters.map(renderProjectChapterTile));
+}
+
+function renderProjectChapterTile(chapter) {
+  const isActive =
+    chapter.filterId === projectFilter ||
+    (projectFilter === INITIAL_PROJECT_FILTER_ID && chapter.status === "current");
+  const button = document.createElement("button");
+  button.className = [
+    "project-chapter-tile",
+    "is-" + chapter.status,
+    isActive ? "is-active" : ""
+  ]
+    .filter(Boolean)
+    .join(" ");
+  button.type = "button";
+  button.title = chapter.title;
+  button.setAttribute("aria-pressed", isActive ? "true" : "false");
+  button.addEventListener("click", () => {
+    projectFilter = chapter.filterId;
+    render();
+  });
+
+  const visual = document.createElement("span");
+  visual.className = "project-chapter-visual";
+  visual.setAttribute("aria-hidden", "true");
+
+  const orbit = document.createElement("span");
+  orbit.className = "project-chapter-orbit";
+
+  const core = document.createElement("span");
+  core.className = "project-chapter-core";
+
+  const progress = document.createElement("span");
+  progress.className = "project-chapter-progress";
+
+  const progressFill = document.createElement("span");
+  progressFill.style.width = Math.round(chapter.progress * 100) + "%";
+  progress.append(progressFill);
+  visual.append(orbit, core, progress);
+
+  const name = document.createElement("strong");
+  name.textContent = chapter.name;
+
+  const meta = document.createElement("span");
+  meta.className = "project-chapter-meta";
+  meta.textContent = chapter.progressText;
+
+  const next = document.createElement("span");
+  next.className = "project-chapter-next";
+  next.textContent = chapter.nextText;
+
+  button.append(visual, name, meta, next);
+  return button;
 }
 
 function renderProjectFilter(filter, projects) {

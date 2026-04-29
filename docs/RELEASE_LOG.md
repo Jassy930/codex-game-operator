@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+- 星图视觉航线下新增“星图章节视觉导航”：四个章节以固定尺寸视觉按钮展示完成进度、下一条目标和小型进度轨，点击可直接切换到对应章节筛选。
+- `src/game.js` 新增 `getProjectChapterVisuals`，从现有项目状态推导章节进度、状态、下一条目标和筛选 id；`src/app.js` 渲染 `projectChapterMap` / `project-chapter-tile` 并复用现有 `projectFilter`；`index.html` 和 `src/styles.css` 同步新增静态结构与样式。
+- 本轮只调整星图导航和视觉呈现；不新增存档字段，不改变升级价格、产能公式、星图 57 段路线、项目奖励、项目完成判定、航线策略、航线指令、反馈入口或既有筛选摘要结构。
+- 同步 GitHub Issues 反馈状态：当前 3 个 open feedback issue、0 个 open bug issue；#4 继续指向视觉密度和图片需求。
+- 验证通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 100 项。
+- 构建产物已确认包含 `projectChapterMap`、`project-chapter-tile`、`getProjectChapterVisuals` 和“下一条 1/44 星门远征”。
 - 星图筛选新增四个章节入口：首段星图、专精校准、深空基建、远航长尾，玩家可直接按章节查看航段，不必只依赖“本章”或“全部”。
 - `src/game.js` 在 `PROJECT_FILTER_DEFS` 中新增章节筛选定义，并让 `filterProjectStatuses` 按 `chapterName` 过滤；`index.html` 静态筛选按钮同步显示“首段星图 0/4”“专精校准 0/5”“深空基建 0/4”“远航长尾 0/44”。
 - 本轮只调整星图列表导航和筛选展示；不新增存档字段，不改变升级价格、产能公式、星图 57 段路线、项目奖励、项目完成判定、航线策略、航线指令、反馈入口或筛选摘要结构。

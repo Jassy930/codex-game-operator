@@ -1,5 +1,29 @@
 # Decision
 
+## 2026-04-30 Product decision：星图章节视觉导航
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-04-30 05:39 CST 同步到 3 个 open feedback issue、0 个 open bug issue。没有新的 bug 或玩家复测结论；#4 仍是最近更新的视觉密度反馈，继续进入有反馈样本下的 Product decision。
+
+当前最大问题：星图已经有插画、节点航线、筛选摘要折叠、非当前航段详情折叠、默认本章和四个章节筛选按钮，但“章节”仍主要藏在按钮文字和摘要文字里。玩家看节点航线时，不能直接用更视觉化的章节块判断四个阶段的进度和下一条目标。
+
+本轮决策：
+
+- 在星图视觉航线下新增四个可点击章节视觉按钮：首段星图、专精校准、深空基建、远航长尾。
+- 章节视觉按钮显示章节进度、下一条目标和小型进度轨，点击后直接切换到对应章节筛选。
+- 章节视觉数据由 `getProjectChapterVisuals` 从现有项目完成状态、`chapterName` 和筛选定义推导。
+- 本轮只调整星图导航与视觉呈现；不新增存档字段，不改变升级价格、产能公式、星图 57 段路线、项目奖励、项目完成判定、航线策略、航线指令、反馈入口或既有筛选摘要结构。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-04-30 05:39 CST 查询到 3 个 open feedback issue、0 个 open bug issue；#4 作为本轮处理对象。
+- `getProjectChapterVisuals` 返回四个章节的 `filterId`、`progressText`、`status` 和 `nextText`；在 260K 示例状态下，专精校准为 `1/5`、`current`、`下一条 1/5 点火航校`，远航长尾为 `0/44`、`pending`、`下一条 1/44 星门远征`。
+- 运行期 `projectChapterMap` 渲染 `project-chapter-tile`，并能通过点击章节视觉按钮切换 `projectFilter` 到对应章节筛选。
+- 静态首页包含 `projectChapterMap`、“星图章节视觉导航”和远航长尾下一条目标。
+- `bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build` 已通过；测试数 100 项。
+- 构建产物包含 `projectChapterMap`、`project-chapter-tile`、`getProjectChapterVisuals` 和“下一条 1/44 星门远征”。
+
+下一步：提交并推送后等待 GitHub Pages 发布；发布成功后回复 #4，请玩家复测章节视觉导航是否比只看筛选按钮更容易定位星图阶段。
+
 ## 2026-04-30 Product decision：星图章节筛选入口
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-04-30 05:28 CST 同步到 3 个 open feedback issue、0 个 open bug issue。没有新的 bug 或玩家复测结论；#4 仍指向“界面密密麻麻、希望生成图片、更好看”，本轮回到视觉密度问题做 Product decision。

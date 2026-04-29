@@ -23,6 +23,7 @@ import {
   getProjectFilterBrief,
   getProjectFilterButtonText,
   getProjectFilterSummary,
+  getProjectChapterVisuals,
   getProjectOverview,
   getProjectStatuses,
   getProjectVisualMap,
@@ -839,6 +840,25 @@ test("静态首页会引用星图插画资产", () => {
   assert.match(styles, /\.project-scene-image/);
   assert.match(asset, /星核工坊星图航线插画/);
   assert.match(asset, /routeLine/);
+});
+
+test("静态首页会渲染星图章节视觉导航", () => {
+  const indexHtml = readFileSync(new URL("../index.html", import.meta.url), "utf8");
+  const appJs = readFileSync(new URL("../src/app.js", import.meta.url), "utf8");
+  const styles = readFileSync(new URL("../src/styles.css", import.meta.url), "utf8");
+
+  assert.match(indexHtml, /id="projectChapterMap"/);
+  assert.match(indexHtml, /星图章节视觉导航/);
+  assert.match(indexHtml, /project-chapter-tile is-current is-active/);
+  assert.match(indexHtml, /<strong>远航长尾<\/strong>/);
+  assert.match(indexHtml, /<span class="project-chapter-next">下一条 1\/44 星门远征<\/span>/);
+  assert.match(appJs, /getProjectChapterVisuals/);
+  assert.match(appJs, /function renderProjectChapterMap\(chapters\)/);
+  assert.match(appJs, /projectChapterMap: document\.querySelector\("#projectChapterMap"\)/);
+  assert.match(appJs, /projectFilter = chapter\.filterId/);
+  assert.match(styles, /\.project-chapter-map/);
+  assert.match(styles, /\.project-chapter-tile/);
+  assert.match(styles, /\.project-chapter-visual/);
 });
 
 test("静态首页会引用主操作区工坊插画资产", () => {
@@ -2555,6 +2575,50 @@ test("星图筛选定义包含四个章节入口", () => {
       ["chapter-long-tail", "远航长尾", "远航长尾"]
     ]
   );
+});
+
+test("星图章节视觉导航会返回章节进度和下一条目标", () => {
+  const active = getProjectStatuses({
+    ...createInitialState(0),
+    totalEnergy: 260_000,
+    overloadBonus: 17,
+    upgrades: {
+      lens: 12,
+      collector: 12,
+      resonator: 6,
+      stabilizer: 9
+    }
+  });
+  const completed = getProjectStatuses({
+    ...createInitialState(0),
+    totalEnergy: 122_001_000_000,
+    overloadBonus: 17,
+    upgrades: {
+      lens: 14,
+      collector: 16,
+      resonator: 6,
+      stabilizer: 16
+    }
+  });
+
+  assert.deepEqual(
+    getProjectChapterVisuals(active).map((chapter) => [
+      chapter.name,
+      chapter.filterId,
+      chapter.progressText,
+      chapter.status,
+      chapter.nextText
+    ]),
+    [
+      ["首段星图", "chapter-starter-map", "4/4", "completed", "已完成"],
+      ["专精校准", "chapter-mastery", "1/5", "current", "下一条 1/5 点火航校"],
+      ["深空基建", "chapter-deep-infra", "0/4", "pending", "下一条 1/4 远星中继"],
+      ["远航长尾", "chapter-long-tail", "0/44", "pending", "下一条 1/44 星门远征"]
+    ]
+  );
+  assert.equal(getProjectChapterVisuals(active)[1].progress, 0.2);
+  assert.equal(getProjectChapterVisuals(completed)[3].status, "completed");
+  assert.equal(getProjectChapterVisuals(completed)[3].nextText, "已完成");
 });
 
 test("星图总览会显示全部完成状态", () => {
