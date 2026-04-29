@@ -5,6 +5,9 @@
 - GitHub Issues：gh 可用且已认证；2026-04-29 21:30 CST 查询到 1 个 open issue、1 个 open feedback issue、0 个 open bug issue。
 - #2 仍为 open，最后更新时间停留在 2026-04-29 13:20:41 UTC，未出现新的玩家复测结论或 bug；本轮不继续追加第 58 段，改为让星图筛选摘要在混合完成/未完成视图中显示已领取奖励构成，减少玩家从奖励构成和待领取奖励中反推已获得成长线的成本。
 - data/feedback/github-feedback.md 已同步本地快照。
+- 本轮已回复 #2：说明筛选摘要新增已领取奖励，GitHub Pages workflow 25112149264 已成功，线上地址返回 HTTP 200，线上脚本包含 `formatProjectFilterClaimedRewardMix` 和“已领取奖励”；issue 保持 open，等待复测确认筛选摘要已领取奖励是否降低 57 段星图各视图的已获得成长线判断成本。
+- GitHub Issues：gh 可用且已认证；2026-04-29 21:38 CST 在回复后查询到 1 个 open issue、1 个 open feedback issue、0 个 open bug issue。
+- data/feedback/github-feedback.md 已在回复 #2 后同步本地快照。
 
 - GitHub Issues：gh 可用且已认证；2026-04-29 21:10 CST 查询到 1 个 open issue、1 个 open feedback issue、0 个 open bug issue。
 - #2 仍为 open，最后更新时间停留在 2026-04-29 13:04:37 UTC，未出现新的玩家复测结论或 bug；本轮不继续追加第 58 段，改为让星图筛选摘要显示当前视图的待领取奖励构成，减少玩家从已完成数和奖励构成中反推剩余成长线的成本。

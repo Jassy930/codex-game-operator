@@ -7,6 +7,8 @@
 - 同步 GitHub Issues 反馈状态：当前 1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
 - 验证通过：bun install --no-save、bun run test、bun run build、npm install、npm test、npm run build。
 - 构建产物已包含“已领取奖励”和 `formatProjectFilterClaimedRewardMix`。
+- GitHub Pages workflow 25112149264 已成功，线上地址返回 HTTP 200，且发布脚本包含 `formatProjectFilterClaimedRewardMix` 和“已领取奖励”。
+- 已回复 #2，说明星图筛选摘要已领取奖励已部署，并保持 issue open 等待复测。
 - 新增星图筛选待领取奖励：有未完成航段的筛选摘要会按当前筛选视图显示剩余可领取的总产能、点击、自动和过载奖励构成。
 - 已完成筛选不显示待领取奖励；本轮仅改变筛选摘要展示，不新增存档字段，不改变 57 段星图路线、项目完成判定、奖励数值、升级价格、航线策略或筛选规则。
 - 同步 GitHub Issues 反馈状态：当前 1 个 open feedback issue、0 个 open bug issue；#2 尚无新的复测结论。
