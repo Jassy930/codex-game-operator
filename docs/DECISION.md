@@ -1,5 +1,30 @@
 # Decision
 
+## 2026-04-30 Product decision：航线指令收束续航推荐
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-04-30 04:54 CST 同步到 3 个 open feedback issue、0 个 open bug issue。#3 仍是最近更新的玩法反馈，继续指向“玩法太简单、只有点击和自动产能”；本轮继续进入有反馈样本下的 Product decision。
+
+当前最大问题：上一轮已经把 0/3 起步推荐改为非契合指令，把当前策略契合指令留给 3/3 策略终结。但玩家完成第一步后，1/3 阶段仍会把“另一条非契合指令”和“契合指令”都作为普通轮换推荐；如果第二步提前点掉契合指令，这一轮第三步仍无法触发策略终结。
+
+本轮决策：
+
+- `getDirectivePlan` 在 1/3 且上一指令不是当前策略契合指令时，只推荐另一条非契合指令，把契合指令继续保留给第三步。
+- 按钮推荐文案从普通“轮换推荐”改为“收束续航”，冷却中显示“等待续航”。
+- 锁定态首页和提示文案补充“第二步继续避开契合指令”。
+- 本轮只调整第二步推荐与提示文案；不新增存档字段，不改变升级价格、产能公式、星图 57 段路线、项目奖励、指令基础收益、冷却、连携窗口、轮换目标奖励、策略契合 +10%、策略终结奖励或指令熟练数值。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-04-30 04:54 CST 查询到 3 个 open feedback issue、0 个 open bug issue；#3 作为本轮处理对象。
+- 默认均衡航线下，第一步执行点火齐射后，1/3 阶段只推荐巡航回收，谐振脉冲不再被提前标为推荐。
+- `getDirectivePlan` 在 1/3 返回 `nextDirectiveIds = ["cruise-cache"]`、`recommendationText = "收束续航"` 和 `waitingRecommendationText = "等待续航"`。
+- 1/3 轮换提示包含“继续保留谐振脉冲做 3/3 策略终结”。
+- 锁定态首页提示包含“第二步继续避开契合指令”。
+- `bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build` 已通过。
+- 构建产物包含 `收束续航`、`等待续航`、`第二步继续避开契合指令` 和 `shouldPreserveStanceFinisher`。
+
+下一步：推送后等待 GitHub Pages 部署结果；部署成功后回复 #3，说明第二步收束续航推荐已上线。
+
 ## 2026-04-30 Product decision：航线指令收束起手推荐
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-04-30 04:37 CST 同步到 3 个 open feedback issue、0 个 open bug issue。#3 仍是最近更新的玩法反馈，继续指向“玩法太简单、只有点击和自动产能”；本轮继续进入有反馈样本下的 Product decision。

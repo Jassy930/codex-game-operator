@@ -1896,9 +1896,9 @@ export function getDirectivePlan(state, now = Date.now()) {
       progress: 0,
       target: targetSteps,
       summaryText: "指令轮换：累计 100K 能量后解锁 90 秒连携目标",
-      hintText: "解锁后先从非契合指令起手，轮换不同航线指令，把契合指令留到 3/3 策略终结；完成轮换还会累积指令熟练。",
+      hintText: "解锁后先从非契合指令起手，第二步继续避开契合指令，把契合指令留到 3/3 策略终结；完成轮换还会累积指令熟练。",
       text:
-        "指令轮换：累计 100K 能量后解锁 90 秒连携目标 · 解锁后先从非契合指令起手，轮换不同航线指令，把契合指令留到 3/3 策略终结；完成轮换还会累积指令熟练。"
+        "指令轮换：累计 100K 能量后解锁 90 秒连携目标 · 解锁后先从非契合指令起手，第二步继续避开契合指令，把契合指令留到 3/3 策略终结；完成轮换还会累积指令熟练。"
     };
   }
 
@@ -1959,12 +1959,21 @@ export function getDirectivePlan(state, now = Date.now()) {
   const differentDirectives = DIRECTIVE_DEFS.filter(
     (directive) => directive.id !== chain.lastDirectiveId
   );
-  const readyDirectives = differentDirectives.filter((directive) =>
-    isDirectiveReady(current, directive, now)
-  );
-  const nextDirectivePool = readyDirectives.length ? readyDirectives : differentDirectives;
   const routeStance = getRouteStanceStatus(current);
   const stanceDirective = getDirectiveDef(routeStance.active?.directiveId);
+  const shouldPreserveStanceFinisher = Boolean(
+    stacks === 0 &&
+      stanceDirective &&
+      chain.lastDirectiveId !== stanceDirective.id &&
+      differentDirectives.some((directive) => directive.id !== stanceDirective.id)
+  );
+  const preferredDirectives = shouldPreserveStanceFinisher
+    ? differentDirectives.filter((directive) => directive.id !== stanceDirective.id)
+    : differentDirectives;
+  const readyDirectives = preferredDirectives.filter((directive) =>
+    isDirectiveReady(current, directive, now)
+  );
+  const nextDirectivePool = readyDirectives.length ? readyDirectives : preferredDirectives;
   const nextIncludesStanceDirective = Boolean(
     stanceDirective &&
       nextDirectivePool.some((directive) => directive.id === stanceDirective.id)
@@ -1983,6 +1992,9 @@ export function getDirectivePlan(state, now = Date.now()) {
     " · 连携窗口 " +
     windowText;
   const waitingPrefix = readyDirectives.length ? "下一步切换到" : "等待冷却后切换到";
+  const preserveStanceHint = shouldPreserveStanceFinisher
+    ? "，继续保留" + stanceDirective.name + "做 3/3 策略终结"
+    : "";
   const hintText =
     stacks >= DIRECTIVE_CHAIN_MAX_STACKS
       ? waitingPrefix +
@@ -1997,6 +2009,7 @@ export function getDirectivePlan(state, now = Date.now()) {
         masteryHint
       : waitingPrefix +
         nextNames +
+        preserveStanceHint +
         "，预计" +
         nextBonusText +
         (nextStacks >= DIRECTIVE_CHAIN_MAX_STACKS ? "，并触发轮换目标奖励" : "") +
@@ -2012,6 +2025,8 @@ export function getDirectivePlan(state, now = Date.now()) {
     target: targetSteps,
     remainingSeconds: Math.ceil(Math.max(0, (chain.expiresAt - now) / 1000)),
     nextDirectiveIds: nextDirectivePool.map((directive) => directive.id),
+    recommendationText: shouldPreserveStanceFinisher ? "收束续航" : undefined,
+    waitingRecommendationText: shouldPreserveStanceFinisher ? "等待续航" : undefined,
     summaryText,
     hintText,
     text: summaryText + " · " + hintText

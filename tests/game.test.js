@@ -198,7 +198,7 @@ test("航线指令会返回轮换目标提示", () => {
   assert.equal(locked.summaryText, "指令轮换：累计 100K 能量后解锁 90 秒连携目标");
   assert.equal(
     locked.text,
-    "指令轮换：累计 100K 能量后解锁 90 秒连携目标 · 解锁后先从非契合指令起手，轮换不同航线指令，把契合指令留到 3/3 策略终结；完成轮换还会累积指令熟练。"
+    "指令轮换：累计 100K 能量后解锁 90 秒连携目标 · 解锁后先从非契合指令起手，第二步继续避开契合指令，把契合指令留到 3/3 策略终结；完成轮换还会累积指令熟练。"
   );
   assert.equal(ready.progress, 0);
   assert.equal(ready.target, 3);
@@ -248,6 +248,7 @@ test("轮换航线指令会触发航线连携收益", () => {
   const first = activateDirective(state, "ignition-salvo", 1000);
   const status = getDirectiveStatus(first.state, 2000);
   const cruiseOption = status.options.find((option) => option.id === "cruise-cache");
+  const earlyResonanceOption = status.options.find((option) => option.id === "resonance-pulse");
   const firstPlan = getDirectivePlan(first.state, 2000);
   const second = activateDirective(first.state, "cruise-cache", 2000);
   const secondPlan = getDirectivePlan(second.state, 3000);
@@ -258,12 +259,16 @@ test("轮换航线指令会触发航线连携收益", () => {
   assert.equal(first.chainStacks, 0);
   assert.equal(first.chainMultiplier, 1);
   assert.equal(cruiseOption.recommended, true);
-  assert.equal(cruiseOption.recommendationText, "轮换推荐");
+  assert.equal(cruiseOption.recommendationText, "收束续航");
   assert.equal(cruiseOption.finisherRecommended, false);
   assert.equal(cruiseOption.previewText, "预计 +50.2 能量 · 航线连携 +12%");
+  assert.equal(earlyResonanceOption.recommended, false);
+  assert.deepEqual(firstPlan.nextDirectiveIds, ["cruise-cache"]);
+  assert.equal(firstPlan.recommendationText, "收束续航");
+  assert.equal(firstPlan.waitingRecommendationText, "等待续航");
   assert.equal(
     firstPlan.text,
-    "指令轮换 1/3 · 当前 点火齐射 · 连携窗口 1.5 分钟 · 下一步切换到巡航回收或谐振脉冲，预计连携 +12%；完成 3/3 轮换会累积 3 分钟指令熟练，每层指令收益 +5%，最多 3 层。"
+    "指令轮换 1/3 · 当前 点火齐射 · 连携窗口 1.5 分钟 · 下一步切换到巡航回收，继续保留谐振脉冲做 3/3 策略终结，预计连携 +12%；完成 3/3 轮换会累积 3 分钟指令熟练，每层指令收益 +5%，最多 3 层。"
   );
   assert.equal(second.activated, true);
   assert.equal(second.baseGain, 44.8);
@@ -889,6 +894,7 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(indexHtml, /id="directivePlan"/);
   assert.match(indexHtml, /指令轮换：累计 100K 能量后解锁 90 秒连携目标/);
   assert.match(indexHtml, /非契合指令起手/);
+  assert.match(indexHtml, /第二步继续避开契合指令/);
   assert.match(indexHtml, /3\/3 策略终结/);
   assert.match(indexHtml, /指令熟练/);
   assert.match(appJs, /rotationReward: result\.rotationReward/);
