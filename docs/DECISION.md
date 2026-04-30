@@ -22,8 +22,11 @@
 - CSS 包含 `.project-chapter-hero-route`、`.project-chapter-hero-node.is-current`、`.is-completed` 和 `.is-active`。
 - 本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 117 项。
 - 构建产物已确认包含 `project-chapter-hero-route`、`PROJECT_CHAPTER_HERO_NODE_LIMIT`、`heroNodes` 和 `renderProjectChapterHeroNode`。
+- 提交 4785d0f 已推送；GitHub Pages workflow 25160335475 已成功；线上地址返回 HTTP 200，且线上首页、`game.js`、`app.js` 和 `styles.css` 已确认包含当前章节节点带相关标记。
+- #4 已回复：说明当前章节大图景新增章节节点带，并保持 issue open 等待复测。
+- 回复后同步 GitHub Issues：2026-04-30 18:26 CST 当前仍为 5 个 open feedback issue、0 个 open bug issue；#4 更新时间为 2026-04-30T10:26:07Z。
 
-下一步：提交、推送并回复 #4，等待复测当前章节节点带是否让章节入口更容易扫视。
+下一步：等待 #4 复测；如果章节入口仍被认为文字压力高，再评估真正的章节分页或更强章节插图，而不是继续增加说明文字。
 
 ## 2026-04-30 Product decision：当前章节大图景
 

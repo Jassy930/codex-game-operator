@@ -8,6 +8,9 @@
 - 同步 GitHub Issues 反馈状态：2026-04-30 18:17 CST 当前 5 个 open feedback issue、0 个 open bug issue；#4 作为本轮处理对象。
 - 验证通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 117 项。
 - 构建产物已确认包含 `project-chapter-hero-route`、`PROJECT_CHAPTER_HERO_NODE_LIMIT`、`heroNodes` 和 `renderProjectChapterHeroNode`。
+- 提交 4785d0f 已推送；GitHub Pages workflow 25160335475 已成功；线上地址返回 HTTP 200，且线上首页、`game.js`、`app.js` 和 `styles.css` 已确认包含当前章节节点带相关标记。
+- 已回复 #4，说明当前章节大图景新增章节节点带，并保持 issue open 等待复测。
+- 回复后同步 GitHub Issues 反馈状态：2026-04-30 18:26 CST 当前 5 个 open feedback issue、0 个 open bug issue；#4 更新时间为 2026-04-30T10:26:07Z。
 
 - 星图视觉航线新增当前章节大图景：在星图视觉标题下显示 `project-chapter-hero`，用更大的轨道、星门/信标、章节信号和进度条展示当前筛选章节或当前航段所属章节，继续回应 #4 对界面文字密度和图片化表达的反馈。
 - `index.html` 新增静态 `projectChapterHero` 占位；`src/app.js` 新增 `renderProjectChapterHero` / `getActiveProjectChapter` 并复用 `getProjectChapterVisuals`；`src/styles.css` 新增当前章节大图景、轨道、星门/信标、章节信号和四类章节差异样式；`tests/game.test.js` 覆盖静态标记、运行期绑定和样式标记。

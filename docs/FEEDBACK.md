@@ -7,7 +7,9 @@
 - 本轮改动新增当前章节节点带：`project-chapter-hero-scene` 内显示 `project-chapter-hero-route`，短章节直接显示节点，远航长尾压缩到最多 8 个节点，并用 completed/current/active/pending 状态辅助扫视。
 - 本轮只调整星图当前章节大图景展示层；不新增存档字段，不改变 57 段星图路线、项目完成判定、筛选结果、奖励数值、升级价格、航线策略、航线指令、反馈入口或部署链路。
 - 本轮本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 117 项。
-- 构建产物已确认包含 `project-chapter-hero-route`、`PROJECT_CHAPTER_HERO_NODE_LIMIT`、`heroNodes` 和 `renderProjectChapterHeroNode`；推送和 issue 回复待执行。
+- 提交 4785d0f 已推送；GitHub Pages workflow 25160335475 已成功；线上地址返回 HTTP 200，且线上首页、`game.js`、`app.js` 和 `styles.css` 已确认包含当前章节节点带相关标记。
+- #4 已回复：说明当前章节大图景新增章节节点带，并保持 issue open 等待复测。
+- 回复后同步 GitHub Issues：2026-04-30 18:26 CST 当前仍为 5 个 open feedback issue、0 个 open bug issue；#4 更新时间为 2026-04-30T10:26:07Z。
 
 - GitHub Issues：gh 可用且已认证；2026-04-30 18:02 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
 - #4 继续作为本轮 Product decision 依据：该反馈指出界面文字密集，希望更多图片和更好看；前序已补星图插画、视觉航线、章节视觉导航、章节徽记、筛选视觉标识、项目列表窗口和章节微图景，本轮处理当前章节缺少更大画面锚点的问题。
