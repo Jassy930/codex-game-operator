@@ -9,6 +9,11 @@
 - 同步 GitHub Issues 反馈状态：2026-05-01 00:57 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 作为本轮处理对象。
 - 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
 - 构建产物已确认包含 `FAR_ROUTE_DISPATCH_BRANCH_ROTATION_REWARD_RATE`、`farRouteBranchRotationDirectiveId`、`dispatchBranchRotationReward`、`directive-dispatch-branch-rotation` 和“轮替闭环”相关文案。
+- 提交 a436937 已推送；GitHub Pages workflow 25179184181 已成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`。
+- 线上地址 https://jassy930.github.io/codex-game-operator/ 返回 HTTP 200，且线上 `game.js`、`app.js` 和 `styles.css` 已确认包含轮替闭环相关标记。
+- 已回复 #6，说明目标后改走不同分支会记录轮替分支，回到目标完成 3/3 时结算“轮替闭环 +9%”；issue 保持 open 等待复测。
+- 回复后同步 GitHub Issues 反馈状态：2026-05-01 01:17 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 更新时间为 2026-04-30T17:17:29Z。
+- 钉钉通知未发送：运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` 相关变量名；未将 webhook 写入仓库。
 
 - 远航调度新增“分支轮替目标”：没有上轮分支时提示先完成任一分支闭环，已有上轮分支时提示改走另一条协同/绕行路线触发“分支改道 +6%”，继续回应 #6 对后半段玩法变化不明显的反馈。
 - `src/game.js` 为远航分支派生 `branchRotationText` 并纳入远航调度长文本和星图总览摘要；`src/app.js` 渲染 `far-dispatch-branch-rotation`；`index.html` 增加静态占位；`src/styles.css` 增加轮替目标样式；`tests/game.test.js` 覆盖无上轮分支、绕行后改走协同、协同整备后改走绕行和静态绑定。
