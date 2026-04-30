@@ -18,6 +18,9 @@
 - 静态首页和运行期资源包含 `directive-visual-ignition-salvo`、`directive-visual-cruise-cache`、`directive-visual-resonance-pulse`、`DIRECTIVE_ICON_DEFS` 和 `renderDirectiveVisual`。
 - 本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 108 项。
 - 构建产物已确认包含航线指令视觉徽记相关标记。
+- 提交 0b5d006 已推送；GitHub Pages workflow 25146648219 已成功，线上地址返回 HTTP 200，且线上首页、`app.js` 和 `styles.css` 已确认包含航线指令视觉徽记相关标记。
+- #4 已回复并继续保持 open，等待复测确认航线指令三类徽记是否降低 100K 后指令区的文字压力。
+- 回复后同步 GitHub Issues：2026-04-30 12:02 CST 当前仍为 5 个 open feedback issue、0 个 open bug issue；#4 更新时间为 2026-04-30T04:02:09Z。
 
 ## 2026-04-30 Product decision：航线策略视觉徽记
 

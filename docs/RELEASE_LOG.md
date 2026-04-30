@@ -8,6 +8,9 @@
 - 同步 GitHub Issues 反馈状态：2026-04-30 11:52 CST 当前 5 个 open feedback issue、0 个 open bug issue；#4 作为本轮处理对象。
 - 验证通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 108 项。
 - 构建产物已确认包含 `directive-visual-ignition-salvo`、`directive-visual-cruise-cache`、`directive-visual-resonance-pulse`、`DIRECTIVE_ICON_DEFS` 和 `renderDirectiveVisual`。
+- 提交 0b5d006 已推送；GitHub Pages workflow 25146648219 已成功，线上地址返回 HTTP 200，且线上首页、`app.js` 和 `styles.css` 已确认包含航线指令视觉徽记相关标记。
+- 已回复 #4，说明航线指令按钮新增三类视觉徽记，并保持 issue open 等待复测。
+- 回复后同步 GitHub Issues 反馈状态：2026-04-30 12:02 CST 当前 5 个 open feedback issue、0 个 open bug issue；#4 更新时间为 2026-04-30T04:02:09Z。
 - 航线策略按钮新增三类视觉徽记：均衡航线、点火优先、巡航优先分别显示固定尺寸策略图形，减少 100K 后策略区只靠文字区分的压力。
 - `index.html` 为 `routeStanceList` 新增静态锁定占位按钮与 `route-stance-visual-*` 徽记；`src/app.js` 新增 `ROUTE_STANCE_ICON_DEFS` 和 `renderRouteStanceVisual`；`src/styles.css` 新增策略徽记尺寸、颜色和选中态；`tests/game.test.js` 补充静态和运行期标记覆盖。
 - 本轮只调整航线策略展示层，回应 #4 对文字密度和更多图片化表达的反馈；不新增存档字段，不改变航线策略倍率、100K 解锁条件、专精航段、航线指令、星图路线、升级价格、反馈入口或部署链路。
