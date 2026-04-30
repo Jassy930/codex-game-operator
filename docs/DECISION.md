@@ -20,8 +20,11 @@
 - CSS 包含 `.core-charge-ring`、`--core-charge-angle` 和过载高亮状态。
 - 本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 109 项。
 - 构建产物已确认包含 `core-charge-ring`、`--core-charge-angle` 和运行期环形蓄能绑定。
+- 提交 734fe4d 已推送；GitHub Pages workflow 25150187384 已成功，线上地址返回 HTTP 200，且线上首页、`app.js` 和 `styles.css` 已确认包含环形蓄能轨相关标记。
+- #5 已回复并继续保持 open，等待复测确认环形蓄能轨是否让点火按钮更有点击反馈和点击欲望。
+- 回复后同步 GitHub Issues：2026-04-30 14:07 CST 当前仍为 5 个 open feedback issue、0 个 open bug issue；#5 更新时间为 2026-04-30T06:07:29Z。
 
-下一步：提交、推送并回复 #5；若复测仍认为点火欲望不足，再评估音效开关或更强的星核阶段变化。
+下一步：等待 #5 复测；若仍认为点火欲望不足，再评估音效开关或更强的星核阶段变化。
 
 ## 2026-04-30 Product decision：远航调度主路径轨
 

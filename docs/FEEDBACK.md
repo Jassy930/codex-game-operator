@@ -8,6 +8,9 @@
 - 本轮不新增存档字段，不改变点击收益、连击窗口、过载奖励、升级价格、星图航段、航线策略、航线指令、反馈入口或部署链路。
 - 本轮本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 109 项。
 - 构建产物已确认包含 `core-charge-ring`、`--core-charge-angle` 和运行期环形蓄能绑定。
+- 提交 734fe4d 已推送；GitHub Pages workflow 25150187384 已成功，线上地址返回 HTTP 200；线上首页、`app.js` 和 `styles.css` 已确认包含环形蓄能轨相关标记。
+- #5 已回复：说明点火按钮主体新增环形蓄能轨，并保持 issue open 等待复测。
+- 回复后同步 GitHub Issues：2026-04-30 14:07 CST 当前仍为 5 个 open feedback issue、0 个 open bug issue；#5 更新时间为 2026-04-30T06:07:29Z。
 
 - GitHub Issues：gh 可用且已认证；2026-04-30 13:43 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
 - #6 继续作为本轮 Product decision 依据：星图卡片已有远航调度 3 步路径轨，但实际执行时主操作区远航调度条仍主要是文字状态和两条进度条，路径关系不如卡片层可扫视。
