@@ -9,7 +9,9 @@
 - 同步 GitHub Issues 反馈状态：2026-05-01 04:57 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 作为本轮处理对象。
 - 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
 - 构建产物已确认包含 `dispatchRouteResultText` 和“路线反馈”相关文案。
-- 发布验证、反馈处理和钉钉通知状态将在推送部署后补充。
+- 发布：提交 `33c539a` 已推送到 `origin/main`；GitHub Pages workflow `25189433751` 成功；线上首页返回 HTTP 200，线上 `src/game.js` 和 `src/app.js` 已确认包含 `dispatchRouteResultText` 和“路线反馈”。
+- 反馈处理：已回复 #6，说明路线反馈上线范围、验证结果和复测问题，issue 保持 open；回复后于 2026-05-01 05:10 CST 再次同步 GitHub Issues，当前仍为 5 个 open feedback issue、0 个 open bug issue。
+- 钉钉通知未发送：运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` 相关变量名，也未发现本地 `.env*` 文件；未将 webhook 写入仓库。
 
 - 远航调度新增“路线下一步”：协同/绕行分支卡片会显示现在应先执行目标、执行对应分支、回目标闭环，或进入整备/整备回航，继续回应 #6 对后半段玩法变化不明显的反馈。
 - `src/game.js` 为 `branchChoices` 派生 `followupText` 并纳入 `branchChoiceText`；`src/app.js` 渲染 `far-dispatch-branch-choice-followup`；`src/styles.css` 增加路线下一步样式；`tests/game.test.js` 覆盖 0/3 起手、目标后分支选择、静态渲染和样式绑定。
