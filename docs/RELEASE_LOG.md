@@ -13,6 +13,7 @@
 - 线上地址 https://jassy930.github.io/codex-game-operator/ 返回 HTTP 200，且线上 `game.js`、`app.js` 和 `styles.css` 已确认包含绕行投送相关标记。
 - 已回复 #6，说明绕行投送的当前能量消耗与累计航段推进，并保持 issue open 等待复测。
 - 回复后同步 GitHub Issues 反馈状态：2026-04-30 20:27 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 更新时间为 2026-04-30T12:27:25Z。
+- 钉钉通知未发送：运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` 相关变量名；未将 webhook 写入仓库。
 
 - 远航调度新增远航绕行分支：目标指令后，指定协同续航仍显示“远航协同/等待协同”，另一个非目标指令会显示并结算“远航绕行 +4%”；选择绕行后回到当前航段目标指令会显示“绕行回航/等待绕行”，并结算“绕行突破 +0.03%剩余”，继续回应 #6 对后半段玩法变化不明显的反馈。
 - `src/game.js` 新增 `FAR_ROUTE_DISPATCH_DETOUR_REWARD_RATE`、`FAR_ROUTE_DISPATCH_DETOUR_BREAKTHROUGH_REMAINING_RATE`、远航绕行收益、绕行回航推荐和绕行突破计算；`src/app.js` 记录 `dispatchDetourReward` / `dispatchDetourBreakthroughReward` 事件字段并渲染对应徽标；`src/styles.css` 新增绕行徽标样式；`tests/game.test.js` 覆盖协同/绕行分支、绕行回航、绕行突破、静态绑定和反馈快照。
