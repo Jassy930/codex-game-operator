@@ -22,8 +22,11 @@
 - `src/styles.css` 包含 `.project-forecast-map`、`.project-forecast-tile`、`.project-forecast-path` 和 `.project-forecast-meter`。
 - 本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 114 项。
 - 构建产物已确认包含 `projectForecastMap`、`project-forecast-map`、`getProjectForecastVisuals` 和“航线预告视觉带”。
+- 提交 c492a56 已推送；GitHub Pages workflow 25155839026 已成功，线上地址返回 HTTP 200，且线上首页、`game.js`、`app.js` 和 `styles.css` 已确认包含航线预告视觉带相关标记。
+- #4 已回复并继续保持 open，等待复测确认星图总览航线预告改成视觉带后，默认可见区域是否更容易扫视、文字压力是否继续下降。
+- 回复后同步 GitHub Issues：2026-04-30 16:39 CST 当前仍为 5 个 open feedback issue、0 个 open bug issue；#4 更新时间为 2026-04-30T08:39:44Z。
 
-下一步：推送并等待 #4 复测；如果仍认为星图总览文字密度高，再继续把默认可见长句转为视觉结构，而不是增加说明文本。
+下一步：等待 #4 复测；如果仍认为星图总览文字密度高，再继续把默认可见长句转为视觉结构，而不是增加说明文本。
 
 ## 2026-04-30 Product decision：星图奖励罗盘
 
