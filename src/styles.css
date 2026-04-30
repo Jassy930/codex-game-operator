@@ -1475,6 +1475,14 @@ h2 {
   font-weight: 850;
 }
 
+.far-dispatch-branch-choice-reason {
+  color: #d8ffe2;
+}
+
+.far-dispatch-branch-choice-reason[hidden] {
+  display: none;
+}
+
 .far-dispatch-branch-choice em {
   color: rgba(248, 243, 231, 0.68);
   font-size: 0.66rem;

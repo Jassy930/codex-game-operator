@@ -2,6 +2,14 @@
 
 ## Unreleased
 
+- 远航调度新增“推荐原因”：当前航段契合路线会在推荐分支和分支选择条中显示点击/过载航段为什么推荐协同、自动/总产能航段为什么推荐绕行，继续回应 #6 对后半段玩法变化不明显的反馈。
+- `src/game.js` 为航段契合派生 `branchFocusReasonText` / `choice.reasonText` 并纳入 `branchChoiceText` / `branchRecommendationText`；`src/app.js` 在契合分支卡片中渲染推荐原因；`src/styles.css` 增加 `.far-dispatch-branch-choice-reason`；`tests/game.test.js` 覆盖协同/绕行推荐原因、推荐分支文案、星图总览摘要和静态绑定。
+- 文档同步更新：`docs/DECISION.md`、`docs/FEEDBACK.md`、`docs/RESEARCH.md`、`docs/PRODUCT.md`、`docs/DESIGN.md`、`docs/ROADMAP.md`、`docs/IDEAS.md`、`docs/METRICS.md`、`README.md` 和本日志已记录远航推荐原因标明。
+- 本轮只调整派生展示、DOM、样式和测试，不新增收益、不新增存档字段，不改变升级价格、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、基础连携倍率、远航调度收益、冷却、连携窗口、反馈入口或部署链路。
+- 同步 GitHub Issues 反馈状态：2026-05-01 00:27 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 作为本轮处理对象。
+- 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含 `branchFocusReasonText`、`choice.reasonText`、“推荐原因：点击/过载航段保留当前资源”和 `.far-dispatch-branch-choice-reason`。
+
 - 远航调度新增“分支后续预告”：分支选择条、推荐分支和星图总览远航摘要会直接显示协同路线后续进入协同回航并触发闭环/远航突破，绕行路线后续进入绕行回航并触发闭环/绕行突破，继续回应 #6 对后半段玩法变化不明显的反馈。
 - `src/game.js` 为 `branchChoices` 派生 `nextText` 并把它纳入 `branchChoiceText` / `branchRecommendationText`；`src/app.js` 在分支选择条中渲染后续预告；`src/styles.css` 增加紧凑样式；`tests/game.test.js` 覆盖推荐分支、分支选择条文案、星图总览摘要和静态绑定。
 - 文档同步更新：`docs/DECISION.md`、`docs/FEEDBACK.md`、`docs/RESEARCH.md`、`docs/PRODUCT.md`、`docs/DESIGN.md`、`docs/ROADMAP.md`、`docs/IDEAS.md`、`docs/METRICS.md`、`README.md` 和本日志已记录远航分支后续预告。

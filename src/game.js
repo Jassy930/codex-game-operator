@@ -2900,6 +2900,7 @@ export function getFarRouteDispatch(state, now = Date.now()) {
       branchFocusRewardText,
       branchFocusKind: "",
       branchFocusText: "",
+      branchFocusReasonText: "",
       branchFocusDirectiveId: null,
       branchFocusDirectiveName: "",
       loopRewardRate: FAR_ROUTE_DISPATCH_LOOP_REWARD_RATE,
@@ -2971,6 +2972,7 @@ export function getFarRouteDispatch(state, now = Date.now()) {
       branchFocusRewardText,
       branchFocusKind: "",
       branchFocusText: "",
+      branchFocusReasonText: "",
       branchFocusDirectiveId: null,
       branchFocusDirectiveName: "",
       loopRewardRate: FAR_ROUTE_DISPATCH_LOOP_REWARD_RATE,
@@ -3082,6 +3084,7 @@ export function getFarRouteDispatch(state, now = Date.now()) {
     branchFocusRewardText,
     branchFocusKind: branchFocus.kind,
     branchFocusText: branchFocus.text,
+    branchFocusReasonText: branchFocus.reasonText,
     branchFocusDirectiveId: branchFocus.directiveId,
     branchFocusDirectiveName: branchFocus.directiveName,
     loopRewardRate: FAR_ROUTE_DISPATCH_LOOP_REWARD_RATE,
@@ -4747,6 +4750,8 @@ function getFarRouteDispatchBranchFocus(project, directive, relayDirective) {
       kind: "",
       label: "",
       text: "",
+      reason: "",
+      reasonText: "",
       directiveId: null,
       directiveName: ""
     };
@@ -4765,6 +4770,8 @@ function getFarRouteDispatchBranchFocus(project, directive, relayDirective) {
       kind: "",
       label: "",
       text: "",
+      reason: "",
+      reasonText: "",
       directiveId: null,
       directiveName: ""
     };
@@ -4780,6 +4787,8 @@ function getFarRouteDispatchBranchFocus(project, directive, relayDirective) {
     kind,
     label,
     text: "航段契合：" + label + " " + focusDirective.name + " · " + reason,
+    reason,
+    reasonText: "推荐原因：" + reason,
     directiveId: focusDirective.id,
     directiveName: focusDirective.name
   };
@@ -4854,6 +4863,7 @@ function buildFarRouteDispatchBranchChoices(
         : previous
           ? "上轮路线"
           : "可选择";
+    const reasonText = focused ? branchFocus.reasonText : "";
     const rewardText =
       choice.baseRewardText +
       (shift
@@ -4874,6 +4884,7 @@ function buildFarRouteDispatchBranchChoices(
       directiveName: choice.directive.name,
       caption: choice.caption,
       nextText: choice.nextText,
+      reasonText,
       focused,
       focusText: focused ? branchFocus.text : "",
       status,
@@ -4887,6 +4898,7 @@ function buildFarRouteDispatchBranchChoices(
         statusText +
         " · " +
         choice.caption +
+        (reasonText ? " · " + reasonText : "") +
         " · " +
         choice.nextText +
         " · " +
@@ -4912,6 +4924,7 @@ function buildFarRouteDispatchBranchChoiceText(choices) {
           choice.statusText +
           " · " +
           choice.caption +
+          (choice.reasonText ? " · " + choice.reasonText : "") +
           " · " +
           choice.nextText +
           " · " +
@@ -4931,6 +4944,7 @@ function buildFarRouteDispatchBranchRecommendationText(choices) {
   const reasons = [
     focusedChoice.statusText,
     focusedChoice.caption,
+    focusedChoice.reasonText,
     focusedChoice.nextText,
     "航段契合 +" +
       Math.round(FAR_ROUTE_DISPATCH_BRANCH_FOCUS_REWARD_RATE * 100) +

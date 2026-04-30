@@ -1674,6 +1674,8 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(appJs, /function renderFarDispatchBranchChoices\(dispatch\)/);
   assert.match(appJs, /track\.className = "far-dispatch-branch-choices"/);
   assert.match(appJs, /"far-dispatch-branch-choice is-"/);
+  assert.match(appJs, /reason\.className = "far-dispatch-branch-choice-reason"/);
+  assert.match(appJs, /reason\.textContent = choice\.reasonText \?\? ""/);
   assert.match(appJs, /next\.textContent = choice\.nextText \?\? ""/);
   assert.match(appJs, /getDirectiveTaskDisplayText\(task\)/);
   assert.match(appJs, /getFarDispatchDisplayText\(dispatch\)/);
@@ -1773,6 +1775,7 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(styles, /\.far-dispatch-branch-choice\.is-shift/);
   assert.match(styles, /\.far-dispatch-branch-choice\.is-focused/);
   assert.match(styles, /\.far-dispatch-branch-choice small/);
+  assert.match(styles, /\.far-dispatch-branch-choice-reason/);
   assert.match(styles, /\.directive-button \.directive-dispatch-branch-focus/);
   assert.match(styles, /text-overflow: ellipsis/);
   assert.match(styles, /\.far-dispatch-meter/);
@@ -2669,11 +2672,15 @@ test("远航调度会在 20M 后按当前航段指定目标指令", () => {
     dispatch.branchFocusText,
     "航段契合：协同 谐振脉冲 · 点击/过载航段保留当前资源"
   );
+  assert.equal(
+    dispatch.branchFocusReasonText,
+    "推荐原因：点击/过载航段保留当前资源"
+  );
   assert.equal(dispatch.branchFocusDirectiveId, "resonance-pulse");
   assert.equal(dispatch.branchFocusDirectiveName, "谐振脉冲");
   assert.equal(
     dispatch.branchRecommendationText,
-    "推荐分支：协同 谐振脉冲 · 可选择 · 补当前资源 · 后续协同回航触发闭环与远航突破 · 航段契合 +5%"
+    "推荐分支：协同 谐振脉冲 · 可选择 · 补当前资源 · 推荐原因：点击/过载航段保留当前资源 · 后续协同回航触发闭环与远航突破 · 航段契合 +5%"
   );
   assert.equal(
     dispatch.detourInfusionCostRate,
@@ -2739,6 +2746,8 @@ test("远航调度会在 20M 后按当前航段指定目标指令", () => {
         ":" +
         choice.caption +
         ":" +
+        choice.reasonText +
+        ":" +
         choice.nextText +
         ":" +
         choice.rewardText +
@@ -2746,13 +2755,13 @@ test("远航调度会在 20M 后按当前航段指定目标指令", () => {
         choice.focused
     ),
     [
-      "sync:谐振脉冲:可选择:补当前资源:后续协同回航触发闭环与远航突破:远航协同 +5% · 协同补给 +3%当前 · 航段契合 +5%:focused=true",
-      "detour:巡航回收:可选择:投送累计航段:后续绕行回航触发闭环与绕行突破:远航绕行 +4% · 绕行投送 -0.3%当前:focused=false"
+      "sync:谐振脉冲:可选择:补当前资源:推荐原因：点击/过载航段保留当前资源:后续协同回航触发闭环与远航突破:远航协同 +5% · 协同补给 +3%当前 · 航段契合 +5%:focused=true",
+      "detour:巡航回收:可选择:投送累计航段::后续绕行回航触发闭环与绕行突破:远航绕行 +4% · 绕行投送 -0.3%当前:focused=false"
     ]
   );
   assert.equal(
     dispatch.branchChoiceText,
-    "分支选择：协同 谐振脉冲（可选择 · 补当前资源 · 后续协同回航触发闭环与远航突破 · 远航协同 +5% · 协同补给 +3%当前 · 航段契合 +5%） / 绕行 巡航回收（可选择 · 投送累计航段 · 后续绕行回航触发闭环与绕行突破 · 远航绕行 +4% · 绕行投送 -0.3%当前）"
+    "分支选择：协同 谐振脉冲（可选择 · 补当前资源 · 推荐原因：点击/过载航段保留当前资源 · 后续协同回航触发闭环与远航突破 · 远航协同 +5% · 协同补给 +3%当前 · 航段契合 +5%） / 绕行 巡航回收（可选择 · 投送累计航段 · 后续绕行回航触发闭环与绕行突破 · 远航绕行 +4% · 绕行投送 -0.3%当前）"
   );
   assert.equal(
     dispatch.loopStatusText,
@@ -2760,11 +2769,11 @@ test("远航调度会在 20M 后按当前航段指定目标指令", () => {
   );
   assert.equal(
     overview.dispatchText,
-    "远航调度总览：航段 27/57 脉冲航闸 · 目标 点火齐射 · 协同 谐振脉冲 · 分支 待选择：先执行目标 · 航段契合：协同 谐振脉冲 · 点击/过载航段保留当前资源 · 推荐分支：协同 谐振脉冲 · 可选择 · 补当前资源 · 后续协同回航触发闭环与远航突破 · 航段契合 +5% · 闭环 0/3 · 下一步 目标 点火齐射"
+    "远航调度总览：航段 27/57 脉冲航闸 · 目标 点火齐射 · 协同 谐振脉冲 · 分支 待选择：先执行目标 · 航段契合：协同 谐振脉冲 · 点击/过载航段保留当前资源 · 推荐分支：协同 谐振脉冲 · 可选择 · 补当前资源 · 推荐原因：点击/过载航段保留当前资源 · 后续协同回航触发闭环与远航突破 · 航段契合 +5% · 闭环 0/3 · 下一步 目标 点火齐射"
   );
   assert.equal(
     dispatch.text,
-    "远航调度：航段 27/57 脉冲航闸指定点火齐射 · 执行目标指令获得调度校准 +14% · 目标指令冷却 -30% · 调度接力 +30 秒 · 分支 待选择：先执行目标 · 航段契合：协同 谐振脉冲 · 点击/过载航段保留当前资源 · 推荐分支：协同 谐振脉冲 · 可选择 · 补当前资源 · 后续协同回航触发闭环与远航突破 · 航段契合 +5% · 目标后优先谐振脉冲触发远航协同 +5%并获得协同补给 +3%当前，另一个非目标可触发远航绕行 +4%并消耗当前能量进行绕行投送 -0.3%当前 / +150%累计；若本轮选择与上一轮不同的分支，还会触发分支改道 +6%；若选择当前航段契合分支，还会触发航段契合 +5%，所有非目标仍触发远航续航 +8% · 3/3 回到目标指令触发远航闭环 +16%、远航突破 +0.05%剩余，绕行路线额外触发绕行突破 +0.03%剩余 · 完成闭环后远航整备刷新谐振脉冲冷却，下一步触发整备续航 +7%；若上一轮选择绕行，则改为触发绕行整备 +5%，再回到目标触发整备回航 +6%"
+    "远航调度：航段 27/57 脉冲航闸指定点火齐射 · 执行目标指令获得调度校准 +14% · 目标指令冷却 -30% · 调度接力 +30 秒 · 分支 待选择：先执行目标 · 航段契合：协同 谐振脉冲 · 点击/过载航段保留当前资源 · 推荐分支：协同 谐振脉冲 · 可选择 · 补当前资源 · 推荐原因：点击/过载航段保留当前资源 · 后续协同回航触发闭环与远航突破 · 航段契合 +5% · 目标后优先谐振脉冲触发远航协同 +5%并获得协同补给 +3%当前，另一个非目标可触发远航绕行 +4%并消耗当前能量进行绕行投送 -0.3%当前 / +150%累计；若本轮选择与上一轮不同的分支，还会触发分支改道 +6%；若选择当前航段契合分支，还会触发航段契合 +5%，所有非目标仍触发远航续航 +8% · 3/3 回到目标指令触发远航闭环 +16%、远航突破 +0.05%剩余，绕行路线额外触发绕行突破 +0.03%剩余 · 完成闭环后远航整备刷新谐振脉冲冷却，下一步触发整备续航 +7%；若上一轮选择绕行，则改为触发绕行整备 +5%，再回到目标触发整备回航 +6%"
   );
   assert.equal(Math.round(dispatch.progress * 100), 83);
   assert.deepEqual(plan.nextDirectiveIds, ["ignition-salvo"]);
@@ -3253,6 +3262,10 @@ test("远航调度会优先接管常规收束起手推荐", () => {
     dispatch.branchFocusText,
     "航段契合：绕行 谐振脉冲 · 自动/总产能航段投送累计航段"
   );
+  assert.equal(
+    dispatch.branchFocusReasonText,
+    "推荐原因：自动/总产能航段投送累计航段"
+  );
   assert.deepEqual(plan.nextDirectiveIds, ["cruise-cache"]);
   assert.equal(plan.recommendationText, "调度目标");
   assert.equal(plan.summaryText, "指令轮换 0/3 · 调度目标 巡航回收");
@@ -3329,7 +3342,7 @@ test("远航调度会奖励切换上一轮分支", () => {
   );
   assert.equal(
     dispatch.branchRecommendationText,
-    "推荐分支：协同 谐振脉冲 · 上轮路线 · 补当前资源 · 后续协同回航触发闭环与远航突破 · 航段契合 +5%"
+    "推荐分支：协同 谐振脉冲 · 上轮路线 · 补当前资源 · 推荐原因：点击/过载航段保留当前资源 · 后续协同回航触发闭环与远航突破 · 航段契合 +5%"
   );
   assert.equal(cruiseOption.dispatchBranchShiftReward > 0, true);
   assert.equal(
@@ -3360,7 +3373,7 @@ test("远航调度会奖励切换上一轮分支", () => {
   );
   assert.equal(
     detourLastDispatch.branchRecommendationText,
-    "推荐分支：协同 谐振脉冲 · 可改道 · 补当前资源 · 后续协同回航触发闭环与远航突破 · 航段契合 +5% · 分支改道 +6%"
+    "推荐分支：协同 谐振脉冲 · 可改道 · 补当前资源 · 推荐原因：点击/过载航段保留当前资源 · 后续协同回航触发闭环与远航突破 · 航段契合 +5% · 分支改道 +6%"
   );
   assert.equal(detourLastCruiseOption.dispatchBranchShiftReward, 0);
   assert.equal(detourLastResonanceOption.dispatchBranchShiftReward > 0, true);

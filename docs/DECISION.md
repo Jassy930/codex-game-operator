@@ -1,5 +1,30 @@
 # Decision
 
+## 2026-05-01 Product decision：远航推荐原因标明
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-01 00:27 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#6 仍是最新反馈线程，原始反馈指出后半段“只有不停的目标、玩法没有真正变化”，因此本轮继续进入 Product decision。
+
+当前最大问题：前序已经让分支选择条显示协同/绕行后的回航结果，但推荐分支仍主要写“走哪条、得到什么、后续怎样”。玩家如果没有读到前面的航段契合说明，仍可能不知道为什么当前航段推荐协同或绕行，从而把推荐当成固定收益提示。
+
+本轮决策：
+
+- 新增“远航推荐原因标明”。
+- `getFarRouteDispatchBranchFocus` 派生 `reasonText`，例如“推荐原因：点击/过载航段保留当前资源”或“推荐原因：自动/总产能航段投送累计航段”。
+- `branchChoices` 的契合路线新增 `reasonText`，分支选择条在契合卡片上直接渲染该原因；`branchChoiceText` 和 `branchRecommendationText` 同步包含推荐原因，星图总览远航调度摘要也会带出推荐原因。
+- 本轮只调整派生展示、DOM、样式和测试；不新增收益、不新增存档字段，不改变升级价格、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、远航调度收益、冷却、连携窗口、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-05-01 00:27 CST 当前 5 个 open feedback issue、0 个 open bug issue。
+- 脉冲航闸这类点击/过载奖励航段，推荐分支文本包含“推荐原因：点击/过载航段保留当前资源”。
+- 离辉轨道港这类自动奖励航段，`branchFocusReasonText` 为“推荐原因：自动/总产能航段投送累计航段”。
+- 分支选择条仅在当前航段契合路线显示推荐原因；非契合路线不伪装成推荐路线。
+- `src/app.js` 渲染 `choice.reasonText`；`src/styles.css` 包含 `.far-dispatch-branch-choice-reason`。
+- 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含 `branchFocusReasonText`、`choice.reasonText`、“推荐原因：点击/过载航段保留当前资源”和 `.far-dispatch-branch-choice-reason`。
+
+下一步：推送并等待部署后回复 #6，重点让复测确认“推荐协同/绕行”是否能解释成当前航段奖励类型驱动的路线选择。
+
 ## 2026-05-01 Product decision：远航分支后续预告
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-01 00:06 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#6 仍是最新反馈线程，原始反馈指出后半段“只有不停的目标、玩法没有真正变化”，因此本轮继续进入 Product decision。
