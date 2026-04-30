@@ -18,6 +18,9 @@
 - `getProjectStatuses` 在 #6 快照对应的脉冲航闸阶段返回 `dispatchBadgeText = "调度 点火齐射"`，并返回目标/协同指令 id。
 - 本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 109 项。
 - 构建产物已确认包含 `project-dispatch-badge`、`project-dispatch` 和远航调度详情派生逻辑。
+- 提交 c35a086 已推送；GitHub Pages workflow 25148886216 已成功，线上地址返回 HTTP 200，且线上 `app.js`、`game.js` 和 `styles.css` 已确认包含星图调度可见性相关标记。
+- #6 已回复并继续保持 open，等待复测确认星图目标层是否更清楚地连接到后半段指令玩法。
+- 回复后同步 GitHub Issues：2026-04-30 13:24 CST 当前仍为 5 个 open feedback issue、0 个 open bug issue；#6 更新时间为 2026-04-30T05:23:59Z。
 
 下一步：回复 #6 并等待复测；若仍认为后半段玩法变化不足，再评估把远航调度关系同步到星图总览或增加更明确的航段驱动效果图。
 

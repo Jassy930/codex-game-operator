@@ -8,6 +8,9 @@
 - 同步 GitHub Issues 反馈状态：2026-04-30 13:13 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 作为本轮处理对象。
 - 验证通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 109 项。
 - 构建产物已确认包含 `project-dispatch-badge`、`project-dispatch` 和远航调度详情派生逻辑。
+- 提交 c35a086 已推送；GitHub Pages workflow 25148886216 已成功，线上地址返回 HTTP 200，且线上 `app.js`、`game.js` 和 `styles.css` 已确认包含星图调度可见性相关标记。
+- 已回复 #6，说明当前航段卡片已显示目标指令、协同续航指令和 3/3 闭环提示，并保持 issue open 等待复测。
+- 回复后同步 GitHub Issues 反馈状态：2026-04-30 13:24 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 更新时间为 2026-04-30T05:23:59Z。
 
 - 航线指令区新增本地 SVG 插画：`src/assets/directive-visual.svg` 展示点火齐射、巡航回收、谐振脉冲和 3 步轮换轨，静态首页在指令按钮前通过 `directive-scene-image` 引用。
 - `src/styles.css` 新增 `directive-scene-image` 固定比例样式；`tests/game.test.js` 覆盖首页引用、样式和 SVG 标记。
