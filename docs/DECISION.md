@@ -1,5 +1,26 @@
 # Decision
 
+## 2026-04-30 Product decision：点火阶段光环
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-04-30 15:45 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#6 最近一轮远航突破已回复等待复测，#5 仍围绕“点火按钮太薄弱、增加点击反馈和点击欲望”保持 open，因此本轮进入 Product decision，并处理点火按钮本体的连续兴奋度反馈。
+
+当前最大问题：点火按钮已经有脉冲、粒子、收益浮层、8 格连击轨、下一击预告、环形蓄能轨、音效、触感和落点闪光，但按钮本体在 3/8、6/8、7/8 这些临近过载阶段缺少一层更连续的视觉升温。玩家仍可能主要靠小点和文字判断距离过载还有多近。
+
+本轮决策：
+
+- 在主点火按钮内新增 `core-stage-aura` 阶段光环。
+- 运行期由现有 `getComboStatus().progress` 更新 `--core-stage-angle`，并按 3/8、6/8、过载前一击和过载命中切换 `is-stage-warm`、`is-stage-hot`、`is-overload-ready` 和 `is-overload-hit`。
+- 本轮只调整主点火按钮展示层；不新增存档字段，不改变点击收益、连击窗口、过载奖励、升级价格、产能公式、星图航段、航线策略、航线指令、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-04-30 15:45 CST 当前 5 个 open feedback issue、0 个 open bug issue。
+- 静态首页包含 `core-stage-aura`。
+- 运行期 `renderCoreFeedback` 会把连击进度转成 `--core-stage-angle`，并切换阶段光环状态。
+- CSS 包含 `.core-stage-aura`、`--core-stage-angle`、过载前兆和过载命中动效。
+- 本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 109 项。
+- 构建产物已确认包含 `core-stage-aura`、`--core-stage-angle`、`coreStageAura`、`coreStageCharge` 和 `coreStageBurst`。
+
 ## 2026-04-30 Product decision：远航突破
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-04-30 15:17 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#6 仍围绕“后半段只有不停的目标、玩法没有真正变化”保持 open，因此本轮继续进入 Product decision。

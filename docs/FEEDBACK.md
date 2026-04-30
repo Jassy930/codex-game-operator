@@ -2,6 +2,13 @@
 
 ## 2026-04-30
 
+- GitHub Issues：gh 可用且已认证；2026-04-30 15:45 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
+- #5 作为本轮 Product decision 依据：该反馈指出点火按钮太薄弱，希望增加点击反馈、特效和点击欲望；前序已补视觉脉冲、粒子、收益浮层、8 格连击轨、下一击预告、环形蓄能轨、音效、触感和落点闪光，本轮补点火按钮本体的连击阶段光环。
+- 本轮改动新增点火阶段光环：静态首页显示 `core-stage-aura`；运行期按现有连击进度更新 `--core-stage-angle`，在 3/8 后进入预热、6/8 后进入升温、过载前一击进入过载前兆，过载命中时播放爆发态。
+- 本轮不新增游戏存档字段，不改变点击收益、连击窗口、过载奖励、升级价格、产能公式、星图航段、航线策略、航线指令、反馈入口或部署链路。
+- 本轮本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 109 项。
+- 构建产物已确认包含 `core-stage-aura`、`--core-stage-angle`、`coreStageAura`、`coreStageCharge` 和 `coreStageBurst`。
+
 - GitHub Issues：gh 可用且已认证；2026-04-30 15:17 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
 - #6 继续作为本轮 Product decision 依据：远航调度已经把目标、协同续航、闭环路径和按钮推荐补齐，但完成闭环后仍主要体现为指令收益与冷却整备，主动短循环和当前航段剩余进度之间缺少直接连接。
 - 本轮改动新增远航突破：20M 后远航调度 active 时，3/3 轮换回到当前航段目标指令会按当前能量航段剩余量的 0.05% 注入能量；按钮徽标、预计收益、执行反馈和本地 `directive` 事件同步记录 `dispatchBreakthroughReward`。

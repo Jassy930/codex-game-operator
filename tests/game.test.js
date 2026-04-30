@@ -1055,6 +1055,7 @@ test("点火按钮会渲染点击反馈和过载前兆效果", () => {
 
   assert.match(indexHtml, /id="coreButton" class="core-button" type="button" data-combo-step="0"/);
   assert.match(indexHtml, /class="core-feedback-layer"/);
+  assert.match(indexHtml, /class="core-stage-aura"/);
   assert.match(indexHtml, /id="coreImpactPoint" class="core-impact-point"/);
   assert.match(indexHtml, /class="core-charge-ring"/);
   assert.match(indexHtml, /id="coreGainPop" class="core-gain-pop"/);
@@ -1082,6 +1083,9 @@ test("点火按钮会渲染点击反馈和过载前兆效果", () => {
   assert.match(appJs, /elements\.hapticToggle\.addEventListener\("change"/);
   assert.match(appJs, /recordEvent\("haptic_toggle"/);
   assert.match(appJs, /function renderCoreFeedback\(combo\)/);
+  assert.match(appJs, /coreStageAura: document\.querySelector\("#coreButton \.core-stage-aura"\)/);
+  assert.match(appJs, /elements\.coreStageAura\.style\.setProperty\(\s*"--core-stage-angle"/);
+  assert.match(appJs, /elements\.coreStageAura\.classList\.toggle\(\s+"is-stage-hot"/);
   assert.match(appJs, /coreChargeRing: document\.querySelector\("#coreButton \.core-charge-ring"\)/);
   assert.match(appJs, /coreImpactPoint: document\.querySelector\("#coreImpactPoint"\)/);
   assert.match(appJs, /elements\.coreChargeRing\.style\.setProperty\(\s*"--core-charge-angle"/);
@@ -1117,6 +1121,10 @@ test("点火按钮会渲染点击反馈和过载前兆效果", () => {
   assert.match(appJs, /window\.setTimeout/);
   assert.match(styles, /\.core-button::before/);
   assert.match(styles, /\.core-feedback-layer/);
+  assert.match(styles, /\.core-stage-aura/);
+  assert.match(styles, /--core-stage-angle/);
+  assert.match(styles, /\.core-stage-aura\.is-stage-hot/);
+  assert.match(styles, /\.core-stage-aura\.is-overload-ready/);
   assert.match(styles, /\.core-impact-point/);
   assert.match(styles, /--core-impact-x/);
   assert.match(styles, /--core-impact-y/);
@@ -1140,6 +1148,8 @@ test("点火按钮会渲染点击反馈和过载前兆效果", () => {
   assert.match(styles, /@keyframes coreShockwave/);
   assert.match(styles, /@keyframes coreOverloadShockwave/);
   assert.match(styles, /@keyframes coreSparks/);
+  assert.match(styles, /@keyframes coreStageCharge/);
+  assert.match(styles, /@keyframes coreStageBurst/);
   assert.match(styles, /@keyframes coreImpactPoint/);
   assert.match(styles, /@keyframes coreGainFloat/);
   assert.match(styles, /@keyframes coreDotPulse/);

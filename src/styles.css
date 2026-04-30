@@ -335,6 +335,82 @@ h2 {
   animation-duration: 520ms;
 }
 
+.core-stage-aura {
+  --core-stage-angle: 0deg;
+  position: absolute;
+  inset: 13%;
+  z-index: 2;
+  border-radius: 999px;
+  background:
+    conic-gradient(
+      from -90deg,
+      rgba(19, 181, 166, 0.34) 0 var(--core-stage-angle),
+      rgba(248, 243, 231, 0.06) var(--core-stage-angle) 360deg
+    ),
+    radial-gradient(circle at center, rgba(255, 247, 194, 0.12), transparent 58%);
+  opacity: 0.2;
+  pointer-events: none;
+  transform: scale(0.9);
+  transition:
+    background 140ms ease,
+    opacity 140ms ease,
+    filter 140ms ease,
+    transform 140ms ease;
+  -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 34px), #000 calc(100% - 32px));
+  mask: radial-gradient(farthest-side, transparent calc(100% - 34px), #000 calc(100% - 32px));
+}
+
+.core-stage-aura.is-stage-warm {
+  opacity: 0.42;
+  filter: drop-shadow(0 0 14px rgba(19, 181, 166, 0.18));
+  transform: scale(0.94);
+}
+
+.core-stage-aura.is-stage-hot {
+  background:
+    conic-gradient(
+      from -90deg,
+      rgba(244, 178, 60, 0.8) 0 var(--core-stage-angle),
+      rgba(248, 243, 231, 0.08) var(--core-stage-angle) 360deg
+    ),
+    radial-gradient(circle at center, rgba(244, 178, 60, 0.18), transparent 58%);
+  opacity: 0.64;
+  filter:
+    drop-shadow(0 0 18px rgba(244, 178, 60, 0.2))
+    drop-shadow(0 0 24px rgba(19, 181, 166, 0.12));
+  transform: scale(0.98);
+}
+
+.core-stage-aura.is-overload-ready {
+  background:
+    conic-gradient(
+      from -90deg,
+      rgba(255, 247, 194, 0.98) 0 var(--core-stage-angle),
+      rgba(232, 93, 117, 0.16) var(--core-stage-angle) 360deg
+    ),
+    radial-gradient(circle at center, rgba(255, 247, 194, 0.22), transparent 58%);
+  opacity: 0.9;
+  filter:
+    drop-shadow(0 0 20px rgba(255, 247, 194, 0.32))
+    drop-shadow(0 0 28px rgba(232, 93, 117, 0.24));
+  animation: coreStageCharge 880ms ease-in-out infinite;
+}
+
+.core-stage-aura.is-overload-hit {
+  background:
+    conic-gradient(
+      from -90deg,
+      rgba(255, 247, 194, 1) 0 42%,
+      rgba(232, 93, 117, 0.9) 42% 76%,
+      rgba(244, 178, 60, 1) 76% 100%
+    );
+  opacity: 1;
+  filter:
+    drop-shadow(0 0 22px rgba(255, 247, 194, 0.38))
+    drop-shadow(0 0 36px rgba(232, 93, 117, 0.3));
+  animation: coreStageBurst 520ms ease-out;
+}
+
 .core-impact-point {
   --core-impact-x: 50%;
   --core-impact-y: 50%;
@@ -2403,6 +2479,29 @@ h2 {
   100% {
     opacity: 0;
     transform: scale(1.18) rotate(18deg);
+  }
+}
+
+@keyframes coreStageCharge {
+  0%,
+  100% {
+    transform: scale(0.98);
+  }
+
+  50% {
+    transform: scale(1.03);
+  }
+}
+
+@keyframes coreStageBurst {
+  0% {
+    opacity: 1;
+    transform: scale(0.94);
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(1.15);
   }
 }
 

@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+- 点火按钮新增阶段光环：按钮主体会随 8 格连击进度点亮阶段环，3/8 后预热、6/8 后升温、过载前一击脉动、过载命中爆发，继续回应 #5 对点击反馈、特效和点击欲望的反馈。
+- `index.html` 新增 `core-stage-aura`；`src/app.js` 在 `renderCoreFeedback` 中用现有连击进度更新 `--core-stage-angle` 并切换阶段状态；`src/styles.css` 新增阶段光环样式与 `coreStageCharge` / `coreStageBurst` 动效；`tests/game.test.js` 覆盖静态标记、运行期绑定和样式标记。
+- 本轮只调整主点火按钮展示层；不新增存档字段，不改变点击收益、连击窗口、过载奖励、升级价格、产能公式、星图航段、航线策略、航线指令、反馈入口或部署链路。
+- 同步 GitHub Issues 反馈状态：2026-04-30 15:45 CST 当前 5 个 open feedback issue、0 个 open bug issue；#5 作为本轮处理对象。
+- 验证通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 109 项。
+- 构建产物已确认包含 `core-stage-aura`、`--core-stage-angle`、`coreStageAura`、`coreStageCharge` 和 `coreStageBurst`。
+
 - 远航调度闭环新增“远航突破”：20M 后远航调度 active 时，3/3 轮换回到当前航段目标指令会按当前能量航段剩余量的 0.05% 注入能量，让后半段短循环直接推进当前航段进度，继续回应 #6 对玩法变化不明显的反馈。
 - `src/game.js` 新增 `FAR_ROUTE_DISPATCH_BREAKTHROUGH_REMAINING_RATE`、远航突破收益计算和调度文案；`src/app.js` 渲染 `directive-dispatch-breakthrough` 并在本地 `directive` 事件记录 `dispatchBreakthroughReward` / `dispatchBreakthroughRewardRate` / `dispatchBreakthroughRewardText`；`tests/game.test.js` 覆盖脉冲航闸阶段预计收益、执行反馈和静态标记。
 - 本轮只补远航闭环和当前航段剩余进度的连接；不新增存档字段，不改变升级价格、产能公式、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、基础连携倍率、轮换目标奖励、预案执行、航线委托、指令熟练、满层回响、远航调度校准、冷却、连携窗口、远航续航、远航协同、远航闭环倍率、远航整备或反馈入口。

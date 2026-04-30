@@ -177,6 +177,7 @@ const elements = {
   perClick: document.querySelector("#perClickValue"),
   overload: document.querySelector("#overloadValue"),
   coreButton: document.querySelector("#coreButton"),
+  coreStageAura: document.querySelector("#coreButton .core-stage-aura"),
   coreChargeRing: document.querySelector("#coreButton .core-charge-ring"),
   coreImpactPoint: document.querySelector("#coreImpactPoint"),
   coreGainPop: document.querySelector("#coreGainPop"),
@@ -422,6 +423,20 @@ function renderCoreFeedback(combo) {
   elements.coreButton.classList.toggle("is-combo-charging", isCharging);
   elements.coreButton.classList.toggle("is-overload-ready", isOverloadReady);
   elements.coreButton.classList.toggle("is-overload-hit", combo.overloaded);
+  elements.coreStageAura.style.setProperty(
+    "--core-stage-angle",
+    Math.round(combo.progress * 360) + "deg"
+  );
+  elements.coreStageAura.classList.toggle(
+    "is-stage-warm",
+    combo.step >= 3 && !combo.overloaded
+  );
+  elements.coreStageAura.classList.toggle(
+    "is-stage-hot",
+    combo.step >= 6 && !combo.overloaded
+  );
+  elements.coreStageAura.classList.toggle("is-overload-ready", isOverloadReady);
+  elements.coreStageAura.classList.toggle("is-overload-hit", combo.overloaded);
   elements.coreChargeRing.style.setProperty(
     "--core-charge-angle",
     Math.round(combo.progress * 360) + "deg"
