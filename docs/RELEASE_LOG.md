@@ -11,6 +11,7 @@
 - 构建产物已确认包含 `branchClosureText`、`far-dispatch-branch-closure` 和“闭环复盘”相关文案。
 - 发布：提交 `c54273f` 已推送到 `origin/main`；GitHub Pages workflow `25185043034` 成功；线上首页返回 HTTP 200，线上 `src/game.js`、`src/app.js` 和 `src/styles.css` 已确认包含 `branchClosureText`、`far-dispatch-branch-closure` 和“闭环复盘”。
 - 反馈处理：已回复 #6，说明闭环复盘上线范围、验证结果和复测问题，issue 保持 open；回复后于 2026-05-01 03:27 CST 再次同步 GitHub Issues，当前仍为 5 个 open feedback issue、0 个 open bug issue。
+- 钉钉通知未发送：运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` 相关变量名，也未发现本地 `.env*` 文件；未将 webhook 写入仓库。
 
 - 远航调度新增“契合闭环”：按当前航段契合分支完成目标 -> 协同/绕行 -> 回目标的 3/3 闭环时，回到目标指令会额外结算有效基础指令收益 7% 的“契合闭环”，继续回应 #6 对后半段玩法变化不明显的反馈。
 - `src/game.js` 新增 `FAR_ROUTE_DISPATCH_FOCUS_LOOP_REWARD_RATE`、契合闭环预览/执行结算、远航调度长文本和星图当前航段路径收益标签；`src/app.js` 记录并渲染 `dispatchFocusLoopReward` / `directive-dispatch-focus-loop`；`src/styles.css` 增加契合闭环徽标样式；`index.html` 同步静态解锁说明；`tests/game.test.js` 覆盖协同契合闭环、绕行契合闭环、非契合路线不触发、事件绑定、样式绑定和反馈快照。

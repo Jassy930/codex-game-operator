@@ -11,6 +11,7 @@
 - 提交 `c54273f` 已推送；GitHub Pages workflow `25185043034` 已成功，线上地址返回 HTTP 200，线上脚本和样式已确认包含远航闭环复盘。
 - #6 已回复：说明协同/绕行路线回目标完成 3/3 后会显示闭环复盘，issue 保持 open 等待复测。
 - 回复后同步 GitHub Issues：2026-05-01 03:27 CST 当前仍为 5 个 open feedback issue、0 个 open bug issue；#6 更新时间为 2026-04-30T19:27:24Z。
+- 钉钉通知未发送：运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` 相关变量名，也未发现本地 `.env*` 文件；未将 webhook 写入仓库。
 
 - GitHub Issues：gh 可用且已认证；2026-05-01 02:48 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
 - #6 继续作为本轮 Product decision 依据：该反馈指出后半段“只有不停的目标、玩法没有真正变化”；前序已经把路线预案、路线步骤和路线按钮标记落到可点击按钮，但当前航段契合路线完成 3/3 时还缺少闭环完成确认。
