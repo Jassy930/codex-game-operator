@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+- 远航调度新增“推荐分支”：20M 后远航调度 active 时，主操作区会把当前航段契合的协同/绕行路线整理成一行推荐分支，星图总览远航调度摘要也会同步显示，继续回应 #6 对后半段玩法变化不明显的反馈。
+- `src/game.js` 新增 `branchRecommendationText` 派生和 `buildFarRouteDispatchBranchRecommendationText`；`src/app.js` 渲染 `far-dispatch-branch-recommendation`；`src/styles.css` 新增推荐分支样式；`index.html` 增加静态占位；`tests/game.test.js` 覆盖锁定态、推荐协同、推荐可改道、静态绑定和样式标记。
+- 文档同步更新：`docs/DECISION.md`、`docs/FEEDBACK.md`、`docs/RESEARCH.md`、`docs/PRODUCT.md`、`docs/DESIGN.md`、`docs/ROADMAP.md`、`docs/IDEAS.md`、`docs/METRICS.md`、`README.md` 和本日志已记录远航推荐分支。
+- 本轮只新增派生展示和样式，不新增存档字段，不改变升级价格、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、基础连携倍率、远航调度收益、冷却、连携窗口、反馈入口或部署链路。
+- 同步 GitHub Issues 反馈状态：2026-04-30 23:16 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 作为本轮处理对象。
+- 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+
 - 远航调度新增“航段契合”：点击/过载奖励航段更契合协同路线，自动/总产能奖励航段更契合绕行路线；目标指令后的契合分支会获得有效基础指令收益 5% 的“航段契合”奖励，继续回应 #6 对后半段玩法变化不明显的反馈。
 - `src/game.js` 新增 `FAR_ROUTE_DISPATCH_BRANCH_FOCUS_REWARD_RATE`、`branchFocusKind` / `branchFocusText` / `branchFocusDirectiveId` / `branchFocusDirectiveName` 派生和航段契合收益计算；`src/app.js` 记录 `dispatchBranchFocusReward` / `dispatchBranchFocusRewardRate` / `dispatchBranchFocusRewardText` 事件字段并渲染 `directive-dispatch-branch-focus` 徽标；`src/styles.css` 新增航段契合徽标和分支选择高亮样式；`index.html` 同步静态文案；`tests/game.test.js` 覆盖协同/绕行契合、事件字段、徽标、样式和静态文案。
 - 文档同步更新：`docs/DECISION.md`、`docs/FEEDBACK.md`、`docs/RESEARCH.md`、`docs/PRODUCT.md`、`docs/DESIGN.md`、`docs/ROADMAP.md`、`docs/IDEAS.md`、`docs/METRICS.md`、`README.md` 和本日志已记录远航航段契合。

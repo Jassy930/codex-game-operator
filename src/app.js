@@ -619,6 +619,11 @@ function renderFarDispatch(dispatch) {
   branch.textContent = dispatch.branchText ?? "";
   branch.hidden = !dispatch.branchText;
 
+  const branchRecommendation = document.createElement("span");
+  branchRecommendation.className = "far-dispatch-branch-recommendation";
+  branchRecommendation.textContent = dispatch.branchRecommendationText ?? "";
+  branchRecommendation.hidden = !dispatch.branchRecommendationText;
+
   const branchChoices = renderFarDispatchBranchChoices(dispatch);
 
   const loopText = document.createElement("span");
@@ -658,6 +663,7 @@ function renderFarDispatch(dispatch) {
   elements.farDispatch.replaceChildren(
     text,
     branch,
+    branchRecommendation,
     branchChoices,
     meter,
     loopText,

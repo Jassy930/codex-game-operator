@@ -1,5 +1,31 @@
 # Decision
 
+## 2026-04-30 Product decision：远航推荐分支
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-04-30 23:16 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#6 仍是最新反馈线程，原始反馈指出后半段“只有不停的目标、玩法没有真正变化”，因此本轮继续进入 Product decision。
+
+当前最大问题：远航调度已经能显示协同/绕行选择、上轮路线、可改道和航段契合，但玩家仍需要在分支选择条、航段契合说明和可改道状态之间自行判断“这一轮到底建议走哪条路线”。当航段契合与分支改道同时存在时，这个判断尤其容易被拆散到多个徽标里。
+
+本轮决策：
+
+- 新增“远航推荐分支”派生展示。
+- `getFarRouteDispatch` 从现有 `branchChoices` 选择当前航段契合的分支，派生 `branchRecommendationText`。
+- 推荐文本同时合并路线名、指令名、当前状态、资源取向、航段契合 +5%；当推荐分支也是可改道路线时，额外显示分支改道 +6%。
+- 主操作区远航调度条新增 `far-dispatch-branch-recommendation`，星图总览远航调度摘要同步包含推荐分支。
+- 本轮只新增派生展示和样式，不新增存档字段，不改变升级价格、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、基础连携倍率、远航调度收益、冷却、连携窗口、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-04-30 23:16 CST 当前 5 个 open feedback issue、0 个 open bug issue。
+- 锁定态和全部完成态 `branchRecommendationText` 为空。
+- 脉冲航闸这类点击奖励航段显示“推荐分支：协同 谐振脉冲 · 可选择 · 补当前资源 · 航段契合 +5%”。
+- 上一轮绕行后进入点击/过载奖励航段时，推荐协同分支同时显示“航段契合 +5%”与“分支改道 +6%”。
+- 主操作区渲染 `far-dispatch-branch-recommendation`，静态首页保留同名占位，样式中包含 `.far-dispatch-branch-recommendation`。
+- 星图总览 `dispatchText` 包含推荐分支，便于在星图层直接看到当前航段建议路线。
+- 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+
+下一步：按发布策略推送并回复 #6，说明本轮新增推荐分支提示，继续等待复测。
+
 ## 2026-04-30 Product decision：远航航段契合
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-04-30 23:01 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#6 仍是最新反馈线程，原始反馈指出后半段“只有不停的目标、玩法没有真正变化”，因此本轮继续进入 Product decision。

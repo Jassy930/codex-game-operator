@@ -2,6 +2,13 @@
 
 ## 2026-04-30
 
+- GitHub Issues：gh 可用且已认证；2026-04-30 23:16 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
+- #6 继续作为本轮 Product decision 依据：该反馈指出后半段“只有不停的目标、玩法没有真正变化”；前序已补当前航段契合协同/绕行路线，但玩家仍需要把航段契合、上轮路线和可改道状态组合成最终选择。
+- 本轮改动新增远航推荐分支：远航调度 active 时，主操作区和星图总览会显示 `branchRecommendationText`，直接写出当前航段推荐走协同还是绕行。
+- 推荐分支复用现有分支选择条，不新增收益；推荐文本包含路线状态、资源取向、航段契合 +5%，当推荐路线也是可改道路线时同时显示分支改道 +6%。
+- 本轮不新增存档字段，不改变升级价格、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、基础连携倍率、远航调度收益、冷却、连携窗口、反馈入口或部署链路。
+- 本轮本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+
 - GitHub Issues：gh 可用且已认证；2026-04-30 23:01 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
 - #6 继续作为本轮 Product decision 依据：该反馈指出后半段“只有不停的目标、玩法没有真正变化”；前序已补协同/绕行、资源取舍、分支改道和分支选择条，但当前航段仍只决定目标指令，没有决定本段更适合的分支路线。
 - 本轮改动新增远航航段契合：点击/过载奖励航段契合协同路线，自动/总产能奖励航段契合绕行路线；目标后的契合分支获得“航段契合 +5%”。

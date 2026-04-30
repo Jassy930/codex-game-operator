@@ -2934,6 +2934,7 @@ export function getFarRouteDispatch(state, now = Date.now()) {
       branchText: "",
       branchDirectiveId: null,
       branchDirectiveName: "",
+      branchRecommendationText: "",
       branchChoices: [],
       branchChoiceText: "",
       projectId: null,
@@ -3004,6 +3005,7 @@ export function getFarRouteDispatch(state, now = Date.now()) {
       branchText: "",
       branchDirectiveId: null,
       branchDirectiveName: "",
+      branchRecommendationText: "",
       branchChoices: [],
       branchChoiceText: "",
       projectId: null,
@@ -3047,6 +3049,8 @@ export function getFarRouteDispatch(state, now = Date.now()) {
     branchStatus,
     branchFocus
   );
+  const branchRecommendationText =
+    buildFarRouteDispatchBranchRecommendationText(branchChoices);
   const loopSteps = buildFarRouteDispatchLoopSteps(
     directive,
     relayDirective,
@@ -3113,6 +3117,7 @@ export function getFarRouteDispatch(state, now = Date.now()) {
     branchText: branchStatus.text,
     branchDirectiveId: branchStatus.directiveId,
     branchDirectiveName: branchStatus.directiveName,
+    branchRecommendationText,
     branchChoices,
     branchChoiceText: buildFarRouteDispatchBranchChoiceText(branchChoices),
     projectId: project.id,
@@ -3140,6 +3145,7 @@ export function getFarRouteDispatch(state, now = Date.now()) {
       " · " +
       branchStatus.text +
       (branchFocus.text ? " · " + branchFocus.text : "") +
+      (branchRecommendationText ? " · " + branchRecommendationText : "") +
       " · 目标后优先" +
       relayDirectiveName +
       "触发" +
@@ -4506,6 +4512,9 @@ function buildProjectOverviewDispatchText(dispatch) {
   const branchFocusText = dispatch.branchFocusText
     ? " · " + dispatch.branchFocusText
     : "";
+  const branchRecommendationText = dispatch.branchRecommendationText
+    ? " · " + dispatch.branchRecommendationText
+    : "";
   const currentStep = Array.isArray(dispatch.loopSteps)
     ? dispatch.loopSteps.find((step) => step.state === "current")
     : null;
@@ -4523,6 +4532,7 @@ function buildProjectOverviewDispatchText(dispatch) {
     relayText +
     branchText +
     branchFocusText +
+    branchRecommendationText +
     " · 闭环 " +
     dispatch.loopProgress +
     "/" +
@@ -4882,6 +4892,38 @@ function buildFarRouteDispatchBranchChoiceText(choices) {
           "）"
       )
       .join(" / ")
+  );
+}
+
+function buildFarRouteDispatchBranchRecommendationText(choices) {
+  const focusedChoice = choices.find((choice) => choice.focused);
+  if (!focusedChoice) {
+    return "";
+  }
+
+  const reasons = [
+    focusedChoice.statusText,
+    focusedChoice.caption,
+    "航段契合 +" +
+      Math.round(FAR_ROUTE_DISPATCH_BRANCH_FOCUS_REWARD_RATE * 100) +
+      "%"
+  ];
+
+  if (focusedChoice.status === "shift") {
+    reasons.push(
+      "分支改道 +" +
+        Math.round(FAR_ROUTE_DISPATCH_BRANCH_SHIFT_REWARD_RATE * 100) +
+        "%"
+    );
+  }
+
+  return (
+    "推荐分支：" +
+    focusedChoice.label +
+    " " +
+    focusedChoice.directiveName +
+    " · " +
+    reasons.join(" · ")
   );
 }
 
