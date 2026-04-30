@@ -1,5 +1,28 @@
 # Decision
 
+## 2026-04-30 Product decision：远航调度闭环奖励
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-04-30 09:34 CST 同步到 5 个 open feedback issue、0 个 open bug issue。#6 仍是最新后半段玩法变化反馈，上一轮已让远航调度目标指令延长连携窗口，但尚无玩家复测结论；继续进入 Product decision。
+
+当前最大问题：远航调度已经指定目标指令、接管推荐、缩短冷却并把目标指令后的连携窗口延长到 120 秒，但“完成一轮短循环”的奖励仍主要混在轮换目标、委托和调度校准里。玩家可能知道下一步按哪个，却不一定把“目标指令 -> 续航 -> 回到目标指令”识别成后半段当前航段的闭环目标。
+
+本轮决策：
+
+- 新增 `FAR_ROUTE_DISPATCH_LOOP_REWARD_RATE = 0.16`；20M 后远航调度 active 时，若 3/3 指令轮换回到当前航段目标指令，额外获得有效基础指令收益 16% 的“远航闭环”奖励。
+- 目标指令只有在本次执行会完成 3/3 轮换时显示 `远航闭环 +X` 徽标；普通目标指令仍只显示调度校准、调度冷却和调度接力。
+- 远航调度条同步说明“3/3 回到目标指令触发远航闭环 +16%”；本地 `directive` 事件新增 `dispatchLoopReward` / `dispatchLoopRewardRate` / `dispatchLoopRewardText`。
+- 本轮不新增存档字段，不改变升级价格、产能公式、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、基础连携倍率、轮换目标奖励、预案执行、航线委托、指令熟练、满层回响、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-04-30 09:34 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 继续作为本轮处理对象。
+- 25M 脉冲航闸阶段，远航调度显示目标指令点火齐射、调度校准、目标冷却缩短、调度接力和 `远航闭环 +16%`。
+- 点火齐射 -> 巡航回收后，第三步回到点火齐射会显示并结算 `远航闭环`；第一步点火齐射和非目标指令不触发闭环奖励。
+- 按钮徽标、预计收益、执行反馈和本地 `directive` 事件都包含远航闭环字段；静态首页锁定态说明闭环奖励。
+- 本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 106 项。
+
+下一步：提交、推送并回复 #6；若复测仍认为后半段只是追目标，再评估资源消耗型指令或更重的项目分支。
+
 ## 2026-04-30 Product decision：远航调度接力
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-04-30 09:20 CST 同步到 5 个 open feedback issue、0 个 open bug issue。#6 仍是最新后半段玩法变化反馈，上一轮已让远航调度目标指令冷却缩短，但尚无玩家复测结论；继续进入 Product decision。

@@ -446,6 +446,9 @@ function renderDirective(option) {
         taskRewardRate: result.taskRewardRate,
         dispatchReward: result.dispatchReward,
         dispatchRewardRate: result.dispatchRewardRate,
+        dispatchLoopReward: result.dispatchLoopReward,
+        dispatchLoopRewardRate: result.dispatchLoopRewardRate,
+        dispatchLoopRewardText: result.dispatchLoopRewardText,
         dispatchCooldownMultiplier: result.dispatchCooldownMultiplier,
         dispatchCooldownText: result.dispatchCooldownText,
         dispatchChainWindowSeconds: result.dispatchChainWindowSeconds,
@@ -497,6 +500,11 @@ function renderDirective(option) {
   dispatchBonus.textContent = option.dispatchRewardText;
   dispatchBonus.hidden = !option.dispatchRewardText;
 
+  const dispatchLoop = document.createElement("span");
+  dispatchLoop.className = "directive-dispatch-loop";
+  dispatchLoop.textContent = option.dispatchLoopRewardText;
+  dispatchLoop.hidden = !option.dispatchLoopRewardText;
+
   const dispatchCooldown = document.createElement("span");
   dispatchCooldown.className = "directive-dispatch-cooldown";
   dispatchCooldown.textContent = option.dispatchCooldownText;
@@ -527,6 +535,7 @@ function renderDirective(option) {
     planBonus,
     taskBonus,
     dispatchBonus,
+    dispatchLoop,
     dispatchCooldown,
     dispatchWindow,
     finisherRecommendation,
