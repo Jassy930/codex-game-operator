@@ -742,7 +742,15 @@ function renderDirectiveVisual(option) {
   const iconDef =
     DIRECTIVE_ICON_DEFS[option.id] ?? DIRECTIVE_ICON_DEFS["resonance-pulse"];
   const wrapper = document.createElement("span");
-  wrapper.className = "directive-visual directive-visual-" + option.id;
+  wrapper.className = [
+    "directive-visual",
+    "directive-visual-" + option.id,
+    option.ready ? "is-ready" : "",
+    option.cooling ? "is-cooling" : "",
+    option.recommended ? "is-recommended" : ""
+  ]
+    .filter(Boolean)
+    .join(" ");
   wrapper.setAttribute("role", "img");
   wrapper.setAttribute("aria-label", iconDef.label);
 
@@ -754,7 +762,11 @@ function renderDirectiveVisual(option) {
     svg.append(createSvgElement(tagName, attributes));
   });
 
-  wrapper.append(svg);
+  const stateOrb = document.createElement("span");
+  stateOrb.className = "directive-state-orb";
+  stateOrb.setAttribute("aria-hidden", "true");
+
+  wrapper.append(svg, stateOrb);
   return wrapper;
 }
 

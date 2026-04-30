@@ -604,6 +604,7 @@ h2 {
 }
 
 .directive-visual {
+  position: relative;
   display: grid;
   flex: 0 0 38px;
   width: 38px;
@@ -619,6 +620,36 @@ h2 {
 .directive-visual svg {
   width: 28px;
   height: 28px;
+}
+
+.directive-state-orb {
+  position: absolute;
+  right: 4px;
+  bottom: 4px;
+  width: 8px;
+  height: 8px;
+  border: 1px solid rgba(20, 17, 15, 0.72);
+  border-radius: 999px;
+  background: rgba(248, 243, 231, 0.32);
+  box-shadow: 0 0 0 2px rgba(20, 17, 15, 0.32);
+}
+
+.directive-visual.is-ready .directive-state-orb {
+  background: #13b5a6;
+  box-shadow:
+    0 0 0 2px rgba(20, 17, 15, 0.32),
+    0 0 12px rgba(19, 181, 166, 0.72);
+}
+
+.directive-visual.is-cooling .directive-state-orb {
+  background: #f4b23c;
+  box-shadow:
+    0 0 0 2px rgba(20, 17, 15, 0.32),
+    0 0 12px rgba(244, 178, 60, 0.66);
+}
+
+.directive-visual.is-recommended .directive-state-orb {
+  border-color: rgba(255, 247, 194, 0.92);
 }
 
 .directive-visual-ignition-salvo {

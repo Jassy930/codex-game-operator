@@ -2,6 +2,13 @@
 
 ## 2026-04-30
 
+- GitHub Issues：gh 可用且已认证；2026-04-30 12:19 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
+- #4 继续作为本轮 Product decision 依据：该反馈指向界面文字密集、希望更多图片和更好看；航线指令已有徽记和冷却进度轨，但“可执行/冷却/未解锁”状态仍需要从文字和进度条一起判断。
+- 本轮改动新增航线指令状态灯：三枚指令徽记右下角显示固定状态点，运行期按 `ready` / `cooling` / `recommended` 添加视觉状态，静态首页同步锁定态占位。
+- 本轮不新增存档字段，不改变指令收益、实际冷却、连携窗口、轮换目标奖励、预案执行、航线委托、策略契合、策略终结、指令熟练、远航调度、星图航段、升级价格、反馈入口或部署链路。
+- 本轮本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 108 项。
+- 构建产物已确认包含 `directive-state-orb`、`directive-visual.is-ready` 和 `directive-visual.is-cooling`。
+
 - GitHub Issues：gh 可用且已认证；2026-04-30 12:07 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
 - #4 作为本轮 Product decision 依据：该反馈指向界面文字密集、希望更多图片和更好看；航线指令三类徽记已经上线，但按钮冷却状态仍主要靠文字读取。
 - #3/#6 作为辅助依据：主动短循环和远航短循环需要玩家快速判断下一步推荐按钮与可执行状态，冷却只靠状态文本会增加扫视成本。

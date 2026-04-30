@@ -1127,10 +1127,15 @@ test("航线指令按钮会渲染可扫视徽记", () => {
   assert.match(indexHtml, /aria-label="巡航回收徽记"/);
   assert.match(indexHtml, /directive-visual directive-visual-resonance-pulse/);
   assert.match(indexHtml, /aria-label="谐振脉冲徽记"/);
+  assert.match(indexHtml, /class="directive-state-orb"/);
   assert.match(indexHtml, /class="directive-cooldown-meter"/);
   assert.match(indexHtml, /aria-label="点火齐射冷却进度"/);
   assert.match(appJs, /DIRECTIVE_ICON_DEFS/);
   assert.match(appJs, /function renderDirectiveVisual\(option\)/);
+  assert.match(appJs, /option\.ready \? "is-ready" : ""/);
+  assert.match(appJs, /option\.cooling \? "is-cooling" : ""/);
+  assert.match(appJs, /option\.recommended \? "is-recommended" : ""/);
+  assert.match(appJs, /stateOrb\.className = "directive-state-orb"/);
   assert.match(appJs, /titleGroup\.className = "directive-title-group"/);
   assert.match(appJs, /titleGroup\.append\(renderDirectiveVisual\(option\), name\)/);
   assert.match(appJs, /head\.append\(titleGroup, badges\)/);
@@ -1143,6 +1148,9 @@ test("航线指令按钮会渲染可扫视徽记", () => {
   assert.match(styles, /\.directive-visual-ignition-salvo/);
   assert.match(styles, /\.directive-visual-cruise-cache/);
   assert.match(styles, /\.directive-visual-resonance-pulse/);
+  assert.match(styles, /\.directive-state-orb/);
+  assert.match(styles, /\.directive-visual\.is-ready \.directive-state-orb/);
+  assert.match(styles, /\.directive-visual\.is-cooling \.directive-state-orb/);
   assert.match(styles, /\.directive-cooldown-meter/);
   assert.match(styles, /\.directive-button\.is-cooling \.directive-cooldown-meter span/);
 });
@@ -1322,6 +1330,7 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(appJs, /masteryBonus\.textContent = option\.masteryBonusText/);
   assert.match(appJs, /stanceBonus\.className = "directive-stance-bonus"/);
   assert.match(appJs, /stanceBonus\.textContent = option\.stanceBonusText/);
+  assert.match(appJs, /stateOrb\.className = "directive-state-orb"/);
   assert.match(appJs, /cooldownMeter\.className = "directive-cooldown-meter"/);
   assert.match(appJs, /cooldownMeter\.setAttribute\("aria-valuetext", option\.statusText\)/);
   assert.match(appJs, /cooldownFill\.style\.width/);
@@ -1354,6 +1363,9 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(styles, /\.directive-button \.directive-finisher-recommendation/);
   assert.match(styles, /\.directive-button \.directive-mastery-bonus/);
   assert.match(styles, /\.directive-button \.directive-stance-bonus/);
+  assert.match(styles, /\.directive-state-orb/);
+  assert.match(styles, /\.directive-visual\.is-ready \.directive-state-orb/);
+  assert.match(styles, /\.directive-visual\.is-cooling \.directive-state-orb/);
   assert.match(styles, /\.directive-cooldown-meter/);
   assert.match(styles, /\.directive-cooldown-meter span/);
 });

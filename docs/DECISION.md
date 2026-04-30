@@ -1,5 +1,24 @@
 # Decision
 
+## 2026-04-30 Product decision：航线指令状态灯
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-04-30 12:19 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#4 仍反馈界面文字密集、希望更多图片和更好看，继续进入 Product decision。
+
+当前最大问题：航线指令三按钮已经有固定徽记和冷却进度轨，但可执行、冷却中、未解锁这些状态仍主要依赖按钮下方文字和进度条判断。玩家在 100K 后同时处理推荐、预案、远航和冷却时，需要更快看出图标本身是否可用。
+
+本轮决策：
+
+- 给 `renderDirectiveVisual` 增加 `directive-state-orb` 状态灯，运行期按 `option.ready` / `option.cooling` / `option.recommended` 添加 `is-ready`、`is-cooling`、`is-recommended` 视觉状态。
+- 静态首页三枚锁定态指令徽记同步包含状态灯占位，避免首屏结构与运行期结构不一致。
+- 本轮只调整航线指令徽记展示层；不新增存档字段，不改变指令收益、实际冷却、连携窗口、轮换目标奖励、预案执行、航线委托、策略契合、策略终结、指令熟练、远航调度、星图航段、升级价格、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-04-30 12:19 CST 当前 5 个 open feedback issue、0 个 open bug issue。
+- 静态首页和运行期资源包含 `directive-state-orb`，运行期徽记能根据 ready/cooling/recommended 状态追加对应 class。
+- 本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 108 项。
+- 构建产物已确认包含 `directive-state-orb`、`directive-visual.is-ready` 和 `directive-visual.is-cooling`。
+
 ## 2026-04-30 Product decision：航线指令冷却进度轨
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-04-30 12:07 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#4 仍反馈界面文字密集、希望更多图片和更好看，且 #3/#6 的主动短循环也依赖指令按钮可扫视性，继续进入 Product decision。
