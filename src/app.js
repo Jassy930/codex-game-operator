@@ -335,7 +335,11 @@ function render() {
   elements.combo.textContent = "连击 " + combo.count + " · " + combo.progressText;
   elements.pulse.textContent = combo.overloaded ? current.lastPulse : combo.hintText;
   renderDirectives(directives);
-  elements.directivePlan.textContent = directives.plan.text;
+  setCompactSupportText(
+    elements.directivePlan,
+    getDirectivePlanDisplayText(directives.plan),
+    directives.plan.text
+  );
   renderDirectivePlanTrack(directives.plan, directives.options);
   renderDirectiveTask(directives.task);
   renderFarDispatch(directives.dispatch ?? getFarRouteDispatch(current, now));
@@ -478,7 +482,7 @@ function renderDirectiveTask(task) {
 
   const text = document.createElement("span");
   text.className = "directive-task-text";
-  text.textContent = task.text;
+  setCompactSupportText(text, getDirectiveTaskDisplayText(task), task.text);
 
   const meter = document.createElement("span");
   meter.className = "directive-task-meter";
@@ -508,7 +512,7 @@ function renderFarDispatch(dispatch) {
 
   const text = document.createElement("span");
   text.className = "far-dispatch-text";
-  text.textContent = dispatch.text;
+  setCompactSupportText(text, getFarDispatchDisplayText(dispatch), dispatch.text);
 
   const loopText = document.createElement("span");
   loopText.className = "far-dispatch-loop-text";
@@ -543,6 +547,54 @@ function renderFarDispatch(dispatch) {
   elements.farDispatch.classList.toggle("is-locked", !dispatch.unlocked);
   elements.farDispatch.classList.toggle("is-active", dispatch.active);
   elements.farDispatch.replaceChildren(text, meter, loopText, loopMeter);
+}
+
+function setCompactSupportText(element, displayText, fullText) {
+  element.textContent = displayText;
+  if (fullText && fullText !== displayText) {
+    element.title = fullText;
+    element.setAttribute("aria-label", fullText);
+  } else {
+    element.removeAttribute("title");
+    element.removeAttribute("aria-label");
+  }
+}
+
+function getDirectivePlanDisplayText(plan) {
+  return plan.summaryText || plan.text;
+}
+
+function getDirectiveTaskDisplayText(task) {
+  const progress = Math.max(0, task.progress ?? 0);
+  const target = Math.max(1, task.target ?? 3);
+
+  if (!task.unlocked) {
+    return "航线委托：100K 后解锁 " + target + " 步任务";
+  }
+
+  if (task.completed) {
+    return "航线委托 " + target + "/" + target + " · 已完成";
+  }
+
+  return "航线委托 " + progress + "/" + target + " · " + task.rewardText;
+}
+
+function getFarDispatchDisplayText(dispatch) {
+  if (!dispatch.unlocked) {
+    return "远航调度：20M 后解锁";
+  }
+
+  if (!dispatch.active) {
+    return "远航调度：全部航段已完成";
+  }
+
+  return [
+    "远航调度：" + dispatch.segmentText,
+    dispatch.projectName,
+    "目标 " + dispatch.targetDirectiveName
+  ]
+    .filter(Boolean)
+    .join(" · ");
 }
 
 function renderDirective(option) {

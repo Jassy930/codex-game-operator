@@ -1,5 +1,26 @@
 # Decision
 
+## 2026-04-30 Product decision：航线指令说明摘要化
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-04-30 12:45 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#4 的“界面文字密集、希望更多图片和更好看”仍未有玩家复测结论，继续进入 Product decision。
+
+当前最大问题：航线指令按钮本体已完成徽记、冷却轨、状态灯、徽标压缩和收益明细压缩，但按钮下方的指令轮换、航线委托和远航调度说明仍默认显示完整长句。100K/20M 后这些长句会和 3 格视觉轨、进度条、按钮徽标一起形成新的文字块。
+
+本轮决策：
+
+- 运行期新增 `setCompactSupportText`，把指令轮换、航线委托、远航调度主说明默认压缩为短摘要，完整说明保留到 `title` 和 `aria-label`。
+- 静态首页同步短摘要：`directivePlan` 只显示解锁摘要，`directive-task-text` 只显示 100K 解锁短句，`far-dispatch-text` 只显示 20M 解锁短句。
+- CSS 对三段支持文本增加单行省略，避免小屏继续换行成文字墙。
+- 本轮只调整航线指令支持说明展示层；不新增存档字段，不改变指令收益、冷却、连携窗口、轮换目标奖励、预案执行、航线委托、策略契合、策略终结、指令熟练、远航调度、星图航段、升级价格、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-04-30 12:45 CST 当前 5 个 open feedback issue、0 个 open bug issue。
+- 静态首页和运行期资源包含 `setCompactSupportText`、`getDirectivePlanDisplayText`、`getDirectiveTaskDisplayText`、`getFarDispatchDisplayText`，且完整说明进入 `title` / `aria-label`。
+- 本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 108 项。
+- 构建产物已确认包含 `setCompactSupportText`、`getDirectivePlanDisplayText`、`getDirectiveTaskDisplayText`、`getFarDispatchDisplayText`、“航线委托：100K 后解锁 3 步任务”和“远航调度：20M 后解锁”。
+- 若发布成功，回复 #4 并继续保持 open，等待复测确认 100K/20M 后航线指令支持说明是否进一步降低文字密度。
+
 ## 2026-04-30 Product decision：航线指令徽标压缩
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-04-30 12:32 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#4 的“界面文字密集、希望更多图片和更好看”仍未有玩家复测结论，继续进入 Product decision。

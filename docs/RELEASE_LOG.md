@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+- 航线指令支持说明新增摘要化展示：指令轮换、航线委托和远航调度主说明默认只显示短摘要，完整说明保留在 `title` / `aria-label`。
+- `src/app.js` 新增 `setCompactSupportText`、`getDirectivePlanDisplayText`、`getDirectiveTaskDisplayText` 和 `getFarDispatchDisplayText`；`index.html` 静态锁定态同步短摘要；`src/styles.css` 对支持说明文本增加单行省略。
+- 本轮只调整航线指令支持说明展示层，继续回应 #4 对文字密度和可扫视性的反馈；不新增存档字段，不改变指令收益、冷却、连携窗口、远航调度、星图航段、升级价格或反馈入口。
+- 同步 GitHub Issues 反馈状态：2026-04-30 12:45 CST 当前 5 个 open feedback issue、0 个 open bug issue；#4 作为本轮处理对象。
+- 验证通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 108 项。
+- 构建产物已确认包含 `setCompactSupportText`、`getDirectivePlanDisplayText`、`getDirectiveTaskDisplayText`、`getFarDispatchDisplayText`、“航线委托：100K 后解锁 3 步任务”和“远航调度：20M 后解锁”。
+
 - 航线指令按钮新增徽标压缩：运行期每个指令按钮最多直接显示 3 个文字徽标，其余折成 `+N`，预计收益行压缩为“预计 +X 能量 · N 项明细”，完整明细保留在 `title` / `aria-label`。
 - `src/app.js` 新增 `DIRECTIVE_VISIBLE_BADGE_LIMIT`、`compactDirectiveBadges` 和 `getDirectivePreviewDisplayText`；`src/styles.css` 新增 `is-collapsed-badge` 与 `directive-badge-overflow` 样式；`tests/game.test.js` 覆盖运行期标记。
 - 本轮只调整航线指令展示层，继续回应 #4 对文字密度和可扫视性的反馈；不新增存档字段，不改变指令收益、实际冷却、连携窗口、远航调度、星图航段、升级价格或反馈入口。

@@ -1240,8 +1240,11 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(indexHtml, /aria-label="航线委托进度"/);
   assert.match(indexHtml, /aria-label="远航调度进度"/);
   assert.match(indexHtml, /aria-label="远航闭环进度"/);
+  assert.match(indexHtml, /title="指令轮换：累计 100K 能量后解锁 90 秒连携目标/);
   assert.match(indexHtml, /指令轮换：累计 100K 能量后解锁 90 秒连携目标/);
+  assert.match(indexHtml, />航线委托：100K 后解锁 3 步任务<\/span>/);
   assert.match(indexHtml, /航线委托：累计 100K 能量后解锁 3 步短期任务/);
+  assert.match(indexHtml, />远航调度：20M 后解锁<\/span>/);
   assert.match(
     indexHtml,
     /远航调度：累计 20M 能量后解锁后半段航段调度、目标指令推荐、目标冷却缩短、连携窗口延长、远航续航、远航协同、闭环奖励与远航整备/
@@ -1286,7 +1289,14 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(appJs, /directivePlanTrack: document\.querySelector\("#directivePlanTrack"\)/);
   assert.match(appJs, /directiveTask: document\.querySelector\("#directiveTask"\)/);
   assert.match(appJs, /farDispatch: document\.querySelector\("#farDispatch"\)/);
-  assert.match(appJs, /elements\.directivePlan\.textContent = directives\.plan\.text/);
+  assert.match(appJs, /setCompactSupportText\(/);
+  assert.match(appJs, /function getDirectivePlanDisplayText\(plan\)/);
+  assert.match(appJs, /function getDirectiveTaskDisplayText\(task\)/);
+  assert.match(appJs, /function getFarDispatchDisplayText\(dispatch\)/);
+  assert.match(
+    appJs,
+    /getDirectivePlanDisplayText\(directives\.plan\),\s+directives\.plan\.text/
+  );
   assert.match(appJs, /renderDirectivePlanTrack\(directives\.plan, directives\.options\)/);
   assert.match(appJs, /renderDirectiveTask\(directives\.task\)/);
   assert.match(appJs, /renderFarDispatch\(directives\.dispatch/);
@@ -1295,6 +1305,8 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(appJs, /label\.textContent = nextActionText/);
   assert.match(appJs, /function renderDirectiveTask\(task\)/);
   assert.match(appJs, /function renderFarDispatch\(dispatch\)/);
+  assert.match(appJs, /getDirectiveTaskDisplayText\(task\)/);
+  assert.match(appJs, /getFarDispatchDisplayText\(dispatch\)/);
   assert.match(appJs, /meter\.className = "directive-task-meter"/);
   assert.match(appJs, /meter\.className = "far-dispatch-meter"/);
   assert.match(appJs, /loopMeter\.className = "far-dispatch-loop-meter"/);
@@ -1349,9 +1361,11 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(styles, /\.directive-plan-step\.is-complete/);
   assert.match(styles, /\.directive-plan-step\.is-next/);
   assert.match(styles, /\.directive-task/);
+  assert.match(styles, /\.directive-task-text,\s+\.far-dispatch-text/);
   assert.match(styles, /\.directive-task-meter/);
   assert.match(styles, /\.directive-task\.is-completed/);
   assert.match(styles, /\.far-dispatch/);
+  assert.match(styles, /text-overflow: ellipsis/);
   assert.match(styles, /\.far-dispatch-meter/);
   assert.match(styles, /\.far-dispatch-loop-text/);
   assert.match(styles, /\.far-dispatch-loop-meter/);

@@ -870,6 +870,7 @@ h2 {
   width: min(100%, 560px);
   margin: 0;
   padding: 10px 12px;
+  overflow: hidden;
   border: 1px solid rgba(189, 244, 235, 0.22);
   border-radius: 8px;
   background: rgba(19, 181, 166, 0.1);
@@ -877,6 +878,8 @@ h2 {
   font-size: 0.82rem;
   font-weight: 800;
   line-height: 1.45;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .directive-plan-track {
@@ -947,6 +950,14 @@ h2 {
   font-size: 0.82rem;
   font-weight: 850;
   line-height: 1.45;
+}
+
+.directive-task-text,
+.far-dispatch-text {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .directive-task-meter {

@@ -2,6 +2,13 @@
 
 ## 2026-04-30
 
+- GitHub Issues：gh 可用且已认证；2026-04-30 12:45 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
+- #4 继续作为本轮 Product decision 依据：该反馈指向界面文字密集、希望更多图片和更好看；航线指令按钮内文字已经完成徽标压缩和收益明细压缩，但按钮下方的指令轮换、航线委托和远航调度说明仍默认显示长句。
+- 本轮改动新增航线指令说明摘要化：运行期 `directivePlan`、`directiveTask` 和 `farDispatch` 默认显示短摘要，完整说明保留在 `title` / `aria-label`；静态首页同步显示短摘要并保留完整可访问说明。
+- 本轮不新增存档字段，不改变指令收益、冷却、连携窗口、轮换目标奖励、预案执行、航线委托、策略契合、策略终结、指令熟练、远航调度、星图航段、升级价格、反馈入口或部署链路。
+- 本轮本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 108 项。
+- 构建产物已确认包含 `setCompactSupportText`、`getDirectivePlanDisplayText`、`getDirectiveTaskDisplayText`、`getFarDispatchDisplayText`、“航线委托：100K 后解锁 3 步任务”和“远航调度：20M 后解锁”。
+
 - GitHub Issues：gh 可用且已认证；2026-04-30 12:32 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
 - #4 继续作为本轮 Product decision 依据：该反馈指向界面文字密集、希望更多图片和更好看；航线指令已有徽记、冷却进度轨和状态灯后，剩余密度主要来自按钮头部的多枚文字徽标和预计收益长明细。
 - 本轮改动新增航线指令徽标压缩：运行期每个指令按钮最多直接显示 3 个文字徽标，其余折成 `+N`；预计收益行改成“预计 +X 能量 · N 项明细”，完整明细保留在 `title` 和 `aria-label`。
