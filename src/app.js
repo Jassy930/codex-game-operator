@@ -22,6 +22,7 @@ import {
   getProjectChapterVisuals,
   getProjectListWindow,
   getProjectOverview,
+  getProjectRewardVisuals,
   getProjectStatuses,
   getProjectVisualMap,
   getRouteStanceStatus,
@@ -214,6 +215,7 @@ const elements = {
   projectOverviewBonus: document.querySelector("#projectOverviewBonus"),
   projectOverviewAction: document.querySelector("#projectOverviewAction"),
   projectOverviewForecast: document.querySelector("#projectOverviewForecast"),
+  projectRewardMap: document.querySelector("#projectRewardMap"),
   projectMapSummary: document.querySelector("#projectMapSummary"),
   projectMapFilter: document.querySelector("#projectMapFilter"),
   projectMapTrack: document.querySelector("#projectMapTrack"),
@@ -399,6 +401,7 @@ function render() {
   elements.projectOverviewBonus.textContent = projectOverview.bonusText;
   elements.projectOverviewAction.textContent = projectOverview.actionText;
   elements.projectOverviewForecast.textContent = projectOverview.forecastText;
+  renderProjectRewardMap(projectOverview.rewardVisuals ?? getProjectRewardVisuals(projects));
   renderProjectMap(getProjectVisualMap(projects, projectFilter));
   renderProjectChapterMap(getProjectChapterVisuals(projects));
   renderRouteStances(routeStance);
@@ -1184,6 +1187,51 @@ function renderProjectMapNode(node) {
 
 function renderProjectChapterMap(chapters) {
   elements.projectChapterMap.replaceChildren(...chapters.map(renderProjectChapterTile));
+}
+
+function renderProjectRewardMap(rewards) {
+  elements.projectRewardMap.replaceChildren(
+    ...rewards.map((reward) => renderProjectRewardTile(reward))
+  );
+}
+
+function renderProjectRewardTile(reward) {
+  const item = document.createElement("span");
+  item.className = [
+    "project-reward-tile",
+    "project-reward-" + reward.id,
+    "is-" + reward.status
+  ]
+    .filter(Boolean)
+    .join(" ");
+  item.setAttribute("role", "img");
+  item.setAttribute("aria-label", reward.title);
+  item.title = reward.title;
+
+  const icon = document.createElement("span");
+  icon.className = "project-reward-icon";
+  icon.setAttribute("aria-hidden", "true");
+
+  const meta = document.createElement("span");
+  meta.className = "project-reward-meta";
+
+  const label = document.createElement("strong");
+  label.textContent = reward.label;
+
+  const progress = document.createElement("span");
+  progress.textContent = reward.progressText;
+
+  const meter = document.createElement("span");
+  meter.className = "project-reward-meter";
+  meter.setAttribute("aria-hidden", "true");
+
+  const fill = document.createElement("span");
+  fill.style.width = Math.round(reward.progress * 100) + "%";
+  meter.append(fill);
+
+  meta.append(label, progress);
+  item.append(icon, meta, meter);
+  return item;
 }
 
 function renderProjectChapterTile(chapter) {

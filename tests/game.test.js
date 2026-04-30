@@ -40,6 +40,7 @@ import {
   getProjectChapterVisuals,
   getProjectListWindow,
   getProjectOverview,
+  getProjectRewardVisuals,
   getProjectStatuses,
   getProjectVisualMap,
   getRouteStanceStatus,
@@ -974,6 +975,30 @@ test("星图视觉图会返回全航线节点和筛选高亮", () => {
   assert.equal(currentMap.nodes[1].selected, false);
 });
 
+test("星图奖励罗盘会返回四类奖励进度", () => {
+  const projects = getProjectStatuses(createInitialState(0));
+  const rewardVisuals = getProjectRewardVisuals(projects);
+  const overview = getProjectOverview(createInitialState(0));
+
+  assert.equal(rewardVisuals.length, 4);
+  assert.deepEqual(
+    rewardVisuals.map((reward) => reward.id),
+    ["total", "click", "second", "overload"]
+  );
+  assert.equal(rewardVisuals[0].label, "总产能");
+  assert.equal(rewardVisuals[0].progressText, "0/17");
+  assert.equal(rewardVisuals[0].nextText, "下一条 1/57 点亮星图");
+  assert.equal(rewardVisuals[0].status, "current");
+  assert.equal(rewardVisuals[1].progressText, "0/14");
+  assert.equal(rewardVisuals[1].nextText, "下一条 3/57 透镜阵列");
+  assert.equal(rewardVisuals[2].progressText, "0/15");
+  assert.equal(rewardVisuals[2].nextText, "下一条 4/57 采集阵列");
+  assert.equal(rewardVisuals[3].progressText, "0/11");
+  assert.equal(rewardVisuals[3].nextText, "下一条 2/57 谐振校准");
+  assert.equal(overview.rewardVisuals.length, 4);
+  assert.equal(overview.rewardVisuals[0].title, "总产能奖励 0/17 · 下一条 1/57 点亮星图");
+});
+
 test("静态首页会引用星图插画资产", () => {
   const indexHtml = readFileSync(new URL("../index.html", import.meta.url), "utf8");
   const styles = readFileSync(new URL("../src/styles.css", import.meta.url), "utf8");
@@ -988,6 +1013,29 @@ test("静态首页会引用星图插画资产", () => {
   assert.match(styles, /\.project-scene-image/);
   assert.match(asset, /星核工坊星图航线插画/);
   assert.match(asset, /routeLine/);
+});
+
+test("静态首页会渲染星图奖励罗盘", () => {
+  const indexHtml = readFileSync(new URL("../index.html", import.meta.url), "utf8");
+  const appJs = readFileSync(new URL("../src/app.js", import.meta.url), "utf8");
+  const styles = readFileSync(new URL("../src/styles.css", import.meta.url), "utf8");
+
+  assert.match(indexHtml, /id="projectRewardMap" class="project-reward-map"/);
+  assert.match(indexHtml, /aria-label="星图奖励罗盘"/);
+  assert.match(indexHtml, /project-reward-tile project-reward-total is-current/);
+  assert.match(indexHtml, /project-reward-tile project-reward-click is-pending/);
+  assert.match(indexHtml, /总产能奖励 0\/17 · 下一条 1\/57 点亮星图/);
+  assert.match(indexHtml, /过载奖励 0\/11 · 下一条 2\/57 谐振校准/);
+  assert.match(appJs, /getProjectRewardVisuals/);
+  assert.match(appJs, /projectRewardMap: document\.querySelector\("#projectRewardMap"\)/);
+  assert.match(appJs, /function renderProjectRewardMap\(rewards\)/);
+  assert.match(appJs, /function renderProjectRewardTile\(reward\)/);
+  assert.match(appJs, /project-reward-tile/);
+  assert.match(styles, /\.project-reward-map/);
+  assert.match(styles, /\.project-reward-tile/);
+  assert.match(styles, /\.project-reward-icon/);
+  assert.match(styles, /\.project-reward-meter/);
+  assert.match(styles, /\.project-reward-overload \.project-reward-icon/);
 });
 
 test("静态首页会渲染星图章节视觉导航", () => {

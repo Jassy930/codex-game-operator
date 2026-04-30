@@ -2,6 +2,13 @@
 
 ## 2026-04-30
 
+- GitHub Issues：gh 可用且已认证；2026-04-30 16:11 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
+- #4 继续作为本轮 Product decision 依据：该反馈指出界面文字密集，希望更多图片和更好看；前序已补星图插画、章节视觉导航、项目图标、项目缩略图和折叠结构，本轮继续降低星图总览默认区域对文字奖励进度的依赖。
+- 本轮改动新增星图奖励罗盘：星图总览默认可见区域渲染 `project-reward-map`，用总产能、点击、自动和过载四条奖励槽展示完成数、当前/待推进状态和进度条。
+- 本轮只从现有星图项目状态派生奖励罗盘；不新增存档字段，不改变 57 段星图路线、项目完成判定、奖励数值、升级价格、航线策略、航线指令、反馈入口或部署链路。
+- 本轮本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 112 项。
+- 构建产物已确认包含 `projectRewardMap`、`project-reward-map`、`getProjectRewardVisuals` 和“星图奖励罗盘”。
+
 - GitHub Issues：gh 可用且已认证；2026-04-30 16:00 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
 - #4 作为本轮 Product decision 依据：该反馈指出界面文字密集，希望更多图片和更好看；前序已补星图插画、章节视觉导航、项目图标、筛选折叠和详情折叠，本轮继续处理项目列表卡片主体仍偏文字的问题。
 - 本轮改动新增星图项目卡片缩略图：每张项目卡会渲染 `project-card-scene`，用现有项目进度驱动 `--project-card-progress`，并用累计/升级路线和总产能/点击/自动/过载奖励方向切换视觉形态。

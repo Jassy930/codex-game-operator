@@ -1558,6 +1558,142 @@ h2 {
   border-top: 1px solid rgba(248, 243, 231, 0.1);
 }
 
+.project-reward-map {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(116px, 1fr));
+  gap: 8px;
+}
+
+.project-reward-tile {
+  display: grid;
+  grid-template-columns: 30px minmax(0, 1fr);
+  gap: 7px 8px;
+  align-items: center;
+  min-width: 0;
+  min-height: 58px;
+  padding: 8px;
+  border: 1px solid rgba(248, 243, 231, 0.12);
+  border-radius: 8px;
+  background:
+    linear-gradient(135deg, rgba(248, 243, 231, 0.08), transparent 62%),
+    rgba(8, 11, 15, 0.22);
+}
+
+.project-reward-tile.is-current {
+  border-color: rgba(244, 178, 60, 0.68);
+  box-shadow: inset 0 0 18px rgba(244, 178, 60, 0.08);
+}
+
+.project-reward-tile.is-completed {
+  border-color: rgba(19, 181, 166, 0.68);
+}
+
+.project-reward-icon {
+  display: grid;
+  width: 28px;
+  height: 28px;
+  place-items: center;
+  border: 1px solid currentColor;
+  border-radius: 8px;
+  color: #f8f3e7;
+  background: rgba(20, 17, 15, 0.42);
+}
+
+.project-reward-icon::before {
+  content: "";
+  display: block;
+}
+
+.project-reward-total .project-reward-icon {
+  color: #f8f3e7;
+}
+
+.project-reward-click .project-reward-icon {
+  color: #f4b23c;
+}
+
+.project-reward-second .project-reward-icon {
+  color: #13b5a6;
+}
+
+.project-reward-overload .project-reward-icon {
+  color: #e85d75;
+}
+
+.project-reward-total .project-reward-icon::before {
+  width: 17px;
+  height: 17px;
+  border: 2px solid currentColor;
+  border-radius: 50%;
+  box-shadow:
+    inset 0 0 0 4px rgba(248, 243, 231, 0.1),
+    0 0 0 3px rgba(248, 243, 231, 0.06);
+}
+
+.project-reward-click .project-reward-icon::before {
+  width: 12px;
+  height: 20px;
+  background: currentColor;
+  clip-path: polygon(58% 0, 12% 52%, 48% 52%, 34% 100%, 88% 39%, 54% 39%);
+}
+
+.project-reward-second .project-reward-icon::before {
+  width: 17px;
+  height: 17px;
+  border: 3px solid currentColor;
+  border-left-color: transparent;
+  border-radius: 50%;
+}
+
+.project-reward-overload .project-reward-icon::before {
+  width: 17px;
+  height: 17px;
+  border: 3px solid currentColor;
+  border-radius: 50%;
+  box-shadow: 0 0 0 4px rgba(232, 93, 117, 0.14);
+}
+
+.project-reward-meta {
+  display: grid;
+  min-width: 0;
+  gap: 2px;
+}
+
+.project-reward-meta strong,
+.project-reward-meta span {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  line-height: 1.15;
+}
+
+.project-reward-meta strong {
+  color: #fff7c2;
+  font-size: 0.78rem;
+  font-weight: 900;
+}
+
+.project-reward-meta span {
+  color: rgba(248, 243, 231, 0.7);
+  font-size: 0.72rem;
+  font-weight: 900;
+}
+
+.project-reward-meter {
+  grid-column: 1 / -1;
+  display: block;
+  height: 7px;
+  overflow: hidden;
+  border-radius: 99px;
+  background: rgba(248, 243, 231, 0.12);
+}
+
+.project-reward-meter span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #13b5a6, #f4b23c);
+}
+
 .project-map-view {
   display: grid;
   gap: 10px;

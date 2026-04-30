@@ -1956,6 +1956,47 @@ export function getProjectChapterVisuals(projects) {
   });
 }
 
+export function getProjectRewardVisuals(projects) {
+  const items = Array.isArray(projects) ? projects : [];
+
+  return PROJECT_REWARD_SUMMARY_DEFS.map(([label, effectKey, id]) => {
+    const rewardProjects = items.filter((project) =>
+      Boolean(project.effect?.[effectKey])
+    );
+    const completed = rewardProjects.filter((project) => project.completed).length;
+    const total = rewardProjects.length;
+    const nextProject = rewardProjects.find((project) => !project.completed) ?? null;
+    const nextText = nextProject
+      ? "下一条 " +
+        nextProject.segmentIndex +
+        "/" +
+        nextProject.segmentTotal +
+        " " +
+        nextProject.name
+      : "已完成";
+    const status =
+      total > 0 && completed === total
+        ? "completed"
+        : nextProject?.isCurrent
+          ? "current"
+          : completed > 0
+            ? "active"
+            : "pending";
+
+    return {
+      id,
+      label,
+      completed,
+      total,
+      progress: total > 0 ? completed / total : 0,
+      progressText: completed + "/" + total,
+      nextText,
+      status,
+      title: label + "奖励 " + completed + "/" + total + " · " + nextText
+    };
+  });
+}
+
 export function getProjectOverview(state, now = Date.now()) {
   const current = normalizeState(state, now);
   const projects = getProjectStatuses(current);
@@ -1970,6 +2011,7 @@ export function getProjectOverview(state, now = Date.now()) {
   const rewardTargetText = buildProjectRewardTargetText(projects);
   const milestoneText = buildProjectMilestoneText(projects, nextProject);
   const routeFocusText = buildProjectRouteFocusText(projects, current);
+  const rewardVisuals = getProjectRewardVisuals(projects);
   const dispatchText = buildProjectOverviewDispatchText(
     getFarRouteDispatch(current, now)
   );
@@ -1992,6 +2034,7 @@ export function getProjectOverview(state, now = Date.now()) {
       routeFocusText,
       compositionText,
       bonusText,
+      rewardVisuals,
       dispatchText,
       actionText: buildProjectActionText(null, current),
       forecastText: "航线预告：等待下一段航线"
@@ -2029,6 +2072,7 @@ export function getProjectOverview(state, now = Date.now()) {
     routeFocusText,
     compositionText,
     bonusText,
+    rewardVisuals,
     dispatchText,
     actionText: buildProjectActionText(nextProject, current),
     forecastText:

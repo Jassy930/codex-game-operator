@@ -1,5 +1,30 @@
 # Decision
 
+## 2026-04-30 Product decision：星图奖励罗盘
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-04-30 16:11 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#4 仍围绕“界面文字密集、希望更多图片和更好看”保持 open，因此本轮继续进入 Product decision。
+
+当前最大问题：星图计划已经有区域级插画、星图视觉航线、章节视觉导航、项目图标、项目缩略图和折叠结构，但星图总览默认区域仍把奖励方向主要放在“航线预告”和折叠明细内的奖励进度文字里。玩家想判断四类奖励还有多少、当前推进到哪类奖励时，仍需要读文字。
+
+本轮决策：
+
+- 在星图总览默认可见区域新增 `project-reward-map` 星图奖励罗盘。
+- `getProjectRewardVisuals` 从现有项目状态派生总产能、点击、自动、过载四类奖励的完成数、进度、下一条目标和当前/待推进状态。
+- 运行期 `renderProjectRewardMap` 渲染四条固定视觉槽，静态首页保留初始占位，配合可访问标签提供完整说明。
+- 本轮只调整星图总览展示层；不新增存档字段，不改变 57 段星图路线、项目完成判定、奖励数值、升级价格、航线策略、航线指令、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-04-30 16:11 CST 当前 5 个 open feedback issue、0 个 open bug issue。
+- `getProjectRewardVisuals(getProjectStatuses(createInitialState(0)))` 返回总产能、点击、自动和过载四类奖励进度，初始分别为 `0/17`、`0/14`、`0/15`、`0/11`。
+- 静态首页包含 `projectRewardMap`、`project-reward-map` 和“星图奖励罗盘”。
+- `src/app.js` 包含 `renderProjectRewardMap` / `renderProjectRewardTile`，运行期按 `projectOverview.rewardVisuals` 更新奖励罗盘。
+- `src/styles.css` 包含 `.project-reward-map`、`.project-reward-tile`、`.project-reward-icon`、`.project-reward-meter` 和四类奖励方向样式。
+- 本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 112 项。
+- 构建产物已确认包含 `projectRewardMap`、`project-reward-map`、`getProjectRewardVisuals` 和“星图奖励罗盘”。
+
+下一步：推送并回复 #4，说明星图总览新增四类奖励视觉罗盘；继续保持 issue open 等待复测。
+
 ## 2026-04-30 Product decision：星图项目缩略图
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-04-30 16:00 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。#5 与 #6 已连续多轮处理并等待复测，本轮选择继续处理 #4 的“界面文字密集、希望更多图片和更好看”反馈。
