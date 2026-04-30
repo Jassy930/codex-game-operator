@@ -21,6 +21,11 @@
 - `src/styles.css` 包含 `.far-dispatch-branch-choice-route.is-sync`、`.is-detour`、`.is-shift` 样式。
 - 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
 - 构建产物已确认包含 `renderFarDispatchBranchChoiceRoute` 和 `far-dispatch-branch-choice-route`。
+- 发布验证已通过：提交 `51a8ec3` 已推送到 `origin/main`；GitHub Pages workflow `25192206190` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`；线上首页返回 HTTP 200，线上 `src/app.js` 与 `src/styles.css` 已确认包含 `renderFarDispatchBranchChoiceRoute` 和 `far-dispatch-branch-choice-route`。
+- 已回复 GitHub Issue #6，说明本轮路线微图、验证和部署结果，issue 保持 open 等待复测。
+- 已回复 GitHub Issue #4，说明本轮新增图形化路线微图以降低远航分支卡片文字密度，issue 保持 open 等待复测。
+- 回复后同步 GitHub Issues：2026-05-01 06:22 CST 当前仍为 5 个 open feedback issue、0 个 open bug issue；#6 与 #4 更新时间均为 2026-04-30T22:22:17Z。
+- 钉钉通知未发送：运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` 相关变量名，也未发现本地 `.env*` 文件；未将 webhook 写入仓库。
 
 ## 2026-05-01 Product decision：远航路线徽标
 

@@ -9,6 +9,9 @@
 - 同步 GitHub Issues 反馈状态：2026-05-01 06:13 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 作为主处理对象，#4 作为视觉密度依据。
 - 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
 - 构建产物已确认包含 `renderFarDispatchBranchChoiceRoute` 和 `far-dispatch-branch-choice-route`。
+- 发布：提交 `51a8ec3` 已推送到 `origin/main`；GitHub Pages workflow `25192206190` 成功；线上首页返回 HTTP 200，线上 `src/app.js` 与 `src/styles.css` 已确认包含 `renderFarDispatchBranchChoiceRoute` 和 `far-dispatch-branch-choice-route`。
+- 反馈处理：已回复 #6，说明路线微图上线范围、验证结果和复测问题；已回复 #4，说明路线微图作为图形化扫视点降低远航分支卡片文字压力；两个 issue 均保持 open。回复后于 2026-05-01 06:22 CST 再次同步 GitHub Issues，当前仍为 5 个 open feedback issue、0 个 open bug issue。
+- 钉钉通知未发送：运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` 相关变量名，也未发现本地 `.env*` 文件；未将 webhook 写入仓库。
 
 - 远航调度新增“路线徽标”：协同/绕行分支卡片会从 `decisionKind` 派生 `decisionBadgeText`，并在卡片首行显示首推、稳航、改道、建档、备选稳航、备选改道、已选或已完成，继续回应 #6 对后半段玩法变化不明显的反馈。
 - `src/game.js` 新增 `decisionBadgeText` 派生并纳入 `branchChoiceText`；`src/app.js` 渲染 `far-dispatch-branch-choice-head` / `far-dispatch-branch-choice-badge`；`src/styles.css` 增加路线徽标样式；`tests/game.test.js` 覆盖首推、稳航、改道、备选徽标和静态绑定。
