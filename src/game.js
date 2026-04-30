@@ -3050,6 +3050,7 @@ export function getFarRouteDispatch(state, now = Date.now()) {
       branchRouteText: "",
       branchPlanText: "",
       branchPlanStepText: "",
+      branchClosureText: "",
       branchChoices: [],
       branchChoiceText: "",
       projectId: null,
@@ -3130,6 +3131,7 @@ export function getFarRouteDispatch(state, now = Date.now()) {
       branchRouteText: "",
       branchPlanText: "",
       branchPlanStepText: "",
+      branchClosureText: "",
       branchChoices: [],
       branchChoiceText: "",
       projectId: null,
@@ -3188,6 +3190,11 @@ export function getFarRouteDispatch(state, now = Date.now()) {
   const branchPlanStepText = buildFarRouteDispatchBranchPlanStepText(
     current,
     directive,
+    branchChoices,
+    branchStatus
+  );
+  const branchClosureText = buildFarRouteDispatchBranchClosureText(
+    current,
     branchChoices,
     branchStatus
   );
@@ -3267,6 +3274,7 @@ export function getFarRouteDispatch(state, now = Date.now()) {
     branchRouteText,
     branchPlanText,
     branchPlanStepText,
+    branchClosureText,
     branchChoices,
     branchChoiceText: buildFarRouteDispatchBranchChoiceText(branchChoices),
     projectId: project.id,
@@ -3299,6 +3307,7 @@ export function getFarRouteDispatch(state, now = Date.now()) {
       (branchRouteText ? " · " + branchRouteText : "") +
       (branchPlanText ? " · " + branchPlanText : "") +
       (branchPlanStepText ? " · " + branchPlanStepText : "") +
+      (branchClosureText ? " · " + branchClosureText : "") +
       " · 目标后优先" +
       relayDirectiveName +
       "触发" +
@@ -4684,6 +4693,9 @@ function buildProjectOverviewDispatchText(dispatch) {
   const branchPlanStepText = dispatch.branchPlanStepText
     ? " · " + dispatch.branchPlanStepText
     : "";
+  const branchClosureText = dispatch.branchClosureText
+    ? " · " + dispatch.branchClosureText
+    : "";
   const currentStep = Array.isArray(dispatch.loopSteps)
     ? dispatch.loopSteps.find((step) => step.state === "current")
     : null;
@@ -4706,6 +4718,7 @@ function buildProjectOverviewDispatchText(dispatch) {
     branchRouteText +
     branchPlanText +
     branchPlanStepText +
+    branchClosureText +
     " · 闭环 " +
     dispatch.loopProgress +
     "/" +
@@ -5261,6 +5274,72 @@ function buildFarRouteDispatchBranchPlanStepText(
   }
 
   return "";
+}
+
+function buildFarRouteDispatchBranchClosureText(state, choices, branchStatus) {
+  const kind = String(branchStatus?.kind ?? "");
+  if (!choices.length || (kind !== "sync-prep" && kind !== "detour-prep")) {
+    return "";
+  }
+
+  const activeChoice =
+    choices.find(
+      (choice) =>
+        choice.active &&
+        (!branchStatus.directiveId ||
+          choice.directiveId === branchStatus.directiveId)
+    ) ?? choices.find((choice) => choice.active);
+
+  if (!activeChoice) {
+    return "";
+  }
+
+  const branchText = activeChoice.label + " " + activeChoice.directiveName;
+  const isDetour = kind === "detour-prep";
+  const chain = state?.directiveChain ?? {};
+
+  if (branchStatus.directiveId && chain.lastDirectiveId === branchStatus.directiveId) {
+    return (
+      "闭环复盘：" +
+      branchText +
+      " 已整备 · 下一步回目标触发整备回航 +" +
+      Math.round(FAR_ROUTE_DISPATCH_RETURN_REWARD_RATE * 100) +
+      "%"
+    );
+  }
+
+  const rewardTexts = [
+    "远航闭环 +" + Math.round(FAR_ROUTE_DISPATCH_LOOP_REWARD_RATE * 100) + "%",
+    "远航突破 +" +
+      roundTo(FAR_ROUTE_DISPATCH_BREAKTHROUGH_REMAINING_RATE * 100, 3) +
+      "%剩余"
+  ];
+
+  if (isDetour) {
+    rewardTexts.push(
+      "绕行突破 +" +
+        roundTo(FAR_ROUTE_DISPATCH_DETOUR_BREAKTHROUGH_REMAINING_RATE * 100, 3) +
+        "%剩余"
+    );
+  }
+
+  if (activeChoice.focused) {
+    rewardTexts.push(
+      "契合闭环 +" +
+        Math.round(FAR_ROUTE_DISPATCH_FOCUS_LOOP_REWARD_RATE * 100) +
+        "%"
+    );
+  }
+
+  return (
+    "闭环复盘：刚完成" +
+    branchText +
+    " · 已触发" +
+    rewardTexts.join("、") +
+    " · 下一步" +
+    (isDetour ? "绕行整备 " : "整备 ") +
+    activeChoice.directiveName
+  );
 }
 
 function buildFarRouteDispatchBranchSelectionStepText(choices) {

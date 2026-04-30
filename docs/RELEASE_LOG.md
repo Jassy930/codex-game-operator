@@ -2,6 +2,15 @@
 
 ## Unreleased
 
+- 远航调度新增“闭环复盘”：协同/绕行路线回目标完成 3/3 后，远航调度条会显示刚完成的路线、已触发的闭环/突破/契合闭环收益和下一步整备；整备指令执行后会提示回目标触发整备回航，继续回应 #6 对后半段玩法变化不明显的反馈。
+- `src/game.js` 为远航调度派生 `branchClosureText` 并纳入远航调度长文本和星图总览摘要；`src/app.js` 渲染 `far-dispatch-branch-closure`；`index.html` 增加静态占位；`src/styles.css` 增加闭环复盘样式；`tests/game.test.js` 覆盖协同闭环、绕行闭环、整备后回航提示和静态绑定。
+- 文档同步更新：`docs/DECISION.md`、`docs/FEEDBACK.md`、`docs/RESEARCH.md`、`docs/PRODUCT.md`、`docs/DESIGN.md`、`docs/ROADMAP.md`、`docs/IDEAS.md`、`docs/METRICS.md`、`README.md` 和本日志已记录远航闭环复盘。
+- 本轮只调整派生展示、DOM、样式和测试，不新增收益、不新增存档字段，不改变升级价格、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、远航调度既有奖励、冷却、连携窗口、反馈入口或部署链路。
+- 同步 GitHub Issues 反馈状态：2026-05-01 03:17 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 作为本轮处理对象。
+- 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含 `branchClosureText`、`far-dispatch-branch-closure` 和“闭环复盘”相关文案。
+- 发布和反馈回复待本轮提交推送后补充。
+
 - 远航调度新增“契合闭环”：按当前航段契合分支完成目标 -> 协同/绕行 -> 回目标的 3/3 闭环时，回到目标指令会额外结算有效基础指令收益 7% 的“契合闭环”，继续回应 #6 对后半段玩法变化不明显的反馈。
 - `src/game.js` 新增 `FAR_ROUTE_DISPATCH_FOCUS_LOOP_REWARD_RATE`、契合闭环预览/执行结算、远航调度长文本和星图当前航段路径收益标签；`src/app.js` 记录并渲染 `dispatchFocusLoopReward` / `directive-dispatch-focus-loop`；`src/styles.css` 增加契合闭环徽标样式；`index.html` 同步静态解锁说明；`tests/game.test.js` 覆盖协同契合闭环、绕行契合闭环、非契合路线不触发、事件绑定、样式绑定和反馈快照。
 - 文档同步更新：`docs/DECISION.md`、`docs/FEEDBACK.md`、`docs/RESEARCH.md`、`docs/PRODUCT.md`、`docs/DESIGN.md`、`docs/ROADMAP.md`、`docs/IDEAS.md`、`docs/METRICS.md`、`README.md` 和本日志已记录远航契合闭环。

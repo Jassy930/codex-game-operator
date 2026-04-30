@@ -1,5 +1,29 @@
 # Decision
 
+## 2026-05-01 Product decision：远航闭环复盘
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-01 03:17 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#6 仍是最新反馈线程，原始反馈指出后半段“只有不停的目标、玩法没有真正变化”，因此本轮继续进入 Product decision。
+
+当前最大问题：前序已经把路线预案、路线步骤、路线按钮标记和契合闭环补齐，但完成 3/3 后的调度条主要进入整备提示。玩家能看到下一步整备，却缺少一行把“刚刚完成了哪条路线、触发了哪些闭环收益、下一步为什么整备”串起来的复盘。
+
+本轮决策：
+
+- 新增“远航闭环复盘”。
+- `getFarRouteDispatch` 在协同整备或绕行整备态派生 `branchClosureText`：刚完成闭环时显示“刚完成协同/绕行 X · 已触发远航闭环、远航突破、绕行突破/契合闭环 · 下一步整备/绕行整备 X”；整备指令已执行后显示“X 已整备 · 下一步回目标触发整备回航 +6%”。
+- 主操作区远航调度条新增 `far-dispatch-branch-closure`，星图总览远航摘要和反馈快照长文本同步包含闭环复盘。
+- 本轮只调整派生展示、DOM、样式和测试；不新增收益、不新增存档字段，不改变升级价格、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、调度校准、远航续航、远航协同、协同补给、远航绕行、绕行投送、分支改道、航段契合、轮替闭环、契合闭环、远航闭环、突破、整备奖励、冷却、连携窗口、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-05-01 03:17 CST 当前 5 个 open feedback issue、0 个 open bug issue。
+- 协同路线回目标完成 3/3 后，远航调度显示“闭环复盘：刚完成协同 谐振脉冲 · 已触发远航闭环 +16%、远航突破 +0.05%剩余、契合闭环 +7% · 下一步整备 谐振脉冲”。
+- 绕行路线回目标完成 3/3 后，远航调度显示“闭环复盘：刚完成绕行 巡航回收 · 已触发远航闭环 +16%、远航突破 +0.05%剩余、绕行突破 +0.03%剩余 · 下一步绕行整备 巡航回收”。
+- 整备指令执行后，闭环复盘切换为“协同/绕行 X 已整备 · 下一步回目标触发整备回航 +6%”。
+- `src/app.js` 渲染 `dispatch.branchClosureText`，`index.html` 包含 `far-dispatch-branch-closure` 占位，`src/styles.css` 包含 `.far-dispatch-branch-closure`。
+- 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含 `branchClosureText`、`far-dispatch-branch-closure` 和“闭环复盘”相关文案。
+- 发布和 issue 回复待本轮提交推送后补充。
+
 ## 2026-05-01 Product decision：远航契合闭环
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-01 02:48 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#6 仍是最新反馈线程，原始反馈指出后半段“只有不停的目标、玩法没有真正变化”，因此本轮继续进入 Product decision。

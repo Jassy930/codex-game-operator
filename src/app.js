@@ -644,6 +644,11 @@ function renderFarDispatch(dispatch) {
   branchPlanStep.textContent = dispatch.branchPlanStepText ?? "";
   branchPlanStep.hidden = !dispatch.branchPlanStepText;
 
+  const branchClosure = document.createElement("span");
+  branchClosure.className = "far-dispatch-branch-closure";
+  branchClosure.textContent = dispatch.branchClosureText ?? "";
+  branchClosure.hidden = !dispatch.branchClosureText;
+
   const branchChoices = renderFarDispatchBranchChoices(dispatch);
 
   const loopText = document.createElement("span");
@@ -688,6 +693,7 @@ function renderFarDispatch(dispatch) {
     branchRoute,
     branchPlan,
     branchPlanStep,
+    branchClosure,
     branchChoices,
     meter,
     loopText,
