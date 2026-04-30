@@ -789,6 +789,9 @@ function renderDirective(option) {
         dispatchDetourReward: result.dispatchDetourReward,
         dispatchDetourRewardRate: result.dispatchDetourRewardRate,
         dispatchDetourRewardText: result.dispatchDetourRewardText,
+        dispatchBranchShiftReward: result.dispatchBranchShiftReward,
+        dispatchBranchShiftRewardRate: result.dispatchBranchShiftRewardRate,
+        dispatchBranchShiftRewardText: result.dispatchBranchShiftRewardText,
         dispatchLoopReward: result.dispatchLoopReward,
         dispatchLoopRewardRate: result.dispatchLoopRewardRate,
         dispatchLoopRewardText: result.dispatchLoopRewardText,
@@ -893,6 +896,11 @@ function renderDirective(option) {
   dispatchDetour.textContent = option.dispatchDetourRewardText;
   dispatchDetour.hidden = !option.dispatchDetourRewardText;
 
+  const dispatchBranchShift = document.createElement("span");
+  dispatchBranchShift.className = "directive-dispatch-branch-shift";
+  dispatchBranchShift.textContent = option.dispatchBranchShiftRewardText;
+  dispatchBranchShift.hidden = !option.dispatchBranchShiftRewardText;
+
   const dispatchLoop = document.createElement("span");
   dispatchLoop.className = "directive-dispatch-loop";
   dispatchLoop.textContent = option.dispatchLoopRewardText;
@@ -967,6 +975,7 @@ function renderDirective(option) {
     dispatchSync,
     dispatchSyncSupply,
     dispatchDetour,
+    dispatchBranchShift,
     dispatchLoop,
     dispatchBreakthrough,
     dispatchDetourBreakthrough,
@@ -1062,6 +1071,7 @@ function getDirectivePreviewDetailTexts(option) {
     option.dispatchSyncRewardText,
     option.dispatchSyncSupplyText,
     option.dispatchDetourRewardText,
+    option.dispatchBranchShiftRewardText,
     option.dispatchLoopRewardText,
     option.dispatchBreakthroughRewardText,
     option.dispatchDetourBreakthroughRewardText,

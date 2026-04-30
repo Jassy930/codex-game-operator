@@ -1,5 +1,32 @@
 # Decision
 
+## 2026-04-30 Product decision：远航分支改道
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-04-30 22:14 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#6 仍是最新反馈线程，原始反馈指出后半段“只有不停的目标、玩法没有真正变化”，因此本轮继续进入 Product decision。
+
+当前最大问题：远航调度已经能显示协同/绕行分支态势，但协同和绕行仍容易变成玩家固定选择的两条收益路线。分支被看见之后，还需要让“本轮是否切换路线”本身具备即时回报，避免玩家只按一个最优路线重复执行。
+
+本轮决策：
+
+- 新增“远航分支改道”奖励。
+- 复用现有 `farRouteLastBranchDirectiveId` 记录上一轮远航分支；目标指令后选择与上一轮不同的分支时，按有效基础指令收益 6% 结算“分支改道”。
+- 上一轮协同时，本轮选择绕行可触发分支改道；上一轮绕行时，本轮选择协同可触发分支改道；重复同一分支不触发。
+- 按钮徽标、预计收益、执行反馈、本地 `directive` 事件、静态支持文案、远航路径收益标签和反馈快照同步显示/记录 `dispatchBranchShiftReward` / `dispatchBranchShiftRewardRate` / `dispatchBranchShiftRewardText`。
+- 本轮不新增存档字段，不改变升级价格、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、基础连携倍率、远航调度校准、远航续航、远航协同、协同补给、远航绕行、绕行投送、远航闭环、远航突破、绕行突破、整备续航、绕行整备、整备回航、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-04-30 22:14 CST 当前 5 个 open feedback issue、0 个 open bug issue。
+- `FAR_ROUTE_DISPATCH_BRANCH_SHIFT_REWARD_RATE` 为 0.06。
+- `getDirectiveStatus` 在上一轮协同后选择绕行、或上一轮绕行后选择协同时显示“分支改道 +X”。
+- `activateDirective` 执行改道分支时结算分支改道奖励，执行反馈包含“分支改道”，并把当前分支写回 `farRouteLastBranchDirectiveId`。
+- 重复上一轮同一分支不触发分支改道。
+- `src/app.js` 记录 `dispatchBranchShiftReward` / `dispatchBranchShiftRewardRate` / `dispatchBranchShiftRewardText` 事件字段，并渲染 `directive-dispatch-branch-shift` 徽标。
+- `src/styles.css` 包含 `.directive-button .directive-dispatch-branch-shift` 样式。
+- 本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含 `FAR_ROUTE_DISPATCH_BRANCH_SHIFT_REWARD_RATE`、`dispatchBranchShiftReward`、`directive-dispatch-branch-shift` 和“分支改道”。
+- 钉钉通知待发送：运行环境仍需提供 `DING` / `DINGTALK` / `WEBHOOK` 相关变量名；不会将 webhook 写入仓库。
+
 ## 2026-04-30 Product decision：远航分支态势
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-04-30 21:43 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#6 仍是最新反馈线程，原始反馈指出后半段“只有不停的目标、玩法没有真正变化”，因此本轮继续进入 Product decision。

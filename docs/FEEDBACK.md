@@ -2,6 +2,15 @@
 
 ## 2026-04-30
 
+- GitHub Issues：gh 可用且已认证；2026-04-30 22:14 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
+- #6 继续作为本轮 Product decision 依据：该反馈指出后半段“只有不停的目标、玩法没有真正变化”；前序已让协同/绕行分支可见，但玩家仍可能固定重复一条收益路线。
+- 本轮改动新增远航分支改道：目标指令后，如果本轮选择的协同/绕行分支不同于上一轮远航分支，会获得“分支改道 +6%”；上一轮协同后改走绕行、上一轮绕行后改走协同都会触发，重复同一分支不触发。
+- 按钮徽标、预计收益、执行反馈、本地 `directive` 事件、远航路径收益标签和反馈快照会显示/记录 `dispatchBranchShiftReward` / `dispatchBranchShiftRewardRate` / `dispatchBranchShiftRewardText`。
+- 本轮不新增存档字段，不改变升级价格、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、基础连携倍率、远航调度校准、远航续航、远航协同、协同补给、远航绕行、绕行投送、远航闭环、远航突破、绕行突破、整备续航、绕行整备、整备回航、反馈入口或部署链路。
+- 本轮本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含 `FAR_ROUTE_DISPATCH_BRANCH_SHIFT_REWARD_RATE`、`dispatchBranchShiftReward`、`directive-dispatch-branch-shift` 和“分支改道”。
+- 钉钉通知待发送：运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` 相关变量名时不会写入仓库。
+
 - GitHub Issues：gh 可用且已认证；2026-04-30 21:43 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
 - #6 继续作为本轮 Product decision 依据：该反馈指出后半段“只有不停的目标、玩法没有真正变化”；前序已补协同、绕行、协同补给、绕行投送、绕行整备等分支机制，但当前路线状态仍需要从最后一次指令和闭环文字中推断。
 - 本轮改动新增远航分支态势：远航调度会派生“分支 待选择/协同/绕行/协同整备/绕行整备”，主操作区显示 `far-dispatch-branch` 徽标，星图总览和反馈快照同步包含分支态势。
