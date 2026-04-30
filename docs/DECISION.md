@@ -1,5 +1,31 @@
 # Decision
 
+## 2026-04-30 Product decision：远航绕行投送
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-04-30 20:07 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#6 仍是最新反馈线程，指出后半段“只有不停的目标、玩法没有真正变化”，因此本轮继续进入 Product decision。
+
+当前最大问题：远航调度已经把目标、协同、绕行、闭环、突破和整备串成短循环；但绕行分支仍主要是额外奖励和后续突破，和协同路线相比缺少明确代价。玩家可能仍把它理解为“多一个推荐按钮”，而不是后半段操作分支。
+
+本轮决策：
+
+- 在目标指令后的绕行分支新增“绕行投送”。
+- 执行非协同非目标绕行时，若当前航段是累计能量航段且有当前能量可消耗，会消耗当前能量与航段剩余量共同限制的一小笔能量，并按 150% 投送量推进累计能量。
+- 按钮徽标、预计收益、执行反馈、本地 `directive` 事件和反馈快照同步显示/记录 `dispatchDetourInfusionCost`、`dispatchDetourInfusionProgress`、`dispatchDetourInfusionText`。
+- 本轮不新增存档字段，不改变升级价格、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、基础连携倍率、远航调度校准、远航续航、远航协同、远航绕行奖励、远航闭环、远航突破、绕行突破、远航整备刷新冷却、整备续航、整备回航、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-04-30 20:07 CST 当前 5 个 open feedback issue、0 个 open bug issue。
+- `FAR_ROUTE_DISPATCH_DETOUR_INFUSION_COST_RATE` 为 0.003，`FAR_ROUTE_DISPATCH_DETOUR_INFUSION_PROGRESS_MULTIPLIER` 为 1.5。
+- `getDirectiveStatus` 在目标后的非协同非目标按钮上显示“绕行投送 -X当前 / +Y累计”。
+- `activateDirective` 执行绕行时扣除当前能量并额外增加累计能量推进，执行反馈包含“绕行投送”。
+- `src/app.js` 记录 `dispatchDetourInfusionCost` / `dispatchDetourInfusionProgress` 事件字段，并渲染 `directive-dispatch-detour-infusion` 徽标。
+- `src/styles.css` 包含 `.directive-button .directive-dispatch-detour-infusion` 样式。
+- 本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 117 项。
+- 构建产物已确认包含 `FAR_ROUTE_DISPATCH_DETOUR_INFUSION_COST_RATE`、`FAR_ROUTE_DISPATCH_DETOUR_INFUSION_PROGRESS_MULTIPLIER`、`dispatchDetourInfusionCost`、`dispatchDetourInfusionProgress`、`directive-dispatch-detour-infusion` 和“绕行投送”。
+
+下一步：完成 npm 验证、提交、推送和 #6 回复；上线后等待 #6 复测是否认为绕行分支已经形成“消耗资源推进航段”的真实选择差异。
+
 ## 2026-04-30 Product decision：远航绕行分支
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-04-30 19:46 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#6 仍是最新反馈线程，指出后半段“只有不停的目标、玩法没有真正变化”，因此本轮继续进入 Product decision。

@@ -2,6 +2,14 @@
 
 ## Unreleased
 
+- 远航绕行新增“绕行投送”：目标指令后执行非协同非目标绕行时，会消耗少量当前能量并按 150% 投送量推进累计能量，让绕行从额外收益按钮变成“消耗当前资源推进航段”的分支选择，继续回应 #6 对后半段玩法变化不明显的反馈。
+- `src/game.js` 新增 `FAR_ROUTE_DISPATCH_DETOUR_INFUSION_COST_RATE`、`FAR_ROUTE_DISPATCH_DETOUR_INFUSION_PROGRESS_MULTIPLIER`、绕行投送消耗/累计推进计算和执行/预览文案；`src/app.js` 记录 `dispatchDetourInfusionCost` / `dispatchDetourInfusionProgress` 事件字段并渲染 `directive-dispatch-detour-infusion` 徽标；`src/styles.css` 新增绕行投送徽标样式；`tests/game.test.js` 覆盖绕行投送预览、执行、静态绑定和反馈快照。
+- 文档同步更新：`docs/DECISION.md`、`docs/FEEDBACK.md`、`docs/RESEARCH.md`、`docs/PRODUCT.md`、`docs/DESIGN.md`、`docs/ROADMAP.md`、`docs/IDEAS.md`、`docs/METRICS.md` 和本日志已记录绕行投送。
+- 本轮不新增存档字段，不改变升级价格、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、基础连携倍率、远航调度校准、远航续航、远航协同、远航绕行奖励、远航闭环、远航突破、绕行突破、远航整备刷新冷却、整备续航、整备回航、反馈入口或部署链路。
+- 同步 GitHub Issues 反馈状态：2026-04-30 20:07 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 作为本轮处理对象。
+- 验证通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 117 项。
+- 构建产物已确认包含 `FAR_ROUTE_DISPATCH_DETOUR_INFUSION_COST_RATE`、`FAR_ROUTE_DISPATCH_DETOUR_INFUSION_PROGRESS_MULTIPLIER`、`dispatchDetourInfusionCost`、`dispatchDetourInfusionProgress`、`directive-dispatch-detour-infusion` 和“绕行投送”。
+
 - 远航调度新增远航绕行分支：目标指令后，指定协同续航仍显示“远航协同/等待协同”，另一个非目标指令会显示并结算“远航绕行 +4%”；选择绕行后回到当前航段目标指令会显示“绕行回航/等待绕行”，并结算“绕行突破 +0.03%剩余”，继续回应 #6 对后半段玩法变化不明显的反馈。
 - `src/game.js` 新增 `FAR_ROUTE_DISPATCH_DETOUR_REWARD_RATE`、`FAR_ROUTE_DISPATCH_DETOUR_BREAKTHROUGH_REMAINING_RATE`、远航绕行收益、绕行回航推荐和绕行突破计算；`src/app.js` 记录 `dispatchDetourReward` / `dispatchDetourBreakthroughReward` 事件字段并渲染对应徽标；`src/styles.css` 新增绕行徽标样式；`tests/game.test.js` 覆盖协同/绕行分支、绕行回航、绕行突破、静态绑定和反馈快照。
 - 文档同步更新：`docs/DECISION.md`、`docs/FEEDBACK.md`、`docs/PRODUCT.md`、`docs/DESIGN.md`、`docs/ROADMAP.md` 和本日志已记录远航绕行分支。

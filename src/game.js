@@ -1127,6 +1127,8 @@ export const FAR_ROUTE_DISPATCH_PREP_REWARD_RATE = 0.07;
 export const FAR_ROUTE_DISPATCH_RETURN_REWARD_RATE = 0.06;
 export const FAR_ROUTE_DISPATCH_DETOUR_REWARD_RATE = 0.04;
 export const FAR_ROUTE_DISPATCH_DETOUR_BREAKTHROUGH_REMAINING_RATE = 0.0003;
+export const FAR_ROUTE_DISPATCH_DETOUR_INFUSION_COST_RATE = 0.003;
+export const FAR_ROUTE_DISPATCH_DETOUR_INFUSION_PROGRESS_MULTIPLIER = 1.5;
 
 const INITIAL_UPGRADES = Object.fromEntries(
   UPGRADE_DEFS.map((upgrade) => [upgrade.id, 0])
@@ -1442,6 +1444,13 @@ export function activateDirective(state, directiveId, now = Date.now()) {
       current,
       now
     );
+  const dispatchDetourInfusion = getFarRouteDispatchDetourInfusion(
+    dispatch,
+    directive.id,
+    chain,
+    current,
+    now
+  );
   const dispatchPrepReward = getFarRouteDispatchPrepReward(
     effectiveBaseGain,
     dispatch,
@@ -1491,6 +1500,10 @@ export function activateDirective(state, directiveId, now = Date.now()) {
   );
   const stanceBonus = roundTo(preStanceGain * stanceBonusRate, 4);
   const gain = roundTo(preStanceGain + stanceBonus, 4);
+  const energyAfterDetourInfusion = Math.max(
+    0,
+    current.energy - dispatchDetourInfusion.cost
+  );
   const masteryReward = getNextDirectiveMastery(mastery, chain, now);
   const nextDirectives = {
     ...current.directives,
@@ -1501,8 +1514,8 @@ export function activateDirective(state, directiveId, now = Date.now()) {
   }
   const nextState = {
     ...current,
-    energy: current.energy + gain,
-    totalEnergy: current.totalEnergy + gain,
+    energy: energyAfterDetourInfusion + gain,
+    totalEnergy: current.totalEnergy + gain + dispatchDetourInfusion.progress,
     directives: nextDirectives,
     directiveChain: {
       lastDirectiveId: directive.id,
@@ -1528,6 +1541,8 @@ export function activateDirective(state, directiveId, now = Date.now()) {
     formatFarRouteDispatchDetourBreakthroughReward(
       dispatchDetourBreakthroughReward
     );
+  const dispatchDetourInfusionText =
+    formatFarRouteDispatchDetourInfusion(dispatchDetourInfusion);
   const dispatchPrepRewardText = formatFarRouteDispatchPrepReward(dispatchPrepReward);
   const dispatchReturnRewardText =
     formatFarRouteDispatchReturnReward(dispatchReturnReward);
@@ -1575,6 +1590,12 @@ export function activateDirective(state, directiveId, now = Date.now()) {
     dispatchDetourBreakthroughRewardRate:
       FAR_ROUTE_DISPATCH_DETOUR_BREAKTHROUGH_REMAINING_RATE,
     dispatchDetourBreakthroughRewardText,
+    dispatchDetourInfusionCost: dispatchDetourInfusion.cost,
+    dispatchDetourInfusionProgress: dispatchDetourInfusion.progress,
+    dispatchDetourInfusionCostRate: FAR_ROUTE_DISPATCH_DETOUR_INFUSION_COST_RATE,
+    dispatchDetourInfusionProgressMultiplier:
+      FAR_ROUTE_DISPATCH_DETOUR_INFUSION_PROGRESS_MULTIPLIER,
+    dispatchDetourInfusionText,
     dispatchPrepReward,
     dispatchPrepRewardRate: FAR_ROUTE_DISPATCH_PREP_REWARD_RATE,
     dispatchPrepRewardText,
@@ -1608,6 +1629,7 @@ export function activateDirective(state, directiveId, now = Date.now()) {
     dispatchLoopRewardText,
     dispatchBreakthroughRewardText,
     dispatchDetourBreakthroughRewardText,
+    dispatchDetourInfusionText,
     dispatchPrepRewardText,
     dispatchReturnRewardText,
     chainBonusText: chainText,
@@ -1633,6 +1655,7 @@ export function activateDirective(state, directiveId, now = Date.now()) {
       (dispatchDetourBreakthroughRewardText
         ? dispatchDetourBreakthroughRewardText + "，"
         : "") +
+      (dispatchDetourInfusionText ? dispatchDetourInfusionText + "，" : "") +
       (dispatchPrepRewardText ? dispatchPrepRewardText + "，" : "") +
       (dispatchReturnRewardText ? dispatchReturnRewardText + "，" : "") +
       (dispatchRefreshText ? dispatchRefreshText + "，" : "") +
@@ -2416,6 +2439,13 @@ export function getDirectiveStatus(state, now = Date.now()) {
           current,
           now
         );
+      const dispatchDetourInfusion = getFarRouteDispatchDetourInfusion(
+        dispatch,
+        directive.id,
+        chain,
+        current,
+        now
+      );
       const dispatchPrepReward = getFarRouteDispatchPrepReward(
         effectiveBaseGain,
         dispatch,
@@ -2480,6 +2510,8 @@ export function getDirectiveStatus(state, now = Date.now()) {
         formatFarRouteDispatchDetourBreakthroughReward(
           dispatchDetourBreakthroughReward
         );
+      const dispatchDetourInfusionText =
+        formatFarRouteDispatchDetourInfusion(dispatchDetourInfusion);
       const dispatchPrepRewardText = formatFarRouteDispatchPrepReward(dispatchPrepReward);
       const dispatchReturnRewardText =
         formatFarRouteDispatchReturnReward(dispatchReturnReward);
@@ -2541,6 +2573,12 @@ export function getDirectiveStatus(state, now = Date.now()) {
         dispatchDetourBreakthroughRewardRate:
           FAR_ROUTE_DISPATCH_DETOUR_BREAKTHROUGH_REMAINING_RATE,
         dispatchDetourBreakthroughRewardText,
+        dispatchDetourInfusionCost: dispatchDetourInfusion.cost,
+        dispatchDetourInfusionProgress: dispatchDetourInfusion.progress,
+        dispatchDetourInfusionCostRate: FAR_ROUTE_DISPATCH_DETOUR_INFUSION_COST_RATE,
+        dispatchDetourInfusionProgressMultiplier:
+          FAR_ROUTE_DISPATCH_DETOUR_INFUSION_PROGRESS_MULTIPLIER,
+        dispatchDetourInfusionText,
         dispatchPrepReward,
         dispatchPrepRewardRate: FAR_ROUTE_DISPATCH_PREP_REWARD_RATE,
         dispatchPrepRewardText,
@@ -2571,6 +2609,7 @@ export function getDirectiveStatus(state, now = Date.now()) {
         dispatchLoopRewardText,
         dispatchBreakthroughRewardText,
         dispatchDetourBreakthroughRewardText,
+        dispatchDetourInfusionText,
         dispatchPrepRewardText,
         dispatchReturnRewardText,
         chainBonusText: chainText,
@@ -2599,6 +2638,7 @@ export function getDirectiveStatus(state, now = Date.now()) {
             (dispatchDetourBreakthroughRewardText
               ? " · " + dispatchDetourBreakthroughRewardText
               : "") +
+            (dispatchDetourInfusionText ? " · " + dispatchDetourInfusionText : "") +
             (dispatchPrepRewardText ? " · " + dispatchPrepRewardText : "") +
             (dispatchReturnRewardText ? " · " + dispatchReturnRewardText : "") +
             (dispatchRefreshText ? " · " + dispatchRefreshText : "") +
@@ -2657,6 +2697,12 @@ export function getFarRouteDispatch(state, now = Date.now()) {
     "绕行突破 +" +
     roundTo(FAR_ROUTE_DISPATCH_DETOUR_BREAKTHROUGH_REMAINING_RATE * 100, 3) +
     "%剩余";
+  const detourInfusionText =
+    "绕行投送 -" +
+    roundTo(FAR_ROUTE_DISPATCH_DETOUR_INFUSION_COST_RATE * 100, 2) +
+    "%当前 / +" +
+    roundTo(FAR_ROUTE_DISPATCH_DETOUR_INFUSION_PROGRESS_MULTIPLIER * 100, 0) +
+    "%累计";
   const prepRewardText =
     "整备续航 +" + Math.round(FAR_ROUTE_DISPATCH_PREP_REWARD_RATE * 100) + "%";
   const returnRewardText =
@@ -2683,6 +2729,10 @@ export function getFarRouteDispatch(state, now = Date.now()) {
       detourBreakthroughRewardRate:
         FAR_ROUTE_DISPATCH_DETOUR_BREAKTHROUGH_REMAINING_RATE,
       detourBreakthroughRewardText,
+      detourInfusionCostRate: FAR_ROUTE_DISPATCH_DETOUR_INFUSION_COST_RATE,
+      detourInfusionProgressMultiplier:
+        FAR_ROUTE_DISPATCH_DETOUR_INFUSION_PROGRESS_MULTIPLIER,
+      detourInfusionText,
       prepRewardRate: FAR_ROUTE_DISPATCH_PREP_REWARD_RATE,
       prepRewardText,
       returnRewardRate: FAR_ROUTE_DISPATCH_RETURN_REWARD_RATE,
@@ -2706,7 +2756,7 @@ export function getFarRouteDispatch(state, now = Date.now()) {
       loopSteps: [],
       loopStepText: "",
       loopStatusText: "闭环进度 0/" + loopTarget + " · 20M 后解锁",
-      text: "远航调度：累计 20M 能量后解锁后半段航段调度、目标指令推荐、目标冷却缩短、连携窗口延长、远航续航、远航协同、远航绕行、闭环奖励、远航突破、绕行突破、远航整备、整备续航与整备回航"
+      text: "远航调度：累计 20M 能量后解锁后半段航段调度、目标指令推荐、目标冷却缩短、连携窗口延长、远航续航、远航协同、远航绕行、绕行投送、闭环奖励、远航突破、绕行突破、远航整备、整备续航与整备回航"
     };
   }
 
@@ -2731,6 +2781,10 @@ export function getFarRouteDispatch(state, now = Date.now()) {
       detourBreakthroughRewardRate:
         FAR_ROUTE_DISPATCH_DETOUR_BREAKTHROUGH_REMAINING_RATE,
       detourBreakthroughRewardText,
+      detourInfusionCostRate: FAR_ROUTE_DISPATCH_DETOUR_INFUSION_COST_RATE,
+      detourInfusionProgressMultiplier:
+        FAR_ROUTE_DISPATCH_DETOUR_INFUSION_PROGRESS_MULTIPLIER,
+      detourInfusionText,
       prepRewardRate: FAR_ROUTE_DISPATCH_PREP_REWARD_RATE,
       prepRewardText,
       returnRewardRate: FAR_ROUTE_DISPATCH_RETURN_REWARD_RATE,
@@ -2798,6 +2852,10 @@ export function getFarRouteDispatch(state, now = Date.now()) {
     detourBreakthroughRewardRate:
       FAR_ROUTE_DISPATCH_DETOUR_BREAKTHROUGH_REMAINING_RATE,
     detourBreakthroughRewardText,
+    detourInfusionCostRate: FAR_ROUTE_DISPATCH_DETOUR_INFUSION_COST_RATE,
+    detourInfusionProgressMultiplier:
+      FAR_ROUTE_DISPATCH_DETOUR_INFUSION_PROGRESS_MULTIPLIER,
+    detourInfusionText,
     prepRewardRate: FAR_ROUTE_DISPATCH_PREP_REWARD_RATE,
     prepRewardText,
     returnRewardRate: FAR_ROUTE_DISPATCH_RETURN_REWARD_RATE,
@@ -2844,6 +2902,8 @@ export function getFarRouteDispatch(state, now = Date.now()) {
       syncRewardText +
       "，另一个非目标可触发" +
       detourRewardText +
+      "并消耗当前能量进行" +
+      detourInfusionText +
       "，所有非目标仍触发" +
       relayRewardText +
       " · 3/3 回到目标指令触发" +
@@ -4317,7 +4377,9 @@ function getFarRouteDispatchLoopStepRewardText(step, relayDirective) {
         Math.round(FAR_ROUTE_DISPATCH_SYNC_REWARD_RATE * 100) +
         "% · 绕行 +" +
         Math.round(FAR_ROUTE_DISPATCH_DETOUR_REWARD_RATE * 100) +
-        "%"
+        "% · 投送 -" +
+        roundTo(FAR_ROUTE_DISPATCH_DETOUR_INFUSION_COST_RATE * 100, 2) +
+        "%当前"
       );
     }
 
@@ -4802,6 +4864,59 @@ function formatFarRouteDispatchDetourBreakthroughReward(
   }
 
   return "绕行突破 +" + formatNumber(dispatchDetourBreakthroughReward);
+}
+
+function getFarRouteDispatchDetourInfusion(dispatch, directiveId, chain, state, now) {
+  const sourceChain = state.directiveChain;
+  const active = Boolean(sourceChain.lastDirectiveId && sourceChain.expiresAt >= now);
+  if (
+    !dispatch?.active ||
+    !active ||
+    sourceChain.lastDirectiveId !== dispatch.targetDirectiveId ||
+    dispatch.targetDirectiveId === directiveId ||
+    dispatch.relayDirectiveId === directiveId ||
+    chain.stacks !== 1 ||
+    !(dispatch.breakthroughBase > 0) ||
+    !(state.energy > 0)
+  ) {
+    return { cost: 0, progress: 0 };
+  }
+
+  const cost = roundTo(
+    Math.min(
+      state.energy * FAR_ROUTE_DISPATCH_DETOUR_INFUSION_COST_RATE,
+      dispatch.breakthroughBase * FAR_ROUTE_DISPATCH_DETOUR_BREAKTHROUGH_REMAINING_RATE
+    ),
+    4
+  );
+  if (cost <= 0) {
+    return { cost: 0, progress: 0 };
+  }
+
+  return {
+    cost,
+    progress: roundTo(
+      Math.min(
+        dispatch.breakthroughBase,
+        cost * FAR_ROUTE_DISPATCH_DETOUR_INFUSION_PROGRESS_MULTIPLIER
+      ),
+      4
+    )
+  };
+}
+
+function formatFarRouteDispatchDetourInfusion(dispatchDetourInfusion) {
+  if (!dispatchDetourInfusion?.cost || !dispatchDetourInfusion?.progress) {
+    return "";
+  }
+
+  return (
+    "绕行投送 -" +
+    formatNumber(dispatchDetourInfusion.cost) +
+    "当前 / +" +
+    formatNumber(dispatchDetourInfusion.progress) +
+    "累计"
+  );
 }
 
 function getFarRouteDispatchPrepReward(baseGain, dispatch, directiveId, chain, state, now) {

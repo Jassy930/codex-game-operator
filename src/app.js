@@ -787,6 +787,12 @@ function renderDirective(option) {
           result.dispatchDetourBreakthroughRewardRate,
         dispatchDetourBreakthroughRewardText:
           result.dispatchDetourBreakthroughRewardText,
+        dispatchDetourInfusionCost: result.dispatchDetourInfusionCost,
+        dispatchDetourInfusionProgress: result.dispatchDetourInfusionProgress,
+        dispatchDetourInfusionCostRate: result.dispatchDetourInfusionCostRate,
+        dispatchDetourInfusionProgressMultiplier:
+          result.dispatchDetourInfusionProgressMultiplier,
+        dispatchDetourInfusionText: result.dispatchDetourInfusionText,
         dispatchPrepReward: result.dispatchPrepReward,
         dispatchPrepRewardRate: result.dispatchPrepRewardRate,
         dispatchPrepRewardText: result.dispatchPrepRewardText,
@@ -881,6 +887,11 @@ function renderDirective(option) {
   dispatchDetourBreakthrough.textContent = option.dispatchDetourBreakthroughRewardText;
   dispatchDetourBreakthrough.hidden = !option.dispatchDetourBreakthroughRewardText;
 
+  const dispatchDetourInfusion = document.createElement("span");
+  dispatchDetourInfusion.className = "directive-dispatch-detour-infusion";
+  dispatchDetourInfusion.textContent = option.dispatchDetourInfusionText;
+  dispatchDetourInfusion.hidden = !option.dispatchDetourInfusionText;
+
   const dispatchPrep = document.createElement("span");
   dispatchPrep.className = "directive-dispatch-prep";
   dispatchPrep.textContent = option.dispatchPrepRewardText;
@@ -932,6 +943,7 @@ function renderDirective(option) {
     dispatchLoop,
     dispatchBreakthrough,
     dispatchDetourBreakthrough,
+    dispatchDetourInfusion,
     dispatchPrep,
     dispatchReturn,
     dispatchRefresh,
@@ -1024,6 +1036,7 @@ function getDirectivePreviewDetailTexts(option) {
     option.dispatchLoopRewardText,
     option.dispatchBreakthroughRewardText,
     option.dispatchDetourBreakthroughRewardText,
+    option.dispatchDetourInfusionText,
     option.dispatchPrepRewardText,
     option.dispatchReturnRewardText,
     option.dispatchRefreshText,
