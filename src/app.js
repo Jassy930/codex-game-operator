@@ -549,6 +549,7 @@ function renderDirective(option) {
   button.className = [
     "directive-button",
     option.ready ? "is-ready" : "",
+    option.cooling ? "is-cooling" : "",
     option.recommended ? "is-recommended" : "",
     option.finisherRecommended ? "is-finisher-recommended" : ""
   ]
@@ -716,7 +717,24 @@ function renderDirective(option) {
   status.className = "directive-status";
   status.textContent = option.statusText;
 
-  button.append(head, summary, preview, status);
+  const cooldownMeter = document.createElement("span");
+  cooldownMeter.className = "directive-cooldown-meter";
+  cooldownMeter.setAttribute("role", "meter");
+  cooldownMeter.setAttribute("aria-label", option.name + "冷却进度");
+  cooldownMeter.setAttribute("aria-valuemin", "0");
+  cooldownMeter.setAttribute("aria-valuemax", "100");
+  cooldownMeter.setAttribute(
+    "aria-valuenow",
+    String(Math.round((option.cooldownProgress ?? 0) * 100))
+  );
+  cooldownMeter.setAttribute("aria-valuetext", option.statusText);
+
+  const cooldownFill = document.createElement("span");
+  cooldownFill.style.width =
+    Math.round(Math.max(0, Math.min(1, option.cooldownProgress ?? 0)) * 100) + "%";
+  cooldownMeter.append(cooldownFill);
+
+  button.append(head, summary, preview, cooldownMeter, status);
   return button;
 }
 

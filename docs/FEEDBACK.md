@@ -2,6 +2,14 @@
 
 ## 2026-04-30
 
+- GitHub Issues：gh 可用且已认证；2026-04-30 12:07 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
+- #4 作为本轮 Product decision 依据：该反馈指向界面文字密集、希望更多图片和更好看；航线指令三类徽记已经上线，但按钮冷却状态仍主要靠文字读取。
+- #3/#6 作为辅助依据：主动短循环和远航短循环需要玩家快速判断下一步推荐按钮与可执行状态，冷却只靠状态文本会增加扫视成本。
+- 本轮改动新增航线指令冷却进度轨：`getDirectiveStatus` 为每个指令派生 `cooldownProgress` / `cooling`，`renderDirective` 渲染 `directive-cooldown-meter`，静态首页同步三条锁定态占位。
+- 本轮不新增存档字段，不改变指令收益、实际冷却、连携窗口、轮换目标奖励、预案执行、航线委托、策略契合、策略终结、指令熟练、远航调度、星图航段、升级价格、反馈入口或部署链路。
+- 本轮本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 108 项。
+- 构建产物已确认包含 `directive-cooldown-meter`、`cooldownProgress`、`is-cooling` 和“冷却进度”。
+
 - GitHub Issues：gh 可用且已认证；2026-04-30 11:52 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
 - #4 作为本轮 Product decision 依据：该反馈指向界面文字密集、希望更多图片和更好看；航线策略已经补徽记后，100K 后仍偏文字和徽标堆叠的区域是航线指令三按钮。
 - 本轮改动新增航线指令视觉徽记：`directiveList` 的点火齐射、巡航回收、谐振脉冲分别显示固定尺寸徽记，运行期由 `DIRECTIVE_ICON_DEFS` 和 `renderDirectiveVisual` 渲染，静态首页也提供锁定态占位。

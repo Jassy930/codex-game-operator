@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+- 航线指令按钮新增冷却进度轨：每个指令按钮在预计收益和状态之间显示固定高度 `directive-cooldown-meter`，可执行时满格、冷却中按剩余时间推进、未解锁时为空轨。
+- `src/game.js` 为指令选项派生 `cooldownProgress` 和 `cooling`；`src/app.js` 渲染可访问的冷却 meter 并给冷却中按钮追加 `is-cooling`；`index.html` 增加三条静态锁定占位；`src/styles.css` 增加冷却轨样式；`tests/game.test.js` 覆盖可执行、冷却中和静态/运行期标记。
+- 本轮只调整航线指令展示层，回应 #4 对文字密度和可扫视性的反馈，并辅助 #3/#6 降低主动短循环中判断指令是否快好的成本；不新增存档字段，不改变指令收益、实际冷却、连携窗口、远航调度、星图航段、升级价格或反馈入口。
+- 同步 GitHub Issues 反馈状态：2026-04-30 12:07 CST 当前 5 个 open feedback issue、0 个 open bug issue；#4 作为本轮处理对象。
+- 验证通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 108 项。
+- 构建产物已确认包含 `directive-cooldown-meter`、`cooldownProgress`、`is-cooling` 和“冷却进度”。
 - 航线指令按钮新增三类视觉徽记：点火齐射、巡航回收、谐振脉冲分别显示固定尺寸指令图形，减少 100K 后主动按钮只靠文字标题和徽标区分的压力。
 - `index.html` 为 `directiveList` 新增静态锁定占位徽记；`src/app.js` 新增 `DIRECTIVE_ICON_DEFS` 和 `renderDirectiveVisual`；`src/styles.css` 新增指令徽记尺寸、颜色和标题组布局；`tests/game.test.js` 补充静态和运行期标记覆盖。
 - 本轮只调整航线指令展示层，回应 #4 对文字密度和更多图片化表达的反馈，并辅助 #3/#6 降低主动短循环按钮识别成本；不新增存档字段，不改变指令收益、冷却、连携窗口、远航调度、星图航段、升级价格或反馈入口。

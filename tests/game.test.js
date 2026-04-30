@@ -200,22 +200,22 @@ test("星图航线策略会在 100K 后解锁并影响产能", () => {
 
 test("航线指令会在 100K 后解锁并返回预计收益", () => {
   const locked = getDirectiveStatus(createInitialState(0), 0);
-  const unlocked = getDirectiveStatus(
-    {
-      ...createInitialState(0),
-      totalEnergy: 100_000,
-      energyPerClick: 10,
-      energyPerSecond: 5,
-      overloadBonus: 7
-    },
-    0
-  );
+  const unlockedState = {
+    ...createInitialState(0),
+    totalEnergy: 100_000,
+    energyPerClick: 10,
+    energyPerSecond: 5,
+    overloadBonus: 7
+  };
+  const unlocked = getDirectiveStatus(unlockedState, 0);
 
   assert.equal(locked.unlocked, false);
   assert.equal(locked.options[0].disabled, true);
   assert.equal(locked.options[0].previewText, "累计 100K 能量后解锁航线指令");
   assert.equal(unlocked.unlocked, true);
   assert.equal(unlocked.options[0].ready, true);
+  assert.equal(unlocked.options[0].cooldownProgress, 1);
+  assert.equal(unlocked.options[0].cooling, false);
   assert.equal(unlocked.options[0].previewText, "预计 +95 能量 · 预案执行 +5.4");
   assert.equal(unlocked.options[0].recommended, true);
   assert.equal(unlocked.options[0].recommendationText, "收束起手");
@@ -231,6 +231,14 @@ test("航线指令会在 100K 后解锁并返回预计收益", () => {
   assert.equal(unlocked.options[2].stanceMatched, true);
   assert.equal(unlocked.options[2].stanceBonusRate, DIRECTIVE_STANCE_BONUS_RATE);
   assert.equal(unlocked.options[2].stanceBonusText, "策略契合 +10%");
+
+  const used = activateDirective(unlockedState, "ignition-salvo", 1_000).state;
+  const cooling = getDirectiveStatus(used, 11_000).options[0];
+
+  assert.equal(cooling.ready, false);
+  assert.equal(cooling.cooling, true);
+  assert.equal(cooling.cooldownProgress, 0.2857);
+  assert.equal(cooling.statusText, "冷却 25 秒");
 });
 
 test("航线指令会返回轮换目标提示", () => {
@@ -1119,16 +1127,24 @@ test("航线指令按钮会渲染可扫视徽记", () => {
   assert.match(indexHtml, /aria-label="巡航回收徽记"/);
   assert.match(indexHtml, /directive-visual directive-visual-resonance-pulse/);
   assert.match(indexHtml, /aria-label="谐振脉冲徽记"/);
+  assert.match(indexHtml, /class="directive-cooldown-meter"/);
+  assert.match(indexHtml, /aria-label="点火齐射冷却进度"/);
   assert.match(appJs, /DIRECTIVE_ICON_DEFS/);
   assert.match(appJs, /function renderDirectiveVisual\(option\)/);
   assert.match(appJs, /titleGroup\.className = "directive-title-group"/);
   assert.match(appJs, /titleGroup\.append\(renderDirectiveVisual\(option\), name\)/);
   assert.match(appJs, /head\.append\(titleGroup, badges\)/);
+  assert.match(appJs, /option\.cooling \? "is-cooling" : ""/);
+  assert.match(appJs, /cooldownMeter\.className = "directive-cooldown-meter"/);
+  assert.match(appJs, /cooldownMeter\.setAttribute\("role", "meter"\)/);
+  assert.match(appJs, /button\.append\(head, summary, preview, cooldownMeter, status\)/);
   assert.match(styles, /\.directive-title-group/);
   assert.match(styles, /\.directive-visual/);
   assert.match(styles, /\.directive-visual-ignition-salvo/);
   assert.match(styles, /\.directive-visual-cruise-cache/);
   assert.match(styles, /\.directive-visual-resonance-pulse/);
+  assert.match(styles, /\.directive-cooldown-meter/);
+  assert.match(styles, /\.directive-button\.is-cooling \.directive-cooldown-meter span/);
 });
 
 test("星图项目卡片会渲染推进和奖励图标", () => {
@@ -1276,6 +1292,7 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(appJs, /elements\.directiveTask\.replaceChildren\(text, meter\)/);
   assert.match(appJs, /elements\.farDispatch\.classList\.toggle\("is-active", dispatch\.active\)/);
   assert.match(appJs, /option\.recommended \? "is-recommended" : ""/);
+  assert.match(appJs, /option\.cooling \? "is-cooling" : ""/);
   assert.match(appJs, /option\.finisherRecommended \? "is-finisher-recommended" : ""/);
   assert.match(appJs, /badges\.className = "directive-badges"/);
   assert.match(appJs, /recommendation\.className = "directive-recommendation"/);
@@ -1305,6 +1322,9 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(appJs, /masteryBonus\.textContent = option\.masteryBonusText/);
   assert.match(appJs, /stanceBonus\.className = "directive-stance-bonus"/);
   assert.match(appJs, /stanceBonus\.textContent = option\.stanceBonusText/);
+  assert.match(appJs, /cooldownMeter\.className = "directive-cooldown-meter"/);
+  assert.match(appJs, /cooldownMeter\.setAttribute\("aria-valuetext", option\.statusText\)/);
+  assert.match(appJs, /cooldownFill\.style\.width/);
   assert.match(styles, /\.directive-plan/);
   assert.match(styles, /\.directive-plan-track/);
   assert.match(styles, /\.directive-plan-step/);
@@ -1334,6 +1354,8 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(styles, /\.directive-button \.directive-finisher-recommendation/);
   assert.match(styles, /\.directive-button \.directive-mastery-bonus/);
   assert.match(styles, /\.directive-button \.directive-stance-bonus/);
+  assert.match(styles, /\.directive-cooldown-meter/);
+  assert.match(styles, /\.directive-cooldown-meter span/);
 });
 
 test("静态首页会默认折叠星图详细文本", () => {

@@ -2062,6 +2062,11 @@ export function getDirectiveStatus(state, now = Date.now()) {
           : 0
         : cooldownMs;
       const remainingSeconds = Math.ceil(remainingMs / 1000);
+      const cooldownProgress = unlocked
+        ? remainingMs <= 0 || effectiveCooldownMs <= 0
+          ? 1
+          : roundTo(1 - remainingMs / effectiveCooldownMs, 4)
+        : 0;
       const baseGain = roundTo(Math.max(0, directive.getGain(current, production)), 4);
       const masteryBonus = getDirectiveMasteryBonus(baseGain, mastery);
       const effectiveBaseGain = roundTo(baseGain + masteryBonus, 4);
@@ -2224,6 +2229,8 @@ export function getDirectiveStatus(state, now = Date.now()) {
             ? "冷却 " + formatDuration(remainingMs / 1000)
             : "可执行",
         remainingSeconds,
+        cooldownProgress,
+        cooling: unlocked && remainingMs > 0,
         ready,
         recommended,
         recommendationText: recommended

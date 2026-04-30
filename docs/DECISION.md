@@ -1,5 +1,26 @@
 # Decision
 
+## 2026-04-30 Product decision：航线指令冷却进度轨
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-04-30 12:07 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#4 仍反馈界面文字密集、希望更多图片和更好看，且 #3/#6 的主动短循环也依赖指令按钮可扫视性，继续进入 Product decision。
+
+当前最大问题：航线指令三按钮已经有视觉徽记，但每个按钮在使用后仍主要靠“冷却 X 秒”文字说明可用状态。玩家在 100K 后同时处理轮换推荐、预案奖励、远航调度和冷却时，需要读状态文本才能判断哪个指令快好。
+
+本轮决策：
+
+- 在 `getDirectiveStatus` 为每个指令派生 `cooldownProgress` 和 `cooling`，只反映已有冷却状态。
+- 运行期按钮新增 `directive-cooldown-meter` 可访问进度轨，静态首页锁定态也补三条冷却进度占位。
+- 本轮只调整航线指令按钮展示层；不新增存档字段，不改变指令收益、实际冷却、连携窗口、轮换目标奖励、预案执行、航线委托、策略契合、策略终结、指令熟练、远航调度、星图航段、升级价格、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-04-30 12:07 CST 当前 5 个 open feedback issue、0 个 open bug issue。
+- `getDirectiveStatus` 在可执行、冷却中和未解锁状态返回稳定的 `cooldownProgress` / `cooling`。
+- 静态首页和运行期资源包含 `directive-cooldown-meter`、`cooldownProgress`、`is-cooling` 和“冷却进度”。
+- 本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 108 项。
+- 构建产物已确认包含 `directive-cooldown-meter`、`cooldownProgress`、`is-cooling` 和“冷却进度”。
+- 提交、部署和 issue 回复完成后补记最终线上验收。
+
 ## 2026-04-30 Product decision：航线指令视觉徽记
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-04-30 11:52 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#4 仍反馈界面文字密集、希望更多图片和更好看，#3/#6 也都和航线指令扫视成本有关，进入 Product decision。
