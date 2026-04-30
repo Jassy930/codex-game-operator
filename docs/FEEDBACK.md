@@ -2,6 +2,14 @@
 
 ## 2026-04-30
 
+- GitHub Issues：gh 可用且已认证；2026-04-30 16:48 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
+- #4 继续作为本轮 Product decision 依据：该反馈指出界面文字密集，希望更多图片和更好看；前序已补星图插画、章节视觉导航、项目图标、项目缩略图、奖励罗盘、航线预告视觉带和折叠结构，本轮继续处理星图总览当前航段仍需要组合多行文字理解的问题。
+- 本轮改动新增当前航段视觉卡：星图总览默认可见区域渲染 `project-current-visual`，用固定视觉槽展示当前航段号、章节位置、推进类型、奖励方向和进度条。
+- 本轮只从现有星图项目状态派生当前航段视觉卡；不新增存档字段，不改变 57 段星图路线、项目完成判定、奖励数值、升级价格、航线策略、航线指令、反馈入口或部署链路。
+- 本轮本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 116 项。
+- 构建产物已确认包含 `projectCurrentVisual`、`project-current-visual`、`getProjectCurrentVisual` 和“当前航段”。
+- 待推送后回复 #4，说明星图总览新增当前航段视觉卡，并保持 issue open 等待复测。
+
 - GitHub Issues：gh 可用且已认证；2026-04-30 16:34 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
 - #4 继续作为本轮 Product decision 依据：该反馈指出界面文字密集，希望更多图片和更好看；前序已补星图插画、章节视觉导航、项目图标、项目缩略图、奖励罗盘和折叠结构，本轮继续处理星图总览“航线预告”仍是一行长文本的问题。
 - 本轮改动新增航线预告视觉带：星图总览默认可见区域渲染 `project-forecast-map`，用最多三条固定视觉槽展示后续航段、推进类型、奖励方向和进度条。

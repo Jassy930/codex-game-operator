@@ -1522,6 +1522,167 @@ h2 {
   line-height: 1.35;
 }
 
+.project-current-visual {
+  display: grid;
+  grid-template-columns: 56px minmax(0, 1fr);
+  gap: 8px 10px;
+  align-items: center;
+  min-height: 96px;
+  padding: 10px;
+  overflow: hidden;
+  border: 1px solid rgba(248, 243, 231, 0.12);
+  border-radius: 8px;
+  background:
+    radial-gradient(circle at 28px 48px, rgba(244, 178, 60, 0.2), transparent 34px),
+    linear-gradient(135deg, rgba(19, 181, 166, 0.1), rgba(232, 93, 117, 0.08)),
+    rgba(8, 11, 15, 0.24);
+}
+
+.project-current-visual[hidden] {
+  display: none;
+}
+
+.project-current-visual.is-current {
+  border-color: rgba(244, 178, 60, 0.68);
+  box-shadow: inset 0 0 22px rgba(244, 178, 60, 0.08);
+}
+
+.project-current-orbit {
+  position: relative;
+  display: block;
+  grid-row: 1 / span 2;
+  width: 52px;
+  height: 68px;
+  border: 1px solid currentColor;
+  border-radius: 18px;
+  color: #bdf4eb;
+  background:
+    linear-gradient(180deg, rgba(248, 243, 231, 0.08), transparent),
+    rgba(20, 17, 15, 0.34);
+}
+
+.project-current-orbit::before,
+.project-current-orbit::after {
+  content: "";
+  position: absolute;
+}
+
+.project-current-orbit::before {
+  top: 12px;
+  left: 50%;
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 247, 194, 0.9);
+  border-radius: 999px;
+  background: #f4b23c;
+  box-shadow:
+    0 0 18px rgba(244, 178, 60, 0.34),
+    0 26px 0 -5px currentColor;
+  transform: translateX(-50%);
+}
+
+.project-current-orbit::after {
+  top: 33px;
+  left: 50%;
+  width: 2px;
+  height: 19px;
+  border-radius: 999px;
+  background: rgba(248, 243, 231, 0.32);
+  transform: translateX(-50%);
+}
+
+.project-current-visual.is-track-upgrade .project-current-orbit {
+  color: #fff7c2;
+}
+
+.project-current-visual.is-reward-click .project-current-orbit {
+  color: #f4b23c;
+}
+
+.project-current-visual.is-reward-second .project-current-orbit {
+  color: #13b5a6;
+}
+
+.project-current-visual.is-reward-overload .project-current-orbit {
+  color: #e85d75;
+}
+
+.project-current-meta {
+  display: grid;
+  min-width: 0;
+  gap: 4px;
+}
+
+.project-current-meta strong,
+.project-current-meta span {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  line-height: 1.25;
+}
+
+.project-current-kicker {
+  color: #bdf4eb !important;
+  font-size: 0.72rem !important;
+  font-weight: 900;
+}
+
+.project-current-meta strong {
+  color: #fff7c2;
+  font-size: 1rem;
+  font-weight: 950;
+}
+
+.project-current-segment {
+  color: rgba(248, 243, 231, 0.72) !important;
+  font-size: 0.78rem !important;
+  font-weight: 850;
+}
+
+.project-current-track {
+  display: flex !important;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.project-current-track span {
+  padding: 3px 7px;
+  border: 1px solid rgba(248, 243, 231, 0.12);
+  border-radius: 999px;
+  background: rgba(248, 243, 231, 0.08);
+  color: rgba(248, 243, 231, 0.82) !important;
+  font-size: 0.72rem !important;
+  font-weight: 900;
+}
+
+.project-current-meter {
+  display: block;
+  min-width: 0;
+  height: 7px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: rgba(248, 243, 231, 0.12);
+}
+
+.project-current-meter span {
+  display: block;
+  width: 0%;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #13b5a6, #f4b23c);
+}
+
+.project-current-visual.is-reward-click .project-current-meter span {
+  background: linear-gradient(90deg, #f4b23c, #fff7c2);
+}
+
+.project-current-visual.is-reward-second .project-current-meter span {
+  background: linear-gradient(90deg, #13b5a6, #bdf4eb);
+}
+
+.project-current-visual.is-reward-overload .project-current-meter span {
+  background: linear-gradient(90deg, #e85d75, #f4b23c);
+}
+
 .project-detail-drawer {
   overflow: hidden;
   border: 1px solid rgba(248, 243, 231, 0.12);

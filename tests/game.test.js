@@ -38,6 +38,7 @@ import {
   getProjectFilterButtonText,
   getProjectFilterSummary,
   getProjectChapterVisuals,
+  getProjectCurrentVisual,
   getProjectForecastVisuals,
   getProjectListWindow,
   getProjectOverview,
@@ -1026,6 +1027,27 @@ test("星图航线预告会返回三段视觉槽", () => {
   assert.equal(overview.forecastVisuals[2].name, "透镜阵列");
 });
 
+test("星图当前航段视觉会返回当前目标槽", () => {
+  const projects = getProjectStatuses(createInitialState(0));
+  const currentVisual = getProjectCurrentVisual(projects);
+  const overview = getProjectOverview(createInitialState(0));
+
+  assert.equal(currentVisual.id, "stellar-map");
+  assert.equal(currentVisual.name, "点亮星图");
+  assert.equal(currentVisual.segmentText, "航段 1/57");
+  assert.equal(currentVisual.chapterText, "首段星图 1/4");
+  assert.equal(currentVisual.trackId, "energy");
+  assert.equal(currentVisual.trackText, "累计航段");
+  assert.equal(currentVisual.rewardId, "total");
+  assert.equal(currentVisual.status, "current");
+  assert.equal(
+    currentVisual.title,
+    "当前航段：航段 1/57 · 首段星图 1/4 点亮星图 · 累计航段 · 总产能 +12% · 进度 0 能量 / 100K 能量 · 还差 100K 能量"
+  );
+  assert.equal(overview.currentVisual.id, "stellar-map");
+  assert.equal(overview.currentVisual.trackText, "累计航段");
+});
+
 test("静态首页会引用星图插画资产", () => {
   const indexHtml = readFileSync(new URL("../index.html", import.meta.url), "utf8");
   const styles = readFileSync(new URL("../src/styles.css", import.meta.url), "utf8");
@@ -1063,6 +1085,26 @@ test("静态首页会渲染星图奖励罗盘", () => {
   assert.match(styles, /\.project-reward-icon/);
   assert.match(styles, /\.project-reward-meter/);
   assert.match(styles, /\.project-reward-overload \.project-reward-icon/);
+});
+
+test("静态首页会渲染当前航段视觉卡", () => {
+  const indexHtml = readFileSync(new URL("../index.html", import.meta.url), "utf8");
+  const appJs = readFileSync(new URL("../src/app.js", import.meta.url), "utf8");
+  const styles = readFileSync(new URL("../src/styles.css", import.meta.url), "utf8");
+
+  assert.match(indexHtml, /id="projectCurrentVisual" class="project-current-visual is-current is-track-energy is-reward-total"/);
+  assert.match(indexHtml, /当前航段：航段 1\/57 · 首段星图 1\/4 点亮星图 · 累计航段 · 总产能 \+12%/);
+  assert.match(indexHtml, /class="project-current-orbit"/);
+  assert.match(indexHtml, /class="project-current-meter"/);
+  assert.match(appJs, /getProjectCurrentVisual/);
+  assert.match(appJs, /projectCurrentVisual: document\.querySelector\("#projectCurrentVisual"\)/);
+  assert.match(appJs, /function renderProjectCurrentVisual\(project\)/);
+  assert.match(appJs, /project-current-visual/);
+  assert.match(styles, /\.project-current-visual/);
+  assert.match(styles, /\.project-current-orbit/);
+  assert.match(styles, /\.project-current-track/);
+  assert.match(styles, /\.project-current-meter/);
+  assert.match(styles, /\.project-current-visual\.is-reward-overload/);
 });
 
 test("静态首页会渲染航线预告视觉带", () => {

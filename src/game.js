@@ -2035,6 +2035,46 @@ export function getProjectForecastVisuals(projects) {
     });
 }
 
+export function getProjectCurrentVisual(projects) {
+  const items = Array.isArray(projects) ? projects : [];
+  const project = items.find((item) => !item.completed) ?? null;
+
+  if (!project) {
+    return null;
+  }
+
+  const rewardId = getProjectRewardVisualId(project);
+  const trackId = project.upgradeId ? "upgrade" : "energy";
+  const trackText = project.upgradeId ? "升级航段" : "累计航段";
+
+  return {
+    id: project.id,
+    name: project.name,
+    segmentText: project.segmentText,
+    chapterText: project.chapterText,
+    reward: project.reward,
+    rewardId,
+    trackId,
+    trackText,
+    progress: project.progress,
+    progressText: project.progressText,
+    status: project.isCurrent ? "current" : "pending",
+    title:
+      "当前航段：" +
+      project.segmentText +
+      " · " +
+      project.chapterText +
+      " " +
+      project.name +
+      " · " +
+      trackText +
+      " · " +
+      project.reward +
+      " · " +
+      project.progressText
+  };
+}
+
 export function getProjectOverview(state, now = Date.now()) {
   const current = normalizeState(state, now);
   const projects = getProjectStatuses(current);
@@ -2051,6 +2091,7 @@ export function getProjectOverview(state, now = Date.now()) {
   const routeFocusText = buildProjectRouteFocusText(projects, current);
   const rewardVisuals = getProjectRewardVisuals(projects);
   const forecastVisuals = getProjectForecastVisuals(projects);
+  const currentVisual = getProjectCurrentVisual(projects);
   const dispatchText = buildProjectOverviewDispatchText(
     getFarRouteDispatch(current, now)
   );
@@ -2075,6 +2116,7 @@ export function getProjectOverview(state, now = Date.now()) {
       bonusText,
       rewardVisuals,
       forecastVisuals,
+      currentVisual,
       dispatchText,
       actionText: buildProjectActionText(null, current),
       forecastText: "航线预告：等待下一段航线"
@@ -2114,6 +2156,7 @@ export function getProjectOverview(state, now = Date.now()) {
     bonusText,
     rewardVisuals,
     forecastVisuals,
+    currentVisual,
     dispatchText,
     actionText: buildProjectActionText(nextProject, current),
     forecastText:

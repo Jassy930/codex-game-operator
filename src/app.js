@@ -20,6 +20,7 @@ import {
   getProjectFilterSummary,
   getProjectFilterButtonText,
   getProjectChapterVisuals,
+  getProjectCurrentVisual,
   getProjectForecastVisuals,
   getProjectListWindow,
   getProjectOverview,
@@ -216,6 +217,7 @@ const elements = {
   projectOverviewBonus: document.querySelector("#projectOverviewBonus"),
   projectOverviewAction: document.querySelector("#projectOverviewAction"),
   projectOverviewForecast: document.querySelector("#projectOverviewForecast"),
+  projectCurrentVisual: document.querySelector("#projectCurrentVisual"),
   projectForecastMap: document.querySelector("#projectForecastMap"),
   projectRewardMap: document.querySelector("#projectRewardMap"),
   projectMapSummary: document.querySelector("#projectMapSummary"),
@@ -403,6 +405,7 @@ function render() {
   elements.projectOverviewBonus.textContent = projectOverview.bonusText;
   elements.projectOverviewAction.textContent = projectOverview.actionText;
   elements.projectOverviewForecast.textContent = projectOverview.forecastText;
+  renderProjectCurrentVisual(projectOverview.currentVisual ?? getProjectCurrentVisual(projects));
   renderProjectForecastMap(projectOverview.forecastVisuals ?? getProjectForecastVisuals(projects));
   renderProjectRewardMap(projectOverview.rewardVisuals ?? getProjectRewardVisuals(projects));
   renderProjectMap(getProjectVisualMap(projects, projectFilter));
@@ -1196,6 +1199,67 @@ function renderProjectRewardMap(rewards) {
   elements.projectRewardMap.replaceChildren(
     ...rewards.map((reward) => renderProjectRewardTile(reward))
   );
+}
+
+function renderProjectCurrentVisual(project) {
+  if (!project) {
+    elements.projectCurrentVisual.hidden = true;
+    elements.projectCurrentVisual.replaceChildren();
+    return;
+  }
+
+  elements.projectCurrentVisual.hidden = false;
+  elements.projectCurrentVisual.className = [
+    "project-current-visual",
+    "is-" + project.status,
+    "is-track-" + project.trackId,
+    "is-reward-" + project.rewardId
+  ]
+    .filter(Boolean)
+    .join(" ");
+  elements.projectCurrentVisual.setAttribute("role", "img");
+  elements.projectCurrentVisual.setAttribute("aria-label", project.title);
+  elements.projectCurrentVisual.title = project.title;
+
+  const orbit = document.createElement("span");
+  orbit.className = "project-current-orbit";
+  orbit.setAttribute("aria-hidden", "true");
+
+  const meta = document.createElement("span");
+  meta.className = "project-current-meta";
+
+  const kicker = document.createElement("span");
+  kicker.className = "project-current-kicker";
+  kicker.textContent = "当前航段";
+
+  const name = document.createElement("strong");
+  name.textContent = project.name;
+
+  const segment = document.createElement("span");
+  segment.className = "project-current-segment";
+  segment.textContent = project.segmentText + " · " + project.chapterText;
+
+  const track = document.createElement("span");
+  track.className = "project-current-track";
+
+  const trackText = document.createElement("span");
+  trackText.textContent = project.trackText;
+
+  const reward = document.createElement("span");
+  reward.textContent = project.reward;
+
+  track.append(trackText, reward);
+  meta.append(kicker, name, segment, track);
+
+  const meter = document.createElement("span");
+  meter.className = "project-current-meter";
+  meter.setAttribute("aria-hidden", "true");
+
+  const fill = document.createElement("span");
+  fill.style.width = Math.round(project.progress * 100) + "%";
+  meter.append(fill);
+
+  elements.projectCurrentVisual.replaceChildren(orbit, meta, meter);
 }
 
 function renderProjectForecastMap(projects) {

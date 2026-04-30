@@ -1,5 +1,31 @@
 # Decision
 
+## 2026-04-30 Product decision：当前航段视觉卡
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-04-30 16:48 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#4 仍围绕“界面文字密集、希望更多图片和更好看”保持 open，因此本轮继续进入 Product decision。
+
+当前最大问题：星图总览已经有航线预告视觉带和奖励罗盘，但默认首屏对“当前正在推进哪一段、属于累计还是升级、奖励方向是什么”仍主要依赖三行文字。玩家扫总览时需要把标题、当前进度、行动建议和预告槽组合起来才能确认当前航段。
+
+本轮决策：
+
+- 在星图总览默认可见区域新增 `project-current-visual` 当前航段视觉卡。
+- `getProjectCurrentVisual` 从现有项目状态派生第一个未完成航段，包含航段号、章节位置、推进类型、奖励方向、进度和可访问说明。
+- 运行期 `renderProjectCurrentVisual` 根据 `projectOverview.currentVisual` 更新固定视觉卡；全部航段完成时隐藏该卡。
+- 本轮只调整星图总览展示层；不新增存档字段，不改变 57 段星图路线、项目完成判定、奖励数值、升级价格、航线策略、航线指令、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-04-30 16:48 CST 当前 5 个 open feedback issue、0 个 open bug issue。
+- `getProjectCurrentVisual(getProjectStatuses(createInitialState(0)))` 返回点亮星图当前航段视觉槽，推进类型为累计航段、奖励方向为总产能。
+- 静态首页包含 `projectCurrentVisual`、`project-current-visual` 和“当前航段”。
+- `src/app.js` 包含 `renderProjectCurrentVisual`，运行期按 `projectOverview.currentVisual` 更新当前航段视觉卡。
+- `src/styles.css` 包含 `.project-current-visual`、`.project-current-orbit`、`.project-current-track` 和 `.project-current-meter`。
+- 本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 116 项。
+- 构建产物已确认包含 `projectCurrentVisual`、`project-current-visual`、`getProjectCurrentVisual` 和“当前航段”。
+- 待推送后回复 #4，并保持 open 等待复测当前航段视觉卡是否能降低星图总览首屏文字组合成本。
+
+下一步：推送并等待 #4 复测；如果仍认为星图总览文字密度高，再继续把默认可见长句转为视觉结构。
+
 ## 2026-04-30 Product decision：航线预告视觉带
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-04-30 16:34 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#4 仍围绕“界面文字密集、希望更多图片和更好看”保持 open，因此本轮继续进入 Product decision。
