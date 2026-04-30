@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+- 星图总览新增远航调度总览：20M 后 active 调度时，星图总览会显示当前航段、目标指令、协同续航、闭环进度和下一步路径，继续回应 #6 对后半段玩法变化不明显的反馈。
+- `src/game.js` 新增 `buildProjectOverviewDispatchText` 和 `dispatchText`；`index.html` 新增 `projectOverviewDispatch`；`src/app.js` 运行期按 `dispatchText` 显示/隐藏总览调度行；`src/styles.css` 新增 `project-overview-dispatch`；`tests/game.test.js` 覆盖脉冲航闸阶段总览文案和静态标记。
+- 本轮只调整星图总览展示层；不新增存档字段，不改变指令收益、冷却、连携窗口、星图航段、项目奖励、升级价格、反馈入口或部署链路。
+- 同步 GitHub Issues 反馈状态：2026-04-30 14:51 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 作为本轮处理对象。
+- 验证通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 109 项。
+- 构建产物已确认包含 `projectOverviewDispatch`、`project-overview-dispatch`、`buildProjectOverviewDispatchText`、`dispatchText` 和“远航调度总览”。
+
 - 点火按钮新增落点闪光：普通点火会在实际点击位置播放短促亮点，键盘触发回退到按钮中心，过载点火使用更大的过载落点闪光，继续回应 #5 对点击反馈、特效和点击欲望的反馈。
 - `index.html` 新增 `coreImpactPoint`；`src/app.js` 新增 `coreImpactPoint` 绑定、`coreImpactTimer` 和 `positionCoreImpact`；`src/styles.css` 新增 `core-impact-point`、`--core-impact-x` / `--core-impact-y` 和 `coreImpactPoint` 动画；`tests/game.test.js` 覆盖静态标记、运行期绑定和样式标记。
 - 本轮只调整点火按钮展示层；不新增游戏存档字段，不改变点击收益、连击窗口、过载奖励、升级价格、产能公式、星图航段、航线策略、航线指令、反馈入口或部署链路。

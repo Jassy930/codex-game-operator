@@ -1419,6 +1419,16 @@ h2 {
   line-height: 1.35;
 }
 
+.project-overview-dispatch {
+  display: block;
+  padding: 7px 9px;
+  border: 1px solid rgba(116, 204, 244, 0.24);
+  border-radius: 8px;
+  background: rgba(116, 204, 244, 0.08);
+  color: #c9f0ff !important;
+  font-weight: 900;
+}
+
 .project-overview em {
   color: rgba(248, 243, 231, 0.86);
   font-size: 0.82rem;

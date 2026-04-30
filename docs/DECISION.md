@@ -1,5 +1,27 @@
 # Decision
 
+## 2026-04-30 Product decision：星图总览远航调度总览
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-04-30 14:51 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#6 仍围绕“后半段只有不停的目标、玩法没有真正变化”保持 open，因此本轮继续进入 Product decision，并处理远航调度在星图总览层的可见性。
+
+当前最大问题：远航调度已经在主操作区显示 3 格路径轨，也在当前航段卡片显示调度徽标、详情和 3 步路径轨。但玩家查看星图计划时，默认首先看到的是星图总览的下一段、行动建议和航线预告；这里还没有直接说明当前航段会驱动哪个主动指令、协同续航是什么、闭环走到哪一步。
+
+本轮决策：
+
+- 在 `getProjectOverview` 中派生 `dispatchText`，只在 `getFarRouteDispatch` active 时返回远航调度总览。
+- 星图总览新增 `projectOverviewDispatch` 行，显示当前航段、目标指令、协同续航、闭环进度和下一步路径；未解锁、锁定或全部航段完成时隐藏。
+- 本轮只调整星图总览展示层；不新增存档字段，不改变指令收益、冷却、连携窗口、远航调度计算、星图航段、项目奖励、升级价格、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-04-30 14:51 CST 当前 5 个 open feedback issue、0 个 open bug issue。
+- `getProjectOverview` 在 #6 快照对应的脉冲航闸阶段返回 `dispatchText = "远航调度总览：航段 27/57 脉冲航闸 · 目标 点火齐射 · 协同 谐振脉冲 · 闭环 0/3 · 下一步 目标 点火齐射"`。
+- 运行期星图总览会渲染 `projectOverviewDispatch`，并按 `dispatchText` 显示或隐藏。
+- 本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 109 项。
+- 构建产物已确认包含 `projectOverviewDispatch`、`project-overview-dispatch`、`buildProjectOverviewDispatchText`、`dispatchText` 和“远航调度总览”。
+
+下一步：推送并等待 #6 复测；若仍认为后半段玩法变化不足，再评估资源消耗型指令或更明确的阶段分支，而不是继续只追加展示文本。
+
 ## 2026-04-30 Product decision：点火落点闪光
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-04-30 14:38 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#5 仍围绕“点火按钮太薄弱、增加点击反馈、特效和点击欲望”保持 open，因此本轮继续进入 Product decision，并处理 #5 的点火按钮按下反馈层。

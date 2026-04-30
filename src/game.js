@@ -1942,8 +1942,8 @@ export function getProjectChapterVisuals(projects) {
   });
 }
 
-export function getProjectOverview(state) {
-  const current = normalizeState(state);
+export function getProjectOverview(state, now = Date.now()) {
+  const current = normalizeState(state, now);
   const projects = getProjectStatuses(current);
   const completed = projects.filter((project) => project.completed).length;
   const nextProject = projects.find((project) => !project.completed) ?? null;
@@ -1956,6 +1956,9 @@ export function getProjectOverview(state) {
   const rewardTargetText = buildProjectRewardTargetText(projects);
   const milestoneText = buildProjectMilestoneText(projects, nextProject);
   const routeFocusText = buildProjectRouteFocusText(projects, current);
+  const dispatchText = buildProjectOverviewDispatchText(
+    getFarRouteDispatch(current, now)
+  );
 
   if (!nextProject) {
     return {
@@ -1975,6 +1978,7 @@ export function getProjectOverview(state) {
       routeFocusText,
       compositionText,
       bonusText,
+      dispatchText,
       actionText: buildProjectActionText(null, current),
       forecastText: "航线预告：等待下一段航线"
     };
@@ -2011,6 +2015,7 @@ export function getProjectOverview(state) {
     routeFocusText,
     compositionText,
     bonusText,
+    dispatchText,
     actionText: buildProjectActionText(nextProject, current),
     forecastText:
       "航线预告：" + upcomingProjects.map(formatForecastProject).join("、")
@@ -3595,6 +3600,37 @@ function buildProjectTagText(project) {
     .join("/");
 
   return rewardTypes ? trackText + " · " + rewardTypes + "奖励" : trackText;
+}
+
+function buildProjectOverviewDispatchText(dispatch) {
+  if (!dispatch?.active) {
+    return "";
+  }
+
+  const relayText = dispatch.relayDirectiveName
+    ? " · 协同 " + dispatch.relayDirectiveName
+    : "";
+  const currentStep = Array.isArray(dispatch.loopSteps)
+    ? dispatch.loopSteps.find((step) => step.state === "current")
+    : null;
+  const stepText = currentStep
+    ? " · 下一步 " + currentStep.label + " " + currentStep.text
+    : "";
+
+  return (
+    "远航调度总览：" +
+    dispatch.segmentText +
+    " " +
+    dispatch.projectName +
+    " · 目标 " +
+    dispatch.targetDirectiveName +
+    relayText +
+    " · 闭环 " +
+    dispatch.loopProgress +
+    "/" +
+    dispatch.loopTarget +
+    stepText
+  );
 }
 
 function buildProjectDispatchInfo(project, state, isCurrent) {

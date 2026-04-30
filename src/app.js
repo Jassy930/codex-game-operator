@@ -200,6 +200,7 @@ const elements = {
   upgradeList: document.querySelector("#upgradeList"),
   projectOverview: document.querySelector("#projectOverview"),
   projectOverviewDetail: document.querySelector("#projectOverviewDetail"),
+  projectOverviewDispatch: document.querySelector("#projectOverviewDispatch"),
   projectOverviewTracks: document.querySelector("#projectOverviewTracks"),
   projectOverviewChapter: document.querySelector("#projectOverviewChapter"),
   projectOverviewChapterTargets: document.querySelector("#projectOverviewChapterTargets"),
@@ -353,7 +354,7 @@ function render() {
   const combo = getComboStatus(current, now);
   const coreReward = getCoreRewardPreview(current, now);
   const production = getEffectiveProduction(current);
-  const projectOverview = getProjectOverview(current);
+  const projectOverview = getProjectOverview(current, now);
   const projects = getProjectStatuses(current);
   const routeStance = getRouteStanceStatus(current);
   const directives = getDirectiveStatus(current);
@@ -383,6 +384,8 @@ function render() {
   renderActionNotice();
   elements.projectOverview.textContent = projectOverview.summaryText;
   elements.projectOverviewDetail.textContent = projectOverview.detailText;
+  elements.projectOverviewDispatch.textContent = projectOverview.dispatchText;
+  elements.projectOverviewDispatch.hidden = !projectOverview.dispatchText;
   elements.projectOverviewTracks.textContent = projectOverview.trackText;
   elements.projectOverviewChapter.textContent = projectOverview.chapterText;
   elements.projectOverviewChapterTargets.textContent = projectOverview.chapterTargetText;

@@ -1476,16 +1476,22 @@ test("静态首页会渲染航线指令轮换目标", () => {
 
 test("静态首页会默认折叠星图详细文本", () => {
   const indexHtml = readFileSync(new URL("../index.html", import.meta.url), "utf8");
+  const appJs = readFileSync(new URL("../src/app.js", import.meta.url), "utf8");
   const styles = readFileSync(new URL("../src/styles.css", import.meta.url), "utf8");
 
   assert.match(indexHtml, /<details class="project-detail-drawer">/);
   assert.doesNotMatch(indexHtml, /<details class="project-detail-drawer" open>/);
   assert.match(indexHtml, /<summary>星图明细<\/summary>/);
+  assert.match(indexHtml, /id="projectOverviewDispatch" class="project-overview-dispatch" hidden/);
   assert.match(indexHtml, /projectOverviewTracks/);
   assert.match(indexHtml, /projectOverviewAction/);
   assert.match(indexHtml, /projectOverviewForecast/);
+  assert.match(appJs, /projectOverviewDispatch: document\.querySelector\("#projectOverviewDispatch"\)/);
+  assert.match(appJs, /elements\.projectOverviewDispatch\.textContent = projectOverview\.dispatchText/);
+  assert.match(appJs, /elements\.projectOverviewDispatch\.hidden = !projectOverview\.dispatchText/);
   assert.match(styles, /\.project-detail-drawer/);
   assert.match(styles, /\.project-detail-grid/);
+  assert.match(styles, /\.project-overview-dispatch/);
 });
 
 test("静态首页会默认折叠星图筛选长摘要", () => {
@@ -2087,6 +2093,7 @@ test("远航调度会在 20M 后按当前航段指定目标指令", () => {
     }
   };
   const dispatch = getFarRouteDispatch(state, 1000);
+  const overview = getProjectOverview(state, 1000);
   const currentProject = getProjectStatuses(state).find((project) => project.isCurrent);
   const plan = getDirectivePlan(state, 1000);
   const status = getDirectiveStatus(state, 1000);
@@ -2225,6 +2232,10 @@ test("远航调度会在 20M 后按当前航段指定目标指令", () => {
     ["目标:下一步:点火齐射", "协同:待推进:谐振脉冲", "回目标:待推进:点火齐射"]
   );
   assert.equal(dispatch.loopStatusText, "闭环进度 0/3 · 下一步 点火齐射");
+  assert.equal(
+    overview.dispatchText,
+    "远航调度总览：航段 27/57 脉冲航闸 · 目标 点火齐射 · 协同 谐振脉冲 · 闭环 0/3 · 下一步 目标 点火齐射"
+  );
   assert.equal(
     dispatch.text,
     "远航调度：航段 27/57 脉冲航闸指定点火齐射 · 执行目标指令获得调度校准 +14% · 目标指令冷却 -30% · 调度接力 +30 秒 · 目标后优先谐振脉冲触发远航协同 +5%，其他非目标仍触发远航续航 +8% · 3/3 回到目标指令触发远航闭环 +16% · 完成闭环后远航整备刷新谐振脉冲冷却"
