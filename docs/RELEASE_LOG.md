@@ -7,6 +7,9 @@
 - 本轮只调整星图章节导航展示层；不新增存档字段，不改变 57 段星图路线、项目完成判定、筛选结果、奖励数值、升级价格、航线策略、航线指令、反馈入口或部署链路。
 - 同步 GitHub Issues 反馈状态：2026-04-30 17:48 CST 当前 5 个 open feedback issue、0 个 open bug issue；#4 作为本轮处理对象。
 - 验证通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 116 项。
+- 提交 6dd3572 已推送；GitHub Pages workflow 25159179510 已成功；线上地址返回 HTTP 200，且线上首页、`app.js` 和 `styles.css` 已确认包含章节微图景相关标记。
+- 已回复 #4，说明星图章节导航按钮现在加入轨道、星门/信标和章节信号微图景，并保持 issue open 等待复测。
+- 回复后同步 GitHub Issues 反馈状态：2026-04-30 17:57 CST 当前 5 个 open feedback issue、0 个 open bug issue；#4 更新时间为 2026-04-30T09:57:32Z。
 
 - 星图筛选按钮新增视觉标识：全部、当前、章节、累计/升级、奖励方向和完成状态等筛选入口会显示固定小图形/颜色标记，继续回应 #4 对界面文字密度和图片化表达的反馈。
 - `index.html` 静态筛选按钮同步 `is-filter-*` 标记；`src/app.js` 新增 `PROJECT_FILTER_VISUAL_CLASSES` 并在运行期渲染筛选按钮视觉类别；`src/styles.css` 新增筛选按钮 `::before` 标识、响应式按钮列宽和单行省略；`tests/game.test.js` 覆盖静态标记、运行期绑定和样式标记。
