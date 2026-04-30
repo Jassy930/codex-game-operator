@@ -8,6 +8,9 @@
 - 同步 GitHub Issues 反馈状态：2026-04-30 18:47 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 作为本轮处理对象。
 - 验证通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 117 项。
 - 构建产物已确认包含 `far-dispatch-step-reward` 和 `project-dispatch-step-reward`。
+- 提交 05117b5 已推送；GitHub Pages workflow 25161579162 已成功；线上地址返回 HTTP 200，且线上 `app.js`、`game.js` 和 `styles.css` 已确认包含远航路径步骤收益标签相关标记。
+- 已回复 #6，说明远航调度 3 步路径新增步骤收益标签，并保持 issue open 等待复测。
+- 回复后同步 GitHub Issues 反馈状态：2026-04-30 18:57 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 更新时间为 2026-04-30T10:57:25Z。
 
 - 点火按钮新增过载倒计时徽标：`core-overload-badge` 直接显示距离过载还剩几次，临近过载和过载命中时切换高亮/爆发态，继续回应 #5 对点击反馈、特效和点击欲望的反馈。
 - `index.html` 新增 `coreOverloadBadge` 静态占位；`src/app.js` 在 `renderCoreFeedback` 中用现有连击状态更新 `coreOverloadBadgeValue` 和倒计时状态 class；`src/styles.css` 新增倒计时徽标样式与 `coreBadgePulse` / `coreBadgeBurst` 动效；`tests/game.test.js` 覆盖静态标记、运行期绑定和样式标记。

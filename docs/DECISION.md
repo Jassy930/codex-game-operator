@@ -22,6 +22,9 @@
 - `src/styles.css` 包含 `.far-dispatch-loop-step em` 和 `.project-dispatch-step em` 样式。
 - 本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 117 项。
 - 构建产物已确认包含 `far-dispatch-step-reward` 和 `project-dispatch-step-reward`。
+- 提交 05117b5 已推送；GitHub Pages workflow 25161579162 已成功；线上地址返回 HTTP 200，且线上 `app.js`、`game.js` 和 `styles.css` 已确认包含远航路径步骤收益标签相关标记。
+- #6 已回复：说明远航调度 3 步路径新增步骤收益标签，并保持 issue open 等待复测。
+- 回复后同步 GitHub Issues：2026-04-30 18:57 CST 当前仍为 5 个 open feedback issue、0 个 open bug issue；#6 更新时间为 2026-04-30T10:57:25Z。
 
 下一步：等待 #6 复测；如果仍认为后半段只是目标推进，再评估真正的资源消耗型指令或项目分支，而不是继续只增加路径展示。
 

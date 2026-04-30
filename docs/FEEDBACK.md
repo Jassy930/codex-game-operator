@@ -8,6 +8,9 @@
 - 本轮只调整远航调度展示层；不新增存档字段，不改变指令收益、冷却、连携窗口、远航调度计算、远航突破数值、星图航段、项目奖励、升级价格、反馈入口或部署链路。
 - 本轮本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 117 项。
 - 构建产物已确认包含 `far-dispatch-step-reward` 和 `project-dispatch-step-reward`。
+- 提交 05117b5 已推送；GitHub Pages workflow 25161579162 已成功；线上地址返回 HTTP 200，且线上 `app.js`、`game.js` 和 `styles.css` 已确认包含远航路径步骤收益标签相关标记。
+- #6 已回复：说明远航调度 3 步路径新增步骤收益标签，并保持 issue open 等待复测。
+- 回复后同步 GitHub Issues：2026-04-30 18:57 CST 当前仍为 5 个 open feedback issue、0 个 open bug issue；#6 更新时间为 2026-04-30T10:57:25Z。
 
 - GitHub Issues：gh 可用且已认证；2026-04-30 18:31 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue；回复 #5 后于 2026-04-30 18:42 CST 再次同步，仍为 5 个 open feedback issue、0 个 open bug issue。
 - #5 作为本轮 Product decision 依据：该反馈指出点火按钮太薄弱，希望增加点击反馈、特效和点击欲望；前序已补脉冲、粒子、收益浮层、8 格连击轨、下一击预告、环形蓄能轨、音效、触感、落点闪光和阶段光环，本轮补按钮内更直接的过载剩余次数视觉锚点。
