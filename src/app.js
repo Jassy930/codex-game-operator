@@ -477,6 +477,9 @@ function renderDirective(option) {
         dispatchLoopReward: result.dispatchLoopReward,
         dispatchLoopRewardRate: result.dispatchLoopRewardRate,
         dispatchLoopRewardText: result.dispatchLoopRewardText,
+        dispatchRefreshDirectiveId: result.dispatchRefreshDirectiveId,
+        dispatchRefreshDirectiveName: result.dispatchRefreshDirectiveName,
+        dispatchRefreshText: result.dispatchRefreshText,
         dispatchCooldownMultiplier: result.dispatchCooldownMultiplier,
         dispatchCooldownText: result.dispatchCooldownText,
         dispatchChainWindowSeconds: result.dispatchChainWindowSeconds,
@@ -543,6 +546,11 @@ function renderDirective(option) {
   dispatchLoop.textContent = option.dispatchLoopRewardText;
   dispatchLoop.hidden = !option.dispatchLoopRewardText;
 
+  const dispatchRefresh = document.createElement("span");
+  dispatchRefresh.className = "directive-dispatch-refresh";
+  dispatchRefresh.textContent = option.dispatchRefreshText;
+  dispatchRefresh.hidden = !option.dispatchRefreshText;
+
   const dispatchCooldown = document.createElement("span");
   dispatchCooldown.className = "directive-dispatch-cooldown";
   dispatchCooldown.textContent = option.dispatchCooldownText;
@@ -576,6 +584,7 @@ function renderDirective(option) {
     dispatchRelay,
     dispatchSync,
     dispatchLoop,
+    dispatchRefresh,
     dispatchCooldown,
     dispatchWindow,
     finisherRecommendation,

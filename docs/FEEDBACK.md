@@ -2,6 +2,14 @@
 
 ## 2026-04-30
 
+- GitHub Issues：gh 可用且已认证；2026-04-30 10:57 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
+- #6 继续作为本轮 Product decision：上一轮已让目标指令后的非目标续航有一个协同优先项，但完成闭环后协同续航指令仍可能在冷却中，下一轮短循环会被等待打断。
+- 本轮改动新增“远航整备”：远航调度 active 时，3/3 指令轮换回到当前航段目标指令并触发远航闭环后，会刷新当前协同续航指令的冷却，并在完成态优先推荐“整备续航/等待整备”。
+- 脉冲航闸阶段点火齐射闭环后会刷新谐振脉冲冷却；远航调度条、预计收益、执行反馈、本地 `directive` 事件和按钮徽标同步记录 `dispatchRefreshDirectiveId` / `dispatchRefreshDirectiveName` / `dispatchRefreshText`。
+- 本轮不新增存档字段，不改变升级价格、产能公式、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、基础连携倍率、轮换目标奖励、预案执行、航线委托、指令熟练、满层回响、远航调度校准、冷却倍率、连携窗口、远航续航奖励倍率、远航协同奖励、远航闭环奖励或反馈入口。
+- 本轮本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 106 项。
+- 构建产物已确认包含 `dispatchRefreshText`、`directive-dispatch-refresh`、“远航整备”和“整备续航”。
+
 - GitHub Issues：gh 可用且已认证；2026-04-30 10:38 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
 - #6 继续作为本轮 Product decision：上一轮已让目标指令后的两个非目标按钮都显示远航续航推荐，但尚无玩家复测结论；本轮把第二步从两个等价非目标按钮改成“任意非目标可续航，其中一个由当前目标指令指定为协同续航”。
 - 本轮改动新增 `FAR_ROUTE_DISPATCH_SYNC_REWARD_RATE = 0.05`；目标指令后仍允许任意非目标指令触发 8% 远航续航，但指定协同续航指令额外获得 5% 远航协同奖励。

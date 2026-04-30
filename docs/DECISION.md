@@ -1,5 +1,30 @@
 # Decision
 
+## 2026-04-30 Product decision：远航整备续航
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-04-30 10:57 CST 同步到 5 个 open feedback issue、0 个 open bug issue。#6 仍是最新后半段玩法变化反馈，上一轮已给目标后的非目标步骤增加“远航协同”优先项，但尚无玩家复测结论；继续进入 Product decision。
+
+当前最大问题：远航调度短循环已经明确为目标指令、协同续航、回到目标指令闭环，但完成闭环后仍可能撞上协同续航指令冷却，导致下一轮短循环从“完成后继续操作”退回“等冷却”。这会削弱后半段当前航段改变操作节奏的感知。
+
+本轮决策：
+
+- 新增“远航整备”：远航调度 active 时，3/3 指令轮换回到当前航段目标指令并触发远航闭环后，会刷新当前协同续航指令的冷却。
+- 完成态的下一步推荐从普通熟练续航改为“整备续航/等待整备”，并优先推荐当前目标指令指定的协同续航指令；脉冲航闸阶段为点火齐射闭环后刷新并推荐谐振脉冲。
+- 按钮徽标、预计收益、执行反馈、本地 `directive` 事件和远航调度条记录 `dispatchRefreshDirectiveId` / `dispatchRefreshDirectiveName` / `dispatchRefreshText`。
+- 本轮不新增存档字段，不改变升级价格、产能公式、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、基础连携倍率、轮换目标奖励、预案执行、航线委托、指令熟练、满层回响、远航调度校准、冷却倍率、连携窗口、远航续航奖励倍率、远航协同奖励、远航闭环奖励或反馈入口。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-04-30 10:57 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 继续作为本轮处理对象。
+- 25M 脉冲航闸阶段，远航调度显示完成闭环后远航整备刷新谐振脉冲冷却。
+- 谐振脉冲作为协同续航后仍在冷却时，回到点火齐射完成 3/3 闭环会把谐振脉冲冷却刷新为可执行。
+- 完成闭环后 `getDirectivePlan.nextDirectiveIds` 优先返回谐振脉冲，推荐文案为“整备续航”，等待文案为“等待整备”。
+- 静态首页和运行期资源包含 `dispatchRefreshText`、`directive-dispatch-refresh` 和“远航整备”。
+- 本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 106 项。
+- 构建产物已确认包含 `dispatchRefreshText`、`directive-dispatch-refresh`、“远航整备”和“整备续航”。
+
+下一步：继续发布、回复 #6 并等待复测；若复测仍认为后半段只是追推荐按钮，再评估更重的资源消耗型阶段动作或项目分支。
+
 ## 2026-04-30 Product decision：远航协同续航
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-04-30 10:38 CST 同步到 5 个 open feedback issue、0 个 open bug issue。#6 仍是最新后半段玩法变化反馈，上一轮已让目标指令后的两个非目标按钮都进入远航续航推荐，但尚无玩家复测结论；继续进入 Product decision。
