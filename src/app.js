@@ -39,6 +39,7 @@ const EVENT_KEY = "codex-game-operator.events";
 const FEEDBACK_KEY = "codex-game-operator.feedback";
 const SESSION_ID = globalThis.crypto?.randomUUID?.() ?? String(Date.now());
 const SVG_NS = "http://www.w3.org/2000/svg";
+const DIRECTIVE_VISIBLE_BADGE_LIMIT = 3;
 const ROUTE_STANCE_ICON_DEFS = {
   balanced: {
     label: "均衡航线徽记",
@@ -704,6 +705,7 @@ function renderDirective(option) {
     masteryBonus,
     stanceBonus
   );
+  compactDirectiveBadges(badges);
   head.append(titleGroup, badges);
 
   const summary = document.createElement("span");
@@ -711,7 +713,11 @@ function renderDirective(option) {
 
   const preview = document.createElement("span");
   preview.className = "directive-preview";
-  preview.textContent = option.previewText;
+  preview.textContent = getDirectivePreviewDisplayText(option);
+  if (preview.textContent !== option.previewText) {
+    preview.title = option.previewText;
+    preview.setAttribute("aria-label", option.previewText);
+  }
 
   const status = document.createElement("span");
   status.className = "directive-status";
@@ -736,6 +742,58 @@ function renderDirective(option) {
 
   button.append(head, summary, preview, cooldownMeter, status);
   return button;
+}
+
+function compactDirectiveBadges(badges) {
+  const visibleBadges = Array.from(badges.children).filter(
+    (item) => !item.hidden && item.textContent
+  );
+  visibleBadges.forEach((item, index) => {
+    item.classList.toggle("is-collapsed-badge", index >= DIRECTIVE_VISIBLE_BADGE_LIMIT);
+  });
+
+  const hiddenCount = Math.max(0, visibleBadges.length - DIRECTIVE_VISIBLE_BADGE_LIMIT);
+  if (hiddenCount > 0) {
+    const overflow = document.createElement("span");
+    overflow.className = "directive-badge-overflow";
+    overflow.textContent = "+" + hiddenCount;
+    overflow.title = visibleBadges.map((item) => item.textContent).join("，");
+    badges.append(overflow);
+  }
+}
+
+function getDirectivePreviewDisplayText(option) {
+  if (option.statusText === "未解锁") {
+    return option.previewText;
+  }
+
+  const detailCount = getDirectivePreviewDetailTexts(option).length;
+  return (
+    "预计 +" +
+    formatNumber(option.gain) +
+    " 能量" +
+    (detailCount > 0 ? " · " + detailCount + " 项明细" : "")
+  );
+}
+
+function getDirectivePreviewDetailTexts(option) {
+  return [
+    option.masteryBonusText,
+    option.planRewardText,
+    option.taskRewardText,
+    option.dispatchRewardText,
+    option.dispatchRelayRewardText,
+    option.dispatchSyncRewardText,
+    option.dispatchLoopRewardText,
+    option.dispatchRefreshText,
+    option.dispatchCooldownText,
+    option.dispatchChainWindowText,
+    option.chainBonusText,
+    option.rotationRewardText,
+    option.masteryCapstoneText,
+    option.stanceFinisherText,
+    option.stanceBonusText
+  ].filter(Boolean);
 }
 
 function renderDirectiveVisual(option) {

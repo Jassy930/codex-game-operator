@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+- 航线指令按钮新增徽标压缩：运行期每个指令按钮最多直接显示 3 个文字徽标，其余折成 `+N`，预计收益行压缩为“预计 +X 能量 · N 项明细”，完整明细保留在 `title` / `aria-label`。
+- `src/app.js` 新增 `DIRECTIVE_VISIBLE_BADGE_LIMIT`、`compactDirectiveBadges` 和 `getDirectivePreviewDisplayText`；`src/styles.css` 新增 `is-collapsed-badge` 与 `directive-badge-overflow` 样式；`tests/game.test.js` 覆盖运行期标记。
+- 本轮只调整航线指令展示层，继续回应 #4 对文字密度和可扫视性的反馈；不新增存档字段，不改变指令收益、实际冷却、连携窗口、远航调度、星图航段、升级价格或反馈入口。
+- 同步 GitHub Issues 反馈状态：2026-04-30 12:32 CST 当前 5 个 open feedback issue、0 个 open bug issue；#4 作为本轮处理对象。
+- 验证通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 108 项。
+- 构建产物已确认包含 `DIRECTIVE_VISIBLE_BADGE_LIMIT`、`directive-badge-overflow`、`getDirectivePreviewDisplayText`、`is-collapsed-badge` 和“项明细”。
 - 航线指令徽记新增状态灯：三枚主动指令图标右下角显示固定状态点，运行期可按可执行、冷却中和推荐态改变状态灯样式，减少只靠状态文字判断按钮可用性的压力。
 - `index.html` 为三枚静态锁定态指令徽记加入 `directive-state-orb`；`src/app.js` 在 `renderDirectiveVisual` 中按 `option.ready` / `option.cooling` / `option.recommended` 添加状态 class；`src/styles.css` 增加状态灯样式；`tests/game.test.js` 覆盖静态和运行期标记。
 - 本轮只调整航线指令展示层，继续回应 #4 对文字密度和可扫视性的反馈；不新增存档字段，不改变指令收益、实际冷却、连携窗口、远航调度、星图航段、升级价格或反馈入口。

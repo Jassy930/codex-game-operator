@@ -1132,6 +1132,9 @@ test("航线指令按钮会渲染可扫视徽记", () => {
   assert.match(indexHtml, /aria-label="点火齐射冷却进度"/);
   assert.match(appJs, /DIRECTIVE_ICON_DEFS/);
   assert.match(appJs, /function renderDirectiveVisual\(option\)/);
+  assert.match(appJs, /DIRECTIVE_VISIBLE_BADGE_LIMIT = 3/);
+  assert.match(appJs, /function compactDirectiveBadges\(badges\)/);
+  assert.match(appJs, /function getDirectivePreviewDisplayText\(option\)/);
   assert.match(appJs, /option\.ready \? "is-ready" : ""/);
   assert.match(appJs, /option\.cooling \? "is-cooling" : ""/);
   assert.match(appJs, /option\.recommended \? "is-recommended" : ""/);
@@ -1151,6 +1154,8 @@ test("航线指令按钮会渲染可扫视徽记", () => {
   assert.match(styles, /\.directive-state-orb/);
   assert.match(styles, /\.directive-visual\.is-ready \.directive-state-orb/);
   assert.match(styles, /\.directive-visual\.is-cooling \.directive-state-orb/);
+  assert.match(styles, /\.directive-button \.directive-badges \.is-collapsed-badge/);
+  assert.match(styles, /\.directive-button \.directive-badge-overflow/);
   assert.match(styles, /\.directive-cooldown-meter/);
   assert.match(styles, /\.directive-button\.is-cooling \.directive-cooldown-meter span/);
 });
@@ -1303,6 +1308,10 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(appJs, /option\.cooling \? "is-cooling" : ""/);
   assert.match(appJs, /option\.finisherRecommended \? "is-finisher-recommended" : ""/);
   assert.match(appJs, /badges\.className = "directive-badges"/);
+  assert.match(appJs, /compactDirectiveBadges\(badges\)/);
+  assert.match(appJs, /overflow\.className = "directive-badge-overflow"/);
+  assert.match(appJs, /preview\.textContent = getDirectivePreviewDisplayText\(option\)/);
+  assert.match(appJs, /preview\.setAttribute\("aria-label", option\.previewText\)/);
   assert.match(appJs, /recommendation\.className = "directive-recommendation"/);
   assert.match(appJs, /recommendation\.textContent = option\.recommendationText/);
   assert.match(appJs, /planBonus\.className = "directive-plan-bonus"/);
@@ -1348,6 +1357,8 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(styles, /\.far-dispatch-loop-meter/);
   assert.match(styles, /\.far-dispatch\.is-active/);
   assert.match(styles, /\.directive-button \.directive-badges/);
+  assert.match(styles, /\.directive-button \.directive-badges \.is-collapsed-badge/);
+  assert.match(styles, /\.directive-button \.directive-badge-overflow/);
   assert.match(styles, /\.directive-button\.is-recommended/);
   assert.match(styles, /\.directive-button\.is-finisher-recommended/);
   assert.match(styles, /\.directive-button \.directive-recommendation/);

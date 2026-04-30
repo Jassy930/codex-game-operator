@@ -1,5 +1,24 @@
 # Decision
 
+## 2026-04-30 Product decision：航线指令徽标压缩
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-04-30 12:32 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#4 的“界面文字密集、希望更多图片和更好看”仍未有玩家复测结论，继续进入 Product decision。
+
+当前最大问题：航线指令三按钮已经有徽记、冷却进度轨和状态灯，但 100K 后推荐、预案、委托、远航调度、远航续航、远航协同、整备、策略终结、熟练和策略契合等徽标可能同时出现。按钮头部和预计收益行会重新堆出一串文字，抵消前几轮视觉化改动。
+
+本轮决策：
+
+- 在运行期 `renderDirective` 中增加 `DIRECTIVE_VISIBLE_BADGE_LIMIT = 3`，每个航线指令按钮最多直接显示 3 个文字徽标，剩余徽标折成 `directive-badge-overflow` 的 `+N` 提示。
+- 预计收益行改用 `getDirectivePreviewDisplayText` 展示“预计 +X 能量 · N 项明细”，完整原始 `option.previewText` 保留到 `title` 和 `aria-label`，减少视觉文字密度但不丢失明细。
+- 本轮只调整航线指令按钮展示层；不新增存档字段，不改变指令收益、实际冷却、连携窗口、轮换目标奖励、预案执行、航线委托、策略契合、策略终结、指令熟练、远航调度、星图航段、升级价格、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-04-30 12:32 CST 当前 5 个 open feedback issue、0 个 open bug issue。
+- 运行期资源包含 `DIRECTIVE_VISIBLE_BADGE_LIMIT`、`compactDirectiveBadges`、`directive-badge-overflow`、`getDirectivePreviewDisplayText` 和“项明细”。
+- 本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 108 项。
+- 构建产物已确认包含 `DIRECTIVE_VISIBLE_BADGE_LIMIT`、`directive-badge-overflow`、`getDirectivePreviewDisplayText`、`is-collapsed-badge` 和“项明细”。
+
 ## 2026-04-30 Product decision：航线指令状态灯
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-04-30 12:19 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#4 仍反馈界面文字密集、希望更多图片和更好看，继续进入 Product decision。

@@ -678,6 +678,10 @@ h2 {
   justify-content: flex-end;
 }
 
+.directive-button .directive-badges .is-collapsed-badge {
+  display: none;
+}
+
 .directive-button span {
   min-width: 0;
   color: rgba(248, 243, 231, 0.66);
@@ -799,6 +803,16 @@ h2 {
   border-radius: 999px;
   background: rgba(124, 201, 255, 0.16);
   color: #caeaff;
+  font-size: 0.68rem;
+  line-height: 1;
+}
+
+.directive-button .directive-badge-overflow {
+  padding: 3px 6px;
+  border: 1px solid rgba(248, 243, 231, 0.16);
+  border-radius: 999px;
+  background: rgba(248, 243, 231, 0.1);
+  color: #f8f3e7;
   font-size: 0.68rem;
   line-height: 1;
 }
