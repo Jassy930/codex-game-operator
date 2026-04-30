@@ -1,5 +1,29 @@
 # Decision
 
+## 2026-05-01 Product decision：远航路线判断
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-01 05:15 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#6 仍是最新反馈线程，原始反馈指出后半段“只有不停的目标、玩法没有真正变化”，因此本轮继续进入 Product decision。
+
+当前最大问题：前序已经把路线反馈放进行动结果，把路线下一步、路线目标和收益对照放进分支卡片；但协同/绕行卡片默认仍需要玩家同时扫“推荐原因、路线目标、下一步、收益对照和收益明细”，才能判断这张卡本轮到底是首推、稳航、改道、建档还是已选路线。
+
+本轮决策：
+
+- 新增“远航路线判断”。
+- `branchChoices` 为每条协同/绕行路线派生 `decisionText`：当前航段契合且无上轮路线时显示“当前航段首推”；推荐且续走上轮显示“推荐稳航”；推荐且改走另一分支显示“推荐改道”；非推荐路线显示“备选建档/备选稳航/备选改道”；当前路线进行中或整备态显示“本轮已选/本轮已完成”。
+- 主操作区分支选择条新增 `far-dispatch-branch-choice-decision` 行，aria 汇总 `branchChoiceText` 同步包含路线判断。
+- 本轮只调整派生展示、DOM、样式和测试；不新增收益、不新增存档字段，不改变升级价格、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、远航调度既有数值、冷却、连携窗口、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-05-01 05:15 CST 当前 5 个 open feedback issue、0 个 open bug issue。
+- 0/3 起手时，推荐协同分支显示“路线判断：当前航段首推”，绕行分支显示“路线判断：备选建档”。
+- 有上轮协同路线时，续走推荐协同显示“路线判断：推荐稳航”，改走绕行显示“路线判断：备选改道”。
+- 有上轮绕行路线时，改走推荐协同显示“路线判断：推荐改道”，续走绕行显示“路线判断：备选稳航”。
+- `src/app.js` 渲染 `far-dispatch-branch-choice-decision`，`src/styles.css` 包含 `.far-dispatch-branch-choice-decision`。
+- 本地验证已通过：`node --test tests/game.test.js`、`npm install`、`npm test`、`npm run build`、`bun install --no-save`、`bun run test` 和 `bun run build`；测试数 118 项。
+- 构建产物已确认包含 `decisionText`、`far-dispatch-branch-choice-decision` 和“路线判断”相关文案。
+- 发布、issue 回复和钉钉通知状态待本轮 push / Pages workflow 后补记。
+
 ## 2026-05-01 Product decision：远航路线反馈
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-01 04:57 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#6 仍是最新反馈线程，原始反馈指出后半段“只有不停的目标、玩法没有真正变化”，因此本轮继续进入 Product decision。

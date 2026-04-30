@@ -2,6 +2,15 @@
 
 ## Unreleased
 
+- 远航调度新增“路线判断”：协同/绕行分支卡片会直接标出当前航段首推、推荐稳航、推荐改道、备选建档、备选稳航、备选改道、本轮已选或本轮已完成，继续回应 #6 对后半段玩法变化不明显的反馈。
+- `src/game.js` 为 `branchChoices` 派生 `decisionText` 并纳入 `branchChoiceText`；`src/app.js` 渲染 `far-dispatch-branch-choice-decision`；`src/styles.css` 增加路线判断样式；`tests/game.test.js` 覆盖首推、稳航、改道、备选和静态绑定。
+- 文档同步更新：`docs/DECISION.md`、`docs/FEEDBACK.md`、`docs/RESEARCH.md`、`docs/PRODUCT.md`、`docs/DESIGN.md`、`docs/ROADMAP.md`、`docs/IDEAS.md`、`docs/METRICS.md`、`README.md` 和本日志已记录远航路线判断。
+- 本轮只调整派生展示、DOM、样式和测试，不新增收益、不新增存档字段，不改变升级价格、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、远航调度既有数值、冷却、连携窗口、反馈入口或部署链路。
+- 同步 GitHub Issues 反馈状态：2026-05-01 05:15 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 作为本轮处理对象。
+- 验证通过：`node --test tests/game.test.js`、`npm install`、`npm test`、`npm run build`、`bun install --no-save`、`bun run test` 和 `bun run build`；测试数 118 项。
+- 构建产物已确认包含 `decisionText`、`far-dispatch-branch-choice-decision` 和“路线判断”相关文案。
+- 发布、反馈回复和钉钉通知状态待本轮 push / Pages workflow 后补记。
+
 - 远航调度新增“路线反馈”：航线指令执行后的行动反馈会确认刚完成目标、选择协同/绕行、完成回航、完成整备或整备回航，并提示下一步，继续回应 #6 对后半段玩法变化不明显的反馈。
 - `src/game.js` 为指令选项和执行结果派生 `dispatchRouteResultText` 并写入行动反馈；`src/app.js` 在本地 `directive` 事件记录该字段；`tests/game.test.js` 覆盖目标起手、协同/绕行分支、回航、整备、整备回航、事件绑定和构建产物。
 - 文档同步更新：`docs/DECISION.md`、`docs/FEEDBACK.md`、`docs/RESEARCH.md`、`docs/PRODUCT.md`、`docs/DESIGN.md`、`docs/ROADMAP.md`、`docs/IDEAS.md`、`docs/METRICS.md`、`README.md` 和本日志已记录远航路线反馈。

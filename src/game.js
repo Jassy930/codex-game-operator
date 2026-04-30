@@ -5126,6 +5126,14 @@ function buildFarRouteDispatchBranchChoices(
       focused,
       branchStatus
     );
+    const decisionText = buildFarRouteDispatchBranchDecisionText(
+      choice.label,
+      active,
+      shift,
+      stable,
+      focused,
+      branchStatus
+    );
     const followupText = buildFarRouteDispatchBranchFollowupText(
       choice.label,
       choice.directive.name,
@@ -5172,6 +5180,7 @@ function buildFarRouteDispatchBranchChoices(
       caption: choice.caption,
       nextText: choice.nextText,
       reasonText,
+      decisionText,
       objectiveText,
       followupText,
       active,
@@ -5195,6 +5204,8 @@ function buildFarRouteDispatchBranchChoices(
         choice.caption +
         (reasonText ? " · " + reasonText : "") +
         " · " +
+        decisionText +
+        " · " +
         objectiveText +
         " · " +
         followupText +
@@ -5206,6 +5217,44 @@ function buildFarRouteDispatchBranchChoices(
         rewardText
     };
   });
+}
+
+function buildFarRouteDispatchBranchDecisionText(
+  label,
+  active,
+  shift,
+  stable,
+  focused,
+  branchStatus
+) {
+  if (active) {
+    const preparing = String(branchStatus?.kind ?? "").endsWith("-prep");
+    return preparing
+      ? "路线判断：本轮已完成" + label + "，先处理整备"
+      : "路线判断：本轮已选" + label + "，回目标确认";
+  }
+
+  if (focused && shift) {
+    return "路线判断：推荐改道";
+  }
+
+  if (focused && stable) {
+    return "路线判断：推荐稳航";
+  }
+
+  if (focused) {
+    return "路线判断：当前航段首推";
+  }
+
+  if (shift) {
+    return "路线判断：备选改道";
+  }
+
+  if (stable) {
+    return "路线判断：备选稳航";
+  }
+
+  return "路线判断：备选建档";
 }
 
 function buildFarRouteDispatchBranchObjectiveText(
@@ -5393,6 +5442,8 @@ function buildFarRouteDispatchBranchChoiceText(choices) {
           " · " +
           choice.caption +
           (choice.reasonText ? " · " + choice.reasonText : "") +
+          " · " +
+          choice.decisionText +
           " · " +
           choice.objectiveText +
           " · " +

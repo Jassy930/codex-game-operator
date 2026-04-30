@@ -2,6 +2,14 @@
 
 ## 2026-05-01
 
+- GitHub Issues：gh 可用且已认证；2026-05-01 05:15 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
+- #6 继续作为本轮 Product decision 依据：该反馈指出后半段“只有不停的目标、玩法没有真正变化”；前序已经补齐路线反馈、路线下一步、路线目标和收益对照，但协同/绕行卡片仍需要玩家从多行内容里判断首推、稳航、改道或建档。
+- 本轮改动新增远航路线判断：协同/绕行分支卡片会显示“路线判断：当前航段首推 / 推荐稳航 / 推荐改道 / 备选建档 / 备选稳航 / 备选改道 / 本轮已选 / 本轮已完成”。
+- 分支选择条新增 `decisionText` / `far-dispatch-branch-choice-decision`，aria 汇总 `branchChoiceText` 同步包含路线判断；本轮不新增收益、不新增存档字段，不改变升级价格、星图路线、项目奖励、远航调度既有数值、冷却、连携窗口、反馈入口或部署链路。
+- 本轮本地验证已通过：`node --test tests/game.test.js`、`npm install`、`npm test`、`npm run build`、`bun install --no-save`、`bun run test` 和 `bun run build`；测试数 118 项。
+- 构建产物已确认包含 `decisionText`、`far-dispatch-branch-choice-decision` 和“路线判断”相关文案。
+- 发布和 issue 回复状态待本轮 push / Pages workflow 后补记。
+
 - GitHub Issues：gh 可用且已认证；2026-05-01 04:57 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
 - #6 继续作为本轮 Product decision 依据：该反馈指出后半段“只有不停的目标、玩法没有真正变化”；前序已经补齐路线下一步和按钮路线步，但执行后仍需要回看调度条确认本次点击推进到了哪条路线状态。
 - 本轮改动新增远航路线反馈：航线指令执行后的行动反馈会显示刚完成目标、已选择协同/绕行、已完成回航、已完成整备或整备回航，并给出下一步。
