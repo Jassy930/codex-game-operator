@@ -8,6 +8,9 @@
 - 同步 GitHub Issues 反馈状态：2026-04-30 17:17 CST 当前 5 个 open feedback issue、0 个 open bug issue；#4 作为本轮处理对象。
 - 验证通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 116 项。
 - 构建产物已确认包含 `formatProjectFilterBriefProjectLabel`、`projectFilterSummaryBrief` 和“筛选摘要：本章 0/4 · 下一条 航段 1/57 点亮星图”。
+- 提交 eea834c 已推送；GitHub Pages workflow 25157859784 已成功，线上地址返回 HTTP 200，且线上首页、`game.js`、`app.js` 和 `styles.css` 已确认包含筛选摘要短标签相关标记。
+- 已回复 #4，说明星图筛选摘要默认压缩为“航段 X/57 项目名”，完整筛选说明保留在 `title` / `aria-label` 和展开详情中，并保持 issue open 等待复测。
+- 回复后同步 GitHub Issues 反馈状态：2026-04-30 17:28 CST 当前 5 个 open feedback issue、0 个 open bug issue；#4 更新时间为 2026-04-30T09:27:42Z。
 
 - 星图总览航线预告新增短摘要：`projectOverviewForecast` 默认显示“接下来 N 段 · 下一段 X/Y 项目名”，完整三段预告保留在 `title` / `aria-label`，继续回应 #4 对界面文字密度和可扫视性的反馈。
 - `src/game.js` 为 `getProjectOverview` 新增 `forecastDetailText` 并把 `forecastText` 改为短摘要；`src/app.js` 复用 `setCompactSupportText` 保留完整预告；`index.html` 静态占位同步短摘要和完整可访问说明；`src/styles.css` 对预告行增加单行省略；`tests/game.test.js` 覆盖派生文本和静态标记。

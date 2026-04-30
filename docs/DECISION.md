@@ -22,6 +22,9 @@
 - `src/styles.css` 对 `project-filter-drawer summary` 增加单行省略。
 - 本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 116 项。
 - 构建产物已确认包含 `formatProjectFilterBriefProjectLabel`、`projectFilterSummaryBrief` 和“筛选摘要：本章 0/4 · 下一条 航段 1/57 点亮星图”。
+- 提交 eea834c 已推送；GitHub Pages workflow 25157859784 已成功，线上地址返回 HTTP 200；线上首页、`game.js`、`app.js` 和 `styles.css` 已确认包含筛选摘要短标签相关标记。
+- #4 已回复：说明星图筛选摘要默认压缩为“航段 X/57 项目名”，完整筛选说明保留在 `title` / `aria-label` 和展开详情中，并保持 issue open 等待复测。
+- 回复后同步 GitHub Issues：2026-04-30 17:28 CST 当前仍为 5 个 open feedback issue、0 个 open bug issue；#4 更新时间为 2026-04-30T09:27:42Z。
 
 下一步：等待 #4 复测；如果星图筛选区仍有明显文字压力，再继续把默认可见筛选信息转为视觉槽，而不是恢复长说明。
 
