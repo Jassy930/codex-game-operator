@@ -9,6 +9,8 @@
 - 同步 GitHub Issues 反馈状态：2026-05-01 02:07 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 作为本轮处理对象。
 - 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
 - 构建产物已确认包含 `branchPlanStepText`、`far-dispatch-branch-step` 和“路线步骤”相关文案。
+- 发布：提交 `458c6f7` 已推送到 `origin/main`；GitHub Pages workflow `25182079509` 成功；线上首页、`src/game.js`、`src/app.js` 和 `src/styles.css` 已确认包含 `branchPlanStepText`、`far-dispatch-branch-step` 和“路线步骤”。
+- 反馈处理：已回复 #6，说明路线步骤上线范围、验证结果和复测问题，issue 保持 open；回复后于 2026-05-01 02:22 CST 再次同步 GitHub Issues，当前仍为 5 个 open feedback issue、0 个 open bug issue。
 - 钉钉通知未发送：运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` 相关变量名，也未发现本地 `.env` 文件；未将 webhook 写入仓库。
 
 - 远航调度新增“路线预案”：主操作区、星图总览远航摘要和反馈快照会显示推荐、本轮或下一轮“目标 -> 协同/绕行 -> 回目标”路线，继续回应 #6 对后半段玩法变化不明显的反馈。
