@@ -9,7 +9,9 @@
 - 同步 GitHub Issues 反馈状态：2026-05-01 03:46 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 作为本轮处理对象。
 - 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
 - 构建产物已确认包含 `dispatchBranchStabilityReward`、`directive-dispatch-branch-stability` 和“路线稳航”相关文案。
-- 发布验证、反馈回复和钉钉通知状态将在提交、推送和部署后补记。
+- 发布：提交 `a5deae1` 已推送到 `origin/main`；GitHub Pages workflow `25186268001` 成功；线上首页返回 HTTP 200，线上 `src/game.js`、`src/app.js` 和 `src/styles.css` 已确认包含 `dispatchBranchStabilityReward`、`FAR_ROUTE_DISPATCH_BRANCH_STABILITY_REWARD_RATE`、`directive-dispatch-branch-stability` 和“路线稳航”。
+- 反馈处理：已回复 #6，说明路线稳航上线范围、验证结果和复测问题，issue 保持 open；回复后于 2026-05-01 03:56 CST 再次同步 GitHub Issues，当前仍为 5 个 open feedback issue、0 个 open bug issue。
+- 钉钉通知未发送：运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` 相关变量名，也未发现本地 `.env*` 文件；未将 webhook 写入仓库。
 
 - 远航调度新增“闭环复盘”：协同/绕行路线回目标完成 3/3 后，远航调度条会显示刚完成的路线、已触发的闭环/突破/契合闭环收益和下一步整备；整备指令执行后会提示回目标触发整备回航，继续回应 #6 对后半段玩法变化不明显的反馈。
 - `src/game.js` 为远航调度派生 `branchClosureText` 并纳入远航调度长文本和星图总览摘要；`src/app.js` 渲染 `far-dispatch-branch-closure`；`index.html` 增加静态占位；`src/styles.css` 增加闭环复盘样式；`tests/game.test.js` 覆盖协同闭环、绕行闭环、整备后回航提示和静态绑定。
