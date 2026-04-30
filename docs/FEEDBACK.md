@@ -2,6 +2,13 @@
 
 ## 2026-04-30
 
+- GitHub Issues：gh 可用且已认证；2026-04-30 19:26 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
+- #6 继续作为本轮 Product decision 依据：该反馈指出后半段“只有不停的目标、玩法没有真正变化”；前序已补远航调度目标、协同/续航、回目标闭环、远航突破、整备刷新、路径收益标签和整备续航奖励，本轮处理整备续航之后回到目标指令缺少独立回航回报的问题。
+- 本轮改动新增远航整备回航奖励：完成 3/3 闭环并执行整备续航后，回到当前航段目标指令会显示并结算“整备回航 +6%”。
+- 本轮不新增存档字段，不改变升级价格、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、基础连携倍率、远航调度校准、远航续航、远航协同、远航闭环、远航突破、远航整备刷新冷却、整备续航、反馈入口或部署链路。
+- 本轮本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 117 项。
+- 构建产物已确认包含 `FAR_ROUTE_DISPATCH_RETURN_REWARD_RATE`、`dispatchReturnReward`、`directive-dispatch-return` 和“整备回航”。
+
 - GitHub Issues：gh 可用且已认证；2026-04-30 19:02 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
 - #6 继续作为本轮 Product decision 依据：该反馈指出后半段“只有不停的目标、玩法没有真正变化”；前序已补远航调度目标、协同/续航、回目标闭环、远航突破、整备刷新和路径收益标签，本轮处理 3/3 闭环完成后下一轮起手只有推荐、缺少独立远航回报的问题。
 - 本轮改动新增远航整备续航奖励：完成 3/3 回到当前航段目标指令后，被远航整备刷新的协同续航按钮会显示并结算“整备续航 +7%”。

@@ -1,5 +1,32 @@
 # Decision
 
+## 2026-04-30 Product decision：远航整备回航奖励
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-04-30 19:26 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#6 仍是最新反馈线程，指出后半段“只有不停的目标、玩法没有真正变化”，因此本轮继续进入 Product decision。
+
+当前最大问题：远航调度已经形成“目标指令 -> 协同/续航 -> 回目标闭环 -> 整备续航”的后半段短循环；但整备续航执行后，再回到当前航段目标指令时主要表现为常规调度目标。闭环收尾、整备续航和下一轮目标起手之间还缺少一个明确的回航回报。
+
+本轮决策：
+
+- 给整备续航后的目标指令新增“整备回航 +6%”奖励。
+- 当上一轮完成 3/3 闭环后已经执行当前协同续航指令，且下一步回到当前航段目标指令时，按有效基础指令收益结算整备回航奖励。
+- 按钮推荐从普通调度目标切换为“整备回航/等待回航”，按钮徽标、预计收益、执行反馈和本地 `directive` 事件同步记录 `dispatchReturnReward` / `dispatchReturnRewardRate` / `dispatchReturnRewardText`。
+- 本轮不新增存档字段，不改变升级价格、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、基础连携倍率、远航调度校准、远航续航、远航协同、远航闭环、远航突破、远航整备刷新冷却、整备续航、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-04-30 19:26 CST 当前 5 个 open feedback issue、0 个 open bug issue。
+- `FAR_ROUTE_DISPATCH_RETURN_REWARD_RATE` 为 0.06。
+- `getDirectivePlan` 在整备续航后推荐当前目标指令为“整备回航”，等待文案为“等待回航”。
+- `getDirectiveStatus` 在整备回航目标指令按钮上显示 `整备回航 +X`。
+- `activateDirective` 执行整备回航时结算 `dispatchReturnReward`，执行反馈包含“整备回航”。
+- `src/app.js` 记录 `dispatchReturnReward` 事件字段，并渲染 `directive-dispatch-return` 徽标。
+- `src/styles.css` 包含 `.directive-button .directive-dispatch-return` 样式。
+- 本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 117 项。
+- 构建产物已确认包含 `FAR_ROUTE_DISPATCH_RETURN_REWARD_RATE`、`dispatchReturnReward`、`directive-dispatch-return` 和“整备回航”。
+
+下一步：推送后等待 #6 复测；如果仍认为后半段只是目标推进，再评估资源消耗型指令或项目分支，而不是继续增加路径展示。
+
 ## 2026-04-30 Product decision：远航整备续航奖励
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-04-30 19:02 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#6 仍是最新反馈线程，指出后半段“只有不停的目标、玩法没有真正变化”，因此本轮继续进入 Product decision。
