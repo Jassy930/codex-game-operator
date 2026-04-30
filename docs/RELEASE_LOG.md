@@ -9,6 +9,11 @@
 - 同步 GitHub Issues 反馈状态：2026-05-01 00:06 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 作为本轮处理对象。
 - 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
 - 构建产物已确认包含 `choice.nextText`、后续协同/绕行回航文案和 `.far-dispatch-branch-choice small`。
+- 提交 f31face 已推送；GitHub Pages workflow 25176578989 已成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`。
+- 线上地址 https://jassy930.github.io/codex-game-operator/ 返回 HTTP 200，且线上 `game.js`、`app.js` 和 `styles.css` 已确认包含 `choice.nextText`、后续协同/绕行回航文案和 `.far-dispatch-branch-choice small`。
+- 已回复 #6，说明分支选择条、推荐分支和星图总览摘要会直接显示协同/绕行后的回航结果；issue 保持 open 等待复测。
+- 回复后同步 GitHub Issues 反馈状态：2026-05-01 00:19 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 更新时间为 2026-04-30T16:19:15Z。
+- 钉钉通知未发送：运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` 相关变量名；未将 webhook 写入仓库。
 
 - 星图当前航段远航路径现在会标明具体协同和绕行指令：详情显示“协同 X · 绕行 Y”，3 步路径显示“协同 X / 绕行 Y”，主操作区远航路径轨也会显示实际绕行指令名，继续回应 #6 对后半段玩法变化不明显的反馈。
 - `src/game.js` 让 `buildProjectDispatchInfo` 派生 `dispatchDetourDirectiveId` / `dispatchDetourDirectiveName` 并复用绕行备选指令名；`tests/game.test.js` 覆盖脉冲航闸的星图详情、路径文本和主操作区路径轨。

@@ -21,8 +21,13 @@
 - `src/app.js` 渲染 `choice.nextText`；`src/styles.css` 为分支选择条中的后续预告提供紧凑样式。
 - 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
 - 构建产物已确认包含 `choice.nextText`、后续协同/绕行回航文案和 `.far-dispatch-branch-choice small`。
+- 提交 f31face 已推送；GitHub Pages workflow 25176578989 已成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`。
+- 线上地址 https://jassy930.github.io/codex-game-operator/ 返回 HTTP 200，且线上 `game.js`、`app.js` 和 `styles.css` 已确认包含 `choice.nextText`、后续协同/绕行回航文案和 `.far-dispatch-branch-choice small`。
+- #6 已回复：说明分支选择条、推荐分支和星图总览摘要会直接显示协同/绕行后的回航结果；issue 保持 open 等待复测。
+- 回复后同步 GitHub Issues：2026-05-01 00:19 CST 当前仍为 5 个 open feedback issue、0 个 open bug issue；#6 更新时间为 2026-04-30T16:19:15Z。
+- 钉钉通知未发送：运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` 相关变量名；未将 webhook 写入仓库。
 
-下一步：提交并推送本轮改动，等待 GitHub Pages workflow 成功后回复 #6，说明分支选择条现在会直接写出协同/绕行后的回航结果。
+下一步：等待 #6 复测，重点确认分支选择条是否更像路线选择，而不是两个收益按钮。
 
 ## 2026-04-30 Product decision：星图远航分支路径标明
 

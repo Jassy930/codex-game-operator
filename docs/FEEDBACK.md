@@ -8,6 +8,10 @@
 - 本轮只调整派生展示、DOM 和样式，不新增收益、不新增存档字段，不改变升级价格、星图路线、项目奖励、远航调度数值、冷却、连携窗口、反馈入口或部署链路。
 - 本轮本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
 - 构建产物已确认包含 `choice.nextText`、后续协同/绕行回航文案和 `.far-dispatch-branch-choice small`。
+- 提交 f31face 已推送；GitHub Pages workflow 25176578989 已成功，线上地址返回 HTTP 200，线上脚本和样式已确认包含远航分支后续预告。
+- #6 已回复：说明分支选择条、推荐分支和星图总览摘要会直接显示协同/绕行后的回航结果；issue 保持 open 等待复测。
+- 回复后同步 GitHub Issues：2026-05-01 00:19 CST 当前仍为 5 个 open feedback issue、0 个 open bug issue；#6 更新时间为 2026-04-30T16:19:15Z。
+- 钉钉通知未发送：运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` 相关变量名；未将 webhook 写入仓库。
 
 ## 2026-04-30
 
