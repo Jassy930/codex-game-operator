@@ -7,6 +7,9 @@
 - 本轮改动让目标指令后的 1/3 阶段将可用非目标指令标为“远航续航/等待续航”；脉冲航闸点火齐射后，巡航回收和谐振脉冲都可以作为远航续航第二步。
 - 本轮不新增存档字段，不改变升级价格、产能公式、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、基础连携倍率、轮换目标奖励、预案执行、航线委托、指令熟练、满层回响、远航调度校准、冷却、连携窗口、远航续航奖励倍率、远航闭环奖励或反馈入口。
 - 本轮本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 106 项。
+- 提交 36b91fe 已推送；GitHub Pages workflow 25144325224 已成功，线上地址返回 HTTP 200；线上 `game.js` 已确认包含 `dispatchRelayCanOverride`、“远航续航可切换到”、“目标后推荐非目标指令”和“等待续航”。
+- #6 已回复：说明远航续航从奖励徽标升级为目标后的按钮级第二步推荐，issue 保持 open 等待复测。
+- 回复后同步 GitHub Issues：2026-04-30 10:33 CST 当前仍为 5 个 open feedback issue、0 个 open bug issue；#6 更新时间为 2026-04-30T02:33:23Z。
 
 - GitHub Issues：gh 可用且已认证；2026-04-30 10:12 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
 - #6 继续作为本轮 Product decision：上一轮已让远航调度条显示 0/3 到 3/3 闭环进度，但尚无玩家复测结论；本轮补齐短循环第二步，让目标指令后的非目标续航也有明确奖励。
