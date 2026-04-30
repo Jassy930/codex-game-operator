@@ -22,9 +22,11 @@
 - `src/styles.css` 包含 `.project-current-visual`、`.project-current-orbit`、`.project-current-track` 和 `.project-current-meter`。
 - 本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 116 项。
 - 构建产物已确认包含 `projectCurrentVisual`、`project-current-visual`、`getProjectCurrentVisual` 和“当前航段”。
-- 待推送后回复 #4，并保持 open 等待复测当前航段视觉卡是否能降低星图总览首屏文字组合成本。
+- 提交 37fe8ad 已推送；GitHub Pages workflow 25156456518 已成功，线上地址返回 HTTP 200，且线上首页、`game.js`、`app.js` 和 `styles.css` 已确认包含当前航段视觉卡相关标记。
+- #4 已回复并继续保持 open，等待复测确认星图总览新增当前航段视觉卡后，默认可见区域是否更容易一眼看懂当前航段、推进类型和奖励方向。
+- 回复后同步 GitHub Issues：2026-04-30 16:54 CST 当前仍为 5 个 open feedback issue、0 个 open bug issue；#4 更新时间为 2026-04-30T08:53:49Z。
 
-下一步：推送并等待 #4 复测；如果仍认为星图总览文字密度高，再继续把默认可见长句转为视觉结构。
+下一步：等待 #4 复测；如果仍认为星图总览文字密度高，再继续把默认可见长句转为视觉结构。
 
 ## 2026-04-30 Product decision：航线预告视觉带
 
