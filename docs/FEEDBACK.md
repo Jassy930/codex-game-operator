@@ -8,6 +8,10 @@
 - 本轮只调整派生展示和反馈快照文本；不新增存档字段，不改变升级价格、星图路线、项目奖励、项目完成判定、航线策略、指令收益、远航调度收益、整备收益、反馈入口或部署链路。
 - 本轮本地验证已通过：`npm install`、`npm test` 和 `npm run build`；测试数 117 项。
 - 构建产物已确认包含 `far-dispatch-branch`、`branchKind`、`branchText`、“分支 待选择”、“分支 协同”和“分支 绕行”。
+- 提交 7bf24b8 已推送；GitHub Pages workflow 25169515816 已成功，线上地址返回 HTTP 200，线上 `game.js`、`app.js` 和 `styles.css` 已确认包含远航分支态势相关标记。
+- #6 已回复：说明远航调度新增分支态势，并保持 issue open 等待复测。
+- 回复后同步 GitHub Issues：2026-04-30 21:58 CST 当前仍为 5 个 open feedback issue、0 个 open bug issue；#6 更新时间为 2026-04-30T13:58:22Z。
+- 钉钉通知未发送：运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` 相关变量名；未将 webhook 写入仓库。
 
 - GitHub Issues：gh 可用且已认证；2026-04-30 21:16 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
 - #6 继续作为本轮 Product decision 依据：该反馈指出后半段“只有不停的目标、玩法没有真正变化”；前序已经让协同路线补当前资源、绕行路线消耗当前资源推进累计航段，但绕行完成闭环后的下一轮起手仍和协同整备节奏过于接近。

@@ -9,6 +9,11 @@
 - 同步 GitHub Issues 反馈状态：2026-04-30 21:43 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 作为本轮处理对象。
 - 验证通过：`npm install`、`npm test` 和 `npm run build`；测试数 117 项。
 - 构建产物已确认包含 `far-dispatch-branch`、`branchKind`、`branchText`、“分支 待选择”、“分支 协同”和“分支 绕行”。
+- 提交 7bf24b8 已推送；GitHub Pages workflow 25169515816 已成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`。
+- 线上地址 https://jassy930.github.io/codex-game-operator/ 返回 HTTP 200，且线上 `game.js`、`app.js` 和 `styles.css` 已确认包含远航分支态势相关标记。
+- 已回复 #6，说明远航调度新增分支态势，并保持 issue open 等待复测。
+- 回复后同步 GitHub Issues 反馈状态：2026-04-30 21:58 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 更新时间为 2026-04-30T13:58:22Z。
+- 钉钉通知未发送：运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` 相关变量名；未将 webhook 写入仓库。
 
 - 远航绕行路线新增“绕行整备”：目标指令后选择绕行并回到目标完成闭环时，会记录最近远航分支 `farRouteLastBranchDirectiveId`，刷新刚才的绕行指令冷却；完成态下一步优先推荐“绕行整备/等待绕行整备”，执行该绕行指令获得有效基础指令收益 5% 的奖励，继续回应 #6 对后半段玩法变化不明显的反馈。
 - `src/game.js` 新增 `FAR_ROUTE_DISPATCH_DETOUR_PREP_REWARD_RATE`、最近远航分支记录、绕行整备刷新/推荐/收益计算和执行/预览文案；`src/app.js` 记录 `dispatchDetourPrepReward` / `dispatchDetourPrepRewardRate` / `dispatchDetourPrepRewardText` 事件字段并渲染 `directive-dispatch-detour-prep` 徽标；`src/styles.css` 新增绕行整备徽标样式；`tests/game.test.js` 覆盖绕行整备推荐、预览、执行、静态绑定和反馈快照。
