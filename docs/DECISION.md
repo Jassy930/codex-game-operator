@@ -21,6 +21,9 @@
 - CSS 包含 `.core-overload-badge`、`.is-countdown-active`、`.is-overload-ready`、`.is-overload-hit`、`coreBadgePulse` 和 `coreBadgeBurst`。
 - 本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 117 项。
 - 构建产物已确认包含 `coreOverloadBadge`、`core-overload-badge`、`coreOverloadBadgeValue`、`coreBadgePulse` 和 `coreBadgeBurst`。
+- 提交 f42758f 已推送；GitHub Pages workflow 25160921955 已成功；线上地址返回 HTTP 200，且线上首页、`app.js` 和 `styles.css` 已确认包含点火过载倒计时徽标相关标记。
+- #5 已回复：说明按钮内新增过载倒计时徽标，并保持 issue open 等待复测。
+- 回复后同步 GitHub Issues：2026-04-30 18:42 CST 当前仍为 5 个 open feedback issue、0 个 open bug issue；#5 更新时间为 2026-04-30T10:40:34Z。
 
 下一步：等待 #5 复测；如果仍认为点火按钮点击欲望不足，再评估星核本体随连击阶段改变图形层级，而不是提高点击收益。
 

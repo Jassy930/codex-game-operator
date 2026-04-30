@@ -8,6 +8,9 @@
 - 同步 GitHub Issues 反馈状态：2026-04-30 18:31 CST 当前 5 个 open feedback issue、0 个 open bug issue；#5 作为本轮处理对象。
 - 验证通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 117 项。
 - 构建产物已确认包含 `coreOverloadBadge`、`core-overload-badge`、`coreOverloadBadgeValue`、`coreBadgePulse` 和 `coreBadgeBurst`。
+- 提交 f42758f 已推送；GitHub Pages workflow 25160921955 已成功；线上地址返回 HTTP 200，且线上首页、`app.js` 和 `styles.css` 已确认包含点火过载倒计时徽标相关标记。
+- 已回复 #5，说明点火按钮内新增过载倒计时徽标，并保持 issue open 等待复测。
+- 回复后同步 GitHub Issues 反馈状态：2026-04-30 18:42 CST 当前 5 个 open feedback issue、0 个 open bug issue；#5 更新时间为 2026-04-30T10:40:34Z。
 
 - 星图当前章节大图景新增章节节点带：`project-chapter-hero-route` 用 completed/current/active/pending 节点展示章节内推进状态，远航长尾压缩到最多 8 个节点，继续回应 #4 对界面文字密度和图片化表达的反馈。
 - `src/game.js` 新增 `PROJECT_CHAPTER_HERO_NODE_LIMIT` 与 `heroNodes` 派生；`src/app.js` 新增 `renderProjectChapterHeroNode` 并把节点带渲染进当前章节大图景；`index.html` 静态占位同步 `project-chapter-hero-route`；`src/styles.css` 新增章节节点带和状态样式；`tests/game.test.js` 覆盖静态标记、运行期绑定和长尾压缩节点。
