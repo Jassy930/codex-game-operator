@@ -2,6 +2,13 @@
 
 ## 2026-04-30
 
+- GitHub Issues：gh 可用且已认证；2026-04-30 23:48 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
+- #6 继续作为本轮 Product decision 依据：该反馈指出后半段“只有不停的目标、玩法没有真正变化”；前序已把推荐分支落到按钮层，但星图当前航段卡片仍把第二步写成泛化“协同/绕行”或“绕行备选”。
+- 本轮改动新增星图远航分支路径标明：星图当前航段详情会显示“协同 X · 绕行 Y”，星图 3 步路径和主操作区远航路径轨会显示实际协同/绕行指令名。
+- 本轮只调整派生展示和测试，不新增存档字段，不改变升级价格、星图路线、项目奖励、远航调度数值、冷却、连携窗口、反馈入口或部署链路。
+- 本轮本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含 `dispatchDetourDirectiveId` 与具体协同/绕行路径名。
+
 - GitHub Issues：gh 可用且已认证；2026-04-30 23:35 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
 - #6 继续作为本轮 Product decision 依据：该反馈指出后半段“只有不停的目标、玩法没有真正变化”；前序已把当前航段推荐协同/绕行显示到调度条和星图总览，但实际按钮层仍只显示“远航协同/远航绕行”。
 - 本轮改动新增推荐分支按钮标记：目标指令后的远航续航阶段，如果按钮正好对应当前航段契合分支，推荐徽标显示“推荐协同”或“推荐绕行”；冷却时显示“等待推荐协同/等待推荐绕行”。

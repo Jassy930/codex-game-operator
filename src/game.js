@@ -1876,6 +1876,8 @@ export function getProjectStatuses(state) {
       dispatchTargetDirectiveName: dispatchInfo?.targetDirectiveName ?? "",
       dispatchRelayDirectiveId: dispatchInfo?.relayDirectiveId ?? null,
       dispatchRelayDirectiveName: dispatchInfo?.relayDirectiveName ?? "",
+      dispatchDetourDirectiveId: dispatchInfo?.detourDirectiveId ?? null,
+      dispatchDetourDirectiveName: dispatchInfo?.detourDirectiveName ?? "",
       dispatchSteps: dispatchInfo?.steps ?? [],
       dispatchStepText: dispatchInfo?.stepText ?? ""
     };
@@ -4552,6 +4554,10 @@ function buildProjectDispatchInfo(project, state, isCurrent) {
 
   const targetDirective = getFarRouteDispatchDirective(project, state);
   const relayDirective = getFarRouteDispatchRelayDirective(targetDirective);
+  const detourDirective = getFarRouteDispatchDetourDirective(
+    targetDirective,
+    relayDirective
+  );
   const branchFocus = getFarRouteDispatchBranchFocus(
     project,
     targetDirective,
@@ -4563,11 +4569,15 @@ function buildProjectDispatchInfo(project, state, isCurrent) {
   }
 
   const relayText = relayDirective
-    ? " · 协同 " + relayDirective.name + " · 绕行备选"
+    ? " · 协同 " +
+      relayDirective.name +
+      (detourDirective ? " · 绕行 " + detourDirective.name : " · 绕行备选")
     : "";
   const branchFocusText = branchFocus.text ? " · " + branchFocus.text : "";
   const relayStepText = relayDirective
-    ? "协同/绕行 " + relayDirective.name
+    ? "协同 " +
+      relayDirective.name +
+      (detourDirective ? " / 绕行 " + detourDirective.name : " / 绕行备选")
     : "非目标续航";
   const targetRewardText = getFarRouteDispatchLoopStepRewardText(1, relayDirective);
   const relayRewardText = getFarRouteDispatchLoopStepRewardText(
@@ -4589,6 +4599,8 @@ function buildProjectDispatchInfo(project, state, isCurrent) {
     targetDirectiveName: targetDirective.name,
     relayDirectiveId: relayDirective?.id ?? null,
     relayDirectiveName: relayDirective?.name ?? "",
+    detourDirectiveId: detourDirective?.id ?? null,
+    detourDirectiveName: detourDirective?.name ?? "",
     steps: [
       {
         label: "目标",
@@ -4598,7 +4610,9 @@ function buildProjectDispatchInfo(project, state, isCurrent) {
       },
       {
         label: relayDirective ? "协同/绕行" : "续航",
-        directiveName: relayDirective ? relayDirective.name + "/绕行" : "非目标指令",
+        directiveName: relayDirective
+          ? relayDirective.name + "/" + (detourDirective?.name ?? "绕行")
+          : "非目标指令",
         text: relayStepText,
         rewardText: relayRewardText
       },
@@ -4637,7 +4651,13 @@ function buildFarRouteDispatchLoopSteps(
     return [];
   }
 
-  const relayStepText = relayDirective ? relayDirective.name + "/绕行" : "非目标续航";
+  const detourDirective = getFarRouteDispatchDetourDirective(
+    directive,
+    relayDirective
+  );
+  const relayStepText = relayDirective
+    ? relayDirective.name + "/" + (detourDirective?.name ?? "绕行")
+    : "非目标续航";
   return [
     {
       label: "目标",

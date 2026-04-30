@@ -1,5 +1,30 @@
 # Decision
 
+## 2026-04-30 Product decision：星图远航分支路径标明
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-04-30 23:48 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#6 仍是最新反馈线程，原始反馈指出后半段“只有不停的目标、玩法没有真正变化”，因此本轮继续进入 Product decision。
+
+当前最大问题：目标后的实际按钮已经能标出“推荐协同/推荐绕行”，主操作区也有分支选择条；但星图当前航段卡片的 3 步路径仍把第二步写成“协同/绕行 X”或泛化“绕行备选”。玩家在星图目标层扫当前航段时，仍不能直接知道协同和绕行分别对应哪枚航线指令。
+
+本轮决策：
+
+- 新增“星图远航分支路径标明”。
+- `buildProjectDispatchInfo` 从现有目标指令和协同续航指令继续派生绕行备选指令，并把星图当前航段详情改为“协同 X · 绕行 Y”。
+- 星图当前航段 3 步路径第二步改为“协同 X / 绕行 Y”，主操作区远航路径轨也同步显示实际绕行指令名，不再只写“X/绕行”。
+- 本轮只调整派生展示和测试，不新增存档字段，不改变升级价格、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、远航调度收益、冷却、连携窗口、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-04-30 23:48 CST 当前 5 个 open feedback issue、0 个 open bug issue。
+- 脉冲航闸星图当前航段详情显示“协同 谐振脉冲 · 绕行 巡航回收”。
+- 星图当前航段 3 步路径第二步显示“协同 谐振脉冲 / 绕行 巡航回收”。
+- 主操作区远航路径轨第二步显示“谐振脉冲/巡航回收”，不再显示泛化“谐振脉冲/绕行”。
+- `getProjectStatuses` 暴露 `dispatchDetourDirectiveId` / `dispatchDetourDirectiveName`，便于后续展示和测试复用。
+- 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含 `dispatchDetourDirectiveId` 与具体协同/绕行路径名。
+
+下一步：推送后回复 #6，等待复测星图目标层是否更容易看清协同/绕行具体路径。
+
 ## 2026-04-30 Product decision：推荐分支按钮标记
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-04-30 23:35 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#6 仍是最新反馈线程，原始反馈指出后半段“只有不停的目标、玩法没有真正变化”，因此本轮继续进入 Product decision。

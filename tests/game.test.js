@@ -2615,11 +2615,11 @@ test("远航调度会在 20M 后按当前航段指定目标指令", () => {
   assert.equal(currentProject.dispatchBadgeText, "调度 点火齐射");
   assert.equal(
     currentProject.dispatchText,
-    "远航调度：目标 点火齐射 · 协同 谐振脉冲 · 绕行备选 · 航段契合：协同 谐振脉冲 · 点击/过载航段保留当前资源 · 3/3 回到目标触发闭环"
+    "远航调度：目标 点火齐射 · 协同 谐振脉冲 · 绕行 巡航回收 · 航段契合：协同 谐振脉冲 · 点击/过载航段保留当前资源 · 3/3 回到目标触发闭环"
   );
   assert.equal(
     currentProject.dispatchStepText,
-    "调度路径：目标 点火齐射（调度校准 +14%） -> 协同/绕行 谐振脉冲（远航协同 +5% · 补给 +3%当前 · 绕行 +4% · 改道 +6% · 投送 -0.3%当前 · 契合 +5%） -> 回目标 点火齐射（远航闭环 +16% · 远航突破 +0.05%剩余 · 绕行突破 +0.03%剩余）"
+    "调度路径：目标 点火齐射（调度校准 +14%） -> 协同 谐振脉冲 / 绕行 巡航回收（远航协同 +5% · 补给 +3%当前 · 绕行 +4% · 改道 +6% · 投送 -0.3%当前 · 契合 +5%） -> 回目标 点火齐射（远航闭环 +16% · 远航突破 +0.05%剩余 · 绕行突破 +0.03%剩余）"
   );
   assert.deepEqual(
     currentProject.dispatchSteps.map((step) => step.rewardText),
@@ -2631,10 +2631,11 @@ test("远航调度会在 20M 后按当前航段指定目标指令", () => {
   );
   assert.deepEqual(
     currentProject.dispatchSteps.map((step) => step.text),
-    ["目标 点火齐射", "协同/绕行 谐振脉冲", "回目标 点火齐射"]
+    ["目标 点火齐射", "协同 谐振脉冲 / 绕行 巡航回收", "回目标 点火齐射"]
   );
   assert.equal(currentProject.dispatchTargetDirectiveId, "ignition-salvo");
   assert.equal(currentProject.dispatchRelayDirectiveId, "resonance-pulse");
+  assert.equal(currentProject.dispatchDetourDirectiveId, "cruise-cache");
   assert.equal(dispatch.targetDirectiveId, "ignition-salvo");
   assert.equal(dispatch.targetDirectiveName, "点火齐射");
   assert.equal(dispatch.relayDirectiveId, "resonance-pulse");
@@ -2709,7 +2710,7 @@ test("远航调度会在 20M 后按当前航段指定目标指令", () => {
   assert.equal(dispatch.loopTarget, 3);
   assert.equal(
     dispatch.loopStepText,
-    "远航路径：下一步 目标 点火齐射（调度校准 +14%） -> 待推进 协同/绕行 谐振脉冲/绕行（远航协同 +5% · 补给 +3%当前 · 绕行 +4% · 改道 +6% · 投送 -0.3%当前 · 契合 +5%） -> 待推进 回目标 点火齐射（远航闭环 +16% · 远航突破 +0.05%剩余 · 绕行突破 +0.03%剩余）"
+    "远航路径：下一步 目标 点火齐射（调度校准 +14%） -> 待推进 协同/绕行 谐振脉冲/巡航回收（远航协同 +5% · 补给 +3%当前 · 绕行 +4% · 改道 +6% · 投送 -0.3%当前 · 契合 +5%） -> 待推进 回目标 点火齐射（远航闭环 +16% · 远航突破 +0.05%剩余 · 绕行突破 +0.03%剩余）"
   );
   assert.deepEqual(
     dispatch.loopSteps.map(
@@ -2717,7 +2718,7 @@ test("远航调度会在 20M 后按当前航段指定目标指令", () => {
     ),
     [
       "目标:下一步:点火齐射:调度校准 +14%",
-      "协同/绕行:待推进:谐振脉冲/绕行:远航协同 +5% · 补给 +3%当前 · 绕行 +4% · 改道 +6% · 投送 -0.3%当前 · 契合 +5%",
+      "协同/绕行:待推进:谐振脉冲/巡航回收:远航协同 +5% · 补给 +3%当前 · 绕行 +4% · 改道 +6% · 投送 -0.3%当前 · 契合 +5%",
       "回目标:待推进:点火齐射:远航闭环 +16% · 远航突破 +0.05%剩余 · 绕行突破 +0.03%剩余"
     ]
   );
