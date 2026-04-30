@@ -21,8 +21,11 @@
 - 执行谐振脉冲续航时，预计收益、执行反馈和本地 `directive` 事件记录远航协同；执行巡航回收续航时不记录远航协同。
 - 静态首页和运行期资源包含 `FAR_ROUTE_DISPATCH_SYNC_REWARD_RATE`、`dispatchSyncReward`、`directive-dispatch-sync` 和“远航协同”。
 - 本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 106 项。
+- 提交 1faabbd 已推送；GitHub Pages workflow 25144798558 已成功，线上地址返回 HTTP 200，且线上首页、`game.js`、`app.js` 和 `styles.css` 已确认包含远航协同相关标记。
+- #6 已回复并继续保持 open，等待复测确认目标后的协同续航优先级是否比两个等价非目标按钮更像后半段当前航段决定的操作变化。
+- 回复后同步 GitHub Issues：2026-04-30 10:51 CST 当前仍为 5 个 open feedback issue、0 个 open bug issue；#6 更新时间为 2026-04-30T02:51:43Z。
 
-下一步：发布后回复 #6，等待复测确认目标后的协同续航优先级是否比两个等价非目标按钮更像后半段当前航段决定的操作变化。
+下一步：等待 #6 复测；若仍认为后半段只是按推荐按钮追目标，再评估资源消耗型阶段动作、项目分支或更重的可规划短循环。
 
 ## 2026-04-30 Product decision：远航续航推荐
 
