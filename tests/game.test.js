@@ -19,6 +19,7 @@ import {
   filterProjectStatuses,
   formatNumber,
   getComboStatus,
+  getCoreRewardPreview,
   getCurrentGoal,
   getDirectivePlan,
   getDirectiveStatus,
@@ -97,6 +98,35 @@ test("连击状态会返回过载进度和剩余点击数", () => {
   assert.equal(overloaded.remaining, 0);
   assert.equal(overloaded.progress, 1);
   assert.equal(overloaded.hintText, "过载已触发");
+});
+
+test("点火奖励预告会显示下一击收益和过载触发", () => {
+  let state = createInitialState(0);
+  const idlePreview = getCoreRewardPreview(state, 0);
+
+  assert.equal(idlePreview.nextGain, 1);
+  assert.equal(idlePreview.text, "下一击 +1 · 再 8 次过载 +5");
+  assert.equal(idlePreview.isOverloadReady, false);
+  assert.equal(idlePreview.isOverloadHit, false);
+
+  for (let index = 0; index < 7; index += 1) {
+    state = clickCore(state, index * 100);
+  }
+
+  const readyPreview = getCoreRewardPreview(state, 700);
+
+  assert.equal(readyPreview.nextGain, 6);
+  assert.equal(readyPreview.text, "下一击 +6 · 触发过载 +5");
+  assert.equal(readyPreview.isOverloadReady, true);
+  assert.equal(readyPreview.isOverloadHit, false);
+
+  state = clickCore(state, 700);
+  const hitPreview = getCoreRewardPreview(state, 800);
+
+  assert.equal(hitPreview.nextGain, 1);
+  assert.equal(hitPreview.text, "下一击 +1 · 新一轮过载蓄能");
+  assert.equal(hitPreview.isOverloadReady, false);
+  assert.equal(hitPreview.isOverloadHit, true);
 });
 
 test("购买聚能透镜会扣除成本并提升点击产能", () => {
@@ -992,9 +1022,16 @@ test("点火按钮会渲染点击反馈和过载前兆效果", () => {
 
   assert.match(indexHtml, /id="coreButton" class="core-button" type="button" data-combo-step="0"/);
   assert.match(indexHtml, /class="core-feedback-layer"/);
+  assert.match(indexHtml, /class="core-combo-track"/);
+  assert.match(indexHtml, /id="coreRewardHint" class="core-reward-hint"/);
   assert.match(indexHtml, /class="core-label">点火<\/span>/);
+  assert.match(appJs, /getCoreRewardPreview/);
   assert.match(appJs, /function renderCoreFeedback\(combo\)/);
+  assert.match(appJs, /function renderCoreComboTrack\(combo\)/);
+  assert.match(appJs, /function renderCoreRewardHint\(coreReward\)/);
   assert.match(appJs, /elements\.coreButton\.dataset\.comboStep = String\(combo\.step\)/);
+  assert.match(appJs, /dot\.classList\.toggle\("is-filled", combo\.step >= step\)/);
+  assert.match(appJs, /dot\.classList\.toggle\("is-next", !combo\.overloaded && combo\.step \+ 1 === step\)/);
   assert.match(appJs, /is-combo-charging/);
   assert.match(appJs, /is-overload-ready/);
   assert.match(appJs, /is-overload-hit/);
@@ -1002,6 +1039,9 @@ test("点火按钮会渲染点击反馈和过载前兆效果", () => {
   assert.match(appJs, /window\.setTimeout/);
   assert.match(styles, /\.core-button::before/);
   assert.match(styles, /\.core-feedback-layer/);
+  assert.match(styles, /\.core-combo-track/);
+  assert.match(styles, /\.core-combo-dot\.is-next/);
+  assert.match(styles, /\.core-reward-hint/);
   assert.match(styles, /\.core-label/);
   assert.match(styles, /\.core-button\.is-overload-ready/);
   assert.match(styles, /\.core-button\.is-overload-impact::after/);
@@ -1009,6 +1049,7 @@ test("点火按钮会渲染点击反馈和过载前兆效果", () => {
   assert.match(styles, /@keyframes coreShockwave/);
   assert.match(styles, /@keyframes coreOverloadShockwave/);
   assert.match(styles, /@keyframes coreSparks/);
+  assert.match(styles, /@keyframes coreDotPulse/);
 });
 
 test("升级卡片会渲染可扫视图标", () => {

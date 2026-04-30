@@ -2,6 +2,13 @@
 
 ## 2026-04-30
 
+- GitHub Issues：gh 可用且已认证；2026-04-30 08:07 CST 通过 `ops/collect-feedback.sh` 同步到 4 个 open issue、4 个 open feedback issue、0 个 open bug issue。
+- #5 继续作为本轮 Product decision：上一轮已补点火按钮脉冲、粒子层、过载前兆和过载冲击波，但 issue 仍保持 open，尚无玩家复测结论；本轮继续补点击前的奖励预期和过载追逐目标。
+- 本轮改动新增 `getCoreRewardPreview`、按钮内 `core-combo-track` 8 格连击轨和按钮下方 `coreRewardHint` 下一击奖励预告。普通状态显示下一击收益和剩余过载次数，第 7 次连击提示下一击触发过载，第 8 次过载后提示进入新一轮蓄能。
+- 本轮只调整展示和奖励预告，不新增存档字段，不改变点击收益、连击窗口、过载奖励、升级价格、产能公式、星图 57 段路线、项目奖励、航线策略、航线指令或反馈入口。
+- 本轮本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数为 104 项。
+- 构建产物已包含 `core-combo-track`、`coreRewardHint`、`getCoreRewardPreview`、`coreDotPulse` 和“下一击”文案。
+
 - GitHub Issues：gh 可用且已认证；2026-04-30 07:54 CST 通过 `ops/collect-feedback.sh` 同步到 4 个 open issue、4 个 open feedback issue、0 个 open bug issue。
 - #5 进入本轮 Product decision：玩家反馈“点火按钮太薄弱了，增加点击反馈，增加特效，增加点击欲望”；快照显示累计能量约 138K、当前目标为谐振校准。
 - 本轮改动增强主点火按钮即时反馈：`coreButton` 增加 `core-feedback-layer`、`core-label` 和 `data-combo-step`；运行期 `renderCoreFeedback` 根据连击状态切换 `is-combo-charging`、`is-overload-ready`、`is-overload-hit`，第 7 次连击高亮过载前兆，第 8 次过载后保留强反馈状态；`animateCore` 在过载点击时额外触发 `is-overload-impact`。

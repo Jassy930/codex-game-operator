@@ -1532,6 +1532,38 @@ export function getComboStatus(state, now = Date.now()) {
   };
 }
 
+export function getCoreRewardPreview(state, now = Date.now()) {
+  const current = normalizeState(state, now);
+  const combo = getComboStatus(current, now);
+  const production = getEffectiveProduction(current);
+  const isOverloadReady = combo.remaining === 1 && !combo.overloaded;
+  const nextGain = roundTo(
+    production.perClick + (isOverloadReady ? production.overloadBonus : 0),
+    4
+  );
+  const text = isOverloadReady
+    ? "下一击 +" +
+      formatNumber(nextGain) +
+      " · 触发过载 +" +
+      formatNumber(production.overloadBonus)
+    : combo.overloaded
+      ? "下一击 +" + formatNumber(production.perClick) + " · 新一轮过载蓄能"
+      : "下一击 +" +
+        formatNumber(production.perClick) +
+        " · 再 " +
+        combo.remaining +
+        " 次过载 +" +
+        formatNumber(production.overloadBonus);
+
+  return {
+    nextGain,
+    overloadBonus: production.overloadBonus,
+    text,
+    isOverloadReady,
+    isOverloadHit: combo.overloaded
+  };
+}
+
 export function getProjectStatuses(state) {
   const current = normalizeState(state);
   const segmentTotal = PROJECT_DEFS.length;

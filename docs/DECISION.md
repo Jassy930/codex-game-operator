@@ -1,5 +1,30 @@
 # Decision
 
+## 2026-04-30 Product decision：点火奖励预告与连击轨
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-04-30 08:07 CST 同步到 4 个 open feedback issue、0 个 open bug issue。没有新的玩家复测或 bug；#5 仍保持 open，且指向“点火按钮太薄弱、增加点击反馈、特效和点击欲望”，本轮继续进入有反馈样本下的 Product decision。
+
+当前最大问题：上一轮已补普通点击脉冲、粒子层、过载前兆和过载冲击波，但玩家仍需要从按钮外的连击文字和顶部产能区拼接“下一次点击给多少、还差几次过载”。按钮已经有点击后的反馈，但点击前的预期奖励和第 8 次过载目标还不够直接。
+
+本轮决策：
+
+- 新增 `getCoreRewardPreview`，从现有点击产能、过载奖励和 `getComboStatus` 推导下一击收益文案：普通状态显示“下一击 +X · 再 N 次过载 +Y”，第 7 次连击显示“下一击 +X · 触发过载 +Y”，第 8 次过载后提示进入新一轮蓄能。
+- 在 `coreButton` 内新增 `core-combo-track` 8 格连击轨，运行期 `renderCoreComboTrack` 标记已填充格、下一格和第 8 格过载点，让过载进度变成按钮内的视觉目标。
+- 在按钮下方新增 `coreRewardHint`，运行期 `renderCoreRewardHint` 同步下一击奖励预告，并在临近过载或刚触发过载时切换高亮状态。
+- 本轮只调整展示和奖励预告；不新增存档字段，不改变点击收益、连击窗口、过载奖励、升级价格、产能公式、星图 57 段路线、项目奖励、航线策略、航线指令或反馈入口。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-04-30 08:07 CST 当前 4 个 open feedback issue、0 个 open bug issue；#5 继续作为本轮处理对象。
+- `getCoreRewardPreview` 覆盖初始态、第 7 次连击临近过载和第 8 次过载后的下一击预告。
+- 静态首页包含 `core-combo-track`、8 个 `core-combo-dot`、`coreRewardHint` 和默认“下一击 +1 · 再 8 次过载 +5”。
+- 运行期 `renderCoreComboTrack` 会切换 `is-filled`、`is-next`、`is-overload-dot`、`is-overload-ready` 和 `is-overload-hit`；`renderCoreRewardHint` 会切换奖励预告高亮。
+- `src/styles.css` 包含 `core-combo-track`、`core-combo-dot.is-next`、`core-reward-hint` 和 `coreDotPulse` 动画。
+- 本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 104 项。
+- 构建产物已确认包含 `core-combo-track`、`coreRewardHint`、`getCoreRewardPreview`、`coreDotPulse` 和“下一击”文案。
+
+下一步：推送后等待 GitHub Pages workflow；部署成功后回复 #5，请玩家复测奖励预告和 8 格连击轨是否让点火更有点击目标。
+
 ## 2026-04-30 Product decision：点火按钮即时反馈
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-04-30 07:54 CST 同步到 4 个 open feedback issue、0 个 open bug issue。没有新的 bug；#5 是最新反馈，明确指出“点火按钮太薄弱了，增加点击反馈，增加特效，增加点击欲望”，本轮进入有反馈样本下的 Product decision。

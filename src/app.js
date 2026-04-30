@@ -11,6 +11,7 @@ import {
   filterProjectStatuses,
   formatNumber,
   getComboStatus,
+  getCoreRewardPreview,
   getCurrentGoal,
   getDirectiveStatus,
   getEffectiveProduction,
@@ -121,6 +122,8 @@ const elements = {
   perClick: document.querySelector("#perClickValue"),
   overload: document.querySelector("#overloadValue"),
   coreButton: document.querySelector("#coreButton"),
+  coreComboTrack: document.querySelector("#coreButton .core-combo-track"),
+  coreRewardHint: document.querySelector("#coreRewardHint"),
   combo: document.querySelector("#comboValue"),
   pulse: document.querySelector("#pulseValue"),
   directiveList: document.querySelector("#directiveList"),
@@ -254,9 +257,11 @@ setInterval(() => {
 }, 250);
 
 function render() {
+  const now = Date.now();
   const current = normalizeState(state);
   const goal = getCurrentGoal(current);
-  const combo = getComboStatus(current);
+  const combo = getComboStatus(current, now);
+  const coreReward = getCoreRewardPreview(current, now);
   const production = getEffectiveProduction(current);
   const projectOverview = getProjectOverview(current);
   const projects = getProjectStatuses(current);
@@ -264,6 +269,7 @@ function render() {
   const directives = getDirectiveStatus(current);
 
   renderCoreFeedback(combo);
+  renderCoreRewardHint(coreReward);
   elements.energy.textContent = formatNumber(current.energy);
   elements.perSecond.textContent = formatNumber(production.perSecond);
   elements.perClick.textContent = formatNumber(production.perClick);
@@ -319,6 +325,31 @@ function renderCoreFeedback(combo) {
   elements.coreButton.classList.toggle("is-overload-hit", combo.overloaded);
   elements.pulse.classList.toggle("is-overload-ready", isOverloadReady);
   elements.pulse.classList.toggle("is-overload-hit", combo.overloaded);
+  renderCoreComboTrack(combo);
+}
+
+function renderCoreComboTrack(combo) {
+  elements.coreComboTrack.classList.toggle(
+    "is-overload-ready",
+    combo.remaining === 1 && !combo.overloaded
+  );
+  elements.coreComboTrack.classList.toggle("is-overload-hit", combo.overloaded);
+
+  Array.from(elements.coreComboTrack.children).forEach((dot, index) => {
+    const step = index + 1;
+    dot.classList.toggle("is-filled", combo.step >= step);
+    dot.classList.toggle("is-next", !combo.overloaded && combo.step + 1 === step);
+    dot.classList.toggle("is-overload-dot", step === combo.interval);
+  });
+}
+
+function renderCoreRewardHint(coreReward) {
+  elements.coreRewardHint.textContent = coreReward.text;
+  elements.coreRewardHint.classList.toggle(
+    "is-overload-ready",
+    coreReward.isOverloadReady
+  );
+  elements.coreRewardHint.classList.toggle("is-overload-hit", coreReward.isOverloadHit);
 }
 
 function renderDirectives(directives) {
