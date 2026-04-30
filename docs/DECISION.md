@@ -22,8 +22,11 @@
 - `src/styles.css` 包含 `core-combo-track`、`core-combo-dot.is-next`、`core-reward-hint` 和 `coreDotPulse` 动画。
 - 本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 104 项。
 - 构建产物已确认包含 `core-combo-track`、`coreRewardHint`、`getCoreRewardPreview`、`coreDotPulse` 和“下一击”文案。
+- 提交 d6e2dbd 已推送；GitHub Pages workflow 25140734201 已成功，线上地址返回 HTTP 200，且线上首页、`game.js`、`app.js` 和 `styles.css` 已确认包含点火奖励预告与 8 格连击轨相关标记。
+- #5 已回复并继续保持 open，等待复测确认 8 格连击轨和下一击奖励预告是否让点火按钮更有明确点击目标。
+- 回复后同步 GitHub Issues：2026-04-30 08:21 CST 当前为 5 个 open feedback issue、0 个 open bug issue；本轮工作期间新增 #6，反馈后半段“只有不停的目标，玩法没有真正变化”，已回复并作为下一轮优先产品决策候选。
 
-下一步：推送后等待 GitHub Pages workflow；部署成功后回复 #5，请玩家复测奖励预告和 8 格连击轨是否让点火更有点击目标。
+下一步：优先处理 #6，评估后半段能改变操作结构的小系统，避免只继续追加星图目标或文字提示。
 
 ## 2026-04-30 Product decision：点火按钮即时反馈
 

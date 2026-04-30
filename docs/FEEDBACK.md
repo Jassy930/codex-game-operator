@@ -8,6 +8,10 @@
 - 本轮只调整展示和奖励预告，不新增存档字段，不改变点击收益、连击窗口、过载奖励、升级价格、产能公式、星图 57 段路线、项目奖励、航线策略、航线指令或反馈入口。
 - 本轮本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数为 104 项。
 - 构建产物已包含 `core-combo-track`、`coreRewardHint`、`getCoreRewardPreview`、`coreDotPulse` 和“下一击”文案。
+- 提交 d6e2dbd 已推送；GitHub Pages workflow 25140734201 已成功，线上地址返回 HTTP 200；线上首页、`game.js`、`app.js` 和 `styles.css` 已确认包含点火奖励预告与 8 格连击轨相关标记。
+- #5 已回复：说明 8 格连击轨和下一击奖励预告已部署，issue 保持 open 等待复测。
+- 回复后同步 GitHub Issues：2026-04-30 08:21 CST 当前为 5 个 open feedback issue、0 个 open bug issue；#5 更新时间为 2026-04-30T00:20:33Z。
+- 本轮工作期间新增 #6：“到后半段，游戏玩法已经开始无聊了，只有不停的目标，但是游戏玩法没有真正的变化。”快照显示累计能量约 24.8M、当前目标为脉冲航闸、航线策略为巡航优先、指令熟练 2/3。已回复并保持 open；下一轮优先评估后半段玩法结构变化，而不是继续单纯追加目标。
 
 - GitHub Issues：gh 可用且已认证；2026-04-30 07:54 CST 通过 `ops/collect-feedback.sh` 同步到 4 个 open issue、4 个 open feedback issue、0 个 open bug issue。
 - #5 进入本轮 Product decision：玩家反馈“点火按钮太薄弱了，增加点击反馈，增加特效，增加点击欲望”；快照显示累计能量约 138K、当前目标为谐振校准。

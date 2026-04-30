@@ -8,6 +8,9 @@
 - 同步 GitHub Issues 反馈状态：2026-04-30 08:07 CST 当前 4 个 open feedback issue、0 个 open bug issue；#5 继续指向点火按钮点击反馈、特效和点击欲望，并作为本轮处理对象。
 - 验证通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 104 项。
 - 构建产物已确认包含 `core-combo-track`、`coreRewardHint`、`getCoreRewardPreview`、`coreDotPulse` 和“下一击”文案。
+- 提交 d6e2dbd 已推送；GitHub Pages workflow 25140734201 已成功，线上地址返回 HTTP 200，且线上首页、`game.js`、`app.js` 和 `styles.css` 已确认包含点火奖励预告与 8 格连击轨相关标记。
+- 已回复 #5，说明 8 格连击轨和下一击奖励预告已部署，并保持 issue open 等待复测。
+- 回复后同步 GitHub Issues 反馈状态：当前 5 个 open feedback issue、0 个 open bug issue；本轮工作期间新增 #6，指向后半段玩法没有真正变化，已回复并作为下一轮优先产品决策候选。
 - 点火按钮新增即时视觉反馈：普通点击触发按钮脉冲和粒子层，第 7 次连击显示过载前兆，第 8 次过载触发更强冲击波。
 - `index.html` 为 `coreButton` 新增 `data-combo-step`、`core-feedback-layer` 和 `core-label`；`src/app.js` 新增 `renderCoreFeedback` 并扩展 `animateCore`；`src/styles.css` 新增环形蓄能、普通/过载冲击波、粒子层和连击提示高亮；`tests/game.test.js` 覆盖静态结构、运行期 class 和样式标记。
 - 本轮只调整点火按钮展示与交互反馈；不新增存档字段，不改变升级价格、产能公式、星图 57 段路线、项目奖励、连击窗口、过载奖励、航线策略、航线指令或反馈入口。
