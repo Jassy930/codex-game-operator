@@ -1249,7 +1249,12 @@ function renderProject(project) {
     .join(" ");
   statusBadge.textContent = project.statusText;
 
-  header.append(title, segmentBadge, chapterBadge, tagBadge, statusBadge);
+  const dispatchBadge = document.createElement("span");
+  dispatchBadge.className = "project-dispatch-badge";
+  dispatchBadge.textContent = project.dispatchBadgeText;
+  dispatchBadge.hidden = !project.dispatchBadgeText;
+
+  header.append(title, segmentBadge, chapterBadge, tagBadge, statusBadge, dispatchBadge);
   item.append(header);
 
   const detailNodes = renderProjectDetailNodes(project);
@@ -1285,6 +1290,11 @@ function renderProjectDetailNodes(project) {
   reward.className = "project-reward";
   reward.textContent = project.reward;
 
+  const dispatch = document.createElement("span");
+  dispatch.className = "project-dispatch";
+  dispatch.textContent = project.dispatchText;
+  dispatch.hidden = !project.dispatchText;
+
   const meter = document.createElement("span");
   meter.className = "project-meter";
   meter.setAttribute("aria-hidden", "true");
@@ -1293,7 +1303,7 @@ function renderProjectDetailNodes(project) {
   fill.style.width = Math.round(project.progress * 100) + "%";
   meter.append(fill);
 
-  return [summary, progress, reward, meter];
+  return [summary, progress, reward, dispatch, meter];
 }
 
 function getProjectTrackIconId(project) {

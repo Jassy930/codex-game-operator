@@ -2024,6 +2024,7 @@ test("远航调度会在 20M 后按当前航段指定目标指令", () => {
     }
   };
   const dispatch = getFarRouteDispatch(state, 1000);
+  const currentProject = getProjectStatuses(state).find((project) => project.isCurrent);
   const plan = getDirectivePlan(state, 1000);
   const status = getDirectiveStatus(state, 1000);
   const ignitionOption = status.options.find((option) => option.id === "ignition-salvo");
@@ -2113,6 +2114,14 @@ test("远航调度会在 20M 后按当前航段指定目标指令", () => {
   assert.equal(dispatch.projectId, "pulse-arc-gate");
   assert.equal(dispatch.projectName, "脉冲航闸");
   assert.equal(dispatch.segmentText, "航段 27/57");
+  assert.equal(currentProject.id, "pulse-arc-gate");
+  assert.equal(currentProject.dispatchBadgeText, "调度 点火齐射");
+  assert.equal(
+    currentProject.dispatchText,
+    "远航调度：目标 点火齐射 · 协同 谐振脉冲 · 3/3 回到目标触发闭环"
+  );
+  assert.equal(currentProject.dispatchTargetDirectiveId, "ignition-salvo");
+  assert.equal(currentProject.dispatchRelayDirectiveId, "resonance-pulse");
   assert.equal(dispatch.targetDirectiveId, "ignition-salvo");
   assert.equal(dispatch.targetDirectiveName, "点火齐射");
   assert.equal(dispatch.relayDirectiveId, "resonance-pulse");

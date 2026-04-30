@@ -1,5 +1,26 @@
 # Decision
 
+## 2026-04-30 Product decision：星图调度可见性
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-04-30 13:13 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#6 的“后半段只有不停的目标、玩法没有真正变化”仍未有玩家复测结论，继续进入 Product decision。
+
+当前最大问题：20M 后远航调度已经会让当前航段指定目标指令、协同续航和闭环奖励，但玩家在星图卡片层仍主要看到“目标名称 + 奖励 + 进度”。如果调度关系只出现在航线指令区，目标层和玩法变化之间的连接仍不够直接。
+
+本轮决策：
+
+- 在 `getProjectStatuses` 中为 20M 后当前航段派生远航调度展示字段：调度徽标、目标指令、协同续航指令和闭环提示。
+- 星图当前航段卡片头部显示“调度 X”徽标，详情里显示“远航调度：目标 X · 协同 Y · 3/3 回到目标触发闭环”。
+- 本轮只调整星图卡片展示层；不新增存档字段，不改变指令收益、冷却、连携窗口、远航调度计算、星图航段、项目奖励、升级价格、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-04-30 13:13 CST 当前 5 个 open feedback issue、0 个 open bug issue。
+- `getProjectStatuses` 在 #6 快照对应的脉冲航闸阶段返回 `dispatchBadgeText = "调度 点火齐射"`，并返回目标/协同指令 id。
+- 本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 109 项。
+- 构建产物已确认包含 `project-dispatch-badge`、`project-dispatch` 和远航调度详情派生逻辑。
+
+下一步：回复 #6 并等待复测；若仍认为后半段玩法变化不足，再评估把远航调度关系同步到星图总览或增加更明确的航段驱动效果图。
+
 ## 2026-04-30 Product decision：航线指令插画
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-04-30 13:00 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#4 的“界面文字密集、希望更多图片和更好看”仍未有玩家复测结论，继续进入 Product decision。

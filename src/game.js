@@ -1670,11 +1670,18 @@ export function getProjectStatuses(state) {
 
   return statuses.map((project, index) => {
     const isCurrent = index === currentIndex;
+    const dispatchInfo = buildProjectDispatchInfo(project, current, isCurrent);
 
     return {
       ...project,
       isCurrent,
-      statusText: project.completed ? "已完成" : isCurrent ? "当前航段" : "待推进"
+      statusText: project.completed ? "已完成" : isCurrent ? "当前航段" : "待推进",
+      dispatchBadgeText: dispatchInfo?.badgeText ?? "",
+      dispatchText: dispatchInfo?.detailText ?? "",
+      dispatchTargetDirectiveId: dispatchInfo?.targetDirectiveId ?? null,
+      dispatchTargetDirectiveName: dispatchInfo?.targetDirectiveName ?? "",
+      dispatchRelayDirectiveId: dispatchInfo?.relayDirectiveId ?? null,
+      dispatchRelayDirectiveName: dispatchInfo?.relayDirectiveName ?? ""
     };
   });
 }
@@ -3574,6 +3581,38 @@ function buildProjectTagText(project) {
     .join("/");
 
   return rewardTypes ? trackText + " · " + rewardTypes + "奖励" : trackText;
+}
+
+function buildProjectDispatchInfo(project, state, isCurrent) {
+  if (
+    !isCurrent ||
+    project.completed ||
+    state.totalEnergy < FAR_ROUTE_DISPATCH_UNLOCK_ENERGY
+  ) {
+    return null;
+  }
+
+  const targetDirective = getFarRouteDispatchDirective(project, state);
+  const relayDirective = getFarRouteDispatchRelayDirective(targetDirective);
+
+  if (!targetDirective) {
+    return null;
+  }
+
+  const relayText = relayDirective ? " · 协同 " + relayDirective.name : "";
+
+  return {
+    badgeText: "调度 " + targetDirective.name,
+    detailText:
+      "远航调度：目标 " +
+      targetDirective.name +
+      relayText +
+      " · 3/3 回到目标触发闭环",
+    targetDirectiveId: targetDirective.id,
+    targetDirectiveName: targetDirective.name,
+    relayDirectiveId: relayDirective?.id ?? null,
+    relayDirectiveName: relayDirective?.name ?? ""
+  };
 }
 
 function formatProjectAmount(project, value) {

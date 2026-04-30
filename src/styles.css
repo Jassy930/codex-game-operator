@@ -1919,6 +1919,7 @@ h2 {
 .project-segment-badge,
 .project-chapter-badge,
 .project-tag-badge,
+.project-dispatch-badge,
 .project-status-badge {
   flex: 0 0 auto;
   padding: 3px 8px;
@@ -1955,6 +1956,11 @@ h2 {
 .project-status-badge.is-pending {
   background: rgba(248, 243, 231, 0.1);
   color: rgba(248, 243, 231, 0.72);
+}
+
+.project-dispatch-badge {
+  background: rgba(116, 204, 244, 0.16);
+  color: #c9f0ff;
 }
 
 .project-card-drawer {
@@ -1997,10 +2003,16 @@ h2 {
 }
 
 .project-summary,
-.project-progress {
+.project-progress,
+.project-dispatch {
   color: rgba(248, 243, 231, 0.68);
   font-size: 0.84rem;
   line-height: 1.35;
+}
+
+.project-dispatch {
+  color: #c9f0ff;
+  font-weight: 900;
 }
 
 .project-reward {
