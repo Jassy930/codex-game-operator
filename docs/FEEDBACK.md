@@ -2,6 +2,14 @@
 
 ## 2026-05-01
 
+- GitHub Issues：gh 可用且已认证；2026-05-01 05:51 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
+- #6 继续作为本轮 Product decision 依据：该反馈指出后半段“只有不停的目标、玩法没有真正变化”；前序已经给路线判断追加视觉状态，但卡片首行仍需要读到下一行才能确认首推、稳航、改道、建档、已选或已完成。
+- 本轮改动新增远航路线徽标：协同/绕行分支卡片从 `decisionKind` 派生 `decisionBadgeText`，并在卡片首行渲染 `far-dispatch-branch-choice-badge`，让“首推 / 稳航 / 改道 / 建档 / 备选稳航 / 备选改道 / 已选 / 已完成”先被扫到。
+- `branchChoiceText` 和卡片悬停标题同步包含路线徽标；本轮只调整派生展示、DOM、样式和测试，不新增收益、不新增存档字段，不改变升级价格、星图路线、项目奖励、远航调度既有数值、冷却、连携窗口、反馈入口或部署链路。
+- 本轮本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含 `decisionBadgeText` 和 `far-dispatch-branch-choice-badge`。
+- 钉钉通知未发送：运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` 相关变量名，也未发现本地 `.env*` 文件；未将 webhook 写入仓库。
+
 - GitHub Issues：gh 可用且已认证；2026-05-01 05:33 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
 - #6 继续作为本轮 Product decision 依据：该反馈指出后半段“只有不停的目标、玩法没有真正变化”；前序已经把路线判断、路线目标、路线下一步和收益对照放进分支卡片，但路线判断仍只是文本行，快速扫卡时不够突出。
 - 本轮改动新增远航路线判断状态：协同/绕行分支卡片从 `decisionText` 派生 `decisionKind`，并给卡片与判断行追加 `is-decision-*` 状态 class，让当前航段首推、推荐稳航、推荐改道、备选、已选或已完成获得不同视觉强调。

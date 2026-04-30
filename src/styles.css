@@ -1539,6 +1539,52 @@ h2 {
   font-weight: 900;
 }
 
+.far-dispatch-branch-choice-head {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.far-dispatch-branch-choice-head strong {
+  flex: 1;
+}
+
+.far-dispatch-branch-choice .far-dispatch-branch-choice-badge {
+  flex: 0 0 auto;
+  max-width: 74px;
+  padding: 2px 5px;
+  border: 1px solid rgba(248, 243, 231, 0.18);
+  border-radius: 999px;
+  color: rgba(248, 243, 231, 0.78);
+  background: rgba(248, 243, 231, 0.08);
+  font-size: 0.58rem;
+  line-height: 1;
+}
+
+.far-dispatch-branch-choice-badge[hidden] {
+  display: none;
+}
+
+.far-dispatch-branch-choice-badge.is-recommended,
+.far-dispatch-branch-choice-badge.is-recommended-stable {
+  color: #d8ffe2;
+  border-color: rgba(150, 231, 168, 0.58);
+  background: rgba(150, 231, 168, 0.14);
+}
+
+.far-dispatch-branch-choice-badge.is-recommended-shift {
+  color: #ffd1df;
+  border-color: rgba(255, 126, 177, 0.58);
+  background: rgba(255, 126, 177, 0.14);
+}
+
+.far-dispatch-branch-choice-badge.is-selected,
+.far-dispatch-branch-choice-badge.is-completed {
+  color: #cfe8ff;
+  border-color: rgba(116, 194, 255, 0.56);
+  background: rgba(116, 194, 255, 0.14);
+}
+
 .far-dispatch-branch-choice span {
   color: #f8f3e7;
   font-size: 0.76rem;

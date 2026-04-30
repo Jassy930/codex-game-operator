@@ -5141,6 +5141,8 @@ function buildFarRouteDispatchBranchChoices(
       focused,
       branchStatus
     );
+    const decisionBadgeText =
+      buildFarRouteDispatchBranchDecisionBadgeText(decisionKind);
     const followupText = buildFarRouteDispatchBranchFollowupText(
       choice.label,
       choice.directive.name,
@@ -5189,6 +5191,7 @@ function buildFarRouteDispatchBranchChoices(
       reasonText,
       decisionText,
       decisionKind,
+      decisionBadgeText,
       objectiveText,
       followupText,
       active,
@@ -5208,6 +5211,8 @@ function buildFarRouteDispatchBranchChoices(
         choice.directive.name +
         " · " +
         statusText +
+        " · " +
+        decisionBadgeText +
         " · " +
         choice.caption +
         (reasonText ? " · " + reasonText : "") +
@@ -5297,6 +5302,27 @@ function buildFarRouteDispatchBranchDecisionKind(
   }
 
   return "fallback";
+}
+
+function buildFarRouteDispatchBranchDecisionBadgeText(decisionKind) {
+  switch (decisionKind) {
+    case "recommended":
+      return "首推";
+    case "recommended-stable":
+      return "稳航";
+    case "recommended-shift":
+      return "改道";
+    case "fallback-stable":
+      return "备选稳航";
+    case "fallback-shift":
+      return "备选改道";
+    case "selected":
+      return "已选";
+    case "completed":
+      return "已完成";
+    default:
+      return "建档";
+  }
 }
 
 function buildFarRouteDispatchBranchObjectiveText(
@@ -5481,6 +5507,8 @@ function buildFarRouteDispatchBranchChoiceText(choices) {
           choice.directiveName +
           "（" +
           choice.statusText +
+          " · " +
+          choice.decisionBadgeText +
           " · " +
           choice.caption +
           (choice.reasonText ? " · " + choice.reasonText : "") +

@@ -726,8 +726,19 @@ function renderFarDispatchBranchChoices(dispatch) {
         (choice.focused ? " is-focused" : "");
       item.title = choice.text ?? "";
 
+      const header = document.createElement("span");
+      header.className = "far-dispatch-branch-choice-head";
+
       const label = document.createElement("strong");
       label.textContent = choice.label + " · " + choice.statusText;
+
+      const badge = document.createElement("span");
+      badge.className =
+        "far-dispatch-branch-choice-badge is-" +
+        getFarDispatchBranchChoiceDecisionKind(choice);
+      badge.textContent = choice.decisionBadgeText ?? "";
+      badge.hidden = !choice.decisionBadgeText;
+      header.append(label, badge);
 
       const directive = document.createElement("span");
       directive.textContent = choice.directiveName;
@@ -766,7 +777,7 @@ function renderFarDispatchBranchChoices(dispatch) {
       caption.textContent = choice.caption + " · " + choice.rewardText;
 
       item.append(
-        label,
+        header,
         directive,
         decision,
         reason,

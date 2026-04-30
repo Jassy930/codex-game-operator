@@ -2,6 +2,15 @@
 
 ## Unreleased
 
+- 远航调度新增“路线徽标”：协同/绕行分支卡片会从 `decisionKind` 派生 `decisionBadgeText`，并在卡片首行显示首推、稳航、改道、建档、备选稳航、备选改道、已选或已完成，继续回应 #6 对后半段玩法变化不明显的反馈。
+- `src/game.js` 新增 `decisionBadgeText` 派生并纳入 `branchChoiceText`；`src/app.js` 渲染 `far-dispatch-branch-choice-head` / `far-dispatch-branch-choice-badge`；`src/styles.css` 增加路线徽标样式；`tests/game.test.js` 覆盖首推、稳航、改道、备选徽标和静态绑定。
+- 文档同步更新：`docs/DECISION.md`、`docs/FEEDBACK.md`、`docs/RESEARCH.md`、`docs/PRODUCT.md`、`docs/DESIGN.md`、`docs/ROADMAP.md`、`docs/IDEAS.md`、`docs/METRICS.md`、`README.md` 和本日志已记录远航路线徽标。
+- 本轮只调整派生展示、DOM、样式和测试，不新增收益、不新增存档字段，不改变升级价格、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、远航调度既有数值、冷却、连携窗口、反馈入口或部署链路。
+- 同步 GitHub Issues 反馈状态：2026-05-01 05:51 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 作为本轮处理对象。
+- 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含 `decisionBadgeText` 和 `far-dispatch-branch-choice-badge`。
+- 钉钉通知未发送：运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` 相关变量名，也未发现本地 `.env*` 文件；未将 webhook 写入仓库。
+
 - 远航调度新增“路线判断状态”：协同/绕行分支卡片会从 `decisionText` 派生 `decisionKind`，并在卡片与判断行渲染 `is-decision-*` 状态样式，让当前航段首推、推荐稳航、推荐改道、备选、已选和已完成更容易扫视，继续回应 #6 对后半段玩法变化不明显的反馈。
 - `src/game.js` 新增 `decisionKind` 派生；`src/app.js` 把 `decisionKind` 落到 `far-dispatch-branch-choice` 和 `far-dispatch-branch-choice-decision` class；`src/styles.css` 增加路线判断状态样式；`tests/game.test.js` 覆盖首推、稳航、改道、备选和静态绑定。
 - 文档同步更新：`docs/DECISION.md`、`docs/FEEDBACK.md`、`docs/RESEARCH.md`、`docs/PRODUCT.md`、`docs/DESIGN.md`、`docs/ROADMAP.md`、`docs/IDEAS.md`、`docs/METRICS.md`、`README.md` 和本日志已记录远航路线判断状态。

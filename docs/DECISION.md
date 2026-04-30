@@ -1,5 +1,29 @@
 # Decision
 
+## 2026-05-01 Product decision：远航路线徽标
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-01 05:51 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#6 仍是最新反馈线程，原始反馈指出后半段“只有不停的目标、玩法没有真正变化”，因此本轮继续进入 Product decision。
+
+当前最大问题：前序已经给协同/绕行分支卡片加入路线判断和 `decisionKind` 视觉状态，但卡片首行仍主要显示“协同/绕行 + 可选择/上轮路线/可改道”。玩家快速扫卡时，仍要读到第二行路线判断，才能确认这张卡本轮是首推、稳航、改道、建档、已选还是已完成。
+
+本轮决策：
+
+- 新增“远航路线徽标”。
+- `branchChoices` 从既有 `decisionKind` 派生 `decisionBadgeText`：覆盖首推、稳航、改道、建档、备选稳航、备选改道、已选和已完成。
+- 主操作区分支卡片首行新增 `far-dispatch-branch-choice-badge is-*`，把短判断放到协同/绕行卡片顶部；`branchChoiceText` 和卡片 `title` 同步包含该短判断，保留可访问与悬停复盘。
+- 本轮只调整派生展示、DOM、样式和测试；不新增收益、不新增存档字段，不改变升级价格、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、远航调度既有数值、冷却、连携窗口、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-05-01 05:51 CST 当前 5 个 open feedback issue、0 个 open bug issue。
+- 0/3 起手时，契合协同分支派生 `decisionBadgeText: "首推"`，绕行分支派生 `decisionBadgeText: "建档"`。
+- 上轮协同路线下，推荐协同派生“稳航”，备选改道派生“备选改道”。
+- 上轮绕行路线下，推荐改道派生“改道”，备选稳航派生“备选稳航”。
+- `src/app.js` 渲染 `far-dispatch-branch-choice-head` 与 `far-dispatch-branch-choice-badge`；`src/styles.css` 包含路线徽标样式。
+- 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含 `decisionBadgeText` 和 `far-dispatch-branch-choice-badge`。
+- 钉钉通知未发送：运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` 相关变量名，也未发现本地 `.env*` 文件；未将 webhook 写入仓库。
+
 ## 2026-05-01 Product decision：远航路线判断状态
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-01 05:33 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#6 仍是最新反馈线程，原始反馈指出后半段“只有不停的目标、玩法没有真正变化”，因此本轮继续进入 Product decision。
