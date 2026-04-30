@@ -1417,7 +1417,8 @@ h2 {
 
 .far-dispatch-branch-recommendation,
 .far-dispatch-branch-rotation,
-.far-dispatch-branch-route {
+.far-dispatch-branch-route,
+.far-dispatch-branch-plan {
   width: fit-content;
   max-width: 100%;
   padding: 4px 8px;
@@ -1445,9 +1446,16 @@ h2 {
   color: #c6f7ff;
 }
 
+.far-dispatch-branch-plan {
+  border-color: rgba(190, 242, 100, 0.32);
+  background: rgba(190, 242, 100, 0.1);
+  color: #eaffba;
+}
+
 .far-dispatch-branch-recommendation[hidden],
 .far-dispatch-branch-rotation[hidden],
-.far-dispatch-branch-route[hidden] {
+.far-dispatch-branch-route[hidden],
+.far-dispatch-branch-plan[hidden] {
   display: none;
 }
 

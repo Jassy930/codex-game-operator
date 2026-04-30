@@ -1,5 +1,28 @@
 # Decision
 
+## 2026-05-01 Product decision：远航路线预案
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-01 01:50 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#6 仍是最新反馈线程，原始反馈指出后半段“只有不停的目标、玩法没有真正变化”，因此本轮继续进入 Product decision。
+
+当前最大问题：前序已经显示推荐分支、分支轮替、路线履历和协同/绕行后续，但玩家仍要把目标指令、推荐/当前分支和回目标闭环拼成一条完整执行路线。后半段短循环需要直接给出“这一轮该怎么走”的路线预案。
+
+本轮决策：
+
+- 新增“远航路线预案”。
+- `getFarRouteDispatch` 从当前目标指令、`branchChoices`、分支态势和航段契合推荐派生 `branchPlanText`，显示“推荐/本轮/下一轮 目标 X -> 协同/绕行 Y -> 回目标 X”。
+- 主操作区远航调度条新增 `far-dispatch-branch-plan`，星图总览远航摘要和反馈快照长文本同步包含路线预案。
+- 本轮只调整派生展示、DOM、样式和测试；不新增收益、不新增存档字段，不改变升级价格、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、远航调度既有数值、冷却、连携窗口、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-05-01 01:50 CST 当前 5 个 open feedback issue、0 个 open bug issue。
+- 脉冲航闸初始远航调度显示“路线预案：推荐 目标 点火齐射 -> 协同 谐振脉冲 -> 回目标 点火齐射”。
+- 绕行进行中显示“路线预案：本轮 目标 点火齐射 -> 绕行 巡航回收 -> 回目标 点火齐射”。
+- 协同整备完成态显示“路线预案：下一轮 目标 点火齐射 -> 绕行 巡航回收 -> 回目标 点火齐射”。
+- `src/app.js` 渲染 `dispatch.branchPlanText`；`index.html` 包含 `far-dispatch-branch-plan` 占位；`src/styles.css` 包含 `.far-dispatch-branch-plan`。
+- 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含 `branchPlanText`、`far-dispatch-branch-plan` 和“路线预案”相关文案。
+
 ## 2026-05-01 Product decision：远航路线履历
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-01 01:41 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#6 仍是最新反馈线程，原始反馈指出后半段“只有不停的目标、玩法没有真正变化”，因此本轮继续进入 Product decision。
