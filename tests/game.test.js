@@ -1491,6 +1491,7 @@ test("星图项目卡片会渲染可视化进度缩略图", () => {
 
 test("星图项目卡片会默认折叠非当前航段详情", () => {
   const appJs = readFileSync(new URL("../src/app.js", import.meta.url), "utf8");
+  const gameJs = readFileSync(new URL("../src/game.js", import.meta.url), "utf8");
   const styles = readFileSync(new URL("../src/styles.css", import.meta.url), "utf8");
 
   assert.match(appJs, /function renderProjectDetailNodes\(project\)/);
@@ -1499,6 +1500,8 @@ test("星图项目卡片会默认折叠非当前航段详情", () => {
   assert.match(appJs, /track\.className = "project-dispatch-track"/);
   assert.match(appJs, /project\.dispatchSteps/);
   assert.match(appJs, /stepItem\.className = "project-dispatch-step"/);
+  assert.match(appJs, /stepReward\.className = "project-dispatch-step-reward"/);
+  assert.match(gameJs, /rewardText: getFarRouteDispatchLoopStepRewardText/);
   assert.match(appJs, /if \(project\.isCurrent\) \{/);
   assert.match(appJs, /details\.className = "project-card-drawer"/);
   assert.match(appJs, /detailGrid\.className = "project-card-detail-grid"/);
@@ -1508,6 +1511,7 @@ test("星图项目卡片会默认折叠非当前航段详情", () => {
   assert.match(styles, /\.project-card-detail-grid/);
   assert.match(styles, /\.project-dispatch-track/);
   assert.match(styles, /\.project-dispatch-step/);
+  assert.match(styles, /\.project-dispatch-step em/);
   assert.match(styles, /\.project-card-drawer\[open\] summary::after/);
 });
 
@@ -1630,6 +1634,8 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(appJs, /function renderFarDispatchLoopTrack\(dispatch\)/);
   assert.match(appJs, /track\.className = "far-dispatch-loop-track"/);
   assert.match(appJs, /stepItem\.className = "far-dispatch-loop-step is-" \+ step\.state/);
+  assert.match(appJs, /reward\.className = "far-dispatch-step-reward"/);
+  assert.match(appJs, /reward\.textContent = step\.rewardText \?\? ""/);
   assert.match(appJs, /meter\.setAttribute\("role", "meter"\)/);
   assert.match(appJs, /loopMeter\.setAttribute\("role", "meter"\)/);
   assert.match(appJs, /elements\.farDispatch\.replaceChildren\(text, meter, loopText, loopMeter, loopTrack\)/);
@@ -1693,6 +1699,7 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(styles, /\.far-dispatch-loop-meter/);
   assert.match(styles, /\.far-dispatch-loop-track/);
   assert.match(styles, /\.far-dispatch-loop-step\.is-current/);
+  assert.match(styles, /\.far-dispatch-loop-step em/);
   assert.match(styles, /\.far-dispatch\.is-active/);
   assert.match(styles, /\.directive-button \.directive-badges/);
   assert.match(styles, /\.directive-button \.directive-badges \.is-collapsed-badge/);
@@ -2470,7 +2477,11 @@ test("远航调度会在 20M 后按当前航段指定目标指令", () => {
   );
   assert.equal(
     currentProject.dispatchStepText,
-    "调度路径：目标 点火齐射 -> 协同 谐振脉冲 -> 回目标 点火齐射"
+    "调度路径：目标 点火齐射（调度校准 +14%） -> 协同 谐振脉冲（远航协同 +5%） -> 回目标 点火齐射（远航闭环 +16% · 远航突破 +0.05%剩余）"
+  );
+  assert.deepEqual(
+    currentProject.dispatchSteps.map((step) => step.rewardText),
+    ["调度校准 +14%", "远航协同 +5%", "远航闭环 +16% · 远航突破 +0.05%剩余"]
   );
   assert.deepEqual(
     currentProject.dispatchSteps.map((step) => step.text),
@@ -2504,11 +2515,17 @@ test("远航调度会在 20M 后按当前航段指定目标指令", () => {
   assert.equal(dispatch.loopTarget, 3);
   assert.equal(
     dispatch.loopStepText,
-    "远航路径：下一步 目标 点火齐射 -> 待推进 协同 谐振脉冲 -> 待推进 回目标 点火齐射"
+    "远航路径：下一步 目标 点火齐射（调度校准 +14%） -> 待推进 协同 谐振脉冲（远航协同 +5%） -> 待推进 回目标 点火齐射（远航闭环 +16% · 远航突破 +0.05%剩余）"
   );
   assert.deepEqual(
-    dispatch.loopSteps.map((step) => step.label + ":" + step.stateText + ":" + step.text),
-    ["目标:下一步:点火齐射", "协同:待推进:谐振脉冲", "回目标:待推进:点火齐射"]
+    dispatch.loopSteps.map(
+      (step) => step.label + ":" + step.stateText + ":" + step.text + ":" + step.rewardText
+    ),
+    [
+      "目标:下一步:点火齐射:调度校准 +14%",
+      "协同:待推进:谐振脉冲:远航协同 +5%",
+      "回目标:待推进:点火齐射:远航闭环 +16% · 远航突破 +0.05%剩余"
+    ]
   );
   assert.equal(dispatch.loopStatusText, "闭环进度 0/3 · 下一步 点火齐射");
   assert.equal(

@@ -673,7 +673,12 @@ function renderFarDispatchLoopTrack(dispatch) {
       const text = document.createElement("span");
       text.textContent = step.stateText + " · " + step.text;
 
-      stepItem.append(label, text);
+      const reward = document.createElement("em");
+      reward.className = "far-dispatch-step-reward";
+      reward.textContent = step.rewardText ?? "";
+      reward.hidden = !step.rewardText;
+
+      stepItem.append(label, text, reward);
       return stepItem;
     })
   );
@@ -1800,7 +1805,12 @@ function renderProjectDispatchTrack(project) {
       const stepLabel = document.createElement("span");
       stepLabel.textContent = step.text;
 
-      stepItem.append(stepIndex, stepLabel);
+      const stepReward = document.createElement("em");
+      stepReward.className = "project-dispatch-step-reward";
+      stepReward.textContent = step.rewardText ?? "";
+      stepReward.hidden = !step.rewardText;
+
+      stepItem.append(stepIndex, stepLabel, stepReward);
       return stepItem;
     })
   );

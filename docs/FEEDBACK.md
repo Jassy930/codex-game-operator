@@ -2,6 +2,13 @@
 
 ## 2026-04-30
 
+- GitHub Issues：gh 可用且已认证；2026-04-30 18:47 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
+- #6 继续作为本轮 Product decision 依据：该反馈指出后半段“只有不停的目标、玩法没有真正变化”；前序已补远航调度、目标指令、协同续航、闭环、突破、整备以及多层路径展示，本轮处理三步路径格仍没有直接说明每一步回报的问题。
+- 本轮改动新增远航路径步骤收益标签：主操作区远航调度 3 格路径与星图当前航段 3 步路径会显示“调度校准 +14% / 远航协同 +5% / 远航闭环 +16% · 远航突破 +0.05%剩余”等步骤收益。
+- 本轮只调整远航调度展示层；不新增存档字段，不改变指令收益、冷却、连携窗口、远航调度计算、远航突破数值、星图航段、项目奖励、升级价格、反馈入口或部署链路。
+- 本轮本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 117 项。
+- 构建产物已确认包含 `far-dispatch-step-reward` 和 `project-dispatch-step-reward`。
+
 - GitHub Issues：gh 可用且已认证；2026-04-30 18:31 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue；回复 #5 后于 2026-04-30 18:42 CST 再次同步，仍为 5 个 open feedback issue、0 个 open bug issue。
 - #5 作为本轮 Product decision 依据：该反馈指出点火按钮太薄弱，希望增加点击反馈、特效和点击欲望；前序已补脉冲、粒子、收益浮层、8 格连击轨、下一击预告、环形蓄能轨、音效、触感、落点闪光和阶段光环，本轮补按钮内更直接的过载剩余次数视觉锚点。
 - 本轮改动新增点火过载倒计时徽标：`core-overload-badge` 固定显示在点火按钮内，运行期从现有 `getComboStatus()` 派生剩余过载次数，临近过载和过载命中时切换高亮/爆发态。

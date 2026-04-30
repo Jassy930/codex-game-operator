@@ -1,5 +1,30 @@
 # Decision
 
+## 2026-04-30 Product decision：远航路径步骤收益标签
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-04-30 18:47 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#6 仍围绕“后半段只有不停目标、玩法没有真正变化”保持 open，因此本轮进入 Product decision。
+
+当前最大问题：远航调度已经把后半段目标映射到目标指令、协同续航、回目标闭环，并在星图卡片、主操作区和星图总览显示 3 步路径；但路径格本身仍主要展示“按哪个指令”，每一步为什么有玩法回报还要看按钮徽标、预计收益或长说明。对 #6 这类“后半段玩法变化”反馈，三步路径需要更直接地显示每一步的不同回报。
+
+本轮决策：
+
+- 给远航调度 3 步路径新增步骤收益标签。
+- 目标步显示“调度校准 +14%”；协同步显示“远航协同 +5%”或无协同时的“远航续航 +8%”；回目标步显示“远航闭环 +16% · 远航突破 +0.05%剩余”。
+- 主操作区 `far-dispatch-loop-step` 与星图当前航段 `project-dispatch-step` 同步渲染收益标签，并把完整收益写入路径 aria-label。
+- 本轮只调整展示层；不新增存档字段，不改变指令收益、冷却、连携窗口、远航调度计算、远航突破数值、星图航段、项目奖励、升级价格、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-04-30 18:47 CST 当前 5 个 open feedback issue、0 个 open bug issue。
+- `getFarRouteDispatch` 返回的 `loopSteps` 包含 `rewardText`，`loopStepText` 包含三步收益说明。
+- 当前星图航段 `dispatchSteps` 包含相同步骤收益标签。
+- `src/app.js` 渲染 `far-dispatch-step-reward` 和 `project-dispatch-step-reward`。
+- `src/styles.css` 包含 `.far-dispatch-loop-step em` 和 `.project-dispatch-step em` 样式。
+- 本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 117 项。
+- 构建产物已确认包含 `far-dispatch-step-reward` 和 `project-dispatch-step-reward`。
+
+下一步：等待 #6 复测；如果仍认为后半段只是目标推进，再评估真正的资源消耗型指令或项目分支，而不是继续只增加路径展示。
+
 ## 2026-04-30 Product decision：点火过载倒计时徽标
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-04-30 18:31 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#5 仍围绕“点火按钮太薄弱、缺少点击反馈和点击欲望”保持 open，因此本轮进入 Product decision。

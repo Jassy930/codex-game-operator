@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+- 远航调度 3 步路径新增步骤收益标签：主操作区 `far-dispatch-loop-step` 和星图当前航段 `project-dispatch-step` 会直接显示调度校准、远航协同/续航、远航闭环和远航突破收益，继续回应 #6 对后半段玩法变化不明显的反馈。
+- `src/game.js` 为远航路径 `loopSteps` / `dispatchSteps` 派生 `rewardText` 并写入路径 `aria-label`；`src/app.js` 渲染 `far-dispatch-step-reward` 和 `project-dispatch-step-reward`；`src/styles.css` 新增两类步骤收益标签样式；`tests/game.test.js` 覆盖步骤收益文本、运行期绑定和样式标记。
+- 本轮只调整远航调度展示层；不新增存档字段，不改变指令收益、冷却、连携窗口、远航调度计算、远航突破数值、星图航段、项目奖励、升级价格、反馈入口或部署链路。
+- 同步 GitHub Issues 反馈状态：2026-04-30 18:47 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 作为本轮处理对象。
+- 验证通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 117 项。
+- 构建产物已确认包含 `far-dispatch-step-reward` 和 `project-dispatch-step-reward`。
+
 - 点火按钮新增过载倒计时徽标：`core-overload-badge` 直接显示距离过载还剩几次，临近过载和过载命中时切换高亮/爆发态，继续回应 #5 对点击反馈、特效和点击欲望的反馈。
 - `index.html` 新增 `coreOverloadBadge` 静态占位；`src/app.js` 在 `renderCoreFeedback` 中用现有连击状态更新 `coreOverloadBadgeValue` 和倒计时状态 class；`src/styles.css` 新增倒计时徽标样式与 `coreBadgePulse` / `coreBadgeBurst` 动效；`tests/game.test.js` 覆盖静态标记、运行期绑定和样式标记。
 - 本轮只调整点火按钮展示层；不新增存档字段，不改变点击收益、连击窗口、过载奖励、升级价格、星图航段、航线策略、航线指令、反馈入口或部署链路。

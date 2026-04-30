@@ -3934,6 +3934,9 @@ function buildProjectDispatchInfo(project, state, isCurrent) {
 
   const relayText = relayDirective ? " · 协同 " + relayDirective.name : "";
   const relayStepText = relayDirective ? "协同 " + relayDirective.name : "非目标续航";
+  const targetRewardText = getFarRouteDispatchLoopStepRewardText(1, relayDirective);
+  const relayRewardText = getFarRouteDispatchLoopStepRewardText(2, relayDirective);
+  const loopRewardText = getFarRouteDispatchLoopStepRewardText(3, relayDirective);
 
   return {
     badgeText: "调度 " + targetDirective.name,
@@ -3950,26 +3953,36 @@ function buildProjectDispatchInfo(project, state, isCurrent) {
       {
         label: "目标",
         directiveName: targetDirective.name,
-        text: "目标 " + targetDirective.name
+        text: "目标 " + targetDirective.name,
+        rewardText: targetRewardText
       },
       {
         label: relayDirective ? "协同" : "续航",
         directiveName: relayDirective?.name ?? "非目标指令",
-        text: relayStepText
+        text: relayStepText,
+        rewardText: relayRewardText
       },
       {
         label: "闭环",
         directiveName: targetDirective.name,
-        text: "回目标 " + targetDirective.name
+        text: "回目标 " + targetDirective.name,
+        rewardText: loopRewardText
       }
     ],
     stepText:
       "调度路径：目标 " +
       targetDirective.name +
-      " -> " +
+      "（" +
+      targetRewardText +
+      "） -> " +
       relayStepText +
-      " -> 回目标 " +
-      targetDirective.name
+      "（" +
+      relayRewardText +
+      "） -> 回目标 " +
+      targetDirective.name +
+      "（" +
+      loopRewardText +
+      "）"
   };
 }
 
@@ -3983,18 +3996,21 @@ function buildFarRouteDispatchLoopSteps(directive, relayDirective, progress, tar
     {
       label: "目标",
       text: directive.name,
+      rewardText: getFarRouteDispatchLoopStepRewardText(1, relayDirective),
       state: getFarRouteDispatchLoopStepState(1, progress, target),
       stateText: getFarRouteDispatchLoopStepStateText(1, progress, target)
     },
     {
       label: relayDirective ? "协同" : "续航",
       text: relayStepText,
+      rewardText: getFarRouteDispatchLoopStepRewardText(2, relayDirective),
       state: getFarRouteDispatchLoopStepState(2, progress, target),
       stateText: getFarRouteDispatchLoopStepStateText(2, progress, target)
     },
     {
       label: "回目标",
       text: directive.name,
+      rewardText: getFarRouteDispatchLoopStepRewardText(3, relayDirective),
       state: getFarRouteDispatchLoopStepState(3, progress, target),
       stateText: getFarRouteDispatchLoopStepStateText(3, progress, target)
     }
@@ -4034,8 +4050,39 @@ function buildFarRouteDispatchLoopStepText(steps) {
   return (
     "远航路径：" +
     steps
-      .map((step) => step.stateText + " " + step.label + " " + step.text)
+      .map(
+        (step) =>
+          step.stateText +
+          " " +
+          step.label +
+          " " +
+          step.text +
+          (step.rewardText ? "（" + step.rewardText + "）" : "")
+      )
       .join(" -> ")
+  );
+}
+
+function getFarRouteDispatchLoopStepRewardText(step, relayDirective) {
+  if (step === 1) {
+    return "调度校准 +" + Math.round(FAR_ROUTE_DISPATCH_BONUS_RATE * 100) + "%";
+  }
+
+  if (step === 2) {
+    const rewardRate = relayDirective
+      ? FAR_ROUTE_DISPATCH_SYNC_REWARD_RATE
+      : FAR_ROUTE_DISPATCH_RELAY_REWARD_RATE;
+    const rewardName = relayDirective ? "远航协同" : "远航续航";
+
+    return rewardName + " +" + Math.round(rewardRate * 100) + "%";
+  }
+
+  return (
+    "远航闭环 +" +
+    Math.round(FAR_ROUTE_DISPATCH_LOOP_REWARD_RATE * 100) +
+    "% · 远航突破 +" +
+    roundTo(FAR_ROUTE_DISPATCH_BREAKTHROUGH_REMAINING_RATE * 100, 3) +
+    "%剩余"
   );
 }
 
