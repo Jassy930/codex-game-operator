@@ -8,6 +8,9 @@
 - 本轮不新增存档字段，不改变指令收益、冷却、连携窗口、远航调度计算、星图航段、项目奖励、升级价格、反馈入口或部署链路。
 - 本轮本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 109 项。
 - 构建产物已确认包含 `project-dispatch-track`、`dispatchStepText` 和“调度路径”。
+- 提交 1d6e6ef 已推送；GitHub Pages workflow 25149295793 已成功，线上地址返回 HTTP 200；线上 `app.js`、`game.js` 和 `styles.css` 已确认包含星图调度路径轨相关标记。
+- #6 已回复：说明当前航段卡片新增 3 步调度路径轨，并保持 issue open 等待复测。
+- 回复后同步 GitHub Issues：2026-04-30 13:37 CST 当前仍为 5 个 open feedback issue、0 个 open bug issue；#6 更新时间为 2026-04-30T05:37:33Z。
 
 - GitHub Issues：gh 可用且已认证；2026-04-30 13:13 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
 - #6 作为本轮 Product decision 依据：该反馈指出后半段“只有不停的目标、玩法没有真正变化”；远航调度已经存在，但星图卡片层还没有直接说明当前航段会指定哪个主动指令。

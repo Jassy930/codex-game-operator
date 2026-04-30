@@ -8,6 +8,9 @@
 - 同步 GitHub Issues 反馈状态：2026-04-30 13:28 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 作为本轮处理对象。
 - 验证通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 109 项。
 - 构建产物已确认包含 `project-dispatch-track`、`dispatchStepText` 和“调度路径”。
+- 提交 1d6e6ef 已推送；GitHub Pages workflow 25149295793 已成功，线上地址返回 HTTP 200，且线上 `app.js`、`game.js` 和 `styles.css` 已确认包含星图调度路径轨相关标记。
+- 已回复 #6，说明当前航段卡片已新增 3 步调度路径轨，并保持 issue open 等待复测。
+- 回复后同步 GitHub Issues 反馈状态：2026-04-30 13:37 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 更新时间为 2026-04-30T05:37:33Z。
 
 - 星图当前航段新增远航调度可见性：20M 后当前航段卡片显示“调度 X”徽标，并在详情中展示目标指令、协同续航指令和 3/3 闭环提示。
 - `src/game.js` 为 `getProjectStatuses` 派生 `dispatchBadgeText`、`dispatchText`、目标指令 id 和协同续航指令 id；`src/app.js` 渲染 `project-dispatch-badge` / `project-dispatch`；`src/styles.css` 增加调度徽标和详情行样式；`tests/game.test.js` 覆盖脉冲航闸阶段的卡片调度字段。
