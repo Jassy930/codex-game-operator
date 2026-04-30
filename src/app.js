@@ -39,6 +39,31 @@ const EVENT_KEY = "codex-game-operator.events";
 const FEEDBACK_KEY = "codex-game-operator.feedback";
 const SESSION_ID = globalThis.crypto?.randomUUID?.() ?? String(Date.now());
 const SVG_NS = "http://www.w3.org/2000/svg";
+const ROUTE_STANCE_ICON_DEFS = {
+  balanced: {
+    label: "均衡航线徽记",
+    nodes: [
+      ["circle", { cx: 24, cy: 24, r: 14, fill: "none", stroke: "currentColor", "stroke-width": 4 }],
+      ["circle", { cx: 24, cy: 24, r: 4, fill: "currentColor", opacity: 0.42 }],
+      ["path", { d: "M24 10v8M12 31l7-4M36 31l-7-4", stroke: "currentColor", "stroke-width": 4, "stroke-linecap": "round" }]
+    ]
+  },
+  ignition: {
+    label: "点火优先徽记",
+    nodes: [
+      ["path", { d: "M27 5L13 27h10l-3 16 15-23H25z", fill: "none", stroke: "currentColor", "stroke-width": 4, "stroke-linejoin": "round" }],
+      ["path", { d: "M14 34c4 6 16 6 20 0", fill: "none", stroke: "currentColor", "stroke-width": 3, "stroke-linecap": "round" }]
+    ]
+  },
+  cruise: {
+    label: "巡航优先徽记",
+    nodes: [
+      ["path", { d: "M8 29c5-13 27-13 32 0", fill: "none", stroke: "currentColor", "stroke-width": 4, "stroke-linecap": "round" }],
+      ["path", { d: "M15 30l9 9 9-9", fill: "none", stroke: "currentColor", "stroke-width": 4, "stroke-linecap": "round", "stroke-linejoin": "round" }],
+      ["circle", { cx: 24, cy: 19, r: 5, fill: "currentColor", opacity: 0.34 }]
+    ]
+  }
+};
 const UPGRADE_ICON_DEFS = {
   lens: {
     label: "聚能透镜图标",
@@ -806,6 +831,10 @@ function renderRouteStance(option, routeStance) {
   const name = document.createElement("strong");
   name.textContent = option.name;
 
+  const head = document.createElement("span");
+  head.className = "route-stance-head";
+  head.append(renderRouteStanceVisual(option), name);
+
   const summary = document.createElement("span");
   summary.textContent = routeStance.unlocked ? option.summary : routeStance.unlockText;
 
@@ -814,8 +843,27 @@ function renderRouteStance(option, routeStance) {
   mastery.textContent = option.masteryText;
   mastery.hidden = !routeStance.unlocked;
 
-  button.append(name, summary, mastery);
+  button.append(head, summary, mastery);
   return button;
+}
+
+function renderRouteStanceVisual(option) {
+  const iconDef = ROUTE_STANCE_ICON_DEFS[option.id] ?? ROUTE_STANCE_ICON_DEFS.balanced;
+  const wrapper = document.createElement("span");
+  wrapper.className = "route-stance-visual route-stance-visual-" + option.id;
+  wrapper.setAttribute("role", "img");
+  wrapper.setAttribute("aria-label", iconDef.label);
+
+  const svg = document.createElementNS(SVG_NS, "svg");
+  svg.setAttribute("viewBox", "0 0 48 48");
+  svg.setAttribute("aria-hidden", "true");
+  svg.setAttribute("focusable", "false");
+  iconDef.nodes.forEach(([tagName, attributes]) => {
+    svg.append(createSvgElement(tagName, attributes));
+  });
+
+  wrapper.append(svg);
+  return wrapper;
 }
 
 function renderProjectFilters(projects) {

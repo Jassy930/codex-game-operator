@@ -1084,6 +1084,30 @@ test("升级卡片会渲染可扫视图标", () => {
   assert.match(styles, /\.upgrade-icon-resonator/);
 });
 
+test("航线策略按钮会渲染可扫视徽记", () => {
+  const indexHtml = readFileSync(new URL("../index.html", import.meta.url), "utf8");
+  const appJs = readFileSync(new URL("../src/app.js", import.meta.url), "utf8");
+  const styles = readFileSync(new URL("../src/styles.css", import.meta.url), "utf8");
+
+  assert.match(indexHtml, /id="routeStanceList"/);
+  assert.match(indexHtml, /route-stance-visual route-stance-visual-balanced/);
+  assert.match(indexHtml, /aria-label="均衡航线徽记"/);
+  assert.match(indexHtml, /route-stance-visual route-stance-visual-ignition/);
+  assert.match(indexHtml, /aria-label="点火优先徽记"/);
+  assert.match(indexHtml, /route-stance-visual route-stance-visual-cruise/);
+  assert.match(indexHtml, /aria-label="巡航优先徽记"/);
+  assert.match(appJs, /ROUTE_STANCE_ICON_DEFS/);
+  assert.match(appJs, /function renderRouteStanceVisual\(option\)/);
+  assert.match(appJs, /head\.className = "route-stance-head"/);
+  assert.match(appJs, /head\.append\(renderRouteStanceVisual\(option\), name\)/);
+  assert.match(appJs, /button\.append\(head, summary, mastery\)/);
+  assert.match(styles, /\.route-stance-head/);
+  assert.match(styles, /\.route-stance-visual/);
+  assert.match(styles, /\.route-stance-visual-balanced/);
+  assert.match(styles, /\.route-stance-visual-ignition/);
+  assert.match(styles, /\.route-stance-visual-cruise/);
+});
+
 test("星图项目卡片会渲染推进和奖励图标", () => {
   const appJs = readFileSync(new URL("../src/app.js", import.meta.url), "utf8");
   const styles = readFileSync(new URL("../src/styles.css", import.meta.url), "utf8");

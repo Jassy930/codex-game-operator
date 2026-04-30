@@ -1445,9 +1445,9 @@ h2 {
 
 .route-stance-button {
   display: grid;
-  min-height: 104px;
-  gap: 5px;
-  align-content: center;
+  min-height: 128px;
+  gap: 7px;
+  align-content: start;
   padding: 10px;
   border: 1px solid rgba(248, 243, 231, 0.14);
   border-radius: 8px;
@@ -1457,7 +1457,46 @@ h2 {
   cursor: pointer;
 }
 
+.route-stance-head {
+  display: flex;
+  min-width: 0;
+  gap: 8px;
+  align-items: center;
+}
+
+.route-stance-visual {
+  display: grid;
+  flex: 0 0 40px;
+  width: 40px;
+  height: 40px;
+  place-items: center;
+  border: 1px solid rgba(248, 243, 231, 0.14);
+  border-radius: 8px;
+  background: rgba(248, 243, 231, 0.08);
+}
+
+.route-stance-visual svg {
+  width: 30px;
+  height: 30px;
+}
+
+.route-stance-visual-balanced {
+  color: #bdf4eb;
+  background: rgba(189, 244, 235, 0.1);
+}
+
+.route-stance-visual-ignition {
+  color: #f4b23c;
+  background: rgba(244, 178, 60, 0.12);
+}
+
+.route-stance-visual-cruise {
+  color: #13b5a6;
+  background: rgba(19, 181, 166, 0.12);
+}
+
 .route-stance-button strong {
+  min-width: 0;
   font-size: 0.86rem;
   line-height: 1.2;
 }
@@ -1481,6 +1520,12 @@ h2 {
 .route-stance-button.is-active {
   border-color: rgba(244, 178, 60, 0.72);
   background: rgba(244, 178, 60, 0.12);
+}
+
+.route-stance-button:enabled:hover .route-stance-visual,
+.route-stance-button.is-active .route-stance-visual {
+  border-color: rgba(244, 178, 60, 0.72);
+  background: rgba(244, 178, 60, 0.16);
 }
 
 .route-stance-button:disabled {

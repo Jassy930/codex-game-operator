@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+- 航线策略按钮新增三类视觉徽记：均衡航线、点火优先、巡航优先分别显示固定尺寸策略图形，减少 100K 后策略区只靠文字区分的压力。
+- `index.html` 为 `routeStanceList` 新增静态锁定占位按钮与 `route-stance-visual-*` 徽记；`src/app.js` 新增 `ROUTE_STANCE_ICON_DEFS` 和 `renderRouteStanceVisual`；`src/styles.css` 新增策略徽记尺寸、颜色和选中态；`tests/game.test.js` 补充静态和运行期标记覆盖。
+- 本轮只调整航线策略展示层，回应 #4 对文字密度和更多图片化表达的反馈；不新增存档字段，不改变航线策略倍率、100K 解锁条件、专精航段、航线指令、星图路线、升级价格、反馈入口或部署链路。
+- 同步 GitHub Issues 反馈状态：2026-04-30 11:41 CST 当前 5 个 open feedback issue、0 个 open bug issue；#4 作为本轮处理对象。
+- 验证通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 107 项。
+- 构建产物已确认包含 `route-stance-visual-balanced`、`route-stance-visual-ignition`、`route-stance-visual-cruise`、`ROUTE_STANCE_ICON_DEFS` 和 `renderRouteStanceVisual`。
 - 航线指令新增 3 格“指令轮换视觉轨”：锁定态显示 100K 解锁，解锁后按 `getDirectivePlan` 的进度和推荐指令显示 1/3 到 3/3 的已完成、下一步和待推进状态。
 - `index.html` 新增 `directivePlanTrack` 静态结构；`src/app.js` 新增 `renderDirectivePlanTrack(directives.plan, directives.options)`；`src/styles.css` 新增 `directive-plan-track` / `directive-plan-step` 三态样式；`tests/game.test.js` 补充静态和运行期标记覆盖。
 - 本轮只调整航线指令展示层，回应 #3/#6 对主动短循环可理解性和后半段玩法结构感的反馈；不新增存档字段，不改变指令收益、冷却、连携窗口、轮换目标奖励、预案执行、航线委托、策略契合、策略终结、指令熟练、远航调度、远航续航、远航协同、远航闭环、远航整备、星图航段、项目奖励、升级价格或反馈入口。

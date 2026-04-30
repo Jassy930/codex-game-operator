@@ -1,5 +1,25 @@
 # Decision
 
+## 2026-04-30 Product decision：航线策略视觉徽记
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-04-30 11:41 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#4 仍反馈界面文字密集、希望更多图片和更好看，进入 Product decision。
+
+当前最大问题：星图、章节导航、升级和项目卡片已经有视觉资产与图标，但 100K 后的航线策略三按钮仍是文本卡片。玩家需要读“均衡航线/点火优先/巡航优先”和说明文字才能区分策略方向，和 #4 的扫视压力仍有关。
+
+本轮决策：
+
+- 为三种航线策略新增 `ROUTE_STANCE_ICON_DEFS` 和 `renderRouteStanceVisual`，分别渲染均衡、点火、巡航徽记。
+- 静态首页 `routeStanceList` 增加三张带徽记的锁定占位按钮，运行期渲染仍由当前策略状态替换。
+- 本轮只调整航线策略按钮展示层；不新增存档字段，不改变航线策略倍率、100K 解锁条件、专精航段、航线指令、星图路线、升级价格、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-04-30 11:41 CST 当前 5 个 open feedback issue、0 个 open bug issue。
+- 静态首页和运行期资源包含 `route-stance-visual-balanced`、`route-stance-visual-ignition`、`route-stance-visual-cruise`、`ROUTE_STANCE_ICON_DEFS` 和 `renderRouteStanceVisual`。
+- 本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 107 项。
+- 构建产物已确认包含策略视觉徽记相关标记。
+- 下一步：提交、推送、等待 Pages 部署后回复 #4，并保持 issue open 等待复测。
+
 ## 2026-04-30 Product decision：指令轮换视觉轨
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-04-30 11:25 CST 同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#3 仍反馈玩法太简单，#6 仍反馈后半段缺少真正玩法变化，且二者都和航线指令短循环的可理解性有关，继续进入 Product decision。

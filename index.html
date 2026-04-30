@@ -295,7 +295,46 @@
               id="routeStanceList"
               class="route-stance-list"
               aria-label="航线策略"
-            ></div>
+            >
+              <button class="route-stance-button is-active" type="button" aria-pressed="true" disabled>
+                <span class="route-stance-head">
+                  <span class="route-stance-visual route-stance-visual-balanced" role="img" aria-label="均衡航线徽记">
+                    <svg viewBox="0 0 48 48" aria-hidden="true" focusable="false">
+                      <circle cx="24" cy="24" r="14" fill="none" stroke="currentColor" stroke-width="4" />
+                      <circle cx="24" cy="24" r="4" fill="currentColor" opacity="0.42" />
+                      <path d="M24 10v8M12 31l7-4M36 31l-7-4" stroke="currentColor" stroke-width="4" stroke-linecap="round" />
+                    </svg>
+                  </span>
+                  <strong>均衡航线</strong>
+                </span>
+                <span>累计 100K 能量后解锁航线策略</span>
+              </button>
+              <button class="route-stance-button" type="button" aria-pressed="false" disabled>
+                <span class="route-stance-head">
+                  <span class="route-stance-visual route-stance-visual-ignition" role="img" aria-label="点火优先徽记">
+                    <svg viewBox="0 0 48 48" aria-hidden="true" focusable="false">
+                      <path d="M27 5L13 27h10l-3 16 15-23H25z" fill="none" stroke="currentColor" stroke-width="4" stroke-linejoin="round" />
+                      <path d="M14 34c4 6 16 6 20 0" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" />
+                    </svg>
+                  </span>
+                  <strong>点火优先</strong>
+                </span>
+                <span>累计 100K 能量后解锁航线策略</span>
+              </button>
+              <button class="route-stance-button" type="button" aria-pressed="false" disabled>
+                <span class="route-stance-head">
+                  <span class="route-stance-visual route-stance-visual-cruise" role="img" aria-label="巡航优先徽记">
+                    <svg viewBox="0 0 48 48" aria-hidden="true" focusable="false">
+                      <path d="M8 29c5-13 27-13 32 0" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" />
+                      <path d="M15 30l9 9 9-9" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+                      <circle cx="24" cy="19" r="5" fill="currentColor" opacity="0.34" />
+                    </svg>
+                  </span>
+                  <strong>巡航优先</strong>
+                </span>
+                <span>累计 100K 能量后解锁航线策略</span>
+              </button>
+            </div>
             <details class="project-filter-controls">
               <summary>筛选航段</summary>
               <div
