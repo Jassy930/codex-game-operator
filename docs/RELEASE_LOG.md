@@ -8,6 +8,9 @@
 - 同步 GitHub Issues 反馈状态：2026-04-30 13:00 CST 当前 5 个 open feedback issue、0 个 open bug issue；#4 作为本轮处理对象。
 - 验证通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 109 项。
 - 构建产物已确认包含 `directive-scene-image`、`directive-visual.svg`、“星核工坊航线指令插画”和 `routeBeam`。
+- 提交 2a9d51e 已推送；GitHub Pages workflow 25148455339 已成功，线上地址返回 HTTP 200，且线上首页、SVG 资源和 `styles.css` 已确认包含航线指令插画相关标记。
+- 已回复 #4，说明航线指令区新增本地 SVG 插画，并保持 issue open 等待复测。
+- 回复后同步 GitHub Issues 反馈状态：2026-04-30 13:08 CST 当前 5 个 open feedback issue、0 个 open bug issue；#4 更新时间为 2026-04-30T05:08:21Z。
 
 - 航线指令支持说明新增摘要化展示：指令轮换、航线委托和远航调度主说明默认只显示短摘要，完整说明保留在 `title` / `aria-label`。
 - `src/app.js` 新增 `setCompactSupportText`、`getDirectivePlanDisplayText`、`getDirectiveTaskDisplayText` 和 `getFarDispatchDisplayText`；`index.html` 静态锁定态同步短摘要；`src/styles.css` 对支持说明文本增加单行省略。

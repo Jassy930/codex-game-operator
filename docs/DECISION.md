@@ -17,8 +17,11 @@
 - GitHub Issues 已同步：2026-04-30 13:00 CST 当前 5 个 open feedback issue、0 个 open bug issue。
 - 静态首页和构建产物包含 `directive-scene-image`、`src/assets/directive-visual.svg`、“星核工坊航线指令插画”和 `routeBeam`。
 - 本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 109 项。
+- 提交 2a9d51e 已推送；GitHub Pages workflow 25148455339 已成功，线上地址返回 HTTP 200，且线上首页、SVG 资源和 `styles.css` 已确认包含航线指令插画相关标记。
+- #4 已回复并继续保持 open，等待复测确认 100K 后航线指令区新增插画是否进一步降低文字密度。
+- 回复后同步 GitHub Issues：2026-04-30 13:08 CST 当前仍为 5 个 open feedback issue、0 个 open bug issue；#4 更新时间为 2026-04-30T05:08:21Z。
 
-下一步：推送后等待 GitHub Pages workflow；若成功，回复 #4 并保持 open 等待复测航线指令区新增插画后是否进一步减少文字密度。
+下一步：等待 #4 复测；若仍认为界面密集，优先评估航线指令区布局密度或更明确的状态图形，而不是调整指令数值。
 
 ## 2026-04-30 Product decision：航线指令说明摘要化
 
