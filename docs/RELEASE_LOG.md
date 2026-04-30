@@ -9,6 +9,9 @@
 - 同步 GitHub Issues 反馈状态：2026-05-01 04:20 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 作为本轮处理对象。
 - 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
 - 构建产物已确认包含 `objectiveText`、`far-dispatch-branch-choice-objective` 和“路线目标”相关文案。
+- 发布：提交 `6d3c3b2` 已推送到 `origin/main`；GitHub Pages workflow `25187776607` 成功；线上首页返回 HTTP 200，线上 `src/game.js`、`src/app.js` 和 `src/styles.css` 已确认包含 `objectiveText`、`far-dispatch-branch-choice-objective` 和“路线目标”。
+- 反馈处理：已回复 #6，说明路线目标上线范围、验证结果和复测问题，issue 保持 open；回复后于 2026-05-01 04:31 CST 再次同步 GitHub Issues，当前仍为 5 个 open feedback issue、0 个 open bug issue。
+- 钉钉通知未发送：运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` 相关变量名，也未发现本地 `.env*` 文件；未将 webhook 写入仓库。
 
 - 远航调度新增“路线收益对照”：协同/绕行分支卡片会显示本步合计收益和回目标将触发的闭环收益，继续回应 #6 对后半段玩法变化不明显的反馈。
 - `src/game.js` 为 `branchChoices` 派生 `payoffText` 并纳入 `branchChoiceText`；`src/app.js` 渲染 `far-dispatch-branch-choice-payoff`；`src/styles.css` 增加收益对照样式；`tests/game.test.js` 覆盖无上轮分支、路线稳航、分支改道、轮替闭环、契合闭环、静态渲染和样式绑定。
