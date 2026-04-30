@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+- 远航调度新增“分支选择条”：20M 后主操作区远航调度条会并排显示协同路线和绕行路线，标出协同续航指令、绕行备选指令、资源取向、上轮路线、当前路线和可改道状态，继续回应 #6 对后半段玩法变化不明显的反馈。
+- `src/game.js` 新增 `branchChoices` / `branchChoiceText` 派生和绕行备选指令识别；`src/app.js` 渲染 `far-dispatch-branch-choices` / `far-dispatch-branch-choice`；`src/styles.css` 新增分支选择条样式；`index.html` 增加静态占位；`tests/game.test.js` 覆盖锁定态、协同/绕行状态、可改道状态、静态绑定和样式标记。
+- 文档同步更新：`docs/DECISION.md`、`docs/FEEDBACK.md`、`docs/RESEARCH.md`、`docs/PRODUCT.md`、`docs/DESIGN.md`、`docs/ROADMAP.md`、`docs/IDEAS.md`、`docs/METRICS.md`、`README.md` 和本日志已记录远航分支选择条。
+- 本轮不新增存档字段，不改变升级价格、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、基础连携倍率、远航调度收益、冷却、连携窗口、反馈入口或部署链路。
+- 同步 GitHub Issues 反馈状态：2026-04-30 22:30 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 作为本轮处理对象。
+- 验证通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+
 - 远航调度新增“分支改道”：目标指令后如果本轮选择的协同/绕行分支不同于上一轮远航分支，会获得有效基础指令收益 6% 的“分支改道”奖励，继续回应 #6 对后半段玩法变化不明显的反馈。
 - `src/game.js` 新增 `FAR_ROUTE_DISPATCH_BRANCH_SHIFT_REWARD_RATE`、分支改道收益计算、远航路径收益标签和静态支持文案；`src/app.js` 记录 `dispatchBranchShiftReward` / `dispatchBranchShiftRewardRate` / `dispatchBranchShiftRewardText` 事件字段并渲染 `directive-dispatch-branch-shift` 徽标；`src/styles.css` 新增分支改道徽标样式；`tests/game.test.js` 覆盖协同后改走绕行、绕行后改走协同、重复同分支不触发、静态绑定和反馈快照。
 - 文档同步更新：`docs/DECISION.md`、`docs/FEEDBACK.md`、`docs/RESEARCH.md`、`docs/PRODUCT.md`、`docs/DESIGN.md`、`docs/ROADMAP.md`、`docs/IDEAS.md`、`docs/METRICS.md`、`README.md` 和本日志已记录远航分支改道。

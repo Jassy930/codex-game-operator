@@ -2891,6 +2891,8 @@ export function getFarRouteDispatch(state, now = Date.now()) {
       branchText: "",
       branchDirectiveId: null,
       branchDirectiveName: "",
+      branchChoices: [],
+      branchChoiceText: "",
       projectId: null,
       loopProgress: 0,
       loopTarget,
@@ -2953,6 +2955,8 @@ export function getFarRouteDispatch(state, now = Date.now()) {
       branchText: "",
       branchDirectiveId: null,
       branchDirectiveName: "",
+      branchChoices: [],
+      branchChoiceText: "",
       projectId: null,
       loopProgress: loopTarget,
       loopTarget,
@@ -2981,6 +2985,12 @@ export function getFarRouteDispatch(state, now = Date.now()) {
     directive,
     relayDirective,
     now
+  );
+  const branchChoices = buildFarRouteDispatchBranchChoices(
+    current,
+    directive,
+    relayDirective,
+    branchStatus
   );
   const loopSteps = buildFarRouteDispatchLoopSteps(
     directive,
@@ -3041,6 +3051,8 @@ export function getFarRouteDispatch(state, now = Date.now()) {
     branchText: branchStatus.text,
     branchDirectiveId: branchStatus.directiveId,
     branchDirectiveName: branchStatus.directiveName,
+    branchChoices,
+    branchChoiceText: buildFarRouteDispatchBranchChoiceText(branchChoices),
     projectId: project.id,
     projectName: project.name,
     segmentText: project.segmentText,
@@ -4609,6 +4621,127 @@ function appendFarRouteDispatchBranchText(text, branchStatus) {
   return text + " · " + branchStatus.text;
 }
 
+function buildFarRouteDispatchBranchChoices(
+  state,
+  directive,
+  relayDirective,
+  branchStatus
+) {
+  if (!directive || !relayDirective) {
+    return [];
+  }
+
+  const detourDirective = getFarRouteDispatchDetourDirective(
+    directive,
+    relayDirective
+  );
+  const previousBranchDirective = getDirectiveDef(state.farRouteLastBranchDirectiveId);
+  const previousBranchDirectiveId =
+    previousBranchDirective && previousBranchDirective.id !== directive.id
+      ? previousBranchDirective.id
+      : null;
+  const choices = [
+    {
+      kind: "sync",
+      label: "协同",
+      directive: relayDirective,
+      caption: "补当前资源",
+      baseRewardText:
+        "远航协同 +" +
+        Math.round(FAR_ROUTE_DISPATCH_SYNC_REWARD_RATE * 100) +
+        "% · 协同补给 +" +
+        Math.round(FAR_ROUTE_DISPATCH_SYNC_SUPPLY_RATE * 100) +
+        "%当前"
+    },
+    detourDirective
+      ? {
+          kind: "detour",
+          label: "绕行",
+          directive: detourDirective,
+          caption: "投送累计航段",
+          baseRewardText:
+            "远航绕行 +" +
+            Math.round(FAR_ROUTE_DISPATCH_DETOUR_REWARD_RATE * 100) +
+            "% · 绕行投送 -" +
+            roundTo(FAR_ROUTE_DISPATCH_DETOUR_INFUSION_COST_RATE * 100, 2) +
+            "%当前"
+        }
+      : null
+  ].filter(Boolean);
+
+  return choices.map((choice) => {
+    const active =
+      branchStatus?.directiveId === choice.directive.id &&
+      (branchStatus.kind === choice.kind ||
+        branchStatus.kind === choice.kind + "-prep");
+    const previous = previousBranchDirectiveId === choice.directive.id;
+    const shift =
+      Boolean(previousBranchDirectiveId) &&
+      previousBranchDirectiveId !== choice.directive.id;
+    const status = active ? "active" : shift ? "shift" : previous ? "previous" : "available";
+    const statusText = active
+      ? "当前路线"
+      : shift
+        ? "可改道"
+        : previous
+          ? "上轮路线"
+          : "可选择";
+    const rewardText =
+      choice.baseRewardText +
+      (shift
+        ? " · 分支改道 +" +
+          Math.round(FAR_ROUTE_DISPATCH_BRANCH_SHIFT_REWARD_RATE * 100) +
+          "%"
+        : "");
+
+    return {
+      kind: choice.kind,
+      label: choice.label,
+      directiveId: choice.directive.id,
+      directiveName: choice.directive.name,
+      caption: choice.caption,
+      status,
+      statusText,
+      rewardText,
+      text:
+        choice.label +
+        " " +
+        choice.directive.name +
+        " · " +
+        statusText +
+        " · " +
+        choice.caption +
+        " · " +
+        rewardText
+    };
+  });
+}
+
+function buildFarRouteDispatchBranchChoiceText(choices) {
+  if (!choices.length) {
+    return "";
+  }
+
+  return (
+    "分支选择：" +
+    choices
+      .map(
+        (choice) =>
+          choice.label +
+          " " +
+          choice.directiveName +
+          "（" +
+          choice.statusText +
+          " · " +
+          choice.caption +
+          " · " +
+          choice.rewardText +
+          "）"
+      )
+      .join(" / ")
+  );
+}
+
 function getFarRouteDispatchBranchStatus(state, directive, relayDirective, now) {
   if (!directive) {
     return {
@@ -5789,6 +5922,15 @@ function getFarRouteDispatchRelayDirective(targetDirective) {
   const relayDirectiveId = relayByTarget[targetDirective?.id];
 
   return getDirectiveDef(relayDirectiveId) ?? null;
+}
+
+function getFarRouteDispatchDetourDirective(targetDirective, relayDirective) {
+  return (
+    DIRECTIVE_DEFS.find(
+      (directive) =>
+        directive.id !== targetDirective?.id && directive.id !== relayDirective?.id
+    ) ?? null
+  );
 }
 
 function getFarRouteDispatchBreakthroughBase(project) {

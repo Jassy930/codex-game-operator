@@ -619,6 +619,8 @@ function renderFarDispatch(dispatch) {
   branch.textContent = dispatch.branchText ?? "";
   branch.hidden = !dispatch.branchText;
 
+  const branchChoices = renderFarDispatchBranchChoices(dispatch);
+
   const loopText = document.createElement("span");
   loopText.className = "far-dispatch-loop-text";
   loopText.textContent = dispatch.loopStatusText;
@@ -653,7 +655,53 @@ function renderFarDispatch(dispatch) {
 
   elements.farDispatch.classList.toggle("is-locked", !dispatch.unlocked);
   elements.farDispatch.classList.toggle("is-active", dispatch.active);
-  elements.farDispatch.replaceChildren(text, branch, meter, loopText, loopMeter, loopTrack);
+  elements.farDispatch.replaceChildren(
+    text,
+    branch,
+    branchChoices,
+    meter,
+    loopText,
+    loopMeter,
+    loopTrack
+  );
+}
+
+function renderFarDispatchBranchChoices(dispatch) {
+  const track = document.createElement("span");
+  track.className = "far-dispatch-branch-choices";
+
+  const choices = Array.isArray(dispatch.branchChoices) ? dispatch.branchChoices : [];
+  track.hidden = choices.length === 0;
+  if (track.hidden) {
+    return track;
+  }
+
+  track.setAttribute("aria-label", dispatch.branchChoiceText ?? "");
+  track.append(
+    ...choices.map((choice) => {
+      const item = document.createElement("span");
+      item.className =
+        "far-dispatch-branch-choice is-" +
+        getFarDispatchBranchChoiceKind(choice) +
+        " is-" +
+        getFarDispatchBranchChoiceStatus(choice);
+      item.title = choice.text ?? "";
+
+      const label = document.createElement("strong");
+      label.textContent = choice.label + " · " + choice.statusText;
+
+      const directive = document.createElement("span");
+      directive.textContent = choice.directiveName;
+
+      const caption = document.createElement("em");
+      caption.textContent = choice.caption + " · " + choice.rewardText;
+
+      item.append(label, directive, caption);
+      return item;
+    })
+  );
+
+  return track;
 }
 
 function renderFarDispatchLoopTrack(dispatch) {
@@ -742,6 +790,16 @@ function getFarDispatchDisplayText(dispatch) {
 function getFarDispatchBranchKind(dispatch) {
   const kind = String(dispatch.branchKind ?? "none");
   return kind.replace(/[^a-z-]/g, "") || "none";
+}
+
+function getFarDispatchBranchChoiceKind(choice) {
+  const kind = String(choice.kind ?? "none");
+  return kind.replace(/[^a-z-]/g, "") || "none";
+}
+
+function getFarDispatchBranchChoiceStatus(choice) {
+  const status = String(choice.status ?? "available");
+  return status.replace(/[^a-z-]/g, "") || "available";
 }
 
 function renderDirective(option) {

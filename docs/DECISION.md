@@ -1,5 +1,31 @@
 # Decision
 
+## 2026-04-30 Product decision：远航分支选择条
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-04-30 22:30 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#6 仍是最新反馈线程，原始反馈指出后半段“只有不停的目标、玩法没有真正变化”，因此本轮继续进入 Product decision。
+
+当前最大问题：远航调度已经有协同、绕行、分支态势和分支改道，但主操作区只显示一个当前分支徽标和三步路径。玩家在目标后的第二步仍需要从按钮徽标、路径文本和上一轮分支记忆中推断“协同补给”和“绕行投送”两条路线的差异，以及哪条会触发分支改道。
+
+本轮决策：
+
+- 新增“远航分支选择条”。
+- `getFarRouteDispatch` 派生 `branchChoices` / `branchChoiceText`，并把协同路线和绕行路线并排展示。
+- 协同选择显示协同续航指令、补当前资源、远航协同 +5% 与协同补给 +3%当前；绕行选择显示绕行备选指令、投送累计航段、远航绕行 +4% 与绕行投送 -0.3%当前。
+- 当已有上一轮远航分支时，选择条会标出“上轮路线”和“可改道”，并在可改道路线里显示分支改道 +6%；当前路线显示“当前路线”。
+- 本轮只新增派生展示和样式，不新增存档字段，不改变升级价格、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、基础连携倍率、远航调度各项奖励、冷却、连携窗口、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-04-30 22:30 CST 当前 5 个 open feedback issue、0 个 open bug issue。
+- 锁定态和全部完成态 `branchChoices` 为空。
+- 远航调度 active 时，`branchChoices` 同时包含协同和绕行两条路线。
+- 选择绕行后，绕行路线显示“当前路线”，协同路线显示“可改道”；选择协同后状态反向显示。
+- 上一轮协同后目标分支选择条会把绕行标为“可改道”并显示“分支改道 +6%”；上一轮绕行后会把协同标为“可改道”。
+- 主操作区渲染 `far-dispatch-branch-choices` 和 `far-dispatch-branch-choice`，静态首页保留同名占位。
+- 本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+
+下一步：提交并推送后回复 #6，说明远航调度条新增协同/绕行并排选择条，等待复测该展示是否能降低后半段分支理解成本。
+
 ## 2026-04-30 Product decision：远航分支改道
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-04-30 22:14 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#6 仍是最新反馈线程，原始反馈指出后半段“只有不停的目标、玩法没有真正变化”，因此本轮继续进入 Product decision。

@@ -1397,6 +1397,87 @@ h2 {
   color: #ffe3aa;
 }
 
+.far-dispatch-branch-choices {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 6px;
+}
+
+.far-dispatch-branch-choices[hidden] {
+  display: none;
+}
+
+.far-dispatch-branch-choice {
+  display: grid;
+  gap: 3px;
+  min-width: 0;
+  min-height: 54px;
+  padding: 6px 8px;
+  border: 1px solid rgba(248, 243, 231, 0.16);
+  border-radius: 8px;
+  background: rgba(248, 243, 231, 0.06);
+}
+
+.far-dispatch-branch-choice strong,
+.far-dispatch-branch-choice span,
+.far-dispatch-branch-choice em {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.far-dispatch-branch-choice strong {
+  color: rgba(248, 243, 231, 0.72);
+  font-size: 0.68rem;
+  font-weight: 900;
+}
+
+.far-dispatch-branch-choice span {
+  color: #f8f3e7;
+  font-size: 0.76rem;
+  font-weight: 900;
+}
+
+.far-dispatch-branch-choice em {
+  color: rgba(248, 243, 231, 0.68);
+  font-size: 0.66rem;
+  font-style: normal;
+  font-weight: 850;
+}
+
+.far-dispatch-branch-choice.is-sync {
+  border-color: rgba(103, 232, 249, 0.3);
+  background: rgba(103, 232, 249, 0.09);
+}
+
+.far-dispatch-branch-choice.is-sync em {
+  color: #c6f7ff;
+}
+
+.far-dispatch-branch-choice.is-detour {
+  border-color: rgba(244, 178, 60, 0.34);
+  background: rgba(244, 178, 60, 0.1);
+}
+
+.far-dispatch-branch-choice.is-detour em {
+  color: #ffe3aa;
+}
+
+.far-dispatch-branch-choice.is-active {
+  border-color: rgba(150, 231, 168, 0.5);
+  box-shadow: inset 0 0 0 1px rgba(150, 231, 168, 0.16);
+}
+
+.far-dispatch-branch-choice.is-shift {
+  border-color: rgba(255, 126, 177, 0.48);
+  box-shadow: inset 0 0 0 1px rgba(255, 126, 177, 0.16);
+}
+
+.far-dispatch-branch-choice.is-previous {
+  opacity: 0.78;
+}
+
 .far-dispatch-meter {
   display: block;
   width: 100%;
