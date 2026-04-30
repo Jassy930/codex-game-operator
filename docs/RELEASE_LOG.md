@@ -9,6 +9,8 @@
 - 同步 GitHub Issues 反馈状态：2026-05-01 05:51 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 作为本轮处理对象。
 - 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
 - 构建产物已确认包含 `decisionBadgeText` 和 `far-dispatch-branch-choice-badge`。
+- 发布：提交 `334c70e` 已推送到 `origin/main`；GitHub Pages workflow `25191542397` 成功；线上首页返回 HTTP 200，线上 `src/game.js`、`src/app.js` 和 `src/styles.css` 已确认包含 `decisionBadgeText` 与 `far-dispatch-branch-choice-badge`。
+- 反馈处理：已回复 #6，说明路线徽标上线范围、验证结果和复测问题，issue 保持 open；回复后于 2026-05-01 06:04 CST 再次同步 GitHub Issues，当前仍为 5 个 open feedback issue、0 个 open bug issue。
 - 钉钉通知未发送：运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` 相关变量名，也未发现本地 `.env*` 文件；未将 webhook 写入仓库。
 
 - 远航调度新增“路线判断状态”：协同/绕行分支卡片会从 `decisionText` 派生 `decisionKind`，并在卡片与判断行渲染 `is-decision-*` 状态样式，让当前航段首推、推荐稳航、推荐改道、备选、已选和已完成更容易扫视，继续回应 #6 对后半段玩法变化不明显的反馈。
