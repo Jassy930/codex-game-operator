@@ -1,5 +1,30 @@
 # Decision
 
+## 2026-05-01 Product decision：远航契合闭环
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-01 02:48 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#6 仍是最新反馈线程，原始反馈指出后半段“只有不停的目标、玩法没有真正变化”，因此本轮继续进入 Product decision。
+
+当前最大问题：前序已经把远航路线预案、路线步骤和路线按钮标记落到可点击按钮，但“按当前航段推荐分支走完一整圈”仍只在第二步获得航段契合收益。玩家回到目标完成 3/3 时还缺少“这条契合路线已经闭环”的直接确认。
+
+本轮决策：
+
+- 新增“远航契合闭环”。
+- 当本轮路线用当前航段契合分支完成目标 -> 协同/绕行 -> 回目标的 3/3 闭环时，回到当前航段目标指令额外获得有效基础指令收益 7% 的“契合闭环”奖励。
+- `src/game.js` 新增 `FAR_ROUTE_DISPATCH_FOCUS_LOOP_REWARD_RATE` 和 `dispatchFocusLoopReward` 预览/执行结算；`src/app.js` 在本地 `directive` 事件记录 `dispatchFocusLoopReward` / `dispatchFocusLoopRewardRate` / `dispatchFocusLoopRewardText` 并渲染 `directive-dispatch-focus-loop` 徽标。
+- 远航调度长文本、星图当前航段 3 步路径收益标签、静态首页解锁说明、反馈快照和测试同步包含“契合闭环 +7%”。
+- 本轮只新增契合分支回目标的闭环奖励，不新增存档字段，不改变升级价格、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、基础连携倍率、调度校准、远航续航、远航协同、协同补给、远航绕行、绕行投送、分支改道、航段契合、轮替闭环、远航闭环、远航突破、绕行突破、冷却、连携窗口、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-05-01 02:48 CST 当前 5 个 open feedback issue、0 个 open bug issue。
+- `FAR_ROUTE_DISPATCH_FOCUS_LOOP_REWARD_RATE` 为 0.07。
+- 选择当前航段契合分支后回到当前航段目标指令完成 3/3，会在预计收益和执行反馈中显示并结算“契合闭环 +X”；未走契合分支时不触发。
+- 远航调度长文本包含“若用当前航段契合分支回到目标，还会触发契合闭环 +7%”。
+- 星图当前航段 3 步路径第三步收益标签包含“契合闭环 +7%”。
+- `src/app.js` 渲染 `directive-dispatch-focus-loop` 并在本地 `directive` 事件记录 `dispatchFocusLoopReward` / `dispatchFocusLoopRewardRate` / `dispatchFocusLoopRewardText`；`src/styles.css` 包含 `.directive-button .directive-dispatch-focus-loop`。
+- 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含 `dispatchFocusLoopReward`、`directive-dispatch-focus-loop` 和“契合闭环”相关文案。
+
 ## 2026-05-01 Product decision：远航路线按钮标记
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-01 02:30 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#6 仍是最新反馈线程，原始反馈指出后半段“只有不停的目标、玩法没有真正变化”，因此本轮继续进入 Product decision。
