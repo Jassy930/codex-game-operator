@@ -1,5 +1,27 @@
 # Decision
 
+## 2026-05-01 Product decision：远航路线微图
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-01 06:13 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#6 仍是最新后半段玩法反馈，#4 仍指出界面“全是密密麻麻的文字、希望更多图片”，因此本轮继续进入 Product decision，并选择同时降低远航分支文字墙和强化路线感的展示改动。
+
+当前最大问题：前序已经让协同/绕行分支卡片首行出现首推、稳航、改道、建档、已选或已完成徽标，但卡片主体仍主要依赖多行文字解释路线。玩家能扫到判断，却仍缺少一个非文字路线锚点来区分协同直达和绕行偏移。
+
+本轮决策：
+
+- 新增“远航路线微图”。
+- 主操作区协同/绕行分支卡片新增 `far-dispatch-branch-choice-route` 三点路线微图：起点、分支点、回目标点。
+- 协同路线显示直线轨迹，绕行路线显示带偏移的折线路径；焦点、改道和推荐状态通过既有 `kind` / `status` / `decisionKind` class 影响边框与高亮。
+- 微图 `aria-hidden="true"`，完整语义继续由已有 `branchChoiceText`、卡片标题、路线判断、路线目标、路线下一步和收益对照承载。
+- 本轮只调整 DOM、样式和静态测试；不新增收益、不新增存档字段，不改变升级价格、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、远航调度既有数值、冷却、连携窗口、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-05-01 06:13 CST 当前 5 个 open feedback issue、0 个 open bug issue。
+- `src/app.js` 渲染 `renderFarDispatchBranchChoiceRoute(choice)`、`far-dispatch-branch-choice-route`、`far-dispatch-branch-choice-route-line` 和三枚 route node。
+- `src/styles.css` 包含 `.far-dispatch-branch-choice-route.is-sync`、`.is-detour`、`.is-shift` 样式。
+- 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含 `renderFarDispatchBranchChoiceRoute` 和 `far-dispatch-branch-choice-route`。
+
 ## 2026-05-01 Product decision：远航路线徽标
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-01 05:51 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#6 仍是最新反馈线程，原始反馈指出后半段“只有不停的目标、玩法没有真正变化”，因此本轮继续进入 Product decision。

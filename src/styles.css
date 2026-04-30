@@ -1591,6 +1591,104 @@ h2 {
   font-weight: 900;
 }
 
+.far-dispatch-branch-choice-route {
+  position: relative;
+  display: block;
+  height: 18px;
+  border: 1px solid rgba(248, 243, 231, 0.12);
+  border-radius: 6px;
+  background:
+    linear-gradient(90deg, rgba(248, 243, 231, 0.06), rgba(248, 243, 231, 0.02)),
+    rgba(5, 12, 20, 0.2);
+}
+
+.far-dispatch-branch-choice-route-line {
+  position: absolute;
+  top: 50%;
+  right: 12%;
+  left: 12%;
+  height: 2px;
+  border-radius: 999px;
+  background: rgba(248, 243, 231, 0.34);
+  transform: translateY(-50%);
+}
+
+.far-dispatch-branch-choice-route-node {
+  position: absolute;
+  top: 50%;
+  width: 8px;
+  height: 8px;
+  border: 1px solid rgba(248, 243, 231, 0.52);
+  border-radius: 999px;
+  background: #f8f3e7;
+  box-shadow: 0 0 0 3px rgba(248, 243, 231, 0.08);
+  transform: translateY(-50%);
+}
+
+.far-dispatch-branch-choice-route-node.is-start {
+  left: 10%;
+}
+
+.far-dispatch-branch-choice-route-node.is-branch {
+  left: calc(50% - 4px);
+}
+
+.far-dispatch-branch-choice-route-node.is-return {
+  right: 10%;
+}
+
+.far-dispatch-branch-choice-route.is-sync {
+  border-color: rgba(103, 232, 249, 0.28);
+  background:
+    linear-gradient(90deg, rgba(103, 232, 249, 0.12), rgba(150, 231, 168, 0.05)),
+    rgba(5, 12, 20, 0.2);
+}
+
+.far-dispatch-branch-choice-route.is-sync .far-dispatch-branch-choice-route-line,
+.far-dispatch-branch-choice-route.is-sync .far-dispatch-branch-choice-route-node {
+  border-color: rgba(103, 232, 249, 0.62);
+  background: #67e8f9;
+}
+
+.far-dispatch-branch-choice-route.is-detour {
+  border-color: rgba(244, 178, 60, 0.3);
+  background:
+    linear-gradient(90deg, rgba(244, 178, 60, 0.12), rgba(255, 126, 177, 0.05)),
+    rgba(5, 12, 20, 0.2);
+}
+
+.far-dispatch-branch-choice-route.is-detour .far-dispatch-branch-choice-route-line {
+  background: linear-gradient(90deg, #f4b23c, #ff7eb1);
+  transform: translateY(-50%) rotate(-4deg);
+}
+
+.far-dispatch-branch-choice-route.is-detour .far-dispatch-branch-choice-route-node {
+  border-color: rgba(244, 178, 60, 0.64);
+  background: #f4b23c;
+}
+
+.far-dispatch-branch-choice-route.is-detour .far-dispatch-branch-choice-route-node.is-branch {
+  top: 34%;
+  background: #ff7eb1;
+}
+
+.far-dispatch-branch-choice-route.is-detour .far-dispatch-branch-choice-route-node.is-return {
+  top: 66%;
+}
+
+.far-dispatch-branch-choice-route.is-shift,
+.far-dispatch-branch-choice-route.is-decision-recommended-shift,
+.far-dispatch-branch-choice-route.is-decision-fallback-shift {
+  border-color: rgba(255, 126, 177, 0.48);
+  box-shadow: inset 0 0 0 1px rgba(255, 126, 177, 0.12);
+}
+
+.far-dispatch-branch-choice-route.is-focused,
+.far-dispatch-branch-choice-route.is-decision-recommended,
+.far-dispatch-branch-choice-route.is-decision-recommended-stable {
+  box-shadow: inset 0 0 0 1px rgba(150, 231, 168, 0.14);
+}
+
 .far-dispatch-branch-choice small {
   color: rgba(248, 243, 231, 0.72);
   font-size: 0.64rem;

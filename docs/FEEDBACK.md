@@ -2,6 +2,14 @@
 
 ## 2026-05-01
 
+- GitHub Issues：gh 可用且已认证；2026-05-01 06:13 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
+- #6 继续作为本轮 Product decision 依据：该反馈指出后半段“只有不停的目标、玩法没有真正变化”；#4 仍补充界面文字密度和图片化诉求。前序已经给协同/绕行分支卡片加上路线徽标，但卡片主体仍主要靠文字解释路线差异。
+- 本轮改动新增远航路线微图：协同/绕行分支卡片渲染 `far-dispatch-branch-choice-route` 三点路线轨，协同使用直线路径，绕行使用带偏移的路线节点，帮助玩家在读路线目标和收益前先扫到两条路线形态。
+- 微图只作为视觉锚点，`aria-hidden="true"`；可访问语义继续保留在已有 `branchChoiceText`、卡片 `title`、路线判断、路线目标、路线下一步和收益对照中。
+- 本轮只调整 DOM、样式和静态测试，不新增收益、不新增存档字段，不改变升级价格、星图路线、项目奖励、远航调度既有数值、冷却、连携窗口、反馈入口或部署链路。
+- 本轮本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含 `renderFarDispatchBranchChoiceRoute` 和 `far-dispatch-branch-choice-route`。
+
 - GitHub Issues：gh 可用且已认证；2026-05-01 05:51 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
 - #6 继续作为本轮 Product decision 依据：该反馈指出后半段“只有不停的目标、玩法没有真正变化”；前序已经给路线判断追加视觉状态，但卡片首行仍需要读到下一行才能确认首推、稳航、改道、建档、已选或已完成。
 - 本轮改动新增远航路线徽标：协同/绕行分支卡片从 `decisionKind` 派生 `decisionBadgeText`，并在卡片首行渲染 `far-dispatch-branch-choice-badge`，让“首推 / 稳航 / 改道 / 建档 / 备选稳航 / 备选改道 / 已选 / 已完成”先被扫到。

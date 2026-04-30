@@ -743,6 +743,8 @@ function renderFarDispatchBranchChoices(dispatch) {
       const directive = document.createElement("span");
       directive.textContent = choice.directiveName;
 
+      const routeVisual = renderFarDispatchBranchChoiceRoute(choice);
+
       const decision = document.createElement("small");
       decision.className =
         "far-dispatch-branch-choice-decision is-" +
@@ -778,6 +780,7 @@ function renderFarDispatchBranchChoices(dispatch) {
 
       item.append(
         header,
+        routeVisual,
         directive,
         decision,
         reason,
@@ -792,6 +795,34 @@ function renderFarDispatchBranchChoices(dispatch) {
   );
 
   return track;
+}
+
+function renderFarDispatchBranchChoiceRoute(choice) {
+  const route = document.createElement("span");
+  route.className =
+    "far-dispatch-branch-choice-route is-" +
+    getFarDispatchBranchChoiceKind(choice) +
+    " is-" +
+    getFarDispatchBranchChoiceStatus(choice) +
+    " is-decision-" +
+    getFarDispatchBranchChoiceDecisionKind(choice) +
+    (choice.focused ? " is-focused" : "");
+  route.setAttribute("aria-hidden", "true");
+
+  const line = document.createElement("span");
+  line.className = "far-dispatch-branch-choice-route-line";
+
+  const start = document.createElement("span");
+  start.className = "far-dispatch-branch-choice-route-node is-start";
+
+  const branch = document.createElement("span");
+  branch.className = "far-dispatch-branch-choice-route-node is-branch";
+
+  const returnNode = document.createElement("span");
+  returnNode.className = "far-dispatch-branch-choice-route-node is-return";
+
+  route.append(line, start, branch, returnNode);
+  return route;
 }
 
 function renderFarDispatchLoopTrack(dispatch) {
