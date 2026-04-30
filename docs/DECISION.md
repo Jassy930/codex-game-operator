@@ -1,5 +1,29 @@
 # Decision
 
+## 2026-04-30 Product decision：远航协同回航指引
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-04-30 20:34 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#6 仍是最新反馈线程，指出后半段“只有不停的目标、玩法没有真正变化”，因此本轮继续进入 Product decision。
+
+当前最大问题：远航调度已经把目标后的第二步拆成协同与绕行，并让绕行后回目标显示“绕行回航”。但协同路线在第三步回到目标时仍显示泛化的“调度目标”，路线名称在最后一步断开，玩家不容易把“协同 -> 回目标闭环”识别成与绕行路线并列的分支。
+
+本轮决策：
+
+- 在目标指令后执行指定协同续航后，下一步回到当前航段目标指令时显示“协同回航/等待协同”。
+- 远航闭环提示同步改为“协同回航到目标指令触发远航闭环与远航突破”。
+- 绕行路线继续保留“绕行回航/等待绕行”和绕行突破；本轮只补齐协同路线第三步命名。
+- 本轮不新增存档字段，不改变升级价格、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、基础连携倍率、远航调度校准、远航续航、远航协同、远航绕行、绕行投送、远航闭环、远航突破、绕行突破、远航整备、整备续航、整备回航、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-04-30 20:34 CST 当前 5 个 open feedback issue、0 个 open bug issue。
+- `getDirectivePlan` 在“目标指令 -> 指定协同续航”后推荐目标指令为“协同回航”，等待文案为“等待协同”。
+- `getFarRouteDispatchLoopStatus` 在协同路线第三步提示“协同回航到目标指令触发远航闭环与远航突破”。
+- `getDirectiveStatus` 中目标指令按钮显示“协同回航”，同时仍显示远航闭环和远航突破预计收益。
+- 本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 117 项。
+- 构建产物已确认包含 `dispatchSyncReturnCanOverride` 和“协同回航”。
+
+下一步：等待 #6 复测协同与绕行两条路线在按钮层是否都能被识别；如果仍认为后半段只是沿目标推进，再评估更重的资源消耗型指令或项目分支，而不是继续增加路径说明。
+
 ## 2026-04-30 Product decision：远航绕行投送
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-04-30 20:07 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#6 仍是最新反馈线程，指出后半段“只有不停的目标、玩法没有真正变化”，因此本轮继续进入 Product decision。

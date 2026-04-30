@@ -2490,6 +2490,7 @@ test("远航调度会在 20M 后按当前航段指定目标指令", () => {
     }
   };
   const loopStatus = getDirectiveStatus(loopState, 30_000);
+  const loopPlan = getDirectivePlan(loopState, 30_000);
   const loopIgnitionOption = loopStatus.options.find(
     (option) => option.id === "ignition-salvo"
   );
@@ -2827,13 +2828,17 @@ test("远航调度会在 20M 后按当前航段指定目标指令", () => {
   assert.equal(loopDispatch.loopProgress, 2);
   assert.equal(loopDispatch.loopTarget, 3);
   assert.match(loopDispatch.loopStatusText, /闭环进度 2\/3/);
-  assert.match(loopDispatch.loopStatusText, /下一步回到点火齐射触发远航闭环/);
+  assert.match(loopDispatch.loopStatusText, /协同回航到点火齐射触发远航闭环/);
   assert.deepEqual(
     loopDispatch.loopSteps.map((step) => step.label + ":" + step.stateText),
     ["目标:已完成", "协同/绕行:已完成", "回目标:下一步"]
   );
+  assert.deepEqual(loopPlan.nextDirectiveIds, ["ignition-salvo"]);
+  assert.equal(loopPlan.recommendationText, "协同回航");
+  assert.equal(loopPlan.waitingRecommendationText, "等待协同");
+  assert.match(loopPlan.hintText, /触发远航闭环与远航突破/);
   assert.equal(loopIgnitionOption.recommended, true);
-  assert.equal(loopIgnitionOption.recommendationText, "调度目标");
+  assert.equal(loopIgnitionOption.recommendationText, "协同回航");
   assert.equal(loopIgnitionOption.dispatchLoopReward > 0, true);
   assert.match(loopIgnitionOption.dispatchLoopRewardText, /远航闭环 \+/);
   assert.equal(loopIgnitionOption.dispatchBreakthroughReward, 2500);

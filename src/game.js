@@ -3055,6 +3055,12 @@ export function getDirectivePlan(state, now = Date.now()) {
       chain.lastDirectiveId === dispatchRelayDirective.id &&
       stacks >= DIRECTIVE_CHAIN_MAX_STACKS
   );
+  const dispatchSyncReturnCanOverride = Boolean(
+    dispatchDirective &&
+      dispatchRelayDirective &&
+      chain.lastDirectiveId === dispatchRelayDirective.id &&
+      stacks === DIRECTIVE_CHAIN_MAX_STACKS - 1
+  );
   const dispatchDetourReturnCanOverride = Boolean(
     dispatchDirective &&
       dispatchRelayDirective &&
@@ -3069,6 +3075,11 @@ export function getDirectivePlan(state, now = Date.now()) {
       stacks >= DIRECTIVE_CHAIN_MAX_STACKS
   );
   if (dispatchReturnCanOverride) {
+    nextDirectivePool = [dispatchDirective];
+    readyDirectives = isDirectiveReady(current, dispatchDirective, now, dispatch)
+      ? [dispatchDirective]
+      : [];
+  } else if (dispatchSyncReturnCanOverride) {
     nextDirectivePool = [dispatchDirective];
     readyDirectives = isDirectiveReady(current, dispatchDirective, now, dispatch)
       ? [dispatchDirective]
@@ -3111,6 +3122,10 @@ export function getDirectivePlan(state, now = Date.now()) {
     waitingPrefix = readyDirectives.length
       ? "远航整备回航到"
       : "等待远航整备回航冷却后执行";
+  } else if (dispatchSyncReturnCanOverride) {
+    waitingPrefix = readyDirectives.length
+      ? "远航协同回到"
+      : "等待远航协同回航冷却后执行";
   } else if (dispatchDetourReturnCanOverride) {
     waitingPrefix = readyDirectives.length
       ? "远航绕行回到"
@@ -3131,6 +3146,8 @@ export function getDirectivePlan(state, now = Date.now()) {
   let preserveStanceHint = "";
   if (dispatchReturnCanOverride) {
     preserveStanceHint = "，触发整备回航";
+  } else if (dispatchSyncReturnCanOverride) {
+    preserveStanceHint = "，触发远航闭环与远航突破";
   } else if (dispatchDetourReturnCanOverride) {
     preserveStanceHint = "，触发远航闭环与绕行突破";
   } else if (dispatchRelayCanOverride) {
@@ -3205,6 +3222,8 @@ export function getDirectivePlan(state, now = Date.now()) {
     nextDirectiveIds: nextDirectivePool.map((directive) => directive.id),
     recommendationText: dispatchReturnCanOverride
       ? "整备回航"
+      : dispatchSyncReturnCanOverride
+      ? "协同回航"
       : dispatchDetourReturnCanOverride
       ? "绕行回航"
       : dispatchCanOverride
@@ -3221,6 +3240,8 @@ export function getDirectivePlan(state, now = Date.now()) {
     waitingRecommendationText:
       dispatchReturnCanOverride
         ? "等待回航"
+        : dispatchSyncReturnCanOverride
+        ? "等待协同"
         : dispatchDetourReturnCanOverride
         ? "等待绕行"
         : dispatchCanOverride
@@ -5098,6 +5119,10 @@ function getFarRouteDispatchLoopNextText(chain, directive, relayDirective, progr
   }
 
   if ((Number(chain.stacks) || 0) >= DIRECTIVE_CHAIN_MAX_STACKS - 1) {
+    if (relayDirective && chain.lastDirectiveId === relayDirective.id) {
+      return "下一步协同回航到" + directive.name + "触发远航闭环与远航突破";
+    }
+
     const detourText =
       relayDirective &&
       chain.lastDirectiveId !== relayDirective.id &&
