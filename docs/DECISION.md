@@ -1,5 +1,33 @@
 # Decision
 
+## 2026-04-30 Product decision：远航绕行整备
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-04-30 21:16 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#6 仍是最新反馈线程，指出后半段“只有不停的目标、玩法没有真正变化”，因此本轮继续进入 Product decision。
+
+当前最大问题：协同路线已经通过协同补给形成“补当前资源”，绕行路线通过绕行投送形成“消耗当前资源推进累计航段”。但两条路线完成闭环后都回到相似的整备节奏，绕行选择对下一轮起手的影响还不够明显。
+
+本轮决策：
+
+- 给绕行路线新增“绕行整备”。
+- 玩家选择绕行分支并回到目标完成闭环时，记录最近远航分支 `farRouteLastBranchDirectiveId`，刷新刚才的绕行指令冷却，而不是总是刷新协同续航指令。
+- 绕行路线完成态下一步优先推荐“绕行整备/等待绕行整备”；执行该绕行指令时按有效基础指令收益 5% 结算“绕行整备”奖励。
+- 协同路线保持“远航整备 -> 整备续航 -> 整备回航”；绕行路线形成“绕行投送 -> 绕行回航 -> 绕行整备”的下一轮起手差异。
+- 除新增 `farRouteLastBranchDirectiveId` 用于记录最近远航分支外，本轮不新增其他存档字段；不改变升级价格、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、基础连携倍率、远航调度校准、远航续航、远航协同、协同补给、远航绕行、绕行投送、远航闭环、远航突破、绕行突破、整备续航、整备回航、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-04-30 21:16 CST 当前 5 个 open feedback issue、0 个 open bug issue。
+- `FAR_ROUTE_DISPATCH_DETOUR_PREP_REWARD_RATE` 为 0.05。
+- `activateDirective` 在绕行回航完成闭环时刷新刚才的绕行指令冷却，执行反馈显示“绕行整备 X冷却刷新”，并写入 `farRouteLastBranchDirectiveId`。
+- `getDirectivePlan` 在绕行闭环完成态推荐“绕行整备/等待绕行整备”。
+- `getDirectiveStatus` 在被推荐的绕行指令上显示“绕行整备 +X”。
+- `src/app.js` 记录 `dispatchDetourPrepReward` / `dispatchDetourPrepRewardRate` / `dispatchDetourPrepRewardText` 事件字段，并渲染 `directive-dispatch-detour-prep` 徽标。
+- `src/styles.css` 包含 `.directive-button .directive-dispatch-detour-prep` 样式。
+- 本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 117 项。
+- 构建产物已确认包含 `FAR_ROUTE_DISPATCH_DETOUR_PREP_REWARD_RATE`、`dispatchDetourPrepReward`、`directive-dispatch-detour-prep`、`farRouteLastBranchDirectiveId` 和“绕行整备”。
+
+下一步：回复 #6 并按发布策略推送；等待复测绕行分支是否因为“绕行投送 -> 绕行回航 -> 绕行整备”而更像真实分支。
+
 ## 2026-04-30 Product decision：远航协同补给
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-04-30 21:03 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#6 仍是最新反馈线程，指出后半段“只有不停的目标、玩法没有真正变化”，因此本轮继续进入 Product decision。

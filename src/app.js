@@ -799,6 +799,9 @@ function renderDirective(option) {
         dispatchPrepReward: result.dispatchPrepReward,
         dispatchPrepRewardRate: result.dispatchPrepRewardRate,
         dispatchPrepRewardText: result.dispatchPrepRewardText,
+        dispatchDetourPrepReward: result.dispatchDetourPrepReward,
+        dispatchDetourPrepRewardRate: result.dispatchDetourPrepRewardRate,
+        dispatchDetourPrepRewardText: result.dispatchDetourPrepRewardText,
         dispatchReturnReward: result.dispatchReturnReward,
         dispatchReturnRewardRate: result.dispatchReturnRewardRate,
         dispatchReturnRewardText: result.dispatchReturnRewardText,
@@ -905,6 +908,11 @@ function renderDirective(option) {
   dispatchPrep.textContent = option.dispatchPrepRewardText;
   dispatchPrep.hidden = !option.dispatchPrepRewardText;
 
+  const dispatchDetourPrep = document.createElement("span");
+  dispatchDetourPrep.className = "directive-dispatch-detour-prep";
+  dispatchDetourPrep.textContent = option.dispatchDetourPrepRewardText;
+  dispatchDetourPrep.hidden = !option.dispatchDetourPrepRewardText;
+
   const dispatchReturn = document.createElement("span");
   dispatchReturn.className = "directive-dispatch-return";
   dispatchReturn.textContent = option.dispatchReturnRewardText;
@@ -954,6 +962,7 @@ function renderDirective(option) {
     dispatchDetourBreakthrough,
     dispatchDetourInfusion,
     dispatchPrep,
+    dispatchDetourPrep,
     dispatchReturn,
     dispatchRefresh,
     dispatchCooldown,
@@ -1048,6 +1057,7 @@ function getDirectivePreviewDetailTexts(option) {
     option.dispatchDetourBreakthroughRewardText,
     option.dispatchDetourInfusionText,
     option.dispatchPrepRewardText,
+    option.dispatchDetourPrepRewardText,
     option.dispatchReturnRewardText,
     option.dispatchRefreshText,
     option.dispatchCooldownText,
