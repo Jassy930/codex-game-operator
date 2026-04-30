@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+- 远航调度闭环新增“远航突破”：20M 后远航调度 active 时，3/3 轮换回到当前航段目标指令会按当前能量航段剩余量的 0.05% 注入能量，让后半段短循环直接推进当前航段进度，继续回应 #6 对玩法变化不明显的反馈。
+- `src/game.js` 新增 `FAR_ROUTE_DISPATCH_BREAKTHROUGH_REMAINING_RATE`、远航突破收益计算和调度文案；`src/app.js` 渲染 `directive-dispatch-breakthrough` 并在本地 `directive` 事件记录 `dispatchBreakthroughReward` / `dispatchBreakthroughRewardRate` / `dispatchBreakthroughRewardText`；`tests/game.test.js` 覆盖脉冲航闸阶段预计收益、执行反馈和静态标记。
+- 本轮只补远航闭环和当前航段剩余进度的连接；不新增存档字段，不改变升级价格、产能公式、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、基础连携倍率、轮换目标奖励、预案执行、航线委托、指令熟练、满层回响、远航调度校准、冷却、连携窗口、远航续航、远航协同、远航闭环倍率、远航整备或反馈入口。
+- 同步 GitHub Issues 反馈状态：2026-04-30 15:17 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 作为本轮处理对象。
+- 验证通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 109 项。
+- 构建产物已确认包含 `FAR_ROUTE_DISPATCH_BREAKTHROUGH_REMAINING_RATE`、`dispatchBreakthroughReward`、`directive-dispatch-breakthrough` 和“远航突破”。
+
 - 远航调度第二步新增按钮级协同推荐：目标指令后的 1/3 阶段，指定协同续航按钮显示“远航协同”，冷却中显示“等待协同”；其他非目标按钮继续显示“远航续航/等待续航”，继续回应 #6 对后半段玩法变化不明显的反馈。
 - `src/game.js` 新增 `getDirectiveOptionRecommendationText`，让按钮推荐文案可按远航协同候选独立派生；`tests/game.test.js` 覆盖脉冲航闸阶段普通续航、协同续航和协同冷却态。
 - 本轮只调整按钮推荐文案；不新增存档字段，不改变指令收益、冷却、连携窗口、远航调度计算、星图航段、项目奖励、升级价格、反馈入口或部署链路。

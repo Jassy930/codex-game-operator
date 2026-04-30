@@ -1,5 +1,27 @@
 # Decision
 
+## 2026-04-30 Product decision：远航突破
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-04-30 15:17 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#6 仍围绕“后半段只有不停的目标、玩法没有真正变化”保持 open，因此本轮继续进入 Product decision。
+
+当前最大问题：远航调度已经把当前航段目标、协同续航、闭环路径和按钮推荐补齐，但完成 3/3 闭环后，回报仍主要是指令收益与冷却整备。玩家仍可能把后半段理解成“继续追下一段累计能量”，因为主动短循环和当前航段剩余进度之间缺少直接连接。
+
+本轮决策：
+
+- 新增 `FAR_ROUTE_DISPATCH_BREAKTHROUGH_REMAINING_RATE = 0.0005`。
+- 20M 后远航调度 active 时，3/3 轮换回到当前航段目标指令会额外获得“远航突破”，按当前能量航段剩余量的 0.05% 注入能量。
+- 按钮徽标、预计收益、执行反馈、本地 `directive` 事件和反馈快照同步记录 `dispatchBreakthroughReward` / `dispatchBreakthroughRewardRate` / `dispatchBreakthroughRewardText`。
+- 本轮只补远航闭环和当前航段剩余进度的连接；不新增存档字段，不改变升级价格、产能公式、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、基础连携倍率、轮换目标奖励、预案执行、航线委托、指令熟练、满层回响、远航调度校准、冷却、连携窗口、远航续航、远航协同、远航闭环倍率、远航整备或反馈入口。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-04-30 15:17 CST 当前 5 个 open feedback issue、0 个 open bug issue。
+- #6 快照附近的脉冲航闸阶段，3/3 回到点火齐射时，按钮预计收益显示“远航突破 +2.5K”；执行时因 tick 后剩余进度变化，执行反馈显示“远航突破 +2.4K”。
+- 构建产物已确认包含 `FAR_ROUTE_DISPATCH_BREAKTHROUGH_REMAINING_RATE`、`dispatchBreakthroughReward`、`directive-dispatch-breakthrough` 和“远航突破”。
+- 本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 109 项。
+
+下一步：推送并回复 #6，说明远航闭环现在会把当前航段剩余进度转成远航突破能量注入；继续保持 issue open 等待复测。
+
 ## 2026-04-30 Product decision：远航协同按钮推荐
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-04-30 15:05 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#6 仍围绕“后半段只有不停的目标、玩法没有真正变化”保持 open，因此本轮继续进入 Product decision，并处理远航调度第二步在按钮层的可辨识度。

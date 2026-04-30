@@ -875,6 +875,15 @@ h2 {
   line-height: 1;
 }
 
+.directive-button .directive-dispatch-breakthrough {
+  padding: 3px 6px;
+  border-radius: 999px;
+  background: rgba(19, 181, 166, 0.16);
+  color: #d4fbf5;
+  font-size: 0.68rem;
+  line-height: 1;
+}
+
 .directive-button .directive-dispatch-refresh {
   padding: 3px 6px;
   border-radius: 999px;
