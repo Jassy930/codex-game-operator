@@ -25,8 +25,11 @@
 - `src/styles.css` 包含 `.directive-button .directive-dispatch-detour` 与 `.directive-button .directive-dispatch-detour-breakthrough` 样式。
 - 本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 117 项。
 - 构建产物已确认包含 `FAR_ROUTE_DISPATCH_DETOUR_REWARD_RATE`、`FAR_ROUTE_DISPATCH_DETOUR_BREAKTHROUGH_REMAINING_RATE`、`dispatchDetourReward`、`dispatchDetourBreakthroughReward`、`directive-dispatch-detour`、`directive-dispatch-detour-breakthrough`、“远航绕行”和“绕行突破”。
+- 提交 b10e369 已推送；GitHub Pages workflow 25164148663 已成功；线上地址返回 HTTP 200，且线上首页、`game.js`、`app.js` 和 `styles.css` 已确认包含远航绕行相关标记。
+- #6 已回复：说明目标后的第二步新增“协同”和“绕行”两条路线，并保持 issue open 等待复测。
+- 回复后同步 GitHub Issues：2026-04-30 20:01 CST 当前仍为 5 个 open feedback issue、0 个 open bug issue；#6 更新时间为 2026-04-30T12:01:27Z。
 
-下一步：提交并推送后回复 #6，说明远航第二步现在有“协同”和“绕行”两条可选分支，并继续等待复测。
+下一步：等待 #6 复测；如果仍认为后半段只是沿目标推进，再评估真正消耗资源的远航指令或项目分支，而不是继续叠加路径说明。
 
 ## 2026-04-30 Product decision：远航整备回航奖励
 

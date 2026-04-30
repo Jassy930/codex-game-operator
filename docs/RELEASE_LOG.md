@@ -9,6 +9,9 @@
 - 同步 GitHub Issues 反馈状态：2026-04-30 19:46 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 作为本轮处理对象。
 - 验证通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 117 项。
 - 构建产物已确认包含 `FAR_ROUTE_DISPATCH_DETOUR_REWARD_RATE`、`FAR_ROUTE_DISPATCH_DETOUR_BREAKTHROUGH_REMAINING_RATE`、`dispatchDetourReward`、`dispatchDetourBreakthroughReward`、`directive-dispatch-detour`、`directive-dispatch-detour-breakthrough`、“远航绕行”和“绕行突破”。
+- 提交 b10e369 已推送；GitHub Pages workflow 25164148663 已成功；线上地址返回 HTTP 200，且线上首页、`game.js`、`app.js` 和 `styles.css` 已确认包含远航绕行相关标记。
+- 已回复 #6，说明远航第二步新增协同与绕行两条路线，并保持 issue open 等待复测。
+- 回复后同步 GitHub Issues 反馈状态：2026-04-30 20:01 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 更新时间为 2026-04-30T12:01:27Z。
 
 - 远航整备新增整备回航奖励：完成 3/3 闭环并执行整备续航后，回到当前航段目标指令会显示并结算“整备回航 +6%”，继续回应 #6 对后半段短循环收尾到下一轮起手偏弱的反馈。
 - `src/game.js` 新增 `FAR_ROUTE_DISPATCH_RETURN_REWARD_RATE`、整备回航收益计算、推荐文案和执行/预览文案；`src/app.js` 记录 `dispatchReturnReward` 事件字段并渲染 `directive-dispatch-return` 徽标；`src/styles.css` 新增整备回航徽标样式；`tests/game.test.js` 覆盖整备续航后回到目标指令的推荐、预计收益、执行反馈和静态绑定。
