@@ -7,6 +7,9 @@
 - 本轮只调整星图视觉航线展示层；不新增存档字段，不改变 57 段星图路线、项目完成判定、筛选结果、奖励数值、升级价格、航线策略、航线指令、反馈入口或部署链路。
 - 同步 GitHub Issues 反馈状态：2026-04-30 18:02 CST 当前 5 个 open feedback issue、0 个 open bug issue；#4 作为本轮处理对象。
 - 验证通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 117 项。
+- 提交 81406cc 已推送；GitHub Pages workflow 25159763319 已成功；线上地址返回 HTTP 200，且线上首页、`app.js` 和 `styles.css` 已确认包含当前章节大图景相关标记。
+- 已回复 #4，说明星图视觉航线新增当前章节大图景，并保持 issue open 等待复测。
+- 回复后同步 GitHub Issues 反馈状态：2026-04-30 18:12 CST 当前 5 个 open feedback issue、0 个 open bug issue；#4 更新时间为 2026-04-30T10:12:00Z。
 
 - 星图章节视觉导航新增微图景：四个章节按钮内加入固定轨道、星门/信标和章节信号图形，并按首段星图、专精校准、深空基建、远航长尾切换视觉差异，继续回应 #4 对界面文字密度和图片化表达的反馈。
 - `index.html` 静态章节按钮同步 `project-chapter-scene-*` 结构；`src/app.js` 的 `renderProjectChapterTile` 运行期生成同一套微图景 DOM；`src/styles.css` 新增章节微图景轨道、星门/信标和四类章节差异样式；`tests/game.test.js` 覆盖静态标记、运行期绑定和样式标记。

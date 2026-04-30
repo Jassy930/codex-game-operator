@@ -20,8 +20,11 @@
 - 运行期 `src/app.js` 包含 `renderProjectChapterHero` 和 `getActiveProjectChapter`，并在 `render()` 中与章节视觉导航共用同一组 `getProjectChapterVisuals(projects)` 数据。
 - CSS 包含 `.project-chapter-hero`、大图景轨道、星门/信标、章节信号、四类章节差异样式和进度条。
 - 本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 117 项。
+- 提交 81406cc 已推送；GitHub Pages workflow 25159763319 已成功；线上地址返回 HTTP 200，线上首页、`app.js` 和 `styles.css` 已确认包含当前章节大图景相关标记。
+- #4 已回复：说明星图视觉航线新增当前章节大图景，并保持 issue open 等待复测。
+- 回复后同步 GitHub Issues：2026-04-30 18:12 CST 当前仍为 5 个 open feedback issue、0 个 open bug issue；#4 更新时间为 2026-04-30T10:12:00Z。
 
-下一步：推送后等待 #4 复测；如果仍认为章节入口不够图片化，再评估真正的章节分页或更强的章节插图资产，而不是继续增加说明文字。
+下一步：等待 #4 复测；如果仍认为章节入口不够图片化，再评估真正的章节分页或更强的章节插图资产，而不是继续增加说明文字。
 
 ## 2026-04-30 Product decision：章节导航微图景
 
