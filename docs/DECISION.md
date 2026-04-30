@@ -19,8 +19,11 @@
 - #6 快照附近的脉冲航闸阶段，3/3 回到点火齐射时，按钮预计收益显示“远航突破 +2.5K”；执行时因 tick 后剩余进度变化，执行反馈显示“远航突破 +2.4K”。
 - 构建产物已确认包含 `FAR_ROUTE_DISPATCH_BREAKTHROUGH_REMAINING_RATE`、`dispatchBreakthroughReward`、`directive-dispatch-breakthrough` 和“远航突破”。
 - 本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 109 项。
+- 提交 b2cb915 已推送；GitHub Pages workflow 25153371579 已成功，线上地址返回 HTTP 200，且线上 `game.js`、`app.js` 和 `styles.css` 已确认包含远航突破相关标记。
+- #6 已回复并继续保持 open，等待复测确认远航闭环直接推进当前航段剩余进度后，后半段是否更像可执行、可完成、可重复的玩法循环。
+- 回复后同步 GitHub Issues：2026-04-30 15:38 CST 当前仍为 5 个 open feedback issue、0 个 open bug issue；#6 更新时间为 2026-04-30T07:37:57Z。
 
-下一步：推送并回复 #6，说明远航闭环现在会把当前航段剩余进度转成远航突破能量注入；继续保持 issue open 等待复测。
+下一步：等待 #6 复测；若仍认为后半段变化不足，再评估更重的可规划短循环或资源消耗型指令分支。
 
 ## 2026-04-30 Product decision：远航协同按钮推荐
 

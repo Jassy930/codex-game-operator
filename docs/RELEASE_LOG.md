@@ -8,6 +8,9 @@
 - 同步 GitHub Issues 反馈状态：2026-04-30 15:17 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 作为本轮处理对象。
 - 验证通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 109 项。
 - 构建产物已确认包含 `FAR_ROUTE_DISPATCH_BREAKTHROUGH_REMAINING_RATE`、`dispatchBreakthroughReward`、`directive-dispatch-breakthrough` 和“远航突破”。
+- 提交 b2cb915 已推送；GitHub Pages workflow 25153371579 已成功，线上地址返回 HTTP 200，且线上 `game.js`、`app.js` 和 `styles.css` 已确认包含远航突破相关标记。
+- 已回复 #6，说明远航闭环现在会把当前航段剩余进度转成远航突破能量注入，并保持 issue open 等待复测。
+- 回复后同步 GitHub Issues 反馈状态：2026-04-30 15:38 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 更新时间为 2026-04-30T07:37:57Z。
 
 - 远航调度第二步新增按钮级协同推荐：目标指令后的 1/3 阶段，指定协同续航按钮显示“远航协同”，冷却中显示“等待协同”；其他非目标按钮继续显示“远航续航/等待续航”，继续回应 #6 对后半段玩法变化不明显的反馈。
 - `src/game.js` 新增 `getDirectiveOptionRecommendationText`，让按钮推荐文案可按远航协同候选独立派生；`tests/game.test.js` 覆盖脉冲航闸阶段普通续航、协同续航和协同冷却态。
