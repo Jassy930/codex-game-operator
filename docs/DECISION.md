@@ -1,5 +1,28 @@
 # Decision
 
+## 2026-04-30 Product decision：章节导航微图景
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-04-30 17:48 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#4 仍围绕“界面文字密集、希望更多图片和更好看”保持 open，因此本轮继续进入 Product decision。
+
+当前最大问题：星图章节视觉导航已经有章节按钮、进度、焦点标签和小徽记，但按钮内部图形面积仍偏小。玩家在首段星图、专精校准、深空基建和远航长尾之间切换时，仍需要结合章节名、焦点标签和下一条文案理解章节差异。
+
+本轮决策：
+
+- 给每个章节视觉按钮新增 `project-chapter-scene` 微图景，包含固定轨道、星门/信标形状和章节信号。
+- 静态首页与运行期 `renderProjectChapterTile` 使用同一套 `project-chapter-scene-*` 结构。
+- 四个章节继续复用现有 `visualClass` 切换配色和形状差异，不新增新的章节数据或存档字段。
+- 本轮只调整星图章节导航展示层；不改变 57 段星图路线、项目完成判定、筛选结果、奖励数值、升级价格、航线策略、航线指令、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-04-30 17:48 CST 当前 5 个 open feedback issue、0 个 open bug issue。
+- 静态首页四个章节按钮包含 `project-chapter-scene`、`project-chapter-scene-track`、`project-chapter-scene-gate` 和 `project-chapter-scene-signal`。
+- 运行期 `renderProjectChapterTile` 为每个章节按钮生成同一套微图景 DOM。
+- CSS 包含 `.project-chapter-scene`、轨道、星门/信标和四类章节差异样式。
+- 本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 116 项。
+
+下一步：提交并推送；如果 GitHub Pages 部署成功，回复 #4 说明章节导航按钮已经补上更大面积的章节微图景，并保持 issue open 等待复测。
+
 ## 2026-04-30 Product decision：筛选按钮视觉标识
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-04-30 17:33 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#4 仍围绕“界面文字密集、希望更多图片和更好看”保持 open，因此本轮继续进入 Product decision。

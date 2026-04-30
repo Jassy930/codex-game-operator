@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+- 星图章节视觉导航新增微图景：四个章节按钮内加入固定轨道、星门/信标和章节信号图形，并按首段星图、专精校准、深空基建、远航长尾切换视觉差异，继续回应 #4 对界面文字密度和图片化表达的反馈。
+- `index.html` 静态章节按钮同步 `project-chapter-scene-*` 结构；`src/app.js` 的 `renderProjectChapterTile` 运行期生成同一套微图景 DOM；`src/styles.css` 新增章节微图景轨道、星门/信标和四类章节差异样式；`tests/game.test.js` 覆盖静态标记、运行期绑定和样式标记。
+- 本轮只调整星图章节导航展示层；不新增存档字段，不改变 57 段星图路线、项目完成判定、筛选结果、奖励数值、升级价格、航线策略、航线指令、反馈入口或部署链路。
+- 同步 GitHub Issues 反馈状态：2026-04-30 17:48 CST 当前 5 个 open feedback issue、0 个 open bug issue；#4 作为本轮处理对象。
+- 验证通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 116 项。
+
 - 星图筛选按钮新增视觉标识：全部、当前、章节、累计/升级、奖励方向和完成状态等筛选入口会显示固定小图形/颜色标记，继续回应 #4 对界面文字密度和图片化表达的反馈。
 - `index.html` 静态筛选按钮同步 `is-filter-*` 标记；`src/app.js` 新增 `PROJECT_FILTER_VISUAL_CLASSES` 并在运行期渲染筛选按钮视觉类别；`src/styles.css` 新增筛选按钮 `::before` 标识、响应式按钮列宽和单行省略；`tests/game.test.js` 覆盖静态标记、运行期绑定和样式标记。
 - 本轮只调整星图筛选按钮展示层；不新增存档字段，不改变 57 段星图路线、项目完成判定、奖励数值、升级价格、航线策略、航线指令、反馈入口或部署链路。

@@ -2149,19 +2149,125 @@ h2 {
   position: relative;
   display: grid;
   width: 100%;
-  height: 42px;
+  height: 54px;
   align-items: center;
+  overflow: hidden;
+  border: 1px solid rgba(248, 243, 231, 0.1);
+  border-radius: 8px;
+}
+
+.project-chapter-scene {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  border-radius: inherit;
+  background:
+    linear-gradient(135deg, rgba(19, 181, 166, 0.14), rgba(248, 243, 231, 0.05)),
+    rgba(11, 20, 32, 0.86);
+}
+
+.project-chapter-scene-track {
+  position: absolute;
+  top: 24px;
+  right: 36px;
+  left: 12px;
+  height: 3px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgba(244, 178, 60, 0.18), rgba(19, 181, 166, 0.82));
+}
+
+.project-chapter-scene-track::before,
+.project-chapter-scene-track::after {
+  position: absolute;
+  top: -4px;
+  width: 11px;
+  height: 11px;
+  content: "";
+  border: 2px solid rgba(248, 243, 231, 0.48);
+  border-radius: 999px;
+  background: rgba(11, 20, 32, 0.88);
+}
+
+.project-chapter-scene-track::before {
+  left: 30%;
+}
+
+.project-chapter-scene-track::after {
+  right: 8%;
+}
+
+.project-chapter-scene-gate {
+  position: absolute;
+  top: 11px;
+  right: 9px;
+  width: 21px;
+  height: 28px;
+  border: 2px solid rgba(248, 243, 231, 0.36);
+  border-bottom-color: rgba(248, 243, 231, 0.1);
+  border-radius: 999px 999px 4px 4px;
+}
+
+.project-chapter-scene-signal {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgba(255, 247, 194, 0.78);
+  border-radius: 6px;
+  background: rgba(244, 178, 60, 0.2);
+}
+
+.project-chapter-visual.is-starter .project-chapter-scene {
+  background:
+    linear-gradient(135deg, rgba(244, 178, 60, 0.2), rgba(19, 181, 166, 0.08)),
+    rgba(12, 21, 30, 0.9);
+}
+
+.project-chapter-visual.is-mastery .project-chapter-scene {
+  background:
+    linear-gradient(135deg, rgba(155, 211, 255, 0.18), rgba(244, 178, 60, 0.08)),
+    rgba(11, 20, 32, 0.9);
+}
+
+.project-chapter-visual.is-mastery .project-chapter-scene-signal {
+  transform: rotate(45deg);
+  border-radius: 4px;
+  background: rgba(155, 211, 255, 0.18);
+}
+
+.project-chapter-visual.is-infra .project-chapter-scene {
+  background:
+    linear-gradient(135deg, rgba(150, 231, 168, 0.18), rgba(19, 181, 166, 0.08)),
+    rgba(12, 23, 26, 0.9);
+}
+
+.project-chapter-visual.is-infra .project-chapter-scene-gate {
+  border-radius: 5px;
+  border-top-width: 6px;
+}
+
+.project-chapter-visual.is-long-tail .project-chapter-scene {
+  background:
+    linear-gradient(135deg, rgba(241, 160, 176, 0.18), rgba(155, 211, 255, 0.08)),
+    rgba(15, 18, 31, 0.9);
+}
+
+.project-chapter-visual.is-long-tail .project-chapter-scene-track {
+  right: 42px;
+  background: linear-gradient(90deg, rgba(155, 211, 255, 0.22), rgba(241, 160, 176, 0.78));
 }
 
 .project-chapter-orbit {
   position: absolute;
-  inset: 4px 16px 12px;
+  inset: 9px 18px 17px;
   border: 1px solid rgba(248, 243, 231, 0.18);
   border-radius: 999px;
 }
 
 .project-chapter-core {
   position: relative;
+  z-index: 1;
   width: 18px;
   height: 18px;
   margin-left: 10px;
@@ -2173,6 +2279,7 @@ h2 {
 
 .project-chapter-emblem {
   position: absolute;
+  z-index: 1;
   top: 5px;
   right: 12px;
   width: 25px;
@@ -2215,6 +2322,7 @@ h2 {
 
 .project-chapter-progress {
   position: absolute;
+  z-index: 1;
   right: 6px;
   bottom: 0;
   left: 6px;

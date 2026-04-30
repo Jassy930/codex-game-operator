@@ -1400,6 +1400,20 @@ function renderProjectChapterTile(chapter) {
   visual.className = ["project-chapter-visual", chapter.visualClass].filter(Boolean).join(" ");
   visual.setAttribute("aria-hidden", "true");
 
+  const scene = document.createElement("span");
+  scene.className = "project-chapter-scene";
+
+  const sceneTrack = document.createElement("span");
+  sceneTrack.className = "project-chapter-scene-track";
+
+  const sceneGate = document.createElement("span");
+  sceneGate.className = "project-chapter-scene-gate";
+
+  const sceneSignal = document.createElement("span");
+  sceneSignal.className = "project-chapter-scene-signal";
+
+  scene.append(sceneTrack, sceneGate, sceneSignal);
+
   const orbit = document.createElement("span");
   orbit.className = "project-chapter-orbit";
 
@@ -1415,7 +1429,7 @@ function renderProjectChapterTile(chapter) {
   const progressFill = document.createElement("span");
   progressFill.style.width = Math.round(chapter.progress * 100) + "%";
   progress.append(progressFill);
-  visual.append(orbit, core, emblem, progress);
+  visual.append(scene, orbit, core, emblem, progress);
 
   const name = document.createElement("strong");
   name.textContent = chapter.name;
