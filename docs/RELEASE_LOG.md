@@ -9,6 +9,9 @@
 - 同步 GitHub Issues 反馈状态：2026-05-01 02:48 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 作为本轮处理对象。
 - 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
 - 构建产物已确认包含 `dispatchFocusLoopReward`、`directive-dispatch-focus-loop` 和“契合闭环”相关文案。
+- 发布：提交 `0278967` 已推送到 `origin/main`；GitHub Pages workflow `25184200739` 成功；线上首页返回 HTTP 200，线上 `src/game.js`、`src/app.js` 和 `src/styles.css` 已确认包含 `dispatchFocusLoopReward`、`FAR_ROUTE_DISPATCH_FOCUS_LOOP_REWARD_RATE`、`directive-dispatch-focus-loop` 和“契合闭环”。
+- 反馈处理：已回复 #6，说明契合闭环上线范围、验证结果和复测问题，issue 保持 open；回复后于 2026-05-01 03:09 CST 再次同步 GitHub Issues，当前仍为 5 个 open feedback issue、0 个 open bug issue。
+- 钉钉通知未发送：运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` 相关变量名，也未发现本地 `.env*` 文件；未将 webhook 写入仓库。
 
 - 远航调度新增“路线按钮标记”：航线指令按钮会显示当前路线步，例如“路线 1/3 目标”“路线 2/3 推荐协同”“路线 3/3 绕行回航”“路线 整备续航/整备回航”；执行后行动反馈会显示“路线执行：...”，继续回应 #6 对后半段玩法变化不明显的反馈。
 - `src/game.js` 为指令选项和执行结果派生 `dispatchRouteStepText` 并写入行动反馈；`src/app.js` 渲染 `directive-dispatch-route-step` 并在本地 `directive` 事件记录该字段；`src/styles.css` 增加路线按钮徽标样式；`tests/game.test.js` 覆盖起手、分支、回航、整备、事件绑定和样式绑定。
