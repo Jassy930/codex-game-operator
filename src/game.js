@@ -2994,6 +2994,7 @@ export function getFarRouteDispatch(state, now = Date.now()) {
       branchDirectiveName: "",
       branchRecommendationText: "",
       branchRotationText: "",
+      branchRouteText: "",
       branchChoices: [],
       branchChoiceText: "",
       projectId: null,
@@ -3069,6 +3070,7 @@ export function getFarRouteDispatch(state, now = Date.now()) {
       branchDirectiveName: "",
       branchRecommendationText: "",
       branchRotationText: "",
+      branchRouteText: "",
       branchChoices: [],
       branchChoiceText: "",
       projectId: null,
@@ -3115,6 +3117,10 @@ export function getFarRouteDispatch(state, now = Date.now()) {
   const branchRecommendationText =
     buildFarRouteDispatchBranchRecommendationText(branchChoices);
   const branchRotationText = buildFarRouteDispatchBranchRotationText(branchChoices);
+  const branchRouteText = buildFarRouteDispatchBranchRouteText(
+    branchChoices,
+    branchStatus
+  );
   const loopSteps = buildFarRouteDispatchLoopSteps(
     directive,
     relayDirective,
@@ -3186,6 +3192,7 @@ export function getFarRouteDispatch(state, now = Date.now()) {
     branchDirectiveName: branchStatus.directiveName,
     branchRecommendationText,
     branchRotationText,
+    branchRouteText,
     branchChoices,
     branchChoiceText: buildFarRouteDispatchBranchChoiceText(branchChoices),
     projectId: project.id,
@@ -3215,6 +3222,7 @@ export function getFarRouteDispatch(state, now = Date.now()) {
       (branchFocus.text ? " · " + branchFocus.text : "") +
       (branchRecommendationText ? " · " + branchRecommendationText : "") +
       (branchRotationText ? " · " + branchRotationText : "") +
+      (branchRouteText ? " · " + branchRouteText : "") +
       " · 目标后优先" +
       relayDirectiveName +
       "触发" +
@@ -4589,6 +4597,9 @@ function buildProjectOverviewDispatchText(dispatch) {
   const branchRotationText = dispatch.branchRotationText
     ? " · " + dispatch.branchRotationText
     : "";
+  const branchRouteText = dispatch.branchRouteText
+    ? " · " + dispatch.branchRouteText
+    : "";
   const currentStep = Array.isArray(dispatch.loopSteps)
     ? dispatch.loopSteps.find((step) => step.state === "current")
     : null;
@@ -4608,6 +4619,7 @@ function buildProjectOverviewDispatchText(dispatch) {
     branchFocusText +
     branchRecommendationText +
     branchRotationText +
+    branchRouteText +
     " · 闭环 " +
     dispatch.loopProgress +
     "/" +
@@ -4964,6 +4976,9 @@ function buildFarRouteDispatchBranchChoices(
       caption: choice.caption,
       nextText: choice.nextText,
       reasonText,
+      active,
+      previous,
+      shift,
       rotationReady,
       focused,
       focusText: focused ? branchFocus.text : "",
@@ -5012,6 +5027,48 @@ function buildFarRouteDispatchBranchChoiceText(choices) {
           "）"
       )
       .join(" / ")
+  );
+}
+
+function buildFarRouteDispatchBranchRouteText(choices, branchStatus) {
+  if (!choices.length) {
+    return "";
+  }
+
+  const previousChoice = choices.find((choice) => choice.previous);
+  const activeChoice = choices.find((choice) => choice.active);
+  const shiftChoice = choices.find((choice) => choice.shift && !choice.active);
+  const previousText = previousChoice
+    ? previousChoice.label + " " + previousChoice.directiveName
+    : "无";
+  const currentText = activeChoice
+    ? activeChoice.label + " " + activeChoice.directiveName
+    : branchStatus?.kind === "pending"
+      ? "待选择"
+      : "待选择";
+  let nextText = "";
+
+  if (activeChoice?.rotationReady) {
+    nextText = "回目标结算轮替闭环";
+  } else if (activeChoice) {
+    nextText = String(branchStatus?.kind ?? "").endsWith("-prep")
+      ? "已记录当前路线，下一轮可改道"
+      : "回目标后记录当前路线";
+  } else if (shiftChoice) {
+    nextText = "建议改走" + shiftChoice.label + " " + shiftChoice.directiveName;
+  } else if (previousChoice) {
+    nextText = "选择另一分支触发改道";
+  } else {
+    nextText = "先完成任一分支闭环";
+  }
+
+  return (
+    "路线履历：记录 " +
+    previousText +
+    " · 本轮 " +
+    currentText +
+    " · " +
+    nextText
   );
 }
 

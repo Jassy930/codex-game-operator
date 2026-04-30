@@ -1,5 +1,28 @@
 # Decision
 
+## 2026-05-01 Product decision：远航路线履历
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-01 01:37 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#6 仍是最新反馈线程，原始反馈指出后半段“只有不停的目标、玩法没有真正变化”，因此本轮继续进入 Product decision。
+
+当前最大问题：前序已经把分支轮替目标和轮替闭环奖励落到远航调度，但玩家仍需要在“分支轮替”“当前路线”“可改道”和闭环进度之间组合路线记忆。后半段短循环要更像路线循环，需要直接显示已记录路线、本轮路线和下一步确认。
+
+本轮决策：
+
+- 新增“远航路线履历”。
+- `getFarRouteDispatch` 从现有 `branchChoices`、分支态势和既有 `farRouteLastBranchDirectiveId` 派生 `branchRouteText`，显示“记录 X · 本轮 Y · 下一步确认”。
+- 主操作区远航调度条新增 `far-dispatch-branch-route`，星图总览远航摘要和反馈快照长文本同步包含路线履历。
+- 本轮只调整派生展示、DOM、样式和测试；不新增收益、不新增存档字段，不改变升级价格、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、远航调度既有数值、冷却、连携窗口、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-05-01 01:37 CST 当前 5 个 open feedback issue、0 个 open bug issue。
+- 无记录路线时显示“路线履历：记录 无 · 本轮 待选择 · 先完成任一分支闭环”。
+- 绕行进行中显示已记录绕行、本轮绕行，并提示回目标后记录当前路线。
+- 协同整备完成态显示已记录协同、本轮协同，并提示下一轮可改道。
+- `src/app.js` 渲染 `dispatch.branchRouteText`；`index.html` 包含 `far-dispatch-branch-route` 占位；`src/styles.css` 包含 `.far-dispatch-branch-route`。
+- 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含 `branchRouteText`、`far-dispatch-branch-route` 和“路线履历”相关文案。
+
 ## 2026-05-01 Product decision：远航轮替闭环奖励
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-01 00:57 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#6 仍是最新反馈线程，原始反馈指出后半段“只有不停的目标、玩法没有真正变化”，因此本轮继续进入 Product decision。
