@@ -7,6 +7,9 @@
 - 本轮只补齐远航调度短循环第二步奖励；不新增存档字段，不改变升级价格、产能公式、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、基础连携倍率、轮换目标奖励、预案执行、航线委托、指令熟练、满层回响、远航调度校准、冷却、连携窗口、远航闭环奖励或反馈入口。
 - 同步 GitHub Issues 反馈状态：2026-04-30 10:12 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 继续作为后半段玩法变化处理对象。
 - 验证通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 106 项。
+- 提交 72aefdc 已推送；GitHub Pages workflow 25143929133 已成功，线上地址返回 HTTP 200，且线上首页、`game.js`、`app.js` 和 `styles.css` 已确认包含 `FAR_ROUTE_DISPATCH_RELAY_REWARD_RATE`、`dispatchRelayReward`、`directive-dispatch-relay` 和“远航续航”。
+- 已回复 #6，说明远航调度三步短循环新增第二步远航续航奖励，并保持 issue open 等待复测。
+- 回复后同步 GitHub Issues 反馈状态：2026-04-30 10:18 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 更新时间为 2026-04-30T02:18:33Z。
 - 远航调度条新增“闭环进度”：20M 后远航调度 active 时，会从现有指令连携派生 0/3 到 3/3 的目标指令短循环进度，2/3 时明确提示回到当前航段目标指令触发远航闭环。
 - `src/game.js` 的 `getFarRouteDispatch` 新增 `loopProgress` / `loopTarget` / `loopStatusText`；`index.html` / `src/app.js` / `src/styles.css` 新增 `far-dispatch-loop-text` 和 `far-dispatch-loop-meter`；`src/feedback.js` 的反馈快照追加闭环进度；`tests/game.test.js` 覆盖 0/3、2/3、3/3、静态结构和反馈快照。
 - 本轮只调整远航调度闭环进度展示和反馈快照；不新增存档字段，不改变升级价格、产能公式、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、基础连携倍率、轮换目标奖励、预案执行、航线委托、指令熟练、满层回响、远航调度奖励、冷却、连携窗口或反馈入口。

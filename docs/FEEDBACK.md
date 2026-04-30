@@ -8,6 +8,9 @@
 - 指令按钮新增 `directive-dispatch-relay` 徽标；预计收益、执行反馈、本地 `directive` 事件和远航调度条同步记录 `dispatchRelayReward` / `dispatchRelayRewardRate` / `dispatchRelayRewardText` 与“远航续航”。
 - 本轮不新增存档字段，不改变升级价格、产能公式、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、基础连携倍率、轮换目标奖励、预案执行、航线委托、指令熟练、满层回响、远航调度校准、冷却、连携窗口、远航闭环奖励或反馈入口。
 - 本轮本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 106 项。
+- 提交 72aefdc 已推送；GitHub Pages workflow 25143929133 已成功，线上地址返回 HTTP 200；线上首页、`game.js`、`app.js` 和 `styles.css` 已确认包含远航续航相关标记。
+- #6 已回复：说明远航调度短循环新增第二步远航续航奖励，issue 保持 open 等待复测。
+- 回复后同步 GitHub Issues：2026-04-30 10:18 CST 当前仍为 5 个 open feedback issue、0 个 open bug issue；#6 更新时间为 2026-04-30T02:18:33Z。
 
 - GitHub Issues：gh 可用且已认证；2026-04-30 09:55 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
 - #6 继续作为本轮 Product decision：上一轮已让远航调度 3/3 回到目标指令时给“远航闭环”奖励，但尚无玩家复测结论；本轮强化后半段短循环的可读进度，而不是继续叠加数值奖励。
