@@ -8,6 +8,10 @@
 - 本轮只调整远航调度派生推荐与提示文案；不新增存档字段，不改变升级价格、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、基础连携倍率、远航调度校准、远航续航、远航协同、远航绕行、绕行投送、远航闭环、远航突破、绕行突破、远航整备、整备续航、整备回航、反馈入口或部署链路。
 - 本轮本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 117 项。
 - 构建产物已确认包含 `dispatchSyncReturnCanOverride` 和“协同回航”。
+- 提交 f782c06 已推送；GitHub Pages workflow 25166031157 已成功；线上地址返回 HTTP 200，且线上 `src/game.js` 已确认包含协同回航相关标记。
+- #6 已回复：说明协同路线第三步现在会显示“协同回航/等待协同”，并与绕行路线的“绕行回航/等待绕行”形成并列路线名。
+- 回复后同步 GitHub Issues：2026-04-30 20:45 CST 当前仍为 5 个 open feedback issue、0 个 open bug issue；#6 更新时间为 2026-04-30T12:45:21Z。
+- 钉钉通知未发送：运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` 相关变量名；未将 webhook 写入仓库。
 
 - GitHub Issues：gh 可用且已认证；2026-04-30 20:07 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
 - #6 继续作为本轮 Product decision 依据：该反馈指出后半段“只有不停的目标、玩法没有真正变化”；前序已经补齐目标、协同、绕行、闭环、突破和整备，但绕行分支仍缺少明确代价，本轮处理“绕行只是额外收益按钮”的问题。

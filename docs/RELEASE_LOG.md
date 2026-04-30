@@ -9,6 +9,11 @@
 - 同步 GitHub Issues 反馈状态：2026-04-30 20:34 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 作为本轮处理对象。
 - 验证通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 117 项。
 - 构建产物已确认包含 `dispatchSyncReturnCanOverride` 和“协同回航”。
+- 提交 f782c06 已推送；GitHub Pages workflow 25166031157 已成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`。
+- 线上地址 https://jassy930.github.io/codex-game-operator/ 返回 HTTP 200，线上 `src/game.js` 已确认包含 `dispatchSyncReturnCanOverride` 和“协同回航”。
+- 已回复 #6，说明协同路线第三步现在显示“协同回航/等待协同”，并保持 issue open 等待复测。
+- 回复后同步 GitHub Issues：2026-04-30 20:45 CST 当前仍为 5 个 open feedback issue、0 个 open bug issue；#6 更新时间为 2026-04-30T12:45:21Z。
+- 钉钉通知未发送：运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` 相关变量名；未将 webhook 写入仓库。
 
 - 远航绕行新增“绕行投送”：目标指令后执行非协同非目标绕行时，会消耗少量当前能量并按 150% 投送量推进累计能量，让绕行从额外收益按钮变成“消耗当前资源推进航段”的分支选择，继续回应 #6 对后半段玩法变化不明显的反馈。
 - `src/game.js` 新增 `FAR_ROUTE_DISPATCH_DETOUR_INFUSION_COST_RATE`、`FAR_ROUTE_DISPATCH_DETOUR_INFUSION_PROGRESS_MULTIPLIER`、绕行投送消耗/累计推进计算和执行/预览文案；`src/app.js` 记录 `dispatchDetourInfusionCost` / `dispatchDetourInfusionProgress` 事件字段并渲染 `directive-dispatch-detour-infusion` 徽标；`src/styles.css` 新增绕行投送徽标样式；`tests/game.test.js` 覆盖绕行投送预览、执行、静态绑定和反馈快照。
