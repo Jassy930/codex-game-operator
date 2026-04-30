@@ -2,6 +2,14 @@
 
 ## Unreleased
 
+- 远航调度新增“路线目标”：协同/绕行分支卡片会显示本条路线是在按当前航段建档、续走上轮稳航、改道开启轮替闭环，还是本轮回航确认，继续回应 #6 对后半段玩法变化不明显的反馈。
+- `src/game.js` 为 `branchChoices` 派生 `objectiveText` 并纳入 `branchChoiceText`；`src/app.js` 渲染 `far-dispatch-branch-choice-objective`；`src/styles.css` 增加路线目标样式；`tests/game.test.js` 覆盖无上轮分支、续走稳航、改道轮替、静态渲染和样式绑定。
+- 文档同步更新：`docs/DECISION.md`、`docs/FEEDBACK.md`、`docs/RESEARCH.md`、`docs/PRODUCT.md`、`docs/DESIGN.md`、`docs/ROADMAP.md`、`docs/IDEAS.md`、`docs/METRICS.md`、`README.md` 和本日志已记录远航路线目标。
+- 本轮只调整派生展示、DOM、样式和测试，不新增收益、不新增存档字段，不改变升级价格、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、远航调度既有数值、冷却、连携窗口、反馈入口或部署链路。
+- 同步 GitHub Issues 反馈状态：2026-05-01 04:20 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 作为本轮处理对象。
+- 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含 `objectiveText`、`far-dispatch-branch-choice-objective` 和“路线目标”相关文案。
+
 - 远航调度新增“路线收益对照”：协同/绕行分支卡片会显示本步合计收益和回目标将触发的闭环收益，继续回应 #6 对后半段玩法变化不明显的反馈。
 - `src/game.js` 为 `branchChoices` 派生 `payoffText` 并纳入 `branchChoiceText`；`src/app.js` 渲染 `far-dispatch-branch-choice-payoff`；`src/styles.css` 增加收益对照样式；`tests/game.test.js` 覆盖无上轮分支、路线稳航、分支改道、轮替闭环、契合闭环、静态渲染和样式绑定。
 - 文档同步更新：`docs/DECISION.md`、`docs/FEEDBACK.md`、`docs/RESEARCH.md`、`docs/PRODUCT.md`、`docs/DESIGN.md`、`docs/ROADMAP.md`、`docs/IDEAS.md`、`docs/METRICS.md`、`README.md` 和本日志已记录远航路线收益对照。

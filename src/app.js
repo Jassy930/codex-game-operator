@@ -735,6 +735,11 @@ function renderFarDispatchBranchChoices(dispatch) {
       reason.textContent = choice.reasonText ?? "";
       reason.hidden = !choice.reasonText;
 
+      const objective = document.createElement("small");
+      objective.className = "far-dispatch-branch-choice-objective";
+      objective.textContent = choice.objectiveText ?? "";
+      objective.hidden = !choice.objectiveText;
+
       const next = document.createElement("small");
       next.textContent = choice.nextText ?? "";
 
@@ -746,7 +751,7 @@ function renderFarDispatchBranchChoices(dispatch) {
       const caption = document.createElement("em");
       caption.textContent = choice.caption + " · " + choice.rewardText;
 
-      item.append(label, directive, reason, next, payoff, caption);
+      item.append(label, directive, reason, objective, next, payoff, caption);
       return item;
     })
   );

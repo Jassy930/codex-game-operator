@@ -5105,6 +5105,14 @@ function buildFarRouteDispatchBranchChoices(
           ? "上轮路线"
           : "可选择";
     const reasonText = focused ? branchFocus.reasonText : "";
+    const objectiveText = buildFarRouteDispatchBranchObjectiveText(
+      choice.label,
+      active,
+      shift,
+      stable,
+      focused,
+      branchStatus
+    );
     const rewardText =
       choice.baseRewardText +
       (shift
@@ -5143,6 +5151,7 @@ function buildFarRouteDispatchBranchChoices(
       caption: choice.caption,
       nextText: choice.nextText,
       reasonText,
+      objectiveText,
       active,
       previous,
       stable,
@@ -5164,6 +5173,8 @@ function buildFarRouteDispatchBranchChoices(
         choice.caption +
         (reasonText ? " · " + reasonText : "") +
         " · " +
+        objectiveText +
+        " · " +
         choice.nextText +
         " · " +
         payoffText +
@@ -5171,6 +5182,46 @@ function buildFarRouteDispatchBranchChoices(
         rewardText
     };
   });
+}
+
+function buildFarRouteDispatchBranchObjectiveText(
+  label,
+  active,
+  shift,
+  stable,
+  focused,
+  branchStatus
+) {
+  if (active) {
+    const preparing = String(branchStatus?.kind ?? "").endsWith("-prep");
+    return preparing
+      ? "路线目标：已完成" + label + "路线，整备后接回目标"
+      : "路线目标：本轮走" + label + "路线，下一步回目标确认";
+  }
+
+  if (shift) {
+    return (
+      "路线目标：改走" +
+      (focused ? "推荐" : "") +
+      label +
+      "，开启轮替闭环"
+    );
+  }
+
+  if (stable) {
+    return (
+      "路线目标：续走上轮" +
+      (focused ? "推荐" : "") +
+      label +
+      "，触发路线稳航"
+    );
+  }
+
+  if (focused) {
+    return "路线目标：按当前航段推荐建立" + label + "路线";
+  }
+
+  return "路线目标：建立" + label + "路线，记录为下轮对照";
 }
 
 function buildFarRouteDispatchBranchPayoffText(
@@ -5252,6 +5303,8 @@ function buildFarRouteDispatchBranchChoiceText(choices) {
           " · " +
           choice.caption +
           (choice.reasonText ? " · " + choice.reasonText : "") +
+          " · " +
+          choice.objectiveText +
           " · " +
           choice.nextText +
           " · " +

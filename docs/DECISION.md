@@ -1,5 +1,28 @@
 # Decision
 
+## 2026-05-01 Product decision：远航路线目标
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-01 04:20 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#6 仍是最新反馈线程，原始反馈指出后半段“只有不停的目标、玩法没有真正变化”，因此本轮继续进入 Product decision。
+
+当前最大问题：前序已经补齐远航路线预案、路线步骤、按钮标记、契合闭环、闭环复盘、路线稳航和收益对照，但分支卡片仍偏向说明“给什么收益”。玩家选择协同/绕行前还需要把上轮路线、当前航段契合、改道和轮替闭环翻译成“这条路线本轮要达成什么目标”。
+
+本轮决策：
+
+- 新增“远航路线目标”。
+- `branchChoices` 为每条协同/绕行路线派生 `objectiveText`：无上轮分支时提示按当前航段推荐建档或建立路线作为下轮对照；续走上轮路线时提示触发路线稳航；改走另一条路线时提示开启轮替闭环；当前路线进行中或整备态时提示本轮回航确认或整备后接回目标。
+- 主操作区分支选择条新增 `far-dispatch-branch-choice-objective` 行，aria 汇总 `branchChoiceText` 同步包含路线目标。
+- 本轮只调整派生展示、DOM、样式和测试；不新增收益、不新增存档字段，不改变升级价格、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、远航调度既有数值、冷却、连携窗口、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-05-01 04:20 CST 当前 5 个 open feedback issue、0 个 open bug issue。
+- 无上轮路线时，契合协同分支显示“路线目标：按当前航段推荐建立协同路线”，非契合绕行分支显示“路线目标：建立绕行路线，记录为下轮对照”。
+- 有上轮协同路线时，续走协同显示“续走上轮推荐协同，触发路线稳航”，改走绕行显示“改走绕行，开启轮替闭环”。
+- 有上轮绕行路线时，改走契合协同显示“改走推荐协同，开启轮替闭环”，续走绕行显示“续走上轮绕行，触发路线稳航”。
+- `src/app.js` 渲染 `far-dispatch-branch-choice-objective`，`src/styles.css` 包含 `.far-dispatch-branch-choice-objective`。
+- 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含 `objectiveText`、`far-dispatch-branch-choice-objective` 和“路线目标”相关文案。
+
 ## 2026-05-01 Product decision：远航路线收益对照
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-01 04:01 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#6 仍是最新反馈线程，原始反馈指出后半段“只有不停的目标、玩法没有真正变化”，因此本轮继续进入 Product decision。
