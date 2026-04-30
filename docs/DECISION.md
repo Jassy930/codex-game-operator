@@ -22,8 +22,11 @@
 - `src/styles.css` 包含 `.project-reward-map`、`.project-reward-tile`、`.project-reward-icon`、`.project-reward-meter` 和四类奖励方向样式。
 - 本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 112 项。
 - 构建产物已确认包含 `projectRewardMap`、`project-reward-map`、`getProjectRewardVisuals` 和“星图奖励罗盘”。
+- 提交 d72f33a 已推送；GitHub Pages workflow 25155188485 已成功，线上地址返回 HTTP 200，且线上首页、`game.js`、`app.js` 和 `styles.css` 已确认包含奖励罗盘相关标记。
+- #4 已回复并继续保持 open，等待复测确认星图总览新增四类奖励视觉罗盘后，星图默认区域是否更容易扫视、文字压力是否继续下降。
+- 回复后同步 GitHub Issues：2026-04-30 16:24 CST 当前仍为 5 个 open feedback issue、0 个 open bug issue；#4 更新时间为 2026-04-30T08:23:47Z。
 
-下一步：推送并回复 #4，说明星图总览新增四类奖励视觉罗盘；继续保持 issue open 等待复测。
+下一步：等待 #4 复测；如果仍认为界面文字密度高，再继续把默认可见信息转为视觉结构，避免追加长说明。
 
 ## 2026-04-30 Product decision：星图项目缩略图
 

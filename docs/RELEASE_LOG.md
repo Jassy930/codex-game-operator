@@ -8,6 +8,9 @@
 - 同步 GitHub Issues 反馈状态：2026-04-30 16:11 CST 当前 5 个 open feedback issue、0 个 open bug issue；#4 作为本轮处理对象。
 - 验证通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 112 项。
 - 构建产物已确认包含 `projectRewardMap`、`project-reward-map`、`getProjectRewardVisuals` 和“星图奖励罗盘”。
+- 提交 d72f33a 已推送；GitHub Pages workflow 25155188485 已成功，线上地址返回 HTTP 200，且线上首页、`game.js`、`app.js` 和 `styles.css` 已确认包含奖励罗盘相关标记。
+- 已回复 #4，说明星图总览新增四类奖励视觉罗盘，并保持 issue open 等待复测。
+- 回复后同步 GitHub Issues 反馈状态：2026-04-30 16:24 CST 当前 5 个 open feedback issue、0 个 open bug issue；#4 更新时间为 2026-04-30T08:23:47Z。
 
 - 星图项目卡片新增可视化进度缩略图：每张项目卡显示 `project-card-scene`，用路线标记、进度填充、当前节点和奖励方向图形降低项目列表的文字读取压力，继续回应 #4 对界面文字密度和图片化表达的反馈。
 - `src/app.js` 新增 `renderProjectCardScene`，按现有 `project.progress` 写入 `--project-card-progress` 并派生累计/升级路线、完成/当前状态和奖励方向 class；`src/styles.css` 新增缩略图、进度轨、节点和四类奖励方向样式；`tests/game.test.js` 覆盖结构与样式标记。
