@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+- 星图当前航段新增远航调度 3 步路径轨：20M 后当前航段卡片详情会把远航调度显示成“目标指令 -> 协同续航 -> 回目标闭环”，减少只读一行说明来理解后半段短循环的成本。
+- `src/game.js` 为 `getProjectStatuses` 派生 `dispatchSteps` 和 `dispatchStepText`；`src/app.js` 渲染 `project-dispatch-track` / `project-dispatch-step`；`src/styles.css` 增加响应式路径轨样式；`tests/game.test.js` 覆盖脉冲航闸阶段的路径字段和运行期渲染标记。
+- 本轮只调整星图卡片展示层，继续回应 #6 对后半段玩法变化不明显的反馈；不新增存档字段，不改变指令收益、冷却、连携窗口、远航调度计算、星图航段、项目奖励、升级价格或反馈入口。
+- 同步 GitHub Issues 反馈状态：2026-04-30 13:28 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 作为本轮处理对象。
+- 验证通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 109 项。
+- 构建产物已确认包含 `project-dispatch-track`、`dispatchStepText` 和“调度路径”。
+
 - 星图当前航段新增远航调度可见性：20M 后当前航段卡片显示“调度 X”徽标，并在详情中展示目标指令、协同续航指令和 3/3 闭环提示。
 - `src/game.js` 为 `getProjectStatuses` 派生 `dispatchBadgeText`、`dispatchText`、目标指令 id 和协同续航指令 id；`src/app.js` 渲染 `project-dispatch-badge` / `project-dispatch`；`src/styles.css` 增加调度徽标和详情行样式；`tests/game.test.js` 覆盖脉冲航闸阶段的卡片调度字段。
 - 本轮只调整星图卡片展示层，回应 #6 对后半段玩法变化不明显的反馈；不新增存档字段，不改变指令收益、冷却、连携窗口、远航调度计算、星图航段、项目奖励、升级价格或反馈入口。

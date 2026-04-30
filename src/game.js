@@ -1681,7 +1681,9 @@ export function getProjectStatuses(state) {
       dispatchTargetDirectiveId: dispatchInfo?.targetDirectiveId ?? null,
       dispatchTargetDirectiveName: dispatchInfo?.targetDirectiveName ?? "",
       dispatchRelayDirectiveId: dispatchInfo?.relayDirectiveId ?? null,
-      dispatchRelayDirectiveName: dispatchInfo?.relayDirectiveName ?? ""
+      dispatchRelayDirectiveName: dispatchInfo?.relayDirectiveName ?? "",
+      dispatchSteps: dispatchInfo?.steps ?? [],
+      dispatchStepText: dispatchInfo?.stepText ?? ""
     };
   });
 }
@@ -3600,6 +3602,7 @@ function buildProjectDispatchInfo(project, state, isCurrent) {
   }
 
   const relayText = relayDirective ? " · 协同 " + relayDirective.name : "";
+  const relayStepText = relayDirective ? "协同 " + relayDirective.name : "非目标续航";
 
   return {
     badgeText: "调度 " + targetDirective.name,
@@ -3611,7 +3614,31 @@ function buildProjectDispatchInfo(project, state, isCurrent) {
     targetDirectiveId: targetDirective.id,
     targetDirectiveName: targetDirective.name,
     relayDirectiveId: relayDirective?.id ?? null,
-    relayDirectiveName: relayDirective?.name ?? ""
+    relayDirectiveName: relayDirective?.name ?? "",
+    steps: [
+      {
+        label: "目标",
+        directiveName: targetDirective.name,
+        text: "目标 " + targetDirective.name
+      },
+      {
+        label: relayDirective ? "协同" : "续航",
+        directiveName: relayDirective?.name ?? "非目标指令",
+        text: relayStepText
+      },
+      {
+        label: "闭环",
+        directiveName: targetDirective.name,
+        text: "回目标 " + targetDirective.name
+      }
+    ],
+    stepText:
+      "调度路径：目标 " +
+      targetDirective.name +
+      " -> " +
+      relayStepText +
+      " -> 回目标 " +
+      targetDirective.name
   };
 }
 

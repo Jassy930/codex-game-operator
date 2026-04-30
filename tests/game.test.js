@@ -1201,6 +1201,11 @@ test("星图项目卡片会默认折叠非当前航段详情", () => {
   const styles = readFileSync(new URL("../src/styles.css", import.meta.url), "utf8");
 
   assert.match(appJs, /function renderProjectDetailNodes\(project\)/);
+  assert.match(appJs, /function renderProjectDispatchTrack\(project\)/);
+  assert.match(appJs, /dispatchTrack = renderProjectDispatchTrack\(project\)/);
+  assert.match(appJs, /track\.className = "project-dispatch-track"/);
+  assert.match(appJs, /project\.dispatchSteps/);
+  assert.match(appJs, /stepItem\.className = "project-dispatch-step"/);
   assert.match(appJs, /if \(project\.isCurrent\) \{/);
   assert.match(appJs, /details\.className = "project-card-drawer"/);
   assert.match(appJs, /detailGrid\.className = "project-card-detail-grid"/);
@@ -1208,6 +1213,8 @@ test("星图项目卡片会默认折叠非当前航段详情", () => {
   assert.match(styles, /\.project-item:not\(\.is-current\)/);
   assert.match(styles, /\.project-card-drawer/);
   assert.match(styles, /\.project-card-detail-grid/);
+  assert.match(styles, /\.project-dispatch-track/);
+  assert.match(styles, /\.project-dispatch-step/);
   assert.match(styles, /\.project-card-drawer\[open\] summary::after/);
 });
 
@@ -2119,6 +2126,14 @@ test("远航调度会在 20M 后按当前航段指定目标指令", () => {
   assert.equal(
     currentProject.dispatchText,
     "远航调度：目标 点火齐射 · 协同 谐振脉冲 · 3/3 回到目标触发闭环"
+  );
+  assert.equal(
+    currentProject.dispatchStepText,
+    "调度路径：目标 点火齐射 -> 协同 谐振脉冲 -> 回目标 点火齐射"
+  );
+  assert.deepEqual(
+    currentProject.dispatchSteps.map((step) => step.text),
+    ["目标 点火齐射", "协同 谐振脉冲", "回目标 点火齐射"]
   );
   assert.equal(currentProject.dispatchTargetDirectiveId, "ignition-salvo");
   assert.equal(currentProject.dispatchRelayDirectiveId, "resonance-pulse");

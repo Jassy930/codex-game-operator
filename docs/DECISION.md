@@ -1,5 +1,27 @@
 # Decision
 
+## 2026-04-30 Product decision：星图调度路径轨
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-04-30 13:28 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#6 的“后半段只有不停的目标、玩法没有真正变化”仍未有玩家复测结论，继续进入 Product decision。
+
+当前最大问题：上一轮已经把远航调度目标、协同续航和闭环提示同步到星图当前航段卡片，但仍是一行详情文字。玩家需要阅读后才能意识到当前航段实际驱动的是“目标指令 -> 协同续航 -> 回到目标闭环”的 3 步短循环。
+
+本轮决策：
+
+- 在 `getProjectStatuses` 的当前航段远航调度字段中增加 `dispatchSteps` 和 `dispatchStepText`，复用现有目标指令与协同续航映射。
+- 在星图当前航段卡片详情中渲染 `project-dispatch-track`，显示 3 个固定步骤：目标指令、协同续航、回目标闭环。
+- 本轮只调整星图卡片展示层；不新增存档字段，不改变指令收益、冷却、连携窗口、远航调度计算、星图航段、项目奖励、升级价格、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-04-30 13:28 CST 当前 5 个 open feedback issue、0 个 open bug issue。
+- `getProjectStatuses` 在 #6 快照对应的脉冲航闸阶段返回 `dispatchStepText = "调度路径：目标 点火齐射 -> 协同 谐振脉冲 -> 回目标 点火齐射"`，并返回 3 个路径步骤。
+- 运行期卡片详情会渲染 `project-dispatch-track` 和 `project-dispatch-step`，窄屏下按固定最小宽度换行，不挤压项目卡片。
+- 本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 109 项。
+- 构建产物已确认包含 `project-dispatch-track`、`dispatchStepText` 和“调度路径”。
+
+下一步：推送并等待 GitHub Pages 部署；部署后回复 #6，保持 issue open 等待复测星图当前航段的 3 步路径轨是否让后半段玩法变化更容易理解。
+
 ## 2026-04-30 Product decision：星图调度可见性
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-04-30 13:13 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#6 的“后半段只有不停的目标、玩法没有真正变化”仍未有玩家复测结论，继续进入 Product decision。

@@ -2015,6 +2015,49 @@ h2 {
   font-weight: 900;
 }
 
+.project-dispatch-track {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(108px, 1fr));
+  gap: 6px;
+}
+
+.project-dispatch-track[hidden] {
+  display: none;
+}
+
+.project-dispatch-step {
+  display: grid;
+  grid-template-columns: 24px minmax(0, 1fr);
+  gap: 6px;
+  align-items: center;
+  min-height: 34px;
+  padding: 6px 8px;
+  border: 1px solid rgba(116, 204, 244, 0.2);
+  border-radius: 8px;
+  background: rgba(116, 204, 244, 0.08);
+  color: #c9f0ff;
+  font-size: 0.78rem;
+  font-weight: 900;
+}
+
+.project-dispatch-step strong {
+  display: grid;
+  width: 24px;
+  height: 24px;
+  place-items: center;
+  border-radius: 999px;
+  background: rgba(116, 204, 244, 0.18);
+  color: #f8f3e7;
+  font-size: 0.74rem;
+}
+
+.project-dispatch-step span {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 .project-reward {
   color: #fff7c2;
   font-size: 0.86rem;

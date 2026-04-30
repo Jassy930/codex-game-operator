@@ -1295,6 +1295,8 @@ function renderProjectDetailNodes(project) {
   dispatch.textContent = project.dispatchText;
   dispatch.hidden = !project.dispatchText;
 
+  const dispatchTrack = renderProjectDispatchTrack(project);
+
   const meter = document.createElement("span");
   meter.className = "project-meter";
   meter.setAttribute("aria-hidden", "true");
@@ -1303,7 +1305,37 @@ function renderProjectDetailNodes(project) {
   fill.style.width = Math.round(project.progress * 100) + "%";
   meter.append(fill);
 
-  return [summary, progress, reward, dispatch, meter];
+  return [summary, progress, reward, dispatch, dispatchTrack, meter];
+}
+
+function renderProjectDispatchTrack(project) {
+  const track = document.createElement("span");
+  track.className = "project-dispatch-track";
+
+  const steps = Array.isArray(project.dispatchSteps) ? project.dispatchSteps : [];
+  track.hidden = steps.length === 0;
+  if (track.hidden) {
+    return track;
+  }
+
+  track.setAttribute("aria-label", project.dispatchStepText);
+  track.append(
+    ...steps.map((step, index) => {
+      const stepItem = document.createElement("span");
+      stepItem.className = "project-dispatch-step";
+
+      const stepIndex = document.createElement("strong");
+      stepIndex.textContent = String(index + 1);
+
+      const stepLabel = document.createElement("span");
+      stepLabel.textContent = step.text;
+
+      stepItem.append(stepIndex, stepLabel);
+      return stepItem;
+    })
+  );
+
+  return track;
 }
 
 function getProjectTrackIconId(project) {
