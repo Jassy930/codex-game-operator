@@ -8,6 +8,11 @@
 - 本轮只新增派生展示和样式，不新增存档字段，不改变升级价格、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、基础连携倍率、远航调度收益、冷却、连携窗口、反馈入口或部署链路。
 - 同步 GitHub Issues 反馈状态：2026-04-30 23:16 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 作为本轮处理对象。
 - 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 提交 a679fe9 已推送；GitHub Pages workflow 25174001536 已成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`。
+- 线上地址 https://jassy930.github.io/codex-game-operator/ 返回 HTTP 200，且线上首页、`game.js`、`app.js` 和 `styles.css` 已确认包含 `branchRecommendationText`、`far-dispatch-branch-recommendation` 和“推荐分支”相关标记。
+- 已回复 #6，说明远航推荐分支会把当前航段契合路线、路线状态、资源取向和可改道奖励合并成一行；issue 保持 open 等待复测。
+- 回复后同步 GitHub Issues 反馈状态：2026-04-30 23:27 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 更新时间为 2026-04-30T15:26:46Z。
+- 钉钉通知未发送：运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` 相关变量名；未将 webhook 写入仓库。
 
 - 远航调度新增“航段契合”：点击/过载奖励航段更契合协同路线，自动/总产能奖励航段更契合绕行路线；目标指令后的契合分支会获得有效基础指令收益 5% 的“航段契合”奖励，继续回应 #6 对后半段玩法变化不明显的反馈。
 - `src/game.js` 新增 `FAR_ROUTE_DISPATCH_BRANCH_FOCUS_REWARD_RATE`、`branchFocusKind` / `branchFocusText` / `branchFocusDirectiveId` / `branchFocusDirectiveName` 派生和航段契合收益计算；`src/app.js` 记录 `dispatchBranchFocusReward` / `dispatchBranchFocusRewardRate` / `dispatchBranchFocusRewardText` 事件字段并渲染 `directive-dispatch-branch-focus` 徽标；`src/styles.css` 新增航段契合徽标和分支选择高亮样式；`index.html` 同步静态文案；`tests/game.test.js` 覆盖协同/绕行契合、事件字段、徽标、样式和静态文案。

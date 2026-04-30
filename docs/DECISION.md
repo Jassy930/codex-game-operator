@@ -23,8 +23,13 @@
 - 主操作区渲染 `far-dispatch-branch-recommendation`，静态首页保留同名占位，样式中包含 `.far-dispatch-branch-recommendation`。
 - 星图总览 `dispatchText` 包含推荐分支，便于在星图层直接看到当前航段建议路线。
 - 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 提交 a679fe9 已推送；GitHub Pages workflow 25174001536 已成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`。
+- 线上地址 https://jassy930.github.io/codex-game-operator/ 返回 HTTP 200，且线上首页、`game.js`、`app.js` 和 `styles.css` 已确认包含 `branchRecommendationText`、`far-dispatch-branch-recommendation` 和“推荐分支”相关标记。
+- #6 已回复：说明本轮新增“远航推荐分支”，会把当前航段契合路线、路线状态、资源取向、航段契合和可改道奖励合并到一行；issue 保持 open 等待复测。
+- 回复后同步 GitHub Issues：2026-04-30 23:27 CST 当前仍为 5 个 open feedback issue、0 个 open bug issue；#6 更新时间为 2026-04-30T15:26:46Z。
+- 钉钉通知未发送：运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` 相关变量名；未将 webhook 写入仓库。
 
-下一步：按发布策略推送并回复 #6，说明本轮新增推荐分支提示，继续等待复测。
+下一步：等待 #6 复测，重点确认“推荐分支”是否能让玩家更快判断当前航段建议走协同还是绕行。
 
 ## 2026-04-30 Product decision：远航航段契合
 
