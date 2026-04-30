@@ -8,6 +8,9 @@
 - 同步 GitHub Issues 反馈状态：当前 4 个 open feedback issue、0 个 open bug issue；#5 指向点火按钮点击反馈、特效和点击欲望，并作为本轮处理对象。
 - 验证通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 103 项。
 - 构建产物已确认包含 `core-feedback-layer`、`renderCoreFeedback`、`is-overload-ready`、`coreShockwave`、`coreOverloadShockwave` 和 `coreSparks`。
+- 提交 f25d88f 已推送；GitHub Pages workflow 25140116602 已成功，线上地址返回 HTTP 200，且线上首页、`app.js` 和 `styles.css` 已确认包含点火按钮即时反馈相关标记。
+- 已回复 #5，说明点火按钮反馈增强已部署，并保持 issue open 等待复测。
+- 回复后同步 GitHub Issues 反馈状态：当前 4 个 open feedback issue、0 个 open bug issue；#5 更新时间为 2026-04-30T00:00:44Z。
 - 航线委托新增可访问进度条：运行期按 `progress/target/completed` 显示 0/3、2/3、3/3，并在完成态切换 `is-completed`。
 - `index.html` 静态委托区新增 `directive-task-meter`；`src/app.js` 新增 `renderDirectiveTask`；`src/styles.css` 新增进度条和完成态样式；`tests/game.test.js` 覆盖委托进度字段、静态 meter 和运行期渲染标记。
 - 本轮只调整航线委托展示层；不新增存档字段，不改变升级价格、产能公式、星图 57 段路线、项目奖励、指令基础收益、冷却、连携窗口、轮换目标奖励、预案执行、策略契合、策略终结、指令熟练、满层回响、航线委托奖励或筛选规则。

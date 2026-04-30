@@ -22,8 +22,11 @@
 - `src/styles.css` 包含 `coreShockwave`、`coreOverloadShockwave`、`coreSparks`、过载前兆按钮样式和 `pulseValue` 高亮样式。
 - `tests/game.test.js` 新增点火按钮反馈测试；`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build` 已通过；测试数 103 项。
 - 构建产物包含 `core-feedback-layer`、`renderCoreFeedback`、`is-overload-ready`、`coreShockwave`、`coreOverloadShockwave` 和 `coreSparks`。
+- 提交 f25d88f 已推送；GitHub Pages workflow 25140116602 已成功，线上地址返回 HTTP 200，且线上首页、`app.js` 和 `styles.css` 已确认包含点火按钮即时反馈相关标记。
+- #5 已回复并继续保持 open，等待复测确认普通点击反馈、过载前兆和过载触发特效是否让点火按钮更有点击欲望。
+- 回复后同步 GitHub Issues：2026-04-30 08:01 CST 当前仍为 4 个 open feedback issue、0 个 open bug issue；#5 更新时间为 2026-04-30T00:00:44Z。
 
-下一步：提交并推送后回复 #5，等待复测确认点火按钮的按下反馈、过载前兆和过载触发特效是否提升点击欲望。
+下一步：等待 #5 复测；若仍认为按钮弱，再评估音效开关、点击连段奖励展示或更多星核视觉阶段。
 
 ## 2026-04-30 Product decision：航线委托进度条
 
