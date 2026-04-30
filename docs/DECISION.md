@@ -21,8 +21,14 @@
 - 协同整备完成态显示“分支轮替：改走绕行 巡航回收触发分支改道 +6%”。
 - `src/app.js` 渲染 `dispatch.branchRotationText`；`index.html` 包含 `far-dispatch-branch-rotation` 占位；`src/styles.css` 包含 `.far-dispatch-branch-rotation`。
 - 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含 `branchRotationText`、`far-dispatch-branch-rotation` 和“分支轮替”相关文案。
+- 提交 afaf093 已推送；GitHub Pages workflow 25178047291 已成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`。
+- 线上地址 https://jassy930.github.io/codex-game-operator/ 返回 HTTP 200，且线上 `game.js`、`app.js` 和 `styles.css` 已确认包含 `branchRotationText`、`far-dispatch-branch-rotation` 和“分支轮替”相关标记。
+- #6 已回复：说明远航调度会直接给出跨轮分支轮替目标；issue 保持 open 等待复测。
+- 回复后同步 GitHub Issues：2026-05-01 00:52 CST 当前仍为 5 个 open feedback issue、0 个 open bug issue；#6 更新时间为 2026-04-30T16:52:08Z。
+- 钉钉通知未发送：运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` 相关变量名；未将 webhook 写入仓库。
 
-下一步：回复 #6，说明远航调度现在会直接给出跨轮分支轮替目标，并等待复测确认是否更像路线循环。
+下一步：等待 #6 复测，重点确认“分支轮替”是否让协同/绕行更像跨轮路线循环。
 
 ## 2026-05-01 Product decision：远航推荐原因标明
 

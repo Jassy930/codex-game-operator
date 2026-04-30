@@ -9,6 +9,10 @@
 - 同步 GitHub Issues 反馈状态：2026-05-01 00:45 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 作为本轮处理对象。
 - 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
 - 构建产物已确认包含 `branchRotationText`、`far-dispatch-branch-rotation` 和“分支轮替”相关文案。
+- 提交 afaf093 已推送；GitHub Pages workflow 25178047291 已成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`。
+- 线上地址 https://jassy930.github.io/codex-game-operator/ 返回 HTTP 200，且线上 `game.js`、`app.js` 和 `styles.css` 已确认包含 `branchRotationText`、`far-dispatch-branch-rotation` 和“分支轮替”相关标记。
+- 已回复 #6，说明远航调度会直接给出跨轮分支轮替目标；issue 保持 open 等待复测。
+- 回复后同步 GitHub Issues 反馈状态：2026-05-01 00:52 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 更新时间为 2026-04-30T16:52:08Z。
 - 钉钉通知未发送：运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` 相关变量名；未将 webhook 写入仓库。
 
 - 远航调度新增“推荐原因”：当前航段契合路线会在推荐分支和分支选择条中显示点击/过载航段为什么推荐协同、自动/总产能航段为什么推荐绕行，继续回应 #6 对后半段玩法变化不明显的反馈。
