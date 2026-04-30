@@ -1637,6 +1637,36 @@ h2 {
   right: 10%;
 }
 
+.far-dispatch-branch-choice-route-resource {
+  position: absolute;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.far-dispatch-branch-choice-route-resource.is-current {
+  top: 50%;
+  left: calc(50% + 10px);
+  width: 12px;
+  height: 6px;
+  border: 1px solid rgba(216, 255, 226, 0.7);
+  border-radius: 999px;
+  background: rgba(150, 231, 168, 0.28);
+  box-shadow: 0 0 10px rgba(150, 231, 168, 0.22);
+  transform: translateY(-50%);
+}
+
+.far-dispatch-branch-choice-route-resource.is-progress {
+  top: 50%;
+  right: 12%;
+  width: 0;
+  height: 0;
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-left: 8px solid #ff7eb1;
+  filter: drop-shadow(0 0 6px rgba(255, 126, 177, 0.38));
+  transform: translateY(-50%) rotate(-4deg);
+}
+
 .far-dispatch-branch-choice-route.is-sync {
   border-color: rgba(103, 232, 249, 0.28);
   background:

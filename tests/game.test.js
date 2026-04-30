@@ -1702,9 +1702,12 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(appJs, /badge\.textContent = choice\.decisionBadgeText \?\? ""/);
   assert.match(appJs, /function renderFarDispatchBranchChoiceRoute\(choice\)/);
   assert.match(appJs, /"far-dispatch-branch-choice-route is-" \+/);
+  assert.match(appJs, /" is-resource-" \+/);
   assert.match(appJs, /route\.setAttribute\("aria-hidden", "true"\)/);
   assert.match(appJs, /line\.className = "far-dispatch-branch-choice-route-line"/);
   assert.match(appJs, /returnNode\.className = "far-dispatch-branch-choice-route-node is-return"/);
+  assert.match(appJs, /routeResource\.className =/);
+  assert.match(appJs, /far-dispatch-branch-choice-route-resource is-/);
   assert.match(appJs, /"far-dispatch-branch-choice-decision is-" \+/);
   assert.match(appJs, /decision\.textContent = choice\.decisionText \?\? ""/);
   assert.match(appJs, /reason\.className = "far-dispatch-branch-choice-reason"/);
@@ -1722,6 +1725,7 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(appJs, /function getFarDispatchBranchChoiceKind\(choice\)/);
   assert.match(appJs, /function getFarDispatchBranchChoiceStatus\(choice\)/);
   assert.match(appJs, /function getFarDispatchBranchChoiceDecisionKind\(choice\)/);
+  assert.match(appJs, /function getFarDispatchBranchChoiceRouteResourceKind\(choice\)/);
   assert.match(appJs, /meter\.className = "directive-task-meter"/);
   assert.match(appJs, /meter\.className = "far-dispatch-meter"/);
   assert.match(appJs, /loopMeter\.className = "far-dispatch-loop-meter"/);
@@ -1836,6 +1840,9 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(styles, /\.far-dispatch-branch-choice-route/);
   assert.match(styles, /\.far-dispatch-branch-choice-route-line/);
   assert.match(styles, /\.far-dispatch-branch-choice-route-node/);
+  assert.match(styles, /\.far-dispatch-branch-choice-route-resource/);
+  assert.match(styles, /\.far-dispatch-branch-choice-route-resource\.is-current/);
+  assert.match(styles, /\.far-dispatch-branch-choice-route-resource\.is-progress/);
   assert.match(styles, /\.far-dispatch-branch-choice-route\.is-sync/);
   assert.match(styles, /\.far-dispatch-branch-choice-route\.is-detour/);
   assert.match(styles, /\.far-dispatch-branch-choice-route\.is-shift/);
@@ -2885,6 +2892,12 @@ test("远航调度会在 20M 后按当前航段指定目标指令", () => {
   assert.deepEqual(
     dispatch.branchChoices.map((choice) => choice.decisionBadgeText),
     ["首推", "建档"]
+  );
+  assert.deepEqual(
+    dispatch.branchChoices.map(
+      (choice) => choice.routeResourceKind + ":" + choice.routeResourceText
+    ),
+    ["current:保留当前", "progress:投送累计"]
   );
   assert.equal(
     dispatch.branchChoiceText,

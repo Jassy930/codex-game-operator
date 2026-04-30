@@ -806,6 +806,8 @@ function renderFarDispatchBranchChoiceRoute(choice) {
     getFarDispatchBranchChoiceStatus(choice) +
     " is-decision-" +
     getFarDispatchBranchChoiceDecisionKind(choice) +
+    " is-resource-" +
+    getFarDispatchBranchChoiceRouteResourceKind(choice) +
     (choice.focused ? " is-focused" : "");
   route.setAttribute("aria-hidden", "true");
 
@@ -821,7 +823,12 @@ function renderFarDispatchBranchChoiceRoute(choice) {
   const returnNode = document.createElement("span");
   returnNode.className = "far-dispatch-branch-choice-route-node is-return";
 
-  route.append(line, start, branch, returnNode);
+  const routeResource = document.createElement("span");
+  routeResource.className =
+    "far-dispatch-branch-choice-route-resource is-" +
+    getFarDispatchBranchChoiceRouteResourceKind(choice);
+
+  route.append(line, start, branch, returnNode, routeResource);
   return route;
 }
 
@@ -926,6 +933,11 @@ function getFarDispatchBranchChoiceStatus(choice) {
 function getFarDispatchBranchChoiceDecisionKind(choice) {
   const decisionKind = String(choice.decisionKind ?? "fallback");
   return decisionKind.replace(/[^a-z-]/g, "") || "fallback";
+}
+
+function getFarDispatchBranchChoiceRouteResourceKind(choice) {
+  const resourceKind = String(choice.routeResourceKind ?? "none");
+  return resourceKind.replace(/[^a-z-]/g, "") || "none";
 }
 
 function renderDirective(option) {

@@ -5072,6 +5072,8 @@ function buildFarRouteDispatchBranchChoices(
       label: "协同",
       directive: relayDirective,
       caption: "补当前资源",
+      routeResourceKind: "current",
+      routeResourceText: "保留当前",
       nextText: "后续协同回航触发闭环与远航突破",
       baseRewardText:
         "远航协同 +" +
@@ -5086,6 +5088,8 @@ function buildFarRouteDispatchBranchChoices(
           label: "绕行",
           directive: detourDirective,
           caption: "投送累计航段",
+          routeResourceKind: "progress",
+          routeResourceText: "投送累计",
           nextText: "后续绕行回航触发闭环与绕行突破",
           baseRewardText:
             "远航绕行 +" +
@@ -5187,6 +5191,8 @@ function buildFarRouteDispatchBranchChoices(
       directiveId: choice.directive.id,
       directiveName: choice.directive.name,
       caption: choice.caption,
+      routeResourceKind: choice.routeResourceKind,
+      routeResourceText: choice.routeResourceText,
       nextText: choice.nextText,
       reasonText,
       decisionText,
