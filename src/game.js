@@ -2304,7 +2304,7 @@ export function getFarRouteDispatch(state, now = Date.now()) {
       cooldownText +
       " · " +
       chainWindowText +
-      " · 目标后切换非目标指令触发" +
+      " · 目标后推荐非目标指令触发" +
       relayRewardText +
       " · 3/3 回到目标指令触发" +
       loopRewardText
@@ -2419,8 +2419,15 @@ export function getDirectivePlan(state, now = Date.now()) {
       chain.lastDirectiveId !== stanceDirective.id &&
       differentDirectives.some((directive) => directive.id !== stanceDirective.id)
   );
+  const dispatchRelayCanOverride = Boolean(
+    dispatchDirective &&
+      chain.lastDirectiveId === dispatchDirective.id &&
+      stacks === 0
+  );
   const preferredDirectives = shouldPreserveStanceFinisher
-    ? differentDirectives.filter((directive) => directive.id !== stanceDirective.id)
+    ? dispatchRelayCanOverride
+      ? differentDirectives
+      : differentDirectives.filter((directive) => directive.id !== stanceDirective.id)
     : differentDirectives;
   let readyDirectives = preferredDirectives.filter((directive) =>
     isDirectiveReady(current, directive, now, dispatch)
@@ -2452,18 +2459,24 @@ export function getDirectivePlan(state, now = Date.now()) {
     (lastDirective?.name ?? "未知指令") +
     " · 连携窗口 " +
     windowText;
-  const waitingPrefix = dispatchCanOverride
-    ? readyDirectives.length
+  let waitingPrefix = readyDirectives.length ? "下一步切换到" : "等待冷却后切换到";
+  if (dispatchCanOverride) {
+    waitingPrefix = readyDirectives.length
       ? "远航调度指定"
-      : "等待远航调度冷却后执行"
-    : readyDirectives.length
-      ? "下一步切换到"
-      : "等待冷却后切换到";
-  const preserveStanceHint = shouldPreserveStanceFinisher
-    ? dispatchCanOverride
+      : "等待远航调度冷却后执行";
+  } else if (dispatchRelayCanOverride) {
+    waitingPrefix = readyDirectives.length
+      ? "远航续航可切换到"
+      : "等待远航续航冷却后切换到";
+  }
+  let preserveStanceHint = "";
+  if (dispatchRelayCanOverride) {
+    preserveStanceHint = "，目标后切换非目标指令触发远航续航";
+  } else if (shouldPreserveStanceFinisher) {
+    preserveStanceHint = dispatchCanOverride
       ? "，当前航段调度优先"
-      : "，继续保留" + stanceDirective.name + "做 3/3 策略终结"
-    : "";
+      : "，继续保留" + stanceDirective.name + "做 3/3 策略终结";
+  }
   const completedRotation = stacks >= DIRECTIVE_CHAIN_MAX_STACKS;
   const masteryContinuation = completedRotation && mastery.stacks > 0;
   const completedRecommendationText = masteryAtCap
@@ -2513,6 +2526,8 @@ export function getDirectivePlan(state, now = Date.now()) {
     nextDirectiveIds: nextDirectivePool.map((directive) => directive.id),
     recommendationText: dispatchCanOverride
       ? "调度目标"
+      : dispatchRelayCanOverride
+      ? "远航续航"
       : completedRotation
       ? completedRecommendationText
       : shouldPreserveStanceFinisher
@@ -2521,6 +2536,8 @@ export function getDirectivePlan(state, now = Date.now()) {
     waitingRecommendationText:
       dispatchCanOverride
         ? "等待调度"
+        : dispatchRelayCanOverride
+        ? "等待续航"
         : completedRotation || shouldPreserveStanceFinisher
         ? waitingRecommendationText
         : undefined,
@@ -3832,7 +3849,7 @@ function getFarRouteDispatchLoopNextText(chain, directive, progress, target) {
   }
 
   if (chain.lastDirectiveId === directive.id) {
-    return "下一步切换非目标指令触发远航续航";
+    return "下一步推荐非目标指令触发远航续航";
   }
 
   if ((Number(chain.stacks) || 0) >= DIRECTIVE_CHAIN_MAX_STACKS - 1) {

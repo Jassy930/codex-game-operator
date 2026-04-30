@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+- 远航调度新增“远航续航推荐”：目标指令后的 1/3 阶段会把可用非目标指令标为“远航续航/等待续航”，让第二步不只依赖奖励徽标。
+- `src/game.js` 的 `getDirectivePlan` 在远航续航阶段允许任意非目标指令进入推荐池，并把远航调度条文案更新为“目标后推荐非目标指令触发远航续航”；`tests/game.test.js` 覆盖点火齐射后同时推荐巡航回收和谐振脉冲。
+- 本轮只调整远航续航的按钮级推荐与文案；不新增存档字段，不改变升级价格、产能公式、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、基础连携倍率、轮换目标奖励、预案执行、航线委托、指令熟练、满层回响、远航调度校准、冷却、连携窗口、远航续航奖励倍率、远航闭环奖励或反馈入口。
+- 同步 GitHub Issues 反馈状态：2026-04-30 10:23 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 继续作为后半段玩法变化处理对象。
+- 验证通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 106 项。
 - 远航调度新增“远航续航”：20M 后远航调度 active 时，上一指令是当前航段目标指令、下一步切换非目标指令并接上 1/3 连携，会获得有效基础指令收益 8% 的远航续航奖励。
 - `src/game.js` 新增 `FAR_ROUTE_DISPATCH_RELAY_REWARD_RATE`、远航续航收益计算和调度文案；`src/app.js` 渲染 `directive-dispatch-relay` 并记录 `dispatchRelayReward` / `dispatchRelayRewardRate` / `dispatchRelayRewardText`；`src/styles.css` 新增远航续航徽标样式；`index.html` 锁定文案同步说明远航续航。
 - 本轮只补齐远航调度短循环第二步奖励；不新增存档字段，不改变升级价格、产能公式、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、基础连携倍率、轮换目标奖励、预案执行、航线委托、指令熟练、满层回响、远航调度校准、冷却、连携窗口、远航闭环奖励或反馈入口。

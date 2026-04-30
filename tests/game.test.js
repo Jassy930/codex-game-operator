@@ -1905,6 +1905,7 @@ test("远航调度会在 20M 后按当前航段指定目标指令", () => {
     }
   };
   const relayStatus = getDirectiveStatus(relayState, 30_000);
+  const relayPlan = getDirectivePlan(relayState, 30_000);
   const relayCruiseOption = relayStatus.options.find(
     (option) => option.id === "cruise-cache"
   );
@@ -1970,7 +1971,7 @@ test("远航调度会在 20M 后按当前航段指定目标指令", () => {
   assert.equal(dispatch.loopStatusText, "闭环进度 0/3 · 下一步 点火齐射");
   assert.equal(
     dispatch.text,
-    "远航调度：航段 27/57 脉冲航闸指定点火齐射 · 执行目标指令获得调度校准 +14% · 目标指令冷却 -30% · 调度接力 +30 秒 · 目标后切换非目标指令触发远航续航 +8% · 3/3 回到目标指令触发远航闭环 +16%"
+    "远航调度：航段 27/57 脉冲航闸指定点火齐射 · 执行目标指令获得调度校准 +14% · 目标指令冷却 -30% · 调度接力 +30 秒 · 目标后推荐非目标指令触发远航续航 +8% · 3/3 回到目标指令触发远航闭环 +16%"
   );
   assert.equal(Math.round(dispatch.progress * 100), 83);
   assert.deepEqual(plan.nextDirectiveIds, ["ignition-salvo"]);
@@ -2019,9 +2020,15 @@ test("远航调度会在 20M 后按当前航段指定目标指令", () => {
   assert.equal(cooledIgnitionResult.activated, true);
   assert.equal(relayDispatch.loopProgress, 1);
   assert.match(relayDispatch.loopStatusText, /闭环进度 1\/3/);
-  assert.match(relayDispatch.loopStatusText, /下一步切换非目标指令触发远航续航/);
-  assert.equal(relayCruiseOption.recommended, false);
+  assert.match(relayDispatch.loopStatusText, /下一步推荐非目标指令触发远航续航/);
+  assert.deepEqual(relayPlan.nextDirectiveIds, ["cruise-cache", "resonance-pulse"]);
+  assert.equal(relayPlan.recommendationText, "远航续航");
+  assert.equal(relayPlan.waitingRecommendationText, "等待续航");
+  assert.match(relayPlan.hintText, /目标后切换非目标指令触发远航续航/);
+  assert.equal(relayCruiseOption.recommended, true);
+  assert.equal(relayCruiseOption.recommendationText, "远航续航");
   assert.equal(relayResonanceOption.recommended, true);
+  assert.equal(relayResonanceOption.recommendationText, "远航续航");
   assert.equal(relayCruiseOption.dispatchRelayReward > 0, true);
   assert.equal(relayCruiseOption.dispatchRelayRewardRate, FAR_ROUTE_DISPATCH_RELAY_REWARD_RATE);
   assert.match(relayCruiseOption.dispatchRelayRewardText, /远航续航 \+/);
