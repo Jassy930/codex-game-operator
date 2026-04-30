@@ -1,5 +1,32 @@
 # Decision
 
+## 2026-05-01 Product decision：远航路线稳航
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-01 03:46 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#6 仍是最新反馈线程，原始反馈指出后半段“只有不停的目标、玩法没有真正变化”，因此本轮继续进入 Product decision。
+
+当前最大问题：前序已经把远航路线的预案、步骤、按钮标记、契合闭环和闭环复盘补齐，但跨轮分支仍偏向“改走另一条路线才有奖励”。如果玩家判断当前资源状态更适合续走上轮分支，界面会标出“上轮路线”，但缺少与“分支改道 +6%”并列的稳定路线收益确认。
+
+本轮决策：
+
+- 新增“远航路线稳航”。
+- 目标指令后，如果玩家续走上一轮记录的协同/绕行分支，获得有效基础指令收益 4% 的“路线稳航”奖励。
+- 该判断复用现有 `farRouteLastBranchDirectiveId`、目标指令、分支选择和指令链状态；不新增存档字段。
+- 分支选择条会把上轮路线显示为“路线稳航 +4%”；推荐分支如果同时是上轮路线，会追加“路线稳航 +4%”；分支轮替提示会同时说明“续走上轮路线触发路线稳航 +4%”与“改走另一分支触发分支改道 +6% / 轮替闭环 +9%”。
+- `src/app.js` 在本地 `directive` 事件记录 `dispatchBranchStabilityReward` / `dispatchBranchStabilityRewardRate` / `dispatchBranchStabilityRewardText`，并渲染 `directive-dispatch-branch-stability` 徽标。
+- 本轮只新增续走上轮分支的即时奖励与展示，不新增存档字段，不改变升级价格、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、调度校准、远航续航、远航协同、协同补给、远航绕行、绕行投送、分支改道、航段契合、轮替闭环、契合闭环、远航闭环、突破、整备奖励、冷却、连携窗口、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-05-01 03:46 CST 当前 5 个 open feedback issue、0 个 open bug issue。
+- `FAR_ROUTE_DISPATCH_BRANCH_STABILITY_REWARD_RATE` 为 0.04。
+- 没有上轮分支记录时，目标后的协同/绕行分支不会触发路线稳航。
+- 上轮分支为协同时，续走协同触发“路线稳航 +X”，改走绕行不触发路线稳航但仍可触发分支改道。
+- 上轮分支为绕行时，续走绕行触发“路线稳航 +X”，改走协同不触发路线稳航但仍可触发分支改道。
+- 分支选择条、推荐分支、分支轮替提示、按钮徽标、预计收益、执行反馈、本地 `directive` 事件、反馈快照和静态解锁说明同步包含“路线稳航”。
+- 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含 `dispatchBranchStabilityReward`、`directive-dispatch-branch-stability` 和“路线稳航”相关文案。
+- 发布验证、GitHub Issue #6 回复和钉钉通知状态将在提交、推送和部署后补记。
+
 ## 2026-05-01 Product decision：远航闭环复盘
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-01 03:17 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#6 仍是最新反馈线程，原始反馈指出后半段“只有不停的目标、玩法没有真正变化”，因此本轮继续进入 Product decision。

@@ -895,6 +895,9 @@ function renderDirective(option) {
         dispatchBranchShiftReward: result.dispatchBranchShiftReward,
         dispatchBranchShiftRewardRate: result.dispatchBranchShiftRewardRate,
         dispatchBranchShiftRewardText: result.dispatchBranchShiftRewardText,
+        dispatchBranchStabilityReward: result.dispatchBranchStabilityReward,
+        dispatchBranchStabilityRewardRate: result.dispatchBranchStabilityRewardRate,
+        dispatchBranchStabilityRewardText: result.dispatchBranchStabilityRewardText,
         dispatchBranchFocusReward: result.dispatchBranchFocusReward,
         dispatchBranchFocusRewardRate: result.dispatchBranchFocusRewardRate,
         dispatchBranchFocusRewardText: result.dispatchBranchFocusRewardText,
@@ -1019,6 +1022,11 @@ function renderDirective(option) {
   dispatchBranchShift.textContent = option.dispatchBranchShiftRewardText;
   dispatchBranchShift.hidden = !option.dispatchBranchShiftRewardText;
 
+  const dispatchBranchStability = document.createElement("span");
+  dispatchBranchStability.className = "directive-dispatch-branch-stability";
+  dispatchBranchStability.textContent = option.dispatchBranchStabilityRewardText;
+  dispatchBranchStability.hidden = !option.dispatchBranchStabilityRewardText;
+
   const dispatchBranchFocus = document.createElement("span");
   dispatchBranchFocus.className = "directive-dispatch-branch-focus";
   dispatchBranchFocus.textContent = option.dispatchBranchFocusRewardText;
@@ -1110,6 +1118,7 @@ function renderDirective(option) {
     dispatchSyncSupply,
     dispatchDetour,
     dispatchBranchShift,
+    dispatchBranchStability,
     dispatchBranchFocus,
     dispatchBranchRotation,
     dispatchFocusLoop,
