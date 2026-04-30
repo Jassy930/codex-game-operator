@@ -7,6 +7,9 @@
 - 本轮只调整 20M 后远航调度与指令推荐的派生状态；不新增存档字段，不改变升级价格、产能公式、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令冷却、连携窗口、轮换目标奖励、预案执行、航线委托、指令熟练、满层回响或反馈入口。
 - 同步 GitHub Issues 反馈状态：2026-04-30 08:51 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 继续作为后半段玩法变化处理对象。
 - 验证通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 106 项。
+- 提交 edec87d 已推送；GitHub Pages workflow 25141772650 已成功，线上地址返回 HTTP 200，且线上首页和 `game.js` 已确认包含“目标指令推荐”“调度目标”“等待调度”和“当前航段调度优先”。
+- 已回复 #6，说明远航调度现在会接管下一步指令推荐，并保持 issue open 等待复测。
+- 回复后同步 GitHub Issues 反馈状态：2026-04-30 08:57 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 更新时间为 2026-04-30T00:57:13Z。
 - 后半段新增“远航调度”：20M 后当前星图航段会指定目标指令，执行匹配指令获得“调度校准”奖励，让脉冲航闸附近不再只是继续追逐累计能量门槛。
 - `src/game.js` 新增 `FAR_ROUTE_DISPATCH_UNLOCK_ENERGY`、`FAR_ROUTE_DISPATCH_BONUS_RATE` 和 `getFarRouteDispatch`；`index.html` / `src/app.js` / `src/styles.css` 新增远航调度条和 `directive-dispatch-bonus`；`src/feedback.js` 的反馈快照新增远航调度状态；`tests/game.test.js` 覆盖 20M 锁定态、脉冲航闸目标指令、调度奖励、静态结构和反馈快照。
 - 本轮不新增存档字段，不改变升级价格、产能公式、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令冷却、连携窗口、轮换目标奖励、预案执行、航线委托、指令熟练或反馈入口。
