@@ -8,6 +8,9 @@
 - `getFarRouteDispatch` 新增 `loopProgress` / `loopTarget` / `loopStatusText`；`renderFarDispatch` 渲染 `far-dispatch-loop-text` 和 `far-dispatch-loop-meter`；反馈快照中的远航调度状态追加闭环进度。
 - 本轮不新增存档字段，不改变升级价格、产能公式、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、基础连携倍率、轮换目标奖励、预案执行、航线委托、指令熟练、满层回响、远航调度奖励、冷却、连携窗口或反馈入口。
 - 本轮本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 106 项。
+- 提交 b358677 已推送；GitHub Pages workflow 25143476516 已成功，线上首页、`game.js`、`app.js` 和 `styles.css` 已确认包含闭环进度相关标记。
+- #6 已回复：说明远航调度条新增 0/3 到 3/3 闭环进度，issue 保持 open 等待复测。
+- 回复后同步 GitHub Issues：2026-04-30 10:02 CST 当前仍为 5 个 open feedback issue、0 个 open bug issue；#6 更新时间为 2026-04-30T02:01:58Z。
 
 - GitHub Issues：gh 可用且已认证；2026-04-30 09:34 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
 - #6 继续作为本轮 Product decision：上一轮已让远航调度目标指令延长连携窗口，但尚无玩家复测结论；本轮把“目标指令 -> 续航 -> 回到目标指令”的 3/3 短循环显式做成闭环奖励。
