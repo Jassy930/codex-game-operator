@@ -8,6 +8,9 @@
 - 同步 GitHub Issues 反馈状态：2026-04-30 12:19 CST 当前 5 个 open feedback issue、0 个 open bug issue；#4 作为本轮处理对象。
 - 验证通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 108 项。
 - 构建产物已确认包含 `directive-state-orb`、`directive-visual.is-ready` 和 `directive-visual.is-cooling`。
+- 提交 bb1a4c7 已推送；GitHub Pages workflow 25147333844 已成功，线上地址返回 HTTP 200，且线上首页、`app.js` 和 `styles.css` 已确认包含航线指令状态灯相关标记。
+- 已回复 #4，说明航线指令徽记新增状态灯，并保持 issue open 等待复测。
+- 回复后同步 GitHub Issues 反馈状态：2026-04-30 12:27 CST 当前 5 个 open feedback issue、0 个 open bug issue；#4 更新时间为 2026-04-30T04:27:31Z。
 - 航线指令按钮新增冷却进度轨：每个指令按钮在预计收益和状态之间显示固定高度 `directive-cooldown-meter`，可执行时满格、冷却中按剩余时间推进、未解锁时为空轨。
 - `src/game.js` 为指令选项派生 `cooldownProgress` 和 `cooling`；`src/app.js` 渲染可访问的冷却 meter 并给冷却中按钮追加 `is-cooling`；`index.html` 增加三条静态锁定占位；`src/styles.css` 增加冷却轨样式；`tests/game.test.js` 覆盖可执行、冷却中和静态/运行期标记。
 - 本轮只调整航线指令展示层，回应 #4 对文字密度和可扫视性的反馈，并辅助 #3/#6 降低主动短循环中判断指令是否快好的成本；不新增存档字段，不改变指令收益、实际冷却、连携窗口、远航调度、星图航段、升级价格或反馈入口。

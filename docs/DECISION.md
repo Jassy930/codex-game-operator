@@ -18,6 +18,9 @@
 - 静态首页和运行期资源包含 `directive-state-orb`，运行期徽记能根据 ready/cooling/recommended 状态追加对应 class。
 - 本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 108 项。
 - 构建产物已确认包含 `directive-state-orb`、`directive-visual.is-ready` 和 `directive-visual.is-cooling`。
+- 提交 bb1a4c7 已推送；GitHub Pages workflow 25147333844 已成功，线上地址返回 HTTP 200，且线上首页、`app.js` 和 `styles.css` 已确认包含航线指令状态灯相关标记。
+- #4 已回复并继续保持 open，等待复测确认状态灯是否进一步降低 100K 后航线指令按钮区的文字判断压力。
+- 回复后同步 GitHub Issues：2026-04-30 12:27 CST 当前仍为 5 个 open feedback issue、0 个 open bug issue；#4 更新时间为 2026-04-30T04:27:31Z。
 
 ## 2026-04-30 Product decision：航线指令冷却进度轨
 
