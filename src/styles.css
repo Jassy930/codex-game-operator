@@ -1050,6 +1050,15 @@ h2 {
   line-height: 1;
 }
 
+.directive-button .directive-dispatch-branch-rotation {
+  padding: 3px 6px;
+  border-radius: 999px;
+  background: rgba(255, 126, 177, 0.18);
+  color: #ffd2e5;
+  font-size: 0.68rem;
+  line-height: 1;
+}
+
 .directive-button .directive-dispatch-loop {
   padding: 3px 6px;
   border-radius: 999px;

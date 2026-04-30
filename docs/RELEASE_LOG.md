@@ -2,6 +2,14 @@
 
 ## Unreleased
 
+- 远航调度新增“轮替闭环”：目标后改走与上一轮不同的协同/绕行分支时，会记录短期待结算轮替分支；随后回到当前航段目标指令完成 3/3 时，额外获得有效基础指令收益 9% 的“轮替闭环”奖励，继续回应 #6 对后半段玩法变化不明显的反馈。
+- `src/game.js` 新增 `FAR_ROUTE_DISPATCH_BRANCH_ROTATION_REWARD_RATE`、`farRouteBranchRotationDirectiveId` 兼容字段、轮替闭环奖励计算、分支轮替闭环预告和远航路径第三步收益标签；`src/app.js` 记录并渲染 `dispatchBranchRotationReward` / `directive-dispatch-branch-rotation`；`src/styles.css` 增加轮替闭环徽标样式；`index.html` 同步静态解锁说明；`tests/game.test.js` 覆盖改道后回目标结算、静态绑定和反馈快照。
+- 文档同步更新：`docs/DECISION.md`、`docs/FEEDBACK.md`、`docs/RESEARCH.md`、`docs/PRODUCT.md`、`docs/DESIGN.md`、`docs/ROADMAP.md`、`docs/IDEAS.md`、`docs/METRICS.md`、`README.md` 和本日志已记录远航轮替闭环奖励。
+- 本轮只新增短期待结算字段与轮替闭环奖励，不改变升级价格、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、基础连携倍率、调度校准、远航续航、远航协同、协同补给、远航绕行、绕行投送、分支改道、航段契合、远航闭环、远航突破、绕行突破、冷却、连携窗口、反馈入口或部署链路。
+- 同步 GitHub Issues 反馈状态：2026-05-01 00:57 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 作为本轮处理对象。
+- 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含 `FAR_ROUTE_DISPATCH_BRANCH_ROTATION_REWARD_RATE`、`farRouteBranchRotationDirectiveId`、`dispatchBranchRotationReward`、`directive-dispatch-branch-rotation` 和“轮替闭环”相关文案。
+
 - 远航调度新增“分支轮替目标”：没有上轮分支时提示先完成任一分支闭环，已有上轮分支时提示改走另一条协同/绕行路线触发“分支改道 +6%”，继续回应 #6 对后半段玩法变化不明显的反馈。
 - `src/game.js` 为远航分支派生 `branchRotationText` 并纳入远航调度长文本和星图总览摘要；`src/app.js` 渲染 `far-dispatch-branch-rotation`；`index.html` 增加静态占位；`src/styles.css` 增加轮替目标样式；`tests/game.test.js` 覆盖无上轮分支、绕行后改走协同、协同整备后改走绕行和静态绑定。
 - 文档同步更新：`docs/DECISION.md`、`docs/FEEDBACK.md`、`docs/PRODUCT.md`、`docs/DESIGN.md`、`docs/ROADMAP.md`、`docs/IDEAS.md`、`docs/METRICS.md` 和本日志已记录远航分支轮替目标。

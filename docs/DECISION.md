@@ -1,5 +1,31 @@
 # Decision
 
+## 2026-05-01 Product decision：远航轮替闭环奖励
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-01 00:57 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#6 仍是最新反馈线程，原始反馈指出后半段“只有不停的目标、玩法没有真正变化”，因此本轮继续进入 Product decision。
+
+当前最大问题：前序已经把跨轮分支轮替目标显示到主操作区和星图总览，但“改走另一条路线”主要在第二步通过分支改道给即时反馈。玩家完成改道路线并回到目标时，闭环本身还没有确认“这次跨轮轮替已经完成”，容易仍把分支轮替理解成当轮按钮收益。
+
+本轮决策：
+
+- 新增“远航轮替闭环奖励”。
+- 目标后选择与上一轮不同的协同/绕行分支时，记录短期 `farRouteBranchRotationDirectiveId`；该字段只用于本轮闭环待结算，旧存档自动补齐为空。
+- 如果本轮改道分支随后回到当前航段目标指令并完成 3/3，额外获得有效基础指令收益 9% 的“轮替闭环”奖励；结算后清空待结算分支。
+- 分支轮替提示在可改道时同步预告“回到目标闭环触发轮替闭环 +9%”；当前已改走轮替分支时显示“当前已改走 X，回到目标闭环触发轮替闭环 +9%”。
+- 按钮徽标、预计收益、执行反馈、本地 `directive` 事件、远航 3 步路径收益标签、反馈快照长文本和静态首页解锁说明同步包含轮替闭环。
+- 本轮不改变升级价格、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、基础连携倍率、调度校准、远航续航、远航协同、协同补给、远航绕行、绕行投送、分支改道、航段契合、远航闭环、远航突破、绕行突破、冷却、连携窗口、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-05-01 00:57 CST 当前 5 个 open feedback issue、0 个 open bug issue。
+- `FAR_ROUTE_DISPATCH_BRANCH_ROTATION_REWARD_RATE` 为 0.09。
+- 上一轮协同、本轮改走绕行后，回到当前航段目标指令会显示并结算“轮替闭环 +X”；重复同一分支不触发。
+- 分支轮替提示包含闭环奖励预告，远航路径第三步收益标签包含“轮替闭环 +9%”。
+- `src/app.js` 渲染 `directive-dispatch-branch-rotation`，并在本地 `directive` 事件中记录 `dispatchBranchRotationReward` / `dispatchBranchRotationRewardRate` / `dispatchBranchRotationRewardText`。
+- `src/styles.css` 包含 `.directive-button .directive-dispatch-branch-rotation`。
+- 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含 `FAR_ROUTE_DISPATCH_BRANCH_ROTATION_REWARD_RATE`、`farRouteBranchRotationDirectiveId`、`dispatchBranchRotationReward`、`directive-dispatch-branch-rotation` 和“轮替闭环”相关文案。
+
 ## 2026-05-01 Product decision：远航分支轮替目标
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-01 00:45 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#6 仍是最新反馈线程，原始反馈指出后半段“只有不停的目标、玩法没有真正变化”，因此本轮继续进入 Product decision。

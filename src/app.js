@@ -874,6 +874,9 @@ function renderDirective(option) {
         dispatchBranchFocusReward: result.dispatchBranchFocusReward,
         dispatchBranchFocusRewardRate: result.dispatchBranchFocusRewardRate,
         dispatchBranchFocusRewardText: result.dispatchBranchFocusRewardText,
+        dispatchBranchRotationReward: result.dispatchBranchRotationReward,
+        dispatchBranchRotationRewardRate: result.dispatchBranchRotationRewardRate,
+        dispatchBranchRotationRewardText: result.dispatchBranchRotationRewardText,
         dispatchLoopReward: result.dispatchLoopReward,
         dispatchLoopRewardRate: result.dispatchLoopRewardRate,
         dispatchLoopRewardText: result.dispatchLoopRewardText,
@@ -988,6 +991,11 @@ function renderDirective(option) {
   dispatchBranchFocus.textContent = option.dispatchBranchFocusRewardText;
   dispatchBranchFocus.hidden = !option.dispatchBranchFocusRewardText;
 
+  const dispatchBranchRotation = document.createElement("span");
+  dispatchBranchRotation.className = "directive-dispatch-branch-rotation";
+  dispatchBranchRotation.textContent = option.dispatchBranchRotationRewardText;
+  dispatchBranchRotation.hidden = !option.dispatchBranchRotationRewardText;
+
   const dispatchLoop = document.createElement("span");
   dispatchLoop.className = "directive-dispatch-loop";
   dispatchLoop.textContent = option.dispatchLoopRewardText;
@@ -1064,6 +1072,7 @@ function renderDirective(option) {
     dispatchDetour,
     dispatchBranchShift,
     dispatchBranchFocus,
+    dispatchBranchRotation,
     dispatchLoop,
     dispatchBreakthrough,
     dispatchDetourBreakthrough,
@@ -1161,6 +1170,7 @@ function getDirectivePreviewDetailTexts(option) {
     option.dispatchDetourRewardText,
     option.dispatchBranchShiftRewardText,
     option.dispatchBranchFocusRewardText,
+    option.dispatchBranchRotationRewardText,
     option.dispatchLoopRewardText,
     option.dispatchBreakthroughRewardText,
     option.dispatchDetourBreakthroughRewardText,
