@@ -1,5 +1,27 @@
 # Decision
 
+## 2026-04-30 Product decision：远航调度主路径轨
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-04-30 13:43 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#6 仍是最近更新的开放反馈，继续进入 Product decision。
+
+当前最大问题：上一轮已经把 3 步调度路径显示到星图当前航段卡片，但玩家在实际执行时主要盯着主操作区的远航调度条和航线指令按钮。远航调度条有文字状态和闭环进度条，但还没有直接展示“目标 -> 协同/续航 -> 回目标”的 3 格当前步骤轨。
+
+本轮决策：
+
+- 在 `getFarRouteDispatch` 中为 active 调度派生 `loopSteps` 和 `loopStepText`，按闭环进度标记“下一步 / 已完成 / 待推进”。
+- 在主操作区 `farDispatch` 中渲染 `far-dispatch-loop-track`，显示目标、协同/续航、回目标三格路径。
+- 本轮只调整远航调度展示层；不新增存档字段，不改变指令收益、冷却、连携窗口、远航调度计算、星图航段、项目奖励、升级价格、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-04-30 13:43 CST 当前 5 个 open feedback issue、0 个 open bug issue。
+- `getFarRouteDispatch` 在 #6 快照对应的脉冲航闸阶段返回 `loopStepText = "远航路径：下一步 目标 点火齐射 -> 待推进 协同 谐振脉冲 -> 待推进 回目标 点火齐射"`，并在 1/3、2/3、3/3 时正确切换三格状态。
+- 运行期远航调度条会渲染 `far-dispatch-loop-track` 和 `far-dispatch-loop-step`，锁定态不显示路径轨。
+- 本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 109 项。
+- 构建产物已确认包含 `far-dispatch-loop-track`、`loopStepText` 和“远航路径”。
+
+下一步：提交、推送并回复 #6；若复测仍认为后半段玩法变化不足，再评估更重的可规划短循环或资源消耗型指令。
+
 ## 2026-04-30 Product decision：星图调度路径轨
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-04-30 13:28 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#6 的“后半段只有不停的目标、玩法没有真正变化”仍未有玩家复测结论，继续进入 Product decision。

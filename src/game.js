@@ -2303,6 +2303,8 @@ export function getFarRouteDispatch(state, now = Date.now()) {
       projectId: null,
       loopProgress: 0,
       loopTarget,
+      loopSteps: [],
+      loopStepText: "",
       loopStatusText: "闭环进度 0/" + loopTarget + " · 20M 后解锁",
       text: "远航调度：累计 20M 能量后解锁后半段航段调度、目标指令推荐、目标冷却缩短、连携窗口延长、远航续航、远航协同、闭环奖励与远航整备"
     };
@@ -2337,6 +2339,8 @@ export function getFarRouteDispatch(state, now = Date.now()) {
       projectId: null,
       loopProgress: loopTarget,
       loopTarget,
+      loopSteps: [],
+      loopStepText: "",
       loopStatusText: "闭环进度 " + loopTarget + "/" + loopTarget + " · 全部航段已完成",
       text: "远航调度：全部航段已完成，等待下一段航线"
     };
@@ -2354,6 +2358,12 @@ export function getFarRouteDispatch(state, now = Date.now()) {
     directive,
     relayDirective,
     now
+  );
+  const loopSteps = buildFarRouteDispatchLoopSteps(
+    directive,
+    relayDirective,
+    loopStatus.progress,
+    loopStatus.target
   );
 
   return {
@@ -2387,6 +2397,8 @@ export function getFarRouteDispatch(state, now = Date.now()) {
     progressText: project.progressText,
     loopProgress: loopStatus.progress,
     loopTarget: loopStatus.target,
+    loopSteps,
+    loopStepText: buildFarRouteDispatchLoopStepText(loopSteps),
     loopStatusText: loopStatus.text,
     text:
       "远航调度：" +
@@ -3640,6 +3652,72 @@ function buildProjectDispatchInfo(project, state, isCurrent) {
       " -> 回目标 " +
       targetDirective.name
   };
+}
+
+function buildFarRouteDispatchLoopSteps(directive, relayDirective, progress, target) {
+  if (!directive) {
+    return [];
+  }
+
+  const relayStepText = relayDirective ? relayDirective.name : "非目标续航";
+  return [
+    {
+      label: "目标",
+      text: directive.name,
+      state: getFarRouteDispatchLoopStepState(1, progress, target),
+      stateText: getFarRouteDispatchLoopStepStateText(1, progress, target)
+    },
+    {
+      label: relayDirective ? "协同" : "续航",
+      text: relayStepText,
+      state: getFarRouteDispatchLoopStepState(2, progress, target),
+      stateText: getFarRouteDispatchLoopStepStateText(2, progress, target)
+    },
+    {
+      label: "回目标",
+      text: directive.name,
+      state: getFarRouteDispatchLoopStepState(3, progress, target),
+      stateText: getFarRouteDispatchLoopStepStateText(3, progress, target)
+    }
+  ];
+}
+
+function getFarRouteDispatchLoopStepState(step, progress, target) {
+  if (progress >= target || progress >= step) {
+    return "completed";
+  }
+
+  if (progress === step - 1) {
+    return "current";
+  }
+
+  return "pending";
+}
+
+function getFarRouteDispatchLoopStepStateText(step, progress, target) {
+  const state = getFarRouteDispatchLoopStepState(step, progress, target);
+  if (state === "completed") {
+    return "已完成";
+  }
+
+  if (state === "current") {
+    return "下一步";
+  }
+
+  return "待推进";
+}
+
+function buildFarRouteDispatchLoopStepText(steps) {
+  if (!steps.length) {
+    return "";
+  }
+
+  return (
+    "远航路径：" +
+    steps
+      .map((step) => step.stateText + " " + step.label + " " + step.text)
+      .join(" -> ")
+  );
 }
 
 function formatProjectAmount(project, value) {

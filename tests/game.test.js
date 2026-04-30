@@ -1260,6 +1260,7 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(indexHtml, /class="directive-task-meter"/);
   assert.match(indexHtml, /class="far-dispatch-meter"/);
   assert.match(indexHtml, /class="far-dispatch-loop-meter"/);
+  assert.match(indexHtml, /class="far-dispatch-loop-track"/);
   assert.match(indexHtml, /aria-label="航线委托进度"/);
   assert.match(indexHtml, /aria-label="远航调度进度"/);
   assert.match(indexHtml, /aria-label="远航闭环进度"/);
@@ -1333,9 +1334,12 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(appJs, /meter\.className = "directive-task-meter"/);
   assert.match(appJs, /meter\.className = "far-dispatch-meter"/);
   assert.match(appJs, /loopMeter\.className = "far-dispatch-loop-meter"/);
+  assert.match(appJs, /function renderFarDispatchLoopTrack\(dispatch\)/);
+  assert.match(appJs, /track\.className = "far-dispatch-loop-track"/);
+  assert.match(appJs, /stepItem\.className = "far-dispatch-loop-step is-" \+ step\.state/);
   assert.match(appJs, /meter\.setAttribute\("role", "meter"\)/);
   assert.match(appJs, /loopMeter\.setAttribute\("role", "meter"\)/);
-  assert.match(appJs, /elements\.farDispatch\.replaceChildren\(text, meter, loopText, loopMeter\)/);
+  assert.match(appJs, /elements\.farDispatch\.replaceChildren\(text, meter, loopText, loopMeter, loopTrack\)/);
   assert.match(appJs, /elements\.directiveTask\.classList\.toggle\("is-completed", task\.completed\)/);
   assert.match(appJs, /elements\.directiveTask\.replaceChildren\(text, meter\)/);
   assert.match(appJs, /elements\.farDispatch\.classList\.toggle\("is-active", dispatch\.active\)/);
@@ -1392,6 +1396,8 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(styles, /\.far-dispatch-meter/);
   assert.match(styles, /\.far-dispatch-loop-text/);
   assert.match(styles, /\.far-dispatch-loop-meter/);
+  assert.match(styles, /\.far-dispatch-loop-track/);
+  assert.match(styles, /\.far-dispatch-loop-step\.is-current/);
   assert.match(styles, /\.far-dispatch\.is-active/);
   assert.match(styles, /\.directive-button \.directive-badges/);
   assert.match(styles, /\.directive-button \.directive-badges \.is-collapsed-badge/);
@@ -2111,6 +2117,8 @@ test("远航调度会在 20M 后按当前航段指定目标指令", () => {
   assert.equal(locked.unlocked, false);
   assert.equal(locked.loopProgress, 0);
   assert.equal(locked.loopTarget, 3);
+  assert.deepEqual(locked.loopSteps, []);
+  assert.equal(locked.loopStepText, "");
   assert.equal(locked.loopStatusText, "闭环进度 0/3 · 20M 后解锁");
   assert.equal(
     locked.text,
@@ -2158,6 +2166,14 @@ test("远航调度会在 20M 后按当前航段指定目标指令", () => {
   assert.equal(dispatch.chainWindowText, "调度接力 +30 秒");
   assert.equal(dispatch.loopProgress, 0);
   assert.equal(dispatch.loopTarget, 3);
+  assert.equal(
+    dispatch.loopStepText,
+    "远航路径：下一步 目标 点火齐射 -> 待推进 协同 谐振脉冲 -> 待推进 回目标 点火齐射"
+  );
+  assert.deepEqual(
+    dispatch.loopSteps.map((step) => step.label + ":" + step.stateText + ":" + step.text),
+    ["目标:下一步:点火齐射", "协同:待推进:谐振脉冲", "回目标:待推进:点火齐射"]
+  );
   assert.equal(dispatch.loopStatusText, "闭环进度 0/3 · 下一步 点火齐射");
   assert.equal(
     dispatch.text,
@@ -2217,6 +2233,10 @@ test("远航调度会在 20M 后按当前航段指定目标指令", () => {
   assert.equal(relayDispatch.loopProgress, 1);
   assert.match(relayDispatch.loopStatusText, /闭环进度 1\/3/);
   assert.match(relayDispatch.loopStatusText, /优先谐振脉冲触发远航协同/);
+  assert.deepEqual(
+    relayDispatch.loopSteps.map((step) => step.label + ":" + step.stateText),
+    ["目标:已完成", "协同:下一步", "回目标:待推进"]
+  );
   assert.deepEqual(relayPlan.nextDirectiveIds, ["cruise-cache", "resonance-pulse"]);
   assert.equal(relayPlan.recommendationText, "远航续航");
   assert.equal(relayPlan.waitingRecommendationText, "等待续航");
@@ -2253,6 +2273,10 @@ test("远航调度会在 20M 后按当前航段指定目标指令", () => {
   assert.equal(loopDispatch.loopTarget, 3);
   assert.match(loopDispatch.loopStatusText, /闭环进度 2\/3/);
   assert.match(loopDispatch.loopStatusText, /下一步回到点火齐射触发远航闭环/);
+  assert.deepEqual(
+    loopDispatch.loopSteps.map((step) => step.label + ":" + step.stateText),
+    ["目标:已完成", "协同:已完成", "回目标:下一步"]
+  );
   assert.equal(loopIgnitionOption.recommended, true);
   assert.equal(loopIgnitionOption.recommendationText, "调度目标");
   assert.equal(loopIgnitionOption.dispatchLoopReward > 0, true);
@@ -2277,6 +2301,10 @@ test("远航调度会在 20M 后按当前航段指定目标指令", () => {
   assert.equal(completedDispatch.loopProgress, 3);
   assert.match(completedDispatch.loopStatusText, /闭环进度 3\/3/);
   assert.match(completedDispatch.loopStatusText, /已完成 · 远航整备优先谐振脉冲开启下一轮/);
+  assert.deepEqual(
+    completedDispatch.loopSteps.map((step) => step.label + ":" + step.stateText),
+    ["目标:已完成", "协同:已完成", "回目标:已完成"]
+  );
   const completedPlan = getDirectivePlan(loopIgnitionResult.state, 31_000);
   const completedStatus = getDirectiveStatus(loopIgnitionResult.state, 31_000);
   const completedResonanceOption = completedStatus.options.find(

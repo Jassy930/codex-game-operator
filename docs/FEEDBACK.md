@@ -2,6 +2,13 @@
 
 ## 2026-04-30
 
+- GitHub Issues：gh 可用且已认证；2026-04-30 13:43 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
+- #6 继续作为本轮 Product decision 依据：星图卡片已有远航调度 3 步路径轨，但实际执行时主操作区远航调度条仍主要是文字状态和两条进度条，路径关系不如卡片层可扫视。
+- 本轮改动新增远航调度主路径轨：20M 后主操作区远航调度条显示 3 格路径“目标 / 协同或续航 / 回目标”，并按当前闭环进度标记“下一步 / 已完成 / 待推进”。
+- 本轮不新增存档字段，不改变指令收益、冷却、连携窗口、远航调度计算、星图航段、项目奖励、升级价格、反馈入口或部署链路。
+- 本轮本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 109 项。
+- 构建产物已确认包含 `far-dispatch-loop-track`、`loopStepText` 和“远航路径”。
+
 - GitHub Issues：gh 可用且已认证；2026-04-30 13:28 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
 - #6 继续作为本轮 Product decision 依据：上一轮已把远航调度目标和协同续航显示到星图当前航段卡片，但目标层仍主要依赖一行文字说明，后半段短循环路径不够可扫视。
 - 本轮改动新增星图调度路径轨：20M 后当前航段卡片详情显示 3 步路径“目标指令 -> 协同续航 -> 回目标闭环”，脉冲航闸阶段会显示“目标 点火齐射 / 协同 谐振脉冲 / 回目标 点火齐射”。

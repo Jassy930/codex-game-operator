@@ -544,9 +544,41 @@ function renderFarDispatch(dispatch) {
   loopFill.style.width = loopMeterValue + "%";
   loopMeter.append(loopFill);
 
+  const loopTrack = renderFarDispatchLoopTrack(dispatch);
+
   elements.farDispatch.classList.toggle("is-locked", !dispatch.unlocked);
   elements.farDispatch.classList.toggle("is-active", dispatch.active);
-  elements.farDispatch.replaceChildren(text, meter, loopText, loopMeter);
+  elements.farDispatch.replaceChildren(text, meter, loopText, loopMeter, loopTrack);
+}
+
+function renderFarDispatchLoopTrack(dispatch) {
+  const track = document.createElement("span");
+  track.className = "far-dispatch-loop-track";
+
+  const steps = Array.isArray(dispatch.loopSteps) ? dispatch.loopSteps : [];
+  track.hidden = steps.length === 0;
+  if (track.hidden) {
+    return track;
+  }
+
+  track.setAttribute("aria-label", dispatch.loopStepText);
+  track.append(
+    ...steps.map((step) => {
+      const stepItem = document.createElement("span");
+      stepItem.className = "far-dispatch-loop-step is-" + step.state;
+
+      const label = document.createElement("strong");
+      label.textContent = step.label;
+
+      const text = document.createElement("span");
+      text.textContent = step.stateText + " · " + step.text;
+
+      stepItem.append(label, text);
+      return stepItem;
+    })
+  );
+
+  return track;
 }
 
 function setCompactSupportText(element, displayText, fullText) {
