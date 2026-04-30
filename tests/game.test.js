@@ -1849,9 +1849,12 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(styles, /\.far-dispatch-branch-choice-badge\.is-recommended-shift/);
   assert.match(styles, /\.far-dispatch-branch-choice-route/);
   assert.match(styles, /\.far-dispatch-branch-choice-route-line/);
+  assert.match(styles, /\.far-dispatch-branch-choice-route-line::before/);
+  assert.match(styles, /\.far-dispatch-branch-choice-route-line::after/);
   assert.match(styles, /\.far-dispatch-branch-choice-route-node/);
   assert.match(styles, /\.far-dispatch-branch-choice-route-node::after/);
   assert.match(styles, /content: attr\(data-step-label\)/);
+  assert.match(styles, /border-left: 6px solid rgba\(248, 243, 231, 0\.56\)/);
   assert.match(styles, /\.far-dispatch-branch-choice-route \.far-dispatch-branch-choice-route-node\.is-done/);
   assert.match(styles, /\.far-dispatch-branch-choice-route \.far-dispatch-branch-choice-route-node\.is-next/);
   assert.match(styles, /\.far-dispatch-branch-choice-route-resource/);
@@ -1864,7 +1867,9 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(styles, /\.far-dispatch-branch-choice-route-marker\.is-previous/);
   assert.match(styles, /\.far-dispatch-branch-choice-route-marker\.is-shift/);
   assert.match(styles, /\.far-dispatch-branch-choice-route\.is-sync/);
+  assert.match(styles, /\.far-dispatch-branch-choice-route\.is-sync \.far-dispatch-branch-choice-route-line::before/);
   assert.match(styles, /\.far-dispatch-branch-choice-route\.is-detour/);
+  assert.match(styles, /\.far-dispatch-branch-choice-route\.is-detour \.far-dispatch-branch-choice-route-line::before/);
   assert.match(styles, /\.far-dispatch-branch-choice-route\.is-shift/);
   assert.match(styles, /\.far-dispatch-branch-choice small/);
   assert.match(styles, /\.far-dispatch-branch-choice-decision/);

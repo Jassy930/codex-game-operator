@@ -19,6 +19,7 @@
 - 远航路线微图标记当前由 `branchChoices` 派生的 `recommended / available / current / recommended-previous / recommended-shift / previous / shift` 展示状态即时渲染，不单独记录为真实线上指标；推荐、上轮、本轮和改道语义仍通过路线判断、分支选择文本、收益对照和反馈快照复盘。
 - 远航路线微图步骤高亮当前由 `branchChoices.routeNodeStates` 派生的 `done / next / waiting` 节点展示状态即时渲染，不单独记录为真实线上指标；目标、分支选择、回目标和整备语义仍通过路线步骤、路线下一步、按钮路线标记、路线反馈和反馈快照复盘。
 - 远航路线微图步骤序号当前由 `branchChoices.routeStepLabels` 派生的 `1 / 2 / 3` 节点标记即时渲染，不单独记录为真实线上指标；目标、分支选择、回目标和整备语义仍通过路线步骤、路线下一步、按钮路线标记、路线反馈和反馈快照复盘。
+- 远航路线微图方向箭头当前由 `.far-dispatch-branch-choice-route-line::before` / `::after` 的 CSS 展示状态即时渲染，不单独记录为真实线上指标；1 -> 2 -> 3 的路线语义仍通过路线步骤、路线下一步、按钮路线标记、路线反馈和反馈快照复盘。
 - 远航分支态势当前由本地 `directiveChain`、目标指令、协同指令和最近远航分支即时派生，不单独记录为远端指标；游戏内反馈快照会通过远航调度文本记录待选择、协同、绕行、协同整备或绕行整备状态，便于人工复盘。
 - 浏览器本地在离线收益达到展示阈值时记录 offline_gain 事件。
 - 浏览器本地通过 localStorage 保存最近 50 条 feedback 草稿，提交反馈时记录 feedback_sent 事件；反馈快照包含当前过载奖励、航线策略、指令熟练层和远航调度状态。

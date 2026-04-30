@@ -1,5 +1,26 @@
 # Decision
 
+## 2026-05-01 Product decision：远航路线微图方向箭头
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-01 07:44 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#6 仍是后半段玩法变化主反馈，#4 仍是文字密度和图片化主反馈，因此本轮继续进入 Product decision。
+
+当前最大问题：前序路线微图已经显示协同/绕行路线形态、资源取向、推荐/本轮/上轮/改道、已完成/下一步/待推进节点状态和 1/2/3 步号，但轨道本身仍像静态连接线。玩家能看到三步顺序，却还缺少“从 1 到 2 再到 3”的方向感。
+
+本轮决策：
+
+- 新增“远航路线微图方向箭头”。
+- `src/styles.css` 使用 `.far-dispatch-branch-choice-route-line::before` 和 `::after` 在路线轨道上绘制两个小箭头，分别指向分支点和回目标点。
+- 协同路线箭头继承青色轨道，绕行路线箭头继承粉色投送轨道，让直线协同和偏移绕行的方向都能扫到。
+- 本轮只调整 CSS 视觉层和静态测试；不新增 DOM、不新增收益、不新增存档字段，不改变升级价格、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、远航调度数值、冷却、连携窗口、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-05-01 07:44 CST 当前 5 个 open feedback issue、0 个 open bug issue。
+- `src/styles.css` 包含 `.far-dispatch-branch-choice-route-line::before` / `::after`、基础箭头 `border-left`、协同箭头颜色和绕行箭头颜色。
+- `tests/game.test.js` 覆盖路线轨道方向箭头的静态 CSS 绑定。
+- 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含 `.far-dispatch-branch-choice-route-line::before`、`.far-dispatch-branch-choice-route-line::after` 和方向箭头 `border-left` 样式。
+
 ## 2026-05-01 Product decision：远航路线微图步骤序号
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-01 07:27 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#6 仍是最新后半段玩法反馈，#4 仍指出界面文字密度和图片化诉求，因此本轮继续进入 Product decision。
