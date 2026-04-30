@@ -23,8 +23,12 @@
 - 上一轮协同后目标分支选择条会把绕行标为“可改道”并显示“分支改道 +6%”；上一轮绕行后会把协同标为“可改道”。
 - 主操作区渲染 `far-dispatch-branch-choices` 和 `far-dispatch-branch-choice`，静态首页保留同名占位。
 - 本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 提交 806b88b 已推送；GitHub Pages workflow 25171845682 已成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`。
+- 线上地址 https://jassy930.github.io/codex-game-operator/ 返回 HTTP 200，且线上首页、`game.js`、`app.js` 和 `styles.css` 已确认包含 `far-dispatch-branch-choices`、`branchChoices`、“分支选择”和“可改道”相关标记。
+- #6 已回复：说明远航调度条新增协同/绕行并排选择条，并保持 issue open 等待复测。
+- 回复后同步 GitHub Issues：2026-04-30 22:45 CST 当前仍为 5 个 open feedback issue、0 个 open bug issue；#6 更新时间为 2026-04-30T14:44:57Z。
 
-下一步：提交并推送后回复 #6，说明远航调度条新增协同/绕行并排选择条，等待复测该展示是否能降低后半段分支理解成本。
+下一步：等待 #6 复测分支选择条是否能降低后半段分支理解成本；如果仍不足，再评估更重的资源循环或项目分支。
 
 ## 2026-04-30 Product decision：远航分支改道
 

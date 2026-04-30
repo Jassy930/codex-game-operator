@@ -8,6 +8,9 @@
 - 本轮不新增存档字段，不改变升级价格、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、基础连携倍率、远航调度收益、冷却、连携窗口、反馈入口或部署链路。
 - 同步 GitHub Issues 反馈状态：2026-04-30 22:30 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 作为本轮处理对象。
 - 验证通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 提交 806b88b 已推送；GitHub Pages workflow 25171845682 已成功，线上地址返回 HTTP 200，线上首页、`game.js`、`app.js` 和 `styles.css` 已确认包含分支选择条相关标记。
+- 已回复 #6，说明远航调度条新增协同/绕行并排选择条，并保持 issue open 等待复测。
+- 回复后同步 GitHub Issues 反馈状态：2026-04-30 22:45 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 更新时间为 2026-04-30T14:44:57Z。
 
 - 远航调度新增“分支改道”：目标指令后如果本轮选择的协同/绕行分支不同于上一轮远航分支，会获得有效基础指令收益 6% 的“分支改道”奖励，继续回应 #6 对后半段玩法变化不明显的反馈。
 - `src/game.js` 新增 `FAR_ROUTE_DISPATCH_BRANCH_SHIFT_REWARD_RATE`、分支改道收益计算、远航路径收益标签和静态支持文案；`src/app.js` 记录 `dispatchBranchShiftReward` / `dispatchBranchShiftRewardRate` / `dispatchBranchShiftRewardText` 事件字段并渲染 `directive-dispatch-branch-shift` 徽标；`src/styles.css` 新增分支改道徽标样式；`tests/game.test.js` 覆盖协同后改走绕行、绕行后改走协同、重复同分支不触发、静态绑定和反馈快照。
