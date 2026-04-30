@@ -617,6 +617,15 @@ h2 {
   line-height: 1;
 }
 
+.directive-button .directive-dispatch-sync {
+  padding: 3px 6px;
+  border-radius: 999px;
+  background: rgba(103, 232, 249, 0.16);
+  color: #c6f7ff;
+  font-size: 0.68rem;
+  line-height: 1;
+}
+
 .directive-button .directive-dispatch-loop {
   padding: 3px 6px;
   border-radius: 999px;

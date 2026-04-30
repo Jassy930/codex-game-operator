@@ -1119,6 +1119,7 @@ export const FAR_ROUTE_DISPATCH_BONUS_RATE = 0.14;
 export const FAR_ROUTE_DISPATCH_COOLDOWN_MULTIPLIER = 0.7;
 export const FAR_ROUTE_DISPATCH_CHAIN_WINDOW_EXTENSION_SECONDS = 30;
 export const FAR_ROUTE_DISPATCH_RELAY_REWARD_RATE = 0.08;
+export const FAR_ROUTE_DISPATCH_SYNC_REWARD_RATE = 0.05;
 export const FAR_ROUTE_DISPATCH_LOOP_REWARD_RATE = 0.16;
 
 const INITIAL_UPGRADES = Object.fromEntries(
@@ -1400,6 +1401,14 @@ export function activateDirective(state, directiveId, now = Date.now()) {
     current,
     now
   );
+  const dispatchSyncReward = getFarRouteDispatchSyncReward(
+    effectiveBaseGain,
+    dispatch,
+    directive.id,
+    chain,
+    current,
+    now
+  );
   const dispatchLoopReward = getFarRouteDispatchLoopReward(
     effectiveBaseGain,
     dispatch,
@@ -1424,6 +1433,7 @@ export function activateDirective(state, directiveId, now = Date.now()) {
       taskReward +
       dispatchReward +
       dispatchRelayReward +
+      dispatchSyncReward +
       dispatchLoopReward +
       rotationReward +
       masteryCapstoneReward +
@@ -1455,6 +1465,7 @@ export function activateDirective(state, directiveId, now = Date.now()) {
   const taskRewardText = formatDirectiveTaskReward(taskReward);
   const dispatchRewardText = formatFarRouteDispatchReward(dispatchReward);
   const dispatchRelayRewardText = formatFarRouteDispatchRelayReward(dispatchRelayReward);
+  const dispatchSyncRewardText = formatFarRouteDispatchSyncReward(dispatchSyncReward);
   const dispatchLoopRewardText = formatFarRouteDispatchLoopReward(dispatchLoopReward);
   const dispatchCooldownText = formatFarRouteDispatchCooldown(dispatch, directive);
   const dispatchChainWindowText = formatFarRouteDispatchChainWindow(dispatch, directive);
@@ -1484,6 +1495,9 @@ export function activateDirective(state, directiveId, now = Date.now()) {
     dispatchRelayReward,
     dispatchRelayRewardRate: FAR_ROUTE_DISPATCH_RELAY_REWARD_RATE,
     dispatchRelayRewardText,
+    dispatchSyncReward,
+    dispatchSyncRewardRate: FAR_ROUTE_DISPATCH_SYNC_REWARD_RATE,
+    dispatchSyncRewardText,
     dispatchLoopReward,
     dispatchLoopRewardRate: FAR_ROUTE_DISPATCH_LOOP_REWARD_RATE,
     dispatchCooldownMultiplier: getDirectiveCooldownMultiplier(directive, dispatch),
@@ -1505,6 +1519,7 @@ export function activateDirective(state, directiveId, now = Date.now()) {
     taskRewardText,
     dispatchRewardText,
     dispatchRelayRewardText,
+    dispatchSyncRewardText,
     dispatchLoopRewardText,
     chainBonusText: chainText,
     rotationRewardText,
@@ -1522,6 +1537,7 @@ export function activateDirective(state, directiveId, now = Date.now()) {
       (taskRewardText ? taskRewardText + "，" : "") +
       (dispatchRewardText ? dispatchRewardText + "，" : "") +
       (dispatchRelayRewardText ? dispatchRelayRewardText + "，" : "") +
+      (dispatchSyncRewardText ? dispatchSyncRewardText + "，" : "") +
       (dispatchLoopRewardText ? dispatchLoopRewardText + "，" : "") +
       (dispatchCooldownText ? dispatchCooldownText + "，" : "") +
       (dispatchChainWindowText ? dispatchChainWindowText + "，" : "") +
@@ -2055,6 +2071,14 @@ export function getDirectiveStatus(state, now = Date.now()) {
         current,
         now
       );
+      const dispatchSyncReward = getFarRouteDispatchSyncReward(
+        effectiveBaseGain,
+        dispatch,
+        directive.id,
+        chain,
+        current,
+        now
+      );
       const dispatchLoopReward = getFarRouteDispatchLoopReward(
         effectiveBaseGain,
         dispatch,
@@ -2079,6 +2103,7 @@ export function getDirectiveStatus(state, now = Date.now()) {
           taskReward +
           dispatchReward +
           dispatchRelayReward +
+          dispatchSyncReward +
           dispatchLoopReward +
           rotationReward +
           masteryCapstoneReward +
@@ -2092,6 +2117,7 @@ export function getDirectiveStatus(state, now = Date.now()) {
       const dispatchRewardText = formatFarRouteDispatchReward(dispatchReward);
       const dispatchRelayRewardText =
         formatFarRouteDispatchRelayReward(dispatchRelayReward);
+      const dispatchSyncRewardText = formatFarRouteDispatchSyncReward(dispatchSyncReward);
       const dispatchLoopRewardText = formatFarRouteDispatchLoopReward(dispatchLoopReward);
       const dispatchCooldownText = formatFarRouteDispatchCooldown(dispatch, directive);
       const dispatchChainWindowText = formatFarRouteDispatchChainWindow(dispatch, directive);
@@ -2126,6 +2152,9 @@ export function getDirectiveStatus(state, now = Date.now()) {
         dispatchRelayReward,
         dispatchRelayRewardRate: FAR_ROUTE_DISPATCH_RELAY_REWARD_RATE,
         dispatchRelayRewardText,
+        dispatchSyncReward,
+        dispatchSyncRewardRate: FAR_ROUTE_DISPATCH_SYNC_REWARD_RATE,
+        dispatchSyncRewardText,
         dispatchLoopReward,
         dispatchLoopRewardRate: FAR_ROUTE_DISPATCH_LOOP_REWARD_RATE,
         dispatchCooldownMultiplier: getDirectiveCooldownMultiplier(directive, dispatch),
@@ -2162,6 +2191,7 @@ export function getDirectiveStatus(state, now = Date.now()) {
             (taskRewardText ? " · " + taskRewardText : "") +
             (dispatchRewardText ? " · " + dispatchRewardText : "") +
             (dispatchRelayRewardText ? " · " + dispatchRelayRewardText : "") +
+            (dispatchSyncRewardText ? " · " + dispatchSyncRewardText : "") +
             (dispatchLoopRewardText ? " · " + dispatchLoopRewardText : "") +
             (dispatchCooldownText ? " · " + dispatchCooldownText : "") +
             (dispatchChainWindowText ? " · " + dispatchChainWindowText : "") +
@@ -2206,6 +2236,8 @@ export function getFarRouteDispatch(state, now = Date.now()) {
     formatDuration(FAR_ROUTE_DISPATCH_CHAIN_WINDOW_EXTENSION_SECONDS);
   const relayRewardText =
     "远航续航 +" + Math.round(FAR_ROUTE_DISPATCH_RELAY_REWARD_RATE * 100) + "%";
+  const syncRewardText =
+    "远航协同 +" + Math.round(FAR_ROUTE_DISPATCH_SYNC_REWARD_RATE * 100) + "%";
   const loopRewardText =
     "远航闭环 +" + Math.round(FAR_ROUTE_DISPATCH_LOOP_REWARD_RATE * 100) + "%";
 
@@ -2218,6 +2250,8 @@ export function getFarRouteDispatch(state, now = Date.now()) {
       rewardText,
       relayRewardRate: FAR_ROUTE_DISPATCH_RELAY_REWARD_RATE,
       relayRewardText,
+      syncRewardRate: FAR_ROUTE_DISPATCH_SYNC_REWARD_RATE,
+      syncRewardText,
       loopRewardRate: FAR_ROUTE_DISPATCH_LOOP_REWARD_RATE,
       loopRewardText,
       cooldownMultiplier: 1,
@@ -2227,11 +2261,13 @@ export function getFarRouteDispatch(state, now = Date.now()) {
       chainWindowText: "",
       targetDirectiveId: null,
       targetDirectiveName: "",
+      relayDirectiveId: null,
+      relayDirectiveName: "",
       projectId: null,
       loopProgress: 0,
       loopTarget,
       loopStatusText: "闭环进度 0/" + loopTarget + " · 20M 后解锁",
-      text: "远航调度：累计 20M 能量后解锁后半段航段调度、目标指令推荐、目标冷却缩短、连携窗口延长、远航续航与闭环奖励"
+      text: "远航调度：累计 20M 能量后解锁后半段航段调度、目标指令推荐、目标冷却缩短、连携窗口延长、远航续航、远航协同与闭环奖励"
     };
   }
 
@@ -2245,6 +2281,8 @@ export function getFarRouteDispatch(state, now = Date.now()) {
       rewardText,
       relayRewardRate: FAR_ROUTE_DISPATCH_RELAY_REWARD_RATE,
       relayRewardText,
+      syncRewardRate: FAR_ROUTE_DISPATCH_SYNC_REWARD_RATE,
+      syncRewardText,
       loopRewardRate: FAR_ROUTE_DISPATCH_LOOP_REWARD_RATE,
       loopRewardText,
       cooldownMultiplier: 1,
@@ -2254,6 +2292,8 @@ export function getFarRouteDispatch(state, now = Date.now()) {
       chainWindowText: "",
       targetDirectiveId: null,
       targetDirectiveName: "",
+      relayDirectiveId: null,
+      relayDirectiveName: "",
       projectId: null,
       loopProgress: loopTarget,
       loopTarget,
@@ -2263,8 +2303,15 @@ export function getFarRouteDispatch(state, now = Date.now()) {
   }
 
   const directive = getFarRouteDispatchDirective(project, current);
+  const relayDirective = getFarRouteDispatchRelayDirective(directive);
   const targetDirectiveName = directive?.name ?? "目标指令";
-  const loopStatus = getFarRouteDispatchLoopStatus(current, directive, now);
+  const relayDirectiveName = relayDirective?.name ?? "非目标指令";
+  const loopStatus = getFarRouteDispatchLoopStatus(
+    current,
+    directive,
+    relayDirective,
+    now
+  );
 
   return {
     unlocked: true,
@@ -2274,6 +2321,8 @@ export function getFarRouteDispatch(state, now = Date.now()) {
     rewardText,
     relayRewardRate: FAR_ROUTE_DISPATCH_RELAY_REWARD_RATE,
     relayRewardText,
+    syncRewardRate: FAR_ROUTE_DISPATCH_SYNC_REWARD_RATE,
+    syncRewardText,
     loopRewardRate: FAR_ROUTE_DISPATCH_LOOP_REWARD_RATE,
     loopRewardText,
     cooldownMultiplier: FAR_ROUTE_DISPATCH_COOLDOWN_MULTIPLIER,
@@ -2284,6 +2333,8 @@ export function getFarRouteDispatch(state, now = Date.now()) {
     chainWindowText,
     targetDirectiveId: directive?.id ?? null,
     targetDirectiveName,
+    relayDirectiveId: relayDirective?.id ?? null,
+    relayDirectiveName,
     projectId: project.id,
     projectName: project.name,
     segmentText: project.segmentText,
@@ -2304,7 +2355,11 @@ export function getFarRouteDispatch(state, now = Date.now()) {
       cooldownText +
       " · " +
       chainWindowText +
-      " · 目标后推荐非目标指令触发" +
+      " · 目标后优先" +
+      relayDirectiveName +
+      "触发" +
+      syncRewardText +
+      "，其他非目标仍触发" +
       relayRewardText +
       " · 3/3 回到目标指令触发" +
       loopRewardText
@@ -2320,6 +2375,9 @@ export function getDirectivePlan(state, now = Date.now()) {
   const dispatch = getFarRouteDispatch(current, now);
   const dispatchDirective = dispatch.active
     ? getDirectiveDef(dispatch.targetDirectiveId)
+    : null;
+  const dispatchRelayDirective = dispatch.active
+    ? getDirectiveDef(dispatch.relayDirectiveId)
     : null;
 
   if (current.totalEnergy < DIRECTIVE_UNLOCK_ENERGY) {
@@ -2472,6 +2530,12 @@ export function getDirectivePlan(state, now = Date.now()) {
   let preserveStanceHint = "";
   if (dispatchRelayCanOverride) {
     preserveStanceHint = "，目标后切换非目标指令触发远航续航";
+    if (dispatchRelayDirective) {
+      preserveStanceHint =
+        "，优先" +
+        dispatchRelayDirective.name +
+        "触发远航协同，其他非目标仍触发远航续航";
+    }
   } else if (shouldPreserveStanceFinisher) {
     preserveStanceHint = dispatchCanOverride
       ? "，当前航段调度优先"
@@ -3756,6 +3820,30 @@ function formatFarRouteDispatchRelayReward(dispatchRelayReward) {
   return "远航续航 +" + formatNumber(dispatchRelayReward);
 }
 
+function getFarRouteDispatchSyncReward(baseGain, dispatch, directiveId, chain, state, now) {
+  const sourceChain = state.directiveChain;
+  const active = Boolean(sourceChain.lastDirectiveId && sourceChain.expiresAt >= now);
+  if (
+    !dispatch?.active ||
+    !active ||
+    sourceChain.lastDirectiveId !== dispatch.targetDirectiveId ||
+    dispatch.relayDirectiveId !== directiveId ||
+    chain.stacks !== 1
+  ) {
+    return 0;
+  }
+
+  return roundTo(baseGain * FAR_ROUTE_DISPATCH_SYNC_REWARD_RATE, 4);
+}
+
+function formatFarRouteDispatchSyncReward(dispatchSyncReward) {
+  if (!dispatchSyncReward) {
+    return "";
+  }
+
+  return "远航协同 +" + formatNumber(dispatchSyncReward);
+}
+
 function getFarRouteDispatchLoopReward(baseGain, dispatch, directiveId, chain) {
   if (
     !dispatch?.active ||
@@ -3796,7 +3884,7 @@ function formatFarRouteDispatchChainWindow(dispatch, directive) {
   return "调度接力 +" + formatDuration(FAR_ROUTE_DISPATCH_CHAIN_WINDOW_EXTENSION_SECONDS);
 }
 
-function getFarRouteDispatchLoopStatus(state, directive, now) {
+function getFarRouteDispatchLoopStatus(state, directive, relayDirective, now) {
   const target = DIRECTIVE_CHAIN_MAX_STACKS + 1;
   if (!directive) {
     return {
@@ -3823,7 +3911,13 @@ function getFarRouteDispatchLoopStatus(state, directive, now) {
   );
   const progress = Math.min(target, stacks + 1);
   const currentDirectiveName = getDirectiveDef(chain.lastDirectiveId)?.name ?? "未知指令";
-  const nextText = getFarRouteDispatchLoopNextText(chain, directive, progress, target);
+  const nextText = getFarRouteDispatchLoopNextText(
+    chain,
+    directive,
+    relayDirective,
+    progress,
+    target
+  );
   const windowText = formatDuration((chain.expiresAt - now) / 1000);
 
   return {
@@ -3843,12 +3937,16 @@ function getFarRouteDispatchLoopStatus(state, directive, now) {
   };
 }
 
-function getFarRouteDispatchLoopNextText(chain, directive, progress, target) {
+function getFarRouteDispatchLoopNextText(chain, directive, relayDirective, progress, target) {
   if (progress >= target) {
     return "已完成 · 切换非目标指令开启下一轮";
   }
 
   if (chain.lastDirectiveId === directive.id) {
+    if (relayDirective) {
+      return "下一步优先" + relayDirective.name + "触发远航协同，其他非目标可远航续航";
+    }
+
     return "下一步推荐非目标指令触发远航续航";
   }
 
@@ -3927,6 +4025,17 @@ function getFarRouteDispatchDirective(project, state) {
 
   const stance = getRouteStanceDef(state.routeStance);
   return getDirectiveDef(stance.directiveId) ?? getDirectiveDef("resonance-pulse");
+}
+
+function getFarRouteDispatchRelayDirective(targetDirective) {
+  const relayByTarget = {
+    "ignition-salvo": "resonance-pulse",
+    "resonance-pulse": "cruise-cache",
+    "cruise-cache": "ignition-salvo"
+  };
+  const relayDirectiveId = relayByTarget[targetDirective?.id];
+
+  return getDirectiveDef(relayDirectiveId) ?? null;
 }
 
 function getRouteStanceDef(routeStanceId) {

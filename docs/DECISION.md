@@ -1,5 +1,29 @@
 # Decision
 
+## 2026-04-30 Product decision：远航协同续航
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-04-30 10:38 CST 同步到 5 个 open feedback issue、0 个 open bug issue。#6 仍是最新后半段玩法变化反馈，上一轮已让目标指令后的两个非目标按钮都进入远航续航推荐，但尚无玩家复测结论；继续进入 Product decision。
+
+当前最大问题：远航调度短循环已经具备目标指令、非目标续航和回到目标指令闭环，但目标后的两个非目标按钮在上一轮变成等价选择。玩家仍可能把第二步理解成“按任意推荐按钮”，而不是当前航段进一步改变操作结构。
+
+本轮决策：
+
+- 新增 `FAR_ROUTE_DISPATCH_SYNC_REWARD_RATE = 0.05`；远航调度 active 时，目标指令后的 1/3 阶段仍允许任意非目标指令触发 8% 远航续航，但目标指令会额外指定一个协同续航指令，执行该指令获得 5% 远航协同奖励。
+- 协同续航按目标指令派生：点火齐射后优先谐振脉冲，谐振脉冲后优先巡航回收，巡航回收后优先点火齐射；脉冲航闸阶段因此形成“点火齐射 -> 谐振脉冲协同续航 -> 回到点火齐射”的优先闭环。
+- 按钮徽标、预计收益、执行反馈和本地 `directive` 事件新增 `dispatchSyncReward` / `dispatchSyncRewardRate` / `dispatchSyncRewardText`；远航调度条和闭环进度文案同步提示“优先协同，其他非目标仍可续航”。
+- 本轮不新增存档字段，不改变升级价格、产能公式、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、基础连携倍率、轮换目标奖励、预案执行、航线委托、指令熟练、满层回响、远航调度校准、冷却、连携窗口、远航续航奖励倍率、远航闭环奖励或反馈入口。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-04-30 10:38 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 继续作为本轮处理对象。
+- 25M 脉冲航闸阶段，远航调度目标指令为点火齐射，协同续航指令为谐振脉冲，并显示“目标后优先谐振脉冲触发远航协同 +5%，其他非目标仍触发远航续航 +8%”。
+- 点火齐射后 `getDirectivePlan.nextDirectiveIds` 仍返回巡航回收和谐振脉冲；巡航回收只显示远航续航，谐振脉冲同时显示远航续航和远航协同。
+- 执行谐振脉冲续航时，预计收益、执行反馈和本地 `directive` 事件记录远航协同；执行巡航回收续航时不记录远航协同。
+- 静态首页和运行期资源包含 `FAR_ROUTE_DISPATCH_SYNC_REWARD_RATE`、`dispatchSyncReward`、`directive-dispatch-sync` 和“远航协同”。
+- 本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 106 项。
+
+下一步：发布后回复 #6，等待复测确认目标后的协同续航优先级是否比两个等价非目标按钮更像后半段当前航段决定的操作变化。
+
 ## 2026-04-30 Product decision：远航续航推荐
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-04-30 10:23 CST 同步到 5 个 open feedback issue、0 个 open bug issue。#6 仍是最新后半段玩法变化反馈，上一轮已让目标指令后的非目标指令结算“远航续航”，但尚无玩家复测结论；继续进入 Product decision。
