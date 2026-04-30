@@ -1,5 +1,28 @@
 # Decision
 
+## 2026-04-30 Product decision：远航调度冷却抢占
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-04-30 09:07 CST 同步到 5 个 open feedback issue、0 个 open bug issue。#6 仍是最新后半段玩法变化反馈，上一轮已让远航调度接管推荐，但尚无复测结论；继续进入 Product decision。
+
+当前最大问题：远航调度已经能指定目标指令、给“调度校准”奖励并接管下一步推荐，但目标指令仍使用原本 35/60/75 秒冷却。玩家看到当前航段目标后，仍可能因为冷却等待而回到“看目标、等数值”的节奏，当前航段对操作频率的影响还不够直接。
+
+本轮决策：
+
+- 新增 `FAR_ROUTE_DISPATCH_COOLDOWN_MULTIPLIER = 0.7`，20M 后远航调度 active 时，当前航段目标指令冷却缩短 30%。
+- `activateDirective`、`getDirectiveStatus` 和 `getDirectivePlan` 共用调度后的有效冷却；目标指令会更早从冷却中恢复，按钮显示“调度冷却 -30%”。
+- 远航调度条文案同步展示“目标指令冷却 -30%”，本地 `directive` 事件记录 `dispatchCooldownMultiplier` / `dispatchCooldownText`，便于后续复盘 #6。
+- 本轮不新增存档字段，不改变升级价格、产能公式、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、连携窗口、轮换目标奖励、预案执行、航线委托、指令熟练、满层回响或反馈入口。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-04-30 09:07 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 继续作为本轮处理对象。
+- 25M 脉冲航闸阶段，远航调度显示目标指令点火齐射、`调度校准 +14%` 和 `目标指令冷却 -30%`。
+- 点火齐射 35 秒基础冷却在脉冲航闸调度中按 0.7 倍生效：使用后 19 秒仍显示冷却，25 秒后恢复可执行。
+- 目标指令按钮显示 `directive-dispatch-cooldown` 徽标，预计收益包含“调度冷却 -30%”；非目标指令不显示该徽标。
+- 本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 106 项。
+
+下一步：推送并部署后回复 #6；若复测仍认为后半段只是追目标，再评估更重的远航短循环或资源消耗型指令。
+
 ## 2026-04-30 Product decision：远航调度接管推荐
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-04-30 08:51 CST 同步到 5 个 open feedback issue、0 个 open bug issue。#6 仍是最新后半段玩法变化反馈，继续进入 Product decision。

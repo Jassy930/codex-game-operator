@@ -1116,6 +1116,7 @@ export const DIRECTIVE_MASTERY_MAX_STACKS = 3;
 export const DIRECTIVE_MASTERY_CAPSTONE_RATE = 0.1;
 export const FAR_ROUTE_DISPATCH_UNLOCK_ENERGY = 20_000_000;
 export const FAR_ROUTE_DISPATCH_BONUS_RATE = 0.14;
+export const FAR_ROUTE_DISPATCH_COOLDOWN_MULTIPLIER = 0.7;
 
 const INITIAL_UPGRADES = Object.fromEntries(
   UPGRADE_DEFS.map((upgrade) => [upgrade.id, 0])
@@ -1357,7 +1358,8 @@ export function activateDirective(state, directiveId, now = Date.now()) {
     };
   }
 
-  const cooldownMs = directive.cooldownSeconds * 1000;
+  const dispatch = getFarRouteDispatch(current, now);
+  const cooldownMs = getDirectiveCooldownMs(directive, dispatch);
   const lastUsedAt = current.directives[directive.id] ?? 0;
   const remainingMs = lastUsedAt > 0 ? Math.max(0, lastUsedAt + cooldownMs - now) : 0;
 
@@ -1385,7 +1387,6 @@ export function activateDirective(state, directiveId, now = Date.now()) {
   const planReward = getDirectivePlanReward(effectiveBaseGain, plan, directive.id);
   const chain = getDirectiveChainForUse(current, directive.id, now);
   const taskReward = getDirectiveTaskReward(effectiveBaseGain, plan, directive.id, chain);
-  const dispatch = getFarRouteDispatch(current, now);
   const dispatchReward = getFarRouteDispatchReward(effectiveBaseGain, dispatch, directive.id);
   const rotationReward = getDirectiveRotationReward(effectiveBaseGain, chain);
   const masteryCapstoneReward = getDirectiveMasteryCapstoneReward(
@@ -1433,6 +1434,7 @@ export function activateDirective(state, directiveId, now = Date.now()) {
   const planRewardText = formatDirectivePlanReward(planReward);
   const taskRewardText = formatDirectiveTaskReward(taskReward);
   const dispatchRewardText = formatFarRouteDispatchReward(dispatchReward);
+  const dispatchCooldownText = formatFarRouteDispatchCooldown(dispatch, directive);
   const chainText = formatDirectiveChainBonus(chain);
   const rotationRewardText = formatDirectiveRotationReward(rotationReward);
   const masteryCapstoneText =
@@ -1456,6 +1458,8 @@ export function activateDirective(state, directiveId, now = Date.now()) {
     taskRewardRate: DIRECTIVE_TASK_REWARD_RATE,
     dispatchReward,
     dispatchRewardRate: FAR_ROUTE_DISPATCH_BONUS_RATE,
+    dispatchCooldownMultiplier: getDirectiveCooldownMultiplier(directive, dispatch),
+    dispatchCooldownText,
     masteryRewardGained: masteryReward.gained,
     masteryRewardStacks: masteryReward.mastery.stacks,
     rotationReward,
@@ -1485,6 +1489,7 @@ export function activateDirective(state, directiveId, now = Date.now()) {
       (planRewardText ? planRewardText + "，" : "") +
       (taskRewardText ? taskRewardText + "，" : "") +
       (dispatchRewardText ? dispatchRewardText + "，" : "") +
+      (dispatchCooldownText ? dispatchCooldownText + "，" : "") +
       (chainText ? chainText + "，" : "") +
       (rotationRewardText ? rotationRewardText + "，" : "") +
       (masteryCapstoneText ? masteryCapstoneText + "，" : "") +
@@ -1988,10 +1993,11 @@ export function getDirectiveStatus(state, now = Date.now()) {
     dispatch,
     options: DIRECTIVE_DEFS.map((directive) => {
       const cooldownMs = directive.cooldownSeconds * 1000;
+      const effectiveCooldownMs = getDirectiveCooldownMs(directive, dispatch);
       const lastUsedAt = current.directives[directive.id] ?? 0;
       const remainingMs = unlocked
         ? lastUsedAt > 0
-          ? Math.max(0, lastUsedAt + cooldownMs - now)
+          ? Math.max(0, lastUsedAt + effectiveCooldownMs - now)
           : 0
         : cooldownMs;
       const remainingSeconds = Math.ceil(remainingMs / 1000);
@@ -2033,6 +2039,7 @@ export function getDirectiveStatus(state, now = Date.now()) {
       const planRewardText = formatDirectivePlanReward(planReward);
       const taskRewardText = formatDirectiveTaskReward(taskReward);
       const dispatchRewardText = formatFarRouteDispatchReward(dispatchReward);
+      const dispatchCooldownText = formatFarRouteDispatchCooldown(dispatch, directive);
       const chainText = formatDirectiveChainBonus(chain);
       const rotationRewardText = formatDirectiveRotationReward(rotationReward);
       const masteryCapstoneText =
@@ -2061,6 +2068,8 @@ export function getDirectiveStatus(state, now = Date.now()) {
         taskRewardRate: DIRECTIVE_TASK_REWARD_RATE,
         dispatchReward,
         dispatchRewardRate: FAR_ROUTE_DISPATCH_BONUS_RATE,
+        dispatchCooldownMultiplier: getDirectiveCooldownMultiplier(directive, dispatch),
+        dispatchCooldownText,
         rotationReward,
         masteryCapstoneReward,
         masteryCapstoneRate: DIRECTIVE_MASTERY_CAPSTONE_RATE,
@@ -2088,6 +2097,7 @@ export function getDirectiveStatus(state, now = Date.now()) {
             (planRewardText ? " · " + planRewardText : "") +
             (taskRewardText ? " · " + taskRewardText : "") +
             (dispatchRewardText ? " · " + dispatchRewardText : "") +
+            (dispatchCooldownText ? " · " + dispatchCooldownText : "") +
             (chainText ? " · " + chainText : "") +
             (rotationRewardText ? " · " + rotationRewardText : "") +
             (masteryCapstoneText ? " · " + masteryCapstoneText : "") +
@@ -2119,6 +2129,10 @@ export function getFarRouteDispatch(state, now = Date.now()) {
   const current = normalizeState(state, now);
   const rewardText =
     "调度校准 +" + Math.round(FAR_ROUTE_DISPATCH_BONUS_RATE * 100) + "%";
+  const cooldownText =
+    "目标指令冷却 -" +
+    Math.round((1 - FAR_ROUTE_DISPATCH_COOLDOWN_MULTIPLIER) * 100) +
+    "%";
 
   if (current.totalEnergy < FAR_ROUTE_DISPATCH_UNLOCK_ENERGY) {
     return {
@@ -2127,10 +2141,12 @@ export function getFarRouteDispatch(state, now = Date.now()) {
       progress: 0,
       rewardRate: FAR_ROUTE_DISPATCH_BONUS_RATE,
       rewardText,
+      cooldownMultiplier: 1,
+      cooldownText: "",
       targetDirectiveId: null,
       targetDirectiveName: "",
       projectId: null,
-      text: "远航调度：累计 20M 能量后解锁后半段航段调度与目标指令推荐"
+      text: "远航调度：累计 20M 能量后解锁后半段航段调度、目标指令推荐与目标冷却缩短"
     };
   }
 
@@ -2142,6 +2158,8 @@ export function getFarRouteDispatch(state, now = Date.now()) {
       progress: 1,
       rewardRate: FAR_ROUTE_DISPATCH_BONUS_RATE,
       rewardText,
+      cooldownMultiplier: 1,
+      cooldownText: "",
       targetDirectiveId: null,
       targetDirectiveName: "",
       projectId: null,
@@ -2158,6 +2176,8 @@ export function getFarRouteDispatch(state, now = Date.now()) {
     progress: project.progress,
     rewardRate: FAR_ROUTE_DISPATCH_BONUS_RATE,
     rewardText,
+    cooldownMultiplier: FAR_ROUTE_DISPATCH_COOLDOWN_MULTIPLIER,
+    cooldownText,
     targetDirectiveId: directive?.id ?? null,
     targetDirectiveName,
     projectId: project.id,
@@ -2172,7 +2192,9 @@ export function getFarRouteDispatch(state, now = Date.now()) {
       "指定" +
       targetDirectiveName +
       " · 执行目标指令获得" +
-      rewardText
+      rewardText +
+      " · " +
+      cooldownText
   };
 }
 
@@ -2209,7 +2231,7 @@ export function getDirectivePlan(state, now = Date.now()) {
       ? DIRECTIVE_DEFS.filter((directive) => directive.id !== stanceDirective.id)
       : DIRECTIVE_DEFS;
     const readyOpeners = openerDirectives.filter((directive) =>
-      isDirectiveReady(current, directive, now)
+      isDirectiveReady(current, directive, now, dispatch)
     );
     let nextDirectivePool = readyOpeners.length ? readyOpeners : openerDirectives;
     let recommendationText = "收束起手";
@@ -2221,7 +2243,7 @@ export function getDirectivePlan(state, now = Date.now()) {
       recommendationText = "调度目标";
       waitingRecommendationText = "等待调度";
       openerPhrase =
-        (isDirectiveReady(current, dispatchDirective, now)
+        (isDirectiveReady(current, dispatchDirective, now, dispatch)
           ? "远航调度指定"
           : "等待远航调度冷却后执行") + dispatchDirective.name;
     }
@@ -2288,7 +2310,7 @@ export function getDirectivePlan(state, now = Date.now()) {
     ? differentDirectives.filter((directive) => directive.id !== stanceDirective.id)
     : differentDirectives;
   let readyDirectives = preferredDirectives.filter((directive) =>
-    isDirectiveReady(current, directive, now)
+    isDirectiveReady(current, directive, now, dispatch)
   );
   let nextDirectivePool = readyDirectives.length ? readyDirectives : preferredDirectives;
   const dispatchCanOverride = Boolean(
@@ -2296,7 +2318,7 @@ export function getDirectivePlan(state, now = Date.now()) {
   );
   if (dispatchCanOverride) {
     nextDirectivePool = [dispatchDirective];
-    readyDirectives = isDirectiveReady(current, dispatchDirective, now)
+    readyDirectives = isDirectiveReady(current, dispatchDirective, now, dispatch)
       ? [dispatchDirective]
       : [];
   }
@@ -3399,9 +3421,21 @@ function getNextDirectiveMastery(mastery, chain, now) {
   };
 }
 
-function isDirectiveReady(state, directive, now) {
+function getDirectiveCooldownMultiplier(directive, dispatch) {
+  if (dispatch?.active && dispatch.targetDirectiveId === directive.id) {
+    return FAR_ROUTE_DISPATCH_COOLDOWN_MULTIPLIER;
+  }
+
+  return 1;
+}
+
+function getDirectiveCooldownMs(directive, dispatch) {
+  return directive.cooldownSeconds * 1000 * getDirectiveCooldownMultiplier(directive, dispatch);
+}
+
+function isDirectiveReady(state, directive, now, dispatch = null) {
   const lastUsedAt = state.directives[directive.id] ?? 0;
-  return lastUsedAt <= 0 || lastUsedAt + directive.cooldownSeconds * 1000 <= now;
+  return lastUsedAt <= 0 || lastUsedAt + getDirectiveCooldownMs(directive, dispatch) <= now;
 }
 
 function formatDirectiveNameList(names) {
@@ -3558,6 +3592,18 @@ function formatFarRouteDispatchReward(dispatchReward) {
   }
 
   return "调度校准 +" + formatNumber(dispatchReward);
+}
+
+function formatFarRouteDispatchCooldown(dispatch, directive) {
+  if (!dispatch?.active || dispatch.targetDirectiveId !== directive.id) {
+    return "";
+  }
+
+  return (
+    "调度冷却 -" +
+    Math.round((1 - FAR_ROUTE_DISPATCH_COOLDOWN_MULTIPLIER) * 100) +
+    "%"
+  );
 }
 
 function getDirectiveRotationReward(baseGain, chain) {

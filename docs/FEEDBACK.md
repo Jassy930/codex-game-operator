@@ -2,6 +2,13 @@
 
 ## 2026-04-30
 
+- GitHub Issues：gh 可用且已认证；2026-04-30 09:07 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
+- #6 继续作为本轮 Product decision：上一轮已让远航调度接管下一步推荐，但目标指令仍沿用原冷却，当前航段对指令使用频率的影响不够明显。
+- 本轮改动让 20M 后远航调度 active 时目标指令冷却缩短 30%，按钮显示“调度冷却 -30%”，远航调度条显示“目标指令冷却 -30%”。
+- `activateDirective`、`getDirectiveStatus` 和 `getDirectivePlan` 共用调度后的有效冷却；本地 `directive` 事件新增 `dispatchCooldownMultiplier` / `dispatchCooldownText`。
+- 本轮不新增存档字段，不改变升级价格、产能公式、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、连携窗口、轮换目标奖励、预案执行、航线委托、指令熟练、满层回响或反馈入口。
+- 本轮本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 106 项。
+
 - GitHub Issues：gh 可用且已认证；2026-04-30 08:51 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
 - #6 继续作为本轮 Product decision：上一轮已新增 20M 后“远航调度”和“调度校准”奖励，但远航调度仍只是目标按钮的奖励徽标；本轮让当前航段的目标指令直接接管指令轮换推荐。
 - 本轮改动让 `getDirectivePlan` 在远航调度 active 时把目标指令写入 `nextDirectiveIds`，推荐文案显示“调度目标/等待调度”。脉冲航闸会把点火齐射收束为唯一下一步推荐；离辉轨道港这类自动奖励航段会让巡航回收优先于常规“保留契合指令做策略终结”的起手推荐。
