@@ -8,6 +8,10 @@
 - 分支选择条、远航路径收益、按钮徽标、预计收益、执行反馈和本地 `directive` 事件会显示/记录 `dispatchBranchFocusReward` / `dispatchBranchFocusRewardRate` / `dispatchBranchFocusRewardText`。
 - 本轮不新增存档字段，不改变升级价格、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、基础连携倍率、远航调度原有收益、冷却、连携窗口、反馈入口或部署链路。
 - 本轮本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 提交 0ca888d 已推送；GitHub Pages workflow 25173150738 已成功，线上地址返回 HTTP 200，线上脚本和样式已确认包含航段契合相关标记。
+- #6 已回复：说明点击/过载奖励航段契合协同路线，自动/总产能奖励航段契合绕行路线，目标后的契合分支会结算“航段契合 +5%”；issue 保持 open 等待复测。
+- 回复后同步 GitHub Issues：2026-04-30 23:10 CST 当前仍为 5 个 open feedback issue、0 个 open bug issue；#6 更新时间为 2026-04-30T15:10:10Z。
+- 钉钉通知未发送：运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` 相关变量名；未将 webhook 写入仓库。
 
 - GitHub Issues：gh 可用且已认证；2026-04-30 22:30 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
 - #6 继续作为本轮 Product decision 依据：该反馈指出后半段“只有不停的目标、玩法没有真正变化”；前序已补协同/绕行、分支态势和分支改道，但主操作区还没有把两条分支选择并排展示。

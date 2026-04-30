@@ -24,8 +24,13 @@
 - `src/app.js` 记录 `dispatchBranchFocusReward` / `dispatchBranchFocusRewardRate` / `dispatchBranchFocusRewardText` 事件字段，并渲染 `directive-dispatch-branch-focus` 徽标。
 - `src/styles.css` 包含 `.directive-button .directive-dispatch-branch-focus` 和 `.far-dispatch-branch-choice.is-focused` 样式。
 - 本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 提交 0ca888d 已推送；GitHub Pages workflow 25173150738 已成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`。
+- 线上地址 https://jassy930.github.io/codex-game-operator/ 返回 HTTP 200，且线上 `game.js`、`app.js` 和 `styles.css` 已确认包含航段契合相关标记。
+- #6 已回复：说明本轮新增“航段契合 +5%”，点击/过载航段契合协同，自动/总产能航段契合绕行，并保持 issue open 等待复测。
+- 回复后同步 GitHub Issues：2026-04-30 23:10 CST 当前仍为 5 个 open feedback issue、0 个 open bug issue；#6 更新时间为 2026-04-30T15:10:10Z。
+- 钉钉通知未发送：运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` 相关变量名；未将 webhook 写入仓库。
 
-下一步：推送后等待 #6 复测，重点确认“当前航段指定目标指令 + 当前航段推荐分支”是否比固定协同/绕行路线更像后半段玩法变化。
+下一步：等待 #6 复测，重点确认“当前航段指定目标指令 + 当前航段推荐分支”是否比固定协同/绕行路线更像后半段玩法变化。
 
 ## 2026-04-30 Product decision：远航分支选择条
 

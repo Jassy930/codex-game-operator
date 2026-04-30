@@ -8,6 +8,11 @@
 - 本轮不新增存档字段，不改变升级价格、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、基础连携倍率、远航调度原有收益、冷却、连携窗口、反馈入口或部署链路。
 - 同步 GitHub Issues 反馈状态：2026-04-30 23:01 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 作为本轮处理对象。
 - 验证通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 提交 0ca888d 已推送；GitHub Pages workflow 25173150738 已成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`。
+- 线上地址 https://jassy930.github.io/codex-game-operator/ 返回 HTTP 200，且线上 `game.js`、`app.js` 和 `styles.css` 已确认包含 `FAR_ROUTE_DISPATCH_BRANCH_FOCUS_REWARD_RATE`、`dispatchBranchFocusReward`、`directive-dispatch-branch-focus` 和“航段契合”相关标记。
+- 已回复 #6，说明当前航段奖励类型会决定协同/绕行契合分支，并保持 issue open 等待复测。
+- 回复后同步 GitHub Issues 反馈状态：2026-04-30 23:10 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 更新时间为 2026-04-30T15:10:10Z。
+- 钉钉通知未发送：运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` 相关变量名；未将 webhook 写入仓库。
 
 - 远航调度新增“分支选择条”：20M 后主操作区远航调度条会并排显示协同路线和绕行路线，标出协同续航指令、绕行备选指令、资源取向、上轮路线、当前路线和可改道状态，继续回应 #6 对后半段玩法变化不明显的反馈。
 - `src/game.js` 新增 `branchChoices` / `branchChoiceText` 派生和绕行备选指令识别；`src/app.js` 渲染 `far-dispatch-branch-choices` / `far-dispatch-branch-choice`；`src/styles.css` 新增分支选择条样式；`index.html` 增加静态占位；`tests/game.test.js` 覆盖锁定态、协同/绕行状态、可改道状态、静态绑定和样式标记。
