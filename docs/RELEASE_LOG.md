@@ -2,6 +2,16 @@
 
 ## Unreleased
 
+- 远航调度新增“路线微图标记”：协同/绕行分支卡片的路线微图会在节点附近显示推荐、备选、本轮、推荐上轮、推荐改道、上轮或改道，继续回应 #6 的后半段路线状态理解和 #4 的图片化/降文字密度反馈。
+- `src/game.js` 为 `branchChoices` 派生 `routeMarkerKind` / `routeMarkerText`；`src/app.js` 在 `renderFarDispatchBranchChoiceRoute(choice)` 中渲染 `far-dispatch-branch-choice-route-marker` 和 `is-route-marker-*`；`src/styles.css` 增加路线微图标记样式；`tests/game.test.js` 覆盖起手推荐、上轮路线、改道、本轮路线、静态绑定和样式。
+- 文档同步更新：`docs/DECISION.md`、`docs/FEEDBACK.md`、`docs/RESEARCH.md`、`docs/PRODUCT.md`、`docs/DESIGN.md`、`docs/ROADMAP.md`、`docs/IDEAS.md`、`docs/METRICS.md`、`README.md` 和本日志已记录远航路线微图标记。
+- 本轮只调整派生展示、DOM、样式和测试，不新增收益、不新增存档字段，不改变升级价格、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、远航调度既有数值、冷却、连携窗口、反馈入口或部署链路。
+- 同步 GitHub Issues 反馈状态：2026-05-01 06:49 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 作为主处理对象，#4 作为视觉密度依据。
+- 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含 `routeMarkerKind`、`routeMarkerText`、`far-dispatch-branch-choice-route-marker` 和 `is-route-marker-*`。
+- 发布状态：待推送后由 GitHub Pages workflow 验证。
+- 反馈处理：待部署验证后回复 #6 和 #4。
+
 - 远航调度新增“资源取向符号”：协同/绕行分支卡片的路线微图会进一步显示保留当前资源或投送累计航段的图形符号，继续回应 #6 的后半段路线取舍和 #4 的图片化/降文字密度反馈。
 - `src/game.js` 为 `branchChoices` 派生 `routeResourceKind` / `routeResourceText`；`src/app.js` 在 `renderFarDispatchBranchChoiceRoute(choice)` 中渲染 `far-dispatch-branch-choice-route-resource`；`src/styles.css` 增加 `is-current` / `is-progress` 资源取向样式；`tests/game.test.js` 覆盖派生字段、静态绑定和样式。
 - 文档同步更新：`docs/DECISION.md`、`docs/FEEDBACK.md`、`docs/RESEARCH.md`、`docs/PRODUCT.md`、`docs/DESIGN.md`、`docs/ROADMAP.md`、`docs/IDEAS.md`、`docs/METRICS.md`、`README.md` 和本日志已记录远航资源取向符号。

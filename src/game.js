@@ -5147,6 +5147,14 @@ function buildFarRouteDispatchBranchChoices(
     );
     const decisionBadgeText =
       buildFarRouteDispatchBranchDecisionBadgeText(decisionKind);
+    const routeMarkerKind = buildFarRouteDispatchBranchRouteMarkerKind(
+      active,
+      shift,
+      stable,
+      focused
+    );
+    const routeMarkerText =
+      buildFarRouteDispatchBranchRouteMarkerText(routeMarkerKind);
     const followupText = buildFarRouteDispatchBranchFollowupText(
       choice.label,
       choice.directive.name,
@@ -5193,6 +5201,8 @@ function buildFarRouteDispatchBranchChoices(
       caption: choice.caption,
       routeResourceKind: choice.routeResourceKind,
       routeResourceText: choice.routeResourceText,
+      routeMarkerKind,
+      routeMarkerText,
       nextText: choice.nextText,
       reasonText,
       decisionText,
@@ -5274,6 +5284,58 @@ function buildFarRouteDispatchBranchDecisionText(
   }
 
   return "路线判断：备选建档";
+}
+
+function buildFarRouteDispatchBranchRouteMarkerKind(
+  active,
+  shift,
+  stable,
+  focused
+) {
+  if (active) {
+    return "current";
+  }
+
+  if (focused && shift) {
+    return "recommended-shift";
+  }
+
+  if (focused && stable) {
+    return "recommended-previous";
+  }
+
+  if (focused) {
+    return "recommended";
+  }
+
+  if (stable) {
+    return "previous";
+  }
+
+  if (shift) {
+    return "shift";
+  }
+
+  return "available";
+}
+
+function buildFarRouteDispatchBranchRouteMarkerText(routeMarkerKind) {
+  switch (routeMarkerKind) {
+    case "current":
+      return "本轮";
+    case "recommended-shift":
+      return "推荐改道";
+    case "recommended-previous":
+      return "推荐上轮";
+    case "recommended":
+      return "推荐";
+    case "previous":
+      return "上轮";
+    case "shift":
+      return "改道";
+    default:
+      return "备选";
+  }
 }
 
 function buildFarRouteDispatchBranchDecisionKind(

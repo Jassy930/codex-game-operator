@@ -808,6 +808,8 @@ function renderFarDispatchBranchChoiceRoute(choice) {
     getFarDispatchBranchChoiceDecisionKind(choice) +
     " is-resource-" +
     getFarDispatchBranchChoiceRouteResourceKind(choice) +
+    " is-route-marker-" +
+    getFarDispatchBranchChoiceRouteMarkerKind(choice) +
     (choice.focused ? " is-focused" : "");
   route.setAttribute("aria-hidden", "true");
 
@@ -828,7 +830,14 @@ function renderFarDispatchBranchChoiceRoute(choice) {
     "far-dispatch-branch-choice-route-resource is-" +
     getFarDispatchBranchChoiceRouteResourceKind(choice);
 
-  route.append(line, start, branch, returnNode, routeResource);
+  const routeMarker = document.createElement("span");
+  routeMarker.className =
+    "far-dispatch-branch-choice-route-marker is-" +
+    getFarDispatchBranchChoiceRouteMarkerKind(choice);
+  routeMarker.textContent = choice.routeMarkerText ?? "";
+  routeMarker.hidden = !choice.routeMarkerText;
+
+  route.append(line, start, branch, returnNode, routeResource, routeMarker);
   return route;
 }
 
@@ -938,6 +947,11 @@ function getFarDispatchBranchChoiceDecisionKind(choice) {
 function getFarDispatchBranchChoiceRouteResourceKind(choice) {
   const resourceKind = String(choice.routeResourceKind ?? "none");
   return resourceKind.replace(/[^a-z-]/g, "") || "none";
+}
+
+function getFarDispatchBranchChoiceRouteMarkerKind(choice) {
+  const markerKind = String(choice.routeMarkerKind ?? "available");
+  return markerKind.replace(/[^a-z-]/g, "") || "available";
 }
 
 function renderDirective(option) {

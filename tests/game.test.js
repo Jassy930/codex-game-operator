@@ -1703,11 +1703,15 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(appJs, /function renderFarDispatchBranchChoiceRoute\(choice\)/);
   assert.match(appJs, /"far-dispatch-branch-choice-route is-" \+/);
   assert.match(appJs, /" is-resource-" \+/);
+  assert.match(appJs, /" is-route-marker-" \+/);
   assert.match(appJs, /route\.setAttribute\("aria-hidden", "true"\)/);
   assert.match(appJs, /line\.className = "far-dispatch-branch-choice-route-line"/);
   assert.match(appJs, /returnNode\.className = "far-dispatch-branch-choice-route-node is-return"/);
   assert.match(appJs, /routeResource\.className =/);
   assert.match(appJs, /far-dispatch-branch-choice-route-resource is-/);
+  assert.match(appJs, /routeMarker\.className =/);
+  assert.match(appJs, /far-dispatch-branch-choice-route-marker is-/);
+  assert.match(appJs, /routeMarker\.textContent = choice\.routeMarkerText \?\? ""/);
   assert.match(appJs, /"far-dispatch-branch-choice-decision is-" \+/);
   assert.match(appJs, /decision\.textContent = choice\.decisionText \?\? ""/);
   assert.match(appJs, /reason\.className = "far-dispatch-branch-choice-reason"/);
@@ -1726,6 +1730,7 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(appJs, /function getFarDispatchBranchChoiceStatus\(choice\)/);
   assert.match(appJs, /function getFarDispatchBranchChoiceDecisionKind\(choice\)/);
   assert.match(appJs, /function getFarDispatchBranchChoiceRouteResourceKind\(choice\)/);
+  assert.match(appJs, /function getFarDispatchBranchChoiceRouteMarkerKind\(choice\)/);
   assert.match(appJs, /meter\.className = "directive-task-meter"/);
   assert.match(appJs, /meter\.className = "far-dispatch-meter"/);
   assert.match(appJs, /loopMeter\.className = "far-dispatch-loop-meter"/);
@@ -1843,6 +1848,12 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(styles, /\.far-dispatch-branch-choice-route-resource/);
   assert.match(styles, /\.far-dispatch-branch-choice-route-resource\.is-current/);
   assert.match(styles, /\.far-dispatch-branch-choice-route-resource\.is-progress/);
+  assert.match(styles, /\.far-dispatch-branch-choice-route-marker/);
+  assert.match(styles, /\.far-dispatch-branch-choice-route-marker\.is-current/);
+  assert.match(styles, /\.far-dispatch-branch-choice-route-marker\.is-recommended/);
+  assert.match(styles, /\.far-dispatch-branch-choice-route-marker\.is-recommended-shift/);
+  assert.match(styles, /\.far-dispatch-branch-choice-route-marker\.is-previous/);
+  assert.match(styles, /\.far-dispatch-branch-choice-route-marker\.is-shift/);
   assert.match(styles, /\.far-dispatch-branch-choice-route\.is-sync/);
   assert.match(styles, /\.far-dispatch-branch-choice-route\.is-detour/);
   assert.match(styles, /\.far-dispatch-branch-choice-route\.is-shift/);
@@ -2899,6 +2910,12 @@ test("远航调度会在 20M 后按当前航段指定目标指令", () => {
     ),
     ["current:保留当前", "progress:投送累计"]
   );
+  assert.deepEqual(
+    dispatch.branchChoices.map(
+      (choice) => choice.routeMarkerKind + ":" + choice.routeMarkerText
+    ),
+    ["recommended:推荐", "available:备选"]
+  );
   assert.equal(
     dispatch.branchChoiceText,
     "分支选择：协同 谐振脉冲（可选择 · 首推 · 补当前资源 · 推荐原因：点击/过载航段保留当前资源 · 路线判断：当前航段首推 · 路线目标：按当前航段推荐建立协同路线 · 下一步：先执行目标 点火齐射，再选协同 谐振脉冲 · 后续协同回航触发闭环与远航突破 · 本步合计 +13% · 回目标 远航闭环 +16% + 远航突破 +0.05%剩余 + 契合闭环 +7% · 远航协同 +5% · 协同补给 +3%当前 · 航段契合 +5%） / 绕行 巡航回收（可选择 · 建档 · 投送累计航段 · 路线判断：备选建档 · 路线目标：建立绕行路线，记录为下轮对照 · 下一步：先执行目标 点火齐射，再选绕行 巡航回收 · 后续绕行回航触发闭环与绕行突破 · 本步合计 +4% · 投送累计 · 回目标 远航闭环 +16% + 远航突破 +0.05%剩余 + 绕行突破 +0.03%剩余 · 远航绕行 +4% · 绕行投送 -0.3%当前）"
@@ -3035,6 +3052,12 @@ test("远航调度会在 20M 后按当前航段指定目标指令", () => {
   assert.deepEqual(
     relayDispatch.branchChoices.map((choice) => choice.statusText),
     ["可选择", "可选择"]
+  );
+  assert.deepEqual(
+    relayDispatch.branchChoices.map(
+      (choice) => choice.routeMarkerKind + ":" + choice.routeMarkerText
+    ),
+    ["recommended:推荐", "available:备选"]
   );
   assert.match(relayDispatch.loopStatusText, /闭环进度 1\/3/);
   assert.match(relayDispatch.loopStatusText, /优先谐振脉冲触发远航协同/);
@@ -3186,6 +3209,12 @@ test("远航调度会在 20M 后按当前航段指定目标指令", () => {
     detourDispatch.branchChoices.map((choice) => choice.statusText),
     ["可改道", "当前路线"]
   );
+  assert.deepEqual(
+    detourDispatch.branchChoices.map(
+      (choice) => choice.routeMarkerKind + ":" + choice.routeMarkerText
+    ),
+    ["recommended-shift:推荐改道", "current:本轮"]
+  );
   assert.match(detourDispatch.loopStatusText, /闭环进度 2\/3/);
   assert.match(detourDispatch.loopStatusText, /触发远航闭环与绕行突破/);
   assert.match(detourDispatch.loopStatusText, /分支 绕行：巡航回收/);
@@ -3319,6 +3348,12 @@ test("远航调度会在 20M 后按当前航段指定目标指令", () => {
   assert.deepEqual(
     loopDispatch.branchChoices.map((choice) => choice.statusText),
     ["当前路线", "可选择"]
+  );
+  assert.deepEqual(
+    loopDispatch.branchChoices.map(
+      (choice) => choice.routeMarkerKind + ":" + choice.routeMarkerText
+    ),
+    ["current:本轮", "available:备选"]
   );
   assert.match(loopDispatch.loopStatusText, /闭环进度 2\/3/);
   assert.match(loopDispatch.loopStatusText, /协同回航到点火齐射触发远航闭环/);
@@ -3710,6 +3745,12 @@ test("远航调度会奖励切换上一轮分支", () => {
     ["稳航", "备选改道"]
   );
   assert.deepEqual(
+    dispatch.branchChoices.map(
+      (choice) => choice.routeMarkerKind + ":" + choice.routeMarkerText
+    ),
+    ["recommended-previous:推荐上轮", "shift:改道"]
+  );
+  assert.deepEqual(
     dispatch.branchChoices.map((choice) => choice.followupText),
     [
       "下一步：执行协同 谐振脉冲，再回目标 点火齐射",
@@ -3807,6 +3848,12 @@ test("远航调度会奖励切换上一轮分支", () => {
   assert.deepEqual(
     detourLastDispatch.branchChoices.map((choice) => choice.decisionBadgeText),
     ["改道", "备选稳航"]
+  );
+  assert.deepEqual(
+    detourLastDispatch.branchChoices.map(
+      (choice) => choice.routeMarkerKind + ":" + choice.routeMarkerText
+    ),
+    ["recommended-shift:推荐改道", "previous:上轮"]
   );
   assert.deepEqual(
     detourLastDispatch.branchChoices.map((choice) => choice.followupText),

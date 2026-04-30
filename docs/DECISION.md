@@ -1,5 +1,32 @@
 # Decision
 
+## 2026-05-01 Product decision：远航路线微图标记
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-01 06:49 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#6 仍是最新后半段玩法反馈，#4 仍指出界面文字密度和图片化诉求，因此本轮继续进入 Product decision。
+
+当前最大问题：前序已经给协同/绕行路线微图加入资源取向符号，能区分“保留当前”和“投送累计”；但微图里的路线状态仍主要依赖卡片首行和文字徽标。玩家能扫到路线形态和资源方向，却还需要离开微图去确认这条路线是推荐、上轮、本轮还是改道。
+
+本轮决策：
+
+- 新增“远航路线微图标记”。
+- `branchChoices` 派生 `routeMarkerKind` / `routeMarkerText`：覆盖 `recommended`、`available`、`current`、`recommended-previous`、`recommended-shift`、`previous` 和 `shift`。
+- `renderFarDispatchBranchChoiceRoute(choice)` 在路线微图分支节点附近渲染 `far-dispatch-branch-choice-route-marker is-*`，显示推荐、备选、本轮、推荐上轮、推荐改道、上轮或改道。
+- 微图标记 `aria-hidden="true"`，语义继续由已有 `caption`、`branchChoiceText`、卡片 `title`、路线判断、路线目标和路线收益对照承载。
+- 本轮只调整派生展示、DOM、样式和测试；不新增收益、不新增存档字段，不改变升级价格、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、远航调度既有数值、冷却、连携窗口、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-05-01 06:49 CST 当前 5 个 open feedback issue、0 个 open bug issue。
+- 0/3 起手时，推荐协同分支派生 `routeMarkerKind: "recommended"` / `routeMarkerText: "推荐"`，绕行分支派生 `available / 备选`。
+- 上轮协同路线下，推荐协同派生 `recommended-previous / 推荐上轮`，绕行派生 `shift / 改道`。
+- 上轮绕行路线下，推荐协同派生 `recommended-shift / 推荐改道`，绕行派生 `previous / 上轮`。
+- 本轮已选协同或绕行路线时，当前路线派生 `current / 本轮`。
+- `src/app.js` 渲染 `far-dispatch-branch-choice-route-marker` 与 `is-route-marker-*`；`src/styles.css` 包含 `.far-dispatch-branch-choice-route-marker.is-current`、`.is-recommended`、`.is-recommended-shift`、`.is-previous` 和 `.is-shift`。
+- 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含 `routeMarkerKind`、`routeMarkerText`、`far-dispatch-branch-choice-route-marker` 和 `is-route-marker-*`。
+- 发布状态：待推送后由 GitHub Pages workflow 验证。
+- 反馈处理：待部署验证后回复 #6 和 #4。
+
 ## 2026-05-01 Product decision：远航资源取向符号
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-01 06:34 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#6 仍是最新后半段玩法反馈，#4 仍指出界面文字密度和图片化诉求，因此本轮继续进入 Product decision。

@@ -1667,6 +1667,63 @@ h2 {
   transform: translateY(-50%) rotate(-4deg);
 }
 
+.far-dispatch-branch-choice-route-marker {
+  position: absolute;
+  z-index: 2;
+  top: 1px;
+  left: 50%;
+  max-width: 52px;
+  padding: 1px 4px;
+  border: 1px solid rgba(248, 243, 231, 0.18);
+  border-radius: 999px;
+  color: rgba(248, 243, 231, 0.76);
+  background: rgba(5, 12, 20, 0.76);
+  box-shadow: 0 0 8px rgba(5, 12, 20, 0.38);
+  font-size: 0.48rem;
+  font-weight: 900;
+  line-height: 1.2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+.far-dispatch-branch-choice-route-marker[hidden] {
+  display: none;
+}
+
+.far-dispatch-branch-choice-route-marker.is-current {
+  color: #cfe8ff;
+  border-color: rgba(116, 194, 255, 0.62);
+  background: rgba(36, 99, 146, 0.74);
+}
+
+.far-dispatch-branch-choice-route-marker.is-recommended,
+.far-dispatch-branch-choice-route-marker.is-recommended-previous {
+  color: #d8ffe2;
+  border-color: rgba(150, 231, 168, 0.62);
+  background: rgba(37, 109, 72, 0.74);
+}
+
+.far-dispatch-branch-choice-route-marker.is-recommended-shift {
+  color: #ffd1df;
+  border-color: rgba(255, 126, 177, 0.62);
+  background: rgba(132, 45, 82, 0.74);
+}
+
+.far-dispatch-branch-choice-route-marker.is-previous {
+  color: #ffe6b3;
+  border-color: rgba(244, 178, 60, 0.58);
+  background: rgba(112, 77, 26, 0.74);
+}
+
+.far-dispatch-branch-choice-route-marker.is-shift {
+  color: #ffd1df;
+  border-color: rgba(255, 126, 177, 0.52);
+  background: rgba(96, 42, 68, 0.74);
+}
+
 .far-dispatch-branch-choice-route.is-sync {
   border-color: rgba(103, 232, 249, 0.28);
   background:

@@ -2,6 +2,16 @@
 
 ## 2026-05-01
 
+- GitHub Issues：gh 可用且已认证；2026-05-01 06:49 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
+- #6 继续作为本轮 Product decision 依据：该反馈指出后半段“只有不停的目标、玩法没有真正变化”；#4 仍补充界面“密密麻麻的文字”和图片化诉求。前序路线微图和资源取向符号已经能显示路线形态与资源方向，但“推荐、上轮、本轮、改道”仍主要靠卡片文字和顶部徽标判断。
+- 本轮改动新增远航路线微图标记：协同/绕行分支卡片的 `far-dispatch-branch-choice-route` 内新增 `far-dispatch-branch-choice-route-marker`，把推荐、备选、本轮、推荐上轮、推荐改道、上轮或改道直接压到路线微图节点附近。
+- `branchChoices` 派生 `routeMarkerKind` / `routeMarkerText`，只服务展示和测试；可访问语义继续保留在已有 `caption`、`branchChoiceText`、卡片 `title`、路线判断、路线目标和收益对照中。
+- 本轮只调整派生展示、DOM、样式和测试，不新增收益、不新增存档字段，不改变升级价格、星图路线、项目奖励、远航调度既有数值、冷却、连携窗口、反馈入口或部署链路。
+- 本轮本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含 `routeMarkerKind`、`routeMarkerText`、`far-dispatch-branch-choice-route-marker` 和 `is-route-marker-*`。
+- 发布状态：待推送后由 GitHub Pages workflow 验证。
+- 反馈处理：待部署验证后回复 #6 和 #4。
+
 - GitHub Issues：gh 可用且已认证；2026-05-01 06:34 CST 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
 - #6 继续作为本轮 Product decision 依据：该反馈指出后半段“只有不停的目标、玩法没有真正变化”；#4 仍补充界面“密密麻麻的文字”和图片化诉求。前序路线微图已能区分协同直线和绕行偏移，但资源取向仍主要靠文字说明。
 - 本轮改动新增远航资源取向符号：协同/绕行分支卡片的 `far-dispatch-branch-choice-route` 内新增 `far-dispatch-branch-choice-route-resource`，协同显示保留当前资源符号，绕行显示投送累计航段箭头。
