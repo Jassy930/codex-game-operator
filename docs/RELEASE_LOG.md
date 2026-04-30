@@ -8,6 +8,9 @@
 - 同步 GitHub Issues 反馈状态：2026-04-30 15:45 CST 当前 5 个 open feedback issue、0 个 open bug issue；#5 作为本轮处理对象。
 - 验证通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 109 项。
 - 构建产物已确认包含 `core-stage-aura`、`--core-stage-angle`、`coreStageAura`、`coreStageCharge` 和 `coreStageBurst`。
+- 提交 6ceae57 已推送；GitHub Pages workflow 25153942991 已成功，线上地址返回 HTTP 200，且线上首页、`app.js` 和 `styles.css` 已确认包含点火阶段光环相关标记。
+- 已回复 #5，说明点火按钮新增随 8 格连击进度升温的阶段光环，并保持 issue open 等待复测。
+- 回复后同步 GitHub Issues 反馈状态：2026-04-30 15:52 CST 当前 5 个 open feedback issue、0 个 open bug issue；#5 更新时间为 2026-04-30T07:52:38Z。
 
 - 远航调度闭环新增“远航突破”：20M 后远航调度 active 时，3/3 轮换回到当前航段目标指令会按当前能量航段剩余量的 0.05% 注入能量，让后半段短循环直接推进当前航段进度，继续回应 #6 对玩法变化不明显的反馈。
 - `src/game.js` 新增 `FAR_ROUTE_DISPATCH_BREAKTHROUGH_REMAINING_RATE`、远航突破收益计算和调度文案；`src/app.js` 渲染 `directive-dispatch-breakthrough` 并在本地 `directive` 事件记录 `dispatchBreakthroughReward` / `dispatchBreakthroughRewardRate` / `dispatchBreakthroughRewardText`；`tests/game.test.js` 覆盖脉冲航闸阶段预计收益、执行反馈和静态标记。

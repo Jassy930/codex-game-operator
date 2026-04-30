@@ -20,6 +20,11 @@
 - CSS 包含 `.core-stage-aura`、`--core-stage-angle`、过载前兆和过载命中动效。
 - 本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 109 项。
 - 构建产物已确认包含 `core-stage-aura`、`--core-stage-angle`、`coreStageAura`、`coreStageCharge` 和 `coreStageBurst`。
+- 提交 6ceae57 已推送；GitHub Pages workflow 25153942991 已成功，线上地址返回 HTTP 200，且线上首页、`app.js` 和 `styles.css` 已确认包含阶段光环相关标记。
+- #5 已回复并继续保持 open，等待复测确认阶段光环配合现有点火反馈后是否让点火按钮更有点击反馈和点击欲望。
+- 回复后同步 GitHub Issues：2026-04-30 15:52 CST 当前仍为 5 个 open feedback issue、0 个 open bug issue；#5 更新时间为 2026-04-30T07:52:38Z。
+
+下一步：等待 #5 复测；若仍认为点火欲望不足，再评估更多星核视觉阶段或更明确的点击节奏目标。
 
 ## 2026-04-30 Product decision：远航突破
 
