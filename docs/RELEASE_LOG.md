@@ -8,6 +8,9 @@
 - 同步 GitHub Issues 反馈状态：2026-04-30 14:12 CST 当前 5 个 open feedback issue、0 个 open bug issue；#5 作为本轮处理对象。
 - 验证通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 109 项。
 - 构建产物已确认包含 `soundToggle`、`sound-toggle`、`SOUND_KEY`、`playCoreSound` 和 `AudioContext`。
+- 提交 8980f49 已推送；GitHub Pages workflow 25150604998 已成功，线上地址返回 HTTP 200，且线上首页、`app.js` 和 `styles.css` 已确认包含点火音效开关相关标记。
+- 已回复 #5，说明点火按钮新增可关闭本地音效反馈，并保持 issue open 等待复测。
+- 回复后同步 GitHub Issues 反馈状态：2026-04-30 14:20 CST 当前 5 个 open feedback issue、0 个 open bug issue；#5 更新时间为 2026-04-30T06:20:40Z。
 
 - 点火按钮新增环形蓄能轨：按钮主体会随 8 格连击进度逐步点亮，过载前兆和过载命中时切换更强高亮，继续回应 #5 对点击反馈和点击欲望的反馈。
 - `index.html` 新增 `core-charge-ring`；`src/app.js` 在 `renderCoreFeedback` 中用 `combo.progress` 更新 `--core-charge-angle` 并切换充能/过载状态；`src/styles.css` 增加环形蓄能轨样式；`tests/game.test.js` 覆盖静态标记、运行期绑定和样式标记。
