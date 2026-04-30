@@ -2,6 +2,13 @@
 
 ## 2026-04-30
 
+- GitHub Issues：gh 可用且已认证；2026-04-30 14:01 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
+- #5 作为本轮 Product decision 依据：该反馈指出点火按钮太薄弱，希望增加点击反馈、特效和点击欲望；前序已补点击脉冲、粒子、收益浮层、8 格连击轨和下一击预告，但按钮主体还缺少连续蓄能状态。
+- 本轮改动新增点火环形蓄能轨：主点火按钮内显示 `core-charge-ring`，由现有连击进度驱动环形点亮，过载前兆和过载命中时切换高亮状态。
+- 本轮不新增存档字段，不改变点击收益、连击窗口、过载奖励、升级价格、星图航段、航线策略、航线指令、反馈入口或部署链路。
+- 本轮本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 109 项。
+- 构建产物已确认包含 `core-charge-ring`、`--core-charge-angle` 和运行期环形蓄能绑定。
+
 - GitHub Issues：gh 可用且已认证；2026-04-30 13:43 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
 - #6 继续作为本轮 Product decision 依据：星图卡片已有远航调度 3 步路径轨，但实际执行时主操作区远航调度条仍主要是文字状态和两条进度条，路径关系不如卡片层可扫视。
 - 本轮改动新增远航调度主路径轨：20M 后主操作区远航调度条显示 3 格路径“目标 / 协同或续航 / 回目标”，并按当前闭环进度标记“下一步 / 已完成 / 待推进”。

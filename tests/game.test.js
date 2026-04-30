@@ -1054,12 +1054,17 @@ test("点火按钮会渲染点击反馈和过载前兆效果", () => {
 
   assert.match(indexHtml, /id="coreButton" class="core-button" type="button" data-combo-step="0"/);
   assert.match(indexHtml, /class="core-feedback-layer"/);
+  assert.match(indexHtml, /class="core-charge-ring"/);
   assert.match(indexHtml, /id="coreGainPop" class="core-gain-pop"/);
   assert.match(indexHtml, /class="core-combo-track"/);
   assert.match(indexHtml, /id="coreRewardHint" class="core-reward-hint"/);
   assert.match(indexHtml, /class="core-label">点火<\/span>/);
   assert.match(appJs, /getCoreRewardPreview/);
   assert.match(appJs, /function renderCoreFeedback\(combo\)/);
+  assert.match(appJs, /coreChargeRing: document\.querySelector\("#coreButton \.core-charge-ring"\)/);
+  assert.match(appJs, /elements\.coreChargeRing\.style\.setProperty\(\s*"--core-charge-angle"/);
+  assert.match(appJs, /Math\.round\(combo\.progress \* 360\) \+ "deg"/);
+  assert.match(appJs, /elements\.coreChargeRing\.classList\.toggle\("is-overload-ready", isOverloadReady\)/);
   assert.match(appJs, /coreGainPop: document\.querySelector\("#coreGainPop"\)/);
   assert.match(appJs, /gainText: "\+" \+ formatNumber\(state\.lastGain\)/);
   assert.match(appJs, /elements\.coreGainPop\.textContent = gainText/);
@@ -1077,6 +1082,9 @@ test("点火按钮会渲染点击反馈和过载前兆效果", () => {
   assert.match(appJs, /window\.setTimeout/);
   assert.match(styles, /\.core-button::before/);
   assert.match(styles, /\.core-feedback-layer/);
+  assert.match(styles, /\.core-charge-ring/);
+  assert.match(styles, /--core-charge-angle/);
+  assert.match(styles, /\.core-charge-ring\.is-overload-ready/);
   assert.match(styles, /\.core-gain-pop/);
   assert.match(styles, /\.core-gain-pop\.is-showing/);
   assert.match(styles, /\.core-gain-pop\.is-overload-gain/);

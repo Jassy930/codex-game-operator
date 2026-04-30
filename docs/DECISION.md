@@ -1,5 +1,28 @@
 # Decision
 
+## 2026-04-30 Product decision：点火环形蓄能轨
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-04-30 14:01 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。#6 刚完成多轮远航调度展示并已回复等待复测；#5 仍围绕“点火按钮太薄弱、增加点击反馈和点击欲望”保持 open，因此本轮继续进入 Product decision，并处理 #5 的展示层反馈。
+
+当前最大问题：点火按钮已经有点击脉冲、粒子层、收益浮层、8 格连击轨和下一击预告，但按钮主体仍缺少一个随每次点击逐步充能的连续视觉反馈。玩家需要在底部小点和文字预告之间读取“现在离过载还有多近”，点击欲望还可以继续通过按钮本体状态强化。
+
+本轮决策：
+
+- 在主点火按钮内新增 `core-charge-ring` 环形蓄能轨。
+- 运行期由 `getComboStatus().progress` 直接更新 `--core-charge-angle`，并复用现有过载前兆与过载命中状态切换高亮。
+- 本轮只调整主点火按钮展示层；不新增存档字段，不改变点击收益、连击窗口、过载奖励、升级价格、星图航段、航线策略、航线指令、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-04-30 14:01 CST 当前 5 个 open feedback issue、0 个 open bug issue。
+- 静态首页包含 `core-charge-ring`。
+- 运行期 `renderCoreFeedback` 会把连击进度转成 `--core-charge-angle`，并切换 `is-charging`、`is-overload-ready` 和 `is-overload-hit`。
+- CSS 包含 `.core-charge-ring`、`--core-charge-angle` 和过载高亮状态。
+- 本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 109 项。
+- 构建产物已确认包含 `core-charge-ring`、`--core-charge-angle` 和运行期环形蓄能绑定。
+
+下一步：提交、推送并回复 #5；若复测仍认为点火欲望不足，再评估音效开关或更强的星核阶段变化。
+
 ## 2026-04-30 Product decision：远航调度主路径轨
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-04-30 13:43 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#6 仍是最近更新的开放反馈，继续进入 Product decision。

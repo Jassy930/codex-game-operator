@@ -335,6 +335,58 @@ h2 {
   animation-duration: 520ms;
 }
 
+.core-charge-ring {
+  --core-charge-angle: 0deg;
+  position: absolute;
+  inset: 8%;
+  z-index: 2;
+  border-radius: 999px;
+  background:
+    conic-gradient(
+      from -90deg,
+      rgba(244, 178, 60, 0.92) 0 var(--core-charge-angle),
+      rgba(248, 243, 231, 0.08) var(--core-charge-angle) 360deg
+    );
+  opacity: 0.42;
+  pointer-events: none;
+  -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 13px), #000 calc(100% - 12px));
+  mask: radial-gradient(farthest-side, transparent calc(100% - 13px), #000 calc(100% - 12px));
+  transition:
+    background 120ms ease,
+    opacity 120ms ease,
+    filter 120ms ease;
+}
+
+.core-charge-ring.is-charging {
+  opacity: 0.72;
+  filter: drop-shadow(0 0 14px rgba(244, 178, 60, 0.2));
+}
+
+.core-charge-ring.is-overload-ready {
+  background:
+    conic-gradient(
+      from -90deg,
+      rgba(255, 247, 194, 0.98) 0 var(--core-charge-angle),
+      rgba(232, 93, 117, 0.18) var(--core-charge-angle) 360deg
+    );
+  opacity: 0.94;
+  filter:
+    drop-shadow(0 0 16px rgba(255, 247, 194, 0.28))
+    drop-shadow(0 0 22px rgba(232, 93, 117, 0.22));
+}
+
+.core-charge-ring.is-overload-hit {
+  background:
+    conic-gradient(
+      from -90deg,
+      rgba(255, 247, 194, 1) 0 360deg
+    );
+  opacity: 1;
+  filter:
+    drop-shadow(0 0 18px rgba(255, 247, 194, 0.34))
+    drop-shadow(0 0 30px rgba(232, 93, 117, 0.28));
+}
+
 .core-gain-pop {
   position: absolute;
   top: 22%;

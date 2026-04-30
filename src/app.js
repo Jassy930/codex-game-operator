@@ -175,6 +175,7 @@ const elements = {
   perClick: document.querySelector("#perClickValue"),
   overload: document.querySelector("#overloadValue"),
   coreButton: document.querySelector("#coreButton"),
+  coreChargeRing: document.querySelector("#coreButton .core-charge-ring"),
   coreGainPop: document.querySelector("#coreGainPop"),
   coreComboTrack: document.querySelector("#coreButton .core-combo-track"),
   coreRewardHint: document.querySelector("#coreRewardHint"),
@@ -387,6 +388,13 @@ function renderCoreFeedback(combo) {
   elements.coreButton.classList.toggle("is-combo-charging", isCharging);
   elements.coreButton.classList.toggle("is-overload-ready", isOverloadReady);
   elements.coreButton.classList.toggle("is-overload-hit", combo.overloaded);
+  elements.coreChargeRing.style.setProperty(
+    "--core-charge-angle",
+    Math.round(combo.progress * 360) + "deg"
+  );
+  elements.coreChargeRing.classList.toggle("is-charging", isCharging);
+  elements.coreChargeRing.classList.toggle("is-overload-ready", isOverloadReady);
+  elements.coreChargeRing.classList.toggle("is-overload-hit", combo.overloaded);
   elements.pulse.classList.toggle("is-overload-ready", isOverloadReady);
   elements.pulse.classList.toggle("is-overload-hit", combo.overloaded);
   renderCoreComboTrack(combo);
