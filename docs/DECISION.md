@@ -19,7 +19,9 @@
 - 静态首页和运行期资源包含 `setCompactSupportText`、`getDirectivePlanDisplayText`、`getDirectiveTaskDisplayText`、`getFarDispatchDisplayText`，且完整说明进入 `title` / `aria-label`。
 - 本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 108 项。
 - 构建产物已确认包含 `setCompactSupportText`、`getDirectivePlanDisplayText`、`getDirectiveTaskDisplayText`、`getFarDispatchDisplayText`、“航线委托：100K 后解锁 3 步任务”和“远航调度：20M 后解锁”。
-- 若发布成功，回复 #4 并继续保持 open，等待复测确认 100K/20M 后航线指令支持说明是否进一步降低文字密度。
+- 提交 893ab03 已推送；GitHub Pages workflow 25148101290 已成功，线上地址返回 HTTP 200，且线上首页、`app.js` 和 `styles.css` 已确认包含航线指令说明摘要化相关标记。
+- #4 已回复并继续保持 open，等待复测确认 100K/20M 后航线指令支持说明默认摘要化是否进一步降低文字密度。
+- 回复后同步 GitHub Issues：2026-04-30 12:55 CST 当前仍为 5 个 open feedback issue、0 个 open bug issue；#4 更新时间为 2026-04-30T04:54:55Z。
 
 ## 2026-04-30 Product decision：航线指令徽标压缩
 
