@@ -8,6 +8,10 @@
 - 本轮只调整派生展示、DOM、样式和测试，不新增收益、不新增存档字段，不改变升级价格、星图路线、项目奖励、远航调度数值、冷却、连携窗口、反馈入口或部署链路。
 - 本轮本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
 - 构建产物已确认包含 `branchFocusReasonText`、`choice.reasonText`、“推荐原因：点击/过载航段保留当前资源”和 `.far-dispatch-branch-choice-reason`。
+- 提交 dd1e4d0 已推送；GitHub Pages workflow 25177316830 已成功，线上地址返回 HTTP 200，线上脚本和样式已确认包含远航推荐原因标记。
+- #6 已回复：说明推荐分支和契合分支卡片会显示推荐原因；issue 保持 open 等待复测。
+- 回复后同步 GitHub Issues：2026-05-01 00:36 CST 当前仍为 5 个 open feedback issue、0 个 open bug issue；#6 更新时间为 2026-04-30T16:36:07Z。
+- 钉钉通知未发送：运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` 相关变量名；未将 webhook 写入仓库。
 
 - GitHub Issues：gh 可用且已认证；2026-05-01 00:06 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
 - #6 继续作为本轮 Product decision 依据：该反馈指出后半段“只有不停的目标、玩法没有真正变化”；前序已经把协同/绕行具体指令、推荐分支和按钮推荐展示出来，但分支选择条仍没有直接说明选择后会进入哪种回航。

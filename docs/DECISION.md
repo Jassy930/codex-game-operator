@@ -22,8 +22,13 @@
 - `src/app.js` 渲染 `choice.reasonText`；`src/styles.css` 包含 `.far-dispatch-branch-choice-reason`。
 - 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
 - 构建产物已确认包含 `branchFocusReasonText`、`choice.reasonText`、“推荐原因：点击/过载航段保留当前资源”和 `.far-dispatch-branch-choice-reason`。
+- 提交 dd1e4d0 已推送；GitHub Pages workflow 25177316830 已成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`。
+- 线上地址 https://jassy930.github.io/codex-game-operator/ 返回 HTTP 200，且线上 `game.js`、`app.js` 和 `styles.css` 已确认包含 `branchFocusReasonText`、`choice.reasonText` 与 `.far-dispatch-branch-choice-reason`。
+- #6 已回复：说明推荐分支和契合分支卡片会显示推荐原因；issue 保持 open 等待复测。
+- 回复后同步 GitHub Issues：2026-05-01 00:36 CST 当前仍为 5 个 open feedback issue、0 个 open bug issue；#6 更新时间为 2026-04-30T16:36:07Z。
+- 钉钉通知未发送：运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` 相关变量名；未将 webhook 写入仓库。
 
-下一步：推送并等待部署后回复 #6，重点让复测确认“推荐协同/绕行”是否能解释成当前航段奖励类型驱动的路线选择。
+下一步：等待 #6 复测，重点确认“推荐协同/绕行”是否能解释成当前航段奖励类型驱动的路线选择。
 
 ## 2026-05-01 Product decision：远航分支后续预告
 

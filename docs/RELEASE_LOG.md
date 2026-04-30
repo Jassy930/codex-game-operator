@@ -9,6 +9,11 @@
 - 同步 GitHub Issues 反馈状态：2026-05-01 00:27 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 作为本轮处理对象。
 - 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
 - 构建产物已确认包含 `branchFocusReasonText`、`choice.reasonText`、“推荐原因：点击/过载航段保留当前资源”和 `.far-dispatch-branch-choice-reason`。
+- 提交 dd1e4d0 已推送；GitHub Pages workflow 25177316830 已成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`。
+- 线上地址 https://jassy930.github.io/codex-game-operator/ 返回 HTTP 200，且线上 `game.js`、`app.js` 和 `styles.css` 已确认包含 `branchFocusReasonText`、`choice.reasonText` 与 `.far-dispatch-branch-choice-reason`。
+- 已回复 #6，说明推荐分支和契合分支卡片会显示推荐原因；issue 保持 open 等待复测。
+- 回复后同步 GitHub Issues 反馈状态：2026-05-01 00:36 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 更新时间为 2026-04-30T16:36:07Z。
+- 钉钉通知未发送：运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` 相关变量名；未将 webhook 写入仓库。
 
 - 远航调度新增“分支后续预告”：分支选择条、推荐分支和星图总览远航摘要会直接显示协同路线后续进入协同回航并触发闭环/远航突破，绕行路线后续进入绕行回航并触发闭环/绕行突破，继续回应 #6 对后半段玩法变化不明显的反馈。
 - `src/game.js` 为 `branchChoices` 派生 `nextText` 并把它纳入 `branchChoiceText` / `branchRecommendationText`；`src/app.js` 在分支选择条中渲染后续预告；`src/styles.css` 增加紧凑样式；`tests/game.test.js` 覆盖推荐分支、分支选择条文案、星图总览摘要和静态绑定。
