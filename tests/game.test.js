@@ -1696,7 +1696,8 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(appJs, /function renderFarDispatchBranchChoices\(dispatch\)/);
   assert.match(appJs, /track\.className = "far-dispatch-branch-choices"/);
   assert.match(appJs, /"far-dispatch-branch-choice is-"/);
-  assert.match(appJs, /decision\.className = "far-dispatch-branch-choice-decision"/);
+  assert.match(appJs, /" is-decision-" \+/);
+  assert.match(appJs, /"far-dispatch-branch-choice-decision is-" \+/);
   assert.match(appJs, /decision\.textContent = choice\.decisionText \?\? ""/);
   assert.match(appJs, /reason\.className = "far-dispatch-branch-choice-reason"/);
   assert.match(appJs, /reason\.textContent = choice\.reasonText \?\? ""/);
@@ -1712,6 +1713,7 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(appJs, /function getFarDispatchBranchKind\(dispatch\)/);
   assert.match(appJs, /function getFarDispatchBranchChoiceKind\(choice\)/);
   assert.match(appJs, /function getFarDispatchBranchChoiceStatus\(choice\)/);
+  assert.match(appJs, /function getFarDispatchBranchChoiceDecisionKind\(choice\)/);
   assert.match(appJs, /meter\.className = "directive-task-meter"/);
   assert.match(appJs, /meter\.className = "far-dispatch-meter"/);
   assert.match(appJs, /loopMeter\.className = "far-dispatch-loop-meter"/);
@@ -1817,8 +1819,12 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(styles, /\.far-dispatch-branch-choice\.is-detour/);
   assert.match(styles, /\.far-dispatch-branch-choice\.is-shift/);
   assert.match(styles, /\.far-dispatch-branch-choice\.is-focused/);
+  assert.match(styles, /\.far-dispatch-branch-choice\.is-decision-recommended/);
+  assert.match(styles, /\.far-dispatch-branch-choice\.is-decision-recommended-shift/);
+  assert.match(styles, /\.far-dispatch-branch-choice\.is-decision-fallback/);
   assert.match(styles, /\.far-dispatch-branch-choice small/);
   assert.match(styles, /\.far-dispatch-branch-choice-decision/);
+  assert.match(styles, /\.far-dispatch-branch-choice-decision\.is-recommended-shift/);
   assert.match(styles, /\.far-dispatch-branch-choice-reason/);
   assert.match(styles, /\.far-dispatch-branch-choice-objective/);
   assert.match(styles, /\.far-dispatch-branch-choice-followup/);
@@ -2855,6 +2861,10 @@ test("远航调度会在 20M 后按当前航段指定目标指令", () => {
     dispatch.branchChoices.map((choice) => choice.decisionText),
     ["路线判断：当前航段首推", "路线判断：备选建档"]
   );
+  assert.deepEqual(
+    dispatch.branchChoices.map((choice) => choice.decisionKind),
+    ["recommended", "fallback"]
+  );
   assert.equal(
     dispatch.branchChoiceText,
     "分支选择：协同 谐振脉冲（可选择 · 补当前资源 · 推荐原因：点击/过载航段保留当前资源 · 路线判断：当前航段首推 · 路线目标：按当前航段推荐建立协同路线 · 下一步：先执行目标 点火齐射，再选协同 谐振脉冲 · 后续协同回航触发闭环与远航突破 · 本步合计 +13% · 回目标 远航闭环 +16% + 远航突破 +0.05%剩余 + 契合闭环 +7% · 远航协同 +5% · 协同补给 +3%当前 · 航段契合 +5%） / 绕行 巡航回收（可选择 · 投送累计航段 · 路线判断：备选建档 · 路线目标：建立绕行路线，记录为下轮对照 · 下一步：先执行目标 点火齐射，再选绕行 巡航回收 · 后续绕行回航触发闭环与绕行突破 · 本步合计 +4% · 投送累计 · 回目标 远航闭环 +16% + 远航突破 +0.05%剩余 + 绕行突破 +0.03%剩余 · 远航绕行 +4% · 绕行投送 -0.3%当前）"
@@ -3658,6 +3668,10 @@ test("远航调度会奖励切换上一轮分支", () => {
     ["路线判断：推荐稳航", "路线判断：备选改道"]
   );
   assert.deepEqual(
+    dispatch.branchChoices.map((choice) => choice.decisionKind),
+    ["recommended-stable", "fallback-shift"]
+  );
+  assert.deepEqual(
     dispatch.branchChoices.map((choice) => choice.followupText),
     [
       "下一步：执行协同 谐振脉冲，再回目标 点火齐射",
@@ -3747,6 +3761,10 @@ test("远航调度会奖励切换上一轮分支", () => {
   assert.deepEqual(
     detourLastDispatch.branchChoices.map((choice) => choice.decisionText),
     ["路线判断：推荐改道", "路线判断：备选稳航"]
+  );
+  assert.deepEqual(
+    detourLastDispatch.branchChoices.map((choice) => choice.decisionKind),
+    ["recommended-shift", "fallback-stable"]
   );
   assert.deepEqual(
     detourLastDispatch.branchChoices.map((choice) => choice.followupText),

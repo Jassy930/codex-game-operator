@@ -721,6 +721,8 @@ function renderFarDispatchBranchChoices(dispatch) {
         getFarDispatchBranchChoiceKind(choice) +
         " is-" +
         getFarDispatchBranchChoiceStatus(choice) +
+        " is-decision-" +
+        getFarDispatchBranchChoiceDecisionKind(choice) +
         (choice.focused ? " is-focused" : "");
       item.title = choice.text ?? "";
 
@@ -731,7 +733,9 @@ function renderFarDispatchBranchChoices(dispatch) {
       directive.textContent = choice.directiveName;
 
       const decision = document.createElement("small");
-      decision.className = "far-dispatch-branch-choice-decision";
+      decision.className =
+        "far-dispatch-branch-choice-decision is-" +
+        getFarDispatchBranchChoiceDecisionKind(choice);
       decision.textContent = choice.decisionText ?? "";
       decision.hidden = !choice.decisionText;
 
@@ -875,6 +879,11 @@ function getFarDispatchBranchChoiceKind(choice) {
 function getFarDispatchBranchChoiceStatus(choice) {
   const status = String(choice.status ?? "available");
   return status.replace(/[^a-z-]/g, "") || "available";
+}
+
+function getFarDispatchBranchChoiceDecisionKind(choice) {
+  const decisionKind = String(choice.decisionKind ?? "fallback");
+  return decisionKind.replace(/[^a-z-]/g, "") || "fallback";
 }
 
 function renderDirective(option) {

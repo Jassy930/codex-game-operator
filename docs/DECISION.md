@@ -1,5 +1,28 @@
 # Decision
 
+## 2026-05-01 Product decision：远航路线判断状态
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-01 05:33 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#6 仍是最新反馈线程，原始反馈指出后半段“只有不停的目标、玩法没有真正变化”，因此本轮继续进入 Product decision。
+
+当前最大问题：前序已经让协同/绕行分支卡片显示“路线判断”，但该判断仍和多行路线目标、下一步、收益对照一起以文本堆叠呈现。玩家能读到首推、稳航、改道或建档，但快速扫卡时仍需要在多行文字中定位判断行。
+
+本轮决策：
+
+- 新增“远航路线判断状态”。
+- `branchChoices` 为每条协同/绕行路线派生 `decisionKind`：覆盖 `recommended`、`recommended-stable`、`recommended-shift`、`fallback`、`fallback-stable`、`fallback-shift`、`selected` 和 `completed`。
+- 主操作区分支卡片和路线判断行追加 `is-decision-*` 状态 class，让首推/推荐稳航/推荐改道/备选/已选/已完成获得不同视觉强调。
+- 本轮只调整派生展示、DOM class、样式和测试；不新增收益、不新增存档字段，不改变升级价格、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、远航调度既有数值、冷却、连携窗口、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-05-01 05:33 CST 当前 5 个 open feedback issue、0 个 open bug issue。
+- 0/3 起手时，契合协同分支派生 `decisionKind: "recommended"`，绕行分支派生 `decisionKind: "fallback"`。
+- 上轮协同路线下，推荐协同派生 `recommended-stable`，备选改道派生 `fallback-shift`。
+- 上轮绕行路线下，推荐改道派生 `recommended-shift`，备选稳航派生 `fallback-stable`。
+- `src/app.js` 渲染 `is-decision-*` 与 `getFarDispatchBranchChoiceDecisionKind`；`src/styles.css` 包含路线判断状态样式。
+- 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含 `decisionKind` 和 `is-decision-*` 路线判断状态样式。
+
 ## 2026-05-01 Product decision：远航路线判断
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-01 05:15 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#6 仍是最新反馈线程，原始反馈指出后半段“只有不停的目标、玩法没有真正变化”，因此本轮继续进入 Product decision。

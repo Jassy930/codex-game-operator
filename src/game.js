@@ -5134,6 +5134,13 @@ function buildFarRouteDispatchBranchChoices(
       focused,
       branchStatus
     );
+    const decisionKind = buildFarRouteDispatchBranchDecisionKind(
+      active,
+      shift,
+      stable,
+      focused,
+      branchStatus
+    );
     const followupText = buildFarRouteDispatchBranchFollowupText(
       choice.label,
       choice.directive.name,
@@ -5181,6 +5188,7 @@ function buildFarRouteDispatchBranchChoices(
       nextText: choice.nextText,
       reasonText,
       decisionText,
+      decisionKind,
       objectiveText,
       followupText,
       active,
@@ -5255,6 +5263,40 @@ function buildFarRouteDispatchBranchDecisionText(
   }
 
   return "路线判断：备选建档";
+}
+
+function buildFarRouteDispatchBranchDecisionKind(
+  active,
+  shift,
+  stable,
+  focused,
+  branchStatus
+) {
+  if (active) {
+    return String(branchStatus?.kind ?? "").endsWith("-prep") ? "completed" : "selected";
+  }
+
+  if (focused && shift) {
+    return "recommended-shift";
+  }
+
+  if (focused && stable) {
+    return "recommended-stable";
+  }
+
+  if (focused) {
+    return "recommended";
+  }
+
+  if (shift) {
+    return "fallback-shift";
+  }
+
+  if (stable) {
+    return "fallback-stable";
+  }
+
+  return "fallback";
 }
 
 function buildFarRouteDispatchBranchObjectiveText(

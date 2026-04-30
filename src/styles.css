@@ -1561,10 +1561,52 @@ h2 {
 
 .far-dispatch-branch-choice-decision {
   color: #fff4c2;
+  padding-left: 6px;
+  border-left: 3px solid rgba(255, 244, 194, 0.36);
 }
 
 .far-dispatch-branch-choice-decision[hidden] {
   display: none;
+}
+
+.far-dispatch-branch-choice.is-decision-recommended,
+.far-dispatch-branch-choice.is-decision-recommended-stable,
+.far-dispatch-branch-choice.is-decision-recommended-shift {
+  background:
+    linear-gradient(90deg, rgba(150, 231, 168, 0.16), rgba(248, 243, 231, 0.05)),
+    rgba(248, 243, 231, 0.06);
+}
+
+.far-dispatch-branch-choice.is-decision-recommended .far-dispatch-branch-choice-decision,
+.far-dispatch-branch-choice.is-decision-recommended-stable .far-dispatch-branch-choice-decision,
+.far-dispatch-branch-choice.is-decision-recommended-shift .far-dispatch-branch-choice-decision {
+  color: #d8ffe2;
+  border-left-color: rgba(150, 231, 168, 0.78);
+}
+
+.far-dispatch-branch-choice.is-decision-recommended-shift .far-dispatch-branch-choice-decision,
+.far-dispatch-branch-choice-decision.is-recommended-shift {
+  color: #ffd1df;
+  border-left-color: rgba(255, 126, 177, 0.78);
+}
+
+.far-dispatch-branch-choice.is-decision-recommended-shift {
+  background:
+    linear-gradient(90deg, rgba(255, 126, 177, 0.15), rgba(248, 243, 231, 0.05)),
+    rgba(248, 243, 231, 0.06);
+}
+
+.far-dispatch-branch-choice.is-decision-selected .far-dispatch-branch-choice-decision,
+.far-dispatch-branch-choice.is-decision-completed .far-dispatch-branch-choice-decision {
+  color: #cfe8ff;
+  border-left-color: rgba(116, 194, 255, 0.78);
+}
+
+.far-dispatch-branch-choice.is-decision-fallback .far-dispatch-branch-choice-decision,
+.far-dispatch-branch-choice.is-decision-fallback-stable .far-dispatch-branch-choice-decision,
+.far-dispatch-branch-choice.is-decision-fallback-shift .far-dispatch-branch-choice-decision {
+  color: rgba(248, 243, 231, 0.66);
+  border-left-color: rgba(248, 243, 231, 0.28);
 }
 
 .far-dispatch-branch-choice-objective {
