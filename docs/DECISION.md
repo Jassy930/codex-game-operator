@@ -23,8 +23,12 @@
 - `src/styles.css` 包含 `.directive-button .directive-dispatch-detour-infusion` 样式。
 - 本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 117 项。
 - 构建产物已确认包含 `FAR_ROUTE_DISPATCH_DETOUR_INFUSION_COST_RATE`、`FAR_ROUTE_DISPATCH_DETOUR_INFUSION_PROGRESS_MULTIPLIER`、`dispatchDetourInfusionCost`、`dispatchDetourInfusionProgress`、`directive-dispatch-detour-infusion` 和“绕行投送”。
+- 提交 a5af1b8 已推送；GitHub Pages workflow 25165249350 已成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`。
+- 线上地址 https://jassy930.github.io/codex-game-operator/ 返回 HTTP 200，线上 `game.js`、`app.js` 和 `styles.css` 已确认包含绕行投送相关标记。
+- #6 已回复：说明绕行分支新增消耗当前能量并推进累计航段的“绕行投送”，并保持 issue open 等待复测。
+- 回复后同步 GitHub Issues：2026-04-30 20:27 CST 当前仍为 5 个 open feedback issue、0 个 open bug issue；#6 更新时间为 2026-04-30T12:27:25Z。
 
-下一步：完成 npm 验证、提交、推送和 #6 回复；上线后等待 #6 复测是否认为绕行分支已经形成“消耗资源推进航段”的真实选择差异。
+下一步：等待 #6 复测是否认为绕行分支已经形成“消耗资源推进航段”的真实选择差异；同时记录 GitHub Actions Node.js 20 actions 弃用提示，后续需要升级 workflow action 运行环境。
 
 ## 2026-04-30 Product decision：远航绕行分支
 

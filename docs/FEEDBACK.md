@@ -8,6 +8,9 @@
 - 本轮不新增存档字段，不改变升级价格、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、基础连携倍率、远航调度校准、远航续航、远航协同、远航绕行奖励、远航闭环、远航突破、绕行突破、远航整备刷新冷却、整备续航、整备回航、反馈入口或部署链路。
 - 本轮本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 117 项。
 - 构建产物已确认包含 `FAR_ROUTE_DISPATCH_DETOUR_INFUSION_COST_RATE`、`FAR_ROUTE_DISPATCH_DETOUR_INFUSION_PROGRESS_MULTIPLIER`、`dispatchDetourInfusionCost`、`dispatchDetourInfusionProgress`、`directive-dispatch-detour-infusion` 和“绕行投送”。
+- 提交 a5af1b8 已推送；GitHub Pages workflow 25165249350 已成功；线上地址返回 HTTP 200，且线上 `game.js`、`app.js` 和 `styles.css` 已确认包含绕行投送相关标记。
+- #6 已回复：说明远航绕行现在会消耗少量当前能量，并按 150% 投送量推进累计能量，形成“保留当前资源 vs 消耗当前资源推进航段”的选择差异。
+- 回复后同步 GitHub Issues：2026-04-30 20:27 CST 当前仍为 5 个 open feedback issue、0 个 open bug issue；#6 更新时间为 2026-04-30T12:27:25Z。
 
 - GitHub Issues：gh 可用且已认证；2026-04-30 19:46 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
 - #6 继续作为本轮 Product decision 依据：该反馈指出后半段“只有不停的目标、玩法没有真正变化”；前序已经把远航目标、协同/续航、闭环、远航突破、整备续航和整备回航补成连续短循环，本轮不再继续追加单一路径奖励，而是处理第二步缺少分支选择的问题。
