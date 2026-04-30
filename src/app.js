@@ -240,6 +240,7 @@ const elements = {
   projectMapSummary: document.querySelector("#projectMapSummary"),
   projectMapFilter: document.querySelector("#projectMapFilter"),
   projectMapTrack: document.querySelector("#projectMapTrack"),
+  projectChapterHero: document.querySelector("#projectChapterHero"),
   projectChapterMap: document.querySelector("#projectChapterMap"),
   routeStanceList: document.querySelector("#routeStanceList"),
   projectFilterList: document.querySelector("#projectFilterList"),
@@ -430,7 +431,9 @@ function render() {
   renderProjectForecastMap(projectOverview.forecastVisuals ?? getProjectForecastVisuals(projects));
   renderProjectRewardMap(projectOverview.rewardVisuals ?? getProjectRewardVisuals(projects));
   renderProjectMap(getProjectVisualMap(projects, projectFilter));
-  renderProjectChapterMap(getProjectChapterVisuals(projects));
+  const projectChapters = getProjectChapterVisuals(projects);
+  renderProjectChapterHero(projectChapters);
+  renderProjectChapterMap(projectChapters);
   renderRouteStances(routeStance);
   renderProjectFilters(projects);
   const projectFilterSummary = getProjectFilterSummary(projects, projectFilter);
@@ -1216,6 +1219,95 @@ function renderProjectMapNode(node) {
 
 function renderProjectChapterMap(chapters) {
   elements.projectChapterMap.replaceChildren(...chapters.map(renderProjectChapterTile));
+}
+
+function renderProjectChapterHero(chapters) {
+  const chapter = getActiveProjectChapter(chapters);
+  if (!chapter) {
+    elements.projectChapterHero.hidden = true;
+    elements.projectChapterHero.replaceChildren();
+    return;
+  }
+
+  elements.projectChapterHero.hidden = false;
+  elements.projectChapterHero.className = [
+    "project-chapter-hero",
+    chapter.visualClass,
+    "is-" + chapter.status
+  ]
+    .filter(Boolean)
+    .join(" ");
+  elements.projectChapterHero.setAttribute("role", "img");
+  elements.projectChapterHero.setAttribute(
+    "aria-label",
+    "当前章节：" +
+      chapter.name +
+      " " +
+      chapter.progressText +
+      " · " +
+      chapter.focusText +
+      " · " +
+      chapter.nextText
+  );
+  elements.projectChapterHero.title = elements.projectChapterHero.getAttribute("aria-label");
+
+  const scene = document.createElement("span");
+  scene.className = "project-chapter-hero-scene";
+  scene.setAttribute("aria-hidden", "true");
+
+  const lane = document.createElement("span");
+  lane.className = "project-chapter-hero-lane";
+
+  const gate = document.createElement("span");
+  gate.className = "project-chapter-hero-gate";
+
+  const signal = document.createElement("span");
+  signal.className = "project-chapter-hero-signal";
+
+  const beacon = document.createElement("span");
+  beacon.className = "project-chapter-hero-beacon";
+
+  scene.append(lane, gate, signal, beacon);
+
+  const meta = document.createElement("span");
+  meta.className = "project-chapter-hero-meta";
+
+  const kicker = document.createElement("span");
+  kicker.className = "project-chapter-hero-kicker";
+  kicker.textContent = "当前章节";
+
+  const name = document.createElement("strong");
+  name.textContent = chapter.name;
+
+  const progress = document.createElement("span");
+  progress.textContent = chapter.progressText + " · " + chapter.focusText;
+
+  const next = document.createElement("span");
+  next.textContent = chapter.nextText;
+
+  meta.append(kicker, name, progress, next);
+
+  const meter = document.createElement("span");
+  meter.className = "project-chapter-hero-meter";
+  meter.setAttribute("aria-hidden", "true");
+
+  const fill = document.createElement("span");
+  fill.style.width = Math.round(chapter.progress * 100) + "%";
+  meter.append(fill);
+
+  elements.projectChapterHero.replaceChildren(scene, meta, meter);
+}
+
+function getActiveProjectChapter(chapters) {
+  return (
+    chapters.find((chapter) => chapter.filterId === projectFilter) ??
+    (projectFilter === INITIAL_PROJECT_FILTER_ID
+      ? chapters.find((chapter) => chapter.status === "current")
+      : null) ??
+    chapters.find((chapter) => chapter.status === "current") ??
+    chapters[0] ??
+    null
+  );
 }
 
 function renderProjectRewardMap(rewards) {

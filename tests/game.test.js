@@ -1169,6 +1169,41 @@ test("静态首页会渲染星图章节视觉导航", () => {
   assert.match(styles, /\.project-chapter-focus/);
 });
 
+test("星图视觉航线会渲染当前章节大图景", () => {
+  const indexHtml = readFileSync(new URL("../index.html", import.meta.url), "utf8");
+  const appJs = readFileSync(new URL("../src/app.js", import.meta.url), "utf8");
+  const styles = readFileSync(new URL("../src/styles.css", import.meta.url), "utf8");
+
+  assert.match(indexHtml, /id="projectChapterHero"/);
+  assert.match(indexHtml, /class="project-chapter-hero is-starter is-current"/);
+  assert.match(indexHtml, /当前章节：首段星图 0\/4 · 星核点亮 · 下一条 1\/4 点亮星图/);
+  assert.match(indexHtml, /project-chapter-hero-scene/);
+  assert.match(indexHtml, /project-chapter-hero-lane/);
+  assert.match(indexHtml, /project-chapter-hero-gate/);
+  assert.match(indexHtml, /project-chapter-hero-signal/);
+  assert.match(indexHtml, /project-chapter-hero-beacon/);
+  assert.match(indexHtml, /project-chapter-hero-meter/);
+  assert.match(appJs, /projectChapterHero: document\.querySelector\("#projectChapterHero"\)/);
+  assert.match(appJs, /function renderProjectChapterHero\(chapters\)/);
+  assert.match(appJs, /function getActiveProjectChapter\(chapters\)/);
+  assert.match(appJs, /renderProjectChapterHero\(projectChapters\)/);
+  assert.match(appJs, /"project-chapter-hero"/);
+  assert.match(appJs, /chapter\.visualClass/);
+  assert.match(appJs, /scene\.className = "project-chapter-hero-scene"/);
+  assert.match(appJs, /lane\.className = "project-chapter-hero-lane"/);
+  assert.match(appJs, /gate\.className = "project-chapter-hero-gate"/);
+  assert.match(appJs, /signal\.className = "project-chapter-hero-signal"/);
+  assert.match(appJs, /beacon\.className = "project-chapter-hero-beacon"/);
+  assert.match(styles, /\.project-chapter-hero/);
+  assert.match(styles, /\.project-chapter-hero-scene/);
+  assert.match(styles, /\.project-chapter-hero-lane/);
+  assert.match(styles, /\.project-chapter-hero-gate/);
+  assert.match(styles, /\.project-chapter-hero-signal/);
+  assert.match(styles, /\.project-chapter-hero-beacon/);
+  assert.match(styles, /\.project-chapter-hero\.is-long-tail \.project-chapter-hero-scene/);
+  assert.match(styles, /\.project-chapter-hero-meter/);
+});
+
 test("静态首页会引用主操作区工坊插画资产", () => {
   const indexHtml = readFileSync(new URL("../index.html", import.meta.url), "utf8");
   const styles = readFileSync(new URL("../src/styles.css", import.meta.url), "utf8");

@@ -2,6 +2,12 @@
 
 ## 2026-04-30
 
+- GitHub Issues：gh 可用且已认证；2026-04-30 18:02 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
+- #4 继续作为本轮 Product decision 依据：该反馈指出界面文字密集，希望更多图片和更好看；前序已补星图插画、视觉航线、章节视觉导航、章节徽记、筛选视觉标识、项目列表窗口和章节微图景，本轮处理当前章节缺少更大画面锚点的问题。
+- 本轮改动新增当前章节大图景：星图视觉航线标题下显示 `project-chapter-hero`，用更大的轨道、星门/信标、章节信号和进度条展示当前筛选章节或当前航段所属章节。
+- 本轮只调整星图视觉航线展示层；不新增存档字段，不改变 57 段星图路线、项目完成判定、筛选结果、奖励数值、升级价格、航线策略、航线指令、反馈入口或部署链路。
+- 本轮本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 117 项。
+
 - GitHub Issues：gh 可用且已认证；2026-04-30 17:48 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
 - #4 继续作为本轮 Product decision 依据：该反馈指出界面文字密集，希望更多图片和更好看；前序已补星图插画、视觉航线、章节视觉导航、章节徽记、筛选按钮视觉标识和项目列表短窗口，本轮处理章节导航按钮内部图形面积仍偏小的问题。
 - 本轮改动新增星图章节导航微图景：四个章节按钮内加入固定轨道、星门/信标和章节信号图形，并按首段星图、专精校准、深空基建、远航长尾切换视觉差异。
