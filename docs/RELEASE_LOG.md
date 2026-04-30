@@ -9,7 +9,9 @@
 - 同步 GitHub Issues 反馈状态：2026-05-01 05:15 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 作为本轮处理对象。
 - 验证通过：`node --test tests/game.test.js`、`npm install`、`npm test`、`npm run build`、`bun install --no-save`、`bun run test` 和 `bun run build`；测试数 118 项。
 - 构建产物已确认包含 `decisionText`、`far-dispatch-branch-choice-decision` 和“路线判断”相关文案。
-- 发布、反馈回复和钉钉通知状态待本轮 push / Pages workflow 后补记。
+- 发布：提交 `fae216e` 已推送到 `origin/main`；GitHub Pages workflow `25190159685` 成功；线上首页返回 HTTP 200，线上 `src/game.js`、`src/app.js` 和 `src/styles.css` 已确认包含 `decisionText`、`far-dispatch-branch-choice-decision` 和“路线判断”。
+- 反馈处理：已回复 #6，说明路线判断上线范围、验证结果和复测问题，issue 保持 open；回复后于 2026-05-01 05:28 CST 再次同步 GitHub Issues，当前仍为 5 个 open feedback issue、0 个 open bug issue。
+- 钉钉通知未发送：运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` 相关变量名，也未发现本地 `.env*` 文件；未将 webhook 写入仓库。
 
 - 远航调度新增“路线反馈”：航线指令执行后的行动反馈会确认刚完成目标、选择协同/绕行、完成回航、完成整备或整备回航，并提示下一步，继续回应 #6 对后半段玩法变化不明显的反馈。
 - `src/game.js` 为指令选项和执行结果派生 `dispatchRouteResultText` 并写入行动反馈；`src/app.js` 在本地 `directive` 事件记录该字段；`tests/game.test.js` 覆盖目标起手、协同/绕行分支、回航、整备、整备回航、事件绑定和构建产物。
