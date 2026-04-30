@@ -9,6 +9,11 @@
 - 同步 GitHub Issues 反馈状态：2026-04-30 23:35 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 作为本轮处理对象。
 - 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
 - 构建产物已确认包含按钮级推荐分支逻辑。
+- 提交 3068cbe 已推送；GitHub Pages workflow 25174805397 已成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`。
+- 线上地址 https://jassy930.github.io/codex-game-operator/ 返回 HTTP 200，且线上 `game.js` 已确认包含 `branchFocusDirectiveId` 与按钮级推荐逻辑。
+- 已回复 #6，说明目标后的契合分支按钮会显示“推荐协同/推荐绕行”，非契合分支仍保留可选路线文案；issue 保持 open 等待复测。
+- 回复后同步 GitHub Issues 反馈状态：2026-04-30 23:42 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 更新时间为 2026-04-30T15:42:26Z。
+- 钉钉通知未发送：运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` 相关变量名；未将 webhook 写入仓库。
 
 - 远航调度新增“推荐分支”：20M 后远航调度 active 时，主操作区会把当前航段契合的协同/绕行路线整理成一行推荐分支，星图总览远航调度摘要也会同步显示，继续回应 #6 对后半段玩法变化不明显的反馈。
 - `src/game.js` 新增 `branchRecommendationText` 派生和 `buildFarRouteDispatchBranchRecommendationText`；`src/app.js` 渲染 `far-dispatch-branch-recommendation`；`src/styles.css` 新增推荐分支样式；`index.html` 增加静态占位；`tests/game.test.js` 覆盖锁定态、推荐协同、推荐可改道、静态绑定和样式标记。

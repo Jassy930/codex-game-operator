@@ -22,8 +22,13 @@
 - 契合分支仍结算既有“航段契合 +5%”，非契合分支不触发。
 - 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
 - 构建产物已确认包含 `推荐` + `branchFocusDirectiveId` 按钮级推荐逻辑。
+- 提交 3068cbe 已推送；GitHub Pages workflow 25174805397 已成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`。
+- 线上地址 https://jassy930.github.io/codex-game-operator/ 返回 HTTP 200，线上 `game.js` 已确认包含 `branchFocusDirectiveId` 与按钮级推荐逻辑。
+- #6 已回复：说明目标后的契合分支按钮会显示“推荐协同/推荐绕行”，非契合分支仍保留原路线文案；issue 保持 open 等待复测。
+- 回复后同步 GitHub Issues：2026-04-30 23:42 CST 当前仍为 5 个 open feedback issue、0 个 open bug issue；#6 更新时间为 2026-04-30T15:42:26Z。
+- 钉钉通知未发送：运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` 相关变量名；未将 webhook 写入仓库。
 
-下一步：完成提交、推送、发布与 #6 回复后，等待复测按钮级推荐是否降低实际点击时的分支判断成本。
+下一步：等待 #6 复测，重点确认按钮级“推荐协同/推荐绕行”是否降低实际点击时的分支判断成本。
 
 ## 2026-04-30 Product decision：远航推荐分支
 
