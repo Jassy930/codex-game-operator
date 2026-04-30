@@ -2,6 +2,13 @@
 
 ## 2026-04-30
 
+- GitHub Issues：gh 可用且已认证；2026-04-30 16:00 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
+- #4 作为本轮 Product decision 依据：该反馈指出界面文字密集，希望更多图片和更好看；前序已补星图插画、章节视觉导航、项目图标、筛选折叠和详情折叠，本轮继续处理项目列表卡片主体仍偏文字的问题。
+- 本轮改动新增星图项目卡片缩略图：每张项目卡会渲染 `project-card-scene`，用现有项目进度驱动 `--project-card-progress`，并用累计/升级路线和总产能/点击/自动/过载奖励方向切换视觉形态。
+- 本轮只调整星图项目卡片展示层，不新增存档字段，不改变 57 段星图路线、项目完成判定、奖励数值、升级价格、航线策略、航线指令、反馈入口或部署链路。
+- 本轮本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 110 项。
+- 构建产物已确认包含 `project-card-scene`、`--project-card-progress`、`renderProjectCardScene` 和“航段缩略图”。
+
 - GitHub Issues：gh 可用且已认证；2026-04-30 15:45 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
 - #5 作为本轮 Product decision 依据：该反馈指出点火按钮太薄弱，希望增加点击反馈、特效和点击欲望；前序已补视觉脉冲、粒子、收益浮层、8 格连击轨、下一击预告、环形蓄能轨、音效、触感和落点闪光，本轮补点火按钮本体的连击阶段光环。
 - 本轮改动新增点火阶段光环：静态首页显示 `core-stage-aura`；运行期按现有连击进度更新 `--core-stage-angle`，在 3/8 后进入预热、6/8 后进入升温、过载前一击进入过载前兆，过载命中时播放爆发态。

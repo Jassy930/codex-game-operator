@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+- 星图项目卡片新增可视化进度缩略图：每张项目卡显示 `project-card-scene`，用路线标记、进度填充、当前节点和奖励方向图形降低项目列表的文字读取压力，继续回应 #4 对界面文字密度和图片化表达的反馈。
+- `src/app.js` 新增 `renderProjectCardScene`，按现有 `project.progress` 写入 `--project-card-progress` 并派生累计/升级路线、完成/当前状态和奖励方向 class；`src/styles.css` 新增缩略图、进度轨、节点和四类奖励方向样式；`tests/game.test.js` 覆盖结构与样式标记。
+- 本轮只调整星图项目卡片展示层；不新增存档字段，不改变 57 段星图路线、项目完成判定、奖励数值、升级价格、航线策略、航线指令、反馈入口或部署链路。
+- 同步 GitHub Issues 反馈状态：2026-04-30 16:00 CST 当前 5 个 open feedback issue、0 个 open bug issue；#4 作为本轮处理对象。
+- 验证通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 110 项。
+- 构建产物已确认包含 `project-card-scene`、`--project-card-progress`、`renderProjectCardScene` 和“航段缩略图”。
+
 - 点火按钮新增阶段光环：按钮主体会随 8 格连击进度点亮阶段环，3/8 后预热、6/8 后升温、过载前一击脉动、过载命中爆发，继续回应 #5 对点击反馈、特效和点击欲望的反馈。
 - `index.html` 新增 `core-stage-aura`；`src/app.js` 在 `renderCoreFeedback` 中用现有连击进度更新 `--core-stage-angle` 并切换阶段状态；`src/styles.css` 新增阶段光环样式与 `coreStageCharge` / `coreStageBurst` 动效；`tests/game.test.js` 覆盖静态标记、运行期绑定和样式标记。
 - 本轮只调整主点火按钮展示层；不新增存档字段，不改变点击收益、连击窗口、过载奖励、升级价格、产能公式、星图航段、航线策略、航线指令、反馈入口或部署链路。

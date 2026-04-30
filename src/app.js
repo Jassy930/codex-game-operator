@@ -1354,7 +1354,7 @@ function renderProject(project) {
   dispatchBadge.hidden = !project.dispatchBadgeText;
 
   header.append(title, segmentBadge, chapterBadge, tagBadge, statusBadge, dispatchBadge);
-  item.append(header);
+  item.append(header, renderProjectCardScene(project));
 
   const detailNodes = renderProjectDetailNodes(project);
   if (project.isCurrent) {
@@ -1374,6 +1374,50 @@ function renderProject(project) {
     item.append(details);
   }
   return item;
+}
+
+function renderProjectCardScene(project) {
+  const rewardIconId = getProjectRewardIconId(project);
+  const progressPercent = Math.round(Math.max(0, Math.min(1, project.progress)) * 100);
+  const scene = document.createElement("span");
+  scene.className = [
+    "project-card-scene",
+    project.completed ? "is-complete" : "",
+    project.isCurrent ? "is-current" : "is-pending",
+    project.upgradeId ? "is-upgrade-track" : "is-energy-track",
+    "is-reward-" + rewardIconId
+  ]
+    .filter(Boolean)
+    .join(" ");
+  scene.style.setProperty("--project-card-progress", progressPercent + "%");
+  scene.setAttribute("role", "img");
+  scene.setAttribute(
+    "aria-label",
+    project.name + "航段缩略图：" + project.progressText + "，奖励 " + project.reward
+  );
+
+  const trackMark = document.createElement("span");
+  trackMark.className = "project-card-scene-track-mark";
+  trackMark.setAttribute("aria-hidden", "true");
+
+  const rail = document.createElement("span");
+  rail.className = "project-card-scene-rail";
+  rail.setAttribute("aria-hidden", "true");
+
+  const fill = document.createElement("span");
+  fill.className = "project-card-scene-fill";
+
+  const marker = document.createElement("span");
+  marker.className = "project-card-scene-marker";
+
+  rail.append(fill, marker);
+
+  const rewardMark = document.createElement("span");
+  rewardMark.className = "project-card-scene-reward";
+  rewardMark.setAttribute("aria-hidden", "true");
+
+  scene.append(trackMark, rail, rewardMark);
+  return scene;
 }
 
 function renderProjectDetailNodes(project) {

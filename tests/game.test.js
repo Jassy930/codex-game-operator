@@ -1257,6 +1257,29 @@ test("星图项目卡片会渲染推进和奖励图标", () => {
   assert.match(styles, /\.project-card-icon-overload/);
 });
 
+test("星图项目卡片会渲染可视化进度缩略图", () => {
+  const appJs = readFileSync(new URL("../src/app.js", import.meta.url), "utf8");
+  const styles = readFileSync(new URL("../src/styles.css", import.meta.url), "utf8");
+
+  assert.match(appJs, /function renderProjectCardScene\(project\)/);
+  assert.match(appJs, /item\.append\(header, renderProjectCardScene\(project\)\)/);
+  assert.match(appJs, /--project-card-progress/);
+  assert.match(appJs, /project-card-scene-track-mark/);
+  assert.match(appJs, /project-card-scene-rail/);
+  assert.match(appJs, /project-card-scene-fill/);
+  assert.match(appJs, /project-card-scene-marker/);
+  assert.match(appJs, /project-card-scene-reward/);
+  assert.match(styles, /\.project-card-scene/);
+  assert.match(styles, /--project-card-progress/);
+  assert.match(styles, /\.project-card-scene-track-mark/);
+  assert.match(styles, /\.project-card-scene-fill/);
+  assert.match(styles, /\.project-card-scene-marker/);
+  assert.match(styles, /\.project-card-scene\.is-energy-track/);
+  assert.match(styles, /\.project-card-scene\.is-upgrade-track/);
+  assert.match(styles, /\.project-card-scene\.is-reward-click/);
+  assert.match(styles, /\.project-card-scene\.is-reward-overload/);
+});
+
 test("星图项目卡片会默认折叠非当前航段详情", () => {
   const appJs = readFileSync(new URL("../src/app.js", import.meta.url), "utf8");
   const styles = readFileSync(new URL("../src/styles.css", import.meta.url), "utf8");

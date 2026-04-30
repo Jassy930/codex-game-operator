@@ -1,5 +1,28 @@
 # Decision
 
+## 2026-04-30 Product decision：星图项目缩略图
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-04-30 16:00 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。#5 与 #6 已连续多轮处理并等待复测，本轮选择继续处理 #4 的“界面文字密集、希望更多图片和更好看”反馈。
+
+当前最大问题：星图计划已有星图插画、章节视觉导航、项目图标、筛选折叠和项目详情折叠；但项目列表每张卡的主体仍主要由航段、章节、标签、状态和详情文字构成。玩家扫 57 段列表时，需要读文字和进度句子来判断航段推进状态、累计/升级路线和奖励方向。
+
+本轮决策：
+
+- 在每张星图项目卡片中新增 `project-card-scene` 可视化进度缩略图。
+- 缩略图只从现有 `project.progress`、`project.completed`、`project.isCurrent`、`project.upgradeId` 和奖励 effect 派生，显示推进路线、进度填充、当前节点与奖励方向。
+- 本轮只调整星图项目卡片展示层；不新增存档字段，不改变 57 段星图路线、项目完成判定、奖励数值、升级价格、航线策略、航线指令、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-04-30 16:00 CST 当前 5 个 open feedback issue、0 个 open bug issue。
+- `src/app.js` 包含 `renderProjectCardScene`，并把 `project-card-scene` 插入每张项目卡。
+- `src/styles.css` 包含 `--project-card-progress`、`project-card-scene-fill`、`project-card-scene-marker`、累计/升级推进样式和四类奖励方向样式。
+- `tests/game.test.js` 覆盖项目卡可视化进度缩略图结构与样式标记。
+- 本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 110 项。
+- 构建产物已确认包含 `project-card-scene`、`--project-card-progress`、`renderProjectCardScene` 和“航段缩略图”。
+
+下一步：推送并等待 #4 复测；如果仍认为界面文字密度高，再优先继续把项目列表/筛选信息转为可扫视视觉结构，而不是继续增加长文说明。
+
 ## 2026-04-30 Product decision：点火阶段光环
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-04-30 15:45 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#6 最近一轮远航突破已回复等待复测，#5 仍围绕“点火按钮太薄弱、增加点击反馈和点击欲望”保持 open，因此本轮进入 Product decision，并处理点火按钮本体的连续兴奋度反馈。

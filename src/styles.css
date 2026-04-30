@@ -2225,6 +2225,178 @@ h2 {
   color: #c9f0ff;
 }
 
+.project-card-scene {
+  --project-card-progress: 0%;
+  display: grid;
+  grid-template-columns: 34px minmax(0, 1fr) 34px;
+  gap: 10px;
+  align-items: center;
+  min-height: 54px;
+  overflow: hidden;
+  padding: 9px 10px;
+  border: 1px solid rgba(248, 243, 231, 0.12);
+  border-radius: 8px;
+  background:
+    radial-gradient(circle at var(--project-card-progress) 50%, rgba(244, 178, 60, 0.22), transparent 32%),
+    linear-gradient(90deg, rgba(19, 181, 166, 0.08), rgba(116, 204, 244, 0.08), rgba(232, 93, 117, 0.08));
+  box-shadow: inset 0 0 22px rgba(248, 243, 231, 0.05);
+}
+
+.project-card-scene-track-mark,
+.project-card-scene-reward {
+  display: grid;
+  width: 32px;
+  height: 32px;
+  place-items: center;
+  border: 1px solid currentColor;
+  border-radius: 8px;
+  background: rgba(8, 11, 15, 0.28);
+  box-shadow: inset 0 0 16px rgba(248, 243, 231, 0.06);
+}
+
+.project-card-scene-track-mark::before,
+.project-card-scene-reward::before {
+  content: "";
+  display: block;
+}
+
+.project-card-scene.is-energy-track .project-card-scene-track-mark {
+  color: #bdf4eb;
+}
+
+.project-card-scene.is-energy-track .project-card-scene-track-mark::before {
+  width: 18px;
+  height: 18px;
+  border: 2px solid currentColor;
+  border-radius: 50%;
+  box-shadow:
+    9px 0 0 -5px currentColor,
+    -9px 0 0 -5px currentColor;
+}
+
+.project-card-scene.is-upgrade-track .project-card-scene-track-mark {
+  color: #fff7c2;
+}
+
+.project-card-scene.is-upgrade-track .project-card-scene-track-mark::before {
+  width: 18px;
+  height: 18px;
+  border: 2px solid currentColor;
+  border-radius: 5px;
+  transform: rotate(45deg);
+}
+
+.project-card-scene-rail {
+  position: relative;
+  display: block;
+  min-width: 0;
+  height: 10px;
+  border-radius: 999px;
+  background: rgba(248, 243, 231, 0.12);
+}
+
+.project-card-scene-rail::before,
+.project-card-scene-rail::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  background: rgba(248, 243, 231, 0.34);
+  transform: translateY(-50%);
+}
+
+.project-card-scene-rail::before {
+  left: 7px;
+}
+
+.project-card-scene-rail::after {
+  right: 7px;
+}
+
+.project-card-scene-fill {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: var(--project-card-progress);
+  border-radius: inherit;
+  background: linear-gradient(90deg, #13b5a6, #f4b23c);
+}
+
+.project-card-scene-marker {
+  position: absolute;
+  top: 50%;
+  left: var(--project-card-progress);
+  width: 18px;
+  height: 18px;
+  border: 2px solid #f8f3e7;
+  border-radius: 50%;
+  background: #1f211e;
+  box-shadow: 0 0 14px rgba(244, 178, 60, 0.42);
+  transform: translate(-50%, -50%);
+}
+
+.project-card-scene.is-complete .project-card-scene-marker {
+  background: #13b5a6;
+}
+
+.project-card-scene.is-current .project-card-scene-marker {
+  background: #f4b23c;
+}
+
+.project-card-scene-reward {
+  color: #f8f3e7;
+}
+
+.project-card-scene.is-reward-click .project-card-scene-reward {
+  color: #f4b23c;
+}
+
+.project-card-scene.is-reward-second .project-card-scene-reward {
+  color: #13b5a6;
+}
+
+.project-card-scene.is-reward-overload .project-card-scene-reward {
+  color: #e85d75;
+}
+
+.project-card-scene.is-reward-total .project-card-scene-reward {
+  color: #f8f3e7;
+}
+
+.project-card-scene.is-reward-click .project-card-scene-reward::before {
+  width: 13px;
+  height: 21px;
+  background: currentColor;
+  clip-path: polygon(58% 0, 12% 52%, 48% 52%, 34% 100%, 88% 39%, 54% 39%);
+}
+
+.project-card-scene.is-reward-second .project-card-scene-reward::before {
+  width: 18px;
+  height: 18px;
+  border: 3px solid currentColor;
+  border-radius: 50%;
+  border-left-color: transparent;
+}
+
+.project-card-scene.is-reward-overload .project-card-scene-reward::before {
+  width: 18px;
+  height: 18px;
+  border: 3px solid currentColor;
+  border-radius: 50%;
+  box-shadow: 0 0 0 5px rgba(232, 93, 117, 0.15);
+}
+
+.project-card-scene.is-reward-total .project-card-scene-reward::before {
+  width: 20px;
+  height: 20px;
+  border: 2px solid currentColor;
+  border-radius: 50%;
+  box-shadow:
+    inset 0 0 0 5px rgba(248, 243, 231, 0.12),
+    0 0 0 4px rgba(248, 243, 231, 0.08);
+}
+
 .project-card-drawer {
   border-top: 1px solid rgba(248, 243, 231, 0.12);
 }
