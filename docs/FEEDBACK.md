@@ -9,6 +9,11 @@
 - 本轮只调整派生展示、DOM、样式和测试，不新增收益、不新增存档字段，不改变升级价格、星图路线、项目奖励、远航调度既有数值、冷却、连携窗口、反馈入口或部署链路。
 - 本轮本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
 - 构建产物已确认包含 `routeStepLabels`、`getFarDispatchBranchChoiceRouteStepLabel`、`data-step-label` 和 `.far-dispatch-branch-choice-route-node::after`。
+- 发布：提交 `e3411af` 已推送到 `origin/main`；GitHub Pages workflow `25194692467` 成功，build job 执行了 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页返回 HTTP 200，线上 `src/game.js`、`src/app.js` 和 `src/styles.css` 已确认包含步骤序号相关标记。
+- #6 已回复：说明远航路线微图新增 1/2/3 步序号、验证结果、Pages 部署和复测问题；issue 保持 open，更新时间为 2026-04-30T23:38:05Z。
+- #4 已回复：说明本轮步骤序号继续降低 20M 后分支卡片对多行文字说明的依赖；issue 保持 open，更新时间为 2026-04-30T23:38:07Z。
+- 回复后同步 GitHub Issues：2026-05-01 07:38 CST 当前仍为 5 个 open feedback issue、0 个 open bug issue。
+- 钉钉通知未发送：运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` 相关变量名，父目录两层内也未发现 `.env*` 文件；未将 webhook 写入仓库。
 
 - GitHub Issues：gh 可用且已认证；2026-05-01 07:04 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue；回复 #6/#4 后于 2026-05-01 07:19 CST 再次同步，仍为 5 个 open feedback issue、0 个 open bug issue。
 - #6 继续作为本轮 Product decision 依据：该反馈指出后半段“只有不停的目标、玩法没有真正变化”；#4 仍补充界面“密密麻麻的文字”和图片化诉求。前序路线微图已经能显示路线形态、资源取向和推荐/上轮/本轮/改道，但当前处在目标、分支还是回目标阶段仍主要依赖文字步骤和按钮徽标。
