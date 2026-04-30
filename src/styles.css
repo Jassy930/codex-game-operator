@@ -1041,6 +1041,15 @@ h2 {
   line-height: 1;
 }
 
+.directive-button .directive-dispatch-branch-focus {
+  padding: 3px 6px;
+  border-radius: 999px;
+  background: rgba(150, 231, 168, 0.18);
+  color: #d8ffdf;
+  font-size: 0.68rem;
+  line-height: 1;
+}
+
 .directive-button .directive-dispatch-loop {
   padding: 3px 6px;
   border-radius: 999px;
@@ -1472,6 +1481,11 @@ h2 {
 .far-dispatch-branch-choice.is-shift {
   border-color: rgba(255, 126, 177, 0.48);
   box-shadow: inset 0 0 0 1px rgba(255, 126, 177, 0.16);
+}
+
+.far-dispatch-branch-choice.is-focused {
+  border-color: rgba(150, 231, 168, 0.54);
+  box-shadow: inset 0 0 0 1px rgba(150, 231, 168, 0.18);
 }
 
 .far-dispatch-branch-choice.is-previous {

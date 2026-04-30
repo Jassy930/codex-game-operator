@@ -1132,6 +1132,7 @@ export const FAR_ROUTE_DISPATCH_DETOUR_INFUSION_COST_RATE = 0.003;
 export const FAR_ROUTE_DISPATCH_DETOUR_INFUSION_PROGRESS_MULTIPLIER = 1.5;
 export const FAR_ROUTE_DISPATCH_DETOUR_PREP_REWARD_RATE = 0.05;
 export const FAR_ROUTE_DISPATCH_BRANCH_SHIFT_REWARD_RATE = 0.06;
+export const FAR_ROUTE_DISPATCH_BRANCH_FOCUS_REWARD_RATE = 0.05;
 
 const INITIAL_UPGRADES = Object.fromEntries(
   UPGRADE_DEFS.map((upgrade) => [upgrade.id, 0])
@@ -1448,6 +1449,14 @@ export function activateDirective(state, directiveId, now = Date.now()) {
     current,
     now
   );
+  const dispatchBranchFocusReward = getFarRouteDispatchBranchFocusReward(
+    effectiveBaseGain,
+    dispatch,
+    directive.id,
+    chain,
+    current,
+    now
+  );
   const dispatchLoopReward = getFarRouteDispatchLoopReward(
     effectiveBaseGain,
     dispatch,
@@ -1526,6 +1535,7 @@ export function activateDirective(state, directiveId, now = Date.now()) {
       dispatchSyncReward +
       dispatchDetourReward +
       dispatchBranchShiftReward +
+      dispatchBranchFocusReward +
       dispatchLoopReward +
       dispatchBreakthroughReward +
       dispatchDetourBreakthroughReward +
@@ -1584,6 +1594,8 @@ export function activateDirective(state, directiveId, now = Date.now()) {
     formatFarRouteDispatchDetourReward(dispatchDetourReward);
   const dispatchBranchShiftRewardText =
     formatFarRouteDispatchBranchShiftReward(dispatchBranchShiftReward);
+  const dispatchBranchFocusRewardText =
+    formatFarRouteDispatchBranchFocusReward(dispatchBranchFocusReward);
   const dispatchLoopRewardText = formatFarRouteDispatchLoopReward(dispatchLoopReward);
   const dispatchBreakthroughRewardText =
     formatFarRouteDispatchBreakthroughReward(dispatchBreakthroughReward);
@@ -1639,6 +1651,9 @@ export function activateDirective(state, directiveId, now = Date.now()) {
     dispatchBranchShiftReward,
     dispatchBranchShiftRewardRate: FAR_ROUTE_DISPATCH_BRANCH_SHIFT_REWARD_RATE,
     dispatchBranchShiftRewardText,
+    dispatchBranchFocusReward,
+    dispatchBranchFocusRewardRate: FAR_ROUTE_DISPATCH_BRANCH_FOCUS_REWARD_RATE,
+    dispatchBranchFocusRewardText,
     dispatchLoopReward,
     dispatchLoopRewardRate: FAR_ROUTE_DISPATCH_LOOP_REWARD_RATE,
     dispatchBreakthroughReward,
@@ -1689,6 +1704,7 @@ export function activateDirective(state, directiveId, now = Date.now()) {
     dispatchSyncSupplyText,
     dispatchDetourRewardText,
     dispatchBranchShiftRewardText,
+    dispatchBranchFocusRewardText,
     dispatchLoopRewardText,
     dispatchBreakthroughRewardText,
     dispatchDetourBreakthroughRewardText,
@@ -1716,6 +1732,7 @@ export function activateDirective(state, directiveId, now = Date.now()) {
       (dispatchSyncSupplyText ? dispatchSyncSupplyText + "，" : "") +
       (dispatchDetourRewardText ? dispatchDetourRewardText + "，" : "") +
       (dispatchBranchShiftRewardText ? dispatchBranchShiftRewardText + "，" : "") +
+      (dispatchBranchFocusRewardText ? dispatchBranchFocusRewardText + "，" : "") +
       (dispatchLoopRewardText ? dispatchLoopRewardText + "，" : "") +
       (dispatchBreakthroughRewardText ? dispatchBreakthroughRewardText + "，" : "") +
       (dispatchDetourBreakthroughRewardText
@@ -2503,6 +2520,14 @@ export function getDirectiveStatus(state, now = Date.now()) {
         current,
         now
       );
+      const dispatchBranchFocusReward = getFarRouteDispatchBranchFocusReward(
+        effectiveBaseGain,
+        dispatch,
+        directive.id,
+        chain,
+        current,
+        now
+      );
       const dispatchLoopReward = getFarRouteDispatchLoopReward(
         effectiveBaseGain,
         dispatch,
@@ -2581,6 +2606,7 @@ export function getDirectiveStatus(state, now = Date.now()) {
           dispatchSyncReward +
           dispatchDetourReward +
           dispatchBranchShiftReward +
+          dispatchBranchFocusReward +
           dispatchLoopReward +
           dispatchBreakthroughReward +
           dispatchDetourBreakthroughReward +
@@ -2605,6 +2631,8 @@ export function getDirectiveStatus(state, now = Date.now()) {
         formatFarRouteDispatchDetourReward(dispatchDetourReward);
       const dispatchBranchShiftRewardText =
         formatFarRouteDispatchBranchShiftReward(dispatchBranchShiftReward);
+      const dispatchBranchFocusRewardText =
+        formatFarRouteDispatchBranchFocusReward(dispatchBranchFocusReward);
       const dispatchLoopRewardText = formatFarRouteDispatchLoopReward(dispatchLoopReward);
       const dispatchBreakthroughRewardText =
         formatFarRouteDispatchBreakthroughReward(dispatchBreakthroughReward);
@@ -2674,6 +2702,9 @@ export function getDirectiveStatus(state, now = Date.now()) {
         dispatchBranchShiftReward,
         dispatchBranchShiftRewardRate: FAR_ROUTE_DISPATCH_BRANCH_SHIFT_REWARD_RATE,
         dispatchBranchShiftRewardText,
+        dispatchBranchFocusReward,
+        dispatchBranchFocusRewardRate: FAR_ROUTE_DISPATCH_BRANCH_FOCUS_REWARD_RATE,
+        dispatchBranchFocusRewardText,
         dispatchLoopReward,
         dispatchLoopRewardRate: FAR_ROUTE_DISPATCH_LOOP_REWARD_RATE,
         dispatchBreakthroughReward,
@@ -2721,6 +2752,7 @@ export function getDirectiveStatus(state, now = Date.now()) {
         dispatchSyncSupplyText,
         dispatchDetourRewardText,
         dispatchBranchShiftRewardText,
+        dispatchBranchFocusRewardText,
         dispatchLoopRewardText,
         dispatchBreakthroughRewardText,
         dispatchDetourBreakthroughRewardText,
@@ -2749,6 +2781,7 @@ export function getDirectiveStatus(state, now = Date.now()) {
             (dispatchSyncSupplyText ? " · " + dispatchSyncSupplyText : "") +
             (dispatchDetourRewardText ? " · " + dispatchDetourRewardText : "") +
             (dispatchBranchShiftRewardText ? " · " + dispatchBranchShiftRewardText : "") +
+            (dispatchBranchFocusRewardText ? " · " + dispatchBranchFocusRewardText : "") +
             (dispatchLoopRewardText ? " · " + dispatchLoopRewardText : "") +
             (dispatchBreakthroughRewardText
               ? " · " + dispatchBreakthroughRewardText
@@ -2814,6 +2847,10 @@ export function getFarRouteDispatch(state, now = Date.now()) {
     "分支改道 +" +
     Math.round(FAR_ROUTE_DISPATCH_BRANCH_SHIFT_REWARD_RATE * 100) +
     "%";
+  const branchFocusRewardText =
+    "航段契合 +" +
+    Math.round(FAR_ROUTE_DISPATCH_BRANCH_FOCUS_REWARD_RATE * 100) +
+    "%";
   const loopRewardText =
     "远航闭环 +" + Math.round(FAR_ROUTE_DISPATCH_LOOP_REWARD_RATE * 100) + "%";
   const breakthroughRewardText =
@@ -2857,6 +2894,12 @@ export function getFarRouteDispatch(state, now = Date.now()) {
       detourRewardText,
       branchShiftRewardRate: FAR_ROUTE_DISPATCH_BRANCH_SHIFT_REWARD_RATE,
       branchShiftRewardText,
+      branchFocusRewardRate: FAR_ROUTE_DISPATCH_BRANCH_FOCUS_REWARD_RATE,
+      branchFocusRewardText,
+      branchFocusKind: "",
+      branchFocusText: "",
+      branchFocusDirectiveId: null,
+      branchFocusDirectiveName: "",
       loopRewardRate: FAR_ROUTE_DISPATCH_LOOP_REWARD_RATE,
       loopRewardText,
       breakthroughRewardRate: FAR_ROUTE_DISPATCH_BREAKTHROUGH_REMAINING_RATE,
@@ -2899,7 +2942,7 @@ export function getFarRouteDispatch(state, now = Date.now()) {
       loopSteps: [],
       loopStepText: "",
       loopStatusText: "闭环进度 0/" + loopTarget + " · 20M 后解锁",
-      text: "远航调度：累计 20M 能量后解锁后半段航段调度、目标指令推荐、目标冷却缩短、连携窗口延长、远航续航、远航协同、协同补给、远航绕行、绕行投送、分支改道、闭环奖励、远航突破、绕行突破、远航整备、整备续航、绕行整备与整备回航"
+      text: "远航调度：累计 20M 能量后解锁后半段航段调度、目标指令推荐、目标冷却缩短、连携窗口延长、远航续航、远航协同、协同补给、远航绕行、绕行投送、分支改道、航段契合、闭环奖励、远航突破、绕行突破、远航整备、整备续航、绕行整备与整备回航"
     };
   }
 
@@ -2921,6 +2964,12 @@ export function getFarRouteDispatch(state, now = Date.now()) {
       detourRewardText,
       branchShiftRewardRate: FAR_ROUTE_DISPATCH_BRANCH_SHIFT_REWARD_RATE,
       branchShiftRewardText,
+      branchFocusRewardRate: FAR_ROUTE_DISPATCH_BRANCH_FOCUS_REWARD_RATE,
+      branchFocusRewardText,
+      branchFocusKind: "",
+      branchFocusText: "",
+      branchFocusDirectiveId: null,
+      branchFocusDirectiveName: "",
       loopRewardRate: FAR_ROUTE_DISPATCH_LOOP_REWARD_RATE,
       loopRewardText,
       breakthroughRewardRate: FAR_ROUTE_DISPATCH_BREAKTHROUGH_REMAINING_RATE,
@@ -2980,6 +3029,11 @@ export function getFarRouteDispatch(state, now = Date.now()) {
     relayDirective,
     now
   );
+  const branchFocus = getFarRouteDispatchBranchFocus(
+    project,
+    directive,
+    relayDirective
+  );
   const branchStatus = getFarRouteDispatchBranchStatus(
     current,
     directive,
@@ -2990,13 +3044,15 @@ export function getFarRouteDispatch(state, now = Date.now()) {
     current,
     directive,
     relayDirective,
-    branchStatus
+    branchStatus,
+    branchFocus
   );
   const loopSteps = buildFarRouteDispatchLoopSteps(
     directive,
     relayDirective,
     loopStatus.progress,
-    loopStatus.target
+    loopStatus.target,
+    branchFocus
   );
   const breakthroughBase = getFarRouteDispatchBreakthroughBase(project);
 
@@ -3016,6 +3072,12 @@ export function getFarRouteDispatch(state, now = Date.now()) {
     detourRewardText,
     branchShiftRewardRate: FAR_ROUTE_DISPATCH_BRANCH_SHIFT_REWARD_RATE,
     branchShiftRewardText,
+    branchFocusRewardRate: FAR_ROUTE_DISPATCH_BRANCH_FOCUS_REWARD_RATE,
+    branchFocusRewardText,
+    branchFocusKind: branchFocus.kind,
+    branchFocusText: branchFocus.text,
+    branchFocusDirectiveId: branchFocus.directiveId,
+    branchFocusDirectiveName: branchFocus.directiveName,
     loopRewardRate: FAR_ROUTE_DISPATCH_LOOP_REWARD_RATE,
     loopRewardText,
     breakthroughRewardRate: FAR_ROUTE_DISPATCH_BREAKTHROUGH_REMAINING_RATE,
@@ -3077,6 +3139,7 @@ export function getFarRouteDispatch(state, now = Date.now()) {
       chainWindowText +
       " · " +
       branchStatus.text +
+      (branchFocus.text ? " · " + branchFocus.text : "") +
       " · 目标后优先" +
       relayDirectiveName +
       "触发" +
@@ -3089,6 +3152,8 @@ export function getFarRouteDispatch(state, now = Date.now()) {
       detourInfusionText +
       "；若本轮选择与上一轮不同的分支，还会触发" +
       branchShiftRewardText +
+      "；若选择当前航段契合分支，还会触发" +
+      branchFocusRewardText +
       "，所有非目标仍触发" +
       relayRewardText +
       " · 3/3 回到目标指令触发" +
@@ -4438,6 +4503,9 @@ function buildProjectOverviewDispatchText(dispatch) {
     ? " · 协同 " + dispatch.relayDirectiveName
     : "";
   const branchText = dispatch.branchText ? " · " + dispatch.branchText : "";
+  const branchFocusText = dispatch.branchFocusText
+    ? " · " + dispatch.branchFocusText
+    : "";
   const currentStep = Array.isArray(dispatch.loopSteps)
     ? dispatch.loopSteps.find((step) => step.state === "current")
     : null;
@@ -4454,6 +4522,7 @@ function buildProjectOverviewDispatchText(dispatch) {
     dispatch.targetDirectiveName +
     relayText +
     branchText +
+    branchFocusText +
     " · 闭环 " +
     dispatch.loopProgress +
     "/" +
@@ -4473,6 +4542,11 @@ function buildProjectDispatchInfo(project, state, isCurrent) {
 
   const targetDirective = getFarRouteDispatchDirective(project, state);
   const relayDirective = getFarRouteDispatchRelayDirective(targetDirective);
+  const branchFocus = getFarRouteDispatchBranchFocus(
+    project,
+    targetDirective,
+    relayDirective
+  );
 
   if (!targetDirective) {
     return null;
@@ -4481,11 +4555,16 @@ function buildProjectDispatchInfo(project, state, isCurrent) {
   const relayText = relayDirective
     ? " · 协同 " + relayDirective.name + " · 绕行备选"
     : "";
+  const branchFocusText = branchFocus.text ? " · " + branchFocus.text : "";
   const relayStepText = relayDirective
     ? "协同/绕行 " + relayDirective.name
     : "非目标续航";
   const targetRewardText = getFarRouteDispatchLoopStepRewardText(1, relayDirective);
-  const relayRewardText = getFarRouteDispatchLoopStepRewardText(2, relayDirective);
+  const relayRewardText = getFarRouteDispatchLoopStepRewardText(
+    2,
+    relayDirective,
+    branchFocus
+  );
   const loopRewardText = getFarRouteDispatchLoopStepRewardText(3, relayDirective);
 
   return {
@@ -4494,6 +4573,7 @@ function buildProjectDispatchInfo(project, state, isCurrent) {
       "远航调度：目标 " +
       targetDirective.name +
       relayText +
+      branchFocusText +
       " · 3/3 回到目标触发闭环",
     targetDirectiveId: targetDirective.id,
     targetDirectiveName: targetDirective.name,
@@ -4536,7 +4616,13 @@ function buildProjectDispatchInfo(project, state, isCurrent) {
   };
 }
 
-function buildFarRouteDispatchLoopSteps(directive, relayDirective, progress, target) {
+function buildFarRouteDispatchLoopSteps(
+  directive,
+  relayDirective,
+  progress,
+  target,
+  branchFocus
+) {
   if (!directive) {
     return [];
   }
@@ -4553,7 +4639,11 @@ function buildFarRouteDispatchLoopSteps(directive, relayDirective, progress, tar
     {
       label: relayDirective ? "协同/绕行" : "续航",
       text: relayStepText,
-      rewardText: getFarRouteDispatchLoopStepRewardText(2, relayDirective),
+      rewardText: getFarRouteDispatchLoopStepRewardText(
+        2,
+        relayDirective,
+        branchFocus
+      ),
       state: getFarRouteDispatchLoopStepState(2, progress, target),
       stateText: getFarRouteDispatchLoopStepStateText(2, progress, target)
     },
@@ -4621,11 +4711,56 @@ function appendFarRouteDispatchBranchText(text, branchStatus) {
   return text + " · " + branchStatus.text;
 }
 
+function getFarRouteDispatchBranchFocus(project, directive, relayDirective) {
+  if (!project || !directive || !relayDirective) {
+    return {
+      kind: "",
+      label: "",
+      text: "",
+      directiveId: null,
+      directiveName: ""
+    };
+  }
+
+  const effect = project.effect ?? {};
+  const kind =
+    effect.secondMultiplier || effect.totalMultiplier ? "detour" : "sync";
+  const detourDirective = getFarRouteDispatchDetourDirective(
+    directive,
+    relayDirective
+  );
+  const focusDirective = kind === "sync" ? relayDirective : detourDirective;
+  if (!focusDirective) {
+    return {
+      kind: "",
+      label: "",
+      text: "",
+      directiveId: null,
+      directiveName: ""
+    };
+  }
+
+  const label = kind === "sync" ? "协同" : "绕行";
+  const reason =
+    kind === "sync"
+      ? "点击/过载航段保留当前资源"
+      : "自动/总产能航段投送累计航段";
+
+  return {
+    kind,
+    label,
+    text: "航段契合：" + label + " " + focusDirective.name + " · " + reason,
+    directiveId: focusDirective.id,
+    directiveName: focusDirective.name
+  };
+}
+
 function buildFarRouteDispatchBranchChoices(
   state,
   directive,
   relayDirective,
-  branchStatus
+  branchStatus,
+  branchFocus
 ) {
   if (!directive || !relayDirective) {
     return [];
@@ -4678,6 +4813,7 @@ function buildFarRouteDispatchBranchChoices(
     const shift =
       Boolean(previousBranchDirectiveId) &&
       previousBranchDirectiveId !== choice.directive.id;
+    const focused = branchFocus?.directiveId === choice.directive.id;
     const status = active ? "active" : shift ? "shift" : previous ? "previous" : "available";
     const statusText = active
       ? "当前路线"
@@ -4692,6 +4828,11 @@ function buildFarRouteDispatchBranchChoices(
         ? " · 分支改道 +" +
           Math.round(FAR_ROUTE_DISPATCH_BRANCH_SHIFT_REWARD_RATE * 100) +
           "%"
+        : "") +
+      (focused
+        ? " · 航段契合 +" +
+          Math.round(FAR_ROUTE_DISPATCH_BRANCH_FOCUS_REWARD_RATE * 100) +
+          "%"
         : "");
 
     return {
@@ -4700,6 +4841,8 @@ function buildFarRouteDispatchBranchChoices(
       directiveId: choice.directive.id,
       directiveName: choice.directive.name,
       caption: choice.caption,
+      focused,
+      focusText: focused ? branchFocus.text : "",
       status,
       statusText,
       rewardText,
@@ -4840,14 +4983,14 @@ function getFarRouteDispatchBranchStatus(state, directive, relayDirective, now) 
   };
 }
 
-function getFarRouteDispatchLoopStepRewardText(step, relayDirective) {
+function getFarRouteDispatchLoopStepRewardText(step, relayDirective, branchFocus) {
   if (step === 1) {
     return "调度校准 +" + Math.round(FAR_ROUTE_DISPATCH_BONUS_RATE * 100) + "%";
   }
 
   if (step === 2) {
     if (relayDirective) {
-      return (
+      let rewardText =
         "远航协同 +" +
         Math.round(FAR_ROUTE_DISPATCH_SYNC_REWARD_RATE * 100) +
         "% · 补给 +" +
@@ -4858,8 +5001,15 @@ function getFarRouteDispatchLoopStepRewardText(step, relayDirective) {
         Math.round(FAR_ROUTE_DISPATCH_BRANCH_SHIFT_REWARD_RATE * 100) +
         "% · 投送 -" +
         roundTo(FAR_ROUTE_DISPATCH_DETOUR_INFUSION_COST_RATE * 100, 2) +
-        "%当前"
-      );
+        "%当前";
+      if (branchFocus?.kind) {
+        rewardText +=
+          " · 契合 +" +
+          Math.round(FAR_ROUTE_DISPATCH_BRANCH_FOCUS_REWARD_RATE * 100) +
+          "%";
+      }
+
+      return rewardText;
     }
 
     const rewardRate = FAR_ROUTE_DISPATCH_RELAY_REWARD_RATE;
@@ -5320,6 +5470,37 @@ function formatFarRouteDispatchBranchShiftReward(dispatchBranchShiftReward) {
   }
 
   return "分支改道 +" + formatNumber(dispatchBranchShiftReward);
+}
+
+function getFarRouteDispatchBranchFocusReward(
+  baseGain,
+  dispatch,
+  directiveId,
+  chain,
+  state,
+  now
+) {
+  const sourceChain = state.directiveChain;
+  const active = Boolean(sourceChain.lastDirectiveId && sourceChain.expiresAt >= now);
+  if (
+    !dispatch?.active ||
+    !active ||
+    sourceChain.lastDirectiveId !== dispatch.targetDirectiveId ||
+    dispatch.branchFocusDirectiveId !== directiveId ||
+    chain.stacks !== 1
+  ) {
+    return 0;
+  }
+
+  return roundTo(baseGain * FAR_ROUTE_DISPATCH_BRANCH_FOCUS_REWARD_RATE, 4);
+}
+
+function formatFarRouteDispatchBranchFocusReward(dispatchBranchFocusReward) {
+  if (!dispatchBranchFocusReward) {
+    return "";
+  }
+
+  return "航段契合 +" + formatNumber(dispatchBranchFocusReward);
 }
 
 function getFarRouteDispatchLoopReward(baseGain, dispatch, directiveId, chain) {

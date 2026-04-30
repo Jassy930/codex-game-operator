@@ -684,7 +684,8 @@ function renderFarDispatchBranchChoices(dispatch) {
         "far-dispatch-branch-choice is-" +
         getFarDispatchBranchChoiceKind(choice) +
         " is-" +
-        getFarDispatchBranchChoiceStatus(choice);
+        getFarDispatchBranchChoiceStatus(choice) +
+        (choice.focused ? " is-focused" : "");
       item.title = choice.text ?? "";
 
       const label = document.createElement("strong");
@@ -850,6 +851,9 @@ function renderDirective(option) {
         dispatchBranchShiftReward: result.dispatchBranchShiftReward,
         dispatchBranchShiftRewardRate: result.dispatchBranchShiftRewardRate,
         dispatchBranchShiftRewardText: result.dispatchBranchShiftRewardText,
+        dispatchBranchFocusReward: result.dispatchBranchFocusReward,
+        dispatchBranchFocusRewardRate: result.dispatchBranchFocusRewardRate,
+        dispatchBranchFocusRewardText: result.dispatchBranchFocusRewardText,
         dispatchLoopReward: result.dispatchLoopReward,
         dispatchLoopRewardRate: result.dispatchLoopRewardRate,
         dispatchLoopRewardText: result.dispatchLoopRewardText,
@@ -959,6 +963,11 @@ function renderDirective(option) {
   dispatchBranchShift.textContent = option.dispatchBranchShiftRewardText;
   dispatchBranchShift.hidden = !option.dispatchBranchShiftRewardText;
 
+  const dispatchBranchFocus = document.createElement("span");
+  dispatchBranchFocus.className = "directive-dispatch-branch-focus";
+  dispatchBranchFocus.textContent = option.dispatchBranchFocusRewardText;
+  dispatchBranchFocus.hidden = !option.dispatchBranchFocusRewardText;
+
   const dispatchLoop = document.createElement("span");
   dispatchLoop.className = "directive-dispatch-loop";
   dispatchLoop.textContent = option.dispatchLoopRewardText;
@@ -1034,6 +1043,7 @@ function renderDirective(option) {
     dispatchSyncSupply,
     dispatchDetour,
     dispatchBranchShift,
+    dispatchBranchFocus,
     dispatchLoop,
     dispatchBreakthrough,
     dispatchDetourBreakthrough,
@@ -1130,6 +1140,7 @@ function getDirectivePreviewDetailTexts(option) {
     option.dispatchSyncSupplyText,
     option.dispatchDetourRewardText,
     option.dispatchBranchShiftRewardText,
+    option.dispatchBranchFocusRewardText,
     option.dispatchLoopRewardText,
     option.dispatchBreakthroughRewardText,
     option.dispatchDetourBreakthroughRewardText,

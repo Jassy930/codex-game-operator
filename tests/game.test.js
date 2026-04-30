@@ -17,6 +17,7 @@ import {
   DIRECTIVE_STANCE_FINISHER_RATE,
   DIRECTIVE_TASK_REWARD_RATE,
   FAR_ROUTE_DISPATCH_BONUS_RATE,
+  FAR_ROUTE_DISPATCH_BRANCH_FOCUS_REWARD_RATE,
   FAR_ROUTE_DISPATCH_BRANCH_SHIFT_REWARD_RATE,
   FAR_ROUTE_DISPATCH_CHAIN_WINDOW_EXTENSION_SECONDS,
   FAR_ROUTE_DISPATCH_BREAKTHROUGH_REMAINING_RATE,
@@ -1579,7 +1580,7 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(indexHtml, />远航调度：20M 后解锁<\/span>/);
   assert.match(
     indexHtml,
-    /远航调度：累计 20M 能量后解锁后半段航段调度、目标指令推荐、目标冷却缩短、连携窗口延长、远航续航、远航协同、协同补给、远航绕行、绕行投送、分支改道、闭环奖励、远航突破、绕行突破、远航整备、整备续航与整备回航/
+    /远航调度：累计 20M 能量后解锁后半段航段调度、目标指令推荐、目标冷却缩短、连携窗口延长、远航续航、远航协同、协同补给、远航绕行、绕行投送、分支改道、航段契合、闭环奖励、远航突破、绕行突破、远航整备、整备续航与整备回航/
   );
   assert.match(indexHtml, /非契合指令起手/);
   assert.match(indexHtml, /第二步继续避开契合指令/);
@@ -1610,6 +1611,9 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(appJs, /dispatchBranchShiftReward: result\.dispatchBranchShiftReward/);
   assert.match(appJs, /dispatchBranchShiftRewardRate: result\.dispatchBranchShiftRewardRate/);
   assert.match(appJs, /dispatchBranchShiftRewardText: result\.dispatchBranchShiftRewardText/);
+  assert.match(appJs, /dispatchBranchFocusReward: result\.dispatchBranchFocusReward/);
+  assert.match(appJs, /dispatchBranchFocusRewardRate: result\.dispatchBranchFocusRewardRate/);
+  assert.match(appJs, /dispatchBranchFocusRewardText: result\.dispatchBranchFocusRewardText/);
   assert.match(appJs, /dispatchLoopReward: result\.dispatchLoopReward/);
   assert.match(appJs, /dispatchLoopRewardRate: result\.dispatchLoopRewardRate/);
   assert.match(appJs, /dispatchLoopRewardText: result\.dispatchLoopRewardText/);
@@ -1714,6 +1718,8 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(appJs, /dispatchDetour\.textContent = option\.dispatchDetourRewardText/);
   assert.match(appJs, /dispatchBranchShift\.className = "directive-dispatch-branch-shift"/);
   assert.match(appJs, /dispatchBranchShift\.textContent = option\.dispatchBranchShiftRewardText/);
+  assert.match(appJs, /dispatchBranchFocus\.className = "directive-dispatch-branch-focus"/);
+  assert.match(appJs, /dispatchBranchFocus\.textContent = option\.dispatchBranchFocusRewardText/);
   assert.match(appJs, /dispatchLoop\.className = "directive-dispatch-loop"/);
   assert.match(appJs, /dispatchLoop\.textContent = option\.dispatchLoopRewardText/);
   assert.match(appJs, /dispatchBreakthrough\.className = "directive-dispatch-breakthrough"/);
@@ -1761,6 +1767,8 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(styles, /\.far-dispatch-branch-choice\.is-sync/);
   assert.match(styles, /\.far-dispatch-branch-choice\.is-detour/);
   assert.match(styles, /\.far-dispatch-branch-choice\.is-shift/);
+  assert.match(styles, /\.far-dispatch-branch-choice\.is-focused/);
+  assert.match(styles, /\.directive-button \.directive-dispatch-branch-focus/);
   assert.match(styles, /text-overflow: ellipsis/);
   assert.match(styles, /\.far-dispatch-meter/);
   assert.match(styles, /\.far-dispatch-loop-text/);
@@ -2579,6 +2587,7 @@ test("远航调度会在 20M 后按当前航段指定目标指令", () => {
   assert.equal(FAR_ROUTE_DISPATCH_DETOUR_INFUSION_PROGRESS_MULTIPLIER, 1.5);
   assert.equal(FAR_ROUTE_DISPATCH_DETOUR_PREP_REWARD_RATE, 0.05);
   assert.equal(FAR_ROUTE_DISPATCH_BRANCH_SHIFT_REWARD_RATE, 0.06);
+  assert.equal(FAR_ROUTE_DISPATCH_BRANCH_FOCUS_REWARD_RATE, 0.05);
   assert.equal(locked.unlocked, false);
   assert.equal(locked.loopProgress, 0);
   assert.equal(locked.loopTarget, 3);
@@ -2591,7 +2600,7 @@ test("远航调度会在 20M 后按当前航段指定目标指令", () => {
   assert.equal(locked.loopStatusText, "闭环进度 0/3 · 20M 后解锁");
   assert.equal(
     locked.text,
-    "远航调度：累计 20M 能量后解锁后半段航段调度、目标指令推荐、目标冷却缩短、连携窗口延长、远航续航、远航协同、协同补给、远航绕行、绕行投送、分支改道、闭环奖励、远航突破、绕行突破、远航整备、整备续航、绕行整备与整备回航"
+    "远航调度：累计 20M 能量后解锁后半段航段调度、目标指令推荐、目标冷却缩短、连携窗口延长、远航续航、远航协同、协同补给、远航绕行、绕行投送、分支改道、航段契合、闭环奖励、远航突破、绕行突破、远航整备、整备续航、绕行整备与整备回航"
   );
   assert.equal(dispatch.unlocked, true);
   assert.equal(dispatch.active, true);
@@ -2602,17 +2611,17 @@ test("远航调度会在 20M 后按当前航段指定目标指令", () => {
   assert.equal(currentProject.dispatchBadgeText, "调度 点火齐射");
   assert.equal(
     currentProject.dispatchText,
-    "远航调度：目标 点火齐射 · 协同 谐振脉冲 · 绕行备选 · 3/3 回到目标触发闭环"
+    "远航调度：目标 点火齐射 · 协同 谐振脉冲 · 绕行备选 · 航段契合：协同 谐振脉冲 · 点击/过载航段保留当前资源 · 3/3 回到目标触发闭环"
   );
   assert.equal(
     currentProject.dispatchStepText,
-    "调度路径：目标 点火齐射（调度校准 +14%） -> 协同/绕行 谐振脉冲（远航协同 +5% · 补给 +3%当前 · 绕行 +4% · 改道 +6% · 投送 -0.3%当前） -> 回目标 点火齐射（远航闭环 +16% · 远航突破 +0.05%剩余 · 绕行突破 +0.03%剩余）"
+    "调度路径：目标 点火齐射（调度校准 +14%） -> 协同/绕行 谐振脉冲（远航协同 +5% · 补给 +3%当前 · 绕行 +4% · 改道 +6% · 投送 -0.3%当前 · 契合 +5%） -> 回目标 点火齐射（远航闭环 +16% · 远航突破 +0.05%剩余 · 绕行突破 +0.03%剩余）"
   );
   assert.deepEqual(
     currentProject.dispatchSteps.map((step) => step.rewardText),
     [
       "调度校准 +14%",
-      "远航协同 +5% · 补给 +3%当前 · 绕行 +4% · 改道 +6% · 投送 -0.3%当前",
+      "远航协同 +5% · 补给 +3%当前 · 绕行 +4% · 改道 +6% · 投送 -0.3%当前 · 契合 +5%",
       "远航闭环 +16% · 远航突破 +0.05%剩余 · 绕行突破 +0.03%剩余"
     ]
   );
@@ -2643,6 +2652,18 @@ test("远航调度会在 20M 后按当前航段指定目标指令", () => {
     FAR_ROUTE_DISPATCH_BRANCH_SHIFT_REWARD_RATE
   );
   assert.equal(dispatch.branchShiftRewardText, "分支改道 +6%");
+  assert.equal(
+    dispatch.branchFocusRewardRate,
+    FAR_ROUTE_DISPATCH_BRANCH_FOCUS_REWARD_RATE
+  );
+  assert.equal(dispatch.branchFocusRewardText, "航段契合 +5%");
+  assert.equal(dispatch.branchFocusKind, "sync");
+  assert.equal(
+    dispatch.branchFocusText,
+    "航段契合：协同 谐振脉冲 · 点击/过载航段保留当前资源"
+  );
+  assert.equal(dispatch.branchFocusDirectiveId, "resonance-pulse");
+  assert.equal(dispatch.branchFocusDirectiveName, "谐振脉冲");
   assert.equal(
     dispatch.detourInfusionCostRate,
     FAR_ROUTE_DISPATCH_DETOUR_INFUSION_COST_RATE
@@ -2680,7 +2701,7 @@ test("远航调度会在 20M 后按当前航段指定目标指令", () => {
   assert.equal(dispatch.loopTarget, 3);
   assert.equal(
     dispatch.loopStepText,
-    "远航路径：下一步 目标 点火齐射（调度校准 +14%） -> 待推进 协同/绕行 谐振脉冲/绕行（远航协同 +5% · 补给 +3%当前 · 绕行 +4% · 改道 +6% · 投送 -0.3%当前） -> 待推进 回目标 点火齐射（远航闭环 +16% · 远航突破 +0.05%剩余 · 绕行突破 +0.03%剩余）"
+    "远航路径：下一步 目标 点火齐射（调度校准 +14%） -> 待推进 协同/绕行 谐振脉冲/绕行（远航协同 +5% · 补给 +3%当前 · 绕行 +4% · 改道 +6% · 投送 -0.3%当前 · 契合 +5%） -> 待推进 回目标 点火齐射（远航闭环 +16% · 远航突破 +0.05%剩余 · 绕行突破 +0.03%剩余）"
   );
   assert.deepEqual(
     dispatch.loopSteps.map(
@@ -2688,7 +2709,7 @@ test("远航调度会在 20M 后按当前航段指定目标指令", () => {
     ),
     [
       "目标:下一步:点火齐射:调度校准 +14%",
-      "协同/绕行:待推进:谐振脉冲/绕行:远航协同 +5% · 补给 +3%当前 · 绕行 +4% · 改道 +6% · 投送 -0.3%当前",
+      "协同/绕行:待推进:谐振脉冲/绕行:远航协同 +5% · 补给 +3%当前 · 绕行 +4% · 改道 +6% · 投送 -0.3%当前 · 契合 +5%",
       "回目标:待推进:点火齐射:远航闭环 +16% · 远航突破 +0.05%剩余 · 绕行突破 +0.03%剩余"
     ]
   );
@@ -2707,16 +2728,18 @@ test("远航调度会在 20M 后按当前航段指定目标指令", () => {
         ":" +
         choice.caption +
         ":" +
-        choice.rewardText
+        choice.rewardText +
+        ":focused=" +
+        choice.focused
     ),
     [
-      "sync:谐振脉冲:可选择:补当前资源:远航协同 +5% · 协同补给 +3%当前",
-      "detour:巡航回收:可选择:投送累计航段:远航绕行 +4% · 绕行投送 -0.3%当前"
+      "sync:谐振脉冲:可选择:补当前资源:远航协同 +5% · 协同补给 +3%当前 · 航段契合 +5%:focused=true",
+      "detour:巡航回收:可选择:投送累计航段:远航绕行 +4% · 绕行投送 -0.3%当前:focused=false"
     ]
   );
   assert.equal(
     dispatch.branchChoiceText,
-    "分支选择：协同 谐振脉冲（可选择 · 补当前资源 · 远航协同 +5% · 协同补给 +3%当前） / 绕行 巡航回收（可选择 · 投送累计航段 · 远航绕行 +4% · 绕行投送 -0.3%当前）"
+    "分支选择：协同 谐振脉冲（可选择 · 补当前资源 · 远航协同 +5% · 协同补给 +3%当前 · 航段契合 +5%） / 绕行 巡航回收（可选择 · 投送累计航段 · 远航绕行 +4% · 绕行投送 -0.3%当前）"
   );
   assert.equal(
     dispatch.loopStatusText,
@@ -2724,11 +2747,11 @@ test("远航调度会在 20M 后按当前航段指定目标指令", () => {
   );
   assert.equal(
     overview.dispatchText,
-    "远航调度总览：航段 27/57 脉冲航闸 · 目标 点火齐射 · 协同 谐振脉冲 · 分支 待选择：先执行目标 · 闭环 0/3 · 下一步 目标 点火齐射"
+    "远航调度总览：航段 27/57 脉冲航闸 · 目标 点火齐射 · 协同 谐振脉冲 · 分支 待选择：先执行目标 · 航段契合：协同 谐振脉冲 · 点击/过载航段保留当前资源 · 闭环 0/3 · 下一步 目标 点火齐射"
   );
   assert.equal(
     dispatch.text,
-    "远航调度：航段 27/57 脉冲航闸指定点火齐射 · 执行目标指令获得调度校准 +14% · 目标指令冷却 -30% · 调度接力 +30 秒 · 分支 待选择：先执行目标 · 目标后优先谐振脉冲触发远航协同 +5%并获得协同补给 +3%当前，另一个非目标可触发远航绕行 +4%并消耗当前能量进行绕行投送 -0.3%当前 / +150%累计；若本轮选择与上一轮不同的分支，还会触发分支改道 +6%，所有非目标仍触发远航续航 +8% · 3/3 回到目标指令触发远航闭环 +16%、远航突破 +0.05%剩余，绕行路线额外触发绕行突破 +0.03%剩余 · 完成闭环后远航整备刷新谐振脉冲冷却，下一步触发整备续航 +7%；若上一轮选择绕行，则改为触发绕行整备 +5%，再回到目标触发整备回航 +6%"
+    "远航调度：航段 27/57 脉冲航闸指定点火齐射 · 执行目标指令获得调度校准 +14% · 目标指令冷却 -30% · 调度接力 +30 秒 · 分支 待选择：先执行目标 · 航段契合：协同 谐振脉冲 · 点击/过载航段保留当前资源 · 目标后优先谐振脉冲触发远航协同 +5%并获得协同补给 +3%当前，另一个非目标可触发远航绕行 +4%并消耗当前能量进行绕行投送 -0.3%当前 / +150%累计；若本轮选择与上一轮不同的分支，还会触发分支改道 +6%；若选择当前航段契合分支，还会触发航段契合 +5%，所有非目标仍触发远航续航 +8% · 3/3 回到目标指令触发远航闭环 +16%、远航突破 +0.05%剩余，绕行路线额外触发绕行突破 +0.03%剩余 · 完成闭环后远航整备刷新谐振脉冲冷却，下一步触发整备续航 +7%；若上一轮选择绕行，则改为触发绕行整备 +5%，再回到目标触发整备回航 +6%"
   );
   assert.equal(Math.round(dispatch.progress * 100), 83);
   assert.deepEqual(plan.nextDirectiveIds, ["ignition-salvo"]);
@@ -2746,6 +2769,8 @@ test("远航调度会在 20M 后按当前航段指定目标指令", () => {
   assert.equal(ignitionOption.dispatchSyncSupplyText, "");
   assert.equal(ignitionOption.dispatchDetourReward, 0);
   assert.equal(ignitionOption.dispatchDetourRewardText, "");
+  assert.equal(ignitionOption.dispatchBranchFocusReward, 0);
+  assert.equal(ignitionOption.dispatchBranchFocusRewardText, "");
   assert.equal(ignitionOption.dispatchLoopReward, 0);
   assert.equal(ignitionOption.dispatchLoopRewardText, "");
   assert.equal(ignitionOption.dispatchBreakthroughReward, 0);
@@ -2770,6 +2795,7 @@ test("远航调度会在 20M 后按当前航段指定目标指令", () => {
   assert.equal(cruiseOption.dispatchSyncReward, 0);
   assert.equal(cruiseOption.dispatchSyncSupply, 0);
   assert.equal(cruiseOption.dispatchDetourReward, 0);
+  assert.equal(cruiseOption.dispatchBranchFocusReward, 0);
   assert.equal(cruiseOption.dispatchLoopReward, 0);
   assert.equal(cruiseOption.dispatchBreakthroughReward, 0);
   assert.equal(cruiseOption.dispatchDetourBreakthroughReward, 0);
@@ -2789,6 +2815,7 @@ test("远航调度会在 20M 后按当前航段指定目标指令", () => {
   assert.equal(ignitionResult.dispatchSyncReward, 0);
   assert.equal(ignitionResult.dispatchSyncSupply, 0);
   assert.equal(ignitionResult.dispatchDetourReward, 0);
+  assert.equal(ignitionResult.dispatchBranchFocusReward, 0);
   assert.equal(ignitionResult.dispatchLoopReward, 0);
   assert.equal(ignitionResult.dispatchBreakthroughReward, 0);
   assert.equal(ignitionResult.dispatchDetourBreakthroughReward, 0);
@@ -2838,6 +2865,8 @@ test("远航调度会在 20M 后按当前航段指定目标指令", () => {
     FAR_ROUTE_DISPATCH_DETOUR_REWARD_RATE
   );
   assert.match(relayCruiseOption.dispatchDetourRewardText, /远航绕行 \+/);
+  assert.equal(relayCruiseOption.dispatchBranchFocusReward, 0);
+  assert.equal(relayCruiseOption.dispatchBranchFocusRewardText, "");
   assert.equal(relayCruiseOption.dispatchBreakthroughReward, 0);
   assert.equal(relayCruiseOption.dispatchDetourBreakthroughReward, 0);
   assert.equal(relayCruiseOption.dispatchDetourInfusionCost, 1500);
@@ -2869,8 +2898,15 @@ test("远航调度会在 20M 后按当前航段指定目标指令", () => {
   );
   assert.match(relayResonanceOption.dispatchSyncSupplyText, /协同补给 \+/);
   assert.equal(relayResonanceOption.dispatchDetourReward, 0);
+  assert.equal(relayResonanceOption.dispatchBranchFocusReward > 0, true);
+  assert.equal(
+    relayResonanceOption.dispatchBranchFocusRewardRate,
+    FAR_ROUTE_DISPATCH_BRANCH_FOCUS_REWARD_RATE
+  );
+  assert.match(relayResonanceOption.dispatchBranchFocusRewardText, /航段契合 \+/);
   assert.match(relayResonanceOption.previewText, /远航协同 \+/);
   assert.match(relayResonanceOption.previewText, /协同补给 \+/);
+  assert.match(relayResonanceOption.previewText, /航段契合 \+/);
   assert.equal(relayCruiseResult.activated, true);
   assert.equal(relayCruiseResult.chainStacks, 1);
   assert.equal(relayCruiseResult.dispatchRelayReward > 0, true);
@@ -2883,6 +2919,7 @@ test("远航调度会在 20M 后按当前航段指定目标指令", () => {
     FAR_ROUTE_DISPATCH_DETOUR_REWARD_RATE
   );
   assert.equal(relayCruiseResult.dispatchDetourInfusionCost > 0, true);
+  assert.equal(relayCruiseResult.dispatchBranchFocusReward, 0);
   assert.equal(relayCruiseResult.dispatchDetourInfusionProgress > 0, true);
   assert.equal(
     relayCruiseResult.dispatchDetourInfusionCostRate,
@@ -2990,8 +3027,14 @@ test("远航调度会在 20M 后按当前航段指定目标指令", () => {
     FAR_ROUTE_DISPATCH_SYNC_SUPPLY_RATE
   );
   assert.equal(relayResonanceResult.dispatchDetourReward, 0);
+  assert.equal(relayResonanceResult.dispatchBranchFocusReward > 0, true);
+  assert.equal(
+    relayResonanceResult.dispatchBranchFocusRewardRate,
+    FAR_ROUTE_DISPATCH_BRANCH_FOCUS_REWARD_RATE
+  );
   assert.match(relayResonanceResult.dispatchSyncRewardText, /远航协同 \+/);
   assert.match(relayResonanceResult.dispatchSyncSupplyText, /协同补给 \+/);
+  assert.match(relayResonanceResult.dispatchBranchFocusRewardText, /航段契合 \+/);
   assert.equal(
     relayResonanceResult.state.energy >
       relayState.energy + relayResonanceResult.gain,
@@ -2999,6 +3042,7 @@ test("远航调度会在 20M 后按当前航段指定目标指令", () => {
   );
   assert.match(relayResonanceResult.notice, /远航协同 \+/);
   assert.match(relayResonanceResult.notice, /协同补给 \+/);
+  assert.match(relayResonanceResult.notice, /航段契合 \+/);
   assert.equal(loopDispatch.loopProgress, 2);
   assert.equal(loopDispatch.loopTarget, 3);
   assert.equal(loopDispatch.branchKind, "sync");
@@ -3171,6 +3215,12 @@ test("远航调度会优先接管常规收束起手推荐", () => {
 
   assert.equal(dispatch.projectId, "glow-orbit-harbor");
   assert.equal(dispatch.targetDirectiveId, "cruise-cache");
+  assert.equal(dispatch.branchFocusKind, "detour");
+  assert.equal(dispatch.branchFocusDirectiveId, "resonance-pulse");
+  assert.equal(
+    dispatch.branchFocusText,
+    "航段契合：绕行 谐振脉冲 · 自动/总产能航段投送累计航段"
+  );
   assert.deepEqual(plan.nextDirectiveIds, ["cruise-cache"]);
   assert.equal(plan.recommendationText, "调度目标");
   assert.equal(plan.summaryText, "指令轮换 0/3 · 调度目标 巡航回收");
@@ -3235,7 +3285,7 @@ test("远航调度会奖励切换上一轮分支", () => {
       (choice) => choice.kind + ":" + choice.statusText + ":" + choice.rewardText
     ),
     [
-      "sync:上轮路线:远航协同 +5% · 协同补给 +3%当前",
+      "sync:上轮路线:远航协同 +5% · 协同补给 +3%当前 · 航段契合 +5%",
       "detour:可改道:远航绕行 +4% · 绕行投送 -0.3%当前 · 分支改道 +6%"
     ]
   );
@@ -3247,6 +3297,8 @@ test("远航调度会奖励切换上一轮分支", () => {
   assert.match(cruiseOption.dispatchBranchShiftRewardText, /分支改道 \+/);
   assert.match(cruiseOption.previewText, /分支改道 \+/);
   assert.equal(resonanceOption.dispatchBranchShiftReward, 0);
+  assert.equal(resonanceOption.dispatchBranchFocusReward > 0, true);
+  assert.match(resonanceOption.dispatchBranchFocusRewardText, /航段契合 \+/);
   assert.equal(cruiseResult.dispatchBranchShiftReward > 0, true);
   assert.equal(
     cruiseResult.dispatchBranchShiftRewardRate,
@@ -3260,13 +3312,15 @@ test("远航调度会奖励切换上一轮分支", () => {
       (choice) => choice.kind + ":" + choice.statusText + ":" + choice.rewardText
     ),
     [
-      "sync:可改道:远航协同 +5% · 协同补给 +3%当前 · 分支改道 +6%",
+      "sync:可改道:远航协同 +5% · 协同补给 +3%当前 · 分支改道 +6% · 航段契合 +5%",
       "detour:上轮路线:远航绕行 +4% · 绕行投送 -0.3%当前"
     ]
   );
   assert.equal(detourLastCruiseOption.dispatchBranchShiftReward, 0);
   assert.equal(detourLastResonanceOption.dispatchBranchShiftReward > 0, true);
+  assert.equal(detourLastResonanceOption.dispatchBranchFocusReward > 0, true);
   assert.match(detourLastResonanceOption.dispatchBranchShiftRewardText, /分支改道 \+/);
+  assert.match(detourLastResonanceOption.dispatchBranchFocusRewardText, /航段契合 \+/);
 });
 
 test("脉冲航闸完成后会继续指向离辉轨道港", () => {
@@ -4472,7 +4526,7 @@ test("反馈入口会生成带游戏快照的 GitHub Issue 链接", () => {
   assert.match(body, /航线策略：点火优先/);
   assert.match(body, new RegExp(`指令熟练：2/${DIRECTIVE_MASTERY_MAX_STACKS}`));
   assert.match(body, /远航调度：累计 20M 能量后解锁后半段航段调度/);
-  assert.match(body, /远航续航、远航协同、协同补给、远航绕行、绕行投送、分支改道、闭环奖励、远航突破、绕行突破、远航整备、整备续航、绕行整备与整备回航/);
+  assert.match(body, /远航续航、远航协同、协同补给、远航绕行、绕行投送、分支改道、航段契合、闭环奖励、远航突破、绕行突破、远航整备、整备续航、绕行整备与整备回航/);
   assert.match(body, /闭环进度 0\/3 · 20M 后解锁/);
   assert.match(body, /lens:1/);
 });
