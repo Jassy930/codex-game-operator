@@ -1,5 +1,29 @@
 # Decision
 
+## 2026-05-01 Product decision：远航分支轮替目标
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-01 00:45 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#6 仍是最新反馈线程，原始反馈指出后半段“只有不停的目标、玩法没有真正变化”，因此本轮继续进入 Product decision。
+
+当前最大问题：前序已经把协同/绕行路线、推荐原因、后续回航和可改道收益展示出来，但玩家仍需要自己把“上轮路线”和“可改道”翻译成跨轮目标。后半段短循环如果只看本轮收益，仍可能被理解成两个可选按钮，而不是需要跨轮轮替规划的路线循环。
+
+本轮决策：
+
+- 新增“远航分支轮替目标”。
+- `getFarRouteDispatch` 从现有 `branchChoices` 派生 `branchRotationText`：没有上轮分支时提示先完成任一分支闭环；已有上轮分支时提示改走另一条协同/绕行路线触发“分支改道 +6%”；当前已走某路线但还没有上轮记录时提示完成闭环后下一轮可改道。
+- 主操作区远航调度条新增 `far-dispatch-branch-rotation`，星图总览远航调度摘要和反馈快照长文本同步带出轮替目标。
+- 本轮只调整派生展示、DOM、样式和测试；不新增收益、不新增存档字段，不改变升级价格、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、远航调度收益、冷却、连携窗口、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-05-01 00:45 CST 当前 5 个 open feedback issue、0 个 open bug issue。
+- 脉冲航闸初始远航调度显示“分支轮替：先完成协同或绕行闭环，下一轮开启分支改道”。
+- 绕行路线进行中显示“分支轮替：改走协同 谐振脉冲触发分支改道 +6%”。
+- 协同整备完成态显示“分支轮替：改走绕行 巡航回收触发分支改道 +6%”。
+- `src/app.js` 渲染 `dispatch.branchRotationText`；`index.html` 包含 `far-dispatch-branch-rotation` 占位；`src/styles.css` 包含 `.far-dispatch-branch-rotation`。
+- 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+
+下一步：回复 #6，说明远航调度现在会直接给出跨轮分支轮替目标，并等待复测确认是否更像路线循环。
+
 ## 2026-05-01 Product decision：远航推荐原因标明
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-01 00:27 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#6 仍是最新反馈线程，原始反馈指出后半段“只有不停的目标、玩法没有真正变化”，因此本轮继续进入 Product decision。

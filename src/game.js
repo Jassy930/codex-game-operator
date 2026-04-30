@@ -2938,6 +2938,7 @@ export function getFarRouteDispatch(state, now = Date.now()) {
       branchDirectiveId: null,
       branchDirectiveName: "",
       branchRecommendationText: "",
+      branchRotationText: "",
       branchChoices: [],
       branchChoiceText: "",
       projectId: null,
@@ -3010,6 +3011,7 @@ export function getFarRouteDispatch(state, now = Date.now()) {
       branchDirectiveId: null,
       branchDirectiveName: "",
       branchRecommendationText: "",
+      branchRotationText: "",
       branchChoices: [],
       branchChoiceText: "",
       projectId: null,
@@ -3055,6 +3057,7 @@ export function getFarRouteDispatch(state, now = Date.now()) {
   );
   const branchRecommendationText =
     buildFarRouteDispatchBranchRecommendationText(branchChoices);
+  const branchRotationText = buildFarRouteDispatchBranchRotationText(branchChoices);
   const loopSteps = buildFarRouteDispatchLoopSteps(
     directive,
     relayDirective,
@@ -3123,6 +3126,7 @@ export function getFarRouteDispatch(state, now = Date.now()) {
     branchDirectiveId: branchStatus.directiveId,
     branchDirectiveName: branchStatus.directiveName,
     branchRecommendationText,
+    branchRotationText,
     branchChoices,
     branchChoiceText: buildFarRouteDispatchBranchChoiceText(branchChoices),
     projectId: project.id,
@@ -3151,6 +3155,7 @@ export function getFarRouteDispatch(state, now = Date.now()) {
       branchStatus.text +
       (branchFocus.text ? " · " + branchFocus.text : "") +
       (branchRecommendationText ? " · " + branchRecommendationText : "") +
+      (branchRotationText ? " · " + branchRotationText : "") +
       " · 目标后优先" +
       relayDirectiveName +
       "触发" +
@@ -4520,6 +4525,9 @@ function buildProjectOverviewDispatchText(dispatch) {
   const branchRecommendationText = dispatch.branchRecommendationText
     ? " · " + dispatch.branchRecommendationText
     : "";
+  const branchRotationText = dispatch.branchRotationText
+    ? " · " + dispatch.branchRotationText
+    : "";
   const currentStep = Array.isArray(dispatch.loopSteps)
     ? dispatch.loopSteps.find((step) => step.state === "current")
     : null;
@@ -4538,6 +4546,7 @@ function buildProjectOverviewDispatchText(dispatch) {
     branchText +
     branchFocusText +
     branchRecommendationText +
+    branchRotationText +
     " · 闭环 " +
     dispatch.loopProgress +
     "/" +
@@ -4967,6 +4976,38 @@ function buildFarRouteDispatchBranchRecommendationText(choices) {
     " · " +
     reasons.join(" · ")
   );
+}
+
+function buildFarRouteDispatchBranchRotationText(choices) {
+  if (!choices.length) {
+    return "";
+  }
+
+  const shiftChoice = choices.find((choice) => choice.status === "shift");
+  if (shiftChoice) {
+    return (
+      "分支轮替：改走" +
+      shiftChoice.label +
+      " " +
+      shiftChoice.directiveName +
+      "触发分支改道 +" +
+      Math.round(FAR_ROUTE_DISPATCH_BRANCH_SHIFT_REWARD_RATE * 100) +
+      "%"
+    );
+  }
+
+  const activeChoice = choices.find((choice) => choice.status === "active");
+  if (activeChoice) {
+    return (
+      "分支轮替：当前已走" +
+      activeChoice.label +
+      " " +
+      activeChoice.directiveName +
+      "，完成闭环后下一轮可改道"
+    );
+  }
+
+  return "分支轮替：先完成协同或绕行闭环，下一轮开启分支改道";
 }
 
 function getFarRouteDispatchBranchStatus(state, directive, relayDirective, now) {

@@ -1406,7 +1406,8 @@ h2 {
   color: #ffe3aa;
 }
 
-.far-dispatch-branch-recommendation {
+.far-dispatch-branch-recommendation,
+.far-dispatch-branch-rotation {
   width: fit-content;
   max-width: 100%;
   padding: 4px 8px;
@@ -1422,7 +1423,14 @@ h2 {
   white-space: nowrap;
 }
 
-.far-dispatch-branch-recommendation[hidden] {
+.far-dispatch-branch-rotation {
+  border-color: rgba(255, 126, 177, 0.34);
+  background: rgba(255, 126, 177, 0.1);
+  color: #ffd2e5;
+}
+
+.far-dispatch-branch-recommendation[hidden],
+.far-dispatch-branch-rotation[hidden] {
   display: none;
 }
 

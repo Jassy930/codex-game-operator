@@ -2,6 +2,15 @@
 
 ## Unreleased
 
+- 远航调度新增“分支轮替目标”：没有上轮分支时提示先完成任一分支闭环，已有上轮分支时提示改走另一条协同/绕行路线触发“分支改道 +6%”，继续回应 #6 对后半段玩法变化不明显的反馈。
+- `src/game.js` 为远航分支派生 `branchRotationText` 并纳入远航调度长文本和星图总览摘要；`src/app.js` 渲染 `far-dispatch-branch-rotation`；`index.html` 增加静态占位；`src/styles.css` 增加轮替目标样式；`tests/game.test.js` 覆盖无上轮分支、绕行后改走协同、协同整备后改走绕行和静态绑定。
+- 文档同步更新：`docs/DECISION.md`、`docs/FEEDBACK.md`、`docs/PRODUCT.md`、`docs/DESIGN.md`、`docs/ROADMAP.md`、`docs/IDEAS.md`、`docs/METRICS.md` 和本日志已记录远航分支轮替目标。
+- 本轮只调整派生展示、DOM、样式和测试，不新增收益、不新增存档字段，不改变升级价格、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、基础连携倍率、远航调度收益、冷却、连携窗口、反馈入口或部署链路。
+- 同步 GitHub Issues 反馈状态：2026-05-01 00:45 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 作为本轮处理对象。
+- 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含 `branchRotationText`、`far-dispatch-branch-rotation` 和“分支轮替”相关文案。
+- 钉钉通知未发送：运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` 相关变量名；未将 webhook 写入仓库。
+
 - 远航调度新增“推荐原因”：当前航段契合路线会在推荐分支和分支选择条中显示点击/过载航段为什么推荐协同、自动/总产能航段为什么推荐绕行，继续回应 #6 对后半段玩法变化不明显的反馈。
 - `src/game.js` 为航段契合派生 `branchFocusReasonText` / `choice.reasonText` 并纳入 `branchChoiceText` / `branchRecommendationText`；`src/app.js` 在契合分支卡片中渲染推荐原因；`src/styles.css` 增加 `.far-dispatch-branch-choice-reason`；`tests/game.test.js` 覆盖协同/绕行推荐原因、推荐分支文案、星图总览摘要和静态绑定。
 - 文档同步更新：`docs/DECISION.md`、`docs/FEEDBACK.md`、`docs/RESEARCH.md`、`docs/PRODUCT.md`、`docs/DESIGN.md`、`docs/ROADMAP.md`、`docs/IDEAS.md`、`docs/METRICS.md`、`README.md` 和本日志已记录远航推荐原因标明。
