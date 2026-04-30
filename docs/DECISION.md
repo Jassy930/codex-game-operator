@@ -24,6 +24,7 @@
 - 构建产物已确认包含 `branchRouteText`、`far-dispatch-branch-route` 和“路线履历”相关文案。
 - 发布验证已通过：提交 `9994b3c` 已推送到 `origin/main`；GitHub Pages workflow `25180220027` 成功；线上首页、`src/app.js` 和 `src/game.js` 已确认包含 `far-dispatch-branch-route`、`branchRouteText` 和“路线履历”。
 - 已回复 GitHub Issue #6，说明本轮路线履历、验证和部署结果，issue 保持 open 等待复测。
+- 钉钉通知未发送：运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` 相关变量名，也未发现本地 `.env` 文件；未将 webhook 写入仓库。
 
 ## 2026-05-01 Product decision：远航轮替闭环奖励
 

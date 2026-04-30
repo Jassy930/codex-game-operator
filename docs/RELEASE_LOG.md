@@ -11,6 +11,7 @@
 - 构建产物已确认包含 `branchRouteText`、`far-dispatch-branch-route` 和“路线履历”相关文案。
 - 发布：提交 `9994b3c` 已推送到 `origin/main`；GitHub Pages workflow `25180220027` 成功；线上首页、`src/app.js` 和 `src/game.js` 已确认包含 `far-dispatch-branch-route`、`branchRouteText` 和“路线履历”。
 - 反馈处理：已回复 #6，说明路线履历上线范围、验证结果和复测问题，issue 保持 open。
+- 钉钉通知未发送：运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` 相关变量名，也未发现本地 `.env` 文件；未将 webhook 写入仓库。
 
 - 远航调度新增“轮替闭环”：目标后改走与上一轮不同的协同/绕行分支时，会记录短期待结算轮替分支；随后回到当前航段目标指令完成 3/3 时，额外获得有效基础指令收益 9% 的“轮替闭环”奖励，继续回应 #6 对后半段玩法变化不明显的反馈。
 - `src/game.js` 新增 `FAR_ROUTE_DISPATCH_BRANCH_ROTATION_REWARD_RATE`、`farRouteBranchRotationDirectiveId` 兼容字段、轮替闭环奖励计算、分支轮替闭环预告和远航路径第三步收益标签；`src/app.js` 记录并渲染 `dispatchBranchRotationReward` / `directive-dispatch-branch-rotation`；`src/styles.css` 增加轮替闭环徽标样式；`index.html` 同步静态解锁说明；`tests/game.test.js` 覆盖改道后回目标结算、静态绑定和反馈快照。

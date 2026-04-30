@@ -10,6 +10,7 @@
 - 构建产物已确认包含 `branchRouteText`、`far-dispatch-branch-route` 和“路线履历”相关文案。
 - 已推送提交 `9994b3c`，GitHub Pages workflow `25180220027` 已成功；线上页面和脚本已确认包含 `far-dispatch-branch-route`、`branchRouteText` 和“路线履历”。
 - 已回复 #6，说明远航路线履历的上线范围、验证结果和复测问题；issue 继续保持 open 等待玩家复测。
+- 钉钉通知未发送：运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` 相关变量名，也未发现本地 `.env` 文件；未将 webhook 写入仓库。
 
 - GitHub Issues：gh 可用且已认证；2026-05-01 00:57 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
 - #6 继续作为本轮 Product decision 依据：该反馈指出后半段“只有不停的目标、玩法没有真正变化”；前序已经显示分支轮替目标，但改道后的回目标闭环还缺少“本次跨轮轮替完成”的直接结算。
