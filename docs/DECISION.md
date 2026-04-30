@@ -1,5 +1,29 @@
 # Decision
 
+## 2026-05-01 Product decision：远航路线收益对照
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-01 04:01 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#6 仍是最新反馈线程，原始反馈指出后半段“只有不停的目标、玩法没有真正变化”，因此本轮继续进入 Product decision。
+
+当前最大问题：前序已经补齐远航路线预案、路线步骤、按钮标记、契合闭环、闭环复盘和路线稳航，但协同/绕行分支选择条仍需要玩家把“本步即时收益”和“回目标闭环收益”从多枚徽标里心算。稳航、改道、契合闭环和轮替闭环都已经可见，但选择前缺少一行把本步合计与回目标收益放在同一条路线里对照。
+
+本轮决策：
+
+- 新增“远航路线收益对照”。
+- `branchChoices` 为每条协同/绕行路线派生 `payoffText`，显示“本步合计 +X%”以及回目标会触发的远航闭环、远航突破、绕行突破、轮替闭环和契合闭环。
+- 主操作区分支选择条新增 `far-dispatch-branch-choice-payoff` 行，aria 汇总 `branchChoiceText` 同步包含收益对照。
+- 本轮只调整派生展示、DOM、样式和测试；不新增收益、不新增存档字段，不改变升级价格、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、远航调度既有数值、冷却、连携窗口、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-05-01 04:01 CST 当前 5 个 open feedback issue、0 个 open bug issue。
+- 无上轮路线时，协同分支显示本步合计包含远航协同、协同补给和航段契合，回目标包含远航闭环、远航突破和契合闭环。
+- 绕行分支显示本步合计、投送累计提示，回目标包含远航闭环、远航突破和绕行突破。
+- 有上轮协同路线时，续走协同的本步合计包含路线稳航，改走绕行的回目标预览包含轮替闭环。
+- 有上轮绕行路线时，改走协同的本步合计包含分支改道和航段契合，回目标预览包含轮替闭环和契合闭环；续走绕行的本步合计包含路线稳航。
+- `src/app.js` 渲染 `far-dispatch-branch-choice-payoff`，`src/styles.css` 包含 `.far-dispatch-branch-choice-payoff`。
+- 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含 `payoffText`、`far-dispatch-branch-choice-payoff` 和“本步合计”相关文案。
+
 ## 2026-05-01 Product decision：远航路线稳航
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-01 03:46 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#6 仍是最新反馈线程，原始反馈指出后半段“只有不停的目标、玩法没有真正变化”，因此本轮继续进入 Product decision。

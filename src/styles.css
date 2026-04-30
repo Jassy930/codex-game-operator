@@ -1559,6 +1559,14 @@ h2 {
   display: none;
 }
 
+.far-dispatch-branch-choice-payoff {
+  color: #ffe7b6;
+}
+
+.far-dispatch-branch-choice-payoff[hidden] {
+  display: none;
+}
+
 .far-dispatch-branch-choice em {
   color: rgba(248, 243, 231, 0.68);
   font-size: 0.66rem;

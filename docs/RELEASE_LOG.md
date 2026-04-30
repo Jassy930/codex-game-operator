@@ -2,6 +2,14 @@
 
 ## Unreleased
 
+- 远航调度新增“路线收益对照”：协同/绕行分支卡片会显示本步合计收益和回目标将触发的闭环收益，继续回应 #6 对后半段玩法变化不明显的反馈。
+- `src/game.js` 为 `branchChoices` 派生 `payoffText` 并纳入 `branchChoiceText`；`src/app.js` 渲染 `far-dispatch-branch-choice-payoff`；`src/styles.css` 增加收益对照样式；`tests/game.test.js` 覆盖无上轮分支、路线稳航、分支改道、轮替闭环、契合闭环、静态渲染和样式绑定。
+- 文档同步更新：`docs/DECISION.md`、`docs/FEEDBACK.md`、`docs/RESEARCH.md`、`docs/PRODUCT.md`、`docs/DESIGN.md`、`docs/ROADMAP.md`、`docs/IDEAS.md`、`docs/METRICS.md`、`README.md` 和本日志已记录远航路线收益对照。
+- 本轮只调整派生展示、DOM、样式和测试，不新增收益、不新增存档字段，不改变升级价格、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、远航调度既有数值、冷却、连携窗口、反馈入口或部署链路。
+- 同步 GitHub Issues 反馈状态：2026-05-01 04:01 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 作为本轮处理对象。
+- 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含 `payoffText`、`far-dispatch-branch-choice-payoff` 和“本步合计”相关文案。
+
 - 远航调度新增“路线稳航”：目标指令后续走上一轮协同/绕行分支时，会获得有效基础指令收益 4% 的即时奖励，和“分支改道 +6% / 轮替闭环 +9%”形成稳走与改道取舍，继续回应 #6 对后半段玩法变化不明显的反馈。
 - `src/game.js` 新增 `FAR_ROUTE_DISPATCH_BRANCH_STABILITY_REWARD_RATE`、路线稳航预览/执行结算、分支选择条奖励文案和分支轮替提示；`src/app.js` 记录并渲染 `dispatchBranchStabilityReward` / `directive-dispatch-branch-stability`；`src/styles.css` 增加路线稳航徽标样式；`index.html` 同步静态解锁说明；`tests/game.test.js` 覆盖无上轮分支不触发、续走协同/绕行触发、改道不触发、事件绑定、样式绑定和反馈快照。
 - 文档同步更新：`docs/DECISION.md`、`docs/FEEDBACK.md`、`docs/RESEARCH.md`、`docs/PRODUCT.md`、`docs/DESIGN.md`、`docs/ROADMAP.md`、`docs/IDEAS.md`、`docs/METRICS.md`、`README.md` 和本日志已记录远航路线稳航。

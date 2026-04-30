@@ -2,6 +2,13 @@
 
 ## 2026-05-01
 
+- GitHub Issues：gh 可用且已认证；2026-05-01 04:01 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
+- #6 继续作为本轮 Product decision 依据：该反馈指出后半段“只有不停的目标、玩法没有真正变化”；前序已经补齐路线预案、路线步骤、按钮标记、契合闭环、闭环复盘和路线稳航，但分支选择前仍需要玩家把本步收益和回目标收益拆开判断。
+- 本轮改动新增远航路线收益对照：协同/绕行分支卡片会显示“本步合计 +X%”和回目标将触发的远航闭环、远航突破、绕行突破、轮替闭环或契合闭环。
+- 分支选择条新增 `payoffText` / `far-dispatch-branch-choice-payoff`，aria 汇总 `branchChoiceText` 同步包含收益对照；本轮不新增收益、不新增存档字段，不改变升级价格、星图路线、项目奖励、远航调度既有数值、冷却、连携窗口、反馈入口或部署链路。
+- 本轮本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含 `payoffText`、`far-dispatch-branch-choice-payoff` 和“本步合计”相关文案。
+
 - GitHub Issues：gh 可用且已认证；2026-05-01 03:46 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
 - #6 继续作为本轮 Product decision 依据：该反馈指出后半段“只有不停的目标、玩法没有真正变化”；前序已经补齐路线预案、路线步骤、路线按钮标记、契合闭环和闭环复盘，但续走上轮路线只有状态提示，缺少与改道奖励并列的收益确认。
 - 本轮改动新增远航路线稳航：目标指令后续走上一轮协同/绕行分支时，会获得有效基础指令收益 4% 的“路线稳航”奖励。

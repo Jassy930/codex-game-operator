@@ -738,10 +738,15 @@ function renderFarDispatchBranchChoices(dispatch) {
       const next = document.createElement("small");
       next.textContent = choice.nextText ?? "";
 
+      const payoff = document.createElement("small");
+      payoff.className = "far-dispatch-branch-choice-payoff";
+      payoff.textContent = choice.payoffText ?? "";
+      payoff.hidden = !choice.payoffText;
+
       const caption = document.createElement("em");
       caption.textContent = choice.caption + " · " + choice.rewardText;
 
-      item.append(label, directive, reason, next, caption);
+      item.append(label, directive, reason, next, payoff, caption);
       return item;
     })
   );

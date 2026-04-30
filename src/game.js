@@ -5127,6 +5127,13 @@ function buildFarRouteDispatchBranchChoices(
           Math.round(FAR_ROUTE_DISPATCH_BRANCH_ROTATION_REWARD_RATE * 100) +
           "%"
         : "");
+    const payoffText = buildFarRouteDispatchBranchPayoffText(
+      choice.kind,
+      shift,
+      stable,
+      focused,
+      rotationReady
+    );
 
     return {
       kind: choice.kind,
@@ -5145,6 +5152,7 @@ function buildFarRouteDispatchBranchChoices(
       focusText: focused ? branchFocus.text : "",
       status,
       statusText,
+      payoffText,
       rewardText,
       text:
         choice.label +
@@ -5158,9 +5166,72 @@ function buildFarRouteDispatchBranchChoices(
         " · " +
         choice.nextText +
         " · " +
+        payoffText +
+        " · " +
         rewardText
     };
   });
+}
+
+function buildFarRouteDispatchBranchPayoffText(
+  kind,
+  shift,
+  stable,
+  focused,
+  rotationReady
+) {
+  let instantRate =
+    kind === "sync"
+      ? FAR_ROUTE_DISPATCH_SYNC_REWARD_RATE + FAR_ROUTE_DISPATCH_SYNC_SUPPLY_RATE
+      : FAR_ROUTE_DISPATCH_DETOUR_REWARD_RATE;
+
+  if (shift) {
+    instantRate += FAR_ROUTE_DISPATCH_BRANCH_SHIFT_REWARD_RATE;
+  }
+  if (stable) {
+    instantRate += FAR_ROUTE_DISPATCH_BRANCH_STABILITY_REWARD_RATE;
+  }
+  if (focused) {
+    instantRate += FAR_ROUTE_DISPATCH_BRANCH_FOCUS_REWARD_RATE;
+  }
+
+  const returnRewards = [
+    "远航闭环 +" + Math.round(FAR_ROUTE_DISPATCH_LOOP_REWARD_RATE * 100) + "%",
+    "远航突破 +" +
+      roundTo(FAR_ROUTE_DISPATCH_BREAKTHROUGH_REMAINING_RATE * 100, 3) +
+      "%剩余"
+  ];
+
+  if (kind === "detour") {
+    returnRewards.push(
+      "绕行突破 +" +
+        roundTo(FAR_ROUTE_DISPATCH_DETOUR_BREAKTHROUGH_REMAINING_RATE * 100, 3) +
+        "%剩余"
+    );
+  }
+  if (shift || rotationReady) {
+    returnRewards.push(
+      "轮替闭环 +" +
+        Math.round(FAR_ROUTE_DISPATCH_BRANCH_ROTATION_REWARD_RATE * 100) +
+        "%"
+    );
+  }
+  if (focused) {
+    returnRewards.push(
+      "契合闭环 +" +
+        Math.round(FAR_ROUTE_DISPATCH_FOCUS_LOOP_REWARD_RATE * 100) +
+        "%"
+    );
+  }
+
+  return (
+    "本步合计 +" +
+    Math.round(instantRate * 100) +
+    "%" +
+    (kind === "detour" ? " · 投送累计" : "") +
+    " · 回目标 " +
+    returnRewards.join(" + ")
+  );
 }
 
 function buildFarRouteDispatchBranchChoiceText(choices) {
@@ -5183,6 +5254,8 @@ function buildFarRouteDispatchBranchChoiceText(choices) {
           (choice.reasonText ? " · " + choice.reasonText : "") +
           " · " +
           choice.nextText +
+          " · " +
+          choice.payoffText +
           " · " +
           choice.rewardText +
           "）"
