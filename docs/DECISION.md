@@ -1,5 +1,33 @@
 # Decision
 
+## 2026-04-30 Product decision：远航协同补给
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-04-30 21:03 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#6 仍是最新反馈线程，指出后半段“只有不停的目标、玩法没有真正变化”，因此本轮继续进入 Product decision。
+
+当前最大问题：远航绕行已经通过“绕行投送”形成消耗当前能量、推进累计航段的选择差异；协同路线虽然有远航协同奖励和协同回航指引，但它仍更像安全收益路线，缺少和绕行投送对应的资源侧特征。玩家可能仍把协同与绕行理解为两种收益徽标，而不是“保留/补当前资源”和“消耗当前资源推进航段”的分支取舍。
+
+本轮决策：
+
+- 给目标指令后的指定协同续航新增“协同补给”。
+- 执行指定协同续航时，除远航续航和远航协同外，额外按有效基础指令收益 3% 增加当前能量。
+- 协同补给只增加 `state.energy`，不增加 `totalEnergy`，避免把协同路线变成累计航段推进工具；绕行路线继续通过绕行投送消耗当前能量并推进累计能量。
+- 按钮徽标、预计收益、执行反馈、本地 `directive` 事件和反馈快照同步显示/记录 `dispatchSyncSupply`、`dispatchSyncSupplyRate`、`dispatchSyncSupplyText`。
+- 本轮不新增存档字段，不改变升级价格、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、基础连携倍率、远航调度校准、远航续航、远航协同收益、远航绕行、绕行投送、远航闭环、远航突破、绕行突破、远航整备、整备续航、整备回航、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-04-30 21:03 CST 当前 5 个 open feedback issue、0 个 open bug issue。
+- `FAR_ROUTE_DISPATCH_SYNC_SUPPLY_RATE` 为 0.03。
+- `getDirectiveStatus` 在目标后的指定协同续航按钮上显示“协同补给 +X当前”。
+- `activateDirective` 执行指定协同续航时增加当前能量，不增加累计能量，执行反馈包含“协同补给”。
+- 非协同绕行按钮不显示协同补给，继续显示远航绕行和绕行投送。
+- `src/app.js` 记录 `dispatchSyncSupply` / `dispatchSyncSupplyRate` / `dispatchSyncSupplyText` 事件字段，并渲染 `directive-dispatch-sync-supply` 徽标。
+- `src/styles.css` 包含 `.directive-button .directive-dispatch-sync-supply` 样式。
+- 本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 117 项。
+- 构建产物已确认包含 `FAR_ROUTE_DISPATCH_SYNC_SUPPLY_RATE`、`dispatchSyncSupply`、`directive-dispatch-sync-supply` 和“协同补给”。
+
+下一步：等待 #6 复测协同与绕行路线的资源取舍是否更清楚；如果仍认为后半段只是沿目标推进，再评估更重的项目分支或消耗型短循环，而不是继续叠加说明文本。
+
 ## 2026-04-30 Product decision：远航协同回航指引
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-04-30 20:34 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#6 仍是最新反馈线程，指出后半段“只有不停的目标、玩法没有真正变化”，因此本轮继续进入 Product decision。

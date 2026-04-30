@@ -773,6 +773,9 @@ function renderDirective(option) {
         dispatchSyncReward: result.dispatchSyncReward,
         dispatchSyncRewardRate: result.dispatchSyncRewardRate,
         dispatchSyncRewardText: result.dispatchSyncRewardText,
+        dispatchSyncSupply: result.dispatchSyncSupply,
+        dispatchSyncSupplyRate: result.dispatchSyncSupplyRate,
+        dispatchSyncSupplyText: result.dispatchSyncSupplyText,
         dispatchDetourReward: result.dispatchDetourReward,
         dispatchDetourRewardRate: result.dispatchDetourRewardRate,
         dispatchDetourRewardText: result.dispatchDetourRewardText,
@@ -867,6 +870,11 @@ function renderDirective(option) {
   dispatchSync.textContent = option.dispatchSyncRewardText;
   dispatchSync.hidden = !option.dispatchSyncRewardText;
 
+  const dispatchSyncSupply = document.createElement("span");
+  dispatchSyncSupply.className = "directive-dispatch-sync-supply";
+  dispatchSyncSupply.textContent = option.dispatchSyncSupplyText;
+  dispatchSyncSupply.hidden = !option.dispatchSyncSupplyText;
+
   const dispatchDetour = document.createElement("span");
   dispatchDetour.className = "directive-dispatch-detour";
   dispatchDetour.textContent = option.dispatchDetourRewardText;
@@ -939,6 +947,7 @@ function renderDirective(option) {
     dispatchBonus,
     dispatchRelay,
     dispatchSync,
+    dispatchSyncSupply,
     dispatchDetour,
     dispatchLoop,
     dispatchBreakthrough,
@@ -1032,6 +1041,7 @@ function getDirectivePreviewDetailTexts(option) {
     option.dispatchRewardText,
     option.dispatchRelayRewardText,
     option.dispatchSyncRewardText,
+    option.dispatchSyncSupplyText,
     option.dispatchDetourRewardText,
     option.dispatchLoopRewardText,
     option.dispatchBreakthroughRewardText,

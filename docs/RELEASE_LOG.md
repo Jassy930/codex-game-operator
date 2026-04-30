@@ -2,6 +2,14 @@
 
 ## Unreleased
 
+- 远航协同路线新增“协同补给”：目标指令后执行当前航段指定的协同续航时，除远航续航与远航协同外，额外获得有效基础指令收益 3% 的当前能量补给；该补给只增加当前能量，不增加累计能量，让协同路线与绕行投送形成“补当前资源 vs 消耗当前资源推进累计航段”的取舍，继续回应 #6 对后半段玩法变化不明显的反馈。
+- `src/game.js` 新增 `FAR_ROUTE_DISPATCH_SYNC_SUPPLY_RATE`、协同补给计算、执行/预览文案和远航路径收益文本；`src/app.js` 记录 `dispatchSyncSupply` / `dispatchSyncSupplyRate` / `dispatchSyncSupplyText` 事件字段并渲染 `directive-dispatch-sync-supply` 徽标；`src/styles.css` 新增协同补给徽标样式；`tests/game.test.js` 覆盖协同补给预览、执行、静态绑定和反馈快照。
+- 文档同步更新：`docs/DECISION.md`、`docs/FEEDBACK.md`、`docs/RESEARCH.md`、`docs/PRODUCT.md`、`docs/DESIGN.md`、`docs/ROADMAP.md`、`docs/IDEAS.md`、`docs/METRICS.md` 和本日志已记录协同补给。
+- 本轮不新增存档字段，不改变升级价格、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、基础连携倍率、远航调度校准、远航续航、远航协同收益、远航绕行、绕行投送、远航闭环、远航突破、绕行突破、远航整备、整备续航、整备回航、反馈入口或部署链路。
+- 同步 GitHub Issues 反馈状态：2026-04-30 21:03 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 作为本轮处理对象。
+- 验证通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 117 项。
+- 构建产物已确认包含 `FAR_ROUTE_DISPATCH_SYNC_SUPPLY_RATE`、`dispatchSyncSupply`、`directive-dispatch-sync-supply` 和“协同补给”。
+
 - 远航调度协同路线新增“协同回航”指引：目标指令后执行指定协同续航，再回到当前航段目标指令时，按钮推荐从泛化“调度目标”改为“协同回航/等待协同”，闭环提示同步说明协同回航会触发远航闭环与远航突破，继续回应 #6 对后半段玩法变化不明显的反馈。
 - `src/game.js` 新增 `dispatchSyncReturnCanOverride` 派生路径，区分协同路线第三步回航与普通调度目标；`tests/game.test.js` 覆盖协同回航推荐文案、等待文案、闭环提示和按钮推荐。
 - 文档同步更新：`docs/DECISION.md`、`docs/FEEDBACK.md`、`docs/RESEARCH.md`、`docs/PRODUCT.md`、`docs/DESIGN.md`、`docs/ROADMAP.md`、`docs/IDEAS.md`、`docs/METRICS.md` 和本日志已记录协同回航。

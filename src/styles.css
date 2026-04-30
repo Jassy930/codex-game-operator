@@ -1014,6 +1014,15 @@ h2 {
   line-height: 1;
 }
 
+.directive-button .directive-dispatch-sync-supply {
+  padding: 3px 6px;
+  border-radius: 999px;
+  background: rgba(137, 255, 199, 0.16);
+  color: #d5ffeb;
+  font-size: 0.68rem;
+  line-height: 1;
+}
+
 .directive-button .directive-dispatch-detour {
   padding: 3px 6px;
   border-radius: 999px;
