@@ -9,6 +9,9 @@
 - 同步 GitHub Issues 反馈状态：2026-05-01 05:33 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 作为本轮处理对象。
 - 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
 - 构建产物已确认包含 `decisionKind` 和 `is-decision-*` 路线判断状态样式。
+- 发布：提交 `7f3047d` 已推送到 `origin/main`；GitHub Pages workflow `25190839200` 成功；线上首页返回 HTTP 200，线上 `src/game.js`、`src/app.js` 和 `src/styles.css` 已确认包含 `decisionKind` 与 `is-decision-*`。
+- 反馈处理：已回复 #6，说明路线判断状态上线范围、验证结果和复测问题，issue 保持 open；回复后于 2026-05-01 05:45 CST 再次同步 GitHub Issues，当前仍为 5 个 open feedback issue、0 个 open bug issue。
+- 钉钉通知未发送：运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` 相关变量名，也未发现本地 `.env*` 文件；未将 webhook 写入仓库。
 
 - 远航调度新增“路线判断”：协同/绕行分支卡片会直接标出当前航段首推、推荐稳航、推荐改道、备选建档、备选稳航、备选改道、本轮已选或本轮已完成，继续回应 #6 对后半段玩法变化不明显的反馈。
 - `src/game.js` 为 `branchChoices` 派生 `decisionText` 并纳入 `branchChoiceText`；`src/app.js` 渲染 `far-dispatch-branch-choice-decision`；`src/styles.css` 增加路线判断样式；`tests/game.test.js` 覆盖首推、稳航、改道、备选和静态绑定。
