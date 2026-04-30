@@ -20,8 +20,11 @@
 - `tests/game.test.js` 覆盖项目卡可视化进度缩略图结构与样式标记。
 - 本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 110 项。
 - 构建产物已确认包含 `project-card-scene`、`--project-card-progress`、`renderProjectCardScene` 和“航段缩略图”。
+- 提交 79a7a4b 已推送；GitHub Pages workflow 25154509337 已成功，线上地址返回 HTTP 200，且线上 `app.js` 和 `styles.css` 已确认包含项目卡缩略图相关标记。
+- #4 已回复并继续保持 open，等待复测确认星图项目卡片新增缩略图后，项目列表是否更容易扫视、文字压力是否下降。
+- 回复后同步 GitHub Issues：2026-04-30 16:07 CST 当前仍为 5 个 open feedback issue、0 个 open bug issue；#4 更新时间为 2026-04-30T08:07:02Z。
 
-下一步：推送并等待 #4 复测；如果仍认为界面文字密度高，再优先继续把项目列表/筛选信息转为可扫视视觉结构，而不是继续增加长文说明。
+下一步：等待 #4 复测；如果仍认为界面文字密度高，再优先继续把项目列表/筛选信息转为可扫视视觉结构，而不是继续增加长文说明。
 
 ## 2026-04-30 Product decision：点火阶段光环
 
