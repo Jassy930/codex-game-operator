@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+- 点火按钮新增过载倒计时徽标：`core-overload-badge` 直接显示距离过载还剩几次，临近过载和过载命中时切换高亮/爆发态，继续回应 #5 对点击反馈、特效和点击欲望的反馈。
+- `index.html` 新增 `coreOverloadBadge` 静态占位；`src/app.js` 在 `renderCoreFeedback` 中用现有连击状态更新 `coreOverloadBadgeValue` 和倒计时状态 class；`src/styles.css` 新增倒计时徽标样式与 `coreBadgePulse` / `coreBadgeBurst` 动效；`tests/game.test.js` 覆盖静态标记、运行期绑定和样式标记。
+- 本轮只调整点火按钮展示层；不新增存档字段，不改变点击收益、连击窗口、过载奖励、升级价格、星图航段、航线策略、航线指令、反馈入口或部署链路。
+- 同步 GitHub Issues 反馈状态：2026-04-30 18:31 CST 当前 5 个 open feedback issue、0 个 open bug issue；#5 作为本轮处理对象。
+- 验证通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 117 项。
+- 构建产物已确认包含 `coreOverloadBadge`、`core-overload-badge`、`coreOverloadBadgeValue`、`coreBadgePulse` 和 `coreBadgeBurst`。
+
 - 星图当前章节大图景新增章节节点带：`project-chapter-hero-route` 用 completed/current/active/pending 节点展示章节内推进状态，远航长尾压缩到最多 8 个节点，继续回应 #4 对界面文字密度和图片化表达的反馈。
 - `src/game.js` 新增 `PROJECT_CHAPTER_HERO_NODE_LIMIT` 与 `heroNodes` 派生；`src/app.js` 新增 `renderProjectChapterHeroNode` 并把节点带渲染进当前章节大图景；`index.html` 静态占位同步 `project-chapter-hero-route`；`src/styles.css` 新增章节节点带和状态样式；`tests/game.test.js` 覆盖静态标记、运行期绑定和长尾压缩节点。
 - 本轮只调整星图当前章节大图景展示层；不新增存档字段，不改变 57 段星图路线、项目完成判定、筛选结果、奖励数值、升级价格、航线策略、航线指令、反馈入口或部署链路。

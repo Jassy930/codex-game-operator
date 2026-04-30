@@ -1,5 +1,29 @@
 # Decision
 
+## 2026-04-30 Product decision：点火过载倒计时徽标
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-04-30 18:31 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#5 仍围绕“点火按钮太薄弱、缺少点击反馈和点击欲望”保持 open，因此本轮进入 Product decision。
+
+当前最大问题：点火按钮已经有脉冲、粒子、收益浮层、8 格连击轨、下一击预告、环形蓄能轨、音效、触感、落点闪光和阶段光环，但“距离过载还剩几次”仍主要落在按钮底部小点和按钮外文字上。玩家连续点击时，按钮主体缺少一个更直接的倒计时锚点来促成下一次点击。
+
+本轮决策：
+
+- 在点火按钮内新增 `core-overload-badge` 过载倒计时徽标。
+- 运行期 `renderCoreFeedback` 复用现有 `getComboStatus()`，显示剩余过载次数；过载命中时显示 `!`。
+- 徽标按 `is-countdown-active`、`is-overload-ready`、`is-overload-hit` 切换普通蓄能、过载前一击和过载命中状态。
+- 本轮只调整点火按钮展示层；不新增存档字段，不改变点击收益、连击窗口、过载奖励、升级价格、星图航段、航线策略、航线指令、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-04-30 18:31 CST 当前 5 个 open feedback issue、0 个 open bug issue。
+- 静态首页包含 `coreOverloadBadge`、`core-overload-badge` 和初始剩余值 `8`。
+- 运行期 `src/app.js` 包含 `coreOverloadBadgeValue`，并在 `renderCoreFeedback` 中按 `combo.remaining` / `combo.overloaded` 更新徽标。
+- CSS 包含 `.core-overload-badge`、`.is-countdown-active`、`.is-overload-ready`、`.is-overload-hit`、`coreBadgePulse` 和 `coreBadgeBurst`。
+- 本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 117 项。
+- 构建产物已确认包含 `coreOverloadBadge`、`core-overload-badge`、`coreOverloadBadgeValue`、`coreBadgePulse` 和 `coreBadgeBurst`。
+
+下一步：等待 #5 复测；如果仍认为点火按钮点击欲望不足，再评估星核本体随连击阶段改变图形层级，而不是提高点击收益。
+
 ## 2026-04-30 Product decision：当前章节节点带
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-04-30 18:17 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#4 仍围绕“界面文字密集、希望更多图片和更好看”保持 open，因此本轮继续进入 Product decision。

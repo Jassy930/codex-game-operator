@@ -201,6 +201,8 @@ const elements = {
   coreChargeRing: document.querySelector("#coreButton .core-charge-ring"),
   coreImpactPoint: document.querySelector("#coreImpactPoint"),
   coreGainPop: document.querySelector("#coreGainPop"),
+  coreOverloadBadge: document.querySelector("#coreOverloadBadge"),
+  coreOverloadBadgeValue: document.querySelector("#coreOverloadBadgeValue"),
   coreComboTrack: document.querySelector("#coreButton .core-combo-track"),
   coreRewardHint: document.querySelector("#coreRewardHint"),
   soundToggle: document.querySelector("#soundToggle"),
@@ -479,6 +481,12 @@ function renderCoreFeedback(combo) {
   elements.coreChargeRing.classList.toggle("is-charging", isCharging);
   elements.coreChargeRing.classList.toggle("is-overload-ready", isOverloadReady);
   elements.coreChargeRing.classList.toggle("is-overload-hit", combo.overloaded);
+  elements.coreOverloadBadgeValue.textContent = combo.overloaded
+    ? "!"
+    : String(combo.remaining);
+  elements.coreOverloadBadge.classList.toggle("is-countdown-active", isCharging);
+  elements.coreOverloadBadge.classList.toggle("is-overload-ready", isOverloadReady);
+  elements.coreOverloadBadge.classList.toggle("is-overload-hit", combo.overloaded);
   elements.pulse.classList.toggle("is-overload-ready", isOverloadReady);
   elements.pulse.classList.toggle("is-overload-hit", combo.overloaded);
   renderCoreComboTrack(combo);

@@ -1255,6 +1255,8 @@ test("点火按钮会渲染点击反馈和过载前兆效果", () => {
   assert.match(indexHtml, /id="coreImpactPoint" class="core-impact-point"/);
   assert.match(indexHtml, /class="core-charge-ring"/);
   assert.match(indexHtml, /id="coreGainPop" class="core-gain-pop"/);
+  assert.match(indexHtml, /id="coreOverloadBadge" class="core-overload-badge"/);
+  assert.match(indexHtml, /id="coreOverloadBadgeValue">8<\/strong>/);
   assert.match(indexHtml, /class="core-combo-track"/);
   assert.match(indexHtml, /id="coreRewardHint" class="core-reward-hint"/);
   assert.match(indexHtml, /class="feedback-toggle-list"/);
@@ -1288,6 +1290,8 @@ test("点火按钮会渲染点击反馈和过载前兆效果", () => {
   assert.match(appJs, /Math\.round\(combo\.progress \* 360\) \+ "deg"/);
   assert.match(appJs, /elements\.coreChargeRing\.classList\.toggle\("is-overload-ready", isOverloadReady\)/);
   assert.match(appJs, /coreGainPop: document\.querySelector\("#coreGainPop"\)/);
+  assert.match(appJs, /coreOverloadBadge: document\.querySelector\("#coreOverloadBadge"\)/);
+  assert.match(appJs, /coreOverloadBadgeValue: document\.querySelector\("#coreOverloadBadgeValue"\)/);
   assert.match(appJs, /gainText: "\+" \+ formatNumber\(state\.lastGain\)/);
   assert.match(appJs, /elements\.coreGainPop\.textContent = gainText/);
   assert.match(appJs, /elements\.coreGainPop\.classList\.add\("is-showing"\)/);
@@ -1307,6 +1311,9 @@ test("点火按钮会渲染点击反馈和过载前兆效果", () => {
   assert.match(appJs, /window\.AudioContext \?\? window\.webkitAudioContext/);
   assert.match(appJs, /context\.createOscillator\(\)/);
   assert.match(appJs, /frequency: 392/);
+  assert.match(appJs, /elements\.coreOverloadBadgeValue\.textContent = combo\.overloaded/);
+  assert.match(appJs, /elements\.coreOverloadBadge\.classList\.toggle\("is-countdown-active", isCharging\)/);
+  assert.match(appJs, /elements\.coreOverloadBadge\.classList\.toggle\("is-overload-ready", isOverloadReady\)/);
   assert.match(appJs, /elements\.coreButton\.dataset\.comboStep = String\(combo\.step\)/);
   assert.match(appJs, /dot\.classList\.toggle\("is-filled", combo\.step >= step\)/);
   assert.match(appJs, /dot\.classList\.toggle\("is-next", !combo\.overloaded && combo\.step \+ 1 === step\)/);
@@ -1331,6 +1338,10 @@ test("点火按钮会渲染点击反馈和过载前兆效果", () => {
   assert.match(styles, /\.core-gain-pop/);
   assert.match(styles, /\.core-gain-pop\.is-showing/);
   assert.match(styles, /\.core-gain-pop\.is-overload-gain/);
+  assert.match(styles, /\.core-overload-badge/);
+  assert.match(styles, /\.core-overload-badge\.is-countdown-active/);
+  assert.match(styles, /\.core-overload-badge\.is-overload-ready/);
+  assert.match(styles, /\.core-overload-badge\.is-overload-hit/);
   assert.match(styles, /\.core-combo-track/);
   assert.match(styles, /\.core-combo-dot\.is-next/);
   assert.match(styles, /\.core-reward-hint/);
@@ -1348,6 +1359,8 @@ test("点火按钮会渲染点击反馈和过载前兆效果", () => {
   assert.match(styles, /@keyframes coreStageBurst/);
   assert.match(styles, /@keyframes coreImpactPoint/);
   assert.match(styles, /@keyframes coreGainFloat/);
+  assert.match(styles, /@keyframes coreBadgePulse/);
+  assert.match(styles, /@keyframes coreBadgeBurst/);
   assert.match(styles, /@keyframes coreDotPulse/);
 });
 

@@ -2,6 +2,13 @@
 
 ## 2026-04-30
 
+- GitHub Issues：gh 可用且已认证；2026-04-30 18:31 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
+- #5 作为本轮 Product decision 依据：该反馈指出点火按钮太薄弱，希望增加点击反馈、特效和点击欲望；前序已补脉冲、粒子、收益浮层、8 格连击轨、下一击预告、环形蓄能轨、音效、触感、落点闪光和阶段光环，本轮补按钮内更直接的过载剩余次数视觉锚点。
+- 本轮改动新增点火过载倒计时徽标：`core-overload-badge` 固定显示在点火按钮内，运行期从现有 `getComboStatus()` 派生剩余过载次数，临近过载和过载命中时切换高亮/爆发态。
+- 本轮只调整点火按钮展示层；不新增存档字段，不改变点击收益、连击窗口、过载奖励、升级价格、星图航段、航线策略、航线指令、反馈入口或部署链路。
+- 本轮本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 117 项。
+- 构建产物已确认包含 `coreOverloadBadge`、`core-overload-badge`、`coreOverloadBadgeValue`、`coreBadgePulse` 和 `coreBadgeBurst`。
+
 - GitHub Issues：gh 可用且已认证；2026-04-30 18:17 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
 - #4 继续作为本轮 Product decision 依据：该反馈指出界面文字密集，希望更多图片和更好看；前序已补星图插画、视觉航线、章节视觉导航、章节徽记、筛选视觉标识、章节微图景和当前章节大图景，本轮处理当前章节大图景仍缺少章节内节点节奏的问题。
 - 本轮改动新增当前章节节点带：`project-chapter-hero-scene` 内显示 `project-chapter-hero-route`，短章节直接显示节点，远航长尾压缩到最多 8 个节点，并用 completed/current/active/pending 状态辅助扫视。
