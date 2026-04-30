@@ -1,5 +1,33 @@
 # Decision
 
+## 2026-04-30 Product decision：远航绕行分支
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-04-30 19:46 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#6 仍是最新反馈线程，指出后半段“只有不停的目标、玩法没有真正变化”，因此本轮继续进入 Product decision。
+
+当前最大问题：远航调度已经形成“目标指令 -> 协同/续航 -> 回目标闭环 -> 整备续航 -> 整备回航”的连续短循环；但目标后的第二步仍是单一路径优化，指定协同续航严格优于另一个非目标指令。玩家在后半段看到的仍可能是“按推荐路径走”，而不是一个可选择的分支。
+
+本轮决策：
+
+- 在目标指令后的 1/3 阶段新增“远航绕行”分支。
+- 指定协同续航仍显示“远航协同/等待协同”并保留 +5% 协同收益；另一个非目标指令显示“远航绕行/等待绕行”，在远航续航 +8% 基础上追加 +4% 绕行收益。
+- 选择绕行后回到当前航段目标指令时，按钮推荐显示“绕行回航/等待绕行”，并按当前能量航段剩余量结算 0.03% 的“绕行突破”。
+- 远航路径收益标签从“协同/续航”更新为“协同/绕行”，回目标步同步显示远航闭环、远航突破和绕行突破。
+- 本轮不新增存档字段，不改变升级价格、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、基础连携倍率、远航调度校准、远航续航、远航协同、远航闭环、远航突破、远航整备刷新冷却、整备续航、整备回航、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-04-30 19:46 CST 当前 5 个 open feedback issue、0 个 open bug issue。
+- `FAR_ROUTE_DISPATCH_DETOUR_REWARD_RATE` 为 0.04，`FAR_ROUTE_DISPATCH_DETOUR_BREAKTHROUGH_REMAINING_RATE` 为 0.0003。
+- `getDirectiveStatus` 在目标后的非协同非目标按钮上显示“远航绕行”，并结算 `dispatchDetourReward`。
+- `getDirectivePlan` 在绕行后回到目标指令时推荐“绕行回航/等待绕行”。
+- `activateDirective` 在绕行回航时结算 `dispatchDetourBreakthroughReward`，执行反馈包含“绕行突破”。
+- `src/app.js` 记录 `dispatchDetourReward` / `dispatchDetourBreakthroughReward` 事件字段，并渲染 `directive-dispatch-detour` / `directive-dispatch-detour-breakthrough` 徽标。
+- `src/styles.css` 包含 `.directive-button .directive-dispatch-detour` 与 `.directive-button .directive-dispatch-detour-breakthrough` 样式。
+- 本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 117 项。
+- 构建产物已确认包含 `FAR_ROUTE_DISPATCH_DETOUR_REWARD_RATE`、`FAR_ROUTE_DISPATCH_DETOUR_BREAKTHROUGH_REMAINING_RATE`、`dispatchDetourReward`、`dispatchDetourBreakthroughReward`、`directive-dispatch-detour`、`directive-dispatch-detour-breakthrough`、“远航绕行”和“绕行突破”。
+
+下一步：提交并推送后回复 #6，说明远航第二步现在有“协同”和“绕行”两条可选分支，并继续等待复测。
+
 ## 2026-04-30 Product decision：远航整备回航奖励
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-04-30 19:26 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#6 仍是最新反馈线程，指出后半段“只有不停的目标、玩法没有真正变化”，因此本轮继续进入 Product decision。

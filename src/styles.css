@@ -1014,6 +1014,15 @@ h2 {
   line-height: 1;
 }
 
+.directive-button .directive-dispatch-detour {
+  padding: 3px 6px;
+  border-radius: 999px;
+  background: rgba(179, 136, 255, 0.17);
+  color: #eadcff;
+  font-size: 0.68rem;
+  line-height: 1;
+}
+
 .directive-button .directive-dispatch-loop {
   padding: 3px 6px;
   border-radius: 999px;
@@ -1028,6 +1037,15 @@ h2 {
   border-radius: 999px;
   background: rgba(19, 181, 166, 0.16);
   color: #d4fbf5;
+  font-size: 0.68rem;
+  line-height: 1;
+}
+
+.directive-button .directive-dispatch-detour-breakthrough {
+  padding: 3px 6px;
+  border-radius: 999px;
+  background: rgba(124, 201, 255, 0.17);
+  color: #d9efff;
   font-size: 0.68rem;
   line-height: 1;
 }

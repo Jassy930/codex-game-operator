@@ -773,12 +773,20 @@ function renderDirective(option) {
         dispatchSyncReward: result.dispatchSyncReward,
         dispatchSyncRewardRate: result.dispatchSyncRewardRate,
         dispatchSyncRewardText: result.dispatchSyncRewardText,
+        dispatchDetourReward: result.dispatchDetourReward,
+        dispatchDetourRewardRate: result.dispatchDetourRewardRate,
+        dispatchDetourRewardText: result.dispatchDetourRewardText,
         dispatchLoopReward: result.dispatchLoopReward,
         dispatchLoopRewardRate: result.dispatchLoopRewardRate,
         dispatchLoopRewardText: result.dispatchLoopRewardText,
         dispatchBreakthroughReward: result.dispatchBreakthroughReward,
         dispatchBreakthroughRewardRate: result.dispatchBreakthroughRewardRate,
         dispatchBreakthroughRewardText: result.dispatchBreakthroughRewardText,
+        dispatchDetourBreakthroughReward: result.dispatchDetourBreakthroughReward,
+        dispatchDetourBreakthroughRewardRate:
+          result.dispatchDetourBreakthroughRewardRate,
+        dispatchDetourBreakthroughRewardText:
+          result.dispatchDetourBreakthroughRewardText,
         dispatchPrepReward: result.dispatchPrepReward,
         dispatchPrepRewardRate: result.dispatchPrepRewardRate,
         dispatchPrepRewardText: result.dispatchPrepRewardText,
@@ -853,6 +861,11 @@ function renderDirective(option) {
   dispatchSync.textContent = option.dispatchSyncRewardText;
   dispatchSync.hidden = !option.dispatchSyncRewardText;
 
+  const dispatchDetour = document.createElement("span");
+  dispatchDetour.className = "directive-dispatch-detour";
+  dispatchDetour.textContent = option.dispatchDetourRewardText;
+  dispatchDetour.hidden = !option.dispatchDetourRewardText;
+
   const dispatchLoop = document.createElement("span");
   dispatchLoop.className = "directive-dispatch-loop";
   dispatchLoop.textContent = option.dispatchLoopRewardText;
@@ -862,6 +875,11 @@ function renderDirective(option) {
   dispatchBreakthrough.className = "directive-dispatch-breakthrough";
   dispatchBreakthrough.textContent = option.dispatchBreakthroughRewardText;
   dispatchBreakthrough.hidden = !option.dispatchBreakthroughRewardText;
+
+  const dispatchDetourBreakthrough = document.createElement("span");
+  dispatchDetourBreakthrough.className = "directive-dispatch-detour-breakthrough";
+  dispatchDetourBreakthrough.textContent = option.dispatchDetourBreakthroughRewardText;
+  dispatchDetourBreakthrough.hidden = !option.dispatchDetourBreakthroughRewardText;
 
   const dispatchPrep = document.createElement("span");
   dispatchPrep.className = "directive-dispatch-prep";
@@ -910,8 +928,10 @@ function renderDirective(option) {
     dispatchBonus,
     dispatchRelay,
     dispatchSync,
+    dispatchDetour,
     dispatchLoop,
     dispatchBreakthrough,
+    dispatchDetourBreakthrough,
     dispatchPrep,
     dispatchReturn,
     dispatchRefresh,
@@ -1000,8 +1020,10 @@ function getDirectivePreviewDetailTexts(option) {
     option.dispatchRewardText,
     option.dispatchRelayRewardText,
     option.dispatchSyncRewardText,
+    option.dispatchDetourRewardText,
     option.dispatchLoopRewardText,
     option.dispatchBreakthroughRewardText,
+    option.dispatchDetourBreakthroughRewardText,
     option.dispatchPrepRewardText,
     option.dispatchReturnRewardText,
     option.dispatchRefreshText,
