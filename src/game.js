@@ -5155,6 +5155,10 @@ function buildFarRouteDispatchBranchChoices(
     );
     const routeMarkerText =
       buildFarRouteDispatchBranchRouteMarkerText(routeMarkerKind);
+    const routeNodeStates = buildFarRouteDispatchBranchRouteNodeStates(
+      active,
+      branchStatus
+    );
     const followupText = buildFarRouteDispatchBranchFollowupText(
       choice.label,
       choice.directive.name,
@@ -5203,6 +5207,7 @@ function buildFarRouteDispatchBranchChoices(
       routeResourceText: choice.routeResourceText,
       routeMarkerKind,
       routeMarkerText,
+      routeNodeStates,
       nextText: choice.nextText,
       reasonText,
       decisionText,
@@ -5336,6 +5341,56 @@ function buildFarRouteDispatchBranchRouteMarkerText(routeMarkerKind) {
     default:
       return "备选";
   }
+}
+
+function buildFarRouteDispatchBranchRouteNodeStates(active, branchStatus) {
+  const kind = String(branchStatus?.kind ?? "");
+
+  if (kind === "pending" && branchStatus?.directiveId) {
+    return {
+      start: "next",
+      branch: "waiting",
+      return: "waiting"
+    };
+  }
+
+  if (kind === "pending") {
+    return {
+      start: "done",
+      branch: "next",
+      return: "waiting"
+    };
+  }
+
+  if (active && (kind === "sync" || kind === "detour")) {
+    return {
+      start: "done",
+      branch: "done",
+      return: "next"
+    };
+  }
+
+  if (active && (kind === "sync-prep" || kind === "detour-prep")) {
+    return {
+      start: "done",
+      branch: "done",
+      return: "done"
+    };
+  }
+
+  if (kind === "sync" || kind === "detour" || kind.endsWith("-prep")) {
+    return {
+      start: "done",
+      branch: "waiting",
+      return: "waiting"
+    };
+  }
+
+  return {
+    start: "waiting",
+    branch: "waiting",
+    return: "waiting"
+  };
 }
 
 function buildFarRouteDispatchBranchDecisionKind(

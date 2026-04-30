@@ -1,5 +1,31 @@
 # Decision
 
+## 2026-05-01 Product decision：远航路线微图步骤高亮
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-01 07:04 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#6 仍是最新后半段玩法反馈，#4 仍指出界面文字密度和图片化诉求，因此本轮继续进入 Product decision。
+
+当前最大问题：前序路线微图已经显示协同/绕行路径、资源取向和推荐/上轮/本轮/改道状态，但微图里的三个节点仍是静态点。玩家能扫到路线属于哪一类，却还需要读“路线步骤”或按钮徽标来确认当前是在执行目标、选择分支还是回目标。
+
+本轮决策：
+
+- 新增“远航路线微图步骤高亮”。
+- `branchChoices` 派生 `routeNodeStates`，为起点、分支点和回目标点标记 `done`、`next` 或 `waiting`。
+- `renderFarDispatchBranchChoiceRoute(choice)` 将节点状态渲染到 `far-dispatch-branch-choice-route-node is-*`，让 0/3 起手、1/3 选分支、2/3 回目标和已完成路线能直接从三点微图扫到。
+- 路线微图仍保持 `aria-hidden="true"`；语义继续由已有 `branchChoiceText`、卡片标题、路线步骤、路线下一步和按钮路线标记承载。
+- 本轮只调整派生展示、DOM、样式和测试；不新增收益、不新增存档字段，不改变升级价格、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、远航调度既有数值、冷却、连携窗口、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-05-01 07:04 CST 当前 5 个 open feedback issue、0 个 open bug issue。
+- 0/3 起手时，两条路线节点为 `next:waiting:waiting`。
+- 目标后等待协同/绕行选择时，两条路线节点为 `done:next:waiting`。
+- 已选择绕行路线时，绕行路线节点为 `done:done:next`，未选协同路线为 `done:waiting:waiting`。
+- 已选择协同路线时，协同路线节点为 `done:done:next`，未选绕行路线为 `done:waiting:waiting`。
+- `src/app.js` 使用 `getFarDispatchBranchChoiceRouteNodeState` 渲染起点、分支点和回目标点状态；`src/styles.css` 包含 `.far-dispatch-branch-choice-route-node.is-done` 与 `.is-next` 样式。
+- 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含 `routeNodeStates`、`getFarDispatchBranchChoiceRouteNodeState`、`far-dispatch-branch-choice-route-node is-done/is-next/is-waiting`。
+- 发布、issue 回复和钉钉通知结果会在本轮结束前补入发布记录。
+
 ## 2026-05-01 Product decision：远航路线微图标记
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-01 06:49 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#6 仍是最新后半段玩法反馈，#4 仍指出界面文字密度和图片化诉求，因此本轮继续进入 Product decision。
