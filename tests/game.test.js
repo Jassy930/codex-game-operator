@@ -2858,10 +2858,10 @@ test("远航调度会在 20M 后按当前航段指定目标指令", () => {
   assert.equal(relayCruiseOption.recommended, true);
   assert.equal(relayCruiseOption.recommendationText, "远航绕行");
   assert.equal(relayResonanceOption.recommended, true);
-  assert.equal(relayResonanceOption.recommendationText, "远航协同");
+  assert.equal(relayResonanceOption.recommendationText, "推荐协同");
   assert.equal(relayWaitingResonanceOption.ready, false);
   assert.equal(relayWaitingResonanceOption.recommended, true);
-  assert.equal(relayWaitingResonanceOption.recommendationText, "等待协同");
+  assert.equal(relayWaitingResonanceOption.recommendationText, "等待推荐协同");
   assert.equal(relayCruiseOption.dispatchRelayReward > 0, true);
   assert.equal(relayCruiseOption.dispatchRelayRewardRate, FAR_ROUTE_DISPATCH_RELAY_REWARD_RATE);
   assert.match(relayCruiseOption.dispatchRelayRewardText, /远航续航 \+/);
@@ -3220,6 +3220,25 @@ test("远航调度会优先接管常规收束起手推荐", () => {
   const status = getDirectiveStatus(state, 1000);
   const cruiseOption = status.options.find((option) => option.id === "cruise-cache");
   const ignitionOption = status.options.find((option) => option.id === "ignition-salvo");
+  const targetUsedState = {
+    ...state,
+    directives: {
+      ...state.directives,
+      "cruise-cache": 1000
+    },
+    directiveChain: {
+      lastDirectiveId: "cruise-cache",
+      stacks: 0,
+      expiresAt: 121_000
+    }
+  };
+  const relayStatus = getDirectiveStatus(targetUsedState, 30_000);
+  const relayIgnitionOption = relayStatus.options.find(
+    (option) => option.id === "ignition-salvo"
+  );
+  const relayResonanceOption = relayStatus.options.find(
+    (option) => option.id === "resonance-pulse"
+  );
 
   assert.equal(dispatch.projectId, "glow-orbit-harbor");
   assert.equal(dispatch.targetDirectiveId, "cruise-cache");
@@ -3239,6 +3258,12 @@ test("远航调度会优先接管常规收束起手推荐", () => {
   assert.equal(cruiseOption.dispatchCooldownText, "调度冷却 -30%");
   assert.equal(cruiseOption.dispatchChainWindowText, "调度接力 +30 秒");
   assert.equal(ignitionOption.recommended, false);
+  assert.equal(relayIgnitionOption.recommended, true);
+  assert.equal(relayIgnitionOption.recommendationText, "远航协同");
+  assert.equal(relayResonanceOption.recommended, true);
+  assert.equal(relayResonanceOption.recommendationText, "推荐绕行");
+  assert.equal(relayResonanceOption.dispatchBranchFocusReward > 0, true);
+  assert.match(relayResonanceOption.dispatchBranchFocusRewardText, /航段契合 \+/);
 });
 
 test("远航调度会奖励切换上一轮分支", () => {

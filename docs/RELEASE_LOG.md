@@ -2,6 +2,14 @@
 
 ## Unreleased
 
+- 远航调度新增“推荐分支按钮标记”：目标指令后的远航续航阶段，当前航段契合分支会在按钮推荐徽标中显示“推荐协同”或“推荐绕行”，冷却时显示“等待推荐协同/等待推荐绕行”，继续回应 #6 对后半段玩法变化不明显的反馈。
+- `src/game.js` 调整 `getDirectiveOptionRecommendationText`，让按钮级推荐优先识别 `branchFocusDirectiveId`；`tests/game.test.js` 覆盖点击/过载航段推荐协同、冷却等待推荐协同，以及自动航段推荐绕行。
+- 文档同步更新：`docs/DECISION.md`、`docs/FEEDBACK.md`、`docs/RESEARCH.md`、`docs/PRODUCT.md`、`docs/DESIGN.md`、`docs/ROADMAP.md`、`docs/IDEAS.md`、`docs/METRICS.md` 和本日志已记录推荐分支按钮标记。
+- 本轮只调整按钮推荐文案，不新增收益、不新增存档字段，不改变升级价格、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、基础连携倍率、远航调度收益、冷却、连携窗口、反馈入口或部署链路。
+- 同步 GitHub Issues 反馈状态：2026-04-30 23:35 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 作为本轮处理对象。
+- 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含按钮级推荐分支逻辑。
+
 - 远航调度新增“推荐分支”：20M 后远航调度 active 时，主操作区会把当前航段契合的协同/绕行路线整理成一行推荐分支，星图总览远航调度摘要也会同步显示，继续回应 #6 对后半段玩法变化不明显的反馈。
 - `src/game.js` 新增 `branchRecommendationText` 派生和 `buildFarRouteDispatchBranchRecommendationText`；`src/app.js` 渲染 `far-dispatch-branch-recommendation`；`src/styles.css` 新增推荐分支样式；`index.html` 增加静态占位；`tests/game.test.js` 覆盖锁定态、推荐协同、推荐可改道、静态绑定和样式标记。
 - 文档同步更新：`docs/DECISION.md`、`docs/FEEDBACK.md`、`docs/RESEARCH.md`、`docs/PRODUCT.md`、`docs/DESIGN.md`、`docs/ROADMAP.md`、`docs/IDEAS.md`、`docs/METRICS.md`、`README.md` 和本日志已记录远航推荐分支。

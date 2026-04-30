@@ -2,6 +2,14 @@
 
 ## 2026-04-30
 
+- GitHub Issues：gh 可用且已认证；2026-04-30 23:35 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
+- #6 继续作为本轮 Product decision 依据：该反馈指出后半段“只有不停的目标、玩法没有真正变化”；前序已把当前航段推荐协同/绕行显示到调度条和星图总览，但实际按钮层仍只显示“远航协同/远航绕行”。
+- 本轮改动新增推荐分支按钮标记：目标指令后的远航续航阶段，如果按钮正好对应当前航段契合分支，推荐徽标显示“推荐协同”或“推荐绕行”；冷却时显示“等待推荐协同/等待推荐绕行”。
+- 非契合分支仍保持“远航协同”或“远航绕行”，保留可选路线；本轮不新增收益、不新增存档字段，不改变升级价格、星图路线、项目奖励、远航调度数值、冷却、连携窗口、反馈入口或部署链路。
+- 本轮本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含按钮级推荐分支逻辑。
+- 钉钉通知待本轮结束时处理；webhook 仅从运行时环境读取，不写入仓库。
+
 - GitHub Issues：gh 可用且已认证；2026-04-30 23:16 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
 - #6 继续作为本轮 Product decision 依据：该反馈指出后半段“只有不停的目标、玩法没有真正变化”；前序已补当前航段契合协同/绕行路线，但玩家仍需要把航段契合、上轮路线和可改道状态组合成最终选择。
 - 本轮改动新增远航推荐分支：远航调度 active 时，主操作区和星图总览会显示 `branchRecommendationText`，直接写出当前航段推荐走协同还是绕行。

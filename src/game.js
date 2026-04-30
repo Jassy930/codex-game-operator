@@ -5119,6 +5119,15 @@ function getDirectiveOptionRecommendationText({
   if (
     plan?.recommendationText === "远航续航" &&
     dispatch?.active &&
+    dispatch.branchFocusDirectiveId === directive.id
+  ) {
+    const branchLabel = dispatch.branchFocusKind === "detour" ? "绕行" : "协同";
+    return ready ? "推荐" + branchLabel : "等待推荐" + branchLabel;
+  }
+
+  if (
+    plan?.recommendationText === "远航续航" &&
+    dispatch?.active &&
     dispatch.relayDirectiveId === directive.id
   ) {
     return ready ? "远航协同" : "等待协同";
