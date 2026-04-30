@@ -21,8 +21,11 @@
 - 普通点火和过载点火都会触发落点闪光，过载点火会切换 `is-overload-impact`。
 - 本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 109 项。
 - 构建产物已确认包含 `coreImpactPoint`、`core-impact-point`、`--core-impact-x`、`--core-impact-y` 和 `coreImpactPoint` 动画标记。
+- 提交 704132c 已推送；GitHub Pages workflow 25151443908 已成功，线上地址返回 HTTP 200，且线上首页、`app.js` 和 `styles.css` 已确认包含点火落点闪光相关标记。
+- #5 已回复并继续保持 open，等待复测确认落点闪光配合现有音效、触感和蓄能轨后是否让点火按钮更有点击反馈和点击欲望。
+- 回复后同步 GitHub Issues：2026-04-30 14:46 CST 当前仍为 5 个 open feedback issue、0 个 open bug issue；#5 更新时间为 2026-04-30T06:45:56Z。
 
-下一步：推送并等待 #5 复测；若仍认为点火欲望不足，再评估更明确的星核阶段变化或连击节奏目标。
+下一步：等待 #5 复测；若仍认为点火欲望不足，再评估更明确的星核阶段变化或连击节奏目标。
 
 ## 2026-04-30 Product decision：点火触感反馈开关
 

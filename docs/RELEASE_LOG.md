@@ -8,6 +8,9 @@
 - 同步 GitHub Issues 反馈状态：2026-04-30 14:38 CST 当前 5 个 open feedback issue、0 个 open bug issue；#5 作为本轮处理对象。
 - 验证通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 109 项。
 - 构建产物已确认包含 `coreImpactPoint`、`core-impact-point`、`--core-impact-x`、`--core-impact-y` 和 `coreImpactPoint` 动画标记。
+- 提交 704132c 已推送；GitHub Pages workflow 25151443908 已成功，线上地址返回 HTTP 200，且线上首页、`app.js` 和 `styles.css` 已确认包含点火落点闪光相关标记。
+- 已回复 #5，说明点火按钮新增落点闪光，并保持 issue open 等待复测。
+- 回复后同步 GitHub Issues 反馈状态：2026-04-30 14:46 CST 当前 5 个 open feedback issue、0 个 open bug issue；#5 更新时间为 2026-04-30T06:45:56Z。
 
 - 点火按钮新增可关闭的移动端触感反馈：默认开启“触感反馈”，普通点火调用 12ms 短震动，过载点火调用 `[18, 22, 34]` 节奏，继续回应 #5 对点击反馈、特效和点击欲望的反馈。
 - `index.html` 新增 `hapticToggle` 开关；`src/app.js` 新增独立 `HAPTIC_KEY` 偏好、`playCoreHaptic` 和 `haptic_toggle` 本地事件；`src/styles.css` 将点火反馈偏好整理为 `feedback-toggle-list`；`tests/game.test.js` 覆盖静态标记、运行期绑定和样式标记。
