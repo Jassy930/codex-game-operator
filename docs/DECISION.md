@@ -19,8 +19,11 @@
 - 静态首页和运行期资源包含 `coreGainPop`、`core-gain-pop`、`coreGainFloat` 和 `is-overload-gain`。
 - 本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 106 项。
 - 构建产物已确认包含 `coreGainPop`、`core-gain-pop`、`coreGainFloat`、`gainText` 和 `is-overload-gain`。
+- 提交 5b1a738 已推送；GitHub Pages workflow 25145593440 已成功，线上地址返回 HTTP 200，且线上首页、`app.js` 和 `styles.css` 已确认包含点火收益浮层相关标记。
+- #5 已回复并继续保持 open，等待复测确认按钮内收益浮层是否提升点击反馈和点击欲望。
+- 回复后同步 GitHub Issues：2026-04-30 11:21 CST 当前仍为 5 个 open feedback issue、0 个 open bug issue；#5 更新时间为 2026-04-30T03:21:06Z。
 
-下一步：发布后回复 #5 并保持 open，等待复测确认按钮内收益浮层是否提升点击反馈和点击欲望。
+下一步：等待 #5 复测；若仍觉得点火按钮薄弱，再评估音效开关、更多星核视觉阶段或更强的点击连击阶段反馈。
 
 ## 2026-04-30 Product decision：远航整备续航
 

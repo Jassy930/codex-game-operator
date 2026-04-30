@@ -8,6 +8,9 @@
 - 同步 GitHub Issues 反馈状态：2026-04-30 11:13 CST 当前 5 个 open feedback issue、0 个 open bug issue；#5 继续作为点火点击欲望处理对象。
 - 验证通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 106 项。
 - 构建产物已确认包含 `coreGainPop`、`core-gain-pop`、`coreGainFloat`、`gainText` 和 `is-overload-gain`。
+- 提交 5b1a738 已推送；GitHub Pages workflow 25145593440 已成功，线上地址返回 HTTP 200，且线上首页、`app.js` 和 `styles.css` 已确认包含点火收益浮层相关标记。
+- 已回复 #5，说明点火按钮内本次收益浮层和过载收益浮层已上线，并保持 issue open 等待复测。
+- 回复后同步 GitHub Issues 反馈状态：2026-04-30 11:21 CST 当前 5 个 open feedback issue、0 个 open bug issue；#5 更新时间为 2026-04-30T03:21:06Z。
 - 远航调度新增“远航整备”：3/3 指令轮换回到当前航段目标指令并触发远航闭环后，会刷新当前协同续航指令冷却，并把完成态下一步优先推荐为“整备续航/等待整备”。
 - `src/game.js` 新增远航整备派生状态和冷却刷新逻辑；`src/app.js` 渲染 `directive-dispatch-refresh` 并在本地 `directive` 事件记录 `dispatchRefreshDirectiveId` / `dispatchRefreshDirectiveName` / `dispatchRefreshText`；`src/styles.css` 新增远航整备徽标样式；`index.html` 锁定文案同步说明远航整备。
 - 本轮只调整远航闭环完成后的协同续航连续性；不新增存档字段，不改变升级价格、产能公式、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、基础连携倍率、轮换目标奖励、预案执行、航线委托、指令熟练、满层回响、远航调度校准、冷却倍率、连携窗口、远航续航奖励倍率、远航协同奖励、远航闭环奖励或反馈入口。
