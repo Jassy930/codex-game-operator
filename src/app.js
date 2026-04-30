@@ -178,6 +178,7 @@ const elements = {
   overload: document.querySelector("#overloadValue"),
   coreButton: document.querySelector("#coreButton"),
   coreChargeRing: document.querySelector("#coreButton .core-charge-ring"),
+  coreImpactPoint: document.querySelector("#coreImpactPoint"),
   coreGainPop: document.querySelector("#coreGainPop"),
   coreComboTrack: document.querySelector("#coreButton .core-combo-track"),
   coreRewardHint: document.querySelector("#coreRewardHint"),
@@ -236,6 +237,7 @@ let lastFirstUpgradeAt = state.firstUpgradeAt;
 let projectFilter = INITIAL_PROJECT_FILTER_ID;
 let corePulseTimer = 0;
 let coreGainTimer = 0;
+let coreImpactTimer = 0;
 let soundEnabled = loadSoundPreference();
 let hapticEnabled = loadHapticPreference();
 let audioContext = null;
@@ -255,7 +257,7 @@ elements.soundToggle.checked = soundEnabled;
 elements.hapticToggle.checked = hapticEnabled;
 render();
 
-elements.coreButton.addEventListener("click", () => {
+elements.coreButton.addEventListener("click", (event) => {
   offlineSummary = null;
   const previousGoal = getCurrentGoal(state);
   state = clickCore(state);
@@ -269,7 +271,8 @@ elements.coreButton.addEventListener("click", () => {
   playCoreHaptic({ overloaded });
   animateCore({
     gainText: "+" + formatNumber(state.lastGain),
-    overloaded
+    overloaded,
+    pointerEvent: event
   });
   saveAndRender();
 });
@@ -1583,15 +1586,20 @@ function saveFeedbackEntry(entry) {
   }
 }
 
-function animateCore({ gainText = "", overloaded = false } = {}) {
+function animateCore({ gainText = "", overloaded = false, pointerEvent = null } = {}) {
   window.clearTimeout(corePulseTimer);
   window.clearTimeout(coreGainTimer);
+  window.clearTimeout(coreImpactTimer);
   elements.coreButton.classList.remove("is-pulsing", "is-overload-impact");
   elements.coreGainPop.textContent = gainText;
   elements.coreGainPop.classList.remove("is-showing", "is-overload-gain");
+  positionCoreImpact(pointerEvent);
+  elements.coreImpactPoint.classList.remove("is-showing", "is-overload-impact");
   requestAnimationFrame(() => {
     elements.coreButton.classList.add("is-pulsing");
     elements.coreButton.classList.toggle("is-overload-impact", overloaded);
+    elements.coreImpactPoint.classList.add("is-showing");
+    elements.coreImpactPoint.classList.toggle("is-overload-impact", overloaded);
     elements.coreGainPop.classList.add("is-showing");
     elements.coreGainPop.classList.toggle("is-overload-gain", overloaded);
     corePulseTimer = window.setTimeout(
@@ -1606,7 +1614,33 @@ function animateCore({ gainText = "", overloaded = false } = {}) {
       },
       overloaded ? 760 : 620
     );
+    coreImpactTimer = window.setTimeout(
+      () => {
+        elements.coreImpactPoint.classList.remove("is-showing", "is-overload-impact");
+      },
+      overloaded ? 620 : 420
+    );
   });
+}
+
+function positionCoreImpact(event) {
+  const rect = elements.coreButton.getBoundingClientRect();
+  const usePointer =
+    event &&
+    event.detail !== 0 &&
+    Number.isFinite(event.clientX) &&
+    Number.isFinite(event.clientY);
+  const x = usePointer ? event.clientX - rect.left : rect.width / 2;
+  const y = usePointer ? event.clientY - rect.top : rect.height / 2;
+
+  elements.coreImpactPoint.style.setProperty(
+    "--core-impact-x",
+    Math.min(Math.max(x, 0), rect.width) + "px"
+  );
+  elements.coreImpactPoint.style.setProperty(
+    "--core-impact-y",
+    Math.min(Math.max(y, 0), rect.height) + "px"
+  );
 }
 
 function playCoreSound({ overloaded = false } = {}) {

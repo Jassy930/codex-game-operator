@@ -335,6 +335,36 @@ h2 {
   animation-duration: 520ms;
 }
 
+.core-impact-point {
+  --core-impact-x: 50%;
+  --core-impact-y: 50%;
+  position: absolute;
+  top: var(--core-impact-y);
+  left: var(--core-impact-x);
+  z-index: 3;
+  width: 96px;
+  height: 96px;
+  border-radius: 999px;
+  background:
+    radial-gradient(circle, rgba(255, 247, 194, 0.95) 0 8%, rgba(244, 178, 60, 0.56) 18%, transparent 62%);
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-50%, -50%) scale(0.34);
+  mix-blend-mode: screen;
+}
+
+.core-impact-point.is-showing {
+  animation: coreImpactPoint 420ms ease-out;
+}
+
+.core-impact-point.is-overload-impact {
+  width: 124px;
+  height: 124px;
+  background:
+    radial-gradient(circle, rgba(255, 247, 194, 1) 0 8%, rgba(232, 93, 117, 0.72) 22%, transparent 66%);
+  animation-duration: 620ms;
+}
+
 .core-charge-ring {
   --core-charge-angle: 0deg;
   position: absolute;
@@ -2354,6 +2384,18 @@ h2 {
   100% {
     opacity: 0;
     transform: scale(1.18) rotate(18deg);
+  }
+}
+
+@keyframes coreImpactPoint {
+  0% {
+    opacity: 0.95;
+    transform: translate(-50%, -50%) scale(0.34);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(1.26);
   }
 }
 

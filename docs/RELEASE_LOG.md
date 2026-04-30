@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+- 点火按钮新增落点闪光：普通点火会在实际点击位置播放短促亮点，键盘触发回退到按钮中心，过载点火使用更大的过载落点闪光，继续回应 #5 对点击反馈、特效和点击欲望的反馈。
+- `index.html` 新增 `coreImpactPoint`；`src/app.js` 新增 `coreImpactPoint` 绑定、`coreImpactTimer` 和 `positionCoreImpact`；`src/styles.css` 新增 `core-impact-point`、`--core-impact-x` / `--core-impact-y` 和 `coreImpactPoint` 动画；`tests/game.test.js` 覆盖静态标记、运行期绑定和样式标记。
+- 本轮只调整点火按钮展示层；不新增游戏存档字段，不改变点击收益、连击窗口、过载奖励、升级价格、产能公式、星图航段、航线策略、航线指令、反馈入口或部署链路。
+- 同步 GitHub Issues 反馈状态：2026-04-30 14:38 CST 当前 5 个 open feedback issue、0 个 open bug issue；#5 作为本轮处理对象。
+- 验证通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 109 项。
+- 构建产物已确认包含 `coreImpactPoint`、`core-impact-point`、`--core-impact-x`、`--core-impact-y` 和 `coreImpactPoint` 动画标记。
+
 - 点火按钮新增可关闭的移动端触感反馈：默认开启“触感反馈”，普通点火调用 12ms 短震动，过载点火调用 `[18, 22, 34]` 节奏，继续回应 #5 对点击反馈、特效和点击欲望的反馈。
 - `index.html` 新增 `hapticToggle` 开关；`src/app.js` 新增独立 `HAPTIC_KEY` 偏好、`playCoreHaptic` 和 `haptic_toggle` 本地事件；`src/styles.css` 将点火反馈偏好整理为 `feedback-toggle-list`；`tests/game.test.js` 覆盖静态标记、运行期绑定和样式标记。
 - 本轮只调整点火反馈表现层和本地偏好；不新增游戏存档字段，不改变点击收益、连击窗口、过载奖励、升级价格、产能公式、星图航段、航线策略、航线指令、反馈入口或部署链路。

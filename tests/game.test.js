@@ -1054,6 +1054,7 @@ test("点火按钮会渲染点击反馈和过载前兆效果", () => {
 
   assert.match(indexHtml, /id="coreButton" class="core-button" type="button" data-combo-step="0"/);
   assert.match(indexHtml, /class="core-feedback-layer"/);
+  assert.match(indexHtml, /id="coreImpactPoint" class="core-impact-point"/);
   assert.match(indexHtml, /class="core-charge-ring"/);
   assert.match(indexHtml, /id="coreGainPop" class="core-gain-pop"/);
   assert.match(indexHtml, /class="core-combo-track"/);
@@ -1081,6 +1082,7 @@ test("点火按钮会渲染点击反馈和过载前兆效果", () => {
   assert.match(appJs, /recordEvent\("haptic_toggle"/);
   assert.match(appJs, /function renderCoreFeedback\(combo\)/);
   assert.match(appJs, /coreChargeRing: document\.querySelector\("#coreButton \.core-charge-ring"\)/);
+  assert.match(appJs, /coreImpactPoint: document\.querySelector\("#coreImpactPoint"\)/);
   assert.match(appJs, /elements\.coreChargeRing\.style\.setProperty\(\s*"--core-charge-angle"/);
   assert.match(appJs, /Math\.round\(combo\.progress \* 360\) \+ "deg"/);
   assert.match(appJs, /elements\.coreChargeRing\.classList\.toggle\("is-overload-ready", isOverloadReady\)/);
@@ -1096,6 +1098,11 @@ test("点火按钮会渲染点击反馈和过载前兆效果", () => {
   assert.match(appJs, /playCoreHaptic\(\{ overloaded \}\)/);
   assert.match(appJs, /function playCoreHaptic\(\{ overloaded = false \} = \{\}\)/);
   assert.match(appJs, /navigator\.vibrate\(overloaded \? \[18, 22, 34\] : 12\)/);
+  assert.match(appJs, /function positionCoreImpact\(event\)/);
+  assert.match(appJs, /"--core-impact-x"/);
+  assert.match(appJs, /"--core-impact-y"/);
+  assert.match(appJs, /elements\.coreImpactPoint\.classList\.add\("is-showing"\)/);
+  assert.match(appJs, /elements\.coreImpactPoint\.classList\.toggle\("is-overload-impact", overloaded\)/);
   assert.match(appJs, /window\.AudioContext \?\? window\.webkitAudioContext/);
   assert.match(appJs, /context\.createOscillator\(\)/);
   assert.match(appJs, /frequency: 392/);
@@ -1109,6 +1116,10 @@ test("点火按钮会渲染点击反馈和过载前兆效果", () => {
   assert.match(appJs, /window\.setTimeout/);
   assert.match(styles, /\.core-button::before/);
   assert.match(styles, /\.core-feedback-layer/);
+  assert.match(styles, /\.core-impact-point/);
+  assert.match(styles, /--core-impact-x/);
+  assert.match(styles, /--core-impact-y/);
+  assert.match(styles, /\.core-impact-point\.is-overload-impact/);
   assert.match(styles, /\.core-charge-ring/);
   assert.match(styles, /--core-charge-angle/);
   assert.match(styles, /\.core-charge-ring\.is-overload-ready/);
@@ -1128,6 +1139,7 @@ test("点火按钮会渲染点击反馈和过载前兆效果", () => {
   assert.match(styles, /@keyframes coreShockwave/);
   assert.match(styles, /@keyframes coreOverloadShockwave/);
   assert.match(styles, /@keyframes coreSparks/);
+  assert.match(styles, /@keyframes coreImpactPoint/);
   assert.match(styles, /@keyframes coreGainFloat/);
   assert.match(styles, /@keyframes coreDotPulse/);
 });
