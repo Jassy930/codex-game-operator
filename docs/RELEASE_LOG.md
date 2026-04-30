@@ -8,6 +8,9 @@
 - 同步 GitHub Issues 反馈状态：2026-04-30 13:43 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 作为本轮处理对象。
 - 验证通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 109 项。
 - 构建产物已确认包含 `far-dispatch-loop-track`、`loopStepText` 和“远航路径”。
+- 提交 2301e81 已推送；GitHub Pages workflow 25149809258 已成功，线上地址返回 HTTP 200，且线上首页、`app.js`、`game.js` 和 `styles.css` 已确认包含远航调度主路径轨相关标记。
+- 已回复 #6，说明主操作区远航调度条新增 3 格路径轨，并保持 issue open 等待复测。
+- 回复后同步 GitHub Issues 反馈状态：2026-04-30 13:55 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 更新时间为 2026-04-30T05:55:22Z。
 
 - 星图当前航段新增远航调度 3 步路径轨：20M 后当前航段卡片详情会把远航调度显示成“目标指令 -> 协同续航 -> 回目标闭环”，减少只读一行说明来理解后半段短循环的成本。
 - `src/game.js` 为 `getProjectStatuses` 派生 `dispatchSteps` 和 `dispatchStepText`；`src/app.js` 渲染 `project-dispatch-track` / `project-dispatch-step`；`src/styles.css` 增加响应式路径轨样式；`tests/game.test.js` 覆盖脉冲航闸阶段的路径字段和运行期渲染标记。

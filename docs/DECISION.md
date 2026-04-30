@@ -19,8 +19,11 @@
 - 运行期远航调度条会渲染 `far-dispatch-loop-track` 和 `far-dispatch-loop-step`，锁定态不显示路径轨。
 - 本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 109 项。
 - 构建产物已确认包含 `far-dispatch-loop-track`、`loopStepText` 和“远航路径”。
+- 提交 2301e81 已推送；GitHub Pages workflow 25149809258 已成功，线上地址返回 HTTP 200，且线上首页、`app.js`、`game.js` 和 `styles.css` 已确认包含远航调度主路径轨相关标记。
+- #6 已回复并继续保持 open，等待复测确认主操作区远航调度条的 3 格路径轨是否让后半段短循环在实际执行时更清楚。
+- 回复后同步 GitHub Issues：2026-04-30 13:55 CST 当前仍为 5 个 open feedback issue、0 个 open bug issue；#6 更新时间为 2026-04-30T05:55:22Z。
 
-下一步：提交、推送并回复 #6；若复测仍认为后半段玩法变化不足，再评估更重的可规划短循环或资源消耗型指令。
+下一步：等待 #6 复测；若仍认为后半段玩法变化不足，再评估更重的可规划短循环或资源消耗型指令。
 
 ## 2026-04-30 Product decision：星图调度路径轨
 
