@@ -1,5 +1,28 @@
 # Decision
 
+## 2026-05-01 Product decision：远航路线下一步
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-01 04:38 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#6 仍是最新反馈线程，原始反馈指出后半段“只有不停的目标、玩法没有真正变化”，因此本轮继续进入 Product decision。
+
+当前最大问题：前序已经给协同/绕行分支卡片补齐收益对照和路线目标，但卡片仍需要玩家把“路线目标”“路线预案”“路线步骤”和实际按钮顺序组合起来。尤其在 0/3 起手时，分支卡片已经可见，但真正下一步是先执行目标指令；目标后才轮到协同或绕行选择。
+
+本轮决策：
+
+- 新增“远航路线下一步”。
+- `branchChoices` 为每条协同/绕行路线派生 `followupText`：0/3 起手提示先执行目标再选分支；目标后提示执行协同/绕行再回目标；当前路线中提示回目标完成闭环；整备态提示先整备或回目标触发整备回航。
+- 主操作区分支选择条新增 `far-dispatch-branch-choice-followup` 行，aria 汇总 `branchChoiceText` 同步包含下一步提示。
+- 本轮只调整派生展示、DOM、样式和测试；不新增收益、不新增存档字段，不改变升级价格、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、远航调度既有数值、冷却、连携窗口、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-05-01 04:38 CST 当前 5 个 open feedback issue、0 个 open bug issue。
+- 0/3 起手时，协同分支显示“下一步：先执行目标 点火齐射，再选协同 谐振脉冲”，绕行分支显示“下一步：先执行目标 点火齐射，再选绕行 巡航回收”。
+- 目标后分支选择态，协同/绕行分支显示“下一步：执行协同/绕行 X，再回目标 Y”。
+- `src/app.js` 渲染 `far-dispatch-branch-choice-followup`，`src/styles.css` 包含 `.far-dispatch-branch-choice-followup`。
+- 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含 `followupText`、`far-dispatch-branch-choice-followup` 和“下一步：先执行目标”相关文案。
+- 发布待处理：通过本轮提交推送后等待 GitHub Pages workflow 验证。
+
 ## 2026-05-01 Product decision：远航路线目标
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-01 04:20 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#6 仍是最新反馈线程，原始反馈指出后半段“只有不停的目标、玩法没有真正变化”，因此本轮继续进入 Product decision。

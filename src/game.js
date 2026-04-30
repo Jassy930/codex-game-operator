@@ -5113,6 +5113,14 @@ function buildFarRouteDispatchBranchChoices(
       focused,
       branchStatus
     );
+    const followupText = buildFarRouteDispatchBranchFollowupText(
+      choice.label,
+      choice.directive.name,
+      directive.name,
+      active,
+      branchStatus,
+      state
+    );
     const rewardText =
       choice.baseRewardText +
       (shift
@@ -5152,6 +5160,7 @@ function buildFarRouteDispatchBranchChoices(
       nextText: choice.nextText,
       reasonText,
       objectiveText,
+      followupText,
       active,
       previous,
       stable,
@@ -5174,6 +5183,8 @@ function buildFarRouteDispatchBranchChoices(
         (reasonText ? " · " + reasonText : "") +
         " · " +
         objectiveText +
+        " · " +
+        followupText +
         " · " +
         choice.nextText +
         " · " +
@@ -5222,6 +5233,72 @@ function buildFarRouteDispatchBranchObjectiveText(
   }
 
   return "路线目标：建立" + label + "路线，记录为下轮对照";
+}
+
+function buildFarRouteDispatchBranchFollowupText(
+  label,
+  directiveName,
+  targetDirectiveName,
+  active,
+  branchStatus,
+  state
+) {
+  const kind = String(branchStatus?.kind ?? "");
+  const branchDirectiveId = branchStatus?.directiveId ?? null;
+  const chain = state?.directiveChain ?? {};
+
+  if (active) {
+    if (kind === "sync" || kind === "detour") {
+      return "下一步：回目标 " + targetDirectiveName + " 完成" + label + "闭环";
+    }
+
+    if (kind === "sync-prep" || kind === "detour-prep") {
+      if (branchDirectiveId && chain.lastDirectiveId === branchDirectiveId) {
+        return "下一步：回目标 " + targetDirectiveName + " 触发整备回航";
+      }
+
+      return (
+        "下一步：" +
+        (kind === "detour-prep" ? "绕行整备 " : "整备 ") +
+        directiveName +
+        "，再回目标 " +
+        targetDirectiveName
+      );
+    }
+  }
+
+  if (kind === "pending") {
+    return branchStatus?.directiveName === targetDirectiveName
+      ? "下一步：先执行目标 " +
+          targetDirectiveName +
+          "，再选" +
+          label +
+          " " +
+          directiveName
+      : "下一步：执行" +
+          label +
+          " " +
+          directiveName +
+          "，再回目标 " +
+          targetDirectiveName;
+  }
+
+  if (kind.endsWith("-prep")) {
+    return "下一轮：目标 " + targetDirectiveName + " 后可走" + label + " " + directiveName;
+  }
+
+  if (kind === "sync" || kind === "detour") {
+    return "下一轮：回目标 " + targetDirectiveName + " 后再评估" + label + "路线";
+  }
+
+  return (
+    "下一步：执行" +
+    label +
+    " " +
+    directiveName +
+    "，再回目标 " +
+    targetDirectiveName
+  );
 }
 
 function buildFarRouteDispatchBranchPayoffText(
@@ -5305,6 +5382,8 @@ function buildFarRouteDispatchBranchChoiceText(choices) {
           (choice.reasonText ? " · " + choice.reasonText : "") +
           " · " +
           choice.objectiveText +
+          " · " +
+          choice.followupText +
           " · " +
           choice.nextText +
           " · " +

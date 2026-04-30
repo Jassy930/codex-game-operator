@@ -1567,6 +1567,14 @@ h2 {
   display: none;
 }
 
+.far-dispatch-branch-choice-followup {
+  color: #d8ffe2;
+}
+
+.far-dispatch-branch-choice-followup[hidden] {
+  display: none;
+}
+
 .far-dispatch-branch-choice-payoff {
   color: #ffe7b6;
 }
