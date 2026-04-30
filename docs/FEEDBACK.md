@@ -8,6 +8,9 @@
 - 本轮不新增存档字段，不改变航线策略倍率、100K 解锁条件、专精航段、航线指令、星图路线、升级价格、反馈入口或部署链路。
 - 本轮本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 107 项。
 - 构建产物已确认包含 `route-stance-visual-balanced`、`route-stance-visual-ignition`、`route-stance-visual-cruise`、`ROUTE_STANCE_ICON_DEFS` 和 `renderRouteStanceVisual`。
+- 提交 03d317b 已推送；GitHub Pages workflow 25146277465 已成功，线上地址返回 HTTP 200；线上首页、`app.js` 和 `styles.css` 已确认包含航线策略视觉徽记相关标记。
+- #4 已回复：说明航线策略按钮新增三类视觉徽记，并保持 issue open 等待复测。
+- 回复后同步 GitHub Issues：2026-04-30 11:47 CST 当前仍为 5 个 open feedback issue、0 个 open bug issue；#4 更新时间为 2026-04-30T03:47:33Z。
 
 - GitHub Issues：gh 可用且已认证；2026-04-30 11:25 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
 - #3 和 #6 作为本轮 Product decision 依据：#3 指向玩法太简单，#6 指向后半段目标增多但玩法结构感不足；当前航线指令已有多轮短循环与远航调度规则，但默认仍主要依赖长文本和按钮徽标理解。
