@@ -18,6 +18,9 @@
 - 运行期资源包含 `DIRECTIVE_VISIBLE_BADGE_LIMIT`、`compactDirectiveBadges`、`directive-badge-overflow`、`getDirectivePreviewDisplayText` 和“项明细”。
 - 本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 108 项。
 - 构建产物已确认包含 `DIRECTIVE_VISIBLE_BADGE_LIMIT`、`directive-badge-overflow`、`getDirectivePreviewDisplayText`、`is-collapsed-badge` 和“项明细”。
+- 提交 74dac74 已推送；GitHub Pages workflow 25147712250 已成功，线上地址返回 HTTP 200，且线上 `app.js` / `styles.css` 已确认包含航线指令徽标压缩相关标记。
+- #4 已回复并继续保持 open，等待复测确认 100K 后航线指令按钮的徽标和收益明细压缩是否进一步减少文字密度。
+- 回复后同步 GitHub Issues：2026-04-30 12:40 CST 当前仍为 5 个 open feedback issue、0 个 open bug issue；#4 更新时间为 2026-04-30T04:40:35Z。
 
 ## 2026-04-30 Product decision：航线指令状态灯
 

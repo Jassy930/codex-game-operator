@@ -8,6 +8,9 @@
 - 同步 GitHub Issues 反馈状态：2026-04-30 12:32 CST 当前 5 个 open feedback issue、0 个 open bug issue；#4 作为本轮处理对象。
 - 验证通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 108 项。
 - 构建产物已确认包含 `DIRECTIVE_VISIBLE_BADGE_LIMIT`、`directive-badge-overflow`、`getDirectivePreviewDisplayText`、`is-collapsed-badge` 和“项明细”。
+- 提交 74dac74 已推送；GitHub Pages workflow 25147712250 已成功，线上地址返回 HTTP 200，且线上 `app.js` / `styles.css` 已确认包含航线指令徽标压缩相关标记。
+- 已回复 #4，说明航线指令按钮已压缩文字徽标和收益明细，并保持 issue open 等待复测。
+- 回复后同步 GitHub Issues 反馈状态：2026-04-30 12:40 CST 当前 5 个 open feedback issue、0 个 open bug issue；#4 更新时间为 2026-04-30T04:40:35Z。
 - 航线指令徽记新增状态灯：三枚主动指令图标右下角显示固定状态点，运行期可按可执行、冷却中和推荐态改变状态灯样式，减少只靠状态文字判断按钮可用性的压力。
 - `index.html` 为三枚静态锁定态指令徽记加入 `directive-state-orb`；`src/app.js` 在 `renderDirectiveVisual` 中按 `option.ready` / `option.cooling` / `option.recommended` 添加状态 class；`src/styles.css` 增加状态灯样式；`tests/game.test.js` 覆盖静态和运行期标记。
 - 本轮只调整航线指令展示层，继续回应 #4 对文字密度和可扫视性的反馈；不新增存档字段，不改变指令收益、实际冷却、连携窗口、远航调度、星图航段、升级价格或反馈入口。
