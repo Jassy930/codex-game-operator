@@ -2,6 +2,13 @@
 
 ## 2026-04-30
 
+- GitHub Issues：gh 可用且已认证；2026-04-30 09:55 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
+- #6 继续作为本轮 Product decision：上一轮已让远航调度 3/3 回到目标指令时给“远航闭环”奖励，但尚无玩家复测结论；本轮强化后半段短循环的可读进度，而不是继续叠加数值奖励。
+- 本轮改动让远航调度条额外显示“闭环进度”派生状态和第二条可访问进度条：0/3 提示下一步目标指令，2/3 提示回到目标指令触发远航闭环，3/3 提示切换非目标指令开启下一轮。
+- `getFarRouteDispatch` 新增 `loopProgress` / `loopTarget` / `loopStatusText`；`renderFarDispatch` 渲染 `far-dispatch-loop-text` 和 `far-dispatch-loop-meter`；反馈快照中的远航调度状态追加闭环进度。
+- 本轮不新增存档字段，不改变升级价格、产能公式、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、基础连携倍率、轮换目标奖励、预案执行、航线委托、指令熟练、满层回响、远航调度奖励、冷却、连携窗口或反馈入口。
+- 本轮本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 106 项。
+
 - GitHub Issues：gh 可用且已认证；2026-04-30 09:34 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
 - #6 继续作为本轮 Product decision：上一轮已让远航调度目标指令延长连携窗口，但尚无玩家复测结论；本轮把“目标指令 -> 续航 -> 回到目标指令”的 3/3 短循环显式做成闭环奖励。
 - 本轮改动让 20M 后远航调度 active 时，3/3 指令轮换回到当前航段目标指令会获得有效基础指令收益 16% 的“远航闭环”奖励；第一步目标指令和非目标指令不触发。

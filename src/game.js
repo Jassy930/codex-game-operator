@@ -2162,6 +2162,7 @@ export function getDirectiveStatus(state, now = Date.now()) {
 
 export function getFarRouteDispatch(state, now = Date.now()) {
   const current = normalizeState(state, now);
+  const loopTarget = DIRECTIVE_CHAIN_MAX_STACKS + 1;
   const rewardText =
     "调度校准 +" + Math.round(FAR_ROUTE_DISPATCH_BONUS_RATE * 100) + "%";
   const cooldownText =
@@ -2191,6 +2192,9 @@ export function getFarRouteDispatch(state, now = Date.now()) {
       targetDirectiveId: null,
       targetDirectiveName: "",
       projectId: null,
+      loopProgress: 0,
+      loopTarget,
+      loopStatusText: "闭环进度 0/" + loopTarget + " · 20M 后解锁",
       text: "远航调度：累计 20M 能量后解锁后半段航段调度、目标指令推荐、目标冷却缩短、连携窗口延长与闭环奖励"
     };
   }
@@ -2213,12 +2217,16 @@ export function getFarRouteDispatch(state, now = Date.now()) {
       targetDirectiveId: null,
       targetDirectiveName: "",
       projectId: null,
+      loopProgress: loopTarget,
+      loopTarget,
+      loopStatusText: "闭环进度 " + loopTarget + "/" + loopTarget + " · 全部航段已完成",
       text: "远航调度：全部航段已完成，等待下一段航线"
     };
   }
 
   const directive = getFarRouteDispatchDirective(project, current);
   const targetDirectiveName = directive?.name ?? "目标指令";
+  const loopStatus = getFarRouteDispatchLoopStatus(current, directive, now);
 
   return {
     unlocked: true,
@@ -2240,6 +2248,9 @@ export function getFarRouteDispatch(state, now = Date.now()) {
     projectName: project.name,
     segmentText: project.segmentText,
     progressText: project.progressText,
+    loopProgress: loopStatus.progress,
+    loopTarget: loopStatus.target,
+    loopStatusText: loopStatus.text,
     text:
       "远航调度：" +
       project.segmentText +
@@ -3700,6 +3711,69 @@ function formatFarRouteDispatchChainWindow(dispatch, directive) {
   }
 
   return "调度接力 +" + formatDuration(FAR_ROUTE_DISPATCH_CHAIN_WINDOW_EXTENSION_SECONDS);
+}
+
+function getFarRouteDispatchLoopStatus(state, directive, now) {
+  const target = DIRECTIVE_CHAIN_MAX_STACKS + 1;
+  if (!directive) {
+    return {
+      progress: 0,
+      target,
+      text: "闭环进度 0/" + target + " · 等待目标指令"
+    };
+  }
+
+  const chain = state.directiveChain;
+  const active = Boolean(chain.lastDirectiveId && chain.expiresAt >= now);
+  if (!active) {
+    return {
+      progress: 0,
+      target,
+      text: "闭环进度 0/" + target + " · 下一步 " + directive.name
+    };
+  }
+
+  const rawStacks = Number(chain.stacks);
+  const stacks = Math.min(
+    DIRECTIVE_CHAIN_MAX_STACKS,
+    Math.max(0, Number.isFinite(rawStacks) ? Math.floor(rawStacks) : 0)
+  );
+  const progress = Math.min(target, stacks + 1);
+  const currentDirectiveName = getDirectiveDef(chain.lastDirectiveId)?.name ?? "未知指令";
+  const nextText = getFarRouteDispatchLoopNextText(chain, directive, progress, target);
+  const windowText = formatDuration((chain.expiresAt - now) / 1000);
+
+  return {
+    progress,
+    target,
+    text:
+      "闭环进度 " +
+      progress +
+      "/" +
+      target +
+      " · 当前 " +
+      currentDirectiveName +
+      " · " +
+      nextText +
+      " · 剩余 " +
+      windowText
+  };
+}
+
+function getFarRouteDispatchLoopNextText(chain, directive, progress, target) {
+  if (progress >= target) {
+    return "已完成 · 切换非目标指令开启下一轮";
+  }
+
+  if (chain.lastDirectiveId === directive.id) {
+    return "下一步切换非目标指令续航";
+  }
+
+  if ((Number(chain.stacks) || 0) >= DIRECTIVE_CHAIN_MAX_STACKS - 1) {
+    return "下一步回到" + directive.name + "触发远航闭环";
+  }
+
+  return "下一步执行" + directive.name + "接入闭环";
 }
 
 function getDirectiveRotationReward(baseGain, chain) {

@@ -391,10 +391,19 @@ function renderDirectiveTask(task) {
 function renderFarDispatch(dispatch) {
   const progress = Math.max(0, Math.min(1, Number(dispatch.progress) || 0));
   const meterValue = Math.round(progress * 100);
+  const loopProgress = Math.max(0, dispatch.loopProgress ?? 0);
+  const loopTarget = Math.max(1, dispatch.loopTarget ?? 3);
+  const loopValue = Math.min(loopTarget, loopProgress);
+  const loopMeterValue = Math.round((loopValue / loopTarget) * 100);
+  const loopProgressText = loopValue + "/" + loopTarget;
 
   const text = document.createElement("span");
   text.className = "far-dispatch-text";
   text.textContent = dispatch.text;
+
+  const loopText = document.createElement("span");
+  loopText.className = "far-dispatch-loop-text";
+  loopText.textContent = dispatch.loopStatusText;
 
   const meter = document.createElement("span");
   meter.className = "far-dispatch-meter";
@@ -409,9 +418,22 @@ function renderFarDispatch(dispatch) {
   fill.style.width = meterValue + "%";
   meter.append(fill);
 
+  const loopMeter = document.createElement("span");
+  loopMeter.className = "far-dispatch-loop-meter";
+  loopMeter.setAttribute("role", "meter");
+  loopMeter.setAttribute("aria-label", "远航闭环进度");
+  loopMeter.setAttribute("aria-valuemin", "0");
+  loopMeter.setAttribute("aria-valuemax", String(loopTarget));
+  loopMeter.setAttribute("aria-valuenow", String(loopValue));
+  loopMeter.setAttribute("aria-valuetext", loopProgressText);
+
+  const loopFill = document.createElement("span");
+  loopFill.style.width = loopMeterValue + "%";
+  loopMeter.append(loopFill);
+
   elements.farDispatch.classList.toggle("is-locked", !dispatch.unlocked);
   elements.farDispatch.classList.toggle("is-active", dispatch.active);
-  elements.farDispatch.replaceChildren(text, meter);
+  elements.farDispatch.replaceChildren(text, meter, loopText, loopMeter);
 }
 
 function renderDirective(option) {

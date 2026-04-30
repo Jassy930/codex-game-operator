@@ -134,7 +134,9 @@ function getFeedbackDirectiveMastery(directiveMastery) {
 }
 
 function formatFeedbackFarRouteDispatch(dispatch) {
-  return String(dispatch?.text ?? "未知").replace(/^远航调度：/, "");
+  const text = String(dispatch?.text ?? "未知").replace(/^远航调度：/, "");
+  const loopStatusText = dispatch?.loopStatusText ? " · " + dispatch.loopStatusText : "";
+  return text + loopStatusText;
 }
 
 function clampRating(value) {
