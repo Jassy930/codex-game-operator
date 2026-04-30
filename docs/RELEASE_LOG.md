@@ -8,6 +8,9 @@
 - 同步 GitHub Issues 反馈状态：2026-04-30 14:51 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 作为本轮处理对象。
 - 验证通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 109 项。
 - 构建产物已确认包含 `projectOverviewDispatch`、`project-overview-dispatch`、`buildProjectOverviewDispatchText`、`dispatchText` 和“远航调度总览”。
+- 提交 ddc9622 已推送；GitHub Pages workflow 25151944052 已成功，线上地址返回 HTTP 200，且线上首页、`app.js`、`game.js` 和 `styles.css` 已确认包含远航调度总览相关标记。
+- 已回复 #6，说明星图总览新增远航调度总览，并保持 issue open 等待复测。
+- 回复后同步 GitHub Issues 反馈状态：2026-04-30 15:00 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 更新时间为 2026-04-30T07:00:06Z。
 
 - 点火按钮新增落点闪光：普通点火会在实际点击位置播放短促亮点，键盘触发回退到按钮中心，过载点火使用更大的过载落点闪光，继续回应 #5 对点击反馈、特效和点击欲望的反馈。
 - `index.html` 新增 `coreImpactPoint`；`src/app.js` 新增 `coreImpactPoint` 绑定、`coreImpactTimer` 和 `positionCoreImpact`；`src/styles.css` 新增 `core-impact-point`、`--core-impact-x` / `--core-impact-y` 和 `coreImpactPoint` 动画；`tests/game.test.js` 覆盖静态标记、运行期绑定和样式标记。

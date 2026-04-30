@@ -19,6 +19,9 @@
 - 运行期星图总览会渲染 `projectOverviewDispatch`，并按 `dispatchText` 显示或隐藏。
 - 本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 109 项。
 - 构建产物已确认包含 `projectOverviewDispatch`、`project-overview-dispatch`、`buildProjectOverviewDispatchText`、`dispatchText` 和“远航调度总览”。
+- 提交 ddc9622 已推送；GitHub Pages workflow 25151944052 已成功，线上地址返回 HTTP 200，且线上首页、`app.js`、`game.js` 和 `styles.css` 已确认包含远航调度总览相关标记。
+- #6 已回复并继续保持 open，等待复测确认星图总览层显示远航调度路径后，后半段目标和主动指令短循环的关系是否更清楚。
+- 回复后同步 GitHub Issues：2026-04-30 15:00 CST 当前仍为 5 个 open feedback issue、0 个 open bug issue；#6 更新时间为 2026-04-30T07:00:06Z。
 
 下一步：推送并等待 #6 复测；若仍认为后半段玩法变化不足，再评估资源消耗型指令或更明确的阶段分支，而不是继续只追加展示文本。
 
