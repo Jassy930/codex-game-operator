@@ -24,8 +24,11 @@
 - `src/styles.css` 包含 `.directive-button .directive-dispatch-return` 样式。
 - 本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 117 项。
 - 构建产物已确认包含 `FAR_ROUTE_DISPATCH_RETURN_REWARD_RATE`、`dispatchReturnReward`、`directive-dispatch-return` 和“整备回航”。
+- 提交 a2f7ffa 已推送；GitHub Pages workflow 25163305696 已成功；线上地址返回 HTTP 200，且线上 `game.js`、`app.js` 和 `styles.css` 已确认包含整备回航相关标记。
+- #6 已回复：说明整备续航后回到当前航段目标指令会显示并结算“整备回航 +6%”，并保持 issue open 等待复测。
+- 回复后同步 GitHub Issues：2026-04-30 19:40 CST 当前仍为 5 个 open feedback issue、0 个 open bug issue；#6 更新时间为 2026-04-30T11:40:34Z。
 
-下一步：推送后等待 #6 复测；如果仍认为后半段只是目标推进，再评估资源消耗型指令或项目分支，而不是继续增加路径展示。
+下一步：等待 #6 复测；如果仍认为后半段只是目标推进，再评估资源消耗型指令或项目分支，而不是继续增加路径展示。
 
 ## 2026-04-30 Product decision：远航整备续航奖励
 

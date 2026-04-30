@@ -8,6 +8,9 @@
 - 同步 GitHub Issues 反馈状态：2026-04-30 19:26 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 作为本轮处理对象。
 - 验证通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 117 项。
 - 构建产物已确认包含 `FAR_ROUTE_DISPATCH_RETURN_REWARD_RATE`、`dispatchReturnReward`、`directive-dispatch-return` 和“整备回航”。
+- 提交 a2f7ffa 已推送；GitHub Pages workflow 25163305696 已成功；线上地址返回 HTTP 200，且线上 `game.js`、`app.js` 和 `styles.css` 已确认包含整备回航相关标记。
+- 已回复 #6，说明整备续航后回到当前航段目标指令会显示并结算“整备回航 +6%”，并保持 issue open 等待复测。
+- 回复后同步 GitHub Issues 反馈状态：2026-04-30 19:40 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 更新时间为 2026-04-30T11:40:34Z。
 
 - 远航整备新增整备续航奖励：完成 3/3 回到当前航段目标指令后，被远航整备刷新的协同续航按钮会显示并结算“整备续航 +7%”，继续回应 #6 对后半段玩法变化不明显的反馈。
 - `src/game.js` 新增 `FAR_ROUTE_DISPATCH_PREP_REWARD_RATE`、整备续航收益计算和执行/预览文案；`src/app.js` 记录 `dispatchPrepReward` 事件字段并渲染 `directive-dispatch-prep` 徽标；`src/styles.css` 新增整备续航徽标样式；`tests/game.test.js` 覆盖 3/3 完成态推荐、预计收益、执行反馈和静态绑定。
