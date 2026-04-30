@@ -1663,12 +1663,16 @@ test("静态首页会默认折叠星图详细文本", () => {
   assert.match(indexHtml, /projectOverviewTracks/);
   assert.match(indexHtml, /projectOverviewAction/);
   assert.match(indexHtml, /projectOverviewForecast/);
+  assert.match(indexHtml, />航线预告：接下来 3 段 · 下一段 1\/57 点亮星图<\/em>/);
+  assert.match(indexHtml, /title="航线预告：点亮星图（总产能 \+12%）、谐振校准（过载奖励 \+20%）、透镜阵列（点击产能 \+18%）"/);
   assert.match(appJs, /projectOverviewDispatch: document\.querySelector\("#projectOverviewDispatch"\)/);
   assert.match(appJs, /elements\.projectOverviewDispatch\.textContent = projectOverview\.dispatchText/);
   assert.match(appJs, /elements\.projectOverviewDispatch\.hidden = !projectOverview\.dispatchText/);
+  assert.match(appJs, /projectOverview\.forecastDetailText/);
   assert.match(styles, /\.project-detail-drawer/);
   assert.match(styles, /\.project-detail-grid/);
   assert.match(styles, /\.project-overview-dispatch/);
+  assert.match(styles, /\.project-overview em \{[\s\S]*text-overflow: ellipsis/);
 });
 
 test("静态首页会默认折叠星图筛选长摘要", () => {
@@ -1770,6 +1774,10 @@ test("星图总览会显示完成数和下一段奖励", () => {
   );
   assert.equal(
     overview.forecastText,
+    "航线预告：接下来 3 段 · 下一段 2/57 谐振校准"
+  );
+  assert.equal(
+    overview.forecastDetailText,
     "航线预告：谐振校准（过载奖励 +20%）、透镜阵列（点击产能 +18%）、采集阵列（自动产能 +18%）"
   );
 });
@@ -3769,6 +3777,7 @@ test("星图总览会显示全部完成状态", () => {
     "行动建议：所有航段完成，继续累计能量等待下一段航线。"
   );
   assert.equal(overview.forecastText, "航线预告：等待下一段航线");
+  assert.equal(overview.forecastDetailText, "航线预告：等待下一段航线");
   assert.equal(
     overview.compositionText,
     "航线构成：48 个累计航段 · 9 个升级航段 · 奖励分布 总产能 17 段 / 点击 14 段 / 自动 15 段 / 过载 11 段"

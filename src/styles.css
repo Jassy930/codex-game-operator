@@ -1515,11 +1515,16 @@ h2 {
 }
 
 .project-overview em {
+  display: block;
+  min-width: 0;
+  overflow: hidden;
   color: rgba(248, 243, 231, 0.86);
   font-size: 0.82rem;
   font-style: normal;
   font-weight: 850;
   line-height: 1.35;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .project-current-visual {

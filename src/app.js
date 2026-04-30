@@ -404,7 +404,11 @@ function render() {
   elements.projectOverviewComposition.textContent = projectOverview.compositionText;
   elements.projectOverviewBonus.textContent = projectOverview.bonusText;
   elements.projectOverviewAction.textContent = projectOverview.actionText;
-  elements.projectOverviewForecast.textContent = projectOverview.forecastText;
+  setCompactSupportText(
+    elements.projectOverviewForecast,
+    projectOverview.forecastText,
+    projectOverview.forecastDetailText
+  );
   renderProjectCurrentVisual(projectOverview.currentVisual ?? getProjectCurrentVisual(projects));
   renderProjectForecastMap(projectOverview.forecastVisuals ?? getProjectForecastVisuals(projects));
   renderProjectRewardMap(projectOverview.rewardVisuals ?? getProjectRewardVisuals(projects));

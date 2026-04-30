@@ -1,5 +1,30 @@
 # Decision
 
+## 2026-04-30 Product decision：航线预告短摘要
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-04-30 16:59 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#4 仍围绕“界面文字密集、希望更多图片和更好看”保持 open，因此本轮继续进入 Product decision。
+
+当前最大问题：星图总览已经有当前航段视觉卡、航线预告视觉带和奖励罗盘，但默认区域仍保留一整句“航线预告：A、B、C”。这行内容与视觉带重复，继续占用默认可见文字密度。
+
+本轮决策：
+
+- 将 `projectOverviewForecast` 默认文本改为短摘要，例如“航线预告：接下来 3 段 · 下一段 1/57 点亮星图”。
+- `getProjectOverview` 同时返回 `forecastDetailText`，保留原完整三段预告。
+- 运行期用 `setCompactSupportText` 把完整预告写入 `title` / `aria-label`；静态首页同步保留完整可访问说明。
+- 本轮只调整星图总览展示层；不新增存档字段，不改变 57 段星图路线、项目完成判定、奖励数值、升级价格、航线策略、航线指令、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-04-30 16:59 CST 当前 5 个 open feedback issue、0 个 open bug issue。
+- `getProjectOverview` 的 `forecastText` 返回短摘要，`forecastDetailText` 返回完整三段预告。
+- 静态首页的 `projectOverviewForecast` 默认显示短摘要，并通过 `title` / `aria-label` 保留完整预告。
+- 运行期 `src/app.js` 使用 `projectOverview.forecastDetailText` 作为完整说明。
+- `src/styles.css` 对 `project-overview em` 增加单行省略，避免小屏重新形成长句。
+- 本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 116 项。
+- 构建产物已确认包含 `forecastDetailText`、`projectOverviewForecast` 和“航线预告：接下来 3 段”。
+
+下一步：推送并部署后回复 #4，请玩家复测星图总览默认区域在保留视觉带的同时，文字压力是否继续下降。
+
 ## 2026-04-30 Product decision：当前航段视觉卡
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-04-30 16:48 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#4 仍围绕“界面文字密集、希望更多图片和更好看”保持 open，因此本轮继续进入 Product decision。

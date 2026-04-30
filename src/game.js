@@ -2119,7 +2119,8 @@ export function getProjectOverview(state, now = Date.now()) {
       currentVisual,
       dispatchText,
       actionText: buildProjectActionText(null, current),
-      forecastText: "航线预告：等待下一段航线"
+      forecastText: buildProjectForecastBriefText([]),
+      forecastDetailText: buildProjectForecastDetailText([])
     };
   }
 
@@ -2159,8 +2160,8 @@ export function getProjectOverview(state, now = Date.now()) {
     currentVisual,
     dispatchText,
     actionText: buildProjectActionText(nextProject, current),
-    forecastText:
-      "航线预告：" + upcomingProjects.map(formatForecastProject).join("、")
+    forecastText: buildProjectForecastBriefText(upcomingProjects),
+    forecastDetailText: buildProjectForecastDetailText(upcomingProjects)
   };
 }
 
@@ -3475,6 +3476,32 @@ function formatProjectTrack(project) {
 
 function formatForecastProject(project) {
   return project.name + "（" + project.reward + "）";
+}
+
+function buildProjectForecastBriefText(projects) {
+  if (projects.length === 0) {
+    return "航线预告：等待下一段航线";
+  }
+
+  const nextProject = projects[0];
+  return (
+    "航线预告：接下来 " +
+    projects.length +
+    " 段 · 下一段 " +
+    nextProject.segmentIndex +
+    "/" +
+    nextProject.segmentTotal +
+    " " +
+    nextProject.name
+  );
+}
+
+function buildProjectForecastDetailText(projects) {
+  if (projects.length === 0) {
+    return "航线预告：等待下一段航线";
+  }
+
+  return "航线预告：" + projects.map(formatForecastProject).join("、");
 }
 
 function formatProjectFilterCompletion(completed, total) {
