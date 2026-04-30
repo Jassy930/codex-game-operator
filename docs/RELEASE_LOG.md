@@ -8,6 +8,9 @@
 - 同步 GitHub Issues 反馈状态：2026-04-30 16:59 CST 当前 5 个 open feedback issue、0 个 open bug issue；#4 作为本轮处理对象。
 - 验证通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 116 项。
 - 构建产物已确认包含 `forecastDetailText`、`projectOverviewForecast` 和“航线预告：接下来 3 段”。
+- 提交 f14511d 已推送；GitHub Pages workflow 25157138566 已成功，线上地址返回 HTTP 200，且线上首页、`game.js`、`app.js` 和 `styles.css` 已确认包含航线预告短摘要相关标记。
+- 已回复 #4，说明星图总览航线预告默认显示短摘要，完整三段预告保留在 `title` / `aria-label`，并保持 issue open 等待复测。
+- 回复后同步 GitHub Issues 反馈状态：2026-04-30 17:10 CST 当前 5 个 open feedback issue、0 个 open bug issue；#4 更新时间为 2026-04-30T09:10:10Z。
 
 - 星图总览新增当前航段视觉卡：默认可见区域显示 `project-current-visual`，用固定视觉槽展示当前航段号、章节位置、累计/升级推进类型、奖励方向和进度条，继续回应 #4 对界面文字密度和图片化表达的反馈。
 - `src/game.js` 新增 `getProjectCurrentVisual` 并把 `currentVisual` 合入 `getProjectOverview`；`index.html` 新增 `projectCurrentVisual` 静态占位；`src/app.js` 新增 `renderProjectCurrentVisual`；`src/styles.css` 新增当前航段视觉槽、航线图形、标签和进度条样式；`tests/game.test.js` 覆盖数据派生与静态渲染标记。

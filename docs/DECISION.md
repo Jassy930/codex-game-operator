@@ -22,8 +22,11 @@
 - `src/styles.css` 对 `project-overview em` 增加单行省略，避免小屏重新形成长句。
 - 本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 116 项。
 - 构建产物已确认包含 `forecastDetailText`、`projectOverviewForecast` 和“航线预告：接下来 3 段”。
+- 提交 f14511d 已推送；GitHub Pages workflow 25157138566 已成功，线上地址返回 HTTP 200；线上首页、`game.js`、`app.js` 和 `styles.css` 已确认包含航线预告短摘要相关标记。
+- #4 已回复：说明星图总览航线预告默认显示短摘要，完整三段预告保留在 `title` / `aria-label`，并保持 issue open 等待复测。
+- 回复后同步 GitHub Issues：2026-04-30 17:10 CST 当前仍为 5 个 open feedback issue、0 个 open bug issue；#4 更新时间为 2026-04-30T09:10:10Z。
 
-下一步：推送并部署后回复 #4，请玩家复测星图总览默认区域在保留视觉带的同时，文字压力是否继续下降。
+下一步：等待 #4 复测；如果仍认为星图总览默认区域文字压力高，再继续优先压缩重复文本，而不是增加说明句。
 
 ## 2026-04-30 Product decision：当前航段视觉卡
 
