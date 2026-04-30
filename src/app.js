@@ -448,6 +448,8 @@ function renderDirective(option) {
         dispatchRewardRate: result.dispatchRewardRate,
         dispatchCooldownMultiplier: result.dispatchCooldownMultiplier,
         dispatchCooldownText: result.dispatchCooldownText,
+        dispatchChainWindowSeconds: result.dispatchChainWindowSeconds,
+        dispatchChainWindowText: result.dispatchChainWindowText,
         masteryRewardGained: result.masteryRewardGained,
         masteryRewardStacks: result.masteryRewardStacks,
         rotationReward: result.rotationReward,
@@ -500,6 +502,11 @@ function renderDirective(option) {
   dispatchCooldown.textContent = option.dispatchCooldownText;
   dispatchCooldown.hidden = !option.dispatchCooldownText;
 
+  const dispatchWindow = document.createElement("span");
+  dispatchWindow.className = "directive-dispatch-window";
+  dispatchWindow.textContent = option.dispatchChainWindowText;
+  dispatchWindow.hidden = !option.dispatchChainWindowText;
+
   const finisherRecommendation = document.createElement("span");
   finisherRecommendation.className = "directive-finisher-recommendation";
   finisherRecommendation.textContent = option.finisherRecommendationText;
@@ -521,6 +528,7 @@ function renderDirective(option) {
     taskBonus,
     dispatchBonus,
     dispatchCooldown,
+    dispatchWindow,
     finisherRecommendation,
     masteryBonus,
     stanceBonus

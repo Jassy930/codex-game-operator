@@ -617,6 +617,15 @@ h2 {
   line-height: 1;
 }
 
+.directive-button .directive-dispatch-window {
+  padding: 3px 6px;
+  border-radius: 999px;
+  background: rgba(244, 178, 60, 0.16);
+  color: #ffe3a3;
+  font-size: 0.68rem;
+  line-height: 1;
+}
+
 .directive-button .directive-stance-bonus {
   padding: 3px 6px;
   border-radius: 999px;
