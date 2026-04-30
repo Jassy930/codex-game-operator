@@ -9,7 +9,9 @@
 - 同步 GitHub Issues 反馈状态：2026-05-01 07:04 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 作为主处理对象，#4 作为视觉密度依据。
 - 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
 - 构建产物已确认包含 `routeNodeStates`、`getFarDispatchBranchChoiceRouteNodeState`、`far-dispatch-branch-choice-route-node is-done/is-next/is-waiting`。
-- 发布与 issue 回复结果会在本轮收尾时补充。
+- 发布：提交 `dec5c00` 已推送到 `origin/main`；GitHub Pages workflow `25194040630` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页返回 HTTP 200，线上 `src/game.js`、`src/app.js` 与 `src/styles.css` 已确认包含 `routeNodeStates`、`getFarDispatchBranchChoiceRouteNodeState` 和 `far-dispatch-branch-choice-route-node.is-done/is-next/is-waiting`。
+- 反馈处理：已回复 #6，说明路线微图步骤高亮、验证结果和复测问题；已回复 #4，说明本轮图形化步骤高亮继续降低远航分支卡片文字压力；两个 issue 均保持 open。回复后于 2026-05-01 07:19 CST 再次同步 GitHub Issues，当前仍为 5 个 open feedback issue、0 个 open bug issue；#6 更新时间为 2026-04-30T23:17:01Z，#4 更新时间为 2026-04-30T23:19:09Z。
+- 钉钉通知未发送：运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` 相关变量名，父目录两层内也未发现 `.env*` 文件；未将 webhook 写入仓库。
 
 - 远航调度新增“路线微图标记”：协同/绕行分支卡片的路线微图会在节点附近显示推荐、备选、本轮、推荐上轮、推荐改道、上轮或改道，继续回应 #6 的后半段路线状态理解和 #4 的图片化/降文字密度反馈。
 - `src/game.js` 为 `branchChoices` 派生 `routeMarkerKind` / `routeMarkerText`；`src/app.js` 在 `renderFarDispatchBranchChoiceRoute(choice)` 中渲染 `far-dispatch-branch-choice-route-marker` 和 `is-route-marker-*`；`src/styles.css` 增加路线微图标记样式；`tests/game.test.js` 覆盖起手推荐、上轮路线、改道、本轮路线、静态绑定和样式。
