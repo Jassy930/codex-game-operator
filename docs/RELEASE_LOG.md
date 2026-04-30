@@ -9,6 +9,11 @@
 - 同步 GitHub Issues 反馈状态：2026-04-30 23:48 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 作为本轮处理对象。
 - 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
 - 构建产物已确认包含 `dispatchDetourDirectiveId` 与具体协同/绕行路径名。
+- 提交 048487d 已推送；GitHub Pages workflow 25175638829 已成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`。
+- 线上地址 https://jassy930.github.io/codex-game-operator/ 返回 HTTP 200，且线上 `game.js` 已确认包含 `dispatchDetourDirectiveId` 与具体协同/绕行路径名。
+- 已回复 #6，说明星图当前航段卡片和 3 步路径会直接显示“协同 X / 绕行 Y”；issue 保持 open 等待复测。
+- 回复后同步 GitHub Issues 反馈状态：2026-04-30 23:59 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 更新时间为 2026-04-30T15:59:46Z。
+- 钉钉通知未发送：运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` 相关变量名；未将 webhook 写入仓库。
 
 - 远航调度新增“推荐分支按钮标记”：目标指令后的远航续航阶段，当前航段契合分支会在按钮推荐徽标中显示“推荐协同”或“推荐绕行”，冷却时显示“等待推荐协同/等待推荐绕行”，继续回应 #6 对后半段玩法变化不明显的反馈。
 - `src/game.js` 调整 `getDirectiveOptionRecommendationText`，让按钮级推荐优先识别 `branchFocusDirectiveId`；`tests/game.test.js` 覆盖点击/过载航段推荐协同、冷却等待推荐协同，以及自动航段推荐绕行。

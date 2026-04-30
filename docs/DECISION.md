@@ -22,8 +22,13 @@
 - `getProjectStatuses` 暴露 `dispatchDetourDirectiveId` / `dispatchDetourDirectiveName`，便于后续展示和测试复用。
 - 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
 - 构建产物已确认包含 `dispatchDetourDirectiveId` 与具体协同/绕行路径名。
+- 提交 048487d 已推送；GitHub Pages workflow 25175638829 已成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`。
+- 线上地址 https://jassy930.github.io/codex-game-operator/ 返回 HTTP 200，线上 `game.js` 已确认包含 `dispatchDetourDirectiveId` 与具体协同/绕行路径名。
+- #6 已回复：说明星图当前航段卡片和 3 步路径会直接显示“协同 X / 绕行 Y”；issue 保持 open 等待复测。
+- 回复后同步 GitHub Issues：2026-04-30 23:59 CST 当前仍为 5 个 open feedback issue、0 个 open bug issue；#6 更新时间为 2026-04-30T15:59:46Z。
+- 钉钉通知未发送：运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` 相关变量名；未将 webhook 写入仓库。
 
-下一步：推送后回复 #6，等待复测星图目标层是否更容易看清协同/绕行具体路径。
+下一步：等待 #6 复测，重点确认星图目标层是否更容易看清协同/绕行具体路径。
 
 ## 2026-04-30 Product decision：推荐分支按钮标记
 
