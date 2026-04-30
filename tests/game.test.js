@@ -16,6 +16,8 @@ import {
   DIRECTIVE_STANCE_BONUS_RATE,
   DIRECTIVE_STANCE_FINISHER_RATE,
   DIRECTIVE_TASK_REWARD_RATE,
+  FAR_ROUTE_DISPATCH_BONUS_RATE,
+  FAR_ROUTE_DISPATCH_UNLOCK_ENERGY,
   filterProjectStatuses,
   formatNumber,
   getComboStatus,
@@ -25,6 +27,7 @@ import {
   getDirectiveStatus,
   getDirectiveTaskStatus,
   getEffectiveProduction,
+  getFarRouteDispatch,
   getProjectFilterBrief,
   getProjectFilterButtonText,
   getProjectFilterSummary,
@@ -1136,10 +1139,14 @@ test("静态首页会渲染航线指令轮换目标", () => {
 
   assert.match(indexHtml, /id="directivePlan"/);
   assert.match(indexHtml, /id="directiveTask"/);
+  assert.match(indexHtml, /id="farDispatch"/);
   assert.match(indexHtml, /class="directive-task-meter"/);
+  assert.match(indexHtml, /class="far-dispatch-meter"/);
   assert.match(indexHtml, /aria-label="航线委托进度"/);
+  assert.match(indexHtml, /aria-label="远航调度进度"/);
   assert.match(indexHtml, /指令轮换：累计 100K 能量后解锁 90 秒连携目标/);
   assert.match(indexHtml, /航线委托：累计 100K 能量后解锁 3 步短期任务/);
+  assert.match(indexHtml, /远航调度：累计 20M 能量后解锁后半段航段调度/);
   assert.match(indexHtml, /非契合指令起手/);
   assert.match(indexHtml, /第二步继续避开契合指令/);
   assert.match(indexHtml, /3\/3 策略终结/);
@@ -1152,6 +1159,8 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(appJs, /planBonusRate: result\.planBonusRate/);
   assert.match(appJs, /taskReward: result\.taskReward/);
   assert.match(appJs, /taskRewardRate: result\.taskRewardRate/);
+  assert.match(appJs, /dispatchReward: result\.dispatchReward/);
+  assert.match(appJs, /dispatchRewardRate: result\.dispatchRewardRate/);
   assert.match(appJs, /masteryCapstoneReward: result\.masteryCapstoneReward/);
   assert.match(appJs, /masteryCapstoneRate: result\.masteryCapstoneRate/);
   assert.match(appJs, /stanceFinisherReward: result\.stanceFinisherReward/);
@@ -1160,13 +1169,18 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(appJs, /masteryRewardStacks: result\.masteryRewardStacks/);
   assert.match(appJs, /directivePlan: document\.querySelector\("#directivePlan"\)/);
   assert.match(appJs, /directiveTask: document\.querySelector\("#directiveTask"\)/);
+  assert.match(appJs, /farDispatch: document\.querySelector\("#farDispatch"\)/);
   assert.match(appJs, /elements\.directivePlan\.textContent = directives\.plan\.text/);
   assert.match(appJs, /renderDirectiveTask\(directives\.task\)/);
+  assert.match(appJs, /renderFarDispatch\(directives\.dispatch/);
   assert.match(appJs, /function renderDirectiveTask\(task\)/);
+  assert.match(appJs, /function renderFarDispatch\(dispatch\)/);
   assert.match(appJs, /meter\.className = "directive-task-meter"/);
+  assert.match(appJs, /meter\.className = "far-dispatch-meter"/);
   assert.match(appJs, /meter\.setAttribute\("role", "meter"\)/);
   assert.match(appJs, /elements\.directiveTask\.classList\.toggle\("is-completed", task\.completed\)/);
   assert.match(appJs, /elements\.directiveTask\.replaceChildren\(text, meter\)/);
+  assert.match(appJs, /elements\.farDispatch\.classList\.toggle\("is-active", dispatch\.active\)/);
   assert.match(appJs, /option\.recommended \? "is-recommended" : ""/);
   assert.match(appJs, /option\.finisherRecommended \? "is-finisher-recommended" : ""/);
   assert.match(appJs, /badges\.className = "directive-badges"/);
@@ -1177,6 +1191,8 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(appJs, /planBonus\.hidden = !option\.planRewardText/);
   assert.match(appJs, /taskBonus\.className = "directive-task-bonus"/);
   assert.match(appJs, /taskBonus\.textContent = option\.taskRewardText/);
+  assert.match(appJs, /dispatchBonus\.className = "directive-dispatch-bonus"/);
+  assert.match(appJs, /dispatchBonus\.textContent = option\.dispatchRewardText/);
   assert.match(appJs, /finisherRecommendation\.className = "directive-finisher-recommendation"/);
   assert.match(appJs, /finisherRecommendation\.textContent = option\.finisherRecommendationText/);
   assert.match(appJs, /masteryBonus\.className = "directive-mastery-bonus"/);
@@ -1187,12 +1203,16 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(styles, /\.directive-task/);
   assert.match(styles, /\.directive-task-meter/);
   assert.match(styles, /\.directive-task\.is-completed/);
+  assert.match(styles, /\.far-dispatch/);
+  assert.match(styles, /\.far-dispatch-meter/);
+  assert.match(styles, /\.far-dispatch\.is-active/);
   assert.match(styles, /\.directive-button \.directive-badges/);
   assert.match(styles, /\.directive-button\.is-recommended/);
   assert.match(styles, /\.directive-button\.is-finisher-recommended/);
   assert.match(styles, /\.directive-button \.directive-recommendation/);
   assert.match(styles, /\.directive-button \.directive-plan-bonus/);
   assert.match(styles, /\.directive-button \.directive-task-bonus/);
+  assert.match(styles, /\.directive-button \.directive-dispatch-bonus/);
   assert.match(styles, /\.directive-button \.directive-finisher-recommendation/);
   assert.match(styles, /\.directive-button \.directive-mastery-bonus/);
   assert.match(styles, /\.directive-button \.directive-stance-bonus/);
@@ -1788,6 +1808,61 @@ test("引潮星环完成后会继续指向脉冲航闸", () => {
     goal.progressText,
     "航段 27/57 · 进度 25M 能量 / 30M 能量 · 还差 5M 能量 · 奖励 点击产能 +18%"
   );
+});
+
+test("远航调度会在 20M 后按当前航段指定目标指令", () => {
+  const locked = getFarRouteDispatch({
+    ...createInitialState(0),
+    totalEnergy: 19_900_000
+  });
+  const state = {
+    ...createInitialState(0),
+    totalEnergy: 25_000_000,
+    energyPerClick: 16,
+    energyPerSecond: 17.5,
+    multiplier: 32.3239,
+    overloadBonus: 27,
+    routeStance: "cruise",
+    upgrades: {
+      lens: 15,
+      collector: 25,
+      resonator: 11,
+      stabilizer: 21
+    }
+  };
+  const dispatch = getFarRouteDispatch(state, 1000);
+  const status = getDirectiveStatus(state, 1000);
+  const ignitionOption = status.options.find((option) => option.id === "ignition-salvo");
+  const cruiseOption = status.options.find((option) => option.id === "cruise-cache");
+  const ignitionResult = activateDirective(state, "ignition-salvo", 1000);
+  const cruiseResult = activateDirective(state, "cruise-cache", 1000);
+
+  assert.equal(FAR_ROUTE_DISPATCH_UNLOCK_ENERGY, 20_000_000);
+  assert.equal(FAR_ROUTE_DISPATCH_BONUS_RATE, 0.14);
+  assert.equal(locked.unlocked, false);
+  assert.equal(locked.text, "远航调度：累计 20M 能量后解锁后半段航段调度");
+  assert.equal(dispatch.unlocked, true);
+  assert.equal(dispatch.active, true);
+  assert.equal(dispatch.projectId, "pulse-arc-gate");
+  assert.equal(dispatch.projectName, "脉冲航闸");
+  assert.equal(dispatch.segmentText, "航段 27/57");
+  assert.equal(dispatch.targetDirectiveId, "ignition-salvo");
+  assert.equal(dispatch.targetDirectiveName, "点火齐射");
+  assert.equal(dispatch.rewardText, "调度校准 +14%");
+  assert.equal(
+    dispatch.text,
+    "远航调度：航段 27/57 脉冲航闸指定点火齐射 · 执行目标指令获得调度校准 +14%"
+  );
+  assert.equal(Math.round(dispatch.progress * 100), 83);
+  assert.equal(ignitionOption.dispatchReward > 0, true);
+  assert.match(ignitionOption.dispatchRewardText, /调度校准 \+/);
+  assert.match(ignitionOption.previewText, /调度校准 \+/);
+  assert.equal(cruiseOption.dispatchReward, 0);
+  assert.equal(cruiseOption.dispatchRewardText, "");
+  assert.equal(ignitionResult.dispatchReward > 0, true);
+  assert.equal(ignitionResult.dispatchRewardRate, FAR_ROUTE_DISPATCH_BONUS_RATE);
+  assert.match(ignitionResult.notice, /调度校准 \+/);
+  assert.equal(cruiseResult.dispatchReward, 0);
 });
 
 test("脉冲航闸完成后会继续指向离辉轨道港", () => {
@@ -2985,5 +3060,6 @@ test("反馈入口会生成带游戏快照的 GitHub Issue 链接", () => {
   assert.match(body, /过载奖励：5/);
   assert.match(body, /航线策略：点火优先/);
   assert.match(body, new RegExp(`指令熟练：2/${DIRECTIVE_MASTERY_MAX_STACKS}`));
+  assert.match(body, /远航调度：累计 20M 能量后解锁后半段航段调度/);
   assert.match(body, /lens:1/);
 });

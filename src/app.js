@@ -15,6 +15,7 @@ import {
   getCurrentGoal,
   getDirectiveStatus,
   getEffectiveProduction,
+  getFarRouteDispatch,
   getProjectFilterBrief,
   getProjectFilterSummary,
   getProjectFilterButtonText,
@@ -129,6 +130,7 @@ const elements = {
   directiveList: document.querySelector("#directiveList"),
   directivePlan: document.querySelector("#directivePlan"),
   directiveTask: document.querySelector("#directiveTask"),
+  farDispatch: document.querySelector("#farDispatch"),
   goalLabel: document.querySelector("#goalLabel"),
   goalValue: document.querySelector("#goalValue"),
   goalHint: document.querySelector("#goalHint"),
@@ -279,6 +281,7 @@ function render() {
   renderDirectives(directives);
   elements.directivePlan.textContent = directives.plan.text;
   renderDirectiveTask(directives.task);
+  renderFarDispatch(directives.dispatch ?? getFarRouteDispatch(current, now));
   elements.goalLabel.textContent = goal.label;
   elements.goalValue.textContent = goal.value;
   elements.goalHint.textContent = goal.progressText;
@@ -385,6 +388,32 @@ function renderDirectiveTask(task) {
   elements.directiveTask.replaceChildren(text, meter);
 }
 
+function renderFarDispatch(dispatch) {
+  const progress = Math.max(0, Math.min(1, Number(dispatch.progress) || 0));
+  const meterValue = Math.round(progress * 100);
+
+  const text = document.createElement("span");
+  text.className = "far-dispatch-text";
+  text.textContent = dispatch.text;
+
+  const meter = document.createElement("span");
+  meter.className = "far-dispatch-meter";
+  meter.setAttribute("role", "meter");
+  meter.setAttribute("aria-label", "远航调度进度");
+  meter.setAttribute("aria-valuemin", "0");
+  meter.setAttribute("aria-valuemax", "100");
+  meter.setAttribute("aria-valuenow", String(meterValue));
+  meter.setAttribute("aria-valuetext", meterValue + "%");
+
+  const fill = document.createElement("span");
+  fill.style.width = meterValue + "%";
+  meter.append(fill);
+
+  elements.farDispatch.classList.toggle("is-locked", !dispatch.unlocked);
+  elements.farDispatch.classList.toggle("is-active", dispatch.active);
+  elements.farDispatch.replaceChildren(text, meter);
+}
+
 function renderDirective(option) {
   const button = document.createElement("button");
   button.className = [
@@ -415,6 +444,8 @@ function renderDirective(option) {
         planBonusRate: result.planBonusRate,
         taskReward: result.taskReward,
         taskRewardRate: result.taskRewardRate,
+        dispatchReward: result.dispatchReward,
+        dispatchRewardRate: result.dispatchRewardRate,
         masteryRewardGained: result.masteryRewardGained,
         masteryRewardStacks: result.masteryRewardStacks,
         rotationReward: result.rotationReward,
@@ -457,6 +488,11 @@ function renderDirective(option) {
   taskBonus.textContent = option.taskRewardText;
   taskBonus.hidden = !option.taskRewardText;
 
+  const dispatchBonus = document.createElement("span");
+  dispatchBonus.className = "directive-dispatch-bonus";
+  dispatchBonus.textContent = option.dispatchRewardText;
+  dispatchBonus.hidden = !option.dispatchRewardText;
+
   const finisherRecommendation = document.createElement("span");
   finisherRecommendation.className = "directive-finisher-recommendation";
   finisherRecommendation.textContent = option.finisherRecommendationText;
@@ -476,6 +512,7 @@ function renderDirective(option) {
     recommendation,
     planBonus,
     taskBonus,
+    dispatchBonus,
     finisherRecommendation,
     masteryBonus,
     stanceBonus

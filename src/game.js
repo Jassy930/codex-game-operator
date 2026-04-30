@@ -1114,6 +1114,8 @@ export const DIRECTIVE_MASTERY_WINDOW_SECONDS = 180;
 export const DIRECTIVE_MASTERY_BONUS_STEP = 0.05;
 export const DIRECTIVE_MASTERY_MAX_STACKS = 3;
 export const DIRECTIVE_MASTERY_CAPSTONE_RATE = 0.1;
+export const FAR_ROUTE_DISPATCH_UNLOCK_ENERGY = 20_000_000;
+export const FAR_ROUTE_DISPATCH_BONUS_RATE = 0.14;
 
 const INITIAL_UPGRADES = Object.fromEntries(
   UPGRADE_DEFS.map((upgrade) => [upgrade.id, 0])
@@ -1383,6 +1385,8 @@ export function activateDirective(state, directiveId, now = Date.now()) {
   const planReward = getDirectivePlanReward(effectiveBaseGain, plan, directive.id);
   const chain = getDirectiveChainForUse(current, directive.id, now);
   const taskReward = getDirectiveTaskReward(effectiveBaseGain, plan, directive.id, chain);
+  const dispatch = getFarRouteDispatch(current, now);
+  const dispatchReward = getFarRouteDispatchReward(effectiveBaseGain, dispatch, directive.id);
   const rotationReward = getDirectiveRotationReward(effectiveBaseGain, chain);
   const masteryCapstoneReward = getDirectiveMasteryCapstoneReward(
     effectiveBaseGain,
@@ -1399,6 +1403,7 @@ export function activateDirective(state, directiveId, now = Date.now()) {
     effectiveBaseGain * chain.multiplier +
       planReward +
       taskReward +
+      dispatchReward +
       rotationReward +
       masteryCapstoneReward +
       stanceFinisherReward,
@@ -1427,6 +1432,7 @@ export function activateDirective(state, directiveId, now = Date.now()) {
   const masteryBonusText = formatDirectiveMasteryBonus(mastery);
   const planRewardText = formatDirectivePlanReward(planReward);
   const taskRewardText = formatDirectiveTaskReward(taskReward);
+  const dispatchRewardText = formatFarRouteDispatchReward(dispatchReward);
   const chainText = formatDirectiveChainBonus(chain);
   const rotationRewardText = formatDirectiveRotationReward(rotationReward);
   const masteryCapstoneText =
@@ -1448,6 +1454,8 @@ export function activateDirective(state, directiveId, now = Date.now()) {
     planBonusRate: DIRECTIVE_PLAN_BONUS_RATE,
     taskReward,
     taskRewardRate: DIRECTIVE_TASK_REWARD_RATE,
+    dispatchReward,
+    dispatchRewardRate: FAR_ROUTE_DISPATCH_BONUS_RATE,
     masteryRewardGained: masteryReward.gained,
     masteryRewardStacks: masteryReward.mastery.stacks,
     rotationReward,
@@ -1461,6 +1469,7 @@ export function activateDirective(state, directiveId, now = Date.now()) {
     masteryBonusText,
     planRewardText,
     taskRewardText,
+    dispatchRewardText,
     chainBonusText: chainText,
     rotationRewardText,
     masteryCapstoneText,
@@ -1475,6 +1484,7 @@ export function activateDirective(state, directiveId, now = Date.now()) {
       (masteryBonusText ? masteryBonusText + "，" : "") +
       (planRewardText ? planRewardText + "，" : "") +
       (taskRewardText ? taskRewardText + "，" : "") +
+      (dispatchRewardText ? dispatchRewardText + "，" : "") +
       (chainText ? chainText + "，" : "") +
       (rotationRewardText ? rotationRewardText + "，" : "") +
       (masteryCapstoneText ? masteryCapstoneText + "，" : "") +
@@ -1963,6 +1973,7 @@ export function getDirectiveStatus(state, now = Date.now()) {
   const production = getEffectiveProduction(current);
   const unlockText = unlocked ? "航线指令已解锁" : "累计 100K 能量后解锁航线指令";
   const plan = getDirectivePlan(current, now);
+  const dispatch = getFarRouteDispatch(current, now);
   const recommendedIds = new Set(plan.nextDirectiveIds ?? []);
   const mastery = getDirectiveMastery(current, now);
   const masteryBonusText = formatDirectiveMasteryBonus(mastery);
@@ -1974,6 +1985,7 @@ export function getDirectiveStatus(state, now = Date.now()) {
     unlockText,
     plan,
     task: getDirectiveTaskStatus(current, now),
+    dispatch,
     options: DIRECTIVE_DEFS.map((directive) => {
       const cooldownMs = directive.cooldownSeconds * 1000;
       const lastUsedAt = current.directives[directive.id] ?? 0;
@@ -1989,6 +2001,11 @@ export function getDirectiveStatus(state, now = Date.now()) {
       const chain = getDirectiveChainForUse(current, directive.id, now);
       const planReward = getDirectivePlanReward(effectiveBaseGain, plan, directive.id);
       const taskReward = getDirectiveTaskReward(effectiveBaseGain, plan, directive.id, chain);
+      const dispatchReward = getFarRouteDispatchReward(
+        effectiveBaseGain,
+        dispatch,
+        directive.id
+      );
       const rotationReward = getDirectiveRotationReward(effectiveBaseGain, chain);
       const masteryCapstoneReward = getDirectiveMasteryCapstoneReward(
         effectiveBaseGain,
@@ -2005,6 +2022,7 @@ export function getDirectiveStatus(state, now = Date.now()) {
         effectiveBaseGain * chain.multiplier +
           planReward +
           taskReward +
+          dispatchReward +
           rotationReward +
           masteryCapstoneReward +
           stanceFinisherReward,
@@ -2014,6 +2032,7 @@ export function getDirectiveStatus(state, now = Date.now()) {
       const gain = roundTo(preStanceGain + stanceBonus, 4);
       const planRewardText = formatDirectivePlanReward(planReward);
       const taskRewardText = formatDirectiveTaskReward(taskReward);
+      const dispatchRewardText = formatFarRouteDispatchReward(dispatchReward);
       const chainText = formatDirectiveChainBonus(chain);
       const rotationRewardText = formatDirectiveRotationReward(rotationReward);
       const masteryCapstoneText =
@@ -2040,6 +2059,8 @@ export function getDirectiveStatus(state, now = Date.now()) {
         planBonusRate: DIRECTIVE_PLAN_BONUS_RATE,
         taskReward,
         taskRewardRate: DIRECTIVE_TASK_REWARD_RATE,
+        dispatchReward,
+        dispatchRewardRate: FAR_ROUTE_DISPATCH_BONUS_RATE,
         rotationReward,
         masteryCapstoneReward,
         masteryCapstoneRate: DIRECTIVE_MASTERY_CAPSTONE_RATE,
@@ -2050,6 +2071,7 @@ export function getDirectiveStatus(state, now = Date.now()) {
         chainMultiplier: chain.multiplier,
         planRewardText,
         taskRewardText,
+        dispatchRewardText,
         chainBonusText: chainText,
         rotationRewardText,
         masteryCapstoneText,
@@ -2065,6 +2087,7 @@ export function getDirectiveStatus(state, now = Date.now()) {
             (masteryBonusText ? " · " + masteryBonusText : "") +
             (planRewardText ? " · " + planRewardText : "") +
             (taskRewardText ? " · " + taskRewardText : "") +
+            (dispatchRewardText ? " · " + dispatchRewardText : "") +
             (chainText ? " · " + chainText : "") +
             (rotationRewardText ? " · " + rotationRewardText : "") +
             (masteryCapstoneText ? " · " + masteryCapstoneText : "") +
@@ -2089,6 +2112,67 @@ export function getDirectiveStatus(state, now = Date.now()) {
         disabled: !unlocked || remainingMs > 0
       };
     })
+  };
+}
+
+export function getFarRouteDispatch(state, now = Date.now()) {
+  const current = normalizeState(state, now);
+  const rewardText =
+    "调度校准 +" + Math.round(FAR_ROUTE_DISPATCH_BONUS_RATE * 100) + "%";
+
+  if (current.totalEnergy < FAR_ROUTE_DISPATCH_UNLOCK_ENERGY) {
+    return {
+      unlocked: false,
+      active: false,
+      progress: 0,
+      rewardRate: FAR_ROUTE_DISPATCH_BONUS_RATE,
+      rewardText,
+      targetDirectiveId: null,
+      targetDirectiveName: "",
+      projectId: null,
+      text: "远航调度：累计 20M 能量后解锁后半段航段调度"
+    };
+  }
+
+  const project = getProjectStatuses(current).find((item) => !item.completed) ?? null;
+  if (!project) {
+    return {
+      unlocked: true,
+      active: false,
+      progress: 1,
+      rewardRate: FAR_ROUTE_DISPATCH_BONUS_RATE,
+      rewardText,
+      targetDirectiveId: null,
+      targetDirectiveName: "",
+      projectId: null,
+      text: "远航调度：全部航段已完成，等待下一段航线"
+    };
+  }
+
+  const directive = getFarRouteDispatchDirective(project, current);
+  const targetDirectiveName = directive?.name ?? "目标指令";
+
+  return {
+    unlocked: true,
+    active: true,
+    progress: project.progress,
+    rewardRate: FAR_ROUTE_DISPATCH_BONUS_RATE,
+    rewardText,
+    targetDirectiveId: directive?.id ?? null,
+    targetDirectiveName,
+    projectId: project.id,
+    projectName: project.name,
+    segmentText: project.segmentText,
+    progressText: project.progressText,
+    text:
+      "远航调度：" +
+      project.segmentText +
+      " " +
+      project.name +
+      "指定" +
+      targetDirectiveName +
+      " · 执行目标指令获得" +
+      rewardText
   };
 }
 
@@ -3415,6 +3499,22 @@ function formatDirectiveTaskReward(taskReward) {
   return "委托完成 +" + formatNumber(taskReward);
 }
 
+function getFarRouteDispatchReward(baseGain, dispatch, directiveId) {
+  if (!dispatch?.active || dispatch.targetDirectiveId !== directiveId) {
+    return 0;
+  }
+
+  return roundTo(baseGain * FAR_ROUTE_DISPATCH_BONUS_RATE, 4);
+}
+
+function formatFarRouteDispatchReward(dispatchReward) {
+  if (!dispatchReward) {
+    return "";
+  }
+
+  return "调度校准 +" + formatNumber(dispatchReward);
+}
+
 function getDirectiveRotationReward(baseGain, chain) {
   if (chain.stacks < DIRECTIVE_CHAIN_MAX_STACKS) {
     return 0;
@@ -3466,6 +3566,23 @@ function formatDirectiveStanceBonus(stanceBonusRate) {
 function getProjectFilterDef(filterId) {
   const validId = getValidProjectFilterId(filterId);
   return PROJECT_FILTER_DEFS.find((item) => item.id === validId) ?? PROJECT_FILTER_DEFS[0];
+}
+
+function getFarRouteDispatchDirective(project, state) {
+  const effect = project?.effect ?? {};
+
+  if (effect.clickMultiplier) {
+    return getDirectiveDef("ignition-salvo");
+  }
+  if (effect.secondMultiplier) {
+    return getDirectiveDef("cruise-cache");
+  }
+  if (effect.overloadMultiplier) {
+    return getDirectiveDef("resonance-pulse");
+  }
+
+  const stance = getRouteStanceDef(state.routeStance);
+  return getDirectiveDef(stance.directiveId) ?? getDirectiveDef("resonance-pulse");
 }
 
 function getRouteStanceDef(routeStanceId) {

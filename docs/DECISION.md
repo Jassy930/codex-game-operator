@@ -1,5 +1,30 @@
 # Decision
 
+## 2026-04-30 Product decision：远航调度
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-04-30 08:27 CST 同步到 5 个 open feedback issue、0 个 open bug issue。#6 明确指出后半段“只有不停的目标，玩法没有真正变化”，本轮进入有反馈样本下的 Product decision。
+
+当前最大问题：玩家已经到脉冲航闸附近，星图目标数量足够，但当前航段主要还是“攒到下一个数值门槛”。继续追加远航目标或文字摘要无法解决玩法结构变化不足。
+
+本轮决策：
+
+- 新增 20M 后解锁的“远航调度”，从当前未完成星图航段派生一个目标指令：点击奖励航段指定点火齐射，自动奖励航段指定巡航回收，过载奖励航段指定谐振脉冲，总产能奖励航段指定当前航线策略契合指令。
+- 执行当前航段指定指令时，获得有效基础指令收益 14% 的“调度校准”奖励，并在预计收益、执行反馈、本地 `directive` 事件和按钮徽标中记录 `dispatchReward` / `dispatchRewardRate`。
+- 主操作区新增 `farDispatch` 远航调度条，显示当前航段、目标指令、调度奖励和当前航段进度；反馈快照新增远航调度状态，便于后续复盘 #6。
+- 本轮不新增存档字段，不改变升级价格、产能公式、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令冷却、连携窗口、轮换目标奖励、预案执行、航线委托、指令熟练或反馈入口。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-04-30 08:27 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 作为本轮处理对象。
+- 20M 前 `getFarRouteDispatch` 返回锁定态；25M 脉冲航闸阶段返回目标指令点火齐射、奖励文案“调度校准 +14%”和航段 27/57。
+- 点火齐射预计收益和执行反馈包含调度校准奖励；巡航回收在同一脉冲航闸阶段不获得调度奖励。
+- 静态首页包含 `farDispatch`、`far-dispatch-meter` 和“远航调度”；运行期会渲染 `directive-dispatch-bonus`。
+- 反馈 Issue 快照包含远航调度状态。
+- 本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 105 项。
+- 构建产物已确认包含 `FAR_ROUTE_DISPATCH_UNLOCK_ENERGY`、`getFarRouteDispatch`、`farDispatch`、`directive-dispatch-bonus` 和“调度校准”。
+
+下一步：回复 #6 并保持 open，等待复测确认“当前航段改变目标指令”是否能缓解后半段只追数值目标的问题；若仍不足，再评估项目分支或资源消耗型指令。
+
 ## 2026-04-30 Product decision：点火奖励预告与连击轨
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-04-30 08:07 CST 同步到 4 个 open feedback issue、0 个 open bug issue。没有新的玩家复测或 bug；#5 仍保持 open，且指向“点火按钮太薄弱、增加点击反馈、特效和点击欲望”，本轮继续进入有反馈样本下的 Product decision。

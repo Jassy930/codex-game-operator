@@ -2,6 +2,14 @@
 
 ## 2026-04-30
 
+- GitHub Issues：gh 可用且已认证；2026-04-30 08:27 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
+- #6 进入本轮 Product decision：玩家在脉冲航闸附近反馈后半段“只有不停的目标，玩法没有真正变化”；本轮新增 20M 后“远航调度”，让当前星图航段指定目标指令。
+- 本轮改动新增 `FAR_ROUTE_DISPATCH_UNLOCK_ENERGY = 20_000_000`、`FAR_ROUTE_DISPATCH_BONUS_RATE = 0.14` 和 `getFarRouteDispatch`。点击奖励航段指定点火齐射，自动奖励航段指定巡航回收，过载奖励航段指定谐振脉冲，总产能奖励航段指定当前航线策略契合指令；执行目标指令获得“调度校准”奖励。
+- 主操作区新增 `farDispatch` 远航调度条和按钮层 `directive-dispatch-bonus` 徽标；本地 `directive` 事件记录 `dispatchReward` / `dispatchRewardRate`；反馈快照新增远航调度状态。
+- 本轮不新增存档字段，不改变升级价格、产能公式、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令冷却、连携窗口、轮换目标奖励、预案执行、航线委托、指令熟练或反馈入口。
+- 本轮本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数为 105 项。
+- 构建产物已包含 `FAR_ROUTE_DISPATCH_UNLOCK_ENERGY`、`getFarRouteDispatch`、`farDispatch`、`directive-dispatch-bonus` 和“调度校准”。
+
 - GitHub Issues：gh 可用且已认证；2026-04-30 08:07 CST 通过 `ops/collect-feedback.sh` 同步到 4 个 open issue、4 个 open feedback issue、0 个 open bug issue。
 - #5 继续作为本轮 Product decision：上一轮已补点火按钮脉冲、粒子层、过载前兆和过载冲击波，但 issue 仍保持 open，尚无玩家复测结论；本轮继续补点击前的奖励预期和过载追逐目标。
 - 本轮改动新增 `getCoreRewardPreview`、按钮内 `core-combo-track` 8 格连击轨和按钮下方 `coreRewardHint` 下一击奖励预告。普通状态显示下一击收益和剩余过载次数，第 7 次连击提示下一击触发过载，第 8 次过载后提示进入新一轮蓄能。

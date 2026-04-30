@@ -1,6 +1,7 @@
 import {
   DEFAULT_ROUTE_STANCE_ID,
   DIRECTIVE_MASTERY_MAX_STACKS,
+  getFarRouteDispatch,
   ROUTE_STANCE_DEFS
 } from "./game.js";
 
@@ -39,6 +40,7 @@ export function createFeedbackEntry({
   const feedbackType = FEEDBACK_TYPES[type] ? type : "experience";
   const currentState = state ?? {};
   const currentGoal = goal ?? {};
+  const farRouteDispatch = getFarRouteDispatch(currentState);
 
   return {
     id:
@@ -59,6 +61,7 @@ export function createFeedbackEntry({
       overloadBonus: currentState.overloadBonus ?? 5,
       routeStance: getFeedbackRouteStanceId(currentState.routeStance),
       directiveMastery: getFeedbackDirectiveMastery(currentState.directiveMastery),
+      farRouteDispatch: formatFeedbackFarRouteDispatch(farRouteDispatch),
       combo: currentState.combo ?? 0,
       goal: currentGoal.value ?? "未知",
       upgrades: currentState.upgrades ?? {}
@@ -98,6 +101,7 @@ export function createFeedbackIssueBody(entry) {
     `- 过载奖励：${snapshot.overloadBonus}`,
     `- 航线策略：${getFeedbackRouteStanceName(snapshot.routeStance)}`,
     `- 指令熟练：${snapshot.directiveMastery.stacks}/${DIRECTIVE_MASTERY_MAX_STACKS}`,
+    `- 远航调度：${snapshot.farRouteDispatch}`,
     `- 连击：${snapshot.combo}`,
     `- 当前目标：${snapshot.goal}`,
     `- 升级：${upgrades || "无"}`,
@@ -127,6 +131,10 @@ function getFeedbackDirectiveMastery(directiveMastery) {
       ? Math.min(DIRECTIVE_MASTERY_MAX_STACKS, Math.max(0, Math.floor(stacks)))
       : 0
   };
+}
+
+function formatFeedbackFarRouteDispatch(dispatch) {
+  return String(dispatch?.text ?? "未知").replace(/^远航调度：/, "");
 }
 
 function clampRating(value) {

@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+- 后半段新增“远航调度”：20M 后当前星图航段会指定目标指令，执行匹配指令获得“调度校准”奖励，让脉冲航闸附近不再只是继续追逐累计能量门槛。
+- `src/game.js` 新增 `FAR_ROUTE_DISPATCH_UNLOCK_ENERGY`、`FAR_ROUTE_DISPATCH_BONUS_RATE` 和 `getFarRouteDispatch`；`index.html` / `src/app.js` / `src/styles.css` 新增远航调度条和 `directive-dispatch-bonus`；`src/feedback.js` 的反馈快照新增远航调度状态；`tests/game.test.js` 覆盖 20M 锁定态、脉冲航闸目标指令、调度奖励、静态结构和反馈快照。
+- 本轮不新增存档字段，不改变升级价格、产能公式、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令冷却、连携窗口、轮换目标奖励、预案执行、航线委托、指令熟练或反馈入口。
+- 同步 GitHub Issues 反馈状态：2026-04-30 08:27 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 指向后半段玩法没有真正变化，并作为本轮处理对象。
+- 验证通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 105 项。
+- 构建产物已确认包含 `FAR_ROUTE_DISPATCH_UNLOCK_ENERGY`、`getFarRouteDispatch`、`farDispatch`、`directive-dispatch-bonus` 和“调度校准”。
 - 点火按钮新增 8 格连击轨和下一击奖励预告：普通状态显示下一击收益和剩余过载次数，第 7 次连击直接提示下一击触发过载，第 8 次过载后提示进入新一轮蓄能。
 - `src/game.js` 新增 `getCoreRewardPreview`；`index.html` 新增 `core-combo-track` 和 `coreRewardHint`；`src/app.js` 新增 `renderCoreComboTrack` / `renderCoreRewardHint`；`src/styles.css` 新增连击轨、奖励预告和 `coreDotPulse` 动画；`tests/game.test.js` 覆盖初始态、临近过载态、过载后预告和静态/样式标记。
 - 本轮只调整点火按钮展示和奖励预告；不新增存档字段，不改变点击收益、连击窗口、过载奖励、升级价格、产能公式、星图 57 段路线、项目奖励、航线策略、航线指令或反馈入口。
