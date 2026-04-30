@@ -2165,6 +2165,15 @@ export function getDirectiveStatus(state, now = Date.now()) {
         chain.stacks >= DIRECTIVE_CHAIN_MAX_STACKS &&
         stanceFinisherReward > 0;
       const ready = unlocked && remainingMs <= 0;
+      const optionRecommendationText = getDirectiveOptionRecommendationText({
+        recommended,
+        ready,
+        plan,
+        dispatch,
+        directive,
+        recommendationText,
+        waitingRecommendationText
+      });
 
       return {
         ...directive,
@@ -2247,11 +2256,7 @@ export function getDirectiveStatus(state, now = Date.now()) {
         cooling: unlocked && remainingMs > 0,
         ready,
         recommended,
-        recommendationText: recommended
-          ? ready
-            ? recommendationText
-            : waitingRecommendationText
-          : "",
+        recommendationText: optionRecommendationText,
         finisherRecommended,
         finisherRecommendationText: finisherRecommended ? "策略终结" : "",
         disabled: !unlocked || remainingMs > 0
@@ -3786,6 +3791,30 @@ function getValidProjectFilterId(filterId) {
 
 function getDirectiveDef(directiveId) {
   return DIRECTIVE_DEFS.find((item) => item.id === directiveId) ?? null;
+}
+
+function getDirectiveOptionRecommendationText({
+  recommended,
+  ready,
+  plan,
+  dispatch,
+  directive,
+  recommendationText,
+  waitingRecommendationText
+}) {
+  if (!recommended) {
+    return "";
+  }
+
+  if (
+    plan?.recommendationText === "远航续航" &&
+    dispatch?.active &&
+    dispatch.relayDirectiveId === directive.id
+  ) {
+    return ready ? "远航协同" : "等待协同";
+  }
+
+  return ready ? recommendationText : waitingRecommendationText;
 }
 
 function getValidDirectiveId(directiveId) {

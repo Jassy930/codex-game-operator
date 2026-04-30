@@ -2143,6 +2143,18 @@ test("远航调度会在 20M 后按当前航段指定目标指令", () => {
   const relayDispatch = getFarRouteDispatch(relayState, 30_000);
   const relayCruiseResult = activateDirective(relayState, "cruise-cache", 30_000);
   const relayResonanceResult = activateDirective(relayState, "resonance-pulse", 30_000);
+  const relayWaitingState = {
+    ...relayState,
+    directives: {
+      ...relayState.directives,
+      "cruise-cache": 29_000,
+      "resonance-pulse": 29_000
+    }
+  };
+  const relayWaitingStatus = getDirectiveStatus(relayWaitingState, 30_000);
+  const relayWaitingResonanceOption = relayWaitingStatus.options.find(
+    (option) => option.id === "resonance-pulse"
+  );
   const loopState = {
     ...state,
     directives: {
@@ -2305,7 +2317,10 @@ test("远航调度会在 20M 后按当前航段指定目标指令", () => {
   assert.equal(relayCruiseOption.recommended, true);
   assert.equal(relayCruiseOption.recommendationText, "远航续航");
   assert.equal(relayResonanceOption.recommended, true);
-  assert.equal(relayResonanceOption.recommendationText, "远航续航");
+  assert.equal(relayResonanceOption.recommendationText, "远航协同");
+  assert.equal(relayWaitingResonanceOption.ready, false);
+  assert.equal(relayWaitingResonanceOption.recommended, true);
+  assert.equal(relayWaitingResonanceOption.recommendationText, "等待协同");
   assert.equal(relayCruiseOption.dispatchRelayReward > 0, true);
   assert.equal(relayCruiseOption.dispatchRelayRewardRate, FAR_ROUTE_DISPATCH_RELAY_REWARD_RATE);
   assert.match(relayCruiseOption.dispatchRelayRewardText, /远航续航 \+/);

@@ -1,5 +1,27 @@
 # Decision
 
+## 2026-04-30 Product decision：远航协同按钮推荐
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-04-30 15:05 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#6 仍围绕“后半段只有不停的目标、玩法没有真正变化”保持 open，因此本轮继续进入 Product decision，并处理远航调度第二步在按钮层的可辨识度。
+
+当前最大问题：远航调度已经在星图总览、当前航段卡片和主操作区显示目标、协同与闭环路径；但实际点击第二步时，指定协同续航按钮和其他非目标按钮都显示“远航续航”。玩家需要读收益徽标里的“远航协同 +X”才能知道哪个按钮是当前航段指定的优先选择。
+
+本轮决策：
+
+- 在 `getDirectiveStatus` 中新增每个按钮独立的远航推荐文案派生。
+- 当远航目标后的 1/3 阶段推荐非目标指令时，指定协同续航按钮显示“远航协同”，冷却中显示“等待协同”；其他非目标按钮仍显示“远航续航/等待续航”。
+- 本轮只调整按钮推荐文案；不新增存档字段，不改变指令收益、冷却、连携窗口、远航调度计算、星图航段、项目奖励、升级价格、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-04-30 15:05 CST 当前 5 个 open feedback issue、0 个 open bug issue。
+- #6 快照对应的脉冲航闸阶段，执行目标指令后，巡航回收仍显示“远航续航”，谐振脉冲显示“远航协同”。
+- 当谐振脉冲处于冷却且仍属于协同续航候选时，按钮显示“等待协同”。
+- 本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 109 项。
+- 构建产物已确认包含 `getDirectiveOptionRecommendationText`、“远航协同”和“等待协同”。
+
+下一步：推送并回复 #6；继续保持 issue open，等待复测确认按钮层把“协同优先”和普通续航区分开后，后半段短循环是否更清楚。
+
 ## 2026-04-30 Product decision：星图总览远航调度总览
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-04-30 14:51 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#6 仍围绕“后半段只有不停的目标、玩法没有真正变化”保持 open，因此本轮继续进入 Product decision，并处理远航调度在星图总览层的可见性。

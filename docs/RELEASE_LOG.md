@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+- 远航调度第二步新增按钮级协同推荐：目标指令后的 1/3 阶段，指定协同续航按钮显示“远航协同”，冷却中显示“等待协同”；其他非目标按钮继续显示“远航续航/等待续航”，继续回应 #6 对后半段玩法变化不明显的反馈。
+- `src/game.js` 新增 `getDirectiveOptionRecommendationText`，让按钮推荐文案可按远航协同候选独立派生；`tests/game.test.js` 覆盖脉冲航闸阶段普通续航、协同续航和协同冷却态。
+- 本轮只调整按钮推荐文案；不新增存档字段，不改变指令收益、冷却、连携窗口、远航调度计算、星图航段、项目奖励、升级价格、反馈入口或部署链路。
+- 同步 GitHub Issues 反馈状态：2026-04-30 15:05 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 作为本轮处理对象。
+- 验证通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 109 项。
+- 构建产物已确认包含 `getDirectiveOptionRecommendationText`、“远航协同”和“等待协同”。
+
 - 星图总览新增远航调度总览：20M 后 active 调度时，星图总览会显示当前航段、目标指令、协同续航、闭环进度和下一步路径，继续回应 #6 对后半段玩法变化不明显的反馈。
 - `src/game.js` 新增 `buildProjectOverviewDispatchText` 和 `dispatchText`；`index.html` 新增 `projectOverviewDispatch`；`src/app.js` 运行期按 `dispatchText` 显示/隐藏总览调度行；`src/styles.css` 新增 `project-overview-dispatch`；`tests/game.test.js` 覆盖脉冲航闸阶段总览文案和静态标记。
 - 本轮只调整星图总览展示层；不新增存档字段，不改变指令收益、冷却、连携窗口、星图航段、项目奖励、升级价格、反馈入口或部署链路。

@@ -2,6 +2,13 @@
 
 ## 2026-04-30
 
+- GitHub Issues：gh 可用且已认证；2026-04-30 15:05 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
+- #6 继续作为本轮 Product decision 依据：远航调度已经能在总览、当前航段卡片和主操作区显示目标、协同与闭环路径，但执行第二步时，指定协同续航按钮和普通非目标续航按钮都显示“远航续航”，按钮层没有直接标出哪个是优先协同选择。
+- 本轮改动新增远航协同按钮推荐：远航目标后的 1/3 阶段，指定协同续航按钮显示“远航协同”，冷却中显示“等待协同”；其他非目标按钮继续显示“远航续航/等待续航”。
+- 本轮不新增存档字段，不改变指令收益、冷却、连携窗口、星图航段、项目奖励、升级价格、反馈入口或部署链路。
+- 本轮本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 109 项。
+- 构建产物已确认包含 `getDirectiveOptionRecommendationText`、“远航协同”和“等待协同”。
+
 - GitHub Issues：gh 可用且已认证；2026-04-30 14:51 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
 - #6 继续作为本轮 Product decision 依据：远航调度已在主操作区和当前航段卡片显示，但星图总览还没有把当前航段、目标指令、协同续航和闭环进度合在一起。玩家从星图总览看后半段目标时，仍可能感到目标和主动指令短循环之间的关系不够直接。
 - 本轮改动新增星图总览远航调度总览：20M 后 active 调度时显示当前航段、目标指令、协同续航、闭环进度和下一步路径；未解锁、锁定或全部完成时隐藏该行，避免早期增加文字密度。
