@@ -20,8 +20,11 @@
 - 点火齐射作为远航调度目标指令执行后，`directiveChain.expiresAt` 写入 120 秒窗口；同阶段非目标指令仍使用 90 秒窗口。
 - 目标指令按钮显示 `directive-dispatch-window` 徽标，预计收益包含 `调度接力 +30 秒`，本地 `directive` 事件记录调度接力字段。
 - 本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 106 项。
+- 提交 d5dc442 已推送；GitHub Pages workflow 25142609617 已成功，线上地址返回 HTTP 200，且线上首页、`game.js`、`app.js` 和 `styles.css` 已确认包含远航调度接力相关标记。
+- #6 已回复并继续保持 open，等待复测确认目标指令后的 120 秒连携窗口是否让后半段更像可完成短循环。
+- 回复后同步 GitHub Issues：2026-04-30 09:28 CST 当前仍为 5 个 open feedback issue、0 个 open bug issue；#6 更新时间为 2026-04-30T01:28:41Z。
 
-下一步：完成 install/build 验证后推送并回复 #6；等待复测确认后半段当前航段是否更能形成“目标指令 -> 后续轮换”的短循环。
+下一步：等待 #6 复测；若仍认为后半段只是追目标，再评估资源消耗型指令、项目分支或更重的远航短循环。
 
 ## 2026-04-30 Product decision：远航调度冷却抢占
 

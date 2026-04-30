@@ -8,6 +8,9 @@
 - `activateDirective`、`getDirectiveStatus` 和远航调度条共用调度接力派生状态；本地 `directive` 事件新增 `dispatchChainWindowSeconds` / `dispatchChainWindowText`。
 - 本轮不新增存档字段，不改变升级价格、产能公式、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、基础连携倍率、轮换目标奖励、预案执行、航线委托、指令熟练、满层回响或反馈入口。
 - 本轮本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 106 项。
+- 提交 d5dc442 已推送；GitHub Pages workflow 25142609617 已成功，线上地址返回 HTTP 200；线上首页、`game.js`、`app.js` 和 `styles.css` 已确认包含远航调度接力相关标记。
+- #6 已回复：说明远航调度目标指令现在会延长本轮连携窗口，issue 保持 open 等待复测。
+- 回复后同步 GitHub Issues：2026-04-30 09:28 CST 当前仍为 5 个 open feedback issue、0 个 open bug issue；#6 更新时间为 2026-04-30T01:28:41Z。
 
 - GitHub Issues：gh 可用且已认证；2026-04-30 09:07 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
 - #6 继续作为本轮 Product decision：上一轮已让远航调度接管下一步推荐，但目标指令仍沿用原冷却，当前航段对指令使用频率的影响不够明显。
