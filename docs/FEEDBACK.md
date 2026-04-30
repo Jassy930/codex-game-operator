@@ -2,6 +2,20 @@
 
 ## 2026-05-01
 
+- GitHub Issues：gh 可用且已认证；2026-05-01 06:34 CST 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
+- #6 继续作为本轮 Product decision 依据：该反馈指出后半段“只有不停的目标、玩法没有真正变化”；#4 仍补充界面“密密麻麻的文字”和图片化诉求。前序路线微图已能区分协同直线和绕行偏移，但资源取向仍主要靠文字说明。
+- 本轮改动新增远航资源取向符号：协同/绕行分支卡片的 `far-dispatch-branch-choice-route` 内新增 `far-dispatch-branch-choice-route-resource`，协同显示保留当前资源符号，绕行显示投送累计航段箭头。
+- `branchChoices` 派生 `routeResourceKind` / `routeResourceText`，只服务展示和测试；可访问语义继续保留在已有 `caption`、`branchChoiceText`、卡片 `title`、路线收益对照和路线目标中。
+- 本轮只调整派生展示、DOM、样式和静态测试，不新增收益、不新增存档字段，不改变升级价格、星图路线、项目奖励、远航调度既有数值、冷却、连携窗口、反馈入口或部署链路。
+- 本轮本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含 `routeResourceKind`、`routeResourceText`、`far-dispatch-branch-choice-route-resource` 和 `is-resource-*`。
+- 提交 `159b72b` 已推送；GitHub Pages workflow `25192747774` 已成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`。
+- 线上地址返回 HTTP 200，线上 `src/game.js`、`src/app.js` 与 `src/styles.css` 已确认包含资源取向符号相关代码和样式。
+- #6 已回复：说明路线微图新增资源取向符号，issue 保持 open 等待复测。
+- #4 已回复：说明资源取向符号用于让协同/绕行路线差异先通过图形扫到，issue 保持 open 等待复测。
+- 回复后同步 GitHub Issues：2026-05-01 06:37 CST 当前仍为 5 个 open feedback issue、0 个 open bug issue；#6 与 #4 更新时间均为 2026-04-30T22:37:27Z。
+- 钉钉通知未发送：运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` 相关变量名，也未发现本地 `.env*` 文件；未将 webhook 写入仓库。
+
 - GitHub Issues：gh 可用且已认证；2026-05-01 06:13 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
 - #6 继续作为本轮 Product decision 依据：该反馈指出后半段“只有不停的目标、玩法没有真正变化”；#4 仍补充界面文字密度和图片化诉求。前序已经给协同/绕行分支卡片加上路线徽标，但卡片主体仍主要靠文字解释路线差异。
 - 本轮改动新增远航路线微图：协同/绕行分支卡片渲染 `far-dispatch-branch-choice-route` 三点路线轨，协同使用直线路径，绕行使用带偏移的路线节点，帮助玩家在读路线目标和收益前先扫到两条路线形态。

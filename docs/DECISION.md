@@ -1,5 +1,32 @@
 # Decision
 
+## 2026-05-01 Product decision：远航资源取向符号
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-01 06:34 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#6 仍是最新后半段玩法反馈，#4 仍指出界面文字密度和图片化诉求，因此本轮继续进入 Product decision。
+
+当前最大问题：前序已经给协同/绕行分支卡片加入三点路线微图，能区分直线协同和偏移绕行；但“协同补当前资源、绕行投送累计航段”的关键取舍仍主要依赖卡片文字。玩家能扫到路线形态，却还需要读说明才能确认两条路线的资源方向。
+
+本轮决策：
+
+- 新增“远航资源取向符号”。
+- `branchChoices` 派生 `routeResourceKind` / `routeResourceText`：协同为 `current / 保留当前`，绕行为 `progress / 投送累计`。
+- `renderFarDispatchBranchChoiceRoute(choice)` 在路线微图中渲染 `far-dispatch-branch-choice-route-resource is-current/is-progress`；协同显示小型资源舱，绕行显示投送箭头。
+- 资源取向符号 `aria-hidden="true"`，语义继续由已有 `caption`、`branchChoiceText`、卡片 `title`、路线收益对照和路线目标承载。
+- 本轮只调整派生展示、DOM、样式和静态测试；不新增收益、不新增存档字段，不改变升级价格、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、远航调度既有数值、冷却、连携窗口、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-05-01 06:34 CST 当前 5 个 open feedback issue、0 个 open bug issue。
+- 0/3 起手时，协同分支派生 `routeResourceKind: "current"` / `routeResourceText: "保留当前"`，绕行分支派生 `routeResourceKind: "progress"` / `routeResourceText: "投送累计"`。
+- `src/app.js` 渲染 `far-dispatch-branch-choice-route-resource` 与 `is-resource-*`；`src/styles.css` 包含 `.far-dispatch-branch-choice-route-resource.is-current` 和 `.is-progress`。
+- 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含 `routeResourceKind`、`routeResourceText`、`far-dispatch-branch-choice-route-resource` 和 `is-resource-*`。
+- 发布验证已通过：提交 `159b72b` 已推送到 `origin/main`；GitHub Pages workflow `25192747774` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`；线上首页返回 HTTP 200，线上 `src/game.js`、`src/app.js` 与 `src/styles.css` 已确认包含资源取向符号相关代码和样式。
+- 已回复 GitHub Issue #6，说明本轮资源取向符号、验证和部署结果，issue 保持 open 等待复测。
+- 已回复 GitHub Issue #4，说明本轮用图形化资源符号继续降低远航分支卡片文字压力，issue 保持 open 等待复测。
+- 回复后同步 GitHub Issues：2026-05-01 06:37 CST 当前仍为 5 个 open feedback issue、0 个 open bug issue；#6 与 #4 更新时间均为 2026-04-30T22:37:27Z。
+- 钉钉通知未发送：运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` 相关变量名，也未发现本地 `.env*` 文件；未将 webhook 写入仓库。
+
 ## 2026-05-01 Product decision：远航路线微图
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-01 06:13 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#6 仍是最新后半段玩法反馈，#4 仍指出界面“全是密密麻麻的文字、希望更多图片”，因此本轮继续进入 Product decision，并选择同时降低远航分支文字墙和强化路线感的展示改动。
