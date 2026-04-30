@@ -928,6 +928,7 @@ function renderDirective(option) {
         dispatchCooldownText: result.dispatchCooldownText,
         dispatchChainWindowSeconds: result.dispatchChainWindowSeconds,
         dispatchChainWindowText: result.dispatchChainWindowText,
+        dispatchRouteStepText: result.dispatchRouteStepText,
         masteryRewardGained: result.masteryRewardGained,
         masteryRewardStacks: result.masteryRewardStacks,
         rotationReward: result.rotationReward,
@@ -958,6 +959,11 @@ function renderDirective(option) {
 
   const badges = document.createElement("span");
   badges.className = "directive-badges";
+
+  const dispatchRouteStep = document.createElement("span");
+  dispatchRouteStep.className = "directive-dispatch-route-step";
+  dispatchRouteStep.textContent = option.dispatchRouteStepText;
+  dispatchRouteStep.hidden = !option.dispatchRouteStepText;
 
   const recommendation = document.createElement("span");
   recommendation.className = "directive-recommendation";
@@ -1080,6 +1086,7 @@ function renderDirective(option) {
   stanceBonus.hidden = !option.stanceMatched;
 
   badges.append(
+    dispatchRouteStep,
     recommendation,
     planBonus,
     taskBonus,
@@ -1199,6 +1206,7 @@ function getDirectivePreviewDetailTexts(option) {
     option.dispatchRefreshText,
     option.dispatchCooldownText,
     option.dispatchChainWindowText,
+    option.dispatchRouteStepText,
     option.chainBonusText,
     option.rotationRewardText,
     option.masteryCapstoneText,

@@ -1,5 +1,29 @@
 # Decision
 
+## 2026-05-01 Product decision：远航路线按钮标记
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-01 02:30 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#6 仍是最新反馈线程，原始反馈指出后半段“只有不停的目标、玩法没有真正变化”，因此本轮继续进入 Product decision。
+
+当前最大问题：上一轮已经在远航调度条显示“路线步骤”，但玩家实际执行时仍要把调度条上的第 1/3、2/3、3/3 与三枚航线指令按钮对应起来。后半段短循环需要把路线步骤直接落到可点击按钮，并在执行后确认刚完成了哪一步。
+
+本轮决策：
+
+- 新增“远航路线按钮标记”。
+- 航线指令按钮从当前远航分支态势派生 `dispatchRouteStepText`：目标按钮显示“路线 1/3 目标”，目标后分支按钮显示“路线 2/3 推荐协同/绕行”，回航目标显示“路线 3/3 协同回航/绕行回航”，整备态显示“路线 整备续航/绕行整备/整备回航”。
+- 执行航线指令后，行动反馈和本地 `directive` 事件记录 `dispatchRouteStepText`，行动提示会显示“路线执行：...”确认已完成的路线步。
+- 本轮只调整派生展示、按钮徽标、行动反馈、事件字段和测试；不新增收益、不新增存档字段，不改变升级价格、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、远航调度既有数值、冷却、连携窗口、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-05-01 02:30 CST 当前 5 个 open feedback issue、0 个 open bug issue。
+- 脉冲航闸起手时，点火齐射按钮显示“路线 1/3 目标”，执行反馈包含“路线执行：1/3 目标”。
+- 目标后分支选择态，谐振脉冲显示“路线 2/3 推荐协同”，巡航回收显示“路线 2/3 绕行”。
+- 绕行进行中，点火齐射显示“路线 3/3 绕行回航”；协同进行中显示“路线 3/3 协同回航”。
+- 整备态显示“路线 整备续航/绕行整备/整备回航”并在执行反馈中确认。
+- `src/app.js` 渲染 `directive-dispatch-route-step` 并在本地 `directive` 事件记录 `dispatchRouteStepText`；`src/styles.css` 包含 `.directive-button .directive-dispatch-route-step`。
+- 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含 `dispatchRouteStepText`、`directive-dispatch-route-step` 和“路线执行”相关文案。
+
 ## 2026-05-01 Product decision：远航路线步骤
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-01 02:07 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#6 仍是最新反馈线程，原始反馈指出后半段“只有不停的目标、玩法没有真正变化”，因此本轮继续进入 Product decision。
