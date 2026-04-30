@@ -1146,7 +1146,10 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(indexHtml, /aria-label="远航调度进度"/);
   assert.match(indexHtml, /指令轮换：累计 100K 能量后解锁 90 秒连携目标/);
   assert.match(indexHtml, /航线委托：累计 100K 能量后解锁 3 步短期任务/);
-  assert.match(indexHtml, /远航调度：累计 20M 能量后解锁后半段航段调度/);
+  assert.match(
+    indexHtml,
+    /远航调度：累计 20M 能量后解锁后半段航段调度与目标指令推荐/
+  );
   assert.match(indexHtml, /非契合指令起手/);
   assert.match(indexHtml, /第二步继续避开契合指令/);
   assert.match(indexHtml, /3\/3 策略终结/);
@@ -1831,16 +1834,23 @@ test("远航调度会在 20M 后按当前航段指定目标指令", () => {
     }
   };
   const dispatch = getFarRouteDispatch(state, 1000);
+  const plan = getDirectivePlan(state, 1000);
   const status = getDirectiveStatus(state, 1000);
   const ignitionOption = status.options.find((option) => option.id === "ignition-salvo");
   const cruiseOption = status.options.find((option) => option.id === "cruise-cache");
+  const resonanceOption = status.options.find(
+    (option) => option.id === "resonance-pulse"
+  );
   const ignitionResult = activateDirective(state, "ignition-salvo", 1000);
   const cruiseResult = activateDirective(state, "cruise-cache", 1000);
 
   assert.equal(FAR_ROUTE_DISPATCH_UNLOCK_ENERGY, 20_000_000);
   assert.equal(FAR_ROUTE_DISPATCH_BONUS_RATE, 0.14);
   assert.equal(locked.unlocked, false);
-  assert.equal(locked.text, "远航调度：累计 20M 能量后解锁后半段航段调度");
+  assert.equal(
+    locked.text,
+    "远航调度：累计 20M 能量后解锁后半段航段调度与目标指令推荐"
+  );
   assert.equal(dispatch.unlocked, true);
   assert.equal(dispatch.active, true);
   assert.equal(dispatch.projectId, "pulse-arc-gate");
@@ -1854,15 +1864,57 @@ test("远航调度会在 20M 后按当前航段指定目标指令", () => {
     "远航调度：航段 27/57 脉冲航闸指定点火齐射 · 执行目标指令获得调度校准 +14%"
   );
   assert.equal(Math.round(dispatch.progress * 100), 83);
+  assert.deepEqual(plan.nextDirectiveIds, ["ignition-salvo"]);
+  assert.equal(plan.recommendationText, "调度目标");
+  assert.equal(plan.waitingRecommendationText, "等待调度");
+  assert.equal(plan.summaryText, "指令轮换 0/3 · 调度目标 点火齐射");
+  assert.match(plan.text, /远航调度指定点火齐射/);
   assert.equal(ignitionOption.dispatchReward > 0, true);
   assert.match(ignitionOption.dispatchRewardText, /调度校准 \+/);
   assert.match(ignitionOption.previewText, /调度校准 \+/);
+  assert.equal(ignitionOption.recommended, true);
+  assert.equal(ignitionOption.recommendationText, "调度目标");
   assert.equal(cruiseOption.dispatchReward, 0);
   assert.equal(cruiseOption.dispatchRewardText, "");
+  assert.equal(resonanceOption.recommended, false);
   assert.equal(ignitionResult.dispatchReward > 0, true);
   assert.equal(ignitionResult.dispatchRewardRate, FAR_ROUTE_DISPATCH_BONUS_RATE);
   assert.match(ignitionResult.notice, /调度校准 \+/);
   assert.equal(cruiseResult.dispatchReward, 0);
+});
+
+test("远航调度会优先接管常规收束起手推荐", () => {
+  const state = {
+    ...createInitialState(0),
+    totalEnergy: 35_000_000,
+    energyPerClick: 16,
+    energyPerSecond: 17.5,
+    multiplier: 32.3239,
+    overloadBonus: 27,
+    routeStance: "cruise",
+    upgrades: {
+      lens: 15,
+      collector: 25,
+      resonator: 11,
+      stabilizer: 21
+    }
+  };
+  const dispatch = getFarRouteDispatch(state, 1000);
+  const plan = getDirectivePlan(state, 1000);
+  const status = getDirectiveStatus(state, 1000);
+  const cruiseOption = status.options.find((option) => option.id === "cruise-cache");
+  const ignitionOption = status.options.find((option) => option.id === "ignition-salvo");
+
+  assert.equal(dispatch.projectId, "glow-orbit-harbor");
+  assert.equal(dispatch.targetDirectiveId, "cruise-cache");
+  assert.deepEqual(plan.nextDirectiveIds, ["cruise-cache"]);
+  assert.equal(plan.recommendationText, "调度目标");
+  assert.equal(plan.summaryText, "指令轮换 0/3 · 调度目标 巡航回收");
+  assert.match(plan.hintText, /当前航段调度优先于常规收束起手/);
+  assert.equal(cruiseOption.recommended, true);
+  assert.equal(cruiseOption.recommendationText, "调度目标");
+  assert.equal(cruiseOption.dispatchReward > 0, true);
+  assert.equal(ignitionOption.recommended, false);
 });
 
 test("脉冲航闸完成后会继续指向离辉轨道港", () => {

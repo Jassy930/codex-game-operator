@@ -1,5 +1,28 @@
 # Decision
 
+## 2026-04-30 Product decision：远航调度接管推荐
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-04-30 08:51 CST 同步到 5 个 open feedback issue、0 个 open bug issue。#6 仍是最新后半段玩法变化反馈，继续进入 Product decision。
+
+当前最大问题：上一轮远航调度已经让 20M 后当前航段指定目标指令并提供“调度校准”奖励，但指令轮换推荐仍按常规收束起手、策略终结和熟练续航推导。玩家可能看到目标指令奖励，却仍被下一步推荐引向另一条指令，当前航段对操作结构的影响还不够直接。
+
+本轮决策：
+
+- `getDirectivePlan` 在远航调度 active 时把当前航段目标指令写入 `nextDirectiveIds`，按钮推荐文案显示“调度目标/等待调度”。
+- 0/3 起手阶段，远航调度目标优先于常规“非契合起手、保留契合指令做策略终结”；连携进行中时，只要目标指令不是刚执行的上一条指令，也会优先成为下一步推荐。
+- 脉冲航闸阶段会把点火齐射收束为唯一推荐目标；离辉轨道港这类自动奖励航段会让巡航回收优先于常规收束起手，让不同航段直接改变下一步指令选择。
+- 本轮只调整派生推荐与展示文案；不新增存档字段，不改变升级价格、产能公式、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令冷却、连携窗口、轮换目标奖励、预案执行、航线委托、指令熟练、满层回响或反馈入口。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-04-30 08:51 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 作为本轮处理对象。
+- 25M 脉冲航闸阶段，`getDirectivePlan` 返回 `nextDirectiveIds = ["ignition-salvo"]`，推荐文案为“调度目标”，提示包含“远航调度指定点火齐射”。
+- 35M 离辉轨道港阶段，巡航优先航线下常规起手会避开巡航回收，但远航调度会把 `nextDirectiveIds` 改为 `["cruise-cache"]` 并提示当前航段调度优先。
+- 静态首页锁定文案同步为“累计 20M 能量后解锁后半段航段调度与目标指令推荐”。
+- 本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 106 项。
+
+下一步：部署后回复 #6，说明远航调度现在不仅加奖励，也会直接改变下一步指令推荐；等待复测确认后半段操作结构是否更明确。
+
 ## 2026-04-30 Product decision：远航调度
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-04-30 08:27 CST 同步到 5 个 open feedback issue、0 个 open bug issue。#6 明确指出后半段“只有不停的目标，玩法没有真正变化”，本轮进入有反馈样本下的 Product decision。

@@ -2130,7 +2130,7 @@ export function getFarRouteDispatch(state, now = Date.now()) {
       targetDirectiveId: null,
       targetDirectiveName: "",
       projectId: null,
-      text: "远航调度：累计 20M 能量后解锁后半段航段调度"
+      text: "远航调度：累计 20M 能量后解锁后半段航段调度与目标指令推荐"
     };
   }
 
@@ -2182,6 +2182,10 @@ export function getDirectivePlan(state, now = Date.now()) {
   const mastery = getDirectiveMastery(current, now);
   const masteryHint = formatDirectiveMasteryHint(mastery);
   const masteryAtCap = mastery.stacks >= DIRECTIVE_MASTERY_MAX_STACKS;
+  const dispatch = getFarRouteDispatch(current, now);
+  const dispatchDirective = dispatch.active
+    ? getDirectiveDef(dispatch.targetDirectiveId)
+    : null;
 
   if (current.totalEnergy < DIRECTIVE_UNLOCK_ENERGY) {
     return {
@@ -2207,26 +2211,47 @@ export function getDirectivePlan(state, now = Date.now()) {
     const readyOpeners = openerDirectives.filter((directive) =>
       isDirectiveReady(current, directive, now)
     );
-    const nextDirectivePool = readyOpeners.length ? readyOpeners : openerDirectives;
+    let nextDirectivePool = readyOpeners.length ? readyOpeners : openerDirectives;
+    let recommendationText = "收束起手";
+    let waitingRecommendationText = "等待起手";
+    let openerPhrase = "";
+
+    if (dispatchDirective) {
+      nextDirectivePool = [dispatchDirective];
+      recommendationText = "调度目标";
+      waitingRecommendationText = "等待调度";
+      openerPhrase =
+        (isDirectiveReady(current, dispatchDirective, now)
+          ? "远航调度指定"
+          : "等待远航调度冷却后执行") + dispatchDirective.name;
+    }
+
     const openerNames = formatDirectiveNameList(
       nextDirectivePool.map((directive) => directive.name)
     );
     const openerPrefix = readyOpeners.length ? "先执行" : "等待冷却后执行";
     const finisherHint = stanceDirective
-      ? "，保留" + stanceDirective.name + "完成 3/3 策略终结"
+      ? dispatchDirective
+        ? "，当前航段调度优先于常规收束起手"
+        : "，保留" + stanceDirective.name + "完成 3/3 策略终结"
       : "";
+    const nextActionText = dispatchDirective ? openerPhrase : openerPrefix + openerNames;
 
     return {
       unlocked: true,
       progress: 0,
       target: targetSteps,
       nextDirectiveIds: nextDirectivePool.map((directive) => directive.id),
-      recommendationText: "收束起手",
-      waitingRecommendationText: "等待起手",
-      summaryText: "指令轮换 0/" + targetSteps + " · 收束起手 " + openerNames,
+      recommendationText,
+      waitingRecommendationText,
+      summaryText:
+        "指令轮换 0/" +
+        targetSteps +
+        " · " +
+        (dispatchDirective ? "调度目标 " : "收束起手 ") +
+        openerNames,
       hintText:
-        openerPrefix +
-        openerNames +
+        nextActionText +
         finisherHint +
         "；匹配当前航线策略可获得策略契合 +10%；随后在 90 秒内切换不同指令；" +
         masteryHint,
@@ -2234,8 +2259,7 @@ export function getDirectivePlan(state, now = Date.now()) {
         "指令轮换 0/" +
         targetSteps +
         " · " +
-        openerPrefix +
-        openerNames +
+        nextActionText +
         finisherHint +
         " · 匹配当前航线策略可获得策略契合 +10% · 随后在 90 秒内切换不同指令 · " +
         masteryHint
@@ -2263,10 +2287,19 @@ export function getDirectivePlan(state, now = Date.now()) {
   const preferredDirectives = shouldPreserveStanceFinisher
     ? differentDirectives.filter((directive) => directive.id !== stanceDirective.id)
     : differentDirectives;
-  const readyDirectives = preferredDirectives.filter((directive) =>
+  let readyDirectives = preferredDirectives.filter((directive) =>
     isDirectiveReady(current, directive, now)
   );
-  const nextDirectivePool = readyDirectives.length ? readyDirectives : preferredDirectives;
+  let nextDirectivePool = readyDirectives.length ? readyDirectives : preferredDirectives;
+  const dispatchCanOverride = Boolean(
+    dispatchDirective && dispatchDirective.id !== chain.lastDirectiveId
+  );
+  if (dispatchCanOverride) {
+    nextDirectivePool = [dispatchDirective];
+    readyDirectives = isDirectiveReady(current, dispatchDirective, now)
+      ? [dispatchDirective]
+      : [];
+  }
   const nextIncludesStanceDirective = Boolean(
     stanceDirective &&
       nextDirectivePool.some((directive) => directive.id === stanceDirective.id)
@@ -2284,9 +2317,17 @@ export function getDirectivePlan(state, now = Date.now()) {
     (lastDirective?.name ?? "未知指令") +
     " · 连携窗口 " +
     windowText;
-  const waitingPrefix = readyDirectives.length ? "下一步切换到" : "等待冷却后切换到";
+  const waitingPrefix = dispatchCanOverride
+    ? readyDirectives.length
+      ? "远航调度指定"
+      : "等待远航调度冷却后执行"
+    : readyDirectives.length
+      ? "下一步切换到"
+      : "等待冷却后切换到";
   const preserveStanceHint = shouldPreserveStanceFinisher
-    ? "，继续保留" + stanceDirective.name + "做 3/3 策略终结"
+    ? dispatchCanOverride
+      ? "，当前航段调度优先"
+      : "，继续保留" + stanceDirective.name + "做 3/3 策略终结"
     : "";
   const completedRotation = stacks >= DIRECTIVE_CHAIN_MAX_STACKS;
   const masteryContinuation = completedRotation && mastery.stacks > 0;
@@ -2335,13 +2376,17 @@ export function getDirectivePlan(state, now = Date.now()) {
     target: targetSteps,
     remainingSeconds: Math.ceil(Math.max(0, (chain.expiresAt - now) / 1000)),
     nextDirectiveIds: nextDirectivePool.map((directive) => directive.id),
-    recommendationText: completedRotation
+    recommendationText: dispatchCanOverride
+      ? "调度目标"
+      : completedRotation
       ? completedRecommendationText
       : shouldPreserveStanceFinisher
         ? "收束续航"
         : undefined,
     waitingRecommendationText:
-      completedRotation || shouldPreserveStanceFinisher
+      dispatchCanOverride
+        ? "等待调度"
+        : completedRotation || shouldPreserveStanceFinisher
         ? waitingRecommendationText
         : undefined,
     summaryText,
