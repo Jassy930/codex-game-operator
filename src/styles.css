@@ -2429,6 +2429,8 @@ h2 {
 
 .project-filter-drawer summary {
   min-height: 42px;
+  min-width: 0;
+  overflow: hidden;
   padding: 10px 34px 10px 12px;
   color: rgba(248, 243, 231, 0.86);
   cursor: pointer;
@@ -2437,6 +2439,8 @@ h2 {
   line-height: 1.35;
   list-style: none;
   position: relative;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .project-filter-drawer summary::-webkit-details-marker {

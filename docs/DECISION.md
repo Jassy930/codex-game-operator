@@ -1,5 +1,30 @@
 # Decision
 
+## 2026-04-30 Product decision：筛选摘要短标签
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-04-30 17:17 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#4 仍围绕“界面文字密集、希望更多图片和更好看”保持 open，因此本轮继续进入 Product decision。
+
+当前最大问题：星图筛选按钮和完整筛选详情已经默认折叠，但 `projectFilterSummaryBrief` 默认仍显示“航段号 + 章节位置 + 项目名 + 剩余段数”。在窄屏或较长章节名下，这条摘要仍容易换行形成新的文字块。
+
+本轮决策：
+
+- 将筛选摘要默认可见的下一条目标压缩为“航段 X/57 项目名”，不再重复章节内位置。
+- 运行期用 `setCompactSupportText` 把完整筛选视图说明保留到 `title` / `aria-label`，展开抽屉后仍显示完整 `projectFilterSummary`。
+- CSS 对 `project-filter-drawer summary` 增加单行省略，避免小屏重新形成多行文字块。
+- 本轮只调整星图筛选展示层；不新增存档字段，不改变 57 段星图路线、项目完成判定、奖励数值、升级价格、航线策略、航线指令、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-04-30 17:17 CST 当前 5 个 open feedback issue、0 个 open bug issue。
+- `getProjectFilterBrief` 默认显示“下一条 航段 X/57 项目名”，完整章节位置仍保留在 `getProjectFilterSummary`。
+- 静态首页的 `projectFilterSummaryBrief` 显示短标签，并通过 `title` / `aria-label` 保留完整筛选说明。
+- 运行期 `src/app.js` 使用 `setCompactSupportText` 同步短摘要和完整说明。
+- `src/styles.css` 对 `project-filter-drawer summary` 增加单行省略。
+- 本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 116 项。
+- 构建产物已确认包含 `formatProjectFilterBriefProjectLabel`、`projectFilterSummaryBrief` 和“筛选摘要：本章 0/4 · 下一条 航段 1/57 点亮星图”。
+
+下一步：等待 #4 复测；如果星图筛选区仍有明显文字压力，再继续把默认可见筛选信息转为视觉槽，而不是恢复长说明。
+
 ## 2026-04-30 Product decision：航线预告短摘要
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-04-30 16:59 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#4 仍围绕“界面文字密集、希望更多图片和更好看”保持 open，因此本轮继续进入 Product decision。

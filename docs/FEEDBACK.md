@@ -2,6 +2,13 @@
 
 ## 2026-04-30
 
+- GitHub Issues：gh 可用且已认证；2026-04-30 17:17 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
+- #4 继续作为本轮 Product decision 依据：该反馈指出界面文字密集，希望更多图片和更好看；前序已补星图插画、视觉航线、章节视觉导航、当前航段视觉卡、奖励罗盘、航线预告视觉带和多层折叠，本轮处理筛选摘要短句仍可能在窄屏变成多行文字块的问题。
+- 本轮改动压缩星图筛选摘要：`projectFilterSummaryBrief` 默认下一条目标显示为“航段 X/57 项目名”，完整章节位置、奖励构成、推进构成和后续航段继续保留到 `title` / `aria-label` 与展开后的完整摘要。
+- 本轮只调整星图筛选展示层；不新增存档字段，不改变 57 段星图路线、项目完成判定、奖励数值、升级价格、航线策略、航线指令、反馈入口或部署链路。
+- 本轮本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 116 项。
+- 构建产物已确认包含 `formatProjectFilterBriefProjectLabel`、`projectFilterSummaryBrief` 和“筛选摘要：本章 0/4 · 下一条 航段 1/57 点亮星图”。
+
 - GitHub Issues：gh 可用且已认证；2026-04-30 16:59 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
 - #4 继续作为本轮 Product decision 依据：该反馈指出界面文字密集，希望更多图片和更好看；前序已补星图插画、视觉航线、章节视觉导航、当前航段视觉卡、奖励罗盘和航线预告视觉带，本轮处理视觉带旁边仍重复显示完整三段航线预告长句的问题。
 - 本轮改动新增航线预告短摘要：`projectOverviewForecast` 默认显示“航线预告：接下来 3 段 · 下一段 X/Y 项目名”，完整三段预告保留到 `title` / `aria-label`。

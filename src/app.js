@@ -416,11 +416,13 @@ function render() {
   renderProjectChapterMap(getProjectChapterVisuals(projects));
   renderRouteStances(routeStance);
   renderProjectFilters(projects);
-  elements.projectFilterSummaryBrief.textContent = getProjectFilterBrief(
-    projects,
-    projectFilter
+  const projectFilterSummary = getProjectFilterSummary(projects, projectFilter);
+  setCompactSupportText(
+    elements.projectFilterSummaryBrief,
+    getProjectFilterBrief(projects, projectFilter),
+    projectFilterSummary
   );
-  elements.projectFilterSummary.textContent = getProjectFilterSummary(projects, projectFilter);
+  elements.projectFilterSummary.textContent = projectFilterSummary;
 
   elements.upgradeList.replaceChildren(
     ...UPGRADE_DEFS.map((upgrade) => renderUpgrade(upgrade, current, goal))

@@ -1860,7 +1860,7 @@ export function getProjectFilterBrief(projects, filterId = DEFAULT_PROJECT_FILTE
     "/" +
     visibleProjects.length +
     " · 下一条 " +
-    formatProjectFilterProjectLabel(nextProject) +
+    formatProjectFilterBriefProjectLabel(nextProject) +
     " · 剩余 " +
     remaining +
     " 段"
@@ -3623,6 +3623,10 @@ function formatProjectFilterChapterMix(projects) {
 function formatProjectFilterProjectLabel(project) {
   const positionText = [project.segmentText, project.chapterText].filter(Boolean).join(" · ");
   return positionText ? positionText + " " + project.name : project.name;
+}
+
+function formatProjectFilterBriefProjectLabel(project) {
+  return project.segmentText ? project.segmentText + " " + project.name : project.name;
 }
 
 function getProjectRewardCounts(projects) {
