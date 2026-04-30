@@ -9,6 +9,11 @@
 - 同步 GitHub Issues 反馈状态：2026-04-30 22:14 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 作为本轮处理对象。
 - 验证通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
 - 构建产物已确认包含 `FAR_ROUTE_DISPATCH_BRANCH_SHIFT_REWARD_RATE`、`dispatchBranchShiftReward`、`directive-dispatch-branch-shift` 和“分支改道”。
+- 提交 5bca14b 已推送；GitHub Pages workflow 25170753179 已成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`。
+- 线上地址 https://jassy930.github.io/codex-game-operator/ 返回 HTTP 200，且线上 `game.js`、`app.js` 和 `styles.css` 已确认包含分支改道相关标记。
+- 已回复 #6，说明交替走协同/绕行会触发“分支改道 +6%”，重复同一分支不触发，并保持 issue open 等待复测。
+- 回复后同步 GitHub Issues 反馈状态：2026-04-30 22:23 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 更新时间为 2026-04-30T14:23:13Z。
+- 钉钉通知未发送：运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` 相关变量名；未将 webhook 写入仓库。
 
 - 远航调度新增“分支态势”：从现有指令链、当前目标指令、协同指令和最近远航分支派生待选择、协同、绕行、协同整备或绕行整备，主操作区远航调度条显示 `far-dispatch-branch` 徽标，星图总览和反馈快照同步包含当前分支，继续回应 #6 对后半段玩法变化不明显的反馈。
 - `src/game.js` 新增 `branchKind` / `branchText` / `branchDirectiveId` / `branchDirectiveName` 派生与闭环状态拼接；`src/app.js` 渲染 `far-dispatch-branch`；`src/styles.css` 新增分支态势徽标样式；`index.html` 同步静态占位；`tests/game.test.js` 覆盖待选择、协同、绕行、协同整备、绕行整备、星图总览和静态绑定。

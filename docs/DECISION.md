@@ -16,7 +16,7 @@
 
 验收标准：
 
-- GitHub Issues 已同步：2026-04-30 22:14 CST 当前 5 个 open feedback issue、0 个 open bug issue。
+- GitHub Issues 已同步：2026-04-30 22:14 CST 当前 5 个 open feedback issue、0 个 open bug issue；回复 #6 后于 2026-04-30 22:23 CST 再次同步，#6 更新时间为 2026-04-30T14:23:13Z。
 - `FAR_ROUTE_DISPATCH_BRANCH_SHIFT_REWARD_RATE` 为 0.06。
 - `getDirectiveStatus` 在上一轮协同后选择绕行、或上一轮绕行后选择协同时显示“分支改道 +X”。
 - `activateDirective` 执行改道分支时结算分支改道奖励，执行反馈包含“分支改道”，并把当前分支写回 `farRouteLastBranchDirectiveId`。
@@ -25,7 +25,12 @@
 - `src/styles.css` 包含 `.directive-button .directive-dispatch-branch-shift` 样式。
 - 本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
 - 构建产物已确认包含 `FAR_ROUTE_DISPATCH_BRANCH_SHIFT_REWARD_RATE`、`dispatchBranchShiftReward`、`directive-dispatch-branch-shift` 和“分支改道”。
-- 钉钉通知待发送：运行环境仍需提供 `DING` / `DINGTALK` / `WEBHOOK` 相关变量名；不会将 webhook 写入仓库。
+- 提交 5bca14b 已推送；GitHub Pages workflow 25170753179 已成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`。
+- 线上地址 https://jassy930.github.io/codex-game-operator/ 返回 HTTP 200，且线上 `game.js`、`app.js` 和 `styles.css` 已确认包含分支改道相关标记。
+- #6 已回复：说明交替走协同/绕行会触发“分支改道 +6%”，重复同一分支不触发，并保持 issue open 等待复测。
+- 钉钉通知未发送：运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` 相关变量名；未将 webhook 写入仓库。
+
+下一步：等待 #6 复测交替走协同/绕行是否比固定路线更像后半段操作分支；如果仍不足，再评估更重的资源循环或项目分支，而不是继续只加说明文本。
 
 ## 2026-04-30 Product decision：远航分支态势
 
