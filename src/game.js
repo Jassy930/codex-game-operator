@@ -59,6 +59,7 @@ export const DEFAULT_ROUTE_STANCE_ID = "balanced";
 export const DEFAULT_PROJECT_FILTER_ID = "all";
 export const INITIAL_PROJECT_FILTER_ID = "current-chapter";
 export const PROJECT_LIST_PREVIEW_LIMIT = 8;
+export const PROJECT_CHAPTER_HERO_NODE_LIMIT = 8;
 export const PROJECT_FILTER_DEFS = [
   {
     id: DEFAULT_PROJECT_FILTER_ID,
@@ -1951,9 +1952,74 @@ export function getProjectChapterVisuals(projects) {
       focusText: chapter.focusText,
       nextText,
       status,
+      heroNodes: getProjectChapterHeroNodes(chapterProjects),
       title: chapter.name + " " + completed + "/" + total + " · " + nextText
     };
   });
+}
+
+function getProjectChapterHeroNodes(
+  chapterProjects,
+  limit = PROJECT_CHAPTER_HERO_NODE_LIMIT
+) {
+  const projects = Array.isArray(chapterProjects) ? chapterProjects : [];
+  const total = projects.length;
+  if (total === 0) {
+    return [];
+  }
+
+  const nodeCount = Math.min(total, Math.max(1, Math.floor(Number(limit) || 1)));
+  return Array.from({ length: nodeCount }, (_, index) => {
+    const startIndex = Math.floor((index * total) / nodeCount);
+    const endIndex = Math.max(
+      startIndex,
+      Math.floor(((index + 1) * total) / nodeCount) - 1
+    );
+    const segmentProjects = projects.slice(startIndex, endIndex + 1);
+    const currentProject = segmentProjects.find((project) => project.isCurrent);
+    const completedCount = segmentProjects.filter((project) => project.completed).length;
+    const firstProject = segmentProjects[0];
+    const lastProject = segmentProjects[segmentProjects.length - 1] ?? firstProject;
+    const status = currentProject
+      ? "current"
+      : completedCount === segmentProjects.length
+        ? "completed"
+        : completedCount > 0
+          ? "active"
+          : "pending";
+    const label =
+      firstProject === lastProject
+        ? firstProject.chapterIndex + "/" + firstProject.chapterTotal + " " + firstProject.name
+        : firstProject.chapterIndex +
+          "-" +
+          lastProject.chapterIndex +
+          "/" +
+          firstProject.chapterTotal;
+
+    return {
+      status,
+      label,
+      title:
+        label +
+        " · " +
+        (currentProject?.name ?? firstProject.name) +
+        " · " +
+        formatProjectChapterHeroNodeStatus(status)
+    };
+  });
+}
+
+function formatProjectChapterHeroNodeStatus(status) {
+  if (status === "completed") {
+    return "已完成";
+  }
+  if (status === "current") {
+    return "当前";
+  }
+  if (status === "active") {
+    return "部分完成";
+  }
+  return "待推进";
 }
 
 export function getProjectRewardVisuals(projects) {

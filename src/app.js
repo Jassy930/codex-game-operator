@@ -1267,7 +1267,12 @@ function renderProjectChapterHero(chapters) {
   const beacon = document.createElement("span");
   beacon.className = "project-chapter-hero-beacon";
 
-  scene.append(lane, gate, signal, beacon);
+  const route = document.createElement("span");
+  route.className = "project-chapter-hero-route";
+  route.setAttribute("aria-hidden", "true");
+  route.append(...chapter.heroNodes.map(renderProjectChapterHeroNode));
+
+  scene.append(lane, gate, signal, beacon, route);
 
   const meta = document.createElement("span");
   meta.className = "project-chapter-hero-meta";
@@ -1296,6 +1301,15 @@ function renderProjectChapterHero(chapters) {
   meter.append(fill);
 
   elements.projectChapterHero.replaceChildren(scene, meta, meter);
+}
+
+function renderProjectChapterHeroNode(node) {
+  const item = document.createElement("span");
+  item.className = ["project-chapter-hero-node", "is-" + node.status]
+    .filter(Boolean)
+    .join(" ");
+  item.title = node.title;
+  return item;
 }
 
 function getActiveProjectChapter(chapters) {

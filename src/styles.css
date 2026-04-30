@@ -2140,6 +2140,43 @@ h2 {
   box-shadow: 0 0 18px rgba(19, 181, 166, 0.26);
 }
 
+.project-chapter-hero-route {
+  position: absolute;
+  right: 12px;
+  bottom: 8px;
+  left: 12px;
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(8px, 1fr);
+  gap: 5px;
+  align-items: center;
+}
+
+.project-chapter-hero-node {
+  display: block;
+  height: 7px;
+  border: 1px solid rgba(248, 243, 231, 0.18);
+  border-radius: 999px;
+  background: rgba(248, 243, 231, 0.1);
+}
+
+.project-chapter-hero-node.is-completed {
+  border-color: rgba(19, 181, 166, 0.42);
+  background: #13b5a6;
+  box-shadow: 0 0 10px rgba(19, 181, 166, 0.24);
+}
+
+.project-chapter-hero-node.is-current {
+  border-color: rgba(255, 247, 194, 0.82);
+  background: #f4b23c;
+  box-shadow: 0 0 12px rgba(244, 178, 60, 0.36);
+}
+
+.project-chapter-hero-node.is-active {
+  border-color: rgba(244, 178, 60, 0.56);
+  background: linear-gradient(90deg, #13b5a6 48%, #f4b23c 52%);
+}
+
 .project-chapter-hero.is-starter .project-chapter-hero-scene {
   color: #f4b23c;
   background:

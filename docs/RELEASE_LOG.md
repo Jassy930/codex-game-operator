@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+- 星图当前章节大图景新增章节节点带：`project-chapter-hero-route` 用 completed/current/active/pending 节点展示章节内推进状态，远航长尾压缩到最多 8 个节点，继续回应 #4 对界面文字密度和图片化表达的反馈。
+- `src/game.js` 新增 `PROJECT_CHAPTER_HERO_NODE_LIMIT` 与 `heroNodes` 派生；`src/app.js` 新增 `renderProjectChapterHeroNode` 并把节点带渲染进当前章节大图景；`index.html` 静态占位同步 `project-chapter-hero-route`；`src/styles.css` 新增章节节点带和状态样式；`tests/game.test.js` 覆盖静态标记、运行期绑定和长尾压缩节点。
+- 本轮只调整星图当前章节大图景展示层；不新增存档字段，不改变 57 段星图路线、项目完成判定、筛选结果、奖励数值、升级价格、航线策略、航线指令、反馈入口或部署链路。
+- 同步 GitHub Issues 反馈状态：2026-04-30 18:17 CST 当前 5 个 open feedback issue、0 个 open bug issue；#4 作为本轮处理对象。
+- 验证通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 117 项。
+- 构建产物已确认包含 `project-chapter-hero-route`、`PROJECT_CHAPTER_HERO_NODE_LIMIT`、`heroNodes` 和 `renderProjectChapterHeroNode`。
+
 - 星图视觉航线新增当前章节大图景：在星图视觉标题下显示 `project-chapter-hero`，用更大的轨道、星门/信标、章节信号和进度条展示当前筛选章节或当前航段所属章节，继续回应 #4 对界面文字密度和图片化表达的反馈。
 - `index.html` 新增静态 `projectChapterHero` 占位；`src/app.js` 新增 `renderProjectChapterHero` / `getActiveProjectChapter` 并复用 `getProjectChapterVisuals`；`src/styles.css` 新增当前章节大图景、轨道、星门/信标、章节信号和四类章节差异样式；`tests/game.test.js` 覆盖静态标记、运行期绑定和样式标记。
 - 本轮只调整星图视觉航线展示层；不新增存档字段，不改变 57 段星图路线、项目完成判定、筛选结果、奖励数值、升级价格、航线策略、航线指令、反馈入口或部署链路。

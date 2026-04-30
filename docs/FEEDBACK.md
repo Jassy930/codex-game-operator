@@ -2,6 +2,13 @@
 
 ## 2026-04-30
 
+- GitHub Issues：gh 可用且已认证；2026-04-30 18:17 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
+- #4 继续作为本轮 Product decision 依据：该反馈指出界面文字密集，希望更多图片和更好看；前序已补星图插画、视觉航线、章节视觉导航、章节徽记、筛选视觉标识、章节微图景和当前章节大图景，本轮处理当前章节大图景仍缺少章节内节点节奏的问题。
+- 本轮改动新增当前章节节点带：`project-chapter-hero-scene` 内显示 `project-chapter-hero-route`，短章节直接显示节点，远航长尾压缩到最多 8 个节点，并用 completed/current/active/pending 状态辅助扫视。
+- 本轮只调整星图当前章节大图景展示层；不新增存档字段，不改变 57 段星图路线、项目完成判定、筛选结果、奖励数值、升级价格、航线策略、航线指令、反馈入口或部署链路。
+- 本轮本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 117 项。
+- 构建产物已确认包含 `project-chapter-hero-route`、`PROJECT_CHAPTER_HERO_NODE_LIMIT`、`heroNodes` 和 `renderProjectChapterHeroNode`；推送和 issue 回复待执行。
+
 - GitHub Issues：gh 可用且已认证；2026-04-30 18:02 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
 - #4 继续作为本轮 Product decision 依据：该反馈指出界面文字密集，希望更多图片和更好看；前序已补星图插画、视觉航线、章节视觉导航、章节徽记、筛选视觉标识、项目列表窗口和章节微图景，本轮处理当前章节缺少更大画面锚点的问题。
 - 本轮改动新增当前章节大图景：星图视觉航线标题下显示 `project-chapter-hero`，用更大的轨道、星门/信标、章节信号和进度条展示当前筛选章节或当前航段所属章节。

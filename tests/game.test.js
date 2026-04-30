@@ -37,6 +37,7 @@ import {
   getProjectFilterBrief,
   getProjectFilterButtonText,
   getProjectFilterSummary,
+  PROJECT_CHAPTER_HERO_NODE_LIMIT,
   getProjectChapterVisuals,
   getProjectCurrentVisual,
   getProjectForecastVisuals,
@@ -1182,13 +1183,17 @@ test("星图视觉航线会渲染当前章节大图景", () => {
   assert.match(indexHtml, /project-chapter-hero-gate/);
   assert.match(indexHtml, /project-chapter-hero-signal/);
   assert.match(indexHtml, /project-chapter-hero-beacon/);
+  assert.match(indexHtml, /project-chapter-hero-route/);
+  assert.match(indexHtml, /project-chapter-hero-node is-current/);
   assert.match(indexHtml, /project-chapter-hero-meter/);
   assert.match(appJs, /projectChapterHero: document\.querySelector\("#projectChapterHero"\)/);
   assert.match(appJs, /function renderProjectChapterHero\(chapters\)/);
+  assert.match(appJs, /function renderProjectChapterHeroNode\(node\)/);
   assert.match(appJs, /function getActiveProjectChapter\(chapters\)/);
   assert.match(appJs, /renderProjectChapterHero\(projectChapters\)/);
   assert.match(appJs, /"project-chapter-hero"/);
   assert.match(appJs, /chapter\.visualClass/);
+  assert.match(appJs, /chapter\.heroNodes\.map\(renderProjectChapterHeroNode\)/);
   assert.match(appJs, /scene\.className = "project-chapter-hero-scene"/);
   assert.match(appJs, /lane\.className = "project-chapter-hero-lane"/);
   assert.match(appJs, /gate\.className = "project-chapter-hero-gate"/);
@@ -1200,6 +1205,9 @@ test("星图视觉航线会渲染当前章节大图景", () => {
   assert.match(styles, /\.project-chapter-hero-gate/);
   assert.match(styles, /\.project-chapter-hero-signal/);
   assert.match(styles, /\.project-chapter-hero-beacon/);
+  assert.match(styles, /\.project-chapter-hero-route/);
+  assert.match(styles, /\.project-chapter-hero-node\.is-current/);
+  assert.match(styles, /\.project-chapter-hero-node\.is-completed/);
   assert.match(styles, /\.project-chapter-hero\.is-long-tail \.project-chapter-hero-scene/);
   assert.match(styles, /\.project-chapter-hero-meter/);
 });
@@ -3769,8 +3777,14 @@ test("星图章节视觉导航会返回章节进度和下一条目标", () => {
     ]
   );
   assert.equal(getProjectChapterVisuals(active)[1].progress, 0.2);
+  assert.equal(getProjectChapterVisuals(active)[1].heroNodes.length, 5);
+  assert.equal(getProjectChapterVisuals(active)[1].heroNodes[0].status, "current");
+  assert.equal(getProjectChapterVisuals(active)[1].heroNodes[2].status, "completed");
+  assert.equal(getProjectChapterVisuals(active)[3].heroNodes.length, PROJECT_CHAPTER_HERO_NODE_LIMIT);
+  assert.equal(getProjectChapterVisuals(active)[3].heroNodes[0].label, "1-5/44");
   assert.equal(getProjectChapterVisuals(completed)[3].status, "completed");
   assert.equal(getProjectChapterVisuals(completed)[3].nextText, "已完成");
+  assert.equal(getProjectChapterVisuals(completed)[3].heroNodes[7].status, "completed");
 });
 
 test("星图总览会显示全部完成状态", () => {

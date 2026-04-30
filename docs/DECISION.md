@@ -1,5 +1,30 @@
 # Decision
 
+## 2026-04-30 Product decision：当前章节节点带
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-04-30 18:17 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#4 仍围绕“界面文字密集、希望更多图片和更好看”保持 open，因此本轮继续进入 Product decision。
+
+当前最大问题：上一轮已在星图视觉航线标题下新增当前章节大图景，但大图景仍主要通过章节名、进度文本和单条进度条表达章节内推进。远航长尾这类 44 段章节如果继续展开文字或节点，会重新制造密度；如果只保留进度条，又缺少章节内“已完成 / 当前 / 待推进”的视觉节奏。
+
+本轮决策：
+
+- 在 `project-chapter-hero-scene` 内新增 `project-chapter-hero-route` 章节节点带。
+- `getProjectChapterVisuals` 为每个章节派生 `heroNodes`；短章节直接显示章节内节点，远航长尾压缩到最多 8 个节点。
+- 节点状态区分 `completed`、`current`、`active` 和 `pending`，用于表达已完成、当前、部分完成和待推进状态。
+- 本轮只调整星图当前章节大图景展示层；不新增存档字段，不改变 57 段星图路线、项目完成判定、筛选结果、奖励数值、升级价格、航线策略、航线指令、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-04-30 18:17 CST 当前 5 个 open feedback issue、0 个 open bug issue。
+- `getProjectChapterVisuals` 返回 `heroNodes`；远航长尾最多返回 `PROJECT_CHAPTER_HERO_NODE_LIMIT` 个压缩节点。
+- 静态首页包含 `project-chapter-hero-route` 和 `project-chapter-hero-node`。
+- 运行期 `src/app.js` 包含 `renderProjectChapterHeroNode`，并把 `chapter.heroNodes` 渲染进当前章节大图景。
+- CSS 包含 `.project-chapter-hero-route`、`.project-chapter-hero-node.is-current`、`.is-completed` 和 `.is-active`。
+- 本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 117 项。
+- 构建产物已确认包含 `project-chapter-hero-route`、`PROJECT_CHAPTER_HERO_NODE_LIMIT`、`heroNodes` 和 `renderProjectChapterHeroNode`。
+
+下一步：提交、推送并回复 #4，等待复测当前章节节点带是否让章节入口更容易扫视。
+
 ## 2026-04-30 Product decision：当前章节大图景
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-04-30 18:02 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#4 仍围绕“界面文字密集、希望更多图片和更好看”保持 open，因此本轮继续进入 Product decision。
