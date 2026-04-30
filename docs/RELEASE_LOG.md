@@ -8,6 +8,9 @@
 - 同步 GitHub Issues 反馈状态：2026-04-30 12:07 CST 当前 5 个 open feedback issue、0 个 open bug issue；#4 作为本轮处理对象。
 - 验证通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 108 项。
 - 构建产物已确认包含 `directive-cooldown-meter`、`cooldownProgress`、`is-cooling` 和“冷却进度”。
+- 提交 45b4a8b 已推送；GitHub Pages workflow 25146979089 已成功，线上地址返回 HTTP 200，且线上首页、`game.js`、`app.js` 和 `styles.css` 已确认包含航线指令冷却进度轨相关标记。
+- 已回复 #4，说明航线指令按钮新增冷却进度轨，并保持 issue open 等待复测。
+- 回复后同步 GitHub Issues 反馈状态：2026-04-30 12:14 CST 当前 5 个 open feedback issue、0 个 open bug issue；#4 更新时间为 2026-04-30T04:14:37Z。
 - 航线指令按钮新增三类视觉徽记：点火齐射、巡航回收、谐振脉冲分别显示固定尺寸指令图形，减少 100K 后主动按钮只靠文字标题和徽标区分的压力。
 - `index.html` 为 `directiveList` 新增静态锁定占位徽记；`src/app.js` 新增 `DIRECTIVE_ICON_DEFS` 和 `renderDirectiveVisual`；`src/styles.css` 新增指令徽记尺寸、颜色和标题组布局；`tests/game.test.js` 补充静态和运行期标记覆盖。
 - 本轮只调整航线指令展示层，回应 #4 对文字密度和更多图片化表达的反馈，并辅助 #3/#6 降低主动短循环按钮识别成本；不新增存档字段，不改变指令收益、冷却、连携窗口、远航调度、星图航段、升级价格或反馈入口。
