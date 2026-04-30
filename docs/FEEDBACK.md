@@ -2,6 +2,14 @@
 
 ## 2026-05-01
 
+- GitHub Issues：gh 可用且已认证；2026-05-01 04:57 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
+- #6 继续作为本轮 Product decision 依据：该反馈指出后半段“只有不停的目标、玩法没有真正变化”；前序已经补齐路线下一步和按钮路线步，但执行后仍需要回看调度条确认本次点击推进到了哪条路线状态。
+- 本轮改动新增远航路线反馈：航线指令执行后的行动反馈会显示刚完成目标、已选择协同/绕行、已完成回航、已完成整备或整备回航，并给出下一步。
+- 本地 `directive` 事件新增 `dispatchRouteResultText`；本轮不新增收益、不新增存档字段，不改变升级价格、星图路线、项目奖励、远航调度既有数值、冷却、连携窗口、反馈入口或部署链路。
+- 本轮本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含 `dispatchRouteResultText` 和“路线反馈”相关文案。
+- 发布验证、#6 回复和钉钉通知状态将在推送部署后补充。
+
 - GitHub Issues：gh 可用且已认证；2026-05-01 04:38 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
 - #6 继续作为本轮 Product decision 依据：该反馈指出后半段“只有不停的目标、玩法没有真正变化”；前序已经补齐路线收益对照和路线目标，但分支卡片仍需要玩家把目标、预案、步骤和实际按钮顺序拼起来。
 - 本轮改动新增远航路线下一步：协同/绕行分支卡片会显示 0/3 起手先执行目标、目标后执行对应分支再回目标、当前路线回目标完成闭环、整备态先整备或回目标触发整备回航。

@@ -2,6 +2,15 @@
 
 ## Unreleased
 
+- 远航调度新增“路线反馈”：航线指令执行后的行动反馈会确认刚完成目标、选择协同/绕行、完成回航、完成整备或整备回航，并提示下一步，继续回应 #6 对后半段玩法变化不明显的反馈。
+- `src/game.js` 为指令选项和执行结果派生 `dispatchRouteResultText` 并写入行动反馈；`src/app.js` 在本地 `directive` 事件记录该字段；`tests/game.test.js` 覆盖目标起手、协同/绕行分支、回航、整备、整备回航、事件绑定和构建产物。
+- 文档同步更新：`docs/DECISION.md`、`docs/FEEDBACK.md`、`docs/RESEARCH.md`、`docs/PRODUCT.md`、`docs/DESIGN.md`、`docs/ROADMAP.md`、`docs/IDEAS.md`、`docs/METRICS.md`、`README.md` 和本日志已记录远航路线反馈。
+- 本轮只调整执行结果派生、行动反馈、本地事件字段和测试，不新增收益、不新增存档字段，不改变升级价格、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、远航调度既有数值、冷却、连携窗口、反馈入口或部署链路。
+- 同步 GitHub Issues 反馈状态：2026-05-01 04:57 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 作为本轮处理对象。
+- 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含 `dispatchRouteResultText` 和“路线反馈”相关文案。
+- 发布验证、反馈处理和钉钉通知状态将在推送部署后补充。
+
 - 远航调度新增“路线下一步”：协同/绕行分支卡片会显示现在应先执行目标、执行对应分支、回目标闭环，或进入整备/整备回航，继续回应 #6 对后半段玩法变化不明显的反馈。
 - `src/game.js` 为 `branchChoices` 派生 `followupText` 并纳入 `branchChoiceText`；`src/app.js` 渲染 `far-dispatch-branch-choice-followup`；`src/styles.css` 增加路线下一步样式；`tests/game.test.js` 覆盖 0/3 起手、目标后分支选择、静态渲染和样式绑定。
 - 文档同步更新：`docs/DECISION.md`、`docs/FEEDBACK.md`、`docs/RESEARCH.md`、`docs/PRODUCT.md`、`docs/DESIGN.md`、`docs/ROADMAP.md`、`docs/IDEAS.md`、`docs/METRICS.md`、`README.md` 和本日志已记录远航路线下一步。

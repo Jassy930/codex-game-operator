@@ -1669,6 +1669,11 @@ export function activateDirective(state, directiveId, now = Date.now()) {
   );
   const dispatchRouteStepNotice =
     formatFarRouteDispatchRouteStepNotice(dispatchRouteStepText);
+  const dispatchRouteResultText = getFarRouteDispatchRouteResultText(
+    dispatch,
+    directive.id,
+    current
+  );
   const chainText = formatDirectiveChainBonus(chain);
   const rotationRewardText = formatDirectiveRotationReward(rotationReward);
   const masteryCapstoneText =
@@ -1749,6 +1754,7 @@ export function activateDirective(state, directiveId, now = Date.now()) {
     dispatchChainWindowSeconds: chainWindowSeconds,
     dispatchChainWindowText,
     dispatchRouteStepText,
+    dispatchRouteResultText,
     dispatchRefreshDirectiveId: dispatchRefresh?.directiveId ?? null,
     dispatchRefreshDirectiveName: dispatchRefresh?.directiveName ?? "",
     dispatchRefreshText,
@@ -1820,6 +1826,7 @@ export function activateDirective(state, directiveId, now = Date.now()) {
       (dispatchCooldownText ? dispatchCooldownText + "，" : "") +
       (dispatchChainWindowText ? dispatchChainWindowText + "，" : "") +
       (dispatchRouteStepNotice ? dispatchRouteStepNotice + "，" : "") +
+      (dispatchRouteResultText ? dispatchRouteResultText + "，" : "") +
       (chainText ? chainText + "，" : "") +
       (rotationRewardText ? rotationRewardText + "，" : "") +
       (masteryCapstoneText ? masteryCapstoneText + "，" : "") +
@@ -2765,6 +2772,11 @@ export function getDirectiveStatus(state, now = Date.now()) {
         directive.id,
         current
       );
+      const dispatchRouteResultText = getFarRouteDispatchRouteResultText(
+        dispatch,
+        directive.id,
+        current
+      );
       const chainText = formatDirectiveChainBonus(chain);
       const rotationRewardText = formatDirectiveRotationReward(rotationReward);
       const masteryCapstoneText =
@@ -2860,6 +2872,7 @@ export function getDirectiveStatus(state, now = Date.now()) {
         dispatchChainWindowSeconds: getDirectiveChainWindowSeconds(directive, dispatch),
         dispatchChainWindowText,
         dispatchRouteStepText,
+        dispatchRouteResultText,
         dispatchRefreshDirectiveId: dispatchRefresh?.directiveId ?? null,
         dispatchRefreshDirectiveName: dispatchRefresh?.directiveName ?? "",
         dispatchRefreshText,
@@ -5680,6 +5693,89 @@ function getFarRouteDispatchRouteStepText(dispatch, directiveId, state) {
 
 function formatFarRouteDispatchRouteStepNotice(routeStepText) {
   return routeStepText ? routeStepText.replace(/^路线 /, "路线执行：") : "";
+}
+
+function getFarRouteDispatchRouteResultText(dispatch, directiveId, state) {
+  if (!dispatch?.active || !directiveId) {
+    return "";
+  }
+
+  const kind = String(dispatch.branchKind ?? "");
+  const targetDirectiveId = dispatch.targetDirectiveId;
+  const targetDirectiveName = dispatch.targetDirectiveName || "目标指令";
+  const branchDirectiveId = dispatch.branchDirectiveId;
+  const branchDirectiveName = dispatch.branchDirectiveName || "分支指令";
+  const choices = Array.isArray(dispatch.branchChoices) ? dispatch.branchChoices : [];
+
+  if (kind === "pending") {
+    if (branchDirectiveId === targetDirectiveId) {
+      if (directiveId !== targetDirectiveId) {
+        return "";
+      }
+
+      const nextStep = buildFarRouteDispatchBranchSelectionStepText(choices);
+      return (
+        "路线反馈：已完成目标 " +
+        targetDirectiveName +
+        (nextStep ? " · 下一步" + nextStep : "")
+      );
+    }
+
+    const choice = choices.find((item) => item.directiveId === directiveId);
+    if (!choice) {
+      return "";
+    }
+
+    return (
+      "路线反馈：已选择" +
+      choice.label +
+      " " +
+      choice.directiveName +
+      " · 下一步回目标 " +
+      targetDirectiveName
+    );
+  }
+
+  if ((kind === "sync" || kind === "detour") && directiveId === targetDirectiveId) {
+    const label = kind === "sync" ? "协同" : "绕行";
+    const prepLabel = kind === "detour" ? "绕行整备" : "整备";
+    return (
+      "路线反馈：已完成" +
+      label +
+      "回航 " +
+      targetDirectiveName +
+      " · 下一步" +
+      prepLabel +
+      " " +
+      branchDirectiveName
+    );
+  }
+
+  if (kind === "sync-prep" || kind === "detour-prep") {
+    const prepLabel = kind === "detour-prep" ? "绕行整备" : "整备";
+    const chain = state?.directiveChain ?? {};
+
+    if (branchDirectiveId && chain.lastDirectiveId === branchDirectiveId) {
+      return directiveId === targetDirectiveId
+        ? "路线反馈：已完成整备回航 " +
+            targetDirectiveName +
+            " · 下一轮可重新选择协同或绕行"
+        : "";
+    }
+
+    if (directiveId === branchDirectiveId) {
+      return (
+        "路线反馈：已完成" +
+        prepLabel +
+        " " +
+        branchDirectiveName +
+        " · 下一步回目标 " +
+        targetDirectiveName
+      );
+    }
+  }
+
+  return "";
 }
 
 function buildFarRouteDispatchBranchRecommendationText(choices) {

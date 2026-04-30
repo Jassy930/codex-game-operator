@@ -956,6 +956,7 @@ function renderDirective(option) {
         dispatchChainWindowSeconds: result.dispatchChainWindowSeconds,
         dispatchChainWindowText: result.dispatchChainWindowText,
         dispatchRouteStepText: result.dispatchRouteStepText,
+        dispatchRouteResultText: result.dispatchRouteResultText,
         masteryRewardGained: result.masteryRewardGained,
         masteryRewardStacks: result.masteryRewardStacks,
         rotationReward: result.rotationReward,

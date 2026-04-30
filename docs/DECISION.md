@@ -1,5 +1,30 @@
 # Decision
 
+## 2026-05-01 Product decision：远航路线反馈
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-01 04:57 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#6 仍是最新反馈线程，原始反馈指出后半段“只有不停的目标、玩法没有真正变化”，因此本轮继续进入 Product decision。
+
+当前最大问题：前序已经把路线下一步放进协同/绕行分支卡片，并把路线步落到按钮；但点击执行后，行动反馈仍偏向收益清单和“路线执行：...”。玩家完成目标、选择协同/绕行、回航或整备之后，还要回看调度条确认这次点击把路线推进到了哪一步。
+
+本轮决策：
+
+- 新增“远航路线反馈”。
+- `activateDirective` 和 `getDirectiveStatus` 派生 `dispatchRouteResultText`：完成目标后提示下一步选择推荐协同或绕行；执行协同/绕行后提示回目标；回航完成后提示整备；整备后提示回目标；整备回航后提示下一轮可重新选择协同或绕行。
+- 行动反馈会追加“路线反馈：...”，本地 `directive` 事件同步记录 `dispatchRouteResultText`。
+- 本轮只调整执行结果派生、行动反馈、本地事件字段和测试；不新增收益、不新增存档字段，不改变升级价格、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、远航调度既有数值、冷却、连携窗口、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-05-01 04:57 CST 当前 5 个 open feedback issue、0 个 open bug issue。
+- 0/3 起手执行目标后，结果包含“路线反馈：已完成目标 点火齐射 · 下一步选择推荐协同 谐振脉冲，或绕行 巡航回收”。
+- 目标后执行协同/绕行后，结果包含“路线反馈：已选择协同/绕行 X · 下一步回目标 Y”。
+- 协同/绕行回航后，结果包含“路线反馈：已完成协同/绕行回航 Y · 下一步整备/绕行整备 X”。
+- 整备与整备回航后，结果分别提示回目标或下一轮重新选择协同/绕行。
+- `src/app.js` 在本地 `directive` 事件记录 `dispatchRouteResultText`。
+- 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含 `dispatchRouteResultText` 和“路线反馈”相关文案。
+- 发布验证、Issue 回复和钉钉通知状态将在推送部署后补充。
+
 ## 2026-05-01 Product decision：远航路线下一步
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-01 04:38 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#6 仍是最新反馈线程，原始反馈指出后半段“只有不停的目标、玩法没有真正变化”，因此本轮继续进入 Product decision。
