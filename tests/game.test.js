@@ -1675,7 +1675,7 @@ test("静态首页会默认折叠星图详细文本", () => {
   assert.match(styles, /\.project-overview em \{[\s\S]*text-overflow: ellipsis/);
 });
 
-test("静态首页会默认折叠星图筛选长摘要", () => {
+test("静态首页会默认折叠星图筛选长摘要并显示筛选视觉标识", () => {
   const indexHtml = readFileSync(new URL("../index.html", import.meta.url), "utf8");
   const appJs = readFileSync(new URL("../src/app.js", import.meta.url), "utf8");
   const styles = readFileSync(new URL("../src/styles.css", import.meta.url), "utf8");
@@ -1688,19 +1688,25 @@ test("静态首页会默认折叠星图筛选长摘要", () => {
   assert.doesNotMatch(indexHtml, /<details class="project-filter-drawer" open>/);
   assert.match(indexHtml, /id="projectFilterSummaryBrief"/);
   assert.match(indexHtml, /高亮：本章 4 段/);
-  assert.match(indexHtml, /<button class="project-filter-button is-active" type="button" aria-pressed="true">本章 0\/4<\/button>/);
-  assert.match(indexHtml, /<button class="project-filter-button" type="button" aria-pressed="false">首段星图 0\/4<\/button>/);
-  assert.match(indexHtml, /<button class="project-filter-button" type="button" aria-pressed="false">远航长尾 0\/44<\/button>/);
+  assert.match(indexHtml, /<button class="project-filter-button is-filter-chapter is-active" type="button" aria-pressed="true">本章 0\/4<\/button>/);
+  assert.match(indexHtml, /<button class="project-filter-button is-filter-chapter is-filter-chapter-starter" type="button" aria-pressed="false">首段星图 0\/4<\/button>/);
+  assert.match(indexHtml, /<button class="project-filter-button is-filter-chapter is-filter-chapter-tail" type="button" aria-pressed="false">远航长尾 0\/44<\/button>/);
+  assert.match(indexHtml, /<button class="project-filter-button is-filter-reward is-filter-reward-overload" type="button" aria-pressed="false">过载 0\/11<\/button>/);
   assert.match(indexHtml, /筛选摘要：本章 0\/4 · 下一条 航段 1\/57 点亮星图/);
   assert.match(indexHtml, /id="projectFilterSummaryBrief"[\s\S]*aria-label="筛选视图：本章 4 段/);
   assert.match(indexHtml, /终点 航段 4\/57 · 首段星图 4\/4 采集阵列/);
   assert.match(appJs, /INITIAL_PROJECT_FILTER_ID/);
   assert.match(appJs, /let projectFilter = INITIAL_PROJECT_FILTER_ID/);
   assert.match(appJs, /getProjectFilterBrief/);
+  assert.match(appJs, /PROJECT_FILTER_VISUAL_CLASSES/);
+  assert.match(appJs, /getProjectFilterVisualClass\(filter\.id\)/);
   assert.match(appJs, /projectFilterSummaryBrief: document\.querySelector\("#projectFilterSummaryBrief"\)/);
   assert.match(appJs, /setCompactSupportText\(\s*elements\.projectFilterSummaryBrief/);
   assert.match(styles, /\.project-filter-controls/);
   assert.match(styles, /\.project-filter-controls\[open\] summary::after/);
+  assert.match(styles, /\.project-filter-button::before/);
+  assert.match(styles, /\.project-filter-button\.is-filter-chapter-tail::before/);
+  assert.match(styles, /\.project-filter-button\.is-filter-reward-overload::before/);
   assert.match(styles, /\.project-filter-drawer/);
   assert.match(styles, /\.project-filter-drawer summary \{[\s\S]*text-overflow: ellipsis/);
   assert.match(styles, /\.project-filter-drawer\[open\] summary::after/);

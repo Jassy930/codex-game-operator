@@ -1,5 +1,28 @@
 # Decision
 
+## 2026-04-30 Product decision：筛选按钮视觉标识
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-04-30 17:33 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#4 仍围绕“界面文字密集、希望更多图片和更好看”保持 open，因此本轮继续进入 Product decision。
+
+当前最大问题：星图筛选按钮已经默认收进“筛选航段”抽屉，筛选摘要也已压成短标签，但抽屉展开后仍是一组相似文字按钮。玩家想从 15 个筛选入口里区分全部、当前、本章、章节、累计/升级、奖励方向和完成状态时，仍主要依赖逐字阅读。
+
+本轮决策：
+
+- 给星图筛选按钮增加固定视觉标识 class，由按钮类型映射为全部、当前、章节、推进方式、奖励方向和完成状态等视觉类别。
+- 静态首页与运行期按钮保持同一套视觉标识：章节入口、累计/升级入口、四类奖励入口和完成状态入口分别显示不同形状/颜色的小标记。
+- 筛选按钮布局改为 `auto-fit` 响应式列宽，按钮本身保持单行省略，降低加上标识后在窄屏溢出的风险。
+- 本轮只调整星图筛选按钮展示层；不新增存档字段，不改变 57 段星图路线、项目完成判定、奖励数值、升级价格、航线策略、航线指令、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-04-30 17:33 CST 当前 5 个 open feedback issue、0 个 open bug issue。
+- 静态首页的筛选按钮包含 `is-filter-chapter`、`is-filter-reward-overload` 等视觉类别标记。
+- 运行期 `renderProjectFilter` 通过 `PROJECT_FILTER_VISUAL_CLASSES` 为每个筛选按钮附加视觉类别。
+- CSS 包含 `.project-filter-button::before`、章节/推进/奖励/状态等筛选标识样式，并保持按钮单行省略。
+- 本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 116 项。
+
+下一步：等待 #4 复测；如果筛选抽屉仍被认为文字压力高，再继续把筛选入口拆成更强的图形分组，而不是恢复长说明。
+
 ## 2026-04-30 Product decision：筛选摘要短标签
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-04-30 17:17 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#4 仍围绕“界面文字密集、希望更多图片和更好看”保持 open，因此本轮继续进入 Product decision。

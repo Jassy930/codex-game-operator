@@ -173,6 +173,23 @@ const PROJECT_CARD_ICON_DEFS = {
     ]
   }
 };
+const PROJECT_FILTER_VISUAL_CLASSES = {
+  all: "is-filter-all",
+  current: "is-filter-current",
+  "current-chapter": "is-filter-chapter",
+  "chapter-starter-map": "is-filter-chapter is-filter-chapter-starter",
+  "chapter-mastery": "is-filter-chapter is-filter-chapter-mastery",
+  "chapter-deep-infra": "is-filter-chapter is-filter-chapter-infra",
+  "chapter-long-tail": "is-filter-chapter is-filter-chapter-tail",
+  "energy-track": "is-filter-track is-filter-energy",
+  "upgrade-track": "is-filter-track is-filter-upgrade",
+  "total-reward": "is-filter-reward is-filter-reward-total",
+  "click-reward": "is-filter-reward is-filter-reward-click",
+  "second-reward": "is-filter-reward is-filter-reward-second",
+  "overload-reward": "is-filter-reward is-filter-reward-overload",
+  incomplete: "is-filter-state is-filter-incomplete",
+  completed: "is-filter-state is-filter-completed"
+};
 
 const elements = {
   energy: document.querySelector("#energyValue"),
@@ -1421,8 +1438,13 @@ function renderProjectChapterTile(chapter) {
 
 function renderProjectFilter(filter, projects) {
   const button = document.createElement("button");
-  button.className =
-    filter.id === projectFilter ? "project-filter-button is-active" : "project-filter-button";
+  button.className = [
+    "project-filter-button",
+    getProjectFilterVisualClass(filter.id),
+    filter.id === projectFilter ? "is-active" : ""
+  ]
+    .filter(Boolean)
+    .join(" ");
   button.type = "button";
   button.setAttribute("aria-pressed", filter.id === projectFilter ? "true" : "false");
   button.textContent = getProjectFilterButtonText(projects, filter.id);
@@ -1432,6 +1454,10 @@ function renderProjectFilter(filter, projects) {
   });
 
   return button;
+}
+
+function getProjectFilterVisualClass(filterId) {
+  return PROJECT_FILTER_VISUAL_CLASSES[filterId] ?? "is-filter-all";
 }
 
 function renderProjectList(projects) {
