@@ -38,6 +38,7 @@ const STORAGE_KEY = "codex-game-operator.state";
 const EVENT_KEY = "codex-game-operator.events";
 const FEEDBACK_KEY = "codex-game-operator.feedback";
 const SOUND_KEY = "codex-game-operator.sound-enabled";
+const HAPTIC_KEY = "codex-game-operator.haptic-enabled";
 const SESSION_ID = globalThis.crypto?.randomUUID?.() ?? String(Date.now());
 const SVG_NS = "http://www.w3.org/2000/svg";
 const DIRECTIVE_VISIBLE_BADGE_LIMIT = 3;
@@ -181,6 +182,7 @@ const elements = {
   coreComboTrack: document.querySelector("#coreButton .core-combo-track"),
   coreRewardHint: document.querySelector("#coreRewardHint"),
   soundToggle: document.querySelector("#soundToggle"),
+  hapticToggle: document.querySelector("#hapticToggle"),
   combo: document.querySelector("#comboValue"),
   pulse: document.querySelector("#pulseValue"),
   directiveList: document.querySelector("#directiveList"),
@@ -235,6 +237,7 @@ let projectFilter = INITIAL_PROJECT_FILTER_ID;
 let corePulseTimer = 0;
 let coreGainTimer = 0;
 let soundEnabled = loadSoundPreference();
+let hapticEnabled = loadHapticPreference();
 let audioContext = null;
 
 recordEvent("session", {
@@ -249,6 +252,7 @@ if (offlineSummary) {
 }
 persistState();
 elements.soundToggle.checked = soundEnabled;
+elements.hapticToggle.checked = hapticEnabled;
 render();
 
 elements.coreButton.addEventListener("click", () => {
@@ -262,6 +266,7 @@ elements.coreButton.addEventListener("click", () => {
     combo: state.combo
   });
   playCoreSound({ overloaded });
+  playCoreHaptic({ overloaded });
   animateCore({
     gainText: "+" + formatNumber(state.lastGain),
     overloaded
@@ -274,6 +279,14 @@ elements.soundToggle.addEventListener("change", () => {
   persistSoundPreference();
   recordEvent("sound_toggle", {
     enabled: soundEnabled
+  });
+});
+
+elements.hapticToggle.addEventListener("change", () => {
+  hapticEnabled = elements.hapticToggle.checked;
+  persistHapticPreference();
+  recordEvent("haptic_toggle", {
+    enabled: hapticEnabled
   });
 });
 
@@ -1499,6 +1512,23 @@ function persistSoundPreference() {
   }
 }
 
+function loadHapticPreference() {
+  try {
+    const saved = localStorage.getItem(HAPTIC_KEY);
+    return saved === null ? true : saved === "true";
+  } catch {
+    return true;
+  }
+}
+
+function persistHapticPreference() {
+  try {
+    localStorage.setItem(HAPTIC_KEY, hapticEnabled ? "true" : "false");
+  } catch {
+    // The haptic toggle is a local preference; gameplay state does not depend on it.
+  }
+}
+
 function renderOfflineNotice() {
   if (!offlineSummary) {
     elements.offlineNotice.hidden = true;
@@ -1622,6 +1652,18 @@ function playCoreSound({ overloaded = false } = {}) {
     gain: 0.08,
     type: "sine"
   });
+}
+
+function playCoreHaptic({ overloaded = false } = {}) {
+  if (!hapticEnabled || typeof navigator.vibrate !== "function") {
+    return;
+  }
+
+  try {
+    navigator.vibrate(overloaded ? [18, 22, 34] : 12);
+  } catch {
+    // Haptics are best-effort and unavailable in many desktop browsers.
+  }
 }
 
 function getAudioContext() {

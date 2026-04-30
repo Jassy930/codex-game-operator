@@ -1,11 +1,12 @@
 # Metrics
 
-需要采集 session、click、first_upgrade_time、upgrade_purchase、offline_gain、goal_complete、route_stance、directive、sound_toggle、feedback_sent。
+需要采集 session、click、first_upgrade_time、upgrade_purchase、offline_gain、goal_complete、route_stance、directive、sound_toggle、haptic_toggle、feedback_sent。
 
 当前实现：
 
 - 浏览器本地通过 localStorage 保存最近 200 条 session、click、first_upgrade_time、upgrade_purchase、goal_complete、reset 事件。
 - 浏览器本地在玩家切换点火音效偏好时记录 sound_toggle 事件；音效偏好使用独立 localStorage key，不计入游戏进度存档。
+- 浏览器本地在玩家切换点火触感偏好时记录 haptic_toggle 事件；触感偏好使用独立 localStorage key，不计入游戏进度存档。
 - 浏览器本地在玩家切换星图航线策略时记录 route_stance 事件。
 - 浏览器本地在玩家执行航线指令时记录 directive 事件，包含指令 id、本次即时收益、指令熟练收益、指令熟练倍率、当前熟练层、熟练叠层结果、预案执行奖励、航线委托奖励、远航调度奖励、远航续航奖励、远航协同奖励、远航调度闭环奖励、远航整备刷新指令、远航调度冷却倍率、远航调度连携窗口、轮换目标奖励、满层回响奖励、策略终结奖励、策略契合奖励、策略契合倍率、航线连携层数和连携倍率。
 - 指令轮换目标和 3 格视觉轨当前由本地冷却、连携字段与 `getDirectivePlan` 即时推导，不单独记录为真实线上指标。

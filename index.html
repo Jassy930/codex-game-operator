@@ -102,10 +102,16 @@
             <span id="comboValue">连击 0</span>
             <span id="pulseValue">稳定</span>
           </div>
-          <label class="sound-toggle">
-            <input id="soundToggle" type="checkbox" checked />
-            <span>点火音效</span>
-          </label>
+          <div class="feedback-toggle-list" aria-label="点火反馈偏好">
+            <label class="feedback-toggle sound-toggle">
+              <input id="soundToggle" type="checkbox" checked />
+              <span>点火音效</span>
+            </label>
+            <label class="feedback-toggle haptic-toggle">
+              <input id="hapticToggle" type="checkbox" checked />
+              <span>触感反馈</span>
+            </label>
+          </div>
 
           <img
             class="directive-scene-image"

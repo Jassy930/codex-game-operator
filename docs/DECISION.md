@@ -1,5 +1,28 @@
 # Decision
 
+## 2026-04-30 Product decision：点火触感反馈开关
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-04-30 14:27 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#5 仍围绕“点火按钮太薄弱、增加点击反馈、特效和点击欲望”保持 open，因此本轮继续进入 Product decision，并处理 #5 的点火反馈层。
+
+当前最大问题：点火按钮已经有视觉脉冲、粒子、收益浮层、8 格连击轨、下一击预告、环形蓄能轨和可关闭音效，但移动端点击仍缺少一层可感知的按下反馈。普通点火与过载点火如果能在支持的设备上使用不同触感节奏，会更直接回应“点击反馈”和“点击欲望”，且不需要改数值。
+
+本轮决策：
+
+- 在点火反馈偏好区新增 `hapticToggle` 触感反馈开关，默认开启，偏好写入独立 localStorage key `codex-game-operator.haptic-enabled`。
+- 点火后通过 `navigator.vibrate` 能力检测播放触感反馈；普通点火使用 12ms 短震动，过载点火使用 `[18, 22, 34]` 节奏。
+- 本轮只调整点火反馈表现层、本地偏好和本地事件；不新增游戏存档字段，不改变点击收益、连击窗口、过载奖励、升级价格、星图航段、航线策略、航线指令、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-04-30 14:27 CST 当前 5 个 open feedback issue、0 个 open bug issue。
+- 静态首页包含 `hapticToggle` 和“触感反馈”开关。
+- 运行期 `playCoreHaptic` 只在玩家点火后按开关状态调用 `navigator.vibrate`；普通点击和过载点击使用不同震动节奏。
+- 点火触感偏好只写入 `HAPTIC_KEY`，不进入游戏进度存档；切换时记录本地 `haptic_toggle` 事件。
+- 本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 109 项。
+- 构建产物已确认包含 `hapticToggle`、`haptic-toggle`、`HAPTIC_KEY`、`playCoreHaptic` 和 `navigator.vibrate`。
+
+下一步：推送后回复 #5，保持 issue open 等待复测；若仍认为点火欲望不足，再评估更多星核视觉阶段或更明确的点击节奏目标。
+
 ## 2026-04-30 Product decision：点火音效反馈开关
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-04-30 14:12 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#5 仍围绕“点火按钮太薄弱、增加点击反馈、特效和点击欲望”保持 open，因此本轮继续进入 Product decision，并处理 #5 的点火反馈层。
