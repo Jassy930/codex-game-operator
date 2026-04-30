@@ -1031,6 +1031,22 @@ test("静态首页会引用主操作区工坊插画资产", () => {
   assert.match(asset, /energyBeam/);
 });
 
+test("静态首页会引用航线指令插画资产", () => {
+  const indexHtml = readFileSync(new URL("../index.html", import.meta.url), "utf8");
+  const styles = readFileSync(new URL("../src/styles.css", import.meta.url), "utf8");
+  const asset = readFileSync(
+    new URL("../src/assets/directive-visual.svg", import.meta.url),
+    "utf8"
+  );
+
+  assert.match(indexHtml, /directive-scene-image/);
+  assert.match(indexHtml, /src="\.\/src\/assets\/directive-visual\.svg"/);
+  assert.match(indexHtml, /点火齐射、巡航回收、谐振脉冲和三步轮换组成的航线指令插画/);
+  assert.match(styles, /\.directive-scene-image/);
+  assert.match(asset, /星核工坊航线指令插画/);
+  assert.match(asset, /routeBeam/);
+});
+
 test("点火按钮会渲染点击反馈和过载前兆效果", () => {
   const indexHtml = readFileSync(new URL("../index.html", import.meta.url), "utf8");
   const appJs = readFileSync(new URL("../src/app.js", import.meta.url), "utf8");

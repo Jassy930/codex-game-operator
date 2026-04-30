@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+- 航线指令区新增本地 SVG 插画：`src/assets/directive-visual.svg` 展示点火齐射、巡航回收、谐振脉冲和 3 步轮换轨，静态首页在指令按钮前通过 `directive-scene-image` 引用。
+- `src/styles.css` 新增 `directive-scene-image` 固定比例样式；`tests/game.test.js` 覆盖首页引用、样式和 SVG 标记。
+- 本轮只调整航线指令展示层，继续回应 #4 对文字密度和更多图片化表达的反馈；不新增存档字段，不改变指令收益、冷却、连携窗口、远航调度、星图航段、升级价格或反馈入口。
+- 同步 GitHub Issues 反馈状态：2026-04-30 13:00 CST 当前 5 个 open feedback issue、0 个 open bug issue；#4 作为本轮处理对象。
+- 验证通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 109 项。
+- 构建产物已确认包含 `directive-scene-image`、`directive-visual.svg`、“星核工坊航线指令插画”和 `routeBeam`。
+
 - 航线指令支持说明新增摘要化展示：指令轮换、航线委托和远航调度主说明默认只显示短摘要，完整说明保留在 `title` / `aria-label`。
 - `src/app.js` 新增 `setCompactSupportText`、`getDirectivePlanDisplayText`、`getDirectiveTaskDisplayText` 和 `getFarDispatchDisplayText`；`index.html` 静态锁定态同步短摘要；`src/styles.css` 对支持说明文本增加单行省略。
 - 本轮只调整航线指令支持说明展示层，继续回应 #4 对文字密度和可扫视性的反馈；不新增存档字段，不改变指令收益、冷却、连携窗口、远航调度、星图航段、升级价格或反馈入口。

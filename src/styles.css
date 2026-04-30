@@ -208,6 +208,16 @@ h2 {
   background: #111615;
 }
 
+.directive-scene-image {
+  display: block;
+  width: min(100%, 560px);
+  aspect-ratio: 48 / 13;
+  object-fit: cover;
+  border: 1px solid rgba(248, 243, 231, 0.12);
+  border-radius: 8px;
+  background: #111615;
+}
+
 .core-button {
   position: relative;
   isolation: isolate;

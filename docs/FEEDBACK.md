@@ -2,6 +2,13 @@
 
 ## 2026-04-30
 
+- GitHub Issues：gh 可用且已认证；2026-04-30 13:00 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
+- #4 继续作为本轮 Product decision 依据：该反馈指向界面文字密集、希望更多图片和更好看；航线指令按钮和支持说明已经完成多轮压缩与视觉化，但指令区还缺少像主操作区、星图区一样的区域级图片锚点。
+- 本轮改动新增航线指令插画：`src/assets/directive-visual.svg` 表现点火齐射、巡航回收、谐振脉冲和 3 步轮换轨，静态首页用 `directive-scene-image` 放在指令按钮前。
+- 本轮不新增存档字段，不改变指令收益、冷却、连携窗口、远航调度、星图航段、升级价格、反馈入口或部署链路。
+- 本轮本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 109 项。
+- 构建产物已确认包含 `directive-scene-image`、`directive-visual.svg`、“星核工坊航线指令插画”和 `routeBeam`。
+
 - GitHub Issues：gh 可用且已认证；2026-04-30 12:45 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
 - #4 继续作为本轮 Product decision 依据：该反馈指向界面文字密集、希望更多图片和更好看；航线指令按钮内文字已经完成徽标压缩和收益明细压缩，但按钮下方的指令轮换、航线委托和远航调度说明仍默认显示长句。
 - 本轮改动新增航线指令说明摘要化：运行期 `directivePlan`、`directiveTask` 和 `farDispatch` 默认显示短摘要，完整说明保留在 `title` / `aria-label`；静态首页同步显示短摘要并保留完整可访问说明。
