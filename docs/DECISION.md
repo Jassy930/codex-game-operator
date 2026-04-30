@@ -20,8 +20,11 @@
 - 点火齐射 35 秒基础冷却在脉冲航闸调度中按 0.7 倍生效：使用后 19 秒仍显示冷却，25 秒后恢复可执行。
 - 目标指令按钮显示 `directive-dispatch-cooldown` 徽标，预计收益包含“调度冷却 -30%”；非目标指令不显示该徽标。
 - 本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 106 项。
+- 提交 7cba19e 已推送；GitHub Pages workflow 25142230649 已成功，线上地址返回 HTTP 200，且线上首页、`game.js`、`app.js` 和 `styles.css` 已确认包含远航调度冷却相关标记。
+- #6 已回复并继续保持 open，等待复测确认目标指令冷却缩短是否让后半段当前航段更能改变指令节奏。
+- 回复后同步 GitHub Issues：2026-04-30 09:13 CST 当前仍为 5 个 open feedback issue、0 个 open bug issue；#6 更新时间为 2026-04-30T01:13:41Z。
 
-下一步：推送并部署后回复 #6；若复测仍认为后半段只是追目标，再评估更重的远航短循环或资源消耗型指令。
+下一步：等待 #6 复测；若仍认为后半段只是追目标，再评估更重的远航短循环或资源消耗型指令。
 
 ## 2026-04-30 Product decision：远航调度接管推荐
 

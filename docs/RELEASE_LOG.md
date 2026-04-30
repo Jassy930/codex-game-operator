@@ -7,6 +7,9 @@
 - 本轮只调整 20M 后远航调度目标指令的有效冷却与展示；不新增存档字段，不改变升级价格、产能公式、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、连携窗口、轮换目标奖励、预案执行、航线委托、指令熟练、满层回响或反馈入口。
 - 同步 GitHub Issues 反馈状态：2026-04-30 09:07 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 继续作为后半段玩法变化处理对象。
 - 验证通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 106 项。
+- 提交 7cba19e 已推送；GitHub Pages workflow 25142230649 已成功，线上地址返回 HTTP 200，且线上首页、`game.js`、`app.js` 和 `styles.css` 已确认包含“目标冷却缩短”、`FAR_ROUTE_DISPATCH_COOLDOWN_MULTIPLIER`、`directive-dispatch-cooldown` 和“调度冷却”。
+- 已回复 #6，说明远航调度目标指令现在会缩短 30% 冷却，并保持 issue open 等待复测。
+- 回复后同步 GitHub Issues 反馈状态：2026-04-30 09:13 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 更新时间为 2026-04-30T01:13:41Z。
 - 远航调度现在会接管 20M 后航段的下一步指令推荐：当前航段指定的目标指令会在指令轮换中显示为“调度目标/等待调度”，不再只作为按钮奖励徽标。
 - `src/game.js` 的 `getDirectivePlan` 会把远航调度目标指令写入 `nextDirectiveIds`；`index.html` 的锁定文案同步说明会解锁目标指令推荐；`tests/game.test.js` 覆盖脉冲航闸调度目标收束、离辉轨道港调度优先于常规收束起手。
 - 本轮只调整 20M 后远航调度与指令推荐的派生状态；不新增存档字段，不改变升级价格、产能公式、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令冷却、连携窗口、轮换目标奖励、预案执行、航线委托、指令熟练、满层回响或反馈入口。

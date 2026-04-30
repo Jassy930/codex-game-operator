@@ -8,6 +8,9 @@
 - `activateDirective`、`getDirectiveStatus` 和 `getDirectivePlan` 共用调度后的有效冷却；本地 `directive` 事件新增 `dispatchCooldownMultiplier` / `dispatchCooldownText`。
 - 本轮不新增存档字段，不改变升级价格、产能公式、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、连携窗口、轮换目标奖励、预案执行、航线委托、指令熟练、满层回响或反馈入口。
 - 本轮本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 106 项。
+- 提交 7cba19e 已推送；GitHub Pages workflow 25142230649 已成功，线上地址返回 HTTP 200；线上首页、`game.js`、`app.js` 和 `styles.css` 已确认包含远航调度冷却相关标记。
+- #6 已回复：说明远航调度目标指令现在会缩短 30% 冷却，issue 保持 open 等待复测。
+- 回复后同步 GitHub Issues：2026-04-30 09:13 CST 当前仍为 5 个 open feedback issue、0 个 open bug issue；#6 更新时间为 2026-04-30T01:13:41Z。
 
 - GitHub Issues：gh 可用且已认证；2026-04-30 08:51 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
 - #6 继续作为本轮 Product decision：上一轮已新增 20M 后“远航调度”和“调度校准”奖励，但远航调度仍只是目标按钮的奖励徽标；本轮让当前航段的目标指令直接接管指令轮换推荐。
