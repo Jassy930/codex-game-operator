@@ -1,5 +1,24 @@
 # Decision
 
+## 2026-04-30 Product decision：航线指令视觉徽记
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-04-30 11:52 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#4 仍反馈界面文字密集、希望更多图片和更好看，#3/#6 也都和航线指令扫视成本有关，进入 Product decision。
+
+当前最大问题：星图、章节、升级、项目卡片和航线策略已经补充视觉资产或徽记，但 100K 后的航线指令三按钮仍以文字标题、说明和大量收益徽标为主。玩家需要先读“点火齐射/巡航回收/谐振脉冲”和说明文字，才能区分三类主动按钮的作用方向。
+
+本轮决策：
+
+- 为三种航线指令新增 `DIRECTIVE_ICON_DEFS` 和 `renderDirectiveVisual`，分别渲染点火齐射、巡航回收、谐振脉冲徽记。
+- 静态首页 `directiveList` 增加三张带徽记的锁定占位按钮，运行期按钮标题区也改为徽记 + 指令名 + 徽标组。
+- 本轮只调整航线指令按钮展示层；不新增存档字段，不改变指令收益、冷却、连携窗口、轮换目标奖励、预案执行、航线委托、策略契合、策略终结、指令熟练、远航调度、星图航段、升级价格、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-04-30 11:52 CST 当前 5 个 open feedback issue、0 个 open bug issue。
+- 静态首页和运行期资源包含 `directive-visual-ignition-salvo`、`directive-visual-cruise-cache`、`directive-visual-resonance-pulse`、`DIRECTIVE_ICON_DEFS` 和 `renderDirectiveVisual`。
+- 本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 108 项。
+- 构建产物已确认包含航线指令视觉徽记相关标记。
+
 ## 2026-04-30 Product decision：航线策略视觉徽记
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-04-30 11:41 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#4 仍反馈界面文字密集、希望更多图片和更好看，进入 Product decision。

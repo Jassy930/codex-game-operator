@@ -1108,6 +1108,29 @@ test("航线策略按钮会渲染可扫视徽记", () => {
   assert.match(styles, /\.route-stance-visual-cruise/);
 });
 
+test("航线指令按钮会渲染可扫视徽记", () => {
+  const indexHtml = readFileSync(new URL("../index.html", import.meta.url), "utf8");
+  const appJs = readFileSync(new URL("../src/app.js", import.meta.url), "utf8");
+  const styles = readFileSync(new URL("../src/styles.css", import.meta.url), "utf8");
+
+  assert.match(indexHtml, /directive-visual directive-visual-ignition-salvo/);
+  assert.match(indexHtml, /aria-label="点火齐射徽记"/);
+  assert.match(indexHtml, /directive-visual directive-visual-cruise-cache/);
+  assert.match(indexHtml, /aria-label="巡航回收徽记"/);
+  assert.match(indexHtml, /directive-visual directive-visual-resonance-pulse/);
+  assert.match(indexHtml, /aria-label="谐振脉冲徽记"/);
+  assert.match(appJs, /DIRECTIVE_ICON_DEFS/);
+  assert.match(appJs, /function renderDirectiveVisual\(option\)/);
+  assert.match(appJs, /titleGroup\.className = "directive-title-group"/);
+  assert.match(appJs, /titleGroup\.append\(renderDirectiveVisual\(option\), name\)/);
+  assert.match(appJs, /head\.append\(titleGroup, badges\)/);
+  assert.match(styles, /\.directive-title-group/);
+  assert.match(styles, /\.directive-visual/);
+  assert.match(styles, /\.directive-visual-ignition-salvo/);
+  assert.match(styles, /\.directive-visual-cruise-cache/);
+  assert.match(styles, /\.directive-visual-resonance-pulse/);
+});
+
 test("星图项目卡片会渲染推进和奖励图标", () => {
   const appJs = readFileSync(new URL("../src/app.js", import.meta.url), "utf8");
   const styles = readFileSync(new URL("../src/styles.css", import.meta.url), "utf8");

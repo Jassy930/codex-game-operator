@@ -64,6 +64,32 @@ const ROUTE_STANCE_ICON_DEFS = {
     ]
   }
 };
+const DIRECTIVE_ICON_DEFS = {
+  "ignition-salvo": {
+    label: "点火齐射徽记",
+    nodes: [
+      ["path", { d: "M24 5l9 15h-7l5 23-16-26h8z", fill: "none", stroke: "currentColor", "stroke-width": 4, "stroke-linejoin": "round" }],
+      ["path", { d: "M10 33c4 5 10 8 14 8s10-3 14-8", fill: "none", stroke: "currentColor", "stroke-width": 3, "stroke-linecap": "round" }],
+      ["path", { d: "M11 18h5M32 18h5", stroke: "currentColor", "stroke-width": 3, "stroke-linecap": "round" }]
+    ]
+  },
+  "cruise-cache": {
+    label: "巡航回收徽记",
+    nodes: [
+      ["path", { d: "M9 19c5-6 12-9 21-8l4-5 3 12-12 2 4-5c-7 0-12 2-16 7", fill: "none", stroke: "currentColor", "stroke-width": 4, "stroke-linecap": "round", "stroke-linejoin": "round" }],
+      ["path", { d: "M39 29c-5 6-12 9-21 8l-4 5-3-12 12-2-4 5c7 0 12-2 16-7", fill: "none", stroke: "currentColor", "stroke-width": 4, "stroke-linecap": "round", "stroke-linejoin": "round" }]
+    ]
+  },
+  "resonance-pulse": {
+    label: "谐振脉冲徽记",
+    nodes: [
+      ["circle", { cx: 24, cy: 24, r: 5, fill: "currentColor", opacity: 0.42 }],
+      ["circle", { cx: 24, cy: 24, r: 13, fill: "none", stroke: "currentColor", "stroke-width": 4 }],
+      ["path", { d: "M24 5v7M24 36v7M5 24h7M36 24h7", stroke: "currentColor", "stroke-width": 3, "stroke-linecap": "round" }],
+      ["path", { d: "M12 12l5 5M36 12l-5 5M12 36l5-5M36 36l-5-5", stroke: "currentColor", "stroke-width": 3, "stroke-linecap": "round" }]
+    ]
+  }
+};
 const UPGRADE_ICON_DEFS = {
   lens: {
     label: "聚能透镜图标",
@@ -590,6 +616,10 @@ function renderDirective(option) {
   const head = document.createElement("span");
   head.className = "directive-head";
 
+  const titleGroup = document.createElement("span");
+  titleGroup.className = "directive-title-group";
+  titleGroup.append(renderDirectiveVisual(option), name);
+
   const badges = document.createElement("span");
   badges.className = "directive-badges";
 
@@ -673,7 +703,7 @@ function renderDirective(option) {
     masteryBonus,
     stanceBonus
   );
-  head.append(name, badges);
+  head.append(titleGroup, badges);
 
   const summary = document.createElement("span");
   summary.textContent = option.summary;
@@ -688,6 +718,26 @@ function renderDirective(option) {
 
   button.append(head, summary, preview, status);
   return button;
+}
+
+function renderDirectiveVisual(option) {
+  const iconDef =
+    DIRECTIVE_ICON_DEFS[option.id] ?? DIRECTIVE_ICON_DEFS["resonance-pulse"];
+  const wrapper = document.createElement("span");
+  wrapper.className = "directive-visual directive-visual-" + option.id;
+  wrapper.setAttribute("role", "img");
+  wrapper.setAttribute("aria-label", iconDef.label);
+
+  const svg = document.createElementNS(SVG_NS, "svg");
+  svg.setAttribute("viewBox", "0 0 48 48");
+  svg.setAttribute("aria-hidden", "true");
+  svg.setAttribute("focusable", "false");
+  iconDef.nodes.forEach(([tagName, attributes]) => {
+    svg.append(createSvgElement(tagName, attributes));
+  });
+
+  wrapper.append(svg);
+  return wrapper;
 }
 
 function renderUpgrade(upgrade, current, goal) {
