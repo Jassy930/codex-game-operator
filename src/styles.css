@@ -769,6 +769,61 @@ h2 {
   line-height: 1.45;
 }
 
+.directive-plan-track {
+  display: grid;
+  width: min(100%, 560px);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  margin: -18px 0 0;
+}
+
+.directive-plan-step {
+  display: grid;
+  min-height: 58px;
+  align-content: center;
+  gap: 4px;
+  padding: 8px 10px;
+  border: 1px solid rgba(248, 243, 231, 0.14);
+  border-radius: 8px;
+  background: rgba(248, 243, 231, 0.06);
+  color: rgba(248, 243, 231, 0.68);
+  line-height: 1.2;
+  overflow-wrap: anywhere;
+  transition:
+    background 120ms ease,
+    border-color 120ms ease,
+    box-shadow 120ms ease;
+}
+
+.directive-plan-step strong {
+  color: rgba(248, 243, 231, 0.88);
+  font-size: 0.76rem;
+  line-height: 1;
+}
+
+.directive-plan-step span {
+  color: inherit;
+  font-size: 0.76rem;
+  font-weight: 850;
+}
+
+.directive-plan-step.is-complete {
+  border-color: rgba(19, 181, 166, 0.36);
+  background: rgba(19, 181, 166, 0.12);
+  color: #bdf4eb;
+}
+
+.directive-plan-step.is-next {
+  border-color: rgba(244, 178, 60, 0.56);
+  background: rgba(244, 178, 60, 0.13);
+  color: #fff7c2;
+  box-shadow: 0 0 20px rgba(244, 178, 60, 0.12);
+}
+
+.directive-plan-step.is-pending {
+  color: rgba(248, 243, 231, 0.5);
+}
+
 .directive-task {
   display: grid;
   width: min(100%, 560px);
@@ -1987,6 +2042,10 @@ h2 {
   }
 
   .directive-list {
+    grid-template-columns: 1fr;
+  }
+
+  .directive-plan-track {
     grid-template-columns: 1fr;
   }
 

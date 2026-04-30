@@ -2,6 +2,13 @@
 
 ## 2026-04-30
 
+- GitHub Issues：gh 可用且已认证；2026-04-30 11:25 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
+- #3 和 #6 作为本轮 Product decision 依据：#3 指向玩法太简单，#6 指向后半段目标增多但玩法结构感不足；当前航线指令已有多轮短循环与远航调度规则，但默认仍主要依赖长文本和按钮徽标理解。
+- 本轮改动新增指令轮换视觉轨：`directivePlanTrack` 用 3 格固定视觉状态显示 1/3 到 3/3，运行时根据 `getDirectivePlan` 的进度和推荐指令显示已完成、下一步和待推进状态。
+- 本轮不新增存档字段，不改变指令收益、冷却、连携窗口、轮换目标奖励、预案执行、航线委托、策略契合、策略终结、指令熟练、远航调度、远航续航、远航协同、远航闭环、远航整备、星图航段、项目奖励、升级价格或反馈入口。
+- 本轮本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 106 项。
+- 构建产物已确认包含 `directivePlanTrack`、`directive-plan-track`、`directive-plan-step`、`renderDirectivePlanTrack` 和“指令轮换视觉轨”。
+
 - GitHub Issues：gh 可用且已认证；2026-04-30 11:13 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
 - #5 作为本轮 Product decision：#6 已连续多轮补齐远航调度短循环但尚无复测结论；#5 仍反馈点火按钮“太薄弱”，需要继续增强点击后的按钮本体反馈。
 - 本轮改动新增点火收益浮层：每次点火后按钮内短暂显示本次 `+X` 能量，第 8 次过载点击使用 `is-overload-gain` 强反馈样式。

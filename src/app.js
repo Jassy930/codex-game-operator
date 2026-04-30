@@ -130,6 +130,7 @@ const elements = {
   pulse: document.querySelector("#pulseValue"),
   directiveList: document.querySelector("#directiveList"),
   directivePlan: document.querySelector("#directivePlan"),
+  directivePlanTrack: document.querySelector("#directivePlanTrack"),
   directiveTask: document.querySelector("#directiveTask"),
   farDispatch: document.querySelector("#farDispatch"),
   goalLabel: document.querySelector("#goalLabel"),
@@ -283,6 +284,7 @@ function render() {
   elements.pulse.textContent = combo.overloaded ? current.lastPulse : combo.hintText;
   renderDirectives(directives);
   elements.directivePlan.textContent = directives.plan.text;
+  renderDirectivePlanTrack(directives.plan, directives.options);
   renderDirectiveTask(directives.task);
   renderFarDispatch(directives.dispatch ?? getFarRouteDispatch(current, now));
   elements.goalLabel.textContent = goal.label;
@@ -361,6 +363,58 @@ function renderCoreRewardHint(coreReward) {
 function renderDirectives(directives) {
   elements.directiveList.replaceChildren(
     ...directives.options.map((option) => renderDirective(option))
+  );
+}
+
+function renderDirectivePlanTrack(plan, options) {
+  const target = Math.max(1, plan.target ?? 3);
+  const progress = Math.max(0, Math.min(target, plan.progress ?? 0));
+  const nextNames = (plan.nextDirectiveIds ?? [])
+    .map((directiveId) => options.find((option) => option.id === directiveId)?.name)
+    .filter(Boolean);
+  const nextText = nextNames.length
+    ? nextNames.join(" / ")
+    : plan.unlocked
+      ? "等待指令"
+      : "100K 解锁";
+  const nextActionText = [plan.recommendationText ?? "下一步", nextText]
+    .filter(Boolean)
+    .join(" ");
+
+  elements.directivePlanTrack.replaceChildren(
+    ...Array.from({ length: target }, (_item, index) => {
+      const step = index + 1;
+      const item = document.createElement("span");
+      const isComplete = plan.unlocked && progress >= step;
+      const isNext = !isComplete && step === Math.min(progress + 1, target);
+      item.className = [
+        "directive-plan-step",
+        isComplete ? "is-complete" : "",
+        isNext ? "is-next" : "",
+        !isComplete && !isNext ? "is-pending" : ""
+      ]
+        .filter(Boolean)
+        .join(" ");
+
+      const marker = document.createElement("strong");
+      marker.textContent = step + "/" + target;
+
+      const label = document.createElement("span");
+      if (!plan.unlocked) {
+        label.textContent = step === 1 ? "100K 解锁" : "待解锁";
+      } else if (progress >= target) {
+        label.textContent = step === target ? "轮换完成" : "已完成";
+      } else if (step <= progress) {
+        label.textContent = "已完成";
+      } else if (step === progress + 1) {
+        label.textContent = nextActionText;
+      } else {
+        label.textContent = "待推进";
+      }
+
+      item.append(marker, label);
+      return item;
+    })
   );
 }
 

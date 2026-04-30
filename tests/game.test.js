@@ -1153,8 +1153,11 @@ test("静态首页会渲染航线指令轮换目标", () => {
   const styles = readFileSync(new URL("../src/styles.css", import.meta.url), "utf8");
 
   assert.match(indexHtml, /id="directivePlan"/);
+  assert.match(indexHtml, /id="directivePlanTrack"/);
   assert.match(indexHtml, /id="directiveTask"/);
   assert.match(indexHtml, /id="farDispatch"/);
+  assert.match(indexHtml, /class="directive-plan-step is-next"/);
+  assert.match(indexHtml, /aria-label="指令轮换视觉轨"/);
   assert.match(indexHtml, /class="directive-task-meter"/);
   assert.match(indexHtml, /class="far-dispatch-meter"/);
   assert.match(indexHtml, /class="far-dispatch-loop-meter"/);
@@ -1204,11 +1207,16 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(appJs, /masteryBonus: result\.masteryBonus/);
   assert.match(appJs, /masteryRewardStacks: result\.masteryRewardStacks/);
   assert.match(appJs, /directivePlan: document\.querySelector\("#directivePlan"\)/);
+  assert.match(appJs, /directivePlanTrack: document\.querySelector\("#directivePlanTrack"\)/);
   assert.match(appJs, /directiveTask: document\.querySelector\("#directiveTask"\)/);
   assert.match(appJs, /farDispatch: document\.querySelector\("#farDispatch"\)/);
   assert.match(appJs, /elements\.directivePlan\.textContent = directives\.plan\.text/);
+  assert.match(appJs, /renderDirectivePlanTrack\(directives\.plan, directives\.options\)/);
   assert.match(appJs, /renderDirectiveTask\(directives\.task\)/);
   assert.match(appJs, /renderFarDispatch\(directives\.dispatch/);
+  assert.match(appJs, /function renderDirectivePlanTrack\(plan, options\)/);
+  assert.match(appJs, /"directive-plan-step"/);
+  assert.match(appJs, /label\.textContent = nextActionText/);
   assert.match(appJs, /function renderDirectiveTask\(task\)/);
   assert.match(appJs, /function renderFarDispatch\(dispatch\)/);
   assert.match(appJs, /meter\.className = "directive-task-meter"/);
@@ -1251,6 +1259,10 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(appJs, /stanceBonus\.className = "directive-stance-bonus"/);
   assert.match(appJs, /stanceBonus\.textContent = option\.stanceBonusText/);
   assert.match(styles, /\.directive-plan/);
+  assert.match(styles, /\.directive-plan-track/);
+  assert.match(styles, /\.directive-plan-step/);
+  assert.match(styles, /\.directive-plan-step\.is-complete/);
+  assert.match(styles, /\.directive-plan-step\.is-next/);
   assert.match(styles, /\.directive-task/);
   assert.match(styles, /\.directive-task-meter/);
   assert.match(styles, /\.directive-task\.is-completed/);

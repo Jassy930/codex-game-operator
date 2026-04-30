@@ -1,5 +1,25 @@
 # Decision
 
+## 2026-04-30 Product decision：指令轮换视觉轨
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-04-30 11:25 CST 同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#3 仍反馈玩法太简单，#6 仍反馈后半段缺少真正玩法变化，且二者都和航线指令短循环的可理解性有关，继续进入 Product decision。
+
+当前最大问题：航线指令已经有推荐预案、航线委托、策略终结、指令熟练、远航调度、远航续航、远航协同、远航闭环和远航整备，但玩家默认看到的是一段较长的指令轮换说明、三个按钮和两个进度条。短循环“第几步完成、下一步按哪个、后续还有几步”仍需要从文字和按钮徽标里拼接。
+
+本轮决策：
+
+- 在指令轮换说明下方新增 `directivePlanTrack` 三格视觉轨，按 `getDirectivePlan` 的 `progress`、`target`、`nextDirectiveIds`、`recommendationText` 派生已完成、下一步和待推进状态。
+- 视觉轨在锁定态显示 100K 解锁；解锁后显示 1/3 到 3/3 的当前完成进度和推荐指令名；完成 3/3 后显示轮换完成。
+- 本轮只调整航线指令展示层；不新增存档字段，不改变指令收益、冷却、连携窗口、轮换目标奖励、预案执行、航线委托、策略契合、策略终结、指令熟练、远航调度、远航续航、远航协同、远航闭环、远航整备、星图航段、项目奖励、升级价格或反馈入口。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-04-30 11:25 CST 当前 5 个 open feedback issue、0 个 open bug issue。
+- 静态首页包含 `directivePlanTrack`、`directive-plan-track`、`directive-plan-step` 和 `aria-label="指令轮换视觉轨"`。
+- 运行期 `src/app.js` 调用 `renderDirectivePlanTrack(directives.plan, directives.options)`，并把现有计划状态渲染为 3 格视觉轨。
+- 本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 106 项。
+- 构建产物已确认包含 `directivePlanTrack`、`directive-plan-track`、`directive-plan-step`、`renderDirectivePlanTrack` 和“指令轮换视觉轨”。
+
 ## 2026-04-30 Product decision：点火收益浮层
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-04-30 11:13 CST 同步到 5 个 open feedback issue、0 个 open bug issue。#6 已连续多轮补齐远航调度短循环但尚无复测结论；#5 仍反馈点火按钮“太薄弱”，继续进入有反馈样本下的 Product decision。
