@@ -19,6 +19,9 @@
 - 运行期 `src/app.js` 调用 `renderDirectivePlanTrack(directives.plan, directives.options)`，并把现有计划状态渲染为 3 格视觉轨。
 - 本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 106 项。
 - 构建产物已确认包含 `directivePlanTrack`、`directive-plan-track`、`directive-plan-step`、`renderDirectivePlanTrack` 和“指令轮换视觉轨”。
+- 提交 ca9b1db 已推送；GitHub Pages workflow 25145956308 已成功，线上地址返回 HTTP 200，且线上首页、`app.js` 和 `styles.css` 已确认包含指令轮换视觉轨相关标记。
+- #3 和 #6 已回复并继续保持 open，等待复测确认 3 格视觉轨是否让航线指令和后半段远航短循环更容易扫视和连续执行。
+- 回复后同步 GitHub Issues：2026-04-30 11:35 CST 当前仍为 5 个 open feedback issue、0 个 open bug issue；#3 更新时间为 2026-04-30T03:35:12Z，#6 更新时间为 2026-04-30T03:35:32Z。
 
 ## 2026-04-30 Product decision：点火收益浮层
 

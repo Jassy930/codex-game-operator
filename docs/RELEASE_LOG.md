@@ -8,6 +8,9 @@
 - 同步 GitHub Issues 反馈状态：2026-04-30 11:25 CST 当前 5 个 open feedback issue、0 个 open bug issue；#3/#6 作为本轮处理对象。
 - 验证通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 106 项。
 - 构建产物已确认包含 `directivePlanTrack`、`directive-plan-track`、`directive-plan-step`、`renderDirectivePlanTrack` 和“指令轮换视觉轨”。
+- 提交 ca9b1db 已推送；GitHub Pages workflow 25145956308 已成功，线上地址返回 HTTP 200，且线上首页、`app.js` 和 `styles.css` 已确认包含指令轮换视觉轨相关标记。
+- 已回复 #3 和 #6，说明 3 格视觉轨已部署，并保持 issue open 等待复测。
+- 回复后同步 GitHub Issues 反馈状态：2026-04-30 11:35 CST 当前 5 个 open feedback issue、0 个 open bug issue；#3 更新时间为 2026-04-30T03:35:12Z，#6 更新时间为 2026-04-30T03:35:32Z。
 - 点火按钮新增收益浮层：每次点火后按钮内短暂弹出本次 `+X` 能量，第 8 次过载点击使用更强的过载收益样式。
 - `index.html` 新增 `coreGainPop` 静态浮层；`src/app.js` 在点火后把 `state.lastGain` 写入 `gainText` 并触发 `is-showing` / `is-overload-gain`；`src/styles.css` 新增 `core-gain-pop` 与 `coreGainFloat` 动画；`tests/game.test.js` 补充静态和运行期标记覆盖。
 - 本轮只调整点火按钮展示层，回应 #5 对点击反馈、特效和点击欲望的反馈；不新增存档字段，不改变点击收益、连击窗口、过载奖励、升级价格、产能公式、星图 57 段路线、项目奖励、航线策略、航线指令或反馈入口。

@@ -8,6 +8,10 @@
 - 本轮不新增存档字段，不改变指令收益、冷却、连携窗口、轮换目标奖励、预案执行、航线委托、策略契合、策略终结、指令熟练、远航调度、远航续航、远航协同、远航闭环、远航整备、星图航段、项目奖励、升级价格或反馈入口。
 - 本轮本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 106 项。
 - 构建产物已确认包含 `directivePlanTrack`、`directive-plan-track`、`directive-plan-step`、`renderDirectivePlanTrack` 和“指令轮换视觉轨”。
+- 提交 ca9b1db 已推送；GitHub Pages workflow 25145956308 已成功，线上地址返回 HTTP 200；线上首页、`app.js` 和 `styles.css` 已确认包含指令轮换视觉轨相关标记。
+- #3 已回复：说明 3 格视觉轨已上线，issue 保持 open 等待复测主动短期玩法是否更容易扫视。
+- #6 已回复：说明远航短循环现在可通过 3 格视觉轨查看当前步骤和下一步推荐，issue 保持 open 等待复测。
+- 回复后同步 GitHub Issues：2026-04-30 11:35 CST 当前仍为 5 个 open feedback issue、0 个 open bug issue；#3 更新时间为 2026-04-30T03:35:12Z，#6 更新时间为 2026-04-30T03:35:32Z。
 
 - GitHub Issues：gh 可用且已认证；2026-04-30 11:13 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
 - #5 作为本轮 Product decision：#6 已连续多轮补齐远航调度短循环但尚无复测结论；#5 仍反馈点火按钮“太薄弱”，需要继续增强点击后的按钮本体反馈。
