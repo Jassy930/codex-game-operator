@@ -11,6 +11,7 @@
 - 构建产物已确认包含 `followupText`、`far-dispatch-branch-choice-followup` 和“下一步：先执行目标”相关文案。
 - 发布：提交 `2e9bbd5` 已推送到 `origin/main`；GitHub Pages workflow `25188555013` 成功；线上首页返回 HTTP 200，线上 `src/game.js`、`src/app.js` 和 `src/styles.css` 已确认包含 `followupText`、`far-dispatch-branch-choice-followup` 和“下一步：先执行目标”。
 - 反馈处理：已回复 #6，说明路线下一步上线范围、验证结果和复测问题，issue 保持 open；回复后于 2026-05-01 04:49 CST 再次同步 GitHub Issues，当前仍为 5 个 open feedback issue、0 个 open bug issue。
+- 钉钉通知未发送：运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` 相关变量名，也未发现本地 `.env*` 文件；未将 webhook 写入仓库。
 
 - 远航调度新增“路线目标”：协同/绕行分支卡片会显示本条路线是在按当前航段建档、续走上轮稳航、改道开启轮替闭环，还是本轮回航确认，继续回应 #6 对后半段玩法变化不明显的反馈。
 - `src/game.js` 为 `branchChoices` 派生 `objectiveText` 并纳入 `branchChoiceText`；`src/app.js` 渲染 `far-dispatch-branch-choice-objective`；`src/styles.css` 增加路线目标样式；`tests/game.test.js` 覆盖无上轮分支、续走稳航、改道轮替、静态渲染和样式绑定。
