@@ -1,5 +1,30 @@
 # Decision
 
+## 2026-04-30 Product decision：航线预告视觉带
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-04-30 16:34 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#4 仍围绕“界面文字密集、希望更多图片和更好看”保持 open，因此本轮继续进入 Product decision。
+
+当前最大问题：星图总览已有奖励罗盘降低四类奖励进度的阅读成本，但“航线预告”仍是一行把后三段项目名和奖励串起来的长文本。玩家想扫下一段、后续奖励方向和推进类型时，仍要读完整句。
+
+本轮决策：
+
+- 在星图总览默认可见区域新增 `project-forecast-map` 航线预告视觉带。
+- `getProjectForecastVisuals` 从现有项目状态派生最多三条未完成航段，包含航段号、章节位置、项目名、推进类型、奖励方向、进度和可访问说明。
+- 运行期 `renderProjectForecastMap` 渲染三条固定视觉槽，静态首页保留初始占位；原 `projectOverviewForecast` 文本继续保留，避免丢失完整说明。
+- 本轮只调整星图总览展示层；不新增存档字段，不改变 57 段星图路线、项目完成判定、奖励数值、升级价格、航线策略、航线指令、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-04-30 16:34 CST 当前 5 个 open feedback issue、0 个 open bug issue。
+- `getProjectForecastVisuals(getProjectStatuses(createInitialState(0)))` 返回点亮星图、谐振校准和透镜阵列三条初始预告槽。
+- 静态首页包含 `projectForecastMap`、`project-forecast-map` 和“航线预告视觉带”。
+- `src/app.js` 包含 `renderProjectForecastMap` / `renderProjectForecastTile`，运行期按 `projectOverview.forecastVisuals` 更新预告视觉带。
+- `src/styles.css` 包含 `.project-forecast-map`、`.project-forecast-tile`、`.project-forecast-path` 和 `.project-forecast-meter`。
+- 本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 114 项。
+- 构建产物已确认包含 `projectForecastMap`、`project-forecast-map`、`getProjectForecastVisuals` 和“航线预告视觉带”。
+
+下一步：推送并等待 #4 复测；如果仍认为星图总览文字密度高，再继续把默认可见长句转为视觉结构，而不是增加说明文本。
+
 ## 2026-04-30 Product decision：星图奖励罗盘
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-04-30 16:11 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#4 仍围绕“界面文字密集、希望更多图片和更好看”保持 open，因此本轮继续进入 Product decision。

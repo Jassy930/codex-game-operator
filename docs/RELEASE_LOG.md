@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+- 星图总览新增航线预告视觉带：默认可见区域显示 `project-forecast-map`，用最多三条视觉槽展示后续航段、推进类型、奖励方向和进度条，继续回应 #4 对界面文字密度和图片化表达的反馈。
+- `src/game.js` 新增 `getProjectForecastVisuals` 并把 `forecastVisuals` 合入 `getProjectOverview`；`index.html` 新增 `projectForecastMap` 静态占位；`src/app.js` 新增 `renderProjectForecastMap` / `renderProjectForecastTile`；`src/styles.css` 新增预告视觉槽、路线标记和进度条样式；`tests/game.test.js` 覆盖数据派生与静态渲染标记。
+- 本轮只调整星图总览展示层；不新增存档字段，不改变 57 段星图路线、项目完成判定、奖励数值、升级价格、航线策略、航线指令、反馈入口或部署链路。
+- 同步 GitHub Issues 反馈状态：2026-04-30 16:34 CST 当前 5 个 open feedback issue、0 个 open bug issue；#4 作为本轮处理对象。
+- 验证通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 114 项。
+- 构建产物已确认包含 `projectForecastMap`、`project-forecast-map`、`getProjectForecastVisuals` 和“航线预告视觉带”。
+
 - 星图总览新增奖励罗盘：默认可见区域显示 `project-reward-map`，用总产能、点击、自动和过载四条视觉槽展示完成数、当前/待推进状态和进度条，继续回应 #4 对界面文字密度和图片化表达的反馈。
 - `src/game.js` 新增 `getProjectRewardVisuals` 并把 `rewardVisuals` 合入 `getProjectOverview`；`index.html` 新增 `projectRewardMap` 静态占位；`src/app.js` 新增 `renderProjectRewardMap` / `renderProjectRewardTile`；`src/styles.css` 新增奖励罗盘、奖励图标和进度条样式；`tests/game.test.js` 覆盖数据派生与静态渲染标记。
 - 本轮只调整星图总览展示层；不新增存档字段，不改变 57 段星图路线、项目完成判定、奖励数值、升级价格、航线策略、航线指令、反馈入口或部署链路。

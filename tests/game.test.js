@@ -38,6 +38,7 @@ import {
   getProjectFilterButtonText,
   getProjectFilterSummary,
   getProjectChapterVisuals,
+  getProjectForecastVisuals,
   getProjectListWindow,
   getProjectOverview,
   getProjectRewardVisuals,
@@ -999,6 +1000,32 @@ test("星图奖励罗盘会返回四类奖励进度", () => {
   assert.equal(overview.rewardVisuals[0].title, "总产能奖励 0/17 · 下一条 1/57 点亮星图");
 });
 
+test("星图航线预告会返回三段视觉槽", () => {
+  const projects = getProjectStatuses(createInitialState(0));
+  const forecastVisuals = getProjectForecastVisuals(projects);
+  const overview = getProjectOverview(createInitialState(0));
+
+  assert.equal(forecastVisuals.length, 3);
+  assert.deepEqual(
+    forecastVisuals.map((project) => project.id),
+    ["stellar-map", "resonance-calibration", "lens-array"]
+  );
+  assert.equal(forecastVisuals[0].segmentText, "航段 1/57");
+  assert.equal(forecastVisuals[0].chapterText, "首段星图 1/4");
+  assert.equal(forecastVisuals[0].trackId, "energy");
+  assert.equal(forecastVisuals[0].rewardId, "total");
+  assert.equal(forecastVisuals[0].status, "current");
+  assert.equal(forecastVisuals[1].trackId, "upgrade");
+  assert.equal(forecastVisuals[1].rewardId, "overload");
+  assert.equal(forecastVisuals[2].rewardId, "click");
+  assert.equal(
+    forecastVisuals[0].title,
+    "航线预告 1：航段 1/57 · 首段星图 1/4 点亮星图 · 总产能 +12% · 进度 0 能量 / 100K 能量 · 还差 100K 能量"
+  );
+  assert.equal(overview.forecastVisuals.length, 3);
+  assert.equal(overview.forecastVisuals[2].name, "透镜阵列");
+});
+
 test("静态首页会引用星图插画资产", () => {
   const indexHtml = readFileSync(new URL("../index.html", import.meta.url), "utf8");
   const styles = readFileSync(new URL("../src/styles.css", import.meta.url), "utf8");
@@ -1036,6 +1063,29 @@ test("静态首页会渲染星图奖励罗盘", () => {
   assert.match(styles, /\.project-reward-icon/);
   assert.match(styles, /\.project-reward-meter/);
   assert.match(styles, /\.project-reward-overload \.project-reward-icon/);
+});
+
+test("静态首页会渲染航线预告视觉带", () => {
+  const indexHtml = readFileSync(new URL("../index.html", import.meta.url), "utf8");
+  const appJs = readFileSync(new URL("../src/app.js", import.meta.url), "utf8");
+  const styles = readFileSync(new URL("../src/styles.css", import.meta.url), "utf8");
+
+  assert.match(indexHtml, /id="projectForecastMap" class="project-forecast-map"/);
+  assert.match(indexHtml, /aria-label="航线预告视觉带"/);
+  assert.match(indexHtml, /project-forecast-tile is-current is-track-energy is-reward-total/);
+  assert.match(indexHtml, /project-forecast-tile is-pending is-track-upgrade is-reward-overload/);
+  assert.match(indexHtml, /project-forecast-tile is-pending is-track-upgrade is-reward-click/);
+  assert.match(indexHtml, /航线预告 1：航段 1\/57 · 首段星图 1\/4 点亮星图/);
+  assert.match(appJs, /getProjectForecastVisuals/);
+  assert.match(appJs, /projectForecastMap: document\.querySelector\("#projectForecastMap"\)/);
+  assert.match(appJs, /function renderProjectForecastMap\(projects\)/);
+  assert.match(appJs, /function renderProjectForecastTile\(project\)/);
+  assert.match(appJs, /project-forecast-tile/);
+  assert.match(styles, /\.project-forecast-map/);
+  assert.match(styles, /\.project-forecast-tile/);
+  assert.match(styles, /\.project-forecast-path/);
+  assert.match(styles, /\.project-forecast-meter/);
+  assert.match(styles, /\.project-forecast-tile\.is-reward-overload/);
 });
 
 test("静态首页会渲染星图章节视觉导航", () => {

@@ -20,6 +20,7 @@ import {
   getProjectFilterSummary,
   getProjectFilterButtonText,
   getProjectChapterVisuals,
+  getProjectForecastVisuals,
   getProjectListWindow,
   getProjectOverview,
   getProjectRewardVisuals,
@@ -215,6 +216,7 @@ const elements = {
   projectOverviewBonus: document.querySelector("#projectOverviewBonus"),
   projectOverviewAction: document.querySelector("#projectOverviewAction"),
   projectOverviewForecast: document.querySelector("#projectOverviewForecast"),
+  projectForecastMap: document.querySelector("#projectForecastMap"),
   projectRewardMap: document.querySelector("#projectRewardMap"),
   projectMapSummary: document.querySelector("#projectMapSummary"),
   projectMapFilter: document.querySelector("#projectMapFilter"),
@@ -401,6 +403,7 @@ function render() {
   elements.projectOverviewBonus.textContent = projectOverview.bonusText;
   elements.projectOverviewAction.textContent = projectOverview.actionText;
   elements.projectOverviewForecast.textContent = projectOverview.forecastText;
+  renderProjectForecastMap(projectOverview.forecastVisuals ?? getProjectForecastVisuals(projects));
   renderProjectRewardMap(projectOverview.rewardVisuals ?? getProjectRewardVisuals(projects));
   renderProjectMap(getProjectVisualMap(projects, projectFilter));
   renderProjectChapterMap(getProjectChapterVisuals(projects));
@@ -1193,6 +1196,58 @@ function renderProjectRewardMap(rewards) {
   elements.projectRewardMap.replaceChildren(
     ...rewards.map((reward) => renderProjectRewardTile(reward))
   );
+}
+
+function renderProjectForecastMap(projects) {
+  elements.projectForecastMap.replaceChildren(
+    ...projects.map((project) => renderProjectForecastTile(project))
+  );
+  elements.projectForecastMap.hidden = projects.length === 0;
+}
+
+function renderProjectForecastTile(project) {
+  const item = document.createElement("span");
+  item.className = [
+    "project-forecast-tile",
+    "is-" + project.status,
+    "is-track-" + project.trackId,
+    "is-reward-" + project.rewardId
+  ]
+    .filter(Boolean)
+    .join(" ");
+  item.setAttribute("role", "img");
+  item.setAttribute("aria-label", project.title);
+  item.title = project.title;
+
+  const path = document.createElement("span");
+  path.className = "project-forecast-path";
+  path.setAttribute("aria-hidden", "true");
+
+  const meta = document.createElement("span");
+  meta.className = "project-forecast-meta";
+
+  const segment = document.createElement("span");
+  segment.className = "project-forecast-segment";
+  segment.textContent = project.segmentText;
+
+  const name = document.createElement("strong");
+  name.textContent = project.name;
+
+  const reward = document.createElement("span");
+  reward.className = "project-forecast-reward";
+  reward.textContent = project.reward;
+
+  const meter = document.createElement("span");
+  meter.className = "project-forecast-meter";
+  meter.setAttribute("aria-hidden", "true");
+
+  const fill = document.createElement("span");
+  fill.style.width = Math.round(project.progress * 100) + "%";
+  meter.append(fill);
+
+  meta.append(segment, name, reward);
+  item.append(path, meta, meter);
+  return item;
 }
 
 function renderProjectRewardTile(reward) {

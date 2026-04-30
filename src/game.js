@@ -1997,6 +1997,44 @@ export function getProjectRewardVisuals(projects) {
   });
 }
 
+export function getProjectForecastVisuals(projects) {
+  const items = Array.isArray(projects) ? projects : [];
+
+  return items
+    .filter((project) => !project.completed)
+    .slice(0, 3)
+    .map((project, index) => {
+      const rewardId = getProjectRewardVisualId(project);
+      const trackId = project.upgradeId ? "upgrade" : "energy";
+
+      return {
+        id: project.id,
+        name: project.name,
+        segmentText: project.segmentText,
+        chapterText: project.chapterText,
+        reward: project.reward,
+        rewardId,
+        trackId,
+        progress: project.progress,
+        progressText: project.progressText,
+        status: project.isCurrent ? "current" : "pending",
+        title:
+          "航线预告 " +
+          (index + 1) +
+          "：" +
+          project.segmentText +
+          " · " +
+          project.chapterText +
+          " " +
+          project.name +
+          " · " +
+          project.reward +
+          " · " +
+          project.progressText
+      };
+    });
+}
+
 export function getProjectOverview(state, now = Date.now()) {
   const current = normalizeState(state, now);
   const projects = getProjectStatuses(current);
@@ -2012,6 +2050,7 @@ export function getProjectOverview(state, now = Date.now()) {
   const milestoneText = buildProjectMilestoneText(projects, nextProject);
   const routeFocusText = buildProjectRouteFocusText(projects, current);
   const rewardVisuals = getProjectRewardVisuals(projects);
+  const forecastVisuals = getProjectForecastVisuals(projects);
   const dispatchText = buildProjectOverviewDispatchText(
     getFarRouteDispatch(current, now)
   );
@@ -2035,6 +2074,7 @@ export function getProjectOverview(state, now = Date.now()) {
       compositionText,
       bonusText,
       rewardVisuals,
+      forecastVisuals,
       dispatchText,
       actionText: buildProjectActionText(null, current),
       forecastText: "航线预告：等待下一段航线"
@@ -2073,6 +2113,7 @@ export function getProjectOverview(state, now = Date.now()) {
     compositionText,
     bonusText,
     rewardVisuals,
+    forecastVisuals,
     dispatchText,
     actionText: buildProjectActionText(nextProject, current),
     forecastText:
@@ -3694,6 +3735,14 @@ function buildProjectTagText(project) {
     .join("/");
 
   return rewardTypes ? trackText + " · " + rewardTypes + "奖励" : trackText;
+}
+
+function getProjectRewardVisualId(project) {
+  const rewardType = PROJECT_REWARD_SUMMARY_DEFS.find(([, effectKey]) =>
+    Boolean(project?.effect?.[effectKey])
+  );
+
+  return rewardType?.[2] ?? "total";
 }
 
 function buildProjectOverviewDispatchText(dispatch) {
