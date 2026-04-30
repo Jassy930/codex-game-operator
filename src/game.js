@@ -2996,6 +2996,7 @@ export function getFarRouteDispatch(state, now = Date.now()) {
       branchRotationText: "",
       branchRouteText: "",
       branchPlanText: "",
+      branchPlanStepText: "",
       branchChoices: [],
       branchChoiceText: "",
       projectId: null,
@@ -3073,6 +3074,7 @@ export function getFarRouteDispatch(state, now = Date.now()) {
       branchRotationText: "",
       branchRouteText: "",
       branchPlanText: "",
+      branchPlanStepText: "",
       branchChoices: [],
       branchChoiceText: "",
       projectId: null,
@@ -3124,6 +3126,12 @@ export function getFarRouteDispatch(state, now = Date.now()) {
     branchStatus
   );
   const branchPlanText = buildFarRouteDispatchBranchPlanText(
+    directive,
+    branchChoices,
+    branchStatus
+  );
+  const branchPlanStepText = buildFarRouteDispatchBranchPlanStepText(
+    current,
     directive,
     branchChoices,
     branchStatus
@@ -3201,6 +3209,7 @@ export function getFarRouteDispatch(state, now = Date.now()) {
     branchRotationText,
     branchRouteText,
     branchPlanText,
+    branchPlanStepText,
     branchChoices,
     branchChoiceText: buildFarRouteDispatchBranchChoiceText(branchChoices),
     projectId: project.id,
@@ -3232,6 +3241,7 @@ export function getFarRouteDispatch(state, now = Date.now()) {
       (branchRotationText ? " · " + branchRotationText : "") +
       (branchRouteText ? " · " + branchRouteText : "") +
       (branchPlanText ? " · " + branchPlanText : "") +
+      (branchPlanStepText ? " · " + branchPlanStepText : "") +
       " · 目标后优先" +
       relayDirectiveName +
       "触发" +
@@ -4612,6 +4622,9 @@ function buildProjectOverviewDispatchText(dispatch) {
   const branchPlanText = dispatch.branchPlanText
     ? " · " + dispatch.branchPlanText
     : "";
+  const branchPlanStepText = dispatch.branchPlanStepText
+    ? " · " + dispatch.branchPlanStepText
+    : "";
   const currentStep = Array.isArray(dispatch.loopSteps)
     ? dispatch.loopSteps.find((step) => step.state === "current")
     : null;
@@ -4633,6 +4646,7 @@ function buildProjectOverviewDispatchText(dispatch) {
     branchRotationText +
     branchRouteText +
     branchPlanText +
+    branchPlanStepText +
     " · 闭环 " +
     dispatch.loopProgress +
     "/" +
@@ -5133,6 +5147,83 @@ function buildFarRouteDispatchBranchPlanText(directive, choices, branchStatus) {
     planChoice.directiveName +
     " -> 回目标 " +
     directive.name
+  );
+}
+
+function buildFarRouteDispatchBranchPlanStepText(
+  state,
+  directive,
+  choices,
+  branchStatus
+) {
+  if (!directive || !choices.length || !branchStatus?.kind) {
+    return "";
+  }
+
+  const kind = branchStatus.kind;
+  if (kind === "pending") {
+    if (branchStatus.directiveId === directive.id) {
+      return "路线步骤：第 1/3 执行目标 " + directive.name;
+    }
+
+    return "路线步骤：第 2/3 " + buildFarRouteDispatchBranchSelectionStepText(choices);
+  }
+
+  if (kind === "sync") {
+    return "路线步骤：第 3/3 协同回航 " + directive.name;
+  }
+
+  if (kind === "detour") {
+    return "路线步骤：第 3/3 绕行回航 " + directive.name;
+  }
+
+  if (kind === "sync-prep" || kind === "detour-prep") {
+    const branchDirectiveName =
+      branchStatus.directiveName ||
+      choices.find((choice) => choice.active)?.directiveName ||
+      "";
+    const chain = state.directiveChain ?? {};
+    if (branchDirectiveName && chain.lastDirectiveId === branchStatus.directiveId) {
+      return "路线步骤：整备回航 " + directive.name;
+    }
+
+    const prepLabel = kind === "detour-prep" ? "绕行整备" : "整备";
+    return (
+      "路线步骤：" +
+      prepLabel +
+      (branchDirectiveName ? " " + branchDirectiveName : "") +
+      "，随后回目标 " +
+      directive.name
+    );
+  }
+
+  return "";
+}
+
+function buildFarRouteDispatchBranchSelectionStepText(choices) {
+  const focusedChoice = choices.find((choice) => choice.focused);
+  if (focusedChoice) {
+    const otherChoices = choices.filter(
+      (choice) => choice.directiveId !== focusedChoice.directiveId
+    );
+    const otherText = otherChoices
+      .map((choice) => choice.label + " " + choice.directiveName)
+      .join("或");
+
+    return (
+      "选择推荐" +
+      focusedChoice.label +
+      " " +
+      focusedChoice.directiveName +
+      (otherText ? "，或" + otherText : "")
+    );
+  }
+
+  return (
+    "选择" +
+    choices
+      .map((choice) => choice.label + " " + choice.directiveName)
+      .join("或")
   );
 }
 

@@ -2,6 +2,15 @@
 
 ## Unreleased
 
+- 远航调度新增“路线步骤”：主操作区、星图总览远航摘要和反馈快照会显示当前应执行第 1/3 目标、第 2/3 推荐分支、第 3/3 回航目标、整备续航或整备回航，继续回应 #6 对后半段玩法变化不明显的反馈。
+- `src/game.js` 为远航分支派生 `branchPlanStepText` 并纳入远航调度长文本和星图总览摘要；`src/app.js` 渲染 `far-dispatch-branch-step`；`index.html` 增加静态占位；`src/styles.css` 增加路线步骤样式；`tests/game.test.js` 覆盖锁定态、目标起手、分支选择、绕行回航、整备续航、整备回航和静态绑定。
+- 文档同步更新：`docs/DECISION.md`、`docs/FEEDBACK.md`、`docs/RESEARCH.md`、`docs/PRODUCT.md`、`docs/DESIGN.md`、`docs/ROADMAP.md`、`docs/IDEAS.md`、`docs/METRICS.md`、`README.md` 和本日志已记录远航路线步骤。
+- 本轮只调整派生展示、DOM、样式和测试，不新增收益、不新增存档字段，不改变升级价格、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、远航调度既有数值、冷却、连携窗口、反馈入口或部署链路。
+- 同步 GitHub Issues 反馈状态：2026-05-01 02:07 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 作为本轮处理对象。
+- 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含 `branchPlanStepText`、`far-dispatch-branch-step` 和“路线步骤”相关文案。
+- 钉钉通知未发送：运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` 相关变量名，也未发现本地 `.env` 文件；未将 webhook 写入仓库。
+
 - 远航调度新增“路线预案”：主操作区、星图总览远航摘要和反馈快照会显示推荐、本轮或下一轮“目标 -> 协同/绕行 -> 回目标”路线，继续回应 #6 对后半段玩法变化不明显的反馈。
 - `src/game.js` 为远航分支派生 `branchPlanText` 并纳入远航调度长文本和星图总览摘要；`src/app.js` 渲染 `far-dispatch-branch-plan`；`index.html` 增加静态占位；`src/styles.css` 增加路线预案样式；`tests/game.test.js` 覆盖锁定态、推荐路线、本轮绕行、下一轮改道预案和静态绑定。
 - 文档同步更新：`docs/DECISION.md`、`docs/FEEDBACK.md`、`docs/RESEARCH.md`、`docs/PRODUCT.md`、`docs/DESIGN.md`、`docs/ROADMAP.md`、`docs/IDEAS.md`、`docs/METRICS.md`、`README.md` 和本日志已记录远航路线预案。

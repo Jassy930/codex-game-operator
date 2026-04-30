@@ -1,5 +1,30 @@
 # Decision
 
+## 2026-05-01 Product decision：远航路线步骤
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-01 02:07 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#6 仍是最新反馈线程，原始反馈指出后半段“只有不停的目标、玩法没有真正变化”，因此本轮继续进入 Product decision。
+
+当前最大问题：前序已经显示路线预案，但“当前该执行第几步”仍分散在路线预案、闭环进度、按钮徽标和整备提示中。玩家需要一行能直接把路线预案落到当前操作步骤的提示。
+
+本轮决策：
+
+- 新增“远航路线步骤”。
+- `getFarRouteDispatch` 从当前分支态势和 `branchChoices` 派生 `branchPlanStepText`：覆盖第 1/3 执行目标、第 2/3 选择推荐协同/绕行、第 3/3 协同/绕行回航、整备续航和整备回航。
+- 主操作区远航调度条新增 `far-dispatch-branch-step`，星图总览远航摘要和反馈快照长文本同步包含路线步骤。
+- 本轮只调整派生展示、DOM、样式和测试；不新增收益、不新增存档字段，不改变升级价格、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、远航调度既有数值、冷却、连携窗口、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-05-01 02:07 CST 当前 5 个 open feedback issue、0 个 open bug issue。
+- 脉冲航闸初始远航调度显示“路线步骤：第 1/3 执行目标 点火齐射”。
+- 目标后分支选择态显示“路线步骤：第 2/3 选择推荐协同 谐振脉冲，或绕行 巡航回收”。
+- 绕行进行中显示“路线步骤：第 3/3 绕行回航 点火齐射”。
+- 协同整备完成态显示“路线步骤：整备 谐振脉冲，随后回目标 点火齐射”，整备续航后显示“路线步骤：整备回航 点火齐射”。
+- `src/app.js` 渲染 `dispatch.branchPlanStepText`；`index.html` 包含 `far-dispatch-branch-step` 占位；`src/styles.css` 包含 `.far-dispatch-branch-step`。
+- 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含 `branchPlanStepText`、`far-dispatch-branch-step` 和“路线步骤”相关文案。
+- 钉钉通知未发送：运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` 相关变量名，也未发现本地 `.env` 文件；未将 webhook 写入仓库。
+
 ## 2026-05-01 Product decision：远航路线预案
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-01 01:50 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#6 仍是最新反馈线程，原始反馈指出后半段“只有不停的目标、玩法没有真正变化”，因此本轮继续进入 Product decision。
