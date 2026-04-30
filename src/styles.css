@@ -1354,6 +1354,40 @@ h2 {
   color: rgba(248, 243, 231, 0.62);
 }
 
+.far-dispatch-branch {
+  width: fit-content;
+  max-width: 100%;
+  padding: 3px 7px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 210, 229, 0.28);
+  border-radius: 999px;
+  background: rgba(255, 126, 177, 0.13);
+  color: #ffd2e5;
+  font-size: 0.7rem;
+  font-weight: 900;
+  line-height: 1.1;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.far-dispatch-branch[hidden] {
+  display: none;
+}
+
+.far-dispatch-branch.is-sync,
+.far-dispatch-branch.is-sync-prep {
+  border-color: rgba(103, 232, 249, 0.34);
+  background: rgba(103, 232, 249, 0.12);
+  color: #c6f7ff;
+}
+
+.far-dispatch-branch.is-detour,
+.far-dispatch-branch.is-detour-prep {
+  border-color: rgba(244, 178, 60, 0.36);
+  background: rgba(244, 178, 60, 0.14);
+  color: #ffe3aa;
+}
+
 .far-dispatch-meter {
   display: block;
   width: 100%;

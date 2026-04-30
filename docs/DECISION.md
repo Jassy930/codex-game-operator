@@ -1,5 +1,30 @@
 # Decision
 
+## 2026-04-30 Product decision：远航分支态势
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-04-30 21:43 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#6 仍是最新反馈线程，原始反馈指出后半段“只有不停的目标、玩法没有真正变化”，因此本轮继续进入 Product decision。
+
+当前最大问题：远航调度已经具备协同、绕行、协同补给、绕行投送、绕行整备等分支回报，但玩家和后续复测仍需要从闭环进度、最后一次指令、按钮推荐和反馈快照中推断“当前到底处在协同还是绕行路线”。分支状态不够直接，会削弱前序玩法改动的可理解性。
+
+本轮决策：
+
+- 新增“远航分支态势”派生展示。
+- `getFarRouteDispatch` 从现有 `directiveChain`、当前目标指令、协同指令和 `farRouteLastBranchDirectiveId` 派生 `branchKind` / `branchText` / `branchDirectiveId` / `branchDirectiveName`。
+- 分支态势覆盖“待选择”“协同”“绕行”“协同整备”“绕行整备”，并追加到远航闭环状态、星图总览远航调度摘要和反馈快照。
+- 主操作区远航调度条新增 `far-dispatch-branch` 徽标，协同与绕行使用不同视觉状态。
+- 本轮只改派生展示和反馈快照文本；不新增存档字段，不改变升级价格、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、基础连携倍率、远航调度校准、远航续航、远航协同、协同补给、远航绕行、绕行投送、远航闭环、远航突破、绕行突破、整备续航、绕行整备、整备回航、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-04-30 21:43 CST 当前 5 个 open feedback issue、0 个 open bug issue。
+- `getFarRouteDispatch` 在远航调度 active 时返回分支态势字段。
+- 0/3 起手显示“分支 待选择：先执行目标”；目标后 1/3 显示“分支 待选择：协同或绕行”；协同路线显示“分支 协同：X”；绕行路线显示“分支 绕行：X”；闭环完成态显示“分支 协同整备：X”或“分支 绕行整备：X”。
+- 主操作区渲染 `far-dispatch-branch`，样式区分协同和绕行。
+- 星图总览远航调度摘要包含当前分支态势。
+- 反馈快照中的远航调度包含分支态势，便于后续复测定位玩家路线。
+- 本地验证已通过：`npm install`、`npm test` 和 `npm run build`；测试数 117 项。
+- 构建产物已确认包含 `far-dispatch-branch`、`branchKind`、`branchText`、“分支 待选择”、“分支 协同”和“分支 绕行”。
+
 ## 2026-04-30 Product decision：远航绕行整备
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-04-30 21:16 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#6 仍是最新反馈线程，指出后半段“只有不停的目标、玩法没有真正变化”，因此本轮继续进入 Product decision。

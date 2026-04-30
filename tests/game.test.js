@@ -1564,6 +1564,7 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(indexHtml, /aria-label="指令轮换视觉轨"/);
   assert.match(indexHtml, /class="directive-task-meter"/);
   assert.match(indexHtml, /class="far-dispatch-meter"/);
+  assert.match(indexHtml, /class="far-dispatch-branch is-locked"/);
   assert.match(indexHtml, /class="far-dispatch-loop-meter"/);
   assert.match(indexHtml, /class="far-dispatch-loop-track"/);
   assert.match(indexHtml, /aria-label="航线委托进度"/);
@@ -1658,8 +1659,10 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(appJs, /label\.textContent = nextActionText/);
   assert.match(appJs, /function renderDirectiveTask\(task\)/);
   assert.match(appJs, /function renderFarDispatch\(dispatch\)/);
+  assert.match(appJs, /branch\.className = "far-dispatch-branch is-" \+ getFarDispatchBranchKind\(dispatch\)/);
   assert.match(appJs, /getDirectiveTaskDisplayText\(task\)/);
   assert.match(appJs, /getFarDispatchDisplayText\(dispatch\)/);
+  assert.match(appJs, /function getFarDispatchBranchKind\(dispatch\)/);
   assert.match(appJs, /meter\.className = "directive-task-meter"/);
   assert.match(appJs, /meter\.className = "far-dispatch-meter"/);
   assert.match(appJs, /loopMeter\.className = "far-dispatch-loop-meter"/);
@@ -1670,7 +1673,7 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(appJs, /reward\.textContent = step\.rewardText \?\? ""/);
   assert.match(appJs, /meter\.setAttribute\("role", "meter"\)/);
   assert.match(appJs, /loopMeter\.setAttribute\("role", "meter"\)/);
-  assert.match(appJs, /elements\.farDispatch\.replaceChildren\(text, meter, loopText, loopMeter, loopTrack\)/);
+  assert.match(appJs, /elements\.farDispatch\.replaceChildren\(text, branch, meter, loopText, loopMeter, loopTrack\)/);
   assert.match(appJs, /elements\.directiveTask\.classList\.toggle\("is-completed", task\.completed\)/);
   assert.match(appJs, /elements\.directiveTask\.replaceChildren\(text, meter\)/);
   assert.match(appJs, /elements\.farDispatch\.classList\.toggle\("is-active", dispatch\.active\)/);
@@ -1739,6 +1742,9 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(styles, /\.directive-task-meter/);
   assert.match(styles, /\.directive-task\.is-completed/);
   assert.match(styles, /\.far-dispatch/);
+  assert.match(styles, /\.far-dispatch-branch/);
+  assert.match(styles, /\.far-dispatch-branch\.is-sync/);
+  assert.match(styles, /\.far-dispatch-branch\.is-detour/);
   assert.match(styles, /text-overflow: ellipsis/);
   assert.match(styles, /\.far-dispatch-meter/);
   assert.match(styles, /\.far-dispatch-loop-text/);
@@ -2560,6 +2566,8 @@ test("远航调度会在 20M 后按当前航段指定目标指令", () => {
   assert.equal(locked.loopTarget, 3);
   assert.deepEqual(locked.loopSteps, []);
   assert.equal(locked.loopStepText, "");
+  assert.equal(locked.branchKind, "locked");
+  assert.equal(locked.branchText, "");
   assert.equal(locked.loopStatusText, "闭环进度 0/3 · 20M 后解锁");
   assert.equal(
     locked.text,
@@ -2659,14 +2667,21 @@ test("远航调度会在 20M 后按当前航段指定目标指令", () => {
       "回目标:待推进:点火齐射:远航闭环 +16% · 远航突破 +0.05%剩余 · 绕行突破 +0.03%剩余"
     ]
   );
-  assert.equal(dispatch.loopStatusText, "闭环进度 0/3 · 下一步 点火齐射");
+  assert.equal(dispatch.branchKind, "pending");
+  assert.equal(dispatch.branchText, "分支 待选择：先执行目标");
+  assert.equal(dispatch.branchDirectiveId, "ignition-salvo");
+  assert.equal(dispatch.branchDirectiveName, "点火齐射");
+  assert.equal(
+    dispatch.loopStatusText,
+    "闭环进度 0/3 · 下一步 点火齐射 · 分支 待选择：先执行目标"
+  );
   assert.equal(
     overview.dispatchText,
-    "远航调度总览：航段 27/57 脉冲航闸 · 目标 点火齐射 · 协同 谐振脉冲 · 闭环 0/3 · 下一步 目标 点火齐射"
+    "远航调度总览：航段 27/57 脉冲航闸 · 目标 点火齐射 · 协同 谐振脉冲 · 分支 待选择：先执行目标 · 闭环 0/3 · 下一步 目标 点火齐射"
   );
   assert.equal(
     dispatch.text,
-    "远航调度：航段 27/57 脉冲航闸指定点火齐射 · 执行目标指令获得调度校准 +14% · 目标指令冷却 -30% · 调度接力 +30 秒 · 目标后优先谐振脉冲触发远航协同 +5%并获得协同补给 +3%当前，另一个非目标可触发远航绕行 +4%并消耗当前能量进行绕行投送 -0.3%当前 / +150%累计，所有非目标仍触发远航续航 +8% · 3/3 回到目标指令触发远航闭环 +16%、远航突破 +0.05%剩余，绕行路线额外触发绕行突破 +0.03%剩余 · 完成闭环后远航整备刷新谐振脉冲冷却，下一步触发整备续航 +7%；若上一轮选择绕行，则改为触发绕行整备 +5%，再回到目标触发整备回航 +6%"
+    "远航调度：航段 27/57 脉冲航闸指定点火齐射 · 执行目标指令获得调度校准 +14% · 目标指令冷却 -30% · 调度接力 +30 秒 · 分支 待选择：先执行目标 · 目标后优先谐振脉冲触发远航协同 +5%并获得协同补给 +3%当前，另一个非目标可触发远航绕行 +4%并消耗当前能量进行绕行投送 -0.3%当前 / +150%累计，所有非目标仍触发远航续航 +8% · 3/3 回到目标指令触发远航闭环 +16%、远航突破 +0.05%剩余，绕行路线额外触发绕行突破 +0.03%剩余 · 完成闭环后远航整备刷新谐振脉冲冷却，下一步触发整备续航 +7%；若上一轮选择绕行，则改为触发绕行整备 +5%，再回到目标触发整备回航 +6%"
   );
   assert.equal(Math.round(dispatch.progress * 100), 83);
   assert.deepEqual(plan.nextDirectiveIds, ["ignition-salvo"]);
@@ -2740,9 +2755,12 @@ test("远航调度会在 20M 后按当前航段指定目标指令", () => {
   assert.match(ignitionResult.notice, /调度接力 \+30 秒/);
   assert.equal(cooledIgnitionResult.activated, true);
   assert.equal(relayDispatch.loopProgress, 1);
+  assert.equal(relayDispatch.branchKind, "pending");
+  assert.equal(relayDispatch.branchText, "分支 待选择：协同或绕行");
   assert.match(relayDispatch.loopStatusText, /闭环进度 1\/3/);
   assert.match(relayDispatch.loopStatusText, /优先谐振脉冲触发远航协同/);
   assert.match(relayDispatch.loopStatusText, /另一非目标触发远航绕行/);
+  assert.match(relayDispatch.loopStatusText, /分支 待选择：协同或绕行/);
   assert.deepEqual(
     relayDispatch.loopSteps.map((step) => step.label + ":" + step.stateText),
     ["目标:已完成", "协同/绕行:下一步", "回目标:待推进"]
@@ -2835,8 +2853,11 @@ test("远航调度会在 20M 后按当前航段指定目标指令", () => {
   assert.match(relayCruiseResult.notice, /远航绕行 \+/);
   assert.match(relayCruiseResult.notice, /绕行投送 -/);
   assert.equal(detourDispatch.loopProgress, 2);
+  assert.equal(detourDispatch.branchKind, "detour");
+  assert.equal(detourDispatch.branchText, "分支 绕行：巡航回收");
   assert.match(detourDispatch.loopStatusText, /闭环进度 2\/3/);
   assert.match(detourDispatch.loopStatusText, /触发远航闭环与绕行突破/);
+  assert.match(detourDispatch.loopStatusText, /分支 绕行：巡航回收/);
   assert.deepEqual(
     detourDispatch.loopSteps.map((step) => step.label + ":" + step.stateText),
     ["目标:已完成", "协同/绕行:已完成", "回目标:下一步"]
@@ -2870,10 +2891,13 @@ test("远航调度会在 20M 后按当前航段指定目标指令", () => {
   assert.equal(detourIgnitionResult.state.directives["cruise-cache"], 0);
   assert.equal(detourIgnitionResult.state.farRouteLastBranchDirectiveId, "cruise-cache");
   assert.equal(detourCompletedDispatch.loopProgress, 3);
+  assert.equal(detourCompletedDispatch.branchKind, "detour-prep");
+  assert.equal(detourCompletedDispatch.branchText, "分支 绕行整备：巡航回收");
   assert.match(
     detourCompletedDispatch.loopStatusText,
     /已完成 · 绕行整备优先巡航回收触发绕行整备/
   );
+  assert.match(detourCompletedDispatch.loopStatusText, /分支 绕行整备：巡航回收/);
   assert.deepEqual(detourCompletedPlan.nextDirectiveIds, ["cruise-cache"]);
   assert.equal(detourCompletedPlan.recommendationText, "绕行整备");
   assert.equal(detourCompletedPlan.waitingRecommendationText, "等待绕行整备");
@@ -2918,8 +2942,11 @@ test("远航调度会在 20M 后按当前航段指定目标指令", () => {
   assert.match(relayResonanceResult.notice, /协同补给 \+/);
   assert.equal(loopDispatch.loopProgress, 2);
   assert.equal(loopDispatch.loopTarget, 3);
+  assert.equal(loopDispatch.branchKind, "sync");
+  assert.equal(loopDispatch.branchText, "分支 协同：谐振脉冲");
   assert.match(loopDispatch.loopStatusText, /闭环进度 2\/3/);
   assert.match(loopDispatch.loopStatusText, /协同回航到点火齐射触发远航闭环/);
+  assert.match(loopDispatch.loopStatusText, /分支 协同：谐振脉冲/);
   assert.deepEqual(
     loopDispatch.loopSteps.map((step) => step.label + ":" + step.stateText),
     ["目标:已完成", "协同/绕行:已完成", "回目标:下一步"]
@@ -2966,8 +2993,11 @@ test("远航调度会在 20M 后按当前航段指定目标指令", () => {
   assert.match(loopIgnitionResult.notice, /远航整备 谐振脉冲冷却刷新/);
   assert.equal(loopIgnitionResult.state.directiveChain.expiresAt, 150_000);
   assert.equal(completedDispatch.loopProgress, 3);
+  assert.equal(completedDispatch.branchKind, "sync-prep");
+  assert.equal(completedDispatch.branchText, "分支 协同整备：谐振脉冲");
   assert.match(completedDispatch.loopStatusText, /闭环进度 3\/3/);
   assert.match(completedDispatch.loopStatusText, /已完成 · 远航整备优先谐振脉冲触发整备续航/);
+  assert.match(completedDispatch.loopStatusText, /分支 协同整备：谐振脉冲/);
   assert.deepEqual(
     completedDispatch.loopSteps.map((step) => step.label + ":" + step.stateText),
     ["目标:已完成", "协同/绕行:已完成", "回目标:已完成"]
@@ -3010,7 +3040,10 @@ test("远航调度会在 20M 后按当前航段指定目标指令", () => {
   assert.match(completedResonanceResult.dispatchPrepRewardText, /整备续航 \+/);
   assert.match(completedResonanceResult.notice, /整备续航 \+/);
   assert.equal(returnDispatch.loopProgress, 3);
+  assert.equal(returnDispatch.branchKind, "sync-prep");
+  assert.equal(returnDispatch.branchText, "分支 协同整备：谐振脉冲");
   assert.match(returnDispatch.loopStatusText, /已完成 · 回到点火齐射触发整备回航/);
+  assert.match(returnDispatch.loopStatusText, /分支 协同整备：谐振脉冲/);
   assert.deepEqual(returnPlan.nextDirectiveIds, ["ignition-salvo"]);
   assert.equal(returnPlan.recommendationText, "整备回航");
   assert.equal(returnPlan.waitingRecommendationText, "等待回航");

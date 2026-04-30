@@ -2,6 +2,13 @@
 
 ## 2026-04-30
 
+- GitHub Issues：gh 可用且已认证；2026-04-30 21:43 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
+- #6 继续作为本轮 Product decision 依据：该反馈指出后半段“只有不停的目标、玩法没有真正变化”；前序已补协同、绕行、协同补给、绕行投送、绕行整备等分支机制，但当前路线状态仍需要从最后一次指令和闭环文字中推断。
+- 本轮改动新增远航分支态势：远航调度会派生“分支 待选择/协同/绕行/协同整备/绕行整备”，主操作区显示 `far-dispatch-branch` 徽标，星图总览和反馈快照同步包含分支态势。
+- 本轮只调整派生展示和反馈快照文本；不新增存档字段，不改变升级价格、星图路线、项目奖励、项目完成判定、航线策略、指令收益、远航调度收益、整备收益、反馈入口或部署链路。
+- 本轮本地验证已通过：`npm install`、`npm test` 和 `npm run build`；测试数 117 项。
+- 构建产物已确认包含 `far-dispatch-branch`、`branchKind`、`branchText`、“分支 待选择”、“分支 协同”和“分支 绕行”。
+
 - GitHub Issues：gh 可用且已认证；2026-04-30 21:16 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
 - #6 继续作为本轮 Product decision 依据：该反馈指出后半段“只有不停的目标、玩法没有真正变化”；前序已经让协同路线补当前资源、绕行路线消耗当前资源推进累计航段，但绕行完成闭环后的下一轮起手仍和协同整备节奏过于接近。
 - 本轮改动新增绕行整备：选择绕行并回到目标完成闭环时，会记录最近远航分支 `farRouteLastBranchDirectiveId`，刷新刚才的绕行指令冷却；完成态下一步优先推荐“绕行整备/等待绕行整备”，执行该绕行指令获得“绕行整备 +5%”奖励。

@@ -614,6 +614,11 @@ function renderFarDispatch(dispatch) {
   text.className = "far-dispatch-text";
   setCompactSupportText(text, getFarDispatchDisplayText(dispatch), dispatch.text);
 
+  const branch = document.createElement("span");
+  branch.className = "far-dispatch-branch is-" + getFarDispatchBranchKind(dispatch);
+  branch.textContent = dispatch.branchText ?? "";
+  branch.hidden = !dispatch.branchText;
+
   const loopText = document.createElement("span");
   loopText.className = "far-dispatch-loop-text";
   loopText.textContent = dispatch.loopStatusText;
@@ -648,7 +653,7 @@ function renderFarDispatch(dispatch) {
 
   elements.farDispatch.classList.toggle("is-locked", !dispatch.unlocked);
   elements.farDispatch.classList.toggle("is-active", dispatch.active);
-  elements.farDispatch.replaceChildren(text, meter, loopText, loopMeter, loopTrack);
+  elements.farDispatch.replaceChildren(text, branch, meter, loopText, loopMeter, loopTrack);
 }
 
 function renderFarDispatchLoopTrack(dispatch) {
@@ -732,6 +737,11 @@ function getFarDispatchDisplayText(dispatch) {
   ]
     .filter(Boolean)
     .join(" · ");
+}
+
+function getFarDispatchBranchKind(dispatch) {
+  const kind = String(dispatch.branchKind ?? "none");
+  return kind.replace(/[^a-z-]/g, "") || "none";
 }
 
 function renderDirective(option) {

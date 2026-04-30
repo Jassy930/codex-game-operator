@@ -2848,6 +2848,10 @@ export function getFarRouteDispatch(state, now = Date.now()) {
       refreshDirectiveId: null,
       refreshDirectiveName: "",
       refreshText: "",
+      branchKind: "locked",
+      branchText: "",
+      branchDirectiveId: null,
+      branchDirectiveName: "",
       projectId: null,
       loopProgress: 0,
       loopTarget,
@@ -2904,6 +2908,10 @@ export function getFarRouteDispatch(state, now = Date.now()) {
       refreshDirectiveId: null,
       refreshDirectiveName: "",
       refreshText: "",
+      branchKind: "completed",
+      branchText: "",
+      branchDirectiveId: null,
+      branchDirectiveName: "",
       projectId: null,
       loopProgress: loopTarget,
       loopTarget,
@@ -2922,6 +2930,12 @@ export function getFarRouteDispatch(state, now = Date.now()) {
     ? dispatchRefreshLabel + "刷新" + relayDirective.name + "冷却"
     : "";
   const loopStatus = getFarRouteDispatchLoopStatus(
+    current,
+    directive,
+    relayDirective,
+    now
+  );
+  const branchStatus = getFarRouteDispatchBranchStatus(
     current,
     directive,
     relayDirective,
@@ -2980,6 +2994,10 @@ export function getFarRouteDispatch(state, now = Date.now()) {
     refreshDirectiveId: relayDirective?.id ?? null,
     refreshDirectiveName: relayDirectiveName,
     refreshText,
+    branchKind: branchStatus.kind,
+    branchText: branchStatus.text,
+    branchDirectiveId: branchStatus.directiveId,
+    branchDirectiveName: branchStatus.directiveName,
     projectId: project.id,
     projectName: project.name,
     segmentText: project.segmentText,
@@ -2988,7 +3006,7 @@ export function getFarRouteDispatch(state, now = Date.now()) {
     loopTarget: loopStatus.target,
     loopSteps,
     loopStepText: buildFarRouteDispatchLoopStepText(loopSteps),
-    loopStatusText: loopStatus.text,
+    loopStatusText: appendFarRouteDispatchBranchText(loopStatus.text, branchStatus),
     text:
       "远航调度：" +
       project.segmentText +
@@ -3002,6 +3020,8 @@ export function getFarRouteDispatch(state, now = Date.now()) {
       cooldownText +
       " · " +
       chainWindowText +
+      " · " +
+      branchStatus.text +
       " · 目标后优先" +
       relayDirectiveName +
       "触发" +
@@ -4360,6 +4380,7 @@ function buildProjectOverviewDispatchText(dispatch) {
   const relayText = dispatch.relayDirectiveName
     ? " · 协同 " + dispatch.relayDirectiveName
     : "";
+  const branchText = dispatch.branchText ? " · " + dispatch.branchText : "";
   const currentStep = Array.isArray(dispatch.loopSteps)
     ? dispatch.loopSteps.find((step) => step.state === "current")
     : null;
@@ -4375,6 +4396,7 @@ function buildProjectOverviewDispatchText(dispatch) {
     " · 目标 " +
     dispatch.targetDirectiveName +
     relayText +
+    branchText +
     " · 闭环 " +
     dispatch.loopProgress +
     "/" +
@@ -4532,6 +4554,112 @@ function buildFarRouteDispatchLoopStepText(steps) {
       )
       .join(" -> ")
   );
+}
+
+function appendFarRouteDispatchBranchText(text, branchStatus) {
+  if (!branchStatus?.text) {
+    return text;
+  }
+
+  return text + " · " + branchStatus.text;
+}
+
+function getFarRouteDispatchBranchStatus(state, directive, relayDirective, now) {
+  if (!directive) {
+    return {
+      kind: "none",
+      text: "",
+      directiveId: null,
+      directiveName: ""
+    };
+  }
+
+  const branchBase = {
+    active: true,
+    targetDirectiveId: directive.id,
+    relayDirectiveId: relayDirective?.id ?? null,
+    chainWindowSeconds:
+      DIRECTIVE_CHAIN_WINDOW_SECONDS + FAR_ROUTE_DISPATCH_CHAIN_WINDOW_EXTENSION_SECONDS
+  };
+  const chain = state.directiveChain ?? {};
+  const active = Boolean(chain.lastDirectiveId && chain.expiresAt >= now);
+  const rawStacks = Number(chain.stacks);
+  const stacks = Math.min(
+    DIRECTIVE_CHAIN_MAX_STACKS,
+    Math.max(0, Number.isFinite(rawStacks) ? Math.floor(rawStacks) : 0)
+  );
+  const progress = active ? Math.min(DIRECTIVE_CHAIN_MAX_STACKS + 1, stacks + 1) : 0;
+
+  if (!relayDirective) {
+    return {
+      kind: "relay",
+      text: "分支 续航：非目标指令",
+      directiveId: null,
+      directiveName: ""
+    };
+  }
+
+  if (!active) {
+    return {
+      kind: "pending",
+      text: "分支 待选择：先执行目标",
+      directiveId: directive.id,
+      directiveName: directive.name
+    };
+  }
+
+  if (progress >= DIRECTIVE_CHAIN_MAX_STACKS + 1) {
+    const completedBranchDirective = getFarRouteDispatchCompletedBranchDirective(
+      state,
+      branchBase,
+      now
+    );
+    const branchDirective = completedBranchDirective ?? relayDirective;
+    const kind = branchDirective.id === relayDirective.id ? "sync-prep" : "detour-prep";
+    const label = kind === "sync-prep" ? "协同整备" : "绕行整备";
+
+    return {
+      kind,
+      text: "分支 " + label + "：" + branchDirective.name,
+      directiveId: branchDirective.id,
+      directiveName: branchDirective.name
+    };
+  }
+
+  if (chain.lastDirectiveId === directive.id) {
+    return {
+      kind: "pending",
+      text: "分支 待选择：协同或绕行",
+      directiveId: null,
+      directiveName: ""
+    };
+  }
+
+  if (chain.lastDirectiveId === relayDirective.id) {
+    return {
+      kind: "sync",
+      text: "分支 协同：" + relayDirective.name,
+      directiveId: relayDirective.id,
+      directiveName: relayDirective.name
+    };
+  }
+
+  const detourDirective = getDirectiveDef(chain.lastDirectiveId);
+  if (detourDirective) {
+    return {
+      kind: "detour",
+      text: "分支 绕行：" + detourDirective.name,
+      directiveId: detourDirective.id,
+      directiveName: detourDirective.name
+    };
+  }
+
+  return {
+    kind: "pending",
+    text: "分支 待选择：协同或绕行",
+    directiveId: null,
+    directiveName: ""
+  };
 }
 
 function getFarRouteDispatchLoopStepRewardText(step, relayDirective) {
