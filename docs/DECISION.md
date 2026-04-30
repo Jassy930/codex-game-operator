@@ -24,8 +24,11 @@
 - `src/app.js` 渲染 `far-dispatch-branch-choice-route-marker` 与 `is-route-marker-*`；`src/styles.css` 包含 `.far-dispatch-branch-choice-route-marker.is-current`、`.is-recommended`、`.is-recommended-shift`、`.is-previous` 和 `.is-shift`。
 - 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
 - 构建产物已确认包含 `routeMarkerKind`、`routeMarkerText`、`far-dispatch-branch-choice-route-marker` 和 `is-route-marker-*`。
-- 发布状态：待推送后由 GitHub Pages workflow 验证。
-- 反馈处理：待部署验证后回复 #6 和 #4。
+- 发布验证已通过：提交 `6fbf8cd` 已推送到 `origin/main`；GitHub Pages workflow `25193446312` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`；线上首页返回 HTTP 200，线上 `src/game.js`、`src/app.js` 与 `src/styles.css` 已确认包含路线微图标记相关代码和样式。
+- 已回复 GitHub Issue #6，说明本轮路线微图标记、验证和部署结果，issue 保持 open 等待复测。
+- 已回复 GitHub Issue #4，说明本轮用图形化节点标记继续降低远航分支卡片文字压力，issue 保持 open 等待复测。
+- 回复后同步 GitHub Issues：2026-05-01 06:59 CST 当前仍为 5 个 open feedback issue、0 个 open bug issue；#6 与 #4 更新时间均为 2026-04-30T22:58:46Z。
+- 钉钉通知未发送：运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` 相关变量名，也未发现本地 `.env*` 文件；未将 webhook 写入仓库。
 
 ## 2026-05-01 Product decision：远航资源取向符号
 

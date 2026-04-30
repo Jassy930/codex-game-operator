@@ -9,8 +9,9 @@
 - 同步 GitHub Issues 反馈状态：2026-05-01 06:49 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 作为主处理对象，#4 作为视觉密度依据。
 - 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
 - 构建产物已确认包含 `routeMarkerKind`、`routeMarkerText`、`far-dispatch-branch-choice-route-marker` 和 `is-route-marker-*`。
-- 发布状态：待推送后由 GitHub Pages workflow 验证。
-- 反馈处理：待部署验证后回复 #6 和 #4。
+- 发布：提交 `6fbf8cd` 已推送到 `origin/main`；GitHub Pages workflow `25193446312` 成功；线上首页返回 HTTP 200，线上 `src/game.js`、`src/app.js` 和 `src/styles.css` 已确认包含 `routeMarkerKind`、`routeMarkerText`、`far-dispatch-branch-choice-route-marker` 与 `is-route-marker-*`。
+- 反馈处理：已回复 #6，说明路线微图新增推荐/上轮/本轮/改道节点标记、验证结果和复测问题；已回复 #4，说明本轮路线微图标记继续降低远航分支卡片文字压力；两个 issue 均保持 open。回复后于 2026-05-01 06:59 CST 再次同步 GitHub Issues，当前仍为 5 个 open feedback issue、0 个 open bug issue。
+- 钉钉通知未发送：运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` 相关变量名，也未发现本地 `.env*` 文件；未将 webhook 写入仓库。
 
 - 远航调度新增“资源取向符号”：协同/绕行分支卡片的路线微图会进一步显示保留当前资源或投送累计航段的图形符号，继续回应 #6 的后半段路线取舍和 #4 的图片化/降文字密度反馈。
 - `src/game.js` 为 `branchChoices` 派生 `routeResourceKind` / `routeResourceText`；`src/app.js` 在 `renderFarDispatchBranchChoiceRoute(choice)` 中渲染 `far-dispatch-branch-choice-route-resource`；`src/styles.css` 增加 `is-current` / `is-progress` 资源取向样式；`tests/game.test.js` 覆盖派生字段、静态绑定和样式。
