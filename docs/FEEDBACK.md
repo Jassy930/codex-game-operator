@@ -9,6 +9,9 @@
 - 本轮不新增存档字段，不改变升级价格、产能公式、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令冷却、连携窗口、轮换目标奖励、预案执行、航线委托、指令熟练或反馈入口。
 - 本轮本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数为 105 项。
 - 构建产物已包含 `FAR_ROUTE_DISPATCH_UNLOCK_ENERGY`、`getFarRouteDispatch`、`farDispatch`、`directive-dispatch-bonus` 和“调度校准”。
+- 提交 399e179 已推送；GitHub Pages workflow 25141363221 已成功，线上地址返回 HTTP 200；线上首页、`game.js`、`app.js` 和 `styles.css` 已确认包含远航调度相关标记。
+- #6 已回复：说明 20M 后远航调度已部署，脉冲航闸会指定点火齐射，issue 保持 open 等待复测。
+- 回复后同步 GitHub Issues：2026-04-30 08:42 CST 当前仍为 5 个 open feedback issue、0 个 open bug issue；#6 更新时间为 2026-04-30T00:42:29Z。
 
 - GitHub Issues：gh 可用且已认证；2026-04-30 08:07 CST 通过 `ops/collect-feedback.sh` 同步到 4 个 open issue、4 个 open feedback issue、0 个 open bug issue。
 - #5 继续作为本轮 Product decision：上一轮已补点火按钮脉冲、粒子层、过载前兆和过载冲击波，但 issue 仍保持 open，尚无玩家复测结论；本轮继续补点击前的奖励预期和过载追逐目标。

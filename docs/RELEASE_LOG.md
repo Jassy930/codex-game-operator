@@ -8,6 +8,9 @@
 - 同步 GitHub Issues 反馈状态：2026-04-30 08:27 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 指向后半段玩法没有真正变化，并作为本轮处理对象。
 - 验证通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 105 项。
 - 构建产物已确认包含 `FAR_ROUTE_DISPATCH_UNLOCK_ENERGY`、`getFarRouteDispatch`、`farDispatch`、`directive-dispatch-bonus` 和“调度校准”。
+- 提交 399e179 已推送；GitHub Pages workflow 25141363221 已成功，线上地址返回 HTTP 200，且线上首页、`game.js`、`app.js` 和 `styles.css` 已确认包含远航调度相关标记。
+- 已回复 #6，说明远航调度已部署，并保持 issue open 等待复测。
+- 回复后同步 GitHub Issues 反馈状态：当前 5 个 open feedback issue、0 个 open bug issue；#6 更新时间为 2026-04-30T00:42:29Z。
 - 点火按钮新增 8 格连击轨和下一击奖励预告：普通状态显示下一击收益和剩余过载次数，第 7 次连击直接提示下一击触发过载，第 8 次过载后提示进入新一轮蓄能。
 - `src/game.js` 新增 `getCoreRewardPreview`；`index.html` 新增 `core-combo-track` 和 `coreRewardHint`；`src/app.js` 新增 `renderCoreComboTrack` / `renderCoreRewardHint`；`src/styles.css` 新增连击轨、奖励预告和 `coreDotPulse` 动画；`tests/game.test.js` 覆盖初始态、临近过载态、过载后预告和静态/样式标记。
 - 本轮只调整点火按钮展示和奖励预告；不新增存档字段，不改变点击收益、连击窗口、过载奖励、升级价格、产能公式、星图 57 段路线、项目奖励、航线策略、航线指令或反馈入口。

@@ -22,8 +22,11 @@
 - 反馈 Issue 快照包含远航调度状态。
 - 本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 105 项。
 - 构建产物已确认包含 `FAR_ROUTE_DISPATCH_UNLOCK_ENERGY`、`getFarRouteDispatch`、`farDispatch`、`directive-dispatch-bonus` 和“调度校准”。
+- 提交 399e179 已推送；GitHub Pages workflow 25141363221 已成功，线上地址返回 HTTP 200，且线上首页、`game.js`、`app.js` 和 `styles.css` 已确认包含远航调度相关标记。
+- #6 已回复并继续保持 open，等待复测确认远航调度是否让脉冲航闸附近的主动指令选择发生变化。
+- 回复后同步 GitHub Issues：2026-04-30 08:42 CST 当前仍为 5 个 open feedback issue、0 个 open bug issue；#6 更新时间为 2026-04-30T00:42:29Z。
 
-下一步：回复 #6 并保持 open，等待复测确认“当前航段改变目标指令”是否能缓解后半段只追数值目标的问题；若仍不足，再评估项目分支或资源消耗型指令。
+下一步：等待 #6 复测确认“当前航段改变目标指令”是否能缓解后半段只追数值目标的问题；若仍不足，再评估项目分支或资源消耗型指令。
 
 ## 2026-04-30 Product decision：点火奖励预告与连击轨
 
