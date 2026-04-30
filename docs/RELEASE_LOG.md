@@ -7,6 +7,9 @@
 - 本轮只调整 20M 后远航调度目标指令完成 3/3 短循环时的奖励与展示；不新增存档字段，不改变升级价格、产能公式、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、基础连携倍率、轮换目标奖励、预案执行、航线委托、指令熟练、满层回响或反馈入口。
 - 同步 GitHub Issues 反馈状态：2026-04-30 09:34 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 继续作为后半段玩法变化处理对象。
 - 验证通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 106 项。
+- 提交 6806c45 已推送；GitHub Pages workflow 25143036877 已成功，线上地址返回 HTTP 200，且线上首页、`game.js`、`app.js` 和 `styles.css` 已确认包含 `FAR_ROUTE_DISPATCH_LOOP_REWARD_RATE`、`dispatchLoopReward`、`directive-dispatch-loop` 和“远航闭环”。
+- 已回复 #6，说明 3/3 指令轮换回到当前航段目标指令会触发远航闭环奖励，并保持 issue open 等待复测。
+- 回复后同步 GitHub Issues 反馈状态：2026-04-30 09:45 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 更新时间为 2026-04-30T01:45:22Z。
 - 远航调度新增“调度接力”：20M 后远航调度 active 时，执行当前航段目标指令会把本轮指令连携窗口从 90 秒延长到 120 秒，并在按钮层显示“调度接力 +30 秒”。
 - `src/game.js` 新增 `FAR_ROUTE_DISPATCH_CHAIN_WINDOW_EXTENSION_SECONDS` 和调度连携窗口计算；`src/app.js` 渲染 `directive-dispatch-window` 并记录 `dispatchChainWindowSeconds` / `dispatchChainWindowText`；`src/styles.css` 新增调度接力徽标样式；`index.html` 锁定文案同步说明连携窗口延长。
 - 本轮只调整 20M 后远航调度目标指令的连携窗口与展示；不新增存档字段，不改变升级价格、产能公式、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、基础连携倍率、轮换目标奖励、预案执行、航线委托、指令熟练、满层回响或反馈入口。
