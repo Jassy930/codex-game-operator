@@ -20,6 +20,7 @@ import {
   FAR_ROUTE_DISPATCH_CHAIN_WINDOW_EXTENSION_SECONDS,
   FAR_ROUTE_DISPATCH_COOLDOWN_MULTIPLIER,
   FAR_ROUTE_DISPATCH_LOOP_REWARD_RATE,
+  FAR_ROUTE_DISPATCH_RELAY_REWARD_RATE,
   FAR_ROUTE_DISPATCH_UNLOCK_ENERGY,
   filterProjectStatuses,
   formatNumber,
@@ -1153,7 +1154,7 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(indexHtml, /航线委托：累计 100K 能量后解锁 3 步短期任务/);
   assert.match(
     indexHtml,
-    /远航调度：累计 20M 能量后解锁后半段航段调度、目标指令推荐、目标冷却缩短、连携窗口延长与闭环奖励/
+    /远航调度：累计 20M 能量后解锁后半段航段调度、目标指令推荐、目标冷却缩短、连携窗口延长、远航续航与闭环奖励/
   );
   assert.match(indexHtml, /非契合指令起手/);
   assert.match(indexHtml, /第二步继续避开契合指令/);
@@ -1169,6 +1170,9 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(appJs, /taskRewardRate: result\.taskRewardRate/);
   assert.match(appJs, /dispatchReward: result\.dispatchReward/);
   assert.match(appJs, /dispatchRewardRate: result\.dispatchRewardRate/);
+  assert.match(appJs, /dispatchRelayReward: result\.dispatchRelayReward/);
+  assert.match(appJs, /dispatchRelayRewardRate: result\.dispatchRelayRewardRate/);
+  assert.match(appJs, /dispatchRelayRewardText: result\.dispatchRelayRewardText/);
   assert.match(appJs, /dispatchLoopReward: result\.dispatchLoopReward/);
   assert.match(appJs, /dispatchLoopRewardRate: result\.dispatchLoopRewardRate/);
   assert.match(appJs, /dispatchLoopRewardText: result\.dispatchLoopRewardText/);
@@ -1211,6 +1215,8 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(appJs, /taskBonus\.textContent = option\.taskRewardText/);
   assert.match(appJs, /dispatchBonus\.className = "directive-dispatch-bonus"/);
   assert.match(appJs, /dispatchBonus\.textContent = option\.dispatchRewardText/);
+  assert.match(appJs, /dispatchRelay\.className = "directive-dispatch-relay"/);
+  assert.match(appJs, /dispatchRelay\.textContent = option\.dispatchRelayRewardText/);
   assert.match(appJs, /dispatchLoop\.className = "directive-dispatch-loop"/);
   assert.match(appJs, /dispatchLoop\.textContent = option\.dispatchLoopRewardText/);
   assert.match(appJs, /dispatchCooldown\.className = "directive-dispatch-cooldown"/);
@@ -1239,6 +1245,7 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(styles, /\.directive-button \.directive-plan-bonus/);
   assert.match(styles, /\.directive-button \.directive-task-bonus/);
   assert.match(styles, /\.directive-button \.directive-dispatch-bonus/);
+  assert.match(styles, /\.directive-button \.directive-dispatch-relay/);
   assert.match(styles, /\.directive-button \.directive-dispatch-loop/);
   assert.match(styles, /\.directive-button \.directive-dispatch-cooldown/);
   assert.match(styles, /\.directive-button \.directive-dispatch-window/);
@@ -1885,6 +1892,27 @@ test("远航调度会在 20M 后按当前航段指定目标指令", () => {
     (option) => option.id === "ignition-salvo"
   );
   const cooledIgnitionResult = activateDirective(cooledState, "ignition-salvo", 26_000);
+  const relayState = {
+    ...state,
+    directives: {
+      ...state.directives,
+      "ignition-salvo": 1000
+    },
+    directiveChain: {
+      lastDirectiveId: "ignition-salvo",
+      stacks: 0,
+      expiresAt: 121_000
+    }
+  };
+  const relayStatus = getDirectiveStatus(relayState, 30_000);
+  const relayCruiseOption = relayStatus.options.find(
+    (option) => option.id === "cruise-cache"
+  );
+  const relayResonanceOption = relayStatus.options.find(
+    (option) => option.id === "resonance-pulse"
+  );
+  const relayDispatch = getFarRouteDispatch(relayState, 30_000);
+  const relayCruiseResult = activateDirective(relayState, "cruise-cache", 30_000);
   const loopState = {
     ...state,
     directives: {
@@ -1910,6 +1938,7 @@ test("远航调度会在 20M 后按当前航段指定目标指令", () => {
   assert.equal(FAR_ROUTE_DISPATCH_BONUS_RATE, 0.14);
   assert.equal(FAR_ROUTE_DISPATCH_COOLDOWN_MULTIPLIER, 0.7);
   assert.equal(FAR_ROUTE_DISPATCH_CHAIN_WINDOW_EXTENSION_SECONDS, 30);
+  assert.equal(FAR_ROUTE_DISPATCH_RELAY_REWARD_RATE, 0.08);
   assert.equal(FAR_ROUTE_DISPATCH_LOOP_REWARD_RATE, 0.16);
   assert.equal(locked.unlocked, false);
   assert.equal(locked.loopProgress, 0);
@@ -1917,7 +1946,7 @@ test("远航调度会在 20M 后按当前航段指定目标指令", () => {
   assert.equal(locked.loopStatusText, "闭环进度 0/3 · 20M 后解锁");
   assert.equal(
     locked.text,
-    "远航调度：累计 20M 能量后解锁后半段航段调度、目标指令推荐、目标冷却缩短、连携窗口延长与闭环奖励"
+    "远航调度：累计 20M 能量后解锁后半段航段调度、目标指令推荐、目标冷却缩短、连携窗口延长、远航续航与闭环奖励"
   );
   assert.equal(dispatch.unlocked, true);
   assert.equal(dispatch.active, true);
@@ -1927,6 +1956,8 @@ test("远航调度会在 20M 后按当前航段指定目标指令", () => {
   assert.equal(dispatch.targetDirectiveId, "ignition-salvo");
   assert.equal(dispatch.targetDirectiveName, "点火齐射");
   assert.equal(dispatch.rewardText, "调度校准 +14%");
+  assert.equal(dispatch.relayRewardRate, FAR_ROUTE_DISPATCH_RELAY_REWARD_RATE);
+  assert.equal(dispatch.relayRewardText, "远航续航 +8%");
   assert.equal(dispatch.loopRewardRate, FAR_ROUTE_DISPATCH_LOOP_REWARD_RATE);
   assert.equal(dispatch.loopRewardText, "远航闭环 +16%");
   assert.equal(dispatch.cooldownMultiplier, FAR_ROUTE_DISPATCH_COOLDOWN_MULTIPLIER);
@@ -1939,7 +1970,7 @@ test("远航调度会在 20M 后按当前航段指定目标指令", () => {
   assert.equal(dispatch.loopStatusText, "闭环进度 0/3 · 下一步 点火齐射");
   assert.equal(
     dispatch.text,
-    "远航调度：航段 27/57 脉冲航闸指定点火齐射 · 执行目标指令获得调度校准 +14% · 目标指令冷却 -30% · 调度接力 +30 秒 · 3/3 回到目标指令触发远航闭环 +16%"
+    "远航调度：航段 27/57 脉冲航闸指定点火齐射 · 执行目标指令获得调度校准 +14% · 目标指令冷却 -30% · 调度接力 +30 秒 · 目标后切换非目标指令触发远航续航 +8% · 3/3 回到目标指令触发远航闭环 +16%"
   );
   assert.equal(Math.round(dispatch.progress * 100), 83);
   assert.deepEqual(plan.nextDirectiveIds, ["ignition-salvo"]);
@@ -1949,6 +1980,8 @@ test("远航调度会在 20M 后按当前航段指定目标指令", () => {
   assert.match(plan.text, /远航调度指定点火齐射/);
   assert.equal(ignitionOption.dispatchReward > 0, true);
   assert.match(ignitionOption.dispatchRewardText, /调度校准 \+/);
+  assert.equal(ignitionOption.dispatchRelayReward, 0);
+  assert.equal(ignitionOption.dispatchRelayRewardText, "");
   assert.equal(ignitionOption.dispatchLoopReward, 0);
   assert.equal(ignitionOption.dispatchLoopRewardText, "");
   assert.equal(ignitionOption.dispatchCooldownMultiplier, FAR_ROUTE_DISPATCH_COOLDOWN_MULTIPLIER);
@@ -1962,6 +1995,7 @@ test("远航调度会在 20M 后按当前航段指定目标指令", () => {
   assert.equal(ignitionOption.recommendationText, "调度目标");
   assert.equal(cruiseOption.dispatchReward, 0);
   assert.equal(cruiseOption.dispatchRewardText, "");
+  assert.equal(cruiseOption.dispatchRelayReward, 0);
   assert.equal(cruiseOption.dispatchLoopReward, 0);
   assert.equal(cruiseOption.dispatchCooldownText, "");
   assert.equal(cruiseOption.dispatchChainWindowSeconds, 90);
@@ -1973,6 +2007,7 @@ test("远航调度会在 20M 后按当前航段指定目标指令", () => {
   assert.equal(cooledIgnitionOption.statusText, "可执行");
   assert.equal(ignitionResult.dispatchReward > 0, true);
   assert.equal(ignitionResult.dispatchRewardRate, FAR_ROUTE_DISPATCH_BONUS_RATE);
+  assert.equal(ignitionResult.dispatchRelayReward, 0);
   assert.equal(ignitionResult.dispatchLoopReward, 0);
   assert.equal(ignitionResult.dispatchCooldownMultiplier, FAR_ROUTE_DISPATCH_COOLDOWN_MULTIPLIER);
   assert.equal(ignitionResult.dispatchCooldownText, "调度冷却 -30%");
@@ -1982,6 +2017,21 @@ test("远航调度会在 20M 后按当前航段指定目标指令", () => {
   assert.match(ignitionResult.notice, /调度校准 \+/);
   assert.match(ignitionResult.notice, /调度接力 \+30 秒/);
   assert.equal(cooledIgnitionResult.activated, true);
+  assert.equal(relayDispatch.loopProgress, 1);
+  assert.match(relayDispatch.loopStatusText, /闭环进度 1\/3/);
+  assert.match(relayDispatch.loopStatusText, /下一步切换非目标指令触发远航续航/);
+  assert.equal(relayCruiseOption.recommended, false);
+  assert.equal(relayResonanceOption.recommended, true);
+  assert.equal(relayCruiseOption.dispatchRelayReward > 0, true);
+  assert.equal(relayCruiseOption.dispatchRelayRewardRate, FAR_ROUTE_DISPATCH_RELAY_REWARD_RATE);
+  assert.match(relayCruiseOption.dispatchRelayRewardText, /远航续航 \+/);
+  assert.match(relayCruiseOption.previewText, /远航续航 \+/);
+  assert.equal(relayCruiseResult.activated, true);
+  assert.equal(relayCruiseResult.chainStacks, 1);
+  assert.equal(relayCruiseResult.dispatchRelayReward > 0, true);
+  assert.equal(relayCruiseResult.dispatchRelayRewardRate, FAR_ROUTE_DISPATCH_RELAY_REWARD_RATE);
+  assert.match(relayCruiseResult.dispatchRelayRewardText, /远航续航 \+/);
+  assert.match(relayCruiseResult.notice, /远航续航 \+/);
   assert.equal(loopDispatch.loopProgress, 2);
   assert.equal(loopDispatch.loopTarget, 3);
   assert.match(loopDispatch.loopStatusText, /闭环进度 2\/3/);
@@ -2002,6 +2052,7 @@ test("远航调度会在 20M 后按当前航段指定目标指令", () => {
   assert.match(completedDispatch.loopStatusText, /闭环进度 3\/3/);
   assert.match(completedDispatch.loopStatusText, /已完成 · 切换非目标指令开启下一轮/);
   assert.equal(cruiseResult.dispatchReward, 0);
+  assert.equal(cruiseResult.dispatchRelayReward, 0);
   assert.equal(cruiseResult.dispatchChainWindowSeconds, 90);
   assert.equal(cruiseResult.dispatchChainWindowText, "");
 });
@@ -3238,6 +3289,7 @@ test("反馈入口会生成带游戏快照的 GitHub Issue 链接", () => {
   assert.match(body, /航线策略：点火优先/);
   assert.match(body, new RegExp(`指令熟练：2/${DIRECTIVE_MASTERY_MAX_STACKS}`));
   assert.match(body, /远航调度：累计 20M 能量后解锁后半段航段调度/);
+  assert.match(body, /远航续航与闭环奖励/);
   assert.match(body, /闭环进度 0\/3 · 20M 后解锁/);
   assert.match(body, /lens:1/);
 });
