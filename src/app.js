@@ -820,16 +820,19 @@ function renderFarDispatchBranchChoiceRoute(choice) {
   start.className =
     "far-dispatch-branch-choice-route-node is-start is-" +
     getFarDispatchBranchChoiceRouteNodeState(choice, "start");
+  start.dataset.stepLabel = getFarDispatchBranchChoiceRouteStepLabel(choice, "start");
 
   const branch = document.createElement("span");
   branch.className =
     "far-dispatch-branch-choice-route-node is-branch is-" +
     getFarDispatchBranchChoiceRouteNodeState(choice, "branch");
+  branch.dataset.stepLabel = getFarDispatchBranchChoiceRouteStepLabel(choice, "branch");
 
   const returnNode = document.createElement("span");
   returnNode.className =
     "far-dispatch-branch-choice-route-node is-return is-" +
     getFarDispatchBranchChoiceRouteNodeState(choice, "return");
+  returnNode.dataset.stepLabel = getFarDispatchBranchChoiceRouteStepLabel(choice, "return");
 
   const routeResource = document.createElement("span");
   routeResource.className =
@@ -964,6 +967,12 @@ function getFarDispatchBranchChoiceRouteNodeState(choice, nodeId) {
   const routeNodeStates = choice.routeNodeStates ?? {};
   const state = String(routeNodeStates[nodeId] ?? "waiting");
   return state.replace(/[^a-z-]/g, "") || "waiting";
+}
+
+function getFarDispatchBranchChoiceRouteStepLabel(choice, nodeId) {
+  const routeStepLabels = choice.routeStepLabels ?? {};
+  const label = String(routeStepLabels[nodeId] ?? "");
+  return label.replace(/[^0-9/]/g, "").slice(0, 3);
 }
 
 function renderDirective(option) {

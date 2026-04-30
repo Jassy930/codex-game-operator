@@ -1136,6 +1136,11 @@ export const FAR_ROUTE_DISPATCH_BRANCH_STABILITY_REWARD_RATE = 0.04;
 export const FAR_ROUTE_DISPATCH_BRANCH_FOCUS_REWARD_RATE = 0.05;
 export const FAR_ROUTE_DISPATCH_BRANCH_ROTATION_REWARD_RATE = 0.09;
 export const FAR_ROUTE_DISPATCH_FOCUS_LOOP_REWARD_RATE = 0.07;
+const FAR_ROUTE_DISPATCH_BRANCH_ROUTE_STEP_LABELS = Object.freeze({
+  start: "1",
+  branch: "2",
+  return: "3"
+});
 
 const INITIAL_UPGRADES = Object.fromEntries(
   UPGRADE_DEFS.map((upgrade) => [upgrade.id, 0])
@@ -5159,6 +5164,9 @@ function buildFarRouteDispatchBranchChoices(
       active,
       branchStatus
     );
+    const routeStepLabels = {
+      ...FAR_ROUTE_DISPATCH_BRANCH_ROUTE_STEP_LABELS
+    };
     const followupText = buildFarRouteDispatchBranchFollowupText(
       choice.label,
       choice.directive.name,
@@ -5208,6 +5216,7 @@ function buildFarRouteDispatchBranchChoices(
       routeMarkerKind,
       routeMarkerText,
       routeNodeStates,
+      routeStepLabels,
       nextText: choice.nextText,
       reasonText,
       decisionText,

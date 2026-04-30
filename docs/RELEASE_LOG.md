@@ -2,6 +2,14 @@
 
 ## Unreleased
 
+- 远航调度新增“路线微图步骤序号”：协同/绕行分支卡片的三点路线微图会在起点、分支点和回目标点显示 1/2/3，继续回应 #6 的后半段短循环顺序理解和 #4 的图片化/降文字密度反馈。
+- `src/game.js` 为 `branchChoices` 派生 `routeStepLabels`；`src/app.js` 在 `renderFarDispatchBranchChoiceRoute(choice)` 中把步号写入节点 `data-step-label`；`src/styles.css` 通过 `.far-dispatch-branch-choice-route-node::after` 显示步号；`tests/game.test.js` 覆盖派生字段、静态绑定和样式。
+- 文档同步更新：`docs/DECISION.md`、`docs/FEEDBACK.md`、`docs/RESEARCH.md`、`docs/PRODUCT.md`、`docs/DESIGN.md`、`docs/ROADMAP.md`、`docs/IDEAS.md`、`docs/METRICS.md`、`README.md` 和本日志已记录远航路线微图步骤序号。
+- 本轮只调整派生展示、DOM、样式和测试，不新增收益、不新增存档字段，不改变升级价格、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、远航调度既有数值、冷却、连携窗口、反馈入口或部署链路。
+- 同步 GitHub Issues 反馈状态：2026-05-01 07:27 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 作为主处理对象，#4 作为视觉密度依据。
+- 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含 `routeStepLabels`、`getFarDispatchBranchChoiceRouteStepLabel`、`data-step-label` 和 `.far-dispatch-branch-choice-route-node::after`。
+
 - 远航调度新增“路线微图步骤高亮”：协同/绕行分支卡片的三点路线微图会把起点、分支点和回目标点标为已完成、下一步或待推进，继续回应 #6 的后半段短循环理解和 #4 的图片化/降文字密度反馈。
 - `src/game.js` 为 `branchChoices` 派生 `routeNodeStates`；`src/app.js` 在 `renderFarDispatchBranchChoiceRoute(choice)` 中把节点状态渲染为 `far-dispatch-branch-choice-route-node is-done/is-next/is-waiting`；`src/styles.css` 增加路线节点步骤高亮；`tests/game.test.js` 覆盖 0/3 起手、1/3 选分支、2/3 回目标、静态绑定和样式。
 - 文档同步更新：`docs/DECISION.md`、`docs/FEEDBACK.md`、`docs/RESEARCH.md`、`docs/PRODUCT.md`、`docs/DESIGN.md`、`docs/ROADMAP.md`、`docs/IDEAS.md`、`docs/METRICS.md`、`README.md` 和本日志已记录远航路线微图步骤高亮。

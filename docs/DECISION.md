@@ -1,5 +1,28 @@
 # Decision
 
+## 2026-05-01 Product decision：远航路线微图步骤序号
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-01 07:27 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#6 仍是最新后半段玩法反馈，#4 仍指出界面文字密度和图片化诉求，因此本轮继续进入 Product decision。
+
+当前最大问题：前序路线微图已经能显示协同/绕行路径、资源取向、路线状态和当前节点完成状态，但三枚节点仍缺少固定序号。玩家能扫到哪个节点是下一步，却仍要把节点位置和“目标 -> 分支 -> 回目标”的三步顺序对应起来。
+
+本轮决策：
+
+- 新增“远航路线微图步骤序号”。
+- `branchChoices` 派生 `routeStepLabels`，固定为起点 `1`、分支点 `2`、回目标点 `3`。
+- `renderFarDispatchBranchChoiceRoute(choice)` 将序号写入路线节点 `data-step-label`，样式通过节点伪元素显示。
+- 路线微图仍保持 `aria-hidden="true"`；语义继续由已有 `branchChoiceText`、路线步骤、路线下一步、按钮路线标记和路线反馈承载。
+- 本轮只调整派生展示、DOM、样式和测试；不新增收益、不新增存档字段，不改变升级价格、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、远航调度既有数值、冷却、连携窗口、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-05-01 07:27 CST 当前 5 个 open feedback issue、0 个 open bug issue。
+- 协同/绕行分支均派生 `routeStepLabels` 为 `1:2:3`。
+- `src/app.js` 使用 `getFarDispatchBranchChoiceRouteStepLabel` 写入路线节点 `dataset.stepLabel`。
+- `src/styles.css` 使用 `.far-dispatch-branch-choice-route-node::after` 与 `content: attr(data-step-label)` 显示序号。
+- 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含 `routeStepLabels`、`getFarDispatchBranchChoiceRouteStepLabel`、`data-step-label` 和 `.far-dispatch-branch-choice-route-node::after`。
+
 ## 2026-05-01 Product decision：远航路线微图步骤高亮
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-01 07:04 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#6 仍是最新后半段玩法反馈，#4 仍指出界面文字密度和图片化诉求，因此本轮继续进入 Product decision。

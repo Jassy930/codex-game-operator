@@ -1710,6 +1710,8 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(appJs, /getFarDispatchBranchChoiceRouteNodeState\(choice, "branch"\)/);
   assert.match(appJs, /getFarDispatchBranchChoiceRouteNodeState\(choice, "return"\)/);
   assert.match(appJs, /function getFarDispatchBranchChoiceRouteNodeState\(choice, nodeId\)/);
+  assert.match(appJs, /dataset\.stepLabel = getFarDispatchBranchChoiceRouteStepLabel/);
+  assert.match(appJs, /function getFarDispatchBranchChoiceRouteStepLabel\(choice, nodeId\)/);
   assert.match(appJs, /routeResource\.className =/);
   assert.match(appJs, /far-dispatch-branch-choice-route-resource is-/);
   assert.match(appJs, /routeMarker\.className =/);
@@ -1848,6 +1850,8 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(styles, /\.far-dispatch-branch-choice-route/);
   assert.match(styles, /\.far-dispatch-branch-choice-route-line/);
   assert.match(styles, /\.far-dispatch-branch-choice-route-node/);
+  assert.match(styles, /\.far-dispatch-branch-choice-route-node::after/);
+  assert.match(styles, /content: attr\(data-step-label\)/);
   assert.match(styles, /\.far-dispatch-branch-choice-route \.far-dispatch-branch-choice-route-node\.is-done/);
   assert.match(styles, /\.far-dispatch-branch-choice-route \.far-dispatch-branch-choice-route-node\.is-next/);
   assert.match(styles, /\.far-dispatch-branch-choice-route-resource/);
@@ -2931,6 +2935,17 @@ test("远航调度会在 20M 后按当前航段指定目标指令", () => {
         choice.routeNodeStates.return
     ),
     ["next:waiting:waiting", "next:waiting:waiting"]
+  );
+  assert.deepEqual(
+    dispatch.branchChoices.map(
+      (choice) =>
+        choice.routeStepLabels.start +
+        ":" +
+        choice.routeStepLabels.branch +
+        ":" +
+        choice.routeStepLabels.return
+    ),
+    ["1:2:3", "1:2:3"]
   );
   assert.equal(
     dispatch.branchChoiceText,

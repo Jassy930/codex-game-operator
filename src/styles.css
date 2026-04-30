@@ -1594,7 +1594,7 @@ h2 {
 .far-dispatch-branch-choice-route {
   position: relative;
   display: block;
-  height: 18px;
+  height: 22px;
   border: 1px solid rgba(248, 243, 231, 0.12);
   border-radius: 6px;
   background:
@@ -1615,14 +1615,24 @@ h2 {
 
 .far-dispatch-branch-choice-route-node {
   position: absolute;
+  display: grid;
   top: 50%;
-  width: 8px;
-  height: 8px;
+  width: 12px;
+  height: 12px;
+  place-items: center;
   border: 1px solid rgba(248, 243, 231, 0.52);
   border-radius: 999px;
   background: #f8f3e7;
+  color: rgba(5, 12, 20, 0.78);
+  font-size: 0.48rem;
+  font-weight: 950;
+  line-height: 1;
   box-shadow: 0 0 0 3px rgba(248, 243, 231, 0.08);
   transform: translateY(-50%);
+}
+
+.far-dispatch-branch-choice-route-node::after {
+  content: attr(data-step-label);
 }
 
 .far-dispatch-branch-choice-route-node.is-start {
@@ -1630,7 +1640,7 @@ h2 {
 }
 
 .far-dispatch-branch-choice-route-node.is-branch {
-  left: calc(50% - 4px);
+  left: calc(50% - 6px);
 }
 
 .far-dispatch-branch-choice-route-node.is-return {
