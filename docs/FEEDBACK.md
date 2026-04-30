@@ -2,6 +2,13 @@
 
 ## 2026-04-30
 
+- GitHub Issues：gh 可用且已认证；2026-04-30 14:12 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
+- #5 继续作为本轮 Product decision 依据：该反馈指出点火按钮太薄弱，希望增加点击反馈、特效和点击欲望；前序已补视觉脉冲、粒子、收益浮层、8 格连击轨、下一击预告和环形蓄能轨，本轮补一层可关闭的点击音效反馈。
+- 本轮改动新增点火音效开关：静态首页显示 `soundToggle`，默认开启；运行期普通点火播放轻双音，过载点火播放更厚的双音，偏好写入独立 `codex-game-operator.sound-enabled`。
+- 本轮不新增游戏存档字段，不改变点击收益、连击窗口、过载奖励、升级价格、产能公式、星图航段、航线策略、航线指令、反馈入口或部署链路。
+- 本轮本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 109 项。
+- 构建产物已确认包含 `soundToggle`、`sound-toggle`、`SOUND_KEY`、`playCoreSound` 和 `AudioContext`。
+
 - GitHub Issues：gh 可用且已认证；2026-04-30 14:01 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
 - #5 作为本轮 Product decision 依据：该反馈指出点火按钮太薄弱，希望增加点击反馈、特效和点击欲望；前序已补点击脉冲、粒子、收益浮层、8 格连击轨和下一击预告，但按钮主体还缺少连续蓄能状态。
 - 本轮改动新增点火环形蓄能轨：主点火按钮内显示 `core-charge-ring`，由现有连击进度驱动环形点亮，过载前兆和过载命中时切换高亮状态。

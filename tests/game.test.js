@@ -1058,8 +1058,17 @@ test("点火按钮会渲染点击反馈和过载前兆效果", () => {
   assert.match(indexHtml, /id="coreGainPop" class="core-gain-pop"/);
   assert.match(indexHtml, /class="core-combo-track"/);
   assert.match(indexHtml, /id="coreRewardHint" class="core-reward-hint"/);
+  assert.match(indexHtml, /class="sound-toggle"/);
+  assert.match(indexHtml, /id="soundToggle" type="checkbox" checked/);
+  assert.match(indexHtml, /点火音效/);
   assert.match(indexHtml, /class="core-label">点火<\/span>/);
   assert.match(appJs, /getCoreRewardPreview/);
+  assert.match(appJs, /const SOUND_KEY = "codex-game-operator\.sound-enabled"/);
+  assert.match(appJs, /soundToggle: document\.querySelector\("#soundToggle"\)/);
+  assert.match(appJs, /let soundEnabled = loadSoundPreference\(\)/);
+  assert.match(appJs, /elements\.soundToggle\.checked = soundEnabled/);
+  assert.match(appJs, /elements\.soundToggle\.addEventListener\("change"/);
+  assert.match(appJs, /recordEvent\("sound_toggle"/);
   assert.match(appJs, /function renderCoreFeedback\(combo\)/);
   assert.match(appJs, /coreChargeRing: document\.querySelector\("#coreButton \.core-charge-ring"\)/);
   assert.match(appJs, /elements\.coreChargeRing\.style\.setProperty\(\s*"--core-charge-angle"/);
@@ -1072,6 +1081,11 @@ test("点火按钮会渲染点击反馈和过载前兆效果", () => {
   assert.match(appJs, /elements\.coreGainPop\.classList\.toggle\("is-overload-gain", overloaded\)/);
   assert.match(appJs, /function renderCoreComboTrack\(combo\)/);
   assert.match(appJs, /function renderCoreRewardHint\(coreReward\)/);
+  assert.match(appJs, /playCoreSound\(\{ overloaded \}\)/);
+  assert.match(appJs, /function playCoreSound\(\{ overloaded = false \} = \{\}\)/);
+  assert.match(appJs, /window\.AudioContext \?\? window\.webkitAudioContext/);
+  assert.match(appJs, /context\.createOscillator\(\)/);
+  assert.match(appJs, /frequency: 392/);
   assert.match(appJs, /elements\.coreButton\.dataset\.comboStep = String\(combo\.step\)/);
   assert.match(appJs, /dot\.classList\.toggle\("is-filled", combo\.step >= step\)/);
   assert.match(appJs, /dot\.classList\.toggle\("is-next", !combo\.overloaded && combo\.step \+ 1 === step\)/);
@@ -1095,6 +1109,8 @@ test("点火按钮会渲染点击反馈和过载前兆效果", () => {
   assert.match(styles, /\.core-button\.is-overload-ready/);
   assert.match(styles, /\.core-button\.is-overload-impact::after/);
   assert.match(styles, /\.combo-line span\.is-overload-ready/);
+  assert.match(styles, /\.sound-toggle/);
+  assert.match(styles, /\.sound-toggle input/);
   assert.match(styles, /@keyframes coreShockwave/);
   assert.match(styles, /@keyframes coreOverloadShockwave/);
   assert.match(styles, /@keyframes coreSparks/);

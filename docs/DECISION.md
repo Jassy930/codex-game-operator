@@ -1,5 +1,28 @@
 # Decision
 
+## 2026-04-30 Product decision：点火音效反馈开关
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-04-30 14:12 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#5 仍围绕“点火按钮太薄弱、增加点击反馈、特效和点击欲望”保持 open，因此本轮继续进入 Product decision，并处理 #5 的点火反馈层。
+
+当前最大问题：点火按钮已经有视觉脉冲、粒子、收益浮层、8 格连击轨、下一击预告和环形蓄能轨，但点击反馈仍全部停留在视觉层。玩家明确提到“点击反馈”和“点击欲望”，在不改变数值和存档的前提下，补一层可关闭的短促音效能让普通点火和过载点击形成更明确的感官差异。
+
+本轮决策：
+
+- 在点火主循环下方新增 `soundToggle` 点火音效开关，默认开启，偏好写入独立 localStorage key `codex-game-operator.sound-enabled`。
+- 使用浏览器 Web Audio 在玩家点击后播放短促本地音效；普通点火使用轻双音，过载点火使用更厚的双音反馈。
+- 本轮只调整点火反馈表现层和本地偏好；不新增游戏存档字段，不改变点击收益、连击窗口、过载奖励、升级价格、星图航段、航线策略、航线指令、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-04-30 14:12 CST 当前 5 个 open feedback issue、0 个 open bug issue。
+- 静态首页包含 `soundToggle` 和“点火音效”开关。
+- 运行期 `playCoreSound` 只在玩家点火后按开关状态调用 Web Audio；过载点击和普通点击使用不同音色组合。
+- 点火音效偏好只写入 `SOUND_KEY`，不进入游戏进度存档。
+- 本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 109 项。
+- 构建产物已确认包含 `soundToggle`、`sound-toggle`、`SOUND_KEY`、`playCoreSound` 和 `AudioContext`。
+
+下一步：提交并推送；部署成功后回复 #5，说明点火音效开关已上线并保持 issue open 等待复测。
+
 ## 2026-04-30 Product decision：点火环形蓄能轨
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-04-30 14:01 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。#6 刚完成多轮远航调度展示并已回复等待复测；#5 仍围绕“点火按钮太薄弱、增加点击反馈和点击欲望”保持 open，因此本轮继续进入 Product decision，并处理 #5 的展示层反馈。

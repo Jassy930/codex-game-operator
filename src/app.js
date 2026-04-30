@@ -37,6 +37,7 @@ import { buildFeedbackIssueUrl, createFeedbackEntry } from "./feedback.js";
 const STORAGE_KEY = "codex-game-operator.state";
 const EVENT_KEY = "codex-game-operator.events";
 const FEEDBACK_KEY = "codex-game-operator.feedback";
+const SOUND_KEY = "codex-game-operator.sound-enabled";
 const SESSION_ID = globalThis.crypto?.randomUUID?.() ?? String(Date.now());
 const SVG_NS = "http://www.w3.org/2000/svg";
 const DIRECTIVE_VISIBLE_BADGE_LIMIT = 3;
@@ -179,6 +180,7 @@ const elements = {
   coreGainPop: document.querySelector("#coreGainPop"),
   coreComboTrack: document.querySelector("#coreButton .core-combo-track"),
   coreRewardHint: document.querySelector("#coreRewardHint"),
+  soundToggle: document.querySelector("#soundToggle"),
   combo: document.querySelector("#comboValue"),
   pulse: document.querySelector("#pulseValue"),
   directiveList: document.querySelector("#directiveList"),
@@ -232,6 +234,8 @@ let lastFirstUpgradeAt = state.firstUpgradeAt;
 let projectFilter = INITIAL_PROJECT_FILTER_ID;
 let corePulseTimer = 0;
 let coreGainTimer = 0;
+let soundEnabled = loadSoundPreference();
+let audioContext = null;
 
 recordEvent("session", {
   startedAt: new Date().toISOString()
@@ -244,22 +248,33 @@ if (offlineSummary) {
   });
 }
 persistState();
+elements.soundToggle.checked = soundEnabled;
 render();
 
 elements.coreButton.addEventListener("click", () => {
   offlineSummary = null;
   const previousGoal = getCurrentGoal(state);
   state = clickCore(state);
+  const overloaded = String(state.lastPulse).startsWith("过载");
   applyActionNoticeWithGoalTransition(previousGoal, state, buildClickActionNotice(state));
   recordEvent("click", {
     energy: Math.floor(state.energy),
     combo: state.combo
   });
+  playCoreSound({ overloaded });
   animateCore({
     gainText: "+" + formatNumber(state.lastGain),
-    overloaded: String(state.lastPulse).startsWith("过载")
+    overloaded
   });
   saveAndRender();
+});
+
+elements.soundToggle.addEventListener("change", () => {
+  soundEnabled = elements.soundToggle.checked;
+  persistSoundPreference();
+  recordEvent("sound_toggle", {
+    enabled: soundEnabled
+  });
 });
 
 elements.resetButton.addEventListener("click", () => {
@@ -1467,6 +1482,23 @@ function persistState() {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
 }
 
+function loadSoundPreference() {
+  try {
+    const saved = localStorage.getItem(SOUND_KEY);
+    return saved === null ? true : saved === "true";
+  } catch {
+    return true;
+  }
+}
+
+function persistSoundPreference() {
+  try {
+    localStorage.setItem(SOUND_KEY, soundEnabled ? "true" : "false");
+  } catch {
+    // The sound toggle is a local preference; gameplay state does not depend on it.
+  }
+}
+
 function renderOfflineNotice() {
   if (!offlineSummary) {
     elements.offlineNotice.hidden = true;
@@ -1545,4 +1577,78 @@ function animateCore({ gainText = "", overloaded = false } = {}) {
       overloaded ? 760 : 620
     );
   });
+}
+
+function playCoreSound({ overloaded = false } = {}) {
+  if (!soundEnabled) {
+    return;
+  }
+
+  const context = getAudioContext();
+  if (!context) {
+    return;
+  }
+
+  const now = context.currentTime;
+  if (overloaded) {
+    playTone(context, {
+      frequency: 196,
+      start: now,
+      duration: 0.14,
+      gain: 0.16,
+      type: "sawtooth"
+    });
+    playTone(context, {
+      frequency: 392,
+      start: now + 0.05,
+      duration: 0.2,
+      gain: 0.14,
+      type: "triangle"
+    });
+    return;
+  }
+
+  playTone(context, {
+    frequency: 330,
+    start: now,
+    duration: 0.08,
+    gain: 0.09,
+    type: "triangle"
+  });
+  playTone(context, {
+    frequency: 494,
+    start: now + 0.035,
+    duration: 0.1,
+    gain: 0.08,
+    type: "sine"
+  });
+}
+
+function getAudioContext() {
+  const AudioContextCtor = window.AudioContext ?? window.webkitAudioContext;
+  if (!AudioContextCtor) {
+    return null;
+  }
+
+  audioContext ??= new AudioContextCtor();
+  if (audioContext.state === "suspended") {
+    audioContext.resume();
+  }
+
+  return audioContext;
+}
+
+function playTone(context, { frequency, start, duration, gain, type }) {
+  const oscillator = context.createOscillator();
+  const gainNode = context.createGain();
+  const end = start + duration;
+
+  oscillator.type = type;
+  oscillator.frequency.setValueAtTime(frequency, start);
+  gainNode.gain.setValueAtTime(0.0001, start);
+  gainNode.gain.exponentialRampToValueAtTime(gain, start + 0.012);
+  gainNode.gain.exponentialRampToValueAtTime(0.0001, end);
+  oscillator.connect(gainNode).connect(context.destination);
+  oscillator.start(start);
+  oscillator.stop(end + 0.02);
 }
