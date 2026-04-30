@@ -779,6 +779,9 @@ function renderDirective(option) {
         dispatchBreakthroughReward: result.dispatchBreakthroughReward,
         dispatchBreakthroughRewardRate: result.dispatchBreakthroughRewardRate,
         dispatchBreakthroughRewardText: result.dispatchBreakthroughRewardText,
+        dispatchPrepReward: result.dispatchPrepReward,
+        dispatchPrepRewardRate: result.dispatchPrepRewardRate,
+        dispatchPrepRewardText: result.dispatchPrepRewardText,
         dispatchRefreshDirectiveId: result.dispatchRefreshDirectiveId,
         dispatchRefreshDirectiveName: result.dispatchRefreshDirectiveName,
         dispatchRefreshText: result.dispatchRefreshText,
@@ -857,6 +860,11 @@ function renderDirective(option) {
   dispatchBreakthrough.textContent = option.dispatchBreakthroughRewardText;
   dispatchBreakthrough.hidden = !option.dispatchBreakthroughRewardText;
 
+  const dispatchPrep = document.createElement("span");
+  dispatchPrep.className = "directive-dispatch-prep";
+  dispatchPrep.textContent = option.dispatchPrepRewardText;
+  dispatchPrep.hidden = !option.dispatchPrepRewardText;
+
   const dispatchRefresh = document.createElement("span");
   dispatchRefresh.className = "directive-dispatch-refresh";
   dispatchRefresh.textContent = option.dispatchRefreshText;
@@ -896,6 +904,7 @@ function renderDirective(option) {
     dispatchSync,
     dispatchLoop,
     dispatchBreakthrough,
+    dispatchPrep,
     dispatchRefresh,
     dispatchCooldown,
     dispatchWindow,
@@ -984,6 +993,7 @@ function getDirectivePreviewDetailTexts(option) {
     option.dispatchSyncRewardText,
     option.dispatchLoopRewardText,
     option.dispatchBreakthroughRewardText,
+    option.dispatchPrepRewardText,
     option.dispatchRefreshText,
     option.dispatchCooldownText,
     option.dispatchChainWindowText,

@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+- 远航整备新增整备续航奖励：完成 3/3 回到当前航段目标指令后，被远航整备刷新的协同续航按钮会显示并结算“整备续航 +7%”，继续回应 #6 对后半段玩法变化不明显的反馈。
+- `src/game.js` 新增 `FAR_ROUTE_DISPATCH_PREP_REWARD_RATE`、整备续航收益计算和执行/预览文案；`src/app.js` 记录 `dispatchPrepReward` 事件字段并渲染 `directive-dispatch-prep` 徽标；`src/styles.css` 新增整备续航徽标样式；`tests/game.test.js` 覆盖 3/3 完成态推荐、预计收益、执行反馈和静态绑定。
+- 本轮不新增存档字段，不改变升级价格、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、基础连携倍率、远航调度校准、远航续航、远航协同、远航闭环、远航突破、远航整备刷新冷却、反馈入口或部署链路。
+- 同步 GitHub Issues 反馈状态：2026-04-30 19:02 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 作为本轮处理对象。
+- 验证通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 117 项。
+- 构建产物已确认包含 `FAR_ROUTE_DISPATCH_PREP_REWARD_RATE`、`dispatchPrepReward`、`directive-dispatch-prep` 和“整备续航”。
+
 - 远航调度 3 步路径新增步骤收益标签：主操作区 `far-dispatch-loop-step` 和星图当前航段 `project-dispatch-step` 会直接显示调度校准、远航协同/续航、远航闭环和远航突破收益，继续回应 #6 对后半段玩法变化不明显的反馈。
 - `src/game.js` 为远航路径 `loopSteps` / `dispatchSteps` 派生 `rewardText` 并写入路径 `aria-label`；`src/app.js` 渲染 `far-dispatch-step-reward` 和 `project-dispatch-step-reward`；`src/styles.css` 新增两类步骤收益标签样式；`tests/game.test.js` 覆盖步骤收益文本、运行期绑定和样式标记。
 - 本轮只调整远航调度展示层；不新增存档字段，不改变指令收益、冷却、连携窗口、远航调度计算、远航突破数值、星图航段、项目奖励、升级价格、反馈入口或部署链路。
