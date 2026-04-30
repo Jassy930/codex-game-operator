@@ -9,7 +9,11 @@
 - 本轮不新增存档字段，不改变升级价格、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、基础连携倍率、远航调度校准、远航续航、远航协同收益、远航绕行、绕行投送、远航闭环、远航突破、绕行突破、远航整备、整备续航、整备回航、反馈入口或部署链路。
 - 本轮本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 117 项。
 - 构建产物已确认包含 `FAR_ROUTE_DISPATCH_SYNC_SUPPLY_RATE`、`dispatchSyncSupply`、`directive-dispatch-sync-supply` 和“协同补给”。
-- 钉钉通知待发送：需要运行时或本地环境提供 webhook 变量，且不能写入仓库。
+- 提交 a735c69 已推送；GitHub Pages workflow 25167206170 已成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`。
+- 线上地址 https://jassy930.github.io/codex-game-operator/ 返回 HTTP 200，且线上 `game.js`、`app.js` 和 `styles.css` 已确认包含协同补给相关标记。
+- #6 已回复：说明协同路线新增“协同补给 +3%当前”，与绕行投送形成“补当前资源 vs 消耗当前资源推进累计航段”的取舍。
+- 回复后同步 GitHub Issues：2026-04-30 21:11 CST 当前仍为 5 个 open feedback issue、0 个 open bug issue；#6 更新时间为 2026-04-30T13:10:53Z。
+- 钉钉通知未发送：运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` 相关变量名；未将 webhook 写入仓库。
 
 - GitHub Issues：gh 可用且已认证；2026-04-30 20:34 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
 - #6 继续作为本轮 Product decision 依据：该反馈指出后半段“只有不停的目标、玩法没有真正变化”；前序已经让目标后第二步拆成协同和绕行，并让绕行回目标显示“绕行回航”，但协同路线第三步仍显示泛化“调度目标”，路线识别在闭环前断开。

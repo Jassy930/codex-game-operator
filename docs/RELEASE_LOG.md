@@ -9,6 +9,11 @@
 - 同步 GitHub Issues 反馈状态：2026-04-30 21:03 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 作为本轮处理对象。
 - 验证通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 117 项。
 - 构建产物已确认包含 `FAR_ROUTE_DISPATCH_SYNC_SUPPLY_RATE`、`dispatchSyncSupply`、`directive-dispatch-sync-supply` 和“协同补给”。
+- 提交 a735c69 已推送；GitHub Pages workflow 25167206170 已成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`。
+- 线上地址 https://jassy930.github.io/codex-game-operator/ 返回 HTTP 200，且线上 `game.js`、`app.js` 和 `styles.css` 已确认包含协同补给相关标记。
+- 已回复 #6，说明协同路线新增“协同补给 +3%当前”，并保持 issue open 等待复测。
+- 回复后同步 GitHub Issues 反馈状态：2026-04-30 21:11 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 更新时间为 2026-04-30T13:10:53Z。
+- 钉钉通知未发送：运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` 相关变量名；未将 webhook 写入仓库。
 
 - 远航调度协同路线新增“协同回航”指引：目标指令后执行指定协同续航，再回到当前航段目标指令时，按钮推荐从泛化“调度目标”改为“协同回航/等待协同”，闭环提示同步说明协同回航会触发远航闭环与远航突破，继续回应 #6 对后半段玩法变化不明显的反馈。
 - `src/game.js` 新增 `dispatchSyncReturnCanOverride` 派生路径，区分协同路线第三步回航与普通调度目标；`tests/game.test.js` 覆盖协同回航推荐文案、等待文案、闭环提示和按钮推荐。
