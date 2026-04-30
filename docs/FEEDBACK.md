@@ -9,6 +9,10 @@
 - 除新增 `farRouteLastBranchDirectiveId` 用于记录最近远航分支外，本轮不新增其他存档字段，不改变升级价格、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、基础连携倍率、远航调度校准、远航续航、远航协同、协同补给、远航绕行、绕行投送、远航闭环、远航突破、绕行突破、整备续航、整备回航、反馈入口或部署链路。
 - 本轮本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 117 项。
 - 构建产物已确认包含 `FAR_ROUTE_DISPATCH_DETOUR_PREP_REWARD_RATE`、`dispatchDetourPrepReward`、`directive-dispatch-detour-prep`、`farRouteLastBranchDirectiveId` 和“绕行整备”。
+- 提交 2d1bdc0 已推送；GitHub Pages workflow 25168449353 已成功，线上地址返回 HTTP 200，线上 `game.js`、`app.js` 和 `styles.css` 已确认包含绕行整备相关标记。
+- #6 已回复：说明绕行路线新增“绕行整备 +5%”，并保持 issue open 等待复测。
+- 回复后同步 GitHub Issues：2026-04-30 21:37 CST 当前仍为 5 个 open feedback issue、0 个 open bug issue；#6 更新时间为 2026-04-30T13:37:09Z。
+- 钉钉通知未发送：运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` 相关变量名；未将 webhook 写入仓库。
 
 - GitHub Issues：gh 可用且已认证；2026-04-30 21:03 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
 - #6 继续作为本轮 Product decision 依据：该反馈指出后半段“只有不停的目标、玩法没有真正变化”；前序已经让协同路线有“远航协同”和“协同回航”，绕行路线有“远航绕行/绕行投送/绕行回航”，但协同路线仍缺少和绕行投送相对的资源侧特征。

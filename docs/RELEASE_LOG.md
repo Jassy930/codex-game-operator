@@ -9,6 +9,11 @@
 - 同步 GitHub Issues 反馈状态：2026-04-30 21:16 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 作为本轮处理对象。
 - 验证通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 117 项。
 - 构建产物已确认包含 `FAR_ROUTE_DISPATCH_DETOUR_PREP_REWARD_RATE`、`dispatchDetourPrepReward`、`directive-dispatch-detour-prep`、`farRouteLastBranchDirectiveId` 和“绕行整备”。
+- 提交 2d1bdc0 已推送；GitHub Pages workflow 25168449353 已成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`。
+- 线上地址 https://jassy930.github.io/codex-game-operator/ 返回 HTTP 200，且线上 `game.js`、`app.js` 和 `styles.css` 已确认包含绕行整备相关标记。
+- 已回复 #6，说明绕行路线新增“绕行整备 +5%”、回航完成后刷新刚才的绕行指令冷却，并保持 issue open 等待复测。
+- 回复后同步 GitHub Issues 反馈状态：2026-04-30 21:37 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 更新时间为 2026-04-30T13:37:09Z。
+- 钉钉通知未发送：运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` 相关变量名；未将 webhook 写入仓库。
 
 - 远航协同路线新增“协同补给”：目标指令后执行当前航段指定的协同续航时，除远航续航与远航协同外，额外获得有效基础指令收益 3% 的当前能量补给；该补给只增加当前能量，不增加累计能量，让协同路线与绕行投送形成“补当前资源 vs 消耗当前资源推进累计航段”的取舍，继续回应 #6 对后半段玩法变化不明显的反馈。
 - `src/game.js` 新增 `FAR_ROUTE_DISPATCH_SYNC_SUPPLY_RATE`、协同补给计算、执行/预览文案和远航路径收益文本；`src/app.js` 记录 `dispatchSyncSupply` / `dispatchSyncSupplyRate` / `dispatchSyncSupplyText` 事件字段并渲染 `directive-dispatch-sync-supply` 徽标；`src/styles.css` 新增协同补给徽标样式；`tests/game.test.js` 覆盖协同补给预览、执行、静态绑定和反馈快照。
