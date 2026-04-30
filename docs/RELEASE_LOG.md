@@ -8,6 +8,9 @@
 - 同步 GitHub Issues 反馈状态：2026-04-30 14:27 CST 当前 5 个 open feedback issue、0 个 open bug issue；#5 作为本轮处理对象。
 - 验证通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 109 项。
 - 构建产物已确认包含 `hapticToggle`、`haptic-toggle`、`HAPTIC_KEY`、`playCoreHaptic` 和 `navigator.vibrate`。
+- 提交 c647cff 已推送；GitHub Pages workflow 25150988751 已成功，线上地址返回 HTTP 200，且线上首页和 `app.js` 已确认包含点火触感反馈相关标记。
+- 已回复 #5，说明点火按钮新增可关闭移动端触感反馈，并保持 issue open 等待复测。
+- 回复后同步 GitHub Issues 反馈状态：2026-04-30 14:32 CST 当前 5 个 open feedback issue、0 个 open bug issue；#5 更新时间为 2026-04-30T06:32:54Z。
 
 - 点火按钮新增可关闭的本地音效反馈：默认开启“点火音效”，普通点火播放轻双音，过载点火播放更厚的双音，继续回应 #5 对点击反馈、特效和点击欲望的反馈。
 - `index.html` 新增 `soundToggle` 开关；`src/app.js` 新增独立 `SOUND_KEY` 偏好、Web Audio `playCoreSound` / `playTone` 和 `sound_toggle` 本地事件；`src/styles.css` 增加音效开关样式；`tests/game.test.js` 覆盖静态标记、运行期绑定和样式标记。

@@ -20,8 +20,11 @@
 - 点火触感偏好只写入 `HAPTIC_KEY`，不进入游戏进度存档；切换时记录本地 `haptic_toggle` 事件。
 - 本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 109 项。
 - 构建产物已确认包含 `hapticToggle`、`haptic-toggle`、`HAPTIC_KEY`、`playCoreHaptic` 和 `navigator.vibrate`。
+- 提交 c647cff 已推送；GitHub Pages workflow 25150988751 已成功，线上地址返回 HTTP 200，且线上首页和 `app.js` 已确认包含点火触感反馈相关标记。
+- #5 已回复并继续保持 open，等待复测确认触感反馈配合现有视觉和音效后是否让点火按钮更有点击反馈和点击欲望。
+- 回复后同步 GitHub Issues：2026-04-30 14:32 CST 当前仍为 5 个 open feedback issue、0 个 open bug issue；#5 更新时间为 2026-04-30T06:32:54Z。
 
-下一步：推送后回复 #5，保持 issue open 等待复测；若仍认为点火欲望不足，再评估更多星核视觉阶段或更明确的点击节奏目标。
+下一步：等待 #5 复测；若仍认为点火欲望不足，再评估更多星核视觉阶段或更明确的点击节奏目标。
 
 ## 2026-04-30 Product decision：点火音效反馈开关
 
