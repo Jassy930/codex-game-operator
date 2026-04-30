@@ -9,7 +9,11 @@
 - 本轮只调整 CSS 和静态测试，不新增 DOM、不新增收益、不新增存档字段，不改变升级价格、星图路线、项目奖励、远航调度既有数值、冷却、连携窗口、反馈入口或部署链路。
 - 本轮本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
 - 构建产物已确认包含 `.far-dispatch-branch-choice-route-line::before`、`.far-dispatch-branch-choice-route-line::after` 和方向箭头 `border-left` 样式。
-- 钉钉通知待本轮结束后尝试发送；webhook 只从运行时环境或本地环境读取，不写入仓库。
+- 发布：提交 `5a781a8` 已推送到 `origin/main`；GitHub Pages workflow `25195156862` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页返回 HTTP 200，线上 `src/styles.css` 已确认包含方向箭头样式。
+- #6 已回复：说明远航路线微图轨道新增方向箭头、验证结果、Pages 部署和复测问题；issue 保持 open，更新时间为 2026-04-30T23:53:13Z。
+- #4 已回复：说明本轮方向箭头继续降低 20M 后分支卡片对多行文字说明的依赖；issue 保持 open，更新时间为 2026-04-30T23:53:26Z。
+- 回复后同步 GitHub Issues：2026-05-01 07:53 CST 当前仍为 5 个 open feedback issue、0 个 open bug issue。
+- 钉钉通知未发送：运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` 相关变量名，父目录两层内也未发现 `.env*` 文件；未将 webhook 写入仓库。
 
 - GitHub Issues：gh 可用且已认证；2026-05-01 07:27 CST 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
 - #6 继续作为本轮 Product decision 依据：该反馈指出后半段“只有不停的目标、玩法没有真正变化”；#4 仍补充界面“密密麻麻的文字”和图片化诉求。前序路线微图已经能显示路线形态、资源取向、推荐/上轮/本轮/改道和已完成/下一步/待推进节点状态，但节点顺序仍需要玩家从文字步骤中对照。

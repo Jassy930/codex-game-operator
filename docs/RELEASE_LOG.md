@@ -9,6 +9,9 @@
 - 同步 GitHub Issues 反馈状态：2026-05-01 07:44 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 作为主处理对象，#4 作为视觉密度依据。
 - 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
 - 构建产物已确认包含 `.far-dispatch-branch-choice-route-line::before`、`.far-dispatch-branch-choice-route-line::after` 和方向箭头 `border-left` 样式。
+- 发布：提交 `5a781a8` 已推送到 `origin/main`；GitHub Pages workflow `25195156862` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页返回 HTTP 200，线上 `src/styles.css` 已确认包含路线微图方向箭头样式。
+- 反馈处理：已回复 #6，说明路线微图方向箭头、验证结果和复测问题；已回复 #4，说明本轮方向箭头继续降低远航分支卡片文字压力；两个 issue 均保持 open。回复后于 2026-05-01 07:53 CST 再次同步 GitHub Issues，当前仍为 5 个 open feedback issue、0 个 open bug issue；#6 更新时间为 2026-04-30T23:53:13Z，#4 更新时间为 2026-04-30T23:53:26Z。
+- 钉钉通知未发送：运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` 相关变量名，父目录两层内也未发现 `.env*` 文件；未将 webhook 写入仓库。
 
 - 远航调度新增“路线微图步骤序号”：协同/绕行分支卡片的三点路线微图会在起点、分支点和回目标点显示 1/2/3，继续回应 #6 的后半段短循环顺序理解和 #4 的图片化/降文字密度反馈。
 - `src/game.js` 为 `branchChoices` 派生 `routeStepLabels`；`src/app.js` 在 `renderFarDispatchBranchChoiceRoute(choice)` 中把步号写入节点 `data-step-label`；`src/styles.css` 通过 `.far-dispatch-branch-choice-route-node::after` 显示步号；`tests/game.test.js` 覆盖派生字段、静态绑定和样式。
