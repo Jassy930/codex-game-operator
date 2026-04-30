@@ -20,6 +20,9 @@
 - 运行期 `renderProjectFilter` 通过 `PROJECT_FILTER_VISUAL_CLASSES` 为每个筛选按钮附加视觉类别。
 - CSS 包含 `.project-filter-button::before`、章节/推进/奖励/状态等筛选标识样式，并保持按钮单行省略。
 - 本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 116 项。
+- 提交 bab6924 已推送；GitHub Pages workflow 25158552413 已成功；线上地址返回 HTTP 200，线上首页、`app.js` 和 `styles.css` 已确认包含筛选按钮视觉标识相关标记。
+- #4 已回复：说明筛选按钮现在用小图形和颜色区分全部、当前、章节、累计/升级、奖励方向和完成状态入口，并保持 issue open 等待复测。
+- 回复后同步 GitHub Issues：2026-04-30 17:43 CST 当前仍为 5 个 open feedback issue、0 个 open bug issue；#4 更新时间为 2026-04-30T09:43:16Z。
 
 下一步：等待 #4 复测；如果筛选抽屉仍被认为文字压力高，再继续把筛选入口拆成更强的图形分组，而不是恢复长说明。
 

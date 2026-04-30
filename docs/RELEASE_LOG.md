@@ -7,6 +7,9 @@
 - 本轮只调整星图筛选按钮展示层；不新增存档字段，不改变 57 段星图路线、项目完成判定、奖励数值、升级价格、航线策略、航线指令、反馈入口或部署链路。
 - 同步 GitHub Issues 反馈状态：2026-04-30 17:33 CST 当前 5 个 open feedback issue、0 个 open bug issue；#4 作为本轮处理对象。
 - 验证通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 116 项。
+- 提交 bab6924 已推送；GitHub Pages workflow 25158552413 已成功；线上地址返回 HTTP 200，且线上首页、`app.js` 和 `styles.css` 已确认包含筛选按钮视觉标识相关标记。
+- 已回复 #4，说明星图筛选按钮现在用小图形和颜色区分筛选类别，并保持 issue open 等待复测。
+- 回复后同步 GitHub Issues 反馈状态：2026-04-30 17:43 CST 当前 5 个 open feedback issue、0 个 open bug issue；#4 更新时间为 2026-04-30T09:43:16Z。
 
 - 星图筛选摘要新增短标签：`projectFilterSummaryBrief` 默认下一条目标显示为“航段 X/57 项目名”，完整筛选说明保留到 `title` / `aria-label` 和展开后的完整摘要，继续回应 #4 对界面文字密度的反馈。
 - `src/game.js` 为筛选摘要新增更短的下一条航段标签；`src/app.js` 复用 `setCompactSupportText` 保留完整说明；`index.html` 静态占位同步短摘要和完整可访问说明；`src/styles.css` 对筛选摘要 summary 增加单行省略；`tests/game.test.js` 覆盖派生文本、静态标记、运行期绑定和样式标记。
