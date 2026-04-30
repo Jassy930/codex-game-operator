@@ -2,6 +2,13 @@
 
 ## 2026-04-30
 
+- GitHub Issues：gh 可用且已认证；2026-04-30 11:13 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
+- #5 作为本轮 Product decision：#6 已连续多轮补齐远航调度短循环但尚无复测结论；#5 仍反馈点火按钮“太薄弱”，需要继续增强点击后的按钮本体反馈。
+- 本轮改动新增点火收益浮层：每次点火后按钮内短暂显示本次 `+X` 能量，第 8 次过载点击使用 `is-overload-gain` 强反馈样式。
+- 本轮不新增存档字段，不改变点击收益、连击窗口、过载奖励、升级价格、产能公式、星图 57 段路线、项目奖励、航线策略、航线指令、反馈入口或部署链路。
+- 本轮本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 106 项。
+- 构建产物已确认包含 `coreGainPop`、`core-gain-pop`、`coreGainFloat`、`gainText` 和 `is-overload-gain`。
+
 - GitHub Issues：gh 可用且已认证；2026-04-30 10:57 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
 - #6 继续作为本轮 Product decision：上一轮已让目标指令后的非目标续航有一个协同优先项，但完成闭环后协同续航指令仍可能在冷却中，下一轮短循环会被等待打断。
 - 本轮改动新增“远航整备”：远航调度 active 时，3/3 指令轮换回到当前航段目标指令并触发远航闭环后，会刷新当前协同续航指令的冷却，并在完成态优先推荐“整备续航/等待整备”。

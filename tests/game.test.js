@@ -1030,11 +1030,17 @@ test("点火按钮会渲染点击反馈和过载前兆效果", () => {
 
   assert.match(indexHtml, /id="coreButton" class="core-button" type="button" data-combo-step="0"/);
   assert.match(indexHtml, /class="core-feedback-layer"/);
+  assert.match(indexHtml, /id="coreGainPop" class="core-gain-pop"/);
   assert.match(indexHtml, /class="core-combo-track"/);
   assert.match(indexHtml, /id="coreRewardHint" class="core-reward-hint"/);
   assert.match(indexHtml, /class="core-label">点火<\/span>/);
   assert.match(appJs, /getCoreRewardPreview/);
   assert.match(appJs, /function renderCoreFeedback\(combo\)/);
+  assert.match(appJs, /coreGainPop: document\.querySelector\("#coreGainPop"\)/);
+  assert.match(appJs, /gainText: "\+" \+ formatNumber\(state\.lastGain\)/);
+  assert.match(appJs, /elements\.coreGainPop\.textContent = gainText/);
+  assert.match(appJs, /elements\.coreGainPop\.classList\.add\("is-showing"\)/);
+  assert.match(appJs, /elements\.coreGainPop\.classList\.toggle\("is-overload-gain", overloaded\)/);
   assert.match(appJs, /function renderCoreComboTrack\(combo\)/);
   assert.match(appJs, /function renderCoreRewardHint\(coreReward\)/);
   assert.match(appJs, /elements\.coreButton\.dataset\.comboStep = String\(combo\.step\)/);
@@ -1047,6 +1053,9 @@ test("点火按钮会渲染点击反馈和过载前兆效果", () => {
   assert.match(appJs, /window\.setTimeout/);
   assert.match(styles, /\.core-button::before/);
   assert.match(styles, /\.core-feedback-layer/);
+  assert.match(styles, /\.core-gain-pop/);
+  assert.match(styles, /\.core-gain-pop\.is-showing/);
+  assert.match(styles, /\.core-gain-pop\.is-overload-gain/);
   assert.match(styles, /\.core-combo-track/);
   assert.match(styles, /\.core-combo-dot\.is-next/);
   assert.match(styles, /\.core-reward-hint/);
@@ -1057,6 +1066,7 @@ test("点火按钮会渲染点击反馈和过载前兆效果", () => {
   assert.match(styles, /@keyframes coreShockwave/);
   assert.match(styles, /@keyframes coreOverloadShockwave/);
   assert.match(styles, /@keyframes coreSparks/);
+  assert.match(styles, /@keyframes coreGainFloat/);
   assert.match(styles, /@keyframes coreDotPulse/);
 });
 

@@ -123,6 +123,7 @@ const elements = {
   perClick: document.querySelector("#perClickValue"),
   overload: document.querySelector("#overloadValue"),
   coreButton: document.querySelector("#coreButton"),
+  coreGainPop: document.querySelector("#coreGainPop"),
   coreComboTrack: document.querySelector("#coreButton .core-combo-track"),
   coreRewardHint: document.querySelector("#coreRewardHint"),
   combo: document.querySelector("#comboValue"),
@@ -176,6 +177,7 @@ let actionNotice = "";
 let lastFirstUpgradeAt = state.firstUpgradeAt;
 let projectFilter = INITIAL_PROJECT_FILTER_ID;
 let corePulseTimer = 0;
+let coreGainTimer = 0;
 
 recordEvent("session", {
   startedAt: new Date().toISOString()
@@ -200,6 +202,7 @@ elements.coreButton.addEventListener("click", () => {
     combo: state.combo
   });
   animateCore({
+    gainText: "+" + formatNumber(state.lastGain),
     overloaded: String(state.lastPulse).startsWith("过载")
   });
   saveAndRender();
@@ -1144,17 +1147,28 @@ function saveFeedbackEntry(entry) {
   }
 }
 
-function animateCore({ overloaded = false } = {}) {
+function animateCore({ gainText = "", overloaded = false } = {}) {
   window.clearTimeout(corePulseTimer);
+  window.clearTimeout(coreGainTimer);
   elements.coreButton.classList.remove("is-pulsing", "is-overload-impact");
+  elements.coreGainPop.textContent = gainText;
+  elements.coreGainPop.classList.remove("is-showing", "is-overload-gain");
   requestAnimationFrame(() => {
     elements.coreButton.classList.add("is-pulsing");
     elements.coreButton.classList.toggle("is-overload-impact", overloaded);
+    elements.coreGainPop.classList.add("is-showing");
+    elements.coreGainPop.classList.toggle("is-overload-gain", overloaded);
     corePulseTimer = window.setTimeout(
       () => {
         elements.coreButton.classList.remove("is-pulsing", "is-overload-impact");
       },
       overloaded ? 520 : 360
+    );
+    coreGainTimer = window.setTimeout(
+      () => {
+        elements.coreGainPop.classList.remove("is-showing", "is-overload-gain");
+      },
+      overloaded ? 760 : 620
     );
   });
 }

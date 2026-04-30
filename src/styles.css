@@ -325,6 +325,46 @@ h2 {
   animation-duration: 520ms;
 }
 
+.core-gain-pop {
+  position: absolute;
+  top: 22%;
+  left: 50%;
+  z-index: 4;
+  display: inline-grid;
+  min-width: 72px;
+  min-height: 32px;
+  place-items: center;
+  padding: 6px 12px;
+  border: 1px solid rgba(255, 247, 194, 0.48);
+  border-radius: 999px;
+  background: rgba(20, 17, 15, 0.72);
+  color: #fff7c2;
+  font-size: 0.92rem;
+  font-weight: 950;
+  line-height: 1;
+  opacity: 0;
+  pointer-events: none;
+  text-shadow: 0 1px 10px rgba(244, 178, 60, 0.42);
+  transform: translate(-50%, 10px) scale(0.92);
+}
+
+.core-gain-pop.is-showing {
+  animation: coreGainFloat 620ms ease-out;
+}
+
+.core-gain-pop.is-overload-gain {
+  border-color: rgba(232, 93, 117, 0.66);
+  background: rgba(91, 31, 45, 0.76);
+  color: #fff7c2;
+  text-shadow:
+    0 1px 12px rgba(255, 247, 194, 0.5),
+    0 0 18px rgba(232, 93, 117, 0.48);
+}
+
+.core-gain-pop.is-overload-gain.is-showing {
+  animation-duration: 760ms;
+}
+
 .core-combo-track {
   position: absolute;
   bottom: 18px;
@@ -1891,6 +1931,23 @@ h2 {
   100% {
     opacity: 0;
     transform: scale(1.18) rotate(18deg);
+  }
+}
+
+@keyframes coreGainFloat {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, 12px) scale(0.92);
+  }
+
+  18% {
+    opacity: 1;
+    transform: translate(-50%, 0) scale(1.04);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -24px) scale(0.98);
   }
 }
 

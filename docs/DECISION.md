@@ -1,5 +1,27 @@
 # Decision
 
+## 2026-04-30 Product decision：点火收益浮层
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-04-30 11:13 CST 同步到 5 个 open feedback issue、0 个 open bug issue。#6 已连续多轮补齐远航调度短循环但尚无复测结论；#5 仍反馈点火按钮“太薄弱”，继续进入有反馈样本下的 Product decision。
+
+当前最大问题：点火按钮已有脉冲、粒子、过载前兆、冲击波、8 格连击轨和下一击预告，但点击后的实际收益仍主要出现在主操作提示里。玩家按下按钮的一瞬间，按钮本体还没有直接弹出“这次得到了多少”的确认，点击欲望的即时回报仍可继续增强。
+
+本轮决策：
+
+- 在点火按钮内新增 `coreGainPop` 收益浮层，点击后短暂显示本次 `+X` 能量。
+- 过载点击会给收益浮层追加 `is-overload-gain` 样式和更长动画，和现有过载冲击波形成同一瞬间的强反馈。
+- 本轮只调整点火按钮展示层；不新增存档字段，不改变点击收益、连击窗口、过载奖励、升级价格、产能公式、星图 57 段路线、项目奖励、航线策略、航线指令、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-04-30 11:13 CST 当前 5 个 open feedback issue、0 个 open bug issue；#5 继续作为点火点击欲望处理对象。
+- 点击点火后按钮内显示 `+lastGain` 收益浮层；第 8 次过载点击使用 `is-overload-gain` 强反馈样式。
+- 静态首页和运行期资源包含 `coreGainPop`、`core-gain-pop`、`coreGainFloat` 和 `is-overload-gain`。
+- 本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 106 项。
+- 构建产物已确认包含 `coreGainPop`、`core-gain-pop`、`coreGainFloat`、`gainText` 和 `is-overload-gain`。
+
+下一步：发布后回复 #5 并保持 open，等待复测确认按钮内收益浮层是否提升点击反馈和点击欲望。
+
 ## 2026-04-30 Product decision：远航整备续航
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-04-30 10:57 CST 同步到 5 个 open feedback issue、0 个 open bug issue。#6 仍是最新后半段玩法变化反馈，上一轮已给目标后的非目标步骤增加“远航协同”优先项，但尚无玩家复测结论；继续进入 Product decision。
