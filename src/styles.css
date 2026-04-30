@@ -1449,6 +1449,7 @@ h2 {
 
 .far-dispatch-branch-choice strong,
 .far-dispatch-branch-choice span,
+.far-dispatch-branch-choice small,
 .far-dispatch-branch-choice em {
   min-width: 0;
   overflow: hidden;
@@ -1466,6 +1467,12 @@ h2 {
   color: #f8f3e7;
   font-size: 0.76rem;
   font-weight: 900;
+}
+
+.far-dispatch-branch-choice small {
+  color: rgba(248, 243, 231, 0.72);
+  font-size: 0.64rem;
+  font-weight: 850;
 }
 
 .far-dispatch-branch-choice em {

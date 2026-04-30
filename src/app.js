@@ -700,10 +700,13 @@ function renderFarDispatchBranchChoices(dispatch) {
       const directive = document.createElement("span");
       directive.textContent = choice.directiveName;
 
+      const next = document.createElement("small");
+      next.textContent = choice.nextText ?? "";
+
       const caption = document.createElement("em");
       caption.textContent = choice.caption + " · " + choice.rewardText;
 
-      item.append(label, directive, caption);
+      item.append(label, directive, next, caption);
       return item;
     })
   );

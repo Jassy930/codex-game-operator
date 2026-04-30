@@ -1,5 +1,14 @@
 # Feedback
 
+## 2026-05-01
+
+- GitHub Issues：gh 可用且已认证；2026-05-01 00:06 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
+- #6 继续作为本轮 Product decision 依据：该反馈指出后半段“只有不停的目标、玩法没有真正变化”；前序已经把协同/绕行具体指令、推荐分支和按钮推荐展示出来，但分支选择条仍没有直接说明选择后会进入哪种回航。
+- 本轮改动新增远航分支后续预告：协同路线显示“后续协同回航触发闭环与远航突破”，绕行路线显示“后续绕行回航触发闭环与绕行突破”；推荐分支、星图总览远航摘要和分支选择条同步显示该后续路线。
+- 本轮只调整派生展示、DOM 和样式，不新增收益、不新增存档字段，不改变升级价格、星图路线、项目奖励、远航调度数值、冷却、连携窗口、反馈入口或部署链路。
+- 本轮本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含 `choice.nextText`、后续协同/绕行回航文案和 `.far-dispatch-branch-choice small`。
+
 ## 2026-04-30
 
 - GitHub Issues：gh 可用且已认证；2026-04-30 23:48 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。

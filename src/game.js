@@ -4811,6 +4811,7 @@ function buildFarRouteDispatchBranchChoices(
       label: "协同",
       directive: relayDirective,
       caption: "补当前资源",
+      nextText: "后续协同回航触发闭环与远航突破",
       baseRewardText:
         "远航协同 +" +
         Math.round(FAR_ROUTE_DISPATCH_SYNC_REWARD_RATE * 100) +
@@ -4824,6 +4825,7 @@ function buildFarRouteDispatchBranchChoices(
           label: "绕行",
           directive: detourDirective,
           caption: "投送累计航段",
+          nextText: "后续绕行回航触发闭环与绕行突破",
           baseRewardText:
             "远航绕行 +" +
             Math.round(FAR_ROUTE_DISPATCH_DETOUR_REWARD_RATE * 100) +
@@ -4871,6 +4873,7 @@ function buildFarRouteDispatchBranchChoices(
       directiveId: choice.directive.id,
       directiveName: choice.directive.name,
       caption: choice.caption,
+      nextText: choice.nextText,
       focused,
       focusText: focused ? branchFocus.text : "",
       status,
@@ -4884,6 +4887,8 @@ function buildFarRouteDispatchBranchChoices(
         statusText +
         " · " +
         choice.caption +
+        " · " +
+        choice.nextText +
         " · " +
         rewardText
     };
@@ -4908,6 +4913,8 @@ function buildFarRouteDispatchBranchChoiceText(choices) {
           " · " +
           choice.caption +
           " · " +
+          choice.nextText +
+          " · " +
           choice.rewardText +
           "）"
       )
@@ -4924,6 +4931,7 @@ function buildFarRouteDispatchBranchRecommendationText(choices) {
   const reasons = [
     focusedChoice.statusText,
     focusedChoice.caption,
+    focusedChoice.nextText,
     "航段契合 +" +
       Math.round(FAR_ROUTE_DISPATCH_BRANCH_FOCUS_REWARD_RATE * 100) +
       "%"

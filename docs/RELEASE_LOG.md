@@ -2,6 +2,14 @@
 
 ## Unreleased
 
+- 远航调度新增“分支后续预告”：分支选择条、推荐分支和星图总览远航摘要会直接显示协同路线后续进入协同回航并触发闭环/远航突破，绕行路线后续进入绕行回航并触发闭环/绕行突破，继续回应 #6 对后半段玩法变化不明显的反馈。
+- `src/game.js` 为 `branchChoices` 派生 `nextText` 并把它纳入 `branchChoiceText` / `branchRecommendationText`；`src/app.js` 在分支选择条中渲染后续预告；`src/styles.css` 增加紧凑样式；`tests/game.test.js` 覆盖推荐分支、分支选择条文案、星图总览摘要和静态绑定。
+- 文档同步更新：`docs/DECISION.md`、`docs/FEEDBACK.md`、`docs/RESEARCH.md`、`docs/PRODUCT.md`、`docs/DESIGN.md`、`docs/ROADMAP.md`、`docs/IDEAS.md`、`docs/METRICS.md`、`README.md` 和本日志已记录远航分支后续预告。
+- 本轮只调整派生展示、DOM 和样式，不新增收益、不新增存档字段，不改变升级价格、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、基础连携倍率、远航调度收益、冷却、连携窗口、反馈入口或部署链路。
+- 同步 GitHub Issues 反馈状态：2026-05-01 00:06 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 作为本轮处理对象。
+- 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含 `choice.nextText`、后续协同/绕行回航文案和 `.far-dispatch-branch-choice small`。
+
 - 星图当前航段远航路径现在会标明具体协同和绕行指令：详情显示“协同 X · 绕行 Y”，3 步路径显示“协同 X / 绕行 Y”，主操作区远航路径轨也会显示实际绕行指令名，继续回应 #6 对后半段玩法变化不明显的反馈。
 - `src/game.js` 让 `buildProjectDispatchInfo` 派生 `dispatchDetourDirectiveId` / `dispatchDetourDirectiveName` 并复用绕行备选指令名；`tests/game.test.js` 覆盖脉冲航闸的星图详情、路径文本和主操作区路径轨。
 - 文档同步更新：`docs/DECISION.md`、`docs/FEEDBACK.md`、`docs/RESEARCH.md`、`docs/PRODUCT.md`、`docs/DESIGN.md`、`docs/ROADMAP.md`、`docs/IDEAS.md`、`docs/METRICS.md`、`README.md` 和本日志已记录星图远航分支路径标明。

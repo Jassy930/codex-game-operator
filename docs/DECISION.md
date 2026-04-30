@@ -1,5 +1,29 @@
 # Decision
 
+## 2026-05-01 Product decision：远航分支后续预告
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-01 00:06 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#6 仍是最新反馈线程，原始反馈指出后半段“只有不停的目标、玩法没有真正变化”，因此本轮继续进入 Product decision。
+
+当前最大问题：前序已经把协同/绕行具体指令、推荐分支、航段契合、可改道和按钮级推荐都展示出来，但玩家在目标后的分支选择条里仍主要看到“现在选什么”和“这一步奖励什么”。如果不直接写出分支选择后的下一段路线，协同/绕行仍可能被理解成两个收益按钮，而不是会进入不同回航状态的短循环。
+
+本轮决策：
+
+- 新增“远航分支后续预告”。
+- `branchChoices` 为协同路线派生“后续协同回航触发闭环与远航突破”，为绕行路线派生“后续绕行回航触发闭环与绕行突破”。
+- 分支选择条新增一行后续预告；`branchChoiceText` 和 `branchRecommendationText` 同步包含后续预告，星图总览远航调度摘要也会带出推荐分支后续。
+- 本轮只调整派生展示、DOM 和样式；不新增收益、不新增存档字段，不改变升级价格、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、远航调度收益、冷却、连携窗口、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-05-01 00:06 CST 当前 5 个 open feedback issue、0 个 open bug issue。
+- 脉冲航闸这类点击/过载奖励航段，推荐分支文本显示协同路线后续会协同回航并触发闭环与远航突破。
+- 分支选择条中协同和绕行两项分别显示后续协同回航、后续绕行回航，不只显示资源取向和收益。
+- `src/app.js` 渲染 `choice.nextText`；`src/styles.css` 为分支选择条中的后续预告提供紧凑样式。
+- 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含 `choice.nextText`、后续协同/绕行回航文案和 `.far-dispatch-branch-choice small`。
+
+下一步：提交并推送本轮改动，等待 GitHub Pages workflow 成功后回复 #6，说明分支选择条现在会直接写出协同/绕行后的回航结果。
+
 ## 2026-04-30 Product decision：星图远航分支路径标明
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-04-30 23:48 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#6 仍是最新反馈线程，原始反馈指出后半段“只有不停的目标、玩法没有真正变化”，因此本轮继续进入 Product decision。
