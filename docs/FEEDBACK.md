@@ -9,6 +9,9 @@
 - 本轮不新增存档字段，不改变升级价格、产能公式、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、基础连携倍率、轮换目标奖励、预案执行、航线委托、指令熟练、满层回响、远航调度校准、冷却倍率、连携窗口、远航续航奖励倍率、远航协同奖励、远航闭环奖励或反馈入口。
 - 本轮本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 106 项。
 - 构建产物已确认包含 `dispatchRefreshText`、`directive-dispatch-refresh`、“远航整备”和“整备续航”。
+- 提交 1f190f8 已推送；GitHub Pages workflow 25145266275 已成功，线上地址返回 HTTP 200；线上首页、`game.js`、`app.js` 和 `styles.css` 已确认包含远航整备相关标记。
+- #6 已回复：说明完成远航闭环后会刷新协同续航指令冷却，并保持 issue open 等待复测。
+- 回复后同步 GitHub Issues：2026-04-30 11:09 CST 当前仍为 5 个 open feedback issue、0 个 open bug issue；#6 更新时间为 2026-04-30T03:08:55Z。
 
 - GitHub Issues：gh 可用且已认证；2026-04-30 10:38 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
 - #6 继续作为本轮 Product decision：上一轮已让目标指令后的两个非目标按钮都显示远航续航推荐，但尚无玩家复测结论；本轮把第二步从两个等价非目标按钮改成“任意非目标可续航，其中一个由当前目标指令指定为协同续航”。

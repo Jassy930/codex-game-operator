@@ -22,8 +22,11 @@
 - 静态首页和运行期资源包含 `dispatchRefreshText`、`directive-dispatch-refresh` 和“远航整备”。
 - 本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 106 项。
 - 构建产物已确认包含 `dispatchRefreshText`、`directive-dispatch-refresh`、“远航整备”和“整备续航”。
+- 提交 1f190f8 已推送；GitHub Pages workflow 25145266275 已成功，线上地址返回 HTTP 200，且线上首页、`game.js`、`app.js` 和 `styles.css` 已确认包含远航整备相关标记。
+- #6 已回复并继续保持 open，等待复测确认远航整备刷新协同续航冷却后，后半段短循环是否更容易连续进入下一轮。
+- 回复后同步 GitHub Issues：2026-04-30 11:09 CST 当前仍为 5 个 open feedback issue、0 个 open bug issue；#6 更新时间为 2026-04-30T03:08:55Z。
 
-下一步：继续发布、回复 #6 并等待复测；若复测仍认为后半段只是追推荐按钮，再评估更重的资源消耗型阶段动作或项目分支。
+下一步：等待 #6 复测；若仍认为后半段只是追推荐按钮，再评估更重的资源消耗型阶段动作或项目分支。
 
 ## 2026-04-30 Product decision：远航协同续航
 
