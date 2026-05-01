@@ -1390,6 +1390,8 @@ test("点火按钮会渲染点击反馈和过载前兆效果", () => {
   assert.match(appJs, /window\.setTimeout/);
   assert.match(styles, /\.core-button::before/);
   assert.match(styles, /touch-action: manipulation/);
+  assert.match(styles, /\.core-button:not\(\.is-pulsing\):not\(\.is-pressing\)::after/);
+  assert.match(styles, /coreIdleInviteRing 2200ms ease-in-out infinite/);
   assert.match(styles, /\.core-button\.is-pressing/);
   assert.match(styles, /\.core-button\.is-pressing::before/);
   assert.match(styles, /\.core-button\.is-pressing \.core-surge-orbit/);
@@ -1529,6 +1531,7 @@ test("点火按钮会渲染点击反馈和过载前兆效果", () => {
   assert.match(styles, /\.feedback-toggle/);
   assert.match(styles, /\.feedback-toggle input/);
   assert.match(styles, /@keyframes coreShockwave/);
+  assert.match(styles, /@keyframes coreIdleInviteRing/);
   assert.match(styles, /@keyframes coreButtonHitGlow/);
   assert.match(styles, /@keyframes coreButtonOverloadGlow/);
   assert.match(styles, /@keyframes coreShellHitFlash/);
@@ -1549,6 +1552,7 @@ test("点火按钮会渲染点击反馈和过载前兆效果", () => {
   assert.match(styles, /@keyframes coreBadgePulse/);
   assert.match(styles, /@keyframes coreBadgeBurst/);
   assert.match(styles, /@media \(prefers-reduced-motion: reduce\) \{[\s\S]*\.core-button\.is-pulsing:not\(\.is-overload-impact\)[\s\S]*animation: none/);
+  assert.match(styles, /@media \(prefers-reduced-motion: reduce\) \{[\s\S]*\.core-button:not\(\.is-pulsing\):not\(\.is-pressing\)::after[\s\S]*animation: none/);
   assert.match(styles, /@media \(prefers-reduced-motion: reduce\) \{[\s\S]*\.core-button\.is-overload-impact[\s\S]*animation: none/);
   assert.match(styles, /@media \(prefers-reduced-motion: reduce\) \{[\s\S]*\.core-button\.is-pulsing:not\(\.is-overload-impact\) \.core-stage-aura[\s\S]*animation: none/);
   assert.match(styles, /@media \(prefers-reduced-motion: reduce\) \{[\s\S]*\.core-button\.is-pulsing:not\(\.is-overload-impact\) \.core-vein[\s\S]*animation: none/);
