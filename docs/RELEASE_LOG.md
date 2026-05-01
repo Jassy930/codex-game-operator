@@ -9,7 +9,9 @@
 - 同步 GitHub Issues 反馈状态：2026-05-01 11:36 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 作为主处理对象，#4 作为视觉密度依据。
 - 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
 - 构建产物已确认包含 `routePhaseText`、`far-dispatch-branch-choice-summary-phase` 和 `路线对照：`。
-- 发布、反馈处理与钉钉通知结果待本轮收尾补记。
+- 发布：提交 `86befd0` 已推送到 `origin/main`；GitHub Pages workflow `25201201533` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页返回 HTTP 200，线上 `src/game.js`、`src/app.js` 和 `src/styles.css` 已确认包含 `routePhaseText` 与 `far-dispatch-branch-choice-summary-phase`。
+- 反馈处理：已回复 #6，说明路线对照条当前步短标、验证结果、Pages 部署和复测问题；已回复 #4，说明本轮把当前阶段压到协同/绕行对照槽以减少逐张读卡片、下看路线微图和展开明细的依赖；两个 issue 均保持 open。回复后于 2026-05-01 11:45 CST 再次同步 GitHub Issues，当前仍为 5 个 open feedback issue、0 个 open bug issue；#6 和 #4 更新时间均为 2026-05-01T03:44:54Z。
+- 钉钉通知未发送：运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` 相关变量名，当前目录和父级两层内也未发现 `.env*` 文件；未将 webhook 写入仓库。
 
 - 远航调度新增“路线对照条第二步短标”：协同/绕行对照槽直接显示 `2 谐振脉冲` / `2 巡航回收`，继续回应 #6 的后半段路线执行理解和 #4 的降文字密度反馈。
 - `src/game.js` 为 `branchChoices` 派生 `routeBranchStepText` 并纳入 `branchChoiceSummaryText` / `branchChoiceText`；`src/app.js` 渲染 `far-dispatch-branch-choice-summary-step`；`src/styles.css` 调整对照条列宽并增加第二步短标状态色；`tests/game.test.js` 覆盖第二步短标派生、可访问汇总、静态 DOM 和样式绑定。
