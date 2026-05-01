@@ -8,7 +8,9 @@
 - 同步 GitHub Issues 反馈状态：2026-05-02 00:01 CST 当前 5 个 open feedback issue、0 个 open bug issue；#5 作为主处理对象。
 - 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
 - 构建产物已确认包含点火连击轨命中光扫样式。
-- 发布与反馈回复待推送部署后补记。
+- 发布：提交 `e2169bb` 已推送到 `origin/main`；GitHub Pages workflow `25221827391` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页返回 HTTP 200，线上 `src/styles.css` 已确认包含点火连击轨命中光扫样式。workflow 继续给出 Node.js 20 actions 弃用提醒，未影响本次部署。
+- 反馈处理：已回复 #5，说明点火连击轨命中光扫、验证结果、Pages 部署和复测问题；issue 保持 open，评论地址：`https://github.com/Jassy930/codex-game-operator/issues/5#issuecomment-4360247871`。回复后于 2026-05-02 00:08 CST 再次同步 GitHub Issues，当前仍为 5 个 open feedback issue、0 个 open bug issue；#5 更新时间为 2026-05-01T16:07:51Z。
+- 钉钉通知未发送：2026-05-02 00:08 CST 运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` / `ROBOT` 相关变量名，当前目录、`/home/jassy/glm` 和用户目录两层内未发现 `.env*` 文件；未将 webhook 写入仓库。
 
 - 远航调度新增“回航校准”：20M 后执行目标后的协同或绕行分支时，会刷新当前目标指令冷却，让下一步可以直接回到目标完成 3/3 闭环，回应 #6/#3/#2 对后半段玩法节奏变化不足的反馈。
 - `src/game.js` 复用现有 `dispatchRefresh` 管线，在分支执行时返回“回航校准 <目标指令>冷却刷新”并把目标指令冷却置 0；`tests/game.test.js` 覆盖分支后目标立即可执行、预计收益/执行反馈/反馈快照包含回航校准；`index.html` 同步静态初始远航调度说明。
