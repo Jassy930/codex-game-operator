@@ -895,6 +895,7 @@ function renderFarDispatchBranchChoiceSummaryItem(choice) {
   item.title = [
     choice.label,
     choice.decisionBadgeText,
+    choice.routeResourceText,
     choice.routePhaseText,
     choice.routeActionText,
     choice.routeRewardSummaryText,

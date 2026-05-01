@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+- 远航调度新增“路线对照条当前资源符号锚点”：协同/绕行对照槽成为本轮已选路线时，左侧资源符号会随当前路线加强；协同的保留当前资源符号更亮，绕行的投送累计航段箭头更强，让玩家在看到当前路线身份、阶段、动作、收益路径、第二步按钮、本步收益、资源取向、代价和回航结果时，也能先扫到资源方向图形，继续回应 #6 的后半段路线执行理解和 #4 的文字密度反馈。
+- `src/app.js` 把 `choice.routeResourceText` 纳入路线对照槽 `title`；`src/styles.css` 增加当前路线 `is-current` / `is-progress` 资源符号样式；`tests/game.test.js` 覆盖静态绑定。
+- 本轮只调整远航路线对照条展示层和可访问辅助语义，不新增收益、不新增存档字段，不改变升级价格、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、远航调度数值、冷却、连携窗口、反馈入口或部署链路。
+- 同步 GitHub Issues 反馈状态：2026-05-01 21:34 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 作为主处理对象，#4 作为视觉密度依据。
+- 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含 `choice.routeResourceText`、当前路线资源符号选择器和 `transform-origin: center`。
+
 - 点火按钮新增“连击读数命中跳闪”：普通点火命中时，下方 `连击` 读数会跟随按钮命中短促跳闪；过载命中时，`连击` 和 `稳定/过载` 读数会播放更强跳闪，让玩家不用只靠静态文字确认连击与过载状态已经更新，继续回应 #5 的点击反馈、特效和点击欲望反馈。
 - `src/styles.css` 增加 `coreComboReadoutHit`、`coreComboReadoutOverloadHit`、普通命中 `#comboValue` 选择器和过载命中 `#comboValue` / `#pulseValue` 选择器；`tests/game.test.js` 覆盖静态绑定。
 - 本轮只调整点火按钮相邻读数展示层和测试，不新增收益、不新增存档字段，不改变点击收益、连击窗口、过载奖励、升级价格、星图路线、项目奖励、航线策略、航线指令、远航调度、反馈入口或部署链路。

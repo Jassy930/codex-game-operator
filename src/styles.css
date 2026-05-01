@@ -2079,6 +2079,7 @@ h2 {
   grid-area: glyph;
   display: inline-block;
   justify-self: center;
+  transform-origin: center;
 }
 
 .far-dispatch-branch-choice-summary-glyph.is-current {
@@ -2097,6 +2098,27 @@ h2 {
   border-bottom: 6px solid transparent;
   border-left: 10px solid #ff7eb1;
   filter: drop-shadow(0 0 6px rgba(255, 126, 177, 0.34));
+}
+
+.far-dispatch-branch-choice-summary-item.is-active-route
+  .far-dispatch-branch-choice-summary-glyph.is-current {
+  border-color: rgba(216, 255, 226, 0.95);
+  background:
+    linear-gradient(90deg, rgba(216, 255, 226, 0.5), rgba(255, 211, 106, 0.2)),
+    rgba(150, 231, 168, 0.34);
+  box-shadow:
+    0 0 12px rgba(150, 231, 168, 0.42),
+    0 0 0 3px rgba(150, 231, 168, 0.1);
+  transform: scale(1.08);
+}
+
+.far-dispatch-branch-choice-summary-item.is-active-route
+  .far-dispatch-branch-choice-summary-glyph.is-progress {
+  border-left-color: #ff7eb1;
+  filter:
+    drop-shadow(0 0 8px rgba(255, 126, 177, 0.48))
+    drop-shadow(0 0 3px rgba(255, 211, 106, 0.38));
+  transform: scale(1.12);
 }
 
 .far-dispatch-branch-choice-summary-cost.is-safe,

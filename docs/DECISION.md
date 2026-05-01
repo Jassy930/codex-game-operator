@@ -1,5 +1,29 @@
 # Decision
 
+## 2026-05-01 Product decision：远航对照条当前资源符号锚点
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-01 21:34 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；本轮继续处理 #6“后半段玩法无聊、只有不停目标”和 #4“界面文字密集、需要更好看”的交集。
+
+当前最大问题：远航路线对照条已经突出当前路线身份、阶段、下一步动作、收益路径、第二步按钮、本步收益、资源取向、资源代价、回航结果和迷你进度轨，但左侧资源符号仍和非当前路线同权重。玩家能读到 `保当前` / `推累计` 和 `无消耗` / `消耗当前`，但当前路线左侧“保留当前资源 / 投送累计航段”的图形信号还不够强。
+
+本轮决策：
+
+- 新增“远航对照条当前资源符号锚点”。
+- `src/app.js` 把 `choice.routeResourceText` 纳入路线对照槽 `title`，让悬停标题保留资源语义。
+- `src/styles.css` 只强化 `.far-dispatch-branch-choice-summary-item.is-active-route` 内的 `is-current` / `is-progress` 资源符号：协同符号更亮、绕行投送箭头更强，不新增可见文字。
+- `tests/game.test.js` 增加静态断言，覆盖当前路线资源符号锚点样式绑定与 `routeResourceText` 标题语义。
+- 该改动只调整远航路线对照条展示层和可访问辅助语义，不新增收益、不新增存档字段，不改变升级价格、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、远航调度数值、冷却、连携窗口、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-05-01 21:34 CST 当前 5 个 open feedback issue、0 个 open bug issue。
+- `src/app.js` 在路线对照槽标题中包含 `choice.routeResourceText`。
+- `src/styles.css` 包含当前路线 `is-current` / `is-progress` 资源符号选择器。
+- `tests/game.test.js` 覆盖远航对照条当前资源符号锚点静态样式绑定。
+- 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含 `choice.routeResourceText`、当前路线资源符号选择器和 `transform-origin: center`。
+- 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #6 和 #4，以及当前远航路线对照条实现复盘。
+
 ## 2026-05-01 Product decision：点火连击读数命中跳闪
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-01 21:18 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；本轮处理 #5“点火按钮太薄弱、增加点击反馈和点击欲望”。

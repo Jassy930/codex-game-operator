@@ -1838,6 +1838,7 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(appJs, /summary\.hidden = !dispatch\.branchChoiceSummaryText/);
   assert.match(appJs, /dispatch\.branchChoiceSummaryText \?\? ""/);
   assert.match(appJs, /function renderFarDispatchBranchChoiceSummaryItem\(choice\)/);
+  assert.match(appJs, /choice\.routeResourceText/);
   assert.match(appJs, /far-dispatch-branch-choice-summary-item is-/);
   assert.match(appJs, /choice\.active \? " is-active-route" : ""/);
   assert.match(appJs, /far-dispatch-branch-choice-summary-glyph is-/);
@@ -2105,6 +2106,8 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(styles, /grid-area: label/);
   assert.match(styles, /\.far-dispatch-branch-choice-summary-glyph\.is-current/);
   assert.match(styles, /\.far-dispatch-branch-choice-summary-glyph\.is-progress/);
+  assert.match(styles, /\.far-dispatch-branch-choice-summary-item\.is-active-route[\s\S]*\.far-dispatch-branch-choice-summary-glyph\.is-current/);
+  assert.match(styles, /\.far-dispatch-branch-choice-summary-item\.is-active-route[\s\S]*\.far-dispatch-branch-choice-summary-glyph\.is-progress/);
   assert.match(styles, /\.far-dispatch-branch-choice-summary-phase/);
   assert.match(styles, /grid-area: phase/);
   assert.match(styles, /\.far-dispatch-branch-choice-summary-phase\.is-branch/);

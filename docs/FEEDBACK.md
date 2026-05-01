@@ -2,6 +2,13 @@
 
 ## 2026-05-01
 
+- GitHub Issues：gh 可用且已认证；2026-05-01 21:34 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
+- 本轮 Product decision 继续处理 #6，并以 #4 作为视觉密度约束：当前路线已经有身份、阶段、下一步动作、收益路径、第二步按钮、本步收益、资源取向、资源代价、回航结果和迷你进度轨锚点，但左侧资源符号仍和非当前路线同权重。
+- 本轮改动新增远航对照条当前资源符号锚点：当前协同路线的“保留当前资源”符号会更亮，当前绕行路线的“投送累计航段”箭头会更强；`routeResourceText` 同步进入对照槽悬停标题。
+- 本轮只调整远航路线对照条展示层和可访问辅助语义，不新增收益、不新增存档字段，不改变升级价格、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、远航调度数值、冷却、连携窗口、反馈入口或部署链路。
+- 本轮本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含当前路线资源符号锚点代码和样式。
+
 - GitHub Issues：gh 可用且已认证；2026-05-01 21:18 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
 - 本轮 Product decision 处理 #5：点火按钮已有按住、落点、收益浮层、蓄能轨、连击点、中心标签、外层轮廓和下一击预告命中反馈，但 `连击` / `稳定` 读数仍只更新文本，缺少与普通命中和过载命中同节奏的短促确认。
 - 本轮改动新增点火连击读数命中跳闪：普通点火命中时 `#comboValue` 播放短促跳闪；过载命中时 `#comboValue` 和 `#pulseValue` 播放更强跳闪。
