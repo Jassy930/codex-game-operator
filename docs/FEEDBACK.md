@@ -8,7 +8,10 @@
 - 本轮只调整点火按钮相邻读数展示层和测试，不新增收益、不新增存档字段，不改变点击收益、连击窗口、过载奖励、升级价格、星图路线、项目奖励、航线策略、航线指令、远航调度、反馈入口或部署链路。
 - 本轮本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
 - 构建产物已确认包含点火连击读数命中跳闪选择器和 keyframes。
-- 钉钉通知待处理：本轮结束前仅会从运行环境或本地 `.env*` 查找 webhook，不写入仓库。
+- 发布：提交 `82e5ca5` 已推送到 `origin/main`；GitHub Pages workflow `25215991193` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页返回 HTTP 200，线上 `src/styles.css` 已确认包含点火连击读数命中跳闪样式。workflow 继续给出 Node.js 20 actions 弃用提醒，未影响本次部署。
+- #5 已回复：说明点火连击读数命中跳闪、验证结果、Pages 部署和复测问题；issue 保持 open，更新时间为 2026-05-01T13:27:56Z，评论地址：`https://github.com/Jassy930/codex-game-operator/issues/5#issuecomment-4359494970`。
+- 回复后同步 GitHub Issues：2026-05-01 21:28 CST 当前仍为 5 个 open feedback issue、0 个 open bug issue。
+- 钉钉通知未发送：2026-05-01 21:29 CST 运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` / `ROBOT` 相关变量名，当前目录、`/home/jassy/glm` 和用户目录两层内未发现 `.env*` 文件；未将 webhook 写入仓库。
 
 - GitHub Issues：gh 可用且已认证；2026-05-01 21:02 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
 - 本轮 Product decision 继续处理 #6，并以 #4 作为视觉密度约束：当前路线已经有边栏、阶段、下一步动作、收益路径、本步收益、资源代价、回航结果、取向和第二步按钮锚点，但首行身份短标 `协同 · 当前路线` / `绕行 · 当前路线` 仍缺少当前路线内的扫视锚点。
