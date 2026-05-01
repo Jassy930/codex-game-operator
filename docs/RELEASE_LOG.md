@@ -9,6 +9,8 @@
 - 同步 GitHub Issues 反馈状态：2026-05-01 11:19 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 作为主处理对象，#4 作为视觉密度依据。
 - 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
 - 构建产物已确认包含 `routeBranchStepText`、`far-dispatch-branch-choice-summary-step` 和 `路线对照：`。
+- 发布：提交 `e731345` 已推送到 `origin/main`；GitHub Pages workflow `25200839578` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页返回 HTTP 200，线上 `src/game.js`、`src/app.js` 和 `src/styles.css` 已确认包含 `routeBranchStepText` 与 `far-dispatch-branch-choice-summary-step`。
+- 反馈处理：已回复 #6，说明路线对照条第二步短标、验证结果、Pages 部署和复测问题；已回复 #4，说明本轮把第二步按钮名压到协同/绕行对照槽以降低逐张读卡片和展开明细的依赖；两个 issue 均保持 open。回复后于 2026-05-01 11:30 CST 再次同步 GitHub Issues，当前仍为 5 个 open feedback issue、0 个 open bug issue；#6 更新时间为 2026-05-01T03:30:09Z，#4 更新时间为 2026-05-01T03:30:37Z。
 - 钉钉通知未发送：运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` 相关变量名，当前目录和父级两层内也未发现 `.env*` 文件；未将 webhook 写入仓库。
 
 - 远航调度新增“路线对照条”：协同/绕行卡片上方用两个固定视觉槽并排显示路线徽标、路线取向、当前资源代价和回航结果，继续回应 #6 的后半段路线取舍理解和 #4 的降文字密度反馈。
