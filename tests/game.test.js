@@ -1743,6 +1743,10 @@ test("静态首页会渲染航线指令轮换目标", () => {
   const appJs = readFileSync(new URL("../src/app.js", import.meta.url), "utf8");
   const gameJs = readFileSync(new URL("../src/game.js", import.meta.url), "utf8");
   const styles = readFileSync(new URL("../src/styles.css", import.meta.url), "utf8");
+  const farDispatchVisual = readFileSync(
+    new URL("../src/assets/far-dispatch-visual.svg", import.meta.url),
+    "utf8"
+  );
 
   assert.match(indexHtml, /id="directivePlan"/);
   assert.match(indexHtml, /id="directivePlanTrack"/);
@@ -1762,6 +1766,9 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(indexHtml, /class="far-dispatch-branch-choices"/);
   assert.match(indexHtml, /class="far-dispatch-loop-meter"/);
   assert.match(indexHtml, /class="far-dispatch-loop-track"/);
+  assert.match(indexHtml, /class="far-dispatch-scene-image"/);
+  assert.match(indexHtml, /src="\.\/src\/assets\/far-dispatch-visual\.svg"/);
+  assert.match(indexHtml, /远航调度三步闭环、协同航线和绕行航线组成的远航插画/);
   assert.match(indexHtml, /aria-label="航线委托进度"/);
   assert.match(indexHtml, /aria-label="远航调度进度"/);
   assert.match(indexHtml, /aria-label="远航闭环进度"/);
@@ -1781,6 +1788,12 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(indexHtml, /指令熟练/);
   assert.match(indexHtml, /回响续航/);
   assert.match(indexHtml, /满层回响/);
+  assert.match(farDispatchVisual, /id="farDispatchVisual"/);
+  assert.match(farDispatchVisual, /<title id="farDispatchVisualTitle">远航调度闭环插画<\/title>/);
+  assert.match(farDispatchVisual, /三步远航闭环、协同航线和绕行航线构成的抽象航线图/);
+  assert.match(styles, /\.far-dispatch-scene-image/);
+  assert.match(styles, /\.far-dispatch\.is-active \.far-dispatch-scene-image/);
+  assert.match(styles, /\.far-dispatch\.is-locked \.far-dispatch-scene-image/);
   assert.match(appJs, /rotationReward: result\.rotationReward/);
   assert.match(appJs, /planReward: result\.planReward/);
   assert.match(appJs, /planBonusRate: result\.planBonusRate/);

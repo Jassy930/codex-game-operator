@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+- 远航调度新增“远航调度闭环插画”：20M 后主操作区远航调度区内新增本地 SVG 远航闭环插画，用三步闭环、协同航线、绕行航线和远航飞行器建立概览视觉锚点，继续回应 #4 的图片化/文字密度反馈，并辅助 #6 的后半段短循环理解。
+- 新增 `src/assets/far-dispatch-visual.svg`；`index.html` 在 `#farDispatch` 中引用 `.far-dispatch-scene-image`；`src/styles.css` 增加插画默认、active 和 locked 状态样式；`tests/game.test.js` 覆盖静态绑定。
+- 本轮只新增远航调度展示资产和样式，不新增可见说明文字、不新增收益、不新增存档字段，不改变点击收益、升级价格、星图路线、项目奖励、航线策略、航线指令、远航调度数值、反馈入口或部署链路。
+- 同步 GitHub Issues 反馈状态：2026-05-02 04:15 CST 当前 5 个 open feedback issue、0 个 open bug issue；#4/#6 作为主处理对象。
+- 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含 `far-dispatch-visual.svg`、`.far-dispatch-scene-image` 和 `farDispatchVisual`。
+
 - 远航调度新增“远航闭环当前连接信标脉冲”：20M 后主操作区远航闭环当前微图节点到步骤卡之间的连接线和小节点会轻量脉冲，继续回应 #4 的图形化/文字密度反馈，并辅助 #6 的后半段短循环执行确认。
 - `src/styles.css` 为 `.far-dispatch-loop-link.is-current::before` 和 `::after` 增加 `farDispatchLoopCurrentLinkPulse` 动画，并在降低动效偏好中关闭该动画；`tests/game.test.js` 覆盖静态绑定。
 - 本轮只调整远航闭环展示层和测试，不新增可见说明文字、不新增收益、不新增存档字段，不改变点击收益、升级价格、星图路线、项目奖励、航线策略、航线指令、远航调度数值、反馈入口或部署链路。

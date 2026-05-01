@@ -1,0 +1,63 @@
+<svg id="farDispatchVisual" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 220" role="img" aria-labelledby="farDispatchVisualTitle farDispatchVisualDesc">
+  <title id="farDispatchVisualTitle">远航调度闭环插画</title>
+  <desc id="farDispatchVisualDesc">三步远航闭环、协同航线和绕行航线构成的抽象航线图。</desc>
+  <defs>
+    <linearGradient id="farDispatchBg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#06131d" />
+      <stop offset="0.52" stop-color="#122527" />
+      <stop offset="1" stop-color="#1b1221" />
+    </linearGradient>
+    <linearGradient id="farDispatchPath" x1="0" x2="1" y1="0" y2="0">
+      <stop offset="0" stop-color="#ff7eb1" />
+      <stop offset="0.5" stop-color="#ffd36a" />
+      <stop offset="1" stop-color="#96e7a8" />
+    </linearGradient>
+    <filter id="farDispatchGlow" x="-30%" y="-60%" width="160%" height="220%">
+      <feGaussianBlur stdDeviation="7" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+  </defs>
+
+  <rect width="960" height="220" rx="26" fill="url(#farDispatchBg)" />
+  <path d="M44 168 C146 88 237 78 336 115 S542 183 654 112 832 52 916 86" fill="none" stroke="#cfe8ff" stroke-width="2" opacity="0.16" />
+  <path d="M60 92 C178 50 280 54 372 106 S554 172 666 121 820 64 900 122" fill="none" stroke="#96e7a8" stroke-width="2" opacity="0.12" />
+
+  <g opacity="0.58">
+    <circle cx="84" cy="46" r="2" fill="#f8f3e7" />
+    <circle cx="154" cy="178" r="1.8" fill="#96e7a8" />
+    <circle cx="246" cy="34" r="1.6" fill="#ffd36a" />
+    <circle cx="430" cy="44" r="2" fill="#f8f3e7" />
+    <circle cx="548" cy="184" r="1.8" fill="#ff7eb1" />
+    <circle cx="710" cy="34" r="1.6" fill="#96e7a8" />
+    <circle cx="860" cy="166" r="2" fill="#f8f3e7" />
+  </g>
+
+  <g filter="url(#farDispatchGlow)">
+    <path d="M156 112 C276 68 368 68 480 112 S684 156 804 108" fill="none" stroke="url(#farDispatchPath)" stroke-width="9" stroke-linecap="round" />
+    <path d="M156 112 C276 156 368 156 480 112 S684 68 804 108" fill="none" stroke="#ff7eb1" stroke-width="4" stroke-linecap="round" opacity="0.7" />
+  </g>
+
+  <g>
+    <circle cx="156" cy="112" r="30" fill="#190d19" stroke="#ff7eb1" stroke-width="4" />
+    <circle cx="156" cy="112" r="14" fill="#ff7eb1" opacity="0.86" />
+    <circle cx="480" cy="112" r="34" fill="#1c1708" stroke="#ffd36a" stroke-width="5" />
+    <path d="M480 76 L490 102 L518 102 L495 119 L504 146 L480 130 L456 146 L465 119 L442 102 L470 102 Z" fill="#fff7c2" opacity="0.86" />
+    <circle cx="804" cy="108" r="30" fill="#081912" stroke="#96e7a8" stroke-width="4" />
+    <path d="M787 108 h34 M804 91 v34" stroke="#96e7a8" stroke-width="7" stroke-linecap="round" opacity="0.86" />
+  </g>
+
+  <g opacity="0.9">
+    <path d="M370 111 L423 94 L413 112 L423 130 Z" fill="#ffd36a" />
+    <path d="M588 113 L641 96 L631 114 L641 132 Z" fill="#96e7a8" />
+    <path d="M374 142 L423 157 L409 139 L425 126 Z" fill="#ff7eb1" opacity="0.86" />
+  </g>
+
+  <g transform="translate(464 102)">
+    <path d="M0 -30 L47 0 L0 30 L10 9 L-46 9 L-58 0 L-46 -9 L10 -9 Z" fill="#0b141a" stroke="#cfe8ff" stroke-width="4" stroke-linejoin="round" />
+    <path d="M-40 0 H30" stroke="#cfe8ff" stroke-width="4" stroke-linecap="round" opacity="0.72" />
+    <circle cx="8" cy="0" r="7" fill="#ffd36a" />
+  </g>
+</svg>

@@ -2,6 +2,13 @@
 
 ## 2026-05-02
 
+- GitHub Issues：gh 可用且已认证；2026-05-02 04:15 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。#4/#6 仍是最新组合反馈：远航调度需要更多图形化表达，减少后半段主操作区文字反推。
+- 本轮 Product decision 继续处理 #4/#6：远航调度已有路线微图、步骤卡、连接信标和当前脉冲，但远航调度区本体缺少一张概览型图片来先表达“目标 -> 分支 -> 回目标”的整体航线关系。
+- 本轮改动新增远航调度闭环插画：`src/assets/far-dispatch-visual.svg` 随静态构建发布，`#farDispatch` 内新增 `.far-dispatch-scene-image`，解锁态增强边框与投光，未解锁态降低饱和度。
+- 本轮只新增远航调度展示资产和样式，不新增可见说明文字、不新增收益、不新增存档字段，不改变点击收益、升级价格、星图路线、项目奖励、航线策略、航线指令、远航调度数值、反馈入口或部署链路。
+- 本轮本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含 `far-dispatch-visual.svg`、`.far-dispatch-scene-image` 和 `farDispatchVisual`。
+
 - GitHub Issues：gh 可用且已认证；2026-05-02 04:00 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。#4/#6 仍是最新组合反馈：远航调度需要更多图形化表达，减少后半段主操作区文字反推。
 - 本轮 Product decision 继续处理 #4/#6：远航闭环路线微图和三张步骤卡之间已经有连接信标，但当前连接线和小节点仍偏静态。
 - 本轮改动新增远航闭环当前连接信标脉冲：`.far-dispatch-loop-link.is-current::before` 和 `::after` 会播放轻量脉冲，让当前微图节点到步骤卡的对应关系更容易被扫到，并在降低动效偏好下关闭动画。
