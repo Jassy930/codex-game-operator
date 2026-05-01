@@ -9,6 +9,9 @@
 - 同步 GitHub Issues 反馈状态：2026-05-01 08:41 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 作为主处理对象，#4 作为视觉密度依据。
 - 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
 - 构建产物已确认包含 `routeProgressPercent`、`buildFarRouteDispatchBranchRouteProgressPercent` 和 `--branch-route-progress`。
+- 发布：提交 `c34de0b` 已推送到 `origin/main`；GitHub Pages workflow `25196762979` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页返回 HTTP 200，线上 `src/game.js`、`src/app.js` 和 `src/styles.css` 已确认包含 `routeProgressPercent` 与 `--branch-route-progress`。
+- 反馈处理：已回复 #6，说明路线微图推进填充、验证结果和复测问题；已回复 #4，说明本轮轨道推进填充继续降低远航路线阶段对文字步骤的依赖；两个 issue 均保持 open。回复后于 2026-05-01 08:49 CST 再次同步 GitHub Issues，当前仍为 5 个 open feedback issue、0 个 open bug issue；#6 更新时间为 2026-05-01T00:48:55Z，#4 更新时间为 2026-05-01T00:49:05Z。
+- 钉钉通知未发送：运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` 相关变量名，父目录两层内也未发现 `.env*` 文件；未将 webhook 写入仓库。
 
 - 远航调度新增“路线微图图例”：协同/绕行分支卡片上方显示 `1 目标`、`2 分支`、`3 回目标`，让路线微图里的 1/2/3 节点不用再从路线步骤和按钮徽标里反推，继续回应 #6 的后半段路线理解和 #4 的图形化/降文字密度反馈。
 - `src/app.js` 新增 `renderFarDispatchBranchChoiceLegend()` 并渲染 `far-dispatch-branch-choice-legend` / `far-dispatch-branch-choice-legend-item`；`src/styles.css` 增加跨栏图例、小圆点步号和紧凑项样式；`tests/game.test.js` 覆盖静态 DOM 与样式绑定。

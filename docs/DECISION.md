@@ -23,7 +23,11 @@
 - `tests/game.test.js` 覆盖推进百分比派生、静态 DOM style 绑定和样式变量。
 - 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
 - 构建产物已确认包含 `routeProgressPercent`、`buildFarRouteDispatchBranchRouteProgressPercent` 和 `--branch-route-progress`。
-- 钉钉通知待本轮结束时尝试发送；webhook 仍只允许来自运行时上下文或本地环境，不写入仓库。
+- 发布验证已通过：提交 `c34de0b` 已推送到 `origin/main`；GitHub Pages workflow `25196762979` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页返回 HTTP 200，线上 `src/game.js`、`src/app.js` 和 `src/styles.css` 已确认包含 `routeProgressPercent` 与 `--branch-route-progress`。
+- 已回复 GitHub Issue #6，说明本轮路线微图推进填充、验证结果、Pages 部署和复测问题，issue 保持 open，更新时间为 2026-05-01T00:48:55Z。
+- 已回复 GitHub Issue #4，说明本轮用轨道推进填充继续降低 20M 后路线阶段对文字步骤的依赖，issue 保持 open，更新时间为 2026-05-01T00:49:05Z。
+- 回复后同步 GitHub Issues：2026-05-01 08:49 CST 当前仍为 5 个 open feedback issue、0 个 open bug issue。
+- 钉钉通知未发送：运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` 相关变量名，父目录两层内也未发现 `.env*` 文件；未将 webhook 写入仓库。
 
 ## 2026-05-01 Product decision：远航路线微图图例
 
