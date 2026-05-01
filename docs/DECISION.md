@@ -24,6 +24,10 @@
 - `tests/game.test.js` 覆盖收益短标派生、可访问汇总、静态 DOM 和样式绑定。
 - 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
 - 构建产物已确认包含 `routeRewardSummaryText`、`far-dispatch-branch-choice-summary-reward`、`校准/补给/闭环` 和 `校准/投送/闭环`。
+- 发布验证已通过：提交 `1c82faf` 已推送到 `origin/main`；GitHub Pages workflow `25202413152` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页返回 HTTP 200，线上 `src/game.js`、`src/app.js` 和 `src/styles.css` 已确认包含 `routeRewardSummaryText` 与 `far-dispatch-branch-choice-summary-reward`。
+- 已回复 GitHub Issue #6，说明本轮路线对照条收益短标、验证结果、Pages 部署和复测问题，issue 保持 open，更新时间为 2026-05-01T04:37:01Z；评论地址：`https://github.com/Jassy930/codex-game-operator/issues/6#issuecomment-4357836373`。
+- 已回复 GitHub Issue #4，说明本轮把三步收益落点压到协同/绕行对照槽，issue 保持 open，更新时间为 2026-05-01T04:37:17Z；评论地址：`https://github.com/Jassy930/codex-game-operator/issues/4#issuecomment-4357837144`。
+- 回复后同步 GitHub Issues：2026-05-01 12:37 CST 当前仍为 5 个 open feedback issue、0 个 open bug issue。
 
 ## 2026-05-01 Product decision：远航路线对照条下一步短标
 
