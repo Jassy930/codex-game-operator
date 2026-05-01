@@ -110,6 +110,10 @@ h2 {
   animation: scoreEnergyReadoutOverloadHit 520ms ease-out;
 }
 
+.score-grid dd.is-core-overload-prize {
+  animation: scoreOverloadReadoutPrize 560ms ease-out;
+}
+
 .play-layout {
   display: grid;
   grid-template-columns: minmax(0, 1.1fr) minmax(320px, 0.7fr);
@@ -6052,6 +6056,37 @@ h2 {
   }
 }
 
+@keyframes scoreOverloadReadoutPrize {
+  0% {
+    color: #fff7c2;
+    filter: drop-shadow(0 0 0 rgba(232, 93, 117, 0));
+    transform: translateY(1px) scale(0.98);
+  }
+
+  34% {
+    color: #ffffff;
+    filter:
+      drop-shadow(0 0 14px rgba(255, 247, 194, 0.44))
+      drop-shadow(0 0 26px rgba(232, 93, 117, 0.4))
+      drop-shadow(0 0 34px rgba(244, 178, 60, 0.28));
+    transform: translateY(-3px) scale(1.16);
+  }
+
+  64% {
+    color: #ffd36a;
+    filter:
+      drop-shadow(0 0 10px rgba(255, 247, 194, 0.28))
+      drop-shadow(0 0 20px rgba(232, 93, 117, 0.22));
+    transform: translateY(-1px) scale(1.05);
+  }
+
+  100% {
+    color: #fff7c2;
+    filter: drop-shadow(0 0 0 rgba(232, 93, 117, 0));
+    transform: translateY(0) scale(1);
+  }
+}
+
 @keyframes coreVeinPulse {
   0%,
   100% {
@@ -6146,6 +6181,7 @@ h2 {
 @media (prefers-reduced-motion: reduce) {
   .score-grid dd.is-core-hit,
   .score-grid dd.is-core-overload-hit,
+  .score-grid dd.is-core-overload-prize,
   .far-dispatch-branch-choice-summary-item.is-active-route
     .far-dispatch-branch-choice-summary-progress::after,
   .far-dispatch-branch-choice-summary-item.is-active-route

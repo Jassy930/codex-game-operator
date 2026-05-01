@@ -270,6 +270,7 @@ let coreGainTimer = 0;
 let coreImpactTimer = 0;
 let coreComboHitTimer = 0;
 let coreEnergyHitTimer = 0;
+let coreOverloadReadoutTimer = 0;
 let soundEnabled = loadSoundPreference();
 let hapticEnabled = loadHapticPreference();
 let audioContext = null;
@@ -2824,8 +2825,10 @@ function animateCore({
   window.clearTimeout(coreGainTimer);
   window.clearTimeout(coreImpactTimer);
   window.clearTimeout(coreEnergyHitTimer);
+  window.clearTimeout(coreOverloadReadoutTimer);
   elements.coreButton.classList.remove("is-pulsing", "is-overload-impact");
   elements.energy.classList.remove("is-core-hit", "is-core-overload-hit");
+  elements.overload.classList.remove("is-core-overload-prize");
   elements.coreGainPop.textContent = gainText;
   elements.coreGainPop.classList.remove("is-showing", "is-overload-gain");
   positionCoreImpact(pointerEvent);
@@ -2844,6 +2847,9 @@ function animateCore({
     elements.coreGainPop.classList.add("is-showing");
     elements.coreGainPop.classList.toggle("is-overload-gain", overloaded);
     elements.energy.classList.add(overloaded ? "is-core-overload-hit" : "is-core-hit");
+    if (overloaded) {
+      elements.overload.classList.add("is-core-overload-prize");
+    }
     highlightCoreComboHit(comboStep, overloaded);
     corePulseTimer = window.setTimeout(
       () => {
@@ -2871,6 +2877,11 @@ function animateCore({
       },
       overloaded ? 520 : 360
     );
+    if (overloaded) {
+      coreOverloadReadoutTimer = window.setTimeout(() => {
+        elements.overload.classList.remove("is-core-overload-prize");
+      }, 560);
+    }
   });
 }
 

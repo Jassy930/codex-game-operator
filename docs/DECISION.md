@@ -1,5 +1,29 @@
 # Decision
 
+## 2026-05-01 Product decision：点火过载奖励读数命中亮闪
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-01 23:20 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；本轮继续处理 #5“点火按钮太薄弱、增加点击反馈和点击欲望”，同时不增加 #4 提到的默认文字密度。
+
+当前最大问题：点火过载命中已经有按钮本体、中心标签、落点、收益浮层、连击读数、下一击预告和顶部能量读数反馈，但顶部“过载 +X”奖励读数仍保持静态。玩家第 8 次点击看到过载爆发后，还需要自己把这次强反馈和长期过载奖励来源对应起来。
+
+本轮决策：
+
+- 新增“点火过载奖励读数命中亮闪”。
+- `src/app.js` 在 `animateCore` 过载命中时，为 `#overloadValue` 短暂追加 `is-core-overload-prize`，并使用独立 timer 清理；普通点火只清理该状态，不触发过载读数亮闪。
+- `src/styles.css` 为顶部过载奖励读数增加 `scoreOverloadReadoutPrize` 短动画，并纳入 `prefers-reduced-motion: reduce` 兜底。
+- `tests/game.test.js` 增加静态断言，覆盖过载奖励读数类名、timer、动画和 keyframes。
+- 该改动只调整点火过载反馈展示层和测试，不新增可见文字、不新增收益、不新增存档字段，不改变点击收益、连击窗口、过载奖励、升级价格、星图 57 段路线、项目奖励、航线策略、航线指令、远航调度、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-05-01 23:20 CST 当前 5 个 open feedback issue、0 个 open bug issue。
+- `src/app.js` 包含 `coreOverloadReadoutTimer` 和 `is-core-overload-prize`。
+- `src/styles.css` 包含 `scoreOverloadReadoutPrize` 和降低动效兜底。
+- `tests/game.test.js` 覆盖点火过载奖励读数命中亮闪静态绑定。
+- 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含 `coreOverloadReadoutTimer`、`is-core-overload-prize` 和 `scoreOverloadReadoutPrize`。
+- 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #5，以及当前点火过载反馈链路复盘。
+
 ## 2026-05-01 Product decision：点火能量读数命中亮闪
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-01 23:07 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；本轮继续处理 #5“点火按钮太薄弱、增加点击反馈和点击欲望”，同时不增加 #4 提到的默认文字密度。
