@@ -1,5 +1,26 @@
 # Decision
 
+## 2026-05-01 Product decision：远航路线对照条下一步按钮短标
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-01 14:18 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#6 仍是后半段玩法变化主反馈，#4 仍是界面文字密度和图形化依据，因此本轮继续进入 Product decision。
+
+当前最大问题：路线对照条已经显示 1/2/3 进度节点和第二步按钮，但动作短标仍是“下一步 目标 / 选协同 / 回目标 / 整备”。玩家扫对照条时还需要再把动作语义映射到具体按钮名。
+
+本轮决策：
+
+- 新增“远航路线对照条下一步按钮短标”。
+- `src/game.js` 让 `routeActionText` 复用 `routeCommandLabels`，直接输出 `下一步 1 点火齐射`、`下一步 2 谐振脉冲`、`下一步 3 点火齐射` 或具体整备指令名。
+- `tests/game.test.js` 更新远航调度状态断言，覆盖起手、分支、回航和绕行整备状态的下一步按钮短标。
+- 该改动只调整展示派生和可访问汇总文本，不新增收益、不新增存档字段，不改变升级价格、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、远航调度数值、冷却、连携窗口、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-05-01 14:18 CST 当前 5 个 open feedback issue、0 个 open bug issue。
+- `src/game.js` 的 `buildFarRouteDispatchBranchRouteAction` 从 `routeCommandLabels` 派生步骤号和指令名。
+- `tests/game.test.js` 覆盖 `下一步 1 点火齐射`、`下一步 2 谐振脉冲`、`下一步 3 点火齐射` 和 `下一步 绕行整备 巡航回收`。
+- 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含 `下一步 1 `、`下一步 2 `、`下一步 3 ` 和 `下一步 绕行整备` 派生逻辑。
+
 ## 2026-05-01 Product decision：远航路线对照条进度步号与状态语义
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-01 14:06 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#6 仍是后半段玩法变化主反馈，#4 仍是界面文字密度和图形化依据，因此本轮继续进入 Product decision。

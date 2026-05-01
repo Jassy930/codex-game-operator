@@ -2,6 +2,13 @@
 
 ## 2026-05-01
 
+- GitHub Issues：gh 可用且已认证；2026-05-01 14:18 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
+- #6 继续作为本轮 Product decision 依据：路线对照条已经有 1/2/3 步号、第二步按钮和进度语义，但泛化的“下一步 目标/选协同/回目标/整备”仍需要玩家再映射到实际按钮；#4 继续作为图形化和降文字密度依据。
+- 本轮改动新增远航路线对照条下一步按钮短标：协同/绕行对照槽直接显示 `下一步 1 点火齐射`、`下一步 2 谐振脉冲`、`下一步 3 点火齐射` 或具体整备指令名。
+- 本轮只调整展示派生和测试，不新增收益、不新增存档字段，不改变星图路线、远航调度数值、冷却、连携窗口、反馈入口或部署链路。
+- 本轮本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含 `下一步 1 `、`下一步 2 `、`下一步 3 ` 和 `下一步 绕行整备` 派生逻辑。
+
 - GitHub Issues：gh 可用且已认证；2026-05-01 14:06 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
 - #6 继续作为本轮 Product decision 依据：路线指令串已经补上 1/2/3 步号与状态语义，但路线对照条底部迷你进度轨仍是无编号小圆点；#4 继续作为图形化和降文字密度依据。
 - 本轮改动新增远航路线对照条进度步号与状态语义：协同/绕行对照槽底部 1/2/3 进度节点直接显示步号，整条进度轨提供“路线对照进度”可访问汇总和悬停状态。

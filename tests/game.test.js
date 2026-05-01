@@ -3200,7 +3200,7 @@ test("远航调度会在 20M 后按当前航段指定目标指令", () => {
     dispatch.branchChoices.map(
       (choice) => choice.routeActionKind + ":" + choice.routeActionText
     ),
-    ["target:下一步 目标", "target:下一步 目标"]
+    ["target:下一步 1 点火齐射", "target:下一步 1 点火齐射"]
   );
   assert.deepEqual(
     dispatch.branchChoices.map(
@@ -3237,11 +3237,11 @@ test("远航调度会在 20M 后按当前航段指定目标指令", () => {
   );
   assert.equal(
     dispatch.branchChoiceText,
-    "分支选择：协同 谐振脉冲（可选择 · 首推 · 0/3 起手 · 下一步 目标 · 校准/补给/闭环 · 收益点：校准 -> 补给 -> 闭环 · 无消耗 · 保当前 · 远航突破 · 2 谐振脉冲 · 本步 +13% · 路线指令：点火齐射 -> 谐振脉冲 -> 点火齐射 · 补当前资源 · 推荐原因：点击/过载航段保留当前资源 · 路线判断：当前航段首推 · 路线目标：按当前航段推荐建立协同路线 · 下一步：先执行目标 点火齐射，再选协同 谐振脉冲 · 后续协同回航触发闭环与远航突破 · 本步合计 +13% · 回目标 远航闭环 +16% + 远航突破 +0.05%剩余 + 契合闭环 +7% · 远航协同 +5% · 协同补给 +3%当前 · 航段契合 +5%） / 绕行 巡航回收（可选择 · 建档 · 0/3 起手 · 下一步 目标 · 校准/投送/闭环 · 收益点：校准 -> 投送 -> 闭环 · 消耗当前 · 推累计 · 绕行突破 · 2 巡航回收 · 本步 +4% · 路线指令：点火齐射 -> 巡航回收 -> 点火齐射 · 投送累计航段 · 路线判断：备选建档 · 路线目标：建立绕行路线，记录为下轮对照 · 下一步：先执行目标 点火齐射，再选绕行 巡航回收 · 后续绕行回航触发闭环与绕行突破 · 本步合计 +4% · 投送累计 · 回目标 远航闭环 +16% + 远航突破 +0.05%剩余 + 绕行突破 +0.03%剩余 · 远航绕行 +4% · 绕行投送 -0.3%当前）"
+    "分支选择：协同 谐振脉冲（可选择 · 首推 · 0/3 起手 · 下一步 1 点火齐射 · 校准/补给/闭环 · 收益点：校准 -> 补给 -> 闭环 · 无消耗 · 保当前 · 远航突破 · 2 谐振脉冲 · 本步 +13% · 路线指令：点火齐射 -> 谐振脉冲 -> 点火齐射 · 补当前资源 · 推荐原因：点击/过载航段保留当前资源 · 路线判断：当前航段首推 · 路线目标：按当前航段推荐建立协同路线 · 下一步：先执行目标 点火齐射，再选协同 谐振脉冲 · 后续协同回航触发闭环与远航突破 · 本步合计 +13% · 回目标 远航闭环 +16% + 远航突破 +0.05%剩余 + 契合闭环 +7% · 远航协同 +5% · 协同补给 +3%当前 · 航段契合 +5%） / 绕行 巡航回收（可选择 · 建档 · 0/3 起手 · 下一步 1 点火齐射 · 校准/投送/闭环 · 收益点：校准 -> 投送 -> 闭环 · 消耗当前 · 推累计 · 绕行突破 · 2 巡航回收 · 本步 +4% · 路线指令：点火齐射 -> 巡航回收 -> 点火齐射 · 投送累计航段 · 路线判断：备选建档 · 路线目标：建立绕行路线，记录为下轮对照 · 下一步：先执行目标 点火齐射，再选绕行 巡航回收 · 后续绕行回航触发闭环与绕行突破 · 本步合计 +4% · 投送累计 · 回目标 远航闭环 +16% + 远航突破 +0.05%剩余 + 绕行突破 +0.03%剩余 · 远航绕行 +4% · 绕行投送 -0.3%当前）"
   );
   assert.equal(
     dispatch.branchChoiceSummaryText,
-    "路线对照：协同 首推 · 0/3 起手 · 下一步 目标 · 校准/补给/闭环 · 2 谐振脉冲 · 本步 +13% · 保当前 · 无消耗 · 远航突破 / 绕行 建档 · 0/3 起手 · 下一步 目标 · 校准/投送/闭环 · 2 巡航回收 · 本步 +4% · 推累计 · 消耗当前 · 绕行突破"
+    "路线对照：协同 首推 · 0/3 起手 · 下一步 1 点火齐射 · 校准/补给/闭环 · 2 谐振脉冲 · 本步 +13% · 保当前 · 无消耗 · 远航突破 / 绕行 建档 · 0/3 起手 · 下一步 1 点火齐射 · 校准/投送/闭环 · 2 巡航回收 · 本步 +4% · 推累计 · 消耗当前 · 绕行突破"
   );
   assert.equal(
     dispatch.loopStatusText,
@@ -3407,7 +3407,7 @@ test("远航调度会在 20M 后按当前航段指定目标指令", () => {
     relayDispatch.branchChoices.map(
       (choice) => choice.routeActionKind + ":" + choice.routeActionText
     ),
-    ["branch:下一步 选协同", "branch:下一步 选绕行"]
+    ["branch:下一步 2 谐振脉冲", "branch:下一步 2 巡航回收"]
   );
   assert.match(relayDispatch.loopStatusText, /闭环进度 1\/3/);
   assert.match(relayDispatch.loopStatusText, /优先谐振脉冲触发远航协同/);
@@ -3590,7 +3590,7 @@ test("远航调度会在 20M 后按当前航段指定目标指令", () => {
     detourDispatch.branchChoices.map(
       (choice) => choice.routeActionKind + ":" + choice.routeActionText
     ),
-    ["idle:待选", "return:下一步 回目标"]
+    ["idle:待选", "return:下一步 3 点火齐射"]
   );
   assert.match(detourDispatch.loopStatusText, /闭环进度 2\/3/);
   assert.match(detourDispatch.loopStatusText, /触发远航闭环与绕行突破/);
@@ -3662,7 +3662,7 @@ test("远航调度会在 20M 后按当前航段指定目标指令", () => {
     detourCompletedDispatch.branchChoices.map(
       (choice) => choice.routeActionKind + ":" + choice.routeActionText
     ),
-    ["idle:待选", "prep:下一步 绕行整备"]
+    ["idle:待选", "prep:下一步 绕行整备 巡航回收"]
   );
   assert.match(
     detourCompletedDispatch.loopStatusText,
@@ -3769,7 +3769,7 @@ test("远航调度会在 20M 后按当前航段指定目标指令", () => {
     loopDispatch.branchChoices.map(
       (choice) => choice.routeActionKind + ":" + choice.routeActionText
     ),
-    ["return:下一步 回目标", "idle:待选"]
+    ["return:下一步 3 点火齐射", "idle:待选"]
   );
   assert.match(loopDispatch.loopStatusText, /闭环进度 2\/3/);
   assert.match(loopDispatch.loopStatusText, /协同回航到点火齐射触发远航闭环/);

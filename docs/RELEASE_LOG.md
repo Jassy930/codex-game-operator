@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+- 远航调度新增“路线对照条下一步按钮短标”：协同/绕行对照槽把泛化的 `下一步 目标/选协同/回目标/整备` 改成 `下一步 1 点火齐射`、`下一步 2 谐振脉冲`、`下一步 3 点火齐射` 或具体整备指令名，继续回应 #6 的后半段路线执行理解和 #4 的图形化降密度反馈。
+- `src/game.js` 让 `routeActionText` 复用 `routeCommandLabels` 派生步骤号和指令名；`tests/game.test.js` 覆盖起手、分支、回航和绕行整备状态的下一步按钮短标。
+- 本轮只调整展示派生和测试，不新增收益、不新增存档字段，不改变升级价格、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、远航调度既有数值、冷却、连携窗口、反馈入口或部署链路。
+- 同步 GitHub Issues 反馈状态：2026-05-01 14:18 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 作为主处理对象，#4 作为视觉密度依据。
+- 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含 `下一步 1 `、`下一步 2 `、`下一步 3 ` 和 `下一步 绕行整备` 派生逻辑。
+
 - 远航调度新增“路线对照条进度步号与状态语义”：协同/绕行对照槽底部的迷你三步进度轨直接显示 1/2/3 步号，并提供“路线对照进度”可访问汇总与悬停状态，继续回应 #6 的后半段路线执行理解和 #4 的图形化降密度反馈。
 - `src/app.js` 为 `far-dispatch-branch-choice-summary-progress` 写入 `role="img"`、`aria-label`、`title` 和节点 `data-step-label`；`src/styles.css` 通过 `.far-dispatch-branch-choice-summary-progress-node::before` 显示步号；`tests/game.test.js` 覆盖 DOM、可访问语义和 CSS 静态绑定。
 - 本轮只调整展示层、悬停说明和可访问语义，不新增收益、不新增存档字段，不改变升级价格、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、远航调度既有数值、冷却、连携窗口、反馈入口或部署链路。

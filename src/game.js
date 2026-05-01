@@ -5224,11 +5224,16 @@ function buildFarRouteDispatchBranchChoices(
     const routeProgressPercent =
       buildFarRouteDispatchBranchRouteProgressPercent(routeNodeStates);
     const routePhase = buildFarRouteDispatchBranchRoutePhase(routeNodeStates);
+    const routeCommandLabels = buildFarRouteDispatchBranchRouteCommandLabels(
+      directive.name,
+      choice.directive.name
+    );
     const routeAction = buildFarRouteDispatchBranchRouteAction(
       choice.label,
       active,
       branchStatus,
-      routeNodeStates
+      routeNodeStates,
+      routeCommandLabels
     );
     const routeStepLabels = {
       ...FAR_ROUTE_DISPATCH_BRANCH_ROUTE_STEP_LABELS
@@ -5243,10 +5248,6 @@ function buildFarRouteDispatchBranchChoices(
     const routeCost = buildFarRouteDispatchBranchRouteCost(choice.kind);
     const routeIntent = buildFarRouteDispatchBranchRouteIntent(choice.kind);
     const routeReturn = buildFarRouteDispatchBranchRouteReturn(choice.kind);
-    const routeCommandLabels = buildFarRouteDispatchBranchRouteCommandLabels(
-      directive.name,
-      choice.directive.name
-    );
     const routeCommandText =
       buildFarRouteDispatchBranchRouteCommandText(routeCommandLabels);
     const routeBranchStepText =
@@ -5586,35 +5587,39 @@ function buildFarRouteDispatchBranchRouteAction(
   label,
   active,
   branchStatus,
-  routeNodeStates
+  routeNodeStates,
+  routeCommandLabels
 ) {
   const kind = String(branchStatus?.kind ?? "");
+  const targetName = String(routeCommandLabels?.start ?? "").trim();
+  const branchName = String(routeCommandLabels?.branch ?? "").trim();
 
   if (active && routeNodeStates?.return === "done") {
+    const prepText = kind === "detour-prep" ? "下一步 绕行整备" : "下一步 整备";
     return {
       kind: "prep",
-      text: kind === "detour-prep" ? "下一步 绕行整备" : "下一步 整备"
+      text: branchName ? prepText + " " + branchName : prepText
     };
   }
 
   if (active && routeNodeStates?.return === "next") {
     return {
       kind: "return",
-      text: "下一步 回目标"
+      text: targetName ? "下一步 3 " + targetName : "下一步 回目标"
     };
   }
 
   if (routeNodeStates?.branch === "next") {
     return {
       kind: "branch",
-      text: "下一步 选" + label
+      text: branchName ? "下一步 2 " + branchName : "下一步 选" + label
     };
   }
 
   if (routeNodeStates?.start === "next") {
     return {
       kind: "target",
-      text: "下一步 目标"
+      text: targetName ? "下一步 1 " + targetName : "下一步 目标"
     };
   }
 
