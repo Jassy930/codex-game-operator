@@ -8,6 +8,9 @@
 - 同步 GitHub Issues 反馈状态：2026-05-02 04:44 CST 当前 5 个 open feedback issue、0 个 open bug issue；#4/#6 作为主处理对象。
 - 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
 - 构建产物已确认包含 `farDispatchSceneImagePulse`、active 插画动画和降低动效兜底。
+- 发布：提交 `7eba680` 已推送到 `origin/main`；GitHub Pages workflow `25232623485` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页返回 HTTP 200，线上首页和 `src/styles.css` 已确认包含远航调度插画与 `farDispatchSceneImagePulse`。workflow 继续给出 Node.js 20 actions 弃用提醒，未影响本次部署。
+- 反馈处理：已回复 #4 和 #6，说明远航调度闭环插画 active 状态投光、验证结果、Pages 部署和复测问题；两个 issue 均保持 open。回复后于 2026-05-02 04:52 CST 再次同步 GitHub Issues，当前仍为 5 个 open feedback issue、0 个 open bug issue。
+- 钉钉通知未发送：2026-05-02 04:52 CST 运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` / `ROBOT` 相关变量名，当前目录和 `/home/jassy/glm` 两层内未发现 `.env*` 文件；未将 webhook 写入仓库。
 
 - 修复远航调度闭环插画运行时丢失：`renderFarDispatch()` 动态重绘 `#farDispatch` 时现在会重新渲染 `.far-dispatch-scene-image`，避免静态首页中的本地 SVG 插画在 JS 启动后被 `replaceChildren()` 移除，继续回应 #4 的图片化/文字密度反馈，并辅助 #6 的后半段短循环理解。
 - `src/app.js` 新增 `renderFarDispatchSceneImage()` 并将 `sceneImage` 纳入远航调度动态重绘顺序；`tests/game.test.js` 覆盖图片属性和 `replaceChildren()` 保留逻辑。
