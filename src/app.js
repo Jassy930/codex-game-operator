@@ -1078,7 +1078,11 @@ function renderFarDispatchBranchChoiceRouteCommand(choice) {
     ["return", choice.routeCommandLabels?.return]
   ].forEach(([step, label], index) => {
     const item = document.createElement("span");
-    item.className = "far-dispatch-branch-choice-route-command-step is-" + step;
+    item.className =
+      "far-dispatch-branch-choice-route-command-step is-" +
+      step +
+      " is-" +
+      getFarDispatchBranchChoiceRouteNodeState(choice, step);
     item.textContent = label ?? "";
     command.append(item);
 

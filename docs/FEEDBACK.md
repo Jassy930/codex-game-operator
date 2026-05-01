@@ -2,6 +2,13 @@
 
 ## 2026-05-01
 
+- GitHub Issues：gh 可用且已认证；2026-05-01 13:37 CST 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
+- #6 继续作为本轮 Product decision 依据：后半段路线已经有路线微图、路线对照条和指令串，但实际按钮顺序短槽还没有直接显示当前应执行哪一段；#4 继续作为图形化和降文字密度依据。
+- 本轮改动新增远航路线指令串当前步高亮：协同/绕行卡片里的目标、分支、回目标三段短槽复用 `routeNodeStates`，显示已完成、下一步或待推进状态。
+- 本轮只调整 DOM 状态类、CSS 状态样式和静态测试，不新增收益、不新增存档字段，不改变星图路线、远航调度数值、冷却、连携窗口、反馈入口或部署链路。
+- 本轮本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含路线指令串 `is-done`、`is-next` 和 `is-waiting` 状态类及样式。
+
 - GitHub Issues：gh 可用且已认证；2026-05-01 13:20 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
 - #6 继续作为本轮 Product decision 依据：远航路线对照条已完成分组布局，但小屏下两个对照槽仍并排，可能继续压缩后半段协同/绕行路线短标；#4 继续作为界面文字密度和响应式阅读负担依据。
 - 本轮改动新增远航路线对照条小屏布局：在 820px 断点下把协同/绕行对照槽改为单列，并把单个槽重排为路线身份/操作、阶段/收益、本步收益、资源取舍、回航结果和 1/2/3 进度轨。

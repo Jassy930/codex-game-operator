@@ -1,5 +1,28 @@
 # Decision
 
+## 2026-05-01 Product decision：远航路线指令串当前步高亮
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-01 13:37 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#6 仍是后半段玩法变化主反馈，#4 仍是界面文字密度和图形化依据，因此本轮继续进入 Product decision。
+
+当前最大问题：协同/绕行卡片已经有路线微图、路线对照条和 `目标 -> 分支 -> 回目标` 指令串，但指令串本身仍是三段静态短槽。玩家在 1/3 分支、2/3 回航或完成态复看时，还需要把上方微图节点高亮和下方实际按钮名再次对应。
+
+本轮决策：
+
+- 新增“远航路线指令串当前步高亮”。
+- `src/app.js` 在渲染 `far-dispatch-branch-choice-route-command-step` 时复用现有 `routeNodeStates`，为目标、分支、回目标三段短槽追加 `is-next`、`is-done` 或 `is-waiting`。
+- `src/styles.css` 为路线指令串短槽增加已完成、下一步和待推进状态样式，让实际按钮顺序直接跟随当前路线阶段高亮。
+- `tests/game.test.js` 增加静态断言，覆盖 DOM 状态类绑定和 CSS 状态样式。
+- 该改动只调整展示层，不新增收益、不新增存档字段，不改变升级价格、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、远航调度数值、冷却、连携窗口、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-05-01 13:37 CST 当前 5 个 open feedback issue、0 个 open bug issue。
+- `src/app.js` 的路线指令串短槽复用 `getFarDispatchBranchChoiceRouteNodeState(choice, step)`。
+- `src/styles.css` 包含 `.far-dispatch-branch-choice-route-command-step.is-done`、`.is-next` 和 `.is-waiting`。
+- `tests/game.test.js` 覆盖路线指令串状态类绑定和样式。
+- 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含 `far-dispatch-branch-choice-route-command-step is-`、`getFarDispatchBranchChoiceRouteNodeState(choice, step)`、`.far-dispatch-branch-choice-route-command-step.is-done`、`.is-next` 和 `.is-waiting`。
+
 ## 2026-05-01 Product decision：远航路线对照条小屏布局
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-01 13:20 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#6 仍是后半段玩法变化主反馈，#4 仍是界面文字密度和图片化依据，因此本轮继续进入 Product decision。
