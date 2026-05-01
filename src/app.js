@@ -1231,6 +1231,15 @@ function renderFarDispatchLoopTrack(dispatch) {
   visual.className = "far-dispatch-loop-visual";
   visual.style.setProperty("--far-loop-visual-progress", visualProgress + "%");
   visual.setAttribute("aria-hidden", "true");
+  [1, 2].forEach((segment) => {
+    const arrow = document.createElement("span");
+    arrow.className =
+      "far-dispatch-loop-visual-arrow is-segment-" +
+      segment +
+      " is-" +
+      getFarDispatchLoopVisualArrowState(visualProgressValue, segment);
+    visual.append(arrow);
+  });
   steps.forEach((step, index) => {
     const node = document.createElement("span");
     node.className = "far-dispatch-loop-visual-node is-" + step.state;
@@ -1261,6 +1270,18 @@ function renderFarDispatchLoopTrack(dispatch) {
   );
 
   return track;
+}
+
+function getFarDispatchLoopVisualArrowState(progress, segment) {
+  if (progress > segment) {
+    return "completed";
+  }
+
+  if (progress === segment) {
+    return "current";
+  }
+
+  return "pending";
 }
 
 function setCompactSupportText(element, displayText, fullText) {

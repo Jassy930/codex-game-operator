@@ -3418,6 +3418,39 @@ h2 {
   box-shadow: 0 0 12px rgba(255, 126, 177, 0.18);
 }
 
+.far-dispatch-loop-visual-arrow {
+  position: absolute;
+  z-index: 2;
+  top: 50%;
+  width: 0;
+  height: 0;
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-left: 8px solid rgba(248, 243, 231, 0.24);
+  filter: drop-shadow(0 0 4px rgba(248, 243, 231, 0.08));
+  transform: translate(-50%, -50%);
+}
+
+.far-dispatch-loop-visual-arrow.is-segment-1 {
+  left: 33.333%;
+}
+
+.far-dispatch-loop-visual-arrow.is-segment-2 {
+  left: 66.667%;
+}
+
+.far-dispatch-loop-visual-arrow.is-completed {
+  border-left-color: #96e7a8;
+  filter: drop-shadow(0 0 6px rgba(150, 231, 168, 0.28));
+}
+
+.far-dispatch-loop-visual-arrow.is-current {
+  border-left-color: #ffd36a;
+  filter:
+    drop-shadow(0 0 7px rgba(255, 211, 106, 0.34))
+    drop-shadow(0 0 3px rgba(255, 126, 177, 0.22));
+}
+
 .far-dispatch-loop-visual-node {
   z-index: 1;
   display: inline-grid;

@@ -2,6 +2,13 @@
 
 ## 2026-05-02
 
+- GitHub Issues：gh 可用且已认证；2026-05-02 01:48 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。#4/#6 仍是最近回复后的组合反馈：后半段远航调度需要更多图形化表达，减少文字墙压力。
+- 本轮 Product decision 继续处理 #4/#6：远航闭环路线微图已经显示 1/2/3 节点和填充轨道，但主操作区微图仍缺少路线方向箭头，玩家需要结合文字步骤理解目标 -> 分支 -> 回目标的推进方向。
+- 本轮改动新增远航闭环方向箭头：`renderFarDispatchLoopTrack` 在 1 -> 2、2 -> 3 两段路线追加 `far-dispatch-loop-visual-arrow`，并用 `getFarDispatchLoopVisualArrowState` 从 `loopProgress` 派生待推进、当前推进和已完成状态。
+- 本轮只调整远航闭环展示层和测试，不新增可见说明文字、不新增收益、不新增存档字段，不改变点击收益、升级价格、星图路线、项目奖励、航线策略、航线指令、远航调度数值、反馈入口或部署链路。
+- 本轮本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含 `far-dispatch-loop-visual-arrow` 和 `getFarDispatchLoopVisualArrowState`。
+
 - GitHub Issues：gh 可用且已认证；2026-05-02 01:28 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。#5 是最近更新的点火反馈，但点火按钮已连续完成多层命中反馈，本轮转向 #4/#6 的交集：后半段远航调度需要更多图形化表达，减少文字墙压力。
 - 本轮 Product decision 处理 #4/#6：远航调度已有 3 步闭环轨和路线对照条，但主操作区闭环轨仍主要由三张文字步骤卡组成，玩家需要读卡片才能确认目标、分支、回目标当前推进位置。
 - 本轮改动新增远航闭环路线微图：`renderFarDispatchLoopTrack` 从 `loopSteps`、`loopProgress` 和 `loopTarget` 派生 `far-dispatch-loop-visual`，用 1/2/3 节点、完成/当前状态和填充轨道先展示闭环进度。

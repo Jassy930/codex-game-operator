@@ -1,5 +1,29 @@
 # Decision
 
+## 2026-05-02 Product decision：远航闭环方向箭头
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-02 01:48 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#4/#6 仍是最近回复后的组合反馈，分别指向图形化降文字密度和后半段玩法变化不明显。
+
+当前最大问题：上一轮已把主操作区远航闭环轨改成 1/2/3 节点和填充轨道，但轨道本身仍像静态进度线。玩家能看到当前推进到哪一格，却不能从图形上直接扫到 1 -> 2 -> 3 的前进方向，仍需要结合文字步骤确认路线顺序。
+
+本轮决策：
+
+- 新增“远航闭环方向箭头”。
+- `src/app.js` 在 `renderFarDispatchLoopTrack` 中为 1 -> 2、2 -> 3 两段路线追加 `far-dispatch-loop-visual-arrow`，并用 `getFarDispatchLoopVisualArrowState` 按 `loopProgress` 派生待推进、当前推进和已完成状态。
+- `src/styles.css` 为两个箭头段增加纯 CSS 三角箭头、位置和当前/完成状态颜色。
+- `tests/game.test.js` 增加静态断言，覆盖箭头 DOM 绑定、状态 helper 和样式选择器。
+- 该改动只调整远航闭环展示层和测试，不新增可见说明文字、不新增收益、不新增存档字段，不改变点击收益、升级价格、星图路线、项目奖励、航线策略、航线指令、远航调度数值、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-05-02 01:48 CST 当前 5 个 open feedback issue、0 个 open bug issue；#4/#6 作为本轮主处理对象。
+- `src/app.js` 包含 `far-dispatch-loop-visual-arrow` 和 `getFarDispatchLoopVisualArrowState`。
+- `src/styles.css` 包含远航闭环方向箭头、第一/第二段位置、完成态和当前态样式。
+- `tests/game.test.js` 覆盖远航闭环方向箭头静态绑定。
+- 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含 `far-dispatch-loop-visual-arrow` 和 `getFarDispatchLoopVisualArrowState`。
+- 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #4/#6，以及当前远航闭环微图方向感复盘。
+
 ## 2026-05-02 Product decision：远航闭环路线微图
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-02 01:28 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#5 是最近更新的点火反馈，但点火按钮已连续补齐多层命中反馈。本轮转向 #4“界面文字密度高、希望增加图片/图形”和 #6“后半段玩法变化不足”的交集。

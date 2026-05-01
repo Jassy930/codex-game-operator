@@ -2026,6 +2026,8 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(appJs, /track\.className = "far-dispatch-loop-track"/);
   assert.match(appJs, /visual\.className = "far-dispatch-loop-visual"/);
   assert.match(appJs, /"--far-loop-visual-progress"/);
+  assert.match(appJs, /far-dispatch-loop-visual-arrow is-segment-/);
+  assert.match(appJs, /function getFarDispatchLoopVisualArrowState\(progress, segment\)/);
   assert.match(appJs, /far-dispatch-loop-visual-node is-/);
   assert.match(appJs, /visual\.setAttribute\("aria-hidden", "true"\)/);
   assert.match(appJs, /node\.dataset\.stepLabel = String\(index \+ 1\)/);
@@ -2341,6 +2343,11 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(styles, /--far-loop-visual-progress/);
   assert.match(styles, /\.far-dispatch-loop-visual::before/);
   assert.match(styles, /\.far-dispatch-loop-visual::after/);
+  assert.match(styles, /\.far-dispatch-loop-visual-arrow/);
+  assert.match(styles, /\.far-dispatch-loop-visual-arrow\.is-segment-1/);
+  assert.match(styles, /\.far-dispatch-loop-visual-arrow\.is-segment-2/);
+  assert.match(styles, /\.far-dispatch-loop-visual-arrow\.is-completed/);
+  assert.match(styles, /\.far-dispatch-loop-visual-arrow\.is-current/);
   assert.match(styles, /\.far-dispatch-loop-visual-node/);
   assert.match(styles, /\.far-dispatch-loop-visual-node::before/);
   assert.match(styles, /content: attr\(data-step-label\)/);
