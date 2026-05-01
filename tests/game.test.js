@@ -1409,6 +1409,10 @@ test("点火按钮会渲染点击反馈和过载前兆效果", () => {
   assert.match(styles, /@keyframes coreImpactSparks/);
   assert.match(styles, /\.core-charge-ring/);
   assert.match(styles, /--core-charge-angle/);
+  assert.match(styles, /\.core-button\.is-pulsing \.core-charge-ring/);
+  assert.match(styles, /coreChargeRingHit 360ms ease-out/);
+  assert.match(styles, /\.core-button\.is-overload-impact \.core-charge-ring/);
+  assert.match(styles, /coreChargeRingOverloadHit 520ms ease-out/);
   assert.match(styles, /\.core-charge-ring\.is-overload-ready/);
   assert.match(styles, /\.core-gain-pop/);
   assert.match(styles, /\.core-gain-pop\.is-showing/);
@@ -1448,6 +1452,8 @@ test("点火按钮会渲染点击反馈和过载前兆效果", () => {
   assert.match(styles, /@keyframes coreStageBurst/);
   assert.match(styles, /@keyframes coreSurgeOrbit/);
   assert.match(styles, /@keyframes coreSurgeBurst/);
+  assert.match(styles, /@keyframes coreChargeRingHit/);
+  assert.match(styles, /@keyframes coreChargeRingOverloadHit/);
   assert.match(styles, /@keyframes coreImpactPoint/);
   assert.match(styles, /@keyframes coreGainFloat/);
   assert.match(styles, /@keyframes coreBadgePulse/);

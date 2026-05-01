@@ -2,6 +2,13 @@
 
 ## 2026-05-01
 
+- GitHub Issues：gh 可用且已认证；2026-05-01 16:51 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
+- 本轮 Product decision 继续处理 #5：点火按钮已有按住落点热区、落点闪光、涟漪、火花束、收益浮层和蓄能轨，但松手后的点击命中还可以让环形蓄能轨本身给一次短促回光，强化“这次点击推进蓄能”的确认。
+- 本轮改动新增点火蓄能轨命中闪烁：`.core-button.is-pulsing .core-charge-ring` 播放 `coreChargeRingHit`，普通点击时蓄能轨短促亮起并外扩；`.core-button.is-overload-impact .core-charge-ring` 播放 `coreChargeRingOverloadHit`，过载命中时显示更亮、更大的蓄能轨余辉。
+- 本轮只调整点火按钮展示层和测试，不新增收益、不新增存档字段，不改变点击收益、连击窗口、过载奖励、升级价格、星图路线、项目奖励、航线策略、航线指令、远航调度、反馈入口或部署链路。
+- 本轮本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含 `.core-button.is-pulsing .core-charge-ring`、`coreChargeRingHit`、`.core-button.is-overload-impact .core-charge-ring` 和 `coreChargeRingOverloadHit`。
+
 - GitHub Issues：gh 可用且已认证；2026-05-01 16:41 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
 - 本轮 Product decision 继续处理 #5：点火按钮已有 pointerdown 即时反冲和按住压光，但实际落点层仍主要在 click 后播放完整闪光、涟漪和火花，按住期间接触点本身还不够明确。
 - 本轮改动新增点火按住落点热区：`.core-button.is-pressing .core-impact-point`、`.core-button.is-pressing .core-impact-ripple` 和 `.core-button.is-pressing .core-impact-sparks` 会在 pointerdown 坐标处显示低强度光斑、能量环和短火花。

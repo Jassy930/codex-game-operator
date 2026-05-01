@@ -1,5 +1,28 @@
 # Decision
 
+## 2026-05-01 Product decision：点火蓄能轨命中闪烁
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-01 16:51 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#5 仍是最新更新的开放反馈，继续围绕“点火按钮太薄弱、增加点击反馈、特效和点击欲望”做 Product decision。
+
+当前最大问题：点火按钮已经有 pointerdown 即时反冲、按住压光、按住落点热区、点击后的落点闪光、涟漪、火花束、收益浮层、星核蓄能裂纹、蓄能外弧、环形蓄能轨、音效和触感。上一轮让按住期间接触点更明确，但松手后“这次点击推进了蓄能轨”的瞬时确认仍主要依赖连击轨和冲击波；环形蓄能轨本身可以在每次命中时给一个短促回光，让玩家把点击和蓄能推进更直接地关联起来。
+
+本轮决策：
+
+- 新增“点火蓄能轨命中闪烁”。
+- `src/styles.css` 让 `.core-button.is-pulsing .core-charge-ring` 播放 `coreChargeRingHit`，普通点击时蓄能轨短促亮起并外扩。
+- `src/styles.css` 让 `.core-button.is-overload-impact .core-charge-ring` 播放 `coreChargeRingOverloadHit`，过载命中时使用更亮、更大的蓄能轨余辉。
+- `tests/game.test.js` 增加静态断言，覆盖普通命中、过载命中和两个关键帧。
+- 该改动只调整点火按钮展示层和测试，不新增收益、不新增存档字段，不改变点击收益、连击窗口、过载奖励、升级价格、星图路线、项目奖励、航线策略、航线指令、远航调度、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-05-01 16:51 CST 当前 5 个 open feedback issue、0 个 open bug issue。
+- `src/styles.css` 包含 `.core-button.is-pulsing .core-charge-ring`、`coreChargeRingHit`、`.core-button.is-overload-impact .core-charge-ring` 和 `coreChargeRingOverloadHit`。
+- `tests/game.test.js` 覆盖点火蓄能轨命中闪烁静态样式绑定。
+- 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含 `.core-button.is-pulsing .core-charge-ring`、`coreChargeRingHit`、`.core-button.is-overload-impact .core-charge-ring` 和 `coreChargeRingOverloadHit`。
+- 发布和反馈回复待本轮后续验证补齐。
+
 ## 2026-05-01 Product decision：点火按住落点热区
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-01 16:41 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#5 仍是最新更新的开放反馈，继续围绕“点火按钮太薄弱、增加点击反馈、特效和点击欲望”做 Product decision。
