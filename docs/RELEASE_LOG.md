@@ -8,6 +8,9 @@
 - 同步 GitHub Issues 反馈状态：2026-05-02 02:55 CST 当前 5 个 open feedback issue、0 个 open bug issue；#4/#6 作为主处理对象。
 - 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
 - 构建产物已确认包含 `far-dispatch-loop-step is-`、`data-step-label` 和远航闭环步骤卡步号锚点样式。
+- 发布：提交 `3887c8c` 已推送到 `origin/main`；GitHub Pages workflow `25228543304` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页返回 HTTP 200，线上 `src/app.js` 和 `src/styles.css` 已确认包含远航闭环步骤卡步号锚点代码和样式。workflow 继续给出 Node.js 20 actions 弃用提醒，未影响本次部署。
+- 反馈处理：已回复 #4 和 #6，说明远航闭环步骤卡步号锚点、验证结果、Pages 部署和复测问题；两个 issue 均保持 open。回复后于 2026-05-02 03:04 CST 再次同步 GitHub Issues，当前仍为 5 个 open feedback issue、0 个 open bug issue。
+- 钉钉通知未发送：2026-05-02 03:04 CST 运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` / `ROBOT` 相关变量名，当前目录和 `/home/jassy/glm` 两层内未发现 `.env*` 文件；未将 webhook 写入仓库。
 
 - 远航调度新增“远航闭环当前方向信标”：20M 后主操作区远航闭环路线微图的当前 1 -> 2 或 2 -> 3 方向箭头会显示轻量信标，让当前推进方向不再只靠静态箭头和节点脉冲确认，继续回应 #4 的图形化/文字密度反馈，并辅助 #6 的后半段短循环理解。
 - `src/styles.css` 为 `.far-dispatch-loop-visual-arrow.is-current` 增加 `farDispatchLoopCurrentArrowPulse` 动画，并在降低动效偏好中关闭该动画；`tests/game.test.js` 覆盖静态绑定。
