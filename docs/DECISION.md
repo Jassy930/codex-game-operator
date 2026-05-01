@@ -28,6 +28,7 @@
 - 已回复 GitHub Issue #6，说明本轮路线对照条收益短标、验证结果、Pages 部署和复测问题，issue 保持 open，更新时间为 2026-05-01T04:37:01Z；评论地址：`https://github.com/Jassy930/codex-game-operator/issues/6#issuecomment-4357836373`。
 - 已回复 GitHub Issue #4，说明本轮把三步收益落点压到协同/绕行对照槽，issue 保持 open，更新时间为 2026-05-01T04:37:17Z；评论地址：`https://github.com/Jassy930/codex-game-operator/issues/4#issuecomment-4357837144`。
 - 回复后同步 GitHub Issues：2026-05-01 12:37 CST 当前仍为 5 个 open feedback issue、0 个 open bug issue。
+- 钉钉通知未发送：运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` 相关变量名，当前目录和父级三层内也未发现 `.env*` 文件；未将 webhook 写入仓库。
 
 ## 2026-05-01 Product decision：远航路线对照条下一步短标
 

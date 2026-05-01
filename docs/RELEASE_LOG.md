@@ -11,6 +11,7 @@
 - 构建产物已确认包含 `routeRewardSummaryText`、`far-dispatch-branch-choice-summary-reward`、`校准/补给/闭环` 和 `校准/投送/闭环`。
 - 发布：提交 `1c82faf` 已推送到 `origin/main`；GitHub Pages workflow `25202413152` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页返回 HTTP 200，线上 `src/game.js`、`src/app.js` 和 `src/styles.css` 已确认包含 `routeRewardSummaryText` 与 `far-dispatch-branch-choice-summary-reward`。
 - 反馈处理：已回复 #6，说明路线对照条收益短标、验证结果、Pages 部署和复测问题；已回复 #4，说明本轮把三步收益落点压到协同/绕行对照槽以减少只靠路线微图、收益对照和折叠明细判断回报的压力；两个 issue 均保持 open。回复后于 2026-05-01 12:37 CST 再次同步 GitHub Issues，当前仍为 5 个 open feedback issue、0 个 open bug issue；#6 更新时间为 2026-05-01T04:37:01Z，#4 更新时间为 2026-05-01T04:37:17Z。
+- 钉钉通知未发送：运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` 相关变量名，当前目录和父级三层内也未发现 `.env*` 文件；未将 webhook 写入仓库。
 
 - 远航调度新增“路线对照条下一步短标”：协同/绕行对照槽直接显示 `下一步 目标`、`下一步 选协同`、`下一步 选绕行`、`下一步 回目标`、`下一步 整备`、`下一步 绕行整备` 或 `待选`，继续回应 #6 的后半段路线执行理解和 #4 的降文字密度反馈。
 - `src/game.js` 新增 `routeActionKind` / `routeActionText` 派生并纳入 `branchChoiceSummaryText` / `branchChoiceText`；`src/app.js` 渲染 `far-dispatch-branch-choice-summary-action`；`src/styles.css` 增加下一步短标状态色；`tests/game.test.js` 覆盖起手、分支、回航、整备、待选、DOM 和 CSS。
