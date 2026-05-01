@@ -8,6 +8,9 @@
 - 同步 GitHub Issues 反馈状态：2026-05-01 22:52 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 作为主处理对象，#4 作为视觉密度依据。
 - 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
 - 构建产物已确认包含小屏 active-route 网格覆盖。
+- 发布：提交 `cd7a676` 已推送到 `origin/main`；GitHub Pages workflow `25219249865` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页返回 HTTP 200，线上 `src/styles.css` 已确认包含小屏 active-route 网格覆盖。workflow 继续给出 Node.js 20 actions 弃用提醒，未影响本次部署。
+- 反馈处理：已回复 #6，说明远航对照条当前路线小屏宽位修正、验证结果、Pages 部署和复测问题；已回复 #4，说明本轮用小屏 active-route 网格覆盖降低窄屏文字挤压；两个 issue 均保持 open。回复后于 2026-05-01 23:01 CST 再次同步 GitHub Issues，当前仍为 5 个 open feedback issue、0 个 open bug issue；#6 更新时间为 2026-05-01T15:00:24Z，#4 更新时间为 2026-05-01T15:00:53Z。
+- 钉钉通知未发送：2026-05-01 23:01 CST 运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` / `ROBOT` 相关变量名，当前目录、`/home/jassy/glm` 和用户目录两层内未发现 `.env*` 文件；未将 webhook 写入仓库。
 
 - 远航调度新增“路线对照条当前路线操作收益宽位”：当前路线已经被置顶并获得单列宽栏后，当前路线内部会让“下一步动作”“本步收益”和“回航结果”横跨更宽槽位，备选路线继续沿用原对照布局，继续回应 #6 的后半段路线执行理解和 #4 的文字密度反馈。
 - `src/styles.css` 增加 `.far-dispatch-branch-choice-summary-item.is-active-route` 专用命名网格；`tests/game.test.js` 覆盖 `glyph label phase action action`、`glyph step reward payoff payoff` 和 `glyph intent cost result result` 静态绑定。
