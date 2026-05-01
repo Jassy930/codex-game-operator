@@ -1,5 +1,27 @@
 # Decision
 
+## 2026-05-01 Product decision：远航对照条非当前路线降噪
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-01 21:52 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；本轮继续处理 #6“后半段玩法无聊、只有不停目标”和 #4“界面文字密集、需要更好看”的交集。
+
+当前最大问题：远航路线对照条已经把当前路线身份、阶段、动作、收益路径、第二步按钮、本步收益、资源取向、资源代价、回航结果、资源符号和迷你进度轨都纳入扫视层，但非当前路线仍保持接近同等视觉权重。玩家选定协同或绕行后，仍需要在当前路线和另一条备选路线之间做视觉筛选。
+
+本轮决策：
+
+- 新增“远航对照条非当前路线降噪”。
+- `src/styles.css` 在路线对照条存在 `.is-active-route` 时，轻度降低非当前路线的透明度和饱和度，并在悬停时恢复可读性。
+- `tests/game.test.js` 增加静态断言，覆盖 `:has(.is-active-route)` 非当前路线降噪选择器与悬停恢复。
+- 该改动只调整远航路线对照条展示层和测试，不新增收益、不新增存档字段，不改变升级价格、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、远航调度数值、冷却、连携窗口、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-05-01 21:52 CST 当前 5 个 open feedback issue、0 个 open bug issue。
+- `src/styles.css` 包含当前路线存在时的非当前路线降噪选择器和悬停恢复。
+- `tests/game.test.js` 覆盖远航对照条非当前路线降噪静态样式绑定。
+- 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含 `far-dispatch-branch-choice-summary:has(.far-dispatch-branch-choice-summary-item.is-active-route)` 和 `filter: saturate(0.72)`。
+- 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #6 和 #4，以及当前远航路线对照条实现复盘。
+
 ## 2026-05-01 Product decision：远航对照条当前资源符号锚点
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-01 21:34 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；本轮继续处理 #6“后半段玩法无聊、只有不停目标”和 #4“界面文字密集、需要更好看”的交集。

@@ -2,6 +2,13 @@
 
 ## 2026-05-01
 
+- GitHub Issues：gh 可用且已认证；2026-05-01 21:52 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
+- 本轮 Product decision 继续处理 #6，并以 #4 作为视觉密度约束：当前路线已经有身份、阶段、动作、第二步按钮、收益路径、本步收益、取向、代价、回航结果、资源符号和迷你进度轨锚点，但非当前路线仍保持接近同等权重。
+- 本轮改动新增远航对照条非当前路线降噪：当对照条已有本轮当前路线时，另一条非当前路线会轻度降低透明度和饱和度，悬停时恢复可读性。
+- 本轮只调整远航路线对照条展示层和测试，不新增收益、不新增存档字段，不改变升级价格、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、远航调度数值、冷却、连携窗口、反馈入口或部署链路。
+- 本轮本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含远航对照条非当前路线降噪选择器和 `filter: saturate(0.72)`。
+
 - GitHub Issues：gh 可用且已认证；2026-05-01 21:34 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
 - 本轮 Product decision 继续处理 #6，并以 #4 作为视觉密度约束：当前路线已经有身份、阶段、下一步动作、收益路径、第二步按钮、本步收益、资源取向、资源代价、回航结果和迷你进度轨锚点，但左侧资源符号仍和非当前路线同权重。
 - 本轮改动新增远航对照条当前资源符号锚点：当前协同路线的“保留当前资源”符号会更亮，当前绕行路线的“投送累计航段”箭头会更强；`routeResourceText` 同步进入对照槽悬停标题。

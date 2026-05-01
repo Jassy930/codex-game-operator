@@ -1989,6 +1989,11 @@ h2 {
   border-radius: 7px;
   background: rgba(5, 12, 20, 0.28);
   isolation: isolate;
+  transition:
+    border-color 180ms ease,
+    background 180ms ease,
+    filter 180ms ease,
+    opacity 180ms ease;
 }
 
 .far-dispatch-branch-choice-summary-item::before {
@@ -2073,6 +2078,18 @@ h2 {
   background:
     linear-gradient(90deg, rgba(255, 126, 177, 0.13), rgba(5, 12, 20, 0.24)),
     rgba(5, 12, 20, 0.26);
+}
+
+.far-dispatch-branch-choice-summary:has(.far-dispatch-branch-choice-summary-item.is-active-route)
+  .far-dispatch-branch-choice-summary-item:not(.is-active-route) {
+  opacity: 0.66;
+  filter: saturate(0.72);
+}
+
+.far-dispatch-branch-choice-summary:has(.far-dispatch-branch-choice-summary-item.is-active-route)
+  .far-dispatch-branch-choice-summary-item:not(.is-active-route):hover {
+  opacity: 0.92;
+  filter: saturate(0.94);
 }
 
 .far-dispatch-branch-choice-summary-glyph {
