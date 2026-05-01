@@ -456,8 +456,22 @@ function renderCoreFeedback(combo) {
   const isCharging = combo.count > 0 && !combo.overloaded;
   const isOverloadReady = isCharging && combo.remaining === 1;
   const veinIntensity = combo.overloaded ? 1 : combo.progress;
+  const surgeIntensity = combo.overloaded ? 1 : combo.progress;
+  const surgeOpacity =
+    combo.count > 0 || combo.overloaded
+      ? Math.max(0.18, Math.round(surgeIntensity * 100) / 100)
+      : 0.1;
 
   elements.coreButton.dataset.comboStep = String(combo.step);
+  elements.coreButton.style.setProperty("--core-surge-opacity", String(surgeOpacity));
+  elements.coreButton.style.setProperty(
+    "--core-surge-scale",
+    String(Math.round((0.88 + surgeIntensity * 0.12) * 100) / 100)
+  );
+  elements.coreButton.style.setProperty(
+    "--core-surge-speed",
+    Math.max(900, Math.round(3200 - surgeIntensity * 1900)) + "ms"
+  );
   elements.coreButton.style.setProperty(
     "--core-vein-opacity",
     String(Math.max(0.12, Math.round(veinIntensity * 100) / 100))

@@ -12,6 +12,7 @@
 - 指令轮换目标和 3 格视觉轨当前由本地冷却、连携字段与 `getDirectivePlan` 即时推导，不单独记录为真实线上指标。
 - 点火阶段光环当前由本地连击进度与 `getComboStatus` 即时推导，不单独记录为真实线上指标；点火行为仍通过 click 事件复盘。
 - 点火星核蓄能裂纹当前由本地连击进度 `combo.progress` 即时渲染为 `--core-vein-opacity` 和 `--core-vein-dash-offset`，不单独记录为真实线上指标；点火行为仍通过 click 事件、连击状态和过载结果复盘。
+- 点火蓄能外弧当前由本地连击进度 `combo.progress` 即时渲染为 `--core-surge-opacity`、`--core-surge-scale` 和 `--core-surge-speed`，不单独记录为真实线上指标；点火行为仍通过 click 事件、连击状态和过载结果复盘。
 - 点火过载倒计时徽标当前由本地连击进度与 `getComboStatus` 即时推导，不单独记录为真实线上指标；点火行为仍通过 click 事件复盘。
 - 点火连击轨进度填充当前由本地连击进度 `combo.progress` 即时渲染为 `--core-combo-progress`，不单独记录为真实线上指标；点火行为仍通过 click 事件、连击状态和过载结果复盘。
 - 星图总览航线预告视觉带当前由本地项目状态与 `getProjectForecastVisuals` 即时推导，不单独记录为真实线上指标；星图完成状态仍通过当前存档数值复盘。

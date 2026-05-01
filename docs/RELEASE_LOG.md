@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+- 点火按钮新增“蓄能外弧”：主按钮外层新增 `core-surge-orbit` 旋转能量弧，会根据现有 `combo.progress` 逐步提高透明度、放大并加快旋转，过载前一击和过载命中时切换更强外弧状态，继续回应 #5 的点击反馈、特效和点击欲望反馈。
+- `index.html` 新增 `core-surge-orbit`；`src/app.js` 在 `renderCoreFeedback` 写入 `--core-surge-opacity`、`--core-surge-scale` 和 `--core-surge-speed`；`src/styles.css` 增加外弧状态和 `coreSurgeOrbit` / `coreSurgeBurst` 动效；`tests/game.test.js` 覆盖静态绑定。
+- 本轮只调整点火按钮展示层和测试，不新增收益、不新增存档字段，不改变点击收益、连击窗口、过载奖励、升级价格、星图路线、项目奖励、航线策略、航线指令、远航调度、反馈入口或部署链路。
+- 同步 GitHub Issues 反馈状态：2026-05-01 15:09 CST 当前 5 个 open feedback issue、0 个 open bug issue；#5 作为主处理对象。
+- 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含 `core-surge-orbit`、`--core-surge-opacity`、`coreSurgeOrbit` 和 `coreSurgeBurst`。
+
 - 点火按钮新增“星核蓄能裂纹”：主按钮内的星核 SVG 会根据现有 `combo.progress` 逐步显现能量纹路，过载前一击进入脉动状态，过载命中时播放爆发态，继续回应 #5 的点击反馈、特效和点击欲望反馈。
 - `index.html` 新增 `core-veins` / `core-vein-*` 内联 SVG 纹路；`src/app.js` 在 `renderCoreFeedback` 写入 `--core-vein-opacity` 和 `--core-vein-dash-offset`；`src/styles.css` 增加纹路状态和 `coreVeinPulse` / `coreVeinBurst` 动效；`tests/game.test.js` 覆盖静态绑定。
 - 本轮只调整点火按钮展示层和测试，不新增收益、不新增存档字段，不改变点击收益、连击窗口、过载奖励、升级价格、星图路线、项目奖励、航线策略、航线指令、远航调度、反馈入口或部署链路。

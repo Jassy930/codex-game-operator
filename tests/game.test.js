@@ -1265,6 +1265,7 @@ test("点火按钮会渲染点击反馈和过载前兆效果", () => {
   assert.match(indexHtml, /id="coreButton" class="core-button" type="button" data-combo-step="0"/);
   assert.match(indexHtml, /class="core-feedback-layer"/);
   assert.match(indexHtml, /class="core-stage-aura"/);
+  assert.match(indexHtml, /class="core-surge-orbit"/);
   assert.match(indexHtml, /id="coreImpactPoint" class="core-impact-point"/);
   assert.match(indexHtml, /class="core-charge-ring"/);
   assert.match(indexHtml, /id="coreGainPop" class="core-gain-pop"/);
@@ -1330,6 +1331,12 @@ test("点火按钮会渲染点击反馈和过载前兆效果", () => {
   assert.match(appJs, /elements\.coreOverloadBadge\.classList\.toggle\("is-countdown-active", isCharging\)/);
   assert.match(appJs, /elements\.coreOverloadBadge\.classList\.toggle\("is-overload-ready", isOverloadReady\)/);
   assert.match(appJs, /elements\.coreButton\.dataset\.comboStep = String\(combo\.step\)/);
+  assert.match(appJs, /const surgeIntensity = combo\.overloaded \? 1 : combo\.progress/);
+  assert.match(appJs, /"--core-surge-opacity"/);
+  assert.match(appJs, /"--core-surge-scale"/);
+  assert.match(appJs, /"--core-surge-speed"/);
+  assert.match(appJs, /Math\.round\(\(0\.88 \+ surgeIntensity \* 0\.12\) \* 100\) \/ 100/);
+  assert.match(appJs, /Math\.max\(900, Math\.round\(3200 - surgeIntensity \* 1900\)\) \+ "ms"/);
   assert.match(appJs, /const veinIntensity = combo\.overloaded \? 1 : combo\.progress/);
   assert.match(appJs, /"--core-vein-opacity"/);
   assert.match(appJs, /"--core-vein-dash-offset"/);
@@ -1349,6 +1356,12 @@ test("点火按钮会渲染点击反馈和过载前兆效果", () => {
   assert.match(styles, /--core-stage-angle/);
   assert.match(styles, /\.core-stage-aura\.is-stage-hot/);
   assert.match(styles, /\.core-stage-aura\.is-overload-ready/);
+  assert.match(styles, /--core-surge-opacity/);
+  assert.match(styles, /--core-surge-scale/);
+  assert.match(styles, /--core-surge-speed/);
+  assert.match(styles, /\.core-surge-orbit/);
+  assert.match(styles, /\.core-button\.is-overload-ready \.core-surge-orbit/);
+  assert.match(styles, /\.core-button\.is-overload-hit \.core-surge-orbit/);
   assert.match(styles, /\.core-impact-point/);
   assert.match(styles, /--core-impact-x/);
   assert.match(styles, /--core-impact-y/);
@@ -1390,6 +1403,8 @@ test("点火按钮会渲染点击反馈和过载前兆效果", () => {
   assert.match(styles, /@keyframes coreSparks/);
   assert.match(styles, /@keyframes coreStageCharge/);
   assert.match(styles, /@keyframes coreStageBurst/);
+  assert.match(styles, /@keyframes coreSurgeOrbit/);
+  assert.match(styles, /@keyframes coreSurgeBurst/);
   assert.match(styles, /@keyframes coreImpactPoint/);
   assert.match(styles, /@keyframes coreGainFloat/);
   assert.match(styles, /@keyframes coreBadgePulse/);

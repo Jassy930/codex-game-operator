@@ -2,6 +2,13 @@
 
 ## 2026-05-01
 
+- GitHub Issues：gh 可用且已认证；2026-05-01 15:09 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
+- 本轮 Product decision 继续处理 #5：点火按钮已经补齐多层即时反馈、连击轨连续填充和星核蓄能裂纹，但按钮外层轮廓仍缺少随连击推进持续变化的旋转蓄能表现。
+- 本轮改动新增点火蓄能外弧：`core-surge-orbit` 会根据现有 `combo.progress` 写入的 `--core-surge-opacity`、`--core-surge-scale` 和 `--core-surge-speed` 逐步增强、放大并加快旋转，过载前一击和过载命中时切换更强外弧状态。
+- 本轮只调整点火按钮展示层和测试，不新增收益、不新增存档字段，不改变点击收益、连击窗口、过载奖励、升级价格、星图路线、项目奖励、航线策略、航线指令、远航调度、反馈入口或部署链路。
+- 本轮本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含 `core-surge-orbit`、`--core-surge-opacity`、`coreSurgeOrbit` 和 `coreSurgeBurst`。
+
 - GitHub Issues：gh 可用且已认证；2026-05-01 14:53 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
 - 本轮 Product decision 继续处理 #5：点火按钮已经补齐多层外部反馈和连击轨连续填充，但星核 SVG 本体仍主要是固定图形，连续点击时缺少随蓄能进度显现的内部纹路变化。
 - 本轮改动新增点火星核蓄能裂纹：`core-veins` / `core-vein-*` 内联 SVG 纹路会根据现有 `combo.progress` 写入的 `--core-vein-opacity` 和 `--core-vein-dash-offset` 逐步显现，并在过载前一击和过载命中时脉动/爆发。

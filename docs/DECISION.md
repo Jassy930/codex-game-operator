@@ -1,5 +1,29 @@
 # Decision
 
+## 2026-05-01 Product decision：点火蓄能外弧
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-01 15:09 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#5 仍围绕“点火按钮太薄弱、增加点击反馈、特效和点击欲望”保持 open，因此本轮继续进入 Product decision。
+
+当前最大问题：点火按钮已经有脉冲、粒子、收益浮层、环形蓄能轨、阶段光环、过载倒计时徽标、落点闪光、音效、触感反馈、连击轨连续填充和星核蓄能裂纹，但按钮主体外层仍缺少一个随连击推进持续变化的旋转能量轮廓。玩家连续点击时，按钮内部裂纹和底部连击轨已经能反馈进度，外层轮廓还可以更直接地表现“越点越快、越接近过载”。
+
+本轮决策：
+
+- 新增“点火蓄能外弧”。
+- `index.html` 在主点火按钮中新增 `core-surge-orbit` 视觉层。
+- `src/app.js` 在 `renderCoreFeedback` 中根据现有 `combo.progress` 写入 `--core-surge-opacity`、`--core-surge-scale` 和 `--core-surge-speed`，过载命中时按满蓄能状态处理。
+- `src/styles.css` 让外弧随连击进度提高透明度、放大并加快旋转；过载前一击和过载命中时切换更强颜色与爆发动画。
+- `tests/game.test.js` 增加静态断言，覆盖外弧 DOM、运行期 CSS 变量和样式绑定。
+- 该改动只调整点火按钮展示层和测试，不新增收益、不新增存档字段，不改变点击收益、连击窗口、过载奖励、升级价格、星图 57 段路线、项目奖励、航线策略、航线指令、远航调度、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-05-01 15:09 CST 当前 5 个 open feedback issue、0 个 open bug issue。
+- 静态首页包含 `core-surge-orbit`。
+- `src/app.js` 在 `renderCoreFeedback` 写入 `--core-surge-opacity`、`--core-surge-scale` 和 `--core-surge-speed`。
+- `src/styles.css` 包含 `.core-surge-orbit`、过载前一击和过载命中的外弧状态，以及 `coreSurgeOrbit` / `coreSurgeBurst` 动画。
+- 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含 `core-surge-orbit`、`--core-surge-opacity`、`coreSurgeOrbit` 和 `coreSurgeBurst`。
+
 ## 2026-05-01 Product decision：点火星核蓄能裂纹
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-01 14:53 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#5 仍围绕“点火按钮太薄弱、增加点击反馈、特效和点击欲望”保持 open，因此本轮继续进入 Product decision。

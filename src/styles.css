@@ -219,6 +219,9 @@ h2 {
 }
 
 .core-button {
+  --core-surge-opacity: 0.1;
+  --core-surge-scale: 0.88;
+  --core-surge-speed: 3200ms;
   --core-vein-dash-offset: 34;
   --core-vein-opacity: 0.12;
   position: relative;
@@ -411,6 +414,77 @@ h2 {
     drop-shadow(0 0 22px rgba(255, 247, 194, 0.38))
     drop-shadow(0 0 36px rgba(232, 93, 117, 0.3));
   animation: coreStageBurst 520ms ease-out;
+}
+
+.core-surge-orbit {
+  position: absolute;
+  inset: 17%;
+  z-index: 2;
+  border-radius: 999px;
+  background:
+    conic-gradient(
+      from -40deg,
+      transparent 0 10%,
+      rgba(255, 247, 194, 0.88) 12% 18%,
+      transparent 22% 34%,
+      rgba(19, 181, 166, 0.78) 36% 42%,
+      transparent 46% 62%,
+      rgba(244, 178, 60, 0.84) 64% 72%,
+      transparent 76% 88%,
+      rgba(232, 93, 117, 0.72) 90% 96%,
+      transparent 100%
+    );
+  opacity: var(--core-surge-opacity);
+  pointer-events: none;
+  filter:
+    drop-shadow(0 0 10px rgba(255, 247, 194, 0.18))
+    drop-shadow(0 0 16px rgba(19, 181, 166, 0.12));
+  mix-blend-mode: screen;
+  transform: scale(var(--core-surge-scale)) rotate(0deg);
+  transition:
+    opacity 140ms ease,
+    filter 140ms ease;
+  animation: coreSurgeOrbit var(--core-surge-speed) linear infinite;
+  -webkit-mask: radial-gradient(farthest-side, transparent 58%, #000 60% 72%, transparent 74%);
+  mask: radial-gradient(farthest-side, transparent 58%, #000 60% 72%, transparent 74%);
+}
+
+.core-button.is-combo-charging .core-surge-orbit {
+  filter:
+    drop-shadow(0 0 12px rgba(255, 247, 194, 0.24))
+    drop-shadow(0 0 18px rgba(19, 181, 166, 0.18));
+}
+
+.core-button.is-overload-ready .core-surge-orbit {
+  background:
+    conic-gradient(
+      from -40deg,
+      rgba(255, 247, 194, 0.96) 0 18%,
+      transparent 22% 34%,
+      rgba(232, 93, 117, 0.9) 38% 56%,
+      transparent 60% 70%,
+      rgba(244, 178, 60, 0.96) 74% 100%
+    );
+  opacity: 1;
+  filter:
+    drop-shadow(0 0 14px rgba(255, 247, 194, 0.34))
+    drop-shadow(0 0 26px rgba(232, 93, 117, 0.24));
+  animation-duration: 900ms;
+}
+
+.core-button.is-overload-hit .core-surge-orbit {
+  background:
+    conic-gradient(
+      from -40deg,
+      rgba(255, 247, 194, 1) 0 34%,
+      rgba(244, 178, 60, 0.96) 38% 64%,
+      rgba(232, 93, 117, 0.92) 70% 100%
+    );
+  opacity: 1;
+  filter:
+    drop-shadow(0 0 18px rgba(255, 247, 194, 0.42))
+    drop-shadow(0 0 34px rgba(232, 93, 117, 0.32));
+  animation: coreSurgeBurst 520ms ease-out;
 }
 
 .core-impact-point {
@@ -5028,6 +5102,33 @@ h2 {
   100% {
     opacity: 0;
     transform: scale(1.15);
+  }
+}
+
+@keyframes coreSurgeOrbit {
+  0% {
+    transform: scale(var(--core-surge-scale)) rotate(0deg);
+  }
+
+  100% {
+    transform: scale(var(--core-surge-scale)) rotate(360deg);
+  }
+}
+
+@keyframes coreSurgeBurst {
+  0% {
+    opacity: 0.62;
+    transform: scale(0.86) rotate(-18deg);
+  }
+
+  44% {
+    opacity: 1;
+    transform: scale(1.08) rotate(18deg);
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(1.24) rotate(64deg);
   }
 }
 
