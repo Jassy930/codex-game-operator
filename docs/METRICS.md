@@ -20,6 +20,7 @@
 - 点火按住压光当前由本地 `is-pressing` 展示态即时渲染星核本体滤镜、中心标签压缩发光和蓄能外弧加速，不单独记录为真实线上指标；点火结果仍通过 click 事件、连击状态和过载结果复盘。
 - 点火过载倒计时徽标当前由本地连击进度与 `getComboStatus` 即时推导，不单独记录为真实线上指标；点火行为仍通过 click 事件复盘。
 - 点火连击轨进度填充当前由本地连击进度 `combo.progress` 即时渲染为 `--core-combo-progress`，不单独记录为真实线上指标；点火行为仍通过 click 事件、连击状态和过载结果复盘。
+- 点火连击轨命中光扫当前由本地 `.core-button.is-pulsing:not(.is-overload-impact) .core-combo-track::before` 和 `.core-button.is-overload-impact .core-combo-track::before` 短时展示态即时渲染，不单独记录为真实线上指标；连击轨进度和过载结果仍通过 click 事件、`getComboStatus`、`lastGain` 和 `lastPulse` 复盘。
 - 点火连击点命中跳闪当前由本地 `comboStatus.step` 即时给本次命中的 `.core-combo-dot` 添加 `is-hit`，过载命中复用 `is-overload-hit` 展示态，不单独记录为真实线上指标；点火行为仍通过 click 事件、连击状态和过载结果复盘。
 - 点火中心标签命中亮脉冲当前由本地 `.core-button.is-pulsing:not(.is-overload-impact)` 短时展示态即时渲染，不单独记录为真实线上指标；普通点火行为仍通过 click 事件、连击状态和 `lastGain` 复盘。
 - 点火过载中心标签闪爆当前由本地 `.core-button.is-overload-impact` 短时展示态即时渲染，不单独记录为真实线上指标；过载命中仍通过 click 事件、连击状态和 `lastPulse` 复盘。

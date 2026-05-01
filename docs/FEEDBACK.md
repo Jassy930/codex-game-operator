@@ -1,5 +1,15 @@
 # Feedback
 
+## 2026-05-02
+
+- GitHub Issues：gh 可用且已认证；2026-05-02 00:01 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。#6/#4/#3/#2 已在上一轮回复回航校准部署状态；#5 仍集中在“点火按钮太薄弱、增加点击反馈和点击欲望”。
+- 本轮 Product decision 继续处理 #5：点火按钮已有多层命中反馈，但 8 格连击轨的连续填充条仍只显示进度结果，缺少每次点击沿填充条扫过的命中确认。
+- 本轮改动新增点火连击轨命中光扫：普通点火命中时 `.core-combo-track::before` 播放 `coreComboTrackHitSweep`，过载命中时播放 `coreComboTrackOverloadSweep`，让连击进度条和本次命中点形成同节奏反馈。
+- 本轮只调整点火按钮展示层和测试，不新增可见文字、不新增收益、不新增存档字段，不改变点击收益、连击窗口、过载奖励、升级价格、星图路线、项目奖励、航线策略、航线指令、远航调度、反馈入口或部署链路。
+- 本轮本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含 `coreComboTrackHitSweep`、`coreComboTrackOverloadSweep` 和连击轨命中选择器。
+- 发布与 #5 回复待推送部署后补记。
+
 ## 2026-05-01
 
 - GitHub Issues：gh 可用且已认证；2026-05-01 23:40 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue；#6/#3/#2 仍集中在后半段玩法变化不足，#4 要求降低文字密度，#5 已有多轮点火反馈增强但仍保持 open。回复后 2026-05-01 23:54 CST 再次同步，当前仍为 5 个 open feedback issue、0 个 open bug issue。

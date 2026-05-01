@@ -885,6 +885,7 @@ h2 {
   content: "";
   opacity: 0.72;
   pointer-events: none;
+  transform-origin: left center;
   transition:
     background 140ms ease,
     clip-path 140ms ease,
@@ -923,6 +924,14 @@ h2 {
     rgba(232, 93, 117, 0.86)
   );
   opacity: 1;
+}
+
+.core-button.is-pulsing:not(.is-overload-impact) .core-combo-track::before {
+  animation: coreComboTrackHitSweep 360ms ease-out;
+}
+
+.core-button.is-overload-impact .core-combo-track::before {
+  animation: coreComboTrackOverloadSweep 520ms ease-out;
 }
 
 .core-combo-dot {
@@ -6012,6 +6021,52 @@ h2 {
   }
 }
 
+@keyframes coreComboTrackHitSweep {
+  0% {
+    opacity: 0.72;
+    filter: saturate(1);
+    transform: scaleX(0.94);
+  }
+
+  42% {
+    opacity: 1;
+    filter:
+      saturate(1.36)
+      drop-shadow(0 0 12px rgba(255, 247, 194, 0.32))
+      drop-shadow(0 0 18px rgba(244, 178, 60, 0.24));
+    transform: scaleX(1.06);
+  }
+
+  100% {
+    opacity: 0.72;
+    filter: saturate(1);
+    transform: scaleX(1);
+  }
+}
+
+@keyframes coreComboTrackOverloadSweep {
+  0% {
+    opacity: 0.84;
+    filter: saturate(1);
+    transform: scaleX(0.9);
+  }
+
+  38% {
+    opacity: 1;
+    filter:
+      saturate(1.5)
+      drop-shadow(0 0 14px rgba(255, 247, 194, 0.42))
+      drop-shadow(0 0 26px rgba(232, 93, 117, 0.36));
+    transform: scaleX(1.1);
+  }
+
+  100% {
+    opacity: 1;
+    filter: saturate(1);
+    transform: scaleX(1);
+  }
+}
+
 @keyframes scoreEnergyReadoutHit {
   0% {
     color: #fff7c2;
@@ -6182,6 +6237,8 @@ h2 {
   .score-grid dd.is-core-hit,
   .score-grid dd.is-core-overload-hit,
   .score-grid dd.is-core-overload-prize,
+  .core-button.is-pulsing:not(.is-overload-impact) .core-combo-track::before,
+  .core-button.is-overload-impact .core-combo-track::before,
   .far-dispatch-branch-choice-summary-item.is-active-route
     .far-dispatch-branch-choice-summary-progress::after,
   .far-dispatch-branch-choice-summary-item.is-active-route
