@@ -844,6 +844,7 @@ function renderFarDispatchBranchChoiceSummaryItem(choice) {
   item.title = [
     choice.label,
     choice.decisionBadgeText,
+    choice.routePhaseText,
     choice.routeBranchStepText,
     choice.routeIntentText,
     choice.routeCostText,
@@ -860,6 +861,13 @@ function renderFarDispatchBranchChoiceSummaryItem(choice) {
 
   const label = document.createElement("strong");
   label.textContent = choice.label + " · " + (choice.decisionBadgeText ?? "");
+
+  const phase = document.createElement("span");
+  phase.className =
+    "far-dispatch-branch-choice-summary-phase is-" +
+    getFarDispatchBranchChoiceRoutePhaseKind(choice);
+  phase.textContent = choice.routePhaseText ?? "";
+  phase.hidden = !choice.routePhaseText;
 
   const branchStep = document.createElement("span");
   branchStep.className = "far-dispatch-branch-choice-summary-step";
@@ -882,7 +890,7 @@ function renderFarDispatchBranchChoiceSummaryItem(choice) {
     getFarDispatchBranchChoiceRouteReturnKind(choice);
   result.textContent = choice.routeReturnText ?? "";
 
-  item.append(glyph, label, branchStep, intent, cost, result);
+  item.append(glyph, label, phase, branchStep, intent, cost, result);
   return item;
 }
 

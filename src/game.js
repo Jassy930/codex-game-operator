@@ -5919,6 +5919,8 @@ function buildFarRouteDispatchBranchChoiceSummaryText(choices) {
           " " +
           choice.decisionBadgeText +
           " · " +
+          choice.routePhaseText +
+          " · " +
           choice.routeBranchStepText +
           " · " +
           choice.routeIntentText +

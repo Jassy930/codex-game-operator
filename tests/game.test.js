@@ -1710,6 +1710,8 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(appJs, /function renderFarDispatchBranchChoiceSummaryItem\(choice\)/);
   assert.match(appJs, /far-dispatch-branch-choice-summary-item is-/);
   assert.match(appJs, /far-dispatch-branch-choice-summary-glyph is-/);
+  assert.match(appJs, /far-dispatch-branch-choice-summary-phase is-/);
+  assert.match(appJs, /phase\.textContent = choice\.routePhaseText \?\? ""/);
   assert.match(appJs, /far-dispatch-branch-choice-summary-step/);
   assert.match(appJs, /branchStep\.textContent = choice\.routeBranchStepText \?\? ""/);
   assert.match(appJs, /far-dispatch-branch-choice-summary-cost is-/);
@@ -1924,6 +1926,9 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(styles, /\.far-dispatch-branch-choice-summary-glyph/);
   assert.match(styles, /\.far-dispatch-branch-choice-summary-glyph\.is-current/);
   assert.match(styles, /\.far-dispatch-branch-choice-summary-glyph\.is-progress/);
+  assert.match(styles, /\.far-dispatch-branch-choice-summary-phase/);
+  assert.match(styles, /\.far-dispatch-branch-choice-summary-phase\.is-branch/);
+  assert.match(styles, /\.far-dispatch-branch-choice-summary-phase\.is-complete/);
   assert.match(styles, /\.far-dispatch-branch-choice-summary-step/);
   assert.match(styles, /\.far-dispatch-branch-choice-summary-item\.is-detour \.far-dispatch-branch-choice-summary-step/);
   assert.match(styles, /\.far-dispatch-branch-choice-summary-cost\.is-safe/);
@@ -3150,7 +3155,7 @@ test("远航调度会在 20M 后按当前航段指定目标指令", () => {
   );
   assert.equal(
     dispatch.branchChoiceSummaryText,
-    "路线对照：协同 首推 · 2 谐振脉冲 · 保当前 · 无消耗 · 远航突破 / 绕行 建档 · 2 巡航回收 · 推累计 · 消耗当前 · 绕行突破"
+    "路线对照：协同 首推 · 0/3 起手 · 2 谐振脉冲 · 保当前 · 无消耗 · 远航突破 / 绕行 建档 · 0/3 起手 · 2 巡航回收 · 推累计 · 消耗当前 · 绕行突破"
   );
   assert.equal(
     dispatch.loopStatusText,
