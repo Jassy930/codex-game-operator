@@ -201,6 +201,7 @@ const elements = {
   coreChargeRing: document.querySelector("#coreButton .core-charge-ring"),
   coreImpactPoint: document.querySelector("#coreImpactPoint"),
   coreImpactRipple: document.querySelector("#coreImpactRipple"),
+  coreImpactSparks: document.querySelector("#coreImpactSparks"),
   coreGainPop: document.querySelector("#coreGainPop"),
   coreOverloadBadge: document.querySelector("#coreOverloadBadge"),
   coreOverloadBadgeValue: document.querySelector("#coreOverloadBadgeValue"),
@@ -2792,6 +2793,7 @@ function animateCore({ gainText = "", overloaded = false, pointerEvent = null } 
   positionCoreImpact(pointerEvent);
   elements.coreImpactPoint.classList.remove("is-showing", "is-overload-impact");
   elements.coreImpactRipple.classList.remove("is-showing", "is-overload-impact");
+  elements.coreImpactSparks.classList.remove("is-showing", "is-overload-impact");
   requestAnimationFrame(() => {
     elements.coreButton.classList.add("is-pulsing");
     elements.coreButton.classList.toggle("is-overload-impact", overloaded);
@@ -2799,6 +2801,8 @@ function animateCore({ gainText = "", overloaded = false, pointerEvent = null } 
     elements.coreImpactPoint.classList.toggle("is-overload-impact", overloaded);
     elements.coreImpactRipple.classList.add("is-showing");
     elements.coreImpactRipple.classList.toggle("is-overload-impact", overloaded);
+    elements.coreImpactSparks.classList.add("is-showing");
+    elements.coreImpactSparks.classList.toggle("is-overload-impact", overloaded);
     elements.coreGainPop.classList.add("is-showing");
     elements.coreGainPop.classList.toggle("is-overload-gain", overloaded);
     corePulseTimer = window.setTimeout(
@@ -2817,6 +2821,7 @@ function animateCore({ gainText = "", overloaded = false, pointerEvent = null } 
       () => {
         elements.coreImpactPoint.classList.remove("is-showing", "is-overload-impact");
         elements.coreImpactRipple.classList.remove("is-showing", "is-overload-impact");
+        elements.coreImpactSparks.classList.remove("is-showing", "is-overload-impact");
       },
       overloaded ? 620 : 420
     );
@@ -2833,7 +2838,11 @@ function positionCoreImpact(event) {
   const x = usePointer ? event.clientX - rect.left : rect.width / 2;
   const y = usePointer ? event.clientY - rect.top : rect.height / 2;
 
-  [elements.coreImpactPoint, elements.coreImpactRipple].forEach((element) => {
+  [
+    elements.coreImpactPoint,
+    elements.coreImpactRipple,
+    elements.coreImpactSparks
+  ].forEach((element) => {
     element.style.setProperty(
       "--core-impact-x",
       Math.min(Math.max(x, 0), rect.width) + "px"

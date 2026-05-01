@@ -1268,6 +1268,7 @@ test("点火按钮会渲染点击反馈和过载前兆效果", () => {
   assert.match(indexHtml, /class="core-surge-orbit"/);
   assert.match(indexHtml, /id="coreImpactPoint" class="core-impact-point"/);
   assert.match(indexHtml, /id="coreImpactRipple" class="core-impact-ripple"/);
+  assert.match(indexHtml, /id="coreImpactSparks" class="core-impact-sparks"/);
   assert.match(indexHtml, /class="core-charge-ring"/);
   assert.match(indexHtml, /id="coreGainPop" class="core-gain-pop"/);
   assert.match(indexHtml, /class="core-veins"/);
@@ -1304,6 +1305,7 @@ test("点火按钮会渲染点击反馈和过载前兆效果", () => {
   assert.match(appJs, /coreChargeRing: document\.querySelector\("#coreButton \.core-charge-ring"\)/);
   assert.match(appJs, /coreImpactPoint: document\.querySelector\("#coreImpactPoint"\)/);
   assert.match(appJs, /coreImpactRipple: document\.querySelector\("#coreImpactRipple"\)/);
+  assert.match(appJs, /coreImpactSparks: document\.querySelector\("#coreImpactSparks"\)/);
   assert.match(appJs, /elements\.coreChargeRing\.style\.setProperty\(\s*"--core-charge-angle"/);
   assert.match(appJs, /Math\.round\(combo\.progress \* 360\) \+ "deg"/);
   assert.match(appJs, /elements\.coreChargeRing\.classList\.toggle\("is-overload-ready", isOverloadReady\)/);
@@ -1328,6 +1330,8 @@ test("点火按钮会渲染点击反馈和过载前兆效果", () => {
   assert.match(appJs, /elements\.coreImpactPoint\.classList\.toggle\("is-overload-impact", overloaded\)/);
   assert.match(appJs, /elements\.coreImpactRipple\.classList\.add\("is-showing"\)/);
   assert.match(appJs, /elements\.coreImpactRipple\.classList\.toggle\("is-overload-impact", overloaded\)/);
+  assert.match(appJs, /elements\.coreImpactSparks\.classList\.add\("is-showing"\)/);
+  assert.match(appJs, /elements\.coreImpactSparks\.classList\.toggle\("is-overload-impact", overloaded\)/);
   assert.match(appJs, /window\.AudioContext \?\? window\.webkitAudioContext/);
   assert.match(appJs, /context\.createOscillator\(\)/);
   assert.match(appJs, /frequency: 392/);
@@ -1373,6 +1377,9 @@ test("点火按钮会渲染点击反馈和过载前兆效果", () => {
   assert.match(styles, /\.core-impact-ripple/);
   assert.match(styles, /\.core-impact-ripple\.is-overload-impact/);
   assert.match(styles, /@keyframes coreImpactRipple/);
+  assert.match(styles, /\.core-impact-sparks/);
+  assert.match(styles, /\.core-impact-sparks\.is-overload-impact/);
+  assert.match(styles, /@keyframes coreImpactSparks/);
   assert.match(styles, /\.core-charge-ring/);
   assert.match(styles, /--core-charge-angle/);
   assert.match(styles, /\.core-charge-ring\.is-overload-ready/);

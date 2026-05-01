@@ -2,6 +2,14 @@
 
 ## 2026-05-01
 
+- GitHub Issues：gh 可用且已认证；2026-05-01 15:40 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
+- 本轮 Product decision 继续处理 #5：点火按钮已经具备多层连击、过载、落点涟漪和触觉/音效反馈，但实际点击位置还缺少短促的放射火花来强化按下瞬间。
+- 本轮改动新增点火落点火花束：`coreImpactSparks` / `core-impact-sparks` 复用现有点击坐标 `--core-impact-x` / `--core-impact-y`，普通点击播放局部火花束，过载点击播放更大、更亮的火花束。
+- 本轮只调整点火按钮展示层和测试，不新增收益、不新增存档字段，不改变点击收益、连击窗口、过载奖励、升级价格、星图路线、项目奖励、航线策略、航线指令、远航调度、反馈入口或部署链路。
+- 本轮本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含 `coreImpactSparks`、`core-impact-sparks` 和 `coreImpactSparks`。
+- 发布、#5 回复和钉钉通知状态将在本轮发布验证后补充。
+
 - GitHub Issues：gh 可用且已认证；2026-05-01 15:25 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
 - 本轮 Product decision 继续处理 #5：点火按钮已经具备多层连击、过载和触觉/音效反馈，但实际点击落点只有亮点闪光，缺少一圈从落点扩散的局部能量反馈。
 - 本轮改动新增点火落点涟漪：`coreImpactRipple` / `core-impact-ripple` 复用现有点击坐标 `--core-impact-x` / `--core-impact-y`，普通点击播放局部能量环，过载点击播放更大、更亮的涟漪。

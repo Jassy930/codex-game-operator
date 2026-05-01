@@ -2,6 +2,14 @@
 
 ## Unreleased
 
+- 点火按钮新增“落点火花束”：主按钮中新增 `coreImpactSparks` / `core-impact-sparks` 视觉层，复用实际点击坐标播放局部放射火花；过载点火使用更大、更亮的火花束，继续回应 #5 的点击反馈、特效和点击欲望反馈。
+- `index.html` 新增 `coreImpactSparks`；`src/app.js` 让 `animateCore` 同步触发落点火花束并让 `positionCoreImpact` 同步写入 `--core-impact-x` / `--core-impact-y`；`src/styles.css` 增加火花束状态和 `coreImpactSparks` 动效；`tests/game.test.js` 覆盖静态绑定。
+- 本轮只调整点火按钮展示层和测试，不新增收益、不新增存档字段，不改变点击收益、连击窗口、过载奖励、升级价格、星图路线、项目奖励、航线策略、航线指令、远航调度、反馈入口或部署链路。
+- 同步 GitHub Issues 反馈状态：2026-05-01 15:40 CST 当前 5 个 open feedback issue、0 个 open bug issue；#5 作为主处理对象。
+- 验证通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含 `coreImpactSparks`、`core-impact-sparks` 和 `coreImpactSparks`。
+- 发布、反馈回复和钉钉通知状态将在本轮发布验证后补充。
+
 - 点火按钮新增“落点涟漪”：主按钮中新增 `coreImpactRipple` / `core-impact-ripple` 视觉层，复用实际点击坐标播放局部能量环；过载点火使用更大、更亮的涟漪，继续回应 #5 的点击反馈、特效和点击欲望反馈。
 - `index.html` 新增 `coreImpactRipple`；`src/app.js` 让 `animateCore` 同步触发落点涟漪并让 `positionCoreImpact` 同步写入 `--core-impact-x` / `--core-impact-y`；`src/styles.css` 增加涟漪状态和 `coreImpactRipple` 动效；`tests/game.test.js` 覆盖静态绑定。
 - 本轮只调整点火按钮展示层和测试，不新增收益、不新增存档字段，不改变点击收益、连击窗口、过载奖励、升级价格、星图路线、项目奖励、航线策略、航线指令、远航调度、反馈入口或部署链路。
