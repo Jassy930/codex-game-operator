@@ -2175,6 +2175,14 @@ h2 {
   content: "+";
 }
 
+.far-dispatch-branch-choice-details.is-return-far summary {
+  color: #cfe8ff;
+}
+
+.far-dispatch-branch-choice-details.is-return-detour summary {
+  color: #ffd1df;
+}
+
 .far-dispatch-branch-choice-details[open] summary::after {
   content: "-";
 }

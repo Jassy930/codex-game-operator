@@ -1183,6 +1183,16 @@ const FAR_ROUTE_DISPATCH_BRANCH_ROUTE_INTENT_LABELS = Object.freeze({
     text: "推累计"
   })
 });
+const FAR_ROUTE_DISPATCH_BRANCH_ROUTE_RETURN_LABELS = Object.freeze({
+  sync: Object.freeze({
+    kind: "far",
+    text: "远航突破"
+  }),
+  detour: Object.freeze({
+    kind: "detour",
+    text: "绕行突破"
+  })
+});
 
 const INITIAL_UPGRADES = Object.fromEntries(
   UPGRADE_DEFS.map((upgrade) => [upgrade.id, 0])
@@ -5219,6 +5229,7 @@ function buildFarRouteDispatchBranchChoices(
     const routeFlow = buildFarRouteDispatchBranchRouteFlow(choice.kind);
     const routeCost = buildFarRouteDispatchBranchRouteCost(choice.kind);
     const routeIntent = buildFarRouteDispatchBranchRouteIntent(choice.kind);
+    const routeReturn = buildFarRouteDispatchBranchRouteReturn(choice.kind);
     const followupText = buildFarRouteDispatchBranchFollowupText(
       choice.label,
       choice.directive.name,
@@ -5280,6 +5291,8 @@ function buildFarRouteDispatchBranchChoices(
       routeCostText: routeCost.text,
       routeIntentKind: routeIntent.kind,
       routeIntentText: routeIntent.text,
+      routeReturnKind: routeReturn.kind,
+      routeReturnText: routeReturn.text,
       nextText: choice.nextText,
       reasonText,
       decisionText,
@@ -5316,6 +5329,8 @@ function buildFarRouteDispatchBranchChoices(
         routeCost.text +
         " · " +
         routeIntent.text +
+        " · " +
+        routeReturn.text +
         " · " +
         choice.caption +
         (reasonText ? " · " + reasonText : "") +
@@ -5557,6 +5572,13 @@ function buildFarRouteDispatchBranchRouteIntent(kind) {
   return {
     ...(FAR_ROUTE_DISPATCH_BRANCH_ROUTE_INTENT_LABELS[kind] ??
       FAR_ROUTE_DISPATCH_BRANCH_ROUTE_INTENT_LABELS.sync)
+  };
+}
+
+function buildFarRouteDispatchBranchRouteReturn(kind) {
+  return {
+    ...(FAR_ROUTE_DISPATCH_BRANCH_ROUTE_RETURN_LABELS[kind] ??
+      FAR_ROUTE_DISPATCH_BRANCH_ROUTE_RETURN_LABELS.sync)
   };
 }
 
@@ -5807,6 +5829,8 @@ function buildFarRouteDispatchBranchChoiceText(choices) {
           choice.routeCostText +
           " · " +
           choice.routeIntentText +
+          " · " +
+          choice.routeReturnText +
           " · " +
           choice.caption +
           (choice.reasonText ? " · " + choice.reasonText : "") +

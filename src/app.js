@@ -794,10 +794,14 @@ function renderFarDispatchBranchChoices(dispatch) {
       caption.textContent = choice.caption + " · " + choice.rewardText;
 
       const details = document.createElement("details");
-      details.className = "far-dispatch-branch-choice-details";
+      details.className =
+        "far-dispatch-branch-choice-details is-return-" +
+        getFarDispatchBranchChoiceRouteReturnKind(choice);
 
       const detailsSummary = document.createElement("summary");
-      detailsSummary.textContent = "路线明细";
+      detailsSummary.textContent = choice.routeReturnText
+        ? "路线明细 · " + choice.routeReturnText
+        : "路线明细";
 
       const detailsGrid = document.createElement("span");
       detailsGrid.className = "far-dispatch-branch-choice-detail-grid";
@@ -1069,6 +1073,11 @@ function getFarDispatchBranchChoiceRouteCostKind(choice) {
 function getFarDispatchBranchChoiceRouteIntentKind(choice) {
   const intentKind = String(choice.routeIntentKind ?? "none");
   return intentKind.replace(/[^a-z-]/g, "") || "none";
+}
+
+function getFarDispatchBranchChoiceRouteReturnKind(choice) {
+  const returnKind = String(choice.routeReturnKind ?? "none");
+  return returnKind.replace(/[^a-z-]/g, "") || "none";
 }
 
 function getFarDispatchBranchChoiceRouteNodeState(choice, nodeId) {

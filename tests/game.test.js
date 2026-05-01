@@ -1746,8 +1746,10 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(appJs, /function renderFarDispatchBranchChoiceRouteReward\(choice, nodeId\)/);
   assert.match(appJs, /far-dispatch-branch-choice-route-reward is-/);
   assert.match(appJs, /function getFarDispatchBranchChoiceRouteRewardLabel\(choice, nodeId\)/);
-  assert.match(appJs, /details\.className = "far-dispatch-branch-choice-details"/);
-  assert.match(appJs, /detailsSummary\.textContent = "路线明细"/);
+  assert.match(appJs, /details\.className =/);
+  assert.match(appJs, /far-dispatch-branch-choice-details is-return-/);
+  assert.match(appJs, /detailsSummary\.textContent = choice\.routeReturnText/);
+  assert.match(appJs, /"路线明细 · " \+ choice\.routeReturnText/);
   assert.match(appJs, /detailsGrid\.className = "far-dispatch-branch-choice-detail-grid"/);
   assert.match(appJs, /detailsGrid\.append\(objective, followup, next, payoff, caption\)/);
   assert.match(appJs, /details\.append\(detailsSummary, detailsGrid\)/);
@@ -1769,6 +1771,7 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(appJs, /function getFarDispatchBranchChoiceRoutePhaseKind\(choice\)/);
   assert.match(appJs, /function getFarDispatchBranchChoiceRouteCostKind\(choice\)/);
   assert.match(appJs, /function getFarDispatchBranchChoiceRouteIntentKind\(choice\)/);
+  assert.match(appJs, /function getFarDispatchBranchChoiceRouteReturnKind\(choice\)/);
   assert.match(appJs, /function getFarDispatchBranchChoiceStatus\(choice\)/);
   assert.match(appJs, /function getFarDispatchBranchChoiceDecisionKind\(choice\)/);
   assert.match(appJs, /function getFarDispatchBranchChoiceRouteResourceKind\(choice\)/);
@@ -1793,8 +1796,10 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(gameJs, /routeProgressPercent/);
   assert.match(gameJs, /routeRewardLabels/);
   assert.match(gameJs, /routeFlowText/);
+  assert.match(gameJs, /routeReturnText/);
   assert.match(gameJs, /function buildFarRouteDispatchBranchRouteRewardText/);
   assert.match(gameJs, /function buildFarRouteDispatchBranchRouteFlow/);
+  assert.match(gameJs, /function buildFarRouteDispatchBranchRouteReturn/);
   assert.match(gameJs, /function buildFarRouteDispatchBranchRouteProgressPercent/);
   assert.match(appJs, /option\.recommended \? "is-recommended" : ""/);
   assert.match(appJs, /option\.cooling \? "is-cooling" : ""/);
@@ -1951,6 +1956,8 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(styles, /\.far-dispatch-branch-choice-payoff/);
   assert.match(styles, /\.far-dispatch-branch-choice-details/);
   assert.match(styles, /\.far-dispatch-branch-choice-details summary \{[\s\S]*text-overflow: ellipsis/);
+  assert.match(styles, /\.far-dispatch-branch-choice-details\.is-return-far summary/);
+  assert.match(styles, /\.far-dispatch-branch-choice-details\.is-return-detour summary/);
   assert.match(styles, /\.far-dispatch-branch-choice-details\[open\] summary::after/);
   assert.match(styles, /\.far-dispatch-branch-choice-detail-grid/);
   assert.match(styles, /\.directive-button \.directive-dispatch-branch-focus/);
@@ -3019,6 +3026,12 @@ test("远航调度会在 20M 后按当前航段指定目标指令", () => {
   );
   assert.deepEqual(
     dispatch.branchChoices.map(
+      (choice) => choice.routeReturnKind + ":" + choice.routeReturnText
+    ),
+    ["far:远航突破", "detour:绕行突破"]
+  );
+  assert.deepEqual(
+    dispatch.branchChoices.map(
       (choice) => choice.routeMarkerKind + ":" + choice.routeMarkerText
     ),
     ["recommended:推荐", "available:备选"]
@@ -3070,7 +3083,7 @@ test("远航调度会在 20M 后按当前航段指定目标指令", () => {
   );
   assert.equal(
     dispatch.branchChoiceText,
-    "分支选择：协同 谐振脉冲（可选择 · 首推 · 0/3 起手 · 收益点：校准 -> 补给 -> 闭环 · 无消耗 · 保当前 · 补当前资源 · 推荐原因：点击/过载航段保留当前资源 · 路线判断：当前航段首推 · 路线目标：按当前航段推荐建立协同路线 · 下一步：先执行目标 点火齐射，再选协同 谐振脉冲 · 后续协同回航触发闭环与远航突破 · 本步合计 +13% · 回目标 远航闭环 +16% + 远航突破 +0.05%剩余 + 契合闭环 +7% · 远航协同 +5% · 协同补给 +3%当前 · 航段契合 +5%） / 绕行 巡航回收（可选择 · 建档 · 0/3 起手 · 收益点：校准 -> 投送 -> 闭环 · 消耗当前 · 推累计 · 投送累计航段 · 路线判断：备选建档 · 路线目标：建立绕行路线，记录为下轮对照 · 下一步：先执行目标 点火齐射，再选绕行 巡航回收 · 后续绕行回航触发闭环与绕行突破 · 本步合计 +4% · 投送累计 · 回目标 远航闭环 +16% + 远航突破 +0.05%剩余 + 绕行突破 +0.03%剩余 · 远航绕行 +4% · 绕行投送 -0.3%当前）"
+    "分支选择：协同 谐振脉冲（可选择 · 首推 · 0/3 起手 · 收益点：校准 -> 补给 -> 闭环 · 无消耗 · 保当前 · 远航突破 · 补当前资源 · 推荐原因：点击/过载航段保留当前资源 · 路线判断：当前航段首推 · 路线目标：按当前航段推荐建立协同路线 · 下一步：先执行目标 点火齐射，再选协同 谐振脉冲 · 后续协同回航触发闭环与远航突破 · 本步合计 +13% · 回目标 远航闭环 +16% + 远航突破 +0.05%剩余 + 契合闭环 +7% · 远航协同 +5% · 协同补给 +3%当前 · 航段契合 +5%） / 绕行 巡航回收（可选择 · 建档 · 0/3 起手 · 收益点：校准 -> 投送 -> 闭环 · 消耗当前 · 推累计 · 绕行突破 · 投送累计航段 · 路线判断：备选建档 · 路线目标：建立绕行路线，记录为下轮对照 · 下一步：先执行目标 点火齐射，再选绕行 巡航回收 · 后续绕行回航触发闭环与绕行突破 · 本步合计 +4% · 投送累计 · 回目标 远航闭环 +16% + 远航突破 +0.05%剩余 + 绕行突破 +0.03%剩余 · 远航绕行 +4% · 绕行投送 -0.3%当前）"
   );
   assert.equal(
     dispatch.loopStatusText,

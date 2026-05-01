@@ -2,6 +2,15 @@
 
 ## Unreleased
 
+- 远航调度新增“路线回航结果短标”：协同/绕行分支卡片默认折叠的 `路线明细` 摘要显示 `远航突破` 或 `绕行突破`，继续回应 #6 的后半段路线结果理解和 #4 的降文字密度反馈。
+- `src/game.js` 为 `branchChoices` 派生 `routeReturnKind` / `routeReturnText` 并纳入 `branchChoiceText`；`src/app.js` 在 `路线明细` summary 中渲染回航结果并写入 `is-return-far/is-return-detour`；`src/styles.css` 增加回航结果摘要状态色；`tests/game.test.js` 覆盖回航结果短标派生、静态 DOM 和样式绑定。
+- 文档同步更新：`docs/DECISION.md`、`docs/FEEDBACK.md`、`docs/RESEARCH.md`、`docs/PRODUCT.md`、`docs/DESIGN.md`、`docs/ROADMAP.md`、`docs/IDEAS.md`、`docs/METRICS.md`、`README.md` 和本日志已记录远航路线回航结果短标。
+- 本轮只调整派生展示、DOM、CSS 和测试，不新增收益、不新增存档字段，不改变升级价格、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、远航调度既有数值、冷却、连携窗口、反馈入口或部署链路。
+- 同步 GitHub Issues 反馈状态：2026-05-01 10:25 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 作为主处理对象，#4 作为视觉密度依据。
+- 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含 `routeReturnKind`、`routeReturnText`、`路线明细 · `、`远航突破` 和 `绕行突破`。
+- 发布、反馈处理和钉钉通知待本轮 push / Pages 验证后补充。
+
 - 远航调度新增“路线取向短标”：协同/绕行分支卡片首行显示 `保当前` 或 `推累计`，继续回应 #6 的后半段路线取舍理解和 #4 的降文字密度反馈。
 - `src/game.js` 为 `branchChoices` 派生 `routeIntentKind` / `routeIntentText` 并纳入 `branchChoiceText`；`src/app.js` 渲染 `far-dispatch-branch-choice-intent`；`src/styles.css` 增加取向短标样式；`tests/game.test.js` 覆盖取向短标派生、静态 DOM 和样式绑定。
 - 文档同步更新：`docs/DECISION.md`、`docs/FEEDBACK.md`、`docs/RESEARCH.md`、`docs/PRODUCT.md`、`docs/DESIGN.md`、`docs/ROADMAP.md`、`docs/IDEAS.md`、`docs/METRICS.md`、`README.md` 和本日志已记录远航路线取向短标。

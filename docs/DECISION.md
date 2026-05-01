@@ -1,5 +1,31 @@
 # Decision
 
+## 2026-05-01 Product decision：远航路线回航结果短标
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-01 10:25 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#6 仍是后半段玩法变化主反馈，#4 仍是界面文字密度和图片化依据，因此本轮继续进入 Product decision。
+
+当前最大问题：协同/绕行卡片已经显示路线微图、当前步、收益点、资源流向、代价和路线取向，但默认折叠“路线明细”后，玩家仍需要展开才能确认回目标后主要触发的是普通远航突破还是绕行突破。
+
+本轮决策：
+
+- 新增“远航路线回航结果短标”。
+- `branchChoices` 派生 `routeReturnKind` / `routeReturnText`，协同路线显示 `远航突破`，绕行路线显示 `绕行突破`。
+- `src/app.js` 在默认折叠的 `路线明细` summary 上显示 `路线明细 · 远航突破/绕行突破`，并给 details 写入 `is-return-far/is-return-detour`。
+- `src/styles.css` 为两类回航结果摘要提供不同强调色；完整语义同步纳入 `branchChoiceText` 与卡片标题。
+- 该短标只从现有路线类型派生，不新增收益、不新增存档字段，不改变升级价格、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、远航调度数值、冷却、连携窗口、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-05-01 10:25 CST 当前 5 个 open feedback issue、0 个 open bug issue。
+- `src/game.js` 派生 `routeReturnKind` / `routeReturnText`，覆盖协同 `far:远航突破` 与绕行 `detour:绕行突破`。
+- `src/app.js` 在路线明细 summary 中渲染回航结果短标，并写入 `is-return-far/is-return-detour`。
+- `src/styles.css` 包含回航结果 summary 状态色。
+- `tests/game.test.js` 覆盖回航结果短标派生、静态 DOM 绑定和样式绑定。
+- 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含 `routeReturnKind`、`routeReturnText`、`路线明细 · `、`远航突破` 和 `绕行突破`。
+- 发布验证待 push 后补充。
+- 钉钉通知待本轮结束时尝试；webhook 只从运行时上下文或本地环境读取，不写入仓库。
+
 ## 2026-05-01 Product decision：远航路线取向短标
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-01 10:07 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#6 仍是后半段玩法变化主反馈，#4 仍是界面文字密度和图片化依据，因此本轮继续进入 Product decision。
