@@ -2,6 +2,13 @@
 
 ## 2026-05-01
 
+- GitHub Issues：gh 可用且已认证；2026-05-01 14:37 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
+- 本轮 Product decision 处理 #5：点火按钮已经有多层反馈，但按钮内 8 格连击轨仍偏离散，缺少每次点击后连续推进的填充反馈；#6 与 #4 继续等待路线对照条相关复测。
+- 本轮改动新增点火连击轨进度填充：`core-combo-track` 根据现有 `combo.progress` 写入 `--core-combo-progress`，用轨道填充显示当前连击进度，并在过载前一击和过载命中时加强颜色。
+- 本轮只调整点火按钮展示层和测试，不新增收益、不新增存档字段，不改变点击收益、连击窗口、过载奖励、升级价格、星图路线、项目奖励、航线策略、航线指令、远航调度、反馈入口或部署链路。
+- 本轮本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含 `--core-combo-progress`、`.core-combo-track::before` 和过载状态填充轨样式。
+
 - GitHub Issues：gh 可用且已认证；2026-05-01 14:18 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
 - #6 继续作为本轮 Product decision 依据：路线对照条已经有 1/2/3 步号、第二步按钮和进度语义，但泛化的“下一步 目标/选协同/回目标/整备”仍需要玩家再映射到实际按钮；#4 继续作为图形化和降文字密度依据。
 - 本轮改动新增远航路线对照条下一步按钮短标：协同/绕行对照槽直接显示 `下一步 1 点火齐射`、`下一步 2 谐振脉冲`、`下一步 3 点火齐射` 或具体整备指令名。

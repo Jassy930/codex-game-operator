@@ -493,6 +493,10 @@ function renderCoreFeedback(combo) {
 }
 
 function renderCoreComboTrack(combo) {
+  elements.coreComboTrack.style.setProperty(
+    "--core-combo-progress",
+    Math.round(combo.progress * 100) + "%"
+  );
   elements.coreComboTrack.classList.toggle(
     "is-overload-ready",
     combo.remaining === 1 && !combo.overloaded

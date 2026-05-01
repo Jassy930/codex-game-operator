@@ -1328,6 +1328,8 @@ test("点火按钮会渲染点击反馈和过载前兆效果", () => {
   assert.match(appJs, /elements\.coreOverloadBadge\.classList\.toggle\("is-countdown-active", isCharging\)/);
   assert.match(appJs, /elements\.coreOverloadBadge\.classList\.toggle\("is-overload-ready", isOverloadReady\)/);
   assert.match(appJs, /elements\.coreButton\.dataset\.comboStep = String\(combo\.step\)/);
+  assert.match(appJs, /"--core-combo-progress"/);
+  assert.match(appJs, /Math\.round\(combo\.progress \* 100\) \+ "%"/);
   assert.match(appJs, /dot\.classList\.toggle\("is-filled", combo\.step >= step\)/);
   assert.match(appJs, /dot\.classList\.toggle\("is-next", !combo\.overloaded && combo\.step \+ 1 === step\)/);
   assert.match(appJs, /is-combo-charging/);
@@ -1356,6 +1358,10 @@ test("点火按钮会渲染点击反馈和过载前兆效果", () => {
   assert.match(styles, /\.core-overload-badge\.is-overload-ready/);
   assert.match(styles, /\.core-overload-badge\.is-overload-hit/);
   assert.match(styles, /\.core-combo-track/);
+  assert.match(styles, /--core-combo-progress/);
+  assert.match(styles, /\.core-combo-track::before/);
+  assert.match(styles, /\.core-combo-track\.is-overload-ready::before/);
+  assert.match(styles, /\.core-combo-track\.is-overload-hit::before/);
   assert.match(styles, /\.core-combo-dot\.is-next/);
   assert.match(styles, /\.core-reward-hint/);
   assert.match(styles, /\.core-label/);

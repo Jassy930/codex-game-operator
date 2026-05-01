@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+- 点火按钮新增“连击轨进度填充”：按钮内 8 格连击轨会根据现有 `combo.progress` 显示连续填充条，过载前一击和过载命中时使用更强填充色，继续回应 #5 的点击反馈、特效和点击欲望反馈。
+- `src/app.js` 在 `renderCoreComboTrack` 写入 `--core-combo-progress`；`src/styles.css` 通过 `.core-combo-track::before` 渲染填充轨；`tests/game.test.js` 覆盖静态绑定。
+- 本轮只调整点火按钮展示层和测试，不新增收益、不新增存档字段，不改变点击收益、连击窗口、过载奖励、升级价格、星图路线、项目奖励、航线策略、航线指令、远航调度、反馈入口或部署链路。
+- 同步 GitHub Issues 反馈状态：2026-05-01 14:37 CST 当前 5 个 open feedback issue、0 个 open bug issue；#5 作为主处理对象。
+- 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含 `--core-combo-progress`、`.core-combo-track::before` 和过载状态填充轨样式。
+
 - 远航调度新增“路线对照条下一步按钮短标”：协同/绕行对照槽把泛化的 `下一步 目标/选协同/回目标/整备` 改成 `下一步 1 点火齐射`、`下一步 2 谐振脉冲`、`下一步 3 点火齐射` 或具体整备指令名，继续回应 #6 的后半段路线执行理解和 #4 的图形化降密度反馈。
 - `src/game.js` 让 `routeActionText` 复用 `routeCommandLabels` 派生步骤号和指令名；`tests/game.test.js` 覆盖起手、分支、回航和绕行整备状态的下一步按钮短标。
 - 本轮只调整展示派生和测试，不新增收益、不新增存档字段，不改变升级价格、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、远航调度既有数值、冷却、连携窗口、反馈入口或部署链路。

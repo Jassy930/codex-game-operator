@@ -606,6 +606,7 @@ h2 {
 }
 
 .core-combo-track {
+  --core-combo-progress: 0%;
   position: absolute;
   bottom: 18px;
   left: 50%;
@@ -616,6 +617,7 @@ h2 {
   padding: 6px 8px;
   border-radius: 999px;
   background: rgba(20, 17, 15, 0.58);
+  overflow: hidden;
   box-shadow:
     inset 0 0 0 1px rgba(248, 243, 231, 0.12),
     0 8px 18px rgba(20, 17, 15, 0.22);
@@ -625,11 +627,41 @@ h2 {
     box-shadow 120ms ease;
 }
 
+.core-combo-track::before {
+  position: absolute;
+  inset: 4px;
+  width: calc(100% - 8px);
+  border-radius: 999px;
+  background: linear-gradient(
+    90deg,
+    rgba(19, 181, 166, 0.62),
+    rgba(244, 178, 60, 0.72)
+  );
+  clip-path: inset(0 calc(100% - var(--core-combo-progress)) 0 0 round 999px);
+  content: "";
+  opacity: 0.72;
+  pointer-events: none;
+  transition:
+    background 140ms ease,
+    clip-path 140ms ease,
+    opacity 140ms ease;
+}
+
 .core-combo-track.is-overload-ready {
   background: rgba(85, 41, 34, 0.72);
   box-shadow:
     inset 0 0 0 1px rgba(244, 178, 60, 0.35),
     0 0 22px rgba(244, 178, 60, 0.2);
+}
+
+.core-combo-track.is-overload-ready::before {
+  background: linear-gradient(
+    90deg,
+    rgba(244, 178, 60, 0.88),
+    rgba(255, 247, 194, 0.95),
+    rgba(232, 93, 117, 0.72)
+  );
+  opacity: 0.92;
 }
 
 .core-combo-track.is-overload-hit {
@@ -639,7 +671,19 @@ h2 {
     0 0 28px rgba(232, 93, 117, 0.26);
 }
 
+.core-combo-track.is-overload-hit::before {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 247, 194, 0.98),
+    rgba(244, 178, 60, 0.95),
+    rgba(232, 93, 117, 0.86)
+  );
+  opacity: 1;
+}
+
 .core-combo-dot {
+  position: relative;
+  z-index: 1;
   width: 6px;
   height: 6px;
   border-radius: 999px;
