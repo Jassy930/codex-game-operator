@@ -2105,6 +2105,8 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(styles, /animation: farDispatchSummaryActionBeacon 1200ms ease-in-out infinite/);
   assert.match(styles, /\.far-dispatch-branch-choice-summary-item\.is-active-route[\s\S]*\.far-dispatch-branch-choice-summary-action:not\(\.is-idle\)/);
   assert.match(styles, /animation: farDispatchSummaryActiveActionGlow 1450ms ease-in-out infinite/);
+  assert.match(styles, /\.far-dispatch-branch-choice-summary-item\.is-active-route[\s\S]*\.far-dispatch-branch-choice-summary-payoff/);
+  assert.match(styles, /animation: farDispatchSummaryActivePayoffGlow 1450ms ease-in-out infinite/);
   assert.match(styles, /\.far-dispatch-branch-choice-summary-action\.is-return/);
   assert.match(styles, /\.far-dispatch-branch-choice-summary-action\.is-prep/);
   assert.match(styles, /\.far-dispatch-branch-choice-summary-action\.is-idle::before/);
@@ -2135,7 +2137,9 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(styles, /@keyframes farDispatchSummaryActiveRouteSweep/);
   assert.match(styles, /@keyframes farDispatchSummaryNextNodePulse/);
   assert.match(styles, /@keyframes farDispatchSummaryActiveActionGlow/);
+  assert.match(styles, /@keyframes farDispatchSummaryActivePayoffGlow/);
   assert.match(styles, /@media \(prefers-reduced-motion: reduce\) \{[\s\S]*\.far-dispatch-branch-choice-summary-item\.is-active-route[\s\S]*animation: none/);
+  assert.match(styles, /@media \(prefers-reduced-motion: reduce\) \{[\s\S]*\.far-dispatch-branch-choice-summary-payoff[\s\S]*animation: none/);
   assert.match(styles, /@media \(max-width: 820px\) \{[\s\S]*\.far-dispatch-branch-choice-summary \{[\s\S]*grid-template-columns: 1fr/);
   assert.match(styles, /@media \(max-width: 820px\) \{[\s\S]*"glyph label action step"/);
   assert.match(styles, /@media \(max-width: 820px\) \{[\s\S]*"glyph phase reward payoff"/);
