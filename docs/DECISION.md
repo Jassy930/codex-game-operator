@@ -1,5 +1,28 @@
 # Decision
 
+## 2026-05-02 Product decision：远航闭环步骤卡当前步号补光
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-02 05:43 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有 open bug；#4/#6 仍是主线反馈，继续指向远航调度需要更多图形化表达、后半段短循环需要更少文字反推。
+
+当前最大问题：远航闭环插画、路线微图、进度轨、当前节点、方向信标、连接信标、当前步骤卡、微图当前收益短标和步骤卡当前收益行已经进入同一反馈节奏，但步骤卡左侧的 1/2/3 当前步号仍只是静态高亮。玩家从上方微图扫到下方卡片时，当前步骤编号这个最短图形锚点还可以更直接地确认“现在执行第几步”。
+
+本轮决策：
+
+- 新增“远航闭环步骤卡当前步号补光”。
+- `src/styles.css` 为 `.far-dispatch.is-active .far-dispatch-loop-step.is-current::before` 增加 `farDispatchLoopCurrentStepBadgeGlow` 轻量补光。
+- 在 `prefers-reduced-motion: reduce` 中关闭该步号动效。
+- `tests/game.test.js` 增加静态断言，覆盖 active 当前步骤卡步号补光、keyframes 和降低动效兜底。
+- 该改动只调整远航闭环展示层和测试，不新增可见说明文字、不新增收益、不新增存档字段，不改变点击收益、升级价格、星图路线、项目奖励、航线策略、航线指令、远航调度数值、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-05-02 05:43 CST 当前 5 个 open feedback issue、0 个 open bug issue；#4/#6 作为本轮主处理对象。
+- `src/styles.css` 包含 `.far-dispatch.is-active .far-dispatch-loop-step.is-current::before`、`farDispatchLoopCurrentStepBadgeGlow` 和降低动效兜底。
+- `tests/game.test.js` 覆盖远航闭环步骤卡当前步号补光静态绑定。
+- 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认 `dist/src/styles.css` 包含 `farDispatchLoopCurrentStepBadgeGlow`、当前步骤卡步号补光样式和降低动效兜底。
+- 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #4/#6，以及当前远航闭环步骤卡步号仍偏静态的复盘。
+
 ## 2026-05-02 Product decision：远航闭环步骤卡当前收益行补光
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-02 05:27 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有 open bug；#4/#6 仍是主线反馈，继续指向远航调度需要更多图形化表达、后半段短循环需要更少文字反推。

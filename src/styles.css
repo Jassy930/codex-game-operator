@@ -3842,6 +3842,10 @@ h2 {
   box-shadow: 0 0 14px rgba(255, 211, 106, 0.24);
 }
 
+.far-dispatch.is-active .far-dispatch-loop-step.is-current::before {
+  animation: farDispatchLoopCurrentStepBadgeGlow 1450ms ease-in-out infinite;
+}
+
 .far-dispatch-loop-step.is-current::after {
   background: linear-gradient(180deg, #ffd36a, rgba(255, 211, 106, 0.16));
 }
@@ -6922,6 +6926,21 @@ h2 {
   }
 }
 
+@keyframes farDispatchLoopCurrentStepBadgeGlow {
+  0%,
+  100% {
+    filter: saturate(1);
+    box-shadow: 0 0 14px rgba(255, 211, 106, 0.24);
+  }
+
+  50% {
+    filter: saturate(1.2);
+    box-shadow:
+      0 0 17px rgba(255, 211, 106, 0.34),
+      0 0 9px rgba(255, 126, 177, 0.16);
+  }
+}
+
 @keyframes farDispatchSceneImagePulse {
   0%,
   100% {
@@ -6987,6 +7006,7 @@ h2 {
   .far-dispatch-loop-link.is-current::before,
   .far-dispatch-loop-link.is-current::after,
   .far-dispatch-loop-step.is-current,
+  .far-dispatch.is-active .far-dispatch-loop-step.is-current::before,
   .far-dispatch.is-active .far-dispatch-step-reward.is-current,
   .far-dispatch-branch-choice-summary-item.is-active-route
     .far-dispatch-branch-choice-summary-progress::after,

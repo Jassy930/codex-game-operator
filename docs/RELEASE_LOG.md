@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+- 远航调度新增“远航闭环步骤卡当前步号补光”：20M 后主操作区远航闭环三张步骤卡中的当前 1/2/3 步号会播放轻量补光，让下方执行卡的最短编号锚点和当前步骤卡、当前连接信标、当前收益行保持同层节奏，继续回应 #4 的图形化/文字密度反馈，并辅助 #6 的后半段短循环步骤确认。
+- `src/styles.css` 为 `.far-dispatch.is-active .far-dispatch-loop-step.is-current::before` 增加 `farDispatchLoopCurrentStepBadgeGlow` 动画，并在降低动效偏好中关闭该动画；`tests/game.test.js` 覆盖静态绑定。
+- 本轮只调整远航闭环展示层和测试，不新增可见说明文字、不新增收益、不新增存档字段，不改变点击收益、升级价格、星图路线、项目奖励、航线策略、航线指令、远航调度数值、反馈入口或部署链路。
+- 同步 GitHub Issues 反馈状态：2026-05-02 05:43 CST 当前 5 个 open feedback issue、0 个 open bug issue；#4/#6 作为主处理对象。
+- 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认 `dist/src/styles.css` 包含 `farDispatchLoopCurrentStepBadgeGlow`、当前步骤卡步号补光样式和降低动效兜底。
+
 - 远航调度新增“远航闭环步骤卡当前收益行补光”：20M 后主操作区远航闭环三张步骤卡中的当前收益行会播放轻量补光，让下方执行卡里的具体回报行和上方路线微图当前收益短标、当前步骤卡、当前连接信标保持同层节奏，继续回应 #4 的图形化/文字密度反馈，并辅助 #6 的后半段短循环收益确认。
 - `src/styles.css` 为 `.far-dispatch.is-active .far-dispatch-step-reward.is-current` 增加 `farDispatchStepRewardCurrentGlow` 动画，并在降低动效偏好中关闭该动画；`tests/game.test.js` 覆盖静态绑定。
 - 本轮只调整远航闭环展示层和测试，不新增可见说明文字、不新增收益、不新增存档字段，不改变点击收益、升级价格、星图路线、项目奖励、航线策略、航线指令、远航调度数值、反馈入口或部署链路。
