@@ -3389,16 +3389,17 @@ h2 {
   display: grid;
   grid-column: 1 / -1;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  align-items: center;
-  min-height: 24px;
+  align-items: start;
+  min-height: 42px;
   margin-bottom: 2px;
+  padding-top: 2px;
   isolation: isolate;
 }
 
 .far-dispatch-loop-visual::before,
 .far-dispatch-loop-visual::after {
   position: absolute;
-  top: 50%;
+  top: 12px;
   left: 18px;
   height: 3px;
   border-radius: 999px;
@@ -3421,7 +3422,7 @@ h2 {
 .far-dispatch-loop-visual-arrow {
   position: absolute;
   z-index: 2;
-  top: 50%;
+  top: 12px;
   width: 0;
   height: 0;
   border-top: 5px solid transparent;
@@ -3451,8 +3452,15 @@ h2 {
     drop-shadow(0 0 3px rgba(255, 126, 177, 0.22));
 }
 
-.far-dispatch-loop-visual-node {
+.far-dispatch-loop-visual-point {
   z-index: 1;
+  display: grid;
+  min-width: 0;
+  gap: 3px;
+  justify-items: center;
+}
+
+.far-dispatch-loop-visual-node {
   display: inline-grid;
   justify-self: center;
   width: 20px;
@@ -3485,6 +3493,52 @@ h2 {
   box-shadow:
     0 0 0 3px rgba(5, 12, 20, 0.74),
     0 0 14px rgba(255, 211, 106, 0.34);
+}
+
+.far-dispatch-loop-visual-reward {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  max-width: calc(100% - 8px);
+  min-width: 0;
+  height: 15px;
+  padding: 0 6px;
+  overflow: hidden;
+  border: 1px solid rgba(248, 243, 231, 0.18);
+  border-radius: 999px;
+  background: rgba(248, 243, 231, 0.08);
+  color: rgba(248, 243, 231, 0.68);
+  font-size: 0.56rem;
+  font-weight: 950;
+  line-height: 1;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.far-dispatch-loop-visual-reward::before {
+  content: attr(data-reward-label);
+}
+
+.far-dispatch-loop-visual-reward.is-target {
+  border-color: rgba(255, 126, 177, 0.28);
+  color: #ffd2e5;
+}
+
+.far-dispatch-loop-visual-reward.is-branch,
+.far-dispatch-loop-visual-reward.is-relay {
+  border-color: rgba(255, 211, 106, 0.3);
+  color: #ffd36a;
+}
+
+.far-dispatch-loop-visual-reward.is-return {
+  border-color: rgba(150, 231, 168, 0.3);
+  color: #96e7a8;
+}
+
+.far-dispatch-loop-visual-reward.is-current,
+.far-dispatch-loop-visual-reward.is-completed {
+  background: rgba(248, 243, 231, 0.14);
+  box-shadow: 0 0 10px rgba(255, 211, 106, 0.12);
 }
 
 .far-dispatch-loop-step {

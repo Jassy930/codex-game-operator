@@ -1241,10 +1241,29 @@ function renderFarDispatchLoopTrack(dispatch) {
     visual.append(arrow);
   });
   steps.forEach((step, index) => {
+    const rewardKind = getFarDispatchLoopVisualRewardKind(step, index);
+    const point = document.createElement("span");
+    point.className =
+      "far-dispatch-loop-visual-point is-" +
+      step.state +
+      " is-" +
+      rewardKind;
+
     const node = document.createElement("span");
     node.className = "far-dispatch-loop-visual-node is-" + step.state;
     node.dataset.stepLabel = String(index + 1);
-    visual.append(node);
+
+    const reward = document.createElement("span");
+    reward.className =
+      "far-dispatch-loop-visual-reward is-" +
+      rewardKind +
+      " is-" +
+      step.state;
+    reward.dataset.rewardLabel = getFarDispatchLoopVisualRewardLabel(step, index);
+    reward.hidden = !step.rewardText;
+
+    point.append(node, reward);
+    visual.append(point);
   });
 
   track.append(
@@ -1282,6 +1301,36 @@ function getFarDispatchLoopVisualArrowState(progress, segment) {
   }
 
   return "pending";
+}
+
+function getFarDispatchLoopVisualRewardKind(step, index) {
+  if (index === 0) {
+    return "target";
+  }
+
+  if (index === 2) {
+    return "return";
+  }
+
+  return step?.label === "续航" ? "relay" : "branch";
+}
+
+function getFarDispatchLoopVisualRewardLabel(step, index) {
+  const kind = getFarDispatchLoopVisualRewardKind(step, index);
+
+  if (kind === "target") {
+    return "校准";
+  }
+
+  if (kind === "return") {
+    return "闭环";
+  }
+
+  if (kind === "relay") {
+    return "续航";
+  }
+
+  return "分支";
 }
 
 function setCompactSupportText(element, displayText, fullText) {
