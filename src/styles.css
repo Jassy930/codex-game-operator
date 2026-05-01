@@ -1626,6 +1626,34 @@ h2 {
   background: rgba(116, 194, 255, 0.14);
 }
 
+.far-dispatch-branch-choice .far-dispatch-branch-choice-cost {
+  flex: 0 0 auto;
+  max-width: 72px;
+  padding: 2px 5px;
+  border: 1px solid rgba(248, 243, 231, 0.16);
+  border-radius: 999px;
+  color: rgba(248, 243, 231, 0.72);
+  background: rgba(5, 12, 20, 0.44);
+  font-size: 0.56rem;
+  line-height: 1;
+}
+
+.far-dispatch-branch-choice-cost[hidden] {
+  display: none;
+}
+
+.far-dispatch-branch-choice-cost.is-safe {
+  color: #d8ffe2;
+  border-color: rgba(150, 231, 168, 0.54);
+  background: rgba(150, 231, 168, 0.12);
+}
+
+.far-dispatch-branch-choice-cost.is-spend {
+  color: #ffd1df;
+  border-color: rgba(255, 126, 177, 0.54);
+  background: rgba(255, 126, 177, 0.12);
+}
+
 .far-dispatch-branch-choice span {
   color: #f8f3e7;
   font-size: 0.76rem;

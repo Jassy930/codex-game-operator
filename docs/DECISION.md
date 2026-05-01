@@ -1,5 +1,30 @@
 # Decision
 
+## 2026-05-01 Product decision：远航路线代价短标
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-01 09:49 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#6 仍是后半段玩法变化主反馈，#4 仍是界面文字密度和图片化依据，因此本轮继续进入 Product decision。
+
+当前最大问题：协同/绕行路线微图已经显示路线阶段、收益落点、资源流向和路线状态，但“绕行会消耗当前资源、协同不消耗当前资源”仍主要藏在绕行投送文案、收益对照和展开明细里。玩家能看到 `当前+` 与 `当前->累计` 后，还需要更快判断哪条路线有当前资源代价。
+
+本轮决策：
+
+- 新增“远航路线代价短标”。
+- `branchChoices` 派生 `routeCostKind` / `routeCostText`，协同路线显示 `无消耗`，绕行路线显示 `消耗当前`。
+- `src/app.js` 在协同/绕行分支卡片首行渲染 `far-dispatch-branch-choice-cost is-safe/is-spend`，让代价和首推/稳航/改道徽标同层可扫视。
+- `src/styles.css` 为无消耗与消耗当前提供独立短标样式；完整语义同步纳入 `branchChoiceText` 与卡片标题。
+- 该短标只从现有路线类型派生，不新增收益、不新增存档字段，不改变升级价格、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、远航调度数值、冷却、连携窗口、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-05-01 09:49 CST 当前 5 个 open feedback issue、0 个 open bug issue。
+- `src/game.js` 派生 `routeCostKind` / `routeCostText`，覆盖协同 `safe:无消耗` 与绕行 `spend:消耗当前`。
+- `src/app.js` 渲染 `far-dispatch-branch-choice-cost is-safe/is-spend`。
+- `src/styles.css` 包含路线代价短标样式和 safe/spend 状态色。
+- `tests/game.test.js` 覆盖代价短标派生、静态 DOM 绑定和样式绑定。
+- 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含 `routeCostKind`、`routeCostText`、`far-dispatch-branch-choice-cost` 和 `消耗当前`。
+- 发布、Issue 回复和钉钉通知状态将在推送与部署验证后补记。
+
 ## 2026-05-01 Product decision：远航路线资源流向短标
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-01 09:32 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#6 仍是后半段玩法变化主反馈，#4 仍是界面文字密度和图片化依据，因此本轮继续进入 Product decision。

@@ -739,7 +739,14 @@ function renderFarDispatchBranchChoices(dispatch) {
         getFarDispatchBranchChoiceDecisionKind(choice);
       badge.textContent = choice.decisionBadgeText ?? "";
       badge.hidden = !choice.decisionBadgeText;
-      header.append(label, badge);
+
+      const costBadge = document.createElement("span");
+      costBadge.className =
+        "far-dispatch-branch-choice-cost is-" +
+        getFarDispatchBranchChoiceRouteCostKind(choice);
+      costBadge.textContent = choice.routeCostText ?? "";
+      costBadge.hidden = !choice.routeCostText;
+      header.append(label, badge, costBadge);
 
       const directive = document.createElement("span");
       directive.textContent = choice.directiveName;
@@ -1045,6 +1052,11 @@ function getFarDispatchBranchChoiceRoutePhaseKind(choice) {
 function getFarDispatchBranchChoiceRouteFlowKind(choice) {
   const flowKind = String(choice.routeFlowKind ?? "none");
   return flowKind.replace(/[^a-z-]/g, "") || "none";
+}
+
+function getFarDispatchBranchChoiceRouteCostKind(choice) {
+  const costKind = String(choice.routeCostKind ?? "none");
+  return costKind.replace(/[^a-z-]/g, "") || "none";
 }
 
 function getFarDispatchBranchChoiceRouteNodeState(choice, nodeId) {

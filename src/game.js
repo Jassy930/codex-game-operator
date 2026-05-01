@@ -1163,6 +1163,16 @@ const FAR_ROUTE_DISPATCH_BRANCH_ROUTE_FLOW_LABELS = Object.freeze({
     text: "当前->累计"
   })
 });
+const FAR_ROUTE_DISPATCH_BRANCH_ROUTE_COST_LABELS = Object.freeze({
+  sync: Object.freeze({
+    kind: "safe",
+    text: "无消耗"
+  }),
+  detour: Object.freeze({
+    kind: "spend",
+    text: "消耗当前"
+  })
+});
 
 const INITIAL_UPGRADES = Object.fromEntries(
   UPGRADE_DEFS.map((upgrade) => [upgrade.id, 0])
@@ -5197,6 +5207,7 @@ function buildFarRouteDispatchBranchChoices(
     const routeRewardText =
       buildFarRouteDispatchBranchRouteRewardText(routeRewardLabels);
     const routeFlow = buildFarRouteDispatchBranchRouteFlow(choice.kind);
+    const routeCost = buildFarRouteDispatchBranchRouteCost(choice.kind);
     const followupText = buildFarRouteDispatchBranchFollowupText(
       choice.label,
       choice.directive.name,
@@ -5254,6 +5265,8 @@ function buildFarRouteDispatchBranchChoices(
       routeRewardText,
       routeFlowKind: routeFlow.kind,
       routeFlowText: routeFlow.text,
+      routeCostKind: routeCost.kind,
+      routeCostText: routeCost.text,
       nextText: choice.nextText,
       reasonText,
       decisionText,
@@ -5286,6 +5299,8 @@ function buildFarRouteDispatchBranchChoices(
         routeRewardText +
         " · " +
         routeFlow.text +
+        " · " +
+        routeCost.text +
         " · " +
         choice.caption +
         (reasonText ? " · " + reasonText : "") +
@@ -5513,6 +5528,13 @@ function buildFarRouteDispatchBranchRouteFlow(kind) {
   return {
     ...(FAR_ROUTE_DISPATCH_BRANCH_ROUTE_FLOW_LABELS[kind] ??
       FAR_ROUTE_DISPATCH_BRANCH_ROUTE_FLOW_LABELS.sync)
+  };
+}
+
+function buildFarRouteDispatchBranchRouteCost(kind) {
+  return {
+    ...(FAR_ROUTE_DISPATCH_BRANCH_ROUTE_COST_LABELS[kind] ??
+      FAR_ROUTE_DISPATCH_BRANCH_ROUTE_COST_LABELS.sync)
   };
 }
 
@@ -5759,6 +5781,8 @@ function buildFarRouteDispatchBranchChoiceText(choices) {
           choice.routePhaseText +
           " · " +
           choice.routeRewardText +
+          " · " +
+          choice.routeCostText +
           " · " +
           choice.caption +
           (choice.reasonText ? " · " + choice.reasonText : "") +
