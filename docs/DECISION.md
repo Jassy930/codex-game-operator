@@ -21,7 +21,11 @@
 - `tests/game.test.js` 覆盖远航路线对照条当前收益亮点静态样式绑定。
 - 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
 - 构建产物已确认包含 `farDispatchSummaryActivePayoffGlow`、当前路线本步收益短标选择器和 `prefers-reduced-motion` 兜底。
-- 发布、issue 回复和钉钉通知状态将在本轮完整验证后补充。
+- 发布验证已通过：提交 `2243983` 已推送到 `origin/main`；GitHub Pages workflow `25212855224` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页返回 HTTP 200，线上 `src/styles.css` 已确认包含 `farDispatchSummaryActivePayoffGlow`、当前路线本步收益短标选择器和 `prefers-reduced-motion` 兜底。workflow 继续出现 Node.js 20 actions 弃用提醒，未影响本次部署。
+- 已回复 GitHub Issue #6，说明远航对照条当前收益亮点、验证结果、Pages 部署和复测问题，issue 保持 open，更新时间为 2026-05-01T11:35:28Z；评论地址：`https://github.com/Jassy930/codex-game-operator/issues/6#issuecomment-4359096370`。
+- 已回复 GitHub Issue #4，说明本轮用当前收益亮点降低收益反推压力、验证结果、Pages 部署和复测问题，issue 保持 open，更新时间为 2026-05-01T11:35:47Z；评论地址：`https://github.com/Jassy930/codex-game-operator/issues/4#issuecomment-4359097226`。
+- 回复后同步 GitHub Issues：2026-05-01 19:35 CST 当前仍为 5 个 open feedback issue、0 个 open bug issue。
+- 钉钉通知未发送：2026-05-01 19:35 CST 运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` 相关变量名，当前目录、上级目录和用户目录未发现 `.env*` 文件；未将 webhook 写入仓库。
 
 ## 2026-05-01 Product decision：远航对照条当前动作亮环
 
