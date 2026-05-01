@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+- 远航调度新增“远航闭环当前步骤标题锚点”：20M 后主操作区远航闭环当前步骤卡的短标题会获得静态胶囊锚点，让玩家从上方 1/2/3 微图扫到下方卡片时，更快确认当前执行的是目标、分支/续航还是回目标，继续回应 #4 的图形化/文字密度反馈，并辅助 #6 的后半段短循环步骤确认。
+- `src/styles.css` 为 `.far-dispatch-loop-step.is-current strong` 增加当前步骤标题锚点样式；`tests/game.test.js` 覆盖静态绑定。
+- 本轮只调整远航闭环展示层和测试，不新增可见说明文字、不新增收益、不新增存档字段，不改变点击收益、升级价格、星图路线、项目奖励、航线策略、航线指令、远航调度数值、反馈入口或部署链路。
+- 同步 GitHub Issues 反馈状态：2026-05-02 06:22 CST 当前 5 个 open feedback issue、0 个 open bug issue；#4/#6 作为主处理对象。
+- 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认 `dist/src/styles.css` 包含 `.far-dispatch-loop-step.is-current strong`、`justify-self: start` 和 `color: #fff7c2`。
+
 - 远航调度新增“远航闭环当前微图列补光”：20M 后主操作区远航闭环路线微图里的当前 1/2/3 列会播放轻量纵向补光，让当前节点和当前 `校准` / `分支` / `续航` / `闭环` 短标在同一列被扫到，继续回应 #4 的图形化/文字密度反馈，并辅助 #6 的后半段短循环步骤与回报确认。
 - `src/styles.css` 为 `.far-dispatch.is-active .far-dispatch-loop-visual-point.is-current::before` 增加 `farDispatchLoopCurrentPointColumnGlow` 动画，并在降低动效偏好中关闭该动画；`tests/game.test.js` 覆盖静态绑定。
 - 本轮只调整远航闭环展示层和测试，不新增可见说明文字、不新增收益、不新增存档字段，不改变点击收益、升级价格、星图路线、项目奖励、航线策略、航线指令、远航调度数值、反馈入口或部署链路。

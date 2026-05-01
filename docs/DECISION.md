@@ -1,5 +1,28 @@
 # Decision
 
+## 2026-05-02 Product decision：远航闭环当前步骤标题锚点
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-02 06:22 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有 open bug；#4/#6 仍是主线反馈，继续指向远航调度需要更多图形化表达、后半段短循环需要更少文字反推。
+
+当前最大问题：远航闭环插画、路线微图、进度轨、当前列、当前节点、方向信标、连接信标、当前步骤卡、当前步号、内侧竖线和当前收益行已经进入同一反馈节奏，但步骤卡短标题仍按普通标题展示。玩家从上方 1/2/3 微图扫到下方卡片时，还可以更快确认“当前这张卡是目标、分支/续航还是回目标”。
+
+本轮决策：
+
+- 新增“远航闭环当前步骤标题锚点”。
+- `src/styles.css` 为 `.far-dispatch-loop-step.is-current strong` 增加静态胶囊锚点样式。
+- `tests/game.test.js` 增加静态断言，覆盖当前步骤标题锚点样式。
+- 该改动只调整远航闭环展示层和测试，不新增可见说明文字、不新增收益、不新增存档字段，不改变点击收益、升级价格、星图路线、项目奖励、航线策略、航线指令、远航调度数值、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-05-02 06:22 CST 当前 5 个 open feedback issue、0 个 open bug issue；#4/#6 作为本轮主处理对象。
+- `src/styles.css` 包含 `.far-dispatch-loop-step.is-current strong` 当前步骤标题锚点样式。
+- `tests/game.test.js` 覆盖远航闭环当前步骤标题锚点静态绑定。
+- 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认 `dist/src/styles.css` 包含 `.far-dispatch-loop-step.is-current strong`、`justify-self: start` 和 `color: #fff7c2`。
+- 发布验证待本轮 push 后执行。
+- 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #4/#6，以及当前远航闭环步骤卡短标题仍缺少当前锚点的复盘。
+
 ## 2026-05-02 Product decision：远航闭环当前微图列补光
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-02 06:06 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有 open bug；#4/#6 仍是主线反馈，继续指向远航调度需要更多图形化表达、后半段短循环需要更少文字反推。
