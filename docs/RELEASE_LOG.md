@@ -8,6 +8,9 @@
 - 同步 GitHub Issues 反馈状态：2026-05-02 04:00 CST 当前 5 个 open feedback issue、0 个 open bug issue；#4/#6 作为主处理对象。
 - 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
 - 构建产物已确认包含 `farDispatchLoopCurrentLinkPulse` 和当前连接信标脉冲样式。
+- 发布：提交 `1b98512` 已推送到 `origin/main`；GitHub Pages workflow `25230970830` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页返回 HTTP 200，线上 `src/styles.css` 已确认包含远航闭环当前连接信标脉冲样式。workflow 继续给出 Node.js 20 actions 弃用提醒，未影响本次部署。
+- 反馈处理：已回复 #4 和 #6，说明远航闭环当前连接信标脉冲、验证结果、Pages 部署和复测问题；两个 issue 均保持 open。回复后于 2026-05-02 04:09 CST 再次同步 GitHub Issues，当前仍为 5 个 open feedback issue、0 个 open bug issue。
+- 钉钉通知未发送：2026-05-02 04:09 CST 运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` / `ROBOT` 相关变量名，当前目录和 `/home/jassy/glm` 两层内未发现 `.env*` 文件；未将 webhook 写入仓库。
 
 - 远航调度新增“远航闭环微图到步骤卡连接信标”：20M 后主操作区远航闭环路线微图和下方三张步骤卡之间会显示 3 个无文字连接信标，按目标、分支/续航、回目标以及当前/完成状态着色，继续回应 #4 的图形化/文字密度反馈，并辅助 #6 的后半段短循环执行确认。
 - `src/app.js` 在 `renderFarDispatchLoopTrack` 中插入 `.far-dispatch-loop-link` 连接层；`src/styles.css` 增加连接线、小节点和状态配色；`tests/game.test.js` 覆盖静态绑定。
