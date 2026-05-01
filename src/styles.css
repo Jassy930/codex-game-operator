@@ -3488,11 +3488,35 @@ h2 {
 }
 
 .far-dispatch-loop-visual-point {
+  position: relative;
   z-index: 1;
   display: grid;
   min-width: 0;
   gap: 3px;
   justify-items: center;
+  isolation: isolate;
+}
+
+.far-dispatch-loop-visual-point::before {
+  position: absolute;
+  inset: -1px 12px 0;
+  border-radius: 999px;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 211, 106, 0),
+    rgba(255, 211, 106, 0.08),
+    rgba(150, 231, 168, 0.06),
+    rgba(255, 211, 106, 0)
+  );
+  content: "";
+  opacity: 0;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.far-dispatch.is-active .far-dispatch-loop-visual-point.is-current::before {
+  opacity: 1;
+  animation: farDispatchLoopCurrentPointColumnGlow 1450ms ease-in-out infinite;
 }
 
 .far-dispatch-loop-visual-node {
@@ -6892,6 +6916,21 @@ h2 {
   }
 }
 
+@keyframes farDispatchLoopCurrentPointColumnGlow {
+  0%,
+  100% {
+    filter: saturate(1);
+    opacity: 0.66;
+    transform: scaleY(0.96);
+  }
+
+  50% {
+    filter: saturate(1.2);
+    opacity: 1;
+    transform: scaleY(1.04);
+  }
+}
+
 @keyframes farDispatchLoopCurrentLinkPulse {
   0%,
   100% {
@@ -7022,6 +7061,7 @@ h2 {
   .core-gain-pop.is-overload-gain.is-showing::after,
   .far-dispatch.is-active .far-dispatch-scene-image,
   .far-dispatch.is-active .far-dispatch-loop-visual::after,
+  .far-dispatch.is-active .far-dispatch-loop-visual-point.is-current::before,
   .far-dispatch.is-active .far-dispatch-loop-visual-reward.is-current,
   .far-dispatch-loop-visual-arrow.is-current,
   .far-dispatch-loop-visual-node.is-current::after,

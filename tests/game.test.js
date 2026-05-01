@@ -2386,6 +2386,9 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(styles, /\.far-dispatch-loop-visual-arrow\.is-current/);
   assert.match(styles, /farDispatchLoopCurrentArrowPulse/);
   assert.match(styles, /\.far-dispatch-loop-visual-point/);
+  assert.match(styles, /\.far-dispatch-loop-visual-point::before/);
+  assert.match(styles, /\.far-dispatch\.is-active \.far-dispatch-loop-visual-point\.is-current::before/);
+  assert.match(styles, /animation: farDispatchLoopCurrentPointColumnGlow 1450ms ease-in-out infinite/);
   assert.match(styles, /\.far-dispatch-loop-visual-node/);
   assert.match(styles, /\.far-dispatch-loop-visual-node::before/);
   assert.match(styles, /content: attr\(data-step-label\)/);
@@ -2395,6 +2398,7 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(styles, /@keyframes farDispatchLoopCurrentPulse/);
   assert.match(styles, /@keyframes farDispatchLoopCurrentArrowPulse/);
   assert.match(styles, /@keyframes farDispatchLoopVisualTrackSweep/);
+  assert.match(styles, /@keyframes farDispatchLoopCurrentPointColumnGlow/);
   assert.match(styles, /@keyframes farDispatchLoopCurrentStepGlow/);
   assert.match(styles, /@keyframes farDispatchSceneImagePulse/);
   assert.match(styles, /\.far-dispatch-loop-visual-reward/);
@@ -2422,6 +2426,7 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(styles, /@media \(prefers-reduced-motion: reduce\) \{[\s\S]*\.far-dispatch-loop-visual-arrow\.is-current[\s\S]*animation: none/);
   assert.match(styles, /@media \(prefers-reduced-motion: reduce\) \{[\s\S]*\.far-dispatch\.is-active \.far-dispatch-scene-image[\s\S]*animation: none/);
   assert.match(styles, /@media \(prefers-reduced-motion: reduce\) \{[\s\S]*\.far-dispatch\.is-active \.far-dispatch-loop-visual::after[\s\S]*animation: none/);
+  assert.match(styles, /@media \(prefers-reduced-motion: reduce\) \{[\s\S]*\.far-dispatch\.is-active \.far-dispatch-loop-visual-point\.is-current::before[\s\S]*animation: none/);
   assert.match(styles, /@media \(prefers-reduced-motion: reduce\) \{[\s\S]*\.far-dispatch\.is-active \.far-dispatch-loop-visual-reward\.is-current[\s\S]*animation: none/);
   assert.match(styles, /@media \(prefers-reduced-motion: reduce\) \{[\s\S]*\.far-dispatch-loop-visual-node\.is-current::after[\s\S]*animation: none/);
   assert.match(styles, /@media \(prefers-reduced-motion: reduce\) \{[\s\S]*\.far-dispatch-loop-link\.is-current::before[\s\S]*animation: none/);
