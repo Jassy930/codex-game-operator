@@ -3554,6 +3554,79 @@ h2 {
   box-shadow: 0 0 10px rgba(255, 211, 106, 0.12);
 }
 
+.far-dispatch-loop-link {
+  --far-loop-link-color: rgba(248, 243, 231, 0.2);
+  --far-loop-link-glow: rgba(248, 243, 231, 0.06);
+  position: relative;
+  display: block;
+  min-height: 12px;
+  margin-top: -2px;
+  isolation: isolate;
+}
+
+.far-dispatch-loop-link::before {
+  position: absolute;
+  top: -4px;
+  bottom: -4px;
+  left: 50%;
+  width: 2px;
+  border-radius: 999px;
+  background: linear-gradient(
+    180deg,
+    rgba(248, 243, 231, 0.08),
+    var(--far-loop-link-color),
+    rgba(248, 243, 231, 0.08)
+  );
+  box-shadow: 0 0 10px var(--far-loop-link-glow);
+  content: "";
+  transform: translateX(-50%);
+}
+
+.far-dispatch-loop-link::after {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 7px;
+  height: 7px;
+  border: 1px solid var(--far-loop-link-color);
+  border-radius: 999px;
+  background: rgba(5, 12, 20, 0.88);
+  box-shadow: 0 0 10px var(--far-loop-link-glow);
+  content: "";
+  transform: translate(-50%, -50%);
+}
+
+.far-dispatch-loop-link.is-target {
+  --far-loop-link-color: rgba(255, 126, 177, 0.44);
+  --far-loop-link-glow: rgba(255, 126, 177, 0.12);
+}
+
+.far-dispatch-loop-link.is-branch,
+.far-dispatch-loop-link.is-relay {
+  --far-loop-link-color: rgba(255, 211, 106, 0.46);
+  --far-loop-link-glow: rgba(255, 211, 106, 0.12);
+}
+
+.far-dispatch-loop-link.is-return {
+  --far-loop-link-color: rgba(150, 231, 168, 0.46);
+  --far-loop-link-glow: rgba(150, 231, 168, 0.12);
+}
+
+.far-dispatch-loop-link.is-current {
+  --far-loop-link-color: rgba(255, 211, 106, 0.9);
+  --far-loop-link-glow: rgba(255, 211, 106, 0.24);
+}
+
+.far-dispatch-loop-link.is-completed {
+  --far-loop-link-color: rgba(150, 231, 168, 0.78);
+  --far-loop-link-glow: rgba(150, 231, 168, 0.2);
+}
+
+.far-dispatch-loop-link.is-current::after,
+.far-dispatch-loop-link.is-completed::after {
+  background: var(--far-loop-link-color);
+}
+
 .far-dispatch-loop-step {
   position: relative;
   display: grid;

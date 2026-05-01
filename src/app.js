@@ -1266,36 +1266,44 @@ function renderFarDispatchLoopTrack(dispatch) {
     visual.append(point);
   });
 
-  track.append(
-    visual,
-    ...steps.map((step, index) => {
-      const rewardKind = getFarDispatchLoopVisualRewardKind(step, index);
-      const stepItem = document.createElement("span");
-      stepItem.className =
-        "far-dispatch-loop-step is-" + step.state + " is-" + rewardKind;
-      stepItem.dataset.stepLabel = String(index + 1);
+  const stepLinks = steps.map((step, index) => {
+    const rewardKind = getFarDispatchLoopVisualRewardKind(step, index);
+    const link = document.createElement("span");
+    link.className =
+      "far-dispatch-loop-link is-" + step.state + " is-" + rewardKind;
+    link.setAttribute("aria-hidden", "true");
+    return link;
+  });
 
-      const label = document.createElement("strong");
-      label.textContent = step.label;
+  const stepItems = steps.map((step, index) => {
+    const rewardKind = getFarDispatchLoopVisualRewardKind(step, index);
+    const stepItem = document.createElement("span");
+    stepItem.className =
+      "far-dispatch-loop-step is-" + step.state + " is-" + rewardKind;
+    stepItem.dataset.stepLabel = String(index + 1);
 
-      const text = document.createElement("span");
-      text.textContent = step.stateText + " · " + step.text;
+    const label = document.createElement("strong");
+    label.textContent = step.label;
 
-      const reward = document.createElement("em");
-      const rewardLabel = getFarDispatchLoopVisualRewardLabel(step, index);
-      reward.className =
-        "far-dispatch-step-reward is-" + rewardKind + " is-" + step.state;
-      reward.dataset.rewardLabel = rewardLabel;
-      reward.textContent = step.rewardText ?? "";
-      reward.hidden = !step.rewardText;
-      if (reward.textContent) {
-        reward.title = rewardLabel + " · " + reward.textContent;
-      }
+    const text = document.createElement("span");
+    text.textContent = step.stateText + " · " + step.text;
 
-      stepItem.append(label, text, reward);
-      return stepItem;
-    })
-  );
+    const reward = document.createElement("em");
+    const rewardLabel = getFarDispatchLoopVisualRewardLabel(step, index);
+    reward.className =
+      "far-dispatch-step-reward is-" + rewardKind + " is-" + step.state;
+    reward.dataset.rewardLabel = rewardLabel;
+    reward.textContent = step.rewardText ?? "";
+    reward.hidden = !step.rewardText;
+    if (reward.textContent) {
+      reward.title = rewardLabel + " · " + reward.textContent;
+    }
+
+    stepItem.append(label, text, reward);
+    return stepItem;
+  });
+
+  track.append(visual, ...stepLinks, ...stepItems);
 
   return track;
 }

@@ -2036,6 +2036,10 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(appJs, /reward\.dataset\.rewardLabel = getFarDispatchLoopVisualRewardLabel\(step, index\)/);
   assert.match(appJs, /visual\.setAttribute\("aria-hidden", "true"\)/);
   assert.match(appJs, /node\.dataset\.stepLabel = String\(index \+ 1\)/);
+  assert.match(appJs, /const stepLinks = steps\.map/);
+  assert.match(appJs, /"far-dispatch-loop-link is-" \+ step\.state \+ " is-" \+ rewardKind/);
+  assert.match(appJs, /link\.setAttribute\("aria-hidden", "true"\)/);
+  assert.match(appJs, /track\.append\(visual, \.\.\.stepLinks, \.\.\.stepItems\)/);
   assert.match(appJs, /stepItem\.className =[\s\S]*"far-dispatch-loop-step is-" \+ step\.state \+ " is-" \+ rewardKind/);
   assert.match(appJs, /stepItem\.dataset\.stepLabel = String\(index \+ 1\)/);
   assert.match(appJs, /const rewardLabel = getFarDispatchLoopVisualRewardLabel\(step, index\)/);
@@ -2376,6 +2380,15 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(styles, /\.far-dispatch-loop-visual-reward\.is-relay/);
   assert.match(styles, /\.far-dispatch-loop-visual-reward\.is-return/);
   assert.match(styles, /\.far-dispatch-loop-visual-reward\.is-current/);
+  assert.match(styles, /\.far-dispatch-loop-link/);
+  assert.match(styles, /\.far-dispatch-loop-link::before/);
+  assert.match(styles, /\.far-dispatch-loop-link::after/);
+  assert.match(styles, /\.far-dispatch-loop-link\.is-target/);
+  assert.match(styles, /\.far-dispatch-loop-link\.is-branch,\n\.far-dispatch-loop-link\.is-relay/);
+  assert.match(styles, /\.far-dispatch-loop-link\.is-return/);
+  assert.match(styles, /\.far-dispatch-loop-link\.is-current/);
+  assert.match(styles, /\.far-dispatch-loop-link\.is-completed/);
+  assert.match(styles, /\.far-dispatch-loop-link\.is-current::after,\n\.far-dispatch-loop-link\.is-completed::after/);
   assert.match(styles, /@media \(prefers-reduced-motion: reduce\) \{[\s\S]*\.far-dispatch-loop-visual-arrow\.is-current[\s\S]*animation: none/);
   assert.match(styles, /@media \(prefers-reduced-motion: reduce\) \{[\s\S]*\.far-dispatch-loop-visual-node\.is-current::after[\s\S]*animation: none/);
   assert.match(styles, /@media \(prefers-reduced-motion: reduce\) \{[\s\S]*\.far-dispatch-loop-step\.is-current[\s\S]*animation: none/);
