@@ -8,6 +8,9 @@
 - 同步 GitHub Issues 反馈状态：2026-05-02 01:48 CST 当前 5 个 open feedback issue、0 个 open bug issue；#4/#6 作为主处理对象。
 - 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
 - 构建产物已确认包含远航闭环方向箭头代码和样式。
+- 发布：提交 `9686f9b` 已推送到 `origin/main`；GitHub Pages workflow `25225962692` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页返回 HTTP 200，线上 `src/app.js` 和 `src/styles.css` 已确认包含远航闭环方向箭头代码和样式。workflow 继续给出 Node.js 20 actions 弃用提醒，未影响本次部署。
+- 反馈处理：已回复 #4 和 #6，说明远航闭环方向箭头、验证结果、Pages 部署和复测问题；两个 issue 均保持 open。回复后于 2026-05-02 01:57 CST 再次同步 GitHub Issues，当前仍为 5 个 open feedback issue、0 个 open bug issue。
+- 钉钉通知未发送：2026-05-02 01:58 CST 运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` / `ROBOT` 相关变量名，当前目录和 `/home/jassy/glm` 两层内未发现 `.env*` 文件；未将 webhook 写入仓库。
 
 - 远航调度新增“远航闭环路线微图”：20M 后主操作区远航闭环轨顶部会用 1/2/3 节点和填充轨道直接显示目标、分支、回目标的已完成、当前和待推进状态，继续回应 #4 的图形化/文字密度反馈，并辅助 #6 的后半段短循环理解。
 - `src/app.js` 在 `renderFarDispatchLoopTrack` 中从 `loopSteps`、`loopProgress` 和 `loopTarget` 派生 `far-dispatch-loop-visual`；`src/styles.css` 增加路线微图轨道、完成节点和当前节点样式；`tests/game.test.js` 覆盖静态绑定。
