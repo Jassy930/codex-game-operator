@@ -2,6 +2,15 @@
 
 ## Unreleased
 
+- 远航调度新增“路线对照条迷你进度条”：协同/绕行对照槽底部用 1/2/3 三点轨道显示已完成、下一步和待推进状态，继续回应 #6 的后半段路线执行理解和 #4 的降文字密度反馈。
+- `src/app.js` 新增 `renderFarDispatchBranchChoiceSummaryProgress()` 并复用 `routeProgressPercent` / `routeNodeStates`；`src/styles.css` 增加对照条迷你轨道、协同/绕行填充和节点状态；`tests/game.test.js` 覆盖 DOM、CSS 与节点状态绑定。
+- 文档同步更新：`docs/DECISION.md`、`docs/FEEDBACK.md`、`docs/RESEARCH.md`、`docs/PRODUCT.md`、`docs/DESIGN.md`、`docs/ROADMAP.md`、`docs/IDEAS.md`、`docs/METRICS.md`、`README.md` 和本日志已记录远航路线对照条迷你进度条。
+- 本轮只调整展示层、DOM、CSS 和测试，不新增收益、不新增存档字段，不改变升级价格、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、远航调度既有数值、冷却、连携窗口、反馈入口或部署链路。
+- 同步 GitHub Issues 反馈状态：2026-05-01 11:54 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 作为主处理对象，#4 作为视觉密度依据。
+- 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含 `far-dispatch-branch-choice-summary-progress`、`--summary-route-progress` 和 `far-dispatch-branch-choice-summary-progress-node`。
+- 待提交、推送、Pages 部署和 issue 回复。
+
 - 远航调度新增“路线对照条当前步短标”：协同/绕行对照槽直接显示 `0/3 起手`、`1/3 分支`、`2/3 回航`、`3/3 完成` 或 `未选`，继续回应 #6 的后半段路线执行理解和 #4 的降文字密度反馈。
 - `src/game.js` 把 `routePhaseText` 纳入 `branchChoiceSummaryText`；`src/app.js` 渲染 `far-dispatch-branch-choice-summary-phase`；`src/styles.css` 调整对照条列宽并增加当前步短标状态色；`tests/game.test.js` 覆盖当前步短标进入路线对照文本、静态 DOM 和样式绑定。
 - 文档同步更新：`docs/DECISION.md`、`docs/FEEDBACK.md`、`docs/RESEARCH.md`、`docs/PRODUCT.md`、`docs/DESIGN.md`、`docs/ROADMAP.md`、`docs/IDEAS.md`、`docs/METRICS.md`、`README.md` 和本日志已记录远航路线对照条当前步短标。

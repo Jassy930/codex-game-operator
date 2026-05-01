@@ -2,6 +2,15 @@
 
 ## 2026-05-01
 
+- GitHub Issues：gh 可用且已认证；2026-05-01 11:54 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
+- #6 继续作为本轮 Product decision 依据：后半段协同/绕行对照槽需要进一步降低从文字短标判断当前推进位置的成本；#4 继续作为界面文字密度和图片化依据。
+- 本轮改动新增远航路线对照条迷你进度条：每个协同/绕行对照槽底部显示 1/2/3 三点轨道，并复用现有 `routeProgressPercent` 与 `routeNodeStates` 标出已完成、下一步和待推进。
+- 迷你进度条只改变展示层；完整语义仍保留在 `branchChoiceSummaryText`、当前步短标、路线微图、路线步骤、按钮路线标记、路线反馈和折叠明细中。
+- 本轮只调整 DOM、CSS 和测试，不新增收益、不新增存档字段，不改变升级价格、星图路线、项目奖励、远航调度既有数值、冷却、连携窗口、反馈入口或部署链路。
+- 本轮本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含 `far-dispatch-branch-choice-summary-progress`、`--summary-route-progress` 和 `far-dispatch-branch-choice-summary-progress-node`。
+- 待提交、推送、Pages 部署和 issue 回复。
+
 - GitHub Issues：gh 可用且已认证；2026-05-01 11:36 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
 - #6 继续作为本轮 Product decision 依据：后半段协同/绕行选择仍需要更快从路线取舍转成当前操作；#4 继续作为界面文字密度和图片化依据。前序路线对照条已经显示第二步按钮名，但对照槽还没有显示当前处于起手、分支、回航还是完成。
 - 本轮改动新增远航路线对照条当前步短标：协同/绕行对照槽直接显示 `0/3 起手`、`1/3 分支`、`2/3 回航`、`3/3 完成` 或 `未选`，让玩家在同一行完成“当前阶段 -> 第二步按钮 -> 资源取舍 -> 回航结果”的判断。

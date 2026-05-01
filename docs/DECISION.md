@@ -1,5 +1,29 @@
 # Decision
 
+## 2026-05-01 Product decision：远航路线对照条迷你进度条
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-01 11:54 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#6 仍是后半段玩法变化主反馈，#4 仍是界面文字密度和图片化依据，因此本轮继续进入 Product decision。
+
+当前最大问题：路线对照条已经能在同一行显示当前步短标、第二步按钮、路线取向、当前资源代价和回航结果，但阶段仍主要靠文字短标识别。玩家扫协同/绕行对照槽时，还缺少一个不展开卡片、不下看路线微图也能判断 1/2/3 推进位置的图形锚点。
+
+本轮决策：
+
+- 新增“远航路线对照条迷你进度条”。
+- 复用现有 `routeProgressPercent` 和 `routeNodeStates`，在每个协同/绕行对照槽底部渲染 1/2/3 三点进度。
+- `src/app.js` 新增 `renderFarDispatchBranchChoiceSummaryProgress()`，只负责对照槽内的展示节点，不改变 `branchChoiceSummaryText` 的可访问语义。
+- `src/styles.css` 给协同/绕行对照槽提供迷你轨道、已完成、下一步和待推进节点样式。
+- 该进度条只改变展示层，不新增收益、不新增存档字段，不改变升级价格、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、远航调度数值、冷却、连携窗口、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-05-01 11:54 CST 当前 5 个 open feedback issue、0 个 open bug issue。
+- `src/app.js` 渲染 `far-dispatch-branch-choice-summary-progress`，并通过 `--summary-route-progress` 绑定现有路线推进百分比。
+- `src/styles.css` 包含对照条迷你进度轨、协同/绕行填充色、已完成节点和下一步节点样式。
+- `tests/game.test.js` 覆盖迷你进度 DOM、CSS 和 `routeNodeStates` 绑定。
+- 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含 `far-dispatch-branch-choice-summary-progress`、`--summary-route-progress` 和迷你进度节点样式。
+- 待提交、推送、等待 GitHub Pages workflow，并在发布后回复 #6 和 #4。
+
 ## 2026-05-01 Product decision：远航路线对照条当前步短标
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-01 11:36 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#6 仍是后半段玩法变化主反馈，#4 仍是界面文字密度和图片化依据，因此本轮继续进入 Product decision。

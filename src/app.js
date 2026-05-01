@@ -890,8 +890,37 @@ function renderFarDispatchBranchChoiceSummaryItem(choice) {
     getFarDispatchBranchChoiceRouteReturnKind(choice);
   result.textContent = choice.routeReturnText ?? "";
 
-  item.append(glyph, label, phase, branchStep, intent, cost, result);
+  const progress = renderFarDispatchBranchChoiceSummaryProgress(choice);
+
+  item.append(glyph, label, phase, branchStep, intent, cost, result, progress);
   return item;
+}
+
+function renderFarDispatchBranchChoiceSummaryProgress(choice) {
+  const progress = document.createElement("span");
+  progress.className =
+    "far-dispatch-branch-choice-summary-progress is-" +
+    getFarDispatchBranchChoiceKind(choice);
+  progress.style.setProperty(
+    "--summary-route-progress",
+    getFarDispatchBranchChoiceRouteProgress(choice) + "%"
+  );
+  progress.setAttribute("aria-hidden", "true");
+
+  [
+    ["start", "1"],
+    ["branch", "2"],
+    ["return", "3"]
+  ].forEach(([nodeId, label]) => {
+    const node = document.createElement("span");
+    node.className =
+      "far-dispatch-branch-choice-summary-progress-node is-" +
+      String(choice.routeNodeStates?.[nodeId] ?? "waiting");
+    node.dataset.stepLabel = label;
+    progress.append(node);
+  });
+
+  return progress;
 }
 
 function renderFarDispatchBranchChoiceLegend() {

@@ -1714,6 +1714,13 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(appJs, /phase\.textContent = choice\.routePhaseText \?\? ""/);
   assert.match(appJs, /far-dispatch-branch-choice-summary-step/);
   assert.match(appJs, /branchStep\.textContent = choice\.routeBranchStepText \?\? ""/);
+  assert.match(appJs, /renderFarDispatchBranchChoiceSummaryProgress\(choice\)/);
+  assert.match(appJs, /progress\.className =/);
+  assert.match(appJs, /far-dispatch-branch-choice-summary-progress is-/);
+  assert.match(appJs, /"--summary-route-progress"/);
+  assert.match(appJs, /getFarDispatchBranchChoiceRouteProgress\(choice\) \+ "%"/);
+  assert.match(appJs, /far-dispatch-branch-choice-summary-progress-node is-/);
+  assert.match(appJs, /choice\.routeNodeStates\?\.\[nodeId\]/);
   assert.match(appJs, /far-dispatch-branch-choice-summary-cost is-/);
   assert.match(appJs, /far-dispatch-branch-choice-summary-result is-/);
   assert.match(appJs, /"far-dispatch-branch-choice is-"/);
@@ -1933,6 +1940,12 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(styles, /\.far-dispatch-branch-choice-summary-item\.is-detour \.far-dispatch-branch-choice-summary-step/);
   assert.match(styles, /\.far-dispatch-branch-choice-summary-cost\.is-safe/);
   assert.match(styles, /\.far-dispatch-branch-choice-summary-result\.is-detour/);
+  assert.match(styles, /\.far-dispatch-branch-choice-summary-progress/);
+  assert.match(styles, /--summary-route-progress/);
+  assert.match(styles, /\.far-dispatch-branch-choice-summary-progress::after/);
+  assert.match(styles, /\.far-dispatch-branch-choice-summary-progress\.is-detour::after/);
+  assert.match(styles, /\.far-dispatch-branch-choice-summary-progress-node\.is-done/);
+  assert.match(styles, /\.far-dispatch-branch-choice-summary-progress-node\.is-next/);
   assert.match(styles, /\.far-dispatch-branch-choice\.is-sync/);
   assert.match(styles, /\.far-dispatch-branch-choice\.is-detour/);
   assert.match(styles, /\.far-dispatch-branch-choice\.is-shift/);
