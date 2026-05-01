@@ -12,6 +12,7 @@
 - #4 已回复：说明远航闭环步骤卡当前收益行补光、验证结果、Pages 部署和复测问题；issue 保持 open，评论地址：`https://github.com/Jassy930/codex-game-operator/issues/4#issuecomment-4361753320`。
 - #6 已回复：说明该补光让目标 -> 分支 -> 回目标短循环的当前步骤收益落点更容易确认；issue 保持 open，评论地址：`https://github.com/Jassy930/codex-game-operator/issues/6#issuecomment-4361754423`。
 - 回复后同步 GitHub Issues：2026-05-02 05:35 CST 当前仍为 5 个 open feedback issue、0 个 open bug issue；#4 更新时间为 2026-05-01T21:34:53Z，#6 更新时间为 2026-05-01T21:35:10Z。
+- 钉钉通知未发送：2026-05-02 05:38 CST 运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` / `ROBOT` 相关变量名，当前目录和 `/home/jassy/glm` 两层内未发现 `.env*` 文件；未将 webhook 写入仓库。
 
 - GitHub Issues：gh 可用且已认证；2026-05-02 05:14 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。#4/#6 仍是最新组合反馈：远航调度需要更多图形化表达，减少后半段主操作区文字反推。
 - 本轮 Product decision 继续处理 #4/#6：远航闭环插画、进度轨、当前节点、方向信标、连接信标和步骤卡已经进入同一反馈节奏，但微图节点下方的当前收益短标仍偏静态。

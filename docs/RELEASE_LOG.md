@@ -10,6 +10,7 @@
 - 构建产物已确认 `dist/src/styles.css` 包含 `farDispatchStepRewardCurrentGlow`、当前步骤卡收益行补光样式和降低动效兜底。
 - 发布：提交 `470148e` 已推送到 `origin/main`；GitHub Pages workflow `25234143073` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页返回 HTTP 200，线上 `src/styles.css` 已确认包含 `farDispatchStepRewardCurrentGlow` 和当前步骤卡收益行补光样式。workflow 继续给出 Node.js 20 actions 弃用提醒，未影响本次部署。
 - 反馈处理：已回复 #4 和 #6，说明远航闭环步骤卡当前收益行补光、验证结果、Pages 部署和复测问题；两个 issue 均保持 open。回复后于 2026-05-02 05:35 CST 再次同步 GitHub Issues，当前仍为 5 个 open feedback issue、0 个 open bug issue；#4 更新时间为 2026-05-01T21:34:53Z，#6 更新时间为 2026-05-01T21:35:10Z。
+- 钉钉通知未发送：2026-05-02 05:38 CST 运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` / `ROBOT` 相关变量名，当前目录和 `/home/jassy/glm` 两层内未发现 `.env*` 文件；未将 webhook 写入仓库。
 
 - 远航调度新增“远航闭环当前收益短标补光”：20M 后主操作区远航闭环路线微图的当前 `校准` / `分支` / `续航` / `闭环` 收益短标会播放轻量补光，让当前步骤的回报落点和当前节点、方向信标、连接信标、进度轨保持同层节奏，继续回应 #4 的图形化/文字密度反馈，并辅助 #6 的后半段短循环收益确认。
 - `src/styles.css` 为 `.far-dispatch.is-active .far-dispatch-loop-visual-reward.is-current` 增加 `farDispatchLoopCurrentRewardGlow` 动画，并在降低动效偏好中关闭该动画；`tests/game.test.js` 覆盖静态绑定。
