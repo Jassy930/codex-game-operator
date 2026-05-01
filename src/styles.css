@@ -240,6 +240,7 @@ h2 {
     transparent;
   color: #14110f;
   cursor: pointer;
+  touch-action: manipulation;
   transition:
     transform 120ms ease,
     filter 120ms ease,
@@ -286,8 +287,15 @@ h2 {
 }
 
 .core-button:active,
+.core-button.is-pressing,
 .core-button.is-pulsing {
   transform: translate(var(--core-recoil-x), var(--core-recoil-y)) scale(0.97);
+}
+
+.core-button.is-pressing::before {
+  opacity: 0.62;
+  filter: blur(1px) drop-shadow(0 0 18px rgba(255, 247, 194, 0.22));
+  transform: scale(0.92);
 }
 
 .core-button.is-combo-charging::before {

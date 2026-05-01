@@ -1,5 +1,30 @@
 # Decision
 
+## 2026-05-01 Product decision：点火按住即时反冲
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-01 16:11 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#5 仍是最新更新的开放反馈，继续围绕“点火按钮太薄弱、增加点击反馈、特效和点击欲望”做 Product decision。
+
+当前最大问题：点火按钮已经有脉冲、粒子、收益浮层、环形蓄能轨、阶段光环、过载倒计时徽标、落点闪光、落点涟漪、落点火花束、音效、触感反馈、连击轨连续填充、星核蓄能裂纹、蓄能外弧和点击后的方向性反冲。但反冲坐标主要在 click 动画阶段更新；鼠标或触屏刚按下时，`:active` 仍可能复用上一次点击落点，按下瞬间的触感不够直接。
+
+本轮决策：
+
+- 新增“点火按住即时反冲”。
+- `src/app.js` 在 `pointerdown` 阶段调用 `positionCoreImpact`，提前写入当前落点坐标和反冲变量，并给主按钮添加 `is-pressing`；`pointerup`、`pointercancel`、`pointerleave`、`blur` 清理按住态。
+- 键盘 Enter / Space 触发时进入中心按住态，继续保持键盘触发落点回退到按钮中心。
+- `positionCoreImpact` 识别 `PointerEvent.pointerType`，允许 pointerdown 即使 `detail` 为 0 也使用指针坐标；键盘事件仍回退中心。
+- `src/styles.css` 让 `.core-button.is-pressing` 复用现有反冲 transform，并在按住时压缩外层光环；同时给点火按钮设置 `touch-action: manipulation`，降低移动端点击延迟。
+- `tests/game.test.js` 增加静态断言，覆盖 pointerdown/keyup 绑定、`is-pressing` class、PointerEvent 坐标识别和样式绑定。
+- 该改动只调整点火按钮交互展示层和测试，不新增收益、不新增存档字段，不改变点击收益、连击窗口、过载奖励、升级价格、星图路线、项目奖励、航线策略、航线指令、远航调度、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-05-01 16:11 CST 当前 5 个 open feedback issue、0 个 open bug issue。
+- `src/app.js` 包含 `pointerdown` 按住态、`is-pressing` 清理、键盘中心回退和 `PointerEvent.pointerType` 坐标识别。
+- `src/styles.css` 包含 `.core-button.is-pressing`、`.core-button.is-pressing::before` 和 `touch-action: manipulation`。
+- `tests/game.test.js` 覆盖点火按住即时反冲静态绑定。
+- 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含 `pointerdown`、`is-pressing`、`PointerEvent.pointerType` 识别和 `touch-action: manipulation`。
+
 ## 2026-05-01 Product decision：点火按压反冲
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-01 15:54 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#5 仍围绕“点火按钮太薄弱、增加点击反馈、特效和点击欲望”保持 open，且是最新更新的反馈 issue，因此本轮继续进入 Product decision。

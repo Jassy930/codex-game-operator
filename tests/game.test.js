@@ -1323,7 +1323,17 @@ test("点火按钮会渲染点击反馈和过载前兆效果", () => {
   assert.match(appJs, /playCoreHaptic\(\{ overloaded \}\)/);
   assert.match(appJs, /function playCoreHaptic\(\{ overloaded = false \} = \{\}\)/);
   assert.match(appJs, /navigator\.vibrate\(overloaded \? \[18, 22, 34\] : 12\)/);
+  assert.match(appJs, /elements\.coreButton\.addEventListener\("pointerdown", pressCoreButton\)/);
+  assert.match(appJs, /elements\.coreButton\.addEventListener\("pointercancel", releaseCoreButton\)/);
+  assert.match(appJs, /elements\.coreButton\.addEventListener\("keydown"/);
+  assert.match(appJs, /function pressCoreButton\(event\)/);
+  assert.match(appJs, /elements\.coreButton\.classList\.add\("is-pressing"\)/);
+  assert.match(appJs, /function releaseCoreButton\(\)/);
+  assert.match(appJs, /elements\.coreButton\.classList\.remove\("is-pressing"\)/);
+  assert.match(appJs, /event\.key === " " \|\| event\.key === "Enter"/);
   assert.match(appJs, /function positionCoreImpact\(event\)/);
+  assert.match(appJs, /typeof event\?\.pointerType === "string"/);
+  assert.match(appJs, /isPointerEvent \|\| event\.detail !== 0/);
   assert.match(appJs, /"--core-recoil-x"/);
   assert.match(appJs, /"--core-recoil-y"/);
   assert.match(appJs, /const recoilX = Math\.round/);
@@ -1362,6 +1372,9 @@ test("点火按钮会渲染点击反馈和过载前兆效果", () => {
   assert.match(appJs, /is-overload-impact/);
   assert.match(appJs, /window\.setTimeout/);
   assert.match(styles, /\.core-button::before/);
+  assert.match(styles, /touch-action: manipulation/);
+  assert.match(styles, /\.core-button\.is-pressing/);
+  assert.match(styles, /\.core-button\.is-pressing::before/);
   assert.match(styles, /\.core-feedback-layer/);
   assert.match(styles, /\.core-stage-aura/);
   assert.match(styles, /--core-stage-angle/);

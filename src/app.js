@@ -287,6 +287,24 @@ elements.soundToggle.checked = soundEnabled;
 elements.hapticToggle.checked = hapticEnabled;
 render();
 
+elements.coreButton.addEventListener("pointerdown", pressCoreButton);
+elements.coreButton.addEventListener("pointerup", releaseCoreButton);
+elements.coreButton.addEventListener("pointercancel", releaseCoreButton);
+elements.coreButton.addEventListener("pointerleave", releaseCoreButton);
+elements.coreButton.addEventListener("blur", releaseCoreButton);
+elements.coreButton.addEventListener("keydown", (event) => {
+  if (!isCorePressKey(event) || event.repeat) {
+    return;
+  }
+
+  pressCoreButton(null);
+});
+elements.coreButton.addEventListener("keyup", (event) => {
+  if (isCorePressKey(event)) {
+    releaseCoreButton();
+  }
+});
+
 elements.coreButton.addEventListener("click", (event) => {
   offlineSummary = null;
   const previousGoal = getCurrentGoal(state);
@@ -2828,11 +2846,26 @@ function animateCore({ gainText = "", overloaded = false, pointerEvent = null } 
   });
 }
 
+function pressCoreButton(event) {
+  positionCoreImpact(event);
+  elements.coreButton.classList.add("is-pressing");
+}
+
+function releaseCoreButton() {
+  elements.coreButton.classList.remove("is-pressing");
+}
+
+function isCorePressKey(event) {
+  return event.key === " " || event.key === "Enter";
+}
+
 function positionCoreImpact(event) {
   const rect = elements.coreButton.getBoundingClientRect();
+  const isPointerEvent =
+    typeof event?.pointerType === "string" && event.pointerType.length > 0;
   const usePointer =
     event &&
-    event.detail !== 0 &&
+    (isPointerEvent || event.detail !== 0) &&
     Number.isFinite(event.clientX) &&
     Number.isFinite(event.clientY);
   const x = usePointer ? event.clientX - rect.left : rect.width / 2;

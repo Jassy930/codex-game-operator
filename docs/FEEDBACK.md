@@ -2,6 +2,13 @@
 
 ## 2026-05-01
 
+- GitHub Issues：gh 可用且已认证；2026-05-01 16:11 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
+- 本轮 Product decision 继续处理 #5：点火按钮点击后已经有方向性反冲，但鼠标或触屏刚按下时仍可能复用上一次落点，按下瞬间的反馈晚于玩家手指/鼠标落下。
+- 本轮改动新增点火按住即时反冲：`pointerdown` 先调用 `positionCoreImpact` 写入当前落点和 `--core-recoil-x` / `--core-recoil-y`，按钮进入 `is-pressing`；松开、取消、离开或失焦时清理按住态，键盘 Enter / Space 使用中心回退。
+- 本轮只调整点火按钮交互展示层和测试，不新增收益、不新增存档字段，不改变点击收益、连击窗口、过载奖励、升级价格、星图路线、项目奖励、航线策略、航线指令、远航调度、反馈入口或部署链路。
+- 本轮本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含 `pointerdown`、`is-pressing`、`PointerEvent.pointerType` 坐标识别和 `touch-action: manipulation`。
+
 - GitHub Issues：gh 可用且已认证；2026-05-01 15:54 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
 - 本轮 Product decision 继续处理 #5：点火按钮已经具备多层连击、过载、落点闪光、落点涟漪、落点火花束和触觉/音效反馈，但按钮本体按压仍主要是居中缩放，缺少跟随实际点击落点的方向性反冲。
 - 本轮改动新增点火按压反冲：`positionCoreImpact` 复用点击坐标写入 `--core-recoil-x` / `--core-recoil-y`，`core-button.is-pulsing` 按落点方向短促位移并缩放；键盘触发回退到按钮中心，反冲归零。

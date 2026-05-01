@@ -15,6 +15,7 @@
 - 点火蓄能外弧当前由本地连击进度 `combo.progress` 即时渲染为 `--core-surge-opacity`、`--core-surge-scale` 和 `--core-surge-speed`，不单独记录为真实线上指标；点火行为仍通过 click 事件、连击状态和过载结果复盘。
 - 点火落点涟漪当前由本地点击事件坐标即时渲染为 `--core-impact-x` / `--core-impact-y`，并随普通点击或过载点击触发不同展示态，不单独记录为真实线上指标；点火行为仍通过 click 事件、连击状态和过载结果复盘。
 - 点火按压反冲当前由本地点击事件坐标即时渲染为 `--core-recoil-x` / `--core-recoil-y`，并随普通点击或过载点击触发主按钮短促位移，不单独记录为真实线上指标；点火行为仍通过 click 事件、连击状态和过载结果复盘。
+- 点火按住即时反冲当前由本地 `pointerdown` 坐标即时写入 `--core-recoil-x` / `--core-recoil-y` 并触发 `is-pressing` 展示态；键盘 Enter / Space 回退到按钮中心，不单独记录为真实线上指标；点火结果仍通过 click 事件、连击状态和过载结果复盘。
 - 点火过载倒计时徽标当前由本地连击进度与 `getComboStatus` 即时推导，不单独记录为真实线上指标；点火行为仍通过 click 事件复盘。
 - 点火连击轨进度填充当前由本地连击进度 `combo.progress` 即时渲染为 `--core-combo-progress`，不单独记录为真实线上指标；点火行为仍通过 click 事件、连击状态和过载结果复盘。
 - 星图总览航线预告视觉带当前由本地项目状态与 `getProjectForecastVisuals` 即时推导，不单独记录为真实线上指标；星图完成状态仍通过当前存档数值复盘。
