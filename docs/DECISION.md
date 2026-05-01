@@ -1,5 +1,29 @@
 # Decision
 
+## 2026-05-01 Product decision：点火能量读数命中亮闪
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-01 23:07 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；本轮继续处理 #5“点火按钮太薄弱、增加点击反馈和点击欲望”，同时不增加 #4 提到的默认文字密度。
+
+当前最大问题：点火按钮本体、收益浮层、下一击预告和连击读数已经有普通命中/过载命中反馈，但顶部“能量”总读数仍只是静态文本更新。玩家连续点击时能看到按钮动效，却还需要自己把 `+X` 浮层和全局能量读数变化对应起来。
+
+本轮决策：
+
+- 新增“点火能量读数命中亮闪”。
+- `src/app.js` 在 `animateCore` 中复用普通命中/过载命中状态，为 `#energyValue` 短暂追加 `is-core-hit` 或 `is-core-overload-hit`，并使用独立 timer 清理，支持连续点击重新触发。
+- `src/styles.css` 为顶部能量读数增加普通命中和过载命中两套短动画，并纳入 `prefers-reduced-motion: reduce` 兜底。
+- `tests/game.test.js` 增加静态断言，覆盖能量读数命中类名、timer、动画和 keyframes。
+- 该改动只调整点火反馈展示层和测试，不新增可见文字、不新增收益、不新增存档字段，不改变点击收益、连击窗口、过载奖励、升级价格、星图 57 段路线、项目奖励、航线策略、航线指令、远航调度、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-05-01 23:07 CST 当前 5 个 open feedback issue、0 个 open bug issue。
+- `src/app.js` 包含 `coreEnergyHitTimer`、`is-core-hit` 和 `is-core-overload-hit`。
+- `src/styles.css` 包含 `scoreEnergyReadoutHit`、`scoreEnergyReadoutOverloadHit` 和降低动效兜底。
+- `tests/game.test.js` 覆盖点火能量读数命中亮闪静态绑定。
+- 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含 `coreEnergyHitTimer`、`is-core-hit`、`is-core-overload-hit`、`scoreEnergyReadoutHit` 和 `scoreEnergyReadoutOverloadHit`。
+- 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #5，以及当前点火反馈链路复盘。
+
 ## 2026-05-01 Product decision：远航对照条当前路线小屏宽位修正
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-01 22:52 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；本轮继续处理 #6“后半段玩法无聊、只有不停目标”和 #4“界面文字密集、需要更好看”的交集。

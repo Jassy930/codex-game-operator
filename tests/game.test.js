@@ -1310,6 +1310,7 @@ test("点火按钮会渲染点击反馈和过载前兆效果", () => {
   assert.match(appJs, /Math\.round\(combo\.progress \* 360\) \+ "deg"/);
   assert.match(appJs, /elements\.coreChargeRing\.classList\.toggle\("is-overload-ready", isOverloadReady\)/);
   assert.match(appJs, /coreGainPop: document\.querySelector\("#coreGainPop"\)/);
+  assert.match(appJs, /let coreEnergyHitTimer = 0/);
   assert.match(appJs, /coreOverloadBadge: document\.querySelector\("#coreOverloadBadge"\)/);
   assert.match(appJs, /coreOverloadBadgeValue: document\.querySelector\("#coreOverloadBadgeValue"\)/);
   assert.match(appJs, /let coreComboHitTimer = 0/);
@@ -1319,6 +1320,9 @@ test("点火按钮会渲染点击反馈和过载前兆效果", () => {
   assert.match(appJs, /elements\.coreGainPop\.textContent = gainText/);
   assert.match(appJs, /elements\.coreGainPop\.classList\.add\("is-showing"\)/);
   assert.match(appJs, /elements\.coreGainPop\.classList\.toggle\("is-overload-gain", overloaded\)/);
+  assert.match(appJs, /elements\.energy\.classList\.remove\("is-core-hit", "is-core-overload-hit"\)/);
+  assert.match(appJs, /elements\.energy\.classList\.add\(overloaded \? "is-core-overload-hit" : "is-core-hit"\)/);
+  assert.match(appJs, /elements\.energy\.classList\.remove\("is-core-hit", "is-core-overload-hit"\)/);
   assert.match(appJs, /highlightCoreComboHit\(comboStep, overloaded\)/);
   assert.match(appJs, /function highlightCoreComboHit\(comboStep, overloaded = false\)/);
   assert.match(appJs, /hitDot\.classList\.add\("is-hit"\)/);
@@ -1454,6 +1458,10 @@ test("点火按钮会渲染点击反馈和过载前兆效果", () => {
   assert.match(styles, /\.core-button\.is-overload-impact ~ \.combo-line #comboValue/);
   assert.match(styles, /\.core-button\.is-overload-impact ~ \.combo-line #pulseValue/);
   assert.match(styles, /coreComboReadoutOverloadHit 520ms ease-out/);
+  assert.match(styles, /\.score-grid dd\.is-core-hit/);
+  assert.match(styles, /scoreEnergyReadoutHit 360ms ease-out/);
+  assert.match(styles, /\.score-grid dd\.is-core-overload-hit/);
+  assert.match(styles, /scoreEnergyReadoutOverloadHit 520ms ease-out/);
   assert.match(styles, /\.core-label/);
   assert.match(styles, /\.core-button\.is-pulsing:not\(\.is-overload-impact\) \.core-label/);
   assert.match(styles, /coreLabelHitFlash 360ms ease-out/);
@@ -1467,6 +1475,8 @@ test("点火按钮会渲染点击反馈和过载前兆效果", () => {
   assert.match(styles, /@keyframes coreRewardHintOverloadHit/);
   assert.match(styles, /@keyframes coreComboReadoutHit/);
   assert.match(styles, /@keyframes coreComboReadoutOverloadHit/);
+  assert.match(styles, /@keyframes scoreEnergyReadoutHit/);
+  assert.match(styles, /@keyframes scoreEnergyReadoutOverloadHit/);
   assert.match(styles, /\.core-button\.is-pressing \.core-label/);
   assert.match(styles, /\.core-button\.is-pressing \.core-art/);
   assert.match(styles, /--core-vein-opacity/);

@@ -2,6 +2,14 @@
 
 ## 2026-05-01
 
+- GitHub Issues：gh 可用且已认证；2026-05-01 23:07 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
+- 本轮 Product decision 处理 #5：点火按钮已有本体、落点、收益浮层、下一击预告和连击读数反馈，但顶部“能量”总读数仍只是静态文本刷新，点击后的全局收益确认不够贴合。
+- 本轮改动新增点火能量读数命中亮闪：普通点火命中时 `#energyValue` 短促亮闪，过载命中时使用更强亮闪；连续点击会清理并重新触发对应状态，系统降低动效偏好下关闭动画。
+- 本轮只调整点火反馈展示层和测试，不新增可见文字、不新增收益、不新增存档字段，不改变点击收益、连击窗口、过载奖励、升级价格、星图路线、项目奖励、航线策略、航线指令、远航调度、反馈入口或部署链路。
+- 本轮本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含点火能量读数命中亮闪代码和样式。
+- 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #5，以及当前点火反馈链路复盘。
+
 - GitHub Issues：gh 可用且已认证；2026-05-01 22:52 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
 - 本轮 Product decision 继续处理 #6，并以 #4 作为视觉密度约束：当前路线已经置顶、降噪、切成宽栏，并让动作、收益和回航结果在桌面当前路线中获得宽位；但小屏媒体查询里的普通 4 列布局会被 `.is-active-route` 桌面宽位选择器覆盖。
 - 本轮改动新增远航对照条当前路线小屏宽位修正：在 820px 以下为 `.far-dispatch-branch-choice-summary-item.is-active-route` 增加专用 4 列网格，保留小屏布局，并让“下一步动作”和“本步收益”各跨两列。
