@@ -8,6 +8,11 @@
 - 本轮只调整远航路线对照条展示层和测试，不新增收益、不新增存档字段，不改变升级价格、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、远航调度数值、冷却、连携窗口、反馈入口或部署链路。
 - 本轮本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
 - 构建产物已确认包含远航对照条非当前路线降噪选择器和 `filter: saturate(0.72)`。
+- 发布：提交 `0961de8` 已推送到 `origin/main`；GitHub Pages workflow `25217086952` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页返回 HTTP 200，线上 `src/styles.css` 已确认包含非当前路线降噪选择器、`filter: saturate(0.72)` 和悬停恢复。
+- #6 已回复：说明远航对照条非当前路线降噪、验证结果、Pages 部署和复测问题；issue 保持 open，更新时间为 2026-05-01T14:00:56Z，评论地址：`https://github.com/Jassy930/codex-game-operator/issues/6#issuecomment-4359638830`。
+- #4 已回复：说明本轮用非当前路线降噪降低文字筛选压力、验证结果、Pages 部署和复测问题；issue 保持 open，更新时间为 2026-05-01T14:00:56Z，评论地址：`https://github.com/Jassy930/codex-game-operator/issues/4#issuecomment-4359638840`。
+- 回复后同步 GitHub Issues：2026-05-01 22:01 CST 当前仍为 5 个 open feedback issue、0 个 open bug issue。
+- 钉钉通知未发送：2026-05-01 22:01 CST 运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` / `ROBOT` 相关变量名，当前目录、`/home/jassy/glm` 和用户目录两层内未发现 `.env*` 文件；未将 webhook 写入仓库。
 
 - GitHub Issues：gh 可用且已认证；2026-05-01 21:34 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
 - 本轮 Product decision 继续处理 #6，并以 #4 作为视觉密度约束：当前路线已经有身份、阶段、下一步动作、收益路径、第二步按钮、本步收益、资源取向、资源代价、回航结果和迷你进度轨锚点，但左侧资源符号仍和非当前路线同权重。

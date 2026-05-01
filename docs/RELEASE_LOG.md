@@ -8,6 +8,9 @@
 - 同步 GitHub Issues 反馈状态：2026-05-01 21:52 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 作为主处理对象，#4 作为视觉密度依据。
 - 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
 - 构建产物已确认包含 `far-dispatch-branch-choice-summary:has(.far-dispatch-branch-choice-summary-item.is-active-route)` 和 `filter: saturate(0.72)`。
+- 发布：提交 `0961de8` 已推送到 `origin/main`；GitHub Pages workflow `25217086952` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页返回 HTTP 200，线上 `src/styles.css` 已确认包含非当前路线降噪选择器、`filter: saturate(0.72)` 和悬停恢复 `filter: saturate(0.94)`。workflow 继续给出 Node.js 20 actions 弃用提醒，未影响本次部署。
+- 反馈处理：已回复 #6，说明远航对照条非当前路线降噪、验证结果、Pages 部署和复测问题；已回复 #4，说明本轮用非当前路线降噪降低文字筛选压力；两个 issue 均保持 open。回复后于 2026-05-01 22:01 CST 再次同步 GitHub Issues，当前仍为 5 个 open feedback issue、0 个 open bug issue；#6 和 #4 更新时间均为 2026-05-01T14:00:56Z。
+- 钉钉通知未发送：2026-05-01 22:01 CST 运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` / `ROBOT` 相关变量名，当前目录、`/home/jassy/glm` 和用户目录两层内未发现 `.env*` 文件；未将 webhook 写入仓库。
 
 - 远航调度新增“路线对照条当前资源符号锚点”：协同/绕行对照槽成为本轮已选路线时，左侧资源符号会随当前路线加强；协同的保留当前资源符号更亮，绕行的投送累计航段箭头更强，让玩家在看到当前路线身份、阶段、动作、收益路径、第二步按钮、本步收益、资源取向、代价和回航结果时，也能先扫到资源方向图形，继续回应 #6 的后半段路线执行理解和 #4 的文字密度反馈。
 - `src/app.js` 把 `choice.routeResourceText` 纳入路线对照槽 `title`；`src/styles.css` 增加当前路线 `is-current` / `is-progress` 资源符号样式；`tests/game.test.js` 覆盖静态绑定。
