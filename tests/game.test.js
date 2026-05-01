@@ -2119,6 +2119,7 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(styles, /grid-area: intent/);
   assert.match(styles, /grid-area: cost/);
   assert.match(styles, /grid-area: result/);
+  assert.match(styles, /\.far-dispatch-branch-choice-summary-item\.is-active-route[\s\S]*\.far-dispatch-branch-choice-summary-result/);
   assert.match(styles, /\.far-dispatch-branch-choice-summary-item\.is-detour \.far-dispatch-branch-choice-summary-reward/);
   assert.match(styles, /\.far-dispatch-branch-choice-summary-item\.is-detour \.far-dispatch-branch-choice-summary-step/);
   assert.match(styles, /\.far-dispatch-branch-choice-summary-item\.is-detour \.far-dispatch-branch-choice-summary-payoff/);

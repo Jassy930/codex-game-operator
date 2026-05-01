@@ -2,6 +2,14 @@
 
 ## 2026-05-01
 
+- GitHub Issues：gh 可用且已认证；2026-05-01 19:42 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
+- 本轮 Product decision 继续处理 #6，并以 #4 作为视觉密度约束：当前路线已经有动作、收益和推进位置高亮，但回航结果短标仍缺少“这条当前路线最终触发什么结果”的扫视锚点。
+- 本轮改动新增远航对照条当前回航结果锚点：只在 `.far-dispatch-branch-choice-summary-item.is-active-route` 内的回航结果短标增加胶囊边框、轻量背景和内描边，不新增文字或动画。
+- 本轮只调整远航路线对照条展示层和测试，不新增收益、不新增存档字段，不改变升级价格、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、远航调度数值、冷却、连携窗口、反馈入口或部署链路。
+- 本轮本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含当前路线回航结果短标选择器。
+- 本轮发布和 issue 回复状态待补充。
+
 - GitHub Issues：gh 可用且已认证；2026-05-01 19:28 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
 - 本轮 Product decision 继续处理 #6，并以 #4 作为视觉密度约束：路线对照条已经把当前路线、当前动作和推进节点压到视觉层，但当前路线里的本步收益短标仍缺少“这一步收益也属于当前路线”的扫视锚点。
 - 本轮改动新增远航对照条当前收益亮点：只在 `.far-dispatch-branch-choice-summary-item.is-active-route` 内的本步收益短标增加胶囊边框、轻量背景和 `farDispatchSummaryActivePayoffGlow` 饱和度呼吸；系统降低动效偏好下关闭动画。
