@@ -1,5 +1,28 @@
 # Decision
 
+## 2026-05-01 Product decision：远航路线指令串步号与状态语义
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-01 13:50 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#6 仍是后半段玩法变化主反馈，#4 仍是界面文字密度和图形化依据，因此本轮继续进入 Product decision。
+
+当前最大问题：上一轮已经让 `目标 -> 分支 -> 回目标` 指令串显示已完成、下一步和待推进状态，但短槽本身仍只显示指令名。玩家在路线微图、路线对照条和指令串之间扫视时，还需要把 1/2/3 步号、目标/分支/回目标含义和当前状态分散对应。
+
+本轮决策：
+
+- 新增“远航路线指令串步号与状态语义”。
+- `src/app.js` 在 `far-dispatch-branch-choice-route-command-step` 上复用现有 `routeStepLabels` 和 `routeNodeStates`，为三段短槽写入 `data-step-label`、`title` 和 `aria-label`，表达 `1 目标 · 点火齐射 · 下一步` 这类完整语义。
+- `src/styles.css` 通过 `far-dispatch-branch-choice-route-command-step::before` 显示 1/2/3 固定步号，让实际指令顺序和路线微图、路线对照条的三步轨保持同屏一致。
+- `tests/game.test.js` 增加静态断言，覆盖步号 DOM 绑定、状态语义 helper 和 CSS `data-step-label` 渲染。
+- 该改动只调整展示层和可访问语义，不新增收益、不新增存档字段，不改变升级价格、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、远航调度数值、冷却、连携窗口、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-05-01 13:50 CST 当前 5 个 open feedback issue、0 个 open bug issue。
+- `src/app.js` 的路线指令串短槽包含 `data-step-label`、`aria-label`、`title` 和“路线指令状态”汇总。
+- `src/styles.css` 包含 `.far-dispatch-branch-choice-route-command-step::before` 和 `content: attr(data-step-label)`。
+- `tests/game.test.js` 覆盖路线指令串步号与状态语义。
+- 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含 `路线指令状态`、`data-step-label`、`.far-dispatch-branch-choice-route-command-step::before` 和 `content: attr(data-step-label)`。
+
 ## 2026-05-01 Product decision：远航路线指令串当前步高亮
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-01 13:37 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#6 仍是后半段玩法变化主反馈，#4 仍是界面文字密度和图形化依据，因此本轮继续进入 Product decision。

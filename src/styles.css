@@ -2235,6 +2235,7 @@ h2 {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  gap: 3px;
   min-width: 0;
   padding: 2px 3px;
   border: 1px solid rgba(248, 243, 231, 0.16);
@@ -2244,6 +2245,20 @@ h2 {
   font-size: 0.5rem;
   font-weight: 950;
   line-height: 1.1;
+}
+
+.far-dispatch-branch-choice-route-command-step::before {
+  content: attr(data-step-label);
+  display: inline-grid;
+  flex: 0 0 11px;
+  width: 11px;
+  height: 11px;
+  place-items: center;
+  border-radius: 999px;
+  background: rgba(248, 243, 231, 0.16);
+  color: rgba(248, 243, 231, 0.82);
+  font-size: 0.44rem;
+  line-height: 1;
 }
 
 .far-dispatch-branch-choice-route-command-step.is-start,

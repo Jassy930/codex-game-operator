@@ -1776,9 +1776,16 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(appJs, /routeCommand = renderFarDispatchBranchChoiceRouteCommand\(choice\)/);
   assert.match(appJs, /function renderFarDispatchBranchChoiceRouteCommand\(choice\)/);
   assert.match(appJs, /command\.className = "far-dispatch-branch-choice-route-command"/);
+  assert.match(appJs, /const commandStatusText = commandSteps/);
+  assert.match(appJs, /路线指令状态：/);
+  assert.match(appJs, /command\.title = commandStatusText/);
   assert.match(appJs, /choice\.routeCommandLabels\?\.start/);
   assert.match(appJs, /far-dispatch-branch-choice-route-command-step is-/);
   assert.match(appJs, /getFarDispatchBranchChoiceRouteNodeState\(choice, step\)/);
+  assert.match(appJs, /item\.dataset\.stepLabel = getFarDispatchBranchChoiceRouteStepLabel\(choice, step\)/);
+  assert.match(appJs, /item\.setAttribute\("aria-label", stepTitle\)/);
+  assert.match(appJs, /function getFarDispatchBranchChoiceRouteNodeStateText\(choice, nodeId\)/);
+  assert.match(appJs, /function getFarDispatchBranchChoiceRouteCommandStepTitle\(choice, nodeId, label\)/);
   assert.match(appJs, /far-dispatch-branch-choice-route-command-arrow/);
   assert.match(appJs, /details\.className =/);
   assert.match(appJs, /far-dispatch-branch-choice-details is-return-/);
@@ -2039,6 +2046,8 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(styles, /\.far-dispatch-branch-choice-route-command/);
   assert.match(styles, /grid-template-columns: minmax\(0, 1fr\) auto minmax\(0, 1fr\) auto minmax\(0, 1fr\)/);
   assert.match(styles, /\.far-dispatch-branch-choice-route-command-step/);
+  assert.match(styles, /\.far-dispatch-branch-choice-route-command-step::before/);
+  assert.match(styles, /content: attr\(data-step-label\)/);
   assert.match(styles, /\.far-dispatch-branch-choice-route-command-step\.is-done/);
   assert.match(styles, /\.far-dispatch-branch-choice-route-command-step\.is-next/);
   assert.match(styles, /\.far-dispatch-branch-choice-route-command-step\.is-waiting/);

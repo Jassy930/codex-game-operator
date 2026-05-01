@@ -1068,21 +1068,41 @@ function renderFarDispatchBranchChoiceRoute(choice) {
 
 function renderFarDispatchBranchChoiceRouteCommand(choice) {
   const command = document.createElement("span");
-  command.className = "far-dispatch-branch-choice-route-command";
-  command.hidden = !choice.routeCommandText;
-  command.setAttribute("aria-label", choice.routeCommandText ?? "");
-
-  [
+  const commandSteps = [
     ["start", choice.routeCommandLabels?.start],
     ["branch", choice.routeCommandLabels?.branch],
     ["return", choice.routeCommandLabels?.return]
-  ].forEach(([step, label], index) => {
+  ];
+  const commandStatusText = commandSteps
+    .map(([step, label]) =>
+      getFarDispatchBranchChoiceRouteCommandStepTitle(choice, step, label)
+    )
+    .filter(Boolean)
+    .join(" -> ");
+
+  command.className = "far-dispatch-branch-choice-route-command";
+  command.hidden = !choice.routeCommandText;
+  command.setAttribute(
+    "aria-label",
+    commandStatusText ? "路线指令状态：" + commandStatusText : choice.routeCommandText ?? ""
+  );
+  command.title = commandStatusText || choice.routeCommandText || "";
+
+  commandSteps.forEach(([step, label], index) => {
     const item = document.createElement("span");
+    const stepTitle = getFarDispatchBranchChoiceRouteCommandStepTitle(
+      choice,
+      step,
+      label
+    );
     item.className =
       "far-dispatch-branch-choice-route-command-step is-" +
       step +
       " is-" +
       getFarDispatchBranchChoiceRouteNodeState(choice, step);
+    item.dataset.stepLabel = getFarDispatchBranchChoiceRouteStepLabel(choice, step);
+    item.setAttribute("aria-label", stepTitle);
+    item.title = stepTitle;
     item.textContent = label ?? "";
     command.append(item);
 
@@ -1253,6 +1273,47 @@ function getFarDispatchBranchChoiceRouteNodeState(choice, nodeId) {
   const routeNodeStates = choice.routeNodeStates ?? {};
   const state = String(routeNodeStates[nodeId] ?? "waiting");
   return state.replace(/[^a-z-]/g, "") || "waiting";
+}
+
+function getFarDispatchBranchChoiceRouteNodeStateText(choice, nodeId) {
+  const state = getFarDispatchBranchChoiceRouteNodeState(choice, nodeId);
+  if (state === "done") {
+    return "已完成";
+  }
+
+  if (state === "next") {
+    return "下一步";
+  }
+
+  return "待推进";
+}
+
+function getFarDispatchBranchChoiceRouteCommandStepName(nodeId) {
+  if (nodeId === "start") {
+    return "目标";
+  }
+
+  if (nodeId === "branch") {
+    return "分支";
+  }
+
+  if (nodeId === "return") {
+    return "回目标";
+  }
+
+  return "路线";
+}
+
+function getFarDispatchBranchChoiceRouteCommandStepTitle(choice, nodeId, label) {
+  const stepLabel = getFarDispatchBranchChoiceRouteStepLabel(choice, nodeId);
+  const stepName = getFarDispatchBranchChoiceRouteCommandStepName(nodeId);
+  return [
+    [stepLabel, stepName].filter(Boolean).join(" "),
+    String(label ?? ""),
+    getFarDispatchBranchChoiceRouteNodeStateText(choice, nodeId)
+  ]
+    .filter(Boolean)
+    .join(" · ");
 }
 
 function getFarDispatchBranchChoiceRouteStepLabel(choice, nodeId) {

@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+- 远航调度新增“路线指令串步号与状态语义”：协同/绕行卡片里的 `目标 -> 分支 -> 回目标` 三段短槽显示 1/2/3 步号，并在 `title` / `aria-label` 中写入目标/分支/回目标、指令名和已完成/下一步/待推进状态，继续回应 #6 的后半段路线执行理解和 #4 的图形化降密度反馈。
+- `src/app.js` 为 `far-dispatch-branch-choice-route-command-step` 写入 `data-step-label`、`title` 与 `aria-label`，并为整条指令串提供“路线指令状态”可访问汇总；`src/styles.css` 通过 `::before` 显示步号；`tests/game.test.js` 覆盖 DOM、helper 和 CSS 静态绑定。
+- 本轮只调整展示层、悬停说明和可访问语义，不新增收益、不新增存档字段，不改变升级价格、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、远航调度既有数值、冷却、连携窗口、反馈入口或部署链路。
+- 同步 GitHub Issues 反馈状态：2026-05-01 13:50 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 作为主处理对象，#4 作为视觉密度依据。
+- 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含 `路线指令状态`、`data-step-label`、`.far-dispatch-branch-choice-route-command-step::before` 和 `content: attr(data-step-label)`。
+
 - 远航调度新增“路线指令串当前步高亮”：协同/绕行卡片里的 `目标 -> 分支 -> 回目标` 三段短槽复用现有 `routeNodeStates`，直接标出已完成、下一步和待推进，继续回应 #6 的后半段路线执行理解和 #4 的图形化降密度反馈。
 - `src/app.js` 为 `far-dispatch-branch-choice-route-command-step` 追加 `is-done` / `is-next` / `is-waiting` 状态类；`src/styles.css` 增加对应状态样式；`tests/game.test.js` 覆盖 DOM 和 CSS 静态绑定。
 - 本轮只调整展示层和静态测试，不新增收益、不新增存档字段，不改变升级价格、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、远航调度既有数值、冷却、连携窗口、反馈入口或部署链路。
