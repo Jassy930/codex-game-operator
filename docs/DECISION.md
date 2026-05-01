@@ -22,6 +22,10 @@
 - `tests/game.test.js` 覆盖路线对照条进度步号与状态语义。
 - 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
 - 构建产物已确认包含 `路线对照进度`、`.far-dispatch-branch-choice-summary-progress-node::before` 和 `content: attr(data-step-label)`。
+- 发布验证已通过：提交 `361e396` 已推送到 `origin/main`；GitHub Pages workflow `25204696469` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页返回 HTTP 200，线上 `src/app.js` 和 `src/styles.css` 已确认包含路线对照进度语义、步号绑定和步号样式。
+- 已回复 GitHub Issue #6，说明路线对照条迷你进度轨步号与状态语义、验证结果、Pages 部署和复测问题，issue 保持 open，更新时间为 2026-05-01T06:13:37Z；评论地址：`https://github.com/Jassy930/codex-game-operator/issues/6#issuecomment-4358109281`。
+- 已回复 GitHub Issue #4，说明本轮把 1/2/3 步号压到路线对照条迷你进度轨，降低对照条、路线微图和路线指令串之间的对应成本，issue 保持 open，更新时间为 2026-05-01T06:13:37Z；评论地址：`https://github.com/Jassy930/codex-game-operator/issues/4#issuecomment-4358109282`。
+- 回复后同步 GitHub Issues：2026-05-01 14:13 CST 当前仍为 5 个 open feedback issue、0 个 open bug issue。
 
 ## 2026-05-01 Product decision：远航路线指令串步号与状态语义
 

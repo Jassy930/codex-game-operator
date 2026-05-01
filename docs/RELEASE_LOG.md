@@ -8,6 +8,8 @@
 - 同步 GitHub Issues 反馈状态：2026-05-01 14:06 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 作为主处理对象，#4 作为视觉密度依据。
 - 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
 - 构建产物已确认包含 `路线对照进度`、`.far-dispatch-branch-choice-summary-progress-node::before` 和 `content: attr(data-step-label)`。
+- 发布：提交 `361e396` 已推送到 `origin/main`；GitHub Pages workflow `25204696469` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页返回 HTTP 200，线上 `src/app.js` 和 `src/styles.css` 已确认包含路线对照进度语义与步号样式。
+- 反馈处理：已回复 #6，说明路线对照条迷你进度轨步号与状态语义、验证结果、Pages 部署和复测问题；已回复 #4，说明本轮用 1/2/3 步号降低对照条、路线微图和路线指令串之间的对应成本；两个 issue 均保持 open。回复后于 2026-05-01 14:13 CST 再次同步 GitHub Issues，当前仍为 5 个 open feedback issue、0 个 open bug issue；#6 和 #4 更新时间均为 2026-05-01T06:13:37Z。
 
 - 远航调度新增“路线指令串步号与状态语义”：协同/绕行卡片里的 `目标 -> 分支 -> 回目标` 三段短槽显示 1/2/3 步号，并在 `title` / `aria-label` 中写入目标/分支/回目标、指令名和已完成/下一步/待推进状态，继续回应 #6 的后半段路线执行理解和 #4 的图形化降密度反馈。
 - `src/app.js` 为 `far-dispatch-branch-choice-route-command-step` 写入 `data-step-label`、`title` 与 `aria-label`，并为整条指令串提供“路线指令状态”可访问汇总；`src/styles.css` 通过 `::before` 显示步号；`tests/game.test.js` 覆盖 DOM、helper 和 CSS 静态绑定。

@@ -8,6 +8,10 @@
 - 本轮只调整展示层、悬停说明和可访问语义，不新增收益、不新增存档字段，不改变星图路线、远航调度数值、冷却、连携窗口、反馈入口或部署链路。
 - 本轮本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
 - 构建产物已确认包含 `路线对照进度`、对照条进度节点 `::before` 步号样式和 `content: attr(data-step-label)`。
+- 发布：提交 `361e396` 已推送到 `origin/main`；GitHub Pages workflow `25204696469` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页返回 HTTP 200，线上资源已确认包含 `路线对照进度` 和对照条进度节点步号样式。
+- #6 已回复：说明路线对照条迷你进度轨步号与状态语义、验证结果、Pages 部署和复测问题；issue 保持 open，更新时间为 2026-05-01T06:13:37Z，评论地址：`https://github.com/Jassy930/codex-game-operator/issues/6#issuecomment-4358109281`。
+- #4 已回复：说明本轮把 1/2/3 步号压到路线对照条底部迷你进度轨，降低只靠无编号圆点和文字反推路线阶段的成本；issue 保持 open，更新时间为 2026-05-01T06:13:37Z，评论地址：`https://github.com/Jassy930/codex-game-operator/issues/4#issuecomment-4358109282`。
+- 回复后同步 GitHub Issues：2026-05-01 14:13 CST 当前仍为 5 个 open feedback issue、0 个 open bug issue。
 
 - GitHub Issues：gh 可用且已认证；2026-05-01 13:50 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
 - #6 继续作为本轮 Product decision 依据：路线指令串已经有当前步高亮，但目标、分支、回目标三段短槽仍只显示指令名，和 1/2/3 路线微图、对照条迷你进度轨之间还需要玩家自行对应；#4 继续作为图形化和降文字密度依据。
