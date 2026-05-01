@@ -2,6 +2,14 @@
 
 ## 2026-05-02
 
+- GitHub Issues：gh 可用且已认证；2026-05-02 04:31 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。#4/#6 仍要求远航调度更图形化、后半段短循环更容易扫视。
+- 本轮 Fix bug 处理 #4/#6 相关展示链路：代码复盘发现远航调度闭环插画只在静态 `index.html` 中存在，`renderFarDispatch()` 首次运行后会用 `replaceChildren()` 移除该图片。
+- 本轮改动新增 `renderFarDispatchSceneImage()`，并把 `.far-dispatch-scene-image` 纳入运行时远航调度重绘顺序，确保静态首页和动态渲染后的 `#farDispatch` 都保留本地 SVG 闭环插画。
+- 本轮只修复远航调度展示层，不新增可见说明文字、不新增收益、不新增存档字段，不改变点击收益、升级价格、星图路线、项目奖励、航线策略、航线指令、远航调度数值、反馈入口或部署链路。
+- 本轮本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认 `dist/src/app.js` 包含 `renderFarDispatchSceneImage()` 和 `far-dispatch-visual.svg` 动态引用。
+- 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #4/#6，以及对远航调度动态渲染链路的代码复盘。
+
 - GitHub Issues：gh 可用且已认证；2026-05-02 04:15 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。#4/#6 仍是最新组合反馈：远航调度需要更多图形化表达，减少后半段主操作区文字反推。
 - 本轮 Product decision 继续处理 #4/#6：远航调度已有路线微图、步骤卡、连接信标和当前脉冲，但远航调度区本体缺少一张概览型图片来先表达“目标 -> 分支 -> 回目标”的整体航线关系。
 - 本轮改动新增远航调度闭环插画：`src/assets/far-dispatch-visual.svg` 随静态构建发布，`#farDispatch` 内新增 `.far-dispatch-scene-image`，解锁态增强边框与投光，未解锁态降低饱和度。

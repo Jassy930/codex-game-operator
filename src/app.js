@@ -653,6 +653,15 @@ function renderDirectiveTask(task) {
   elements.directiveTask.replaceChildren(text, meter);
 }
 
+function renderFarDispatchSceneImage() {
+  const image = document.createElement("img");
+  image.className = "far-dispatch-scene-image";
+  image.src = "./src/assets/far-dispatch-visual.svg";
+  image.alt = "远航调度三步闭环、协同航线和绕行航线组成的远航插画";
+  image.loading = "lazy";
+  return image;
+}
+
 function renderFarDispatch(dispatch) {
   const progress = Math.max(0, Math.min(1, Number(dispatch.progress) || 0));
   const meterValue = Math.round(progress * 100);
@@ -665,6 +674,8 @@ function renderFarDispatch(dispatch) {
   const text = document.createElement("span");
   text.className = "far-dispatch-text";
   setCompactSupportText(text, getFarDispatchDisplayText(dispatch), dispatch.text);
+
+  const sceneImage = renderFarDispatchSceneImage();
 
   const branch = document.createElement("span");
   branch.className = "far-dispatch-branch is-" + getFarDispatchBranchKind(dispatch);
@@ -739,6 +750,7 @@ function renderFarDispatch(dispatch) {
   elements.farDispatch.classList.toggle("is-active", dispatch.active);
   elements.farDispatch.replaceChildren(
     text,
+    sceneImage,
     branch,
     branchRecommendation,
     branchRotation,

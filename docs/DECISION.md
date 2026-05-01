@@ -1,5 +1,27 @@
 # Decision
 
+## 2026-05-02 Fix bug：远航调度插画动态渲染保留
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-02 04:31 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。公开 issue 中没有 bug，但代码复盘发现上一轮新增的远航调度闭环插画只存在于静态 `index.html`，运行时 `renderFarDispatch()` 会用 `replaceChildren()` 重绘 `#farDispatch` 并移除该插画。
+
+当前最大问题：#4/#6 需要远航调度更图形化；如果 JS 首次渲染后插画消失，上一轮用于建立“目标 -> 分支 -> 回目标”概览视觉锚点的改动在真实游戏运行态不会持续可见。
+
+本轮决策：
+
+- 在 `src/app.js` 新增 `renderFarDispatchSceneImage()`，运行时重绘远航调度时重新创建 `.far-dispatch-scene-image`。
+- `renderFarDispatch()` 的 `replaceChildren()` 顺序调整为 `text -> sceneImage -> branch...`，让静态首页和动态渲染后的远航调度区都保留同一张本地 SVG 插画。
+- `tests/game.test.js` 增加静态断言，覆盖动态渲染函数、图片 `src` / `alt` / `loading` 属性，以及 `replaceChildren()` 中保留 `sceneImage`。
+- 该改动只修复展示层，不新增可见说明文字、不新增收益、不新增存档字段，不改变点击收益、升级价格、星图路线、项目奖励、航线策略、航线指令、远航调度数值、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-05-02 04:31 CST 当前 5 个 open feedback issue、0 个 open bug issue；#4/#6 仍作为本轮反馈背景。
+- `src/app.js` 包含 `renderFarDispatchSceneImage()`，并在 `elements.farDispatch.replaceChildren()` 中保留 `sceneImage`。
+- `tests/game.test.js` 覆盖远航调度插画动态渲染保留。
+- 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认 `dist/src/app.js` 包含 `renderFarDispatchSceneImage()` 和 `far-dispatch-visual.svg` 动态引用。
+- 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #4/#6，以及对远航调度动态渲染链路的代码复盘。
+
 ## 2026-05-02 Product decision：远航调度闭环插画
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-02 04:15 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有 open bug；#4/#6 仍是主线反馈，继续指向界面需要更多图形化表达，以及后半段远航调度需要更容易被看成一套短循环。

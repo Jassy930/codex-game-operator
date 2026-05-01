@@ -2035,6 +2035,12 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(appJs, /meter\.className = "directive-task-meter"/);
   assert.match(appJs, /meter\.className = "far-dispatch-meter"/);
   assert.match(appJs, /loopMeter\.className = "far-dispatch-loop-meter"/);
+  assert.match(appJs, /function renderFarDispatchSceneImage\(\)/);
+  assert.match(appJs, /image\.className = "far-dispatch-scene-image"/);
+  assert.match(appJs, /image\.src = "\.\/src\/assets\/far-dispatch-visual\.svg"/);
+  assert.match(appJs, /image\.alt = "远航调度三步闭环、协同航线和绕行航线组成的远航插画"/);
+  assert.match(appJs, /image\.loading = "lazy"/);
+  assert.match(appJs, /const sceneImage = renderFarDispatchSceneImage\(\)/);
   assert.match(appJs, /function renderFarDispatchLoopTrack\(dispatch\)/);
   assert.match(appJs, /track\.className = "far-dispatch-loop-track"/);
   assert.match(appJs, /visual\.className = "far-dispatch-loop-visual"/);
@@ -2062,6 +2068,7 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(appJs, /reward\.title = rewardLabel \+ " · " \+ reward\.textContent/);
   assert.match(appJs, /meter\.setAttribute\("role", "meter"\)/);
   assert.match(appJs, /loopMeter\.setAttribute\("role", "meter"\)/);
+  assert.match(appJs, /elements\.farDispatch\.replaceChildren\(\s*text,\s*sceneImage,\s*branch,/);
   assert.match(appJs, /branchChoices,/);
   assert.match(appJs, /elements\.directiveTask\.classList\.toggle\("is-completed", task\.completed\)/);
   assert.match(appJs, /elements\.directiveTask\.replaceChildren\(text, meter\)/);
