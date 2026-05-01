@@ -5241,6 +5241,8 @@ function buildFarRouteDispatchBranchChoices(
     );
     const routeCommandText =
       buildFarRouteDispatchBranchRouteCommandText(routeCommandLabels);
+    const routeBranchStepText =
+      buildFarRouteDispatchBranchRouteBranchStepText(routeCommandLabels);
     const followupText = buildFarRouteDispatchBranchFollowupText(
       choice.label,
       choice.directive.name,
@@ -5306,6 +5308,7 @@ function buildFarRouteDispatchBranchChoices(
       routeReturnText: routeReturn.text,
       routeCommandLabels,
       routeCommandText,
+      routeBranchStepText,
       nextText: choice.nextText,
       reasonText,
       decisionText,
@@ -5344,6 +5347,8 @@ function buildFarRouteDispatchBranchChoices(
         routeIntent.text +
         " · " +
         routeReturn.text +
+        " · " +
+        routeBranchStepText +
         " · " +
         routeCommandText +
         " · " +
@@ -5621,6 +5626,11 @@ function buildFarRouteDispatchBranchRouteCommandText(routeCommandLabels) {
   return labels.length ? "路线指令：" + labels.join(" -> ") : "";
 }
 
+function buildFarRouteDispatchBranchRouteBranchStepText(routeCommandLabels) {
+  const branchLabel = String(routeCommandLabels?.branch ?? "");
+  return branchLabel ? "2 " + branchLabel : "";
+}
+
 function buildFarRouteDispatchBranchDecisionKind(
   active,
   shift,
@@ -5871,6 +5881,8 @@ function buildFarRouteDispatchBranchChoiceText(choices) {
           " · " +
           choice.routeReturnText +
           " · " +
+          choice.routeBranchStepText +
+          " · " +
           choice.routeCommandText +
           " · " +
           choice.caption +
@@ -5906,6 +5918,8 @@ function buildFarRouteDispatchBranchChoiceSummaryText(choices) {
           choice.label +
           " " +
           choice.decisionBadgeText +
+          " · " +
+          choice.routeBranchStepText +
           " · " +
           choice.routeIntentText +
           " · " +

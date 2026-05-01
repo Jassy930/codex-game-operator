@@ -1567,7 +1567,7 @@ h2 {
 
 .far-dispatch-branch-choice-summary-item {
   display: grid;
-  grid-template-columns: 18px minmax(0, 0.9fr) minmax(0, 0.8fr) minmax(0, 0.86fr) minmax(0, 1fr);
+  grid-template-columns: 18px minmax(0, 0.82fr) minmax(0, 0.95fr) minmax(0, 0.72fr) minmax(0, 0.86fr) minmax(0, 1fr);
   align-items: center;
   gap: 4px;
   min-width: 0;
@@ -1645,6 +1645,14 @@ h2 {
 .far-dispatch-branch-choice-summary-cost.is-safe,
 .far-dispatch-branch-choice-summary-result.is-far {
   color: #cfe8ff;
+}
+
+.far-dispatch-branch-choice-summary-step {
+  color: #d8ffe2;
+}
+
+.far-dispatch-branch-choice-summary-item.is-detour .far-dispatch-branch-choice-summary-step {
+  color: #ffd1df;
 }
 
 .far-dispatch-branch-choice-summary-cost.is-spend,

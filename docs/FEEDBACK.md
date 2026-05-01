@@ -2,6 +2,15 @@
 
 ## 2026-05-01
 
+- GitHub Issues：gh 可用且已认证；2026-05-01 11:19 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
+- #6 继续作为本轮 Product decision 依据：后半段协同/绕行选择仍需要更快映射到实际按钮；#4 继续作为界面文字密度和图片化依据。前序路线对照条已经能并排比较取向、代价和回航结果，但第二步具体指令名仍需要到卡片内找。
+- 本轮改动新增远航路线对照条第二步短标：协同/绕行对照槽直接显示 `2 谐振脉冲` / `2 巡航回收`，让玩家在同一行完成“路线取舍 -> 实际按钮”的映射。
+- 第二步短标只从现有 `routeCommandLabels.branch` 派生；完整语义仍保留在 `branchChoiceText`、卡片标题、路线指令串、路线预案、路线步骤、按钮路线标记、路线反馈和折叠明细中。
+- 本轮只调整派生展示、DOM、CSS 和测试，不新增收益、不新增存档字段，不改变升级价格、星图路线、项目奖励、远航调度既有数值、冷却、连携窗口、反馈入口或部署链路。
+- 本轮本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含 `routeBranchStepText`、`far-dispatch-branch-choice-summary-step` 和 `路线对照：`。
+- 钉钉通知未发送：运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` 相关变量名，当前目录和父级两层内也未发现 `.env*` 文件；未将 webhook 写入仓库。
+
 - GitHub Issues：gh 可用且已认证；2026-05-01 11:00 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
 - #6 继续作为本轮 Product decision 依据：后半段协同/绕行选择仍需要更快做路线取舍；#4 继续作为界面文字密度和图片化依据。前序已经把实际按钮顺序压到卡片首屏，但玩家仍要分别扫两张卡才能比较首推、资源取向、当前资源代价和回航结果。
 - 本轮改动新增远航路线对照条：协同/绕行卡片上方用两个固定视觉槽并排显示路线徽标、保当前/推累计、无消耗/消耗当前和远航突破/绕行突破。

@@ -1,5 +1,31 @@
 # Decision
 
+## 2026-05-01 Product decision：远航路线对照条第二步短标
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-01 11:19 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#6 仍是后半段玩法变化主反馈，#4 仍是界面文字密度和图片化依据，因此本轮继续进入 Product decision。
+
+当前最大问题：路线对照条已经能并排比较协同/绕行的路线徽标、取向、当前资源代价和回航结果，但还没有在同一条里显示“第二步到底按哪枚指令”。玩家仍需要向下扫路线指令串或卡片标题，才能把协同/绕行和实际按钮名对应起来。
+
+本轮决策：
+
+- 新增“远航路线对照条第二步短标”。
+- `branchChoices` 派生 `routeBranchStepText`，例如 `2 谐振脉冲` / `2 巡航回收`。
+- `branchChoiceSummaryText` 纳入第二步短标，形成 `协同 首推 · 2 谐振脉冲 · 保当前 · 无消耗 · 远航突破`。
+- `src/app.js` 在 `far-dispatch-branch-choice-summary-item` 中渲染 `far-dispatch-branch-choice-summary-step`，放在路线徽标和取向之间。
+- `src/styles.css` 给协同/绕行第二步短标提供不同状态色，并调整对照条列宽避免挤压。
+- 该短标只从现有分支指令名派生，不新增收益、不新增存档字段，不改变升级价格、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、远航调度数值、冷却、连携窗口、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-05-01 11:19 CST 当前 5 个 open feedback issue、0 个 open bug issue。
+- `src/game.js` 派生 `routeBranchStepText`，覆盖 `2 谐振脉冲` 与 `2 巡航回收`。
+- `src/app.js` 渲染 `far-dispatch-branch-choice-summary-step`，并把它纳入对照条标题。
+- `src/styles.css` 包含对照条第二步短标与绕行状态色。
+- `tests/game.test.js` 覆盖第二步短标派生、可访问汇总、静态 DOM 和样式绑定。
+- 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含 `routeBranchStepText`、`far-dispatch-branch-choice-summary-step` 和 `路线对照：`。
+- 钉钉通知未发送：运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` 相关变量名，当前目录和父级两层内也未发现 `.env*` 文件；未将 webhook 写入仓库。
+
 ## 2026-05-01 Product decision：远航路线对照条
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-01 11:00 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#6 仍是后半段玩法变化主反馈，#4 仍是界面文字密度和图片化依据，因此本轮继续进入 Product decision。
