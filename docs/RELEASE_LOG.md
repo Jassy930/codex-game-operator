@@ -9,6 +9,9 @@
 - 同步 GitHub Issues 反馈状态：2026-05-01 10:41 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 作为主处理对象，#4 作为视觉密度依据。
 - 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
 - 构建产物已确认包含 `routeCommandLabels`、`routeCommandText`、`far-dispatch-branch-choice-route-command` 和 `路线指令：`。
+- 发布：提交 `a104162` 已推送到 `origin/main`；GitHub Pages workflow `25200017907` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页返回 HTTP 200，线上 `src/game.js`、`src/app.js` 和 `src/styles.css` 已确认包含 `routeCommandLabels`、`routeCommandText`、`far-dispatch-branch-choice-route-command` 与路线指令串样式。
+- 反馈处理：已回复 #6，说明路线指令串、验证结果和复测问题；已回复 #4，说明本轮把实际按钮顺序压到协同/绕行卡片首屏以降低文字依赖；两个 issue 均保持 open。回复后于 2026-05-01 10:55 CST 再次同步 GitHub Issues，当前仍为 5 个 open feedback issue、0 个 open bug issue；#6 更新时间为 2026-05-01T02:55:02Z，#4 更新时间为 2026-05-01T02:55:22Z。
+- 钉钉通知未发送：运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` 相关变量名，当前目录和父级两层内也未发现 `.env*` 文件；未将 webhook 写入仓库。
 
 - 远航调度新增“路线回航结果短标”：协同/绕行分支卡片默认折叠的 `路线明细` 摘要显示 `远航突破` 或 `绕行突破`，继续回应 #6 的后半段路线结果理解和 #4 的降文字密度反馈。
 - `src/game.js` 为 `branchChoices` 派生 `routeReturnKind` / `routeReturnText` 并纳入 `branchChoiceText`；`src/app.js` 在 `路线明细` summary 中渲染回航结果并写入 `is-return-far/is-return-detour`；`src/styles.css` 增加回航结果摘要状态色；`tests/game.test.js` 覆盖回航结果短标派生、静态 DOM 和样式绑定。
