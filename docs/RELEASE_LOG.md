@@ -8,6 +8,9 @@
 - 同步 GitHub Issues 反馈状态：2026-05-01 18:48 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 作为主处理对象，#4 作为视觉密度依据。
 - 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
 - 构建产物已确认包含 `is-active-route`、`.far-dispatch-branch-choice-summary-item::before` 和 `.far-dispatch-branch-choice-summary-item.is-active-route::before`。
+- 发布：提交 `e717da9` 已推送到 `origin/main`；GitHub Pages workflow `25211817392` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页返回 HTTP 200，线上 `src/app.js` 和 `src/styles.css` 已确认包含远航对照条当前路线边栏代码与样式。workflow 继续给出 Node.js 20 actions 弃用提醒，未影响本次部署。
+- 反馈处理：已回复 #6，说明远航路线对照条当前路线边栏、验证结果、Pages 部署和复测问题；已回复 #4，说明本轮用当前路线边栏降低文字反推压力；两个 issue 均保持 open。回复后于 2026-05-01 18:55 CST 再次同步 GitHub Issues，当前仍为 5 个 open feedback issue、0 个 open bug issue；#6 更新时间为 2026-05-01T10:55:11Z，#4 更新时间为 2026-05-01T10:55:12Z。
+- 钉钉通知未发送：2026-05-01 18:55 CST 运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` 相关变量名，当前目录和父级三层内未发现 `.env*` 文件；未将 webhook 写入仓库。
 
 - 远航调度新增“路线对照条下一步动作信标”：协同/绕行对照槽里的下一步按钮短标现在会以胶囊样式显示，非待选状态播放轻量呼吸信标，让当前可执行动作在不增加文字的情况下更容易扫到，继续回应 #6 的后半段路线执行理解和 #4 的文字密度反馈。
 - `src/styles.css` 增加 `.far-dispatch-branch-choice-summary-action::before`、`.far-dispatch-branch-choice-summary-action:not(.is-idle)::before` 和 `farDispatchSummaryActionBeacon`；`tests/game.test.js` 覆盖静态绑定。
