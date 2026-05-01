@@ -9,7 +9,9 @@
 - 同步 GitHub Issues 反馈状态：2026-05-01 09:49 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 作为主处理对象，#4 作为视觉密度依据。
 - 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
 - 构建产物已确认包含 `routeCostKind`、`routeCostText`、`far-dispatch-branch-choice-cost` 和 `消耗当前`。
-- 发布、反馈回复和钉钉通知状态待推送与部署验证后补记。
+- 发布：提交 `9e3c1fd` 已推送到 `origin/main`；GitHub Pages workflow `25198713363` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页返回 HTTP 200，线上 `src/game.js`、`src/app.js` 和 `src/styles.css` 已确认包含 `routeCostText`、`far-dispatch-branch-choice-cost`、`无消耗` 与 `消耗当前`。
+- 反馈处理：已回复 #6，说明路线代价短标、验证结果和复测问题；已回复 #4，说明本轮把当前资源代价压到协同/绕行卡片首行短标以降低文字依赖；两个 issue 均保持 open。回复后于 2026-05-01 10:02 CST 再次同步 GitHub Issues，当前仍为 5 个 open feedback issue、0 个 open bug issue；#6 更新时间为 2026-05-01T02:02:07Z，#4 更新时间为 2026-05-01T02:02:08Z。
+- 钉钉通知未发送：运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` 相关变量名，当前目录和父级两层内也未发现 `.env*` 文件；未将 webhook 写入仓库。
 
 - 远航调度新增“路线资源流向短标”：协同路线微图显示 `当前+`，绕行路线微图显示 `当前->累计`，继续回应 #6 的后半段路线取舍理解和 #4 的图形化/降文字密度反馈。
 - `src/game.js` 为 `branchChoices` 派生 `routeFlowKind` / `routeFlowText`；`src/app.js` 渲染 `far-dispatch-branch-choice-route-flow`；`src/styles.css` 增加资源流向短标样式；`tests/game.test.js` 覆盖资源流向短标派生、静态 DOM 和样式绑定。
