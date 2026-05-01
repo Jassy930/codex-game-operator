@@ -8,7 +8,9 @@
 - 同步 GitHub Issues 反馈状态：2026-05-01 15:40 CST 当前 5 个 open feedback issue、0 个 open bug issue；#5 作为主处理对象。
 - 验证通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
 - 构建产物已确认包含 `coreImpactSparks`、`core-impact-sparks` 和 `coreImpactSparks`。
-- 发布、反馈回复和钉钉通知状态将在本轮发布验证后补充。
+- 发布：提交 `fb10258` 已推送到 `origin/main`；GitHub Pages workflow `25207016246` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页返回 HTTP 200，线上 `index.html`、`src/app.js` 和 `src/styles.css` 已确认包含点火落点火花束 DOM、坐标绑定和动画样式。workflow 继续给出 Node.js 20 actions 弃用提醒，未影响本次部署。
+- 反馈处理：已回复 #5，说明点火落点火花束、验证结果、Pages 部署和复测问题；issue 保持 open。回复后于 2026-05-01 15:48 CST 再次同步 GitHub Issues，当前仍为 5 个 open feedback issue、0 个 open bug issue；#5 更新时间为 2026-05-01T07:48:21Z。
+- 钉钉通知未发送：运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` 相关变量名，当前目录和父级四层内也未发现 `.env*` 文件；未将 webhook 写入仓库。
 
 - 点火按钮新增“落点涟漪”：主按钮中新增 `coreImpactRipple` / `core-impact-ripple` 视觉层，复用实际点击坐标播放局部能量环；过载点火使用更大、更亮的涟漪，继续回应 #5 的点击反馈、特效和点击欲望反馈。
 - `index.html` 新增 `coreImpactRipple`；`src/app.js` 让 `animateCore` 同步触发落点涟漪并让 `positionCoreImpact` 同步写入 `--core-impact-x` / `--core-impact-y`；`src/styles.css` 增加涟漪状态和 `coreImpactRipple` 动效；`tests/game.test.js` 覆盖静态绑定。

@@ -23,7 +23,10 @@
 - `src/styles.css` 包含 `.core-impact-sparks`、过载态样式和 `coreImpactSparks` 动画。
 - 本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
 - 构建产物已确认包含 `coreImpactSparks`、`core-impact-sparks` 和 `coreImpactSparks`。
-- 发布、Issue 回复和钉钉通知状态将在本轮发布验证后补充。
+- 发布验证已通过：提交 `fb10258` 已推送到 `origin/main`；GitHub Pages workflow `25207016246` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页返回 HTTP 200，线上 `index.html`、`src/app.js` 和 `src/styles.css` 已确认包含 `coreImpactSparks`、`core-impact-sparks` 和 `coreImpactSparks` 动画。workflow 继续出现 Node.js 20 actions 弃用提醒，未影响本次部署。
+- 已回复 GitHub Issue #5，说明点火落点火花束、验证结果、Pages 部署和复测问题，issue 保持 open，更新时间为 2026-05-01T07:48:21Z；评论地址：`https://github.com/Jassy930/codex-game-operator/issues/5#issuecomment-4358383999`。
+- 回复后同步 GitHub Issues：2026-05-01 15:48 CST 当前仍为 5 个 open feedback issue、0 个 open bug issue。
+- 钉钉通知未发送：运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` 相关变量名，当前目录和父级四层内也未发现 `.env*` 文件；未将 webhook 写入仓库。
 
 ## 2026-05-01 Product decision：点火落点涟漪
 
