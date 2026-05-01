@@ -2,6 +2,13 @@
 
 ## 2026-05-02
 
+- GitHub Issues：gh 可用且已认证；2026-05-02 04:00 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。#4/#6 仍是最新组合反馈：远航调度需要更多图形化表达，减少后半段主操作区文字反推。
+- 本轮 Product decision 继续处理 #4/#6：远航闭环路线微图和三张步骤卡之间已经有连接信标，但当前连接线和小节点仍偏静态。
+- 本轮改动新增远航闭环当前连接信标脉冲：`.far-dispatch-loop-link.is-current::before` 和 `::after` 会播放轻量脉冲，让当前微图节点到步骤卡的对应关系更容易被扫到，并在降低动效偏好下关闭动画。
+- 本轮只调整远航闭环展示层和测试，不新增可见说明文字、不新增收益、不新增存档字段，不改变点击收益、升级价格、星图路线、项目奖励、航线策略、航线指令、远航调度数值、反馈入口或部署链路。
+- 本轮本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含 `farDispatchLoopCurrentLinkPulse` 和当前连接信标脉冲样式。
+
 - GitHub Issues：gh 可用且已认证；2026-05-02 03:42 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。#4/#6 仍是最新组合反馈：远航调度需要更多图形化表达，减少后半段主操作区文字反推。
 - 本轮 Product decision 继续处理 #4/#6：远航闭环路线微图和步骤卡已经有节点、箭头、当前信标、收益短标、步骤卡步号、收益色带和当前步骤卡信标，但微图与下方步骤卡之间仍靠列位置自行对应。
 - 本轮改动新增远航闭环微图到步骤卡连接信标：`renderFarDispatchLoopTrack` 会在上方路线微图和三张步骤卡之间插入 3 个无文字 `.far-dispatch-loop-link`，并按目标、分支/续航、回目标、当前和完成状态着色。

@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+- 远航调度新增“远航闭环当前连接信标脉冲”：20M 后主操作区远航闭环当前微图节点到步骤卡之间的连接线和小节点会轻量脉冲，继续回应 #4 的图形化/文字密度反馈，并辅助 #6 的后半段短循环执行确认。
+- `src/styles.css` 为 `.far-dispatch-loop-link.is-current::before` 和 `::after` 增加 `farDispatchLoopCurrentLinkPulse` 动画，并在降低动效偏好中关闭该动画；`tests/game.test.js` 覆盖静态绑定。
+- 本轮只调整远航闭环展示层和测试，不新增可见说明文字、不新增收益、不新增存档字段，不改变点击收益、升级价格、星图路线、项目奖励、航线策略、航线指令、远航调度数值、反馈入口或部署链路。
+- 同步 GitHub Issues 反馈状态：2026-05-02 04:00 CST 当前 5 个 open feedback issue、0 个 open bug issue；#4/#6 作为主处理对象。
+- 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含 `farDispatchLoopCurrentLinkPulse` 和当前连接信标脉冲样式。
+
 - 远航调度新增“远航闭环微图到步骤卡连接信标”：20M 后主操作区远航闭环路线微图和下方三张步骤卡之间会显示 3 个无文字连接信标，按目标、分支/续航、回目标以及当前/完成状态着色，继续回应 #4 的图形化/文字密度反馈，并辅助 #6 的后半段短循环执行确认。
 - `src/app.js` 在 `renderFarDispatchLoopTrack` 中插入 `.far-dispatch-loop-link` 连接层；`src/styles.css` 增加连接线、小节点和状态配色；`tests/game.test.js` 覆盖静态绑定。
 - 本轮只调整远航闭环展示层和测试，不新增可见说明文字、不新增收益、不新增存档字段，不改变点击收益、升级价格、星图路线、项目奖励、航线策略、航线指令、远航调度数值、反馈入口或部署链路。
