@@ -2,6 +2,13 @@
 
 ## 2026-05-02
 
+- GitHub Issues：gh 可用且已认证；2026-05-02 05:27 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。#4/#6 仍是最新组合反馈：远航调度需要更多图形化表达，减少后半段主操作区文字反推。
+- 本轮 Product decision 继续处理 #4/#6：远航闭环微图当前收益短标已经进入 active 补光节奏，但下方步骤卡里的当前收益行仍偏静态。
+- 本轮改动新增远航闭环步骤卡当前收益行补光：`.far-dispatch.is-active .far-dispatch-step-reward.is-current` 播放 `farDispatchStepRewardCurrentGlow`，让步骤卡里的具体回报行和当前步骤卡、当前连接信标、微图当前收益短标保持同层节奏，并在降低动效偏好下关闭动画。
+- 本轮只调整远航闭环展示层和测试，不新增可见说明文字、不新增收益、不新增存档字段，不改变点击收益、升级价格、星图路线、项目奖励、航线策略、航线指令、远航调度数值、反馈入口或部署链路。
+- 本轮本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认 `dist/src/styles.css` 包含 `farDispatchStepRewardCurrentGlow`、当前步骤卡收益行补光样式和降低动效兜底。
+
 - GitHub Issues：gh 可用且已认证；2026-05-02 05:14 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。#4/#6 仍是最新组合反馈：远航调度需要更多图形化表达，减少后半段主操作区文字反推。
 - 本轮 Product decision 继续处理 #4/#6：远航闭环插画、进度轨、当前节点、方向信标、连接信标和步骤卡已经进入同一反馈节奏，但微图节点下方的当前收益短标仍偏静态。
 - 本轮改动新增远航闭环当前收益短标补光：`.far-dispatch.is-active .far-dispatch-loop-visual-reward.is-current` 播放 `farDispatchLoopCurrentRewardGlow`，让当前 `校准` / `分支` / `续航` / `闭环` 回报落点和当前节点、方向、连接信标保持同层节奏，并在降低动效偏好下关闭动画。

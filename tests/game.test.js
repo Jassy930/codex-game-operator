@@ -2443,6 +2443,10 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(styles, /\.far-dispatch-step-reward\.is-branch,\n\.far-dispatch-step-reward\.is-relay/);
   assert.match(styles, /\.far-dispatch-step-reward\.is-return/);
   assert.match(styles, /\.far-dispatch-step-reward\.is-current/);
+  assert.match(styles, /\.far-dispatch\.is-active \.far-dispatch-step-reward\.is-current/);
+  assert.match(styles, /animation: farDispatchStepRewardCurrentGlow 1450ms ease-in-out infinite/);
+  assert.match(styles, /@keyframes farDispatchStepRewardCurrentGlow/);
+  assert.match(styles, /@media \(prefers-reduced-motion: reduce\) \{[\s\S]*\.far-dispatch\.is-active \.far-dispatch-step-reward\.is-current[\s\S]*animation: none/);
   assert.match(styles, /\.far-dispatch-step-reward\.is-completed/);
   assert.match(styles, /\.far-dispatch\.is-active/);
   assert.match(styles, /\.directive-button \.directive-badges/);
