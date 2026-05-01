@@ -1394,11 +1394,17 @@ test("点火按钮会渲染点击反馈和过载前兆效果", () => {
   assert.match(styles, /translate\(var\(--core-recoil-x\), var\(--core-recoil-y\)\) scale\(0\.97\)/);
   assert.match(styles, /--core-impact-x/);
   assert.match(styles, /--core-impact-y/);
+  assert.match(styles, /\.core-button\.is-pressing \.core-impact-point/);
+  assert.match(styles, /drop-shadow\(0 0 16px rgba\(255, 247, 194, 0\.34\)\)/);
   assert.match(styles, /\.core-impact-point\.is-overload-impact/);
   assert.match(styles, /\.core-impact-ripple/);
+  assert.match(styles, /\.core-button\.is-pressing \.core-impact-ripple/);
+  assert.match(styles, /transform: translate\(-50%, -50%\) scale\(0\.5\)/);
   assert.match(styles, /\.core-impact-ripple\.is-overload-impact/);
   assert.match(styles, /@keyframes coreImpactRipple/);
   assert.match(styles, /\.core-impact-sparks/);
+  assert.match(styles, /\.core-button\.is-pressing \.core-impact-sparks/);
+  assert.match(styles, /rotate\(18deg\)/);
   assert.match(styles, /\.core-impact-sparks\.is-overload-impact/);
   assert.match(styles, /@keyframes coreImpactSparks/);
   assert.match(styles, /\.core-charge-ring/);

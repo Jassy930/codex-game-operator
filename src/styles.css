@@ -527,6 +527,14 @@ h2 {
   animation: coreImpactPoint 420ms ease-out;
 }
 
+.core-button.is-pressing .core-impact-point {
+  opacity: 0.38;
+  filter:
+    blur(0.4px)
+    drop-shadow(0 0 16px rgba(255, 247, 194, 0.34));
+  transform: translate(-50%, -50%) scale(0.42);
+}
+
 .core-impact-point.is-overload-impact {
   width: 124px;
   height: 124px;
@@ -557,6 +565,16 @@ h2 {
 
 .core-impact-ripple.is-showing {
   animation: coreImpactRipple 460ms ease-out;
+}
+
+.core-button.is-pressing .core-impact-ripple {
+  opacity: 0.34;
+  border-color: rgba(255, 247, 194, 0.82);
+  box-shadow:
+    0 0 20px rgba(255, 247, 194, 0.3),
+    0 0 28px rgba(19, 181, 166, 0.2),
+    inset 0 0 18px rgba(244, 178, 60, 0.22);
+  transform: translate(-50%, -50%) scale(0.5);
 }
 
 .core-impact-ripple.is-overload-impact {
@@ -605,6 +623,12 @@ h2 {
 
 .core-impact-sparks.is-showing {
   animation: coreImpactSparks 420ms ease-out;
+}
+
+.core-button.is-pressing .core-impact-sparks {
+  opacity: 0.28;
+  filter: drop-shadow(0 0 14px rgba(244, 178, 60, 0.28));
+  transform: translate(-50%, -50%) scale(0.38) rotate(18deg);
 }
 
 .core-impact-sparks.is-overload-impact {

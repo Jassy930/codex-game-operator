@@ -2,6 +2,15 @@
 
 ## Unreleased
 
+- 点火按钮新增“按住落点热区”：在已有 pointerdown 即时反冲和按住压光基础上，按住期间实际落点会持续显示低强度光斑、能量环和短火花，继续回应 #5 的点击反馈、特效和点击欲望反馈。
+- `src/styles.css` 增加 `.core-button.is-pressing .core-impact-point`、`.core-button.is-pressing .core-impact-ripple` 和 `.core-button.is-pressing .core-impact-sparks`；`tests/game.test.js` 覆盖静态样式绑定。
+- 本轮只调整点火按钮展示层和测试，不新增收益、不新增存档字段，不改变点击收益、连击窗口、过载奖励、升级价格、星图路线、项目奖励、航线策略、航线指令、远航调度、反馈入口或部署链路。
+- 同步 GitHub Issues 反馈状态：2026-05-01 16:41 CST 当前 5 个 open feedback issue、0 个 open bug issue；#5 作为主处理对象。
+- 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含 `.core-button.is-pressing .core-impact-point`、`.core-button.is-pressing .core-impact-ripple`、`.core-button.is-pressing .core-impact-sparks` 和 `rotate(18deg)`。
+- 发布和反馈处理待提交推送后补充。
+- 钉钉通知待本轮结束时按运行环境可用性处理；不会将 webhook 写入仓库。
+
 - 点火按钮新增“按住压光”：在已有 pointerdown 即时反冲基础上，按住期间星核本体滤镜增强、中心标签压缩发光，蓄能外弧提高透明度并加速旋转，继续回应 #5 的点击反馈、特效和点击欲望反馈。
 - `src/styles.css` 增加 `.core-button.is-pressing .core-surge-orbit`、`.core-button.is-pressing .core-label` 和 `.core-button.is-pressing .core-art`；`tests/game.test.js` 覆盖静态样式绑定。
 - 本轮只调整点火按钮展示层和测试，不新增收益、不新增存档字段，不改变点击收益、连击窗口、过载奖励、升级价格、星图路线、项目奖励、航线策略、航线指令、远航调度、反馈入口或部署链路。

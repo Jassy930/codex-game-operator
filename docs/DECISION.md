@@ -1,5 +1,30 @@
 # Decision
 
+## 2026-05-01 Product decision：点火按住落点热区
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-01 16:41 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#5 仍是最新更新的开放反馈，继续围绕“点火按钮太薄弱、增加点击反馈、特效和点击欲望”做 Product decision。
+
+当前最大问题：点火按钮已经有 pointerdown 即时反冲、按住压光、落点闪光、落点涟漪、落点火花束、音效、触感、连击轨、星核蓄能裂纹和蓄能外弧。但按住期间实际落点层仍主要等待 click 后才播放完整闪光/涟漪/火花；玩家手指压住时，局部接触点还可以更早被点亮。
+
+本轮决策：
+
+- 新增“点火按住落点热区”。
+- `src/styles.css` 让 `.core-button.is-pressing .core-impact-point` 在 pointerdown 坐标处持续显示局部光斑。
+- `src/styles.css` 让 `.core-button.is-pressing .core-impact-ripple` 在按住期间显示较小的落点能量环。
+- `src/styles.css` 让 `.core-button.is-pressing .core-impact-sparks` 显示低透明短火花，和松手后的完整火花动画区分。
+- `tests/game.test.js` 增加静态断言，覆盖按住态落点光斑、落点环和短火花样式。
+- 该改动只调整点火按钮展示层和测试，不新增收益、不新增存档字段，不改变点击收益、连击窗口、过载奖励、升级价格、星图路线、项目奖励、航线策略、航线指令、远航调度、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-05-01 16:41 CST 当前 5 个 open feedback issue、0 个 open bug issue。
+- `src/styles.css` 包含 `.core-button.is-pressing .core-impact-point`、`.core-button.is-pressing .core-impact-ripple` 和 `.core-button.is-pressing .core-impact-sparks`。
+- `tests/game.test.js` 覆盖点火按住落点热区静态样式绑定。
+- 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含 `.core-button.is-pressing .core-impact-point`、`.core-button.is-pressing .core-impact-ripple`、`.core-button.is-pressing .core-impact-sparks` 和 `rotate(18deg)`。
+- 发布验证待提交推送后补充。
+- 钉钉通知待本轮结束时按运行环境可用性处理；不会将 webhook 写入仓库。
+
 ## 2026-05-01 Product decision：点火按住压光
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-01 16:25 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#5 仍是最新更新的开放反馈，继续围绕“点火按钮太薄弱、增加点击反馈、特效和点击欲望”做 Product decision。

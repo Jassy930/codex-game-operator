@@ -2,6 +2,15 @@
 
 ## 2026-05-01
 
+- GitHub Issues：gh 可用且已认证；2026-05-01 16:41 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
+- 本轮 Product decision 继续处理 #5：点火按钮已有 pointerdown 即时反冲和按住压光，但实际落点层仍主要在 click 后播放完整闪光、涟漪和火花，按住期间接触点本身还不够明确。
+- 本轮改动新增点火按住落点热区：`.core-button.is-pressing .core-impact-point`、`.core-button.is-pressing .core-impact-ripple` 和 `.core-button.is-pressing .core-impact-sparks` 会在 pointerdown 坐标处显示低强度光斑、能量环和短火花。
+- 本轮只调整点火按钮展示层和测试，不新增收益、不新增存档字段，不改变点击收益、连击窗口、过载奖励、升级价格、星图路线、项目奖励、航线策略、航线指令、远航调度、反馈入口或部署链路。
+- 本轮本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含 `.core-button.is-pressing .core-impact-point`、`.core-button.is-pressing .core-impact-ripple`、`.core-button.is-pressing .core-impact-sparks` 和 `rotate(18deg)`。
+- 发布和反馈回复待提交推送后补充。
+- 钉钉通知待本轮结束时按运行环境可用性处理；不会将 webhook 写入仓库。
+
 - GitHub Issues：gh 可用且已认证；2026-05-01 16:25 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
 - 本轮 Product decision 继续处理 #5：点火按钮已有 pointerdown 即时反冲，但按住期间星核本体、外弧和中心标签仍偏普通态，缺少持续压住时的被点亮反馈。
 - 本轮改动新增点火按住压光：`.core-button.is-pressing .core-surge-orbit` 提高透明度、加强光晕并加速外弧，`.core-button.is-pressing .core-label` 压缩发光，`.core-button.is-pressing .core-art` 增强星核滤镜。
