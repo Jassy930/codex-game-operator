@@ -2,6 +2,14 @@
 
 ## 2026-05-02
 
+- GitHub Issues：gh 可用且已认证；2026-05-02 07:02 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。#5 仍集中在“点火按钮太薄弱、增加点击反馈和点击欲望”。
+- 本轮 Product decision 继续处理 #5：点火按钮已有待机邀请光环和完整点击后反馈链路，但按钮下方“下一击 +X”预告在普通待机时仍偏静态，还没有参与点击前的邀请节奏。
+- 本轮改动新增点火下一击预告待机信标：`.core-button:not(.is-pulsing):not(.is-pressing) + .core-reward-hint:not(.is-overload-ready):not(.is-overload-hit)` 播放 `coreRewardHintIdleBeacon` 轻量呼吸，hover 时轻微提亮，并在降低动效偏好下关闭动画。
+- 本轮只调整点火按钮下方奖励预告展示层和测试，不新增可见文字、不新增收益、不新增存档字段，不改变点击收益、连击窗口、过载奖励、升级价格、星图路线、项目奖励、航线策略、航线指令、远航调度、反馈入口或部署链路。
+- 本轮本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认 `dist/src/styles.css` 包含 `.core-button:not(.is-pulsing):not(.is-pressing) + .core-reward-hint:not(.is-overload-ready):not(.is-overload-hit)`、`coreRewardHintIdleBeacon 2600ms ease-in-out infinite`、`@keyframes coreRewardHintIdleBeacon` 和降低动效兜底。
+- 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #5，以及当前下一击奖励预告待机状态仍缺少邀请信号的复盘。
+
 - GitHub Issues：gh 可用且已认证；2026-05-02 06:49 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。#5 仍集中在“点火按钮太薄弱、增加点击反馈和点击欲望”。
 - 本轮 Product decision 处理 #5：点火按钮已有按住、命中、落点、收益、读数、音效和触感反馈，但待机状态下的按钮外圈仍缺少点击前的邀请信号。
 - 本轮改动新增点火按钮待机邀请光环：`.core-button:not(.is-pulsing):not(.is-pressing)::after` 在非按压、非命中状态下播放 `coreIdleInviteRing` 轻量外圈呼吸，hover 时稍微加强边框，并在降低动效偏好下关闭动画。

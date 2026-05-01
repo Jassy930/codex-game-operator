@@ -1,5 +1,28 @@
 # Decision
 
+## 2026-05-02 Product decision：点火下一击预告待机信标
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-02 07:02 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有 open bug；#5 仍是最新反馈，继续处理“点火按钮太薄弱，增加点击反馈、特效和点击欲望”。
+
+当前最大问题：点火按钮已经有待机邀请光环、按住反冲、落点热区、命中闪光、涟漪、火花束、收益浮层、蓄能轨、连击轨、中心标签、星核裂纹、读数亮闪、音效和触感。按钮下方的“下一击 +X”预告虽然会在命中后跳闪、临近过载时高亮，但普通待机时仍偏静态；玩家还没按下之前，奖励预告没有主动参与“下一击值得点”的邀请节奏。
+
+本轮决策：
+
+- 新增“点火下一击预告待机信标”。
+- `src/styles.css` 为 `.core-button:not(.is-pulsing):not(.is-pressing) + .core-reward-hint:not(.is-overload-ready):not(.is-overload-hit)` 增加 `coreRewardHintIdleBeacon` 轻量呼吸，并在 hover 时把奖励预告轻微提亮。
+- 在 `prefers-reduced-motion: reduce` 中关闭该待机信标动画。
+- `tests/game.test.js` 增加静态断言，覆盖待机信标样式、hover 样式、keyframes 和降低动效兜底。
+- 该改动只调整点火按钮下方奖励预告展示层和测试，不新增可见文字、不新增收益、不新增存档字段，不改变点击收益、连击窗口、过载奖励、升级价格、星图路线、项目奖励、航线策略、航线指令、远航调度、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-05-02 07:02 CST 当前 5 个 open feedback issue、0 个 open bug issue；#5 作为本轮主处理对象。
+- `src/styles.css` 包含 `.core-button:not(.is-pulsing):not(.is-pressing) + .core-reward-hint:not(.is-overload-ready):not(.is-overload-hit)`、`coreRewardHintIdleBeacon 2600ms ease-in-out infinite`、hover 提亮样式、`@keyframes coreRewardHintIdleBeacon` 和降低动效兜底。
+- `tests/game.test.js` 覆盖点火下一击预告待机信标静态绑定。
+- 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认 `dist/src/styles.css` 包含 `.core-button:not(.is-pulsing):not(.is-pressing) + .core-reward-hint:not(.is-overload-ready):not(.is-overload-hit)`、`coreRewardHintIdleBeacon 2600ms ease-in-out infinite`、`@keyframes coreRewardHintIdleBeacon` 和降低动效兜底。
+- 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #5，以及当前下一击奖励预告待机状态仍缺少邀请信号的复盘。
+
 ## 2026-05-02 Product decision：点火按钮待机邀请光环
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-02 06:49 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有 open bug；本轮切回 #5，继续处理“点火按钮太薄弱，增加点击反馈、特效和点击欲望”的真实反馈。
