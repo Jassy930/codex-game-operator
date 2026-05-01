@@ -19,6 +19,10 @@
 - `tests/game.test.js` 覆盖分支后目标指令立即可执行、预计收益/执行反馈包含回航校准、反馈快照包含回航校准。
 - 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
 - 构建产物已确认包含 `回航校准`、`dispatchRefreshDirectiveId` 和目标冷却刷新逻辑。
+- 发布：提交 `ed0f7fb` 已推送到 `origin/main`；GitHub Pages workflow `25221262679` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页返回 HTTP 200，线上 `index.html` 与 `src/game.js` 已确认包含“回航校准”、`dispatchRefreshDirectiveId` 和目标冷却刷新逻辑。
+- #6、#3、#2 已回复本轮回航校准改动、验证与部署状态；#4 已回复本轮未新增说明面板或卡片区块、仅复用现有反馈管线并继续保留文字密度约束；相关 issue 均保持 open 等待复测。
+- 回复后同步 GitHub Issues：2026-05-01 23:54 CST 当前仍为 5 个 open feedback issue、0 个 open bug issue。
+- 钉钉通知未发送：2026-05-01 23:54 CST 运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` / `ROBOT` 相关变量名，当前目录、`/home/jassy/glm` 和用户目录两层内未发现 `.env*` 文件；未将 webhook 写入仓库。
 - 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #6/#3/#2，以及当前远航调度 3 步闭环节奏复盘。
 
 ## 2026-05-01 Product decision：点火过载奖励读数命中亮闪

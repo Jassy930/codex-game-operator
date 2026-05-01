@@ -8,6 +8,9 @@
 - 同步 GitHub Issues 反馈状态：2026-05-01 23:40 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6/#3/#2 作为主处理对象，#4 作为文字密度约束。
 - 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
 - 构建产物已确认包含 `回航校准`、`dispatchRefreshDirectiveId` 和目标冷却刷新逻辑。
+- 发布：提交 `ed0f7fb` 已推送到 `origin/main`；GitHub Pages workflow `25221262679` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页返回 HTTP 200，线上 `index.html` 与 `src/game.js` 已确认包含“回航校准”、`dispatchRefreshDirectiveId` 和目标冷却刷新逻辑。
+- #6、#3、#2、#4 已回复并保持 open 等待复测；回复后 2026-05-01 23:54 CST 再次同步 GitHub Issues，当前仍为 5 个 open feedback issue、0 个 open bug issue。
+- 钉钉通知未发送：2026-05-01 23:54 CST 运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` / `ROBOT` 相关变量名，当前目录、`/home/jassy/glm` 和用户目录两层内未发现 `.env*` 文件；未将 webhook 写入仓库。
 
 - 点火按钮新增“过载奖励读数命中亮闪”：第 8 次过载命中时顶部 `#overloadValue` 会短促亮闪，把本次过载爆发和长期过载奖励读数连到同一反馈节奏，继续回应 #5 的点击反馈、特效和点击欲望反馈。
 - `src/app.js` 在 `animateCore` 的过载命中分支为过载奖励读数追加 `is-core-overload-prize` 并用独立 timer 清理；`src/styles.css` 增加 `scoreOverloadReadoutPrize` 和降低动效兜底；`tests/game.test.js` 覆盖静态绑定。
