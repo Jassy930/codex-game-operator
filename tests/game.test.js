@@ -2187,6 +2187,11 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(styles, /@media \(max-width: 820px\) \{[\s\S]*"glyph phase reward payoff"/);
   assert.match(styles, /@media \(max-width: 820px\) \{[\s\S]*"glyph intent cost result"/);
   assert.match(styles, /@media \(max-width: 820px\) \{[\s\S]*"progress progress progress progress"/);
+  assert.match(styles, /@media \(max-width: 820px\) \{[\s\S]*\.far-dispatch-branch-choice-summary-item\.is-active-route \{[\s\S]*grid-template-columns: 18px repeat\(3, minmax\(0, 1fr\)\)/);
+  assert.match(styles, /@media \(max-width: 820px\) \{[\s\S]*\.far-dispatch-branch-choice-summary-item\.is-active-route \{[\s\S]*"glyph label action action"/);
+  assert.match(styles, /@media \(max-width: 820px\) \{[\s\S]*\.far-dispatch-branch-choice-summary-item\.is-active-route \{[\s\S]*"glyph phase payoff payoff"/);
+  assert.match(styles, /@media \(max-width: 820px\) \{[\s\S]*\.far-dispatch-branch-choice-summary-item\.is-active-route \{[\s\S]*"glyph step reward result"/);
+  assert.match(styles, /@media \(max-width: 820px\) \{[\s\S]*\.far-dispatch-branch-choice-summary-item\.is-active-route \{[\s\S]*"glyph intent cost result"/);
   assert.match(styles, /\.far-dispatch-branch-choice\.is-sync/);
   assert.match(styles, /\.far-dispatch-branch-choice\.is-detour/);
   assert.match(styles, /\.far-dispatch-branch-choice\.is-shift/);

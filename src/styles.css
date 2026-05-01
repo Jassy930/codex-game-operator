@@ -6145,6 +6145,16 @@ h2 {
       "progress progress progress progress";
   }
 
+  .far-dispatch-branch-choice-summary-item.is-active-route {
+    grid-template-columns: 18px repeat(3, minmax(0, 1fr));
+    grid-template-areas:
+      "glyph label action action"
+      "glyph phase payoff payoff"
+      "glyph step reward result"
+      "glyph intent cost result"
+      "progress progress progress progress";
+  }
+
   .directive-plan-track {
     grid-template-columns: 1fr;
   }

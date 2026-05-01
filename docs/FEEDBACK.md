@@ -2,6 +2,14 @@
 
 ## 2026-05-01
 
+- GitHub Issues：gh 可用且已认证；2026-05-01 22:52 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
+- 本轮 Product decision 继续处理 #6，并以 #4 作为视觉密度约束：当前路线已经置顶、降噪、切成宽栏，并让动作、收益和回航结果在桌面当前路线中获得宽位；但小屏媒体查询里的普通 4 列布局会被 `.is-active-route` 桌面宽位选择器覆盖。
+- 本轮改动新增远航对照条当前路线小屏宽位修正：在 820px 以下为 `.far-dispatch-branch-choice-summary-item.is-active-route` 增加专用 4 列网格，保留小屏布局，并让“下一步动作”和“本步收益”各跨两列。
+- 本轮只调整远航路线对照条小屏布局和测试，不新增可见文字、不新增收益、不新增存档字段，不改变升级价格、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、远航调度数值、冷却、连携窗口、反馈入口或部署链路。
+- 本轮本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含小屏 active-route 网格覆盖：`glyph label action action`、`glyph phase payoff payoff`、`glyph step reward result` 和 `glyph intent cost result`。
+- 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #6 和 #4，以及当前远航路线对照条 CSS specificity 复盘。
+
 - GitHub Issues：gh 可用且已认证；2026-05-01 22:37 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
 - 本轮 Product decision 继续处理 #6，并以 #4 作为视觉密度约束：当前路线已经置顶、降噪并切成宽栏，但当前路线内部仍沿用普通五列槽位，下一步动作、本步收益和回航结果仍可能和身份、阶段、第二步按钮、取向、代价抢横向空间。
 - 本轮改动新增远航对照条当前路线操作收益宽位：仅在 `.is-active-route` 对照槽内重排命名网格，让“下一步动作”“本步收益”和“回航结果”横跨更宽槽位，备选路线继续沿用原布局。

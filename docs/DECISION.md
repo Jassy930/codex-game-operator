@@ -1,5 +1,28 @@
 # Decision
 
+## 2026-05-01 Product decision：远航对照条当前路线小屏宽位修正
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-01 22:52 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；本轮继续处理 #6“后半段玩法无聊、只有不停目标”和 #4“界面文字密集、需要更好看”的交集。
+
+当前最大问题：上一轮为当前路线新增了操作收益宽位，但该规则位于基础样式层，选择器 `.far-dispatch-branch-choice-summary-item.is-active-route` 比 820px 小屏媒体查询里的普通 `.far-dispatch-branch-choice-summary-item` specificity 更高。结果是小屏当前路线可能继续保留桌面 5 列宽位网格，削弱 #4 所要求的窄屏文字密度控制。
+
+本轮决策：
+
+- 新增“远航对照条当前路线小屏宽位修正”。
+- `src/styles.css` 在 `@media (max-width: 820px)` 中为 `.far-dispatch-branch-choice-summary-item.is-active-route` 增加同 specificity 覆盖，让当前路线回到 4 列小屏网格。
+- 小屏当前路线继续给高频执行信息留宽位：`下一步动作` 跨两列，`本步收益` 跨两列，回航结果保留在资源取舍旁边。
+- `tests/game.test.js` 增加静态断言，覆盖小屏 active-route 网格和关键命名区域，防止桌面 active-route 宽位再次覆盖小屏布局。
+- 该改动只调整远航路线对照条小屏布局和测试，不新增可见文字、不新增收益、不新增存档字段，不改变升级价格、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、远航调度数值、冷却、连携窗口、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-05-01 22:52 CST 当前 5 个 open feedback issue、0 个 open bug issue。
+- `src/styles.css` 在 820px 小屏媒体查询中包含 `.far-dispatch-branch-choice-summary-item.is-active-route`，并包含 `glyph label action action`、`glyph phase payoff payoff`、`glyph step reward result` 和 `glyph intent cost result`。
+- `tests/game.test.js` 覆盖远航对照条当前路线小屏宽位静态样式绑定。
+- 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含小屏 active-route 网格覆盖。
+- 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #6 和 #4，以及当前远航路线对照条 CSS specificity 复盘。
+
 ## 2026-05-01 Product decision：远航对照条当前路线操作收益宽位
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-01 22:37 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；本轮继续处理 #6“后半段玩法无聊、只有不停目标”和 #4“界面文字密集、需要更好看”的交集。
