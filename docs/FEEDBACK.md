@@ -8,6 +8,10 @@
 - 本轮只调整点火按钮下方奖励预告展示层和测试，不新增可见文字、不新增收益、不新增存档字段，不改变点击收益、连击窗口、过载奖励、升级价格、星图路线、项目奖励、航线策略、航线指令、远航调度、反馈入口或部署链路。
 - 本轮本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
 - 构建产物已确认 `dist/src/styles.css` 包含 `.core-button:not(.is-pulsing):not(.is-pressing) + .core-reward-hint:not(.is-overload-ready):not(.is-overload-hit)`、`coreRewardHintIdleBeacon 2600ms ease-in-out infinite`、`@keyframes coreRewardHintIdleBeacon` 和降低动效兜底。
+- 发布：提交 `bf8081b` 已推送到 `origin/main`；GitHub Pages workflow `25237056485` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页返回 HTTP 200，线上 `src/styles.css` 已确认包含 `coreRewardHintIdleBeacon`。
+- #5 已回复：说明点火下一击预告待机信标、验证结果、Pages 部署和复测问题；issue 保持 open，评论地址：`https://github.com/Jassy930/codex-game-operator/issues/5#issuecomment-4362082915`。
+- 回复后同步 GitHub Issues：2026-05-02 07:10 CST 当前仍为 5 个 open feedback issue、0 个 open bug issue；#5 更新时间为 2026-05-01T23:10:03Z。
+- 钉钉通知未发送：2026-05-02 07:10 CST 运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` / `ROBOT` 相关变量名，当前目录和 `/home/jassy/glm` 两层内未发现 `.env*` 文件；未将 webhook 写入仓库。
 - 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #5，以及当前下一击奖励预告待机状态仍缺少邀请信号的复盘。
 
 - GitHub Issues：gh 可用且已认证；2026-05-02 06:49 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。#5 仍集中在“点火按钮太薄弱、增加点击反馈和点击欲望”。
