@@ -8,6 +8,9 @@
 - 同步 GitHub Issues 反馈状态：2026-05-02 03:24 CST 当前 5 个 open feedback issue、0 个 open bug issue；#4/#6 作为主处理对象。
 - 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
 - 构建产物已确认包含 `farDispatchLoopCurrentStepGlow`、`.far-dispatch-loop-step.is-current` 和降低动效兜底。
+- 发布：提交 `a26dc63` 已推送到 `origin/main`；GitHub Pages workflow `25229638994` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页返回 HTTP 200，线上 `src/styles.css` 已确认包含远航闭环当前步骤卡信标样式。workflow 继续给出 Node.js 20 actions 弃用提醒，未影响本次部署。
+- 反馈处理：已回复 #4 和 #6，说明远航闭环当前步骤卡信标、验证结果、Pages 部署和复测问题；两个 issue 均保持 open。回复后于 2026-05-02 03:33 CST 再次同步 GitHub Issues，当前仍为 5 个 open feedback issue、0 个 open bug issue。
+- 钉钉通知未发送：2026-05-02 03:34 CST 运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` / `ROBOT` 相关变量名，当前目录和 `/home/jassy/glm` 两层内未发现 `.env*` 文件；未将 webhook 写入仓库。
 
 - 远航调度新增“远航闭环步骤卡收益色带”：20M 后主操作区远航闭环下方三张步骤卡的收益行会按目标、分支/续航、回目标以及当前/完成状态显示紧凑色带，继续回应 #4 的图形化/文字密度反馈，并辅助 #6 的后半段短循环收益理解。
 - `src/app.js` 给 `.far-dispatch-step-reward` 追加收益类型 class、步骤状态 class、`data-reward-label` 和悬停标题；`src/styles.css` 增加收益色带、目标/分支/续航/回目标状态样式；`tests/game.test.js` 覆盖静态绑定。
