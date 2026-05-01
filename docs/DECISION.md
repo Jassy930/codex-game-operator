@@ -1,5 +1,29 @@
 # Decision
 
+## 2026-05-01 Product decision：远航路线明细折叠
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-01 07:59 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#6 仍是后半段玩法变化主反馈，#4 仍是界面文字密度和图片化主反馈，因此本轮继续进入 Product decision。
+
+当前最大问题：前序远航分支卡片已经补齐路线微图、资源取向、状态标记、步骤高亮、1/2/3 序号和方向箭头，但每张协同/绕行卡片仍同时展开路线目标、下一步、后续回航、收益对照和说明文字。玩家能先扫到图形，但仍会在同一张卡里看到多行次级文本。
+
+本轮决策：
+
+- 新增“远航路线明细折叠”。
+- 协同/绕行分支卡片默认保留卡片首行、路线微图、指令名、路线判断和推荐原因。
+- 路线目标、路线下一步、后续回航、收益对照和资源/奖励说明收进默认关闭的 `路线明细` 折叠区。
+- `branchChoiceText` 和卡片 `title` 仍保留完整汇总，展开后仍能查看原有明细。
+- 本轮只调整 DOM 结构、CSS 和静态测试；不新增收益、不新增存档字段，不改变升级价格、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、远航调度数值、冷却、连携窗口、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-05-01 07:59 CST 当前 5 个 open feedback issue、0 个 open bug issue。
+- `src/app.js` 渲染 `far-dispatch-branch-choice-details`、`路线明细` 和 `far-dispatch-branch-choice-detail-grid`，并把 objective/followup/next/payoff/caption 放入折叠区。
+- `src/styles.css` 包含 `far-dispatch-branch-choice-details`、summary 单行省略、展开状态符号和明细网格样式。
+- `tests/game.test.js` 覆盖远航路线明细折叠的静态 DOM 与样式绑定。
+- 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含 `far-dispatch-branch-choice-details`、`路线明细` 和 `far-dispatch-branch-choice-detail-grid`。
+- 功能提交 `14a58ce` 已生成，等待随文档提交一起推送并触发 GitHub Pages。
+
 ## 2026-05-01 Product decision：远航路线微图方向箭头
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-01 07:44 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#6 仍是后半段玩法变化主反馈，#4 仍是文字密度和图片化主反馈，因此本轮继续进入 Product decision。

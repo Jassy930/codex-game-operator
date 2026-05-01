@@ -2,6 +2,15 @@
 
 ## Unreleased
 
+- 远航调度新增“路线明细折叠”：协同/绕行分支卡片默认保留首行、路线微图、指令名、路线判断和推荐原因，把路线目标、路线下一步、后续回航、收益对照和资源/奖励说明收进默认关闭的 `路线明细`，继续回应 #6 的后半段路线理解和 #4 的降文字密度反馈。
+- `src/app.js` 在远航分支卡片中渲染 `far-dispatch-branch-choice-details`、`路线明细` 和 `far-dispatch-branch-choice-detail-grid`；`src/styles.css` 增加折叠区 summary、展开状态符号和明细网格样式；`tests/game.test.js` 覆盖静态 DOM 与样式绑定。
+- 文档同步更新：`docs/DECISION.md`、`docs/FEEDBACK.md`、`docs/RESEARCH.md`、`docs/PRODUCT.md`、`docs/DESIGN.md`、`docs/ROADMAP.md`、`docs/IDEAS.md`、`docs/METRICS.md`、`README.md` 和本日志已记录远航路线明细折叠。
+- 本轮只调整展示结构和静态测试，不新增收益、不新增存档字段，不改变升级价格、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、远航调度既有数值、冷却、连携窗口、反馈入口或部署链路。
+- 同步 GitHub Issues 反馈状态：2026-05-01 07:59 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 作为主处理对象，#4 作为视觉密度依据。
+- 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含 `far-dispatch-branch-choice-details`、`路线明细` 和 `far-dispatch-branch-choice-detail-grid`。
+- 功能提交 `14a58ce` 已生成，等待随文档提交一起推送并触发 GitHub Pages。
+
 - 远航调度新增“路线微图方向箭头”：协同/绕行分支卡片的路线轨道会显示两个小箭头，直接提示从 1 到 2 再到 3 的推进方向，继续回应 #6 的后半段短循环理解和 #4 的图片化/降文字密度反馈。
 - `src/styles.css` 通过 `.far-dispatch-branch-choice-route-line::before` / `::after` 绘制方向箭头，并为协同和绕行路线分别设置轨道箭头颜色；`tests/game.test.js` 覆盖静态 CSS 绑定。
 - 文档同步更新：`docs/DECISION.md`、`docs/FEEDBACK.md`、`docs/RESEARCH.md`、`docs/PRODUCT.md`、`docs/DESIGN.md`、`docs/ROADMAP.md`、`docs/IDEAS.md`、`docs/METRICS.md`、`README.md` 和本日志已记录远航路线微图方向箭头。
