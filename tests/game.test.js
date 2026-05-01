@@ -2353,6 +2353,7 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(styles, /\.far-dispatch-loop-visual-arrow\.is-segment-2/);
   assert.match(styles, /\.far-dispatch-loop-visual-arrow\.is-completed/);
   assert.match(styles, /\.far-dispatch-loop-visual-arrow\.is-current/);
+  assert.match(styles, /farDispatchLoopCurrentArrowPulse/);
   assert.match(styles, /\.far-dispatch-loop-visual-point/);
   assert.match(styles, /\.far-dispatch-loop-visual-node/);
   assert.match(styles, /\.far-dispatch-loop-visual-node::before/);
@@ -2361,6 +2362,7 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(styles, /\.far-dispatch-loop-visual-node\.is-current/);
   assert.match(styles, /\.far-dispatch-loop-visual-node\.is-current::after/);
   assert.match(styles, /@keyframes farDispatchLoopCurrentPulse/);
+  assert.match(styles, /@keyframes farDispatchLoopCurrentArrowPulse/);
   assert.match(styles, /\.far-dispatch-loop-visual-reward/);
   assert.match(styles, /\.far-dispatch-loop-visual-reward::before/);
   assert.match(styles, /content: attr\(data-reward-label\)/);
@@ -2369,6 +2371,7 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(styles, /\.far-dispatch-loop-visual-reward\.is-relay/);
   assert.match(styles, /\.far-dispatch-loop-visual-reward\.is-return/);
   assert.match(styles, /\.far-dispatch-loop-visual-reward\.is-current/);
+  assert.match(styles, /@media \(prefers-reduced-motion: reduce\) \{[\s\S]*\.far-dispatch-loop-visual-arrow\.is-current[\s\S]*animation: none/);
   assert.match(styles, /@media \(prefers-reduced-motion: reduce\) \{[\s\S]*\.far-dispatch-loop-visual-node\.is-current::after[\s\S]*animation: none/);
   assert.match(styles, /\.far-dispatch-loop-step\.is-current/);
   assert.match(styles, /\.far-dispatch-loop-step em/);

@@ -3450,6 +3450,7 @@ h2 {
   filter:
     drop-shadow(0 0 7px rgba(255, 211, 106, 0.34))
     drop-shadow(0 0 3px rgba(255, 126, 177, 0.22));
+  animation: farDispatchLoopCurrentArrowPulse 1200ms ease-in-out infinite;
 }
 
 .far-dispatch-loop-visual-point {
@@ -6581,6 +6582,19 @@ h2 {
   }
 }
 
+@keyframes farDispatchLoopCurrentArrowPulse {
+  0%,
+  100% {
+    opacity: 0.72;
+    transform: translate(-50%, -50%) scale(0.9);
+  }
+
+  50% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.18);
+  }
+}
+
 @keyframes farDispatchSummaryActiveActionGlow {
   0%,
   100% {
@@ -6620,6 +6634,7 @@ h2 {
   .core-button.is-overload-impact .core-combo-track::before,
   .core-gain-pop.is-showing::after,
   .core-gain-pop.is-overload-gain.is-showing::after,
+  .far-dispatch-loop-visual-arrow.is-current,
   .far-dispatch-loop-visual-node.is-current::after,
   .far-dispatch-branch-choice-summary-item.is-active-route
     .far-dispatch-branch-choice-summary-progress::after,
