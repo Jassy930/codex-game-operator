@@ -1967,6 +1967,59 @@ h2 {
   color: #ffd1df;
 }
 
+.far-dispatch-branch-choice-route-command {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: center;
+  gap: 2px;
+}
+
+.far-dispatch-branch-choice-route-command[hidden] {
+  display: none;
+}
+
+.far-dispatch-branch-choice .far-dispatch-branch-choice-route-command-step {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  padding: 2px 3px;
+  border: 1px solid rgba(248, 243, 231, 0.16);
+  border-radius: 5px;
+  background: rgba(5, 12, 20, 0.34);
+  color: rgba(248, 243, 231, 0.72);
+  font-size: 0.5rem;
+  font-weight: 950;
+  line-height: 1.1;
+}
+
+.far-dispatch-branch-choice-route-command-step.is-start,
+.far-dispatch-branch-choice-route-command-step.is-return {
+  color: #cfe8ff;
+  border-color: rgba(116, 194, 255, 0.34);
+  background: rgba(116, 194, 255, 0.1);
+}
+
+.far-dispatch-branch-choice-route-command-step.is-branch {
+  color: #d8ffe2;
+  border-color: rgba(150, 231, 168, 0.34);
+  background: rgba(150, 231, 168, 0.1);
+}
+
+.far-dispatch-branch-choice.is-detour .far-dispatch-branch-choice-route-command-step.is-branch {
+  color: #ffd1df;
+  border-color: rgba(255, 126, 177, 0.36);
+  background: rgba(255, 126, 177, 0.1);
+}
+
+.far-dispatch-branch-choice .far-dispatch-branch-choice-route-command-arrow {
+  color: rgba(248, 243, 231, 0.42);
+  font-size: 0.48rem;
+  font-weight: 950;
+  line-height: 1;
+  text-align: center;
+}
+
 .far-dispatch-branch-choice-route.is-sync {
   --branch-route-line-fill: rgba(103, 232, 249, 0.9);
   --branch-route-line-track: rgba(103, 232, 249, 0.22);

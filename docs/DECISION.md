@@ -1,5 +1,29 @@
 # Decision
 
+## 2026-05-01 Product decision：远航路线指令串
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-01 10:41 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#6 仍是后半段玩法变化主反馈，#4 仍是界面文字密度和图片化依据，因此本轮继续进入 Product decision。
+
+当前最大问题：协同/绕行卡片已经显示路线微图、当前阶段、收益点、资源流向、代价、路线取向和回航结果，但玩家仍需要从路线预案、路线下一步或按钮标记里拼出实际按键顺序。微图有 1/2/3 节点，却没有把“目标指令 -> 分支指令 -> 回目标指令”直接放到卡片首屏。
+
+本轮决策：
+
+- 新增“远航路线指令串”。
+- `branchChoices` 派生 `routeCommandLabels` / `routeCommandText`，按当前目标指令、协同/绕行分支指令、回目标指令形成三段路线。
+- `src/app.js` 在协同/绕行分支卡片中渲染 `far-dispatch-branch-choice-route-command`，用三个固定短槽显示例如 `点火齐射 -> 谐振脉冲 -> 点火齐射`。
+- `src/styles.css` 用紧凑三列指令槽和箭头展示路线指令串，绕行分支的第二步使用绕行色；完整语义同步纳入 `branchChoiceText` 和卡片标题。
+- 该指令串只从现有目标指令与分支指令派生，不新增收益、不新增存档字段，不改变升级价格、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、远航调度数值、冷却、连携窗口、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-05-01 10:41 CST 当前 5 个 open feedback issue、0 个 open bug issue。
+- `src/game.js` 派生 `routeCommandLabels` / `routeCommandText`，覆盖协同 `点火齐射 -> 谐振脉冲 -> 点火齐射` 与绕行 `点火齐射 -> 巡航回收 -> 点火齐射`。
+- `src/app.js` 渲染 `far-dispatch-branch-choice-route-command`、`far-dispatch-branch-choice-route-command-step` 和 `far-dispatch-branch-choice-route-command-arrow`。
+- `src/styles.css` 包含路线指令串三列短槽、起点/分支/回目标样式和绕行分支第二步状态色。
+- `tests/game.test.js` 覆盖路线指令串派生、可访问汇总、静态 DOM 和样式绑定。
+- 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含 `routeCommandLabels`、`routeCommandText`、`far-dispatch-branch-choice-route-command` 和 `路线指令：`。
+
 ## 2026-05-01 Product decision：远航路线回航结果短标
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-01 10:25 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#6 仍是后半段玩法变化主反馈，#4 仍是界面文字密度和图片化依据，因此本轮继续进入 Product decision。

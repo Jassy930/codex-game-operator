@@ -5230,6 +5230,12 @@ function buildFarRouteDispatchBranchChoices(
     const routeCost = buildFarRouteDispatchBranchRouteCost(choice.kind);
     const routeIntent = buildFarRouteDispatchBranchRouteIntent(choice.kind);
     const routeReturn = buildFarRouteDispatchBranchRouteReturn(choice.kind);
+    const routeCommandLabels = buildFarRouteDispatchBranchRouteCommandLabels(
+      directive.name,
+      choice.directive.name
+    );
+    const routeCommandText =
+      buildFarRouteDispatchBranchRouteCommandText(routeCommandLabels);
     const followupText = buildFarRouteDispatchBranchFollowupText(
       choice.label,
       choice.directive.name,
@@ -5293,6 +5299,8 @@ function buildFarRouteDispatchBranchChoices(
       routeIntentText: routeIntent.text,
       routeReturnKind: routeReturn.kind,
       routeReturnText: routeReturn.text,
+      routeCommandLabels,
+      routeCommandText,
       nextText: choice.nextText,
       reasonText,
       decisionText,
@@ -5331,6 +5339,8 @@ function buildFarRouteDispatchBranchChoices(
         routeIntent.text +
         " · " +
         routeReturn.text +
+        " · " +
+        routeCommandText +
         " · " +
         choice.caption +
         (reasonText ? " · " + reasonText : "") +
@@ -5582,6 +5592,30 @@ function buildFarRouteDispatchBranchRouteReturn(kind) {
   };
 }
 
+function buildFarRouteDispatchBranchRouteCommandLabels(
+  targetDirectiveName,
+  branchDirectiveName
+) {
+  const targetName = String(targetDirectiveName ?? "");
+  const branchName = String(branchDirectiveName ?? "");
+
+  return {
+    start: targetName,
+    branch: branchName,
+    return: targetName
+  };
+}
+
+function buildFarRouteDispatchBranchRouteCommandText(routeCommandLabels) {
+  const labels = [
+    routeCommandLabels?.start,
+    routeCommandLabels?.branch,
+    routeCommandLabels?.return
+  ].filter(Boolean);
+
+  return labels.length ? "路线指令：" + labels.join(" -> ") : "";
+}
+
 function buildFarRouteDispatchBranchDecisionKind(
   active,
   shift,
@@ -5831,6 +5865,8 @@ function buildFarRouteDispatchBranchChoiceText(choices) {
           choice.routeIntentText +
           " · " +
           choice.routeReturnText +
+          " · " +
+          choice.routeCommandText +
           " · " +
           choice.caption +
           (choice.reasonText ? " · " + choice.reasonText : "") +

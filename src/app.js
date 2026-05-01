@@ -755,10 +755,8 @@ function renderFarDispatchBranchChoices(dispatch) {
       intentBadge.hidden = !choice.routeIntentText;
       header.append(label, badge, costBadge, intentBadge);
 
-      const directive = document.createElement("span");
-      directive.textContent = choice.directiveName;
-
       const routeVisual = renderFarDispatchBranchChoiceRoute(choice);
+      const routeCommand = renderFarDispatchBranchChoiceRouteCommand(choice);
 
       const decision = document.createElement("small");
       decision.className =
@@ -811,7 +809,7 @@ function renderFarDispatchBranchChoices(dispatch) {
       item.append(
         header,
         routeVisual,
-        directive,
+        routeCommand,
         decision,
         reason,
         details
@@ -932,6 +930,34 @@ function renderFarDispatchBranchChoiceRoute(choice) {
     returnReward
   );
   return route;
+}
+
+function renderFarDispatchBranchChoiceRouteCommand(choice) {
+  const command = document.createElement("span");
+  command.className = "far-dispatch-branch-choice-route-command";
+  command.hidden = !choice.routeCommandText;
+  command.setAttribute("aria-label", choice.routeCommandText ?? "");
+
+  [
+    ["start", choice.routeCommandLabels?.start],
+    ["branch", choice.routeCommandLabels?.branch],
+    ["return", choice.routeCommandLabels?.return]
+  ].forEach(([step, label], index) => {
+    const item = document.createElement("span");
+    item.className = "far-dispatch-branch-choice-route-command-step is-" + step;
+    item.textContent = label ?? "";
+    command.append(item);
+
+    if (index < 2) {
+      const arrow = document.createElement("span");
+      arrow.className = "far-dispatch-branch-choice-route-command-arrow";
+      arrow.setAttribute("aria-hidden", "true");
+      arrow.textContent = "->";
+      command.append(arrow);
+    }
+  });
+
+  return command;
 }
 
 function renderFarDispatchBranchChoiceRouteReward(choice, nodeId) {
