@@ -435,6 +435,10 @@ h2 {
   animation: coreStageCharge 880ms ease-in-out infinite;
 }
 
+.core-button.is-pulsing:not(.is-overload-impact) .core-stage-aura {
+  animation: coreStageHitFlash 360ms ease-out;
+}
+
 .core-stage-aura.is-overload-hit {
   background:
     conic-gradient(
@@ -5687,6 +5691,33 @@ h2 {
   }
 }
 
+@keyframes coreStageHitFlash {
+  0% {
+    opacity: 0.4;
+    filter:
+      drop-shadow(0 0 12px rgba(19, 181, 166, 0.2))
+      drop-shadow(0 0 14px rgba(244, 178, 60, 0.14));
+    transform: scale(0.92);
+  }
+
+  44% {
+    opacity: 0.78;
+    filter:
+      drop-shadow(0 0 18px rgba(255, 247, 194, 0.28))
+      drop-shadow(0 0 26px rgba(244, 178, 60, 0.22))
+      drop-shadow(0 0 18px rgba(19, 181, 166, 0.16));
+    transform: scale(1.04);
+  }
+
+  100% {
+    opacity: 0.24;
+    filter:
+      drop-shadow(0 0 10px rgba(19, 181, 166, 0.14))
+      drop-shadow(0 0 10px rgba(244, 178, 60, 0.1));
+    transform: scale(0.98);
+  }
+}
+
 @keyframes coreStageBurst {
   0% {
     opacity: 1;
@@ -6296,6 +6327,7 @@ h2 {
   .score-grid dd.is-core-hit,
   .score-grid dd.is-core-overload-hit,
   .score-grid dd.is-core-overload-prize,
+  .core-button.is-pulsing:not(.is-overload-impact) .core-stage-aura,
   .core-button.is-pulsing:not(.is-overload-impact) .core-overload-badge,
   .core-button.is-pulsing:not(.is-overload-impact) .core-combo-track::before,
   .core-button.is-pulsing:not(.is-overload-impact) .core-vein,
