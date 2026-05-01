@@ -7,6 +7,10 @@
 - 本轮只调整远航闭环展示层和测试，不新增收益、不新增存档字段，不改变点击收益、升级价格、星图路线、项目奖励、航线策略、航线指令、远航调度数值、反馈入口或部署链路。
 - 同步 GitHub Issues 反馈状态：2026-05-02 02:03 CST 当前 5 个 open feedback issue、0 个 open bug issue；#4/#6 作为主处理对象。
 - 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含远航闭环收益短标代码和样式。
+- 发布：提交 `0eef8e5` 已推送到 `origin/main`；GitHub Pages workflow `25226604785` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页返回 HTTP 200，线上 `src/app.js` 和 `src/styles.css` 已确认包含远航闭环收益短标代码和样式。workflow 继续给出 Node.js 20 actions 弃用提醒，未影响本次部署。
+- 反馈处理：已回复 #4 和 #6，说明远航闭环收益短标、验证结果、Pages 部署和复测问题；两个 issue 均保持 open。回复后于 2026-05-02 02:14 CST 再次同步 GitHub Issues，当前仍为 5 个 open feedback issue、0 个 open bug issue。
+- 钉钉通知未发送：2026-05-02 02:14 CST 运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` / `ROBOT` 相关变量名，当前目录和 `/home/jassy/glm` 两层内未发现 `.env*` 文件；未将 webhook 写入仓库。
 
 - 远航调度新增“远航闭环方向箭头”：20M 后主操作区远航闭环路线微图会在 1 -> 2、2 -> 3 两段轨道上显示箭头，并按待推进、当前推进和已完成状态变色，继续回应 #4 的图形化/文字密度反馈，并辅助 #6 的后半段短循环理解。
 - `src/app.js` 在 `renderFarDispatchLoopTrack` 中渲染 `far-dispatch-loop-visual-arrow`，并新增 `getFarDispatchLoopVisualArrowState`；`src/styles.css` 增加箭头位置与状态样式；`tests/game.test.js` 覆盖静态绑定。
