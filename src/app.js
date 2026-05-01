@@ -455,8 +455,17 @@ function render() {
 function renderCoreFeedback(combo) {
   const isCharging = combo.count > 0 && !combo.overloaded;
   const isOverloadReady = isCharging && combo.remaining === 1;
+  const veinIntensity = combo.overloaded ? 1 : combo.progress;
 
   elements.coreButton.dataset.comboStep = String(combo.step);
+  elements.coreButton.style.setProperty(
+    "--core-vein-opacity",
+    String(Math.max(0.12, Math.round(veinIntensity * 100) / 100))
+  );
+  elements.coreButton.style.setProperty(
+    "--core-vein-dash-offset",
+    String(Math.round((1 - veinIntensity) * 34))
+  );
   elements.coreButton.classList.toggle("is-combo-charging", isCharging);
   elements.coreButton.classList.toggle("is-overload-ready", isOverloadReady);
   elements.coreButton.classList.toggle("is-overload-hit", combo.overloaded);

@@ -1268,6 +1268,8 @@ test("点火按钮会渲染点击反馈和过载前兆效果", () => {
   assert.match(indexHtml, /id="coreImpactPoint" class="core-impact-point"/);
   assert.match(indexHtml, /class="core-charge-ring"/);
   assert.match(indexHtml, /id="coreGainPop" class="core-gain-pop"/);
+  assert.match(indexHtml, /class="core-veins"/);
+  assert.match(indexHtml, /class="core-vein core-vein-a"/);
   assert.match(indexHtml, /id="coreOverloadBadge" class="core-overload-badge"/);
   assert.match(indexHtml, /id="coreOverloadBadgeValue">8<\/strong>/);
   assert.match(indexHtml, /class="core-combo-track"/);
@@ -1328,6 +1330,10 @@ test("点火按钮会渲染点击反馈和过载前兆效果", () => {
   assert.match(appJs, /elements\.coreOverloadBadge\.classList\.toggle\("is-countdown-active", isCharging\)/);
   assert.match(appJs, /elements\.coreOverloadBadge\.classList\.toggle\("is-overload-ready", isOverloadReady\)/);
   assert.match(appJs, /elements\.coreButton\.dataset\.comboStep = String\(combo\.step\)/);
+  assert.match(appJs, /const veinIntensity = combo\.overloaded \? 1 : combo\.progress/);
+  assert.match(appJs, /"--core-vein-opacity"/);
+  assert.match(appJs, /"--core-vein-dash-offset"/);
+  assert.match(appJs, /Math\.round\(\(1 - veinIntensity\) \* 34\)/);
   assert.match(appJs, /"--core-combo-progress"/);
   assert.match(appJs, /Math\.round\(combo\.progress \* 100\) \+ "%"/);
   assert.match(appJs, /dot\.classList\.toggle\("is-filled", combo\.step >= step\)/);
@@ -1365,6 +1371,14 @@ test("点火按钮会渲染点击反馈和过载前兆效果", () => {
   assert.match(styles, /\.core-combo-dot\.is-next/);
   assert.match(styles, /\.core-reward-hint/);
   assert.match(styles, /\.core-label/);
+  assert.match(styles, /--core-vein-opacity/);
+  assert.match(styles, /--core-vein-dash-offset/);
+  assert.match(styles, /\.core-veins/);
+  assert.match(styles, /\.core-vein/);
+  assert.match(styles, /\.core-button\.is-overload-ready \.core-vein/);
+  assert.match(styles, /\.core-button\.is-overload-hit \.core-vein/);
+  assert.match(styles, /@keyframes coreVeinPulse/);
+  assert.match(styles, /@keyframes coreVeinBurst/);
   assert.match(styles, /\.core-button\.is-overload-ready/);
   assert.match(styles, /\.core-button\.is-overload-impact::after/);
   assert.match(styles, /\.combo-line span\.is-overload-ready/);

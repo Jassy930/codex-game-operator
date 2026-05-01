@@ -219,6 +219,8 @@ h2 {
 }
 
 .core-button {
+  --core-vein-dash-offset: 34;
+  --core-vein-opacity: 0.12;
   position: relative;
   isolation: isolate;
   display: grid;
@@ -770,6 +772,58 @@ h2 {
   animation:
     coreSpin 18s linear infinite,
     coreHit 320ms ease-out;
+}
+
+.core-veins {
+  color: #fff7c2;
+  pointer-events: none;
+  mix-blend-mode: screen;
+}
+
+.core-vein {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 34;
+  stroke-dashoffset: var(--core-vein-dash-offset);
+  opacity: var(--core-vein-opacity);
+  filter:
+    drop-shadow(0 0 8px rgba(255, 247, 194, 0.28))
+    drop-shadow(0 0 12px rgba(244, 178, 60, 0.2));
+  transition:
+    opacity 140ms ease,
+    stroke-dashoffset 140ms ease,
+    stroke 140ms ease,
+    filter 140ms ease;
+}
+
+.core-vein-b,
+.core-vein-c {
+  color: #f4b23c;
+}
+
+.core-button.is-combo-charging .core-vein {
+  filter:
+    drop-shadow(0 0 10px rgba(255, 247, 194, 0.34))
+    drop-shadow(0 0 16px rgba(19, 181, 166, 0.22));
+}
+
+.core-button.is-overload-ready .core-vein {
+  color: #fff7c2;
+  opacity: 0.96;
+  filter:
+    drop-shadow(0 0 12px rgba(255, 247, 194, 0.5))
+    drop-shadow(0 0 20px rgba(232, 93, 117, 0.32));
+  animation: coreVeinPulse 760ms ease-in-out infinite;
+}
+
+.core-button.is-overload-hit .core-vein {
+  color: #fff7c2;
+  opacity: 1;
+  stroke-dashoffset: 0;
+  animation: coreVeinBurst 520ms ease-out;
 }
 
 .core-reward-hint {
@@ -5042,6 +5096,34 @@ h2 {
 
   50% {
     transform: scale(1.35);
+  }
+}
+
+@keyframes coreVeinPulse {
+  0%,
+  100% {
+    stroke-width: 4;
+  }
+
+  50% {
+    stroke-width: 5.5;
+  }
+}
+
+@keyframes coreVeinBurst {
+  0% {
+    opacity: 0.68;
+    stroke-width: 4;
+  }
+
+  45% {
+    opacity: 1;
+    stroke-width: 7;
+  }
+
+  100% {
+    opacity: 0.72;
+    stroke-width: 4;
   }
 }
 
