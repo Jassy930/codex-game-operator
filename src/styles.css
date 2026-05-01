@@ -1567,9 +1567,14 @@ h2 {
 
 .far-dispatch-branch-choice-summary-item {
   display: grid;
-  grid-template-columns: 18px minmax(0, 0.68fr) minmax(0, 0.7fr) minmax(0, 0.78fr) minmax(0, 0.82fr) minmax(0, 0.82fr) minmax(0, 0.68fr) minmax(0, 0.58fr) minmax(0, 0.72fr) minmax(0, 0.86fr);
+  grid-template-columns: 18px minmax(0, 0.88fr) minmax(0, 0.84fr) minmax(0, 0.92fr) minmax(0, 0.78fr);
+  grid-template-areas:
+    "glyph label phase action step"
+    "glyph reward payoff intent cost"
+    "glyph result result result result"
+    "progress progress progress progress progress";
   align-items: center;
-  gap: 4px;
+  gap: 3px 4px;
   min-width: 0;
   padding: 4px 6px;
   overflow: hidden;
@@ -1587,6 +1592,7 @@ h2 {
 }
 
 .far-dispatch-branch-choice-summary-item strong {
+  grid-area: label;
   color: rgba(248, 243, 231, 0.78);
   font-size: 0.56rem;
   font-weight: 950;
@@ -1620,6 +1626,7 @@ h2 {
 }
 
 .far-dispatch-branch-choice-summary-glyph {
+  grid-area: glyph;
   display: inline-block;
   justify-self: center;
 }
@@ -1648,6 +1655,7 @@ h2 {
 }
 
 .far-dispatch-branch-choice-summary-phase {
+  grid-area: phase;
   color: #fff7c2;
 }
 
@@ -1661,6 +1669,7 @@ h2 {
 }
 
 .far-dispatch-branch-choice-summary-action {
+  grid-area: action;
   color: #d8ffe2;
 }
 
@@ -1685,15 +1694,30 @@ h2 {
 }
 
 .far-dispatch-branch-choice-summary-step {
+  grid-area: step;
   color: #d8ffe2;
 }
 
 .far-dispatch-branch-choice-summary-reward {
+  grid-area: reward;
   color: #fff7c2;
 }
 
 .far-dispatch-branch-choice-summary-payoff {
+  grid-area: payoff;
   color: #d8ffe2;
+}
+
+.far-dispatch-branch-choice-summary-intent {
+  grid-area: intent;
+}
+
+.far-dispatch-branch-choice-summary-cost {
+  grid-area: cost;
+}
+
+.far-dispatch-branch-choice-summary-result {
+  grid-area: result;
 }
 
 .far-dispatch-branch-choice-summary-item.is-detour .far-dispatch-branch-choice-summary-step {
@@ -1715,6 +1739,7 @@ h2 {
 
 .far-dispatch-branch-choice-summary-progress {
   position: relative;
+  grid-area: progress;
   display: grid;
   grid-column: 1 / -1;
   grid-template-columns: repeat(3, minmax(0, 1fr));

@@ -1,5 +1,27 @@
 # Decision
 
+## 2026-05-01 Product decision：远航路线对照条分组布局
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-01 13:02 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#6 仍是后半段玩法变化主反馈，#4 仍是界面文字密度和图片化依据，因此本轮继续进入 Product decision。
+
+当前最大问题：路线对照条已经能显示当前阶段、下一步动作、收益落点、第二步按钮、本步收益、资源取向、当前资源代价、回航结果和 1/2/3 迷你进度轨，但单个对照槽仍把大量短标压在一行十列里。继续追加新短标会恶化 #4 的“密密麻麻文字”问题，因此本轮优先整理既有信息层级。
+
+本轮决策：
+
+- 新增“远航路线对照条分组布局”。
+- `src/styles.css` 将 `far-dispatch-branch-choice-summary-item` 从单行十列改为命名网格区域：第一行路线身份/阶段/动作/第二步，第二行收益落点/本步收益/资源取向/代价，第三行回航结果，第四行 1/2/3 迷你进度轨。
+- `tests/game.test.js` 增加静态断言，覆盖 `grid-template-areas` 和各短标 `grid-area` 绑定，避免后续改回不可扫视的单行挤压。
+- 该改动只调整展示层和静态测试，不新增收益、不新增存档字段，不改变升级价格、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、远航调度数值、冷却、连携窗口、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-05-01 13:02 CST 当前 5 个 open feedback issue、0 个 open bug issue。
+- `src/styles.css` 包含路线对照条命名网格区域和 `glyph / label / phase / action / step / reward / payoff / intent / cost / result / progress` 区域绑定。
+- `tests/game.test.js` 覆盖对照条分组布局静态 CSS 绑定。
+- 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含 `grid-template-areas` 和 `far-dispatch-branch-choice-summary-item` 分组布局。
+- 钉钉通知未发送：运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` 相关变量名，当前目录和父级三层内也未发现 `.env*` 文件；未将 webhook 写入仓库。
+
 ## 2026-05-01 Product decision：远航路线对照条本步收益短标
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-01 12:45 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#6 仍是后半段玩法变化主反馈，#4 仍是界面文字密度和图片化依据，因此本轮继续进入 Product decision。

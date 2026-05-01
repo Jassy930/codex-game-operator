@@ -2,6 +2,15 @@
 
 ## Unreleased
 
+- 远航调度调整“路线对照条分组布局”：协同/绕行对照槽从单行十列改为多行命名网格，把路线身份/阶段/动作/第二步、收益/资源取舍、回航结果和 1/2/3 迷你进度轨分层展示，继续回应 #6 的后半段路线理解和 #4 的降文字密度反馈。
+- `src/styles.css` 为 `far-dispatch-branch-choice-summary-item` 增加 `grid-template-areas` 和各短标 `grid-area` 绑定；`tests/game.test.js` 覆盖静态 CSS 分组布局。
+- 文档同步更新：`docs/DECISION.md`、`docs/FEEDBACK.md`、`docs/RESEARCH.md`、`docs/PRODUCT.md`、`docs/DESIGN.md`、`docs/ROADMAP.md`、`docs/IDEAS.md`、`docs/METRICS.md`、`README.md` 和本日志已记录远航路线对照条分组布局。
+- 本轮只调整展示层和静态测试，不新增收益、不新增存档字段，不改变升级价格、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、远航调度既有数值、冷却、连携窗口、反馈入口或部署链路。
+- 同步 GitHub Issues 反馈状态：2026-05-01 13:02 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 作为主处理对象，#4 作为视觉密度依据。
+- 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含 `grid-template-areas` 和 `far-dispatch-branch-choice-summary-item` 分组布局。
+- 钉钉通知未发送：运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` 相关变量名，当前目录和父级三层内也未发现 `.env*` 文件；未将 webhook 写入仓库。
+
 - 远航调度新增“路线对照条本步收益短标”：协同/绕行对照槽直接显示 `本步 +13%` 或 `本步 +4%` 等即时收益短标，继续回应 #6 的后半段路线取舍理解和 #4 的降文字密度反馈。
 - `src/game.js` 新增 `routePayoffSummaryText` 派生并纳入 `branchChoiceSummaryText` / `branchChoiceText`；`src/app.js` 渲染 `far-dispatch-branch-choice-summary-payoff`；`src/styles.css` 增加本步收益短标列和绕行状态色；`tests/game.test.js` 覆盖派生、可访问汇总、DOM 和 CSS。
 - 文档同步更新：`docs/DECISION.md`、`docs/FEEDBACK.md`、`docs/RESEARCH.md`、`docs/PRODUCT.md`、`docs/DESIGN.md`、`docs/ROADMAP.md`、`docs/IDEAS.md`、`docs/METRICS.md`、`README.md` 和本日志已记录远航路线对照条本步收益短标。
