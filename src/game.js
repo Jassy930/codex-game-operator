@@ -5164,6 +5164,8 @@ function buildFarRouteDispatchBranchChoices(
       active,
       branchStatus
     );
+    const routeProgressPercent =
+      buildFarRouteDispatchBranchRouteProgressPercent(routeNodeStates);
     const routeStepLabels = {
       ...FAR_ROUTE_DISPATCH_BRANCH_ROUTE_STEP_LABELS
     };
@@ -5216,6 +5218,7 @@ function buildFarRouteDispatchBranchChoices(
       routeMarkerKind,
       routeMarkerText,
       routeNodeStates,
+      routeProgressPercent,
       routeStepLabels,
       nextText: choice.nextText,
       reasonText,
@@ -5400,6 +5403,18 @@ function buildFarRouteDispatchBranchRouteNodeStates(active, branchStatus) {
     branch: "waiting",
     return: "waiting"
   };
+}
+
+function buildFarRouteDispatchBranchRouteProgressPercent(routeNodeStates) {
+  if (routeNodeStates?.return === "done" || routeNodeStates?.return === "next") {
+    return 100;
+  }
+
+  if (routeNodeStates?.branch === "done" || routeNodeStates?.branch === "next") {
+    return 50;
+  }
+
+  return 0;
 }
 
 function buildFarRouteDispatchBranchDecisionKind(

@@ -839,6 +839,10 @@ function renderFarDispatchBranchChoiceRoute(choice) {
     " is-route-marker-" +
     getFarDispatchBranchChoiceRouteMarkerKind(choice) +
     (choice.focused ? " is-focused" : "");
+  route.style.setProperty(
+    "--branch-route-progress",
+    getFarDispatchBranchChoiceRouteProgress(choice) + "%"
+  );
   route.setAttribute("aria-hidden", "true");
 
   const line = document.createElement("span");
@@ -1001,6 +1005,15 @@ function getFarDispatchBranchChoiceRouteStepLabel(choice, nodeId) {
   const routeStepLabels = choice.routeStepLabels ?? {};
   const label = String(routeStepLabels[nodeId] ?? "");
   return label.replace(/[^0-9/]/g, "").slice(0, 3);
+}
+
+function getFarDispatchBranchChoiceRouteProgress(choice) {
+  const progress = Number(choice.routeProgressPercent ?? 0);
+  if (!Number.isFinite(progress)) {
+    return 0;
+  }
+
+  return Math.max(0, Math.min(100, Math.round(progress)));
 }
 
 function renderDirective(option) {

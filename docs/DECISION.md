@@ -1,5 +1,30 @@
 # Decision
 
+## 2026-05-01 Product decision：远航路线微图推进填充
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-01 08:41 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#6 仍是后半段玩法变化主反馈，#4 仍是界面文字密度和图片化主反馈，因此本轮继续进入 Product decision。
+
+当前最大问题：协同/绕行分支卡片已经有路线微图、资源取向、状态标记、步骤高亮、1/2/3 序号、方向箭头、图例和默认折叠明细；但路线轨道本身仍只表达连接关系。玩家能看到哪个节点是下一步，却还不能直接从轨道填充判断路线已经推进到 0/3、1/3 还是 2/3。
+
+本轮决策：
+
+- 新增“远航路线微图推进填充”。
+- `branchChoices` 从现有 `routeNodeStates` 派生 `routeProgressPercent`，按未起步 0%、选择分支阶段 50%、回目标/完成阶段 100% 展示路线轨道填充。
+- `src/app.js` 将推进百分比写入 `--branch-route-progress`，`src/styles.css` 用协同/绕行各自轨道色渲染填充段。
+- 推进填充仍 `aria-hidden="true"`，可访问语义继续保留在 `branchChoiceText`、路线步骤、按钮路线标记、路线反馈、卡片标题和展开明细中。
+- 本轮只调整派生展示、DOM style、CSS 和静态/逻辑测试；不新增收益、不新增存档字段，不改变升级价格、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、远航调度数值、冷却、连携窗口、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-05-01 08:41 CST 当前 5 个 open feedback issue、0 个 open bug issue。
+- `src/game.js` 派生 `routeProgressPercent`，覆盖 0/3 为 0、1/3 为 50、当前回航路线为 100、未选路线为 0。
+- `src/app.js` 渲染 `--branch-route-progress`，并对异常值做 0-100 限制。
+- `src/styles.css` 使用 `--branch-route-line-fill`、`--branch-route-line-track` 和 `--branch-route-progress` 生成路线轨道填充。
+- `tests/game.test.js` 覆盖推进百分比派生、静态 DOM style 绑定和样式变量。
+- 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含 `routeProgressPercent`、`buildFarRouteDispatchBranchRouteProgressPercent` 和 `--branch-route-progress`。
+- 钉钉通知待本轮结束时尝试发送；webhook 仍只允许来自运行时上下文或本地环境，不写入仓库。
+
 ## 2026-05-01 Product decision：远航路线微图图例
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-01 08:18 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#6 仍是后半段玩法变化主反馈，#4 仍是界面文字密度和图片化主反馈，因此本轮继续进入 Product decision。

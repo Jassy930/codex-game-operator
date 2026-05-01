@@ -1559,6 +1559,7 @@ test("星图项目长列表会默认收起超出窗口的航段", () => {
 test("静态首页会渲染航线指令轮换目标", () => {
   const indexHtml = readFileSync(new URL("../index.html", import.meta.url), "utf8");
   const appJs = readFileSync(new URL("../src/app.js", import.meta.url), "utf8");
+  const gameJs = readFileSync(new URL("../src/game.js", import.meta.url), "utf8");
   const styles = readFileSync(new URL("../src/styles.css", import.meta.url), "utf8");
 
   assert.match(indexHtml, /id="directivePlan"/);
@@ -1710,6 +1711,8 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(appJs, /"far-dispatch-branch-choice-route is-" \+/);
   assert.match(appJs, /" is-resource-" \+/);
   assert.match(appJs, /" is-route-marker-" \+/);
+  assert.match(appJs, /"--branch-route-progress"/);
+  assert.match(appJs, /getFarDispatchBranchChoiceRouteProgress\(choice\) \+ "%"/);
   assert.match(appJs, /route\.setAttribute\("aria-hidden", "true"\)/);
   assert.match(appJs, /line\.className = "far-dispatch-branch-choice-route-line"/);
   assert.match(appJs, /getFarDispatchBranchChoiceRouteNodeState\(choice, "start"\)/);
@@ -1747,6 +1750,7 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(appJs, /function getFarDispatchBranchChoiceDecisionKind\(choice\)/);
   assert.match(appJs, /function getFarDispatchBranchChoiceRouteResourceKind\(choice\)/);
   assert.match(appJs, /function getFarDispatchBranchChoiceRouteMarkerKind\(choice\)/);
+  assert.match(appJs, /function getFarDispatchBranchChoiceRouteProgress\(choice\)/);
   assert.match(appJs, /meter\.className = "directive-task-meter"/);
   assert.match(appJs, /meter\.className = "far-dispatch-meter"/);
   assert.match(appJs, /loopMeter\.className = "far-dispatch-loop-meter"/);
@@ -1761,6 +1765,8 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(appJs, /elements\.directiveTask\.classList\.toggle\("is-completed", task\.completed\)/);
   assert.match(appJs, /elements\.directiveTask\.replaceChildren\(text, meter\)/);
   assert.match(appJs, /elements\.farDispatch\.classList\.toggle\("is-active", dispatch\.active\)/);
+  assert.match(gameJs, /routeProgressPercent/);
+  assert.match(gameJs, /function buildFarRouteDispatchBranchRouteProgressPercent/);
   assert.match(appJs, /option\.recommended \? "is-recommended" : ""/);
   assert.match(appJs, /option\.cooling \? "is-cooling" : ""/);
   assert.match(appJs, /option\.finisherRecommended \? "is-finisher-recommended" : ""/);
@@ -1863,7 +1869,10 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(styles, /\.far-dispatch-branch-choice-badge/);
   assert.match(styles, /\.far-dispatch-branch-choice-badge\.is-recommended-shift/);
   assert.match(styles, /\.far-dispatch-branch-choice-route/);
+  assert.match(styles, /--branch-route-progress: 0%/);
+  assert.match(styles, /--branch-route-line-fill/);
   assert.match(styles, /\.far-dispatch-branch-choice-route-line/);
+  assert.match(styles, /var\(--branch-route-line-fill\) 0 var\(--branch-route-progress\)/);
   assert.match(styles, /\.far-dispatch-branch-choice-route-line::before/);
   assert.match(styles, /\.far-dispatch-branch-choice-route-line::after/);
   assert.match(styles, /\.far-dispatch-branch-choice-route-node/);
@@ -2961,6 +2970,10 @@ test("远航调度会在 20M 后按当前航段指定目标指令", () => {
     ["next:waiting:waiting", "next:waiting:waiting"]
   );
   assert.deepEqual(
+    dispatch.branchChoices.map((choice) => choice.routeProgressPercent),
+    [0, 0]
+  );
+  assert.deepEqual(
     dispatch.branchChoices.map(
       (choice) =>
         choice.routeStepLabels.start +
@@ -3124,6 +3137,10 @@ test("远航调度会在 20M 后按当前航段指定目标指令", () => {
         choice.routeNodeStates.return
     ),
     ["done:next:waiting", "done:next:waiting"]
+  );
+  assert.deepEqual(
+    relayDispatch.branchChoices.map((choice) => choice.routeProgressPercent),
+    [50, 50]
   );
   assert.match(relayDispatch.loopStatusText, /闭环进度 1\/3/);
   assert.match(relayDispatch.loopStatusText, /优先谐振脉冲触发远航协同/);
@@ -3292,6 +3309,10 @@ test("远航调度会在 20M 后按当前航段指定目标指令", () => {
     ),
     ["done:waiting:waiting", "done:done:next"]
   );
+  assert.deepEqual(
+    detourDispatch.branchChoices.map((choice) => choice.routeProgressPercent),
+    [0, 100]
+  );
   assert.match(detourDispatch.loopStatusText, /闭环进度 2\/3/);
   assert.match(detourDispatch.loopStatusText, /触发远航闭环与绕行突破/);
   assert.match(detourDispatch.loopStatusText, /分支 绕行：巡航回收/);
@@ -3442,6 +3463,10 @@ test("远航调度会在 20M 后按当前航段指定目标指令", () => {
         choice.routeNodeStates.return
     ),
     ["done:done:next", "done:waiting:waiting"]
+  );
+  assert.deepEqual(
+    loopDispatch.branchChoices.map((choice) => choice.routeProgressPercent),
+    [100, 0]
   );
   assert.match(loopDispatch.loopStatusText, /闭环进度 2\/3/);
   assert.match(loopDispatch.loopStatusText, /协同回航到点火齐射触发远航闭环/);

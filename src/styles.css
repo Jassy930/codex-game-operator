@@ -1633,6 +1633,10 @@ h2 {
 }
 
 .far-dispatch-branch-choice-route {
+  --branch-route-line-fill: rgba(255, 211, 106, 0.88);
+  --branch-route-line-track: rgba(248, 243, 231, 0.28);
+  --branch-route-progress: 0%;
+
   position: relative;
   display: block;
   height: 22px;
@@ -1650,7 +1654,11 @@ h2 {
   left: 12%;
   height: 2px;
   border-radius: 999px;
-  background: rgba(248, 243, 231, 0.34);
+  background: linear-gradient(
+    90deg,
+    var(--branch-route-line-fill) 0 var(--branch-route-progress),
+    var(--branch-route-line-track) var(--branch-route-progress) 100%
+  );
   transform: translateY(-50%);
 }
 
@@ -1797,13 +1805,19 @@ h2 {
 }
 
 .far-dispatch-branch-choice-route.is-sync {
+  --branch-route-line-fill: rgba(103, 232, 249, 0.9);
+  --branch-route-line-track: rgba(103, 232, 249, 0.22);
+
   border-color: rgba(103, 232, 249, 0.28);
   background:
     linear-gradient(90deg, rgba(103, 232, 249, 0.12), rgba(150, 231, 168, 0.05)),
     rgba(5, 12, 20, 0.2);
 }
 
-.far-dispatch-branch-choice-route.is-sync .far-dispatch-branch-choice-route-line,
+.far-dispatch-branch-choice-route.is-sync .far-dispatch-branch-choice-route-line {
+  border-color: rgba(103, 232, 249, 0.62);
+}
+
 .far-dispatch-branch-choice-route.is-sync .far-dispatch-branch-choice-route-node {
   border-color: rgba(103, 232, 249, 0.62);
   background: #67e8f9;
@@ -1815,6 +1829,9 @@ h2 {
 }
 
 .far-dispatch-branch-choice-route.is-detour {
+  --branch-route-line-fill: rgba(255, 126, 177, 0.9);
+  --branch-route-line-track: rgba(244, 178, 60, 0.24);
+
   border-color: rgba(244, 178, 60, 0.3);
   background:
     linear-gradient(90deg, rgba(244, 178, 60, 0.12), rgba(255, 126, 177, 0.05)),
@@ -1822,7 +1839,6 @@ h2 {
 }
 
 .far-dispatch-branch-choice-route.is-detour .far-dispatch-branch-choice-route-line {
-  background: linear-gradient(90deg, #f4b23c, #ff7eb1);
   transform: translateY(-50%) rotate(-4deg);
 }
 
