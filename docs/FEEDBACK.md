@@ -8,6 +8,10 @@
 - 本轮只调整点火按钮展示层和测试，不新增可见文字、不新增收益、不新增存档字段，不改变点击收益、连击窗口、过载奖励、升级价格、星图路线、项目奖励、航线策略、航线指令、远航调度、反馈入口或部署链路。
 - 本轮本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
 - 构建产物已确认包含 `coreVeinHitFlash`、普通命中星核裂纹选择器和降低动效兜底。
+- 发布：提交 `7ef5c3c` 已推送到 `origin/main`；GitHub Pages workflow `25222925852` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页返回 HTTP 200，线上 `src/styles.css` 已确认包含点火星核裂纹命中闪亮样式。
+- #5 已回复：说明点火星核裂纹命中闪亮、验证结果、Pages 部署和复测问题；issue 保持 open，评论地址：`https://github.com/Jassy930/codex-game-operator/issues/5#issuecomment-4360403165`。
+- 回复后同步 GitHub Issues：2026-05-02 00:37 CST 当前仍为 5 个 open feedback issue、0 个 open bug issue；#5 更新时间为 2026-05-01T16:37:17Z。
+- 钉钉通知未发送：2026-05-02 00:37 CST 运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` / `ROBOT` 相关变量名，当前目录、`/home/jassy/glm` 和用户目录两层内未发现 `.env*` 文件；未将 webhook 写入仓库。
 
 - GitHub Issues：gh 可用且已认证；2026-05-02 00:13 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。#5 仍集中在“点火按钮太薄弱、增加点击反馈和点击欲望”。
 - 本轮 Product decision 继续处理 #5：点火按钮已有多层命中反馈，但左上过载倒计时徽标在普通点击后主要只更新数字，缺少“这一击让倒计时减 1”的同节奏确认。

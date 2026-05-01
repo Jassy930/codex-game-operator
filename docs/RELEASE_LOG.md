@@ -8,7 +8,9 @@
 - 同步 GitHub Issues 反馈状态：2026-05-02 00:27 CST 当前 5 个 open feedback issue、0 个 open bug issue；#5 作为主处理对象。
 - 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
 - 构建产物已确认包含点火星核裂纹命中闪亮样式。
-- 发布待执行：提交并推送后等待 GitHub Pages workflow 完成，再复核线上资源。
+- 发布：提交 `7ef5c3c` 已推送到 `origin/main`；GitHub Pages workflow `25222925852` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页返回 HTTP 200，线上 `src/styles.css` 已确认包含点火星核裂纹命中闪亮样式。
+- 反馈处理：已回复 #5，说明点火星核裂纹命中闪亮、验证结果、Pages 部署和复测问题；issue 保持 open，评论地址：`https://github.com/Jassy930/codex-game-operator/issues/5#issuecomment-4360403165`。回复后于 2026-05-02 00:37 CST 再次同步 GitHub Issues，当前仍为 5 个 open feedback issue、0 个 open bug issue；#5 更新时间为 2026-05-01T16:37:17Z。
+- 钉钉通知未发送：2026-05-02 00:37 CST 运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` / `ROBOT` 相关变量名，当前目录、`/home/jassy/glm` 和用户目录两层内未发现 `.env*` 文件；未将 webhook 写入仓库。
 
 - 点火按钮新增“倒计时徽标命中跳闪”：普通点火命中时左上过载倒计时徽标短促跳闪，让玩家确认这一击让过载倒计时减 1；过载命中继续使用已有爆发动画，继续回应 #5 的点击反馈、特效和点击欲望反馈。
 - `src/styles.css` 复用 `.core-button.is-pulsing:not(.is-overload-impact)` 驱动 `coreBadgeStepHit`，并在降低动效偏好中关闭该动画；`tests/game.test.js` 覆盖静态绑定。

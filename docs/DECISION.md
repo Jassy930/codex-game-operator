@@ -22,7 +22,10 @@
 - `tests/game.test.js` 覆盖点火星核裂纹命中闪亮静态绑定。
 - 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
 - 构建产物已确认包含 `coreVeinHitFlash`、普通命中星核裂纹选择器和降低动效兜底。
-- 发布待执行：本轮代码与文档提交后推送到 `origin/main`，再等待 GitHub Pages workflow 完成并复核线上资源。
+- 发布验证已通过：提交 `7ef5c3c` 已推送到 `origin/main`；GitHub Pages workflow `25222925852` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页返回 HTTP 200，线上 `src/styles.css` 已确认包含 `coreVeinHitFlash`、普通命中星核裂纹选择器和降低动效兜底。
+- 已回复 GitHub Issue #5，说明点火星核裂纹命中闪亮、验证结果、Pages 部署和复测问题；issue 保持 open，更新时间为 2026-05-01T16:37:17Z；评论地址：`https://github.com/Jassy930/codex-game-operator/issues/5#issuecomment-4360403165`。
+- 回复后同步 GitHub Issues：2026-05-02 00:37 CST 当前仍为 5 个 open feedback issue、0 个 open bug issue。
+- 钉钉通知未发送：2026-05-02 00:37 CST 运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` / `ROBOT` 相关变量名，当前目录、`/home/jassy/glm` 和用户目录两层内未发现 `.env*` 文件；未将 webhook 写入仓库。
 
 ## 2026-05-02 Product decision：点火倒计时徽标命中跳闪
 
