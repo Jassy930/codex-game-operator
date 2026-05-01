@@ -24,6 +24,7 @@
 - 发布验证已通过：提交 `90c9c99` 已推送到 `origin/main`；GitHub Pages workflow `25208876617` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页返回 HTTP 200，线上 `src/styles.css` 已确认包含 `.core-button.is-pulsing .core-charge-ring`、`coreChargeRingHit`、`.core-button.is-overload-impact .core-charge-ring` 和 `coreChargeRingOverloadHit`。workflow 继续出现 Node.js 20 actions 弃用提醒，未影响本次部署。
 - 已回复 GitHub Issue #5，说明点火蓄能轨命中闪烁、验证结果、Pages 部署和复测问题，issue 保持 open，更新时间为 2026-05-01T09:01:11Z；评论地址：`https://github.com/Jassy930/codex-game-operator/issues/5#issuecomment-4358608276`。
 - 回复后同步 GitHub Issues：2026-05-01 17:01 CST 当前仍为 5 个 open feedback issue、0 个 open bug issue。
+- 钉钉通知未发送：2026-05-01 17:04 CST 运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` 相关变量名，当前目录和父级四层内也未发现 `.env*` 文件；未将 webhook 写入仓库。
 
 ## 2026-05-01 Product decision：点火按住落点热区
 
