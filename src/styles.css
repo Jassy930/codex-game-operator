@@ -3448,6 +3448,11 @@ h2 {
   box-shadow: 0 0 12px rgba(255, 126, 177, 0.18);
 }
 
+.far-dispatch.is-active .far-dispatch-loop-visual::after {
+  background-size: 220% 100%;
+  animation: farDispatchLoopVisualTrackSweep 1500ms ease-in-out infinite;
+}
+
 .far-dispatch-loop-visual-arrow {
   position: absolute;
   z-index: 2;
@@ -6826,6 +6831,23 @@ h2 {
   }
 }
 
+@keyframes farDispatchLoopVisualTrackSweep {
+  0%,
+  100% {
+    background-position: 0% 50%;
+    filter: saturate(1);
+    box-shadow: 0 0 12px rgba(255, 126, 177, 0.18);
+  }
+
+  50% {
+    background-position: 100% 50%;
+    filter: saturate(1.18);
+    box-shadow:
+      0 0 16px rgba(255, 211, 106, 0.2),
+      0 0 18px rgba(150, 231, 168, 0.16);
+  }
+}
+
 @keyframes farDispatchLoopCurrentLinkPulse {
   0%,
   100% {
@@ -6910,6 +6932,7 @@ h2 {
   .core-gain-pop.is-showing::after,
   .core-gain-pop.is-overload-gain.is-showing::after,
   .far-dispatch.is-active .far-dispatch-scene-image,
+  .far-dispatch.is-active .far-dispatch-loop-visual::after,
   .far-dispatch-loop-visual-arrow.is-current,
   .far-dispatch-loop-visual-node.is-current::after,
   .far-dispatch-loop-link.is-current::before,

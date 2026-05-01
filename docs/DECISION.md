@@ -1,5 +1,28 @@
 # Decision
 
+## 2026-05-02 Product decision：远航闭环进度轨活跃态光扫
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-02 04:58 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有 open bug；#4/#6 仍是主线反馈，继续指向远航调度需要更图形化、后半段短循环需要更容易扫视。
+
+当前最大问题：远航调度区已有闭环插画、路线微图、当前节点脉冲、当前方向信标、微图到步骤卡连接信标和当前步骤卡信标，但路线微图的进度轨本体仍是静态填充。玩家在 20M 后连续执行目标 -> 分支 -> 回目标时，轨道推进本身还缺少和当前节点/方向/连接层一致的轻量动态确认。
+
+本轮决策：
+
+- 新增“远航闭环进度轨活跃态光扫”。
+- `src/styles.css` 为 `.far-dispatch.is-active .far-dispatch-loop-visual::after` 增加 `farDispatchLoopVisualTrackSweep` 轻量光扫动画。
+- 在 `prefers-reduced-motion: reduce` 中关闭该进度轨动效。
+- `tests/game.test.js` 增加静态断言，覆盖 active 进度轨动画、keyframes 和降低动效兜底。
+- 该改动只调整远航闭环展示层和测试，不新增可见说明文字、不新增收益、不新增存档字段，不改变点击收益、升级价格、星图路线、项目奖励、航线策略、航线指令、远航调度数值、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-05-02 04:58 CST 当前 5 个 open feedback issue、0 个 open bug issue；#4/#6 作为本轮主处理对象。
+- `src/styles.css` 包含 `.far-dispatch.is-active .far-dispatch-loop-visual::after`、`farDispatchLoopVisualTrackSweep` 和降低动效兜底。
+- `tests/game.test.js` 覆盖远航闭环进度轨活跃态光扫静态绑定。
+- 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认 `dist/src/styles.css` 包含 `farDispatchLoopVisualTrackSweep` 和 active 进度轨光扫降低动效兜底。
+- 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #4/#6，以及当前远航闭环路线微图进度轨仍偏静态的复盘。
+
 ## 2026-05-02 Product decision：远航调度插画活跃态投光
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-02 04:44 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有 open bug；#4/#6 仍是主线反馈，继续指向远航调度需要更图形化、后半段短循环需要更容易扫视。

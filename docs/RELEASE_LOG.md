@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+- 远航调度新增“远航闭环进度轨活跃态光扫”：20M 后主操作区远航闭环 1/2/3 路线微图的进度轨在 active 状态会播放轻量光扫，让已推进轨道、当前节点、方向信标、连接信标和步骤卡当前态进入同一反馈节奏，继续回应 #4 的图形化/文字密度反馈，并辅助 #6 的后半段短循环执行确认。
+- `src/styles.css` 为 `.far-dispatch.is-active .far-dispatch-loop-visual::after` 增加 `farDispatchLoopVisualTrackSweep` 动画，并在降低动效偏好中关闭该动画；`tests/game.test.js` 覆盖静态绑定。
+- 本轮只调整远航闭环展示层和测试，不新增可见说明文字、不新增收益、不新增存档字段，不改变点击收益、升级价格、星图路线、项目奖励、航线策略、航线指令、远航调度数值、反馈入口或部署链路。
+- 同步 GitHub Issues 反馈状态：2026-05-02 04:58 CST 当前 5 个 open feedback issue、0 个 open bug issue；#4/#6 作为主处理对象。
+- 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认 `dist/src/styles.css` 包含 `farDispatchLoopVisualTrackSweep` 和 active 进度轨光扫降低动效兜底。
+
 - 远航调度新增“插画活跃态投光”：20M 后主操作区远航调度闭环插画在 active 状态会播放轻量投光，让远航调度概览图和下方当前节点、连接信标、步骤卡脉冲进入同一反馈节奏，继续回应 #4 的图片化/文字密度反馈，并辅助 #6 的后半段短循环理解。
 - `src/styles.css` 为 `.far-dispatch.is-active .far-dispatch-scene-image` 增加 `farDispatchSceneImagePulse` 动画，并在降低动效偏好中关闭该动画；`tests/game.test.js` 覆盖静态绑定。
 - 本轮只调整远航调度展示层和测试，不新增可见说明文字、不新增收益、不新增存档字段，不改变点击收益、升级价格、星图路线、项目奖励、航线策略、航线指令、远航调度数值、反馈入口或部署链路。

@@ -2378,6 +2378,7 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(styles, /--far-loop-visual-progress/);
   assert.match(styles, /\.far-dispatch-loop-visual::before/);
   assert.match(styles, /\.far-dispatch-loop-visual::after/);
+  assert.match(styles, /\.far-dispatch\.is-active \.far-dispatch-loop-visual::after/);
   assert.match(styles, /\.far-dispatch-loop-visual-arrow/);
   assert.match(styles, /\.far-dispatch-loop-visual-arrow\.is-segment-1/);
   assert.match(styles, /\.far-dispatch-loop-visual-arrow\.is-segment-2/);
@@ -2393,6 +2394,7 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(styles, /\.far-dispatch-loop-visual-node\.is-current::after/);
   assert.match(styles, /@keyframes farDispatchLoopCurrentPulse/);
   assert.match(styles, /@keyframes farDispatchLoopCurrentArrowPulse/);
+  assert.match(styles, /@keyframes farDispatchLoopVisualTrackSweep/);
   assert.match(styles, /@keyframes farDispatchLoopCurrentStepGlow/);
   assert.match(styles, /@keyframes farDispatchSceneImagePulse/);
   assert.match(styles, /\.far-dispatch-loop-visual-reward/);
@@ -2416,6 +2418,7 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(styles, /@keyframes farDispatchLoopCurrentLinkPulse/);
   assert.match(styles, /@media \(prefers-reduced-motion: reduce\) \{[\s\S]*\.far-dispatch-loop-visual-arrow\.is-current[\s\S]*animation: none/);
   assert.match(styles, /@media \(prefers-reduced-motion: reduce\) \{[\s\S]*\.far-dispatch\.is-active \.far-dispatch-scene-image[\s\S]*animation: none/);
+  assert.match(styles, /@media \(prefers-reduced-motion: reduce\) \{[\s\S]*\.far-dispatch\.is-active \.far-dispatch-loop-visual::after[\s\S]*animation: none/);
   assert.match(styles, /@media \(prefers-reduced-motion: reduce\) \{[\s\S]*\.far-dispatch-loop-visual-node\.is-current::after[\s\S]*animation: none/);
   assert.match(styles, /@media \(prefers-reduced-motion: reduce\) \{[\s\S]*\.far-dispatch-loop-link\.is-current::before[\s\S]*animation: none/);
   assert.match(styles, /@media \(prefers-reduced-motion: reduce\) \{[\s\S]*\.far-dispatch-loop-step\.is-current[\s\S]*animation: none/);
