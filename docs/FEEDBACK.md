@@ -11,6 +11,7 @@
 - 发布：提交 `2f2df06` 已推送到 `origin/main`；GitHub Pages workflow `25224556618` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页返回 HTTP 200，线上 `src/styles.css` 已确认包含点火按钮整体命中投光样式。
 - #5 已回复：说明点火按钮整体命中投光、验证结果、Pages 部署和复测问题；issue 保持 open，评论地址：`https://github.com/Jassy930/codex-game-operator/issues/5#issuecomment-4360616868`。
 - 回复后同步 GitHub Issues：2026-05-02 01:20 CST 当前仍为 5 个 open feedback issue、0 个 open bug issue；#5 更新时间为 2026-05-01T17:20:13Z。
+- 钉钉通知未发送：2026-05-02 01:23 CST 运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` / `ROBOT` 相关变量名，当前目录和 `/home/jassy/glm` 两层内未发现 `.env*` 文件；未将 webhook 写入仓库。
 
 - GitHub Issues：gh 可用且已认证；2026-05-02 00:54 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。#5 仍是最近更新的反馈，集中在“点火按钮太薄弱、增加点击反馈和点击欲望”。
 - 本轮 Product decision 继续处理 #5：点火按钮已有多层命中反馈，收益浮层也已经跟随实际点击落点，但 `+X` 浮层本体仍缺少从落点扩散出去的短促奖励光晕。

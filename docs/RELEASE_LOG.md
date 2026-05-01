@@ -10,6 +10,7 @@
 - 构建产物已确认包含点火按钮整体命中投光样式。
 - 发布：提交 `2f2df06` 已推送到 `origin/main`；GitHub Pages workflow `25224556618` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页返回 HTTP 200，线上 `src/styles.css` 已确认包含点火按钮整体命中投光样式。workflow 继续给出 Node.js 20 actions 弃用提醒，未影响本次部署。
 - 反馈处理：已回复 #5，说明点火按钮整体命中投光、验证结果、Pages 部署和复测问题；issue 保持 open，评论地址：`https://github.com/Jassy930/codex-game-operator/issues/5#issuecomment-4360616868`。回复后于 2026-05-02 01:20 CST 再次同步 GitHub Issues，当前仍为 5 个 open feedback issue、0 个 open bug issue；#5 更新时间为 2026-05-01T17:20:13Z。
+- 钉钉通知未发送：2026-05-02 01:23 CST 运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` / `ROBOT` 相关变量名，当前目录和 `/home/jassy/glm` 两层内未发现 `.env*` 文件；未将 webhook 写入仓库。
 
 - 点火按钮新增“收益浮层命中奖励光晕”：普通收益浮层显示时会从点击落点附近扩散短促奖励光晕，过载收益浮层使用更强光晕，继续回应 #5 的点击反馈、特效和点击欲望反馈。
 - `src/styles.css` 为 `.core-gain-pop::after` 增加 `coreGainPopHalo` / `coreGainPopOverloadHalo`，并在降低动效偏好中关闭该动画；`tests/game.test.js` 覆盖静态绑定。
