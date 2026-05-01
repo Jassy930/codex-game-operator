@@ -2,12 +2,16 @@
 
 ## 2026-05-01
 
-- GitHub Issues：gh 可用且已认证；2026-05-01 23:20 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
+- GitHub Issues：gh 可用且已认证；2026-05-01 23:32 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue；#5 更新时间为 2026-05-01T15:30:22Z。
 - 本轮 Product decision 继续处理 #5：点火按钮已经把普通命中和过载命中的反馈接到按钮本体、落点、收益浮层、下一击预告、连击读数和顶部能量读数，但顶部“过载 +X”奖励读数仍是静态展示。
 - 本轮改动新增点火过载奖励读数命中亮闪：第 8 次过载命中时 `#overloadValue` 会短促亮闪，普通点火只清理旧状态不触发该反馈，连续点击会清理并重新触发。
 - 本轮只调整点火过载反馈展示层和测试，不新增可见文字、不新增收益、不新增存档字段，不改变点击收益、连击窗口、过载奖励、升级价格、星图路线、项目奖励、航线策略、航线指令、远航调度、反馈入口或部署链路。
 - 本轮本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
 - 构建产物已确认包含点火过载奖励读数命中亮闪代码和样式。
+- 发布：提交 `62f6e3e` 已推送到 `origin/main`；GitHub Pages workflow `25220367775` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页返回 HTTP 200，线上 `src/app.js` 与 `src/styles.css` 已确认包含点火过载奖励读数命中亮闪代码和样式。
+- #5 已回复：说明点火过载奖励读数命中亮闪、验证结果、Pages 部署和复测问题；首次回复中的“过载 +X”格式被 shell 反引号影响，已补发修正格式的回复，issue 保持 open，正确评论地址：`https://github.com/Jassy930/codex-game-operator/issues/5#issuecomment-4360062885`。
+- 回复后同步 GitHub Issues：2026-05-01 23:32 CST 当前仍为 5 个 open feedback issue、0 个 open bug issue。
+- 钉钉通知未发送：2026-05-01 23:32 CST 运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` / `ROBOT` 相关变量名，当前目录、`/home/jassy/glm` 和用户目录两层内未发现 `.env*` 文件；未将 webhook 写入仓库。
 - 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #5，以及当前点火过载反馈链路复盘。
 
 - GitHub Issues：gh 可用且已认证；2026-05-01 23:07 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。

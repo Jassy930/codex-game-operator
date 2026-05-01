@@ -5,9 +5,12 @@
 - 点火按钮新增“过载奖励读数命中亮闪”：第 8 次过载命中时顶部 `#overloadValue` 会短促亮闪，把本次过载爆发和长期过载奖励读数连到同一反馈节奏，继续回应 #5 的点击反馈、特效和点击欲望反馈。
 - `src/app.js` 在 `animateCore` 的过载命中分支为过载奖励读数追加 `is-core-overload-prize` 并用独立 timer 清理；`src/styles.css` 增加 `scoreOverloadReadoutPrize` 和降低动效兜底；`tests/game.test.js` 覆盖静态绑定。
 - 本轮只调整点火过载反馈展示层和测试，不新增可见文字、不新增收益、不新增存档字段，不改变点击收益、连击窗口、过载奖励、升级价格、星图路线、项目奖励、航线策略、航线指令、远航调度、反馈入口或部署链路。
-- 同步 GitHub Issues 反馈状态：2026-05-01 23:20 CST 当前 5 个 open feedback issue、0 个 open bug issue；#5 作为主处理对象。
+- 同步 GitHub Issues 反馈状态：2026-05-01 23:32 CST 当前 5 个 open feedback issue、0 个 open bug issue；#5 作为主处理对象，更新时间为 2026-05-01T15:30:22Z。
 - 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
 - 构建产物已确认包含点火过载奖励读数命中亮闪代码和样式。
+- 发布：提交 `62f6e3e` 已推送到 `origin/main`；GitHub Pages workflow `25220367775` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页返回 HTTP 200，线上 `src/app.js` 与 `src/styles.css` 已确认包含点火过载奖励读数命中亮闪代码和样式。
+- 反馈处理：已回复 #5，说明点火过载奖励读数命中亮闪、验证结果、Pages 部署和复测问题；首次回复中的“过载 +X”格式被 shell 反引号影响，已补发修正格式的回复，issue 保持 open，正确评论地址：`https://github.com/Jassy930/codex-game-operator/issues/5#issuecomment-4360062885`。回复后于 2026-05-01 23:32 CST 再次同步 GitHub Issues，当前仍为 5 个 open feedback issue、0 个 open bug issue。
+- 钉钉通知未发送：2026-05-01 23:32 CST 运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` / `ROBOT` 相关变量名，当前目录、`/home/jassy/glm` 和用户目录两层内未发现 `.env*` 文件；未将 webhook 写入仓库。
 
 - 点火按钮新增“能量读数命中亮闪”：普通点火命中时顶部 `#energyValue` 会短促亮闪，过载命中时使用更强亮闪，把本次点击收益和全局能量读数变化连到同一反馈节奏，继续回应 #5 的点击反馈、特效和点击欲望反馈。
 - `src/app.js` 复用 `animateCore` 的普通/过载命中状态，为能量读数追加 `is-core-hit` / `is-core-overload-hit` 并用独立 timer 清理；`src/styles.css` 增加 `scoreEnergyReadoutHit`、`scoreEnergyReadoutOverloadHit` 和降低动效兜底；`tests/game.test.js` 覆盖静态绑定。

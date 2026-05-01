@@ -2,7 +2,7 @@
 
 ## 2026-05-01 Product decision：点火过载奖励读数命中亮闪
 
-阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-01 23:20 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；本轮继续处理 #5“点火按钮太薄弱、增加点击反馈和点击欲望”，同时不增加 #4 提到的默认文字密度。
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-01 23:32 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；本轮继续处理 #5“点火按钮太薄弱、增加点击反馈和点击欲望”，同时不增加 #4 提到的默认文字密度。
 
 当前最大问题：点火过载命中已经有按钮本体、中心标签、落点、收益浮层、连击读数、下一击预告和顶部能量读数反馈，但顶部“过载 +X”奖励读数仍保持静态。玩家第 8 次点击看到过载爆发后，还需要自己把这次强反馈和长期过载奖励来源对应起来。
 
@@ -16,12 +16,15 @@
 
 验收标准：
 
-- GitHub Issues 已同步：2026-05-01 23:20 CST 当前 5 个 open feedback issue、0 个 open bug issue。
+- GitHub Issues 已同步：2026-05-01 23:32 CST 当前 5 个 open feedback issue、0 个 open bug issue；#5 更新时间为 2026-05-01T15:30:22Z。
 - `src/app.js` 包含 `coreOverloadReadoutTimer` 和 `is-core-overload-prize`。
 - `src/styles.css` 包含 `scoreOverloadReadoutPrize` 和降低动效兜底。
 - `tests/game.test.js` 覆盖点火过载奖励读数命中亮闪静态绑定。
 - 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
 - 构建产物已确认包含 `coreOverloadReadoutTimer`、`is-core-overload-prize` 和 `scoreOverloadReadoutPrize`。
+- 发布验证已通过：提交 `62f6e3e` 已推送到 `origin/main`；GitHub Pages workflow `25220367775` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页返回 HTTP 200，线上 `src/app.js` 与 `src/styles.css` 已确认包含点火过载奖励读数命中亮闪代码和样式。
+- 已回复 GitHub Issue #5；首次回复中的“过载 +X”格式被 shell 反引号影响，已补发修正格式的回复，issue 保持 open；正确评论地址：`https://github.com/Jassy930/codex-game-operator/issues/5#issuecomment-4360062885`。
+- 钉钉通知未发送：2026-05-01 23:32 CST 运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` / `ROBOT` 相关变量名，当前目录、`/home/jassy/glm` 和用户目录两层内未发现 `.env*` 文件；未将 webhook 写入仓库。
 - 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #5，以及当前点火过载反馈链路复盘。
 
 ## 2026-05-01 Product decision：点火能量读数命中亮闪
