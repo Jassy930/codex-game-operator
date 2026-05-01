@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+- 远航调度新增“路线对照条当前路线操作收益宽位”：当前路线已经被置顶并获得单列宽栏后，当前路线内部会让“下一步动作”“本步收益”和“回航结果”横跨更宽槽位，备选路线继续沿用原对照布局，继续回应 #6 的后半段路线执行理解和 #4 的文字密度反馈。
+- `src/styles.css` 增加 `.far-dispatch-branch-choice-summary-item.is-active-route` 专用命名网格；`tests/game.test.js` 覆盖 `glyph label phase action action`、`glyph step reward payoff payoff` 和 `glyph intent cost result result` 静态绑定。
+- 本轮只调整远航路线对照条当前路线内部布局和测试，不新增可见文字、不新增收益、不新增存档字段，不改变升级价格、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、远航调度数值、冷却、连携窗口、反馈入口或部署链路。
+- 同步 GitHub Issues 反馈状态：2026-05-01 22:37 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 作为主处理对象，#4 作为视觉密度依据。
+- 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含当前路线宽位网格。
+
 - 远航调度新增“路线对照条当前路线宽栏”：当协同/绕行对照槽存在本轮已选当前路线时，路线对照条从桌面双列切为单列宽栏，置顶后的当前路线获得完整横向空间，另一条备选路线继续保留并沿用降噪与悬停恢复，继续回应 #6 的后半段路线执行理解和 #4 的文字密度反馈。
 - `src/styles.css` 增加 active-route 宽栏选择器；`tests/game.test.js` 覆盖 `.far-dispatch-branch-choice-summary:has(.far-dispatch-branch-choice-summary-item.is-active-route)` 与 `grid-template-columns: minmax(0, 1fr)` 静态绑定。
 - 本轮只调整远航路线对照条布局和测试，不新增可见文字、不新增收益、不新增存档字段，不改变升级价格、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、远航调度数值、冷却、连携窗口、反馈入口或部署链路。

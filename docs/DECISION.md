@@ -1,5 +1,27 @@
 # Decision
 
+## 2026-05-01 Product decision：远航对照条当前路线操作收益宽位
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-01 22:37 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；本轮继续处理 #6“后半段玩法无聊、只有不停目标”和 #4“界面文字密集、需要更好看”的交集。
+
+当前最大问题：当前路线已经置顶，非当前路线已经降噪，桌面端也已在存在当前路线时切成单列宽栏。但当前路线内部仍沿用普通五列对照槽，下一步动作、本步收益和回航结果仍会与身份、阶段、第二步按钮、取向和代价分配接近同等的横向空间，执行期扫视重点不够集中。
+
+本轮决策：
+
+- 新增“远航对照条当前路线操作收益宽位”。
+- `src/styles.css` 只在 `.far-dispatch-branch-choice-summary-item.is-active-route` 内重排命名网格，让下一步动作跨两列、本步收益跨两列、回航结果跨两列；备选路线保留原五列对照布局。
+- `tests/game.test.js` 增加静态断言，覆盖当前路线宽位网格区域。
+- 该改动只调整远航路线对照条当前路线内部布局和测试，不新增可见文字、不新增收益、不新增存档字段，不改变升级价格、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、远航调度数值、冷却、连携窗口、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-05-01 22:37 CST 当前 5 个 open feedback issue、0 个 open bug issue。
+- `src/styles.css` 包含当前路线宽位网格：`glyph label phase action action`、`glyph step reward payoff payoff` 和 `glyph intent cost result result`。
+- `tests/game.test.js` 覆盖远航对照条当前路线操作收益宽位静态样式绑定。
+- 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含当前路线宽位网格。
+- 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #6 和 #4，以及当前远航路线对照条实现复盘。
+
 ## 2026-05-01 Product decision：远航对照条当前路线宽栏
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-01 22:21 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；本轮继续处理 #6“后半段玩法无聊、只有不停目标”和 #4“界面文字密集、需要更好看”的交集。
