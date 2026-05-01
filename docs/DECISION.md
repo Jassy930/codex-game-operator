@@ -1,5 +1,28 @@
 # Decision
 
+## 2026-05-01 Product decision：远航对照条当前动作亮环
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-01 19:14 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；本轮继续处理 #6“后半段玩法无聊、只有不停目标”和 #4“界面文字密集、需要更好看”的交集。
+
+当前最大问题：远航路线对照条已经有下一步动作信标、当前路线边栏和当前路线推进脉冲，但当前路线中的下一步动作胶囊本身仍和普通路线动作胶囊接近。玩家在 2/3 回航、整备或绕行整备阶段需要先看到“当前路线里现在该按哪个动作”，继续追加说明文字会加重 #4 的文字密度问题。
+
+本轮决策：
+
+- 新增“远航对照条当前动作亮环”。
+- `src/styles.css` 仅对 `.far-dispatch-branch-choice-summary-item.is-active-route .far-dispatch-branch-choice-summary-action:not(.is-idle)` 增加亮环、轻量背景和 `farDispatchSummaryActiveActionGlow` 饱和度呼吸。
+- `src/styles.css` 将该动效纳入 `prefers-reduced-motion: reduce` 兜底，减少动效敏感风险。
+- `tests/game.test.js` 增加静态断言，覆盖当前路线动作亮环选择器、关键帧和降动效兜底。
+- 该改动只调整远航路线对照条展示层和测试，不新增收益、不新增存档字段，不改变升级价格、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、远航调度数值、冷却、连携窗口、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-05-01 19:14 CST 当前 5 个 open feedback issue、0 个 open bug issue。
+- `src/styles.css` 包含当前路线动作胶囊选择器、`farDispatchSummaryActiveActionGlow` 和 `prefers-reduced-motion: reduce` 兜底。
+- `tests/game.test.js` 覆盖远航路线对照条当前动作亮环静态样式绑定。
+- 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含 `farDispatchSummaryActiveActionGlow`、当前路线动作胶囊选择器和 `prefers-reduced-motion` 兜底。
+- 待自主 push 后由 GitHub Pages workflow 完成线上发布验证，并回复相关 issue。
+
 ## 2026-05-01 Product decision：远航对照条当前路线推进脉冲
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-01 19:00 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；本轮继续处理 #6“后半段玩法无聊、只有不停目标”和 #4“界面文字密集、需要更好看”的交集。

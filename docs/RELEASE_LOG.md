@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+- 远航调度新增“路线对照条当前动作亮环”：协同/绕行对照槽成为本轮已选路线时，非待选的下一步动作胶囊会获得更明确的亮环、轻量背景和饱和度呼吸，在不增加文字的情况下把当前路线里的可执行动作压到第一扫视层，继续回应 #6 的后半段路线执行理解和 #4 的文字密度反馈。
+- `src/styles.css` 增加当前路线动作胶囊选择器、`farDispatchSummaryActiveActionGlow` 和 `prefers-reduced-motion: reduce` 兜底；`tests/game.test.js` 覆盖静态绑定。
+- 本轮只调整远航路线对照条展示层和测试，不新增收益、不新增存档字段，不改变升级价格、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、远航调度数值、冷却、连携窗口、反馈入口或部署链路。
+- 同步 GitHub Issues 反馈状态：2026-05-01 19:14 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 作为主处理对象，#4 作为视觉密度依据。
+- 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含 `farDispatchSummaryActiveActionGlow`、当前路线动作胶囊选择器和 `prefers-reduced-motion` 兜底。
+
 - 远航调度新增“路线对照条当前路线推进脉冲”：协同/绕行对照槽成为本轮已选路线时，底部 1/2/3 迷你进度轨会播放轻量推进扫光，下一步节点会短促脉冲，在不增加文字的情况下强化当前路线正在推进的位置，继续回应 #6 的后半段路线执行理解和 #4 的文字密度反馈。
 - `src/styles.css` 增加当前路线进度轨动效、`farDispatchSummaryActiveRouteSweep`、`farDispatchSummaryNextNodePulse` 和 `prefers-reduced-motion: reduce` 兜底；`tests/game.test.js` 覆盖静态绑定。
 - 本轮只调整远航路线对照条展示层和测试，不新增收益、不新增存档字段，不改变升级价格、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、远航调度数值、冷却、连携窗口、反馈入口或部署链路。
