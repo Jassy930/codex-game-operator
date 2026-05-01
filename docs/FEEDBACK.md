@@ -8,8 +8,11 @@
 - 完整路线说明仍保留在 `branchChoiceText`、卡片悬停标题和可展开明细中；本轮不新增收益、不新增存档字段，不改变升级价格、星图路线、项目奖励、远航调度数值、冷却、连携窗口、反馈入口或部署链路。
 - 本轮本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
 - 构建产物已确认包含 `far-dispatch-branch-choice-details`、`路线明细` 和 `far-dispatch-branch-choice-detail-grid`。
-- 功能提交 `14a58ce` 已生成，等待随文档提交一起推送并触发 GitHub Pages。
-- 钉钉通知待发送：本轮结束前将继续检查运行环境是否提供 webhook；不会将 webhook 写入仓库。
+- 发布：功能提交 `14a58ce` 与文档提交 `87cad4b` 已推送到 `origin/main`；GitHub Pages workflow `25195625545` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页返回 HTTP 200，线上 `src/app.js` 和 `src/styles.css` 已确认包含路线明细折叠相关代码和样式。
+- #6 已回复：说明远航路线明细折叠、验证结果、Pages 部署和复测问题；issue 保持 open，更新时间为 2026-05-01T00:09:12Z。
+- #4 已回复：说明本轮把远航分支卡片次级说明收进“路线明细”，降低 20M 后分支卡片文字压力；issue 保持 open，更新时间为 2026-05-01T00:09:29Z。
+- 回复后同步 GitHub Issues：2026-05-01 08:09 CST 当前仍为 5 个 open feedback issue、0 个 open bug issue。
+- 钉钉通知未发送：运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` 相关变量名，父目录两层内也未发现 `.env*` 文件；未将 webhook 写入仓库。
 
 - GitHub Issues：gh 可用且已认证；2026-05-01 07:44 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
 - #6 继续作为本轮 Product decision 依据：该反馈指出后半段“只有不停的目标、玩法没有真正变化”；#4 继续作为视觉密度依据。前序路线微图已经能显示路线形态、资源取向、推荐/本轮/上轮/改道、当前节点状态和 1/2/3 步号，但轨道本身仍是静态线，方向感主要靠序号和文字步骤补足。
