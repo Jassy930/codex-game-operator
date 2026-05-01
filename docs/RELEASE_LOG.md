@@ -8,6 +8,8 @@
 - 同步 GitHub Issues 反馈状态：2026-05-01 16:51 CST 当前 5 个 open feedback issue、0 个 open bug issue；#5 作为主处理对象。
 - 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
 - 构建产物已确认包含 `.core-button.is-pulsing .core-charge-ring`、`coreChargeRingHit`、`.core-button.is-overload-impact .core-charge-ring` 和 `coreChargeRingOverloadHit`。
+- 发布：提交 `90c9c99` 已推送到 `origin/main`；GitHub Pages workflow `25208876617` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页返回 HTTP 200，线上 `src/styles.css` 已确认包含点火蓄能轨命中闪烁样式。workflow 继续给出 Node.js 20 actions 弃用提醒，未影响本次部署。
+- 反馈处理：已回复 #5，说明点火蓄能轨命中闪烁、验证结果、Pages 部署和复测问题；issue 保持 open。回复后于 2026-05-01 17:01 CST 再次同步 GitHub Issues，当前仍为 5 个 open feedback issue、0 个 open bug issue；#5 更新时间为 2026-05-01T09:01:11Z。
 
 - 点火按钮新增“按住落点热区”：在已有 pointerdown 即时反冲和按住压光基础上，按住期间实际落点会持续显示低强度光斑、能量环和短火花，继续回应 #5 的点击反馈、特效和点击欲望反馈。
 - `src/styles.css` 增加 `.core-button.is-pressing .core-impact-point`、`.core-button.is-pressing .core-impact-ripple` 和 `.core-button.is-pressing .core-impact-sparks`；`tests/game.test.js` 覆盖静态样式绑定。

@@ -8,6 +8,9 @@
 - 本轮只调整点火按钮展示层和测试，不新增收益、不新增存档字段，不改变点击收益、连击窗口、过载奖励、升级价格、星图路线、项目奖励、航线策略、航线指令、远航调度、反馈入口或部署链路。
 - 本轮本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
 - 构建产物已确认包含 `.core-button.is-pulsing .core-charge-ring`、`coreChargeRingHit`、`.core-button.is-overload-impact .core-charge-ring` 和 `coreChargeRingOverloadHit`。
+- 发布：提交 `90c9c99` 已推送到 `origin/main`；GitHub Pages workflow `25208876617` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页返回 HTTP 200，线上 `src/styles.css` 已确认包含点火蓄能轨命中闪烁样式。workflow 继续给出 Node.js 20 actions 弃用提醒，未影响本次部署。
+- #5 已回复：说明点火蓄能轨命中闪烁、验证结果、Pages 部署和复测问题；issue 保持 open，更新时间为 2026-05-01T09:01:11Z，评论地址：`https://github.com/Jassy930/codex-game-operator/issues/5#issuecomment-4358608276`。
+- 回复后同步 GitHub Issues：2026-05-01 17:01 CST 当前仍为 5 个 open feedback issue、0 个 open bug issue。
 
 - GitHub Issues：gh 可用且已认证；2026-05-01 16:41 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
 - 本轮 Product decision 继续处理 #5：点火按钮已有 pointerdown 即时反冲和按住压光，但实际落点层仍主要在 click 后播放完整闪光、涟漪和火花，按住期间接触点本身还不够明确。
