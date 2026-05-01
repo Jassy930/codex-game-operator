@@ -2,6 +2,13 @@
 
 ## 2026-05-01
 
+- GitHub Issues：gh 可用且已认证；2026-05-01 19:55 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
+- 本轮 Product decision 继续处理 #6，并以 #4 作为视觉密度约束：当前路线已经有动作、收益和回航结果锚点，但资源代价短标仍缺少“这条当前路线是否消耗当前资源”的扫视锚点。
+- 本轮改动新增远航对照条当前资源代价锚点：只在 `.far-dispatch-branch-choice-summary-item.is-active-route` 内的资源代价短标增加胶囊边框、轻量背景和内描边，并为 `is-spend` 消耗态提供单独颜色。
+- 本轮只调整远航路线对照条展示层和测试，不新增收益、不新增存档字段，不改变升级价格、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、远航调度数值、冷却、连携窗口、反馈入口或部署链路。
+- 本轮本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含当前路线资源代价短标选择器。
+
 - GitHub Issues：gh 可用且已认证；2026-05-01 19:42 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
 - 本轮 Product decision 继续处理 #6，并以 #4 作为视觉密度约束：当前路线已经有动作、收益和推进位置高亮，但回航结果短标仍缺少“这条当前路线最终触发什么结果”的扫视锚点。
 - 本轮改动新增远航对照条当前回航结果锚点：只在 `.far-dispatch-branch-choice-summary-item.is-active-route` 内的回航结果短标增加胶囊边框、轻量背景和内描边，不新增文字或动画。
