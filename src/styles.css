@@ -3797,6 +3797,15 @@ h2 {
   font-weight: 900;
 }
 
+.far-dispatch-loop-step.is-current span {
+  justify-self: stretch;
+  padding-left: 7px;
+  border-left: 2px solid rgba(255, 211, 106, 0.5);
+  background: linear-gradient(90deg, rgba(255, 211, 106, 0.12), rgba(255, 211, 106, 0));
+  color: #fffbe8;
+  text-shadow: 0 0 10px rgba(255, 211, 106, 0.14);
+}
+
 .far-dispatch-loop-step em {
   color: #96e7a8;
   font-size: 0.68rem;
