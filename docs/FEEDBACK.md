@@ -2,6 +2,13 @@
 
 ## 2026-05-02
 
+- GitHub Issues：gh 可用且已认证；2026-05-02 03:24 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。#4/#6 仍是最新组合反馈：远航调度需要更多图形化表达，减少后半段主操作区文字反推。
+- 本轮 Product decision 继续处理 #4/#6：远航闭环微图和步骤卡已经用当前节点脉冲、方向信标、步号锚点和收益色带建立执行路径，但三张步骤卡本体当前态仍偏静态。
+- 本轮改动新增远航闭环当前步骤卡信标：`.far-dispatch-loop-step.is-current` 会播放轻量扫光和饱和度变化，和上方当前节点/方向信标形成同节奏扫视锚点。
+- 本轮只调整远航闭环步骤卡展示层和测试，不新增可见说明文字、不新增收益、不新增存档字段，不改变点击收益、升级价格、星图路线、项目奖励、航线策略、航线指令、远航调度数值、反馈入口或部署链路。
+- 本轮本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含 `farDispatchLoopCurrentStepGlow`、`.far-dispatch-loop-step.is-current` 和降低动效兜底。
+
 - GitHub Issues：gh 可用且已认证；2026-05-02 03:11 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。#4/#6 仍是最新组合反馈：远航调度需要更多图形化表达，减少后半段主操作区文字反推。
 - 本轮 Product decision 继续处理 #4/#6：远航闭环微图和步骤卡已经用 1/2/3 节点、方向信标、收益短标和步号锚点建立路线对应，但步骤卡底部收益行仍是同一种绿色文本，奖励类型需要继续读长句确认。
 - 本轮改动新增远航闭环步骤卡收益色带：`.far-dispatch-step-reward` 追加目标/分支/续航/回目标类型 class 与当前/完成状态 class，并用紧凑胶囊按类型着色；完整收益仍保留在可见收益文本和悬停标题中。

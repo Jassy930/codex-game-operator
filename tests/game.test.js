@@ -2367,6 +2367,7 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(styles, /\.far-dispatch-loop-visual-node\.is-current::after/);
   assert.match(styles, /@keyframes farDispatchLoopCurrentPulse/);
   assert.match(styles, /@keyframes farDispatchLoopCurrentArrowPulse/);
+  assert.match(styles, /@keyframes farDispatchLoopCurrentStepGlow/);
   assert.match(styles, /\.far-dispatch-loop-visual-reward/);
   assert.match(styles, /\.far-dispatch-loop-visual-reward::before/);
   assert.match(styles, /content: attr\(data-reward-label\)/);
@@ -2377,7 +2378,9 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(styles, /\.far-dispatch-loop-visual-reward\.is-current/);
   assert.match(styles, /@media \(prefers-reduced-motion: reduce\) \{[\s\S]*\.far-dispatch-loop-visual-arrow\.is-current[\s\S]*animation: none/);
   assert.match(styles, /@media \(prefers-reduced-motion: reduce\) \{[\s\S]*\.far-dispatch-loop-visual-node\.is-current::after[\s\S]*animation: none/);
+  assert.match(styles, /@media \(prefers-reduced-motion: reduce\) \{[\s\S]*\.far-dispatch-loop-step\.is-current[\s\S]*animation: none/);
   assert.match(styles, /\.far-dispatch-loop-step\.is-current/);
+  assert.match(styles, /\.far-dispatch-loop-step\.is-current \{[\s\S]*animation: farDispatchLoopCurrentStepGlow 1450ms ease-in-out infinite/);
   assert.match(styles, /\.far-dispatch-loop-step::before/);
   assert.match(styles, /content: attr\(data-step-label\)/);
   assert.match(styles, /\.far-dispatch-loop-step::after/);

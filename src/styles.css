@@ -3686,7 +3686,19 @@ h2 {
 
 .far-dispatch-loop-step.is-current {
   border-color: rgba(244, 178, 60, 0.5);
-  background: rgba(244, 178, 60, 0.12);
+  background:
+    linear-gradient(
+      90deg,
+      rgba(244, 178, 60, 0.18),
+      rgba(255, 211, 106, 0.09),
+      rgba(150, 231, 168, 0.12)
+    ),
+    rgba(244, 178, 60, 0.08);
+  background-size: 180% 100%, auto;
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 211, 106, 0.1),
+    0 0 13px rgba(255, 211, 106, 0.1);
+  animation: farDispatchLoopCurrentStepGlow 1450ms ease-in-out infinite;
 }
 
 .far-dispatch-loop-step.is-current::before {
@@ -6707,6 +6719,19 @@ h2 {
   }
 }
 
+@keyframes farDispatchLoopCurrentStepGlow {
+  0%,
+  100% {
+    background-position: 0% 50%, 0 0;
+    filter: saturate(1);
+  }
+
+  50% {
+    background-position: 100% 50%, 0 0;
+    filter: saturate(1.18);
+  }
+}
+
 @keyframes farDispatchSummaryActiveActionGlow {
   0%,
   100% {
@@ -6748,6 +6773,7 @@ h2 {
   .core-gain-pop.is-overload-gain.is-showing::after,
   .far-dispatch-loop-visual-arrow.is-current,
   .far-dispatch-loop-visual-node.is-current::after,
+  .far-dispatch-loop-step.is-current,
   .far-dispatch-branch-choice-summary-item.is-active-route
     .far-dispatch-branch-choice-summary-progress::after,
   .far-dispatch-branch-choice-summary-item.is-active-route
