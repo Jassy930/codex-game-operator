@@ -22,7 +22,11 @@
 - `tests/game.test.js` 覆盖迷你进度 DOM、CSS 和 `routeNodeStates` 绑定。
 - 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
 - 构建产物已确认包含 `far-dispatch-branch-choice-summary-progress`、`--summary-route-progress` 和迷你进度节点样式。
-- 待提交、推送、等待 GitHub Pages workflow，并在发布后回复 #6 和 #4。
+- 发布验证已通过：提交 `f913566` 已推送到 `origin/main`；GitHub Pages workflow `25201606066` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页返回 HTTP 200，线上 `src/app.js` 和 `src/styles.css` 已确认包含 `far-dispatch-branch-choice-summary-progress`、`--summary-route-progress` 和迷你进度节点样式。
+- 已回复 GitHub Issue #6，说明本轮路线对照条迷你进度条、验证结果、Pages 部署和复测问题，issue 保持 open，更新时间为 2026-05-01T04:02:12Z；评论地址：`https://github.com/Jassy930/codex-game-operator/issues/6#issuecomment-4357734130`。
+- 已回复 GitHub Issue #4，说明本轮把 1/2/3 迷你进度轨压到协同/绕行对照槽，issue 保持 open，更新时间为 2026-05-01T04:02:29Z；评论地址：`https://github.com/Jassy930/codex-game-operator/issues/4#issuecomment-4357734869`。
+- 回复后同步 GitHub Issues：2026-05-01 12:02 CST 当前仍为 5 个 open feedback issue、0 个 open bug issue。
+- 钉钉通知未发送：运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` 相关变量名，当前目录和父级三层内也未发现 `.env*` 文件；未将 webhook 写入仓库。
 
 ## 2026-05-01 Product decision：远航路线对照条当前步短标
 

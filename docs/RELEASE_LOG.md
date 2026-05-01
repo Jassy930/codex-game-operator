@@ -9,7 +9,9 @@
 - 同步 GitHub Issues 反馈状态：2026-05-01 11:54 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 作为主处理对象，#4 作为视觉密度依据。
 - 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
 - 构建产物已确认包含 `far-dispatch-branch-choice-summary-progress`、`--summary-route-progress` 和 `far-dispatch-branch-choice-summary-progress-node`。
-- 待提交、推送、Pages 部署和 issue 回复。
+- 发布：提交 `f913566` 已推送到 `origin/main`；GitHub Pages workflow `25201606066` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页返回 HTTP 200，线上 `src/app.js` 和 `src/styles.css` 已确认包含 `far-dispatch-branch-choice-summary-progress`、`--summary-route-progress` 和迷你进度节点样式。
+- 反馈处理：已回复 #6，说明路线对照条迷你进度条、验证结果、Pages 部署和复测问题；已回复 #4，说明本轮把 1/2/3 迷你进度轨压到协同/绕行对照槽以减少只靠文字短标判断阶段的压力；两个 issue 均保持 open。回复后于 2026-05-01 12:02 CST 再次同步 GitHub Issues，当前仍为 5 个 open feedback issue、0 个 open bug issue；#6 更新时间为 2026-05-01T04:02:12Z，#4 更新时间为 2026-05-01T04:02:29Z。
+- 钉钉通知未发送：运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` 相关变量名，当前目录和父级三层内也未发现 `.env*` 文件；未将 webhook 写入仓库。
 
 - 远航调度新增“路线对照条当前步短标”：协同/绕行对照槽直接显示 `0/3 起手`、`1/3 分支`、`2/3 回航`、`3/3 完成` 或 `未选`，继续回应 #6 的后半段路线执行理解和 #4 的降文字密度反馈。
 - `src/game.js` 把 `routePhaseText` 纳入 `branchChoiceSummaryText`；`src/app.js` 渲染 `far-dispatch-branch-choice-summary-phase`；`src/styles.css` 调整对照条列宽并增加当前步短标状态色；`tests/game.test.js` 覆盖当前步短标进入路线对照文本、静态 DOM 和样式绑定。

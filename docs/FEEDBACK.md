@@ -9,7 +9,11 @@
 - 本轮只调整 DOM、CSS 和测试，不新增收益、不新增存档字段，不改变升级价格、星图路线、项目奖励、远航调度既有数值、冷却、连携窗口、反馈入口或部署链路。
 - 本轮本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
 - 构建产物已确认包含 `far-dispatch-branch-choice-summary-progress`、`--summary-route-progress` 和 `far-dispatch-branch-choice-summary-progress-node`。
-- 待提交、推送、Pages 部署和 issue 回复。
+- 发布：提交 `f913566` 已推送到 `origin/main`；GitHub Pages workflow `25201606066` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页返回 HTTP 200，线上资源已确认包含 `far-dispatch-branch-choice-summary-progress` 和 `--summary-route-progress`。
+- #6 已回复：说明路线对照条迷你进度条、验证结果、Pages 部署和复测问题；issue 保持 open，更新时间为 2026-05-01T04:02:12Z，评论地址：`https://github.com/Jassy930/codex-game-operator/issues/6#issuecomment-4357734130`。
+- #4 已回复：说明本轮在协同/绕行对照槽加入 1/2/3 迷你进度轨，降低只靠文字短标判断路线阶段的压力；issue 保持 open，更新时间为 2026-05-01T04:02:29Z，评论地址：`https://github.com/Jassy930/codex-game-operator/issues/4#issuecomment-4357734869`。
+- 回复后同步 GitHub Issues：2026-05-01 12:02 CST 当前仍为 5 个 open feedback issue、0 个 open bug issue。
+- 钉钉通知未发送：运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` 相关变量名，当前目录和父级三层内也未发现 `.env*` 文件；未将 webhook 写入仓库。
 
 - GitHub Issues：gh 可用且已认证；2026-05-01 11:36 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
 - #6 继续作为本轮 Product decision 依据：后半段协同/绕行选择仍需要更快从路线取舍转成当前操作；#4 继续作为界面文字密度和图片化依据。前序路线对照条已经显示第二步按钮名，但对照槽还没有显示当前处于起手、分支、回航还是完成。
