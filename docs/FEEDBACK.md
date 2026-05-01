@@ -8,6 +8,10 @@
 - 本轮只调整展示层、悬停说明和可访问语义，不新增收益、不新增存档字段，不改变星图路线、远航调度数值、冷却、连携窗口、反馈入口或部署链路。
 - 本轮本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
 - 构建产物已确认包含 `路线指令状态`、`data-step-label`、路线指令串 `::before` 步号样式和 `content: attr(data-step-label)`。
+- 发布：提交 `227fe32` 已推送到 `origin/main`；GitHub Pages workflow `25204350010` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页返回 HTTP 200，线上 `src/app.js` 和 `src/styles.css` 已确认包含路线指令串步号与状态语义。
+- #6 已回复：说明路线指令串步号与状态语义、验证结果、Pages 部署和复测问题；issue 保持 open，更新时间为 2026-05-01T05:59:33Z，评论地址：`https://github.com/Jassy930/codex-game-operator/issues/6#issuecomment-4358067282`。
+- #4 已回复：说明本轮把 1/2/3 步号和状态语义压到指令串短槽，降低路线微图、对照条和实际按钮名之间的对应成本；issue 保持 open，更新时间为 2026-05-01T05:59:33Z，评论地址：`https://github.com/Jassy930/codex-game-operator/issues/4#issuecomment-4358067278`。
+- 回复后同步 GitHub Issues：2026-05-01 13:59 CST 当前仍为 5 个 open feedback issue、0 个 open bug issue。
 
 - GitHub Issues：gh 可用且已认证；2026-05-01 13:37 CST 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
 - #6 继续作为本轮 Product decision 依据：后半段路线已经有路线微图、路线对照条和指令串，但实际按钮顺序短槽还没有直接显示当前应执行哪一段；#4 继续作为图形化和降文字密度依据。

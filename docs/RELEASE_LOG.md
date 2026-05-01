@@ -8,6 +8,8 @@
 - 同步 GitHub Issues 反馈状态：2026-05-01 13:50 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 作为主处理对象，#4 作为视觉密度依据。
 - 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
 - 构建产物已确认包含 `路线指令状态`、`data-step-label`、`.far-dispatch-branch-choice-route-command-step::before` 和 `content: attr(data-step-label)`。
+- 发布：提交 `227fe32` 已推送到 `origin/main`；GitHub Pages workflow `25204350010` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页返回 HTTP 200，线上 `src/app.js` 和 `src/styles.css` 已确认包含路线指令串步号与状态语义。
+- 反馈处理：已回复 #6，说明路线指令串步号与状态语义、验证结果、Pages 部署和复测问题；已回复 #4，说明本轮用 1/2/3 步号和可访问状态降低路线微图、对照条和实际按钮名之间的对应成本；两个 issue 均保持 open。回复后于 2026-05-01 13:59 CST 再次同步 GitHub Issues，当前仍为 5 个 open feedback issue、0 个 open bug issue；#6 和 #4 更新时间均为 2026-05-01T05:59:33Z。
 
 - 远航调度新增“路线指令串当前步高亮”：协同/绕行卡片里的 `目标 -> 分支 -> 回目标` 三段短槽复用现有 `routeNodeStates`，直接标出已完成、下一步和待推进，继续回应 #6 的后半段路线执行理解和 #4 的图形化降密度反馈。
 - `src/app.js` 为 `far-dispatch-branch-choice-route-command-step` 追加 `is-done` / `is-next` / `is-waiting` 状态类；`src/styles.css` 增加对应状态样式；`tests/game.test.js` 覆盖 DOM 和 CSS 静态绑定。
