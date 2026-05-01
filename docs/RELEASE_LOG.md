@@ -8,6 +8,9 @@
 - 同步 GitHub Issues 反馈状态：2026-05-01 20:23 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 作为主处理对象，#4 作为视觉密度依据。
 - 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
 - 构建产物已确认包含当前路线取向短标状态类、`is-preserve` 和 `is-advance` 选择器。
+- 发布：提交 `eb70d99` 已推送到 `origin/main`；GitHub Pages workflow `25214271008` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页返回 HTTP 200，线上 `src/app.js` 与 `src/styles.css` 已确认包含当前取向锚点代码和样式。workflow 继续给出 Node.js 20 actions 弃用提醒，未影响本次部署。
+- 反馈处理：已回复 #6，说明远航对照条当前取向锚点、验证结果、Pages 部署和复测问题；已回复 #4，说明本轮用当前取向锚点降低资源目的反推压力；两个 issue 均保持 open。回复后于 2026-05-01 20:30 CST 再次同步 GitHub Issues，当前仍为 5 个 open feedback issue、0 个 open bug issue；#6 更新时间为 2026-05-01T12:30:08Z，#4 更新时间为 2026-05-01T12:30:09Z。
+- 钉钉通知未发送：2026-05-01 20:30 CST 运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` 相关变量名，当前目录和父级三层内未发现 `.env*` 文件；未将 webhook 写入仓库。
 
 - 远航调度新增“路线对照条当前阶段锚点”：协同/绕行对照槽成为本轮已选路线时，当前阶段短标会获得胶囊边框、轻量背景和内描边，让玩家在看到当前动作、本步收益、资源代价和回航结果前，先扫到当前路线处于起手、分支、回航或整备阶段，继续回应 #6 的后半段路线执行理解和 #4 的文字密度反馈。
 - `src/styles.css` 增加当前路线阶段短标选择器；`tests/game.test.js` 覆盖静态绑定。
