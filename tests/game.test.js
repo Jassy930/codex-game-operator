@@ -2120,6 +2120,7 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(styles, /grid-area: step/);
   assert.match(styles, /grid-area: payoff/);
   assert.match(styles, /\.far-dispatch-branch-choice-summary-item\.is-active-route[\s\S]*\.far-dispatch-branch-choice-summary-reward/);
+  assert.match(styles, /\.far-dispatch-branch-choice-summary-item\.is-active-route[\s\S]*\.far-dispatch-branch-choice-summary-step/);
   assert.match(styles, /grid-area: intent/);
   assert.match(styles, /\.far-dispatch-branch-choice-summary-intent\.is-preserve/);
   assert.match(styles, /\.far-dispatch-branch-choice-summary-intent\.is-advance/);
@@ -2133,6 +2134,7 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(styles, /\.far-dispatch-branch-choice-summary-item\.is-detour \.far-dispatch-branch-choice-summary-reward/);
   assert.match(styles, /\.far-dispatch-branch-choice-summary-item\.is-active-route\.is-detour[\s\S]*\.far-dispatch-branch-choice-summary-reward/);
   assert.match(styles, /\.far-dispatch-branch-choice-summary-item\.is-detour \.far-dispatch-branch-choice-summary-step/);
+  assert.match(styles, /\.far-dispatch-branch-choice-summary-item\.is-active-route\.is-detour[\s\S]*\.far-dispatch-branch-choice-summary-step/);
   assert.match(styles, /\.far-dispatch-branch-choice-summary-item\.is-detour \.far-dispatch-branch-choice-summary-payoff/);
   assert.match(styles, /\.far-dispatch-branch-choice-summary-cost\.is-safe/);
   assert.match(styles, /\.far-dispatch-branch-choice-summary-result\.is-detour/);
