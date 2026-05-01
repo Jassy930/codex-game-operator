@@ -8,7 +8,9 @@
 - 同步 GitHub Issues 反馈状态：2026-05-01 15:25 CST 当前 5 个 open feedback issue、0 个 open bug issue；#5 作为主处理对象。
 - 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
 - 构建产物已确认包含 `core-impact-ripple`、`coreImpactRipple` 和 `--core-impact-x`。
-- 发布验证待推送后由 GitHub Pages workflow 执行。
+- 发布：提交 `5757365` 已推送到 `origin/main`；GitHub Pages workflow `25206676299` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页返回 HTTP 200，线上 `index.html`、`src/app.js` 和 `src/styles.css` 已确认包含点火落点涟漪 DOM、坐标绑定和动画样式。workflow 继续给出 Node.js 20 actions 弃用提醒，未影响本次部署。
+- 反馈处理：已回复 #5，说明点火落点涟漪、验证结果、Pages 部署和复测问题；issue 保持 open。回复后于 2026-05-01 15:35 CST 再次同步 GitHub Issues，当前仍为 5 个 open feedback issue、0 个 open bug issue；#5 更新时间为 2026-05-01T07:35:15Z。
+- 钉钉通知未发送：运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` 相关变量名，当前目录和父级两层内也未发现 `.env*` 文件；未将 webhook 写入仓库。
 
 - 点火按钮新增“蓄能外弧”：主按钮外层新增 `core-surge-orbit` 旋转能量弧，会根据现有 `combo.progress` 逐步提高透明度、放大并加快旋转，过载前一击和过载命中时切换更强外弧状态，继续回应 #5 的点击反馈、特效和点击欲望反馈。
 - `index.html` 新增 `core-surge-orbit`；`src/app.js` 在 `renderCoreFeedback` 写入 `--core-surge-opacity`、`--core-surge-scale` 和 `--core-surge-speed`；`src/styles.css` 增加外弧状态和 `coreSurgeOrbit` / `coreSurgeBurst` 动效；`tests/game.test.js` 覆盖静态绑定。
