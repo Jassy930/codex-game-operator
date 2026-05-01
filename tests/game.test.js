@@ -1395,6 +1395,10 @@ test("点火按钮会渲染点击反馈和过载前兆效果", () => {
   assert.match(styles, /\.core-button\.is-pressing \.core-surge-orbit/);
   assert.match(styles, /animation-duration: 1100ms/);
   assert.match(styles, /\.core-feedback-layer/);
+  assert.match(styles, /\.core-button\.is-pulsing:not\(\.is-overload-impact\)/);
+  assert.match(styles, /coreButtonHitGlow 360ms ease-out/);
+  assert.match(styles, /\.core-button\.is-overload-impact/);
+  assert.match(styles, /coreButtonOverloadGlow 520ms ease-out/);
   assert.match(styles, /\.core-stage-aura/);
   assert.match(styles, /--core-stage-angle/);
   assert.match(styles, /\.core-stage-aura\.is-stage-hot/);
@@ -1525,6 +1529,8 @@ test("点火按钮会渲染点击反馈和过载前兆效果", () => {
   assert.match(styles, /\.feedback-toggle/);
   assert.match(styles, /\.feedback-toggle input/);
   assert.match(styles, /@keyframes coreShockwave/);
+  assert.match(styles, /@keyframes coreButtonHitGlow/);
+  assert.match(styles, /@keyframes coreButtonOverloadGlow/);
   assert.match(styles, /@keyframes coreShellHitFlash/);
   assert.match(styles, /@keyframes coreOverloadShockwave/);
   assert.match(styles, /@keyframes coreShellOverloadFlash/);
@@ -1542,6 +1548,8 @@ test("点火按钮会渲染点击反馈和过载前兆效果", () => {
   assert.match(styles, /@keyframes coreGainPopOverloadHalo/);
   assert.match(styles, /@keyframes coreBadgePulse/);
   assert.match(styles, /@keyframes coreBadgeBurst/);
+  assert.match(styles, /@media \(prefers-reduced-motion: reduce\) \{[\s\S]*\.core-button\.is-pulsing:not\(\.is-overload-impact\)[\s\S]*animation: none/);
+  assert.match(styles, /@media \(prefers-reduced-motion: reduce\) \{[\s\S]*\.core-button\.is-overload-impact[\s\S]*animation: none/);
   assert.match(styles, /@media \(prefers-reduced-motion: reduce\) \{[\s\S]*\.core-button\.is-pulsing:not\(\.is-overload-impact\) \.core-stage-aura[\s\S]*animation: none/);
   assert.match(styles, /@media \(prefers-reduced-motion: reduce\) \{[\s\S]*\.core-button\.is-pulsing:not\(\.is-overload-impact\) \.core-vein[\s\S]*animation: none/);
   assert.match(styles, /@media \(prefers-reduced-motion: reduce\) \{[\s\S]*\.core-button\.is-pulsing:not\(\.is-overload-impact\) \.core-overload-badge[\s\S]*animation: none/);

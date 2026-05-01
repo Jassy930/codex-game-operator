@@ -334,6 +334,14 @@ h2 {
   animation: coreShockwave 360ms ease-out;
 }
 
+.core-button.is-pulsing:not(.is-overload-impact) {
+  animation: coreButtonHitGlow 360ms ease-out;
+}
+
+.core-button.is-overload-impact {
+  animation: coreButtonOverloadGlow 520ms ease-out;
+}
+
 .core-button.is-pulsing:not(.is-overload-impact)::before {
   animation:
     coreCharge 5.2s linear infinite,
@@ -5613,6 +5621,40 @@ h2 {
   }
 }
 
+@keyframes coreButtonHitGlow {
+  0% {
+    box-shadow: 0 0 0 rgba(244, 178, 60, 0);
+  }
+
+  44% {
+    box-shadow:
+      0 0 28px rgba(255, 247, 194, 0.2),
+      0 0 52px rgba(244, 178, 60, 0.18),
+      0 0 72px rgba(19, 181, 166, 0.12);
+  }
+
+  100% {
+    box-shadow: 0 0 0 rgba(244, 178, 60, 0);
+  }
+}
+
+@keyframes coreButtonOverloadGlow {
+  0% {
+    box-shadow: 0 0 0 rgba(232, 93, 117, 0);
+  }
+
+  38% {
+    box-shadow:
+      0 0 34px rgba(255, 247, 194, 0.28),
+      0 0 64px rgba(244, 178, 60, 0.24),
+      0 0 96px rgba(232, 93, 117, 0.22);
+  }
+
+  100% {
+    box-shadow: 0 0 0 rgba(232, 93, 117, 0);
+  }
+}
+
 @keyframes coreShellHitFlash {
   0% {
     opacity: 0.78;
@@ -6387,6 +6429,8 @@ h2 {
   .score-grid dd.is-core-hit,
   .score-grid dd.is-core-overload-hit,
   .score-grid dd.is-core-overload-prize,
+  .core-button.is-pulsing:not(.is-overload-impact),
+  .core-button.is-overload-impact,
   .core-button.is-pulsing:not(.is-overload-impact) .core-stage-aura,
   .core-button.is-pulsing:not(.is-overload-impact) .core-overload-badge,
   .core-button.is-pulsing:not(.is-overload-impact) .core-combo-track::before,

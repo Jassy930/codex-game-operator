@@ -2,6 +2,13 @@
 
 ## 2026-05-02
 
+- GitHub Issues：gh 可用且已认证；2026-05-02 01:10 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。#5 仍是最近更新的反馈，集中在“点火按钮太薄弱、增加点击反馈和点击欲望”。
+- 本轮 Product decision 继续处理 #5：点火按钮已有多层内部、落点、收益和读数反馈，但按钮整体外围缺少一次覆盖整个星核按钮的命中投光。
+- 本轮改动新增点火按钮整体命中投光：普通命中时 `.core-button.is-pulsing:not(.is-overload-impact)` 播放 `coreButtonHitGlow`，过载命中时 `.core-button.is-overload-impact` 播放更强的 `coreButtonOverloadGlow`。
+- 本轮只调整点火按钮展示层和测试，不新增可见文字、不新增收益、不新增存档字段，不改变点击收益、连击窗口、过载奖励、升级价格、星图路线、项目奖励、航线策略、航线指令、远航调度、反馈入口或部署链路。
+- 本轮本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含 `coreButtonHitGlow`、`coreButtonOverloadGlow` 和按钮本体投光降低动效兜底。
+
 - GitHub Issues：gh 可用且已认证；2026-05-02 00:54 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。#5 仍是最近更新的反馈，集中在“点火按钮太薄弱、增加点击反馈和点击欲望”。
 - 本轮 Product decision 继续处理 #5：点火按钮已有多层命中反馈，收益浮层也已经跟随实际点击落点，但 `+X` 浮层本体仍缺少从落点扩散出去的短促奖励光晕。
 - 本轮改动新增点火收益浮层命中奖励光晕：普通收益浮层显示时 `.core-gain-pop::after` 播放 `coreGainPopHalo`，过载收益浮层显示时播放更强的 `coreGainPopOverloadHalo`。
