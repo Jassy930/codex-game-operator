@@ -1793,6 +1793,8 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(farDispatchVisual, /三步远航闭环、协同航线和绕行航线构成的抽象航线图/);
   assert.match(styles, /\.far-dispatch-scene-image/);
   assert.match(styles, /\.far-dispatch\.is-active \.far-dispatch-scene-image/);
+  assert.match(styles, /animation: farDispatchSceneImagePulse 1800ms ease-in-out infinite/);
+  assert.match(styles, /@keyframes farDispatchSceneImagePulse/);
   assert.match(styles, /\.far-dispatch\.is-locked \.far-dispatch-scene-image/);
   assert.match(appJs, /rotationReward: result\.rotationReward/);
   assert.match(appJs, /planReward: result\.planReward/);
@@ -2392,6 +2394,7 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(styles, /@keyframes farDispatchLoopCurrentPulse/);
   assert.match(styles, /@keyframes farDispatchLoopCurrentArrowPulse/);
   assert.match(styles, /@keyframes farDispatchLoopCurrentStepGlow/);
+  assert.match(styles, /@keyframes farDispatchSceneImagePulse/);
   assert.match(styles, /\.far-dispatch-loop-visual-reward/);
   assert.match(styles, /\.far-dispatch-loop-visual-reward::before/);
   assert.match(styles, /content: attr\(data-reward-label\)/);
@@ -2412,6 +2415,7 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(styles, /\.far-dispatch-loop-link\.is-current::before,\n\.far-dispatch-loop-link\.is-current::after/);
   assert.match(styles, /@keyframes farDispatchLoopCurrentLinkPulse/);
   assert.match(styles, /@media \(prefers-reduced-motion: reduce\) \{[\s\S]*\.far-dispatch-loop-visual-arrow\.is-current[\s\S]*animation: none/);
+  assert.match(styles, /@media \(prefers-reduced-motion: reduce\) \{[\s\S]*\.far-dispatch\.is-active \.far-dispatch-scene-image[\s\S]*animation: none/);
   assert.match(styles, /@media \(prefers-reduced-motion: reduce\) \{[\s\S]*\.far-dispatch-loop-visual-node\.is-current::after[\s\S]*animation: none/);
   assert.match(styles, /@media \(prefers-reduced-motion: reduce\) \{[\s\S]*\.far-dispatch-loop-link\.is-current::before[\s\S]*animation: none/);
   assert.match(styles, /@media \(prefers-reduced-motion: reduce\) \{[\s\S]*\.far-dispatch-loop-step\.is-current[\s\S]*animation: none/);

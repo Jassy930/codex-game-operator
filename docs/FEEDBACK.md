@@ -2,6 +2,13 @@
 
 ## 2026-05-02
 
+- GitHub Issues：gh 可用且已认证；2026-05-02 04:44 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。#4/#6 仍是最新组合反馈：远航调度需要更多图形化表达，减少后半段主操作区文字反推。
+- 本轮 Product decision 继续处理 #4/#6：远航调度闭环插画已经能在运行时保留，但 active 状态仍偏静态，和下方远航闭环当前节点、连接信标、步骤卡脉冲不在同一反馈节奏。
+- 本轮改动新增远航调度插画活跃态投光：`.far-dispatch.is-active .far-dispatch-scene-image` 播放 `farDispatchSceneImagePulse` 轻量投光，并在降低动效偏好下关闭动画。
+- 本轮只调整远航调度展示层和测试，不新增可见说明文字、不新增收益、不新增存档字段，不改变点击收益、升级价格、星图路线、项目奖励、航线策略、航线指令、远航调度数值、反馈入口或部署链路。
+- 本轮本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含 `farDispatchSceneImagePulse`、active 插画动画和降低动效兜底。
+
 - GitHub Issues：gh 可用且已认证；2026-05-02 04:31 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。#4/#6 仍要求远航调度更图形化、后半段短循环更容易扫视。
 - 本轮 Fix bug 处理 #4/#6 相关展示链路：代码复盘发现远航调度闭环插画只在静态 `index.html` 中存在，`renderFarDispatch()` 首次运行后会用 `replaceChildren()` 移除该图片。
 - 本轮改动新增 `renderFarDispatchSceneImage()`，并把 `.far-dispatch-scene-image` 纳入运行时远航调度重绘顺序，确保静态首页和动态渲染后的 `#farDispatch` 都保留本地 SVG 闭环插画。

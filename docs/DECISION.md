@@ -1,5 +1,28 @@
 # Decision
 
+## 2026-05-02 Product decision：远航调度插画活跃态投光
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-02 04:44 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有 open bug；#4/#6 仍是主线反馈，继续指向远航调度需要更图形化、后半段短循环需要更容易扫视。
+
+当前最大问题：远航调度闭环插画已在静态首页和运行时重绘后保留，但 active 状态仍是静态图片。玩家进入 20M 后真正使用远航调度时，这张概览图还缺少轻量动态反馈，和下方当前节点、连接信标、步骤卡脉冲不在同一节奏层。
+
+本轮决策：
+
+- 新增“远航调度插画活跃态投光”。
+- `src/styles.css` 为 `.far-dispatch.is-active .far-dispatch-scene-image` 增加 `farDispatchSceneImagePulse` 轻量投光动画。
+- 在 `prefers-reduced-motion: reduce` 中关闭该插画动效。
+- `tests/game.test.js` 增加静态断言，覆盖 active 插画动画、keyframes 和降低动效兜底。
+- 该改动只调整远航调度展示层和测试，不新增可见说明文字、不新增收益、不新增存档字段，不改变点击收益、升级价格、星图路线、项目奖励、航线策略、航线指令、远航调度数值、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-05-02 04:44 CST 当前 5 个 open feedback issue、0 个 open bug issue；#4/#6 作为本轮主处理对象。
+- `src/styles.css` 包含 `.far-dispatch.is-active .far-dispatch-scene-image` 动画、`farDispatchSceneImagePulse` 和降低动效兜底。
+- `tests/game.test.js` 覆盖远航调度插画活跃态投光静态绑定。
+- 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认 `dist/src/styles.css` 包含 `farDispatchSceneImagePulse`、active 插画动画和降低动效兜底。
+- 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #4/#6，以及当前远航调度插画 active 态仍偏静态的复盘。
+
 ## 2026-05-02 Fix bug：远航调度插画动态渲染保留
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-02 04:31 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。公开 issue 中没有 bug，但代码复盘发现上一轮新增的远航调度闭环插画只存在于静态 `index.html`，运行时 `renderFarDispatch()` 会用 `replaceChildren()` 重绘 `#farDispatch` 并移除该插画。
