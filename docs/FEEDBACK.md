@@ -9,6 +9,11 @@
 - 本轮只调整派生展示、DOM、CSS 和测试，不新增收益、不新增存档字段，不改变升级价格、星图路线、项目奖励、远航调度既有数值、冷却、连携窗口、反馈入口或部署链路。
 - 本轮本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
 - 构建产物已确认包含 `routePayoffSummaryText`、`far-dispatch-branch-choice-summary-payoff`、`本步 +13%` 和 `本步 +4%`。
+- 发布：提交 `fbbc2fa` 已推送到 `origin/main`；GitHub Pages workflow `25202874610` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页返回 HTTP 200，线上资源已确认包含 `routePayoffSummaryText` 和 `far-dispatch-branch-choice-summary-payoff`。
+- #6 已回复：说明路线对照条本步收益短标、验证结果、Pages 部署和复测问题；issue 保持 open，更新时间为 2026-05-01T04:56:26Z，评论地址：`https://github.com/Jassy930/codex-game-operator/issues/6#issuecomment-4357893255`。
+- #4 已回复：说明本轮把本步收益短标压到协同/绕行对照槽，降低只靠收益对照和折叠明细判断即时收益的压力；issue 保持 open，更新时间为 2026-05-01T04:56:43Z，评论地址：`https://github.com/Jassy930/codex-game-operator/issues/4#issuecomment-4357894389`。
+- 回复后同步 GitHub Issues：2026-05-01 12:56 CST 当前仍为 5 个 open feedback issue、0 个 open bug issue。
+- 钉钉通知未发送：运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` 相关变量名，当前目录和父级两层内也未发现 `.env*` 文件；未将 webhook 写入仓库。
 
 - GitHub Issues：gh 可用且已认证；2026-05-01 12:25 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
 - #6 继续作为本轮 Product decision 依据：路线对照条已经把当前阶段翻译成下一步动作，但对照槽还没有直接显示三步收益落点；#4 继续作为界面文字密度和图片化依据。
