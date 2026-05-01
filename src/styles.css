@@ -1745,7 +1745,7 @@ h2 {
   grid-template-columns: repeat(3, minmax(0, 1fr));
   align-items: center;
   min-width: 0;
-  height: 10px;
+  height: 14px;
   margin-top: 1px;
   isolation: isolate;
 }
@@ -1767,8 +1767,8 @@ h2 {
 }
 
 .far-dispatch-branch-choice-summary-progress::after {
-  width: max(0px, calc(var(--summary-route-progress, 0%) - 4px));
-  max-width: calc(100% - 10px);
+  width: max(0px, calc(var(--summary-route-progress, 0%) - 6px));
+  max-width: calc(100% - 12px);
   background: linear-gradient(90deg, #96e7a8, #ffd36a);
 }
 
@@ -1780,22 +1780,32 @@ h2 {
   z-index: 1;
   display: inline-grid;
   justify-self: center;
-  width: 8px;
-  height: 8px;
+  width: 13px;
+  height: 13px;
   place-items: center;
   border: 1px solid rgba(248, 243, 231, 0.22);
   border-radius: 999px;
   background: rgba(5, 12, 20, 0.88);
+  color: rgba(248, 243, 231, 0.58);
+  font-size: 0.48rem;
+  font-weight: 950;
+  line-height: 1;
+}
+
+.far-dispatch-branch-choice-summary-progress-node::before {
+  content: attr(data-step-label);
 }
 
 .far-dispatch-branch-choice-summary-progress-node.is-done {
   border-color: rgba(150, 231, 168, 0.78);
   background: #96e7a8;
+  color: #04140a;
 }
 
 .far-dispatch-branch-choice-summary-progress-node.is-next {
   border-color: rgba(255, 211, 106, 0.9);
   background: #ffd36a;
+  color: #1b1303;
   box-shadow: 0 0 10px rgba(255, 211, 106, 0.34);
 }
 
@@ -1803,6 +1813,7 @@ h2 {
   .far-dispatch-branch-choice-summary-progress-node.is-next {
   border-color: rgba(255, 126, 177, 0.9);
   background: #ff7eb1;
+  color: #210512;
   box-shadow: 0 0 10px rgba(255, 126, 177, 0.32);
 }
 

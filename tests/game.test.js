@@ -1725,8 +1725,12 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(appJs, /far-dispatch-branch-choice-summary-progress is-/);
   assert.match(appJs, /"--summary-route-progress"/);
   assert.match(appJs, /getFarDispatchBranchChoiceRouteProgress\(choice\) \+ "%"/);
+  assert.match(appJs, /progress\.setAttribute\("role", "img"\)/);
+  assert.match(appJs, /"路线对照进度："/);
   assert.match(appJs, /far-dispatch-branch-choice-summary-progress-node is-/);
   assert.match(appJs, /choice\.routeNodeStates\?\.\[nodeId\]/);
+  assert.match(appJs, /getFarDispatchBranchChoiceRouteStepLabel\(\s*choice,\s*nodeId\s*\)/);
+  assert.match(appJs, /node\.title = stepTitle/);
   assert.match(appJs, /far-dispatch-branch-choice-summary-cost is-/);
   assert.match(appJs, /far-dispatch-branch-choice-summary-result is-/);
   assert.match(appJs, /"far-dispatch-branch-choice is-"/);
@@ -1988,6 +1992,8 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(styles, /\.far-dispatch-branch-choice-summary-progress\.is-detour::after/);
   assert.match(styles, /\.far-dispatch-branch-choice-summary-progress-node\.is-done/);
   assert.match(styles, /\.far-dispatch-branch-choice-summary-progress-node\.is-next/);
+  assert.match(styles, /\.far-dispatch-branch-choice-summary-progress-node::before/);
+  assert.match(styles, /content: attr\(data-step-label\)/);
   assert.match(styles, /@media \(max-width: 820px\) \{[\s\S]*\.far-dispatch-branch-choice-summary \{[\s\S]*grid-template-columns: 1fr/);
   assert.match(styles, /@media \(max-width: 820px\) \{[\s\S]*"glyph label action step"/);
   assert.match(styles, /@media \(max-width: 820px\) \{[\s\S]*"glyph phase reward payoff"/);

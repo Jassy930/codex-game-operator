@@ -930,6 +930,17 @@ function renderFarDispatchBranchChoiceSummaryItem(choice) {
 
 function renderFarDispatchBranchChoiceSummaryProgress(choice) {
   const progress = document.createElement("span");
+  const nodes = [
+    ["start", choice.routeCommandLabels?.start],
+    ["branch", choice.routeCommandLabels?.branch],
+    ["return", choice.routeCommandLabels?.return]
+  ];
+  const progressStatusText = nodes
+    .map(([nodeId, label]) =>
+      getFarDispatchBranchChoiceRouteCommandStepTitle(choice, nodeId, label)
+    )
+    .filter(Boolean)
+    .join(" -> ");
   progress.className =
     "far-dispatch-branch-choice-summary-progress is-" +
     getFarDispatchBranchChoiceKind(choice);
@@ -937,18 +948,29 @@ function renderFarDispatchBranchChoiceSummaryProgress(choice) {
     "--summary-route-progress",
     getFarDispatchBranchChoiceRouteProgress(choice) + "%"
   );
-  progress.setAttribute("aria-hidden", "true");
+  progress.setAttribute("role", "img");
+  progress.setAttribute(
+    "aria-label",
+    progressStatusText ? "路线对照进度：" + progressStatusText : ""
+  );
+  progress.title = progressStatusText;
 
-  [
-    ["start", "1"],
-    ["branch", "2"],
-    ["return", "3"]
-  ].forEach(([nodeId, label]) => {
+  nodes.forEach(([nodeId, label]) => {
+    const stepTitle = getFarDispatchBranchChoiceRouteCommandStepTitle(
+      choice,
+      nodeId,
+      label
+    );
     const node = document.createElement("span");
     node.className =
       "far-dispatch-branch-choice-summary-progress-node is-" +
       String(choice.routeNodeStates?.[nodeId] ?? "waiting");
-    node.dataset.stepLabel = label;
+    node.dataset.stepLabel = getFarDispatchBranchChoiceRouteStepLabel(
+      choice,
+      nodeId
+    );
+    node.setAttribute("aria-hidden", "true");
+    node.title = stepTitle;
     progress.append(node);
   });
 
