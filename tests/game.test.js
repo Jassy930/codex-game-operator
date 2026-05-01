@@ -1844,6 +1844,8 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(appJs, /branchStep\.textContent = choice\.routeBranchStepText \?\? ""/);
   assert.match(appJs, /far-dispatch-branch-choice-summary-payoff/);
   assert.match(appJs, /payoff\.textContent = choice\.routePayoffSummaryText \?\? ""/);
+  assert.match(appJs, /far-dispatch-branch-choice-summary-intent is-/);
+  assert.match(appJs, /getFarDispatchBranchChoiceRouteIntentKind\(choice\)/);
   assert.match(appJs, /renderFarDispatchBranchChoiceSummaryProgress\(choice\)/);
   assert.match(appJs, /progress\.className =/);
   assert.match(appJs, /far-dispatch-branch-choice-summary-progress is-/);
@@ -2118,6 +2120,10 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(styles, /grid-area: step/);
   assert.match(styles, /grid-area: payoff/);
   assert.match(styles, /grid-area: intent/);
+  assert.match(styles, /\.far-dispatch-branch-choice-summary-intent\.is-preserve/);
+  assert.match(styles, /\.far-dispatch-branch-choice-summary-intent\.is-advance/);
+  assert.match(styles, /\.far-dispatch-branch-choice-summary-item\.is-active-route[\s\S]*\.far-dispatch-branch-choice-summary-intent/);
+  assert.match(styles, /\.far-dispatch-branch-choice-summary-item\.is-active-route[\s\S]*\.far-dispatch-branch-choice-summary-intent\.is-advance/);
   assert.match(styles, /grid-area: cost/);
   assert.match(styles, /grid-area: result/);
   assert.match(styles, /\.far-dispatch-branch-choice-summary-item\.is-active-route[\s\S]*\.far-dispatch-branch-choice-summary-cost/);

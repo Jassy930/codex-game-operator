@@ -1,5 +1,28 @@
 # Decision
 
+## 2026-05-01 Product decision：远航对照条当前取向锚点
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-01 20:23 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；本轮继续处理 #6“后半段玩法无聊、只有不停目标”和 #4“界面文字密集、需要更好看”的交集。
+
+当前最大问题：远航路线对照条已经有当前路线边栏、推进脉冲、当前动作亮环、当前收益亮点、当前资源代价锚点、当前回航结果锚点和当前阶段锚点，但当前路线里的取向短标 `保当前` / `推累计` 仍和普通路线同权重。玩家扫当前路线时可以看到阶段、动作、收益、代价和结果，但还需要从代价或路线类型反推“这条路线现在是在保当前资源还是推累计航段”。
+
+本轮决策：
+
+- 新增“远航对照条当前取向锚点”。
+- `src/app.js` 给 `.far-dispatch-branch-choice-summary-intent` 补充 `is-preserve` / `is-advance` 状态类，复用现有 `routeIntentKind`，不新增文本字段。
+- `src/styles.css` 仅对 `.far-dispatch-branch-choice-summary-item.is-active-route .far-dispatch-branch-choice-summary-intent` 增加胶囊边框、轻量背景和内描边，并为 `is-advance` 提供推进累计航段的高亮颜色。
+- `tests/game.test.js` 增加静态断言，覆盖当前路线取向短标状态类与样式绑定。
+- 该改动只调整远航路线对照条展示层和测试，不新增收益、不新增存档字段，不改变升级价格、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、远航调度数值、冷却、连携窗口、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-05-01 20:23 CST 当前 5 个 open feedback issue、0 个 open bug issue。
+- `src/app.js` 为路线对照条取向短标渲染 `is-preserve` / `is-advance` 状态类。
+- `src/styles.css` 包含当前路线取向短标选择器和 `is-advance` 推累计颜色覆盖。
+- `tests/game.test.js` 覆盖远航路线对照条当前取向锚点静态样式绑定。
+- 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含当前路线取向短标状态类、`is-preserve` 和 `is-advance` 选择器。
+
 ## 2026-05-01 Product decision：远航对照条当前阶段锚点
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-01 20:07 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；本轮继续处理 #6“后半段玩法无聊、只有不停目标”和 #4“界面文字密集、需要更好看”的交集。

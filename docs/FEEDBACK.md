@@ -2,6 +2,13 @@
 
 ## 2026-05-01
 
+- GitHub Issues：gh 可用且已认证；2026-05-01 20:23 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
+- 本轮 Product decision 继续处理 #6，并以 #4 作为视觉密度约束：当前路线已经有阶段、动作、收益、资源代价和回航结果锚点，但取向短标 `保当前` / `推累计` 仍缺少“这条当前路线的资源目的是什么”的扫视锚点。
+- 本轮改动新增远航对照条当前取向锚点：`src/app.js` 为取向短标补 `is-preserve` / `is-advance` 状态类，`src/styles.css` 只在当前路线内增加取向胶囊，并为 `is-advance` 提供推进累计航段的高亮色。
+- 本轮只调整远航路线对照条展示层和测试，不新增收益、不新增存档字段，不改变升级价格、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、远航调度数值、冷却、连携窗口、反馈入口或部署链路。
+- 本轮本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含当前路线取向短标状态类、`is-preserve` 和 `is-advance` 选择器。
+
 - GitHub Issues：gh 可用且已认证；2026-05-01 20:07 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
 - 本轮 Product decision 继续处理 #6，并以 #4 作为视觉密度约束：当前路线已经有动作、收益、资源代价和回航结果锚点，但当前阶段短标仍缺少“这条当前路线现在处于哪一步”的扫视锚点。
 - 本轮改动新增远航对照条当前阶段锚点：只在 `.far-dispatch-branch-choice-summary-item.is-active-route` 内的当前阶段短标增加胶囊边框、轻量背景和内描边，不新增文字或动画。

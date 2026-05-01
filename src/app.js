@@ -946,7 +946,9 @@ function renderFarDispatchBranchChoiceSummaryItem(choice) {
   payoff.hidden = !choice.routePayoffSummaryText;
 
   const intent = document.createElement("span");
-  intent.className = "far-dispatch-branch-choice-summary-intent";
+  intent.className =
+    "far-dispatch-branch-choice-summary-intent is-" +
+    getFarDispatchBranchChoiceRouteIntentKind(choice);
   intent.textContent = choice.routeIntentText ?? "";
 
   const cost = document.createElement("span");
