@@ -5237,6 +5237,8 @@ function buildFarRouteDispatchBranchChoices(
       buildFarRouteDispatchBranchRouteRewardLabels(choice.kind);
     const routeRewardText =
       buildFarRouteDispatchBranchRouteRewardText(routeRewardLabels);
+    const routeRewardSummaryText =
+      buildFarRouteDispatchBranchRouteRewardSummaryText(routeRewardLabels);
     const routeFlow = buildFarRouteDispatchBranchRouteFlow(choice.kind);
     const routeCost = buildFarRouteDispatchBranchRouteCost(choice.kind);
     const routeIntent = buildFarRouteDispatchBranchRouteIntent(choice.kind);
@@ -5306,6 +5308,7 @@ function buildFarRouteDispatchBranchChoices(
       routeStepLabels,
       routeRewardLabels,
       routeRewardText,
+      routeRewardSummaryText,
       routeFlowKind: routeFlow.kind,
       routeFlowText: routeFlow.text,
       routeCostKind: routeCost.kind,
@@ -5347,6 +5350,8 @@ function buildFarRouteDispatchBranchChoices(
         routePhase.text +
         " · " +
         routeAction.text +
+        " · " +
+        routeRewardSummaryText +
         " · " +
         routeRewardText +
         " · " +
@@ -5624,6 +5629,16 @@ function buildFarRouteDispatchBranchRouteRewardText(routeRewardLabels) {
   ].filter(Boolean);
 
   return labels.length ? "收益点：" + labels.join(" -> ") : "";
+}
+
+function buildFarRouteDispatchBranchRouteRewardSummaryText(routeRewardLabels) {
+  const labels = [
+    routeRewardLabels?.start,
+    routeRewardLabels?.branch,
+    routeRewardLabels?.return
+  ].filter(Boolean);
+
+  return labels.join("/");
 }
 
 function buildFarRouteDispatchBranchRouteFlow(kind) {
@@ -5927,6 +5942,8 @@ function buildFarRouteDispatchBranchChoiceText(choices) {
           " · " +
           choice.routeActionText +
           " · " +
+          choice.routeRewardSummaryText +
+          " · " +
           choice.routeRewardText +
           " · " +
           choice.routeCostText +
@@ -5976,6 +5993,8 @@ function buildFarRouteDispatchBranchChoiceSummaryText(choices) {
           choice.routePhaseText +
           " · " +
           choice.routeActionText +
+          " · " +
+          choice.routeRewardSummaryText +
           " · " +
           choice.routeBranchStepText +
           " · " +
