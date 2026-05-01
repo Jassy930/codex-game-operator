@@ -1,5 +1,27 @@
 # Decision
 
+## 2026-05-01 Product decision：远航对照条当前收益路径锚点
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-01 20:35 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；本轮继续处理 #6“后半段玩法无聊、只有不停目标”和 #4“界面文字密集、需要更好看”的交集。
+
+当前最大问题：远航路线对照条已经突出当前路线、推进节点、当前动作、本步收益、资源代价、回航结果、阶段和取向，但三步收益路径 `校准/补给/闭环` 或 `校准/投送/闭环` 仍和非当前路线同权重。玩家在执行当前路线时可以看到本步收益，但仍需要把三步收益落点从普通短标里重新扫一遍。
+
+本轮决策：
+
+- 新增“远航对照条当前收益路径锚点”。
+- `src/styles.css` 仅对 `.far-dispatch-branch-choice-summary-item.is-active-route .far-dispatch-branch-choice-summary-reward` 增加静态胶囊边框、轻量背景和内描边，并给当前绕行路线提供单独颜色。
+- `tests/game.test.js` 增加静态断言，覆盖当前路线收益路径短标样式绑定。
+- 该改动只调整远航路线对照条展示层和测试，不新增收益、不新增存档字段，不改变升级价格、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、远航调度数值、冷却、连携窗口、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-05-01 20:35 CST 当前 5 个 open feedback issue、0 个 open bug issue。
+- `src/styles.css` 包含当前路线收益路径短标选择器和当前绕行路线覆盖。
+- `tests/game.test.js` 覆盖远航路线对照条当前收益路径锚点静态样式绑定。
+- 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含当前路线收益路径短标选择器和当前绕行路线覆盖。
+- 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #6 和 #4，以及当前远航路线对照条实现复盘。
+
 ## 2026-05-01 Product decision：远航对照条当前取向锚点
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-01 20:23 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；本轮继续处理 #6“后半段玩法无聊、只有不停目标”和 #4“界面文字密集、需要更好看”的交集。

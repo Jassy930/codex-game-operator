@@ -46,6 +46,7 @@
 - 远航路线对照条当前路线边栏当前由 `choice.active` 派生的 `.far-dispatch-branch-choice-summary-item.is-active-route` 和 CSS `::before` 边栏即时渲染，不单独记录为真实线上指标；当前路线语义仍由 `branchChoiceSummaryText`、`branchChoiceText`、路线履历、路线步骤、按钮路线标记、路线反馈和反馈快照复盘。
 - 远航路线对照条当前阶段锚点当前由 `choice.active` 派生的 `.far-dispatch-branch-choice-summary-item.is-active-route .far-dispatch-branch-choice-summary-phase` 即时渲染，不单独记录为真实线上指标；起手、分支、回航、完成或整备阶段语义仍由 `routePhaseKind` / `routePhaseText`、迷你三步进度条、按钮路线标记、路线反馈和反馈快照复盘。
 - 远航路线对照条当前取向锚点当前由 `choice.active`、`routeIntentKind` 和 `.far-dispatch-branch-choice-summary-intent.is-preserve/is-advance` 即时渲染，不单独记录为真实线上指标；保当前/推累计语义仍由 `routeIntentText`、`branchChoiceSummaryText`、路线微图、路线指令串、按钮路线标记、路线反馈和反馈快照复盘。
+- 远航路线对照条当前收益路径锚点当前由 `choice.active` 与 `.far-dispatch-branch-choice-summary-reward` 即时渲染，当前绕行路线通过 `.is-active-route.is-detour` 提供单独颜色，不单独记录为真实线上指标；校准/补给/闭环或校准/投送/闭环语义仍由 `routeRewardSummaryText`、`branchChoiceSummaryText`、路线微图、路线指令串、按钮路线标记、路线反馈和反馈快照复盘。
 - 远航路线对照条分组布局当前由 CSS 命名网格区域即时渲染，不单独记录为真实线上指标；它只改变对照槽短标层级，不改变 `branchChoiceSummaryText`、反馈快照、收益、存档或事件字段。
 - 远航路线对照条小屏布局当前由 820px 响应式 CSS 即时渲染，不单独记录为真实线上指标；它只改变对照槽在窄屏下的列数和命名网格区域，不改变 `branchChoiceSummaryText`、反馈快照、收益、存档或事件字段。
 - 远航路线对照条迷你三步进度条当前由 `branchChoices.routeProgressPercent`、`branchChoices.routeNodeStates`、`branchChoices.routeStepLabels` 和 `branchChoices.routeCommandLabels` 即时渲染，包含 1/2/3 步号、悬停标题和“路线对照进度”可访问汇总，不单独记录为真实线上指标；目标、分支、回目标的阶段语义仍通过 `branchChoiceSummaryText`、当前步短标、路线微图、路线步骤、按钮路线标记、路线反馈和反馈快照复盘。
