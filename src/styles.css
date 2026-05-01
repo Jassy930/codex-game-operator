@@ -465,6 +465,14 @@ h2 {
     drop-shadow(0 0 18px rgba(19, 181, 166, 0.18));
 }
 
+.core-button.is-pressing .core-surge-orbit {
+  opacity: 0.72;
+  filter:
+    drop-shadow(0 0 14px rgba(255, 247, 194, 0.3))
+    drop-shadow(0 0 24px rgba(19, 181, 166, 0.22));
+  animation-duration: 1100ms;
+}
+
 .core-button.is-overload-ready .core-surge-orbit {
   background:
     conic-gradient(
@@ -922,6 +930,14 @@ h2 {
   transform: scale(1.05);
 }
 
+.core-button.is-pressing .core-label {
+  background: #fff7c2;
+  box-shadow:
+    0 0 18px rgba(255, 247, 194, 0.38),
+    inset 0 0 18px rgba(244, 178, 60, 0.28);
+  transform: scale(0.94);
+}
+
 .core-art {
   position: relative;
   z-index: 1;
@@ -935,6 +951,12 @@ h2 {
   filter:
     drop-shadow(0 0 34px rgba(19, 181, 166, 0.28))
     drop-shadow(0 0 28px rgba(244, 178, 60, 0.28));
+}
+
+.core-button.is-pressing .core-art {
+  filter:
+    drop-shadow(0 0 38px rgba(255, 247, 194, 0.42))
+    drop-shadow(0 0 30px rgba(19, 181, 166, 0.28));
 }
 
 .core-button.is-overload-ready .core-art,

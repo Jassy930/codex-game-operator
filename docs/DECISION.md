@@ -1,5 +1,28 @@
 # Decision
 
+## 2026-05-01 Product decision：点火按住压光
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-01 16:25 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#5 仍是最新更新的开放反馈，继续围绕“点火按钮太薄弱、增加点击反馈、特效和点击欲望”做 Product decision。
+
+当前最大问题：点火按钮已经有按住即时反冲、按压反冲、落点闪光、落点涟漪、落点火花束、音效、触感、连击轨、星核蓄能裂纹和蓄能外弧。上一轮解决了 pointerdown 坐标滞后，但按住期间星核本体、外弧和中心标签仍主要沿用普通态，玩家手指或鼠标压住时缺少持续的“被压亮”状态。
+
+本轮决策：
+
+- 新增“点火按住压光”。
+- `src/styles.css` 让 `.core-button.is-pressing .core-surge-orbit` 提高透明度、加重光晕并缩短动画周期，让按住态外弧更像正在蓄能。
+- `src/styles.css` 让 `.core-button.is-pressing .core-label` 压缩并切换更亮中心光，让按钮中心在按住期间有明确下压状态。
+- `src/styles.css` 让 `.core-button.is-pressing .core-art` 增强星核本体滤镜，补足按住期间的持续视觉反馈。
+- `tests/game.test.js` 增加静态断言，覆盖按住外弧、中心标签和星核本体样式。
+- 该改动只调整点火按钮展示层和测试，不新增收益、不新增存档字段，不改变点击收益、连击窗口、过载奖励、升级价格、星图路线、项目奖励、航线策略、航线指令、远航调度、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-05-01 16:25 CST 当前 5 个 open feedback issue、0 个 open bug issue。
+- `src/styles.css` 包含 `.core-button.is-pressing .core-surge-orbit`、`.core-button.is-pressing .core-label` 和 `.core-button.is-pressing .core-art`。
+- `tests/game.test.js` 覆盖点火按住压光静态样式绑定。
+- 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含 `.core-button.is-pressing .core-surge-orbit`、`animation-duration: 1100ms`、`.core-button.is-pressing .core-label` 和 `.core-button.is-pressing .core-art`。
+
 ## 2026-05-01 Product decision：点火按住即时反冲
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-01 16:11 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#5 仍是最新更新的开放反馈，继续围绕“点火按钮太薄弱、增加点击反馈、特效和点击欲望”做 Product decision。

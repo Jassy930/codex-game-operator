@@ -1375,6 +1375,8 @@ test("点火按钮会渲染点击反馈和过载前兆效果", () => {
   assert.match(styles, /touch-action: manipulation/);
   assert.match(styles, /\.core-button\.is-pressing/);
   assert.match(styles, /\.core-button\.is-pressing::before/);
+  assert.match(styles, /\.core-button\.is-pressing \.core-surge-orbit/);
+  assert.match(styles, /animation-duration: 1100ms/);
   assert.match(styles, /\.core-feedback-layer/);
   assert.match(styles, /\.core-stage-aura/);
   assert.match(styles, /--core-stage-angle/);
@@ -1417,6 +1419,8 @@ test("点火按钮会渲染点击反馈和过载前兆效果", () => {
   assert.match(styles, /\.core-combo-dot\.is-next/);
   assert.match(styles, /\.core-reward-hint/);
   assert.match(styles, /\.core-label/);
+  assert.match(styles, /\.core-button\.is-pressing \.core-label/);
+  assert.match(styles, /\.core-button\.is-pressing \.core-art/);
   assert.match(styles, /--core-vein-opacity/);
   assert.match(styles, /--core-vein-dash-offset/);
   assert.match(styles, /\.core-veins/);
