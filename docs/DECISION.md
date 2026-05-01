@@ -1,5 +1,27 @@
 # Decision
 
+## 2026-05-01 Product decision：点火连击读数命中跳闪
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-01 21:18 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；本轮处理 #5“点火按钮太薄弱、增加点击反馈和点击欲望”。
+
+当前最大问题：点火按钮已经有按住即时反冲、按住压光、落点特效、收益浮层、蓄能轨、连击点、中心标签、外层轮廓和下一击预告命中反馈，但按钮下方的 `连击 0` / `稳定` 读数仍只在文字上更新。玩家点火后可以看到按钮本体反馈，却还需要从静态读数里确认本次连击与过载状态是否已经更新。
+
+本轮决策：
+
+- 新增“点火连击读数命中跳闪”。
+- `src/styles.css` 复用现有 `.core-button.is-pulsing` 与 `.core-button.is-overload-impact` 短时状态：普通命中时让 `#comboValue` 播放短促读数跳闪；过载命中时让 `#comboValue` 和 `#pulseValue` 播放更强读数跳闪。
+- `tests/game.test.js` 增加静态断言，覆盖普通/过载读数选择器与两套 keyframes。
+- 该改动只调整点火按钮相邻读数展示层和测试，不新增收益、不新增存档字段，不改变点击收益、连击窗口、过载奖励、升级价格、星图路线、项目奖励、航线策略、航线指令、远航调度、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-05-01 21:18 CST 当前 5 个 open feedback issue、0 个 open bug issue。
+- `src/styles.css` 包含 `coreComboReadoutHit`、`coreComboReadoutOverloadHit`、普通命中 `#comboValue` 选择器和过载命中 `#comboValue` / `#pulseValue` 选择器。
+- `tests/game.test.js` 覆盖点火连击读数命中跳闪静态样式绑定。
+- 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含 `coreComboReadoutHit`、`coreComboReadoutOverloadHit`、普通命中 `#comboValue` 选择器和过载命中 `#comboValue` / `#pulseValue` 选择器。
+- 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #5 和当前点火按钮实现复盘。
+
 ## 2026-05-01 Product decision：远航对照条当前路线身份锚点
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-01 21:02 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；本轮继续处理 #6“后半段玩法无聊、只有不停目标”和 #4“界面文字密集、需要更好看”的交集。

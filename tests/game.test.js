@@ -1449,6 +1449,11 @@ test("点火按钮会渲染点击反馈和过载前兆效果", () => {
   assert.match(styles, /coreRewardHintHit 360ms ease-out/);
   assert.match(styles, /\.core-button\.is-overload-impact \+ \.core-reward-hint/);
   assert.match(styles, /coreRewardHintOverloadHit 520ms ease-out/);
+  assert.match(styles, /\.core-button\.is-pulsing:not\(\.is-overload-impact\) ~ \.combo-line #comboValue/);
+  assert.match(styles, /coreComboReadoutHit 360ms ease-out/);
+  assert.match(styles, /\.core-button\.is-overload-impact ~ \.combo-line #comboValue/);
+  assert.match(styles, /\.core-button\.is-overload-impact ~ \.combo-line #pulseValue/);
+  assert.match(styles, /coreComboReadoutOverloadHit 520ms ease-out/);
   assert.match(styles, /\.core-label/);
   assert.match(styles, /\.core-button\.is-pulsing:not\(\.is-overload-impact\) \.core-label/);
   assert.match(styles, /coreLabelHitFlash 360ms ease-out/);
@@ -1460,6 +1465,8 @@ test("点火按钮会渲染点击反馈和过载前兆效果", () => {
   assert.match(styles, /@keyframes coreLabelOverloadFlash/);
   assert.match(styles, /@keyframes coreRewardHintHit/);
   assert.match(styles, /@keyframes coreRewardHintOverloadHit/);
+  assert.match(styles, /@keyframes coreComboReadoutHit/);
+  assert.match(styles, /@keyframes coreComboReadoutOverloadHit/);
   assert.match(styles, /\.core-button\.is-pressing \.core-label/);
   assert.match(styles, /\.core-button\.is-pressing \.core-art/);
   assert.match(styles, /--core-vein-opacity/);

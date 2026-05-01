@@ -1164,6 +1164,15 @@ h2 {
   animation: coreRewardHintOverloadHit 520ms ease-out;
 }
 
+.core-button.is-pulsing:not(.is-overload-impact) ~ .combo-line #comboValue {
+  animation: coreComboReadoutHit 360ms ease-out;
+}
+
+.core-button.is-overload-impact ~ .combo-line #comboValue,
+.core-button.is-overload-impact ~ .combo-line #pulseValue {
+  animation: coreComboReadoutOverloadHit 520ms ease-out;
+}
+
 .combo-line {
   display: flex;
   flex-wrap: wrap;
@@ -5886,6 +5895,55 @@ h2 {
       0 0 28px rgba(255, 247, 194, 0.28),
       0 0 42px rgba(232, 93, 117, 0.26);
     transform: translateY(-3px) scale(1.07);
+  }
+
+  100% {
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes coreComboReadoutHit {
+  0% {
+    background: rgba(244, 178, 60, 0.2);
+    color: #fff7c2;
+    box-shadow:
+      inset 0 0 0 1px rgba(244, 178, 60, 0.36),
+      0 0 14px rgba(244, 178, 60, 0.16);
+    transform: translateY(1px) scale(0.98);
+  }
+
+  46% {
+    background: rgba(255, 247, 194, 0.18);
+    color: #fff7c2;
+    box-shadow:
+      inset 0 0 0 1px rgba(255, 247, 194, 0.4),
+      0 0 18px rgba(255, 211, 106, 0.2);
+    transform: translateY(-1px) scale(1.05);
+  }
+
+  100% {
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes coreComboReadoutOverloadHit {
+  0% {
+    background: rgba(232, 93, 117, 0.24);
+    color: #fff7c2;
+    box-shadow:
+      inset 0 0 0 1px rgba(232, 93, 117, 0.38),
+      0 0 18px rgba(232, 93, 117, 0.2);
+    transform: translateY(1px) scale(0.98);
+  }
+
+  42% {
+    background: rgba(255, 247, 194, 0.2);
+    color: #14110f;
+    box-shadow:
+      inset 0 0 0 1px rgba(255, 247, 194, 0.54),
+      0 0 24px rgba(255, 247, 194, 0.24),
+      0 0 34px rgba(232, 93, 117, 0.24);
+    transform: translateY(-2px) scale(1.08);
   }
 
   100% {

@@ -2,6 +2,14 @@
 
 ## 2026-05-01
 
+- GitHub Issues：gh 可用且已认证；2026-05-01 21:18 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
+- 本轮 Product decision 处理 #5：点火按钮已有按住、落点、收益浮层、蓄能轨、连击点、中心标签、外层轮廓和下一击预告命中反馈，但 `连击` / `稳定` 读数仍只更新文本，缺少与普通命中和过载命中同节奏的短促确认。
+- 本轮改动新增点火连击读数命中跳闪：普通点火命中时 `#comboValue` 播放短促跳闪；过载命中时 `#comboValue` 和 `#pulseValue` 播放更强跳闪。
+- 本轮只调整点火按钮相邻读数展示层和测试，不新增收益、不新增存档字段，不改变点击收益、连击窗口、过载奖励、升级价格、星图路线、项目奖励、航线策略、航线指令、远航调度、反馈入口或部署链路。
+- 本轮本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含点火连击读数命中跳闪选择器和 keyframes。
+- 钉钉通知待处理：本轮结束前仅会从运行环境或本地 `.env*` 查找 webhook，不写入仓库。
+
 - GitHub Issues：gh 可用且已认证；2026-05-01 21:02 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
 - 本轮 Product decision 继续处理 #6，并以 #4 作为视觉密度约束：当前路线已经有边栏、阶段、下一步动作、收益路径、本步收益、资源代价、回航结果、取向和第二步按钮锚点，但首行身份短标 `协同 · 当前路线` / `绕行 · 当前路线` 仍缺少当前路线内的扫视锚点。
 - 本轮改动新增远航对照条当前路线身份锚点：`src/styles.css` 只在当前路线内强化首行身份短标，并为当前绕行路线提供单独颜色。
