@@ -2,6 +2,14 @@
 
 ## Unreleased
 
+- 点火按钮新增“连击轨下一格待机信标”：主按钮未按压、未命中且不处于过载预备/命中状态时，8 格连击轨里的下一格会轻量呼吸，让下一次点火将推进的位置在点击前更容易被扫到，继续回应 #5 对点击反馈、特效和点击欲望的反馈。
+- `src/styles.css` 为 `.core-button:not(.is-pulsing):not(.is-pressing):not(.is-overload-ready):not(.is-overload-hit) .core-combo-dot.is-next` 增加 `coreComboNextIdleBeacon` 动画，并在降低动效偏好中关闭该动画；`tests/game.test.js` 覆盖静态绑定。
+- 本轮只调整点火按钮 8 格连击轨展示层和测试，不新增可见文字、不新增收益、不新增存档字段，不改变点击收益、连击窗口、过载奖励、升级价格、星图路线、项目奖励、航线策略、航线指令、远航调度、反馈入口或部署链路。
+- 同步 GitHub Issues 反馈状态：2026-05-02 07:43 CST 当前 5 个 open feedback issue、0 个 open bug issue；#5 作为主处理对象。
+- 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认 `dist/src/styles.css` 包含 `coreComboNextIdleBeacon 1800ms ease-in-out infinite`、`@keyframes coreComboNextIdleBeacon` 和降低动效兜底。
+- 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #5，以及当前连击轨下一格待机状态仍缺少邀请信号的复盘。
+
 - 点火按钮新增“蓄能外弧待机信标”：主按钮未连击蓄能、未按压、未命中且不处于过载预备/命中状态时，外层蓄能弧会轻量补光，继续回应 #5 对点击反馈、特效和点击欲望的反馈。
 - `src/styles.css` 为 `.core-button:not(.is-combo-charging):not(.is-pulsing):not(.is-pressing):not(.is-overload-ready):not(.is-overload-hit) .core-surge-orbit` 增加 `coreSurgeIdleBeacon` 动画，并在降低动效偏好中关闭该动画；`tests/game.test.js` 覆盖静态绑定。
 - 本轮只调整点火按钮蓄能外弧展示层和测试，不新增可见文字、不新增收益、不新增存档字段，不改变点击收益、连击窗口、过载奖励、升级价格、星图路线、项目奖励、航线策略、航线指令、远航调度、反馈入口或部署链路。

@@ -1476,6 +1476,8 @@ test("点火按钮会渲染点击反馈和过载前兆效果", () => {
   assert.match(styles, /\.core-button\.is-overload-impact \.core-combo-track::before/);
   assert.match(styles, /coreComboTrackOverloadSweep 520ms ease-out/);
   assert.match(styles, /\.core-combo-dot\.is-next/);
+  assert.match(styles, /\.core-button:not\(\.is-pulsing\):not\(\.is-pressing\):not\(\.is-overload-ready\):not\(\.is-overload-hit\)[\s\S]*\.core-combo-dot\.is-next/);
+  assert.match(styles, /coreComboNextIdleBeacon 1800ms ease-in-out infinite/);
   assert.match(styles, /\.core-combo-dot\.is-hit/);
   assert.match(styles, /coreComboDotHit 460ms ease-out/);
   assert.match(styles, /\.core-combo-track\.is-overload-hit \.core-combo-dot\.is-hit/);
@@ -1511,6 +1513,7 @@ test("点火按钮会渲染点击反馈和过载前兆效果", () => {
   assert.match(styles, /@keyframes coreComboReadoutOverloadHit/);
   assert.match(styles, /@keyframes coreComboTrackHitSweep/);
   assert.match(styles, /@keyframes coreComboTrackOverloadSweep/);
+  assert.match(styles, /@keyframes coreComboNextIdleBeacon/);
   assert.match(styles, /@keyframes coreBadgeStepHit/);
   assert.match(styles, /@keyframes scoreEnergyReadoutHit/);
   assert.match(styles, /@keyframes scoreEnergyReadoutOverloadHit/);

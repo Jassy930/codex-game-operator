@@ -16,6 +16,7 @@
 - 点火下一击预告待机信标当前由本地 `.core-button:not(.is-pulsing):not(.is-pressing) + .core-reward-hint:not(.is-overload-ready):not(.is-overload-hit)` 展示态即时渲染，不单独记录为真实线上指标；下一击收益和过载预告仍通过 `getCoreRewardPreview`、click 事件、连击状态和过载结果复盘。
 - 点火中心标签待机信标当前由本地 `.core-button:not(.is-pulsing):not(.is-pressing):not(.is-overload-ready):not(.is-overload-hit) .core-label` 展示态即时渲染，不单独记录为真实线上指标；点火行为仍通过 click 事件、连击状态、过载结果和现有反馈快照复盘。
 - 点火蓄能外弧待机信标当前由本地 `.core-button:not(.is-combo-charging):not(.is-pulsing):not(.is-pressing):not(.is-overload-ready):not(.is-overload-hit) .core-surge-orbit` 展示态即时渲染，不单独记录为真实线上指标；点火行为、连击状态和过载结果仍通过 click 事件、`getComboStatus` 和现有反馈快照复盘。
+- 点火连击轨下一格待机信标当前由本地 `.core-button:not(.is-pulsing):not(.is-pressing):not(.is-overload-ready):not(.is-overload-hit) .core-combo-dot.is-next` 展示态即时渲染，不单独记录为真实线上指标；点火行为、下一格状态和过载结果仍通过 click 事件、`getComboStatus` 和现有反馈快照复盘。
 - 点火蓄能轨命中闪烁当前由本地 `is-pulsing` / `is-overload-impact` 展示态即时触发，不单独记录为真实线上指标；点火行为仍通过 click 事件、连击状态和过载结果复盘。
 - 点火星核蓄能裂纹当前由本地连击进度 `combo.progress` 即时渲染为 `--core-vein-opacity` 和 `--core-vein-dash-offset`，不单独记录为真实线上指标；点火行为仍通过 click 事件、连击状态和过载结果复盘。
 - 点火星核裂纹命中闪亮当前由本地 `.core-button.is-pulsing:not(.is-overload-impact) .core-vein` 短时展示态即时渲染，不单独记录为真实线上指标；裂纹进度仍通过 `combo.progress`、click 事件、连击状态和过载结果复盘。
