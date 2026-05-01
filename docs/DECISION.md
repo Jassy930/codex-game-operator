@@ -1,5 +1,27 @@
 # Decision
 
+## 2026-05-01 Product decision：远航对照条下一步动作信标
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-01 18:35 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；本轮回到 #6“后半段玩法无聊、只有不停目标”和 #4“界面文字密集、需要更好看”的交集，继续优化 20M 后远航调度的路线扫视。
+
+当前最大问题：远航路线对照条已经显示路线徽标、当前步、下一步按钮短标、收益短标、第二步指令、本步收益、路线取向、资源代价、回航结果和 1/2/3 迷你进度轨，但“下一步 1/2/3 <指令名>”仍只是同权重文字。玩家在协同/绕行两条路线间扫视时，最需要先看到哪一项是当前可执行动作，而不是继续读完整短标组合。
+
+本轮决策：
+
+- 新增“远航对照条下一步动作信标”。
+- `src/styles.css` 让 `.far-dispatch-branch-choice-summary-action` 呈现胶囊式动作短标，并在非 `is-idle` 状态下通过 `::before` 播放 `farDispatchSummaryActionBeacon` 呼吸信标。
+- `src/styles.css` 分别强化目标/分支/回航、整备和绕行分支动作的颜色，但不新增可见文字。
+- `tests/game.test.js` 增加静态断言，覆盖动作信标伪元素、非 idle 动画、idle 隐藏和关键帧。
+- 该改动只调整远航路线对照条展示层和测试，不新增收益、不新增存档字段，不改变升级价格、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、远航调度数值、冷却、连携窗口、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-05-01 18:35 CST 当前 5 个 open feedback issue、0 个 open bug issue。
+- `src/styles.css` 包含 `.far-dispatch-branch-choice-summary-action::before`、`.far-dispatch-branch-choice-summary-action:not(.is-idle)::before`、`animation: farDispatchSummaryActionBeacon 1200ms ease-in-out infinite`、`.far-dispatch-branch-choice-summary-action.is-idle::before` 和 `@keyframes farDispatchSummaryActionBeacon`。
+- `tests/game.test.js` 覆盖远航路线对照条下一步动作信标静态样式绑定。
+- 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含 `farDispatchSummaryActionBeacon`、`.far-dispatch-branch-choice-summary-action::before` 和 `.far-dispatch-branch-choice-summary-action:not(.is-idle)::before`。
+
 ## 2026-05-01 Product decision：点火下一击预告命中跳闪
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-01 18:19 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#5 仍是最新更新的开放反馈，继续围绕“点火按钮太薄弱、增加点击反馈、特效和点击欲望”做 Product decision。

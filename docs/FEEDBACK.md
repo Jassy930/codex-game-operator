@@ -2,6 +2,13 @@
 
 ## 2026-05-01
 
+- GitHub Issues：gh 可用且已认证；2026-05-01 18:35 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
+- 本轮 Product decision 处理 #6，并以 #4 作为视觉密度约束：远航路线对照条已经能把当前步、下一步按钮短标、收益短标、第二步指令、本步收益、资源取向、代价、回航结果和 1/2/3 迷你进度轨放到同一层，但“下一步”仍只是普通短标，玩家需要在多项短标里继续找当前可执行动作。
+- 本轮改动新增远航对照条下一步动作信标：`.far-dispatch-branch-choice-summary-action` 改为胶囊式动作短标，非 `is-idle` 状态通过 `::before` 播放 `farDispatchSummaryActionBeacon` 呼吸信标；idle 状态不显示信标，避免待选路线制造误导。
+- 本轮只调整远航路线对照条展示层和测试，不新增收益、不新增存档字段，不改变升级价格、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、远航调度数值、冷却、连携窗口、反馈入口或部署链路。
+- 本轮本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含 `farDispatchSummaryActionBeacon`、`.far-dispatch-branch-choice-summary-action::before` 和 `.far-dispatch-branch-choice-summary-action:not(.is-idle)::before`。
+
 - GitHub Issues：gh 可用且已认证；2026-05-01 18:19 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
 - 本轮 Product decision 继续处理 #5：点火按钮已有按住反冲、按住压光、落点反馈、收益浮层跟随落点、蓄能轨、连击点、中心标签和外层轮廓命中反馈，但按钮下方“下一击 +X / 触发过载”的预告在点击后只更新文字，缺少和按钮命中同节奏的短促确认。
 - 本轮改动新增点火下一击预告命中跳闪：普通命中时 `.core-button.is-pulsing:not(.is-overload-impact) + .core-reward-hint` 播放 `coreRewardHintHit`；过载命中时 `.core-button.is-overload-impact + .core-reward-hint` 播放更强的 `coreRewardHintOverloadHit`。

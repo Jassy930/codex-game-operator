@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+- 远航调度新增“路线对照条下一步动作信标”：协同/绕行对照槽里的下一步按钮短标现在会以胶囊样式显示，非待选状态播放轻量呼吸信标，让当前可执行动作在不增加文字的情况下更容易扫到，继续回应 #6 的后半段路线执行理解和 #4 的文字密度反馈。
+- `src/styles.css` 增加 `.far-dispatch-branch-choice-summary-action::before`、`.far-dispatch-branch-choice-summary-action:not(.is-idle)::before` 和 `farDispatchSummaryActionBeacon`；`tests/game.test.js` 覆盖静态绑定。
+- 本轮只调整远航路线对照条展示层和测试，不新增收益、不新增存档字段，不改变升级价格、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、远航调度数值、冷却、连携窗口、反馈入口或部署链路。
+- 同步 GitHub Issues 反馈状态：2026-05-01 18:35 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 作为主处理对象，#4 作为视觉密度依据。
+- 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含 `farDispatchSummaryActionBeacon`、`.far-dispatch-branch-choice-summary-action::before` 和 `.far-dispatch-branch-choice-summary-action:not(.is-idle)::before`。
+
 - 点火按钮新增“下一击预告命中跳闪”：普通点火命中时，按钮下方下一击奖励预告会短促亮起并回弹；过载点火命中时使用更强跳闪，继续回应 #5 的点击反馈、特效和点击欲望反馈。
 - `src/styles.css` 增加 `.core-button.is-pulsing:not(.is-overload-impact) + .core-reward-hint`、`.core-button.is-overload-impact + .core-reward-hint`、`coreRewardHintHit` 和 `coreRewardHintOverloadHit`；`tests/game.test.js` 覆盖静态绑定。
 - 本轮只调整点火按钮相邻展示层和测试，不新增收益、不新增存档字段，不改变点击收益、连击窗口、过载奖励、升级价格、星图路线、项目奖励、航线策略、航线指令、远航调度、反馈入口或部署链路。

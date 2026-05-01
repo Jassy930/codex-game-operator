@@ -2092,8 +2092,12 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(styles, /\.far-dispatch-branch-choice-summary-phase\.is-complete/);
   assert.match(styles, /\.far-dispatch-branch-choice-summary-action/);
   assert.match(styles, /grid-area: action/);
+  assert.match(styles, /\.far-dispatch-branch-choice-summary-action::before/);
+  assert.match(styles, /\.far-dispatch-branch-choice-summary-action:not\(\.is-idle\)::before/);
+  assert.match(styles, /animation: farDispatchSummaryActionBeacon 1200ms ease-in-out infinite/);
   assert.match(styles, /\.far-dispatch-branch-choice-summary-action\.is-return/);
   assert.match(styles, /\.far-dispatch-branch-choice-summary-action\.is-prep/);
+  assert.match(styles, /\.far-dispatch-branch-choice-summary-action\.is-idle::before/);
   assert.match(styles, /\.far-dispatch-branch-choice-summary-reward/);
   assert.match(styles, /\.far-dispatch-branch-choice-summary-step/);
   assert.match(styles, /\.far-dispatch-branch-choice-summary-payoff/);
@@ -2117,6 +2121,7 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(styles, /\.far-dispatch-branch-choice-summary-progress-node\.is-next/);
   assert.match(styles, /\.far-dispatch-branch-choice-summary-progress-node::before/);
   assert.match(styles, /content: attr\(data-step-label\)/);
+  assert.match(styles, /@keyframes farDispatchSummaryActionBeacon/);
   assert.match(styles, /@media \(max-width: 820px\) \{[\s\S]*\.far-dispatch-branch-choice-summary \{[\s\S]*grid-template-columns: 1fr/);
   assert.match(styles, /@media \(max-width: 820px\) \{[\s\S]*"glyph label action step"/);
   assert.match(styles, /@media \(max-width: 820px\) \{[\s\S]*"glyph phase reward payoff"/);

@@ -42,6 +42,7 @@
 - 远航路线回航结果短标当前由 `branchChoices.routeReturnKind` / `routeReturnText` 即时渲染，不单独记录为真实线上指标；协同远航突破、绕行突破的语义仍通过 `branchChoiceText`、卡片标题、路线下一步、收益对照、路线反馈和反馈快照复盘。
 - 远航路线指令串当前由 `branchChoices.routeCommandLabels` / `routeCommandText`、`routeStepLabels` 和 `routeNodeStates` 即时渲染，并在短槽 `title` / `aria-label` 中暴露步骤名、指令名和已完成/下一步/待推进状态，不单独记录为真实线上指标；目标指令、分支指令和回目标指令的顺序仍通过 `branchChoiceText`、卡片标题、路线预案、路线步骤、按钮路线标记、路线反馈和反馈快照复盘。
 - 远航路线对照条当前由 `branchChoiceSummaryText` 和 `branchChoices` 的路线徽标、当前步短标 `routePhaseText`、下一步按钮短标 `routeActionText`、收益短标 `routeRewardSummaryText`、第二步短标 `routeBranchStepText`、本步收益短标 `routePayoffSummaryText`、取向、代价、回航结果即时渲染，不单独记录为真实线上指标；`routeActionText` 会从 `routeCommandLabels` 带出 `下一步 1/2/3 <指令名>` 或整备指令名，但仍只是展示语义；协同/绕行路线取舍、当前阶段、下一步操作、三步回报落点、第二步按钮映射与本步即时收益差异仍通过 `branchChoiceText`、卡片标题、路线收益对照、路线判断、路线指令串、路线反馈和反馈快照复盘。
+- 远航路线对照条下一步动作信标当前由 `.far-dispatch-branch-choice-summary-action is-*` 和 CSS `farDispatchSummaryActionBeacon` 即时渲染，不单独记录为真实线上指标；下一步动作语义仍由 `routeActionKind` / `routeActionText`、`branchChoiceSummaryText`、按钮路线标记、路线反馈和反馈快照复盘。
 - 远航路线对照条分组布局当前由 CSS 命名网格区域即时渲染，不单独记录为真实线上指标；它只改变对照槽短标层级，不改变 `branchChoiceSummaryText`、反馈快照、收益、存档或事件字段。
 - 远航路线对照条小屏布局当前由 820px 响应式 CSS 即时渲染，不单独记录为真实线上指标；它只改变对照槽在窄屏下的列数和命名网格区域，不改变 `branchChoiceSummaryText`、反馈快照、收益、存档或事件字段。
 - 远航路线对照条迷你三步进度条当前由 `branchChoices.routeProgressPercent`、`branchChoices.routeNodeStates`、`branchChoices.routeStepLabels` 和 `branchChoices.routeCommandLabels` 即时渲染，包含 1/2/3 步号、悬停标题和“路线对照进度”可访问汇总，不单独记录为真实线上指标；目标、分支、回目标的阶段语义仍通过 `branchChoiceSummaryText`、当前步短标、路线微图、路线步骤、按钮路线标记、路线反馈和反馈快照复盘。
