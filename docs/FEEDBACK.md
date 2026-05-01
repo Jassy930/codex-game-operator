@@ -2,6 +2,13 @@
 
 ## 2026-05-01
 
+- GitHub Issues：gh 可用且已认证；2026-05-01 21:02 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
+- 本轮 Product decision 继续处理 #6，并以 #4 作为视觉密度约束：当前路线已经有边栏、阶段、下一步动作、收益路径、本步收益、资源代价、回航结果、取向和第二步按钮锚点，但首行身份短标 `协同 · 当前路线` / `绕行 · 当前路线` 仍缺少当前路线内的扫视锚点。
+- 本轮改动新增远航对照条当前路线身份锚点：`src/styles.css` 只在当前路线内强化首行身份短标，并为当前绕行路线提供单独颜色。
+- 本轮只调整远航路线对照条展示层和测试，不新增收益、不新增存档字段，不改变升级价格、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、远航调度数值、冷却、连携窗口、反馈入口或部署链路。
+- 本轮本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含当前路线身份短标选择器和当前绕行路线覆盖。
+
 - GitHub Issues：gh 可用且已认证；2026-05-01 20:51 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
 - 本轮 Product decision 继续处理 #6，并以 #4 作为视觉密度约束：当前路线已经有阶段、下一步动作、收益路径、本步收益、资源代价、回航结果和取向锚点，但第二步按钮短标 `2 谐振脉冲` / `2 巡航回收` 仍缺少当前路线内的扫视锚点。
 - 本轮改动新增远航对照条当前第二步按钮锚点：`src/styles.css` 只在当前路线内强化第二步按钮短标，并为当前绕行路线提供单独颜色。
