@@ -8,6 +8,9 @@
 - 同步 GitHub Issues 反馈状态：2026-05-01 20:35 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 作为主处理对象，#4 作为视觉密度依据。
 - 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
 - 构建产物已确认包含当前路线收益路径短标选择器和当前绕行路线覆盖。
+- 发布：提交 `71e5009` 已推送到 `origin/main`；GitHub Pages workflow `25214646103` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页返回 HTTP 200，线上 `src/styles.css` 已确认包含当前收益路径锚点样式。workflow 继续给出 Node.js 20 actions 弃用提醒，未影响本次部署。
+- 反馈处理：已回复 #6，说明远航对照条当前收益路径锚点、验证结果、Pages 部署和复测问题；已回复 #4，说明本轮用当前收益路径锚点降低文字反推压力；两个 issue 均保持 open。回复后于 2026-05-01 20:43 CST 再次同步 GitHub Issues，当前仍为 5 个 open feedback issue、0 个 open bug issue；#6 更新时间为 2026-05-01T12:43:32Z，#4 更新时间为 2026-05-01T12:43:45Z。
+- 钉钉通知未发送：2026-05-01 20:44 CST 运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` 相关变量名，当前目录和父级四层内未发现 `.env*` 文件，用户目录两层内也未发现 `.env*` 文件；未将 webhook 写入仓库。
 
 - 远航调度新增“路线对照条当前取向锚点”：协同/绕行对照槽成为本轮已选路线时，路线取向短标 `保当前` / `推累计` 会获得胶囊边框、轻量背景和内描边，其中 `推累计` 使用单独高亮色，让玩家在看到当前阶段、动作、本步收益、资源代价和回航结果时，也能直接扫到这条路线的资源目的，继续回应 #6 的后半段路线执行理解和 #4 的文字密度反馈。
 - `src/app.js` 给路线对照条取向短标追加 `is-preserve` / `is-advance` 状态类；`src/styles.css` 增加当前路线取向短标选择器和 `is-advance` 推累计颜色覆盖；`tests/game.test.js` 覆盖静态绑定。
