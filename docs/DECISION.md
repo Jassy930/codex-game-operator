@@ -1,5 +1,29 @@
 # Decision
 
+## 2026-05-02 Product decision：点火倒计时徽标命中跳闪
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-02 00:13 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；本轮继续处理 #5“点火按钮太薄弱、增加点击反馈和点击欲望”。
+
+当前最大问题：点火按钮已经有按住反冲、落点闪光/涟漪/火花、收益浮层、中心标签、蓄能轨、连击轨、连击点跳闪、读数亮闪和音效/触感反馈，但左上过载倒计时徽标在普通点击后主要只更新数字。玩家能看到连击轨推进，却缺少倒计时本身“这一击减 1”的短促确认。
+
+本轮决策：
+
+- 新增“点火倒计时徽标命中跳闪”。
+- `src/styles.css` 复用 `.core-button.is-pulsing:not(.is-overload-impact)`，让 `.core-overload-badge` 在普通点火命中时播放 `coreBadgeStepHit`。
+- 过载命中继续使用已有 `.core-overload-badge.is-overload-hit` 与 `coreBadgeBurst`，避免普通跳闪覆盖第 8 次爆发。
+- 在 `prefers-reduced-motion: reduce` 中关闭该短动画。
+- `tests/game.test.js` 增加静态断言，覆盖选择器、动画名、keyframes 和降低动效兜底。
+- 该改动只调整点火按钮展示层和测试，不新增可见文字、不新增收益、不新增存档字段，不改变点击收益、连击窗口、过载奖励、升级价格、星图路线、项目奖励、航线策略、航线指令、远航调度、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-05-02 00:13 CST 当前 5 个 open feedback issue、0 个 open bug issue；#5 作为本轮主处理对象。
+- `src/styles.css` 包含 `coreBadgeStepHit`、普通命中倒计时徽标选择器和降低动效兜底。
+- `tests/game.test.js` 覆盖点火倒计时徽标命中跳闪静态绑定。
+- 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含 `coreBadgeStepHit`、普通命中倒计时徽标选择器和降低动效兜底。
+- 发布与反馈回复待主分支推送后执行。
+
 ## 2026-05-02 Product decision：点火连击轨命中光扫
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-02 00:01 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#6/#4/#3/#2 已在上一轮处理并回复，本轮继续处理 #5“点火按钮太薄弱、增加点击反馈和点击欲望”。

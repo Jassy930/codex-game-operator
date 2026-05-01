@@ -849,6 +849,10 @@ h2 {
   animation: coreBadgeBurst 520ms ease-out;
 }
 
+.core-button.is-pulsing:not(.is-overload-impact) .core-overload-badge {
+  animation: coreBadgeStepHit 360ms ease-out;
+}
+
 .core-combo-track {
   --core-combo-progress: 0%;
   position: absolute;
@@ -5853,6 +5857,31 @@ h2 {
   }
 }
 
+@keyframes coreBadgeStepHit {
+  0% {
+    border-color: rgba(255, 247, 194, 0.5);
+    color: #ffffff;
+    filter:
+      drop-shadow(0 0 10px rgba(255, 247, 194, 0.34))
+      drop-shadow(0 0 18px rgba(244, 178, 60, 0.22));
+    transform: rotate(-8deg) translateY(2px) scale(0.96);
+  }
+
+  48% {
+    border-color: rgba(255, 247, 194, 0.64);
+    color: #fff7c2;
+    filter:
+      drop-shadow(0 0 14px rgba(255, 247, 194, 0.28))
+      drop-shadow(0 0 22px rgba(244, 178, 60, 0.18));
+    transform: rotate(-8deg) translateY(-2px) scale(1.1);
+  }
+
+  100% {
+    filter: drop-shadow(0 0 0 rgba(244, 178, 60, 0));
+    transform: rotate(-8deg) translateY(0) scale(1);
+  }
+}
+
 @keyframes coreDotPulse {
   0%,
   100% {
@@ -6237,6 +6266,7 @@ h2 {
   .score-grid dd.is-core-hit,
   .score-grid dd.is-core-overload-hit,
   .score-grid dd.is-core-overload-prize,
+  .core-button.is-pulsing:not(.is-overload-impact) .core-overload-badge,
   .core-button.is-pulsing:not(.is-overload-impact) .core-combo-track::before,
   .core-button.is-overload-impact .core-combo-track::before,
   .far-dispatch-branch-choice-summary-item.is-active-route

@@ -1442,6 +1442,8 @@ test("点火按钮会渲染点击反馈和过载前兆效果", () => {
   assert.match(styles, /\.core-overload-badge\.is-countdown-active/);
   assert.match(styles, /\.core-overload-badge\.is-overload-ready/);
   assert.match(styles, /\.core-overload-badge\.is-overload-hit/);
+  assert.match(styles, /\.core-button\.is-pulsing:not\(\.is-overload-impact\) \.core-overload-badge/);
+  assert.match(styles, /coreBadgeStepHit 360ms ease-out/);
   assert.match(styles, /\.core-combo-track/);
   assert.match(styles, /--core-combo-progress/);
   assert.match(styles, /\.core-combo-track::before/);
@@ -1488,6 +1490,7 @@ test("点火按钮会渲染点击反馈和过载前兆效果", () => {
   assert.match(styles, /@keyframes coreComboReadoutOverloadHit/);
   assert.match(styles, /@keyframes coreComboTrackHitSweep/);
   assert.match(styles, /@keyframes coreComboTrackOverloadSweep/);
+  assert.match(styles, /@keyframes coreBadgeStepHit/);
   assert.match(styles, /@keyframes scoreEnergyReadoutHit/);
   assert.match(styles, /@keyframes scoreEnergyReadoutOverloadHit/);
   assert.match(styles, /@keyframes scoreOverloadReadoutPrize/);
@@ -1526,6 +1529,7 @@ test("点火按钮会渲染点击反馈和过载前兆效果", () => {
   assert.match(styles, /@keyframes coreGainFloat/);
   assert.match(styles, /@keyframes coreBadgePulse/);
   assert.match(styles, /@keyframes coreBadgeBurst/);
+  assert.match(styles, /@media \(prefers-reduced-motion: reduce\) \{[\s\S]*\.core-button\.is-pulsing:not\(\.is-overload-impact\) \.core-overload-badge[\s\S]*animation: none/);
   assert.match(styles, /@keyframes coreDotPulse/);
   assert.match(styles, /@keyframes coreComboDotHit/);
   assert.match(styles, /@keyframes coreComboDotOverloadHit/);
