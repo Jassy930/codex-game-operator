@@ -1268,9 +1268,12 @@ function renderFarDispatchLoopTrack(dispatch) {
 
   track.append(
     visual,
-    ...steps.map((step) => {
+    ...steps.map((step, index) => {
+      const rewardKind = getFarDispatchLoopVisualRewardKind(step, index);
       const stepItem = document.createElement("span");
-      stepItem.className = "far-dispatch-loop-step is-" + step.state;
+      stepItem.className =
+        "far-dispatch-loop-step is-" + step.state + " is-" + rewardKind;
+      stepItem.dataset.stepLabel = String(index + 1);
 
       const label = document.createElement("strong");
       label.textContent = step.label;

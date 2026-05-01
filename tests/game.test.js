@@ -2036,7 +2036,8 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(appJs, /reward\.dataset\.rewardLabel = getFarDispatchLoopVisualRewardLabel\(step, index\)/);
   assert.match(appJs, /visual\.setAttribute\("aria-hidden", "true"\)/);
   assert.match(appJs, /node\.dataset\.stepLabel = String\(index \+ 1\)/);
-  assert.match(appJs, /stepItem\.className = "far-dispatch-loop-step is-" \+ step\.state/);
+  assert.match(appJs, /stepItem\.className =[\s\S]*"far-dispatch-loop-step is-" \+ step\.state \+ " is-" \+ rewardKind/);
+  assert.match(appJs, /stepItem\.dataset\.stepLabel = String\(index \+ 1\)/);
   assert.match(appJs, /reward\.className = "far-dispatch-step-reward"/);
   assert.match(appJs, /reward\.textContent = step\.rewardText \?\? ""/);
   assert.match(appJs, /meter\.setAttribute\("role", "meter"\)/);
@@ -2374,6 +2375,15 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(styles, /@media \(prefers-reduced-motion: reduce\) \{[\s\S]*\.far-dispatch-loop-visual-arrow\.is-current[\s\S]*animation: none/);
   assert.match(styles, /@media \(prefers-reduced-motion: reduce\) \{[\s\S]*\.far-dispatch-loop-visual-node\.is-current::after[\s\S]*animation: none/);
   assert.match(styles, /\.far-dispatch-loop-step\.is-current/);
+  assert.match(styles, /\.far-dispatch-loop-step::before/);
+  assert.match(styles, /content: attr\(data-step-label\)/);
+  assert.match(styles, /\.far-dispatch-loop-step::after/);
+  assert.match(styles, /\.far-dispatch-loop-step\.is-target::before/);
+  assert.match(styles, /\.far-dispatch-loop-step\.is-branch::before/);
+  assert.match(styles, /\.far-dispatch-loop-step\.is-relay::before/);
+  assert.match(styles, /\.far-dispatch-loop-step\.is-return::before/);
+  assert.match(styles, /\.far-dispatch-loop-step\.is-current::before/);
+  assert.match(styles, /\.far-dispatch-loop-step\.is-completed::before/);
   assert.match(styles, /\.far-dispatch-loop-step em/);
   assert.match(styles, /\.far-dispatch\.is-active/);
   assert.match(styles, /\.directive-button \.directive-badges/);

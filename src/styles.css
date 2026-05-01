@@ -3555,14 +3555,61 @@ h2 {
 }
 
 .far-dispatch-loop-step {
+  position: relative;
   display: grid;
   gap: 3px;
   min-width: 0;
   min-height: 56px;
-  padding: 6px 8px;
+  padding: 6px 8px 6px 34px;
   border: 1px solid rgba(255, 126, 177, 0.22);
   border-radius: 8px;
   background: rgba(255, 126, 177, 0.08);
+  isolation: isolate;
+}
+
+.far-dispatch-loop-step::before {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  display: inline-grid;
+  width: 18px;
+  height: 18px;
+  place-items: center;
+  border: 1px solid rgba(248, 243, 231, 0.24);
+  border-radius: 999px;
+  background: rgba(5, 12, 20, 0.82);
+  color: rgba(248, 243, 231, 0.7);
+  content: attr(data-step-label);
+  font-size: 0.56rem;
+  font-weight: 950;
+  line-height: 1;
+}
+
+.far-dispatch-loop-step::after {
+  position: absolute;
+  top: 31px;
+  bottom: 8px;
+  left: 16px;
+  width: 2px;
+  border-radius: 999px;
+  background: rgba(248, 243, 231, 0.14);
+  content: "";
+}
+
+.far-dispatch-loop-step.is-target::before {
+  border-color: rgba(255, 126, 177, 0.36);
+  color: #ffd2e5;
+}
+
+.far-dispatch-loop-step.is-branch::before,
+.far-dispatch-loop-step.is-relay::before {
+  border-color: rgba(255, 211, 106, 0.38);
+  color: #ffd36a;
+}
+
+.far-dispatch-loop-step.is-return::before {
+  border-color: rgba(150, 231, 168, 0.38);
+  color: #96e7a8;
 }
 
 .far-dispatch-loop-step strong,
@@ -3598,9 +3645,30 @@ h2 {
   background: rgba(244, 178, 60, 0.12);
 }
 
+.far-dispatch-loop-step.is-current::before {
+  border-color: rgba(255, 211, 106, 0.9);
+  background: #ffd36a;
+  color: #1b1303;
+  box-shadow: 0 0 14px rgba(255, 211, 106, 0.24);
+}
+
+.far-dispatch-loop-step.is-current::after {
+  background: linear-gradient(180deg, #ffd36a, rgba(255, 211, 106, 0.16));
+}
+
 .far-dispatch-loop-step.is-completed {
   border-color: rgba(150, 231, 168, 0.42);
   background: rgba(150, 231, 168, 0.1);
+}
+
+.far-dispatch-loop-step.is-completed::before {
+  border-color: rgba(150, 231, 168, 0.86);
+  background: #96e7a8;
+  color: #04140a;
+}
+
+.far-dispatch-loop-step.is-completed::after {
+  background: linear-gradient(180deg, #96e7a8, rgba(150, 231, 168, 0.18));
 }
 
 .far-dispatch-loop-step.is-pending {
