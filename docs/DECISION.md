@@ -22,6 +22,11 @@
 - `tests/game.test.js` 覆盖路线指令串状态类绑定和样式。
 - 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
 - 构建产物已确认包含 `far-dispatch-branch-choice-route-command-step is-`、`getFarDispatchBranchChoiceRouteNodeState(choice, step)`、`.far-dispatch-branch-choice-route-command-step.is-done`、`.is-next` 和 `.is-waiting`。
+- 发布验证已通过：提交 `8177ff3` 已推送到 `origin/main`；GitHub Pages workflow `25203987786` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页返回 HTTP 200，线上 `src/app.js` 和 `src/styles.css` 已确认包含路线指令串状态类与样式。
+- 已回复 GitHub Issue #6，说明路线指令串当前步高亮、验证结果、Pages 部署和复测问题，issue 保持 open，更新时间为 2026-05-01T05:43:59Z；评论地址：`https://github.com/Jassy930/codex-game-operator/issues/6#issuecomment-4358024523`。
+- 已回复 GitHub Issue #4，说明本轮用目标/分支/回目标短槽状态高亮降低文字密度，issue 保持 open，更新时间为 2026-05-01T05:44:48Z；评论地址：`https://github.com/Jassy930/codex-game-operator/issues/4#issuecomment-4358025256`。
+- 回复后同步 GitHub Issues：2026-05-01 13:44 CST 当前仍为 5 个 open feedback issue、0 个 open bug issue。
+- 钉钉通知未发送：运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` 相关变量名，当前目录和父级四层内也未发现 `.env*` 文件；未将 webhook 写入仓库。
 
 ## 2026-05-01 Product decision：远航路线对照条小屏布局
 

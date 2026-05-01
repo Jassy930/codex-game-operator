@@ -8,6 +8,9 @@
 - 同步 GitHub Issues 反馈状态：2026-05-01 13:37 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 作为主处理对象，#4 作为视觉密度依据。
 - 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
 - 构建产物已确认包含 `far-dispatch-branch-choice-route-command-step is-`、`getFarDispatchBranchChoiceRouteNodeState(choice, step)`、`.far-dispatch-branch-choice-route-command-step.is-done`、`.is-next` 和 `.is-waiting`。
+- 发布：提交 `8177ff3` 已推送到 `origin/main`；GitHub Pages workflow `25203987786` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页返回 HTTP 200，线上 `src/app.js` 和 `src/styles.css` 已确认包含路线指令串状态类与样式。
+- 反馈处理：已回复 #6，说明路线指令串当前步高亮、验证结果、Pages 部署和复测问题；已回复 #4，说明本轮用目标/分支/回目标短槽状态高亮降低文字密度；两个 issue 均保持 open。回复后于 2026-05-01 13:44 CST 再次同步 GitHub Issues，当前仍为 5 个 open feedback issue、0 个 open bug issue；#6 更新时间为 2026-05-01T05:43:59Z，#4 更新时间为 2026-05-01T05:44:48Z。
+- 钉钉通知未发送：运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` 相关变量名，当前目录和父级四层内也未发现 `.env*` 文件；未将 webhook 写入仓库。
 
 - 远航调度调整“路线对照条小屏布局”：820px 以下把协同/绕行对照槽从双列改为单列，并把单个对照槽重排为路线身份/操作、阶段/收益、本步收益、资源取舍、回航结果和 1/2/3 迷你进度轨，继续回应 #6 的后半段路线理解和 #4 的窄屏文字密度反馈。
 - `src/styles.css` 在现有响应式断点内为 `far-dispatch-branch-choice-summary` 和 `far-dispatch-branch-choice-summary-item` 增加小屏单列与命名网格区域；`tests/game.test.js` 覆盖小屏 CSS 绑定。
