@@ -8,6 +8,10 @@
 - 本轮只调整点火按钮展示层和测试，不新增收益、不新增存档字段，不改变点击收益、连击窗口、过载奖励、升级价格、星图路线、项目奖励、航线策略、航线指令、远航调度、反馈入口或部署链路。
 - 本轮本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
 - 构建产物已确认包含 `.core-button.is-pressing .core-surge-orbit`、`animation-duration: 1100ms`、`.core-button.is-pressing .core-label` 和 `.core-button.is-pressing .core-art`。
+- 发布：提交 `bd8d4b6` 已推送到 `origin/main`；GitHub Pages workflow `25208217600` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页返回 HTTP 200，线上 `src/styles.css` 已确认包含本轮按住压光样式。workflow 继续给出 Node.js 20 actions 弃用提醒，未影响本次部署。
+- #5 已回复：说明点火按住压光、验证结果、Pages 部署和复测问题；issue 保持 open，更新时间为 2026-05-01T08:35:43Z，评论地址：`https://github.com/Jassy930/codex-game-operator/issues/5#issuecomment-4358523129`。
+- 回复后同步 GitHub Issues：2026-05-01 16:35 CST 当前仍为 5 个 open feedback issue、0 个 open bug issue。
+- 钉钉通知未发送：运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` 相关变量名，当前目录和父级三层内也未发现 `.env*` 文件；未将 webhook 写入仓库。
 
 - GitHub Issues：gh 可用且已认证；2026-05-01 16:11 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
 - 本轮 Product decision 继续处理 #5：点火按钮点击后已经有方向性反冲，但鼠标或触屏刚按下时仍可能复用上一次落点，按下瞬间的反馈晚于玩家手指/鼠标落下。
