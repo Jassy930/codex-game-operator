@@ -8,7 +8,9 @@
 - 同步 GitHub Issues 反馈状态：2026-05-02 03:42 CST 当前 5 个 open feedback issue、0 个 open bug issue；#4/#6 作为主处理对象。
 - 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
 - 构建产物已确认包含 `far-dispatch-loop-link` 代码和样式。
-- 发布、反馈回复和钉钉通知状态待推送后补记。
+- 发布：提交 `c5f0637` 已推送到 `origin/main`；GitHub Pages workflow `25230411163` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页返回 HTTP 200，线上 `src/app.js` 和 `src/styles.css` 已确认包含远航闭环微图到步骤卡连接信标代码和样式。workflow 继续给出 Node.js 20 actions 弃用提醒，未影响本次部署。
+- 反馈处理：已回复 #4 和 #6，说明远航闭环微图到步骤卡连接信标、验证结果、Pages 部署和复测问题；两个 issue 均保持 open。回复后于 2026-05-02 03:53 CST 再次同步 GitHub Issues，当前仍为 5 个 open feedback issue、0 个 open bug issue。
+- 钉钉通知未发送：2026-05-02 03:53 CST 运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` / `ROBOT` 相关变量名，当前目录和 `/home/jassy/glm` 两层内未发现 `.env*` 文件；未将 webhook 写入仓库。
 
 - 远航调度新增“远航闭环当前步骤卡信标”：20M 后主操作区远航闭环下方当前步骤卡会播放轻量扫光和饱和度变化，和上方当前节点/方向信标形成同节奏扫视锚点，继续回应 #4 的图形化/文字密度反馈，并辅助 #6 的后半段短循环执行确认。
 - `src/styles.css` 为 `.far-dispatch-loop-step.is-current` 增加 `farDispatchLoopCurrentStepGlow` 动画，并在降低动效偏好中关闭该动画；`tests/game.test.js` 覆盖静态绑定。
