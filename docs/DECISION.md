@@ -21,7 +21,11 @@
 - `tests/game.test.js` 覆盖小屏单列布局和小屏命名网格区域。
 - 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
 - 构建产物已确认包含 `@media (max-width: 820px)`、`far-dispatch-branch-choice-summary`、`glyph label action step`、`glyph phase reward payoff`、`glyph intent cost result` 和 `progress progress progress progress`。
-- 发布前置条件已满足；后续通过主分支 push 触发 GitHub Pages workflow，并在发布后回复 #6 和 #4。
+- 发布验证已通过：提交 `7bfd0a8` 已推送到 `origin/main`；GitHub Pages workflow `25203679110` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页返回 HTTP 200，线上 `src/styles.css` 已确认包含 `@media (max-width: 820px)`、`far-dispatch-branch-choice-summary` 和小屏命名网格区域。
+- 已回复 GitHub Issue #6，说明路线对照条小屏布局、验证结果、Pages 部署和窄屏复测问题，issue 保持 open，更新时间为 2026-05-01T05:31:00Z；评论地址：`https://github.com/Jassy930/codex-game-operator/issues/6#issuecomment-4357989552`。
+- 已回复 GitHub Issue #4，说明本轮把窄屏协同/绕行对照槽从双列改为单列以降低文字密度，issue 保持 open，更新时间为 2026-05-01T05:31:00Z；评论地址：`https://github.com/Jassy930/codex-game-operator/issues/4#issuecomment-4357989550`。
+- 回复后同步 GitHub Issues：2026-05-01 13:31 CST 当前仍为 5 个 open feedback issue、0 个 open bug issue。
+- 钉钉通知未发送：运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` 相关变量名，当前目录和父级三层内也未发现 `.env*` 文件；未将 webhook 写入仓库。
 
 ## 2026-05-01 Product decision：远航路线对照条分组布局
 

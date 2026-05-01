@@ -8,7 +8,11 @@
 - 本轮没有隐藏任何短标，没有新增收益或存档字段，只调整 CSS 响应式布局，避免窄屏继续把两个对照槽压在同一行。
 - 本轮本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
 - 构建产物已确认包含小屏路线对照条单列布局和 `glyph label action step`、`glyph phase reward payoff`、`glyph intent cost result`、`progress progress progress progress` 小屏网格区域。
-- 发布前置条件已满足；后续通过主分支 push 触发 GitHub Pages workflow，并在发布后回复 #6 和 #4。
+- 发布：提交 `7bfd0a8` 已推送到 `origin/main`；GitHub Pages workflow `25203679110` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页返回 HTTP 200，线上 `src/styles.css` 已确认包含 820px 小屏单列网格。
+- #6 已回复：说明路线对照条小屏布局、验证结果、Pages 部署和窄屏复测问题；issue 保持 open，更新时间为 2026-05-01T05:31:00Z，评论地址：`https://github.com/Jassy930/codex-game-operator/issues/6#issuecomment-4357989552`。
+- #4 已回复：说明本轮把窄屏协同/绕行对照槽从双列改为单列以降低文字密度；issue 保持 open，更新时间为 2026-05-01T05:31:00Z，评论地址：`https://github.com/Jassy930/codex-game-operator/issues/4#issuecomment-4357989550`。
+- 回复后同步 GitHub Issues：2026-05-01 13:31 CST 当前仍为 5 个 open feedback issue、0 个 open bug issue。
+- 钉钉通知未发送：运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` 相关变量名，当前目录和父级三层内也未发现 `.env*` 文件；未将 webhook 写入仓库。
 
 - GitHub Issues：gh 可用且已认证；2026-05-01 13:14 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
 - #6 继续作为本轮 Product decision 依据：路线对照条已经把后半段协同/绕行的当前阶段、下一步、第二步按钮、三步收益、本步收益、资源取向、代价、回航结果和 1/2/3 进度轨放到同一层；#4 继续作为界面文字密度和图片化依据。

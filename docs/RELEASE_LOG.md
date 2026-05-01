@@ -9,7 +9,9 @@
 - 同步 GitHub Issues 反馈状态：2026-05-01 13:20 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 作为主处理对象，#4 作为视觉密度依据。
 - 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
 - 构建产物已确认包含 `@media (max-width: 820px)`、`far-dispatch-branch-choice-summary`、`glyph label action step`、`glyph phase reward payoff`、`glyph intent cost result` 和 `progress progress progress progress`。
-- 发布前置条件已满足；主分支 push 后由 GitHub Pages workflow 发布，发布完成后回复 #6 和 #4。
+- 发布：提交 `7bfd0a8` 已推送到 `origin/main`；GitHub Pages workflow `25203679110` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页返回 HTTP 200，线上 `src/styles.css` 已确认包含 `@media (max-width: 820px)`、`far-dispatch-branch-choice-summary` 和小屏命名网格区域。
+- 反馈处理：已回复 #6，说明路线对照条小屏布局、验证结果、Pages 部署和窄屏复测问题；已回复 #4，说明本轮把窄屏协同/绕行对照槽从双列改为单列以降低文字密度；两个 issue 均保持 open。回复后于 2026-05-01 13:31 CST 再次同步 GitHub Issues，当前仍为 5 个 open feedback issue、0 个 open bug issue；#6 和 #4 更新时间均为 2026-05-01T05:31:00Z。
+- 钉钉通知未发送：运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` 相关变量名，当前目录和父级三层内也未发现 `.env*` 文件；未将 webhook 写入仓库。
 
 - 远航调度调整“路线对照条分组布局”：协同/绕行对照槽从单行十列改为多行命名网格，把路线身份/阶段/动作/第二步、收益/资源取舍、回航结果和 1/2/3 迷你进度轨分层展示，继续回应 #6 的后半段路线理解和 #4 的降文字密度反馈。
 - `src/styles.css` 为 `far-dispatch-branch-choice-summary-item` 增加 `grid-template-areas` 和各短标 `grid-area` 绑定；`tests/game.test.js` 覆盖静态 CSS 分组布局。
