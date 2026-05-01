@@ -9,6 +9,7 @@
 - 本轮只调整 DOM、CSS 和静态测试，不新增收益、不新增存档字段，不改变升级价格、星图路线、项目奖励、远航调度既有数值、冷却、连携窗口、反馈入口或部署链路。
 - 本轮本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
 - 构建产物已确认包含 `far-dispatch-branch-choice-legend` 和 `far-dispatch-branch-choice-legend-item`。
+- 发布：提交 `807faf0` 已推送到 `origin/main`；GitHub Pages workflow `25196092089` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页返回 HTTP 200，线上 `src/app.js` 和 `src/styles.css` 已确认包含路线微图图例相关代码和样式。
 
 - GitHub Issues：gh 可用且已认证；2026-05-01 07:59 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
 - #6 继续作为本轮 Product decision 依据：该反馈指出后半段“只有不停的目标、玩法没有真正变化”；#4 继续作为视觉密度依据。前序路线微图已经补齐方向箭头，但协同/绕行分支卡片仍默认展开路线目标、下一步、后续回航和收益对照，多行说明继续挤在卡片首屏。

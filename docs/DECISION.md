@@ -22,6 +22,7 @@
 - `tests/game.test.js` 覆盖远航路线微图图例的静态 DOM 与样式绑定。
 - 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
 - 构建产物已确认包含 `far-dispatch-branch-choice-legend` 和 `far-dispatch-branch-choice-legend-item`。
+- 发布验证已通过：提交 `807faf0` 已推送到 `origin/main`；GitHub Pages workflow `25196092089` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页返回 HTTP 200，线上 `src/app.js` 和 `src/styles.css` 已确认包含远航路线微图图例相关代码和样式。
 
 ## 2026-05-01 Product decision：远航路线明细折叠
 
