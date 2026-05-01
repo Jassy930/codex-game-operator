@@ -1,5 +1,29 @@
 # Decision
 
+## 2026-05-02 Product decision：远航闭环路线微图
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-02 01:28 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#5 是最近更新的点火反馈，但点火按钮已连续补齐多层命中反馈。本轮转向 #4“界面文字密度高、希望增加图片/图形”和 #6“后半段玩法变化不足”的交集。
+
+当前最大问题：20M 后远航调度已有 3 步路径轨、路线对照条、路线微图和当前路线宽栏，但主操作区的远航闭环轨仍以三张文字步骤卡为主。玩家要先读“目标 / 协同或绕行 / 回目标”卡片才能确认当前闭环推进到哪一步，和 #4 的文字墙反馈仍有冲突。
+
+本轮决策：
+
+- 新增“远航闭环路线微图”。
+- `src/app.js` 在 `renderFarDispatchLoopTrack` 中从现有 `dispatch.loopSteps`、`loopProgress` 和 `loopTarget` 派生 `far-dispatch-loop-visual`，显示 1/2/3 三个节点和整体推进填充。
+- `src/styles.css` 为 `far-dispatch-loop-visual` 增加纯 CSS 轨道、完成节点和当前节点样式。
+- `tests/game.test.js` 增加静态断言，覆盖渲染绑定、CSS 变量、节点状态和样式选择器。
+- 该改动只调整远航闭环展示层和测试，不新增可见说明文字、不新增收益、不新增存档字段，不改变点击收益、升级价格、星图路线、项目奖励、航线策略、航线指令、远航调度数值、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-05-02 01:28 CST 当前 5 个 open feedback issue、0 个 open bug issue；#4/#6 作为本轮主处理对象。
+- `src/app.js` 包含 `far-dispatch-loop-visual`、`--far-loop-visual-progress` 和 `far-dispatch-loop-visual-node`。
+- `src/styles.css` 包含远航闭环路线微图轨道、完成节点和当前节点样式。
+- `tests/game.test.js` 覆盖远航闭环路线微图静态绑定。
+- 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含 `far-dispatch-loop-visual` 和 `--far-loop-visual-progress`。
+- 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #4/#6，以及当前远航闭环执行区文字密度复盘。
+
 ## 2026-05-02 Product decision：点火按钮整体命中投光
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-02 01:10 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#5 仍是最近更新的反馈，本轮继续处理“点火按钮太薄弱、增加点击反馈和点击欲望”。

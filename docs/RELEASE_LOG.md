@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+- 远航调度新增“远航闭环路线微图”：20M 后主操作区远航闭环轨顶部会用 1/2/3 节点和填充轨道直接显示目标、分支、回目标的已完成、当前和待推进状态，继续回应 #4 的图形化/文字密度反馈，并辅助 #6 的后半段短循环理解。
+- `src/app.js` 在 `renderFarDispatchLoopTrack` 中从 `loopSteps`、`loopProgress` 和 `loopTarget` 派生 `far-dispatch-loop-visual`；`src/styles.css` 增加路线微图轨道、完成节点和当前节点样式；`tests/game.test.js` 覆盖静态绑定。
+- 本轮只调整远航闭环展示层和测试，不新增可见说明文字、不新增收益、不新增存档字段，不改变点击收益、升级价格、星图路线、项目奖励、航线策略、航线指令、远航调度数值、反馈入口或部署链路。
+- 同步 GitHub Issues 反馈状态：2026-05-02 01:28 CST 当前 5 个 open feedback issue、0 个 open bug issue；#4/#6 作为主处理对象。
+- 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含远航闭环路线微图代码和样式。
+
 - 点火按钮新增“整体命中投光”：普通点火命中时整个星核按钮短促外发光，第 8 次过载命中时使用更强投光，继续回应 #5 的点击反馈、特效和点击欲望反馈。
 - `src/styles.css` 复用 `.core-button.is-pulsing:not(.is-overload-impact)` / `.core-button.is-overload-impact` 驱动 `coreButtonHitGlow` / `coreButtonOverloadGlow`，并在降低动效偏好中关闭该动画；`tests/game.test.js` 覆盖静态绑定。
 - 本轮只调整点火按钮展示层和测试，不新增可见文字、不新增收益、不新增存档字段，不改变点击收益、连击窗口、过载奖励、升级价格、星图路线、项目奖励、航线策略、航线指令、远航调度、反馈入口或部署链路。

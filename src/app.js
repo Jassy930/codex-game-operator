@@ -1220,7 +1220,26 @@ function renderFarDispatchLoopTrack(dispatch) {
   }
 
   track.setAttribute("aria-label", dispatch.loopStepText);
+  const visualTarget = Math.max(1, Number(dispatch.loopTarget) || 3);
+  const visualProgressValue = Math.min(
+    Math.max(0, Number(dispatch.loopProgress) || 0),
+    visualTarget
+  );
+  const visualProgress = Math.round((visualProgressValue / visualTarget) * 100);
+
+  const visual = document.createElement("span");
+  visual.className = "far-dispatch-loop-visual";
+  visual.style.setProperty("--far-loop-visual-progress", visualProgress + "%");
+  visual.setAttribute("aria-hidden", "true");
+  steps.forEach((step, index) => {
+    const node = document.createElement("span");
+    node.className = "far-dispatch-loop-visual-node is-" + step.state;
+    node.dataset.stepLabel = String(index + 1);
+    visual.append(node);
+  });
+
   track.append(
+    visual,
     ...steps.map((step) => {
       const stepItem = document.createElement("span");
       stepItem.className = "far-dispatch-loop-step is-" + step.state;
