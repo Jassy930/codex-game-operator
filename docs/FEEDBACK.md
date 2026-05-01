@@ -8,6 +8,11 @@
 - 本轮只修复远航调度展示层，不新增可见说明文字、不新增收益、不新增存档字段，不改变点击收益、升级价格、星图路线、项目奖励、航线策略、航线指令、远航调度数值、反馈入口或部署链路。
 - 本轮本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
 - 构建产物已确认 `dist/src/app.js` 包含 `renderFarDispatchSceneImage()` 和 `far-dispatch-visual.svg` 动态引用。
+- 发布：提交 `40a5154` 已推送到 `origin/main`；GitHub Pages workflow `25232062394` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页返回 HTTP 200，线上首页、`src/app.js` 和 `src/assets/far-dispatch-visual.svg` 已确认包含动态插画修复。
+- #4 已回复：说明远航调度闭环插画现在会在运行时动态渲染后继续保留；issue 保持 open，评论地址：`https://github.com/Jassy930/codex-game-operator/issues/4#issuecomment-4361524700`。
+- #6 已回复：说明该修复让“目标 -> 分支 -> 回目标”的图形锚点在真实运行态持续可见；issue 保持 open，评论地址：`https://github.com/Jassy930/codex-game-operator/issues/6#issuecomment-4361524737`。
+- 回复后同步 GitHub Issues：2026-05-02 04:37 CST 当前仍为 5 个 open feedback issue、0 个 open bug issue；#4/#6 更新时间均为 2026-05-01T20:37:34Z。
+- 钉钉通知未发送：2026-05-02 04:39 CST 运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` / `ROBOT` 相关变量名，当前目录和 `/home/jassy/glm` 两层内未发现 `.env*` 文件；未将 webhook 写入仓库。
 - 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #4/#6，以及对远航调度动态渲染链路的代码复盘。
 
 - GitHub Issues：gh 可用且已认证；2026-05-02 04:15 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。#4/#6 仍是最新组合反馈：远航调度需要更多图形化表达，减少后半段主操作区文字反推。

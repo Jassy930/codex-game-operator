@@ -8,6 +8,9 @@
 - 同步 GitHub Issues 反馈状态：2026-05-02 04:31 CST 当前 5 个 open feedback issue、0 个 open bug issue；#4/#6 作为本轮反馈背景。
 - 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
 - 构建产物已确认 `dist/src/app.js` 包含 `renderFarDispatchSceneImage()` 和 `far-dispatch-visual.svg` 动态引用。
+- 发布：提交 `40a5154` 已推送到 `origin/main`；GitHub Pages workflow `25232062394` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页返回 HTTP 200，线上首页、`src/app.js` 和 `src/assets/far-dispatch-visual.svg` 已确认包含动态插画修复。workflow 继续给出 Node.js 20 actions 弃用提醒，未影响本次部署。
+- 反馈处理：已回复 #4 和 #6，说明远航调度闭环插画现在会在运行时动态渲染后继续保留；两个 issue 均保持 open。回复后于 2026-05-02 04:37 CST 再次同步 GitHub Issues，当前仍为 5 个 open feedback issue、0 个 open bug issue。
+- 钉钉通知未发送：2026-05-02 04:39 CST 运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` / `ROBOT` 相关变量名，当前目录和 `/home/jassy/glm` 两层内未发现 `.env*` 文件；未将 webhook 写入仓库。
 
 - 远航调度新增“远航调度闭环插画”：20M 后主操作区远航调度区内新增本地 SVG 远航闭环插画，用三步闭环、协同航线、绕行航线和远航飞行器建立概览视觉锚点，继续回应 #4 的图片化/文字密度反馈，并辅助 #6 的后半段短循环理解。
 - 新增 `src/assets/far-dispatch-visual.svg`；`index.html` 在 `#farDispatch` 中引用 `.far-dispatch-scene-image`；`src/styles.css` 增加插画默认、active 和 locked 状态样式；`tests/game.test.js` 覆盖静态绑定。
