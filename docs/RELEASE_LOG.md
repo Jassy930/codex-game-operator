@@ -2,6 +2,14 @@
 
 ## Unreleased
 
+- 远航调度新增“路线对照条”：协同/绕行卡片上方用两个固定视觉槽并排显示路线徽标、路线取向、当前资源代价和回航结果，继续回应 #6 的后半段路线取舍理解和 #4 的降文字密度反馈。
+- `src/game.js` 为 `getFarRouteDispatch()` 派生 `branchChoiceSummaryText`；`src/app.js` 渲染 `far-dispatch-branch-choice-summary`、`summary-item`、资源图形、代价和回航结果短槽；`src/styles.css` 增加路线对照条双槽布局、推荐态、协同/绕行图形和结果状态色；`tests/game.test.js` 覆盖路线对照条派生、静态 DOM 和样式绑定。
+- 文档同步更新：`docs/DECISION.md`、`docs/FEEDBACK.md`、`docs/RESEARCH.md`、`docs/PRODUCT.md`、`docs/DESIGN.md`、`docs/ROADMAP.md`、`docs/IDEAS.md`、`docs/METRICS.md`、`README.md` 和本日志已记录远航路线对照条。
+- 本轮只调整派生展示、DOM、CSS 和测试，不新增收益、不新增存档字段，不改变升级价格、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、远航调度既有数值、冷却、连携窗口、反馈入口或部署链路。
+- 同步 GitHub Issues 反馈状态：2026-05-01 11:00 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 作为主处理对象，#4 作为视觉密度依据。
+- 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含 `branchChoiceSummaryText`、`far-dispatch-branch-choice-summary` 和 `路线对照：`。
+
 - 远航调度新增“路线指令串”：协同/绕行分支卡片首屏用三段短槽显示目标指令、分支指令、回目标指令，继续回应 #6 的后半段路线执行理解和 #4 的降文字密度反馈。
 - `src/game.js` 为 `branchChoices` 派生 `routeCommandLabels` / `routeCommandText` 并纳入 `branchChoiceText`；`src/app.js` 渲染 `far-dispatch-branch-choice-route-command` 并用三段短槽替代单独分支指令行；`src/styles.css` 增加路线指令串短槽和绕行分支状态色；`tests/game.test.js` 覆盖路线指令串派生、静态 DOM 和样式绑定。
 - 文档同步更新：`docs/DECISION.md`、`docs/FEEDBACK.md`、`docs/RESEARCH.md`、`docs/PRODUCT.md`、`docs/DESIGN.md`、`docs/ROADMAP.md`、`docs/IDEAS.md`、`docs/METRICS.md`、`README.md` 和本日志已记录远航路线指令串。

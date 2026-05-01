@@ -1553,6 +1553,105 @@ h2 {
   line-height: 1;
 }
 
+.far-dispatch-branch-choice-summary {
+  display: grid;
+  grid-column: 1 / -1;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 6px;
+  min-width: 0;
+}
+
+.far-dispatch-branch-choice-summary[hidden] {
+  display: none;
+}
+
+.far-dispatch-branch-choice-summary-item {
+  display: grid;
+  grid-template-columns: 18px minmax(0, 0.9fr) minmax(0, 0.8fr) minmax(0, 0.86fr) minmax(0, 1fr);
+  align-items: center;
+  gap: 4px;
+  min-width: 0;
+  padding: 4px 6px;
+  overflow: hidden;
+  border: 1px solid rgba(248, 243, 231, 0.14);
+  border-radius: 7px;
+  background: rgba(5, 12, 20, 0.28);
+}
+
+.far-dispatch-branch-choice-summary-item strong,
+.far-dispatch-branch-choice-summary-item span {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.far-dispatch-branch-choice-summary-item strong {
+  color: rgba(248, 243, 231, 0.78);
+  font-size: 0.56rem;
+  font-weight: 950;
+}
+
+.far-dispatch-branch-choice-summary-item span {
+  color: rgba(248, 243, 231, 0.64);
+  font-size: 0.52rem;
+  font-weight: 900;
+}
+
+.far-dispatch-branch-choice-summary-item.is-focused,
+.far-dispatch-branch-choice-summary-item.is-decision-recommended,
+.far-dispatch-branch-choice-summary-item.is-decision-recommended-stable,
+.far-dispatch-branch-choice-summary-item.is-decision-recommended-shift {
+  border-color: rgba(150, 231, 168, 0.34);
+  background:
+    linear-gradient(90deg, rgba(150, 231, 168, 0.13), rgba(5, 12, 20, 0.24)),
+    rgba(5, 12, 20, 0.26);
+}
+
+.far-dispatch-branch-choice-summary-item.is-detour {
+  border-color: rgba(244, 178, 60, 0.24);
+}
+
+.far-dispatch-branch-choice-summary-item.is-decision-recommended-shift {
+  border-color: rgba(255, 126, 177, 0.36);
+  background:
+    linear-gradient(90deg, rgba(255, 126, 177, 0.13), rgba(5, 12, 20, 0.24)),
+    rgba(5, 12, 20, 0.26);
+}
+
+.far-dispatch-branch-choice-summary-glyph {
+  display: inline-block;
+  justify-self: center;
+}
+
+.far-dispatch-branch-choice-summary-glyph.is-current {
+  width: 14px;
+  height: 8px;
+  border: 1px solid rgba(216, 255, 226, 0.72);
+  border-radius: 999px;
+  background: rgba(150, 231, 168, 0.28);
+  box-shadow: 0 0 10px rgba(150, 231, 168, 0.22);
+}
+
+.far-dispatch-branch-choice-summary-glyph.is-progress {
+  width: 0;
+  height: 0;
+  border-top: 6px solid transparent;
+  border-bottom: 6px solid transparent;
+  border-left: 10px solid #ff7eb1;
+  filter: drop-shadow(0 0 6px rgba(255, 126, 177, 0.34));
+}
+
+.far-dispatch-branch-choice-summary-cost.is-safe,
+.far-dispatch-branch-choice-summary-result.is-far {
+  color: #cfe8ff;
+}
+
+.far-dispatch-branch-choice-summary-cost.is-spend,
+.far-dispatch-branch-choice-summary-result.is-detour {
+  color: #ffd1df;
+}
+
 .far-dispatch-branch-choice {
   display: grid;
   gap: 3px;

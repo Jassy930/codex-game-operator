@@ -1,5 +1,29 @@
 # Decision
 
+## 2026-05-01 Product decision：远航路线对照条
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-01 11:00 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#6 仍是后半段玩法变化主反馈，#4 仍是界面文字密度和图片化依据，因此本轮继续进入 Product decision。
+
+当前最大问题：协同/绕行分支卡片已经有路线微图、当前步、收益、资源流向、代价、取向、回航结果和指令串，但对比两条路线仍需要分别扫两张卡。玩家在目标后做选择时，最先需要的是“哪条是首推/建档、保当前还是推累计、是否消耗当前、回航结果是什么”的并排结论。
+
+本轮决策：
+
+- 新增“远航路线对照条”。
+- `getFarRouteDispatch()` 派生 `branchChoiceSummaryText`，汇总协同/绕行的路线徽标、取向、代价和回航结果。
+- `src/app.js` 在协同/绕行卡片上方渲染 `far-dispatch-branch-choice-summary`，用两个固定视觉槽并排展示协同与绕行；每槽包含资源图形、路线徽标、取向、代价和回航结果。
+- `src/styles.css` 为协同/绕行、推荐、改道、无消耗/消耗当前、远航突破/绕行突破提供紧凑状态样式。
+- 该对照条只从现有 `branchChoices` 派生，不新增收益、不新增存档字段，不改变升级价格、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、远航调度数值、冷却、连携窗口、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-05-01 11:00 CST 当前 5 个 open feedback issue、0 个 open bug issue。
+- `src/game.js` 派生 `branchChoiceSummaryText`，覆盖 `协同 首推 · 保当前 · 无消耗 · 远航突破 / 绕行 建档 · 推累计 · 消耗当前 · 绕行突破`。
+- `src/app.js` 渲染 `far-dispatch-branch-choice-summary`、`far-dispatch-branch-choice-summary-item`、`far-dispatch-branch-choice-summary-glyph`、`summary-cost` 和 `summary-result`。
+- `src/styles.css` 包含路线对照条双槽布局、资源图形、推荐/改道强调、无消耗/消耗当前和回航结果状态色。
+- `tests/game.test.js` 覆盖路线对照条派生、静态 DOM 和样式绑定。
+- 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含 `branchChoiceSummaryText`、`far-dispatch-branch-choice-summary` 和 `路线对照：`。
+
 ## 2026-05-01 Product decision：远航路线指令串
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-01 10:41 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#6 仍是后半段玩法变化主反馈，#4 仍是界面文字密度和图片化依据，因此本轮继续进入 Product decision。

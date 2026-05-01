@@ -715,6 +715,7 @@ function renderFarDispatchBranchChoices(dispatch) {
   track.setAttribute("aria-label", dispatch.branchChoiceText ?? "");
   track.append(
     renderFarDispatchBranchChoiceLegend(),
+    renderFarDispatchBranchChoiceSummary(dispatch),
     ...choices.map((choice) => {
       const item = document.createElement("article");
       item.className =
@@ -819,6 +820,64 @@ function renderFarDispatchBranchChoices(dispatch) {
   );
 
   return track;
+}
+
+function renderFarDispatchBranchChoiceSummary(dispatch) {
+  const summary = document.createElement("div");
+  summary.className = "far-dispatch-branch-choice-summary";
+  summary.hidden = !dispatch.branchChoiceSummaryText;
+  summary.setAttribute("aria-label", dispatch.branchChoiceSummaryText ?? "");
+
+  const choices = Array.isArray(dispatch.branchChoices) ? dispatch.branchChoices : [];
+  summary.append(...choices.map(renderFarDispatchBranchChoiceSummaryItem));
+  return summary;
+}
+
+function renderFarDispatchBranchChoiceSummaryItem(choice) {
+  const item = document.createElement("span");
+  item.className =
+    "far-dispatch-branch-choice-summary-item is-" +
+    getFarDispatchBranchChoiceKind(choice) +
+    " is-decision-" +
+    getFarDispatchBranchChoiceDecisionKind(choice) +
+    (choice.focused ? " is-focused" : "");
+  item.title = [
+    choice.label,
+    choice.decisionBadgeText,
+    choice.routeIntentText,
+    choice.routeCostText,
+    choice.routeReturnText
+  ]
+    .filter(Boolean)
+    .join(" · ");
+
+  const glyph = document.createElement("span");
+  glyph.className =
+    "far-dispatch-branch-choice-summary-glyph is-" +
+    getFarDispatchBranchChoiceRouteResourceKind(choice);
+  glyph.setAttribute("aria-hidden", "true");
+
+  const label = document.createElement("strong");
+  label.textContent = choice.label + " · " + (choice.decisionBadgeText ?? "");
+
+  const intent = document.createElement("span");
+  intent.className = "far-dispatch-branch-choice-summary-intent";
+  intent.textContent = choice.routeIntentText ?? "";
+
+  const cost = document.createElement("span");
+  cost.className =
+    "far-dispatch-branch-choice-summary-cost is-" +
+    getFarDispatchBranchChoiceRouteCostKind(choice);
+  cost.textContent = choice.routeCostText ?? "";
+
+  const result = document.createElement("span");
+  result.className =
+    "far-dispatch-branch-choice-summary-result is-" +
+    getFarDispatchBranchChoiceRouteReturnKind(choice);
+  result.textContent = choice.routeReturnText ?? "";
+
+  item.append(glyph, label, intent, cost, result);
+  return item;
 }
 
 function renderFarDispatchBranchChoiceLegend() {

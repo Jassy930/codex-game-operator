@@ -3167,6 +3167,7 @@ export function getFarRouteDispatch(state, now = Date.now()) {
       branchPlanStepText: "",
       branchClosureText: "",
       branchChoices: [],
+      branchChoiceSummaryText: "",
       branchChoiceText: "",
       projectId: null,
       loopProgress: 0,
@@ -3250,6 +3251,7 @@ export function getFarRouteDispatch(state, now = Date.now()) {
       branchPlanStepText: "",
       branchClosureText: "",
       branchChoices: [],
+      branchChoiceSummaryText: "",
       branchChoiceText: "",
       projectId: null,
       loopProgress: loopTarget,
@@ -3395,6 +3397,9 @@ export function getFarRouteDispatch(state, now = Date.now()) {
     branchPlanStepText,
     branchClosureText,
     branchChoices,
+    branchChoiceSummaryText: buildFarRouteDispatchBranchChoiceSummaryText(
+      branchChoices
+    ),
     branchChoiceText: buildFarRouteDispatchBranchChoiceText(branchChoices),
     projectId: project.id,
     projectName: project.name,
@@ -5883,6 +5888,30 @@ function buildFarRouteDispatchBranchChoiceText(choices) {
           " · " +
           choice.rewardText +
           "）"
+      )
+      .join(" / ")
+  );
+}
+
+function buildFarRouteDispatchBranchChoiceSummaryText(choices) {
+  if (!choices.length) {
+    return "";
+  }
+
+  return (
+    "路线对照：" +
+    choices
+      .map(
+        (choice) =>
+          choice.label +
+          " " +
+          choice.decisionBadgeText +
+          " · " +
+          choice.routeIntentText +
+          " · " +
+          choice.routeCostText +
+          " · " +
+          choice.routeReturnText
       )
       .join(" / ")
   );
