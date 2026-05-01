@@ -1,5 +1,29 @@
 # Decision
 
+## 2026-05-02 Product decision：点火星核裂纹命中闪亮
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-02 00:27 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；本轮继续处理 #5“点火按钮太薄弱、增加点击反馈和点击欲望”。
+
+当前最大问题：点火按钮已经有按住反冲、落点闪光/涟漪/火花、收益浮层、中心标签、蓄能轨、连击轨、倒计时徽标、读数亮闪和音效/触感反馈，但星核 SVG 内部裂纹在普通点击时主要随连击进度显隐。玩家能看到外层与轨道反馈，却缺少星核内部被本次点击点亮的短促确认。
+
+本轮决策：
+
+- 新增“点火星核裂纹命中闪亮”。
+- `src/styles.css` 复用 `.core-button.is-pulsing:not(.is-overload-impact)`，让 `.core-vein` 在普通点火命中时播放 `coreVeinHitFlash`。
+- 过载命中继续使用已有 `.core-button.is-overload-hit .core-vein` 与 `coreVeinBurst`，避免普通裂纹闪亮覆盖第 8 次爆发。
+- 在 `prefers-reduced-motion: reduce` 中关闭该短动画。
+- `tests/game.test.js` 增加静态断言，覆盖选择器、动画名、keyframes 和降低动效兜底。
+- 该改动只调整点火按钮展示层和测试，不新增可见文字、不新增收益、不新增存档字段，不改变点击收益、连击窗口、过载奖励、升级价格、星图路线、项目奖励、航线策略、航线指令、远航调度、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-05-02 00:27 CST 当前 5 个 open feedback issue、0 个 open bug issue；#5 作为本轮主处理对象。
+- `src/styles.css` 包含 `coreVeinHitFlash`、普通命中星核裂纹选择器和降低动效兜底。
+- `tests/game.test.js` 覆盖点火星核裂纹命中闪亮静态绑定。
+- 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含 `coreVeinHitFlash`、普通命中星核裂纹选择器和降低动效兜底。
+- 发布待执行：本轮代码与文档提交后推送到 `origin/main`，再等待 GitHub Pages workflow 完成并复核线上资源。
+
 ## 2026-05-02 Product decision：点火倒计时徽标命中跳闪
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-02 00:13 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；本轮继续处理 #5“点火按钮太薄弱、增加点击反馈和点击欲望”。

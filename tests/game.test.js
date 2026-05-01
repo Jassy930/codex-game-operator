@@ -1500,8 +1500,11 @@ test("点火按钮会渲染点击反馈和过载前兆效果", () => {
   assert.match(styles, /--core-vein-dash-offset/);
   assert.match(styles, /\.core-veins/);
   assert.match(styles, /\.core-vein/);
+  assert.match(styles, /\.core-button\.is-pulsing:not\(\.is-overload-impact\) \.core-vein/);
+  assert.match(styles, /coreVeinHitFlash 360ms ease-out/);
   assert.match(styles, /\.core-button\.is-overload-ready \.core-vein/);
   assert.match(styles, /\.core-button\.is-overload-hit \.core-vein/);
+  assert.match(styles, /@keyframes coreVeinHitFlash/);
   assert.match(styles, /@keyframes coreVeinPulse/);
   assert.match(styles, /@keyframes coreVeinBurst/);
   assert.match(styles, /\.core-button\.is-overload-ready/);
@@ -1529,6 +1532,7 @@ test("点火按钮会渲染点击反馈和过载前兆效果", () => {
   assert.match(styles, /@keyframes coreGainFloat/);
   assert.match(styles, /@keyframes coreBadgePulse/);
   assert.match(styles, /@keyframes coreBadgeBurst/);
+  assert.match(styles, /@media \(prefers-reduced-motion: reduce\) \{[\s\S]*\.core-button\.is-pulsing:not\(\.is-overload-impact\) \.core-vein[\s\S]*animation: none/);
   assert.match(styles, /@media \(prefers-reduced-motion: reduce\) \{[\s\S]*\.core-button\.is-pulsing:not\(\.is-overload-impact\) \.core-overload-badge[\s\S]*animation: none/);
   assert.match(styles, /@keyframes coreDotPulse/);
   assert.match(styles, /@keyframes coreComboDotHit/);

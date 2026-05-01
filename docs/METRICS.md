@@ -13,6 +13,7 @@
 - 点火阶段光环当前由本地连击进度与 `getComboStatus` 即时推导，不单独记录为真实线上指标；点火行为仍通过 click 事件复盘。
 - 点火蓄能轨命中闪烁当前由本地 `is-pulsing` / `is-overload-impact` 展示态即时触发，不单独记录为真实线上指标；点火行为仍通过 click 事件、连击状态和过载结果复盘。
 - 点火星核蓄能裂纹当前由本地连击进度 `combo.progress` 即时渲染为 `--core-vein-opacity` 和 `--core-vein-dash-offset`，不单独记录为真实线上指标；点火行为仍通过 click 事件、连击状态和过载结果复盘。
+- 点火星核裂纹命中闪亮当前由本地 `.core-button.is-pulsing:not(.is-overload-impact) .core-vein` 短时展示态即时渲染，不单独记录为真实线上指标；裂纹进度仍通过 `combo.progress`、click 事件、连击状态和过载结果复盘。
 - 点火蓄能外弧当前由本地连击进度 `combo.progress` 即时渲染为 `--core-surge-opacity`、`--core-surge-scale` 和 `--core-surge-speed`，不单独记录为真实线上指标；点火行为仍通过 click 事件、连击状态和过载结果复盘。
 - 点火落点涟漪当前由本地点击事件坐标即时渲染为 `--core-impact-x` / `--core-impact-y`，并随普通点击或过载点击触发不同展示态，不单独记录为真实线上指标；点火行为仍通过 click 事件、连击状态和过载结果复盘。
 - 点火按压反冲当前由本地点击事件坐标即时渲染为 `--core-recoil-x` / `--core-recoil-y`，并随普通点击或过载点击触发主按钮短促位移，不单独记录为真实线上指标；点火行为仍通过 click 事件、连击状态和过载结果复盘。

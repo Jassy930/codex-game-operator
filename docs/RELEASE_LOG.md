@@ -2,6 +2,14 @@
 
 ## Unreleased
 
+- 点火按钮新增“星核裂纹命中闪亮”：普通点火命中时星核 SVG 内部蓄能裂纹短促闪亮，让按钮本体内部也确认这一击点亮核心，继续回应 #5 的点击反馈、特效和点击欲望反馈。
+- `src/styles.css` 复用 `.core-button.is-pulsing:not(.is-overload-impact)` 驱动 `coreVeinHitFlash`，并在降低动效偏好中关闭该动画；`tests/game.test.js` 覆盖静态绑定。
+- 本轮只调整点火按钮展示层和测试，不新增可见文字、不新增收益、不新增存档字段，不改变点击收益、连击窗口、过载奖励、升级价格、星图路线、项目奖励、航线策略、航线指令、远航调度、反馈入口或部署链路。
+- 同步 GitHub Issues 反馈状态：2026-05-02 00:27 CST 当前 5 个 open feedback issue、0 个 open bug issue；#5 作为主处理对象。
+- 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含点火星核裂纹命中闪亮样式。
+- 发布待执行：提交并推送后等待 GitHub Pages workflow 完成，再复核线上资源。
+
 - 点火按钮新增“倒计时徽标命中跳闪”：普通点火命中时左上过载倒计时徽标短促跳闪，让玩家确认这一击让过载倒计时减 1；过载命中继续使用已有爆发动画，继续回应 #5 的点击反馈、特效和点击欲望反馈。
 - `src/styles.css` 复用 `.core-button.is-pulsing:not(.is-overload-impact)` 驱动 `coreBadgeStepHit`，并在降低动效偏好中关闭该动画；`tests/game.test.js` 覆盖静态绑定。
 - 本轮只调整点火按钮展示层和测试，不新增可见文字、不新增收益、不新增存档字段，不改变点击收益、连击窗口、过载奖励、升级价格、星图路线、项目奖励、航线策略、航线指令、远航调度、反馈入口或部署链路。
