@@ -1088,6 +1088,20 @@ h2 {
     transform 120ms ease;
 }
 
+.core-button:not(.is-pulsing):not(.is-pressing):not(.is-overload-ready):not(.is-overload-hit)
+  .core-label {
+  animation: coreLabelIdleBeacon 2400ms ease-in-out infinite;
+}
+
+.core-button:not(.is-pulsing):not(.is-pressing):not(.is-overload-ready):not(.is-overload-hit):hover
+  .core-label {
+  background: #fff7c2;
+  box-shadow:
+    0 0 22px rgba(255, 247, 194, 0.34),
+    0 0 38px rgba(244, 178, 60, 0.22);
+  transform: scale(1.03);
+}
+
 .core-button.is-overload-ready .core-label {
   background: #fff7c2;
   box-shadow:
@@ -6165,6 +6179,22 @@ h2 {
   }
 }
 
+@keyframes coreLabelIdleBeacon {
+  0%,
+  100% {
+    background: #f8f3e7;
+    box-shadow: 0 0 22px rgba(248, 243, 231, 0.18);
+  }
+
+  50% {
+    background: #fff7c2;
+    box-shadow:
+      0 0 22px rgba(255, 247, 194, 0.3),
+      0 0 34px rgba(244, 178, 60, 0.16),
+      0 0 46px rgba(19, 181, 166, 0.08);
+  }
+}
+
 @keyframes coreButtonHitGlow {
   0% {
     box-shadow: 0 0 0 rgba(244, 178, 60, 0);
@@ -7135,6 +7165,8 @@ h2 {
   .score-grid dd.is-core-overload-prize,
   .core-button:not(.is-pulsing):not(.is-pressing)::after,
   .core-button:not(.is-pulsing):not(.is-pressing) + .core-reward-hint:not(.is-overload-ready):not(.is-overload-hit),
+  .core-button:not(.is-pulsing):not(.is-pressing):not(.is-overload-ready):not(.is-overload-hit)
+    .core-label,
   .core-button.is-pulsing:not(.is-overload-impact),
   .core-button.is-overload-impact,
   .core-button.is-pulsing:not(.is-overload-impact) .core-stage-aura,
