@@ -2,12 +2,16 @@
 
 ## 2026-05-01
 
-- GitHub Issues：gh 可用且已认证；2026-05-01 13:02 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
+- GitHub Issues：gh 可用且已认证；2026-05-01 13:14 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
 - #6 继续作为本轮 Product decision 依据：路线对照条已经把后半段协同/绕行的当前阶段、下一步、第二步按钮、三步收益、本步收益、资源取向、代价、回航结果和 1/2/3 进度轨放到同一层；#4 继续作为界面文字密度和图片化依据。
 - 本轮改动新增远航路线对照条分组布局：把原先单行十列对照槽拆成多行命名网格，第一行处理路线身份和操作，第二行处理收益与资源取舍，第三行处理回航结果，第四行保留迷你进度轨。
 - 本轮没有新增任何收益或存档字段，只整理既有短标层级，避免继续向一行内追加文字。
 - 本轮本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
 - 构建产物已确认包含 `grid-template-areas` 和 `far-dispatch-branch-choice-summary-item` 分组布局。
+- 发布：提交 `95188d4` 已推送到 `origin/main`；GitHub Pages workflow `25203272078` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页返回 HTTP 200，线上 `src/styles.css` 已确认包含 `grid-template-areas`、`far-dispatch-branch-choice-summary-item` 和 `grid-area: progress`。
+- #6 已回复：说明路线对照条分组布局、验证结果、Pages 部署和复测问题；issue 保持 open，更新时间为 2026-05-01T05:13:32Z，评论地址：`https://github.com/Jassy930/codex-game-operator/issues/6#issuecomment-4357940878`。
+- #4 已回复：说明本轮把路线对照条从一行挤压改为分组网格，降低协同/绕行对照槽的文字密度；issue 保持 open，更新时间为 2026-05-01T05:13:50Z，评论地址：`https://github.com/Jassy930/codex-game-operator/issues/4#issuecomment-4357941648`。
+- 回复后同步 GitHub Issues：2026-05-01 13:14 CST 当前仍为 5 个 open feedback issue、0 个 open bug issue。
 - 钉钉通知未发送：运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` 相关变量名，当前目录和父级三层内也未发现 `.env*` 文件；未将 webhook 写入仓库。
 
 - GitHub Issues：gh 可用且已认证；2026-05-01 12:45 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
