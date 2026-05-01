@@ -2,6 +2,14 @@
 
 ## 2026-05-01
 
+- GitHub Issues：gh 可用且已认证；2026-05-01 13:20 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
+- #6 继续作为本轮 Product decision 依据：远航路线对照条已完成分组布局，但小屏下两个对照槽仍并排，可能继续压缩后半段协同/绕行路线短标；#4 继续作为界面文字密度和响应式阅读负担依据。
+- 本轮改动新增远航路线对照条小屏布局：在 820px 断点下把协同/绕行对照槽改为单列，并把单个槽重排为路线身份/操作、阶段/收益、本步收益、资源取舍、回航结果和 1/2/3 进度轨。
+- 本轮没有隐藏任何短标，没有新增收益或存档字段，只调整 CSS 响应式布局，避免窄屏继续把两个对照槽压在同一行。
+- 本轮本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含小屏路线对照条单列布局和 `glyph label action step`、`glyph phase reward payoff`、`glyph intent cost result`、`progress progress progress progress` 小屏网格区域。
+- 发布前置条件已满足；后续通过主分支 push 触发 GitHub Pages workflow，并在发布后回复 #6 和 #4。
+
 - GitHub Issues：gh 可用且已认证；2026-05-01 13:14 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
 - #6 继续作为本轮 Product decision 依据：路线对照条已经把后半段协同/绕行的当前阶段、下一步、第二步按钮、三步收益、本步收益、资源取向、代价、回航结果和 1/2/3 进度轨放到同一层；#4 继续作为界面文字密度和图片化依据。
 - 本轮改动新增远航路线对照条分组布局：把原先单行十列对照槽拆成多行命名网格，第一行处理路线身份和操作，第二行处理收益与资源取舍，第三行处理回航结果，第四行保留迷你进度轨。

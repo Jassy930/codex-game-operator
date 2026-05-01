@@ -1980,6 +1980,11 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(styles, /\.far-dispatch-branch-choice-summary-progress\.is-detour::after/);
   assert.match(styles, /\.far-dispatch-branch-choice-summary-progress-node\.is-done/);
   assert.match(styles, /\.far-dispatch-branch-choice-summary-progress-node\.is-next/);
+  assert.match(styles, /@media \(max-width: 820px\) \{[\s\S]*\.far-dispatch-branch-choice-summary \{[\s\S]*grid-template-columns: 1fr/);
+  assert.match(styles, /@media \(max-width: 820px\) \{[\s\S]*"glyph label action step"/);
+  assert.match(styles, /@media \(max-width: 820px\) \{[\s\S]*"glyph phase reward payoff"/);
+  assert.match(styles, /@media \(max-width: 820px\) \{[\s\S]*"glyph intent cost result"/);
+  assert.match(styles, /@media \(max-width: 820px\) \{[\s\S]*"progress progress progress progress"/);
   assert.match(styles, /\.far-dispatch-branch-choice\.is-sync/);
   assert.match(styles, /\.far-dispatch-branch-choice\.is-detour/);
   assert.match(styles, /\.far-dispatch-branch-choice\.is-shift/);

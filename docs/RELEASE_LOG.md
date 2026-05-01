@@ -2,6 +2,15 @@
 
 ## Unreleased
 
+- 远航调度调整“路线对照条小屏布局”：820px 以下把协同/绕行对照槽从双列改为单列，并把单个对照槽重排为路线身份/操作、阶段/收益、本步收益、资源取舍、回航结果和 1/2/3 迷你进度轨，继续回应 #6 的后半段路线理解和 #4 的窄屏文字密度反馈。
+- `src/styles.css` 在现有响应式断点内为 `far-dispatch-branch-choice-summary` 和 `far-dispatch-branch-choice-summary-item` 增加小屏单列与命名网格区域；`tests/game.test.js` 覆盖小屏 CSS 绑定。
+- 文档同步更新：`docs/DECISION.md`、`docs/FEEDBACK.md`、`docs/RESEARCH.md`、`docs/PRODUCT.md`、`docs/DESIGN.md`、`docs/ROADMAP.md`、`docs/IDEAS.md`、`docs/METRICS.md`、`README.md` 和本日志已记录远航路线对照条小屏布局。
+- 本轮只调整 CSS 响应式布局和静态测试，不新增收益、不新增存档字段，不改变升级价格、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、远航调度既有数值、冷却、连携窗口、反馈入口或部署链路。
+- 同步 GitHub Issues 反馈状态：2026-05-01 13:20 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 作为主处理对象，#4 作为视觉密度依据。
+- 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含 `@media (max-width: 820px)`、`far-dispatch-branch-choice-summary`、`glyph label action step`、`glyph phase reward payoff`、`glyph intent cost result` 和 `progress progress progress progress`。
+- 发布前置条件已满足；主分支 push 后由 GitHub Pages workflow 发布，发布完成后回复 #6 和 #4。
+
 - 远航调度调整“路线对照条分组布局”：协同/绕行对照槽从单行十列改为多行命名网格，把路线身份/阶段/动作/第二步、收益/资源取舍、回航结果和 1/2/3 迷你进度轨分层展示，继续回应 #6 的后半段路线理解和 #4 的降文字密度反馈。
 - `src/styles.css` 为 `far-dispatch-branch-choice-summary-item` 增加 `grid-template-areas` 和各短标 `grid-area` 绑定；`tests/game.test.js` 覆盖静态 CSS 分组布局。
 - 文档同步更新：`docs/DECISION.md`、`docs/FEEDBACK.md`、`docs/RESEARCH.md`、`docs/PRODUCT.md`、`docs/DESIGN.md`、`docs/ROADMAP.md`、`docs/IDEAS.md`、`docs/METRICS.md`、`README.md` 和本日志已记录远航路线对照条分组布局。

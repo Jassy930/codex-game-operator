@@ -1,5 +1,28 @@
 # Decision
 
+## 2026-05-01 Product decision：远航路线对照条小屏布局
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-01 13:20 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#6 仍是后半段玩法变化主反馈，#4 仍是界面文字密度和图片化依据，因此本轮继续进入 Product decision。
+
+当前最大问题：路线对照条已经改成分组布局，但小屏下 `@media (max-width: 820px)` 只处理主布局、状态栏、指令区和筛选区，协同/绕行两个对照槽仍保持双列并排。玩家在窄屏复测 20M 后分支时，路线身份、阶段、下一步、收益、代价和回航结果仍可能被压缩到过短列宽，削弱上一轮分组布局的价值。
+
+本轮决策：
+
+- 新增“远航路线对照条小屏布局”。
+- `src/styles.css` 在现有 820px 响应式断点下，把 `far-dispatch-branch-choice-summary` 改为单列。
+- `far-dispatch-branch-choice-summary-item` 在小屏下改为 18px 图形列 + 3 个弹性文本列，并用命名网格区域分四层展示：路线身份/下一步/第二步、当前阶段/收益落点/本步收益、资源取向/代价/回航结果、1/2/3 迷你进度轨。
+- 该改动不隐藏任何短标；完整语义仍保留在 `branchChoiceSummaryText`、卡片标题、路线微图、路线指令串、路线判断、路线反馈和折叠明细中。
+- 该改动只调整 CSS 响应式布局和静态测试，不新增收益、不新增存档字段，不改变升级价格、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、远航调度数值、冷却、连携窗口、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-05-01 13:20 CST 当前 5 个 open feedback issue、0 个 open bug issue。
+- `src/styles.css` 在 `@media (max-width: 820px)` 中把路线对照条改为单列，并覆盖小屏命名网格区域。
+- `tests/game.test.js` 覆盖小屏单列布局和小屏命名网格区域。
+- 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含 `@media (max-width: 820px)`、`far-dispatch-branch-choice-summary`、`glyph label action step`、`glyph phase reward payoff`、`glyph intent cost result` 和 `progress progress progress progress`。
+- 发布前置条件已满足；后续通过主分支 push 触发 GitHub Pages workflow，并在发布后回复 #6 和 #4。
+
 ## 2026-05-01 Product decision：远航路线对照条分组布局
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-01 13:14 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#6 仍是后半段玩法变化主反馈，#4 仍是界面文字密度和图片化依据，因此本轮继续进入 Product decision。

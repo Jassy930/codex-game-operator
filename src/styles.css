@@ -4983,6 +4983,19 @@ h2 {
     grid-template-columns: 1fr;
   }
 
+  .far-dispatch-branch-choice-summary {
+    grid-template-columns: 1fr;
+  }
+
+  .far-dispatch-branch-choice-summary-item {
+    grid-template-columns: 18px repeat(3, minmax(0, 1fr));
+    grid-template-areas:
+      "glyph label action step"
+      "glyph phase reward payoff"
+      "glyph intent cost result"
+      "progress progress progress progress";
+  }
+
   .directive-plan-track {
     grid-template-columns: 1fr;
   }
