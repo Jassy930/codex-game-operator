@@ -887,6 +887,10 @@ function renderFarDispatchBranchChoiceRoute(choice) {
   routePhase.textContent = choice.routePhaseText ?? "";
   routePhase.hidden = !choice.routePhaseText;
 
+  const startReward = renderFarDispatchBranchChoiceRouteReward(choice, "start");
+  const branchReward = renderFarDispatchBranchChoiceRouteReward(choice, "branch");
+  const returnReward = renderFarDispatchBranchChoiceRouteReward(choice, "return");
+
   route.append(
     line,
     start,
@@ -894,9 +898,20 @@ function renderFarDispatchBranchChoiceRoute(choice) {
     returnNode,
     routeResource,
     routeMarker,
-    routePhase
+    routePhase,
+    startReward,
+    branchReward,
+    returnReward
   );
   return route;
+}
+
+function renderFarDispatchBranchChoiceRouteReward(choice, nodeId) {
+  const reward = document.createElement("span");
+  reward.className = "far-dispatch-branch-choice-route-reward is-" + nodeId;
+  reward.textContent = getFarDispatchBranchChoiceRouteRewardLabel(choice, nodeId);
+  reward.hidden = !reward.textContent;
+  return reward;
 }
 
 function renderFarDispatchLoopTrack(dispatch) {
@@ -1027,6 +1042,13 @@ function getFarDispatchBranchChoiceRouteStepLabel(choice, nodeId) {
   const routeStepLabels = choice.routeStepLabels ?? {};
   const label = String(routeStepLabels[nodeId] ?? "");
   return label.replace(/[^0-9/]/g, "").slice(0, 3);
+}
+
+function getFarDispatchBranchChoiceRouteRewardLabel(choice, nodeId) {
+  const routeRewardLabels = choice.routeRewardLabels ?? {};
+  return String(routeRewardLabels[nodeId] ?? "")
+    .replace(/[^\u4e00-\u9fa5A-Za-z0-9/+%-]/g, "")
+    .slice(0, 4);
 }
 
 function getFarDispatchBranchChoiceRouteProgress(choice) {

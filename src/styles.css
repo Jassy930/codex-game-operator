@@ -1639,7 +1639,7 @@ h2 {
 
   position: relative;
   display: block;
-  height: 30px;
+  height: 38px;
   border: 1px solid rgba(248, 243, 231, 0.12);
   border-radius: 6px;
   background:
@@ -1839,6 +1839,47 @@ h2 {
 
 .far-dispatch-branch-choice-route-phase.is-complete {
   color: #96e7a8;
+}
+
+.far-dispatch-branch-choice-route-reward {
+  position: absolute;
+  z-index: 2;
+  bottom: 2px;
+  max-width: 44px;
+  color: rgba(248, 243, 231, 0.7);
+  font-size: 0.44rem;
+  font-weight: 950;
+  line-height: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-shadow: 0 1px 4px rgba(5, 12, 20, 0.7);
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.far-dispatch-branch-choice-route-reward[hidden] {
+  display: none;
+}
+
+.far-dispatch-branch-choice-route-reward.is-start {
+  left: 10%;
+  transform: translateX(-50%);
+}
+
+.far-dispatch-branch-choice-route-reward.is-branch {
+  left: 50%;
+  color: #d8ffe2;
+  transform: translateX(-50%);
+}
+
+.far-dispatch-branch-choice-route-reward.is-return {
+  right: 10%;
+  color: #cfe8ff;
+  transform: translateX(50%);
+}
+
+.far-dispatch-branch-choice-route.is-detour .far-dispatch-branch-choice-route-reward.is-branch {
+  color: #ffd1df;
 }
 
 .far-dispatch-branch-choice-route.is-sync {

@@ -1141,6 +1141,18 @@ const FAR_ROUTE_DISPATCH_BRANCH_ROUTE_STEP_LABELS = Object.freeze({
   branch: "2",
   return: "3"
 });
+const FAR_ROUTE_DISPATCH_BRANCH_ROUTE_REWARD_LABELS = Object.freeze({
+  sync: Object.freeze({
+    start: "校准",
+    branch: "补给",
+    return: "闭环"
+  }),
+  detour: Object.freeze({
+    start: "校准",
+    branch: "投送",
+    return: "闭环"
+  })
+});
 
 const INITIAL_UPGRADES = Object.fromEntries(
   UPGRADE_DEFS.map((upgrade) => [upgrade.id, 0])
@@ -5170,6 +5182,10 @@ function buildFarRouteDispatchBranchChoices(
     const routeStepLabels = {
       ...FAR_ROUTE_DISPATCH_BRANCH_ROUTE_STEP_LABELS
     };
+    const routeRewardLabels =
+      buildFarRouteDispatchBranchRouteRewardLabels(choice.kind);
+    const routeRewardText =
+      buildFarRouteDispatchBranchRouteRewardText(routeRewardLabels);
     const followupText = buildFarRouteDispatchBranchFollowupText(
       choice.label,
       choice.directive.name,
@@ -5223,6 +5239,8 @@ function buildFarRouteDispatchBranchChoices(
       routePhaseKind: routePhase.kind,
       routePhaseText: routePhase.text,
       routeStepLabels,
+      routeRewardLabels,
+      routeRewardText,
       nextText: choice.nextText,
       reasonText,
       decisionText,
@@ -5251,6 +5269,8 @@ function buildFarRouteDispatchBranchChoices(
         decisionBadgeText +
         " · " +
         routePhase.text +
+        " · " +
+        routeRewardText +
         " · " +
         choice.caption +
         (reasonText ? " · " + reasonText : "") +
@@ -5455,6 +5475,23 @@ function buildFarRouteDispatchBranchRoutePhase(routeNodeStates) {
     kind: "inactive",
     text: "未选"
   };
+}
+
+function buildFarRouteDispatchBranchRouteRewardLabels(kind) {
+  return {
+    ...(FAR_ROUTE_DISPATCH_BRANCH_ROUTE_REWARD_LABELS[kind] ??
+      FAR_ROUTE_DISPATCH_BRANCH_ROUTE_REWARD_LABELS.sync)
+  };
+}
+
+function buildFarRouteDispatchBranchRouteRewardText(routeRewardLabels) {
+  const labels = [
+    routeRewardLabels?.start,
+    routeRewardLabels?.branch,
+    routeRewardLabels?.return
+  ].filter(Boolean);
+
+  return labels.length ? "收益点：" + labels.join(" -> ") : "";
 }
 
 function buildFarRouteDispatchBranchDecisionKind(
@@ -5698,6 +5735,8 @@ function buildFarRouteDispatchBranchChoiceText(choices) {
           choice.decisionBadgeText +
           " · " +
           choice.routePhaseText +
+          " · " +
+          choice.routeRewardText +
           " · " +
           choice.caption +
           (choice.reasonText ? " · " + choice.reasonText : "") +
