@@ -1324,6 +1324,9 @@ test("点火按钮会渲染点击反馈和过载前兆效果", () => {
   assert.match(appJs, /function playCoreHaptic\(\{ overloaded = false \} = \{\}\)/);
   assert.match(appJs, /navigator\.vibrate\(overloaded \? \[18, 22, 34\] : 12\)/);
   assert.match(appJs, /function positionCoreImpact\(event\)/);
+  assert.match(appJs, /"--core-recoil-x"/);
+  assert.match(appJs, /"--core-recoil-y"/);
+  assert.match(appJs, /const recoilX = Math\.round/);
   assert.match(appJs, /"--core-impact-x"/);
   assert.match(appJs, /"--core-impact-y"/);
   assert.match(appJs, /elements\.coreImpactPoint\.classList\.add\("is-showing"\)/);
@@ -1371,6 +1374,9 @@ test("点火按钮会渲染点击反馈和过载前兆效果", () => {
   assert.match(styles, /\.core-button\.is-overload-ready \.core-surge-orbit/);
   assert.match(styles, /\.core-button\.is-overload-hit \.core-surge-orbit/);
   assert.match(styles, /\.core-impact-point/);
+  assert.match(styles, /--core-recoil-x/);
+  assert.match(styles, /--core-recoil-y/);
+  assert.match(styles, /translate\(var\(--core-recoil-x\), var\(--core-recoil-y\)\) scale\(0\.97\)/);
   assert.match(styles, /--core-impact-x/);
   assert.match(styles, /--core-impact-y/);
   assert.match(styles, /\.core-impact-point\.is-overload-impact/);

@@ -2837,20 +2837,23 @@ function positionCoreImpact(event) {
     Number.isFinite(event.clientY);
   const x = usePointer ? event.clientX - rect.left : rect.width / 2;
   const y = usePointer ? event.clientY - rect.top : rect.height / 2;
+  const width = Math.max(rect.width, 1);
+  const height = Math.max(rect.height, 1);
+  const clampedX = Math.min(Math.max(x, 0), rect.width);
+  const clampedY = Math.min(Math.max(y, 0), rect.height);
+  const recoilX = Math.round(((clampedX - rect.width / 2) / width) * 80) / 10;
+  const recoilY = Math.round(((clampedY - rect.height / 2) / height) * 80) / 10;
+
+  elements.coreButton.style.setProperty("--core-recoil-x", recoilX + "px");
+  elements.coreButton.style.setProperty("--core-recoil-y", recoilY + "px");
 
   [
     elements.coreImpactPoint,
     elements.coreImpactRipple,
     elements.coreImpactSparks
   ].forEach((element) => {
-    element.style.setProperty(
-      "--core-impact-x",
-      Math.min(Math.max(x, 0), rect.width) + "px"
-    );
-    element.style.setProperty(
-      "--core-impact-y",
-      Math.min(Math.max(y, 0), rect.height) + "px"
-    );
+    element.style.setProperty("--core-impact-x", clampedX + "px");
+    element.style.setProperty("--core-impact-y", clampedY + "px");
   });
 }
 

@@ -1,5 +1,28 @@
 # Decision
 
+## 2026-05-01 Product decision：点火按压反冲
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-01 15:54 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#5 仍围绕“点火按钮太薄弱、增加点击反馈、特效和点击欲望”保持 open，且是最新更新的反馈 issue，因此本轮继续进入 Product decision。
+
+当前最大问题：点火按钮已经有脉冲、粒子、收益浮层、环形蓄能轨、阶段光环、过载倒计时徽标、落点闪光、落点涟漪、落点火花束、音效、触感反馈、连击轨连续填充、星核蓄能裂纹和蓄能外弧。按钮视觉层已经很丰富，但按下按钮本体时仍主要是居中缩放，实际点击位置没有带动按钮产生方向性反冲，鼠标或触屏点击的“按下去”触感还可以更明确。
+
+本轮决策：
+
+- 新增“点火按压反冲”。
+- `src/app.js` 在 `positionCoreImpact` 中复用点击坐标，给主按钮写入 `--core-recoil-x` 和 `--core-recoil-y`；键盘触发或无指针事件时回退到按钮中心，反冲归零。
+- `src/styles.css` 让 `core-button.is-pulsing` 使用 `translate(var(--core-recoil-x), var(--core-recoil-y)) scale(0.97)`，让按钮按压方向跟随实际落点。
+- `tests/game.test.js` 增加静态断言，覆盖反冲 CSS 变量、运行期写入和按压 transform。
+- 该改动只调整点火按钮展示层和测试，不新增收益、不新增存档字段，不改变点击收益、连击窗口、过载奖励、升级价格、星图 57 段路线、项目奖励、航线策略、航线指令、远航调度、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-05-01 15:54 CST 当前 5 个 open feedback issue、0 个 open bug issue。
+- `src/app.js` 在 `positionCoreImpact` 写入 `--core-recoil-x` 和 `--core-recoil-y`，并继续同步 `--core-impact-x` / `--core-impact-y`。
+- `src/styles.css` 包含 `--core-recoil-x`、`--core-recoil-y` 和反冲 transform。
+- `tests/game.test.js` 覆盖点火按压反冲静态绑定。
+- 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含 `--core-recoil-x`、`--core-recoil-y` 和反冲 transform。
+
 ## 2026-05-01 Product decision：点火落点火花束
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-01 15:40 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#5 仍围绕“点火按钮太薄弱、增加点击反馈、特效和点击欲望”保持 open，且更新时间晚于 #6 / #4，因此本轮继续进入 Product decision。

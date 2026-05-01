@@ -224,6 +224,8 @@ h2 {
   --core-surge-speed: 3200ms;
   --core-vein-dash-offset: 34;
   --core-vein-opacity: 0.12;
+  --core-recoil-x: 0px;
+  --core-recoil-y: 0px;
   position: relative;
   isolation: isolate;
   display: grid;
@@ -285,7 +287,7 @@ h2 {
 
 .core-button:active,
 .core-button.is-pulsing {
-  transform: scale(0.97);
+  transform: translate(var(--core-recoil-x), var(--core-recoil-y)) scale(0.97);
 }
 
 .core-button.is-combo-charging::before {
