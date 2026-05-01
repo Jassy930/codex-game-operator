@@ -8,6 +8,9 @@
 - 同步 GitHub Issues 反馈状态：2026-05-01 18:19 CST 当前 5 个 open feedback issue、0 个 open bug issue；#5 作为主处理对象。
 - 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
 - 构建产物已确认包含 `coreRewardHintHit`、`coreRewardHintOverloadHit`、`.core-button.is-pulsing:not(.is-overload-impact) + .core-reward-hint` 和 `.core-button.is-overload-impact + .core-reward-hint`。
+- 发布：提交 `f6d959c` 已推送到 `origin/main`；GitHub Pages workflow `25211106472` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页返回 HTTP 200，线上 `src/styles.css` 已确认包含点火下一击预告命中跳闪样式。workflow 继续给出 Node.js 20 actions 弃用提醒，未影响本次部署。
+- 反馈处理：已回复 #5，说明点火下一击预告命中跳闪、验证结果、Pages 部署和复测问题；issue 保持 open。回复后于 2026-05-01 18:27 CST 再次同步 GitHub Issues，当前仍为 5 个 open feedback issue、0 个 open bug issue；#5 更新时间为 2026-05-01T10:27:05Z。
+- 钉钉通知未发送：2026-05-01 18:27 CST 运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` 相关变量名，当前目录、父级和用户目录未发现 `.env*` 文件；未将 webhook 写入仓库。
 
 - 点火按钮新增“外层轮廓命中亮闪”：普通点火命中时，按钮外层蓄能轮廓会短促亮起；过载点火命中时使用更强外轮廓亮闪，继续回应 #5 的点击反馈、特效和点击欲望反馈。
 - `src/styles.css` 增加 `.core-button.is-pulsing:not(.is-overload-impact)::before`、`.core-button.is-overload-impact::before`、`coreShellHitFlash` 和 `coreShellOverloadFlash`；`tests/game.test.js` 覆盖静态绑定。
