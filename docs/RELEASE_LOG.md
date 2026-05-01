@@ -8,6 +8,8 @@
 - 同步 GitHub Issues 反馈状态：2026-05-01 18:35 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 作为主处理对象，#4 作为视觉密度依据。
 - 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
 - 构建产物已确认包含 `farDispatchSummaryActionBeacon`、`.far-dispatch-branch-choice-summary-action::before` 和 `.far-dispatch-branch-choice-summary-action:not(.is-idle)::before`。
+- 发布：提交 `ba12376` 已推送到 `origin/main`；GitHub Pages workflow `25211495534` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页返回 HTTP 200，线上 `src/styles.css` 已确认包含远航对照条下一步动作信标样式。workflow 继续给出 Node.js 20 actions 弃用提醒，未影响本次部署。
+- 反馈处理：已回复 #6，说明远航路线对照条下一步动作信标、验证结果、Pages 部署和复测问题；已回复 #4，说明本轮用动作信标降低文字反推压力；两个 issue 均保持 open。回复后于 2026-05-01 18:42 CST 再次同步 GitHub Issues，当前仍为 5 个 open feedback issue、0 个 open bug issue；#6 更新时间为 2026-05-01T10:41:55Z，#4 更新时间为 2026-05-01T10:42:12Z。
 
 - 点火按钮新增“下一击预告命中跳闪”：普通点火命中时，按钮下方下一击奖励预告会短促亮起并回弹；过载点火命中时使用更强跳闪，继续回应 #5 的点击反馈、特效和点击欲望反馈。
 - `src/styles.css` 增加 `.core-button.is-pulsing:not(.is-overload-impact) + .core-reward-hint`、`.core-button.is-overload-impact + .core-reward-hint`、`coreRewardHintHit` 和 `coreRewardHintOverloadHit`；`tests/game.test.js` 覆盖静态绑定。

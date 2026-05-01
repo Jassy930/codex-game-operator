@@ -8,6 +8,10 @@
 - 本轮只调整远航路线对照条展示层和测试，不新增收益、不新增存档字段，不改变升级价格、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、远航调度数值、冷却、连携窗口、反馈入口或部署链路。
 - 本轮本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
 - 构建产物已确认包含 `farDispatchSummaryActionBeacon`、`.far-dispatch-branch-choice-summary-action::before` 和 `.far-dispatch-branch-choice-summary-action:not(.is-idle)::before`。
+- 发布：提交 `ba12376` 已推送到 `origin/main`；GitHub Pages workflow `25211495534` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页返回 HTTP 200，线上 `src/styles.css` 已确认包含远航对照条下一步动作信标样式。workflow 继续给出 Node.js 20 actions 弃用提醒，未影响本次部署。
+- #6 已回复：说明远航路线对照条下一步动作信标、验证结果、Pages 部署和复测问题；issue 保持 open，更新时间为 2026-05-01T10:41:55Z，评论地址：`https://github.com/Jassy930/codex-game-operator/issues/6#issuecomment-4358935150`。
+- #4 已回复：说明本轮用动作信标降低文字反推压力、验证结果、Pages 部署和复测问题；issue 保持 open，更新时间为 2026-05-01T10:42:12Z，评论地址：`https://github.com/Jassy930/codex-game-operator/issues/4#issuecomment-4358936026`。
+- 回复后同步 GitHub Issues：2026-05-01 18:42 CST 当前仍为 5 个 open feedback issue、0 个 open bug issue。
 
 - GitHub Issues：gh 可用且已认证；2026-05-01 18:19 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
 - 本轮 Product decision 继续处理 #5：点火按钮已有按住反冲、按住压光、落点反馈、收益浮层跟随落点、蓄能轨、连击点、中心标签和外层轮廓命中反馈，但按钮下方“下一击 +X / 触发过载”的预告在点击后只更新文字，缺少和按钮命中同节奏的短促确认。
