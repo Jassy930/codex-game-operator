@@ -3850,6 +3850,11 @@ h2 {
   background: linear-gradient(180deg, #ffd36a, rgba(255, 211, 106, 0.16));
 }
 
+.far-dispatch.is-active .far-dispatch-loop-step.is-current::after {
+  box-shadow: 0 0 10px rgba(255, 211, 106, 0.18);
+  animation: farDispatchLoopCurrentStepRailGlow 1450ms ease-in-out infinite;
+}
+
 .far-dispatch-loop-step.is-completed {
   border-color: rgba(150, 231, 168, 0.42);
   background: rgba(150, 231, 168, 0.1);
@@ -6941,6 +6946,23 @@ h2 {
   }
 }
 
+@keyframes farDispatchLoopCurrentStepRailGlow {
+  0%,
+  100% {
+    opacity: 0.76;
+    filter: saturate(1);
+    box-shadow: 0 0 8px rgba(255, 211, 106, 0.16);
+  }
+
+  50% {
+    opacity: 1;
+    filter: saturate(1.22);
+    box-shadow:
+      0 0 13px rgba(255, 211, 106, 0.26),
+      0 0 7px rgba(150, 231, 168, 0.14);
+  }
+}
+
 @keyframes farDispatchSceneImagePulse {
   0%,
   100% {
@@ -7007,6 +7029,7 @@ h2 {
   .far-dispatch-loop-link.is-current::after,
   .far-dispatch-loop-step.is-current,
   .far-dispatch.is-active .far-dispatch-loop-step.is-current::before,
+  .far-dispatch.is-active .far-dispatch-loop-step.is-current::after,
   .far-dispatch.is-active .far-dispatch-step-reward.is-current,
   .far-dispatch-branch-choice-summary-item.is-active-route
     .far-dispatch-branch-choice-summary-progress::after,
