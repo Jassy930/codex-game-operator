@@ -1,5 +1,28 @@
 # Decision
 
+## 2026-05-01 Product decision：远航路线微图图例
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-01 08:18 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#6 仍是后半段玩法变化主反馈，#4 仍是界面文字密度和图片化主反馈，因此本轮继续进入 Product decision。
+
+当前最大问题：协同/绕行分支卡片已经具备路线微图、资源取向、路线状态、步骤高亮、1/2/3 序号、方向箭头和默认折叠明细；但 1/2/3 的含义仍散落在路线步骤、按钮徽标和展开明细里。玩家第一次看到路线微图时，还需要把数字节点和“目标 -> 分支 -> 回目标”自行对应。
+
+本轮决策：
+
+- 新增“远航路线微图图例”。
+- 在协同/绕行分支卡片上方渲染一行紧凑图例：`1 目标`、`2 分支`、`3 回目标`。
+- 图例只在 `branchChoices` 存在时出现，跨两张分支卡片显示；分支卡片本身仍保留首行、路线微图、指令名、路线判断、推荐原因和默认关闭的 `路线明细`。
+- 图例 `aria-hidden="true"`，可访问语义继续保留在 `branchChoiceText`、路线步骤、按钮路线标记、路线反馈、卡片标题和展开明细中。
+- 本轮只调整 DOM、CSS 和静态测试；不新增收益、不新增存档字段，不改变升级价格、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、远航调度数值、冷却、连携窗口、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-05-01 08:18 CST 当前 5 个 open feedback issue、0 个 open bug issue。
+- `src/app.js` 渲染 `renderFarDispatchBranchChoiceLegend()`、`far-dispatch-branch-choice-legend` 和 `far-dispatch-branch-choice-legend-item`，并将 1/2/3 写入 `data-step-label`。
+- `src/styles.css` 包含图例跨栏、三段紧凑项和 `data-step-label` 小圆点样式。
+- `tests/game.test.js` 覆盖远航路线微图图例的静态 DOM 与样式绑定。
+- 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含 `far-dispatch-branch-choice-legend` 和 `far-dispatch-branch-choice-legend-item`。
+
 ## 2026-05-01 Product decision：远航路线明细折叠
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-01 07:59 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#6 仍是后半段玩法变化主反馈，#4 仍是界面文字密度和图片化主反馈，因此本轮继续进入 Product decision。

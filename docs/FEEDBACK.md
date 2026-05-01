@@ -2,6 +2,14 @@
 
 ## 2026-05-01
 
+- GitHub Issues：gh 可用且已认证；2026-05-01 08:18 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
+- #6 继续作为本轮 Product decision 依据：该反馈指出后半段“只有不停的目标、玩法没有真正变化”；#4 继续作为视觉密度和图片化依据。前序已经把协同/绕行路线微图做成 1/2/3 节点和方向箭头，并把路线目标、下一步和收益对照收进默认折叠明细，但 1/2/3 的含义仍主要靠路线步骤和按钮徽标对照。
+- 本轮改动新增远航路线微图图例：协同/绕行分支卡片上方显示 `1 目标`、`2 分支`、`3 回目标`，让路线微图的三个数字节点先有统一解释。
+- 图例只在存在分支选择时显示，`aria-hidden="true"`；完整路线语义仍保留在 `branchChoiceText`、路线步骤、按钮路线标记、路线反馈、卡片标题和可展开明细中。
+- 本轮只调整 DOM、CSS 和静态测试，不新增收益、不新增存档字段，不改变升级价格、星图路线、项目奖励、远航调度既有数值、冷却、连携窗口、反馈入口或部署链路。
+- 本轮本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含 `far-dispatch-branch-choice-legend` 和 `far-dispatch-branch-choice-legend-item`。
+
 - GitHub Issues：gh 可用且已认证；2026-05-01 07:59 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
 - #6 继续作为本轮 Product decision 依据：该反馈指出后半段“只有不停的目标、玩法没有真正变化”；#4 继续作为视觉密度依据。前序路线微图已经补齐方向箭头，但协同/绕行分支卡片仍默认展开路线目标、下一步、后续回航和收益对照，多行说明继续挤在卡片首屏。
 - 本轮改动新增远航路线明细折叠：协同/绕行分支卡片默认保留首行、路线微图、指令名、路线判断和推荐原因，把路线目标、路线下一步、后续回航、收益对照和资源/奖励说明收进默认关闭的 `路线明细`。

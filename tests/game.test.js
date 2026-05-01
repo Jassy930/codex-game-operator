@@ -1695,6 +1695,12 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(appJs, /branchClosure\.textContent = dispatch\.branchClosureText \?\? ""/);
   assert.match(appJs, /function renderFarDispatchBranchChoices\(dispatch\)/);
   assert.match(appJs, /track\.className = "far-dispatch-branch-choices"/);
+  assert.match(appJs, /renderFarDispatchBranchChoiceLegend\(\)/);
+  assert.match(appJs, /function renderFarDispatchBranchChoiceLegend\(\)/);
+  assert.match(appJs, /legend\.className = "far-dispatch-branch-choice-legend"/);
+  assert.match(appJs, /legend\.setAttribute\("aria-hidden", "true"\)/);
+  assert.match(appJs, /item\.className = "far-dispatch-branch-choice-legend-item"/);
+  assert.match(appJs, /item\.dataset\.stepLabel = step/);
   assert.match(appJs, /"far-dispatch-branch-choice is-"/);
   assert.match(appJs, /" is-decision-" \+/);
   assert.match(appJs, /header\.className = "far-dispatch-branch-choice-head"/);
@@ -1842,6 +1848,10 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(styles, /\.far-dispatch-branch-step/);
   assert.match(styles, /\.far-dispatch-branch-closure/);
   assert.match(styles, /\.far-dispatch-branch-choices/);
+  assert.match(styles, /\.far-dispatch-branch-choice-legend/);
+  assert.match(styles, /grid-column: 1 \/ -1/);
+  assert.match(styles, /\.far-dispatch-branch-choice-legend-item/);
+  assert.match(styles, /\.far-dispatch-branch-choice-legend-item::before/);
   assert.match(styles, /\.far-dispatch-branch-choice\.is-sync/);
   assert.match(styles, /\.far-dispatch-branch-choice\.is-detour/);
   assert.match(styles, /\.far-dispatch-branch-choice\.is-shift/);

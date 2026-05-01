@@ -1512,6 +1512,47 @@ h2 {
   display: none;
 }
 
+.far-dispatch-branch-choice-legend {
+  display: flex;
+  grid-column: 1 / -1;
+  gap: 4px;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.far-dispatch-branch-choice-legend-item {
+  display: inline-flex;
+  flex: 1 1 0;
+  align-items: center;
+  min-width: 0;
+  padding: 2px 6px;
+  overflow: hidden;
+  border: 1px solid rgba(103, 232, 249, 0.18);
+  border-radius: 999px;
+  background: rgba(103, 232, 249, 0.07);
+  color: rgba(248, 243, 231, 0.7);
+  font-size: 0.58rem;
+  font-weight: 900;
+  line-height: 1.2;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.far-dispatch-branch-choice-legend-item::before {
+  display: inline-grid;
+  flex: 0 0 auto;
+  width: 14px;
+  height: 14px;
+  margin-right: 4px;
+  place-items: center;
+  border-radius: 999px;
+  background: rgba(248, 243, 231, 0.12);
+  color: #ffd36a;
+  content: attr(data-step-label);
+  font-size: 0.5rem;
+  line-height: 1;
+}
+
 .far-dispatch-branch-choice {
   display: grid;
   gap: 3px;

@@ -714,6 +714,7 @@ function renderFarDispatchBranchChoices(dispatch) {
 
   track.setAttribute("aria-label", dispatch.branchChoiceText ?? "");
   track.append(
+    renderFarDispatchBranchChoiceLegend(),
     ...choices.map((choice) => {
       const item = document.createElement("article");
       item.className =
@@ -802,6 +803,26 @@ function renderFarDispatchBranchChoices(dispatch) {
   );
 
   return track;
+}
+
+function renderFarDispatchBranchChoiceLegend() {
+  const legend = document.createElement("div");
+  legend.className = "far-dispatch-branch-choice-legend";
+  legend.setAttribute("aria-hidden", "true");
+
+  [
+    ["1", "目标"],
+    ["2", "分支"],
+    ["3", "回目标"]
+  ].forEach(([step, label]) => {
+    const item = document.createElement("span");
+    item.className = "far-dispatch-branch-choice-legend-item";
+    item.dataset.stepLabel = step;
+    item.textContent = label;
+    legend.append(item);
+  });
+
+  return legend;
 }
 
 function renderFarDispatchBranchChoiceRoute(choice) {
