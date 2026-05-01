@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+- 点火按钮新增“中心标签命中亮脉冲”：普通点火命中时，中心“点火”标签会短促变亮并回弹，继续回应 #5 的点击反馈、特效和点击欲望反馈。
+- `src/styles.css` 增加 `.core-button.is-pulsing:not(.is-overload-impact) .core-label` 和 `coreLabelHitFlash`；`tests/game.test.js` 覆盖静态绑定。
+- 本轮只调整点火按钮展示层和测试，不新增收益、不新增存档字段，不改变点击收益、连击窗口、过载奖励、升级价格、星图路线、项目奖励、航线策略、航线指令、远航调度、反馈入口或部署链路。
+- 同步 GitHub Issues 反馈状态：2026-05-01 17:52 CST 当前 5 个 open feedback issue、0 个 open bug issue；#5 作为主处理对象。
+- 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含 `.core-button.is-pulsing:not(.is-overload-impact) .core-label`、`coreLabelHitFlash 360ms ease-out` 和 `@keyframes coreLabelHitFlash`。
+
 - 点火按钮新增“过载中心标签闪爆”：第 8 次过载命中时，中心标签会短暂覆盖显示“过载”并闪爆，继续回应 #5 的点击反馈、特效和点击欲望反馈。
 - `src/styles.css` 复用 `.core-button.is-overload-impact`，为 `.core-label` 和 `.core-label::after` 增加过载命中覆盖文案与 `coreLabelOverloadFlash`；`tests/game.test.js` 覆盖静态绑定。
 - 本轮只调整点火按钮展示层和测试，不新增收益、不新增存档字段，不改变点击收益、连击窗口、过载奖励、升级价格、星图路线、项目奖励、航线策略、航线指令、远航调度、反馈入口或部署链路。

@@ -2,6 +2,13 @@
 
 ## 2026-05-01
 
+- GitHub Issues：gh 可用且已认证；2026-05-01 17:52 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
+- 本轮 Product decision 继续处理 #5：点火按钮已有普通/过载落点反馈、收益浮层、蓄能轨、连击点跳闪和过载中心标签闪爆，但普通命中时中心“点火”标签仍没有松手后的短促命中确认。
+- 本轮改动新增点火中心标签命中亮脉冲：`.core-button.is-pulsing:not(.is-overload-impact) .core-label` 在普通点火命中时短促变亮并播放 `coreLabelHitFlash`；过载命中继续使用现有“过载”中心标签闪爆。
+- 本轮只调整点火按钮展示层和测试，不新增收益、不新增存档字段，不改变点击收益、连击窗口、过载奖励、升级价格、星图路线、项目奖励、航线策略、航线指令、远航调度、反馈入口或部署链路。
+- 本轮本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含 `.core-button.is-pulsing:not(.is-overload-impact) .core-label`、`coreLabelHitFlash 360ms ease-out` 和 `@keyframes coreLabelHitFlash`。
+
 - GitHub Issues：gh 可用且已认证；2026-05-01 17:38 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
 - 本轮 Product decision 继续处理 #5：点火按钮已有按住、落点、收益浮层、蓄能轨和连击点命中反馈，但第 8 次过载命中时中心标签仍保持“点火”，缺少命中瞬间的中心确认。
 - 本轮改动新增点火过载中心标签闪爆：复用 `.core-button.is-overload-impact` 短时状态，让 `.core-label::after` 覆盖显示“过载”并播放 `coreLabelOverloadFlash`。

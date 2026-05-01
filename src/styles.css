@@ -980,6 +980,14 @@ h2 {
   transform: scale(1.05);
 }
 
+.core-button.is-pulsing:not(.is-overload-impact) .core-label {
+  background: #fff7c2;
+  box-shadow:
+    0 0 20px rgba(255, 247, 194, 0.4),
+    0 0 34px rgba(244, 178, 60, 0.26);
+  animation: coreLabelHitFlash 360ms ease-out;
+}
+
 .core-button.is-overload-impact .core-label {
   background: #fff7c2;
   color: transparent;
@@ -5500,6 +5508,20 @@ h2 {
 
   100% {
     transform: scale(1.18);
+  }
+}
+
+@keyframes coreLabelHitFlash {
+  0% {
+    transform: scale(0.94);
+  }
+
+  42% {
+    transform: scale(1.08);
+  }
+
+  100% {
+    transform: scale(1);
   }
 }
 
