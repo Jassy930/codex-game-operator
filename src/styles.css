@@ -936,6 +936,22 @@ h2 {
   animation: coreDotPulse 860ms ease-in-out infinite;
 }
 
+.core-combo-dot.is-hit {
+  background: #fff7c2;
+  box-shadow:
+    0 0 12px rgba(255, 247, 194, 0.7),
+    0 0 22px rgba(244, 178, 60, 0.42);
+  animation: coreComboDotHit 460ms ease-out;
+}
+
+.core-combo-track.is-overload-hit .core-combo-dot.is-hit {
+  background: #fff7c2;
+  box-shadow:
+    0 0 16px rgba(255, 247, 194, 0.82),
+    0 0 28px rgba(232, 93, 117, 0.5);
+  animation: coreComboDotOverloadHit 620ms ease-out;
+}
+
 .core-label {
   position: absolute;
   z-index: 2;
@@ -5431,6 +5447,34 @@ h2 {
 
   50% {
     transform: scale(1.35);
+  }
+}
+
+@keyframes coreComboDotHit {
+  0% {
+    transform: scale(0.78);
+  }
+
+  42% {
+    transform: scale(1.75);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes coreComboDotOverloadHit {
+  0% {
+    transform: scale(0.72);
+  }
+
+  36% {
+    transform: scale(2.05);
+  }
+
+  100% {
+    transform: scale(1.18);
   }
 }
 

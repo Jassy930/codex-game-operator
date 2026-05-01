@@ -268,6 +268,7 @@ let projectFilter = INITIAL_PROJECT_FILTER_ID;
 let corePulseTimer = 0;
 let coreGainTimer = 0;
 let coreImpactTimer = 0;
+let coreComboHitTimer = 0;
 let soundEnabled = loadSoundPreference();
 let hapticEnabled = loadHapticPreference();
 let audioContext = null;
@@ -309,7 +310,8 @@ elements.coreButton.addEventListener("click", (event) => {
   offlineSummary = null;
   const previousGoal = getCurrentGoal(state);
   state = clickCore(state);
-  const overloaded = String(state.lastPulse).startsWith("过载");
+  const comboStatus = getComboStatus(state);
+  const overloaded = comboStatus.overloaded;
   applyActionNoticeWithGoalTransition(previousGoal, state, buildClickActionNotice(state));
   recordEvent("click", {
     energy: Math.floor(state.energy),
@@ -320,6 +322,7 @@ elements.coreButton.addEventListener("click", (event) => {
   animateCore({
     gainText: "+" + formatNumber(state.lastGain),
     overloaded,
+    comboStep: comboStatus.step,
     pointerEvent: event
   });
   saveAndRender();
@@ -2801,7 +2804,12 @@ function saveFeedbackEntry(entry) {
   }
 }
 
-function animateCore({ gainText = "", overloaded = false, pointerEvent = null } = {}) {
+function animateCore({
+  gainText = "",
+  overloaded = false,
+  comboStep = 0,
+  pointerEvent = null
+} = {}) {
   window.clearTimeout(corePulseTimer);
   window.clearTimeout(coreGainTimer);
   window.clearTimeout(coreImpactTimer);
@@ -2823,6 +2831,7 @@ function animateCore({ gainText = "", overloaded = false, pointerEvent = null } 
     elements.coreImpactSparks.classList.toggle("is-overload-impact", overloaded);
     elements.coreGainPop.classList.add("is-showing");
     elements.coreGainPop.classList.toggle("is-overload-gain", overloaded);
+    highlightCoreComboHit(comboStep, overloaded);
     corePulseTimer = window.setTimeout(
       () => {
         elements.coreButton.classList.remove("is-pulsing", "is-overload-impact");
@@ -2844,6 +2853,26 @@ function animateCore({ gainText = "", overloaded = false, pointerEvent = null } 
       overloaded ? 620 : 420
     );
   });
+}
+
+function highlightCoreComboHit(comboStep, overloaded = false) {
+  window.clearTimeout(coreComboHitTimer);
+  Array.from(elements.coreComboTrack.children).forEach((dot) => {
+    dot.classList.remove("is-hit");
+  });
+
+  const hitDot = elements.coreComboTrack.children[Math.max(0, comboStep - 1)];
+  if (!hitDot) {
+    return;
+  }
+
+  hitDot.classList.add("is-hit");
+  coreComboHitTimer = window.setTimeout(
+    () => {
+      hitDot.classList.remove("is-hit");
+    },
+    overloaded ? 620 : 460
+  );
 }
 
 function pressCoreButton(event) {

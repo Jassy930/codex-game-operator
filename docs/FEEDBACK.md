@@ -2,6 +2,14 @@
 
 ## 2026-05-01
 
+- GitHub Issues：gh 可用且已认证；2026-05-01 17:09 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
+- 本轮 Product decision 继续处理 #5：点火按钮已有按住反馈、落点反馈、收益浮层、蓄能裂纹、蓄能外弧、蓄能轨命中闪烁、音效和触感，但按钮内 8 格连击轨还缺少“本次点击命中哪一格”的瞬时确认。
+- 本轮改动新增点火连击点命中跳闪：点火后用 `comboStatus.step` 给本次推进到的连击点添加 `is-hit`；普通命中播放 `coreComboDotHit`，第 8 格过载命中播放 `coreComboDotOverloadHit`。
+- 本轮只调整点火按钮展示层和测试，不新增收益、不新增存档字段，不改变点击收益、连击窗口、过载奖励、升级价格、星图路线、项目奖励、航线策略、航线指令、远航调度、反馈入口或部署链路。
+- 本轮本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含 `comboStep: comboStatus.step`、`highlightCoreComboHit`、`.core-combo-dot.is-hit`、`coreComboDotHit` 和 `coreComboDotOverloadHit`。
+- 发布、#5 回复和钉钉通知状态待本轮推送后补充。
+
 - GitHub Issues：gh 可用且已认证；2026-05-01 16:51 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
 - 本轮 Product decision 继续处理 #5：点火按钮已有按住落点热区、落点闪光、涟漪、火花束、收益浮层和蓄能轨，但松手后的点击命中还可以让环形蓄能轨本身给一次短促回光，强化“这次点击推进蓄能”的确认。
 - 本轮改动新增点火蓄能轨命中闪烁：`.core-button.is-pulsing .core-charge-ring` 播放 `coreChargeRingHit`，普通点击时蓄能轨短促亮起并外扩；`.core-button.is-overload-impact .core-charge-ring` 播放 `coreChargeRingOverloadHit`，过载命中时显示更亮、更大的蓄能轨余辉。

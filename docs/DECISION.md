@@ -1,5 +1,30 @@
 # Decision
 
+## 2026-05-01 Product decision：点火连击点命中跳闪
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-01 17:09 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#5 仍是最新更新的开放反馈，继续围绕“点火按钮太薄弱、增加点击反馈、特效和点击欲望”做 Product decision。
+
+当前最大问题：点火按钮已经有 pointerdown 即时反冲、按住压光、按住落点热区、点击后的落点闪光、涟漪、火花束、收益浮层、星核蓄能裂纹、蓄能外弧、环形蓄能轨命中闪烁、音效和触感。上一轮让环形蓄能轨确认“本次命中推动蓄能”，但按钮内 8 格连击轨仍只是在整体填充和节点状态上变化；每次点击具体点亮了哪一格，还可以用一次短促跳闪直接确认。
+
+本轮决策：
+
+- 新增“点火连击点命中跳闪”。
+- `src/app.js` 在点火后用 `getComboStatus(state)` 获取本次 `comboStep`，由 `highlightCoreComboHit` 只给本次命中的连击点添加 `is-hit`。
+- `src/styles.css` 让 `.core-combo-dot.is-hit` 播放 `coreComboDotHit`，普通命中时短促放大发光。
+- `src/styles.css` 让 `.core-combo-track.is-overload-hit .core-combo-dot.is-hit` 播放 `coreComboDotOverloadHit`，第 8 格过载命中时使用更强跳闪。
+- `tests/game.test.js` 增加静态断言，覆盖本次命中点 class、普通/过载动画和关键帧。
+- 该改动只调整点火按钮展示层和测试，不新增收益、不新增存档字段，不改变点击收益、连击窗口、过载奖励、升级价格、星图路线、项目奖励、航线策略、航线指令、远航调度、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-05-01 17:09 CST 当前 5 个 open feedback issue、0 个 open bug issue。
+- `src/app.js` 包含 `comboStep: comboStatus.step`、`highlightCoreComboHit` 和 `is-hit` 命中点清理。
+- `src/styles.css` 包含 `.core-combo-dot.is-hit`、`coreComboDotHit`、`.core-combo-track.is-overload-hit .core-combo-dot.is-hit` 和 `coreComboDotOverloadHit`。
+- `tests/game.test.js` 覆盖点火连击点命中跳闪静态绑定。
+- 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含 `comboStep: comboStatus.step`、`highlightCoreComboHit`、`.core-combo-dot.is-hit`、`coreComboDotHit` 和 `coreComboDotOverloadHit`。
+- 发布、issue 回复和钉钉通知状态待本轮推送后补充。
+
 ## 2026-05-01 Product decision：点火蓄能轨命中闪烁
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-01 16:51 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#5 仍是最新更新的开放反馈，继续围绕“点火按钮太薄弱、增加点击反馈、特效和点击欲望”做 Product decision。

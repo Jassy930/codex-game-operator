@@ -1312,10 +1312,17 @@ test("点火按钮会渲染点击反馈和过载前兆效果", () => {
   assert.match(appJs, /coreGainPop: document\.querySelector\("#coreGainPop"\)/);
   assert.match(appJs, /coreOverloadBadge: document\.querySelector\("#coreOverloadBadge"\)/);
   assert.match(appJs, /coreOverloadBadgeValue: document\.querySelector\("#coreOverloadBadgeValue"\)/);
+  assert.match(appJs, /let coreComboHitTimer = 0/);
+  assert.match(appJs, /const comboStatus = getComboStatus\(state\)/);
+  assert.match(appJs, /comboStep: comboStatus\.step/);
   assert.match(appJs, /gainText: "\+" \+ formatNumber\(state\.lastGain\)/);
   assert.match(appJs, /elements\.coreGainPop\.textContent = gainText/);
   assert.match(appJs, /elements\.coreGainPop\.classList\.add\("is-showing"\)/);
   assert.match(appJs, /elements\.coreGainPop\.classList\.toggle\("is-overload-gain", overloaded\)/);
+  assert.match(appJs, /highlightCoreComboHit\(comboStep, overloaded\)/);
+  assert.match(appJs, /function highlightCoreComboHit\(comboStep, overloaded = false\)/);
+  assert.match(appJs, /hitDot\.classList\.add\("is-hit"\)/);
+  assert.match(appJs, /overloaded \? 620 : 460/);
   assert.match(appJs, /function renderCoreComboTrack\(combo\)/);
   assert.match(appJs, /function renderCoreRewardHint\(coreReward\)/);
   assert.match(appJs, /playCoreSound\(\{ overloaded \}\)/);
@@ -1427,6 +1434,10 @@ test("点火按钮会渲染点击反馈和过载前兆效果", () => {
   assert.match(styles, /\.core-combo-track\.is-overload-ready::before/);
   assert.match(styles, /\.core-combo-track\.is-overload-hit::before/);
   assert.match(styles, /\.core-combo-dot\.is-next/);
+  assert.match(styles, /\.core-combo-dot\.is-hit/);
+  assert.match(styles, /coreComboDotHit 460ms ease-out/);
+  assert.match(styles, /\.core-combo-track\.is-overload-hit \.core-combo-dot\.is-hit/);
+  assert.match(styles, /coreComboDotOverloadHit 620ms ease-out/);
   assert.match(styles, /\.core-reward-hint/);
   assert.match(styles, /\.core-label/);
   assert.match(styles, /\.core-button\.is-pressing \.core-label/);
@@ -1459,6 +1470,8 @@ test("点火按钮会渲染点击反馈和过载前兆效果", () => {
   assert.match(styles, /@keyframes coreBadgePulse/);
   assert.match(styles, /@keyframes coreBadgeBurst/);
   assert.match(styles, /@keyframes coreDotPulse/);
+  assert.match(styles, /@keyframes coreComboDotHit/);
+  assert.match(styles, /@keyframes coreComboDotOverloadHit/);
 });
 
 test("升级卡片会渲染可扫视图标", () => {
