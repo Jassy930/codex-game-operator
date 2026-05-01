@@ -9,6 +9,9 @@
 - 同步 GitHub Issues 反馈状态：2026-05-01 08:54 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 作为主处理对象，#4 作为视觉密度依据。
 - 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
 - 构建产物已确认包含 `routePhaseKind`、`routePhaseText`、`far-dispatch-branch-choice-route-phase` 和 `is-route-phase-*`。
+- 发布：提交 `a65be08` 已推送到 `origin/main`；GitHub Pages workflow `25197262320` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页返回 HTTP 200，线上 `src/game.js`、`src/app.js` 和 `src/styles.css` 已确认包含 `routePhaseKind`、`routePhaseText` 与 `far-dispatch-branch-choice-route-phase`。
+- 反馈处理：已回复 #6，说明路线当前步短标、验证结果和复测问题；已回复 #4，说明本轮当前步短标继续降低远航路线卡片对文字步骤和展开明细的依赖；两个 issue 均保持 open。回复后于 2026-05-01 09:07 CST 再次同步 GitHub Issues，当前仍为 5 个 open feedback issue、0 个 open bug issue；#6 更新时间为 2026-05-01T01:07:02Z，#4 更新时间为 2026-05-01T01:07:18Z。
+- 钉钉通知未发送：运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` 相关变量名，当前目录和父级两层内也未发现 `.env*` 文件；未将 webhook 写入仓库。
 
 - 远航调度新增“路线微图推进填充”：协同/绕行分支卡片的路线轨道会按 0%、50%、100% 填充，直接显示当前处在起手、分支选择还是回目标阶段，继续回应 #6 的后半段路线理解和 #4 的图形化/降文字密度反馈。
 - `src/game.js` 为 `branchChoices` 派生 `routeProgressPercent`；`src/app.js` 把推进百分比写入 `--branch-route-progress`；`src/styles.css` 用 `--branch-route-line-fill` / `--branch-route-line-track` 渲染轨道填充；`tests/game.test.js` 覆盖 0/3、1/3、2/3、静态 DOM style 和样式变量。
