@@ -8,6 +8,11 @@
 - 本轮只调整远航闭环微图展示层和测试，不新增可见说明文字、不新增收益、不新增存档字段，不改变点击收益、升级价格、星图路线、项目奖励、航线策略、航线指令、远航调度数值、反馈入口或部署链路。
 - 本轮本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
 - 构建产物已确认包含 `farDispatchLoopCurrentArrowPulse` 和当前方向信标样式。
+- 发布：提交 `5537b43` 已推送到 `origin/main`；GitHub Pages workflow `25227928985` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页返回 HTTP 200，线上 `src/styles.css` 已确认包含远航闭环当前方向信标样式。
+- #4 已回复：说明远航闭环当前方向信标、验证结果、Pages 部署和复测问题；issue 保持 open，评论地址：`https://github.com/Jassy930/codex-game-operator/issues/4#issuecomment-4361026042`。
+- #6 已回复：说明远航闭环当前方向信标、验证结果、Pages 部署和复测问题；issue 保持 open，评论地址：`https://github.com/Jassy930/codex-game-operator/issues/6#issuecomment-4361026048`。
+- 回复后同步 GitHub Issues：2026-05-02 02:48 CST 当前仍为 5 个 open feedback issue、0 个 open bug issue；#4/#6 更新时间均为 2026-05-01T18:48:13Z。
+- 钉钉通知未发送：2026-05-02 02:48 CST 运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` / `ROBOT` 相关变量名，当前目录和 `/home/jassy/glm` 两层内未发现 `.env*` 文件；未将 webhook 写入仓库。
 
 - GitHub Issues：gh 可用且已认证；2026-05-02 02:20 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。#4/#6 仍是最新组合反馈：远航调度需要更多图形化表达，减少后半段主操作区文字反推。
 - 本轮 Product decision 继续处理 #4/#6：远航闭环路线微图已经有 1/2/3 节点、方向箭头、推进填充和收益短标，但当前执行节点仍主要靠静态黄色节点与下方步骤卡确认。

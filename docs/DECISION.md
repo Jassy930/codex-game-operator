@@ -21,6 +21,11 @@
 - `tests/game.test.js` 覆盖远航闭环当前方向信标静态绑定。
 - 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
 - 构建产物已确认包含 `farDispatchLoopCurrentArrowPulse` 和当前方向信标样式。
+- 发布验证已通过：提交 `5537b43` 已推送到 `origin/main`；GitHub Pages workflow `25227928985` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页返回 HTTP 200，线上 `src/styles.css` 已确认包含 `farDispatchLoopCurrentArrowPulse` 和 `.far-dispatch-loop-visual-arrow.is-current`。workflow 继续出现 Node.js 20 actions 弃用提醒，未影响本次部署。
+- 已回复 GitHub Issue #4，说明远航闭环当前方向信标、验证结果、Pages 部署和复测问题；issue 保持 open，评论地址：`https://github.com/Jassy930/codex-game-operator/issues/4#issuecomment-4361026042`。
+- 已回复 GitHub Issue #6，说明远航闭环当前方向信标、验证结果、Pages 部署和复测问题；issue 保持 open，评论地址：`https://github.com/Jassy930/codex-game-operator/issues/6#issuecomment-4361026048`。
+- 回复后同步 GitHub Issues：2026-05-02 02:48 CST 当前仍为 5 个 open feedback issue、0 个 open bug issue；#4/#6 更新时间均为 2026-05-01T18:48:13Z。
+- 钉钉通知未发送：2026-05-02 02:48 CST 运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` / `ROBOT` 相关变量名，当前目录和 `/home/jassy/glm` 两层内未发现 `.env*` 文件；未将 webhook 写入仓库。
 - 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #4/#6，以及当前远航闭环微图仍需强化当前推进方向的复盘。
 
 ## 2026-05-02 Product decision：远航闭环当前节点脉冲
