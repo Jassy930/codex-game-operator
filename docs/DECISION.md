@@ -1,5 +1,28 @@
 # Decision
 
+## 2026-05-02 Product decision：远航闭环当前收益短标补光
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-02 05:14 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有 open bug；#4/#6 仍是主线反馈，继续指向远航调度需要更多图形化表达、后半段短循环需要更少文字反推。
+
+当前最大问题：远航闭环插画、进度轨、当前节点、方向信标、连接信标和步骤卡已经进入同一反馈节奏，但路线微图节点下方的 `校准` / `分支` / `续航` / `闭环` 收益短标当前仍是静态状态。玩家在目标 -> 分支 -> 回目标连续操作时，当前步骤的回报落点还可以更直接地随当前态被扫到。
+
+本轮决策：
+
+- 新增“远航闭环当前收益短标补光”。
+- `src/styles.css` 为 `.far-dispatch.is-active .far-dispatch-loop-visual-reward.is-current` 增加 `farDispatchLoopCurrentRewardGlow` 轻量补光。
+- 在 `prefers-reduced-motion: reduce` 中关闭该收益短标动效。
+- `tests/game.test.js` 增加静态断言，覆盖 active 当前收益短标动画、keyframes 和降低动效兜底。
+- 该改动只调整远航闭环展示层和测试，不新增可见说明文字、不新增收益、不新增存档字段，不改变点击收益、升级价格、星图路线、项目奖励、航线策略、航线指令、远航调度数值、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-05-02 05:14 CST 当前 5 个 open feedback issue、0 个 open bug issue；#4/#6 作为本轮主处理对象。
+- `src/styles.css` 包含 `.far-dispatch.is-active .far-dispatch-loop-visual-reward.is-current`、`farDispatchLoopCurrentRewardGlow` 和降低动效兜底。
+- `tests/game.test.js` 覆盖远航闭环当前收益短标补光静态绑定。
+- 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认 `dist/src/styles.css` 包含 `farDispatchLoopCurrentRewardGlow`、当前收益短标补光样式和降低动效兜底。
+- 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #4/#6，以及当前远航闭环收益短标仍偏静态的复盘。
+
 ## 2026-05-02 Product decision：远航闭环进度轨活跃态光扫
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-02 04:58 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有 open bug；#4/#6 仍是主线反馈，继续指向远航调度需要更图形化、后半段短循环需要更容易扫视。
