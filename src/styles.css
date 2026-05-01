@@ -3461,6 +3461,7 @@ h2 {
 }
 
 .far-dispatch-loop-visual-node {
+  position: relative;
   display: inline-grid;
   justify-self: center;
   width: 20px;
@@ -3493,6 +3494,17 @@ h2 {
   box-shadow:
     0 0 0 3px rgba(5, 12, 20, 0.74),
     0 0 14px rgba(255, 211, 106, 0.34);
+}
+
+.far-dispatch-loop-visual-node.is-current::after {
+  position: absolute;
+  inset: -6px;
+  border: 1px solid rgba(255, 211, 106, 0.58);
+  border-radius: inherit;
+  box-shadow: 0 0 12px rgba(255, 211, 106, 0.24);
+  content: "";
+  pointer-events: none;
+  animation: farDispatchLoopCurrentPulse 1400ms ease-in-out infinite;
 }
 
 .far-dispatch-loop-visual-reward {
@@ -6556,6 +6568,19 @@ h2 {
   }
 }
 
+@keyframes farDispatchLoopCurrentPulse {
+  0%,
+  100% {
+    opacity: 0.52;
+    transform: scale(0.92);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.12);
+  }
+}
+
 @keyframes farDispatchSummaryActiveActionGlow {
   0%,
   100% {
@@ -6595,6 +6620,7 @@ h2 {
   .core-button.is-overload-impact .core-combo-track::before,
   .core-gain-pop.is-showing::after,
   .core-gain-pop.is-overload-gain.is-showing::after,
+  .far-dispatch-loop-visual-node.is-current::after,
   .far-dispatch-branch-choice-summary-item.is-active-route
     .far-dispatch-branch-choice-summary-progress::after,
   .far-dispatch-branch-choice-summary-item.is-active-route
