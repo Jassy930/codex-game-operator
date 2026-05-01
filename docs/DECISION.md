@@ -1,5 +1,26 @@
 # Decision
 
+## 2026-05-01 Product decision：远航对照条当前阶段锚点
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-01 20:07 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；本轮继续处理 #6“后半段玩法无聊、只有不停目标”和 #4“界面文字密集、需要更好看”的交集。
+
+当前最大问题：远航路线对照条已经有当前路线边栏、推进脉冲、当前动作亮环、当前收益亮点、当前资源代价锚点和当前回航结果锚点，但当前阶段短标仍和普通路线同权重。玩家在 1/3 分支、2/3 回航或整备阶段扫当前路线时，需要先确认“这条当前路线处于哪一步”，否则仍可能先读动作、收益和结果，再回头确认阶段。
+
+本轮决策：
+
+- 新增“远航对照条当前阶段锚点”。
+- `src/styles.css` 仅对 `.far-dispatch-branch-choice-summary-item.is-active-route .far-dispatch-branch-choice-summary-phase` 增加胶囊边框、轻量背景和内描边。
+- `tests/game.test.js` 增加静态断言，覆盖当前路线阶段短标选择器。
+- 该改动只调整远航路线对照条展示层和测试，不新增收益、不新增存档字段，不改变升级价格、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、远航调度数值、冷却、连携窗口、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-05-01 20:07 CST 当前 5 个 open feedback issue、0 个 open bug issue。
+- `src/styles.css` 包含当前路线阶段短标选择器。
+- `tests/game.test.js` 覆盖远航路线对照条当前阶段锚点静态样式绑定。
+- 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含当前路线阶段短标选择器。
+
 ## 2026-05-01 Product decision：远航对照条当前资源代价锚点
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-01 19:55 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；本轮继续处理 #6“后半段玩法无聊、只有不停目标”和 #4“界面文字密集、需要更好看”的交集。
