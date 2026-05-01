@@ -1,5 +1,28 @@
 # Decision
 
+## 2026-05-01 Product decision：远航对照条当前路线推进脉冲
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-01 19:00 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；本轮继续处理 #6“后半段玩法无聊、只有不停目标”和 #4“界面文字密集、需要更好看”的交集。
+
+当前最大问题：远航路线对照条已经有下一步动作信标和当前路线边栏，但当前路线底部 1/2/3 进度轨仍是静态填充。玩家在 2/3 回航或整备阶段需要快速确认“这条路线正在推进、下一步节点在哪里”，继续追加文字会恶化 #4 的文字密度问题。
+
+本轮决策：
+
+- 新增“远航对照条当前路线推进脉冲”。
+- `src/styles.css` 仅对 `.far-dispatch-branch-choice-summary-item.is-active-route` 内的迷你进度轨启用推进扫光，并让当前路线的下一步节点轻量脉冲。
+- `src/styles.css` 增加 `farDispatchSummaryActiveRouteSweep`、`farDispatchSummaryNextNodePulse` 和 `prefers-reduced-motion: reduce` 兜底，减少动效敏感风险。
+- `tests/game.test.js` 增加静态断言，覆盖当前路线进度轨动效、下一步节点脉冲、关键帧和降动效兜底。
+- 该改动只调整远航路线对照条展示层和测试，不新增收益、不新增存档字段，不改变升级价格、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、远航调度数值、冷却、连携窗口、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-05-01 19:00 CST 当前 5 个 open feedback issue、0 个 open bug issue。
+- `src/styles.css` 包含 `farDispatchSummaryActiveRouteSweep`、`farDispatchSummaryNextNodePulse`、当前路线进度轨选择器和 `prefers-reduced-motion: reduce` 兜底。
+- `tests/game.test.js` 覆盖远航路线对照条当前路线推进脉冲静态样式绑定。
+- 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含 `farDispatchSummaryActiveRouteSweep`、`farDispatchSummaryNextNodePulse`、`prefers-reduced-motion` 和 `is-active-route` 进度轨样式。
+- 发布验证、GitHub Issue 回复和钉钉通知状态将在推送与 Pages workflow 完成后补记。
+
 ## 2026-05-01 Product decision：远航对照条当前路线边栏
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-01 18:48 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；本轮继续处理 #6“后半段玩法无聊、只有不停目标”和 #4“界面文字密集、需要更好看”的交集。

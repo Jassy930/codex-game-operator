@@ -2,6 +2,14 @@
 
 ## 2026-05-01
 
+- GitHub Issues：gh 可用且已认证；2026-05-01 19:00 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
+- 本轮 Product decision 继续处理 #6，并以 #4 作为视觉密度约束：远航路线对照条已有下一步动作信标和当前路线边栏，但当前路线底部 1/2/3 进度轨仍是静态填充，玩家在 2/3 回航或整备阶段还需要从短标里确认路线推进。
+- 本轮改动新增远航对照条当前路线推进脉冲：只在 `.far-dispatch-branch-choice-summary-item.is-active-route` 内让迷你进度轨填充段播放 `farDispatchSummaryActiveRouteSweep`，并让下一步节点播放 `farDispatchSummaryNextNodePulse`；系统降低动效偏好下关闭动画。
+- 本轮只调整远航路线对照条展示层和测试，不新增收益、不新增存档字段，不改变升级价格、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、远航调度数值、冷却、连携窗口、反馈入口或部署链路。
+- 本轮本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含 `farDispatchSummaryActiveRouteSweep`、`farDispatchSummaryNextNodePulse`、`prefers-reduced-motion` 和当前路线进度轨样式。
+- 发布、Issue 回复和钉钉通知状态待推送与 Pages workflow 完成后补记。
+
 - GitHub Issues：gh 可用且已认证；2026-05-01 18:48 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
 - 本轮 Product decision 继续处理 #6，并以 #4 作为视觉密度约束：路线对照条已经有下一步动作信标，但选定协同或绕行后，当前路线仍只是与其他短标同层展示，玩家需要继续从多项短标中确认本轮已选路线。
 - 本轮改动新增远航对照条当前路线边栏：`src/app.js` 根据 `choice.active` 给路线对照条 item 追加 `is-active-route`；`src/styles.css` 给当前路线加金色边框、轻量背景和左侧双色边栏，在不增加文字的情况下突出本轮已选协同/绕行路线。

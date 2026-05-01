@@ -2232,6 +2232,12 @@ h2 {
   background: linear-gradient(90deg, #ff7eb1, #ffd36a);
 }
 
+.far-dispatch-branch-choice-summary-item.is-active-route
+  .far-dispatch-branch-choice-summary-progress::after {
+  background-size: 180% 100%;
+  animation: farDispatchSummaryActiveRouteSweep 1450ms ease-in-out infinite;
+}
+
 .far-dispatch-branch-choice-summary-progress-node {
   z-index: 1;
   display: inline-grid;
@@ -2271,6 +2277,11 @@ h2 {
   background: #ff7eb1;
   color: #210512;
   box-shadow: 0 0 10px rgba(255, 126, 177, 0.32);
+}
+
+.far-dispatch-branch-choice-summary-item.is-active-route
+  .far-dispatch-branch-choice-summary-progress-node.is-next {
+  animation: farDispatchSummaryNextNodePulse 1200ms ease-in-out infinite;
 }
 
 .far-dispatch-branch-choice {
@@ -5765,6 +5776,39 @@ h2 {
   50% {
     opacity: 1;
     transform: translateY(-50%) scale(1.32);
+  }
+}
+
+@keyframes farDispatchSummaryActiveRouteSweep {
+  0%,
+  100% {
+    background-position: 0% 50%;
+    filter: saturate(1);
+  }
+
+  50% {
+    background-position: 100% 50%;
+    filter: saturate(1.22);
+  }
+}
+
+@keyframes farDispatchSummaryNextNodePulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.14);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .far-dispatch-branch-choice-summary-item.is-active-route
+    .far-dispatch-branch-choice-summary-progress::after,
+  .far-dispatch-branch-choice-summary-item.is-active-route
+    .far-dispatch-branch-choice-summary-progress-node.is-next {
+    animation: none;
   }
 }
 
