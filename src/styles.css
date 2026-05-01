@@ -517,6 +517,41 @@ h2 {
   animation-duration: 620ms;
 }
 
+.core-impact-ripple {
+  --core-impact-x: 50%;
+  --core-impact-y: 50%;
+  position: absolute;
+  top: var(--core-impact-y);
+  left: var(--core-impact-x);
+  z-index: 3;
+  width: 112px;
+  height: 112px;
+  border: 2px solid rgba(255, 247, 194, 0.72);
+  border-radius: 999px;
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-50%, -50%) scale(0.18);
+  box-shadow:
+    0 0 18px rgba(255, 247, 194, 0.24),
+    inset 0 0 16px rgba(244, 178, 60, 0.18);
+  mix-blend-mode: screen;
+}
+
+.core-impact-ripple.is-showing {
+  animation: coreImpactRipple 460ms ease-out;
+}
+
+.core-impact-ripple.is-overload-impact {
+  width: 146px;
+  height: 146px;
+  border-color: rgba(255, 247, 194, 0.92);
+  box-shadow:
+    0 0 22px rgba(255, 247, 194, 0.36),
+    0 0 34px rgba(232, 93, 117, 0.28),
+    inset 0 0 22px rgba(232, 93, 117, 0.26);
+  animation-duration: 640ms;
+}
+
 .core-charge-ring {
   --core-charge-angle: 0deg;
   position: absolute;
@@ -5136,6 +5171,23 @@ h2 {
   0% {
     opacity: 0.95;
     transform: translate(-50%, -50%) scale(0.34);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(1.26);
+  }
+}
+
+@keyframes coreImpactRipple {
+  0% {
+    opacity: 0.88;
+    transform: translate(-50%, -50%) scale(0.18);
+  }
+
+  54% {
+    opacity: 0.5;
+    transform: translate(-50%, -50%) scale(0.72);
   }
 
   100% {

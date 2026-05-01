@@ -2,6 +2,14 @@
 
 ## 2026-05-01
 
+- GitHub Issues：gh 可用且已认证；2026-05-01 15:25 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
+- 本轮 Product decision 继续处理 #5：点火按钮已经具备多层连击、过载和触觉/音效反馈，但实际点击落点只有亮点闪光，缺少一圈从落点扩散的局部能量反馈。
+- 本轮改动新增点火落点涟漪：`coreImpactRipple` / `core-impact-ripple` 复用现有点击坐标 `--core-impact-x` / `--core-impact-y`，普通点击播放局部能量环，过载点击播放更大、更亮的涟漪。
+- 本轮只调整点火按钮展示层和测试，不新增收益、不新增存档字段，不改变点击收益、连击窗口、过载奖励、升级价格、星图路线、项目奖励、航线策略、航线指令、远航调度、反馈入口或部署链路。
+- 本轮本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含 `core-impact-ripple`、`coreImpactRipple` 和 `--core-impact-x`。
+- 发布验证待推送后由 GitHub Pages workflow 执行。
+
 - GitHub Issues：gh 可用且已认证；2026-05-01 15:09 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
 - 本轮 Product decision 继续处理 #5：点火按钮已经补齐多层即时反馈、连击轨连续填充和星核蓄能裂纹，但按钮外层轮廓仍缺少随连击推进持续变化的旋转蓄能表现。
 - 本轮改动新增点火蓄能外弧：`core-surge-orbit` 会根据现有 `combo.progress` 写入的 `--core-surge-opacity`、`--core-surge-scale` 和 `--core-surge-speed` 逐步增强、放大并加快旋转，过载前一击和过载命中时切换更强外弧状态。
