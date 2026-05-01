@@ -12,6 +12,7 @@
 - #4 已回复：说明远航闭环当前节点脉冲、验证结果、Pages 部署和复测问题；issue 保持 open，评论地址：`https://github.com/Jassy930/codex-game-operator/issues/4#issuecomment-4360932501`。
 - #6 已回复：说明远航闭环当前节点脉冲、验证结果、Pages 部署和复测问题；issue 保持 open，评论地址：`https://github.com/Jassy930/codex-game-operator/issues/6#issuecomment-4360933763`。
 - 回复后同步 GitHub Issues：2026-05-02 02:29 CST 当前仍为 5 个 open feedback issue、0 个 open bug issue；#4 更新时间为 2026-05-01T18:28:39Z，#6 更新时间为 2026-05-01T18:28:56Z。
+- 钉钉通知未发送：2026-05-02 02:32 CST 运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` / `ROBOT` 相关变量名，当前目录和 `/home/jassy/glm` 两层内未发现 `.env*` 文件；未将 webhook 写入仓库。
 
 - GitHub Issues：gh 可用且已认证；2026-05-02 02:03 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。#4/#6 仍是最近更新的组合反馈：远航调度需要更多图形化表达，减少后半段主操作区的文字反推。
 - 本轮 Product decision 继续处理 #4/#6：远航闭环路线微图已有 1/2/3 节点、推进填充和方向箭头，但每步回报仍主要藏在步骤卡的长收益文本里，微图层还不能直接扫到“校准 / 分支或续航 / 闭环”的回报落点。
