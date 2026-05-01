@@ -13,6 +13,7 @@
 - #6 已回复：说明路线微图图例、验证结果、Pages 部署和复测问题；issue 保持 open，更新时间为 2026-05-01T00:28:12Z。
 - #4 已回复：说明本轮用一行图例降低 20M 后分支卡片对路线步骤和展开明细的依赖；issue 保持 open，更新时间为 2026-05-01T00:28:28Z。
 - 回复后同步 GitHub Issues：2026-05-01 08:28 CST 当前仍为 5 个 open feedback issue、0 个 open bug issue。
+- 钉钉通知未发送：运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` 相关变量名，父目录两层内也未发现 `.env*` 文件；未将 webhook 写入仓库。
 
 - GitHub Issues：gh 可用且已认证；2026-05-01 07:59 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
 - #6 继续作为本轮 Product decision 依据：该反馈指出后半段“只有不停的目标、玩法没有真正变化”；#4 继续作为视觉密度依据。前序路线微图已经补齐方向箭头，但协同/绕行分支卡片仍默认展开路线目标、下一步、后续回航和收益对照，多行说明继续挤在卡片首屏。

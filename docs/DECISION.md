@@ -26,6 +26,7 @@
 - 已回复 GitHub Issue #6，说明本轮路线微图图例、验证结果、Pages 部署和复测问题，issue 保持 open，更新时间为 2026-05-01T00:28:12Z。
 - 已回复 GitHub Issue #4，说明本轮用一行图例继续降低 20M 后分支卡片对路线步骤和展开明细的依赖，issue 保持 open，更新时间为 2026-05-01T00:28:28Z。
 - 回复后同步 GitHub Issues：2026-05-01 08:28 CST 当前仍为 5 个 open feedback issue、0 个 open bug issue。
+- 钉钉通知未发送：运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` 相关变量名，父目录两层内也未发现 `.env*` 文件；未将 webhook 写入仓库。
 
 ## 2026-05-01 Product decision：远航路线明细折叠
 
