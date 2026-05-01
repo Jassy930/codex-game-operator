@@ -8,7 +8,9 @@
 - 同步 GitHub Issues 反馈状态：2026-05-01 19:42 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 作为主处理对象，#4 作为视觉密度依据。
 - 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
 - 构建产物已确认包含当前路线回航结果短标选择器。
-- 本轮发布和反馈回复状态待补充。
+- 发布：提交 `898e682` 已推送到 `origin/main`；GitHub Pages workflow `25213180367` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页返回 HTTP 200，线上 `src/styles.css` 已确认包含远航对照条当前回航结果锚点样式。workflow 继续给出 Node.js 20 actions 弃用提醒，未影响本次部署。
+- 反馈处理：已回复 #6，说明远航对照条当前回航结果锚点、验证结果、Pages 部署和复测问题；已回复 #4，说明本轮用当前回航结果锚点降低文字反推压力；两个 issue 均保持 open。回复后于 2026-05-01 19:48 CST 再次同步 GitHub Issues，当前仍为 5 个 open feedback issue、0 个 open bug issue；#6 更新时间为 2026-05-01T11:48:06Z，#4 更新时间为 2026-05-01T11:48:07Z。
+- 钉钉通知未发送：2026-05-01 19:48 CST 运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` 相关变量名，当前目录、上级目录和用户目录未发现 `.env*` 文件；未将 webhook 写入仓库。
 
 - 远航调度新增“路线对照条当前收益亮点”：协同/绕行对照槽成为本轮已选路线时，本步收益短标会获得胶囊边框、轻量背景和饱和度呼吸，让玩家在看到当前动作的同时扫到这一步的即时收益，继续回应 #6 的后半段路线执行理解和 #4 的文字密度反馈。
 - `src/styles.css` 增加当前路线本步收益短标选择器、`farDispatchSummaryActivePayoffGlow` 和 `prefers-reduced-motion: reduce` 兜底；`tests/game.test.js` 覆盖静态绑定。
