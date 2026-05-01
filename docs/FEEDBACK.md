@@ -8,6 +8,10 @@
 - 本轮只调整展示派生和测试，不新增收益、不新增存档字段，不改变星图路线、远航调度数值、冷却、连携窗口、反馈入口或部署链路。
 - 本轮本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
 - 构建产物已确认包含 `下一步 1 `、`下一步 2 `、`下一步 3 ` 和 `下一步 绕行整备` 派生逻辑。
+- 发布：提交 `228d4ba` 已推送到 `origin/main`；GitHub Pages workflow `25205067424` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页返回 HTTP 200，线上 `src/game.js` 已确认包含本轮下一步按钮短标派生逻辑。
+- #6 已回复：说明路线对照条下一步按钮短标、验证结果、Pages 部署和复测问题；issue 保持 open，更新时间为 2026-05-01T06:29:01Z，评论地址：`https://github.com/Jassy930/codex-game-operator/issues/6#issuecomment-4358153873`。
+- #4 已回复：说明本轮把下一步按钮名压到路线对照条，降低路线微图、指令串和展开明细之间的对照成本；issue 保持 open，更新时间为 2026-05-01T06:29:21Z，评论地址：`https://github.com/Jassy930/codex-game-operator/issues/4#issuecomment-4358154779`。
+- 回复后同步 GitHub Issues：2026-05-01 14:29 CST 当前仍为 5 个 open feedback issue、0 个 open bug issue。
 
 - GitHub Issues：gh 可用且已认证；2026-05-01 14:06 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
 - #6 继续作为本轮 Product decision 依据：路线指令串已经补上 1/2/3 步号与状态语义，但路线对照条底部迷你进度轨仍是无编号小圆点；#4 继续作为图形化和降文字密度依据。
