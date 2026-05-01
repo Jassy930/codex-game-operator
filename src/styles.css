@@ -1156,6 +1156,14 @@ h2 {
     0 0 22px rgba(232, 93, 117, 0.18);
 }
 
+.core-button.is-pulsing:not(.is-overload-impact) + .core-reward-hint {
+  animation: coreRewardHintHit 360ms ease-out;
+}
+
+.core-button.is-overload-impact + .core-reward-hint {
+  animation: coreRewardHintOverloadHit 520ms ease-out;
+}
+
 .combo-line {
   display: flex;
   flex-wrap: wrap;
@@ -5608,6 +5616,55 @@ h2 {
   100% {
     opacity: 0;
     transform: scale(1.24);
+  }
+}
+
+@keyframes coreRewardHintHit {
+  0% {
+    background: rgba(244, 178, 60, 0.24);
+    color: #fff7c2;
+    box-shadow:
+      inset 0 0 0 1px rgba(244, 178, 60, 0.4),
+      0 0 18px rgba(244, 178, 60, 0.18);
+    transform: translateY(1px) scale(0.98);
+  }
+
+  44% {
+    background: rgba(255, 247, 194, 0.18);
+    color: #fff7c2;
+    box-shadow:
+      inset 0 0 0 1px rgba(255, 247, 194, 0.42),
+      0 0 24px rgba(244, 178, 60, 0.24);
+    transform: translateY(-2px) scale(1.04);
+  }
+
+  100% {
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes coreRewardHintOverloadHit {
+  0% {
+    background: rgba(232, 93, 117, 0.3);
+    color: #fff7c2;
+    box-shadow:
+      inset 0 0 0 1px rgba(255, 247, 194, 0.42),
+      0 0 22px rgba(232, 93, 117, 0.24);
+    transform: translateY(1px) scale(0.98);
+  }
+
+  42% {
+    background: rgba(255, 247, 194, 0.2);
+    color: #14110f;
+    box-shadow:
+      inset 0 0 0 1px rgba(255, 247, 194, 0.56),
+      0 0 28px rgba(255, 247, 194, 0.28),
+      0 0 42px rgba(232, 93, 117, 0.26);
+    transform: translateY(-3px) scale(1.07);
+  }
+
+  100% {
+    transform: translateY(0) scale(1);
   }
 }
 

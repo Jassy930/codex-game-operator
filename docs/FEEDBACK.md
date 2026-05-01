@@ -2,6 +2,13 @@
 
 ## 2026-05-01
 
+- GitHub Issues：gh 可用且已认证；2026-05-01 18:19 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
+- 本轮 Product decision 继续处理 #5：点火按钮已有按住反冲、按住压光、落点反馈、收益浮层跟随落点、蓄能轨、连击点、中心标签和外层轮廓命中反馈，但按钮下方“下一击 +X / 触发过载”的预告在点击后只更新文字，缺少和按钮命中同节奏的短促确认。
+- 本轮改动新增点火下一击预告命中跳闪：普通命中时 `.core-button.is-pulsing:not(.is-overload-impact) + .core-reward-hint` 播放 `coreRewardHintHit`；过载命中时 `.core-button.is-overload-impact + .core-reward-hint` 播放更强的 `coreRewardHintOverloadHit`。
+- 本轮只调整点火按钮相邻展示层和测试，不新增收益、不新增存档字段，不改变点击收益、连击窗口、过载奖励、升级价格、星图路线、项目奖励、航线策略、航线指令、远航调度、反馈入口或部署链路。
+- 本轮本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含 `coreRewardHintHit`、`coreRewardHintOverloadHit`、`.core-button.is-pulsing:not(.is-overload-impact) + .core-reward-hint` 和 `.core-button.is-overload-impact + .core-reward-hint`。
+
 - GitHub Issues：gh 可用且已认证；2026-05-01 18:05 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
 - 本轮 Product decision 继续处理 #5：点火按钮已有按住反冲、按住压光、落点热区、落点闪光/涟漪/火花、收益浮层、蓄能轨、连击轨和中心标签普通/过载命中反馈，但按钮外层蓄能轮廓在松手命中瞬间仍缺少一次短促整体亮闪。
 - 本轮改动新增点火外层轮廓命中亮闪：普通命中时 `.core-button.is-pulsing:not(.is-overload-impact)::before` 叠加 `coreShellHitFlash`；过载命中时 `.core-button.is-overload-impact::before` 叠加更强的 `coreShellOverloadFlash`。
