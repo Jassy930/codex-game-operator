@@ -8,6 +8,9 @@
 - 同步 GitHub Issues 反馈状态：2026-05-01 17:52 CST 当前 5 个 open feedback issue、0 个 open bug issue；#5 作为主处理对象。
 - 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
 - 构建产物已确认包含 `.core-button.is-pulsing:not(.is-overload-impact) .core-label`、`coreLabelHitFlash 360ms ease-out` 和 `@keyframes coreLabelHitFlash`。
+- 发布：提交 `1e4b896` 已推送到 `origin/main`；GitHub Pages workflow `25210404767` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页返回 HTTP 200，线上 `src/styles.css` 已确认包含点火中心标签命中亮脉冲样式。workflow 继续给出 Node.js 20 actions 弃用提醒，未影响本次部署。
+- 反馈处理：已回复 #5，说明点火中心标签命中亮脉冲、验证结果、Pages 部署和复测问题；issue 保持 open。回复后于 2026-05-01 17:59 CST 再次同步 GitHub Issues，当前仍为 5 个 open feedback issue、0 个 open bug issue；#5 更新时间为 2026-05-01T09:59:44Z。
+- 钉钉通知未发送：2026-05-01 17:59 CST 运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` 相关变量名，当前目录、父级和用户目录未发现 `.env*` 文件；未将 webhook 写入仓库。
 
 - 点火按钮新增“过载中心标签闪爆”：第 8 次过载命中时，中心标签会短暂覆盖显示“过载”并闪爆，继续回应 #5 的点击反馈、特效和点击欲望反馈。
 - `src/styles.css` 复用 `.core-button.is-overload-impact`，为 `.core-label` 和 `.core-label::after` 增加过载命中覆盖文案与 `coreLabelOverloadFlash`；`tests/game.test.js` 覆盖静态绑定。
