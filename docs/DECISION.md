@@ -1,5 +1,29 @@
 # Decision
 
+## 2026-05-01 Product decision：远航路线当前步短标
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-01 08:54 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#6 仍是后半段玩法变化主反馈，#4 仍是界面文字密度和图片化依据，因此本轮继续进入 Product decision。
+
+当前最大问题：协同/绕行路线微图已经有路线形态、资源取向、状态标记、步骤高亮、1/2/3 序号、方向箭头、图例、默认折叠明细和轨道推进填充；但玩家仍需要把节点状态、0/50/100 填充和路线步骤合起来判断“当前是起手、分支、回航、完成还是未选”。
+
+本轮决策：
+
+- 新增“远航路线当前步短标”。
+- `branchChoices` 从现有 `routeNodeStates` 派生 `routePhaseKind` / `routePhaseText`，覆盖 `0/3 起手`、`1/3 分支`、`2/3 回航`、`3/3 完成` 和 `未选`。
+- `src/app.js` 在路线微图内渲染 `far-dispatch-branch-choice-route-phase`，并将阶段 class 写入路线容器。
+- `src/styles.css` 用小型文本短标显示当前步，避免再新增长说明；完整语义同步纳入 `branchChoiceText` 和卡片标题。
+- 本轮只调整派生展示、DOM、CSS 和测试；不新增收益、不新增存档字段，不改变升级价格、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、远航调度数值、冷却、连携窗口、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-05-01 08:54 CST 当前 5 个 open feedback issue、0 个 open bug issue。
+- `src/game.js` 派生 `routePhaseKind` / `routePhaseText`，覆盖 0/3、1/3、2/3、3/3 和未选路线。
+- `src/app.js` 渲染 `far-dispatch-branch-choice-route-phase` 与 `is-route-phase-*`。
+- `src/styles.css` 包含当前步短标和 start/branch/return/complete 状态样式。
+- `tests/game.test.js` 覆盖阶段派生、静态 DOM 绑定和样式绑定。
+- 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含 `routePhaseKind`、`routePhaseText`、`far-dispatch-branch-choice-route-phase` 和 `is-route-phase-*`。
+
 ## 2026-05-01 Product decision：远航路线微图推进填充
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-01 08:41 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#6 仍是后半段玩法变化主反馈，#4 仍是界面文字密度和图片化主反馈，因此本轮继续进入 Product decision。

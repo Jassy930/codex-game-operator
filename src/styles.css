@@ -1639,7 +1639,7 @@ h2 {
 
   position: relative;
   display: block;
-  height: 22px;
+  height: 30px;
   border: 1px solid rgba(248, 243, 231, 0.12);
   border-radius: 6px;
   background:
@@ -1802,6 +1802,43 @@ h2 {
   color: #ffd1df;
   border-color: rgba(255, 126, 177, 0.52);
   background: rgba(96, 42, 68, 0.74);
+}
+
+.far-dispatch-branch-choice-route-phase {
+  position: absolute;
+  z-index: 2;
+  top: 2px;
+  left: 4px;
+  max-width: 56px;
+  color: rgba(248, 243, 231, 0.66);
+  font-size: 0.46rem;
+  font-weight: 950;
+  line-height: 1.2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-shadow: 0 1px 4px rgba(5, 12, 20, 0.7);
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.far-dispatch-branch-choice-route-phase[hidden] {
+  display: none;
+}
+
+.far-dispatch-branch-choice-route-phase.is-start {
+  color: #ffd36a;
+}
+
+.far-dispatch-branch-choice-route-phase.is-branch {
+  color: #d8ffe2;
+}
+
+.far-dispatch-branch-choice-route-phase.is-return {
+  color: #cfe8ff;
+}
+
+.far-dispatch-branch-choice-route-phase.is-complete {
+  color: #96e7a8;
 }
 
 .far-dispatch-branch-choice-route.is-sync {

@@ -5166,6 +5166,7 @@ function buildFarRouteDispatchBranchChoices(
     );
     const routeProgressPercent =
       buildFarRouteDispatchBranchRouteProgressPercent(routeNodeStates);
+    const routePhase = buildFarRouteDispatchBranchRoutePhase(routeNodeStates);
     const routeStepLabels = {
       ...FAR_ROUTE_DISPATCH_BRANCH_ROUTE_STEP_LABELS
     };
@@ -5219,6 +5220,8 @@ function buildFarRouteDispatchBranchChoices(
       routeMarkerText,
       routeNodeStates,
       routeProgressPercent,
+      routePhaseKind: routePhase.kind,
+      routePhaseText: routePhase.text,
       routeStepLabels,
       nextText: choice.nextText,
       reasonText,
@@ -5246,6 +5249,8 @@ function buildFarRouteDispatchBranchChoices(
         statusText +
         " · " +
         decisionBadgeText +
+        " · " +
+        routePhase.text +
         " · " +
         choice.caption +
         (reasonText ? " · " + reasonText : "") +
@@ -5415,6 +5420,41 @@ function buildFarRouteDispatchBranchRouteProgressPercent(routeNodeStates) {
   }
 
   return 0;
+}
+
+function buildFarRouteDispatchBranchRoutePhase(routeNodeStates) {
+  if (routeNodeStates?.return === "done") {
+    return {
+      kind: "complete",
+      text: "3/3 完成"
+    };
+  }
+
+  if (routeNodeStates?.return === "next" || routeNodeStates?.branch === "done") {
+    return {
+      kind: "return",
+      text: "2/3 回航"
+    };
+  }
+
+  if (routeNodeStates?.branch === "next") {
+    return {
+      kind: "branch",
+      text: "1/3 分支"
+    };
+  }
+
+  if (routeNodeStates?.start === "next") {
+    return {
+      kind: "start",
+      text: "0/3 起手"
+    };
+  }
+
+  return {
+    kind: "inactive",
+    text: "未选"
+  };
 }
 
 function buildFarRouteDispatchBranchDecisionKind(
@@ -5656,6 +5696,8 @@ function buildFarRouteDispatchBranchChoiceText(choices) {
           choice.statusText +
           " · " +
           choice.decisionBadgeText +
+          " · " +
+          choice.routePhaseText +
           " · " +
           choice.caption +
           (choice.reasonText ? " · " + choice.reasonText : "") +

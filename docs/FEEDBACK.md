@@ -2,6 +2,14 @@
 
 ## 2026-05-01
 
+- GitHub Issues：gh 可用且已认证；2026-05-01 08:54 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
+- #6 继续作为本轮 Product decision 依据：该反馈指出后半段“只有不停的目标、玩法没有真正变化”；#4 继续作为视觉密度和图片化依据。前序已经给协同/绕行路线微图补齐推进填充，但 0/50/100 的轨道进度仍需要结合节点状态和文字步骤理解。
+- 本轮改动新增远航路线当前步短标：协同/绕行路线微图直接显示 `0/3 起手`、`1/3 分支`、`2/3 回航`、`3/3 完成` 或 `未选`，让当前路线阶段先落在微图上。
+- 当前步短标只从现有 `routeNodeStates` 派生；完整语义同步纳入 `branchChoiceText` 和卡片标题，仍由路线步骤、按钮路线标记、路线反馈和展开明细承载。
+- 本轮只调整派生展示、DOM、CSS 和测试，不新增收益、不新增存档字段，不改变升级价格、星图路线、项目奖励、远航调度既有数值、冷却、连携窗口、反馈入口或部署链路。
+- 本轮本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含 `routePhaseKind`、`routePhaseText`、`far-dispatch-branch-choice-route-phase` 和 `is-route-phase-*`。
+
 - GitHub Issues：gh 可用且已认证；2026-05-01 08:41 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
 - #6 继续作为本轮 Product decision 依据：该反馈指出后半段“只有不停的目标、玩法没有真正变化”；#4 继续作为视觉密度和图片化依据。前序已经给协同/绕行路线微图补齐步骤高亮、1/2/3 序号、方向箭头、图例和默认折叠明细，但路线轨道本身仍不能表达当前推进到第几段。
 - 本轮改动新增远航路线微图推进填充：协同/绕行分支卡片的路线轨道按 `routeProgressPercent` 显示 0%、50% 或 100% 的填充，让 0/3 起手、1/3 分支选择和 2/3 回目标阶段可以从轨道进度直接扫到。

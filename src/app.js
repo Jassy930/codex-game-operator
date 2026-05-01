@@ -838,6 +838,8 @@ function renderFarDispatchBranchChoiceRoute(choice) {
     getFarDispatchBranchChoiceRouteResourceKind(choice) +
     " is-route-marker-" +
     getFarDispatchBranchChoiceRouteMarkerKind(choice) +
+    " is-route-phase-" +
+    getFarDispatchBranchChoiceRoutePhaseKind(choice) +
     (choice.focused ? " is-focused" : "");
   route.style.setProperty(
     "--branch-route-progress",
@@ -878,7 +880,22 @@ function renderFarDispatchBranchChoiceRoute(choice) {
   routeMarker.textContent = choice.routeMarkerText ?? "";
   routeMarker.hidden = !choice.routeMarkerText;
 
-  route.append(line, start, branch, returnNode, routeResource, routeMarker);
+  const routePhase = document.createElement("span");
+  routePhase.className =
+    "far-dispatch-branch-choice-route-phase is-" +
+    getFarDispatchBranchChoiceRoutePhaseKind(choice);
+  routePhase.textContent = choice.routePhaseText ?? "";
+  routePhase.hidden = !choice.routePhaseText;
+
+  route.append(
+    line,
+    start,
+    branch,
+    returnNode,
+    routeResource,
+    routeMarker,
+    routePhase
+  );
   return route;
 }
 
@@ -993,6 +1010,11 @@ function getFarDispatchBranchChoiceRouteResourceKind(choice) {
 function getFarDispatchBranchChoiceRouteMarkerKind(choice) {
   const markerKind = String(choice.routeMarkerKind ?? "available");
   return markerKind.replace(/[^a-z-]/g, "") || "available";
+}
+
+function getFarDispatchBranchChoiceRoutePhaseKind(choice) {
+  const phaseKind = String(choice.routePhaseKind ?? "inactive");
+  return phaseKind.replace(/[^a-z-]/g, "") || "inactive";
 }
 
 function getFarDispatchBranchChoiceRouteNodeState(choice, nodeId) {
