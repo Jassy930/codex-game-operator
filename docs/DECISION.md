@@ -1,5 +1,30 @@
 # Decision
 
+## 2026-05-02 Product decision：远航闭环步骤卡收益色带
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-02 03:11 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有 open bug；#4/#6 仍是主线反馈，继续指向后半段远航调度需要更多图形化表达并减少主操作区文字反推。
+
+当前最大问题：远航闭环路线微图和步骤卡已经用 1/2/3、方向箭头、当前信标和步骤卡步号锚点建立了路线对应；但每张步骤卡底部的收益行仍是同一种绿色文本。玩家确认当前步骤奖励时，还需要从较长收益句里读出它属于校准、分支/续航还是闭环。
+
+本轮决策：
+
+- 新增“远航闭环步骤卡收益色带”。
+- `src/app.js` 给 `.far-dispatch-step-reward` 追加与微图一致的收益类型 class、步骤状态 class 和 `data-reward-label`，并用 `title` 保留完整收益语义。
+- `src/styles.css` 把步骤卡收益行改成紧凑胶囊，并按目标、分支/续航、回目标以及当前/完成状态着色。
+- `tests/game.test.js` 增加静态断言，覆盖收益行 class、`data-reward-label`、悬停标题和样式选择器。
+- 该改动只调整远航闭环步骤卡展示层和测试，不新增可见说明文字、不新增收益、不新增存档字段，不改变点击收益、升级价格、星图路线、项目奖励、航线策略、航线指令、远航调度数值、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-05-02 03:11 CST 当前 5 个 open feedback issue、0 个 open bug issue；#4/#6 作为本轮主处理对象。
+- `src/app.js` 包含 `far-dispatch-step-reward is-`、`reward.dataset.rewardLabel = rewardLabel` 和收益标题绑定。
+- `src/styles.css` 包含 `.far-dispatch-step-reward`、目标/分支/续航/回目标收益色带和当前/完成状态样式。
+- `tests/game.test.js` 覆盖远航闭环步骤卡收益色带静态绑定。
+- 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含 `far-dispatch-step-reward is-`、`data-reward-label` 和收益色带样式。
+- 发布验证待 push 后由 GitHub Pages workflow 确认。
+- 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #4/#6，以及当前远航闭环步骤卡收益行仍需文字阅读的复盘。
+
 ## 2026-05-02 Product decision：远航闭环步骤卡步号锚点
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-02 02:55 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有 open bug；#4/#6 仍是主线反馈，继续指向后半段远航调度需要更多图形化表达并减少主操作区文字反推。

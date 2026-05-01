@@ -2,6 +2,14 @@
 
 ## Unreleased
 
+- 远航调度新增“远航闭环步骤卡收益色带”：20M 后主操作区远航闭环下方三张步骤卡的收益行会按目标、分支/续航、回目标以及当前/完成状态显示紧凑色带，继续回应 #4 的图形化/文字密度反馈，并辅助 #6 的后半段短循环收益理解。
+- `src/app.js` 给 `.far-dispatch-step-reward` 追加收益类型 class、步骤状态 class、`data-reward-label` 和悬停标题；`src/styles.css` 增加收益色带、目标/分支/续航/回目标状态样式；`tests/game.test.js` 覆盖静态绑定。
+- 本轮只调整远航闭环步骤卡展示层和测试，不新增可见说明文字、不新增收益、不新增存档字段，不改变点击收益、升级价格、星图路线、项目奖励、航线策略、航线指令、远航调度数值、反馈入口或部署链路。
+- 同步 GitHub Issues 反馈状态：2026-05-02 03:11 CST 当前 5 个 open feedback issue、0 个 open bug issue；#4/#6 作为主处理对象。
+- 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含 `far-dispatch-step-reward is-`、`data-reward-label` 和远航闭环步骤卡收益色带样式。
+- 发布验证待 push 后由 GitHub Pages workflow 确认。
+
 - 远航调度新增“远航闭环步骤卡步号锚点”：20M 后主操作区远航闭环下方三张步骤卡会显示与上方路线微图一致的 1/2/3 步号，并按目标、分支/续航、回目标以及当前/完成状态着色，继续回应 #4 的图形化/文字密度反馈，并辅助 #6 的后半段短循环理解。
 - `src/app.js` 在 `renderFarDispatchLoopTrack` 中给 `.far-dispatch-loop-step` 追加 `data-step-label` 与目标/分支/续航/回目标类型 class；`src/styles.css` 增加步骤卡步号锚点、竖向状态线和当前/完成状态样式；`tests/game.test.js` 覆盖静态绑定。
 - 本轮只调整远航闭环步骤卡展示层和测试，不新增可见说明文字、不新增收益、不新增存档字段，不改变点击收益、升级价格、星图路线、项目奖励、航线策略、航线指令、远航调度数值、反馈入口或部署链路。

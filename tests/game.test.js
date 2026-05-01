@@ -2038,8 +2038,11 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(appJs, /node\.dataset\.stepLabel = String\(index \+ 1\)/);
   assert.match(appJs, /stepItem\.className =[\s\S]*"far-dispatch-loop-step is-" \+ step\.state \+ " is-" \+ rewardKind/);
   assert.match(appJs, /stepItem\.dataset\.stepLabel = String\(index \+ 1\)/);
-  assert.match(appJs, /reward\.className = "far-dispatch-step-reward"/);
+  assert.match(appJs, /const rewardLabel = getFarDispatchLoopVisualRewardLabel\(step, index\)/);
+  assert.match(appJs, /reward\.className =[\s\S]*"far-dispatch-step-reward is-" \+ rewardKind \+ " is-" \+ step\.state/);
+  assert.match(appJs, /reward\.dataset\.rewardLabel = rewardLabel/);
   assert.match(appJs, /reward\.textContent = step\.rewardText \?\? ""/);
+  assert.match(appJs, /reward\.title = rewardLabel \+ " · " \+ reward\.textContent/);
   assert.match(appJs, /meter\.setAttribute\("role", "meter"\)/);
   assert.match(appJs, /loopMeter\.setAttribute\("role", "meter"\)/);
   assert.match(appJs, /branchChoices,/);
@@ -2385,6 +2388,12 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(styles, /\.far-dispatch-loop-step\.is-current::before/);
   assert.match(styles, /\.far-dispatch-loop-step\.is-completed::before/);
   assert.match(styles, /\.far-dispatch-loop-step em/);
+  assert.match(styles, /\.far-dispatch-step-reward/);
+  assert.match(styles, /\.far-dispatch-step-reward\.is-target/);
+  assert.match(styles, /\.far-dispatch-step-reward\.is-branch,\n\.far-dispatch-step-reward\.is-relay/);
+  assert.match(styles, /\.far-dispatch-step-reward\.is-return/);
+  assert.match(styles, /\.far-dispatch-step-reward\.is-current/);
+  assert.match(styles, /\.far-dispatch-step-reward\.is-completed/);
   assert.match(styles, /\.far-dispatch\.is-active/);
   assert.match(styles, /\.directive-button \.directive-badges/);
   assert.match(styles, /\.directive-button \.directive-badges \.is-collapsed-badge/);

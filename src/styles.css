@@ -3640,6 +3640,50 @@ h2 {
   font-weight: 900;
 }
 
+.far-dispatch-step-reward {
+  display: inline-flex;
+  align-items: center;
+  justify-self: start;
+  max-width: 100%;
+  min-height: 18px;
+  padding: 2px 7px;
+  border: 1px solid rgba(248, 243, 231, 0.18);
+  border-radius: 999px;
+  background: rgba(248, 243, 231, 0.08);
+  box-shadow: inset 0 0 0 1px rgba(5, 12, 20, 0.22);
+  line-height: 1.1;
+}
+
+.far-dispatch-step-reward.is-target {
+  border-color: rgba(255, 126, 177, 0.32);
+  background: rgba(255, 126, 177, 0.1);
+  color: #ffd2e5;
+}
+
+.far-dispatch-step-reward.is-branch,
+.far-dispatch-step-reward.is-relay {
+  border-color: rgba(255, 211, 106, 0.34);
+  background: rgba(255, 211, 106, 0.1);
+  color: #ffd36a;
+}
+
+.far-dispatch-step-reward.is-return {
+  border-color: rgba(150, 231, 168, 0.34);
+  background: rgba(150, 231, 168, 0.1);
+  color: #96e7a8;
+}
+
+.far-dispatch-step-reward.is-current {
+  background: rgba(255, 211, 106, 0.14);
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 211, 106, 0.12),
+    0 0 12px rgba(255, 211, 106, 0.14);
+}
+
+.far-dispatch-step-reward.is-completed {
+  background: rgba(150, 231, 168, 0.14);
+}
+
 .far-dispatch-loop-step.is-current {
   border-color: rgba(244, 178, 60, 0.5);
   background: rgba(244, 178, 60, 0.12);

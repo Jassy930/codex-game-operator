@@ -1282,9 +1282,15 @@ function renderFarDispatchLoopTrack(dispatch) {
       text.textContent = step.stateText + " · " + step.text;
 
       const reward = document.createElement("em");
-      reward.className = "far-dispatch-step-reward";
+      const rewardLabel = getFarDispatchLoopVisualRewardLabel(step, index);
+      reward.className =
+        "far-dispatch-step-reward is-" + rewardKind + " is-" + step.state;
+      reward.dataset.rewardLabel = rewardLabel;
       reward.textContent = step.rewardText ?? "";
       reward.hidden = !step.rewardText;
+      if (reward.textContent) {
+        reward.title = rewardLabel + " · " + reward.textContent;
+      }
 
       stepItem.append(label, text, reward);
       return stepItem;
