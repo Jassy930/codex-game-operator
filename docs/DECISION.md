@@ -21,6 +21,10 @@
 - `tests/game.test.js` 覆盖远航闭环当前节点脉冲静态绑定。
 - 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
 - 构建产物已确认包含 `farDispatchLoopCurrentPulse` 和当前节点脉冲样式。
+- 发布验证已通过：提交 `53c541e` 已推送到 `origin/main`；GitHub Pages workflow `25227150697` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页返回 HTTP 200，线上 `src/styles.css` 已确认包含 `farDispatchLoopCurrentPulse` 和 `.far-dispatch-loop-visual-node.is-current::after`。workflow 继续出现 Node.js 20 actions 弃用提醒，未影响本次部署。
+- 已回复 GitHub Issue #4，说明远航闭环当前节点脉冲、验证结果、Pages 部署和复测问题；issue 保持 open，评论地址：`https://github.com/Jassy930/codex-game-operator/issues/4#issuecomment-4360932501`。
+- 已回复 GitHub Issue #6，说明远航闭环当前节点脉冲、验证结果、Pages 部署和复测问题；issue 保持 open，评论地址：`https://github.com/Jassy930/codex-game-operator/issues/6#issuecomment-4360933763`。
+- 回复后同步 GitHub Issues：2026-05-02 02:29 CST 当前仍为 5 个 open feedback issue、0 个 open bug issue；#4 更新时间为 2026-05-01T18:28:39Z，#6 更新时间为 2026-05-01T18:28:56Z。
 - 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #4/#6，以及当前远航闭环微图仍需强化当前执行节点的复盘。
 
 ## 2026-05-02 Product decision：远航闭环收益短标

@@ -8,6 +8,8 @@
 - 同步 GitHub Issues 反馈状态：2026-05-02 02:20 CST 当前 5 个 open feedback issue、0 个 open bug issue；#4/#6 作为主处理对象。
 - 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
 - 构建产物已确认包含 `farDispatchLoopCurrentPulse` 和当前节点脉冲样式。
+- 发布：提交 `53c541e` 已推送到 `origin/main`；GitHub Pages workflow `25227150697` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页返回 HTTP 200，线上 `src/styles.css` 已确认包含远航闭环当前节点脉冲样式。workflow 继续给出 Node.js 20 actions 弃用提醒，未影响本次部署。
+- 反馈处理：已回复 #4 和 #6，说明远航闭环当前节点脉冲、验证结果、Pages 部署和复测问题；两个 issue 均保持 open。回复后于 2026-05-02 02:29 CST 再次同步 GitHub Issues，当前仍为 5 个 open feedback issue、0 个 open bug issue。
 
 - 远航调度新增“远航闭环收益短标”：20M 后主操作区远航闭环路线微图会在 1/2/3 节点下方显示 `校准`、`分支` / `续航`、`闭环` 短标，让每步回报落点先进入图形层，继续回应 #4 的图形化/文字密度反馈，并辅助 #6 的后半段短循环理解。
 - `src/app.js` 在 `renderFarDispatchLoopTrack` 中渲染 `far-dispatch-loop-visual-reward`，并新增 `getFarDispatchLoopVisualRewardKind` / `getFarDispatchLoopVisualRewardLabel`；`src/styles.css` 增加收益短标布局、目标/分支/续航/回目标状态样式和溢出约束；`tests/game.test.js` 覆盖静态绑定。
