@@ -9,6 +9,9 @@
 - 同步 GitHub Issues 反馈状态：2026-05-01 09:32 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 作为主处理对象，#4 作为视觉密度依据。
 - 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
 - 构建产物已确认包含 `routeFlowKind`、`routeFlowText`、`far-dispatch-branch-choice-route-flow` 和 `当前->累计`。
+- 发布：提交 `20f6a4e` 已推送到 `origin/main`；GitHub Pages workflow `25198229407` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页返回 HTTP 200，线上 `src/game.js`、`src/app.js` 和 `src/styles.css` 已确认包含 `routeFlowText`、`far-dispatch-branch-choice-route-flow` 与 `当前->累计`。
+- 反馈处理：已回复 #6，说明路线资源流向短标、验证结果和复测问题；已回复 #4，说明本轮把协同/绕行的资源方向压到路线微图上以降低文字依赖；两个 issue 均保持 open。回复后于 2026-05-01 09:43 CST 再次同步 GitHub Issues，当前仍为 5 个 open feedback issue、0 个 open bug issue；#6 更新时间为 2026-05-01T01:43:01Z，#4 更新时间为 2026-05-01T01:43:21Z。
+- 钉钉通知未发送：运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` 相关变量名，当前目录和父级两层内也未发现 `.env*` 文件；未将 webhook 写入仓库。
 
 - 远航调度新增“路线收益短标”：协同路线微图显示 `校准 -> 补给 -> 闭环`，绕行路线微图显示 `校准 -> 投送 -> 闭环`，继续回应 #6 的后半段路线回报理解和 #4 的图形化/降文字密度反馈。
 - `src/game.js` 为 `branchChoices` 派生 `routeRewardLabels` / `routeRewardText` 并纳入 `branchChoiceText`；`src/app.js` 渲染 `far-dispatch-branch-choice-route-reward`；`src/styles.css` 增加三步收益短标样式；`tests/game.test.js` 覆盖收益短标派生、静态 DOM 和样式绑定。
