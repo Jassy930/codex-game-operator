@@ -2,6 +2,14 @@
 
 ## 2026-05-01
 
+- GitHub Issues：gh 可用且已认证；2026-05-01 22:21 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
+- 本轮 Product decision 继续处理 #6，并以 #4 作为视觉密度约束：当前路线已经置顶，非当前路线已降噪，但桌面端当前路线仍被限制在半宽对照槽，身份、阶段、动作、收益、资源和进度短标仍容易被压缩。
+- 本轮改动新增远航对照条当前路线宽栏：对照条存在本轮当前路线时切换为单列宽栏，让置顶后的当前路线获得完整横向空间；非当前路线保留在下方并沿用降噪与悬停恢复。
+- 本轮只调整远航路线对照条布局和测试，不新增可见文字、不新增收益、不新增存档字段，不改变升级价格、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、远航调度数值、冷却、连携窗口、反馈入口或部署链路。
+- 本轮本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含 active-route 宽栏选择器和 `grid-template-columns: minmax(0, 1fr)`。
+- 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #6 和 #4，以及当前远航路线对照条实现复盘。
+
 - GitHub Issues：gh 可用且已认证；2026-05-01 22:15 CST 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
 - 本轮 Product decision 继续处理 #6，并以 #4 作为视觉密度约束：当前路线已经有高亮、非当前路线降噪和多个当前态锚点，但当前路线为绕行时仍排在第二槽，玩家需要先扫过协同槽。
 - 本轮改动新增远航对照条当前路线置顶：路线对照条渲染前按 `choice.active` 把本轮已选协同/绕行路线排到前面；未选择路线时保持原有协同/绕行顺序。

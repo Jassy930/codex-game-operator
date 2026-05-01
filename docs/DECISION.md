@@ -1,5 +1,27 @@
 # Decision
 
+## 2026-05-01 Product decision：远航对照条当前路线宽栏
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-01 22:21 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；本轮继续处理 #6“后半段玩法无聊、只有不停目标”和 #4“界面文字密集、需要更好看”的交集。
+
+当前最大问题：远航路线对照条已经把当前路线置顶，并降低非当前路线权重，但桌面端仍使用协同/绕行双列宽度。当前路线虽然排在第一槽，身份、阶段、动作、收益、资源和进度短标仍被压在半宽槽里，玩家在 20M 后执行当前路线时还要读很多被压缩的短标。
+
+本轮决策：
+
+- 新增“远航对照条当前路线宽栏”。
+- `src/styles.css` 在 `.far-dispatch-branch-choice-summary` 存在 `.is-active-route` 时切换为单列宽栏，让置顶后的当前路线获得完整横向空间；非当前路线继续保留在下方并沿用降噪与悬停恢复。
+- `tests/game.test.js` 增加静态断言，覆盖 active-route 宽栏选择器。
+- 该改动只调整远航路线对照条布局和测试，不新增可见文字、不新增收益、不新增存档字段，不改变升级价格、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、远航调度数值、冷却、连携窗口、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-05-01 22:21 CST 当前 5 个 open feedback issue、0 个 open bug issue。
+- `src/styles.css` 包含 `.far-dispatch-branch-choice-summary:has(.far-dispatch-branch-choice-summary-item.is-active-route)` 和 `grid-template-columns: minmax(0, 1fr)`。
+- `tests/game.test.js` 覆盖远航对照条当前路线宽栏静态样式绑定。
+- 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含 active-route 宽栏选择器和单列 grid。
+- 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #6 和 #4，以及当前远航路线对照条实现复盘。
+
 ## 2026-05-01 Product decision：远航对照条当前路线置顶
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-01 22:09 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；本轮继续处理 #6“后半段玩法无聊、只有不停目标”和 #4“界面文字密集、需要更好看”的交集。

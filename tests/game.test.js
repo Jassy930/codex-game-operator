@@ -2101,6 +2101,7 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(styles, /\.far-dispatch-branch-choice-summary-item\.is-active-route::before/);
   assert.match(styles, /\.far-dispatch-branch-choice-summary-item\.is-active-route strong/);
   assert.match(styles, /\.far-dispatch-branch-choice-summary-item\.is-active-route\.is-detour strong/);
+  assert.match(styles, /\.far-dispatch-branch-choice-summary:has\(\.far-dispatch-branch-choice-summary-item\.is-active-route\) \{\s*grid-template-columns: minmax\(0, 1fr\);/);
   assert.match(styles, /\.far-dispatch-branch-choice-summary:has\(\.far-dispatch-branch-choice-summary-item\.is-active-route\)[\s\S]*\.far-dispatch-branch-choice-summary-item:not\(\.is-active-route\)/);
   assert.match(styles, /filter: saturate\(0\.72\)/);
   assert.match(styles, /\.far-dispatch-branch-choice-summary:has\(\.far-dispatch-branch-choice-summary-item\.is-active-route\)[\s\S]*\.far-dispatch-branch-choice-summary-item:not\(\.is-active-route\):hover/);

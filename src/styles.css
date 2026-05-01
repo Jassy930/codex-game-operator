@@ -1971,6 +1971,10 @@ h2 {
   display: none;
 }
 
+.far-dispatch-branch-choice-summary:has(.far-dispatch-branch-choice-summary-item.is-active-route) {
+  grid-template-columns: minmax(0, 1fr);
+}
+
 .far-dispatch-branch-choice-summary-item {
   position: relative;
   display: grid;
