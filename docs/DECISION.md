@@ -20,7 +20,10 @@
 - `tests/game.test.js` 覆盖点火过载中心标签闪爆静态样式绑定。
 - 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
 - 构建产物已确认包含 `.core-button.is-overload-impact .core-label`、`content: "过载"` 和 `coreLabelOverloadFlash`。
-- 钉钉通知待本轮结束前检查运行时 webhook；不会把 webhook 写入仓库。
+- 发布验证已通过：提交 `2a55cb7` 已推送到 `origin/main`；GitHub Pages workflow `25210084481` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页返回 HTTP 200，线上 `src/styles.css` 已确认包含 `.core-button.is-overload-impact .core-label`、`content: "过载"` 和 `coreLabelOverloadFlash`。
+- 已回复 GitHub Issue #5，说明点火过载中心标签闪爆、验证结果、Pages 部署和复测问题，issue 保持 open，更新时间为 2026-05-01T09:47:20Z；评论地址：`https://github.com/Jassy930/codex-game-operator/issues/5#issuecomment-4358760758`。
+- 回复后同步 GitHub Issues：2026-05-01 17:47 CST 当前仍为 5 个 open feedback issue、0 个 open bug issue。
+- 钉钉通知未发送：2026-05-01 17:47 CST 运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` 相关变量名，当前目录、父级和用户目录未发现 `.env*` 文件；未将 webhook 写入仓库。
 
 ## 2026-05-01 Product decision：点火收益浮层跟随落点
 
