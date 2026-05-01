@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+- 远航调度新增“路线对照条当前路线置顶”：协同/绕行对照槽存在本轮已选当前路线时，当前路线会优先显示；未选择路线时保持原有协同/绕行顺序，让绕行当前路线不再固定落在第二槽，继续回应 #6 的后半段路线执行理解和 #4 的文字密度反馈。
+- `src/app.js` 在路线对照条渲染前复制 `branchChoices` 并按 `choice.active` 排序；`tests/game.test.js` 覆盖 `orderedChoices`、active 优先排序和渲染绑定。
+- 本轮只调整远航路线对照条展示顺序和测试，不新增收益、不新增存档字段，不改变升级价格、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、远航调度数值、冷却、连携窗口、反馈入口或部署链路。
+- 同步 GitHub Issues 反馈状态：2026-05-01 22:09 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 作为主处理对象，#4 作为视觉密度依据。
+- 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含 `orderedChoices` 与 `Number(Boolean(b.active)) - Number(Boolean(a.active))` active 优先排序。
+
 - 远航调度新增“路线对照条非当前路线降噪”：当协同/绕行对照槽存在本轮已选当前路线时，另一条非当前路线会轻度降低透明度和饱和度，悬停时恢复可读性，让玩家先扫到当前路线、下一步动作和当前收益，继续回应 #6 的后半段路线执行理解和 #4 的文字密度反馈。
 - `src/styles.css` 增加基于 `:has(.is-active-route)` 的非当前路线降噪选择器、悬停恢复和过渡；`tests/game.test.js` 覆盖静态绑定。
 - 本轮只调整远航路线对照条展示层和测试，不新增收益、不新增存档字段，不改变升级价格、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、远航调度数值、冷却、连携窗口、反馈入口或部署链路。

@@ -879,7 +879,12 @@ function renderFarDispatchBranchChoiceSummary(dispatch) {
   summary.setAttribute("aria-label", dispatch.branchChoiceSummaryText ?? "");
 
   const choices = Array.isArray(dispatch.branchChoices) ? dispatch.branchChoices : [];
-  summary.append(...choices.map(renderFarDispatchBranchChoiceSummaryItem));
+  const orderedChoices = choices
+    .slice()
+    .sort(
+      (a, b) => Number(Boolean(b.active)) - Number(Boolean(a.active))
+    );
+  summary.append(...orderedChoices.map(renderFarDispatchBranchChoiceSummaryItem));
   return summary;
 }
 

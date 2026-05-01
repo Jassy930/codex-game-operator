@@ -2,6 +2,14 @@
 
 ## 2026-05-01
 
+- GitHub Issues：gh 可用且已认证；2026-05-01 22:09 CST 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
+- 本轮 Product decision 继续处理 #6，并以 #4 作为视觉密度约束：当前路线已经有高亮、非当前路线降噪和多个当前态锚点，但当前路线为绕行时仍排在第二槽，玩家需要先扫过协同槽。
+- 本轮改动新增远航对照条当前路线置顶：路线对照条渲染前按 `choice.active` 把本轮已选协同/绕行路线排到前面；未选择路线时保持原有协同/绕行顺序。
+- 本轮只调整远航路线对照条展示顺序和测试，不新增收益、不新增存档字段，不改变升级价格、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、远航调度数值、冷却、连携窗口、反馈入口或部署链路。
+- 本轮本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含 `orderedChoices` 与 active 优先排序。
+- 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #6 和 #4，以及当前远航路线对照条实现复盘。
+
 - GitHub Issues：gh 可用且已认证；2026-05-01 21:52 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
 - 本轮 Product decision 继续处理 #6，并以 #4 作为视觉密度约束：当前路线已经有身份、阶段、动作、第二步按钮、收益路径、本步收益、取向、代价、回航结果、资源符号和迷你进度轨锚点，但非当前路线仍保持接近同等权重。
 - 本轮改动新增远航对照条非当前路线降噪：当对照条已有本轮当前路线时，另一条非当前路线会轻度降低透明度和饱和度，悬停时恢复可读性。

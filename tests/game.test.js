@@ -1837,6 +1837,15 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(appJs, /summary\.className = "far-dispatch-branch-choice-summary"/);
   assert.match(appJs, /summary\.hidden = !dispatch\.branchChoiceSummaryText/);
   assert.match(appJs, /dispatch\.branchChoiceSummaryText \?\? ""/);
+  assert.match(appJs, /const orderedChoices = choices/);
+  assert.match(
+    appJs,
+    /\.sort\(\s*\(a, b\) => Number\(Boolean\(b\.active\)\) - Number\(Boolean\(a\.active\)\)\s*\)/
+  );
+  assert.match(
+    appJs,
+    /summary\.append\(\.\.\.orderedChoices\.map\(renderFarDispatchBranchChoiceSummaryItem\)\)/
+  );
   assert.match(appJs, /function renderFarDispatchBranchChoiceSummaryItem\(choice\)/);
   assert.match(appJs, /choice\.routeResourceText/);
   assert.match(appJs, /far-dispatch-branch-choice-summary-item is-/);
