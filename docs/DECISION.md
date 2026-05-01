@@ -23,7 +23,11 @@
 - `tests/game.test.js` 覆盖取向短标派生、静态 DOM 绑定和样式绑定。
 - 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
 - 构建产物已确认包含 `routeIntentKind`、`routeIntentText`、`far-dispatch-branch-choice-intent`、`保当前` 和 `推累计`。
-- 发布验证待执行。
+- 发布验证已通过：提交 `494d1e8` 已推送到 `origin/main`；GitHub Pages workflow `25199120944` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页返回 HTTP 200，线上 `src/game.js`、`src/app.js` 和 `src/styles.css` 已确认包含 `routeIntentText`、`far-dispatch-branch-choice-intent`、`保当前` 和 `推累计`。
+- 已回复 GitHub Issue #6，说明本轮路线取向短标、验证结果、Pages 部署和复测问题，issue 保持 open，更新时间为 2026-05-01T02:17:53Z。
+- 已回复 GitHub Issue #4，说明本轮把路线目的压到协同/绕行卡片首行短标以减少展开明细依赖，issue 保持 open，更新时间为 2026-05-01T02:18:05Z。
+- 回复后同步 GitHub Issues：2026-05-01 10:18 CST 当前仍为 5 个 open feedback issue、0 个 open bug issue。
+- 钉钉通知未发送：运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` 相关变量名，当前目录和父级两层内也未发现 `.env*` 文件；未将 webhook 写入仓库。
 
 ## 2026-05-01 Product decision：远航路线代价短标
 
