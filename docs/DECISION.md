@@ -1,5 +1,31 @@
 # Decision
 
+## 2026-05-01 Product decision：远航路线对照条下一步短标
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-01 12:08 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#6 仍是后半段玩法变化主反馈，#4 仍是界面文字密度和图片化依据，因此本轮继续进入 Product decision。
+
+当前最大问题：路线对照条已经能显示当前阶段、第二步按钮、资源取向、当前资源代价、回航结果和 1/2/3 迷你进度轨，但玩家仍需要把 `0/3 起手`、`1/3 分支`、`2/3 回航` 或 `3/3 完成` 翻译成“现在该按目标、选协同/绕行、回目标还是整备”。对照槽还缺一枚直接表达当前操作的短标。
+
+本轮决策：
+
+- 新增“远航路线对照条下一步短标”。
+- `src/game.js` 从现有 `routeNodeStates`、当前分支态势和是否本轮路线派生 `routeActionKind` / `routeActionText`，覆盖 `下一步 目标`、`下一步 选协同`、`下一步 选绕行`、`下一步 回目标`、`下一步 整备`、`下一步 绕行整备` 和 `待选`。
+- `branchChoiceSummaryText` 和 `branchChoiceText` 纳入 `routeActionText`，保持可访问语义与视觉短标一致。
+- `src/app.js` 在 `far-dispatch-branch-choice-summary-item` 中渲染 `far-dispatch-branch-choice-summary-action`，放在当前步短标与第二步短标之间。
+- `src/styles.css` 调整对照条列宽，并给目标、分支、回目标、整备、待选状态提供短标状态色。
+- 该短标只改变展示层，不新增收益、不新增存档字段，不改变升级价格、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、远航调度数值、冷却、连携窗口、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-05-01 12:08 CST 当前 5 个 open feedback issue、0 个 open bug issue。
+- `src/game.js` 派生 `routeActionKind` / `routeActionText`，并覆盖起手、分支选择、回目标、完成整备和非当前路线待选。
+- `src/app.js` 渲染 `far-dispatch-branch-choice-summary-action`，并把下一步短标纳入对照槽标题。
+- `src/styles.css` 包含对照条下一步短标、回目标/整备/待选状态色。
+- `tests/game.test.js` 覆盖下一步短标派生、可访问汇总、静态 DOM 和样式绑定。
+- 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含 `routeActionText`、`far-dispatch-branch-choice-summary-action`、`下一步 目标` 和 `下一步 选协同`。
+- 发布、Issue 回复和钉钉通知将在提交推送后继续处理并回写记录。
+
 ## 2026-05-01 Product decision：远航路线对照条迷你进度条
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-01 11:54 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#6 仍是后半段玩法变化主反馈，#4 仍是界面文字密度和图片化依据，因此本轮继续进入 Product decision。

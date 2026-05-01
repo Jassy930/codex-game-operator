@@ -845,6 +845,7 @@ function renderFarDispatchBranchChoiceSummaryItem(choice) {
     choice.label,
     choice.decisionBadgeText,
     choice.routePhaseText,
+    choice.routeActionText,
     choice.routeBranchStepText,
     choice.routeIntentText,
     choice.routeCostText,
@@ -869,6 +870,13 @@ function renderFarDispatchBranchChoiceSummaryItem(choice) {
   phase.textContent = choice.routePhaseText ?? "";
   phase.hidden = !choice.routePhaseText;
 
+  const action = document.createElement("span");
+  action.className =
+    "far-dispatch-branch-choice-summary-action is-" +
+    getFarDispatchBranchChoiceRouteActionKind(choice);
+  action.textContent = choice.routeActionText ?? "";
+  action.hidden = !choice.routeActionText;
+
   const branchStep = document.createElement("span");
   branchStep.className = "far-dispatch-branch-choice-summary-step";
   branchStep.textContent = choice.routeBranchStepText ?? "";
@@ -892,7 +900,17 @@ function renderFarDispatchBranchChoiceSummaryItem(choice) {
 
   const progress = renderFarDispatchBranchChoiceSummaryProgress(choice);
 
-  item.append(glyph, label, phase, branchStep, intent, cost, result, progress);
+  item.append(
+    glyph,
+    label,
+    phase,
+    action,
+    branchStep,
+    intent,
+    cost,
+    result,
+    progress
+  );
   return item;
 }
 
@@ -1186,6 +1204,11 @@ function getFarDispatchBranchChoiceRouteMarkerKind(choice) {
 function getFarDispatchBranchChoiceRoutePhaseKind(choice) {
   const phaseKind = String(choice.routePhaseKind ?? "inactive");
   return phaseKind.replace(/[^a-z-]/g, "") || "inactive";
+}
+
+function getFarDispatchBranchChoiceRouteActionKind(choice) {
+  const actionKind = String(choice.routeActionKind ?? "idle");
+  return actionKind.replace(/[^a-z-]/g, "") || "idle";
 }
 
 function getFarDispatchBranchChoiceRouteFlowKind(choice) {

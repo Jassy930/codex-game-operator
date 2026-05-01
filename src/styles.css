@@ -1567,7 +1567,7 @@ h2 {
 
 .far-dispatch-branch-choice-summary-item {
   display: grid;
-  grid-template-columns: 18px minmax(0, 0.76fr) minmax(0, 0.78fr) minmax(0, 0.92fr) minmax(0, 0.68fr) minmax(0, 0.82fr) minmax(0, 0.96fr);
+  grid-template-columns: 18px minmax(0, 0.7fr) minmax(0, 0.72fr) minmax(0, 0.82fr) minmax(0, 0.86fr) minmax(0, 0.64fr) minmax(0, 0.76fr) minmax(0, 0.9fr);
   align-items: center;
   gap: 4px;
   min-width: 0;
@@ -1658,6 +1658,30 @@ h2 {
 
 .far-dispatch-branch-choice-summary-phase.is-complete {
   color: #ffd36a;
+}
+
+.far-dispatch-branch-choice-summary-action {
+  color: #d8ffe2;
+}
+
+.far-dispatch-branch-choice-summary-action.is-branch,
+.far-dispatch-branch-choice-summary-action.is-return {
+  color: #96e7a8;
+}
+
+.far-dispatch-branch-choice-summary-action.is-prep {
+  color: #ffd36a;
+}
+
+.far-dispatch-branch-choice-summary-action.is-idle {
+  color: rgba(248, 243, 231, 0.44);
+}
+
+.far-dispatch-branch-choice-summary-item.is-detour
+  .far-dispatch-branch-choice-summary-action.is-branch,
+.far-dispatch-branch-choice-summary-item.is-detour
+  .far-dispatch-branch-choice-summary-action.is-prep {
+  color: #ffd1df;
 }
 
 .far-dispatch-branch-choice-summary-step {

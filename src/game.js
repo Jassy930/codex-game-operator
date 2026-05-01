@@ -5224,6 +5224,12 @@ function buildFarRouteDispatchBranchChoices(
     const routeProgressPercent =
       buildFarRouteDispatchBranchRouteProgressPercent(routeNodeStates);
     const routePhase = buildFarRouteDispatchBranchRoutePhase(routeNodeStates);
+    const routeAction = buildFarRouteDispatchBranchRouteAction(
+      choice.label,
+      active,
+      branchStatus,
+      routeNodeStates
+    );
     const routeStepLabels = {
       ...FAR_ROUTE_DISPATCH_BRANCH_ROUTE_STEP_LABELS
     };
@@ -5295,6 +5301,8 @@ function buildFarRouteDispatchBranchChoices(
       routeProgressPercent,
       routePhaseKind: routePhase.kind,
       routePhaseText: routePhase.text,
+      routeActionKind: routeAction.kind,
+      routeActionText: routeAction.text,
       routeStepLabels,
       routeRewardLabels,
       routeRewardText,
@@ -5337,6 +5345,8 @@ function buildFarRouteDispatchBranchChoices(
         decisionBadgeText +
         " · " +
         routePhase.text +
+        " · " +
+        routeAction.text +
         " · " +
         routeRewardText +
         " · " +
@@ -5554,6 +5564,48 @@ function buildFarRouteDispatchBranchRoutePhase(routeNodeStates) {
   return {
     kind: "inactive",
     text: "未选"
+  };
+}
+
+function buildFarRouteDispatchBranchRouteAction(
+  label,
+  active,
+  branchStatus,
+  routeNodeStates
+) {
+  const kind = String(branchStatus?.kind ?? "");
+
+  if (active && routeNodeStates?.return === "done") {
+    return {
+      kind: "prep",
+      text: kind === "detour-prep" ? "下一步 绕行整备" : "下一步 整备"
+    };
+  }
+
+  if (active && routeNodeStates?.return === "next") {
+    return {
+      kind: "return",
+      text: "下一步 回目标"
+    };
+  }
+
+  if (routeNodeStates?.branch === "next") {
+    return {
+      kind: "branch",
+      text: "下一步 选" + label
+    };
+  }
+
+  if (routeNodeStates?.start === "next") {
+    return {
+      kind: "target",
+      text: "下一步 目标"
+    };
+  }
+
+  return {
+    kind: "idle",
+    text: "待选"
   };
 }
 
@@ -5873,6 +5925,8 @@ function buildFarRouteDispatchBranchChoiceText(choices) {
           " · " +
           choice.routePhaseText +
           " · " +
+          choice.routeActionText +
+          " · " +
           choice.routeRewardText +
           " · " +
           choice.routeCostText +
@@ -5920,6 +5974,8 @@ function buildFarRouteDispatchBranchChoiceSummaryText(choices) {
           choice.decisionBadgeText +
           " · " +
           choice.routePhaseText +
+          " · " +
+          choice.routeActionText +
           " · " +
           choice.routeBranchStepText +
           " · " +
