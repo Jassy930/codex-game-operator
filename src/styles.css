@@ -712,9 +712,11 @@ h2 {
 }
 
 .core-gain-pop {
+  --core-gain-x: 50%;
+  --core-gain-y: 22%;
   position: absolute;
-  top: 22%;
-  left: 50%;
+  top: clamp(44px, calc(var(--core-gain-y) - 28px), calc(100% - 54px));
+  left: clamp(56px, var(--core-gain-x), calc(100% - 56px));
   z-index: 4;
   display: inline-grid;
   min-width: 72px;

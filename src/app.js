@@ -2908,6 +2908,8 @@ function positionCoreImpact(event) {
 
   elements.coreButton.style.setProperty("--core-recoil-x", recoilX + "px");
   elements.coreButton.style.setProperty("--core-recoil-y", recoilY + "px");
+  elements.coreGainPop.style.setProperty("--core-gain-x", clampedX + "px");
+  elements.coreGainPop.style.setProperty("--core-gain-y", clampedY + "px");
 
   [
     elements.coreImpactPoint,

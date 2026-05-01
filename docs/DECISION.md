@@ -1,5 +1,28 @@
 # Decision
 
+## 2026-05-01 Product decision：点火收益浮层跟随落点
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-01 17:24 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#5 仍是最新更新的开放反馈，继续围绕“点火按钮太薄弱、增加点击反馈、特效和点击欲望”做 Product decision。
+
+当前最大问题：点火按钮已经有 pointerdown 即时反冲、按住压光、按住落点热区、点击后的落点闪光、涟漪、火花束、蓄能轨命中闪烁、连击点命中跳闪、星核蓄能裂纹、蓄能外弧、音效和触感。现有 `+X` 收益浮层仍固定从按钮上方中心冒出；实际点击落点已经被落点光效和反冲使用，但收益文字没有跟随同一坐标，局部命中与收益确认之间还差一层直接关联。
+
+本轮决策：
+
+- 新增“点火收益浮层跟随落点”。
+- `src/app.js` 在 `positionCoreImpact` 中复用点击坐标，给 `coreGainPop` 写入 `--core-gain-x` 和 `--core-gain-y`；键盘触发继续回退按钮中心。
+- `src/styles.css` 让 `.core-gain-pop` 用 `clamp()` 按落点附近定位，避免浮层贴边溢出按钮范围。
+- `tests/game.test.js` 增加静态断言，覆盖收益浮层坐标变量和样式约束。
+- 该改动只调整点火按钮展示层和测试，不新增收益、不新增存档字段，不改变点击收益、连击窗口、过载奖励、升级价格、星图路线、项目奖励、航线策略、航线指令、远航调度、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-05-01 17:24 CST 当前 5 个 open feedback issue、0 个 open bug issue。
+- `src/app.js` 包含 `--core-gain-x` 和 `--core-gain-y` 写入。
+- `src/styles.css` 包含 `.core-gain-pop` 的 `--core-gain-x`、`--core-gain-y`、`left: clamp(...)` 和 `top: clamp(...)`。
+- `tests/game.test.js` 覆盖点火收益浮层跟随落点静态绑定。
+- 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含 `--core-gain-x`、`--core-gain-y` 和收益浮层 `clamp()` 定位样式。
+
 ## 2026-05-01 Product decision：点火连击点命中跳闪
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-01 17:09 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#5 仍是最新更新的开放反馈，继续围绕“点火按钮太薄弱、增加点击反馈、特效和点击欲望”做 Product decision。

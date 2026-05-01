@@ -2,6 +2,13 @@
 
 ## 2026-05-01
 
+- GitHub Issues：gh 可用且已认证；2026-05-01 17:24 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
+- 本轮 Product decision 继续处理 #5：点火按钮已有按住反馈、落点反馈、蓄能轨命中闪烁和连击点命中跳闪，但收益浮层仍固定在按钮上方中心，和实际点击落点之间还可以更直接地关联。
+- 本轮改动新增点火收益浮层跟随落点：`positionCoreImpact` 同步写入 `--core-gain-x` / `--core-gain-y`，`.core-gain-pop` 通过 `clamp()` 在实际点击位置附近冒出，键盘触发回退中心。
+- 本轮只调整点火按钮展示层和测试，不新增收益、不新增存档字段，不改变点击收益、连击窗口、过载奖励、升级价格、星图路线、项目奖励、航线策略、航线指令、远航调度、反馈入口或部署链路。
+- 本轮本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含 `--core-gain-x`、`--core-gain-y` 和收益浮层 `clamp()` 定位样式。
+
 - GitHub Issues：gh 可用且已认证；2026-05-01 17:09 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
 - 本轮 Product decision 继续处理 #5：点火按钮已有按住反馈、落点反馈、收益浮层、蓄能裂纹、蓄能外弧、蓄能轨命中闪烁、音效和触感，但按钮内 8 格连击轨还缺少“本次点击命中哪一格”的瞬时确认。
 - 本轮改动新增点火连击点命中跳闪：点火后用 `comboStatus.step` 给本次推进到的连击点添加 `is-hit`；普通命中播放 `coreComboDotHit`，第 8 格过载命中播放 `coreComboDotOverloadHit`。

@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+- 点火按钮新增“收益浮层跟随落点”：点击后 `+X` 收益浮层会从实际点击位置附近冒出，键盘触发回退按钮中心，继续回应 #5 的点击反馈、特效和点击欲望反馈。
+- `src/app.js` 在 `positionCoreImpact` 中给 `coreGainPop` 写入 `--core-gain-x` / `--core-gain-y`；`src/styles.css` 用 `clamp()` 约束 `.core-gain-pop` 的落点定位；`tests/game.test.js` 覆盖静态绑定。
+- 本轮只调整点火按钮展示层和测试，不新增收益、不新增存档字段，不改变点击收益、连击窗口、过载奖励、升级价格、星图路线、项目奖励、航线策略、航线指令、远航调度、反馈入口或部署链路。
+- 同步 GitHub Issues 反馈状态：2026-05-01 17:24 CST 当前 5 个 open feedback issue、0 个 open bug issue；#5 作为主处理对象。
+- 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含 `--core-gain-x`、`--core-gain-y` 和收益浮层 `clamp()` 定位样式。
+
 - 点火按钮新增“连击点命中跳闪”：普通点击后，本次推进到的 8 格连击点会短促放大发光；第 8 格过载命中时使用更强跳闪，继续回应 #5 的点击反馈、特效和点击欲望反馈。
 - `src/app.js` 增加 `comboStatus.step` 到 `animateCore` 的传递，并由 `highlightCoreComboHit` 给当前命中点添加/清理 `is-hit`；`src/styles.css` 增加 `.core-combo-dot.is-hit`、`.core-combo-track.is-overload-hit .core-combo-dot.is-hit`、`coreComboDotHit` 和 `coreComboDotOverloadHit`；`tests/game.test.js` 覆盖静态绑定。
 - 本轮只调整点火按钮展示层和测试，不新增收益、不新增存档字段，不改变点击收益、连击窗口、过载奖励、升级价格、星图路线、项目奖励、航线策略、航线指令、远航调度、反馈入口或部署链路。

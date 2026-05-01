@@ -1344,6 +1344,8 @@ test("点火按钮会渲染点击反馈和过载前兆效果", () => {
   assert.match(appJs, /"--core-recoil-x"/);
   assert.match(appJs, /"--core-recoil-y"/);
   assert.match(appJs, /const recoilX = Math\.round/);
+  assert.match(appJs, /"--core-gain-x"/);
+  assert.match(appJs, /"--core-gain-y"/);
   assert.match(appJs, /"--core-impact-x"/);
   assert.match(appJs, /"--core-impact-y"/);
   assert.match(appJs, /elements\.coreImpactPoint\.classList\.add\("is-showing"\)/);
@@ -1422,6 +1424,10 @@ test("点火按钮会渲染点击反馈和过载前兆效果", () => {
   assert.match(styles, /coreChargeRingOverloadHit 520ms ease-out/);
   assert.match(styles, /\.core-charge-ring\.is-overload-ready/);
   assert.match(styles, /\.core-gain-pop/);
+  assert.match(styles, /--core-gain-x/);
+  assert.match(styles, /--core-gain-y/);
+  assert.match(styles, /left: clamp\(56px, var\(--core-gain-x\), calc\(100% - 56px\)\)/);
+  assert.match(styles, /top: clamp\(44px, calc\(var\(--core-gain-y\) - 28px\), calc\(100% - 54px\)\)/);
   assert.match(styles, /\.core-gain-pop\.is-showing/);
   assert.match(styles, /\.core-gain-pop\.is-overload-gain/);
   assert.match(styles, /\.core-overload-badge/);
