@@ -3175,7 +3175,7 @@ export function getFarRouteDispatch(state, now = Date.now()) {
       loopSteps: [],
       loopStepText: "",
       loopStatusText: "闭环进度 0/" + loopTarget + " · 20M 后解锁",
-      text: "远航调度：累计 20M 能量后解锁后半段航段调度、目标指令推荐、目标冷却缩短、连携窗口延长、远航续航、远航协同、协同补给、远航绕行、绕行投送、分支改道、航段契合、路线稳航、轮替闭环、契合闭环、闭环奖励、远航突破、绕行突破、远航整备、整备续航、绕行整备与整备回航"
+      text: "远航调度：累计 20M 能量后解锁后半段航段调度、目标指令推荐、目标冷却缩短、连携窗口延长、远航续航、远航协同、协同补给、远航绕行、绕行投送、回航校准、分支改道、航段契合、路线稳航、轮替闭环、契合闭环、闭环奖励、远航突破、绕行突破、远航整备、整备续航、绕行整备与整备回航"
     };
   }
 
@@ -3442,6 +3442,7 @@ export function getFarRouteDispatch(state, now = Date.now()) {
       detourRewardText +
       "并消耗当前能量进行" +
       detourInfusionText +
+      "；执行协同或绕行分支会触发回航校准刷新目标指令冷却" +
       "；若续走上一轮分支，会触发" +
       branchStabilityRewardText +
       "；若本轮选择与上一轮不同的分支，还会触发" +
@@ -7666,8 +7667,34 @@ function formatFarRouteDispatchReturnReward(dispatchReturnReward) {
 }
 
 function getFarRouteDispatchRefresh(dispatch, directiveId, chain, state, now) {
+  if (!dispatch?.active || !dispatch.targetDirectiveId) {
+    return null;
+  }
+
+  const sourceChain =
+    state && typeof state.directiveChain === "object" ? state.directiveChain : {};
+  const sourceActive = Boolean(
+    sourceChain.lastDirectiveId && sourceChain.expiresAt >= now
+  );
   if (
-    !dispatch?.active ||
+    directiveId !== dispatch.targetDirectiveId &&
+    sourceActive &&
+    sourceChain.lastDirectiveId === dispatch.targetDirectiveId &&
+    chain.stacks === 1
+  ) {
+    const targetDirective = getDirectiveDef(dispatch.targetDirectiveId);
+    if (!targetDirective) {
+      return null;
+    }
+
+    return {
+      directiveId: targetDirective.id,
+      directiveName: targetDirective.name,
+      label: "回航校准"
+    };
+  }
+
+  if (
     dispatch.targetDirectiveId !== directiveId ||
     !dispatch.relayDirectiveId ||
     chain.stacks < DIRECTIVE_CHAIN_MAX_STACKS

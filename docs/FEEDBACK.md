@@ -2,6 +2,14 @@
 
 ## 2026-05-01
 
+- GitHub Issues：gh 可用且已认证；2026-05-01 23:40 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue；#6/#3/#2 仍集中在后半段玩法变化不足，#4 要求降低文字密度，#5 已有多轮点火反馈增强但仍保持 open。
+- 本轮 Product decision 处理 #6/#3/#2：远航调度已有目标、协同/绕行和回目标三步路线，但分支后仍可能等待目标指令冷却，导致后半段路线选择被冷却空档打断。
+- 本轮改动新增远航调度“回航校准”：目标后的协同或绕行分支执行后会刷新当前目标指令冷却，预计收益、按钮徽标、执行反馈、本地 `directive` 事件和反馈快照复用 `dispatchRefresh*` 字段记录“回航校准 <目标指令>冷却刷新”。
+- 本轮不新增存档字段，不改变星图 57 段路线、项目奖励、升级价格、航线策略、指令基础收益、基础连携倍率、分支收益、反馈入口或部署链路。
+- 本轮本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含 `回航校准`、`dispatchRefreshDirectiveId` 和目标冷却刷新逻辑。
+- 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #6/#3/#2，以及当前远航调度 3 步闭环节奏复盘。
+
 - GitHub Issues：gh 可用且已认证；2026-05-01 23:32 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue；#5 更新时间为 2026-05-01T15:30:22Z。
 - 本轮 Product decision 继续处理 #5：点火按钮已经把普通命中和过载命中的反馈接到按钮本体、落点、收益浮层、下一击预告、连击读数和顶部能量读数，但顶部“过载 +X”奖励读数仍是静态展示。
 - 本轮改动新增点火过载奖励读数命中亮闪：第 8 次过载命中时 `#overloadValue` 会短促亮闪，普通点火只清理旧状态不触发该反馈，连续点击会清理并重新触发。

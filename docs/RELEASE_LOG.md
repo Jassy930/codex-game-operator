@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+- 远航调度新增“回航校准”：20M 后执行目标后的协同或绕行分支时，会刷新当前目标指令冷却，让下一步可以直接回到目标完成 3/3 闭环，回应 #6/#3/#2 对后半段玩法节奏变化不足的反馈。
+- `src/game.js` 复用现有 `dispatchRefresh` 管线，在分支执行时返回“回航校准 <目标指令>冷却刷新”并把目标指令冷却置 0；`tests/game.test.js` 覆盖分支后目标立即可执行、预计收益/执行反馈/反馈快照包含回航校准；`index.html` 同步静态初始远航调度说明。
+- 文档同步更新 `docs/DECISION.md`、`docs/RESEARCH.md`、`docs/FEEDBACK.md`、`docs/PRODUCT.md`、`docs/DESIGN.md`、`docs/METRICS.md` 和 `docs/ROADMAP.md`，明确回航校准不新增存档字段、不改变星图路线、项目奖励、分支收益、反馈入口或部署链路。
+- 同步 GitHub Issues 反馈状态：2026-05-01 23:40 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6/#3/#2 作为主处理对象，#4 作为文字密度约束。
+- 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含 `回航校准`、`dispatchRefreshDirectiveId` 和目标冷却刷新逻辑。
+
 - 点火按钮新增“过载奖励读数命中亮闪”：第 8 次过载命中时顶部 `#overloadValue` 会短促亮闪，把本次过载爆发和长期过载奖励读数连到同一反馈节奏，继续回应 #5 的点击反馈、特效和点击欲望反馈。
 - `src/app.js` 在 `animateCore` 的过载命中分支为过载奖励读数追加 `is-core-overload-prize` 并用独立 timer 清理；`src/styles.css` 增加 `scoreOverloadReadoutPrize` 和降低动效兜底；`tests/game.test.js` 覆盖静态绑定。
 - 本轮只调整点火过载反馈展示层和测试，不新增可见文字、不新增收益、不新增存档字段，不改变点击收益、连击窗口、过载奖励、升级价格、星图路线、项目奖励、航线策略、航线指令、远航调度、反馈入口或部署链路。

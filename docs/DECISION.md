@@ -1,5 +1,26 @@
 # Decision
 
+## 2026-05-01 Product decision：远航调度回航校准
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-01 23:40 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；本轮处理 #6/#3/#2 的后半段玩法反馈，并保持 #4 的文字密度约束。
+
+当前最大问题：20M 后远航调度已经提供目标、协同/绕行和回目标 3 步路线，但目标后的分支执行后仍可能被目标指令冷却卡住，短循环从“做路线选择”变成等待冷却，削弱后半段玩法变化。
+
+本轮决策：
+
+- 新增“回航校准”：执行目标后的协同或绕行分支时，刷新当前目标指令冷却。
+- 复用现有 `dispatchRefresh` 字段，让按钮徽标、预计收益、执行反馈、本地 `directive` 事件和反馈快照继续记录 `dispatchRefreshDirectiveId` / `dispatchRefreshDirectiveName` / `dispatchRefreshText`。
+- 保持星图 57 段路线、项目奖励、升级价格、航线策略、指令基础收益、基础连携倍率、分支收益、存档字段、反馈入口和部署链路不变。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-05-01 23:40 CST 当前 5 个 open feedback issue、0 个 open bug issue。
+- `src/game.js` 在目标后的非目标分支执行时返回“回航校准 <目标指令>冷却刷新”，并把目标指令冷却写回 0。
+- `tests/game.test.js` 覆盖分支后目标指令立即可执行、预计收益/执行反馈包含回航校准、反馈快照包含回航校准。
+- 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含 `回航校准`、`dispatchRefreshDirectiveId` 和目标冷却刷新逻辑。
+- 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #6/#3/#2，以及当前远航调度 3 步闭环节奏复盘。
+
 ## 2026-05-01 Product decision：点火过载奖励读数命中亮闪
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-01 23:32 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；本轮继续处理 #5“点火按钮太薄弱、增加点击反馈和点击欲望”，同时不增加 #4 提到的默认文字密度。
