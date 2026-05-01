@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+- 远航调度新增“路线对照条当前路线边栏”：协同/绕行对照槽在成为本轮已选路线时会获得 `is-active-route` 状态、金色边框、轻量背景和左侧双色边栏，让玩家在选定分支后不用增加文字也能先扫到当前路线，继续回应 #6 的后半段路线执行理解和 #4 的文字密度反馈。
+- `src/app.js` 给当前路线对照槽追加 `is-active-route`；`src/styles.css` 增加 `.far-dispatch-branch-choice-summary-item::before`、`.far-dispatch-branch-choice-summary-item.is-active-route` 和 `.far-dispatch-branch-choice-summary-item.is-active-route::before`；`tests/game.test.js` 覆盖静态绑定。
+- 本轮只调整远航路线对照条展示层和测试，不新增收益、不新增存档字段，不改变升级价格、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、远航调度数值、冷却、连携窗口、反馈入口或部署链路。
+- 同步 GitHub Issues 反馈状态：2026-05-01 18:48 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 作为主处理对象，#4 作为视觉密度依据。
+- 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含 `is-active-route`、`.far-dispatch-branch-choice-summary-item::before` 和 `.far-dispatch-branch-choice-summary-item.is-active-route::before`。
+
 - 远航调度新增“路线对照条下一步动作信标”：协同/绕行对照槽里的下一步按钮短标现在会以胶囊样式显示，非待选状态播放轻量呼吸信标，让当前可执行动作在不增加文字的情况下更容易扫到，继续回应 #6 的后半段路线执行理解和 #4 的文字密度反馈。
 - `src/styles.css` 增加 `.far-dispatch-branch-choice-summary-action::before`、`.far-dispatch-branch-choice-summary-action:not(.is-idle)::before` 和 `farDispatchSummaryActionBeacon`；`tests/game.test.js` 覆盖静态绑定。
 - 本轮只调整远航路线对照条展示层和测试，不新增收益、不新增存档字段，不改变升级价格、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、远航调度数值、冷却、连携窗口、反馈入口或部署链路。

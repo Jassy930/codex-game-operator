@@ -1,5 +1,28 @@
 # Decision
 
+## 2026-05-01 Product decision：远航对照条当前路线边栏
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-01 18:48 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；本轮继续处理 #6“后半段玩法无聊、只有不停目标”和 #4“界面文字密集、需要更好看”的交集。
+
+当前最大问题：远航路线对照条已经能显示下一步按钮短标、动作信标、本步收益、资源取向、代价、回航结果和 1/2/3 进度轨，但玩家在选定协同或绕行之后，仍需要从“本轮已选”“2/3 回航”“下一步 3 目标”等多个短标里确认哪一条是当前路线。当前路线需要一个不增加文字的视觉锚点。
+
+本轮决策：
+
+- 新增“远航对照条当前路线边栏”。
+- `src/app.js` 在路线对照条 item 上根据 `choice.active` 追加 `is-active-route`。
+- `src/styles.css` 给 `.far-dispatch-branch-choice-summary-item.is-active-route` 增加金色边框、轻量背景和左侧双色边栏，帮助玩家在协同/绕行两槽中先扫到本轮已选路线。
+- `tests/game.test.js` 增加静态断言，覆盖 active 路线类名派生、当前路线伪元素和样式绑定。
+- 该改动只调整远航路线对照条展示层和测试，不新增收益、不新增存档字段，不改变升级价格、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、远航调度数值、冷却、连携窗口、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-05-01 18:48 CST 当前 5 个 open feedback issue、0 个 open bug issue。
+- `src/app.js` 包含 `choice.active ? " is-active-route" : ""`。
+- `src/styles.css` 包含 `.far-dispatch-branch-choice-summary-item::before`、`.far-dispatch-branch-choice-summary-item.is-active-route` 和 `.far-dispatch-branch-choice-summary-item.is-active-route::before`。
+- `tests/game.test.js` 覆盖远航路线对照条当前路线边栏静态样式绑定。
+- 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含 `is-active-route`、`.far-dispatch-branch-choice-summary-item::before` 和 `.far-dispatch-branch-choice-summary-item.is-active-route::before`。
+
 ## 2026-05-01 Product decision：远航对照条下一步动作信标
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-01 18:35 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；本轮回到 #6“后半段玩法无聊、只有不停目标”和 #4“界面文字密集、需要更好看”的交集，继续优化 20M 后远航调度的路线扫视。

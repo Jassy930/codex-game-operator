@@ -890,6 +890,7 @@ function renderFarDispatchBranchChoiceSummaryItem(choice) {
     getFarDispatchBranchChoiceKind(choice) +
     " is-decision-" +
     getFarDispatchBranchChoiceDecisionKind(choice) +
+    (choice.active ? " is-active-route" : "") +
     (choice.focused ? " is-focused" : "");
   item.title = [
     choice.label,

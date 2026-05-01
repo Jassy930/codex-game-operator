@@ -1832,6 +1832,7 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(appJs, /dispatch\.branchChoiceSummaryText \?\? ""/);
   assert.match(appJs, /function renderFarDispatchBranchChoiceSummaryItem\(choice\)/);
   assert.match(appJs, /far-dispatch-branch-choice-summary-item is-/);
+  assert.match(appJs, /choice\.active \? " is-active-route" : ""/);
   assert.match(appJs, /far-dispatch-branch-choice-summary-glyph is-/);
   assert.match(appJs, /far-dispatch-branch-choice-summary-phase is-/);
   assert.match(appJs, /phase\.textContent = choice\.routePhaseText \?\? ""/);
@@ -2076,6 +2077,9 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(styles, /\.far-dispatch-branch-choice-summary/);
   assert.match(styles, /\.far-dispatch-branch-choice-summary\[hidden\]/);
   assert.match(styles, /\.far-dispatch-branch-choice-summary-item/);
+  assert.match(styles, /\.far-dispatch-branch-choice-summary-item::before/);
+  assert.match(styles, /\.far-dispatch-branch-choice-summary-item\.is-active-route/);
+  assert.match(styles, /\.far-dispatch-branch-choice-summary-item\.is-active-route::before/);
   assert.match(styles, /grid-template-areas:\s*\n\s*"glyph label phase action step"/);
   assert.match(styles, /"glyph reward payoff intent cost"/);
   assert.match(styles, /"glyph result result result result"/);
