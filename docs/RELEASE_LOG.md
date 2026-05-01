@@ -8,6 +8,9 @@
 - 同步 GitHub Issues 反馈状态：2026-05-02 06:22 CST 当前 5 个 open feedback issue、0 个 open bug issue；#4/#6 作为主处理对象。
 - 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
 - 构建产物已确认 `dist/src/styles.css` 包含 `.far-dispatch-loop-step.is-current strong`、`justify-self: start` 和 `color: #fff7c2`。
+- 发布：提交 `5e425fd` 已推送到 `origin/main`；GitHub Pages workflow `25235917443` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页返回 HTTP 200，线上 `src/styles.css` 已确认包含 `.far-dispatch-loop-step.is-current strong`。workflow 继续给出 Node.js 20 actions 弃用提醒，未影响本次部署。
+- 反馈处理：已回复 #4 和 #6，说明远航闭环当前步骤标题锚点、验证结果、Pages 部署和复测问题；两个 issue 均保持 open。回复后于 2026-05-02 06:30 CST 再次同步 GitHub Issues，当前仍为 5 个 open feedback issue、0 个 open bug issue；#4 更新时间为 2026-05-01T22:30:19Z，#6 更新时间为 2026-05-01T22:30:37Z。
+- 钉钉通知未发送：2026-05-02 06:31 CST 运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` / `ROBOT` 相关变量名，当前目录和 `/home/jassy/glm` 两层内未发现 `.env*` 文件；未将 webhook 写入仓库。
 
 - 远航调度新增“远航闭环当前微图列补光”：20M 后主操作区远航闭环路线微图里的当前 1/2/3 列会播放轻量纵向补光，让当前节点和当前 `校准` / `分支` / `续航` / `闭环` 短标在同一列被扫到，继续回应 #4 的图形化/文字密度反馈，并辅助 #6 的后半段短循环步骤与回报确认。
 - `src/styles.css` 为 `.far-dispatch.is-active .far-dispatch-loop-visual-point.is-current::before` 增加 `farDispatchLoopCurrentPointColumnGlow` 动画，并在降低动效偏好中关闭该动画；`tests/game.test.js` 覆盖静态绑定。
