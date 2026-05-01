@@ -542,6 +542,14 @@ h2 {
     drop-shadow(0 0 18px rgba(19, 181, 166, 0.18));
 }
 
+.core-button:not(.is-combo-charging):not(.is-pulsing):not(.is-pressing):not(.is-overload-ready):not(.is-overload-hit)
+  .core-surge-orbit {
+  opacity: clamp(0.16, var(--core-surge-opacity), 1);
+  animation:
+    coreSurgeOrbit var(--core-surge-speed) linear infinite,
+    coreSurgeIdleBeacon 2600ms ease-in-out infinite;
+}
+
 .core-button.is-pressing .core-surge-orbit {
   opacity: 0.72;
   filter:
@@ -6195,6 +6203,22 @@ h2 {
   }
 }
 
+@keyframes coreSurgeIdleBeacon {
+  0%,
+  100% {
+    filter:
+      drop-shadow(0 0 10px rgba(255, 247, 194, 0.2))
+      drop-shadow(0 0 16px rgba(19, 181, 166, 0.14));
+  }
+
+  50% {
+    filter:
+      drop-shadow(0 0 16px rgba(255, 247, 194, 0.28))
+      drop-shadow(0 0 24px rgba(19, 181, 166, 0.18))
+      drop-shadow(0 0 32px rgba(244, 178, 60, 0.14));
+  }
+}
+
 @keyframes coreButtonHitGlow {
   0% {
     box-shadow: 0 0 0 rgba(244, 178, 60, 0);
@@ -7167,6 +7191,8 @@ h2 {
   .core-button:not(.is-pulsing):not(.is-pressing) + .core-reward-hint:not(.is-overload-ready):not(.is-overload-hit),
   .core-button:not(.is-pulsing):not(.is-pressing):not(.is-overload-ready):not(.is-overload-hit)
     .core-label,
+  .core-button:not(.is-combo-charging):not(.is-pulsing):not(.is-pressing):not(.is-overload-ready):not(.is-overload-hit)
+    .core-surge-orbit,
   .core-button.is-pulsing:not(.is-overload-impact),
   .core-button.is-overload-impact,
   .core-button.is-pulsing:not(.is-overload-impact) .core-stage-aura,

@@ -1,5 +1,28 @@
 # Decision
 
+## 2026-05-02 Product decision：点火蓄能外弧待机信标
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-02 07:28 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有 open bug；#5 仍是最新反馈，继续处理“点火按钮太薄弱，增加点击反馈、特效和点击欲望”。
+
+当前最大问题：点火按钮已经有待机邀请光环、下一击预告待机信标、中心标签待机信标、按住反冲、落点热区、命中闪光、涟漪、火花束、收益浮层、蓄能轨、连击轨、读数亮闪、音效和触感。普通待机时，外圈、奖励预告和中心标签已经在邀请点击，但星核外层的 `.core-surge-orbit` 在 0 连击时仍偏弱；玩家第一眼看到星核时，外围能量弧还没有参与点击前节奏。
+
+本轮决策：
+
+- 新增“点火蓄能外弧待机信标”。
+- `src/styles.css` 为 `.core-button:not(.is-combo-charging):not(.is-pulsing):not(.is-pressing):not(.is-overload-ready):not(.is-overload-hit) .core-surge-orbit` 增加 `coreSurgeIdleBeacon` 轻量补光，并保留原有 `coreSurgeOrbit` 旋转。
+- 在 `prefers-reduced-motion: reduce` 中关闭该待机信标动画。
+- `tests/game.test.js` 增加静态断言，覆盖待机蓄能外弧样式、keyframes 和降低动效兜底。
+- 该改动只调整点火按钮蓄能外弧展示层和测试，不新增可见文字、不新增收益、不新增存档字段，不改变点击收益、连击窗口、过载奖励、升级价格、星图路线、项目奖励、航线策略、航线指令、远航调度、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-05-02 07:28 CST 当前 5 个 open feedback issue、0 个 open bug issue；#5 作为本轮主处理对象。
+- `src/styles.css` 包含 `.core-button:not(.is-combo-charging):not(.is-pulsing):not(.is-pressing):not(.is-overload-ready):not(.is-overload-hit) .core-surge-orbit`、`coreSurgeIdleBeacon 2600ms ease-in-out infinite`、`@keyframes coreSurgeIdleBeacon` 和降低动效兜底。
+- `tests/game.test.js` 覆盖点火蓄能外弧待机信标静态绑定。
+- 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认 `dist/src/styles.css` 包含 `coreSurgeIdleBeacon 2600ms ease-in-out infinite`、`@keyframes coreSurgeIdleBeacon` 和降低动效兜底。
+- 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #5，以及当前蓄能外弧待机状态仍缺少点击前邀请信号的复盘。
+
 ## 2026-05-02 Product decision：点火中心标签待机信标
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-02 07:15 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有 open bug；#5 仍是最新反馈，继续处理“点火按钮太薄弱，增加点击反馈、特效和点击欲望”。
