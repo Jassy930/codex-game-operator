@@ -8,6 +8,9 @@
 - 同步 GitHub Issues 反馈状态：2026-05-01 15:09 CST 当前 5 个 open feedback issue、0 个 open bug issue；#5 作为主处理对象。
 - 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
 - 构建产物已确认包含 `core-surge-orbit`、`--core-surge-opacity`、`coreSurgeOrbit` 和 `coreSurgeBurst`。
+- 发布：提交 `629d429` 已推送到 `origin/main`；GitHub Pages workflow `25206249194` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页返回 HTTP 200，线上 `index.html`、`src/app.js` 和 `src/styles.css` 已确认包含点火蓄能外弧 DOM、变量绑定和动画样式。
+- 反馈处理：已回复 #5，说明点火蓄能外弧、验证结果、Pages 部署和复测问题；issue 保持 open。回复后于 2026-05-01 15:18 CST 再次同步 GitHub Issues，当前仍为 5 个 open feedback issue、0 个 open bug issue；#5 更新时间为 2026-05-01T07:18:32Z。
+- 钉钉通知未发送：运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` 相关变量名，当前目录和父级四层内也未发现 `.env*` 文件；未将 webhook 写入仓库。
 
 - 点火按钮新增“星核蓄能裂纹”：主按钮内的星核 SVG 会根据现有 `combo.progress` 逐步显现能量纹路，过载前一击进入脉动状态，过载命中时播放爆发态，继续回应 #5 的点击反馈、特效和点击欲望反馈。
 - `index.html` 新增 `core-veins` / `core-vein-*` 内联 SVG 纹路；`src/app.js` 在 `renderCoreFeedback` 写入 `--core-vein-opacity` 和 `--core-vein-dash-offset`；`src/styles.css` 增加纹路状态和 `coreVeinPulse` / `coreVeinBurst` 动效；`tests/game.test.js` 覆盖静态绑定。
