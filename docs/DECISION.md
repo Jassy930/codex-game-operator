@@ -1,5 +1,31 @@
 # Decision
 
+## 2026-05-01 Product decision：远航路线对照条本步收益短标
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-01 12:45 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#6 仍是后半段玩法变化主反馈，#4 仍是界面文字密度和图片化依据，因此本轮继续进入 Product decision。
+
+当前最大问题：路线对照条已经能显示当前阶段、下一步动作、收益落点、第二步按钮、资源取向、当前资源代价、回航结果和 1/2/3 迷你进度轨，但玩家比较协同/绕行时仍要回到卡片收益对照，才能看到本步即时收益差异。
+
+本轮决策：
+
+- 新增“远航路线对照条本步收益短标”。
+- `src/game.js` 复用现有远航分支奖励常量和航段契合/稳航/改道判断派生 `routePayoffSummaryText`，协同首推可显示 `本步 +13%`，绕行建档可显示 `本步 +4%`。
+- `branchChoiceSummaryText` 和 `branchChoiceText` 纳入 `routePayoffSummaryText`，保持可访问语义与视觉短标一致。
+- `src/app.js` 在 `far-dispatch-branch-choice-summary-item` 中渲染 `far-dispatch-branch-choice-summary-payoff`，放在第二步短标后、资源取向前。
+- `src/styles.css` 调整对照条列宽，并给协同/绕行本步收益短标提供不同强调色。
+- 该短标只改变展示层，不新增收益、不新增存档字段，不改变升级价格、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、远航调度数值、冷却、连携窗口、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-05-01 12:45 CST 当前 5 个 open feedback issue、0 个 open bug issue。
+- `src/game.js` 派生 `routePayoffSummaryText`，并覆盖协同 `本步 +13%` 与绕行 `本步 +4%`。
+- `src/app.js` 渲染 `far-dispatch-branch-choice-summary-payoff`，并把本步收益短标纳入对照槽标题。
+- `src/styles.css` 包含对照条本步收益短标和绕行状态色。
+- `tests/game.test.js` 覆盖本步收益短标派生、可访问汇总、静态 DOM 和样式绑定。
+- 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含 `routePayoffSummaryText`、`far-dispatch-branch-choice-summary-payoff`、`本步 +13%` 和 `本步 +4%`。
+- 钉钉通知待发送：需要在本轮提交/推送/反馈回复完成后检查运行环境中的 webhook 变量；不会将 webhook 写入仓库。
+
 ## 2026-05-01 Product decision：远航路线对照条收益短标
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-01 12:25 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#6 仍是后半段玩法变化主反馈，#4 仍是界面文字密度和图片化依据，因此本轮继续进入 Product decision。

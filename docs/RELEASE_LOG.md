@@ -2,6 +2,14 @@
 
 ## Unreleased
 
+- 远航调度新增“路线对照条本步收益短标”：协同/绕行对照槽直接显示 `本步 +13%` 或 `本步 +4%` 等即时收益短标，继续回应 #6 的后半段路线取舍理解和 #4 的降文字密度反馈。
+- `src/game.js` 新增 `routePayoffSummaryText` 派生并纳入 `branchChoiceSummaryText` / `branchChoiceText`；`src/app.js` 渲染 `far-dispatch-branch-choice-summary-payoff`；`src/styles.css` 增加本步收益短标列和绕行状态色；`tests/game.test.js` 覆盖派生、可访问汇总、DOM 和 CSS。
+- 文档同步更新：`docs/DECISION.md`、`docs/FEEDBACK.md`、`docs/RESEARCH.md`、`docs/PRODUCT.md`、`docs/DESIGN.md`、`docs/ROADMAP.md`、`docs/IDEAS.md`、`docs/METRICS.md`、`README.md` 和本日志已记录远航路线对照条本步收益短标。
+- 本轮只调整派生展示、DOM、CSS 和测试，不新增收益、不新增存档字段，不改变升级价格、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、远航调度既有数值、冷却、连携窗口、反馈入口或部署链路。
+- 同步 GitHub Issues 反馈状态：2026-05-01 12:45 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 作为主处理对象，#4 作为视觉密度依据。
+- 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含 `routePayoffSummaryText`、`far-dispatch-branch-choice-summary-payoff`、`本步 +13%` 和 `本步 +4%`。
+
 - 远航调度新增“路线对照条收益短标”：协同/绕行对照槽直接显示 `校准/补给/闭环` 或 `校准/投送/闭环`，继续回应 #6 的后半段路线执行理解和 #4 的降文字密度反馈。
 - `src/game.js` 新增 `routeRewardSummaryText` 派生并纳入 `branchChoiceSummaryText` / `branchChoiceText`；`src/app.js` 渲染 `far-dispatch-branch-choice-summary-reward`；`src/styles.css` 增加收益短标列和绕行状态色；`tests/game.test.js` 覆盖派生、可访问汇总、DOM 和 CSS。
 - 文档同步更新：`docs/DECISION.md`、`docs/FEEDBACK.md`、`docs/RESEARCH.md`、`docs/PRODUCT.md`、`docs/DESIGN.md`、`docs/ROADMAP.md`、`docs/IDEAS.md`、`docs/METRICS.md`、`README.md` 和本日志已记录远航路线对照条收益短标。

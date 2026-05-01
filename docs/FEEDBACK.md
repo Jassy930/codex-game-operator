@@ -2,6 +2,14 @@
 
 ## 2026-05-01
 
+- GitHub Issues：gh 可用且已认证；2026-05-01 12:45 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
+- #6 继续作为本轮 Product decision 依据：路线对照条已经能显示当前阶段、下一步动作、收益落点、第二步按钮、资源取向、当前资源代价、回航结果和 1/2/3 进度轨，但对照槽还没有直接显示本步即时收益差异；#4 继续作为界面文字密度和图片化依据。
+- 本轮改动新增远航路线对照条本步收益短标：协同/绕行对照槽直接显示 `本步 +13%` 或 `本步 +4%` 等即时收益短标，把选择前的收益差异压到对照条层。
+- 本步收益短标只复用现有远航分支奖励常量、航段契合、路线稳航和分支改道判断；完整语义仍保留在 `payoffText`、路线收益对照、按钮徽标、路线反馈和折叠明细中。
+- 本轮只调整派生展示、DOM、CSS 和测试，不新增收益、不新增存档字段，不改变升级价格、星图路线、项目奖励、远航调度既有数值、冷却、连携窗口、反馈入口或部署链路。
+- 本轮本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含 `routePayoffSummaryText`、`far-dispatch-branch-choice-summary-payoff`、`本步 +13%` 和 `本步 +4%`。
+
 - GitHub Issues：gh 可用且已认证；2026-05-01 12:25 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
 - #6 继续作为本轮 Product decision 依据：路线对照条已经把当前阶段翻译成下一步动作，但对照槽还没有直接显示三步收益落点；#4 继续作为界面文字密度和图片化依据。
 - 本轮改动新增远航路线对照条收益短标：协同/绕行对照槽直接显示 `校准/补给/闭环` 或 `校准/投送/闭环`，把三步回报压到对照条层。

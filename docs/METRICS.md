@@ -28,7 +28,7 @@
 - 远航路线取向短标当前由 `branchChoices.routeIntentKind` / `routeIntentText` 即时渲染，不单独记录为真实线上指标；协同保当前资源、绕行推累计航段的语义仍通过 `branchChoiceText`、卡片标题、资源流向短标、代价短标、收益对照和反馈快照复盘。
 - 远航路线回航结果短标当前由 `branchChoices.routeReturnKind` / `routeReturnText` 即时渲染，不单独记录为真实线上指标；协同远航突破、绕行突破的语义仍通过 `branchChoiceText`、卡片标题、路线下一步、收益对照、路线反馈和反馈快照复盘。
 - 远航路线指令串当前由 `branchChoices.routeCommandLabels` / `routeCommandText` 即时渲染，不单独记录为真实线上指标；目标指令、分支指令和回目标指令的顺序仍通过 `branchChoiceText`、卡片标题、路线预案、路线步骤、按钮路线标记、路线反馈和反馈快照复盘。
-- 远航路线对照条当前由 `branchChoiceSummaryText` 和 `branchChoices` 的路线徽标、当前步短标 `routePhaseText`、下一步短标 `routeActionText`、收益短标 `routeRewardSummaryText`、第二步短标 `routeBranchStepText`、取向、代价、回航结果即时渲染，不单独记录为真实线上指标；协同/绕行路线取舍、当前阶段、下一步操作、三步回报落点与第二步按钮映射仍通过 `branchChoiceText`、卡片标题、路线判断、路线指令串、路线反馈和反馈快照复盘。
+- 远航路线对照条当前由 `branchChoiceSummaryText` 和 `branchChoices` 的路线徽标、当前步短标 `routePhaseText`、下一步短标 `routeActionText`、收益短标 `routeRewardSummaryText`、第二步短标 `routeBranchStepText`、本步收益短标 `routePayoffSummaryText`、取向、代价、回航结果即时渲染，不单独记录为真实线上指标；协同/绕行路线取舍、当前阶段、下一步操作、三步回报落点、第二步按钮映射与本步即时收益差异仍通过 `branchChoiceText`、卡片标题、路线收益对照、路线判断、路线指令串、路线反馈和反馈快照复盘。
 - 远航路线对照条迷你三步进度条当前由 `branchChoices.routeProgressPercent` 和 `branchChoices.routeNodeStates` 即时渲染，不单独记录为真实线上指标；目标、分支、回目标的阶段语义仍通过 `branchChoiceSummaryText`、当前步短标、路线微图、路线步骤、按钮路线标记、路线反馈和反馈快照复盘。
 - 远航路线微图图例当前由 `far-dispatch-branch-choice-legend` 和 `far-dispatch-branch-choice-legend-item` 即时渲染，不单独记录为真实线上指标；1 目标、2 分支、3 回目标的路线语义仍通过路线步骤、路线下一步、按钮路线标记、路线反馈和反馈快照复盘。
 - 远航路线明细折叠当前由 `far-dispatch-branch-choice-details` 的浏览器展开状态即时渲染，不单独记录为真实线上指标；路线目标、下一步、收益对照和后续回航语义仍保留在 `branchChoiceText`、卡片标题、展开内容和反馈快照中复盘。

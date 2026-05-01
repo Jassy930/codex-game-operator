@@ -5251,6 +5251,13 @@ function buildFarRouteDispatchBranchChoices(
       buildFarRouteDispatchBranchRouteCommandText(routeCommandLabels);
     const routeBranchStepText =
       buildFarRouteDispatchBranchRouteBranchStepText(routeCommandLabels);
+    const routePayoffSummaryText =
+      buildFarRouteDispatchBranchPayoffSummaryText(
+        choice.kind,
+        shift,
+        stable,
+        focused
+      );
     const followupText = buildFarRouteDispatchBranchFollowupText(
       choice.label,
       choice.directive.name,
@@ -5320,6 +5327,7 @@ function buildFarRouteDispatchBranchChoices(
       routeCommandLabels,
       routeCommandText,
       routeBranchStepText,
+      routePayoffSummaryText,
       nextText: choice.nextText,
       reasonText,
       decisionText,
@@ -5364,6 +5372,8 @@ function buildFarRouteDispatchBranchChoices(
         routeReturn.text +
         " · " +
         routeBranchStepText +
+        " · " +
+        routePayoffSummaryText +
         " · " +
         routeCommandText +
         " · " +
@@ -5866,20 +5876,12 @@ function buildFarRouteDispatchBranchPayoffText(
   focused,
   rotationReady
 ) {
-  let instantRate =
-    kind === "sync"
-      ? FAR_ROUTE_DISPATCH_SYNC_REWARD_RATE + FAR_ROUTE_DISPATCH_SYNC_SUPPLY_RATE
-      : FAR_ROUTE_DISPATCH_DETOUR_REWARD_RATE;
-
-  if (shift) {
-    instantRate += FAR_ROUTE_DISPATCH_BRANCH_SHIFT_REWARD_RATE;
-  }
-  if (stable) {
-    instantRate += FAR_ROUTE_DISPATCH_BRANCH_STABILITY_REWARD_RATE;
-  }
-  if (focused) {
-    instantRate += FAR_ROUTE_DISPATCH_BRANCH_FOCUS_REWARD_RATE;
-  }
+  const instantRate = getFarRouteDispatchBranchInstantPayoffRate(
+    kind,
+    shift,
+    stable,
+    focused
+  );
 
   const returnRewards = [
     "远航闭环 +" + Math.round(FAR_ROUTE_DISPATCH_LOOP_REWARD_RATE * 100) + "%",
@@ -5920,6 +5922,46 @@ function buildFarRouteDispatchBranchPayoffText(
   );
 }
 
+function buildFarRouteDispatchBranchPayoffSummaryText(
+  kind,
+  shift,
+  stable,
+  focused
+) {
+  const instantRate = getFarRouteDispatchBranchInstantPayoffRate(
+    kind,
+    shift,
+    stable,
+    focused
+  );
+
+  return "本步 +" + Math.round(instantRate * 100) + "%";
+}
+
+function getFarRouteDispatchBranchInstantPayoffRate(
+  kind,
+  shift,
+  stable,
+  focused
+) {
+  let instantRate =
+    kind === "sync"
+      ? FAR_ROUTE_DISPATCH_SYNC_REWARD_RATE + FAR_ROUTE_DISPATCH_SYNC_SUPPLY_RATE
+      : FAR_ROUTE_DISPATCH_DETOUR_REWARD_RATE;
+
+  if (shift) {
+    instantRate += FAR_ROUTE_DISPATCH_BRANCH_SHIFT_REWARD_RATE;
+  }
+  if (stable) {
+    instantRate += FAR_ROUTE_DISPATCH_BRANCH_STABILITY_REWARD_RATE;
+  }
+  if (focused) {
+    instantRate += FAR_ROUTE_DISPATCH_BRANCH_FOCUS_REWARD_RATE;
+  }
+
+  return instantRate;
+}
+
 function buildFarRouteDispatchBranchChoiceText(choices) {
   if (!choices.length) {
     return "";
@@ -5953,6 +5995,8 @@ function buildFarRouteDispatchBranchChoiceText(choices) {
           choice.routeReturnText +
           " · " +
           choice.routeBranchStepText +
+          " · " +
+          choice.routePayoffSummaryText +
           " · " +
           choice.routeCommandText +
           " · " +
@@ -5997,6 +6041,8 @@ function buildFarRouteDispatchBranchChoiceSummaryText(choices) {
           choice.routeRewardSummaryText +
           " · " +
           choice.routeBranchStepText +
+          " · " +
+          choice.routePayoffSummaryText +
           " · " +
           choice.routeIntentText +
           " · " +
