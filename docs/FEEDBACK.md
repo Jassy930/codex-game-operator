@@ -12,6 +12,7 @@
 - #6 已回复：说明路线对照条下一步按钮短标、验证结果、Pages 部署和复测问题；issue 保持 open，更新时间为 2026-05-01T06:29:01Z，评论地址：`https://github.com/Jassy930/codex-game-operator/issues/6#issuecomment-4358153873`。
 - #4 已回复：说明本轮把下一步按钮名压到路线对照条，降低路线微图、指令串和展开明细之间的对照成本；issue 保持 open，更新时间为 2026-05-01T06:29:21Z，评论地址：`https://github.com/Jassy930/codex-game-operator/issues/4#issuecomment-4358154779`。
 - 回复后同步 GitHub Issues：2026-05-01 14:29 CST 当前仍为 5 个 open feedback issue、0 个 open bug issue。
+- 钉钉通知未发送：运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` 相关变量名，当前目录和父级四层内也未发现 `.env*` 文件；未将 webhook 写入仓库。
 
 - GitHub Issues：gh 可用且已认证；2026-05-01 14:06 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
 - #6 继续作为本轮 Product decision 依据：路线指令串已经补上 1/2/3 步号与状态语义，但路线对照条底部迷你进度轨仍是无编号小圆点；#4 继续作为图形化和降文字密度依据。

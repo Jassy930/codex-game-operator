@@ -10,6 +10,7 @@
 - 构建产物已确认包含 `下一步 1 `、`下一步 2 `、`下一步 3 ` 和 `下一步 绕行整备` 派生逻辑。
 - 发布：提交 `228d4ba` 已推送到 `origin/main`；GitHub Pages workflow `25205067424` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页返回 HTTP 200，线上 `src/game.js` 已确认包含下一步按钮短标派生逻辑。
 - 反馈处理：已回复 #6，说明路线对照条下一步按钮短标、验证结果、Pages 部署和复测问题；已回复 #4，说明本轮把下一步按钮名压到路线对照条以降低文字反推压力；两个 issue 均保持 open。回复后于 2026-05-01 14:29 CST 再次同步 GitHub Issues，当前仍为 5 个 open feedback issue、0 个 open bug issue；#6 更新时间为 2026-05-01T06:29:01Z，#4 更新时间为 2026-05-01T06:29:21Z。
+- 钉钉通知未发送：运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` 相关变量名，当前目录和父级四层内也未发现 `.env*` 文件；未将 webhook 写入仓库。
 
 - 远航调度新增“路线对照条进度步号与状态语义”：协同/绕行对照槽底部的迷你三步进度轨直接显示 1/2/3 步号，并提供“路线对照进度”可访问汇总与悬停状态，继续回应 #6 的后半段路线执行理解和 #4 的图形化降密度反馈。
 - `src/app.js` 为 `far-dispatch-branch-choice-summary-progress` 写入 `role="img"`、`aria-label`、`title` 和节点 `data-step-label`；`src/styles.css` 通过 `.far-dispatch-branch-choice-summary-progress-node::before` 显示步号；`tests/game.test.js` 覆盖 DOM、可访问语义和 CSS 静态绑定。
