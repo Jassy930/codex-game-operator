@@ -1,5 +1,27 @@
 # Decision
 
+## 2026-05-01 Product decision：点火外层轮廓命中亮闪
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-01 18:05 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#5 仍是最新更新的开放反馈，继续围绕“点火按钮太薄弱、增加点击反馈、特效和点击欲望”做 Product decision。
+
+当前最大问题：点火按钮已经有按住反冲、按住压光、落点热区、落点闪光、涟漪、火花束、收益浮层跟随落点、蓄能轨命中闪烁、连击点命中跳闪、星核裂纹、蓄能外弧、中心标签普通/过载命中反馈、音效和触感。普通点击和过载点击的局部落点、中心标签和轨道确认已经很密，但按钮外层蓄能轮廓在松手命中瞬间仍主要保持持续旋转态，可以补一次短促亮闪，把“整颗星核被点燃”的命中确认落到按钮本体外轮廓。
+
+本轮决策：
+
+- 新增“点火外层轮廓命中亮闪”。
+- `src/styles.css` 复用 `.core-button.is-pulsing:not(.is-overload-impact)::before`，在普通命中时保留 `coreCharge` 旋转并叠加 `coreShellHitFlash`。
+- `src/styles.css` 复用 `.core-button.is-overload-impact::before`，在过载命中时保留 `coreCharge` 旋转并叠加更强的 `coreShellOverloadFlash`。
+- `tests/game.test.js` 增加静态断言，覆盖普通/过载外层轮廓命中动效选择器和关键帧。
+- 该改动只调整点火按钮展示层和测试，不新增收益、不新增存档字段，不改变点击收益、连击窗口、过载奖励、升级价格、星图路线、项目奖励、航线策略、航线指令、远航调度、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-05-01 18:05 CST 当前 5 个 open feedback issue、0 个 open bug issue。
+- `src/styles.css` 包含 `.core-button.is-pulsing:not(.is-overload-impact)::before`、`coreShellHitFlash 360ms ease-out`、`.core-button.is-overload-impact::before`、`coreShellOverloadFlash 520ms ease-out` 和对应 `@keyframes`。
+- `tests/game.test.js` 覆盖点火外层轮廓普通/过载命中亮闪静态样式绑定。
+- 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含 `coreShellHitFlash`、`coreShellOverloadFlash`、`.core-button.is-pulsing:not(.is-overload-impact)::before` 和 `.core-button.is-overload-impact::before`。
+
 ## 2026-05-01 Product decision：点火中心标签命中亮脉冲
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-01 17:52 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#5 仍是最新更新的开放反馈，继续围绕“点火按钮太薄弱、增加点击反馈、特效和点击欲望”做 Product decision。
