@@ -1923,6 +1923,48 @@ h2 {
   display: none;
 }
 
+.far-dispatch-branch-choice-details {
+  display: block;
+  margin-top: 2px;
+  border-top: 1px solid rgba(248, 243, 231, 0.1);
+  padding-top: 5px;
+}
+
+.far-dispatch-branch-choice-details summary {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  padding-right: 18px;
+  color: rgba(248, 243, 231, 0.64);
+  cursor: pointer;
+  font-size: 0.62rem;
+  font-weight: 900;
+  line-height: 1.3;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.far-dispatch-branch-choice-details summary::-webkit-details-marker {
+  display: none;
+}
+
+.far-dispatch-branch-choice-details summary::after {
+  position: absolute;
+  right: 2px;
+  color: rgba(248, 243, 231, 0.5);
+  content: "+";
+}
+
+.far-dispatch-branch-choice-details[open] summary::after {
+  content: "-";
+}
+
+.far-dispatch-branch-choice-detail-grid {
+  display: grid;
+  gap: 4px;
+  margin-top: 6px;
+}
+
 .far-dispatch-branch-choice em {
   color: rgba(248, 243, 231, 0.68);
   font-size: 0.66rem;

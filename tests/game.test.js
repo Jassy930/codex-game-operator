@@ -1717,6 +1717,11 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(appJs, /routeMarker\.className =/);
   assert.match(appJs, /far-dispatch-branch-choice-route-marker is-/);
   assert.match(appJs, /routeMarker\.textContent = choice\.routeMarkerText \?\? ""/);
+  assert.match(appJs, /details\.className = "far-dispatch-branch-choice-details"/);
+  assert.match(appJs, /detailsSummary\.textContent = "路线明细"/);
+  assert.match(appJs, /detailsGrid\.className = "far-dispatch-branch-choice-detail-grid"/);
+  assert.match(appJs, /detailsGrid\.append\(objective, followup, next, payoff, caption\)/);
+  assert.match(appJs, /details\.append\(detailsSummary, detailsGrid\)/);
   assert.match(appJs, /"far-dispatch-branch-choice-decision is-" \+/);
   assert.match(appJs, /decision\.textContent = choice\.decisionText \?\? ""/);
   assert.match(appJs, /reason\.className = "far-dispatch-branch-choice-reason"/);
@@ -1878,6 +1883,10 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(styles, /\.far-dispatch-branch-choice-objective/);
   assert.match(styles, /\.far-dispatch-branch-choice-followup/);
   assert.match(styles, /\.far-dispatch-branch-choice-payoff/);
+  assert.match(styles, /\.far-dispatch-branch-choice-details/);
+  assert.match(styles, /\.far-dispatch-branch-choice-details summary \{[\s\S]*text-overflow: ellipsis/);
+  assert.match(styles, /\.far-dispatch-branch-choice-details\[open\] summary::after/);
+  assert.match(styles, /\.far-dispatch-branch-choice-detail-grid/);
   assert.match(styles, /\.directive-button \.directive-dispatch-branch-focus/);
   assert.match(styles, /\.directive-button \.directive-dispatch-branch-rotation/);
   assert.match(styles, /\.directive-button \.directive-dispatch-focus-loop/);

@@ -703,7 +703,7 @@ function renderFarDispatch(dispatch) {
 }
 
 function renderFarDispatchBranchChoices(dispatch) {
-  const track = document.createElement("span");
+  const track = document.createElement("div");
   track.className = "far-dispatch-branch-choices";
 
   const choices = Array.isArray(dispatch.branchChoices) ? dispatch.branchChoices : [];
@@ -715,7 +715,7 @@ function renderFarDispatchBranchChoices(dispatch) {
   track.setAttribute("aria-label", dispatch.branchChoiceText ?? "");
   track.append(
     ...choices.map((choice) => {
-      const item = document.createElement("span");
+      const item = document.createElement("article");
       item.className =
         "far-dispatch-branch-choice is-" +
         getFarDispatchBranchChoiceKind(choice) +
@@ -778,17 +778,24 @@ function renderFarDispatchBranchChoices(dispatch) {
       const caption = document.createElement("em");
       caption.textContent = choice.caption + " · " + choice.rewardText;
 
+      const details = document.createElement("details");
+      details.className = "far-dispatch-branch-choice-details";
+
+      const detailsSummary = document.createElement("summary");
+      detailsSummary.textContent = "路线明细";
+
+      const detailsGrid = document.createElement("span");
+      detailsGrid.className = "far-dispatch-branch-choice-detail-grid";
+      detailsGrid.append(objective, followup, next, payoff, caption);
+      details.append(detailsSummary, detailsGrid);
+
       item.append(
         header,
         routeVisual,
         directive,
         decision,
         reason,
-        objective,
-        followup,
-        next,
-        payoff,
-        caption
+        details
       );
       return item;
     })
