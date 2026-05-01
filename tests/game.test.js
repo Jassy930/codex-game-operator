@@ -1438,8 +1438,13 @@ test("点火按钮会渲染点击反馈和过载前兆效果", () => {
   assert.match(styles, /--core-gain-y/);
   assert.match(styles, /left: clamp\(56px, var\(--core-gain-x\), calc\(100% - 56px\)\)/);
   assert.match(styles, /top: clamp\(44px, calc\(var\(--core-gain-y\) - 28px\), calc\(100% - 54px\)\)/);
+  assert.match(styles, /\.core-gain-pop::after/);
   assert.match(styles, /\.core-gain-pop\.is-showing/);
+  assert.match(styles, /\.core-gain-pop\.is-showing::after/);
+  assert.match(styles, /coreGainPopHalo 620ms ease-out/);
   assert.match(styles, /\.core-gain-pop\.is-overload-gain/);
+  assert.match(styles, /\.core-gain-pop\.is-overload-gain\.is-showing::after/);
+  assert.match(styles, /coreGainPopOverloadHalo 760ms ease-out/);
   assert.match(styles, /\.core-overload-badge/);
   assert.match(styles, /\.core-overload-badge\.is-countdown-active/);
   assert.match(styles, /\.core-overload-badge\.is-overload-ready/);
@@ -1533,11 +1538,14 @@ test("点火按钮会渲染点击反馈和过载前兆效果", () => {
   assert.match(styles, /@keyframes coreChargeRingOverloadHit/);
   assert.match(styles, /@keyframes coreImpactPoint/);
   assert.match(styles, /@keyframes coreGainFloat/);
+  assert.match(styles, /@keyframes coreGainPopHalo/);
+  assert.match(styles, /@keyframes coreGainPopOverloadHalo/);
   assert.match(styles, /@keyframes coreBadgePulse/);
   assert.match(styles, /@keyframes coreBadgeBurst/);
   assert.match(styles, /@media \(prefers-reduced-motion: reduce\) \{[\s\S]*\.core-button\.is-pulsing:not\(\.is-overload-impact\) \.core-stage-aura[\s\S]*animation: none/);
   assert.match(styles, /@media \(prefers-reduced-motion: reduce\) \{[\s\S]*\.core-button\.is-pulsing:not\(\.is-overload-impact\) \.core-vein[\s\S]*animation: none/);
   assert.match(styles, /@media \(prefers-reduced-motion: reduce\) \{[\s\S]*\.core-button\.is-pulsing:not\(\.is-overload-impact\) \.core-overload-badge[\s\S]*animation: none/);
+  assert.match(styles, /@media \(prefers-reduced-motion: reduce\) \{[\s\S]*\.core-gain-pop\.is-showing::after[\s\S]*animation: none/);
   assert.match(styles, /@keyframes coreDotPulse/);
   assert.match(styles, /@keyframes coreComboDotHit/);
   assert.match(styles, /@keyframes coreComboDotOverloadHit/);

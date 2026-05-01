@@ -1,5 +1,28 @@
 # Decision
 
+## 2026-05-02 Product decision：点火收益浮层命中奖励光晕
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-02 00:54 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；本轮继续处理 #5“点火按钮太薄弱、增加点击反馈和点击欲望”。
+
+当前最大问题：点火按钮已经有按住反冲、落点反馈、收益浮层、顶部读数亮闪、连击轨光扫、倒计时徽标跳闪、星核裂纹闪亮和阶段光环补光。收益浮层已经跟随点击落点显示 `+X`，但它本身仍是单个胶囊浮层，缺少“这一击奖励从落点扩散出去”的短促奖励感。
+
+本轮决策：
+
+- 新增“点火收益浮层命中奖励光晕”。
+- `src/styles.css` 为 `.core-gain-pop::after` 增加局部奖励光晕，普通收益浮层显示时播放 `coreGainPopHalo`。
+- 过载收益浮层继续复用 `.core-gain-pop.is-overload-gain`，并在显示时播放更强的 `coreGainPopOverloadHalo`。
+- 在 `prefers-reduced-motion: reduce` 中关闭该光晕动画。
+- `tests/game.test.js` 增加静态断言，覆盖伪元素、动画名、keyframes 和降低动效兜底。
+- 该改动只调整点火收益浮层展示层和测试，不新增可见文字、不新增收益、不新增存档字段，不改变点击收益、连击窗口、过载奖励、升级价格、星图路线、项目奖励、航线策略、航线指令、远航调度、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-05-02 00:54 CST 当前 5 个 open feedback issue、0 个 open bug issue；#5 作为本轮主处理对象。
+- `src/styles.css` 包含 `coreGainPopHalo`、`coreGainPopOverloadHalo`、收益浮层光晕伪元素和降低动效兜底。
+- `tests/game.test.js` 覆盖点火收益浮层命中奖励光晕静态绑定。
+- 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含 `coreGainPopHalo`、`coreGainPopOverloadHalo`、收益浮层光晕伪元素和降低动效兜底。
+
 ## 2026-05-02 Product decision：点火阶段光环命中补光
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-02 00:43 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；本轮继续处理 #5“点火按钮太薄弱、增加点击反馈和点击欲望”。
