@@ -8,6 +8,10 @@
 - 本轮只调整点火按钮展示层和测试，不新增收益、不新增存档字段，不改变点击收益、连击窗口、过载奖励、升级价格、星图路线、项目奖励、航线策略、航线指令、远航调度、反馈入口或部署链路。
 - 本轮本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
 - 构建产物已确认包含 `core-veins`、`--core-vein-opacity`、`--core-vein-dash-offset`、`coreVeinPulse` 和 `coreVeinBurst`。
+- 发布：提交 `83eecf7` 已推送到 `origin/main`；GitHub Pages workflow `25205870214` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页返回 HTTP 200，线上 `index.html`、`src/app.js` 和 `src/styles.css` 已确认包含星核蓄能裂纹 DOM、变量绑定和动画样式。workflow 继续给出 Node.js 20 actions 弃用提醒，未影响本次部署。
+- #5 已回复：说明星核蓄能裂纹、验证结果、Pages 部署和复测问题；issue 保持 open，更新时间为 2026-05-01T07:02:22Z，评论地址：`https://github.com/Jassy930/codex-game-operator/issues/5#issuecomment-4358252682`。
+- 回复后同步 GitHub Issues：2026-05-01 15:02 CST 当前仍为 5 个 open feedback issue、0 个 open bug issue。
+- 钉钉通知未发送：运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` 相关变量名，当前目录和父级四层内也未发现 `.env*` 文件；未将 webhook 写入仓库。
 
 - GitHub Issues：gh 可用且已认证；2026-05-01 14:37 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
 - 本轮 Product decision 处理 #5：点火按钮已经有多层反馈，但按钮内 8 格连击轨仍偏离散，缺少每次点击后连续推进的填充反馈；#6 与 #4 继续等待路线对照条相关复测。

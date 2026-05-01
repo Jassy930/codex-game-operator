@@ -8,6 +8,9 @@
 - 同步 GitHub Issues 反馈状态：2026-05-01 14:53 CST 当前 5 个 open feedback issue、0 个 open bug issue；#5 作为主处理对象。
 - 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
 - 构建产物已确认包含 `core-veins`、`--core-vein-opacity`、`--core-vein-dash-offset`、`coreVeinPulse` 和 `coreVeinBurst`。
+- 发布：提交 `83eecf7` 已推送到 `origin/main`；GitHub Pages workflow `25205870214` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页返回 HTTP 200，线上 `index.html`、`src/app.js` 和 `src/styles.css` 已确认包含星核蓄能裂纹 DOM、变量绑定和动画样式。workflow 同时给出 Node.js 20 actions 弃用提醒，未影响本次部署。
+- 反馈处理：已回复 #5，说明星核蓄能裂纹、验证结果、Pages 部署和复测问题；issue 保持 open。回复后于 2026-05-01 15:02 CST 再次同步 GitHub Issues，当前仍为 5 个 open feedback issue、0 个 open bug issue；#5 更新时间为 2026-05-01T07:02:22Z。
+- 钉钉通知未发送：运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` 相关变量名，当前目录和父级四层内也未发现 `.env*` 文件；未将 webhook 写入仓库。
 
 - 点火按钮新增“连击轨进度填充”：按钮内 8 格连击轨会根据现有 `combo.progress` 显示连续填充条，过载前一击和过载命中时使用更强填充色，继续回应 #5 的点击反馈、特效和点击欲望反馈。
 - `src/app.js` 在 `renderCoreComboTrack` 写入 `--core-combo-progress`；`src/styles.css` 通过 `.core-combo-track::before` 渲染填充轨；`tests/game.test.js` 覆盖静态绑定。
