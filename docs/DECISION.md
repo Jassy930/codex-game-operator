@@ -21,6 +21,10 @@
 - `tests/game.test.js` 覆盖点火外层轮廓普通/过载命中亮闪静态样式绑定。
 - 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
 - 构建产物已确认包含 `coreShellHitFlash`、`coreShellOverloadFlash`、`.core-button.is-pulsing:not(.is-overload-impact)::before` 和 `.core-button.is-overload-impact::before`。
+- 发布验证已通过：提交 `f0cc032` 已推送到 `origin/main`；GitHub Pages workflow `25210782717` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页返回 HTTP 200，线上 `src/styles.css` 已确认包含 `coreShellHitFlash`、`coreShellOverloadFlash`、`.core-button.is-pulsing:not(.is-overload-impact)::before` 和 `.core-button.is-overload-impact::before`。workflow 继续出现 Node.js 20 actions 弃用提醒，未影响本次部署。
+- 已回复 GitHub Issue #5，说明点火外层轮廓命中亮闪、验证结果、Pages 部署和复测问题，issue 保持 open，更新时间为 2026-05-01T10:14:06Z；评论地址：`https://github.com/Jassy930/codex-game-operator/issues/5#issuecomment-4358845864`。
+- 回复后同步 GitHub Issues：2026-05-01 18:14 CST 当前仍为 5 个 open feedback issue、0 个 open bug issue。
+- 钉钉通知未发送：2026-05-01 18:14 CST 运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` 相关变量名，当前目录、父级和用户目录未发现 `.env*` 文件；未将 webhook 写入仓库。
 
 ## 2026-05-01 Product decision：点火中心标签命中亮脉冲
 
