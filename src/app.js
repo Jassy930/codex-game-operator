@@ -840,6 +840,8 @@ function renderFarDispatchBranchChoiceRoute(choice) {
     getFarDispatchBranchChoiceRouteMarkerKind(choice) +
     " is-route-phase-" +
     getFarDispatchBranchChoiceRoutePhaseKind(choice) +
+    " is-route-flow-" +
+    getFarDispatchBranchChoiceRouteFlowKind(choice) +
     (choice.focused ? " is-focused" : "");
   route.style.setProperty(
     "--branch-route-progress",
@@ -887,6 +889,13 @@ function renderFarDispatchBranchChoiceRoute(choice) {
   routePhase.textContent = choice.routePhaseText ?? "";
   routePhase.hidden = !choice.routePhaseText;
 
+  const routeFlow = document.createElement("span");
+  routeFlow.className =
+    "far-dispatch-branch-choice-route-flow is-" +
+    getFarDispatchBranchChoiceRouteFlowKind(choice);
+  routeFlow.textContent = choice.routeFlowText ?? "";
+  routeFlow.hidden = !choice.routeFlowText;
+
   const startReward = renderFarDispatchBranchChoiceRouteReward(choice, "start");
   const branchReward = renderFarDispatchBranchChoiceRouteReward(choice, "branch");
   const returnReward = renderFarDispatchBranchChoiceRouteReward(choice, "return");
@@ -899,6 +908,7 @@ function renderFarDispatchBranchChoiceRoute(choice) {
     routeResource,
     routeMarker,
     routePhase,
+    routeFlow,
     startReward,
     branchReward,
     returnReward
@@ -1030,6 +1040,11 @@ function getFarDispatchBranchChoiceRouteMarkerKind(choice) {
 function getFarDispatchBranchChoiceRoutePhaseKind(choice) {
   const phaseKind = String(choice.routePhaseKind ?? "inactive");
   return phaseKind.replace(/[^a-z-]/g, "") || "inactive";
+}
+
+function getFarDispatchBranchChoiceRouteFlowKind(choice) {
+  const flowKind = String(choice.routeFlowKind ?? "none");
+  return flowKind.replace(/[^a-z-]/g, "") || "none";
 }
 
 function getFarDispatchBranchChoiceRouteNodeState(choice, nodeId) {

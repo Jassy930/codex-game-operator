@@ -1712,6 +1712,7 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(appJs, /" is-resource-" \+/);
   assert.match(appJs, /" is-route-marker-" \+/);
   assert.match(appJs, /" is-route-phase-" \+/);
+  assert.match(appJs, /" is-route-flow-" \+/);
   assert.match(appJs, /"--branch-route-progress"/);
   assert.match(appJs, /getFarDispatchBranchChoiceRouteProgress\(choice\) \+ "%"/);
   assert.match(appJs, /route\.setAttribute\("aria-hidden", "true"\)/);
@@ -1730,6 +1731,9 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(appJs, /routePhase\.className =/);
   assert.match(appJs, /far-dispatch-branch-choice-route-phase is-/);
   assert.match(appJs, /routePhase\.textContent = choice\.routePhaseText \?\? ""/);
+  assert.match(appJs, /routeFlow\.className =/);
+  assert.match(appJs, /far-dispatch-branch-choice-route-flow is-/);
+  assert.match(appJs, /routeFlow\.textContent = choice\.routeFlowText \?\? ""/);
   assert.match(appJs, /renderFarDispatchBranchChoiceRouteReward\(choice, "start"\)/);
   assert.match(appJs, /renderFarDispatchBranchChoiceRouteReward\(choice, "branch"\)/);
   assert.match(appJs, /renderFarDispatchBranchChoiceRouteReward\(choice, "return"\)/);
@@ -1762,6 +1766,7 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(appJs, /function getFarDispatchBranchChoiceRouteResourceKind\(choice\)/);
   assert.match(appJs, /function getFarDispatchBranchChoiceRouteMarkerKind\(choice\)/);
   assert.match(appJs, /function getFarDispatchBranchChoiceRouteProgress\(choice\)/);
+  assert.match(appJs, /function getFarDispatchBranchChoiceRouteFlowKind\(choice\)/);
   assert.match(appJs, /function getFarDispatchBranchChoiceRouteRewardLabel\(choice, nodeId\)/);
   assert.match(appJs, /meter\.className = "directive-task-meter"/);
   assert.match(appJs, /meter\.className = "far-dispatch-meter"/);
@@ -1779,7 +1784,9 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(appJs, /elements\.farDispatch\.classList\.toggle\("is-active", dispatch\.active\)/);
   assert.match(gameJs, /routeProgressPercent/);
   assert.match(gameJs, /routeRewardLabels/);
+  assert.match(gameJs, /routeFlowText/);
   assert.match(gameJs, /function buildFarRouteDispatchBranchRouteRewardText/);
+  assert.match(gameJs, /function buildFarRouteDispatchBranchRouteFlow/);
   assert.match(gameJs, /function buildFarRouteDispatchBranchRouteProgressPercent/);
   assert.match(appJs, /option\.recommended \? "is-recommended" : ""/);
   assert.match(appJs, /option\.cooling \? "is-cooling" : ""/);
@@ -1908,6 +1915,9 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(styles, /\.far-dispatch-branch-choice-route-phase\.is-start/);
   assert.match(styles, /\.far-dispatch-branch-choice-route-phase\.is-return/);
   assert.match(styles, /\.far-dispatch-branch-choice-route-phase\.is-complete/);
+  assert.match(styles, /\.far-dispatch-branch-choice-route-flow/);
+  assert.match(styles, /\.far-dispatch-branch-choice-route-flow\.is-current/);
+  assert.match(styles, /\.far-dispatch-branch-choice-route-flow\.is-progress/);
   assert.match(styles, /\.far-dispatch-branch-choice-route-reward/);
   assert.match(styles, /\.far-dispatch-branch-choice-route-reward\.is-start/);
   assert.match(styles, /\.far-dispatch-branch-choice-route-reward\.is-branch/);
@@ -2974,6 +2984,12 @@ test("远航调度会在 20M 后按当前航段指定目标指令", () => {
       (choice) => choice.routeResourceKind + ":" + choice.routeResourceText
     ),
     ["current:保留当前", "progress:投送累计"]
+  );
+  assert.deepEqual(
+    dispatch.branchChoices.map(
+      (choice) => choice.routeFlowKind + ":" + choice.routeFlowText
+    ),
+    ["current:当前+", "progress:当前->累计"]
   );
   assert.deepEqual(
     dispatch.branchChoices.map(

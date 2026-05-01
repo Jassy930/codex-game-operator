@@ -1153,6 +1153,16 @@ const FAR_ROUTE_DISPATCH_BRANCH_ROUTE_REWARD_LABELS = Object.freeze({
     return: "闭环"
   })
 });
+const FAR_ROUTE_DISPATCH_BRANCH_ROUTE_FLOW_LABELS = Object.freeze({
+  sync: Object.freeze({
+    kind: "current",
+    text: "当前+"
+  }),
+  detour: Object.freeze({
+    kind: "progress",
+    text: "当前->累计"
+  })
+});
 
 const INITIAL_UPGRADES = Object.fromEntries(
   UPGRADE_DEFS.map((upgrade) => [upgrade.id, 0])
@@ -5186,6 +5196,7 @@ function buildFarRouteDispatchBranchChoices(
       buildFarRouteDispatchBranchRouteRewardLabels(choice.kind);
     const routeRewardText =
       buildFarRouteDispatchBranchRouteRewardText(routeRewardLabels);
+    const routeFlow = buildFarRouteDispatchBranchRouteFlow(choice.kind);
     const followupText = buildFarRouteDispatchBranchFollowupText(
       choice.label,
       choice.directive.name,
@@ -5241,6 +5252,8 @@ function buildFarRouteDispatchBranchChoices(
       routeStepLabels,
       routeRewardLabels,
       routeRewardText,
+      routeFlowKind: routeFlow.kind,
+      routeFlowText: routeFlow.text,
       nextText: choice.nextText,
       reasonText,
       decisionText,
@@ -5271,6 +5284,8 @@ function buildFarRouteDispatchBranchChoices(
         routePhase.text +
         " · " +
         routeRewardText +
+        " · " +
+        routeFlow.text +
         " · " +
         choice.caption +
         (reasonText ? " · " + reasonText : "") +
@@ -5492,6 +5507,13 @@ function buildFarRouteDispatchBranchRouteRewardText(routeRewardLabels) {
   ].filter(Boolean);
 
   return labels.length ? "收益点：" + labels.join(" -> ") : "";
+}
+
+function buildFarRouteDispatchBranchRouteFlow(kind) {
+  return {
+    ...(FAR_ROUTE_DISPATCH_BRANCH_ROUTE_FLOW_LABELS[kind] ??
+      FAR_ROUTE_DISPATCH_BRANCH_ROUTE_FLOW_LABELS.sync)
+  };
 }
 
 function buildFarRouteDispatchBranchDecisionKind(

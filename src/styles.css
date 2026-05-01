@@ -1841,6 +1841,35 @@ h2 {
   color: #96e7a8;
 }
 
+.far-dispatch-branch-choice-route-flow {
+  position: absolute;
+  z-index: 2;
+  top: 2px;
+  right: 4px;
+  max-width: 64px;
+  color: rgba(248, 243, 231, 0.72);
+  font-size: 0.44rem;
+  font-weight: 950;
+  line-height: 1.2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-shadow: 0 1px 4px rgba(5, 12, 20, 0.7);
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.far-dispatch-branch-choice-route-flow[hidden] {
+  display: none;
+}
+
+.far-dispatch-branch-choice-route-flow.is-current {
+  color: #d8ffe2;
+}
+
+.far-dispatch-branch-choice-route-flow.is-progress {
+  color: #ffd1df;
+}
+
 .far-dispatch-branch-choice-route-reward {
   position: absolute;
   z-index: 2;

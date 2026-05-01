@@ -1,5 +1,29 @@
 # Decision
 
+## 2026-05-01 Product decision：远航路线资源流向短标
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-01 09:32 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#6 仍是后半段玩法变化主反馈，#4 仍是界面文字密度和图片化依据，因此本轮继续进入 Product decision。
+
+当前最大问题：协同/绕行路线微图已经显示路线阶段、推进、收益点和路线状态，但“协同补当前资源、绕行把当前资源投送到累计航段”的资源流向仍主要依赖资源取向图形、卡片说明和展开明细。玩家能看到三步回报后，还需要更快区分两条路线到底在处理哪类资源。
+
+本轮决策：
+
+- 新增“远航路线资源流向短标”。
+- `branchChoices` 派生 `routeFlowKind` / `routeFlowText`，协同路线显示 `当前+`，绕行路线显示 `当前->累计`。
+- `src/app.js` 在路线微图内渲染 `far-dispatch-branch-choice-route-flow`，并给路线容器追加 `is-route-flow-*` class。
+- `src/styles.css` 在路线微图右上角固定显示资源流向短标，协同使用当前资源色，绕行使用投送色。
+- 该短标只从现有路线类型派生，是 `caption`、资源取向符号和收益明细的视觉摘要；不新增收益、不新增存档字段，不改变升级价格、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、远航调度数值、冷却、连携窗口、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-05-01 09:32 CST 当前 5 个 open feedback issue、0 个 open bug issue。
+- `src/game.js` 派生 `routeFlowKind` / `routeFlowText`，覆盖协同 `current:当前+` 与绕行 `progress:当前->累计`。
+- `src/app.js` 渲染 `far-dispatch-branch-choice-route-flow is-current/is-progress`。
+- `src/styles.css` 包含路线资源流向短标样式和 current/progress 状态色。
+- `tests/game.test.js` 覆盖资源流向短标派生、静态 DOM 绑定和样式绑定。
+- 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含 `routeFlowKind`、`routeFlowText`、`far-dispatch-branch-choice-route-flow` 和 `当前->累计`。
+
 ## 2026-05-01 Product decision：远航路线收益短标
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-01 09:13 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#6 仍是后半段玩法变化主反馈，#4 仍是界面文字密度和图片化依据，因此本轮继续进入 Product decision。

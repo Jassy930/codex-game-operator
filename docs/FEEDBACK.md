@@ -2,6 +2,14 @@
 
 ## 2026-05-01
 
+- GitHub Issues：gh 可用且已认证；2026-05-01 09:32 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
+- #6 继续作为本轮 Product decision 依据：后半段仍需要把“目标 -> 协同/绕行 -> 回目标”的路线变化做得更可扫视；#4 继续作为界面文字密度和图片化依据。前序已经给路线微图补齐收益短标，但协同/绕行的资源流向仍主要靠资源图形和明细文案对照。
+- 本轮改动新增远航路线资源流向短标：协同路线微图显示 `当前+`，绕行路线微图显示 `当前->累计`，让“补当前资源”和“投送累计航段”的路线取舍直接落在图形层。
+- 资源流向短标只从现有路线类型派生；完整语义仍由 `caption`、资源取向符号、分支选择汇总、卡片标题、收益对照和展开明细承载。
+- 本轮只调整派生展示、DOM、CSS 和测试，不新增收益、不新增存档字段，不改变升级价格、星图路线、项目奖励、远航调度既有数值、冷却、连携窗口、反馈入口或部署链路。
+- 本轮本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含 `routeFlowKind`、`routeFlowText`、`far-dispatch-branch-choice-route-flow` 和 `当前->累计`。
+
 - GitHub Issues：gh 可用且已认证；2026-05-01 09:13 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
 - #6 继续作为本轮 Product decision 依据：该反馈指出后半段“只有不停的目标、玩法没有真正变化”；#4 继续作为视觉密度和图片化依据。前序已经给协同/绕行路线微图补齐当前步短标，但每一步的回报落点仍要回读收益对照、按钮徽标或展开明细。
 - 本轮改动新增远航路线收益短标：协同路线微图显示 `校准 -> 补给 -> 闭环`，绕行路线微图显示 `校准 -> 投送 -> 闭环`，让三步短循环的回报类型直接落到图形节点下方。
