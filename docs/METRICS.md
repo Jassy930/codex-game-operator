@@ -25,6 +25,7 @@
 - 远航路线收益短标当前由 `branchChoices.routeRewardLabels` / `routeRewardText` 即时渲染，不单独记录为真实线上指标；校准、协同补给、绕行投送和闭环回报语义仍通过 `branchChoiceText`、收益对照、路线步骤、按钮路线标记、路线反馈和反馈快照复盘。
 - 远航路线资源流向短标当前由 `branchChoices.routeFlowKind` / `routeFlowText` 即时渲染，不单独记录为真实线上指标；协同补当前资源和绕行投送累计航段的语义仍通过 `branchChoiceText`、资源取向符号、收益对照、路线目标和反馈快照复盘。
 - 远航路线代价短标当前由 `branchChoices.routeCostKind` / `routeCostText` 即时渲染，不单独记录为真实线上指标；协同无当前资源消耗、绕行消耗当前资源的语义仍通过 `branchChoiceText`、卡片标题、收益对照、资源流向短标和反馈快照复盘。
+- 远航路线取向短标当前由 `branchChoices.routeIntentKind` / `routeIntentText` 即时渲染，不单独记录为真实线上指标；协同保当前资源、绕行推累计航段的语义仍通过 `branchChoiceText`、卡片标题、资源流向短标、代价短标、收益对照和反馈快照复盘。
 - 远航路线微图图例当前由 `far-dispatch-branch-choice-legend` 和 `far-dispatch-branch-choice-legend-item` 即时渲染，不单独记录为真实线上指标；1 目标、2 分支、3 回目标的路线语义仍通过路线步骤、路线下一步、按钮路线标记、路线反馈和反馈快照复盘。
 - 远航路线明细折叠当前由 `far-dispatch-branch-choice-details` 的浏览器展开状态即时渲染，不单独记录为真实线上指标；路线目标、下一步、收益对照和后续回航语义仍保留在 `branchChoiceText`、卡片标题、展开内容和反馈快照中复盘。
 - 远航分支态势当前由本地 `directiveChain`、目标指令、协同指令和最近远航分支即时派生，不单独记录为远端指标；游戏内反馈快照会通过远航调度文本记录待选择、协同、绕行、协同整备或绕行整备状态，便于人工复盘。

@@ -1654,6 +1654,34 @@ h2 {
   background: rgba(255, 126, 177, 0.12);
 }
 
+.far-dispatch-branch-choice .far-dispatch-branch-choice-intent {
+  flex: 0 0 auto;
+  max-width: 64px;
+  padding: 2px 5px;
+  border: 1px solid rgba(248, 243, 231, 0.16);
+  border-radius: 999px;
+  color: rgba(248, 243, 231, 0.72);
+  background: rgba(5, 12, 20, 0.44);
+  font-size: 0.56rem;
+  line-height: 1;
+}
+
+.far-dispatch-branch-choice-intent[hidden] {
+  display: none;
+}
+
+.far-dispatch-branch-choice-intent.is-preserve {
+  color: #cfe8ff;
+  border-color: rgba(116, 194, 255, 0.54);
+  background: rgba(116, 194, 255, 0.12);
+}
+
+.far-dispatch-branch-choice-intent.is-advance {
+  color: #ffe49d;
+  border-color: rgba(255, 211, 106, 0.54);
+  background: rgba(255, 211, 106, 0.12);
+}
+
 .far-dispatch-branch-choice span {
   color: #f8f3e7;
   font-size: 0.76rem;

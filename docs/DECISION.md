@@ -1,5 +1,30 @@
 # Decision
 
+## 2026-05-01 Product decision：远航路线取向短标
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-01 10:07 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#6 仍是后半段玩法变化主反馈，#4 仍是界面文字密度和图片化依据，因此本轮继续进入 Product decision。
+
+当前最大问题：协同/绕行卡片已经显示路线代价、资源流向、收益点、当前阶段和路线微图，但首行只直接告诉玩家“无消耗/消耗当前”。玩家要判断两条路线的最终取向，仍需要把首行代价、微图资源流向和展开明细合并阅读。
+
+本轮决策：
+
+- 新增“远航路线取向短标”。
+- `branchChoices` 派生 `routeIntentKind` / `routeIntentText`，协同路线显示 `保当前`，绕行路线显示 `推累计`。
+- `src/app.js` 在协同/绕行分支卡片首行渲染 `far-dispatch-branch-choice-intent is-preserve/is-advance`，与路线代价短标并列。
+- `src/styles.css` 为保当前与推累计提供独立短标样式；完整语义同步纳入 `branchChoiceText` 与卡片标题。
+- 该短标只从现有路线类型派生，不新增收益、不新增存档字段，不改变升级价格、星图 57 段路线、项目奖励、项目完成判定、航线策略、指令基础收益、远航调度数值、冷却、连携窗口、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-05-01 10:07 CST 当前 5 个 open feedback issue、0 个 open bug issue。
+- `src/game.js` 派生 `routeIntentKind` / `routeIntentText`，覆盖协同 `preserve:保当前` 与绕行 `advance:推累计`。
+- `src/app.js` 渲染 `far-dispatch-branch-choice-intent is-preserve/is-advance`。
+- `src/styles.css` 包含路线取向短标样式和 preserve/advance 状态色。
+- `tests/game.test.js` 覆盖取向短标派生、静态 DOM 绑定和样式绑定。
+- 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认包含 `routeIntentKind`、`routeIntentText`、`far-dispatch-branch-choice-intent`、`保当前` 和 `推累计`。
+- 发布验证待执行。
+
 ## 2026-05-01 Product decision：远航路线代价短标
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-01 09:49 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有新的 bug issue；#6 仍是后半段玩法变化主反馈，#4 仍是界面文字密度和图片化依据，因此本轮继续进入 Product decision。

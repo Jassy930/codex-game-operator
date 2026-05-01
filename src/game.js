@@ -1173,6 +1173,16 @@ const FAR_ROUTE_DISPATCH_BRANCH_ROUTE_COST_LABELS = Object.freeze({
     text: "消耗当前"
   })
 });
+const FAR_ROUTE_DISPATCH_BRANCH_ROUTE_INTENT_LABELS = Object.freeze({
+  sync: Object.freeze({
+    kind: "preserve",
+    text: "保当前"
+  }),
+  detour: Object.freeze({
+    kind: "advance",
+    text: "推累计"
+  })
+});
 
 const INITIAL_UPGRADES = Object.fromEntries(
   UPGRADE_DEFS.map((upgrade) => [upgrade.id, 0])
@@ -5208,6 +5218,7 @@ function buildFarRouteDispatchBranchChoices(
       buildFarRouteDispatchBranchRouteRewardText(routeRewardLabels);
     const routeFlow = buildFarRouteDispatchBranchRouteFlow(choice.kind);
     const routeCost = buildFarRouteDispatchBranchRouteCost(choice.kind);
+    const routeIntent = buildFarRouteDispatchBranchRouteIntent(choice.kind);
     const followupText = buildFarRouteDispatchBranchFollowupText(
       choice.label,
       choice.directive.name,
@@ -5267,6 +5278,8 @@ function buildFarRouteDispatchBranchChoices(
       routeFlowText: routeFlow.text,
       routeCostKind: routeCost.kind,
       routeCostText: routeCost.text,
+      routeIntentKind: routeIntent.kind,
+      routeIntentText: routeIntent.text,
       nextText: choice.nextText,
       reasonText,
       decisionText,
@@ -5301,6 +5314,8 @@ function buildFarRouteDispatchBranchChoices(
         routeFlow.text +
         " · " +
         routeCost.text +
+        " · " +
+        routeIntent.text +
         " · " +
         choice.caption +
         (reasonText ? " · " + reasonText : "") +
@@ -5535,6 +5550,13 @@ function buildFarRouteDispatchBranchRouteCost(kind) {
   return {
     ...(FAR_ROUTE_DISPATCH_BRANCH_ROUTE_COST_LABELS[kind] ??
       FAR_ROUTE_DISPATCH_BRANCH_ROUTE_COST_LABELS.sync)
+  };
+}
+
+function buildFarRouteDispatchBranchRouteIntent(kind) {
+  return {
+    ...(FAR_ROUTE_DISPATCH_BRANCH_ROUTE_INTENT_LABELS[kind] ??
+      FAR_ROUTE_DISPATCH_BRANCH_ROUTE_INTENT_LABELS.sync)
   };
 }
 
@@ -5783,6 +5805,8 @@ function buildFarRouteDispatchBranchChoiceText(choices) {
           choice.routeRewardText +
           " · " +
           choice.routeCostText +
+          " · " +
+          choice.routeIntentText +
           " · " +
           choice.caption +
           (choice.reasonText ? " · " + choice.reasonText : "") +
