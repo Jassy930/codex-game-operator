@@ -8,9 +8,9 @@
 - 同步 GitHub Issues 反馈状态：2026-05-02 08:14 CST 当前 5 个 open feedback issue、0 个 open bug issue；#5 作为主处理对象。
 - 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
 - 构建产物已确认 `dist/src/styles.css` 包含 `coreChargeRingIdleBeacon 2600ms ease-in-out infinite`、`@keyframes coreChargeRingIdleBeacon` 和降低动效兜底。
-- 发布验证待本轮 push 后通过 GitHub Pages workflow 确认。
-- 反馈处理待发布验证后回复 #5；issue 保持 open。
-- 钉钉通知待本轮结束时检查运行环境 webhook。
+- 发布：提交 `2731976` 已推送到 `origin/main`；GitHub Pages workflow `25238924337` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页返回 HTTP 200，线上 `src/styles.css` 已确认包含 `.core-charge-ring` 和 `coreChargeRingIdleBeacon`。workflow 继续给出 Node.js 20 actions 弃用提醒，未影响本次部署。
+- 反馈处理：已回复 #5，说明点火蓄能轨待机信标、验证结果、Pages 部署和复测问题；issue 保持 open。回复后于 2026-05-02 08:24 CST 再次同步 GitHub Issues，当前仍为 5 个 open feedback issue、0 个 open bug issue；#5 更新时间为 2026-05-02T00:24:11Z。
+- 钉钉通知未发送：2026-05-02 08:24 CST 运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` / `ROBOT` 相关变量名，当前目录和 `/home/jassy/glm` 两层内未发现 `.env*` 文件；未将 webhook 写入仓库。
 - 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #5，以及当前环形蓄能轨普通待机状态仍缺少点击前邀请信号的复盘。
 
 - 点火按钮新增“倒计时徽标待机信标”：主按钮未按压、未命中且不处于过载预备/命中状态时，按钮左上过载倒计时徽标会轻量呼吸，让“再点几次触发过载”的小目标在点击前更容易被扫到，继续回应 #5 对点击反馈、特效和点击欲望的反馈。
