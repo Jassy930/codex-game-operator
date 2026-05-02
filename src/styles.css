@@ -1229,6 +1229,13 @@ h2 {
     coreArtIdleBeacon 3200ms ease-in-out infinite;
 }
 
+.core-button:not(.is-combo-charging):not(.is-pulsing):not(.is-pressing):not(.is-overload-ready):not(.is-overload-hit):hover
+  .core-art {
+  animation:
+    coreSpin 18s linear infinite,
+    coreArtHoverPreheat 1200ms ease-in-out infinite;
+}
+
 .core-veins {
   color: #fff7c2;
   pointer-events: none;
@@ -6433,6 +6440,23 @@ h2 {
   }
 }
 
+@keyframes coreArtHoverPreheat {
+  0%,
+  100% {
+    filter:
+      drop-shadow(0 0 40px rgba(255, 247, 194, 0.36))
+      drop-shadow(0 0 32px rgba(244, 178, 60, 0.24))
+      drop-shadow(0 0 18px rgba(19, 181, 166, 0.14));
+  }
+
+  50% {
+    filter:
+      drop-shadow(0 0 50px rgba(255, 247, 194, 0.46))
+      drop-shadow(0 0 42px rgba(244, 178, 60, 0.32))
+      drop-shadow(0 0 28px rgba(19, 181, 166, 0.2));
+  }
+}
+
 @keyframes coreStageCharge {
   0%,
   100% {
@@ -7346,6 +7370,8 @@ h2 {
   .core-button:not(.is-pulsing):not(.is-pressing):not(.is-overload-ready):not(.is-overload-hit)
     .core-combo-dot.is-next,
   .core-button:not(.is-combo-charging):not(.is-pulsing):not(.is-pressing):not(.is-overload-ready):not(.is-overload-hit)
+    .core-art,
+  .core-button:not(.is-combo-charging):not(.is-pulsing):not(.is-pressing):not(.is-overload-ready):not(.is-overload-hit):hover
     .core-art,
   .core-button.is-pulsing:not(.is-overload-impact),
   .core-button.is-overload-impact,
