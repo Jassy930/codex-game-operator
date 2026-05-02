@@ -327,6 +327,12 @@ h2 {
   filter: saturate(1.1);
 }
 
+.core-button:focus-visible {
+  outline: 3px solid rgba(255, 247, 194, 0.72);
+  outline-offset: 10px;
+  filter: saturate(1.12);
+}
+
 .core-button:not(.is-pulsing):not(.is-pressing)::after {
   border-color: rgba(255, 247, 194, 0.28);
   opacity: 0.16;
@@ -334,7 +340,8 @@ h2 {
   animation: coreIdleInviteRing 2200ms ease-in-out infinite;
 }
 
-.core-button:not(.is-pulsing):not(.is-pressing):hover::after {
+.core-button:not(.is-pulsing):not(.is-pressing):hover::after,
+.core-button:not(.is-pulsing):not(.is-pressing):focus-visible::after {
   border-color: rgba(244, 178, 60, 0.52);
   opacity: 0.26;
 }
@@ -1133,6 +1140,8 @@ h2 {
 }
 
 .core-button:not(.is-pulsing):not(.is-pressing):not(.is-overload-ready):not(.is-overload-hit):hover
+  .core-label,
+.core-button:not(.is-pulsing):not(.is-pressing):not(.is-overload-ready):not(.is-overload-hit):focus-visible
   .core-label {
   background: #fff7c2;
   box-shadow:
@@ -1230,6 +1239,8 @@ h2 {
 }
 
 .core-button:not(.is-combo-charging):not(.is-pulsing):not(.is-pressing):not(.is-overload-ready):not(.is-overload-hit):hover
+  .core-art,
+.core-button:not(.is-combo-charging):not(.is-pulsing):not(.is-pressing):not(.is-overload-ready):not(.is-overload-hit):focus-visible
   .core-art {
   animation:
     coreSpin 18s linear infinite,
@@ -1318,7 +1329,8 @@ h2 {
   animation: coreRewardHintIdleBeacon 2600ms ease-in-out infinite;
 }
 
-.core-button:not(.is-pulsing):not(.is-pressing):hover + .core-reward-hint:not(.is-overload-ready):not(.is-overload-hit) {
+.core-button:not(.is-pulsing):not(.is-pressing):hover + .core-reward-hint:not(.is-overload-ready):not(.is-overload-hit),
+.core-button:not(.is-pulsing):not(.is-pressing):focus-visible + .core-reward-hint:not(.is-overload-ready):not(.is-overload-hit) {
   background: rgba(248, 243, 231, 0.14);
   color: #fff7c2;
   box-shadow:
@@ -7372,6 +7384,8 @@ h2 {
   .core-button:not(.is-combo-charging):not(.is-pulsing):not(.is-pressing):not(.is-overload-ready):not(.is-overload-hit)
     .core-art,
   .core-button:not(.is-combo-charging):not(.is-pulsing):not(.is-pressing):not(.is-overload-ready):not(.is-overload-hit):hover
+    .core-art,
+  .core-button:not(.is-combo-charging):not(.is-pulsing):not(.is-pressing):not(.is-overload-ready):not(.is-overload-hit):focus-visible
     .core-art,
   .core-button.is-pulsing:not(.is-overload-impact),
   .core-button.is-overload-impact,
