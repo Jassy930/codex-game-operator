@@ -763,6 +763,12 @@ h2 {
   filter: drop-shadow(0 0 14px rgba(244, 178, 60, 0.2));
 }
 
+.core-button:not(.is-combo-charging):not(.is-pulsing):not(.is-pressing):not(.is-overload-ready):not(.is-overload-hit)
+  .core-charge-ring {
+  opacity: 0.5;
+  animation: coreChargeRingIdleBeacon 2600ms ease-in-out infinite;
+}
+
 .core-charge-ring.is-overload-ready {
   background:
     conic-gradient(
@@ -6451,6 +6457,24 @@ h2 {
   }
 }
 
+@keyframes coreChargeRingIdleBeacon {
+  0%,
+  100% {
+    opacity: 0.42;
+    filter:
+      drop-shadow(0 0 6px rgba(244, 178, 60, 0.12))
+      drop-shadow(0 0 10px rgba(19, 181, 166, 0.08));
+  }
+
+  50% {
+    opacity: 0.58;
+    filter:
+      drop-shadow(0 0 10px rgba(255, 247, 194, 0.18))
+      drop-shadow(0 0 16px rgba(244, 178, 60, 0.16))
+      drop-shadow(0 0 22px rgba(19, 181, 166, 0.1));
+  }
+}
+
 @keyframes coreChargeRingHit {
   0% {
     opacity: 0.96;
@@ -7241,6 +7265,8 @@ h2 {
     .core-label,
   .core-button:not(.is-combo-charging):not(.is-pulsing):not(.is-pressing):not(.is-overload-ready):not(.is-overload-hit)
     .core-surge-orbit,
+  .core-button:not(.is-combo-charging):not(.is-pulsing):not(.is-pressing):not(.is-overload-ready):not(.is-overload-hit)
+    .core-charge-ring,
   .core-button:not(.is-pulsing):not(.is-pressing):not(.is-overload-ready):not(.is-overload-hit)
     .core-overload-badge,
   .core-button:not(.is-pulsing):not(.is-pressing):not(.is-overload-ready):not(.is-overload-hit)

@@ -2,6 +2,17 @@
 
 ## Unreleased
 
+- 点火按钮新增“蓄能轨待机信标”：主按钮未连击蓄能、未按压、未命中且不处于过载预备/命中状态时，环形蓄能轨会轻量呼吸，让“下一击会推进蓄能轨”的目标感在点击前更容易被扫到，继续回应 #5 对点击反馈、特效和点击欲望的反馈。
+- `src/styles.css` 为 `.core-button:not(.is-combo-charging):not(.is-pulsing):not(.is-pressing):not(.is-overload-ready):not(.is-overload-hit) .core-charge-ring` 增加 `coreChargeRingIdleBeacon` 动画，并在降低动效偏好中关闭该动画；`tests/game.test.js` 覆盖静态绑定。
+- 本轮只调整点火按钮环形蓄能轨展示层和测试，不新增可见文字、不新增收益、不新增存档字段，不改变点击收益、连击窗口、过载奖励、升级价格、星图路线、项目奖励、航线策略、航线指令、远航调度、反馈入口或部署链路。
+- 同步 GitHub Issues 反馈状态：2026-05-02 08:14 CST 当前 5 个 open feedback issue、0 个 open bug issue；#5 作为主处理对象。
+- 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认 `dist/src/styles.css` 包含 `coreChargeRingIdleBeacon 2600ms ease-in-out infinite`、`@keyframes coreChargeRingIdleBeacon` 和降低动效兜底。
+- 发布验证待本轮 push 后通过 GitHub Pages workflow 确认。
+- 反馈处理待发布验证后回复 #5；issue 保持 open。
+- 钉钉通知待本轮结束时检查运行环境 webhook。
+- 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #5，以及当前环形蓄能轨普通待机状态仍缺少点击前邀请信号的复盘。
+
 - 点火按钮新增“倒计时徽标待机信标”：主按钮未按压、未命中且不处于过载预备/命中状态时，按钮左上过载倒计时徽标会轻量呼吸，让“再点几次触发过载”的小目标在点击前更容易被扫到，继续回应 #5 对点击反馈、特效和点击欲望的反馈。
 - `src/styles.css` 为 `.core-button:not(.is-pulsing):not(.is-pressing):not(.is-overload-ready):not(.is-overload-hit) .core-overload-badge` 增加 `coreBadgeIdleBeacon` 动画，并在降低动效偏好中关闭该动画；`tests/game.test.js` 覆盖静态绑定。
 - 本轮只调整点火按钮过载倒计时徽标展示层和测试，不新增可见文字、不新增收益、不新增存档字段，不改变点击收益、连击窗口、过载奖励、升级价格、星图路线、项目奖励、航线策略、航线指令、远航调度、反馈入口或部署链路。

@@ -28,6 +28,7 @@
 - 点火过载倒计时徽标当前由本地连击进度与 `getComboStatus` 即时推导，不单独记录为真实线上指标；点火行为仍通过 click 事件复盘。
 - 点火倒计时徽标待机信标当前由本地 `.core-button:not(.is-pulsing):not(.is-pressing):not(.is-overload-ready):not(.is-overload-hit) .core-overload-badge` 展示态即时渲染，不单独记录为真实线上指标；过载倒计时和触发结果仍通过 `getComboStatus`、click 事件、连击状态和过载结果复盘。
 - 点火倒计时徽标命中跳闪当前由本地 `.core-button.is-pulsing:not(.is-overload-impact) .core-overload-badge` 短时展示态即时渲染，不单独记录为真实线上指标；倒计时剩余数仍通过 `getComboStatus`、click 事件、连击状态和过载结果复盘。
+- 点火蓄能轨待机信标当前由本地 `.core-button:not(.is-combo-charging):not(.is-pulsing):not(.is-pressing):not(.is-overload-ready):not(.is-overload-hit) .core-charge-ring` 展示态即时渲染，不单独记录为真实线上指标；环形蓄能进度和命中结果仍通过 `getComboStatus`、click 事件、连击状态和过载结果复盘。
 - 点火连击轨进度填充当前由本地连击进度 `combo.progress` 即时渲染为 `--core-combo-progress`，不单独记录为真实线上指标；点火行为仍通过 click 事件、连击状态和过载结果复盘。
 - 点火连击轨命中光扫当前由本地 `.core-button.is-pulsing:not(.is-overload-impact) .core-combo-track::before` 和 `.core-button.is-overload-impact .core-combo-track::before` 短时展示态即时渲染，不单独记录为真实线上指标；连击轨进度和过载结果仍通过 click 事件、`getComboStatus`、`lastGain` 和 `lastPulse` 复盘。
 - 点火连击点命中跳闪当前由本地 `comboStatus.step` 即时给本次命中的 `.core-combo-dot` 添加 `is-hit`，过载命中复用 `is-overload-hit` 展示态，不单独记录为真实线上指标；点火行为仍通过 click 事件、连击状态和过载结果复盘。
