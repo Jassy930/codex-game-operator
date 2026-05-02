@@ -15,6 +15,7 @@
 - 点火阶段光环待机信标当前由本地 `.core-button:not(.is-combo-charging):not(.is-pulsing):not(.is-pressing):not(.is-overload-ready):not(.is-overload-hit) .core-stage-aura` 展示态即时渲染，不单独记录为真实线上指标；阶段进度、连击状态和过载结果仍通过 `getComboStatus`、click 事件和现有反馈快照复盘。
 - 点火粒子层待机信标当前由本地 `.core-button:not(.is-combo-charging):not(.is-pulsing):not(.is-pressing):not(.is-overload-ready):not(.is-overload-hit) .core-feedback-layer` 展示态即时渲染，不单独记录为真实线上指标；点火行为、命中粒子爆发、连击状态和过载结果仍通过 click 事件、`lastGain`、`lastPulse` 和现有反馈快照复盘。
 - 点火星核本体待机信标当前由本地 `.core-button:not(.is-combo-charging):not(.is-pulsing):not(.is-pressing):not(.is-overload-ready):not(.is-overload-hit) .core-art` 展示态即时渲染，不单独记录为真实线上指标；星核本体展示仍通过 click 事件、连击状态、过载结果和现有反馈快照复盘。
+- 点火悬停预热投光当前由本地 `.core-button:not(.is-combo-charging):not(.is-pulsing):not(.is-pressing):not(.is-overload-ready):not(.is-overload-hit):hover .core-art` 展示态即时渲染，不单独记录为真实线上指标；点火意图仍通过后续 click 事件、连击状态、过载结果和现有反馈快照复盘。
 - 点火按钮整体命中投光当前由本地 `.core-button.is-pulsing:not(.is-overload-impact)` 和 `.core-button.is-overload-impact` 短时展示态即时渲染，不单独记录为真实线上指标；普通/过载点火仍通过 click 事件、`lastGain`、`lastPulse`、连击状态和过载结果复盘。
 - 点火下一击预告待机信标当前由本地 `.core-button:not(.is-pulsing):not(.is-pressing) + .core-reward-hint:not(.is-overload-ready):not(.is-overload-hit)` 展示态即时渲染，不单独记录为真实线上指标；下一击收益和过载预告仍通过 `getCoreRewardPreview`、click 事件、连击状态和过载结果复盘。
 - 点火中心标签待机信标当前由本地 `.core-button:not(.is-pulsing):not(.is-pressing):not(.is-overload-ready):not(.is-overload-hit) .core-label` 展示态即时渲染，不单独记录为真实线上指标；点火行为仍通过 click 事件、连击状态、过载结果和现有反馈快照复盘。

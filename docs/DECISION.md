@@ -1,5 +1,30 @@
 # Decision
 
+## 2026-05-02 Product decision：点火悬停预热投光
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-02 09:19 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有 open bug；#5 仍是最近更新反馈，继续处理“点火按钮太薄弱，增加点击反馈、特效和点击欲望”。
+
+当前最大问题：点火按钮已经有完整点击后反馈链、普通待机信标链、音效和触感；但鼠标悬停时，星核本体仍主要沿用普通待机暖光，只有外圈、奖励预告和中心标签更明显。玩家把指针移到主按钮上、尚未按下时，可以给星核本体一个更短、更亮的预热投光，承接“准备点击”的一瞬间。
+
+本轮决策：
+
+- 新增“点火悬停预热投光”。
+- `src/styles.css` 为 `.core-button:not(.is-combo-charging):not(.is-pulsing):not(.is-pressing):not(.is-overload-ready):not(.is-overload-hit):hover .core-art` 增加 `coreArtHoverPreheat` 预热投光，并保留原有 `coreSpin`。
+- 在 `prefers-reduced-motion: reduce` 中关闭该 hover 预热动画。
+- `tests/game.test.js` 增加静态断言，覆盖悬停预热投光选择器、keyframes 和降低动效兜底。
+- 该改动只调整点火按钮 SVG 本体 hover 展示和测试，不新增可见文字、不新增收益、不新增存档字段，不改变点击收益、连击窗口、过载奖励、升级价格、星图路线、项目奖励、航线策略、航线指令、远航调度、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-05-02 09:19 CST 当前 5 个 open feedback issue、0 个 open bug issue；#5 作为本轮主处理对象。
+- `src/styles.css` 包含 `.core-art` hover 预热选择器、`coreArtHoverPreheat 1200ms ease-in-out infinite`、`@keyframes coreArtHoverPreheat` 和降低动效兜底。
+- `tests/game.test.js` 覆盖点火悬停预热投光静态绑定。
+- 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认 `dist/src/styles.css` 包含 `coreArtHoverPreheat 1200ms ease-in-out infinite`、`@keyframes coreArtHoverPreheat` 和降低动效兜底。
+- 代码提交已创建：`944c9d0 feat: add core hover preheat`。
+- 发布待执行：文档更新后将推送到 `origin/main`，等待 GitHub Pages workflow 完成后再回复 #5。
+- 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #5，以及当前星核本体 hover 状态仍缺少按下前预热信号的复盘。
+
 ## 2026-05-02 Product decision：点火星核本体待机信标
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-02 09:01 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有 open bug；#5 仍是最近更新反馈，继续处理“点火按钮太薄弱，增加点击反馈、特效和点击欲望”。
