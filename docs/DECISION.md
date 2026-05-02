@@ -1,5 +1,30 @@
 # Decision
 
+## 2026-05-02 Product decision：点火星核本体待机信标
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-02 09:01 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有 open bug；#5 仍是最近更新反馈，继续处理“点火按钮太薄弱，增加点击反馈、特效和点击欲望”。
+
+当前最大问题：点火按钮已经有待机邀请光环、下一击预告待机信标、中心标签待机信标、蓄能外弧待机信标、连击轨下一格待机信标、倒计时徽标待机信标、蓄能轨待机信标、阶段光环待机信标、粒子层待机信标，以及完整点击后反馈链路。星核 SVG 本体虽然持续旋转并会随连击显示裂纹，但 0 连击普通待机时本体暖光没有额外呼吸；玩家还没按下之前，星核主体可以和外圈、奖励预告、中心标签、外弧、连击轨、倒计时徽标、蓄能轨、阶段环、粒子层一起形成点击前邀请。
+
+本轮决策：
+
+- 新增“点火星核本体待机信标”。
+- `src/styles.css` 为 `.core-button:not(.is-combo-charging):not(.is-pulsing):not(.is-pressing):not(.is-overload-ready):not(.is-overload-hit) .core-art` 增加 `coreArtIdleBeacon` 轻量暖光呼吸，并保留原有 `coreSpin`。
+- 在 `prefers-reduced-motion: reduce` 中关闭该待机信标动画。
+- `tests/game.test.js` 增加静态断言，覆盖星核本体待机信标样式、keyframes 和降低动效兜底。
+- 该改动只调整点火按钮 SVG 本体展示和测试，不新增可见文字、不新增收益、不新增存档字段，不改变点击收益、连击窗口、过载奖励、升级价格、星图路线、项目奖励、航线策略、航线指令、远航调度、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-05-02 09:01 CST 当前 5 个 open feedback issue、0 个 open bug issue；#5 作为本轮主处理对象。
+- `src/styles.css` 包含 `.core-art` 待机选择器、`coreArtIdleBeacon 3200ms ease-in-out infinite`、`@keyframes coreArtIdleBeacon` 和降低动效兜底。
+- `tests/game.test.js` 覆盖点火星核本体待机信标静态绑定。
+- 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认 `dist/src/styles.css` 包含 `coreArtIdleBeacon 3200ms ease-in-out infinite` 和 `@keyframes coreArtIdleBeacon`。
+- 代码提交已创建：`0e5da4f feat: add core art idle beacon`。
+- 发布、线上校验和 #5 回复待 push 后补记。
+- 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #5，以及当前星核 SVG 本体普通待机暖光仍缺少点击前邀请信号的复盘。
+
 ## 2026-05-02 Product decision：点火粒子层待机信标
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-02 08:46 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有 open bug；#5 仍是最近更新反馈，继续处理“点火按钮太薄弱，增加点击反馈、特效和点击欲望”。
