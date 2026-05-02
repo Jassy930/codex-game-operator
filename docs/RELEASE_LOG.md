@@ -9,6 +9,10 @@
 - 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
 - 构建产物已确认 `dist/src/styles.css` 包含 `focus-visible`、`coreArtHoverPreheat 1200ms ease-in-out infinite` 和降低动效兜底。
 - 代码提交已创建：`42ca40f feat: add core focus preheat`。
+- 文档提交已创建并推送：`6f1a360 docs: record core focus preheat`。
+- 发布：提交 `6f1a360` 已推送到 `origin/main`；GitHub Pages workflow `25240693569` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页返回 HTTP 200，线上 `src/styles.css` 已确认包含 `.core-button:focus-visible` 和 `coreArtHoverPreheat`。workflow 继续给出 Node.js 20 actions 弃用提醒，未影响本次部署。
+- 反馈处理：已回复 #5，说明点火键盘焦点预热投光、验证结果、Pages 部署和复测问题；issue 保持 open，评论地址：`https://github.com/Jassy930/codex-game-operator/issues/5#issuecomment-4362572319`。回复后于 2026-05-02 09:45 CST 再次同步 GitHub Issues，当前仍为 5 个 open feedback issue、0 个 open bug issue；#5 更新时间为 2026-05-02T01:45:51Z。
+- 钉钉通知未发送：2026-05-02 09:46 CST 运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` / `ROBOT` 相关变量名，当前目录和 `/home/jassy/glm` 两层内未发现 `.env*` 文件；未将 webhook 写入仓库。
 - 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #5，以及当前键盘焦点态缺少按下前预热信号的复盘。
 
 - 点火按钮新增“悬停预热投光”：主按钮未连击蓄能、未按压、未命中且不处于过载预备/命中状态时，鼠标悬停到星核本体会播放更短、更亮的预热投光，让玩家从待机邀请过渡到按下前也有明确反馈，继续回应 #5 对点击反馈、特效和点击欲望的反馈。
