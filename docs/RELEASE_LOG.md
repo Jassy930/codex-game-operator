@@ -8,6 +8,9 @@
 - 同步 GitHub Issues 反馈状态：2026-05-02 08:46 CST 当前 5 个 open feedback issue、0 个 open bug issue；#5 作为主处理对象。
 - 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
 - 构建产物已确认 `dist/src/styles.css` 包含 `coreFeedbackIdleBeacon 3000ms ease-in-out infinite`、`@keyframes coreFeedbackIdleBeacon` 和降低动效兜底。
+- 发布：提交 `8158b02` 已推送到 `origin/main`；GitHub Pages workflow `25239639815` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页返回 HTTP 200，线上 `src/styles.css` 已确认包含 `.core-feedback-layer` 和 `coreFeedbackIdleBeacon`。
+- 反馈处理：已回复 #5，说明点火粒子层待机信标、验证结果、Pages 部署和复测问题；issue 保持 open，评论地址：`https://github.com/Jassy930/codex-game-operator/issues/5#issuecomment-4362456794`。回复后于 2026-05-02 08:55 CST 再次同步 GitHub Issues，当前仍为 5 个 open feedback issue、0 个 open bug issue；#5 更新时间为 2026-05-02T00:55:33Z。
+- 钉钉通知未发送：2026-05-02 08:55 CST 运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` / `ROBOT` 相关变量名，当前目录和 `/home/jassy/glm` 两层内未发现 `.env*` 文件；未将 webhook 写入仓库。
 - 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #5，以及当前粒子层普通待机状态仍完全静止的复盘。
 
 - 点火按钮新增“阶段光环待机信标”：主按钮未连击蓄能、未按压、未命中且不处于过载预备/命中状态时，内层阶段光环会轻量呼吸，让 0 连击状态下的蓄能阶段目标感在点击前更容易被扫到，继续回应 #5 对点击反馈、特效和点击欲望的反馈。
