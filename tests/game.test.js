@@ -1403,6 +1403,8 @@ test("点火按钮会渲染点击反馈和过载前兆效果", () => {
   assert.match(styles, /\.core-button\.is-pressing \.core-surge-orbit/);
   assert.match(styles, /animation-duration: 1100ms/);
   assert.match(styles, /\.core-feedback-layer/);
+  assert.match(styles, /\.core-button:not\(\.is-combo-charging\):not\(\.is-pulsing\):not\(\.is-pressing\):not\(\.is-overload-ready\):not\(\.is-overload-hit\)[\s\S]*\.core-feedback-layer/);
+  assert.match(styles, /coreFeedbackIdleBeacon 3000ms ease-in-out infinite/);
   assert.match(styles, /\.core-button\.is-pulsing:not\(\.is-overload-impact\)/);
   assert.match(styles, /coreButtonHitGlow 360ms ease-out/);
   assert.match(styles, /\.core-button\.is-overload-impact/);
@@ -1558,6 +1560,7 @@ test("点火按钮会渲染点击反馈和过载前兆效果", () => {
   assert.match(styles, /@keyframes coreOverloadShockwave/);
   assert.match(styles, /@keyframes coreShellOverloadFlash/);
   assert.match(styles, /@keyframes coreSparks/);
+  assert.match(styles, /@keyframes coreFeedbackIdleBeacon/);
   assert.match(styles, /@keyframes coreStageHitFlash/);
   assert.match(styles, /@keyframes coreStageIdleBeacon/);
   assert.match(styles, /@keyframes coreStageCharge/);
@@ -1578,6 +1581,7 @@ test("点火按钮会渲染点击反馈和过载前兆效果", () => {
   assert.match(styles, /@media \(prefers-reduced-motion: reduce\) \{[\s\S]*\.core-button:not\(\.is-pulsing\):not\(\.is-pressing\)::after[\s\S]*animation: none/);
   assert.match(styles, /@media \(prefers-reduced-motion: reduce\) \{[\s\S]*\.core-button:not\(\.is-pulsing\):not\(\.is-pressing\) \+ \.core-reward-hint:not\(\.is-overload-ready\):not\(\.is-overload-hit\)[\s\S]*animation: none/);
   assert.match(styles, /@media \(prefers-reduced-motion: reduce\) \{[\s\S]*\.core-button:not\(\.is-pulsing\):not\(\.is-pressing\):not\(\.is-overload-ready\):not\(\.is-overload-hit\)[\s\S]*\.core-label[\s\S]*animation: none/);
+  assert.match(styles, /@media \(prefers-reduced-motion: reduce\) \{[\s\S]*\.core-button:not\(\.is-combo-charging\):not\(\.is-pulsing\):not\(\.is-pressing\):not\(\.is-overload-ready\):not\(\.is-overload-hit\)[\s\S]*\.core-feedback-layer[\s\S]*animation: none/);
   assert.match(styles, /@media \(prefers-reduced-motion: reduce\) \{[\s\S]*\.core-button:not\(\.is-combo-charging\):not\(\.is-pulsing\):not\(\.is-pressing\):not\(\.is-overload-ready\):not\(\.is-overload-hit\)[\s\S]*\.core-stage-aura[\s\S]*animation: none/);
   assert.match(styles, /@media \(prefers-reduced-motion: reduce\) \{[\s\S]*\.core-button:not\(\.is-combo-charging\):not\(\.is-pulsing\):not\(\.is-pressing\):not\(\.is-overload-ready\):not\(\.is-overload-hit\)[\s\S]*\.core-surge-orbit[\s\S]*animation: none/);
   assert.match(styles, /@media \(prefers-reduced-motion: reduce\) \{[\s\S]*\.core-button:not\(\.is-combo-charging\):not\(\.is-pulsing\):not\(\.is-pressing\):not\(\.is-overload-ready\):not\(\.is-overload-hit\)[\s\S]*\.core-charge-ring[\s\S]*animation: none/);

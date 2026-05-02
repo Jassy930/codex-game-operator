@@ -1,5 +1,28 @@
 # Decision
 
+## 2026-05-02 Product decision：点火粒子层待机信标
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-02 08:46 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有 open bug；#5 仍是最近更新反馈，继续处理“点火按钮太薄弱，增加点击反馈、特效和点击欲望”。
+
+当前最大问题：点火按钮已经有待机邀请光环、下一击预告待机信标、中心标签待机信标、蓄能外弧待机信标、连击轨下一格待机信标、倒计时徽标待机信标、蓄能轨待机信标、阶段光环待机信标，以及完整点击后反馈链路。既有 `.core-feedback-layer` 会在命中时爆发四点粒子，但 0 连击普通待机时仍完全静止；玩家还没按下之前，星核内部可以有更轻的活跃信号，和外圈、奖励预告、中心标签、蓄能外弧、连击轨、倒计时徽标、蓄能轨、阶段环一起构成点击前邀请。
+
+本轮决策：
+
+- 新增“点火粒子层待机信标”。
+- `src/styles.css` 为 `.core-button:not(.is-combo-charging):not(.is-pulsing):not(.is-pressing):not(.is-overload-ready):not(.is-overload-hit) .core-feedback-layer` 增加 `coreFeedbackIdleBeacon` 轻量呼吸。
+- 在 `prefers-reduced-motion: reduce` 中关闭该待机信标动画。
+- `tests/game.test.js` 增加静态断言，覆盖粒子层待机信标样式、keyframes 和降低动效兜底。
+- 该改动只调整点火按钮粒子层展示和测试，不新增可见文字、不新增收益、不新增存档字段，不改变点击收益、连击窗口、过载奖励、升级价格、星图路线、项目奖励、航线策略、航线指令、远航调度、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-05-02 08:46 CST 当前 5 个 open feedback issue、0 个 open bug issue；#5 作为本轮主处理对象。
+- `src/styles.css` 包含 `.core-feedback-layer` 待机选择器、`coreFeedbackIdleBeacon 3000ms ease-in-out infinite`、`@keyframes coreFeedbackIdleBeacon` 和降低动效兜底。
+- `tests/game.test.js` 覆盖点火粒子层待机信标静态绑定。
+- 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认 `dist/src/styles.css` 包含 `coreFeedbackIdleBeacon 3000ms ease-in-out infinite`、`@keyframes coreFeedbackIdleBeacon` 和降低动效兜底。
+- 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #5，以及当前粒子层普通待机状态仍完全静止的复盘。
+
 ## 2026-05-02 Product decision：点火阶段光环待机信标
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-02 08:30 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有 open bug；#5 仍是最近更新反馈，继续处理“点火按钮太薄弱，增加点击反馈、特效和点击欲望”。

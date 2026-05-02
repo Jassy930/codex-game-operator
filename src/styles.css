@@ -415,6 +415,14 @@ h2 {
   transform: scale(0.84) rotate(0deg);
 }
 
+.core-button:not(.is-combo-charging):not(.is-pulsing):not(.is-pressing):not(.is-overload-ready):not(.is-overload-hit)
+  .core-feedback-layer {
+  opacity: 0.16;
+  filter: drop-shadow(0 0 12px rgba(255, 247, 194, 0.14));
+  transform: scale(0.88) rotate(-8deg);
+  animation: coreFeedbackIdleBeacon 3000ms ease-in-out infinite;
+}
+
 .core-button.is-pulsing .core-feedback-layer {
   animation: coreSparks 360ms ease-out;
 }
@@ -6387,6 +6395,23 @@ h2 {
   }
 }
 
+@keyframes coreFeedbackIdleBeacon {
+  0%,
+  100% {
+    opacity: 0.1;
+    filter: drop-shadow(0 0 8px rgba(255, 247, 194, 0.1));
+    transform: scale(0.84) rotate(-10deg);
+  }
+
+  50% {
+    opacity: 0.24;
+    filter:
+      drop-shadow(0 0 14px rgba(255, 247, 194, 0.18))
+      drop-shadow(0 0 22px rgba(19, 181, 166, 0.12));
+    transform: scale(0.96) rotate(8deg);
+  }
+}
+
 @keyframes coreStageCharge {
   0%,
   100% {
@@ -7287,6 +7312,8 @@ h2 {
   .core-button:not(.is-pulsing):not(.is-pressing) + .core-reward-hint:not(.is-overload-ready):not(.is-overload-hit),
   .core-button:not(.is-pulsing):not(.is-pressing):not(.is-overload-ready):not(.is-overload-hit)
     .core-label,
+  .core-button:not(.is-combo-charging):not(.is-pulsing):not(.is-pressing):not(.is-overload-ready):not(.is-overload-hit)
+    .core-feedback-layer,
   .core-button:not(.is-combo-charging):not(.is-pulsing):not(.is-pressing):not(.is-overload-ready):not(.is-overload-hit)
     .core-stage-aura,
   .core-button:not(.is-combo-charging):not(.is-pulsing):not(.is-pressing):not(.is-overload-ready):not(.is-overload-hit)
