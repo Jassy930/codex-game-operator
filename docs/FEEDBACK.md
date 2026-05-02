@@ -2,6 +2,14 @@
 
 ## 2026-05-02
 
+- GitHub Issues：gh 可用且已认证；2026-05-02 09:51 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。#5 仍是本轮 Product decision 主处理对象，集中在“点火按钮太薄弱、增加点击反馈、特效和点击欲望”。
+- 本轮 Product decision 继续处理 #5：点火按钮已有完整点击后反馈链、普通待机信标链、鼠标 hover 预热投光和键盘焦点预热投光，但 0 连击普通待机时，下方 `连击 0` 读数仍是静态胶囊。
+- 本轮改动新增点火连击读数待机信标：`.core-button:not(.is-combo-charging):not(.is-pulsing):not(.is-pressing):not(.is-overload-ready):not(.is-overload-hit) ~ .combo-line #comboValue` 播放 `coreComboReadoutIdleBeacon` 轻量呼吸，并在降低动效偏好下关闭动画。
+- 本轮只调整 0 连击普通待机时的连击读数展示和测试，不新增可见文字、不新增收益、不新增存档字段，不改变点击收益、连击窗口、过载奖励、升级价格、星图路线、项目奖励、航线策略、航线指令、远航调度、反馈入口或部署链路。
+- 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认 `dist/src/styles.css` 包含 `coreComboReadoutIdleBeacon` 和 `~ .combo-line #comboValue` 降低动效兜底。
+- 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #5，以及当前 0 连击普通待机下方连击读数仍缺少点击前邀请信号的复盘。
+
 - GitHub Issues：gh 可用且已认证；2026-05-02 09:36 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。#5 仍是最近更新反馈，集中在“点火按钮太薄弱、增加点击反馈、特效和点击欲望”。
 - 本轮 Product decision 继续处理 #5：点火按钮已有完整点击后反馈链、普通待机信标链和鼠标 hover 预热投光，但键盘 Tab 聚焦主按钮时，星核本体、中心标签和下一击预告仍缺少按下前的预热引导。
 - 本轮改动新增点火键盘焦点预热投光：`.core-button:focus-visible` 显示清晰焦点环；非连击蓄能、非按压、非命中、非过载预备/命中状态下，焦点态会增强外圈、中心标签、下一击预告，并让 `.core-art` 复用 `coreArtHoverPreheat`。

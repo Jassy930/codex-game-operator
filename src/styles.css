@@ -1373,6 +1373,11 @@ h2 {
   animation: coreComboReadoutOverloadHit 520ms ease-out;
 }
 
+.core-button:not(.is-combo-charging):not(.is-pulsing):not(.is-pressing):not(.is-overload-ready):not(.is-overload-hit)
+  ~ .combo-line #comboValue {
+  animation: coreComboReadoutIdleBeacon 2600ms ease-in-out infinite;
+}
+
 .combo-line {
   display: flex;
   flex-wrap: wrap;
@@ -6989,6 +6994,23 @@ h2 {
   }
 }
 
+@keyframes coreComboReadoutIdleBeacon {
+  0%,
+  100% {
+    background: rgba(248, 243, 231, 0.1);
+    color: rgba(248, 243, 231, 0.82);
+    box-shadow: inset 0 0 0 1px rgba(248, 243, 231, 0);
+  }
+
+  50% {
+    background: rgba(255, 247, 194, 0.14);
+    color: #fff7c2;
+    box-shadow:
+      inset 0 0 0 1px rgba(255, 247, 194, 0.18),
+      0 0 16px rgba(244, 178, 60, 0.12);
+  }
+}
+
 @keyframes coreComboTrackHitSweep {
   0% {
     opacity: 0.72;
@@ -7381,6 +7403,8 @@ h2 {
     .core-overload-badge,
   .core-button:not(.is-pulsing):not(.is-pressing):not(.is-overload-ready):not(.is-overload-hit)
     .core-combo-dot.is-next,
+  .core-button:not(.is-combo-charging):not(.is-pulsing):not(.is-pressing):not(.is-overload-ready):not(.is-overload-hit)
+    ~ .combo-line #comboValue,
   .core-button:not(.is-combo-charging):not(.is-pulsing):not(.is-pressing):not(.is-overload-ready):not(.is-overload-hit)
     .core-art,
   .core-button:not(.is-combo-charging):not(.is-pulsing):not(.is-pressing):not(.is-overload-ready):not(.is-overload-hit):hover
