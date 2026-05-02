@@ -2,6 +2,15 @@
 
 ## Unreleased
 
+- 点火按钮新增“键盘焦点预热投光”：主按钮通过 Tab 聚焦、未连击蓄能、未按压、未命中且不处于过载预备/命中状态时，会显示清晰焦点环，并让星核本体、外圈、中心标签和下一击预告进入按下前预热状态，继续回应 #5 对点击反馈、特效和点击欲望的反馈。
+- `src/styles.css` 为 `.core-button:focus-visible` 增加焦点环，并让焦点态 `.core-art` 复用 `coreArtHoverPreheat`；降低动效偏好下关闭焦点态预热动画；`tests/game.test.js` 覆盖静态绑定。
+- 本轮只调整主点火按钮键盘焦点展示和测试，不新增可见文字、不新增收益、不新增存档字段，不改变点击收益、连击窗口、过载奖励、升级价格、星图路线、项目奖励、航线策略、航线指令、远航调度、反馈入口或部署链路。
+- 同步 GitHub Issues 反馈状态：2026-05-02 09:36 CST 当前 5 个 open feedback issue、0 个 open bug issue；#5 作为主处理对象。
+- 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认 `dist/src/styles.css` 包含 `focus-visible`、`coreArtHoverPreheat 1200ms ease-in-out infinite` 和降低动效兜底。
+- 代码提交已创建：`42ca40f feat: add core focus preheat`。
+- 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #5，以及当前键盘焦点态缺少按下前预热信号的复盘。
+
 - 点火按钮新增“悬停预热投光”：主按钮未连击蓄能、未按压、未命中且不处于过载预备/命中状态时，鼠标悬停到星核本体会播放更短、更亮的预热投光，让玩家从待机邀请过渡到按下前也有明确反馈，继续回应 #5 对点击反馈、特效和点击欲望的反馈。
 - `src/styles.css` 为 `.core-button:not(.is-combo-charging):not(.is-pulsing):not(.is-pressing):not(.is-overload-ready):not(.is-overload-hit):hover .core-art` 增加 `coreArtHoverPreheat` 动画，并在降低动效偏好中关闭该动画；`tests/game.test.js` 覆盖静态绑定。
 - 本轮只调整点火按钮 SVG 本体 hover 展示和测试，不新增可见文字、不新增收益、不新增存档字段，不改变点击收益、连击窗口、过载奖励、升级价格、星图路线、项目奖励、航线策略、航线指令、远航调度、反馈入口或部署链路。

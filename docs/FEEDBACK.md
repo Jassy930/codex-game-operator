@@ -2,6 +2,15 @@
 
 ## 2026-05-02
 
+- GitHub Issues：gh 可用且已认证；2026-05-02 09:36 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。#5 仍是最近更新反馈，集中在“点火按钮太薄弱、增加点击反馈、特效和点击欲望”。
+- 本轮 Product decision 继续处理 #5：点火按钮已有完整点击后反馈链、普通待机信标链和鼠标 hover 预热投光，但键盘 Tab 聚焦主按钮时，星核本体、中心标签和下一击预告仍缺少按下前的预热引导。
+- 本轮改动新增点火键盘焦点预热投光：`.core-button:focus-visible` 显示清晰焦点环；非连击蓄能、非按压、非命中、非过载预备/命中状态下，焦点态会增强外圈、中心标签、下一击预告，并让 `.core-art` 复用 `coreArtHoverPreheat`。
+- 本轮只调整主点火按钮键盘焦点展示和测试，不新增可见文字、不新增收益、不新增存档字段，不改变点击收益、连击窗口、过载奖励、升级价格、星图路线、项目奖励、航线策略、航线指令、远航调度、反馈入口或部署链路。
+- 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认 `dist/src/styles.css` 包含 `focus-visible`、`coreArtHoverPreheat 1200ms ease-in-out infinite` 和降低动效兜底。
+- 代码提交已创建：`42ca40f feat: add core focus preheat`。
+- 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #5，以及当前键盘焦点态缺少按下前预热信号的复盘。
+
 - GitHub Issues：gh 可用且已认证；2026-05-02 09:19 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。#5 仍是最近更新反馈，集中在“点火按钮太薄弱、增加点击反馈、特效和点击欲望”。
 - 本轮 Product decision 继续处理 #5：点火按钮已有完整点击后反馈链和普通待机信标链，但鼠标悬停到星核本体时，按钮主体仍主要沿用普通待机暖光，缺少“准备按下”的短促预热投光。
 - 本轮改动新增点火悬停预热投光：`.core-button:not(.is-combo-charging):not(.is-pulsing):not(.is-pressing):not(.is-overload-ready):not(.is-overload-hit):hover .core-art` 播放 `coreArtHoverPreheat`，并在降低动效偏好下关闭动画。

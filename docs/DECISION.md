@@ -1,5 +1,29 @@
 # Decision
 
+## 2026-05-02 Product decision：点火键盘焦点预热投光
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-02 09:36 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有 open bug；#5 仍是最近更新反馈，继续处理“点火按钮太薄弱，增加点击反馈、特效和点击欲望”。
+
+当前最大问题：点火按钮已经有完整点击后反馈链、普通待机信标链、鼠标 hover 预热投光、音效和触感；但键盘玩家通过 Tab 聚焦主按钮、尚未按 Enter / Space 前，只能看到浏览器默认焦点反馈，星核本体没有承接 hover 同等级的“准备点火”预热信号。
+
+本轮决策：
+
+- 新增“点火键盘焦点预热投光”。
+- `src/styles.css` 为 `.core-button:focus-visible` 增加清晰焦点环，并让非连击蓄能、非按压、非命中、非过载预备/命中状态下的焦点态复用外圈增强、中心标签增强、下一击预告增强和 `.core-art` 的 `coreArtHoverPreheat` 预热投光。
+- 在 `prefers-reduced-motion: reduce` 中关闭焦点态星核预热动画。
+- `tests/game.test.js` 增加静态断言，覆盖 focus-visible 外圈、中心标签、星核本体、下一击预告和降低动效兜底。
+- 该改动只调整主点火按钮键盘焦点展示和测试，不新增可见文字、不新增收益、不新增存档字段，不改变点击收益、连击窗口、过载奖励、升级价格、星图路线、项目奖励、航线策略、航线指令、远航调度、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-05-02 09:36 CST 当前 5 个 open feedback issue、0 个 open bug issue；#5 作为本轮主处理对象。
+- `src/styles.css` 包含 `.core-button:focus-visible`、`:focus-visible::after`、`:focus-visible .core-label`、`:focus-visible .core-art`、`:focus-visible + .core-reward-hint` 和焦点态降低动效兜底。
+- `tests/game.test.js` 覆盖点火键盘焦点预热投光静态绑定。
+- 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认 `dist/src/styles.css` 包含 `focus-visible`、`coreArtHoverPreheat 1200ms ease-in-out infinite` 和降低动效兜底。
+- 代码提交已创建：`42ca40f feat: add core focus preheat`。
+- 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #5，以及当前键盘焦点态缺少按下前预热信号的复盘。
+
 ## 2026-05-02 Product decision：点火悬停预热投光
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-02 09:19 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有 open bug；#5 仍是最近更新反馈，继续处理“点火按钮太薄弱，增加点击反馈、特效和点击欲望”。
