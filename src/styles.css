@@ -488,6 +488,13 @@ h2 {
   animation: coreStageHitFlash 360ms ease-out;
 }
 
+.core-button:not(.is-combo-charging):not(.is-pulsing):not(.is-pressing):not(.is-overload-ready):not(.is-overload-hit)
+  .core-stage-aura {
+  opacity: 0.28;
+  filter: drop-shadow(0 0 14px rgba(255, 247, 194, 0.12));
+  animation: coreStageIdleBeacon 2800ms ease-in-out infinite;
+}
+
 .core-stage-aura.is-overload-hit {
   background:
     conic-gradient(
@@ -6418,6 +6425,23 @@ h2 {
   }
 }
 
+@keyframes coreStageIdleBeacon {
+  0%,
+  100% {
+    opacity: 0.22;
+    filter: drop-shadow(0 0 10px rgba(255, 247, 194, 0.1));
+    transform: scale(0.9);
+  }
+
+  50% {
+    opacity: 0.34;
+    filter:
+      drop-shadow(0 0 16px rgba(255, 247, 194, 0.16))
+      drop-shadow(0 0 24px rgba(19, 181, 166, 0.1));
+    transform: scale(0.92);
+  }
+}
+
 @keyframes coreStageBurst {
   0% {
     opacity: 1;
@@ -7263,6 +7287,8 @@ h2 {
   .core-button:not(.is-pulsing):not(.is-pressing) + .core-reward-hint:not(.is-overload-ready):not(.is-overload-hit),
   .core-button:not(.is-pulsing):not(.is-pressing):not(.is-overload-ready):not(.is-overload-hit)
     .core-label,
+  .core-button:not(.is-combo-charging):not(.is-pulsing):not(.is-pressing):not(.is-overload-ready):not(.is-overload-hit)
+    .core-stage-aura,
   .core-button:not(.is-combo-charging):not(.is-pulsing):not(.is-pressing):not(.is-overload-ready):not(.is-overload-hit)
     .core-surge-orbit,
   .core-button:not(.is-combo-charging):not(.is-pulsing):not(.is-pressing):not(.is-overload-ready):not(.is-overload-hit)
