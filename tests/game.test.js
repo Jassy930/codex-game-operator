@@ -6163,6 +6163,19 @@ test("反馈表单字段会渲染视觉短标", () => {
   assert.match(styles, /\.feedback-field-icon-message::after/);
 });
 
+test("反馈表单标题会渲染视觉短标", () => {
+  const indexHtml = readFileSync(new URL("../index.html", import.meta.url), "utf8");
+  const styles = readFileSync(new URL("../src/styles.css", import.meta.url), "utf8");
+
+  assert.match(indexHtml, /id="feedback-title" class="feedback-heading"/);
+  assert.match(indexHtml, /class="feedback-heading-icon" aria-hidden="true"/);
+  assert.match(indexHtml, /<span>反馈<\/span>/);
+  assert.match(styles, /\.feedback-heading \{/);
+  assert.match(styles, /\.feedback-heading-icon/);
+  assert.match(styles, /\.feedback-heading-icon::before/);
+  assert.match(styles, /\.feedback-heading-icon::after/);
+});
+
 test("反馈提交按钮会渲染发送短标", () => {
   const indexHtml = readFileSync(new URL("../index.html", import.meta.url), "utf8");
   const styles = readFileSync(new URL("../src/styles.css", import.meta.url), "utf8");
