@@ -8,6 +8,9 @@
 - 本轮只增强航线委托进度扫视性和测试，不新增收益、不新增存档字段，不改变指令冷却、连携窗口、策略契合、航线委托奖励、远航调度、星图航段、反馈入口或部署链路。
 - 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 128 项。
 - 构建产物已确认 `dist/index.html`、`dist/src/app.js` 和 `dist/src/styles.css` 包含 `directive-task-meter-fill` 与 `directive-task-meter-node`。
+- 代码提交已创建并推送：`dfb9c8d feat: show directive task progress nodes`；GitHub Pages workflow `25386816696` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页返回 HTTP 200，线上首页、`src/app.js` 和 `src/styles.css` 已确认包含 `directive-task-meter-fill` 与 `directive-task-meter-node`。workflow 给出 Node.js 20 actions 弃用提醒，未影响本次部署。
+- 2026-05-05 23:49-23:50 CST 已在 #3/#6 回复本轮航线委托三节点进度条、提交 `dfb9c8d`、GitHub Pages workflow `25386816696` 和线上验证结果；两个 issue 均保持 open 等待复测，评论地址：`https://github.com/Jassy930/codex-game-operator/issues/3#issuecomment-4380866523`、`https://github.com/Jassy930/codex-game-operator/issues/6#issuecomment-4380868964`。回复后于 2026-05-05 23:50 CST 再次同步 GitHub Issues，当前仍为 5 个 open feedback issue、0 个 open bug issue；#3 更新时间为 `2026-05-05T15:49:52Z`，#6 更新时间为 `2026-05-05T15:50:13Z`。
+- 钉钉通知未发送：2026-05-05 23:50 CST 运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` / `ROBOT` 相关有效 webhook URL；未将 webhook 写入仓库。
 - 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #3/#6，以及当前航线委托条已有下一步收益但进度条缺少离散三步节点的链路复盘。
 
 - GitHub Issues：gh 可用且已认证；2026-05-05 23:17 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。#3/#6 仍是最近更新的玩法结构反馈，本轮继续处理“玩法太简单”和“后半段玩法没有真正变化”。回复后于 2026-05-05 23:28 CST 再次同步，当前仍为 5 个 open feedback issue、0 个 open bug issue；#3/#6 更新时间均为 `2026-05-05T15:28:17Z`。
