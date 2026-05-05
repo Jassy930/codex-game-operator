@@ -1,5 +1,26 @@
 # Decision
 
+## 2026-05-05 Product decision：远航连段星图总览短标
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-05 16:06 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有 open bug；本轮继续处理真实反馈 #6“后半段只有不停的目标，玩法没有真正变化”。
+
+当前最大问题：远航连段已经进入执行区、闭环复盘、路线对照条和当前按钮徽标，但星图计划总览里的“远航调度总览”仍只汇总当前航段、目标、分支、路线步骤和闭环进度。玩家从星图总览层扫当前航段时，还看不到当前跨轮连段层数。
+
+本轮决策：
+
+- 新增“远航连段星图总览短标”。
+- `buildProjectOverviewDispatchText()` 在 `dispatch.loopStreakText` 存在且未被闭环复盘文本覆盖时，追加 `连段 X/3`。
+- 该改动只调整星图总览摘要文本和测试，不新增收益、不新增存档字段，不改变远航连段结算、远航调度路线、按钮徽标、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-05-05 16:06 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 作为本轮主处理对象。
+- `src/game.js` 中 `buildProjectOverviewDispatchText()` 会把 `dispatch.loopStreakText` 并入星图总览远航调度摘要，并避免与闭环复盘内的连段文本重复。
+- `tests/game.test.js` 覆盖星图总览摘要包含 `连段 1/3 · 闭环 1/3`。
+- 本地验证已通过：`node --test tests/game.test.js`、`npm install`、`npm test`、`npm run build`、`bun install --no-save`、`bun run test`、`bun run build`；测试数 118 项。
+- 构建产物已确认 `dist/src/game.js` 包含 `dispatch.loopStreakText && !branchClosureText.includes(dispatch.loopStreakText)`。
+- 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #6，以及远航连段在星图总览层缺少短标的链路复盘。
+
 ## 2026-05-05 Product decision：远航连段按钮徽标信标
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-05 15:53 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有 open bug；本轮继续处理真实反馈 #6“后半段只有不停的目标，玩法没有真正变化”。

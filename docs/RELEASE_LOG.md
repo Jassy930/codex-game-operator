@@ -2,6 +2,14 @@
 
 ## Unreleased
 
+- 星图总览新增“远航连段短标”：远航调度总览会在当前连段存在时显示 `连段 X/3`，让跨轮递进收益不只停留在执行区、路线对照条和按钮徽标中，继续回应 #6 对后半段玩法变化不明显的反馈。
+- `src/game.js` 在 `buildProjectOverviewDispatchText()` 中追加 `dispatch.loopStreakText`，并避免与闭环复盘文本重复；`tests/game.test.js` 覆盖星图总览摘要包含 `连段 1/3 · 闭环 1/3`。
+- 本轮只调整星图总览摘要文本和测试，不新增收益、不新增存档字段，不改变远航连段结算、远航调度路线、按钮徽标、反馈入口或部署链路。
+- 同步 GitHub Issues 反馈状态：2026-05-05 16:06 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 作为主处理对象。
+- 验证通过：`node --test tests/game.test.js`、`npm install`、`npm test`、`npm run build`、`bun install --no-save`、`bun run test`、`bun run build`；测试数 118 项。
+- 构建产物已确认 `dist/src/game.js` 包含 `dispatch.loopStreakText && !branchClosureText.includes(dispatch.loopStreakText)`。
+- 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #6，以及远航连段在星图总览层缺少短标的链路复盘。
+
 - 远航路线步骤按钮新增“远航连段按钮徽标信标”：当前路线按钮若本次会触发 `远航连段 +X`，该徽标会被前置到路线步骤徽标之后，并获得状态点和轻量补光，让跨轮递进收益不再容易折叠进 `+N` 明细，继续回应 #6 对后半段玩法变化不明显的反馈。
 - `src/app.js` 调整 `badges.append()` 顺序，让 `dispatchLoopStreak` 紧跟 `dispatchRouteStep`；`src/styles.css` 增加 `.directive-button.is-dispatch-route-step .directive-dispatch-loop-streak`、`directiveDispatchLoopStreakBeacon`、状态点和降低动效兜底；`tests/game.test.js` 覆盖静态绑定。
 - 本轮只调整现有按钮徽标排序和展示，不新增收益、不新增存档字段，不改变远航连段结算、目标指令、分支路线、冷却、连携窗口、星图航段、反馈入口或部署链路。

@@ -4904,6 +4904,10 @@ function buildProjectOverviewDispatchText(dispatch) {
   const branchClosureText = dispatch.branchClosureText
     ? " · " + dispatch.branchClosureText
     : "";
+  const loopStreakText =
+    dispatch.loopStreakText && !branchClosureText.includes(dispatch.loopStreakText)
+      ? " · " + dispatch.loopStreakText
+      : "";
   const currentStep = Array.isArray(dispatch.loopSteps)
     ? dispatch.loopSteps.find((step) => step.state === "current")
     : null;
@@ -4927,6 +4931,7 @@ function buildProjectOverviewDispatchText(dispatch) {
     branchPlanText +
     branchPlanStepText +
     branchClosureText +
+    loopStreakText +
     " · 闭环 " +
     dispatch.loopProgress +
     "/" +

@@ -2,6 +2,13 @@
 
 ## 2026-05-05
 
+- GitHub Issues：gh 可用且已认证；2026-05-05 16:06 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。#6 仍是最近更新反馈，指向“后半段只有不停目标，玩法没有真正变化”。
+- 本轮 Product decision 继续处理 #6：远航连段已经进入执行区、闭环复盘、路线对照条和当前按钮徽标，但星图计划总览里的“远航调度总览”还没有显示当前连段层数。
+- 本轮改动新增“远航连段星图总览短标”：星图总览远航调度摘要会在当前连段存在时显示 `连段 X/3`，并避免与闭环复盘文本重复。
+- 本轮只调整星图总览摘要文本和测试，不新增收益、不新增存档字段，不改变远航连段结算、远航调度路线、按钮徽标、反馈入口或部署链路。
+- 本地验证已通过：`node --test tests/game.test.js`、`npm install`、`npm test`、`npm run build`、`bun install --no-save`、`bun run test`、`bun run build`；测试数 118 项；构建产物已确认包含 `dispatch.loopStreakText && !branchClosureText.includes(dispatch.loopStreakText)`。
+- 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #6，以及远航连段在星图总览层缺少短标的链路复盘。
+
 - GitHub Issues：gh 可用且已认证；2026-05-05 15:53 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。#6 仍是最近更新反馈，指向“后半段只有不停目标，玩法没有真正变化”。
 - 本轮 Product decision 继续处理 #6：远航连段已经进入远航调度、闭环复盘和路线对照条，但实际航线指令按钮里的 `远航连段 +X` 徽标仍可能排在多项远航收益后，被压缩到 `+N` 明细。
 - 本轮改动新增“远航连段按钮徽标信标”：当前路线按钮会把 `远航连段 +X` 前置到路线步骤徽标之后，并给该徽标添加状态点和轻量补光。
