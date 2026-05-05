@@ -1,5 +1,26 @@
 # Decision
 
+## 2026-05-05 Product decision：反馈提交按钮发送短标
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-05 18:44 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有 open bug；本轮继续处理最近更新的真实反馈 #4“界面里全是密密麻麻的文字，能不能生成一些图片”。
+
+当前最大问题：反馈表单字段已经补上类型、评分和内容视觉短标，但侧栏反馈表单的最终“提交反馈”按钮仍是纯文字按钮。它位于玩家提交反馈前的最后一步，仍会贡献一处只靠文字识别的操作入口。
+
+本轮决策：
+
+- 新增“反馈提交按钮发送短标”。
+- `index.html` 为反馈提交按钮添加 `feedback-submit-icon` 图形槽，并保留原“提交反馈”文案。
+- `src/styles.css` 用 CSS 绘制 22px 发送短标，并让按钮使用稳定的图标 + 文本网格布局。
+- `tests/game.test.js` 覆盖静态首页和 CSS 绑定。
+- 该改动只调整反馈提交按钮展示和测试，不新增可见说明文字、不改变反馈类型、评分、内容输入、Issue 草稿、反馈快照、localStorage 事件、玩法数值、星图、航线指令、远航调度或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-05-05 18:44 CST 当前 5 个 open feedback issue、0 个 open bug issue；#4 作为本轮主处理对象。
+- 反馈提交按钮包含 `feedback-submit-icon`，并保持原有 `feedback-submit` submit 行为和“提交反馈”文案。
+- 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 124 项。
+- 构建产物已确认 `dist/index.html` 和 `dist/src/styles.css` 包含 `feedback-submit-icon` 与 `grid-template-columns: 22px auto`。
+
 ## 2026-05-05 Product decision：反馈表单字段视觉短标
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-05 18:30 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有 open bug；本轮继续处理最近更新的真实反馈 #4“界面里全是密密麻麻的文字，能不能生成一些图片”。

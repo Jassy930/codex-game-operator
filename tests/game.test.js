@@ -6163,6 +6163,20 @@ test("反馈表单字段会渲染视觉短标", () => {
   assert.match(styles, /\.feedback-field-icon-message::after/);
 });
 
+test("反馈提交按钮会渲染发送短标", () => {
+  const indexHtml = readFileSync(new URL("../index.html", import.meta.url), "utf8");
+  const styles = readFileSync(new URL("../src/styles.css", import.meta.url), "utf8");
+
+  assert.match(indexHtml, /class="feedback-submit" type="submit"/);
+  assert.match(indexHtml, /class="feedback-submit-icon" aria-hidden="true"/);
+  assert.match(indexHtml, /<span>提交反馈<\/span>/);
+  assert.match(styles, /\.feedback-submit \{/);
+  assert.match(styles, /grid-template-columns: 22px auto/);
+  assert.match(styles, /\.feedback-submit-icon/);
+  assert.match(styles, /\.feedback-submit-icon::before/);
+  assert.match(styles, /\.feedback-submit-icon::after/);
+});
+
 test("反馈入口会生成带游戏快照的 GitHub Issue 链接", () => {
   const state = {
     ...createInitialState(0),

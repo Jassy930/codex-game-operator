@@ -2,6 +2,14 @@
 
 ## 2026-05-05
 
+- GitHub Issues：gh 可用且已认证；2026-05-05 18:44 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。#4 是最近更新反馈，继续指向“界面文字密度高、希望更多图片”。
+- 本轮 Product decision 继续处理 #4：反馈表单字段已有视觉短标，但侧栏反馈表单的“提交反馈”按钮仍是纯文字按钮。
+- 本轮改动新增“反馈提交按钮发送短标”：反馈提交按钮文字前显示固定 22px CSS 发送图形槽，辅助扫视最终提交动作。
+- 本轮只调整反馈提交按钮展示和测试，不新增可见说明文字、不改变反馈类型、评分、内容输入、Issue 草稿、反馈快照、localStorage 事件、玩法数值、星图、航线指令、远航调度或部署链路。
+- 验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 124 项。
+- 构建产物已确认 `dist/index.html` 和 `dist/src/styles.css` 包含 `feedback-submit-icon` 与 `grid-template-columns: 22px auto`。
+- 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #4，以及反馈提交按钮仍缺少图形锚点的侧栏复盘。
+
 - GitHub Issues：gh 可用且已认证；2026-05-05 18:30 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。#4 是最近更新反馈，继续指向“界面文字密度高、希望更多图片”。
 - 本轮 Product decision 继续处理 #4：主操作区多个关键控件已有视觉锚点，但侧栏反馈表单的“类型 / 评分 / 内容”字段仍是纯文字标签。
 - 本轮改动新增“反馈表单字段视觉短标”：反馈类型、评分和内容三个字段标签各显示固定 22px CSS 图形槽，分别用类型、星级和消息图形辅助扫视。

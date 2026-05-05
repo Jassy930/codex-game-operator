@@ -6645,6 +6645,11 @@ h2 {
 }
 
 .feedback-submit {
+  display: inline-grid;
+  grid-template-columns: 22px auto;
+  gap: 8px;
+  align-items: center;
+  justify-content: center;
   min-height: 42px;
   border: 0;
   border-radius: 8px;
@@ -6652,6 +6657,41 @@ h2 {
   color: #0f1413;
   cursor: pointer;
   font-weight: 900;
+}
+
+.feedback-submit-icon {
+  position: relative;
+  display: inline-block;
+  width: 22px;
+  height: 22px;
+  border: 1px solid rgba(15, 20, 19, 0.32);
+  border-radius: 7px;
+  background:
+    radial-gradient(circle at 32% 28%, rgba(255, 247, 194, 0.62), transparent 30%),
+    rgba(248, 243, 231, 0.3);
+}
+
+.feedback-submit-icon::before,
+.feedback-submit-icon::after {
+  position: absolute;
+  display: block;
+  content: "";
+}
+
+.feedback-submit-icon::before {
+  inset: 5px 4px 5px 5px;
+  background: currentColor;
+  clip-path: polygon(0 8%, 100% 50%, 0 92%, 24% 53%);
+}
+
+.feedback-submit-icon::after {
+  top: 10px;
+  left: 5px;
+  width: 8px;
+  height: 2px;
+  border-radius: 999px;
+  background: rgba(248, 243, 231, 0.72);
+  transform: rotate(-12deg);
 }
 
 .feedback-submit:hover {

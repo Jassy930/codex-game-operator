@@ -5,6 +5,7 @@
 当前实现：
 
 - 浏览器本地通过 localStorage 保存最近 200 条 session、click、first_upgrade_time、upgrade_purchase、goal_complete、reset 事件。
+- 反馈提交按钮发送短标当前由静态 `index.html` 中的 `feedback-submit-icon` 标记和 `src/styles.css` 即时渲染，不单独记录为真实线上指标；反馈提交仍通过现有 feedback_sent 事件和反馈快照复盘。
 - 反馈表单字段视觉短标当前由静态 `index.html` 中的 `feedback-field-label` / `feedback-field-icon-*` 标记和 `src/styles.css` 即时渲染，不单独记录为真实线上指标；反馈提交仍通过现有 feedback_sent 事件和反馈快照复盘。
 - 浏览器本地在玩家切换点火音效偏好时记录 sound_toggle 事件；音效偏好使用独立 localStorage key，不计入游戏进度存档。
 - 浏览器本地在玩家切换点火触感偏好时记录 haptic_toggle 事件；触感偏好使用独立 localStorage key，不计入游戏进度存档。
