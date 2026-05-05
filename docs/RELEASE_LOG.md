@@ -8,6 +8,9 @@
 - 同步 GitHub Issues 反馈状态：2026-05-06 06:01 CST 当前 5 个 open issue、5 个 open feedback issue、0 个 open bug issue；#2/#3/#6 作为本轮关联反馈，#4/#5 继续等待带新快照的真实复测。
 - 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 132 项。
 - 构建产物已确认 `dist/src/feedback.js` 包含 `projectChapter`、`formatFeedbackProjectChapter` 与 `- 星图章节：`。
+- 代码和同步文档提交已创建并推送：`206c2bf feat: add project chapter to feedback snapshots`。
+- 发布：GitHub Pages workflow `25405012264` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页返回 HTTP 200，线上 `src/feedback.js` 已确认包含 `projectChapter`、`formatFeedbackProjectChapter` 与 `- 星图章节：`。workflow 给出 Node.js 20 actions 弃用提醒，未影响本次部署。
+- 反馈处理：已回复 #2、#3 和 #6，说明星图章节反馈快照、验证结果、Pages 部署和复测问题；三个 issue 均保持 open，评论地址：`https://github.com/Jassy930/codex-game-operator/issues/2#issuecomment-4383514283`、`https://github.com/Jassy930/codex-game-operator/issues/3#issuecomment-4383514326`、`https://github.com/Jassy930/codex-game-operator/issues/6#issuecomment-4383514292`。回复后于 2026-05-06 06:10 CST 再次同步 GitHub Issues，当前仍为 5 个 open feedback issue、0 个 open bug issue；#2/#3/#6 更新时间均为 `2026-05-05T22:09:47Z`。
 
 - 反馈快照新增“星图进度摘要”：游戏内反馈生成 GitHub Issue 时，快照会追加 `星图进度：...`，记录当前星图完成数、下一航段、奖励和当前进度，继续为 #2/#3/#6 的内容丰富度、主动玩法和后半段复测提供可诊断上下文。
 - `src/feedback.js` 复用 `getProjectOverview()` 格式化星图快照字段；`tests/game.test.js` 覆盖早期 0/57 点亮星图快照和 26/57 脉冲航闸后半段快照。

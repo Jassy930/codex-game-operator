@@ -19,6 +19,8 @@
 - 新提交的游戏内反馈 Issue 会显示 `星图章节：...`；早期状态能显示 `当前 首段星图 1/4 · 航段 1/57 点亮星图`，后半段能显示 `当前 远航长尾 14/44 · 航段 27/57 脉冲航闸`。
 - 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 132 项。
 - 构建产物已确认 `dist/src/feedback.js` 包含 `projectChapter`、`formatFeedbackProjectChapter` 与 `- 星图章节：`。
+- 发布验证已通过：提交 `206c2bf` 已推送，GitHub Pages workflow `25405012264` 成功，线上首页返回 HTTP 200，线上 `src/feedback.js` 已确认包含 `projectChapter`、`formatFeedbackProjectChapter` 与 `- 星图章节：`。
+- 已回复 GitHub Issue #2、#3 和 #6，说明星图章节反馈快照、验证结果、Pages 部署和复测问题；issue 均保持 open。回复后于 2026-05-06 06:10 CST 再次同步 GitHub Issues，当前仍为 5 个 open feedback issue、0 个 open bug issue。
 - 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #2/#3/#6，以及反馈快照已有全局航段位置但缺少章节内上下文的链路复盘。
 
 ## 2026-05-06 Product decision：星图进度快照摘要
