@@ -8,7 +8,10 @@
 - 同步 GitHub Issues 反馈状态：2026-05-06 07:03 CST 当前 5 个 open issue、5 个 open feedback issue、0 个 open bug issue；#6 作为本轮主关联反馈，#3 作为间接关联反馈。
 - 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 133 项。
 - 构建产物已确认 `dist/src/feedback.js` 包含 `farRouteBranchChoices`、`formatFeedbackFarRouteBranchChoices` 与 `远航路线对照`。
-- 发布待执行：等待本轮提交推送后验证 GitHub Pages workflow 与线上文件。
+- 代码和同步文档提交已创建并推送：`665a582 feat: add far route choice feedback snapshot`。
+- 发布：GitHub Pages workflow `25407249532` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页返回 HTTP 200，线上 `src/feedback.js` 已确认包含 `farRouteBranchChoices`、`formatFeedbackFarRouteBranchChoices` 与 `远航路线对照`。workflow 给出 Node.js 20 actions 弃用提醒，未影响本次部署。
+- 反馈处理：已回复 #6，说明远航路线对照反馈快照、验证结果、Pages 部署和复测问题；issue 保持 open，评论地址：`https://github.com/Jassy930/codex-game-operator/issues/6#issuecomment-4383805770`。回复后于 2026-05-06 07:09 CST 再次同步 GitHub Issues，当前仍为 5 个 open feedback issue、0 个 open bug issue；#6 更新时间为 `2026-05-05T23:09:44Z`。
+- 钉钉通知未发送：2026-05-06 07:10 CST 运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` / `ROBOT` 相关有效 webhook 变量，当前目录和 `/home/jassy/glm` 两层内未发现 `.env*` 文件；未将 webhook 写入仓库。
 
 - 反馈链路新增“反馈编号”：游戏内反馈生成 GitHub Issue 时会在评分后输出 `反馈编号：...`，浏览器本地 `feedback_sent` 事件会记录同一个 `feedbackId`，便于把 GitHub Issue、本地反馈草稿和本地事件对齐复盘。
 - `src/feedback.js` 在 Issue 正文中写入 `entry.id`；`src/app.js` 在 `feedback_sent` payload 中写入 `feedbackId: entry.id`；`tests/game.test.js` 覆盖正文和前端事件绑定。

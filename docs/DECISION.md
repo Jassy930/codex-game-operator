@@ -20,7 +20,9 @@
 - 新提交的 20M 后游戏内反馈 Issue 会显示 `远航路线对照：...`；20M 前或远航未解锁反馈不会输出该行。
 - 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 133 项。
 - 构建产物已确认 `dist/src/feedback.js` 包含 `farRouteBranchChoices`、`formatFeedbackFarRouteBranchChoices` 与 `远航路线对照`。
-- 发布待执行：等待本轮代码和文档提交推送后验证 GitHub Pages workflow 与线上文件。
+- 发布验证已通过：提交 `665a582` 已推送，GitHub Pages workflow `25407249532` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页返回 HTTP 200，线上 `src/feedback.js` 已确认包含 `farRouteBranchChoices`、`formatFeedbackFarRouteBranchChoices` 与 `远航路线对照`。workflow 给出 Node.js 20 actions 弃用提醒，未影响本次部署。
+- 已回复 GitHub Issue #6，说明远航路线对照反馈快照、验证结果、Pages 部署和复测问题；issue 保持 open，评论地址：`https://github.com/Jassy930/codex-game-operator/issues/6#issuecomment-4383805770`。回复后于 2026-05-06 07:09 CST 再次同步 GitHub Issues，当前仍为 5 个 open feedback issue、0 个 open bug issue；#6 更新时间为 `2026-05-05T23:09:44Z`。
+- 钉钉通知未发送：2026-05-06 07:10 CST 运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` / `ROBOT` 相关有效 webhook 变量，当前目录和 `/home/jassy/glm` 两层内未发现 `.env*` 文件；未将 webhook 写入仓库。
 - 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #6，以及当前反馈快照缺少远航路线对照短摘要的链路复盘。
 
 ## 2026-05-06 Product decision：反馈编号链路对齐
