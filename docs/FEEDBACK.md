@@ -2,6 +2,13 @@
 
 ## 2026-05-06
 
+- GitHub Issues：gh 可用且已认证；2026-05-06 05:14 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。#3/#6 仍是主动短循环和后半段玩法复测反馈，#4 仍是图片化和文字密度复测反馈。
+- 本轮 Product decision 处理 #3/#4/#6：反馈快照已经记录指令熟练、远航调度、远航连段和满段回响，但没有单独记录 100K 后指令轮换和航线委托所处阶段，后续复盘 #3/#6 时仍需要从多个字段反推玩家卡在短循环哪一步。
+- 本轮改动新增“反馈快照指令短循环上下文”：`createFeedbackEntry()` 读取 `getDirectivePlan()` 和 `getDirectiveTaskStatus()`，预填 Issue 快照追加 `指令轮换：...` 与 `航线委托：...` 两行，记录阶段、下一步、状态和收益。
+- 本轮只增强真实反馈可诊断性和测试，不新增界面可见文字、不新增收益、不新增存档字段，不改变点火收益、指令冷却、连携窗口、策略契合、航线委托、远航调度、星图航段或部署链路。
+- 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 130 项。
+- 构建产物已确认 `dist/src/feedback.js` 包含 `directivePlan`、`directiveTask`、`formatFeedbackDirectivePlan`、`formatFeedbackDirectiveTask`、`- 指令轮换：` 与 `- 航线委托：`。
+
 - GitHub Issues：gh 可用且已认证；2026-05-06 04:57 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。#3/#6 仍是主动短循环和后半段玩法复测反馈，#4 仍是图片化和文字密度复测反馈。
 - 本轮 Product decision 处理 #3/#4/#6：上一轮已让当前下一格显示 ready/waiting，但整条 3 格指令轮换轨道仍是静态背景；玩家扫路线时缺少一层“整条短循环现在可推进/等待”的图形反馈。
 - 本轮改动新增“指令轮换整轨状态光”：复用 `#directivePlanTrack.is-next-ready/is-next-waiting`，在 `.directive-plan-track::before` 显示 ready 绿色路线光或 waiting 暖色等待光；ready 状态播放 `directivePlanTrackReadyRail`，降低动效偏好下关闭动画。

@@ -6610,10 +6610,46 @@ test("反馈入口会生成带游戏快照的 GitHub Issue 链接", () => {
   assert.match(body, /过载奖励：5/);
   assert.match(body, /航线策略：点火优先/);
   assert.match(body, new RegExp(`指令熟练：2/${DIRECTIVE_MASTERY_MAX_STACKS}`));
+  assert.match(body, /指令轮换：累计 100K 能量后解锁 90 秒连携目标/);
+  assert.match(body, /航线委托：累计 100K 能量后解锁 3 步短期任务/);
   assert.match(body, /远航调度：累计 20M 能量后解锁后半段航段调度/);
   assert.match(body, /远航续航、远航协同、协同补给、远航绕行、绕行投送、回航校准、分支改道、航段契合、路线稳航、轮替闭环、契合闭环、闭环奖励、远航突破、绕行突破、远航整备、整备续航、绕行整备、整备回航与满段回响/);
   assert.match(body, /闭环进度 0\/3 · 20M 后解锁/);
   assert.match(body, /lens:1/);
+});
+
+test("反馈快照会记录指令轮换和航线委托状态", () => {
+  const state = {
+    ...createInitialState(0),
+    totalEnergy: 100_000,
+    energyPerClick: 10,
+    energyPerSecond: 0,
+    overloadBonus: 7,
+    directiveChain: {
+      lastDirectiveId: "ignition-salvo",
+      stacks: 0,
+      expiresAt: Date.now() + 90_000
+    }
+  };
+  const entry = createFeedbackEntry({
+    type: "experience",
+    rating: 3,
+    message: "短循环走到一半时想确认反馈快照能记录状态",
+    state,
+    goal: { value: "巡航航校" },
+    sessionId: "directive-snapshot-session",
+    createdAt: "2026-05-06T05:20:00.000Z"
+  });
+
+  const body = createFeedbackIssueBody(entry);
+
+  assert.match(body, /指令轮换：1\/3 · 当前 点火齐射/);
+  assert.match(body, /收束续航/);
+  assert.match(body, /下一步收益 连携 \+12%/);
+  assert.match(
+    body,
+    /航线委托：1\/3 · 第 2\/3 步 · 收束续航 · 下一步 巡航回收 · 可执行 · 下一步收益 连携 \+12%/
+  );
 });
 
 test("反馈快照会记录当前远航连段层数", () => {

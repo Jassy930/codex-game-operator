@@ -1,5 +1,27 @@
 # Decision
 
+## 2026-05-06 Product decision：反馈快照指令短循环上下文
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-06 05:14 CST 已同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。没有 open bug；#3“玩法太简单”和 #6“后半段玩法没有真正变化”仍是主动短循环与后半段复测反馈，#4 仍是文字密度与图片化复测反馈。
+
+当前最大问题：反馈快照已经记录指令熟练、远航调度、远航连段和满段回响，但没有单独记录 100K 后“指令轮换”和“航线委托”所处阶段。玩家提交 #3/#6 类反馈时，后续只能从能量、当前目标和熟练层大致反推是否卡在 0/3 起手、1/3 续航、2/3 收束或 3/3 完成，复测判断成本偏高。
+
+本轮决策：
+
+- 新增“反馈快照指令短循环上下文”。
+- `src/feedback.js` 在 `createFeedbackEntry()` 中同时读取 `getDirectivePlan()` 和 `getDirectiveTaskStatus()`，并在 Issue 快照中追加 `指令轮换` 与 `航线委托` 两行。
+- 指令轮换快照保留精简后的阶段摘要、推荐/等待意图和下一步收益；航线委托快照保留进度、下一步步号、意图、动作、状态和下一步收益，完成态保留完成步号、续航动作和完成奖励。
+- `tests/game.test.js` 覆盖未解锁快照，以及 1/3 主动短循环中的 `收束续航`、`下一步 巡航回收`、`可执行` 和 `连携 +12%` 快照内容。
+- 该改动只增强真实反馈的可诊断性，不新增界面可见文字、不新增收益、不新增存档字段，不改变点火收益、指令冷却、连携窗口、策略契合、航线委托、远航调度、星图航段或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-05-06 05:14 CST 当前 5 个 open issue、5 个 open feedback issue、0 个 open bug issue；#3/#4/#6 作为本轮关联反馈。
+- 新提交的游戏内反馈 Issue 会在“指令熟练”之后显示 `指令轮换：...` 和 `航线委托：...`；100K 前显示解锁状态，100K 后能记录当前 1/3、2/3、3/3 或完成态上下文。
+- 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 130 项。
+- 构建产物已确认 `dist/src/feedback.js` 包含 `directivePlan`、`directiveTask`、`formatFeedbackDirectivePlan`、`formatFeedbackDirectiveTask`、`- 指令轮换：` 与 `- 航线委托：`。
+- 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #3/#4/#6，以及反馈快照已有远航长尾上下文但缺少 100K 后指令短循环上下文的链路复盘。
+
 ## 2026-05-06 Product decision：指令轮换整轨状态光
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-06 04:57 CST 已同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。没有 open bug；#3“玩法太简单”、#4“界面密密麻麻，希望更多图片”和 #6“后半段玩法没有真正变化”仍是需要持续复测的真实反馈。

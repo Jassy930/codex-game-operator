@@ -1,6 +1,8 @@
 import {
   DEFAULT_ROUTE_STANCE_ID,
   DIRECTIVE_MASTERY_MAX_STACKS,
+  getDirectivePlan,
+  getDirectiveTaskStatus,
   getFarRouteDispatch,
   ROUTE_STANCE_DEFS
 } from "./game.js";
@@ -40,6 +42,8 @@ export function createFeedbackEntry({
   const feedbackType = FEEDBACK_TYPES[type] ? type : "experience";
   const currentState = state ?? {};
   const currentGoal = goal ?? {};
+  const directivePlan = getDirectivePlan(currentState);
+  const directiveTask = getDirectiveTaskStatus(currentState);
   const farRouteDispatch = getFarRouteDispatch(currentState);
   const farRouteLoopStreak = formatFeedbackFarRouteLoopStreak(farRouteDispatch);
   const farRouteLoopCapstone =
@@ -64,6 +68,8 @@ export function createFeedbackEntry({
       overloadBonus: currentState.overloadBonus ?? 5,
       routeStance: getFeedbackRouteStanceId(currentState.routeStance),
       directiveMastery: getFeedbackDirectiveMastery(currentState.directiveMastery),
+      directivePlan: formatFeedbackDirectivePlan(directivePlan),
+      directiveTask: formatFeedbackDirectiveTask(directiveTask),
       farRouteDispatch: formatFeedbackFarRouteDispatch(farRouteDispatch),
       farRouteLoopStreak,
       farRouteLoopCapstone,
@@ -112,6 +118,8 @@ export function createFeedbackIssueBody(entry) {
     `- 过载奖励：${snapshot.overloadBonus}`,
     `- 航线策略：${getFeedbackRouteStanceName(snapshot.routeStance)}`,
     `- 指令熟练：${snapshot.directiveMastery.stacks}/${DIRECTIVE_MASTERY_MAX_STACKS}`,
+    `- 指令轮换：${snapshot.directivePlan}`,
+    `- 航线委托：${snapshot.directiveTask}`,
     `- 远航调度：${snapshot.farRouteDispatch}`,
     ...farRouteLoopStreakLine,
     ...farRouteLoopCapstoneLine,
@@ -146,6 +154,61 @@ function getFeedbackDirectiveMastery(directiveMastery) {
   };
 }
 
+function formatFeedbackDirectivePlan(plan) {
+  const summaryText = stripFeedbackLabel(
+    plan?.summaryText ?? plan?.text ?? "未知",
+    "指令轮换"
+  );
+  const recommendationText = String(
+    plan?.recommendationText ?? plan?.waitingRecommendationText ?? ""
+  );
+  const rewardText = plan?.nextRewardText
+    ? "下一步收益 " + plan.nextRewardText
+    : "";
+
+  return [
+    summaryText,
+    recommendationText && !summaryText.includes(recommendationText)
+      ? recommendationText
+      : "",
+    rewardText
+  ]
+    .filter(Boolean)
+    .join(" · ");
+}
+
+function formatFeedbackDirectiveTask(task) {
+  if (!task?.unlocked) {
+    return stripFeedbackLabel(task?.text ?? "未知", "航线委托");
+  }
+
+  if (task.completed) {
+    return [
+      task.completedStepText,
+      task.completedFollowupText,
+      task.rewardText
+    ]
+      .filter(Boolean)
+      .join(" · ");
+  }
+
+  const progressText = (task.progress ?? 0) + "/" + Math.max(1, task.target ?? 3);
+  const rewardText = task.nextRewardText
+    ? "下一步收益 " + task.nextRewardText
+    : "";
+
+  return [
+    progressText,
+    task.nextStepText,
+    task.nextIntentText,
+    task.nextActionText,
+    task.nextStatusText,
+    rewardText
+  ]
+    .filter(Boolean)
+    .join(" · ");
+}
+
 function formatFeedbackFarRouteDispatch(dispatch) {
   const text = String(dispatch?.text ?? "未知").replace(/^远航调度：/, "");
   const loopStatusText = dispatch?.loopStatusText ? " · " + dispatch.loopStatusText : "";
@@ -158,6 +221,27 @@ function formatFeedbackFarRouteLoopStreak(dispatch) {
 
 function formatFeedbackFarRouteLoopCapstone(dispatch) {
   return String(dispatch?.loopCapstoneText ?? "");
+}
+
+function stripFeedbackLabel(text, label) {
+  const value = String(text ?? "未知");
+  const colonLabel = label + "：";
+  const asciiColonLabel = label + ":";
+  const spacedLabel = label + " ";
+
+  if (value.startsWith(colonLabel)) {
+    return value.slice(colonLabel.length);
+  }
+
+  if (value.startsWith(asciiColonLabel)) {
+    return value.slice(asciiColonLabel.length);
+  }
+
+  if (value.startsWith(spacedLabel)) {
+    return value.slice(spacedLabel.length);
+  }
+
+  return value;
 }
 
 function clampRating(value) {
