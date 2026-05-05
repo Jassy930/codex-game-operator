@@ -1,5 +1,29 @@
 # Decision
 
+## 2026-05-06 Product decision：航线委托下一步步号短标
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-06 00:57 CST 已同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。没有 open bug；#3“玩法太简单”和 #6“后半段玩法没有真正变化”仍是本轮关联反馈。
+
+当前最大问题：航线委托条已经显示下一步动作、状态、收益和 1/2/3 节点，但动作胶囊本身没有直接说明这是本轮第几步。玩家要把 `航线委托 X/3`、三节点和“下一步 XXX”合在一起读，才能确认当前动作对应第 1/3、2/3 还是 3/3。
+
+本轮决策：
+
+- 新增“航线委托下一步步号短标”。
+- `src/game.js` 让 `getDirectiveTaskStatus()` 输出 `nextStepText`，未完成委托显示 `第 N/3 步`，锁定态和完成态保持空值。
+- `src/app.js` 在 `renderDirectiveTask()` 中渲染 `directive-task-step`，并写入“航线委托下一步步号”的标题和可访问标签。
+- `index.html` 为静态首页委托区预留锁定态隐藏 step 节点。
+- `src/styles.css` 为步号短标提供独立青色胶囊样式，并和动作、状态、收益短标共享稳定截断布局。
+- `tests/game.test.js` 覆盖锁定态、起手态、等待冷却态、3/3 收束态、完成态、静态首页、运行时绑定和 CSS。
+- 该改动只增强航线委托下一步步号可见性，不新增收益、不新增存档字段，不改变指令冷却、连携窗口、策略契合、航线委托奖励、远航调度、星图航段、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-05-06 00:57 CST 当前 5 个 open issue、5 个 open feedback issue、0 个 open bug issue；#3/#6 作为本轮关联反馈。#3 和 #6 更新时间均为 `2026-05-05T16:50:52Z`。
+- 航线委托 0/3 下一步显示 `第 1/3 步`；推荐指令冷却等待时仍保留该步号；2/3 收束时显示 `第 3/3 步`；完成态和锁定态不显示步号短标。
+- 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 128 项。
+- 构建产物已确认 `dist/index.html`、`dist/src/app.js`、`dist/src/game.js` 和 `dist/src/styles.css` 包含 `directive-task-step`、`nextStepText` 与“航线委托下一步步号”。
+- 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #3/#6，以及航线委托条已有动作/状态/收益但动作短标缺少当前步号的链路复盘。
+
 ## 2026-05-06 Product decision：航线委托下一步状态短标
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-06 00:34 CST 已同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。没有 open bug；#3“玩法太简单”和 #6“后半段玩法没有真正变化”仍是本轮关联反馈。

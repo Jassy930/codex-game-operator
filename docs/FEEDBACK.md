@@ -2,6 +2,14 @@
 
 ## 2026-05-06
 
+- GitHub Issues：gh 可用且已认证；2026-05-06 00:57 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。#3 和 #6 更新时间均为 `2026-05-05T16:50:52Z`；#3/#6 仍是最近更新的主动玩法与后半段结构反馈，本轮继续处理航线委托三步短循环的步号映射成本。
+- 本轮 Product decision 处理 #3/#6：航线委托已有下一步动作、状态、收益和 1/2/3 节点，但动作胶囊本身没有直接显示这是第几步，玩家需要从 `航线委托 X/3` 和节点反推。
+- 本轮改动新增“航线委托下一步步号短标”：`getDirectiveTaskStatus()` 输出 `nextStepText`，运行时 `renderDirectiveTask()` 在委托条内渲染 `directive-task-step` 胶囊；0/3 显示 `第 1/3 步`，2/3 收束显示 `第 3/3 步`，完成态和锁定态隐藏。
+- 本轮只增强航线委托下一步步号可见性和测试，不新增收益、不新增存档字段，不改变指令冷却、连携窗口、策略契合、航线委托奖励、远航调度、星图航段、反馈入口或部署链路。
+- 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 128 项。
+- 构建产物已确认 `dist/index.html`、`dist/src/app.js`、`dist/src/game.js` 和 `dist/src/styles.css` 包含 `directive-task-step`、`nextStepText` 与“航线委托下一步步号”。
+- 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #3/#6，以及航线委托条已有动作/状态/收益但动作短标缺少当前步号的链路复盘。
+
 - GitHub Issues：gh 可用且已认证；2026-05-06 00:34 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。#3 更新时间为 `2026-05-05T16:26:13Z`，#6 更新时间为 `2026-05-05T16:26:15Z`；#3/#6 仍是最近更新的主动玩法与后半段结构反馈，本轮继续处理航线委托三步短循环的可执行状态映射成本。
 - 本轮 Product decision 处理 #3/#6：航线委托已有下一步动作、下一步收益、三节点进度条和节点步号，但委托条默认可见层没有单独显示下一步推荐指令是否可执行，玩家需要回到指令按钮区确认冷却状态。
 - 本轮改动新增“航线委托下一步状态短标”：`getDirectiveTaskStatus()` 输出 `nextStatusText` / `nextStatusKind`，运行时 `renderDirectiveTask()` 在委托条内渲染 `directive-task-status` 胶囊；可执行态显示 `可执行`，推荐指令全部冷却时显示最近等待时间，例如 `等待 34 秒`。

@@ -4073,6 +4073,7 @@ export function getDirectiveTaskStatus(state, now = Date.now()) {
       target: targetSteps,
       rewardRate: DIRECTIVE_TASK_REWARD_RATE,
       rewardText,
+      nextStepText: "",
       nextActionText: "",
       nextStatusText: "",
       nextStatusKind: "",
@@ -4093,6 +4094,7 @@ export function getDirectiveTaskStatus(state, now = Date.now()) {
       target: targetSteps,
       rewardRate: DIRECTIVE_TASK_REWARD_RATE,
       rewardText,
+      nextStepText: "",
       nextActionText: "",
       nextStatusText: "",
       nextStatusKind: "",
@@ -4108,6 +4110,8 @@ export function getDirectiveTaskStatus(state, now = Date.now()) {
   const nextText = nextDirectives.length
     ? "下一步 " + formatDirectiveNameList(nextDirectives.map((directive) => directive.name))
     : "继续按推荐预案执行";
+  const nextStepText =
+    "第 " + Math.min(targetSteps, progress + 1) + "/" + targetSteps + " 步";
   const nextRewardText = buildDirectiveTaskNextRewardText(
     plan,
     progress,
@@ -4129,6 +4133,7 @@ export function getDirectiveTaskStatus(state, now = Date.now()) {
     target: targetSteps,
     rewardRate: DIRECTIVE_TASK_REWARD_RATE,
     rewardText,
+    nextStepText,
     nextActionText: nextText,
     nextStatusText: nextStatus.text,
     nextStatusKind: nextStatus.kind,
@@ -4138,6 +4143,8 @@ export function getDirectiveTaskStatus(state, now = Date.now()) {
       progress +
       "/" +
       targetSteps +
+      " · " +
+      nextStepText +
       " · " +
       nextText +
       (nextStatus.text ? " · " + nextStatus.text : "") +

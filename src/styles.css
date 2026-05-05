@@ -2419,6 +2419,7 @@ h2 {
   white-space: nowrap;
 }
 
+.directive-task-step,
 .directive-task-action,
 .directive-task-status,
 .directive-task-reward {
@@ -2435,6 +2436,12 @@ h2 {
   line-height: 1.2;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+.directive-task-step {
+  border-color: rgba(19, 181, 166, 0.34);
+  background: rgba(19, 181, 166, 0.12);
+  color: #bdf4eb;
 }
 
 .directive-task-action {
@@ -2461,6 +2468,7 @@ h2 {
   color: #ffe0ae;
 }
 
+.directive-task-step[hidden],
 .directive-task-action[hidden],
 .directive-task-status[hidden],
 .directive-task-reward[hidden] {
