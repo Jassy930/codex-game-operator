@@ -2,6 +2,17 @@
 
 ## 2026-05-05
 
+- GitHub Issues：gh 可用且已认证；2026-05-05 19:52 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。#5 在本轮回复后更新时间为 `2026-05-05T11:52:06Z`，继续指向“点火按钮太薄弱、需要点击反馈和特效”。
+- 本轮 Product decision 处理 #5：点火按钮已有音效、触感、收益浮标、点击回弹、光点、涟漪和火花，但点击命中瞬间仍缺少一层更大范围、跟随点击位置扩散的爆发反馈。
+- 本轮改动新增“点火点击爆发反馈”：点火按钮新增 `coreImpactBurst` / `core-impact-burst` 爆发层，普通点击播放 540ms 扩散光束，过载点击播放 720ms 强化爆发层。
+- 本轮只增强点火按钮点击反馈和测试，不改变点击收益、过载收益、连击规则、升级价格、存档字段、音效/触感开关、星图、航线指令、远航调度、反馈入口或部署链路。
+- 验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 127 项。
+- 构建产物已确认 `dist/index.html`、`dist/src/app.js` 和 `dist/src/styles.css` 包含 `coreImpactBurst`、`core-impact-burst` 与 `coreImpactBurst` 关键帧。
+- 代码提交已创建并推送：`9a7c913 feat: add core ignition burst feedback`；GitHub Pages workflow `25374638393` 成功，线上首页、JS 和 CSS 已确认包含点火点击爆发反馈。
+- 2026-05-05 19:52 CST 已在 #5 回复本轮处理结果、提交 `9a7c913`、GitHub Pages workflow `25374638393` 和线上验证结果；Issue 保持 open 等待复测，评论地址：`https://github.com/Jassy930/codex-game-operator/issues/5#issuecomment-4378927269`。
+- 钉钉通知未发送：2026-05-05 19:54 CST 运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` / `ROBOT` 相关变量名，当前目录和 `/home/jassy/glm` 两层内未发现 `.env*` 文件；未将 webhook 写入仓库。
+- 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #5，以及点火按钮命中反馈层级的交互复盘。
+
 - GitHub Issues：gh 可用且已认证；2026-05-05 19:39 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。#4 是最近更新反馈，继续指向“界面文字密度高、希望更多图片”。
 - 本轮 Product decision 继续处理 #4：反馈标题、字段、提交按钮和状态回执已有短标，但反馈表单整体仍缺少本地插画资产。
 - 本轮改动新增“反馈表单本地插画”：侧栏反馈标题下方显示 `src/assets/feedback-visual.svg`，用反馈草稿、评分轨和 Issue 投递路径建立图片化锚点。

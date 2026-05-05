@@ -2,6 +2,18 @@
 
 ## Unreleased
 
+- 点火按钮新增点击爆发反馈：核心点火按钮现在包含 `coreImpactBurst` / `core-impact-burst` 爆发层，普通点击沿点击位置播放 540ms 扩散光束，过载点击播放 720ms 强化爆发层，回应 #5 对点击反馈、特效和点击欲望的反馈。
+- `index.html` 新增 `coreImpactBurst` 节点；`src/app.js` 在 `animateCore()` 和 `positionCoreImpact()` 中同步显示、清理和定位爆发层；`src/styles.css` 新增普通/过载两档爆发层样式、`coreImpactBurst` 关键帧和降动效绑定；`tests/game.test.js` 覆盖静态首页、运行时绑定和 CSS 绑定。
+- 本轮只增强点火按钮点击反馈和测试，不改变点击收益、过载收益、连击规则、升级价格、存档字段、音效/触感开关、星图、航线指令、远航调度、反馈入口或部署链路。
+- 同步 GitHub Issues 反馈状态：2026-05-05 19:52 CST 当前 5 个 open feedback issue、0 个 open bug issue；#5 作为本轮主处理对象，回复后更新时间为 `2026-05-05T11:52:06Z`。
+- 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 127 项。
+- 构建产物已确认 `dist/index.html`、`dist/src/app.js` 和 `dist/src/styles.css` 包含 `coreImpactBurst`、`core-impact-burst` 与 `coreImpactBurst` 关键帧。
+- 代码提交已创建并推送：`9a7c913 feat: add core ignition burst feedback`。
+- 发布：GitHub Pages workflow `25374638393` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页、`src/app.js` 和 `src/styles.css` 均返回 HTTP 200，线上产物已确认包含本轮新增标记。workflow 继续给出 Node.js 20 actions 弃用提醒，未影响本次部署。
+- 反馈处理：已回复 #5，说明点火点击爆发反馈、验证结果、Pages 部署和复测问题；issue 保持 open，评论地址：`https://github.com/Jassy930/codex-game-operator/issues/5#issuecomment-4378927269`。
+- 钉钉通知未发送：2026-05-05 19:54 CST 运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` / `ROBOT` 相关变量名，当前目录和 `/home/jassy/glm` 两层内未发现 `.env*` 文件；未将 webhook 写入仓库。
+- 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #5，以及点火按钮命中反馈层级的交互复盘。
+
 - 反馈表单新增本地 SVG 插画：侧栏反馈标题下方现在显示 `src/assets/feedback-visual.svg`，用反馈草稿、评分轨和 Issue 投递路径建立图片化锚点，继续回应 #4 对界面文字密度和图片化表达的反馈。
 - `src/assets/feedback-visual.svg` 新增反馈插画；`index.html` 在反馈标题下方引用 `feedback-scene-image`；`src/styles.css` 固定 16/5 展示比例；`tests/game.test.js` 覆盖静态首页、样式绑定和 SVG 资产存在。
 - 本轮只调整反馈表单视觉展示和测试，不新增可见说明文字，不改变反馈类型、评分、内容输入、校验、Issue 草稿、反馈快照、localStorage 事件、玩法数值、星图、航线指令、远航调度或部署链路。
