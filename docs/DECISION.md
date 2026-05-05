@@ -24,6 +24,7 @@
 - 发布验证已通过：GitHub Pages workflow `25369522833` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页返回 HTTP 200，线上 `index.html` 和 `src/styles.css` 已确认包含 `goal-visual` 与 `goal-copy`。workflow 继续给出 Node.js 20 actions 弃用提醒，未影响本次部署。
 - 已回复 GitHub Issue #4，说明当前目标条视觉徽记、验证结果、Pages 部署和复测问题；issue 保持 open，评论地址：`https://github.com/Jassy930/codex-game-operator/issues/4#issuecomment-4378197523`。
 - 回复后同步 GitHub Issues：2026-05-05 17:53 CST 当前仍为 5 个 open feedback issue、0 个 open bug issue；#4 更新时间为 2026-05-05T09:53:09Z。
+- 钉钉通知未发送：2026-05-05 17:56 CST 运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` / `ROBOT` 相关变量名，当前目录和 `/home/jassy/glm` 两层内未发现 `.env*` 文件；未将 webhook 写入仓库。
 - 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #4，以及当前目标条仍缺少图形锚点的首屏复盘。
 
 ## 2026-05-05 Product decision：顶部产能读数视觉徽记
