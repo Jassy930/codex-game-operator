@@ -2,7 +2,7 @@
 
 ## 2026-05-05 Product decision：远航连段项目卡片短标
 
-阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-05 16:29 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有 open bug；本轮继续处理真实反馈 #6“后半段只有不停的目标，玩法没有真正变化”。
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-05 16:34 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有 open bug；本轮继续处理真实反馈 #6“后半段只有不停的目标，玩法没有真正变化”。
 
 当前最大问题：远航连段已经进入执行区、闭环复盘、路线对照条、当前按钮徽标和星图总览，但星图项目列表里的当前航段卡片仍只显示 `调度 点火齐射` 与基础三步路径。玩家在项目卡片层扫当前航段时，看不到这条跨轮递进连段已经延续到当前路线。
 
@@ -21,7 +21,11 @@
 - `tests/game.test.js` 覆盖项目卡片调度徽标、调度说明、调度路径和第三步奖励文本里的连段短标。
 - 本地验证已通过：`node --test tests/game.test.js`、`npm install`、`npm test`、`npm run build`、`bun install --no-save`、`bun run test`、`bun run build`；测试数 118 项。
 - 构建产物已确认 `dist/src/game.js` 包含 `loopStreakSuffix`、`badgeText: "调度 " + targetDirective.name + loopStreakSuffix`，`dist/src/app.js` 包含 `getProjectStatuses(current, now)`。
-- 代码提交、push、GitHub Pages 发布和 Issue 回复待本轮后续步骤完成。
+- 代码提交已创建并推送：`b630d0d feat: show far streak on project cards`。
+- 发布验证已通过：GitHub Pages workflow `25366091482` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页返回 HTTP 200，线上 `src/game.js` 已确认包含 `loopStreakSuffix` 和项目卡片调度徽标连段逻辑，线上 `src/app.js` 已确认包含 `getProjectStatuses(current, now)`。workflow 继续给出 Node.js 20 actions 弃用提醒，未影响本次部署。
+- 已回复 GitHub Issue #6，说明远航连段项目卡片短标、验证结果、Pages 部署和复测问题；issue 保持 open，评论地址：`https://github.com/Jassy930/codex-game-operator/issues/6#issuecomment-4377696579`。
+- 回复后同步 GitHub Issues：2026-05-05 16:34 CST 当前仍为 5 个 open feedback issue、0 个 open bug issue；#6 更新时间为 2026-05-05T08:34:19Z。
+- 钉钉通知未发送：2026-05-05 16:34 CST 运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` / `ROBOT` 相关变量名，当前目录和 `/home/jassy/glm` 未发现 `.env*` 文件；未将 webhook 写入仓库。
 - 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #6，以及远航连段进入星图总览后项目卡片层仍缺少短标的链路复盘。
 
 ## 2026-05-05 Product decision：远航连段星图总览短标
