@@ -8,6 +8,10 @@
 - 同步 GitHub Issues 反馈状态：2026-05-05 22:10 CST 当前 5 个 open issue、5 个 open feedback issue、0 个 open bug issue；#6 作为本轮主处理对象。
 - 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 128 项。
 - 构建产物已确认 `dist/src/feedback.js` 包含 `farRouteLoopCapstone` 与 `- 远航满段回响：`。
+- 代码和同步文档提交已创建并推送：`e843e33 feat: record far capstone in feedback snapshot`。
+- 发布：GitHub Pages workflow `25381894544` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页返回 HTTP 200，线上 `src/feedback.js` 已确认包含 `farRouteLoopCapstone` 和 `远航满段回响` 快照行。workflow 继续给出 Node.js 20 actions 弃用提醒，未影响本次部署。
+- 反馈处理：已回复 #6，说明远航满段回响反馈快照短标、验证结果、Pages 部署和复测问题；issue 保持 open，评论地址：`https://github.com/Jassy930/codex-game-operator/issues/6#issuecomment-4380167324`。回复后于 2026-05-05 22:18 CST 再次同步 GitHub Issues，当前仍为 5 个 open feedback issue、0 个 open bug issue；#6 更新时间为 `2026-05-05T14:18:30Z`。
+- 钉钉通知未发送：2026-05-05 22:18 CST 运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` / `ROBOT` 相关变量名，当前目录和 `/home/jassy/glm` 两层内未发现 `.env*` 文件；未将 webhook 写入仓库。
 - 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #6，以及满段回响进入主调度条后反馈快照仍缺少独立预告行的链路复盘。
 
 - 远航主调度条新增“满段回响”预告：20M 后当前远航闭环下一步回目标会把连段推到 3/3 时，主操作区远航调度面板会显示 `满段回响 +10%`，继续回应 #6 对后半段玩法变化不明显的反馈。
