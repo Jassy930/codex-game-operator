@@ -8,6 +8,10 @@
 - 同步 GitHub Issues 反馈状态：2026-05-06 04:57 CST 当前 5 个 open issue、5 个 open feedback issue、0 个 open bug issue；#3/#4/#6 作为本轮关联反馈。
 - 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 129 项。
 - 构建产物已确认 `dist/src/styles.css` 包含 `.directive-plan-track.is-next-ready::before`、`.directive-plan-track.is-next-waiting::before` 与 `directivePlanTrackReadyRail`。
+- 代码和同步文档提交已创建并推送：`e455f10 feat: highlight directive plan track state`。
+- 发布：GitHub Pages workflow `25402214787` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页返回 HTTP 200，线上 `src/app.js` 已确认包含 `directivePlanTrack.classList.toggle("is-next-ready"` 与 `is-next-waiting`，线上 `src/styles.css` 已确认包含 `.directive-plan-track.is-next-ready::before`、`.directive-plan-track.is-next-waiting::before` 与 `directivePlanTrackReadyRail`。workflow 给出 Node.js 20 actions 弃用提醒，未影响本次部署。
+- 反馈处理：已回复 #3、#4 和 #6，说明指令轮换整轨状态光、验证结果、Pages 部署和复测问题；三个 issue 均保持 open，评论地址：`https://github.com/Jassy930/codex-game-operator/issues/3#issuecomment-4383033623`、`https://github.com/Jassy930/codex-game-operator/issues/4#issuecomment-4383033631`、`https://github.com/Jassy930/codex-game-operator/issues/6#issuecomment-4383033700`。回复后于 2026-05-06 05:05 CST 再次同步 GitHub Issues，当前仍为 5 个 open feedback issue、0 个 open bug issue；#3/#4 更新时间为 `2026-05-05T21:05:26Z`，#6 更新时间为 `2026-05-05T21:05:27Z`。
+- 钉钉通知未发送：2026-05-06 05:05 CST 运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` / `ROBOT` 相关有效 webhook URL，当前目录和 `/home/jassy/glm` 两层内未发现 `.env*` 文件；未将 webhook 写入仓库。
 
 - 指令轮换视觉轨新增“下一步格可执行信标”：100K 后推荐下一格会根据推荐指令是否可执行显示 ready 边框、轻量补光或 waiting 底色，让玩家在 3 格轨上直接扫到当前下一步能否推进，继续回应 #3/#6 对主动短循环和后半段三步结构可读性的反馈，同时不增加 #4 反馈中的文字密度。
 - `src/app.js` 让 `renderDirectivePlanTrack()` 根据 `plan.nextDirectiveIds` 对应按钮的 `ready` 状态切换 `#directivePlanTrack.is-next-ready/is-next-waiting` 与 `.directive-plan-step.is-next-ready/is-next-waiting`；`src/styles.css` 增加 ready/waiting 样式、`directivePlanNextReadyBeacon` 和降低动效兜底；`tests/game.test.js` 覆盖运行时绑定和 CSS。
