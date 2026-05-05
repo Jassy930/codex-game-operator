@@ -307,6 +307,7 @@ test("航线指令会返回轮换目标提示", () => {
   assert.equal(lockedTask.nextStatusKind, "");
   assert.equal(lockedTask.nextRewardText, "");
   assert.equal(lockedTask.completedStepText, "");
+  assert.equal(lockedTask.completedFollowupText, "");
   assert.equal(ready.progress, 0);
   assert.equal(ready.target, 3);
   assert.deepEqual(ready.nextDirectiveIds, ["ignition-salvo", "cruise-cache"]);
@@ -325,6 +326,7 @@ test("航线指令会返回轮换目标提示", () => {
   assert.equal(readyTask.nextStatusKind, "ready");
   assert.equal(readyTask.nextRewardText, "预案执行 +6%");
   assert.equal(readyTask.completedStepText, "");
+  assert.equal(readyTask.completedFollowupText, "");
   assert.equal(
     readyTask.text,
     "航线委托 0/3 · 第 1/3 步 · 收束起手 · 下一步 点火齐射或巡航回收 · 可执行 · 下一步收益 预案执行 +6%，完成 3/3 推荐轮换 · 完成奖励 委托完成 +8%"
@@ -484,6 +486,7 @@ test("轮换航线指令会触发航线连携收益", () => {
   assert.equal(continuationTask.nextStatusKind, "");
   assert.equal(continuationTask.nextRewardText, "");
   assert.equal(continuationTask.completedStepText, "3/3 完成");
+  assert.equal(continuationTask.completedFollowupText, "熟练续航 点火齐射");
   assert.equal(continuationTask.rewardText, "委托完成 +8%");
   assert.deepEqual(continuationPlan.nextDirectiveIds, ["ignition-salvo"]);
   assert.equal(continuationPlan.nextRewardText, "连携 +24% · 轮换目标 +18%");
@@ -2147,8 +2150,10 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(appJs, /task\.completed \? "航线委托完成步号：" : "航线委托下一步步号："/);
   assert.match(appJs, /intent\.className = "directive-task-intent"/);
   assert.match(appJs, /intent\.textContent = task\.nextIntentText \?\? ""/);
-  assert.match(appJs, /action\.className = "directive-task-action"/);
-  assert.match(appJs, /action\.textContent = task\.nextActionText \?\? ""/);
+  assert.match(appJs, /const actionText = task\.completed \? task\.completedFollowupText : task\.nextActionText/);
+  assert.match(appJs, /"directive-task-action",/);
+  assert.match(appJs, /action\.textContent = actionText \?\? ""/);
+  assert.match(appJs, /task\.completed \? "航线委托完成续航动作：" : "航线委托下一步动作："/);
   assert.match(appJs, /"directive-task-status"/);
   assert.match(appJs, /task\.nextStatusKind \? "is-" \+ task\.nextStatusKind : ""/);
   assert.match(appJs, /status\.textContent = task\.nextStatusText \?\? ""/);
@@ -2488,6 +2493,7 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(styles, /\.directive-task-step\.is-completed/);
   assert.match(styles, /\.directive-task-intent/);
   assert.match(styles, /\.directive-task-action/);
+  assert.match(styles, /\.directive-task-action\.is-completed/);
   assert.match(styles, /\.directive-task-status/);
   assert.match(styles, /\.directive-task-status\.is-ready/);
   assert.match(styles, /\.directive-task-status\.is-waiting/);

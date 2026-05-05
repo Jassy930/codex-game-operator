@@ -4074,6 +4074,7 @@ export function getDirectiveTaskStatus(state, now = Date.now()) {
       rewardRate: DIRECTIVE_TASK_REWARD_RATE,
       rewardText,
       completedStepText: "",
+      completedFollowupText: "",
       nextStepText: "",
       nextIntentText: "",
       nextActionText: "",
@@ -4089,6 +4090,8 @@ export function getDirectiveTaskStatus(state, now = Date.now()) {
   const completed = progress >= targetSteps;
 
   if (completed) {
+    const completedFollowupText = buildDirectiveTaskCompletedFollowupText(plan);
+
     return {
       unlocked: true,
       completed: true,
@@ -4097,6 +4100,7 @@ export function getDirectiveTaskStatus(state, now = Date.now()) {
       rewardRate: DIRECTIVE_TASK_REWARD_RATE,
       rewardText,
       completedStepText: targetSteps + "/" + targetSteps + " 完成",
+      completedFollowupText,
       nextStepText: "",
       nextIntentText: "",
       nextActionText: "",
@@ -4139,6 +4143,7 @@ export function getDirectiveTaskStatus(state, now = Date.now()) {
     rewardRate: DIRECTIVE_TASK_REWARD_RATE,
     rewardText,
     completedStepText: "",
+    completedFollowupText: "",
     nextStepText,
     nextIntentText,
     nextActionText: nextText,
@@ -4215,6 +4220,23 @@ function buildDirectiveTaskNextRewardText(plan, progress, targetSteps, rewardTex
   }
 
   return parts.join(" · ");
+}
+
+function buildDirectiveTaskCompletedFollowupText(plan) {
+  const nextDirectives = Array.isArray(plan?.nextDirectiveIds)
+    ? plan.nextDirectiveIds.map(getDirectiveDef).filter(Boolean)
+    : [];
+
+  if (!nextDirectives.length) {
+    return "";
+  }
+
+  const recommendationText = plan?.recommendationText || "续航";
+  return (
+    recommendationText +
+    " " +
+    formatDirectiveNameList(nextDirectives.map((directive) => directive.name))
+  );
 }
 
 export function setRouteStance(state, routeStanceId) {

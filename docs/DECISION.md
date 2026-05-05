@@ -1,5 +1,28 @@
 # Decision
 
+## 2026-05-06 Product decision：航线委托完成续航短标
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-06 04:11 CST 已同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。没有 open bug；#3“玩法太简单”和 #6“后半段玩法没有真正变化”仍是最近需要持续复测的主动玩法反馈。
+
+当前最大问题：航线委托 3/3 完成态已经显示完成收益短标、完成步号短标、最终节点信标、整卡完成面板信标和进度扫光。但完成后动作胶囊隐藏，玩家能确认“这一轮已完成”，却不能在同一委托卡短标层直接看到继续轮换应该接哪一个续航动作。
+
+本轮决策：
+
+- 新增“航线委托完成续航短标”。
+- `src/game.js` 在 completed 任务状态中从 `getDirectivePlan().nextDirectiveIds` 和 `recommendationText` 派生 `completedFollowupText`，例如 `熟练续航 点火齐射`。
+- `src/app.js` 在 `renderDirectiveTask()` 中让完成态复用动作胶囊显示 `completedFollowupText`，并写入“航线委托完成续航动作”标题和可访问标签。
+- `src/styles.css` 增加 `.directive-task-action.is-completed` 完成续航动作样式。
+- `tests/game.test.js` 覆盖状态字段、运行时绑定、完成续航标题和样式。
+- 该改动只增强 100K 后 3/3 委托完成态到下一轮续航动作的扫视，不新增收益、不新增存档字段，不改变指令冷却、连携窗口、策略契合、航线委托奖励数值、星图航段、远航调度、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-05-06 04:11 CST 当前 5 个 open issue、5 个 open feedback issue、0 个 open bug issue；#3/#6 作为本轮关联反馈。
+- 航线委托完成态会在完成步号和完成收益旁显示当前续航动作，例如 `熟练续航 点火齐射`；未完成态继续显示下一步动作，锁定态隐藏。
+- 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 129 项。
+- 构建产物已确认 `dist/src/app.js`、`dist/src/game.js` 和 `dist/src/styles.css` 包含 `completedFollowupText`、`航线委托完成续航动作` 与 `.directive-task-action.is-completed`。
+- 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #3/#6，以及航线委托完成态已有完成确认但缺少完成后续航动作短标的链路复盘。
+
 ## 2026-05-06 Product decision：航线委托完成步号短标
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-06 03:52 CST 已同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。没有 open bug；#3“玩法太简单”和 #6“后半段玩法没有真正变化”仍是最近需要持续复测的主动玩法反馈。

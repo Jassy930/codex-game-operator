@@ -2524,6 +2524,13 @@ h2 {
   color: #eadbff;
 }
 
+.directive-task-action.is-completed {
+  border-color: rgba(255, 211, 106, 0.38);
+  background: rgba(255, 211, 106, 0.12);
+  color: #fff7c2;
+  box-shadow: 0 0 14px rgba(255, 211, 106, 0.12);
+}
+
 .directive-task-status {
   border-color: rgba(248, 243, 231, 0.2);
   background: rgba(248, 243, 231, 0.08);

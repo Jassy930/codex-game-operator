@@ -675,12 +675,20 @@ function renderDirectiveTask(task) {
     intent.setAttribute("aria-label", intent.title);
   }
 
+  const actionText = task.completed ? task.completedFollowupText : task.nextActionText;
   const action = document.createElement("small");
-  action.className = "directive-task-action";
-  action.textContent = task.nextActionText ?? "";
-  action.hidden = !task.nextActionText;
-  if (task.nextActionText) {
-    action.title = "航线委托下一步动作：" + task.nextActionText;
+  action.className = [
+    "directive-task-action",
+    task.completed ? "is-completed" : ""
+  ]
+    .filter(Boolean)
+    .join(" ");
+  action.textContent = actionText ?? "";
+  action.hidden = !actionText;
+  if (actionText) {
+    action.title =
+      (task.completed ? "航线委托完成续航动作：" : "航线委托下一步动作：") +
+      actionText;
     action.setAttribute("aria-label", action.title);
   }
 
