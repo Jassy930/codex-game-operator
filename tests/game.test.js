@@ -4155,7 +4155,7 @@ test("远航调度会在 20M 后按当前航段指定目标指令", () => {
   );
   assert.equal(
     detourCompletedDispatch.branchClosureText,
-    "闭环复盘：刚完成绕行 巡航回收 · 已触发远航闭环 +16%、远航突破 +0.05%剩余、绕行突破 +0.03%剩余 · 下一步绕行整备 巡航回收"
+    "闭环复盘：刚完成绕行 巡航回收 · 已触发远航闭环 +16%、远航突破 +0.05%剩余、绕行突破 +0.03%剩余、连段 1/3 · 下一步绕行整备 巡航回收"
   );
   assert.deepEqual(
     detourCompletedDispatch.branchChoices.map((choice) => choice.statusText),
@@ -4389,7 +4389,7 @@ test("远航调度会在 20M 后按当前航段指定目标指令", () => {
   );
   assert.equal(
     completedDispatch.branchClosureText,
-    "闭环复盘：刚完成协同 谐振脉冲 · 已触发远航闭环 +16%、远航突破 +0.05%剩余、契合闭环 +7% · 下一步整备 谐振脉冲"
+    "闭环复盘：刚完成协同 谐振脉冲 · 已触发远航闭环 +16%、远航突破 +0.05%剩余、契合闭环 +7%、连段 1/3 · 下一步整备 谐振脉冲"
   );
   assert.deepEqual(
     completedDispatch.branchChoices.map((choice) => choice.statusText),
@@ -4453,7 +4453,7 @@ test("远航调度会在 20M 后按当前航段指定目标指令", () => {
   assert.equal(returnDispatch.branchPlanStepText, "路线步骤：整备回航 点火齐射");
   assert.equal(
     returnDispatch.branchClosureText,
-    "闭环复盘：协同 谐振脉冲 已整备 · 下一步回目标触发整备回航 +6%"
+    "闭环复盘：协同 谐振脉冲 已整备 · 连段 1/3 · 下一步回目标触发整备回航 +6%"
   );
   assert.match(returnDispatch.loopStatusText, /已完成 · 回到点火齐射触发整备回航/);
   assert.match(returnDispatch.loopStatusText, /分支 协同整备：谐振脉冲/);

@@ -6310,12 +6310,17 @@ function buildFarRouteDispatchBranchClosureText(state, choices, branchStatus) {
   const branchText = activeChoice.label + " " + activeChoice.directiveName;
   const isDetour = kind === "detour-prep";
   const chain = state?.directiveChain ?? {};
+  const loopStreakText = formatFarRouteDispatchLoopStreakText(
+    state?.farRouteLoopStreak
+  );
 
   if (branchStatus.directiveId && chain.lastDirectiveId === branchStatus.directiveId) {
     return (
       "闭环复盘：" +
       branchText +
-      " 已整备 · 下一步回目标触发整备回航 +" +
+      " 已整备" +
+      (loopStreakText ? " · " + loopStreakText : "") +
+      " · 下一步回目标触发整备回航 +" +
       Math.round(FAR_ROUTE_DISPATCH_RETURN_REWARD_RATE * 100) +
       "%"
     );
@@ -6342,6 +6347,9 @@ function buildFarRouteDispatchBranchClosureText(state, choices, branchStatus) {
         Math.round(FAR_ROUTE_DISPATCH_FOCUS_LOOP_REWARD_RATE * 100) +
         "%"
     );
+  }
+  if (loopStreakText) {
+    rewardTexts.push(loopStreakText);
   }
 
   return (

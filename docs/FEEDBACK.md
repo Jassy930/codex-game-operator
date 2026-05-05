@@ -2,6 +2,14 @@
 
 ## 2026-05-05
 
+- GitHub Issues：gh 可用且已认证；2026-05-05 14:58 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。#6 仍是最近更新反馈，指向“后半段只有不停目标，玩法没有真正变化”。
+- 本轮 Product decision 继续处理 #6：远航闭环连段已经让 3/3 回到目标产生跨轮递进收益，但闭环复盘行还没有直接承接连段层数，玩家扫复盘时仍可能把连段看成分散在别处的收益徽标。
+- 本轮改动新增“远航连段闭环复盘”：协同/绕行路线刚完成 3/3 闭环时，闭环复盘的已触发收益列表追加“连段 X/3”；整备指令执行后，闭环复盘的已整备状态也追加“连段 X/3”。
+- 本轮只调整远航调度复盘文本和测试，不新增收益、不新增存档字段，不改变目标指令、分支路线、冷却、连携窗口、远航连段结算、星图航段、反馈入口或部署链路。
+- 本地完整验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认 `dist/src/game.js` 包含 `state?.farRouteLoopStreak` 和“闭环复盘”关键标记。
+- 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #6，以及远航闭环连段上线后复盘行没有承接连段层数的链路复盘。
+
 - GitHub Issues：gh 可用且已认证；2026-05-05 14:33 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。#6 仍是最近更新反馈，指向“后半段只有不停目标，玩法没有真正变化”。
 - 本轮 Product decision 继续处理 #6：远航调度已经有三步闭环、整备回航、路线对照条和当前按钮状态锚点，但完成闭环后的下一轮缺少跨轮递进收益，后半段仍可能被感知为重复完成单轮目标。
 - 本轮改动新增“远航闭环连段”：20M 后远航闭环 3/3 回到当前航段目标指令时，`farRouteLoopStreak` 增加 1 层，最高 3 层；闭环奖励按每层 3% 追加“远航连段 +X”，整备回航可以吃到更高连段。

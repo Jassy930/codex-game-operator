@@ -1,5 +1,28 @@
 # Decision
 
+## 2026-05-05 Product decision：远航连段闭环复盘
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-05 14:58 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有 open bug；本轮继续处理真实反馈 #6“后半段只有不停的目标，玩法没有真正变化”。
+
+当前最大问题：上一轮已经新增远航闭环连段，让 3/3 回到当前航段目标指令获得 1 到 3 层跨轮递进收益。但闭环复盘行仍只复盘刚完成的协同/绕行路线、闭环/突破收益和下一步整备；玩家如果主要看复盘行，仍可能把连段当成另一处收益徽标，而不是本轮闭环成果的一部分。
+
+本轮决策：
+
+- 新增“远航连段闭环复盘”。
+- `buildFarRouteDispatchBranchClosureText()` 在协同整备/绕行整备态读取 `farRouteLoopStreak` 并复用 `formatFarRouteDispatchLoopStreakText()`。
+- 刚完成 3/3 闭环时，闭环复盘的“已触发”收益列表追加“连段 X/3”。
+- 整备指令执行后，闭环复盘的“已整备”状态追加“连段 X/3”，再提示下一步回目标触发整备回航。
+- 该改动只调整远航调度复盘文本和测试，不新增收益、不新增存档字段，不改变目标指令、分支路线、冷却、连携窗口、远航连段结算、星图航段、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-05-05 14:58 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 作为本轮主处理对象。
+- `src/game.js` 的闭环复盘文本会在刚完成闭环和已整备两种状态展示“连段 X/3”。
+- `tests/game.test.js` 覆盖协同闭环、绕行闭环和整备后回航复盘里的连段文本。
+- 本地完整验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认 `dist/src/game.js` 包含 `state?.farRouteLoopStreak` 和“闭环复盘”关键标记。
+- 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #6，以及远航闭环连段上线后复盘行没有承接连段层数的链路复盘。
+
 ## 2026-05-05 Product decision：远航闭环连段
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-05 14:33 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有 open bug；本轮继续处理真实反馈 #6“后半段只有不停的目标，玩法没有真正变化”。

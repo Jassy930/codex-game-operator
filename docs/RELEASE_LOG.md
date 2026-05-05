@@ -2,6 +2,14 @@
 
 ## Unreleased
 
+- 远航调度新增“远航连段闭环复盘”：协同/绕行路线刚完成 3/3 闭环时，闭环复盘会在已触发收益列表里追加“连段 X/3”；整备指令执行后，复盘会在已整备状态后继续显示“连段 X/3”，让远航连段不只停留在进度行和按钮收益里，继续回应 #6 对后半段玩法变化不明显的反馈。
+- `src/game.js` 让 `buildFarRouteDispatchBranchClosureText()` 读取 `farRouteLoopStreak` 并复用 `formatFarRouteDispatchLoopStreakText()`；`tests/game.test.js` 覆盖协同闭环、绕行闭环和整备后回航复盘里的连段文本。
+- 本轮只调整远航调度复盘文本和测试，不新增收益、不新增存档字段，不改变目标指令、分支路线、冷却、连携窗口、远航连段结算、星图航段、反馈入口或部署链路。
+- 同步 GitHub Issues 反馈状态：2026-05-05 14:58 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 作为主处理对象。
+- 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认 `dist/src/game.js` 包含 `state?.farRouteLoopStreak` 和“闭环复盘”关键标记。
+- 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #6，以及远航闭环连段上线后复盘行没有承接连段层数的链路复盘。
+
 - 远航调度新增“远航闭环连段”：20M 后远航闭环 3/3 回到当前航段目标指令时获得 1 层连段，最高 3 层；闭环奖励按每层 3% 追加“远航连段 +X”，完成闭环后的整备回航可以吃到更高连段，继续回应 #6 对后半段玩法变化不明显的反馈。
 - `src/game.js` 新增 `FAR_ROUTE_DISPATCH_LOOP_STREAK_REWARD_STEP`、`FAR_ROUTE_DISPATCH_LOOP_STREAK_MAX_STACKS`、`farRouteLoopStreak` 归一化、远航闭环连段判断和奖励结算；`src/app.js` 把 `dispatchLoopStreak*` 写入本地事件、预计收益明细和按钮徽标；`src/styles.css` 增加 `.directive-dispatch-loop-streak`；`tests/game.test.js` 覆盖远航连段规则和静态绑定。
 - 本轮新增兼容归一化的存档字段 `farRouteLoopStreak`；不改变星图航段、分支路线、目标指令选择、冷却规则、连携窗口、反馈入口或部署链路。
