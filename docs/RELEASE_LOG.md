@@ -2,6 +2,15 @@
 
 ## Unreleased
 
+- 远航路线对照条新增“满段回响”预告：20M 后当前路线回航会把远航连段推到 3/3 时，回航结果会显示 `远航突破 · 连段 3/3 · 满段回响 +10%`，继续回应 #6 对后半段玩法变化不明显的反馈。
+- `src/game.js` 从现有远航连段与路线状态派生 `routeLoopCapstoneText` 并并入 `routeReturnText`；`src/app.js` 为路线对照回航结果追加 `has-loop-capstone`；`src/styles.css` 增加满段回响结果信标、右侧状态点、补光和降动效兜底；`tests/game.test.js` 覆盖运行态字段、静态绑定、CSS 和构建标记。
+- 本轮只增强路线对照层的满段回响预判，不新增收益、不新增存档字段，不改变远航连段结算、目标指令、协同/绕行路线、冷却、连携窗口、星图航段、反馈入口或部署链路。
+- 同步 GitHub Issues 反馈状态：2026-05-05 21:09 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 作为本轮主处理对象。
+- 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 127 项。
+- 构建产物已确认 `dist/src/game.js`、`dist/src/app.js` 和 `dist/src/styles.css` 包含 `routeLoopCapstoneText`、`has-loop-capstone` 与 `farDispatchSummaryLoopCapstoneResultGlow`。
+- 代码提交已创建：`0bd397b feat: preview far capstone on route returns`；待推送与发布验证。
+- 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #6，以及满段回响上线后路线对照层仍缺少回航前预告的链路复盘。
+
 - 远航闭环新增“满段回响”：20M 后远航连段在 2/3 时再次完成 3/3 回到目标指令，会把连段推到 3/3，并额外结算 `满段回响 +10%`，继续回应 #6 对后半段玩法变化不明显的反馈。
 - `src/game.js` 新增 `FAR_ROUTE_DISPATCH_LOOP_STREAK_CAPSTONE_RATE`、满层连段奖励结算和文案；`src/app.js` 渲染 `directive-dispatch-loop-streak-capstone` 徽标并记录本地 directive 事件；`src/styles.css` 增加满段回响徽标样式；`tests/game.test.js` 覆盖满层预览、执行反馈、事件字段、反馈快照解锁说明和构建绑定。
 - 本轮不新增存档字段，不改变远航解锁门槛、星图航段、基础闭环、协同/绕行、投送、冷却、升级价格、反馈入口或部署链路。

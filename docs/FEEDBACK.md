@@ -2,6 +2,15 @@
 
 ## 2026-05-05
 
+- GitHub Issues：gh 可用且已认证；2026-05-05 21:09 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。#6 仍是最近更新反馈，继续指向“后半段玩法变化不明显、只有不停目标”。
+- 本轮 Product decision 继续处理 #6：远航满段回响已经进入按钮预览、执行反馈和事件字段，但路线对照条的回航结果仍只显示 `远航突破 · 连段 3/3`，缺少回航前的满段终点预告。
+- 本轮改动新增“远航满段回响路线对照预告”：当前路线回航会把远航连段推到 3/3 时，路线对照条回航结果会显示 `远航突破 · 连段 3/3 · 满段回响 +10%`，并给当前路线结果追加 `has-loop-capstone` 信标。
+- 本轮只增强路线对照层的满段回响预判和测试，不新增收益、不新增存档字段，不改变远航连段结算、目标指令、协同/绕行路线、冷却、连携窗口、星图航段、反馈入口或部署链路。
+- 验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 127 项。
+- 构建产物已确认 `dist/src/game.js`、`dist/src/app.js` 和 `dist/src/styles.css` 包含 `routeLoopCapstoneText`、`has-loop-capstone` 与 `farDispatchSummaryLoopCapstoneResultGlow`。
+- 代码提交已创建：`0bd397b feat: preview far capstone on route returns`；待推送与发布验证。
+- 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #6，以及满段回响上线后路线对照层仍缺少回航前预告的链路复盘。
+
 - GitHub Issues：gh 可用且已认证；2026-05-05 20:47 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。#6 仍是最近更新反馈，继续指向“后半段玩法变化不明显、只有不停目标”。
 - 本轮 Product decision 继续处理 #6：远航连段已经有 1/3 到 3/3 的跨轮递进，但满层时仍只是线性加成封顶，缺少明确的满层回报。
 - 本轮改动新增“远航满段回响”：当 20M 后远航闭环在当前连段 2/3 时再次 3/3 回到目标指令，会把连段推到 3/3，并额外结算 `满段回响 +10%`；按钮预览、执行反馈和本地 directive 事件都会暴露该奖励。
