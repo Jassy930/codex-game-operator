@@ -20,6 +20,8 @@
 - 新提交的游戏内反馈 Issue 会在评分后显示 `反馈编号：<entry.id>`；浏览器本地 `feedback_sent` 事件会记录同一个 `feedbackId`。
 - 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 133 项。
 - 构建产物已确认 `dist/src/feedback.js` 包含 `反馈编号`，`dist/src/app.js` 包含 `feedbackId: entry.id`。
+- 发布验证已通过：提交 `2e73240` 已推送，GitHub Pages workflow `25406811029` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页返回 HTTP 200，线上 `src/feedback.js` 已确认包含 `反馈编号`，线上 `src/app.js` 已确认包含 `feedbackId: entry.id`。workflow 给出 Node.js 20 actions 弃用提醒，未影响本次部署。
+- 钉钉通知未发送：2026-05-06 06:56 CST 运行环境和本地 `.env*` 未提供 `DING` / `DINGTALK` / `WEBHOOK` / `ROBOT` 相关有效 webhook URL；未将 webhook 写入仓库。
 - 本轮未新增外部网页调研；依据来自当前 open feedback issue 均需后续复测，以及本地反馈草稿、GitHub Issue 与 `feedback_sent` 事件缺少稳定关联字段的链路复盘。
 
 ## 2026-05-06 Product decision：升级购买态反馈快照

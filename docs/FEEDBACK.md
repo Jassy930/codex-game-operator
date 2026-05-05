@@ -8,6 +8,8 @@
 - 本轮只增强真实反馈诊断能力和本地事件关联，不新增界面可见文字、不新增收益、不新增存档字段，不改变反馈校验、Issue 草稿生成、星图、航线指令、远航调度或部署链路。
 - 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 133 项。
 - 构建产物已确认 `dist/src/feedback.js` 包含 `反馈编号`，`dist/src/app.js` 包含 `feedbackId: entry.id`。
+- 发布已完成：`2e73240 feat: add feedback id tracing` 已推送，GitHub Pages workflow `25406811029` 成功；build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页返回 HTTP 200，线上 `src/feedback.js` 和 `src/app.js` 已确认包含本轮标记。
+- 钉钉通知未发送：2026-05-06 06:56 CST 运行环境和本地 `.env*` 未提供 `DING` / `DINGTALK` / `WEBHOOK` / `ROBOT` 相关有效 webhook URL；未将 webhook 写入仓库。
 
 - GitHub Issues：gh 可用且已认证；2026-05-06 06:31 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。#4 仍是图片化和文字密度复测反馈，#2/#3/#6 仍是内容丰富度、主动玩法和后半段玩法变化复测反馈，#5 继续等待点火点击反馈复测。
 - 本轮 Product decision 处理 #4，并间接服务 #2/#3/#6：上一轮升级插画已经能按 ready/waiting/goal-ready 展示购买态，但反馈快照只记录升级等级，无法直接复盘玩家提交反馈时升级面板图片层处于哪种状态。

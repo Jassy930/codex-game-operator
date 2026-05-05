@@ -8,6 +8,9 @@
 - 同步 GitHub Issues 反馈状态：2026-05-06 06:52 CST 当前 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
 - 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 133 项。
 - 构建产物已确认 `dist/src/feedback.js` 包含 `反馈编号`，`dist/src/app.js` 包含 `feedbackId: entry.id`。
+- 代码和同步文档提交已创建并推送：`2e73240 feat: add feedback id tracing`。
+- 发布：GitHub Pages workflow `25406811029` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页返回 HTTP 200，线上 `src/feedback.js` 已确认包含 `反馈编号`，线上 `src/app.js` 已确认包含 `feedbackId: entry.id`。workflow 给出 Node.js 20 actions 弃用提醒，未影响本次部署。
+- 钉钉通知未发送：2026-05-06 06:56 CST 运行环境和本地 `.env*` 未提供 `DING` / `DINGTALK` / `WEBHOOK` / `ROBOT` 相关有效 webhook URL；未将 webhook 写入仓库。
 
 - 反馈快照新增“升级购买态”：游戏内反馈生成 GitHub Issue 时，快照会追加 `升级购买态：...`，记录当前可购买升级、当前目标升级是否可购买，以及无可购买升级时的最近能量缺口，继续为 #4 的升级插画购买态复测提供可诊断上下文。
 - `src/feedback.js` 复用 `UPGRADE_DEFS`、`getUpgradeAffordability()`、`formatNumber()` 和当前目标 `upgradeId` 格式化升级购买态；`tests/game.test.js` 覆盖等待态、目标升级 ready 态和完整反馈 Issue 正文字段。
