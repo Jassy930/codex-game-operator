@@ -22,6 +22,11 @@
 - 航线委托 0/3 下一步显示 `收束起手`；推荐指令冷却等待时仍保留该意图；1/3 可显示 `收束续航`；2/3 收束时显示 `策略终结`；完成态和锁定态不显示意图短标。
 - 本地验证已通过：`node --test tests/game.test.js`、`npm install`、`npm test`、`npm run build`、`bun install --no-save`、`bun run test`、`bun run build`；测试数 128 项。
 - 构建产物已确认 `dist/index.html`、`dist/src/app.js`、`dist/src/game.js` 和 `dist/src/styles.css` 包含 `directive-task-intent`、`nextIntentText`、`buildDirectiveTaskNextIntentText` 与“航线委托下一步意图”。
+- 代码提交已创建并推送：`04d02b7 feat: show directive task next intent`。
+- 发布验证已通过：GitHub Pages workflow `25391777653` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页、`src/app.js`、`src/game.js` 和 `src/styles.css` 均返回 HTTP 200，并已确认包含 `directive-task-intent`、`nextIntentText`、`buildDirectiveTaskNextIntentText` 与“航线委托下一步意图”。workflow 给出 Node.js 20 actions 弃用提醒，未影响本次部署。
+- 已回复 GitHub Issue #3 和 #6，说明航线委托下一步意图短标、验证结果、Pages 部署和复测问题；两个 issue 均保持 open，评论地址：`https://github.com/Jassy930/codex-game-operator/issues/3#issuecomment-4381549382`、`https://github.com/Jassy930/codex-game-operator/issues/6#issuecomment-4381548542`。
+- 回复后于 2026-05-06 01:29 CST 再次同步 GitHub Issues，当前仍为 5 个 open feedback issue、0 个 open bug issue；#3 更新时间为 `2026-05-05T17:29:33Z`，#6 更新时间为 `2026-05-05T17:29:24Z`。
+- 钉钉通知未发送：2026-05-06 01:29 CST 运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` / `ROBOT` 相关有效 webhook URL；未将 webhook 写入仓库。
 - 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #3/#6，以及航线委托条已有步号/动作/状态/收益但缺少下一步角色短标的链路复盘。
 
 ## 2026-05-06 Product decision：航线委托下一步步号短标
