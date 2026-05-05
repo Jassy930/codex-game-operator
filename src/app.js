@@ -376,7 +376,11 @@ elements.feedbackForm.addEventListener("submit", (event) => {
     message,
     state: current,
     goal,
-    sessionId: SESSION_ID
+    sessionId: SESSION_ID,
+    preferences: {
+      soundEnabled,
+      hapticEnabled
+    }
   });
   const issueUrl = buildFeedbackIssueUrl(entry);
 

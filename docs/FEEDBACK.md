@@ -2,6 +2,13 @@
 
 ## 2026-05-06
 
+- GitHub Issues：gh 可用且已认证；2026-05-06 05:28 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。#5 仍是点火点击反馈和点击欲望复测反馈，#3/#4/#6 仍保持 open 等待带新快照的真实复测。
+- 本轮 Product decision 处理 #5：点火按钮已有多层点击反馈，但反馈快照只有 `连击` 数字，无法直接记录玩家提交反馈时的下一击预告、是否处于过载前一击，以及音效/触感反馈是否开启。
+- 本轮改动新增“点火反馈快照上下文”：`createFeedbackEntry()` 读取 `getCoreRewardPreview()`，预填 Issue 快照追加 `点火反馈：...`，记录下一击奖励、过载临界状态、点火音效和触感反馈偏好。
+- 本轮只增强真实反馈可诊断性和测试，不新增界面可见文字、不新增收益、不新增存档字段，不改变点火收益、过载奖励、连击窗口、音效/触感行为、星图航段、航线指令、远航调度、反馈入口交互或部署链路。
+- 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 131 项。
+- 构建产物已确认 `dist/src/feedback.js` 包含 `getCoreRewardPreview`、`- 点火反馈：`、`音效` 与 `触感`，`dist/src/app.js` 包含提交反馈时传入 `soundEnabled` / `hapticEnabled`。
+
 - GitHub Issues：gh 可用且已认证；2026-05-06 05:14 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。#3/#6 仍是主动短循环和后半段玩法复测反馈，#4 仍是图片化和文字密度复测反馈。
 - 本轮 Product decision 处理 #3/#4/#6：反馈快照已经记录指令熟练、远航调度、远航连段和满段回响，但没有单独记录 100K 后指令轮换和航线委托所处阶段，后续复盘 #3/#6 时仍需要从多个字段反推玩家卡在短循环哪一步。
 - 本轮改动新增“反馈快照指令短循环上下文”：`createFeedbackEntry()` 读取 `getDirectivePlan()` 和 `getDirectiveTaskStatus()`，预填 Issue 快照追加 `指令轮换：...` 与 `航线委托：...` 两行，记录阶段、下一步、状态和收益。

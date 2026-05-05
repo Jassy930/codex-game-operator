@@ -1,6 +1,7 @@
 import {
   DEFAULT_ROUTE_STANCE_ID,
   DIRECTIVE_MASTERY_MAX_STACKS,
+  getCoreRewardPreview,
   getDirectivePlan,
   getDirectiveTaskStatus,
   getFarRouteDispatch,
@@ -37,14 +38,17 @@ export function createFeedbackEntry({
   state,
   goal,
   sessionId,
-  createdAt = new Date().toISOString()
+  preferences,
+  createdAt = new Date().toISOString(),
+  now = Date.now()
 }) {
   const feedbackType = FEEDBACK_TYPES[type] ? type : "experience";
   const currentState = state ?? {};
   const currentGoal = goal ?? {};
-  const directivePlan = getDirectivePlan(currentState);
-  const directiveTask = getDirectiveTaskStatus(currentState);
-  const farRouteDispatch = getFarRouteDispatch(currentState);
+  const coreFeedback = getCoreRewardPreview(currentState, now);
+  const directivePlan = getDirectivePlan(currentState, now);
+  const directiveTask = getDirectiveTaskStatus(currentState, now);
+  const farRouteDispatch = getFarRouteDispatch(currentState, now);
   const farRouteLoopStreak = formatFeedbackFarRouteLoopStreak(farRouteDispatch);
   const farRouteLoopCapstone =
     formatFeedbackFarRouteLoopCapstone(farRouteDispatch);
@@ -66,6 +70,7 @@ export function createFeedbackEntry({
       energyPerClick: currentState.energyPerClick ?? 1,
       multiplier: currentState.multiplier ?? 1,
       overloadBonus: currentState.overloadBonus ?? 5,
+      coreFeedback: formatFeedbackCoreFeedback(coreFeedback, preferences),
       routeStance: getFeedbackRouteStanceId(currentState.routeStance),
       directiveMastery: getFeedbackDirectiveMastery(currentState.directiveMastery),
       directivePlan: formatFeedbackDirectivePlan(directivePlan),
@@ -116,6 +121,7 @@ export function createFeedbackIssueBody(entry) {
     `- 每次产能：${snapshot.energyPerClick}`,
     `- 产能倍率：${snapshot.multiplier}`,
     `- 过载奖励：${snapshot.overloadBonus}`,
+    `- 点火反馈：${snapshot.coreFeedback}`,
     `- 航线策略：${getFeedbackRouteStanceName(snapshot.routeStance)}`,
     `- 指令熟练：${snapshot.directiveMastery.stacks}/${DIRECTIVE_MASTERY_MAX_STACKS}`,
     `- 指令轮换：${snapshot.directivePlan}`,
@@ -152,6 +158,21 @@ function getFeedbackDirectiveMastery(directiveMastery) {
       ? Math.min(DIRECTIVE_MASTERY_MAX_STACKS, Math.max(0, Math.floor(stacks)))
       : 0
   };
+}
+
+function formatFeedbackCoreFeedback(coreFeedback, preferences) {
+  const preferenceText = [
+    typeof preferences?.soundEnabled === "boolean"
+      ? "音效 " + (preferences.soundEnabled ? "开" : "关")
+      : "",
+    typeof preferences?.hapticEnabled === "boolean"
+      ? "触感 " + (preferences.hapticEnabled ? "开" : "关")
+      : ""
+  ].filter(Boolean);
+
+  return [coreFeedback?.text ?? "下一击未知", ...preferenceText]
+    .filter(Boolean)
+    .join(" · ");
 }
 
 function formatFeedbackDirectivePlan(plan) {

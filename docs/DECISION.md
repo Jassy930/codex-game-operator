@@ -1,5 +1,27 @@
 # Decision
 
+## 2026-05-06 Product decision：点火反馈快照上下文
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-06 05:28 CST 已同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。没有 open bug；#5“点火按钮太薄弱，增加点击反馈，增加特效，增加点击欲望”仍保持 open，最近一次处理停留在点火落点回声环，后续复测仍需要确认玩家当时看到的下一击/过载预告和反馈偏好。
+
+当前最大问题：反馈快照只有 `连击：X`，无法直接说明玩家提交 #5 类反馈时，按钮下方的下一击预告是普通待机、过载前一击，还是刚触发过载后的新一轮蓄能；也无法判断玩家是否关闭了点火音效或触感反馈。后续复盘点击欲望反馈时，仍要从连击数和本地实现间接推断。
+
+本轮决策：
+
+- 新增“点火反馈快照上下文”。
+- `src/feedback.js` 复用 `getCoreRewardPreview()`，在 Issue 快照中追加 `点火反馈：...`，记录下一击奖励预告、过载临界状态和可用的点火反馈偏好。
+- `src/app.js` 在提交反馈时传入 `soundEnabled` / `hapticEnabled`，让快照能区分音效和触感开关状态。
+- `tests/game.test.js` 覆盖普通待机快照、过载前一击快照，以及前端提交反馈时传入偏好的静态绑定。
+- 该改动只增强真实反馈诊断能力，不新增界面可见文字、不新增收益、不新增存档字段，不改变点火收益、过载奖励、连击窗口、音效/触感行为、升级价格、星图航段、航线指令、远航调度、反馈入口交互或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-05-06 05:28 CST 当前 5 个 open issue、5 个 open feedback issue、0 个 open bug issue；#5 作为本轮关联反馈。
+- 新提交的游戏内反馈 Issue 会显示 `点火反馈：下一击 ...`；过载前一击会显示 `触发过载`；前端提交会同时写入 `音效 开/关` 和 `触感 开/关`。
+- 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 131 项。
+- 构建产物已确认 `dist/src/feedback.js` 包含 `getCoreRewardPreview`、`- 点火反馈：`、`音效` 与 `触感`，`dist/src/app.js` 包含提交反馈时传入 `soundEnabled` / `hapticEnabled`。
+- 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #5，以及现有快照只有连击数、缺少下一击预告和反馈偏好上下文的链路复盘。
+
 ## 2026-05-06 Product decision：反馈快照指令短循环上下文
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-06 05:14 CST 已同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。没有 open bug；#3“玩法太简单”和 #6“后半段玩法没有真正变化”仍是主动短循环与后半段复测反馈，#4 仍是文字密度与图片化复测反馈。

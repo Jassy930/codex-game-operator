@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+- 反馈快照新增“点火反馈上下文”：游戏内反馈生成 GitHub Issue 时，快照会追加 `点火反馈：...`，记录当前下一击奖励预告、过载临界状态，以及点火音效/触感偏好开关状态，继续为 #5“点火按钮太薄弱”复测提供可诊断上下文。
+- `src/feedback.js` 复用 `getCoreRewardPreview()` 格式化快照字段；`src/app.js` 在提交反馈时传入 `soundEnabled` / `hapticEnabled`；`tests/game.test.js` 覆盖普通待机快照、过载前一击快照和反馈提交偏好传参。
+- 本轮只增强真实反馈诊断能力，不新增界面可见文字、不新增收益、不新增存档字段，不改变点火收益、过载奖励、连击窗口、音效/触感行为、升级价格、星图航段、航线指令、远航调度、反馈入口交互或部署链路。
+- 同步 GitHub Issues 反馈状态：2026-05-06 05:28 CST 当前 5 个 open issue、5 个 open feedback issue、0 个 open bug issue；#5 作为本轮关联反馈，#3/#4/#6 继续等待带新快照的真实复测。
+- 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 131 项。
+- 构建产物已确认 `dist/src/feedback.js` 包含 `getCoreRewardPreview`、`- 点火反馈：`、`音效` 与 `触感`，`dist/src/app.js` 包含提交反馈时传入 `soundEnabled` / `hapticEnabled`。
+
 - 反馈快照新增“指令短循环上下文”：游戏内反馈生成 GitHub Issue 时，快照会追加 `指令轮换：...` 与 `航线委托：...` 两行，记录 100K 后当前轮换阶段、下一步意图/动作、可执行状态和收益，继续为 #3/#6 的主动短循环复测提供可诊断上下文。
 - `src/feedback.js` 复用 `getDirectivePlan()` 与 `getDirectiveTaskStatus()` 格式化快照字段；`tests/game.test.js` 覆盖未解锁快照和 1/3 短循环中的 `收束续航`、`下一步 巡航回收`、`可执行`、`连携 +12%`。
 - 本轮只增强反馈快照可诊断性，不新增界面可见文字、不新增收益、不新增存档字段，不改变点火收益、指令冷却、连携窗口、策略契合、航线委托、远航调度、星图航段或部署链路。

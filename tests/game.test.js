@@ -1435,6 +1435,9 @@ test("点火按钮会渲染点击反馈和过载前兆效果", () => {
   assert.match(appJs, /recordEvent\("sound_toggle"/);
   assert.match(appJs, /elements\.hapticToggle\.addEventListener\("change"/);
   assert.match(appJs, /recordEvent\("haptic_toggle"/);
+  assert.match(appJs, /preferences: \{/);
+  assert.match(appJs, /soundEnabled,/);
+  assert.match(appJs, /hapticEnabled/);
   assert.match(appJs, /function renderCoreFeedback\(combo\)/);
   assert.match(appJs, /coreStageAura: document\.querySelector\("#coreButton \.core-stage-aura"\)/);
   assert.match(appJs, /elements\.coreStageAura\.style\.setProperty\(\s*"--core-stage-angle"/);
@@ -6596,6 +6599,11 @@ test("反馈入口会生成带游戏快照的 GitHub Issue 链接", () => {
     state,
     goal: { value: "累计 100 能量" },
     sessionId: "test-session",
+    preferences: {
+      soundEnabled: false,
+      hapticEnabled: true
+    },
+    now: 0,
     createdAt: "2026-04-28T13:40:00.000Z"
   });
 
@@ -6608,6 +6616,7 @@ test("反馈入口会生成带游戏快照的 GitHub Issue 链接", () => {
   assert.match(body, /升级按钮反馈不明显/);
   assert.match(body, /当前目标：累计 100 能量/);
   assert.match(body, /过载奖励：5/);
+  assert.match(body, /点火反馈：下一击 \+1 · 再 8 次过载 \+5 · 音效 关 · 触感 开/);
   assert.match(body, /航线策略：点火优先/);
   assert.match(body, new RegExp(`指令熟练：2/${DIRECTIVE_MASTERY_MAX_STACKS}`));
   assert.match(body, /指令轮换：累计 100K 能量后解锁 90 秒连携目标/);
@@ -6616,6 +6625,33 @@ test("反馈入口会生成带游戏快照的 GitHub Issue 链接", () => {
   assert.match(body, /远航续航、远航协同、协同补给、远航绕行、绕行投送、回航校准、分支改道、航段契合、路线稳航、轮替闭环、契合闭环、闭环奖励、远航突破、绕行突破、远航整备、整备续航、绕行整备、整备回航与满段回响/);
   assert.match(body, /闭环进度 0\/3 · 20M 后解锁/);
   assert.match(body, /lens:1/);
+});
+
+test("反馈快照会记录点火反馈过载临界状态", () => {
+  let state = createInitialState(0);
+  for (let index = 0; index < 7; index += 1) {
+    state = clickCore(state, index * 100);
+  }
+
+  const entry = createFeedbackEntry({
+    type: "experience",
+    rating: 3,
+    message: "点火按钮过载前想确认反馈快照能记录状态",
+    state,
+    goal: { value: "谐振校准" },
+    sessionId: "core-feedback-session",
+    preferences: {
+      soundEnabled: true,
+      hapticEnabled: false
+    },
+    now: 700,
+    createdAt: "2026-05-06T05:40:00.000Z"
+  });
+
+  const body = createFeedbackIssueBody(entry);
+
+  assert.match(body, /点火反馈：下一击 \+6 · 触发过载 \+5 · 音效 开 · 触感 关/);
+  assert.match(body, /连击：7/);
 });
 
 test("反馈快照会记录指令轮换和航线委托状态", () => {
