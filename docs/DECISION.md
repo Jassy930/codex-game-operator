@@ -20,6 +20,9 @@
 - 没有可购买升级时升级插画显示 `is-waiting` 降权状态；存在任意可购买升级时显示 `is-ready` 投光；当前目标升级可购买时额外显示 `is-goal-ready`。
 - 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 132 项。
 - 构建产物已确认 `dist/index.html`、`dist/src/app.js` 和 `dist/src/styles.css` 包含 `upgrade-scene-image is-waiting`、`upgradeSceneImage`、`is-ready`、`is-waiting`、`is-goal-ready` 与 `upgradeSceneImageReadyPulse`。
+- 发布验证已通过：提交 `c8ff7be` 已推送，GitHub Pages workflow `25405623395` 成功，线上首页、`src/app.js` 和 `src/styles.css` 均返回 HTTP 200，线上文件已确认包含本轮标记。
+- 已回复 GitHub Issue #4，说明升级插画购买态投光、验证结果、Pages 部署和复测问题；issue 保持 open，评论地址：`https://github.com/Jassy930/codex-game-operator/issues/4#issuecomment-4383614475`。回复后于 2026-05-06 06:25 CST 再次同步 GitHub Issues，当前仍为 5 个 open feedback issue、0 个 open bug issue；#4 更新时间为 `2026-05-05T22:25:19Z`。
+- 钉钉通知未发送：2026-05-06 06:25 CST 运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` / `ROBOT` 相关有效 webhook 变量，当前目录和 `/home/jassy/glm` 两层内未发现 `.env*` 文件；未将 webhook 写入仓库。
 - 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #4，以及当前升级插画已存在但没有可购买状态的展示链路复盘。
 
 ## 2026-05-06 Product decision：星图章节反馈快照

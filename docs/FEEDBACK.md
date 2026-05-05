@@ -8,6 +8,10 @@
 - 本轮只增强升级面板图片层扫视和测试，不新增可见文字、不新增收益、不新增存档字段，不改变升级价格、购买逻辑、目标系统、星图、航线指令、远航调度、反馈入口交互或部署链路。
 - 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 132 项。
 - 构建产物已确认 `dist/index.html`、`dist/src/app.js` 和 `dist/src/styles.css` 包含 `upgrade-scene-image is-waiting`、`upgradeSceneImage`、`is-ready`、`is-waiting`、`is-goal-ready` 与 `upgradeSceneImageReadyPulse`。
+- 发布和反馈处理已完成：`c8ff7be feat: highlight upgrade scene purchase state` 已推送，GitHub Pages workflow `25405623395` 成功；build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页返回 HTTP 200，线上首页、`src/app.js` 和 `src/styles.css` 已确认包含本轮标记。
+- 已回复 #4，评论地址：`https://github.com/Jassy930/codex-game-operator/issues/4#issuecomment-4383614475`；issue 保持 open 等待升级面板图片层购买态复测。
+- 回复后于 2026-05-06 06:25 CST 再次同步 GitHub Issues，当前仍为 5 个 open feedback issue、0 个 open bug issue；#4 更新时间为 `2026-05-05T22:25:19Z`。
+- 钉钉通知未发送：2026-05-06 06:25 CST 运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` / `ROBOT` 相关有效 webhook 变量，当前目录和 `/home/jassy/glm` 两层内未发现 `.env*` 文件；未将 webhook 写入仓库。
 
 - GitHub Issues：gh 可用且已认证；2026-05-06 06:01 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。#2/#3/#6 继续等待带新快照的内容丰富度、主动玩法和后半段复测，#4/#5 继续等待图片化和点火点击反馈复测。
 - 本轮 Product decision 处理 #2/#3/#6：反馈快照已有星图进度、指令轮换、航线委托和远航调度，但 `星图进度` 只记录全局 57 段位置；复盘“内容太少”“玩法太简单”“后半段没有变化”时仍缺少当前章节内位置、阶段剩余段数和是否处于最终阶段。

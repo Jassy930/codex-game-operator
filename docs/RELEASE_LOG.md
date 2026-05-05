@@ -8,6 +8,10 @@
 - 同步 GitHub Issues 反馈状态：2026-05-06 06:18 CST 当前 5 个 open issue、5 个 open feedback issue、0 个 open bug issue；#4 作为本轮主关联反馈，#2/#3/#6 作为间接关联反馈。
 - 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 132 项。
 - 构建产物已确认 `dist/index.html`、`dist/src/app.js` 和 `dist/src/styles.css` 包含 `upgrade-scene-image is-waiting`、`upgradeSceneImage`、`is-ready`、`is-waiting`、`is-goal-ready` 与 `upgradeSceneImageReadyPulse`。
+- 代码和同步文档提交已创建并推送：`c8ff7be feat: highlight upgrade scene purchase state`。
+- 发布：GitHub Pages workflow `25405623395` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页返回 HTTP 200，线上首页、`src/app.js` 和 `src/styles.css` 已确认包含 `upgrade-scene-image is-waiting`、`upgradeSceneImage`、`is-ready` / `is-waiting` / `is-goal-ready` 与 `upgradeSceneImageReadyPulse`。workflow 给出 Node.js 20 actions 弃用提醒，未影响本次部署。
+- 反馈处理：已回复 #4，说明升级插画购买态投光、验证结果、Pages 部署和复测问题；issue 保持 open，评论地址：`https://github.com/Jassy930/codex-game-operator/issues/4#issuecomment-4383614475`。回复后于 2026-05-06 06:25 CST 再次同步 GitHub Issues，当前仍为 5 个 open feedback issue、0 个 open bug issue；#4 更新时间为 `2026-05-05T22:25:19Z`。
+- 钉钉通知未发送：2026-05-06 06:25 CST 运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` / `ROBOT` 相关有效 webhook 变量，当前目录和 `/home/jassy/glm` 两层内未发现 `.env*` 文件；未将 webhook 写入仓库。
 
 - 反馈快照新增“星图章节上下文”：游戏内反馈生成 GitHub Issue 时，快照会在 `星图进度：...` 后追加 `星图章节：...`，记录当前章节、章节内位置、全局航段、阶段剩余段数和下一阶段/最终阶段，继续为 #2/#3/#6 的内容丰富度、主动玩法和后半段复测提供可诊断上下文。
 - `src/feedback.js` 复用 `getProjectOverview().chapterText` 格式化章节快照字段；`tests/game.test.js` 覆盖早期首段星图 1/4 快照和 26/57 远航长尾 14/44 后半段快照。
