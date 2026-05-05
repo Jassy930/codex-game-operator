@@ -2419,6 +2419,7 @@ h2 {
   white-space: nowrap;
 }
 
+.directive-task-action,
 .directive-task-reward {
   display: inline-block;
   max-width: 100%;
@@ -2435,6 +2436,13 @@ h2 {
   white-space: nowrap;
 }
 
+.directive-task-action {
+  border-color: rgba(161, 124, 255, 0.34);
+  background: rgba(161, 124, 255, 0.14);
+  color: #eadbff;
+}
+
+.directive-task-action[hidden],
 .directive-task-reward[hidden] {
   display: none;
 }

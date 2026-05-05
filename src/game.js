@@ -4073,6 +4073,7 @@ export function getDirectiveTaskStatus(state, now = Date.now()) {
       target: targetSteps,
       rewardRate: DIRECTIVE_TASK_REWARD_RATE,
       rewardText,
+      nextActionText: "",
       nextRewardText: "",
       text: "航线委托：累计 100K 能量后解锁 3 步短期任务"
     };
@@ -4090,6 +4091,7 @@ export function getDirectiveTaskStatus(state, now = Date.now()) {
       target: targetSteps,
       rewardRate: DIRECTIVE_TASK_REWARD_RATE,
       rewardText,
+      nextActionText: "",
       nextRewardText: "",
       text:
         "航线委托已完成 · 已达成 3/3 推荐轮换；重置或超时后开启下一轮委托，继续轮换可维持连携与熟练"
@@ -4116,6 +4118,7 @@ export function getDirectiveTaskStatus(state, now = Date.now()) {
     target: targetSteps,
     rewardRate: DIRECTIVE_TASK_REWARD_RATE,
     rewardText,
+    nextActionText: nextText,
     nextRewardText,
     text:
       "航线委托 " +

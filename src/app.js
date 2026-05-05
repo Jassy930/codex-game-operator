@@ -648,6 +648,15 @@ function renderDirectiveTask(task) {
   text.className = "directive-task-text";
   setCompactSupportText(text, getDirectiveTaskDisplayText(task), task.text);
 
+  const action = document.createElement("small");
+  action.className = "directive-task-action";
+  action.textContent = task.nextActionText ?? "";
+  action.hidden = !task.nextActionText;
+  if (task.nextActionText) {
+    action.title = "航线委托下一步动作：" + task.nextActionText;
+    action.setAttribute("aria-label", action.title);
+  }
+
   const meter = document.createElement("span");
   meter.className = "directive-task-meter";
   meter.setAttribute("role", "meter");
@@ -690,7 +699,7 @@ function renderDirectiveTask(task) {
   }
 
   elements.directiveTask.classList.toggle("is-completed", task.completed);
-  elements.directiveTask.replaceChildren(text, reward, meter);
+  elements.directiveTask.replaceChildren(text, action, reward, meter);
 }
 
 function renderFarDispatchSceneImage() {
