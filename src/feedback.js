@@ -5,6 +5,7 @@ import {
   getDirectivePlan,
   getDirectiveTaskStatus,
   getFarRouteDispatch,
+  getProjectOverview,
   ROUTE_STANCE_DEFS
 } from "./game.js";
 
@@ -49,6 +50,7 @@ export function createFeedbackEntry({
   const directivePlan = getDirectivePlan(currentState, now);
   const directiveTask = getDirectiveTaskStatus(currentState, now);
   const farRouteDispatch = getFarRouteDispatch(currentState, now);
+  const projectOverview = getProjectOverview(currentState, now);
   const farRouteLoopStreak = formatFeedbackFarRouteLoopStreak(farRouteDispatch);
   const farRouteLoopCapstone =
     formatFeedbackFarRouteLoopCapstone(farRouteDispatch);
@@ -72,6 +74,7 @@ export function createFeedbackEntry({
       overloadBonus: currentState.overloadBonus ?? 5,
       coreFeedback: formatFeedbackCoreFeedback(coreFeedback, preferences),
       routeStance: getFeedbackRouteStanceId(currentState.routeStance),
+      projectOverview: formatFeedbackProjectOverview(projectOverview),
       directiveMastery: getFeedbackDirectiveMastery(currentState.directiveMastery),
       directivePlan: formatFeedbackDirectivePlan(directivePlan),
       directiveTask: formatFeedbackDirectiveTask(directiveTask),
@@ -123,6 +126,7 @@ export function createFeedbackIssueBody(entry) {
     `- 过载奖励：${snapshot.overloadBonus}`,
     `- 点火反馈：${snapshot.coreFeedback}`,
     `- 航线策略：${getFeedbackRouteStanceName(snapshot.routeStance)}`,
+    `- 星图进度：${snapshot.projectOverview}`,
     `- 指令熟练：${snapshot.directiveMastery.stacks}/${DIRECTIVE_MASTERY_MAX_STACKS}`,
     `- 指令轮换：${snapshot.directivePlan}`,
     `- 航线委托：${snapshot.directiveTask}`,
@@ -171,6 +175,21 @@ function formatFeedbackCoreFeedback(coreFeedback, preferences) {
   ].filter(Boolean);
 
   return [coreFeedback?.text ?? "下一击未知", ...preferenceText]
+    .filter(Boolean)
+    .join(" · ");
+}
+
+function formatFeedbackProjectOverview(overview) {
+  const summaryText = stripFeedbackLabel(
+    overview?.summaryText ?? "未知",
+    "星图进度"
+  );
+  const detailText = String(overview?.detailText ?? "");
+
+  return [
+    summaryText,
+    detailText && !summaryText.includes(detailText) ? detailText : ""
+  ]
     .filter(Boolean)
     .join(" · ");
 }

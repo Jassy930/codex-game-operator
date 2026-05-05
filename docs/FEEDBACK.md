@@ -2,6 +2,12 @@
 
 ## 2026-05-06
 
+- GitHub Issues：gh 可用且已认证；2026-05-06 05:46 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。#2/#3/#6 仍是内容丰富度、主动玩法和后半段玩法变化复测反馈，#4/#5 继续等待带新快照的真实复测。
+- 本轮 Product decision 处理 #2/#3/#6：反馈快照已经记录点火、指令轮换、航线委托、远航调度和连段，但没有压缩记录玩家处在星图长线的哪一段；复盘“内容太少”“玩法太简单”“后半段没有变化”时仍需要从累计能量和当前目标反推航段位置。
+- 本轮改动新增“星图进度快照摘要”：`createFeedbackEntry()` 读取 `getProjectOverview()`，预填 Issue 快照追加 `星图进度：...`，记录完成数、下一航段、奖励和当前进度。
+- 本轮只增强真实反馈可诊断性和测试，不新增界面可见文字、不新增收益、不新增存档字段，不改变星图航段、项目奖励、目标判定、航线策略、航线指令、远航调度、反馈入口交互或部署链路。
+- 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 132 项。
+
 - GitHub Issues：gh 可用且已认证；2026-05-06 05:28 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。#5 仍是点火点击反馈和点击欲望复测反馈，#3/#4/#6 仍保持 open 等待带新快照的真实复测。
 - 本轮 Product decision 处理 #5：点火按钮已有多层点击反馈，但反馈快照只有 `连击` 数字，无法直接记录玩家提交反馈时的下一击预告、是否处于过载前一击，以及音效/触感反馈是否开启。
 - 本轮改动新增“点火反馈快照上下文”：`createFeedbackEntry()` 读取 `getCoreRewardPreview()`，预填 Issue 快照追加 `点火反馈：...`，记录下一击奖励、过载临界状态、点火音效和触感反馈偏好。

@@ -6618,6 +6618,8 @@ test("反馈入口会生成带游戏快照的 GitHub Issue 链接", () => {
   assert.match(body, /过载奖励：5/);
   assert.match(body, /点火反馈：下一击 \+1 · 再 8 次过载 \+5 · 音效 关 · 触感 开/);
   assert.match(body, /航线策略：点火优先/);
+  assert.match(body, /星图进度：0\/57 · 下一段 1\/57：点亮星图 · 奖励 总产能 \+12%/);
+  assert.match(body, /进度 80 能量 \/ 100K 能量/);
   assert.match(body, new RegExp(`指令熟练：2/${DIRECTIVE_MASTERY_MAX_STACKS}`));
   assert.match(body, /指令轮换：累计 100K 能量后解锁 90 秒连携目标/);
   assert.match(body, /航线委托：累计 100K 能量后解锁 3 步短期任务/);
@@ -6686,6 +6688,38 @@ test("反馈快照会记录指令轮换和航线委托状态", () => {
     body,
     /航线委托：1\/3 · 第 2\/3 步 · 收束续航 · 下一步 巡航回收 · 可执行 · 下一步收益 连携 \+12%/
   );
+});
+
+test("反馈快照会记录星图进度摘要", () => {
+  const state = {
+    ...createInitialState(0),
+    totalEnergy: 24_768_842,
+    energy: 3_472_075,
+    energyPerClick: 16,
+    energyPerSecond: 17.5,
+    overloadBonus: 27,
+    routeStance: "cruise",
+    upgrades: {
+      lens: 15,
+      collector: 25,
+      stabilizer: 21,
+      resonator: 11
+    }
+  };
+  const entry = createFeedbackEntry({
+    type: "experience",
+    rating: 3,
+    message: "后半段路线变化还是不明显，想看星图进度",
+    state,
+    goal: { value: "脉冲航闸" },
+    sessionId: "project-overview-session",
+    createdAt: "2026-05-06T05:55:00.000Z"
+  });
+
+  const body = createFeedbackIssueBody(entry);
+
+  assert.match(body, /星图进度：26\/57 · 下一段 27\/57：脉冲航闸 · 奖励 点击产能 \+18%/);
+  assert.match(body, /进度 24\.8M 能量 \/ 30M 能量/);
 });
 
 test("反馈快照会记录当前远航连段层数", () => {

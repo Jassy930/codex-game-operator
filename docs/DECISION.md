@@ -1,5 +1,25 @@
 # Decision
 
+## 2026-05-06 Product decision：星图进度快照摘要
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-06 05:46 CST 已同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。没有 open bug；#2“内容丰富度太差”、#3“玩法太简单”和 #6“后半段玩法没有真正变化”仍是内容丰富度、主动玩法与后半段复测反馈。
+
+当前最大问题：反馈快照已经记录点火、航线策略、指令轮换、航线委托、远航调度、远航连段和满段回响，但没有压缩记录当前星图完成数、下一航段、奖励和航段进度。后续复盘 #2/#3/#6 时，仍要从累计能量、当前目标和升级等级间接推断玩家处在星图 57 段长线的哪一段。
+
+本轮决策：
+
+- 新增“星图进度快照摘要”。
+- `src/feedback.js` 复用 `getProjectOverview()`，在 Issue 快照中追加 `星图进度：...`，记录当前完成数、下一航段、奖励和进度。
+- `tests/game.test.js` 覆盖早期 0/57 点亮星图快照，以及 26/57 脉冲航闸后半段快照。
+- 该改动只增强真实反馈诊断能力，不新增界面可见文字、不新增收益、不新增存档字段，不改变星图航段、项目奖励、目标判定、航线策略、航线指令、远航调度、反馈入口交互或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-05-06 05:46 CST 当前 5 个 open issue、5 个 open feedback issue、0 个 open bug issue；#2/#3/#6 作为本轮关联反馈。
+- 新提交的游戏内反馈 Issue 会显示 `星图进度：...`；早期状态能显示 `0/57 · 下一段 1/57：点亮星图`，后半段能显示当前远航长线航段、奖励和进度。
+- 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 132 项。
+- 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #2/#3/#6，以及反馈快照缺少星图长线位置上下文的链路复盘。
+
 ## 2026-05-06 Product decision：点火反馈快照上下文
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-06 05:28 CST 已同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。没有 open bug；#5“点火按钮太薄弱，增加点击反馈，增加特效，增加点击欲望”仍保持 open，最近一次处理停留在点火落点回声环，后续复测仍需要确认玩家当时看到的下一击/过载预告和反馈偏好。

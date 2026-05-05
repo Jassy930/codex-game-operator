@@ -4,6 +4,7 @@
 
 M0 设计约束：
 
+- 反馈快照必须记录星图进度摘要：`createFeedbackEntry()` 必须复用 `getProjectOverview()` 输出 `星图进度` 快照字段，记录当前星图完成数、下一航段、奖励和当前进度；早期状态必须能记录 0/57 点亮星图，后半段状态必须能记录当前远航长线航段和进度。该字段只用于真实反馈复盘，不新增界面可见文字、不新增收益、不新增存档字段，不改变星图航段、项目奖励、目标判定、航线策略、航线指令、远航调度、反馈入口交互或部署链路。
 - 反馈快照必须记录点火反馈上下文：`createFeedbackEntry()` 必须复用 `getCoreRewardPreview()` 输出 `点火反馈` 快照字段，记录下一击奖励预告和过载临界状态；前端反馈提交必须传入点火音效和触感反馈偏好，快照显示 `音效 开/关`、`触感 开/关`。该字段只用于真实反馈复盘，不新增界面可见文字、不新增收益、不新增存档字段，不改变点火收益、过载奖励、连击窗口、音效/触感行为、反馈入口交互或部署链路。
 - 指令轮换视觉轨必须提供下一步格可执行信标：`renderDirectivePlanTrack()` 必须根据 `plan.nextDirectiveIds` 对应按钮的 `ready` 状态，给 `#directivePlanTrack` 和当前 `.directive-plan-step.is-next` 切换 `is-next-ready` / `is-next-waiting`；`.directive-plan-step.is-next-ready` 必须显示绿色边框、补光和 `directivePlanNextReadyBeacon`，`.directive-plan-step.is-next-waiting` 必须显示等待态底色；`prefers-reduced-motion: reduce` 必须关闭 ready 动画。该信标只从现有推荐指令和冷却状态派生，不新增可见文字、不新增收益、不新增存档字段，不改变指令冷却、连携窗口、策略契合、航线委托、远航调度、星图航段或反馈入口。
 - 航线指令插画必须提供解锁运行态：静态首页必须引用 `src/assets/directive-visual.svg`；运行时 `renderDirectives()` 必须按 `directives.unlocked` 给 `.directive-scene-image` 切换 `is-active` / `is-locked`。100K 前 locked 状态降低饱和度与透明度，100K 解锁后 active 状态显示边框、补光和 `directiveSceneImagePulse`；`prefers-reduced-motion: reduce` 必须关闭 active 动画。该插画状态只改变图片层展示，不新增可见文字、不新增收益、不新增存档字段，不改变指令冷却、连携窗口、策略契合、航线委托、远航调度、星图航段或反馈入口。

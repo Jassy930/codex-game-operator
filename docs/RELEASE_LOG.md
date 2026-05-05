@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+- 反馈快照新增“星图进度摘要”：游戏内反馈生成 GitHub Issue 时，快照会追加 `星图进度：...`，记录当前星图完成数、下一航段、奖励和当前进度，继续为 #2/#3/#6 的内容丰富度、主动玩法和后半段复测提供可诊断上下文。
+- `src/feedback.js` 复用 `getProjectOverview()` 格式化星图快照字段；`tests/game.test.js` 覆盖早期 0/57 点亮星图快照和 26/57 脉冲航闸后半段快照。
+- 本轮只增强真实反馈诊断能力，不新增界面可见文字、不新增收益、不新增存档字段，不改变星图航段、项目奖励、目标判定、航线策略、航线指令、远航调度、反馈入口交互或部署链路。
+- 同步 GitHub Issues 反馈状态：2026-05-06 05:46 CST 当前 5 个 open issue、5 个 open feedback issue、0 个 open bug issue；#2/#3/#6 作为本轮关联反馈，#4/#5 继续等待带新快照的真实复测。
+- 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 132 项。
+- 构建产物已确认 `dist/src/feedback.js` 包含 `getProjectOverview`、`projectOverview` 与 `- 星图进度：`。
+
 - 反馈快照新增“点火反馈上下文”：游戏内反馈生成 GitHub Issue 时，快照会追加 `点火反馈：...`，记录当前下一击奖励预告、过载临界状态，以及点火音效/触感偏好开关状态，继续为 #5“点火按钮太薄弱”复测提供可诊断上下文。
 - `src/feedback.js` 复用 `getCoreRewardPreview()` 格式化快照字段；`src/app.js` 在提交反馈时传入 `soundEnabled` / `hapticEnabled`；`tests/game.test.js` 覆盖普通待机快照、过载前一击快照和反馈提交偏好传参。
 - 本轮只增强真实反馈诊断能力，不新增界面可见文字、不新增收益、不新增存档字段，不改变点火收益、过载奖励、连击窗口、音效/触感行为、升级价格、星图航段、航线指令、远航调度、反馈入口交互或部署链路。

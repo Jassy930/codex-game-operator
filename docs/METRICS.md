@@ -4,6 +4,7 @@
 
 当前实现：
 
+- 星图进度快照摘要当前由 `createFeedbackEntry()` 复用本地 `getProjectOverview()` 即时生成，只写入游戏内反馈 Issue 快照，不单独记录为真实线上指标；内容丰富度、星图推进和后半段复盘仍依赖现有本地状态、`goal_complete`、`directive`、`feedback_sent` 事件和反馈快照，发布前不能把该快照字段当作真实线上指标。
 - 点火反馈快照上下文当前由 `createFeedbackEntry()` 复用本地 `getCoreRewardPreview()` 并接收前端 `soundEnabled` / `hapticEnabled` 偏好即时生成，只写入游戏内反馈 Issue 快照，不单独记录为真实线上指标；点击行为、过载触发、音效和触感开关仍分别通过现有 `click`、`sound_toggle`、`haptic_toggle` 与 `feedback_sent` 本地事件复盘，发布前不能把这些本地事件当作真实线上指标。
 - 指令轮换下一步格可执行信标当前由 `renderDirectivePlanTrack()` 根据本地 `plan.nextDirectiveIds` 和对应按钮 `ready` 状态即时切换 `.directive-plan-step.is-next-ready` / `.directive-plan-step.is-next-waiting`，ready 状态播放 `directivePlanNextReadyBeacon` 并在降低动效偏好下关闭动画；它不单独记录为真实线上指标。推荐指令是否执行、是否冷却和执行后的收益复盘仍依赖现有 `directive` 事件、按钮状态、冷却进度、航线委托字段和反馈快照。
 - 航线指令插画运行态投光当前由 `renderDirectives()` 根据本地 `directives.unlocked` 即时切换 `.directive-scene-image.is-active` / `.directive-scene-image.is-locked`，播放 `directiveSceneImagePulse` 并在降低动效偏好下关闭动画；它不单独记录为真实线上指标。航线指令解锁、推荐、执行与收益复盘仍依赖现有 `directive` 事件、按钮状态、航线委托字段和反馈快照。
