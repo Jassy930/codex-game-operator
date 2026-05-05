@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+- 远航路线对照条新增“连段回航短标”：协同/绕行路线的回航结果会显示 `远航突破 · 连段 X/3` 或 `绕行突破 · 连段 X/3`，让远航连段在选择路线和准备回目标前也进入同一层对照，继续回应 #6 对后半段玩法变化不明显的反馈。
+- `src/game.js` 从现有 `routeNodeStates` 和 `farRouteLoopStreak` 派生 `routeLoopStreakText` 并追加到 `routeReturnText`；未参与当前路线的待选槽不显示连段短标；`tests/game.test.js` 覆盖路线对照文本里的连段短标和非当前路线边界。
+- 本轮只调整路线对照展示文本和测试，不新增收益、不新增存档字段，不改变远航连段结算、目标指令、分支路线、冷却、连携窗口、星图航段、反馈入口或部署链路。
+- 同步 GitHub Issues 反馈状态：2026-05-05 15:14 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 作为主处理对象。
+- 验证通过：`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 118 项；构建产物已确认包含 `routeLoopStreakText`。
+
 - 远航调度新增“远航连段闭环复盘”：协同/绕行路线刚完成 3/3 闭环时，闭环复盘会在已触发收益列表里追加“连段 X/3”；整备指令执行后，复盘会在已整备状态后继续显示“连段 X/3”，让远航连段不只停留在进度行和按钮收益里，继续回应 #6 对后半段玩法变化不明显的反馈。
 - `src/game.js` 让 `buildFarRouteDispatchBranchClosureText()` 读取 `farRouteLoopStreak` 并复用 `formatFarRouteDispatchLoopStreakText()`；`tests/game.test.js` 覆盖协同闭环、绕行闭环和整备后回航复盘里的连段文本。
 - 本轮只调整远航调度复盘文本和测试，不新增收益、不新增存档字段，不改变目标指令、分支路线、冷却、连携窗口、远航连段结算、星图航段、反馈入口或部署链路。

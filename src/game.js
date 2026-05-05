@@ -5329,7 +5329,14 @@ function buildFarRouteDispatchBranchChoices(
     const routeFlow = buildFarRouteDispatchBranchRouteFlow(choice.kind);
     const routeCost = buildFarRouteDispatchBranchRouteCost(choice.kind);
     const routeIntent = buildFarRouteDispatchBranchRouteIntent(choice.kind);
-    const routeReturn = buildFarRouteDispatchBranchRouteReturn(choice.kind);
+    const routeLoopStreakText = buildFarRouteDispatchBranchRouteLoopStreakText(
+      state,
+      routeNodeStates
+    );
+    const routeReturn = buildFarRouteDispatchBranchRouteReturn(
+      choice.kind,
+      routeLoopStreakText
+    );
     const routeCommandText =
       buildFarRouteDispatchBranchRouteCommandText(routeCommandLabels);
     const routeBranchStepText =
@@ -5407,6 +5414,7 @@ function buildFarRouteDispatchBranchChoices(
       routeIntentText: routeIntent.text,
       routeReturnKind: routeReturn.kind,
       routeReturnText: routeReturn.text,
+      routeLoopStreakText,
       routeCommandLabels,
       routeCommandText,
       routeBranchStepText,
@@ -5759,11 +5767,39 @@ function buildFarRouteDispatchBranchRouteIntent(kind) {
   };
 }
 
-function buildFarRouteDispatchBranchRouteReturn(kind) {
-  return {
+function buildFarRouteDispatchBranchRouteReturn(kind, loopStreakText = "") {
+  const routeReturn = {
     ...(FAR_ROUTE_DISPATCH_BRANCH_ROUTE_RETURN_LABELS[kind] ??
       FAR_ROUTE_DISPATCH_BRANCH_ROUTE_RETURN_LABELS.sync)
   };
+
+  return {
+    ...routeReturn,
+    text:
+      routeReturn.text +
+      (loopStreakText ? " · " + loopStreakText : "")
+  };
+}
+
+function buildFarRouteDispatchBranchRouteLoopStreakText(state, routeNodeStates) {
+  const routeIsRelevant =
+    routeNodeStates?.start === "next" ||
+    ["next", "done"].includes(routeNodeStates?.branch) ||
+    ["next", "done"].includes(routeNodeStates?.return);
+  if (!routeIsRelevant) {
+    return "";
+  }
+
+  const currentStreak = readFarRouteDispatchLoopStreak(state);
+  const projectedStreak =
+    routeNodeStates?.return === "done"
+      ? currentStreak
+      : Math.min(
+          FAR_ROUTE_DISPATCH_LOOP_STREAK_MAX_STACKS,
+          currentStreak + 1
+        );
+
+  return formatFarRouteDispatchLoopStreakText(projectedStreak);
 }
 
 function buildFarRouteDispatchBranchRouteCommandLabels(

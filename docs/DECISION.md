@@ -1,5 +1,27 @@
 # Decision
 
+## 2026-05-05 Product decision：远航连段路线对照回航短标
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-05 15:14 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有 open bug；本轮继续处理真实反馈 #6“后半段只有不停的目标，玩法没有真正变化”。
+
+当前最大问题：远航连段已经进入按钮预计收益、执行反馈、远航调度进度行和闭环复盘，但分支路线对照条的回航结果短标仍只显示“远航突破/绕行突破”。玩家在选择协同/绕行或回航前扫路线对照条时，仍可能看不到本轮回目标会推进到几层连段。
+
+本轮决策：
+
+- 新增“远航连段路线对照回航短标”。
+- `buildFarRouteDispatchBranchChoices()` 从现有 `routeNodeStates` 和 `farRouteLoopStreak` 派生 `routeLoopStreakText`。
+- 可推进或已完成的协同/绕行路线，会把 `routeReturnText` 从 `远航突破` / `绕行突破` 扩展为 `远航突破 · 连段 X/3` / `绕行突破 · 连段 X/3`。
+- 未参与当前路线的待选槽不显示连段短标，避免把备选路线误读为当前已结算路线。
+- 该改动只调整路线对照展示文本和测试，不新增收益、不新增存档字段，不改变远航连段结算、目标指令、分支路线、冷却、连携窗口、星图航段、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-05-05 15:14 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 作为本轮主处理对象。
+- `src/game.js` 会在路线对照条回航结果短标中显示 `连段 X/3`。
+- `tests/game.test.js` 覆盖 `routeLoopStreakText`、`routeReturnText`、`branchChoiceText` 和 `branchChoiceSummaryText` 的连段短标，并覆盖当前路线显示连段、非当前路线不显示连段的边界。
+- 本地验证已通过：`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 118 项；`dist/src/game.js` 已确认包含 `routeLoopStreakText`。
+- 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #6，以及远航连段上线后路线对照条没有承接连段层数的链路复盘。
+
 ## 2026-05-05 Product decision：远航连段闭环复盘
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-05 14:58 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有 open bug；本轮继续处理真实反馈 #6“后半段只有不停的目标，玩法没有真正变化”。
