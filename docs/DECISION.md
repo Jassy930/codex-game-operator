@@ -1,5 +1,28 @@
 # Decision
 
+## 2026-05-05 Product decision：远航连段主调度条信标
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-05 16:55 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有 open bug；本轮继续处理真实反馈 #6“后半段只有不停的目标，玩法没有真正变化”。
+
+当前最大问题：远航连段已经进入按钮、路线对照条、闭环复盘、星图总览、项目卡片和当前航段视觉卡，但远航调度主条里的连段层数仍主要跟在 `闭环进度 ...` 的状态句尾。玩家如果扫主调度面板，仍可能先看到目标、分支和长状态句，而不把当前跨轮连段当成独立状态。
+
+本轮决策：
+
+- 新增“远航连段主调度条信标”。
+- `renderFarDispatch()` 在 `dispatch.loopStreakText` 存在时渲染独立 `far-dispatch-loop-streak` 胶囊，并给远航调度面板追加 `has-loop-streak`。
+- `src/styles.css` 为主调度条连段胶囊提供状态点、轻量补光和降低动效兜底。
+- 该改动只调整远航调度主面板展示和测试，不新增收益、不新增存档字段，不改变远航连段结算、远航调度路线、星图总览、项目卡片、按钮徽标、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-05-05 16:55 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 作为本轮主处理对象。
+- 有效连段存在时，远航调度主面板会显示独立 `far-dispatch-loop-streak`，文本为 `连段 X/3`。
+- 有效连段存在时，远航调度主面板会追加 `has-loop-streak`，降低动效偏好下关闭该胶囊动画。
+- `tests/game.test.js` 覆盖运行时 JS 绑定、CSS 绑定、keyframes 和降低动效兜底。
+- 本地验证已通过：`node --test tests/game.test.js`、`npm install`、`npm test`、`npm run build`、`bun install --no-save`、`bun run test`、`bun run build`；测试数 118 项。
+- 构建产物已确认 `dist/src/app.js` 包含 `far-dispatch-loop-streak` 和 `has-loop-streak`，`dist/src/styles.css` 包含 `.far-dispatch-loop-streak`、`.far-dispatch.has-loop-streak` 和 `farDispatchLoopStreakBeacon`。
+- 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #6，以及远航连段进入多个辅助层后主调度面板仍缺少独立短标的链路复盘。
+
 ## 2026-05-05 Product decision：远航连段当前航段视觉卡短标
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-05 16:40 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有 open bug；本轮继续处理真实反馈 #6“后半段只有不停的目标，玩法没有真正变化”。

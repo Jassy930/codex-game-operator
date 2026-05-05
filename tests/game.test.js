@@ -2107,6 +2107,10 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(appJs, /meter\.className = "directive-task-meter"/);
   assert.match(appJs, /meter\.className = "far-dispatch-meter"/);
   assert.match(appJs, /loopMeter\.className = "far-dispatch-loop-meter"/);
+  assert.match(appJs, /loopStreak\.className = "far-dispatch-loop-streak"/);
+  assert.match(appJs, /loopStreak\.textContent = dispatch\.loopStreakText \?\? ""/);
+  assert.match(appJs, /loopStreak\.hidden = !dispatch\.loopStreakText/);
+  assert.match(appJs, /"has-loop-streak",\s*Boolean\(dispatch\.loopStreakText\)/);
   assert.match(appJs, /function renderFarDispatchSceneImage\(\)/);
   assert.match(appJs, /image\.className = "far-dispatch-scene-image"/);
   assert.match(appJs, /image\.src = "\.\/src\/assets\/far-dispatch-visual\.svg"/);
@@ -2356,9 +2360,11 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(styles, /@keyframes farDispatchSummaryActiveActionGlow/);
   assert.match(styles, /@keyframes farDispatchSummaryActivePayoffGlow/);
   assert.match(styles, /@keyframes farDispatchSummaryLoopStreakResultGlow/);
+  assert.match(styles, /@keyframes farDispatchLoopStreakBeacon/);
   assert.match(styles, /@media \(prefers-reduced-motion: reduce\) \{[\s\S]*\.far-dispatch-branch-choice-summary-item\.is-active-route[\s\S]*animation: none/);
   assert.match(styles, /@media \(prefers-reduced-motion: reduce\) \{[\s\S]*\.far-dispatch-branch-choice-summary-payoff[\s\S]*animation: none/);
   assert.match(styles, /@media \(prefers-reduced-motion: reduce\) \{[\s\S]*\.far-dispatch-branch-choice-summary-result\.has-loop-streak[\s\S]*animation: none/);
+  assert.match(styles, /@media \(prefers-reduced-motion: reduce\) \{[\s\S]*\.far-dispatch\.is-active \.far-dispatch-loop-streak[\s\S]*animation: none/);
   assert.match(styles, /@media \(max-width: 820px\) \{[\s\S]*\.far-dispatch-branch-choice-summary \{[\s\S]*grid-template-columns: 1fr/);
   assert.match(styles, /@media \(max-width: 820px\) \{[\s\S]*"glyph label action step"/);
   assert.match(styles, /@media \(max-width: 820px\) \{[\s\S]*"glyph phase reward payoff"/);
@@ -2454,7 +2460,12 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(styles, /\.directive-button \.directive-dispatch-focus-loop/);
   assert.match(styles, /text-overflow: ellipsis/);
   assert.match(styles, /\.far-dispatch-meter/);
+  assert.match(styles, /\.far-dispatch\.has-loop-streak/);
   assert.match(styles, /\.far-dispatch-loop-text/);
+  assert.match(styles, /\.far-dispatch-loop-streak/);
+  assert.match(styles, /\.far-dispatch-loop-streak\[hidden\]/);
+  assert.match(styles, /\.far-dispatch-loop-streak::before/);
+  assert.match(styles, /\.far-dispatch\.is-active \.far-dispatch-loop-streak/);
   assert.match(styles, /\.far-dispatch-loop-meter/);
   assert.match(styles, /\.far-dispatch-loop-track/);
   assert.match(styles, /\.far-dispatch-loop-visual/);

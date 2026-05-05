@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+- 远航调度主条新增“远航连段信标”：当前远航连段有效时，主操作区远航调度面板会显示独立 `连段 X/3` 胶囊，并给面板追加 `has-loop-streak` 状态，让跨轮递进层数不只藏在闭环进度长句或路线对照结果中，继续回应 #6 对后半段玩法变化不明显的反馈。
+- `src/app.js` 在 `renderFarDispatch()` 中渲染 `far-dispatch-loop-streak`，并按 `dispatch.loopStreakText` 切换 `has-loop-streak`；`src/styles.css` 增加主调度条连段胶囊、状态点、`farDispatchLoopStreakBeacon` 和降低动效兜底；`tests/game.test.js` 覆盖静态 JS 和 CSS 绑定。
+- 本轮只调整远航调度主面板展示和测试，不新增收益、不新增存档字段，不改变远航连段结算、远航调度路线、星图总览、项目卡片、按钮徽标、反馈入口或部署链路。
+- 同步 GitHub Issues 反馈状态：2026-05-05 16:55 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 作为主处理对象。
+- 验证通过：`node --test tests/game.test.js`、`npm install`、`npm test`、`npm run build`、`bun install --no-save`、`bun run test`、`bun run build`；测试数 118 项。
+- 构建产物已确认 `dist/src/app.js` 包含 `far-dispatch-loop-streak` 和 `has-loop-streak`，`dist/src/styles.css` 包含 `.far-dispatch-loop-streak`、`.far-dispatch.has-loop-streak` 和 `farDispatchLoopStreakBeacon`。
+
 - 星图总览当前航段视觉卡新增“远航调度短标”：20M 后当前航段视觉卡会显示 `调度 X`，当前远航连段有效时显示 `调度 X · 连段 X/3`，让跨轮递进收益进入默认可见的视觉卡层，继续回应 #6 对后半段玩法变化不明显的反馈。
 - `src/game.js` 让 `getProjectCurrentVisual()` 透传 `dispatchBadgeText` 并写入 title / aria-label；`src/app.js` 在视觉卡中渲染 `project-current-dispatch` 胶囊并追加 `is-dispatch-active`；`src/styles.css` 增加当前航段视觉卡调度胶囊和 active 边框样式；`tests/game.test.js` 覆盖数据、title、静态 JS 和 CSS 绑定。
 - 本轮只调整当前航段视觉卡展示和测试，不新增收益、不新增存档字段，不改变远航连段结算、远航调度路线、项目卡片、按钮徽标、反馈入口或部署链路。

@@ -718,6 +718,11 @@ function renderFarDispatch(dispatch) {
   loopText.className = "far-dispatch-loop-text";
   loopText.textContent = dispatch.loopStatusText;
 
+  const loopStreak = document.createElement("span");
+  loopStreak.className = "far-dispatch-loop-streak";
+  loopStreak.textContent = dispatch.loopStreakText ?? "";
+  loopStreak.hidden = !dispatch.loopStreakText;
+
   const meter = document.createElement("span");
   meter.className = "far-dispatch-meter";
   meter.setAttribute("role", "meter");
@@ -748,6 +753,10 @@ function renderFarDispatch(dispatch) {
 
   elements.farDispatch.classList.toggle("is-locked", !dispatch.unlocked);
   elements.farDispatch.classList.toggle("is-active", dispatch.active);
+  elements.farDispatch.classList.toggle(
+    "has-loop-streak",
+    Boolean(dispatch.loopStreakText)
+  );
   elements.farDispatch.replaceChildren(
     text,
     sceneImage,
@@ -758,6 +767,7 @@ function renderFarDispatch(dispatch) {
     branchPlan,
     branchPlanStep,
     branchClosure,
+    loopStreak,
     branchChoices,
     meter,
     loopText,
