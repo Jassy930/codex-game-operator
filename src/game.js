@@ -3239,6 +3239,7 @@ export function getFarRouteDispatch(state, now = Date.now()) {
       loopStreakCapstoneRewardRate: FAR_ROUTE_DISPATCH_LOOP_STREAK_CAPSTONE_RATE,
       loopStreakCapstoneRewardText,
       loopStreakText: "",
+      loopCapstoneText: "",
       branchFocusKind: "",
       branchFocusText: "",
       branchFocusReasonText: "",
@@ -3331,6 +3332,7 @@ export function getFarRouteDispatch(state, now = Date.now()) {
       loopStreakCapstoneRewardRate: FAR_ROUTE_DISPATCH_LOOP_STREAK_CAPSTONE_RATE,
       loopStreakCapstoneRewardText,
       loopStreakText,
+      loopCapstoneText: "",
       branchFocusKind: "",
       branchFocusText: "",
       branchFocusReasonText: "",
@@ -3400,6 +3402,12 @@ export function getFarRouteDispatch(state, now = Date.now()) {
     current,
     directive,
     relayDirective,
+    now
+  );
+  const loopCapstoneText = getFarRouteDispatchLoopCapstonePreviewText(
+    current,
+    directive,
+    loopStatus,
     now
   );
   const branchFocus = getFarRouteDispatchBranchFocus(
@@ -3483,6 +3491,7 @@ export function getFarRouteDispatch(state, now = Date.now()) {
     loopStreakCapstoneRewardRate: FAR_ROUTE_DISPATCH_LOOP_STREAK_CAPSTONE_RATE,
     loopStreakCapstoneRewardText,
     loopStreakText,
+    loopCapstoneText,
     branchFocusKind: branchFocus.kind,
     branchFocusText: branchFocus.text,
     branchFocusReasonText: branchFocus.reasonText,
@@ -3542,9 +3551,12 @@ export function getFarRouteDispatch(state, now = Date.now()) {
     loopTarget: loopStatus.target,
     loopSteps,
     loopStepText: buildFarRouteDispatchLoopStepText(loopSteps),
-    loopStatusText: appendFarRouteDispatchLoopStreakText(
-      appendFarRouteDispatchBranchText(loopStatus.text, branchStatus),
-      loopStreak
+    loopStatusText: appendFarRouteDispatchLoopCapstoneText(
+      appendFarRouteDispatchLoopStreakText(
+        appendFarRouteDispatchBranchText(loopStatus.text, branchStatus),
+        loopStreak
+      ),
+      loopCapstoneText
     ),
     text:
       "远航调度：" +
@@ -8203,9 +8215,49 @@ function formatFarRouteDispatchLoopStreakText(streak) {
     : "";
 }
 
+function formatFarRouteDispatchLoopCapstoneText(streak) {
+  const safeStreak = Math.min(
+    FAR_ROUTE_DISPATCH_LOOP_STREAK_MAX_STACKS,
+    Math.max(0, Math.floor(Number(streak) || 0))
+  );
+  return safeStreak >= FAR_ROUTE_DISPATCH_LOOP_STREAK_MAX_STACKS
+    ? "满段回响 +" +
+        Math.round(FAR_ROUTE_DISPATCH_LOOP_STREAK_CAPSTONE_RATE * 100) +
+        "%"
+    : "";
+}
+
 function appendFarRouteDispatchLoopStreakText(text, streak) {
   const loopStreakText = formatFarRouteDispatchLoopStreakText(streak);
   return loopStreakText ? text + " · " + loopStreakText : text;
+}
+
+function appendFarRouteDispatchLoopCapstoneText(text, loopCapstoneText) {
+  return loopCapstoneText ? text + " · " + loopCapstoneText : text;
+}
+
+function getFarRouteDispatchLoopCapstonePreviewText(
+  state,
+  directive,
+  loopStatus,
+  now
+) {
+  const chain = state?.directiveChain;
+  const chainActive = Boolean(chain?.lastDirectiveId && chain.expiresAt >= now);
+  const nextStepClosesLoop =
+    directive?.id &&
+    chainActive &&
+    chain.lastDirectiveId !== directive.id &&
+    (Number(chain.stacks) || 0) >= DIRECTIVE_CHAIN_MAX_STACKS - 1 &&
+    loopStatus?.progress < loopStatus?.target;
+
+  if (!nextStepClosesLoop) {
+    return "";
+  }
+
+  return formatFarRouteDispatchLoopCapstoneText(
+    readFarRouteDispatchLoopStreak(state) + 1
+  );
 }
 
 function getFarRouteDispatchLoopNextText(

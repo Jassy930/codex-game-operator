@@ -2,6 +2,14 @@
 
 ## Unreleased
 
+- 远航主调度条新增“满段回响”预告：20M 后当前远航闭环下一步回目标会把连段推到 3/3 时，主操作区远航调度面板会显示 `满段回响 +10%`，继续回应 #6 对后半段玩法变化不明显的反馈。
+- `src/game.js` 新增 `loopCapstoneText` 派生与 `loopStatusText` 追加；`src/app.js` 渲染 `far-dispatch-loop-capstone` 并给主面板追加 `has-loop-capstone`；`src/styles.css` 增加主调度条满段回响短标样式和降动效绑定；`tests/game.test.js` 覆盖运行态字段、静态绑定和 CSS。
+- 本轮只增强主调度条的满段回响预告，不新增收益、不新增存档字段，不改变远航连段结算、满段回响奖励、目标指令、协同/绕行路线、冷却、连携窗口、星图航段、反馈入口或部署链路。
+- 同步 GitHub Issues 反馈状态：2026-05-05 21:48 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 作为本轮主处理对象。
+- 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 127 项。
+- 构建产物已确认 `dist/src/game.js`、`dist/src/app.js` 和 `dist/src/styles.css` 包含 `loopCapstoneText`、`far-dispatch-loop-capstone` 与 `.far-dispatch.has-loop-capstone`。
+- 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #6，以及满段回响已进入路线对照层后主调度条仍缺少终点奖励预告的链路复盘。
+
 - 修复远航满段回响路线卡片提示重复：20M 后当前路线回航会把远航连段推到 3/3 时，`满段回响 +10%` 在分支卡片标题/悬停提示中只出现一次。
 - `src/game.js` 移除 `choice.text` 对 `routeLoopCapstoneText` 的二次拼接，改为复用已包含满段回响的 `routeReturnText`；`tests/game.test.js` 增加重复文案防回归断言。
 - 本轮只修复路线提示去重和测试，不改变远航收益、满段回响结算、连段层数、目标指令、协同/绕行路线、冷却、连携窗口、星图航段、反馈入口或部署链路。

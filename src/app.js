@@ -724,6 +724,11 @@ function renderFarDispatch(dispatch) {
   loopStreak.textContent = dispatch.loopStreakText ?? "";
   loopStreak.hidden = !dispatch.loopStreakText;
 
+  const loopCapstone = document.createElement("span");
+  loopCapstone.className = "far-dispatch-loop-capstone";
+  loopCapstone.textContent = dispatch.loopCapstoneText ?? "";
+  loopCapstone.hidden = !dispatch.loopCapstoneText;
+
   const meter = document.createElement("span");
   meter.className = "far-dispatch-meter";
   meter.setAttribute("role", "meter");
@@ -758,6 +763,10 @@ function renderFarDispatch(dispatch) {
     "has-loop-streak",
     Boolean(dispatch.loopStreakText)
   );
+  elements.farDispatch.classList.toggle(
+    "has-loop-capstone",
+    Boolean(dispatch.loopCapstoneText)
+  );
   elements.farDispatch.replaceChildren(
     text,
     sceneImage,
@@ -769,6 +778,7 @@ function renderFarDispatch(dispatch) {
     branchPlanStep,
     branchClosure,
     loopStreak,
+    loopCapstone,
     branchChoices,
     meter,
     loopText,
@@ -1427,7 +1437,8 @@ function getFarDispatchDisplayText(dispatch) {
     "远航调度：" + dispatch.segmentText,
     dispatch.projectName,
     "目标 " + dispatch.targetDirectiveName,
-    dispatch.loopStreakText
+    dispatch.loopStreakText,
+    dispatch.loopCapstoneText
   ]
     .filter(Boolean)
     .join(" · ");

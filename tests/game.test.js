@@ -2189,7 +2189,11 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(appJs, /loopStreak\.className = "far-dispatch-loop-streak"/);
   assert.match(appJs, /loopStreak\.textContent = dispatch\.loopStreakText \?\? ""/);
   assert.match(appJs, /loopStreak\.hidden = !dispatch\.loopStreakText/);
+  assert.match(appJs, /loopCapstone\.className = "far-dispatch-loop-capstone"/);
+  assert.match(appJs, /loopCapstone\.textContent = dispatch\.loopCapstoneText \?\? ""/);
+  assert.match(appJs, /loopCapstone\.hidden = !dispatch\.loopCapstoneText/);
   assert.match(appJs, /"has-loop-streak",\s*Boolean\(dispatch\.loopStreakText\)/);
+  assert.match(appJs, /"has-loop-capstone",\s*Boolean\(dispatch\.loopCapstoneText\)/);
   assert.match(appJs, /function renderFarDispatchSceneImage\(\)/);
   assert.match(appJs, /image\.className = "far-dispatch-scene-image"/);
   assert.match(appJs, /image\.src = "\.\/src\/assets\/far-dispatch-visual\.svg"/);
@@ -2434,6 +2438,10 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(styles, /\.far-dispatch-branch-choice-summary-item\.is-active-route[\s\S]*\.far-dispatch-branch-choice-summary-result/);
   assert.match(styles, /\.far-dispatch-branch-choice-summary-result\.has-loop-streak/);
   assert.match(styles, /\.far-dispatch-branch-choice-summary-result\.has-loop-capstone/);
+  assert.match(styles, /\.far-dispatch\.has-loop-capstone/);
+  assert.match(styles, /\.far-dispatch-loop-capstone/);
+  assert.match(styles, /\.far-dispatch-loop-capstone::after/);
+  assert.match(styles, /\.far-dispatch\.is-active \.far-dispatch-loop-capstone/);
   assert.match(styles, /animation: farDispatchSummaryLoopStreakResultGlow 1450ms ease-in-out infinite/);
   assert.match(styles, /animation: farDispatchSummaryLoopCapstoneResultGlow 1450ms ease-in-out infinite/);
   assert.match(styles, /\.far-dispatch-branch-choice-summary-result\.has-loop-streak::before/);
@@ -2471,6 +2479,7 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(styles, /@media \(prefers-reduced-motion: reduce\) \{[\s\S]*\.far-dispatch-branch-choice-summary-result\.has-loop-streak[\s\S]*animation: none/);
   assert.match(styles, /@media \(prefers-reduced-motion: reduce\) \{[\s\S]*\.far-dispatch-branch-choice-summary-result\.has-loop-capstone[\s\S]*animation: none/);
   assert.match(styles, /@media \(prefers-reduced-motion: reduce\) \{[\s\S]*\.far-dispatch\.is-active \.far-dispatch-loop-streak[\s\S]*animation: none/);
+  assert.match(styles, /@media \(prefers-reduced-motion: reduce\) \{[\s\S]*\.far-dispatch\.is-active \.far-dispatch-loop-capstone[\s\S]*animation: none/);
   assert.match(styles, /@media \(max-width: 820px\) \{[\s\S]*\.far-dispatch-branch-choice-summary \{[\s\S]*grid-template-columns: 1fr/);
   assert.match(styles, /@media \(max-width: 820px\) \{[\s\S]*"glyph label signal action"/);
   assert.match(styles, /@media \(max-width: 820px\) \{[\s\S]*"glyph phase reward payoff"/);
@@ -4725,6 +4734,9 @@ test("远航调度会在 20M 后按当前航段指定目标指令", () => {
     capstoneDispatch.branchChoices.map((choice) => choice.routeLoopCapstoneText),
     ["满段回响 +10%", ""]
   );
+  assert.equal(capstoneDispatch.loopCapstoneText, "满段回响 +10%");
+  assert.match(capstoneDispatch.loopStatusText, /连段 2\/3/);
+  assert.match(capstoneDispatch.loopStatusText, /满段回响 \+10%/);
   assert.deepEqual(
     capstoneDispatch.branchChoices.map((choice) => choice.routeReturnText),
     ["远航突破 · 连段 3/3 · 满段回响 +10%", "绕行突破"]
