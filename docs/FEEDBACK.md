@@ -8,6 +8,9 @@
 - 本轮只增强真实反馈可诊断性和测试，不新增界面可见文字、不新增收益、不新增存档字段，不改变点火收益、过载奖励、连击窗口、音效/触感行为、星图航段、航线指令、远航调度、反馈入口交互或部署链路。
 - 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 131 项。
 - 构建产物已确认 `dist/src/feedback.js` 包含 `getCoreRewardPreview`、`- 点火反馈：`、`音效` 与 `触感`，`dist/src/app.js` 包含提交反馈时传入 `soundEnabled` / `hapticEnabled`。
+- 发布和反馈处理已完成：`3e14d72 feat: add core feedback snapshot context` 已推送，GitHub Pages workflow `25403682688` 成功；build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页返回 HTTP 200，线上 `src/feedback.js` 和 `src/app.js` 已确认包含本轮标记。
+- 已回复 #5，评论地址：`https://github.com/Jassy930/codex-game-operator/issues/5#issuecomment-4383336988`；issue 保持 open 等待带新快照的真实复测。
+- 回复后于 2026-05-06 05:38 CST 再次同步 GitHub Issues，当前仍为 5 个 open feedback issue、0 个 open bug issue；#5 更新时间为 `2026-05-05T21:38:06Z`。
 
 - GitHub Issues：gh 可用且已认证；2026-05-06 05:14 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。#3/#6 仍是主动短循环和后半段玩法复测反馈，#4 仍是图片化和文字密度复测反馈。
 - 本轮 Product decision 处理 #3/#4/#6：反馈快照已经记录指令熟练、远航调度、远航连段和满段回响，但没有单独记录 100K 后指令轮换和航线委托所处阶段，后续复盘 #3/#6 时仍需要从多个字段反推玩家卡在短循环哪一步。

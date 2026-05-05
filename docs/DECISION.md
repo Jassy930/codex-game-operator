@@ -20,6 +20,8 @@
 - 新提交的游戏内反馈 Issue 会显示 `点火反馈：下一击 ...`；过载前一击会显示 `触发过载`；前端提交会同时写入 `音效 开/关` 和 `触感 开/关`。
 - 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 131 项。
 - 构建产物已确认 `dist/src/feedback.js` 包含 `getCoreRewardPreview`、`- 点火反馈：`、`音效` 与 `触感`，`dist/src/app.js` 包含提交反馈时传入 `soundEnabled` / `hapticEnabled`。
+- 发布验证已通过：提交 `3e14d72` 已推送，GitHub Pages workflow `25403682688` 成功，线上首页返回 HTTP 200，线上 `src/feedback.js` 与 `src/app.js` 已确认包含本轮标记。
+- 已回复 GitHub Issue #5，说明点火反馈快照上下文、验证结果、Pages 部署和复测问题；issue 保持 open，评论地址：`https://github.com/Jassy930/codex-game-operator/issues/5#issuecomment-4383336988`。回复后于 2026-05-06 05:38 CST 再次同步 GitHub Issues，当前仍为 5 个 open feedback issue、0 个 open bug issue；#5 更新时间为 `2026-05-05T21:38:06Z`。
 - 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #5，以及现有快照只有连击数、缺少下一击预告和反馈偏好上下文的链路复盘。
 
 ## 2026-05-06 Product decision：反馈快照指令短循环上下文
