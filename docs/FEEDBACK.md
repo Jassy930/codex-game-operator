@@ -2,6 +2,14 @@
 
 ## 2026-05-05
 
+- GitHub Issues：gh 可用且已认证；2026-05-05 18:30 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。#4 是最近更新反馈，继续指向“界面文字密度高、希望更多图片”。
+- 本轮 Product decision 继续处理 #4：主操作区多个关键控件已有视觉锚点，但侧栏反馈表单的“类型 / 评分 / 内容”字段仍是纯文字标签。
+- 本轮改动新增“反馈表单字段视觉短标”：反馈类型、评分和内容三个字段标签各显示固定 22px CSS 图形槽，分别用类型、星级和消息图形辅助扫视。
+- 本轮只调整反馈表单字段展示和测试，不新增可见说明文字、不改变反馈类型、评分、内容输入、Issue 草稿、反馈快照、localStorage 事件、玩法数值、星图、航线指令、远航调度或部署链路。
+- 验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 123 项。
+- 构建产物已确认 `dist/index.html` 和 `dist/src/styles.css` 包含 `feedback-field-label` 与三类 `feedback-field-icon-*` 标记。
+- 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #4，以及反馈表单字段仍缺少图形锚点的侧栏复盘。
+
 - GitHub Issues：gh 可用且已认证；2026-05-05 18:15 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。#4 是最近更新反馈，继续指向“界面文字密度高、希望更多图片”。
 - 本轮 Product decision 继续处理 #4：顶部产能读数、当前目标条、主操作行动提示和离线回收提示已有视觉锚点，但主操作区的点火音效/触感反馈偏好开关仍是 checkbox + 文字。
 - 本轮改动新增“点火反馈偏好视觉短标”：点火音效和触感反馈开关各自显示固定 24px CSS 图形槽，分别用声音/触感图形辅助扫视。

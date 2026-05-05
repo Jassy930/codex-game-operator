@@ -648,7 +648,10 @@
           <form id="feedbackForm" class="feedback-form" aria-labelledby="feedback-title">
             <h2 id="feedback-title">反馈</h2>
             <label for="feedbackType">
-              类型
+              <span class="feedback-field-label">
+                <span class="feedback-field-icon feedback-field-icon-type" aria-hidden="true"></span>
+                <span>类型</span>
+              </span>
               <select id="feedbackType" name="feedbackType">
                 <option value="experience">体验反馈</option>
                 <option value="bug">问题/Bug</option>
@@ -657,7 +660,10 @@
               </select>
             </label>
             <label for="feedbackRating">
-              评分
+              <span class="feedback-field-label">
+                <span class="feedback-field-icon feedback-field-icon-rating" aria-hidden="true"></span>
+                <span>评分</span>
+              </span>
               <select id="feedbackRating" name="feedbackRating">
                 <option value="5">5</option>
                 <option value="4">4</option>
@@ -667,7 +673,10 @@
               </select>
             </label>
             <label for="feedbackMessage">
-              内容
+              <span class="feedback-field-label">
+                <span class="feedback-field-icon feedback-field-icon-message" aria-hidden="true"></span>
+                <span>内容</span>
+              </span>
               <textarea
                 id="feedbackMessage"
                 name="feedbackMessage"

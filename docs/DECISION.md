@@ -1,5 +1,27 @@
 # Decision
 
+## 2026-05-05 Product decision：反馈表单字段视觉短标
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-05 18:30 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有 open bug；本轮继续处理最近更新的真实反馈 #4“界面里全是密密麻麻的文字，能不能生成一些图片”。
+
+当前最大问题：首屏主操作区、目标条、顶部读数和点火反馈偏好已经补了视觉锚点，但侧栏反馈表单仍是“类型 / 评分 / 内容”三行纯文字标签加表单控件。它属于玩家提交反馈前最后看到的界面层，也会延续 #4 提到的文字密度印象。
+
+本轮决策：
+
+- 新增“反馈表单字段视觉短标”。
+- `index.html` 为反馈类型、评分和内容三个字段标签添加 `feedback-field-icon-*` 图形槽。
+- `src/styles.css` 用 CSS 绘制类型、评分和消息三类 22px 短标。
+- `tests/game.test.js` 覆盖静态首页和 CSS 绑定。
+- 该改动只调整反馈表单字段展示和测试，不新增可见说明文字、不改变反馈类型、评分、内容输入、Issue 草稿、反馈快照、localStorage 事件、玩法数值、星图、航线指令、远航调度或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-05-05 18:30 CST 当前 5 个 open feedback issue、0 个 open bug issue；#4 作为本轮主处理对象。
+- 反馈表单字段标签包含 `feedback-field-icon-type`、`feedback-field-icon-rating` 与 `feedback-field-icon-message`，并保持原有 label/select/textarea 绑定。
+- 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 123 项。
+- 构建产物已确认 `dist/index.html` 和 `dist/src/styles.css` 包含 `feedback-field-label` 与三类 `feedback-field-icon-*` 标记。
+- 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #4，以及反馈表单仍缺少图形锚点的侧栏复盘。
+
 ## 2026-05-05 Product decision：点火反馈偏好视觉短标
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-05 18:15 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有 open bug；本轮继续处理真实反馈 #4“界面里全是密密麻麻的文字，能不能生成一些图片”。

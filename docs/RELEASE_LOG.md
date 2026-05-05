@@ -2,6 +2,14 @@
 
 ## Unreleased
 
+- 反馈表单字段新增视觉短标：侧栏反馈表单的“类型”“评分”“内容”字段现在各自显示固定 22px CSS 图形槽，继续回应 #4 对界面文字密度和图片化表达的反馈。
+- `index.html` 为三个反馈字段标签添加 `feedback-field-icon-*`；`src/styles.css` 绘制类型、星级和消息三类短标；`tests/game.test.js` 覆盖静态首页和 CSS 绑定。
+- 本轮只调整反馈表单字段展示和测试，不新增可见说明文字，不改变反馈类型、评分、内容输入、Issue 草稿、反馈快照、localStorage 事件、玩法数值、星图、航线指令、远航调度或部署链路。
+- 同步 GitHub Issues 反馈状态：2026-05-05 18:30 CST 当前 5 个 open feedback issue、0 个 open bug issue；#4 作为本轮主处理对象。
+- 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 123 项。
+- 构建产物已确认 `dist/index.html` 和 `dist/src/styles.css` 包含 `feedback-field-label`、`feedback-field-icon-type`、`feedback-field-icon-rating` 与 `feedback-field-icon-message`。
+- 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #4，以及反馈表单字段仍缺少图形锚点的侧栏复盘。
+
 - 点火反馈偏好开关新增视觉短标：主操作区的“点火音效”和“触感反馈”开关现在各自显示固定 24px CSS 图形槽，继续回应 #4 对首屏文字密度和图片化表达的反馈。
 - `index.html` 为两项反馈偏好添加 `feedback-toggle-icon`；`src/styles.css` 绘制声音/触感两类短标；`tests/game.test.js` 覆盖静态首页和 CSS 绑定。
 - 本轮只调整点火反馈偏好开关展示和测试，不新增可见文字，不改变点火收益、音效播放、触感调用、localStorage key、存档字段、升级价格、星图、航线指令、远航调度、反馈入口或部署链路。

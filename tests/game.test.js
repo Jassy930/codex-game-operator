@@ -6144,6 +6144,25 @@ test("星图阶段导航会显示最终阶段余量", () => {
   );
 });
 
+test("反馈表单字段会渲染视觉短标", () => {
+  const indexHtml = readFileSync(new URL("../index.html", import.meta.url), "utf8");
+  const styles = readFileSync(new URL("../src/styles.css", import.meta.url), "utf8");
+
+  assert.match(indexHtml, /class="feedback-field-label"/);
+  assert.match(indexHtml, /class="feedback-field-icon feedback-field-icon-type" aria-hidden="true"/);
+  assert.match(indexHtml, /class="feedback-field-icon feedback-field-icon-rating" aria-hidden="true"/);
+  assert.match(indexHtml, /class="feedback-field-icon feedback-field-icon-message" aria-hidden="true"/);
+  assert.match(indexHtml, /<span>类型<\/span>/);
+  assert.match(indexHtml, /<span>评分<\/span>/);
+  assert.match(indexHtml, /<span>内容<\/span>/);
+  assert.match(styles, /\.feedback-field-label/);
+  assert.match(styles, /\.feedback-field-icon/);
+  assert.match(styles, /\.feedback-field-icon-type::before/);
+  assert.match(styles, /\.feedback-field-icon-rating::before/);
+  assert.match(styles, /\.feedback-field-icon-message::before/);
+  assert.match(styles, /\.feedback-field-icon-message::after/);
+});
+
 test("反馈入口会生成带游戏快照的 GitHub Issue 链接", () => {
   const state = {
     ...createInitialState(0),
