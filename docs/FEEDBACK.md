@@ -8,6 +8,9 @@
 - 本轮只调整点火反馈偏好开关展示和测试，不新增可见文字、不改变点火收益、音效播放、触感调用、localStorage key、存档字段、升级价格、星图、航线指令、远航调度、反馈入口或部署链路。
 - 验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 122 项。
 - 构建产物已确认 `dist/index.html` 和 `dist/src/styles.css` 包含 `feedback-toggle-icon`、`feedback-toggle-icon-sound` 与 `feedback-toggle-icon-haptic`。
+- 代码提交已创建并推送：`4cb05e3 feat: add feedback preference visual markers`；GitHub Pages workflow `25370840866` 成功，线上首页和 CSS 已确认包含点火反馈偏好视觉短标。
+- 2026-05-05 18:23 CST 已在 #4 回复本轮处理结果、提交 `4cb05e3`、GitHub Pages workflow `25370840866` 和线上验证结果；Issue 保持 open 等待复测，评论地址：`https://github.com/Jassy930/codex-game-operator/issues/4#issuecomment-4378393557`。同步后 #4 更新时间为 `2026-05-05T10:23:46Z`。
+- 钉钉通知未发送：2026-05-05 18:24 CST 运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` / `ROBOT` 相关变量名，当前目录和 `/home/jassy/glm` 两层内未发现 `.env*` 文件；未将 webhook 写入仓库。
 - 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #4，以及主操作区反馈偏好开关仍缺少图形锚点的首屏复盘。
 
 - GitHub Issues：gh 可用且已认证；2026-05-05 18:00 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。#4 是最近更新反馈，继续指向“界面文字密度高、希望更多图片”；回复后于 2026-05-05 18:09 CST 再次同步，当前仍为 5 个 open feedback issue、0 个 open bug issue，#4 更新时间为 `2026-05-05T10:09:31Z`。
