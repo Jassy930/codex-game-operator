@@ -6176,6 +6176,23 @@ test("反馈表单标题会渲染视觉短标", () => {
   assert.match(styles, /\.feedback-heading-icon::after/);
 });
 
+test("反馈表单会渲染本地反馈插画", () => {
+  const indexHtml = readFileSync(new URL("../index.html", import.meta.url), "utf8");
+  const styles = readFileSync(new URL("../src/styles.css", import.meta.url), "utf8");
+  const feedbackVisual = readFileSync(
+    new URL("../src/assets/feedback-visual.svg", import.meta.url),
+    "utf8"
+  );
+
+  assert.match(indexHtml, /class="feedback-scene-image"/);
+  assert.match(indexHtml, /src="\.\/src\/assets\/feedback-visual\.svg"/);
+  assert.match(indexHtml, /alt="反馈草稿、评分和 Issue 投递路径组成的插画"/);
+  assert.match(styles, /\.feedback-scene-image/);
+  assert.match(styles, /aspect-ratio: 16 \/ 5/);
+  assert.match(feedbackVisual, /反馈草稿视觉插画/);
+  assert.match(feedbackVisual, /id="feedbackAccent"/);
+});
+
 test("反馈提交按钮会渲染发送短标", () => {
   const indexHtml = readFileSync(new URL("../index.html", import.meta.url), "utf8");
   const styles = readFileSync(new URL("../src/styles.css", import.meta.url), "utf8");
