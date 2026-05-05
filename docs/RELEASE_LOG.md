@@ -8,6 +8,10 @@
 - 同步 GitHub Issues 反馈状态：2026-05-05 14:01 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 作为主处理对象。
 - 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
 - 构建产物已确认 `dist/src/styles.css` 包含 `directiveDispatchRouteStepBeacon` 和 `.directive-button.is-dispatch-route-step` 降低动效兜底。
+- 代码提交已创建并推送：`511f263 feat: add dispatch route step action beacon`。
+- 发布：提交 `511f263` 已推送到 `origin/main`；GitHub Pages workflow `25360748185` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页返回 HTTP 200，线上 `src/styles.css` 已确认包含 `directiveDispatchRouteStepBeacon` 和 `.directive-button.is-dispatch-route-step`。workflow 继续给出 Node.js 20 actions 弃用提醒，未影响本次部署。
+- 反馈处理：已回复 #6，说明远航路线步骤按钮行动信标、验证结果、Pages 部署和复测问题；issue 保持 open，评论地址：`https://github.com/Jassy930/codex-game-operator/issues/6#issuecomment-4376904008`。回复后于 2026-05-05 14:11 CST 再次同步 GitHub Issues，当前仍为 5 个 open feedback issue、0 个 open bug issue；#6 更新时间为 2026-05-05T06:10:59Z。
+- 钉钉通知未发送：2026-05-05 14:11 CST 运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` / `ROBOT` 相关变量名，当前目录和 `/home/jassy/glm` 两层内未发现 `.env*` 文件；未将 webhook 写入仓库。
 
 - 远航调度新增“远航路线步骤按钮信标”：20M 后当前远航路线步骤对应的航线指令按钮会获得整按钮级高亮，让玩家不只靠小徽标，也能直接扫到当前路线该执行哪一个指令，继续回应 #6 对后半段玩法变化不明显的反馈。
 - `src/app.js` 给存在 `dispatchRouteStepText` 的航线指令按钮增加 `is-dispatch-route-step` class；`src/styles.css` 为 `.directive-button.is-dispatch-route-step`、对应 `.directive-visual` 和 `.directive-dispatch-route-step` 增加高亮；`tests/game.test.js` 覆盖静态绑定。
