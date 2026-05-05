@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+- 反馈快照新增“星图章节上下文”：游戏内反馈生成 GitHub Issue 时，快照会在 `星图进度：...` 后追加 `星图章节：...`，记录当前章节、章节内位置、全局航段、阶段剩余段数和下一阶段/最终阶段，继续为 #2/#3/#6 的内容丰富度、主动玩法和后半段复测提供可诊断上下文。
+- `src/feedback.js` 复用 `getProjectOverview().chapterText` 格式化章节快照字段；`tests/game.test.js` 覆盖早期首段星图 1/4 快照和 26/57 远航长尾 14/44 后半段快照。
+- 本轮只增强真实反馈诊断能力，不新增界面可见文字、不新增收益、不新增存档字段，不改变星图航段、项目奖励、目标判定、航线策略、航线指令、远航调度、反馈入口交互或部署链路。
+- 同步 GitHub Issues 反馈状态：2026-05-06 06:01 CST 当前 5 个 open issue、5 个 open feedback issue、0 个 open bug issue；#2/#3/#6 作为本轮关联反馈，#4/#5 继续等待带新快照的真实复测。
+- 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 132 项。
+- 构建产物已确认 `dist/src/feedback.js` 包含 `projectChapter`、`formatFeedbackProjectChapter` 与 `- 星图章节：`。
+
 - 反馈快照新增“星图进度摘要”：游戏内反馈生成 GitHub Issue 时，快照会追加 `星图进度：...`，记录当前星图完成数、下一航段、奖励和当前进度，继续为 #2/#3/#6 的内容丰富度、主动玩法和后半段复测提供可诊断上下文。
 - `src/feedback.js` 复用 `getProjectOverview()` 格式化星图快照字段；`tests/game.test.js` 覆盖早期 0/57 点亮星图快照和 26/57 脉冲航闸后半段快照。
 - 本轮只增强真实反馈诊断能力，不新增界面可见文字、不新增收益、不新增存档字段，不改变星图航段、项目奖励、目标判定、航线策略、航线指令、远航调度、反馈入口交互或部署链路。

@@ -75,6 +75,7 @@ export function createFeedbackEntry({
       coreFeedback: formatFeedbackCoreFeedback(coreFeedback, preferences),
       routeStance: getFeedbackRouteStanceId(currentState.routeStance),
       projectOverview: formatFeedbackProjectOverview(projectOverview),
+      projectChapter: formatFeedbackProjectChapter(projectOverview),
       directiveMastery: getFeedbackDirectiveMastery(currentState.directiveMastery),
       directivePlan: formatFeedbackDirectivePlan(directivePlan),
       directiveTask: formatFeedbackDirectiveTask(directiveTask),
@@ -127,6 +128,7 @@ export function createFeedbackIssueBody(entry) {
     `- 点火反馈：${snapshot.coreFeedback}`,
     `- 航线策略：${getFeedbackRouteStanceName(snapshot.routeStance)}`,
     `- 星图进度：${snapshot.projectOverview}`,
+    `- 星图章节：${snapshot.projectChapter}`,
     `- 指令熟练：${snapshot.directiveMastery.stacks}/${DIRECTIVE_MASTERY_MAX_STACKS}`,
     `- 指令轮换：${snapshot.directivePlan}`,
     `- 航线委托：${snapshot.directiveTask}`,
@@ -192,6 +194,16 @@ function formatFeedbackProjectOverview(overview) {
   ]
     .filter(Boolean)
     .join(" · ");
+}
+
+function formatFeedbackProjectChapter(overview) {
+  const chapterText = stripFeedbackLabel(
+    overview?.chapterText ?? "未知",
+    "阶段导航"
+  );
+  const currentText = chapterText.split("；当前 ")[1];
+
+  return currentText ? "当前 " + currentText : chapterText;
 }
 
 function formatFeedbackDirectivePlan(plan) {

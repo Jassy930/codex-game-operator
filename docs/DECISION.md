@@ -1,5 +1,26 @@
 # Decision
 
+## 2026-05-06 Product decision：星图章节反馈快照
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-06 06:01 CST 已同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。没有 open bug；#2“内容丰富度太差”、#3“玩法太简单”和 #6“后半段玩法没有真正变化”仍在等待带新快照的真实复测。
+
+当前最大问题：反馈快照已经记录星图进度、点火反馈、指令轮换、航线委托、远航调度、远航连段和满段回响，但星图快照只压缩到全局 57 段位置、下一航段、奖励和进度。后续复盘内容丰富度和后半段反馈时，仍需要从航段号反推当前章节、章节内位置、阶段剩余段数和是否已经进入最终阶段。
+
+本轮决策：
+
+- 新增“星图章节反馈快照”。
+- `src/feedback.js` 复用 `getProjectOverview().chapterText`，在 Issue 快照中追加 `星图章节：...`，只保留当前章节上下文。
+- `tests/game.test.js` 覆盖早期首段星图 1/4 快照，以及 26/57 后半段远航长尾 14/44 快照。
+- 该改动只增强真实反馈诊断能力，不新增界面可见文字、不新增收益、不新增存档字段，不改变星图航段、项目奖励、目标判定、航线策略、航线指令、远航调度、反馈入口交互或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-05-06 06:01 CST 当前 5 个 open issue、5 个 open feedback issue、0 个 open bug issue；#2/#3/#6 作为本轮关联反馈。
+- 新提交的游戏内反馈 Issue 会显示 `星图章节：...`；早期状态能显示 `当前 首段星图 1/4 · 航段 1/57 点亮星图`，后半段能显示 `当前 远航长尾 14/44 · 航段 27/57 脉冲航闸`。
+- 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 132 项。
+- 构建产物已确认 `dist/src/feedback.js` 包含 `projectChapter`、`formatFeedbackProjectChapter` 与 `- 星图章节：`。
+- 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #2/#3/#6，以及反馈快照已有全局航段位置但缺少章节内上下文的链路复盘。
+
 ## 2026-05-06 Product decision：星图进度快照摘要
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-06 05:46 CST 已同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。没有 open bug；#2“内容丰富度太差”、#3“玩法太简单”和 #6“后半段玩法没有真正变化”仍是内容丰富度、主动玩法与后半段复测反馈。
