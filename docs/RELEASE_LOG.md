@@ -11,6 +11,7 @@
 - 代码和同步文档提交已创建并推送：`3e14d72 feat: add core feedback snapshot context`。
 - 发布：GitHub Pages workflow `25403682688` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页返回 HTTP 200，线上 `src/feedback.js` 已确认包含 `getCoreRewardPreview`、`- 点火反馈：`、`音效` 与 `触感`，线上 `src/app.js` 已确认反馈提交会传入 `soundEnabled` / `hapticEnabled`。workflow 给出 Node.js 20 actions 弃用提醒，未影响本次部署。
 - 反馈处理：已回复 #5，说明点火反馈快照上下文、验证结果、Pages 部署和复测问题；issue 保持 open，评论地址：`https://github.com/Jassy930/codex-game-operator/issues/5#issuecomment-4383336988`。回复后于 2026-05-06 05:38 CST 再次同步 GitHub Issues，当前仍为 5 个 open feedback issue、0 个 open bug issue；#5 更新时间为 `2026-05-05T21:38:06Z`。
+- 钉钉通知未发送：2026-05-06 05:41 CST 运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` / `ROBOT` 相关有效 webhook URL，当前目录和 `/home/jassy/glm` 两层内未发现 `.env*` 文件；未将 webhook 写入仓库。
 
 - 反馈快照新增“指令短循环上下文”：游戏内反馈生成 GitHub Issue 时，快照会追加 `指令轮换：...` 与 `航线委托：...` 两行，记录 100K 后当前轮换阶段、下一步意图/动作、可执行状态和收益，继续为 #3/#6 的主动短循环复测提供可诊断上下文。
 - `src/feedback.js` 复用 `getDirectivePlan()` 与 `getDirectiveTaskStatus()` 格式化快照字段；`tests/game.test.js` 覆盖未解锁快照和 1/3 短循环中的 `收束续航`、`下一步 巡航回收`、`可执行`、`连携 +12%`。
