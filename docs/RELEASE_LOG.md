@@ -8,6 +8,10 @@
 - 同步 GitHub Issues 反馈状态：2026-05-06 02:23 CST 当前 5 个 open issue、5 个 open feedback issue、0 个 open bug issue；#3/#6 作为本轮关联反馈。
 - 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 129 项。
 - 构建产物已确认 `dist/src/app.js` 和 `dist/src/styles.css` 包含 `is-next-ready`、`is-next-waiting` 与 `directiveTaskReadyPanelBeacon`。
+- 代码和同步文档提交已创建并推送：`2b508e7 feat: highlight directive task ready state`。
+- 发布：GitHub Pages workflow `25394859070` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页、`src/app.js` 和 `src/styles.css` 均返回 HTTP 200，并已确认包含 `is-next-ready`、`is-next-waiting` 与 `directiveTaskReadyPanelBeacon`。workflow 给出 Node.js 20 actions 弃用提醒，未影响本次部署。
+- 反馈处理：已回复 #3 和 #6，说明航线委托可执行面板信标、验证结果、Pages 部署和复测问题；两个 issue 均保持 open，评论地址：`https://github.com/Jassy930/codex-game-operator/issues/3#issuecomment-4381968699`、`https://github.com/Jassy930/codex-game-operator/issues/6#issuecomment-4381971371`。回复后于 2026-05-06 02:33 CST 再次同步 GitHub Issues，当前仍为 5 个 open feedback issue、0 个 open bug issue；#3 更新时间为 `2026-05-05T18:33:18Z`，#6 更新时间为 `2026-05-05T18:33:40Z`。
+- 钉钉通知未发送：2026-05-06 02:34 CST 运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` / `ROBOT` 相关有效 webhook URL，当前目录和 `/home/jassy/glm` 两层内未发现 `.env*` 文件；未将 webhook 写入仓库。
 
 - 航线委托新增“下一步节点信标”：100K 后委托条里当前下一步的 1/2/3 节点会显示静态外环和轻量脉冲，让玩家更快扫到当前要推进的节点，继续回应 #3/#6 对主动短循环和后半段三步结构不够直观的反馈。
 - `src/styles.css` 为 `.directive-task-meter-node.is-next::after` 增加外环、光晕、`directiveTaskNextNodeBeacon` 动画和降低动效兜底；`tests/game.test.js` 覆盖伪元素、动画 keyframes 和 reduced motion 绑定。
