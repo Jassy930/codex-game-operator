@@ -2663,6 +2663,21 @@ h2 {
   transform: translateY(-50%);
 }
 
+.far-dispatch-branch-choice-summary-item .far-dispatch-branch-choice-summary-signal.is-archive {
+  border-color: rgba(213, 180, 255, 0.34);
+  background:
+    linear-gradient(90deg, rgba(213, 180, 255, 0.12), rgba(248, 243, 231, 0.04)),
+    rgba(5, 12, 20, 0.16);
+  color: #eadbff;
+}
+
+.far-dispatch-branch-choice-summary-item .far-dispatch-branch-choice-summary-signal.is-archive::before {
+  background: #d5b4ff;
+  box-shadow:
+    0 0 7px rgba(213, 180, 255, 0.68),
+    0 0 0 3px rgba(213, 180, 255, 0.1);
+}
+
 .far-dispatch-branch-choice-summary-item .far-dispatch-branch-choice-summary-signal.is-focus {
   border-color: rgba(150, 231, 168, 0.36);
   background: rgba(150, 231, 168, 0.12);
