@@ -122,6 +122,7 @@ export function createFeedbackIssueBody(entry) {
     "",
     `类型：${entry.typeLabel}`,
     `评分：${entry.rating}/5`,
+    `反馈编号：${entry.id}`,
     "",
     entry.message,
     "",

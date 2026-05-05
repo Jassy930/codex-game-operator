@@ -6620,11 +6620,13 @@ test("反馈入口会生成带游戏快照的 GitHub Issue 链接", () => {
 
   const body = createFeedbackIssueBody(entry);
   const url = new URL(buildFeedbackIssueUrl(entry));
+  const appJs = readFileSync(new URL("../src/app.js", import.meta.url), "utf8");
 
   assert.equal(url.origin + url.pathname, "https://github.com/Jassy930/codex-game-operator/issues/new");
   assert.equal(url.searchParams.get("labels"), "feedback,bug");
   assert.equal(url.searchParams.get("title"), "[反馈] 问题/Bug - 5/5");
   assert.match(body, /升级按钮反馈不明显/);
+  assert.match(body, new RegExp("反馈编号：" + entry.id));
   assert.match(body, /当前目标：累计 100 能量/);
   assert.match(body, /过载奖励：5/);
   assert.match(body, /点火反馈：下一击 \+1 · 再 8 次过载 \+5 · 音效 关 · 触感 开/);
@@ -6640,6 +6642,7 @@ test("反馈入口会生成带游戏快照的 GitHub Issue 链接", () => {
   assert.match(body, /闭环进度 0\/3 · 20M 后解锁/);
   assert.match(body, /升级购买态：可购买 聚能透镜、自动采集臂/);
   assert.match(body, /lens:1/);
+  assert.match(appJs, /recordEvent\("feedback_sent", \{[\s\S]*feedbackId: entry\.id/);
 });
 
 test("反馈快照会记录升级购买态", () => {

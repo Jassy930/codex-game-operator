@@ -1,5 +1,27 @@
 # Decision
 
+## 2026-05-06 Product decision：反馈编号链路对齐
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-06 06:52 CST 已同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。没有 open bug；#2/#3/#4/#5/#6 均保持 open，等待带新快照的真实复测。
+
+当前最大问题：反馈 Issue 正文有 Session 和创建时间，浏览器本地也会保存最近反馈草稿并记录 `feedback_sent` 事件，但 GitHub Issue、本地草稿和本地事件之间缺少一个稳定的同源编号。后续如果玩家连续提交多条反馈，复盘时仍要靠时间和内容人工匹配。
+
+本轮决策：
+
+- 新增“反馈编号链路对齐”。
+- `src/feedback.js` 在 Issue 正文的反馈信息区追加 `反馈编号：...`，直接使用 `createFeedbackEntry()` 生成的 `entry.id`。
+- `src/app.js` 在 `feedback_sent` 本地事件 payload 中记录同一个 `feedbackId`。
+- `tests/game.test.js` 覆盖 Issue 正文包含反馈编号，以及前端提交事件绑定 `feedbackId: entry.id`。
+- 该改动只增强真实反馈、GitHub Issue 和本地诊断事件的对齐能力，不新增界面可见文字、不新增收益、不新增存档字段，不改变反馈校验、Issue 草稿生成、星图、航线指令、远航调度或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-05-06 06:52 CST 当前 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
+- 新提交的游戏内反馈 Issue 会在评分后显示 `反馈编号：<entry.id>`；浏览器本地 `feedback_sent` 事件会记录同一个 `feedbackId`。
+- 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 133 项。
+- 构建产物已确认 `dist/src/feedback.js` 包含 `反馈编号`，`dist/src/app.js` 包含 `feedbackId: entry.id`。
+- 本轮未新增外部网页调研；依据来自当前 open feedback issue 均需后续复测，以及本地反馈草稿、GitHub Issue 与 `feedback_sent` 事件缺少稳定关联字段的链路复盘。
+
 ## 2026-05-06 Product decision：升级购买态反馈快照
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-06 06:31 CST 已同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。没有 open bug；#4“界面密密麻麻，希望更多图片”最近一次处理已把升级插画做成 ready/waiting/goal-ready 投光，但后续真实复测仍需要知道玩家提交反馈时升级面板到底处于可购买、等待攒能量，还是当前目标升级已可买。

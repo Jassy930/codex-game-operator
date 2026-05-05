@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+- 反馈链路新增“反馈编号”：游戏内反馈生成 GitHub Issue 时会在评分后输出 `反馈编号：...`，浏览器本地 `feedback_sent` 事件会记录同一个 `feedbackId`，便于把 GitHub Issue、本地反馈草稿和本地事件对齐复盘。
+- `src/feedback.js` 在 Issue 正文中写入 `entry.id`；`src/app.js` 在 `feedback_sent` payload 中写入 `feedbackId: entry.id`；`tests/game.test.js` 覆盖正文和前端事件绑定。
+- 本轮只增强真实反馈诊断链路，不新增界面可见文字、不新增收益、不新增存档字段，不改变反馈校验、Issue 草稿生成、星图、航线指令、远航调度或部署链路。
+- 同步 GitHub Issues 反馈状态：2026-05-06 06:52 CST 当前 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
+- 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 133 项。
+- 构建产物已确认 `dist/src/feedback.js` 包含 `反馈编号`，`dist/src/app.js` 包含 `feedbackId: entry.id`。
+
 - 反馈快照新增“升级购买态”：游戏内反馈生成 GitHub Issue 时，快照会追加 `升级购买态：...`，记录当前可购买升级、当前目标升级是否可购买，以及无可购买升级时的最近能量缺口，继续为 #4 的升级插画购买态复测提供可诊断上下文。
 - `src/feedback.js` 复用 `UPGRADE_DEFS`、`getUpgradeAffordability()`、`formatNumber()` 和当前目标 `upgradeId` 格式化升级购买态；`tests/game.test.js` 覆盖等待态、目标升级 ready 态和完整反馈 Issue 正文字段。
 - 本轮只增强真实反馈诊断能力，不新增界面可见文字、不新增收益、不新增存档字段，不改变升级价格、购买逻辑、目标系统、星图、航线指令、远航调度、反馈入口交互或部署链路。

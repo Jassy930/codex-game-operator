@@ -387,6 +387,7 @@ elements.feedbackForm.addEventListener("submit", (event) => {
 
   saveFeedbackEntry(entry);
   recordEvent("feedback_sent", {
+    feedbackId: entry.id,
     type: entry.type,
     rating: entry.rating,
     messageLength: entry.message.length
