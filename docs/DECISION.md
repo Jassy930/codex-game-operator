@@ -19,6 +19,11 @@
 - 20M 后当前路线回航会把远航连段推到 3/3 时，分支卡片提示只显示一次 `满段回响 +10%`。
 - 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 127 项。
 - 构建产物已确认 `src/game.js` 与 `dist/src/game.js` 不再包含 `routeLoopCapstoneText ? " · "` 二次拼接；运行态样例中 `满段回响 +10%` 出现次数为 1。
+- 代码提交已创建并推送：`0668d27 fix: dedupe far capstone route text`。
+- 发布验证已通过：GitHub Pages workflow `25379973414` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页返回 HTTP 200，线上 `src/game.js` 已确认包含满段回响逻辑，且不再包含 `routeLoopCapstoneText ? " · "` 二次拼接或 `满段回响 +10% · 满段回响 +10%` 重复短语。workflow 继续给出 Node.js 20 actions 弃用提醒，未影响本次部署。
+- 已回复 GitHub Issue #6，说明远航满段回响卡片提示去重、验证结果、Pages 部署和复测问题；issue 保持 open，评论地址：`https://github.com/Jassy930/codex-game-operator/issues/6#issuecomment-4379830054`。
+- 回复后于 2026-05-05 21:43 CST 再次同步 GitHub Issues，当前仍为 5 个 open feedback issue、0 个 open bug issue；#6 更新时间为 `2026-05-05T13:42:51Z`。
+- 钉钉通知未发送：2026-05-05 21:43 CST 运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` / `ROBOT` 相关变量名，当前目录和 `/home/jassy/glm` 两层内未发现 `.env*` 文件；未将 webhook 写入仓库。
 - 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #6，以及满段回响路线对照预告上线后的展示链路复盘。
 
 ## 2026-05-05 Product decision：远航满段回响路线对照预告
