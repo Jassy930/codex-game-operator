@@ -8,6 +8,10 @@
 - 同步 GitHub Issues 反馈状态：2026-05-06 03:52 CST 当前 5 个 open issue、5 个 open feedback issue、0 个 open bug issue；#3/#6 作为本轮关联反馈。
 - 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 129 项。
 - 构建产物已确认 `dist/src/app.js`、`dist/src/game.js` 和 `dist/src/styles.css` 包含 `completedStepText`、`航线委托完成步号` 与 `.directive-task-step.is-completed`。
+- 代码和同步文档提交已创建并推送：`79295f2 feat: show directive task completion step`。
+- 发布：GitHub Pages workflow `25399198245` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页返回 HTTP 200，线上 `src/app.js`、`src/game.js` 和 `src/styles.css` 已确认包含 `completedStepText`、`航线委托完成步号` 与 `.directive-task-step.is-completed`。workflow 给出 Node.js 20 actions 弃用提醒，未影响本次部署。
+- 反馈处理：已回复 #3 和 #6，说明航线委托完成步号短标、验证结果、Pages 部署和复测问题；两个 issue 均保持 open，评论地址：`https://github.com/Jassy930/codex-game-operator/issues/3#issuecomment-4382589100`、`https://github.com/Jassy930/codex-game-operator/issues/6#issuecomment-4382589127`。回复后于 2026-05-06 04:02 CST 再次同步 GitHub Issues，当前仍为 5 个 open feedback issue、0 个 open bug issue；#3 更新时间为 `2026-05-05T20:02:33Z`，#6 更新时间为 `2026-05-05T20:02:34Z`。
+- 钉钉通知未发送：2026-05-06 04:02 CST 运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` / `ROBOT` 相关有效 webhook URL，当前目录和 `/home/jassy/glm` 两层内未发现 `.env*` 文件；未将 webhook 写入仓库。
 - 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #3/#6，以及航线委托完成态已有完成图形反馈但缺少完成步号短标的链路复盘。
 
 - 航线委托新增“完成进度扫光”：100K 后 3/3 委托完成态会让满格进度条播放浅金扫光，让 `委托完成 +8%` 完成收益短标、整卡完成面板和三步终点节点形成同层完成反馈，继续回应 #3/#6 对主动短循环和后半段三步结构不够直观的反馈。
