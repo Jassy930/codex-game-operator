@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+- 点火按钮新增“落点回声环”：普通点火和过载点火会在已有落点闪光、涟漪、火花束、爆发层和全按钮闪幕之外，再从实际点击落点扩散一圈较慢的回声环，继续回应 #5 对点击反馈、特效和点击欲望的反馈。
+- `index.html` 新增 `coreImpactEcho` 节点；`src/app.js` 在 `animateCore()` 中同步触发 `core-impact-echo` 并复用落点坐标；`src/styles.css` 新增普通/过载回声环样式、`coreImpactEcho` 动画和降低动效兜底；`tests/game.test.js` 覆盖静态节点、运行时绑定、触发状态、CSS 和 reduced motion。
+- 本轮只增强点火命中反馈，不新增收益、不新增存档字段，不改变点击收益、过载奖励、连击窗口、升级价格、星图航段、航线策略、航线指令、远航调度或反馈入口。
+- 同步 GitHub Issues 反馈状态：2026-05-06 01:35 CST 当前 5 个 open issue、5 个 open feedback issue、0 个 open bug issue；#5 作为本轮关联反馈，更新时间为 `2026-05-05T14:47:59Z`。
+- 验证通过：`node --test tests/game.test.js`、`npm install`、`npm test`、`npm run build`、`bun install --no-save`、`bun run test`、`bun run build`；测试数 128 项。
+- 构建产物已确认 `dist/index.html`、`dist/src/app.js` 和 `dist/src/styles.css` 包含 `coreImpactEcho`、`core-impact-echo` 与 `coreImpactEcho` 动画标记。
+
 - 航线委托新增“下一步意图短标”：100K 后委托条会在步号、动作、状态和收益旁直接显示 `收束起手`、`收束续航`、`策略终结` 等下一步角色，继续回应 #3/#6 对主动短循环和后半段三步结构不够直观的反馈。
 - `src/game.js` 让 `getDirectiveTaskStatus()` 输出 `nextIntentText`；`src/app.js` 在 `renderDirectiveTask()` 中渲染 `directive-task-intent` 并把紧凑委托文本带上意图；`index.html` 预留锁定态隐藏节点；`src/styles.css` 增加意图短标胶囊样式；`tests/game.test.js` 覆盖状态字段、静态首页、运行时绑定、CSS、等待冷却、1/3 续航和 3/3 策略终结案例。
 - 本轮只增强航线委托下一步意图可见性，不新增收益、不新增存档字段，不改变指令冷却、连携窗口、策略契合、航线委托奖励、远航调度、星图航段、反馈入口或部署链路。

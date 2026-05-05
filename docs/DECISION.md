@@ -1,5 +1,28 @@
 # Decision
 
+## 2026-05-06 Product decision：点火落点回声环
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-06 01:35 CST 已同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。没有 open bug；#3/#6 没有新的玩家复测，本轮转向 #5“点火按钮太薄弱，增加点击反馈，增加特效，增加点击欲望”。
+
+当前最大问题：点火按钮已经有落点闪光、涟漪、火花束、爆发层和全按钮闪幕，但命中后的扩散余波仍偏短。玩家在普通点火和过载点火后能看到瞬间亮闪，却缺少一圈从实际点击落点继续扩散的慢回声来强化点击余韵。
+
+本轮决策：
+
+- 新增“点火落点回声环”。
+- `index.html` 在点火按钮内新增 `#coreImpactEcho.core-impact-echo` 展示层。
+- `src/app.js` 在 `animateCore()` 中和其他命中层同步触发 `coreImpactEcho`，过载时追加 `is-overload-impact`，并让 `positionCoreImpact()` 把同一组落点坐标写入回声环。
+- `src/styles.css` 增加普通/过载两套 `core-impact-echo` 样式、`coreImpactEcho` 动画和降低动效兜底。
+- `tests/game.test.js` 覆盖静态节点、运行时绑定、触发状态、CSS 和降低动效规则。
+- 该改动只增强点火命中反馈，不新增收益、不新增存档字段，不改变点击收益、过载奖励、连击窗口、升级价格、星图航段、航线策略、航线指令、远航调度或反馈入口。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-05-06 01:35 CST 当前 5 个 open issue、5 个 open feedback issue、0 个 open bug issue；#5 作为本轮关联反馈，更新时间为 `2026-05-05T14:47:59Z`。
+- 普通点火会在实际点击落点显示一圈较慢扩散的回声环；第 8 次过载点火会显示更大的过载回声环。
+- 本地验证已通过：`node --test tests/game.test.js`、`npm install`、`npm test`、`npm run build`、`bun install --no-save`、`bun run test`、`bun run build`；测试数 128 项。
+- 构建产物已确认 `dist/index.html`、`dist/src/app.js` 和 `dist/src/styles.css` 包含 `coreImpactEcho`、`core-impact-echo` 与 `coreImpactEcho` 动画标记。
+- 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #5，以及点火命中反馈层级复盘。
+
 ## 2026-05-06 Product decision：航线委托下一步意图短标
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-06 01:16 CST 已同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。没有 open bug；#3“玩法太简单”和 #6“后半段玩法没有真正变化”仍是本轮关联反馈。

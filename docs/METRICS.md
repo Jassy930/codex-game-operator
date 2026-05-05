@@ -11,6 +11,7 @@
 - 航线委托下一步动作短标当前由 `getDirectiveTaskStatus().nextActionText` 从本地指令轮换推荐即时派生并渲染为 `.directive-task-action`，不单独记录为真实线上指标；推荐指令执行后的真实复盘仍依赖现有 `directive` 事件中的指令 id、`planReward`、`chainBonus`、`rotationReward`、`taskReward`、远航调度字段和反馈快照。
 - 航线委托三节点进度条当前由 `renderDirectiveTask()` 从本地 `progress` / `target` 即时渲染为带 `1` / `2` / `3` 步号的 `.directive-task-meter-node`，不单独记录为真实线上指标；委托完成和收益复盘仍依赖现有 `directive` 事件中的 `taskReward`、`taskRewardRate` 与指令轮换字段。
 - 指令轮换下一步收益短标当前由 `getDirectivePlan().nextRewardText` 即时派生并渲染为 `.directive-plan-step-reward`，不单独记录为真实线上指标；推荐指令执行后的真实复盘仍依赖现有 `directive` 事件中的 `planReward`、`chainBonus`、`rotationReward`、`stanceFinisherReward`、`masteryCapstoneReward` 和远航调度字段。
+- 点火落点回声环当前由本地 `animateCore()` 命中态和点击落点坐标即时渲染为 `core-impact-echo`，不单独记录为真实线上指标；普通/过载点火仍通过 click 事件、`lastGain`、`lastPulse`、连击状态和现有反馈快照复盘。
 - 点火命中闪幕当前由本地 `animateCore()` 命中态和点击落点坐标即时渲染为 `core-impact-flare`，不单独记录为真实线上指标；普通/过载点火仍通过 click 事件、`lastGain`、`lastPulse`、连击状态和现有反馈快照复盘。
 - 反馈表单本地插画当前由静态 `index.html` 引用 `src/assets/feedback-visual.svg`，并通过 `.feedback-scene-image` 展示，不单独记录为真实线上指标；反馈提交和校验结果仍通过现有 feedback_sent 事件、Issue 草稿和反馈快照复盘。
 - 反馈表单标题视觉短标当前由静态 `index.html` 中的 `feedback-heading` / `feedback-heading-icon` 标记和 `src/styles.css` 即时渲染，不单独记录为真实线上指标；反馈提交和校验结果仍通过现有 feedback_sent 事件、Issue 草稿和反馈快照复盘。

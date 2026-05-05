@@ -1010,6 +1010,66 @@ h2 {
     drop-shadow(0 0 40px rgba(232, 93, 117, 0.22));
 }
 
+.core-impact-echo {
+  --core-impact-x: 50%;
+  --core-impact-y: 50%;
+  position: absolute;
+  top: var(--core-impact-y);
+  left: var(--core-impact-x);
+  z-index: 3;
+  width: 214px;
+  height: 214px;
+  border: 1px solid rgba(255, 247, 194, 0.46);
+  border-radius: 999px;
+  background:
+    radial-gradient(circle, transparent 0 48%, rgba(255, 247, 194, 0.32) 51%, transparent 58%),
+    conic-gradient(
+      from -32deg,
+      rgba(255, 247, 194, 0.46) 0 8%,
+      transparent 9% 32%,
+      rgba(19, 181, 166, 0.28) 33% 39%,
+      transparent 40% 68%,
+      rgba(244, 178, 60, 0.34) 69% 77%,
+      transparent 78% 100%
+    );
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-50%, -50%) scale(0.2) rotate(-8deg);
+  filter:
+    blur(0.2px)
+    drop-shadow(0 0 18px rgba(255, 247, 194, 0.18))
+    drop-shadow(0 0 28px rgba(19, 181, 166, 0.12));
+  mix-blend-mode: screen;
+  -webkit-mask: radial-gradient(farthest-side, transparent 0 46%, #000 48% 70%, transparent 72%);
+  mask: radial-gradient(farthest-side, transparent 0 46%, #000 48% 70%, transparent 72%);
+}
+
+.core-impact-echo.is-showing {
+  animation: coreImpactEcho 720ms ease-out;
+}
+
+.core-impact-echo.is-overload-impact {
+  width: 268px;
+  height: 268px;
+  border-color: rgba(255, 247, 194, 0.68);
+  background:
+    radial-gradient(circle, transparent 0 46%, rgba(255, 247, 194, 0.44) 50%, transparent 60%),
+    conic-gradient(
+      from -48deg,
+      rgba(255, 247, 194, 0.62) 0 10%,
+      transparent 11% 24%,
+      rgba(232, 93, 117, 0.44) 25% 36%,
+      transparent 37% 56%,
+      rgba(244, 178, 60, 0.48) 57% 72%,
+      transparent 73% 100%
+    );
+  animation-duration: 900ms;
+  filter:
+    blur(0.2px)
+    drop-shadow(0 0 24px rgba(255, 247, 194, 0.28))
+    drop-shadow(0 0 40px rgba(232, 93, 117, 0.22));
+}
+
 .core-charge-ring {
   --core-charge-angle: 0deg;
   position: absolute;
@@ -7749,6 +7809,28 @@ h2 {
   }
 }
 
+@keyframes coreImpactEcho {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.18) rotate(-14deg);
+  }
+
+  18% {
+    opacity: 0.7;
+    transform: translate(-50%, -50%) scale(0.62) rotate(-4deg);
+  }
+
+  58% {
+    opacity: 0.34;
+    transform: translate(-50%, -50%) scale(1.02) rotate(12deg);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(1.42) rotate(34deg);
+  }
+}
+
 @keyframes coreGainFloat {
   0% {
     opacity: 0;
@@ -8629,6 +8711,7 @@ h2 {
   .core-button.is-overload-impact .core-combo-track::before,
   .core-impact-burst.is-showing,
   .core-impact-flare.is-showing,
+  .core-impact-echo.is-showing,
   .core-gain-pop.is-showing::after,
   .core-gain-pop.is-overload-gain.is-showing::after,
   .directive-button.is-dispatch-route-step,

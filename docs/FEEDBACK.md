@@ -2,6 +2,14 @@
 
 ## 2026-05-06
 
+- GitHub Issues：gh 可用且已认证；2026-05-06 01:35 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。#3/#6 在上一轮回复后没有新的玩家复测；本轮转向 #5“点火按钮太薄弱，增加点击反馈，增加特效，增加点击欲望”。
+- 本轮 Product decision 处理 #5：点火按钮已经有落点闪光、涟漪、火花束、爆发层和全按钮闪幕，但命中后的余波持续时间仍偏短，普通点火和过载点火都缺少一圈更慢的落点回声，点击后的“冲击余韵”主要依赖收益浮层和读数跳闪。
+- 本轮改动新增“点火落点回声环”：静态首页新增 `coreImpactEcho` 节点，`animateCore()` 在普通点火和过载点火时触发 `core-impact-echo`，并复用 `--core-impact-x` / `--core-impact-y` 跟随实际点击落点；过载态使用更大尺寸、更长动画和更强红金光晕。
+- 本轮只增强点火命中展示和测试，不新增收益、不新增存档字段，不改变点击收益、过载奖励、连击窗口、升级价格、星图航段、航线策略、航线指令、远航调度或反馈入口。
+- 本地验证已通过：`node --test tests/game.test.js`、`npm install`、`npm test`、`npm run build`、`bun install --no-save`、`bun run test`、`bun run build`；测试数 128 项。
+- 构建产物已确认 `dist/index.html`、`dist/src/app.js` 和 `dist/src/styles.css` 包含 `coreImpactEcho`、`core-impact-echo` 与 `coreImpactEcho` 动画标记。
+- 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #5，以及当前点火按钮已有即时命中特效但缺少更慢落点余波的链路复盘。
+
 - GitHub Issues：gh 可用且已认证；2026-05-06 01:16 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。#3 更新时间为 `2026-05-05T17:09:22Z`，#6 更新时间为 `2026-05-05T17:09:23Z`；本轮继续处理 #3“玩法太简单”和 #6“后半段玩法没有真正变化”。
 - 本轮 Product decision 处理 #3/#6：航线委托已经显示下一步步号、动作、状态、收益和 1/2/3 节点，但委托条里还没有直接说明这一步在轮换里的角色，玩家仍要从指令轮换区或收益短标反推是收束起手、收束续航、策略终结还是回响续航。
 - 本轮改动新增“航线委托下一步意图短标”：`getDirectiveTaskStatus()` 输出 `nextIntentText`，运行时 `renderDirectiveTask()` 在委托条内渲染 `directive-task-intent` 胶囊；0/3 显示 `收束起手`，1/3 可显示 `收束续航`，2/3 收束可显示 `策略终结`，完成态和锁定态隐藏。
