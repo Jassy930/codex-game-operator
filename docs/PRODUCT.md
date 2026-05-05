@@ -4,6 +4,7 @@
 
 当前版本：
 
+- 航线委托会显示下一步状态短标：`getDirectiveTaskStatus()` 输出 `nextStatusText` / `nextStatusKind`，运行时 `renderDirectiveTask()` 在委托条内用 `directive-task-status` 直接显示下一步推荐指令是否 `可执行`，或显示最近等待时间如 `等待 34 秒`；可执行和等待冷却使用不同状态色。该展示只增强下一步可执行性可见性，不新增收益、不新增存档字段，不改变指令冷却、连携窗口、策略契合、航线委托奖励、远航调度、星图航段、反馈入口或部署链路。
 - 航线委托会显示下一步动作短标：`getDirectiveTaskStatus()` 输出 `nextActionText`，运行时 `renderDirectiveTask()` 在委托条内用 `directive-task-action` 直接显示下一步实际指令，例如 `下一步 点火齐射或巡航回收`、`下一步 谐振脉冲`，让三步委托的动作、收益和 1/2/3 节点保持同层扫视。该展示只增强下一步动作可见性，不新增收益、不新增存档字段，不改变指令冷却、连携窗口、策略契合、航线委托奖励、远航调度、星图航段、反馈入口或部署链路。
 - 航线委托进度条会显示 3 个带步号的离散节点：静态首页和运行时 `renderDirectiveTask()` 在 `directive-task-meter` 内渲染 `directive-task-meter-fill` 与 `directive-task-meter-node`，节点直接显示 `1` / `2` / `3`，并按已完成、下一步、待推进切换状态，让 100K 后三步委托和上方指令轮换三格轨、远航三步路线保持一致的扫视语义。该展示只增强进度可见性，不新增收益、不新增存档字段，不改变指令冷却、连携窗口、策略契合、航线委托奖励、远航调度、星图航段、反馈入口或部署链路。
 - 航线委托会显示下一步收益短标：`getDirectiveTaskStatus()` 从当前 `getDirectivePlan()` 派生 `nextRewardText`，在委托条内用 `directive-task-reward` 显示下一步的预案执行、连携、轮换目标、策略终结、满层回响，以及 2/3 收束时的 `委托完成 +8%`。该展示只增强 100K 后三步委托的收益可见性，不新增收益、不新增存档字段，不改变指令冷却、连携窗口、策略契合、远航调度、星图航段、反馈入口或部署链路。

@@ -657,6 +657,20 @@ function renderDirectiveTask(task) {
     action.setAttribute("aria-label", action.title);
   }
 
+  const status = document.createElement("small");
+  status.className = [
+    "directive-task-status",
+    task.nextStatusKind ? "is-" + task.nextStatusKind : ""
+  ]
+    .filter(Boolean)
+    .join(" ");
+  status.textContent = task.nextStatusText ?? "";
+  status.hidden = !task.nextStatusText;
+  if (task.nextStatusText) {
+    status.title = "航线委托下一步状态：" + task.nextStatusText;
+    status.setAttribute("aria-label", status.title);
+  }
+
   const meter = document.createElement("span");
   meter.className = "directive-task-meter";
   meter.setAttribute("role", "meter");
@@ -699,7 +713,7 @@ function renderDirectiveTask(task) {
   }
 
   elements.directiveTask.classList.toggle("is-completed", task.completed);
-  elements.directiveTask.replaceChildren(text, action, reward, meter);
+  elements.directiveTask.replaceChildren(text, action, status, reward, meter);
 }
 
 function renderFarDispatchSceneImage() {

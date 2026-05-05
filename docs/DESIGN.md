@@ -4,6 +4,7 @@
 
 M0 设计约束：
 
+- 航线委托必须显示下一步状态短标：`getDirectiveTaskStatus()` 必须返回 `nextStatusText` / `nextStatusKind`，从下一步推荐指令的现有冷却状态派生 `可执行` 或 `等待 X 秒`；`renderDirectiveTask()` 必须把该值渲染为 `.directive-task-status`，并按 `is-ready` / `is-waiting` 切换状态色，完成态和锁定态隐藏。该短标只暴露现有推荐动作的可执行性，不新增收益、不新增存档字段，不改变指令冷却、连携窗口、策略契合、航线委托奖励、远航调度、星图航段或反馈入口。
 - 航线委托必须显示下一步动作短标：`getDirectiveTaskStatus()` 必须返回 `nextActionText`，内容复用下一步推荐指令，例如 `下一步 点火齐射或巡航回收`、`下一步 谐振脉冲`；`renderDirectiveTask()` 必须把该值渲染为 `.directive-task-action`，完成态和锁定态隐藏。该短标只暴露现有推荐动作，不新增收益、不新增存档字段，不改变指令冷却、连携窗口、策略契合、航线委托奖励、远航调度、星图航段或反馈入口。
 - 航线委托进度条必须显示 3 个带步号的离散节点：`#directiveTask .directive-task-meter` 必须同时包含 `.directive-task-meter-fill` 和 3 个 `.directive-task-meter-node`，节点文本必须为 `1` / `2` / `3`，运行时由 `renderDirectiveTask()` 按 `progress` / `target` 标记 `is-complete`、`is-next`、`is-pending`；节点 `aria-hidden="true"`，可访问进度继续由 meter 的 `aria-valuenow` / `aria-valuetext` 承载。该展示只增强三步委托扫视性，不新增收益、不新增存档字段，不改变指令冷却、连携窗口、策略契合、航线委托奖励、远航调度、星图航段或反馈入口。
 - 航线指令轮换视觉轨必须显示下一步收益短标：`getDirectivePlan()` 必须返回 `nextRewardText`，覆盖起手预案奖励、连携倍率、轮换目标、策略终结和满层回响；`renderDirectivePlanTrack()` 必须把该短标渲染到当前下一格或 3/3 完成格的 `.directive-plan-step-reward`，并用单行截断避免挤压三格轨。该短标只暴露现有收益结构，不新增收益、不新增存档字段，不改变指令冷却、连携窗口、策略契合、远航调度、星图航段或反馈入口。

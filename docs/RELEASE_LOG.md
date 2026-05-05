@@ -2,6 +2,14 @@
 
 ## Unreleased
 
+- 航线委托新增“下一步状态短标”：100K 后委托条会在下一步动作和收益旁直接显示 `可执行` 或 `等待 X 秒`，继续回应 #3/#6 对主动短循环和后半段三步结构不够直观的反馈。
+- `src/game.js` 让 `getDirectiveTaskStatus()` 输出 `nextStatusText` / `nextStatusKind`；`src/app.js` 在 `renderDirectiveTask()` 中渲染 `directive-task-status`；`index.html` 预留锁定态隐藏节点；`src/styles.css` 增加 ready / waiting 状态样式；`tests/game.test.js` 覆盖状态字段、静态首页、运行时绑定、CSS 和冷却等待案例。
+- 本轮只增强航线委托下一步可执行性可见性，不新增收益、不新增存档字段，不改变指令冷却、连携窗口、策略契合、航线委托奖励、远航调度、星图航段、反馈入口或部署链路。
+- 同步 GitHub Issues 反馈状态：2026-05-06 00:34 CST 当前 5 个 open issue、5 个 open feedback issue、0 个 open bug issue；#3/#6 作为本轮关联反馈。#3 更新时间为 `2026-05-05T16:26:13Z`，#6 更新时间为 `2026-05-05T16:26:15Z`。
+- 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 128 项。
+- 构建产物已确认 `dist/index.html`、`dist/src/app.js`、`dist/src/game.js` 和 `dist/src/styles.css` 包含 `directive-task-status`、`nextStatusText`、`nextStatusKind` 与“航线委托下一步状态”。
+- 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #3/#6，以及航线委托条已有动作/收益/节点但缺少下一步可执行状态的链路复盘。
+
 - 航线委托新增“下一步动作短标”：100K 后委托条会在收益短标之外直接显示下一步实际指令，例如 `下一步 点火齐射或巡航回收`、`下一步 谐振脉冲`，继续回应 #3/#6 对主动短循环和后半段三步结构不够直观的反馈。
 - `src/game.js` 让 `getDirectiveTaskStatus()` 输出 `nextActionText`；`src/app.js` 在 `renderDirectiveTask()` 中渲染 `directive-task-action`；`index.html` 预留锁定态隐藏节点；`src/styles.css` 增加动作短标胶囊样式；`tests/game.test.js` 覆盖状态字段、静态首页、运行时绑定和 CSS。
 - 本轮只增强航线委托下一步动作可见性，不新增收益、不新增存档字段，不改变指令冷却、连携窗口、策略契合、航线委托奖励、远航调度、星图航段、反馈入口或部署链路。

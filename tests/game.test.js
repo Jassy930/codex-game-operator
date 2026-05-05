@@ -279,6 +279,18 @@ test("航线指令会返回轮换目标提示", () => {
     },
     0
   );
+  const waitingTask = getDirectiveTaskStatus(
+    {
+      ...createInitialState(0),
+      totalEnergy: 100_000,
+      directives: {
+        "ignition-salvo": 1000,
+        "cruise-cache": 1000,
+        "resonance-pulse": 0
+      }
+    },
+    2000
+  );
 
   assert.equal(locked.progress, 0);
   assert.equal(locked.nextRewardText, "");
@@ -289,6 +301,8 @@ test("航线指令会返回轮换目标提示", () => {
   );
   assert.equal(lockedTask.text, "航线委托：累计 100K 能量后解锁 3 步短期任务");
   assert.equal(lockedTask.nextActionText, "");
+  assert.equal(lockedTask.nextStatusText, "");
+  assert.equal(lockedTask.nextStatusKind, "");
   assert.equal(lockedTask.nextRewardText, "");
   assert.equal(ready.progress, 0);
   assert.equal(ready.target, 3);
@@ -302,11 +316,16 @@ test("航线指令会返回轮换目标提示", () => {
   );
   assert.equal(DIRECTIVE_TASK_REWARD_RATE, 0.08);
   assert.equal(readyTask.nextActionText, "下一步 点火齐射或巡航回收");
+  assert.equal(readyTask.nextStatusText, "可执行");
+  assert.equal(readyTask.nextStatusKind, "ready");
   assert.equal(readyTask.nextRewardText, "预案执行 +6%");
   assert.equal(
     readyTask.text,
-    "航线委托 0/3 · 下一步 点火齐射或巡航回收 · 下一步收益 预案执行 +6%，完成 3/3 推荐轮换 · 完成奖励 委托完成 +8%"
+    "航线委托 0/3 · 下一步 点火齐射或巡航回收 · 可执行 · 下一步收益 预案执行 +6%，完成 3/3 推荐轮换 · 完成奖励 委托完成 +8%"
   );
+  assert.equal(waitingTask.nextActionText, "下一步 点火齐射或巡航回收");
+  assert.equal(waitingTask.nextStatusText, "等待 34 秒");
+  assert.equal(waitingTask.nextStatusKind, "waiting");
 });
 
 test("执行航线指令会获得即时收益并进入冷却", () => {
@@ -396,13 +415,15 @@ test("轮换航线指令会触发航线连携收益", () => {
   );
   assert.equal(
     secondTask.text,
-    "航线委托 2/3 · 下一步 谐振脉冲 · 下一步收益 连携 +24% · 轮换目标 +18% · 策略终结 +12% · 委托完成 +8%，完成 3/3 推荐轮换 · 完成奖励 委托完成 +8%"
+    "航线委托 2/3 · 下一步 谐振脉冲 · 可执行 · 下一步收益 连携 +24% · 轮换目标 +18% · 策略终结 +12% · 委托完成 +8%，完成 3/3 推荐轮换 · 完成奖励 委托完成 +8%"
   );
   assert.equal(
     secondTask.nextRewardText,
     "连携 +24% · 轮换目标 +18% · 策略终结 +12% · 委托完成 +8%"
   );
   assert.equal(secondTask.nextActionText, "下一步 谐振脉冲");
+  assert.equal(secondTask.nextStatusText, "可执行");
+  assert.equal(secondTask.nextStatusKind, "ready");
   assert.equal(secondTask.progress, 2);
   assert.equal(secondTask.target, 3);
   assert.equal(secondTask.completed, false);
@@ -445,6 +466,8 @@ test("轮换航线指令会触发航线连携收益", () => {
   assert.equal(continuationTask.target, 3);
   assert.equal(continuationTask.completed, true);
   assert.equal(continuationTask.nextActionText, "");
+  assert.equal(continuationTask.nextStatusText, "");
+  assert.equal(continuationTask.nextStatusKind, "");
   assert.equal(continuationTask.nextRewardText, "");
   assert.deepEqual(continuationPlan.nextDirectiveIds, ["ignition-salvo"]);
   assert.equal(continuationPlan.nextRewardText, "连携 +24% · 轮换目标 +18%");
@@ -1923,6 +1946,7 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(indexHtml, /class="directive-plan-step is-next"/);
   assert.match(indexHtml, /aria-label="指令轮换视觉轨"/);
   assert.match(indexHtml, /class="directive-task-action" hidden/);
+  assert.match(indexHtml, /class="directive-task-status" hidden/);
   assert.match(indexHtml, /class="directive-task-meter"/);
   assert.match(indexHtml, /class="directive-task-meter-fill" style="width: 0%"/);
   assert.match(indexHtml, /class="directive-task-meter-node is-pending" aria-hidden="true">1<\/span>/);
@@ -2070,9 +2094,12 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(appJs, /node\.textContent = String\(step\)/);
   assert.match(appJs, /action\.className = "directive-task-action"/);
   assert.match(appJs, /action\.textContent = task\.nextActionText \?\? ""/);
+  assert.match(appJs, /"directive-task-status"/);
+  assert.match(appJs, /task\.nextStatusKind \? "is-" \+ task\.nextStatusKind : ""/);
+  assert.match(appJs, /status\.textContent = task\.nextStatusText \?\? ""/);
   assert.match(appJs, /reward\.className = "directive-task-reward"/);
   assert.match(appJs, /reward\.textContent = task\.nextRewardText \?\? ""/);
-  assert.match(appJs, /elements\.directiveTask\.replaceChildren\(text, action, reward, meter\)/);
+  assert.match(appJs, /elements\.directiveTask\.replaceChildren\(text, action, status, reward, meter\)/);
   assert.match(appJs, /function renderFarDispatch\(dispatch\)/);
   assert.match(appJs, /branch\.className = "far-dispatch-branch is-" \+ getFarDispatchBranchKind\(dispatch\)/);
   assert.match(appJs, /branchRecommendation\.className = "far-dispatch-branch-recommendation"/);
@@ -2218,6 +2245,8 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(appJs, /getDirectiveTaskDisplayText\(task\)/);
   assert.match(appJs, /getFarDispatchDisplayText\(dispatch\)/);
   assert.match(gameJs, /function buildDirectiveTaskNextRewardText/);
+  assert.match(gameJs, /function buildDirectiveTaskNextStatus/);
+  assert.match(gameJs, /function getDirectiveRemainingMs/);
   assert.match(gameJs, /progress \+ 1 >= targetSteps/);
   assert.match(appJs, /function getFarDispatchBranchKind\(dispatch\)/);
   assert.match(appJs, /function getFarDispatchBranchChoiceKind\(choice\)/);
@@ -2280,7 +2309,7 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(appJs, /elements\.farDispatch\.replaceChildren\(\s*text,\s*sceneImage,\s*branch,/);
   assert.match(appJs, /branchChoices,/);
   assert.match(appJs, /elements\.directiveTask\.classList\.toggle\("is-completed", task\.completed\)/);
-  assert.match(appJs, /elements\.directiveTask\.replaceChildren\(text, action, reward, meter\)/);
+  assert.match(appJs, /elements\.directiveTask\.replaceChildren\(text, action, status, reward, meter\)/);
   assert.match(appJs, /elements\.farDispatch\.classList\.toggle\("is-active", dispatch\.active\)/);
   assert.match(gameJs, /routeProgressPercent/);
   assert.match(gameJs, /routeRewardLabels/);
@@ -2390,7 +2419,11 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(styles, /\.directive-task/);
   assert.match(styles, /\.directive-task-text,\s+\.far-dispatch-text/);
   assert.match(styles, /\.directive-task-action/);
+  assert.match(styles, /\.directive-task-status/);
+  assert.match(styles, /\.directive-task-status\.is-ready/);
+  assert.match(styles, /\.directive-task-status\.is-waiting/);
   assert.match(styles, /\.directive-task-action\[hidden\]/);
+  assert.match(styles, /\.directive-task-status\[hidden\]/);
   assert.match(styles, /\.directive-task-reward/);
   assert.match(styles, /\.directive-task-reward\[hidden\]/);
   assert.match(styles, /\.directive-task-meter/);

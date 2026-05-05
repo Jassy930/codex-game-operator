@@ -2420,6 +2420,7 @@ h2 {
 }
 
 .directive-task-action,
+.directive-task-status,
 .directive-task-reward {
   display: inline-block;
   max-width: 100%;
@@ -2442,7 +2443,26 @@ h2 {
   color: #eadbff;
 }
 
+.directive-task-status {
+  border-color: rgba(248, 243, 231, 0.2);
+  background: rgba(248, 243, 231, 0.08);
+  color: rgba(248, 243, 231, 0.76);
+}
+
+.directive-task-status.is-ready {
+  border-color: rgba(105, 214, 154, 0.34);
+  background: rgba(105, 214, 154, 0.12);
+  color: #c9f7d9;
+}
+
+.directive-task-status.is-waiting {
+  border-color: rgba(255, 187, 105, 0.34);
+  background: rgba(255, 187, 105, 0.12);
+  color: #ffe0ae;
+}
+
 .directive-task-action[hidden],
+.directive-task-status[hidden],
 .directive-task-reward[hidden] {
   display: none;
 }

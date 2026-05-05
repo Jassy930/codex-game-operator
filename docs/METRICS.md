@@ -5,6 +5,7 @@
 当前实现：
 
 - 浏览器本地通过 localStorage 保存最近 200 条 session、click、first_upgrade_time、upgrade_purchase、goal_complete、reset 事件。
+- 航线委托下一步状态短标当前由 `getDirectiveTaskStatus().nextStatusText` / `nextStatusKind` 从本地推荐指令冷却状态即时派生并渲染为 `.directive-task-status`，不单独记录为真实线上指标；推荐指令是否执行、是否冷却和执行后的收益复盘仍依赖现有 `directive` 事件、按钮状态、冷却进度和反馈快照。
 - 航线委托下一步动作短标当前由 `getDirectiveTaskStatus().nextActionText` 从本地指令轮换推荐即时派生并渲染为 `.directive-task-action`，不单独记录为真实线上指标；推荐指令执行后的真实复盘仍依赖现有 `directive` 事件中的指令 id、`planReward`、`chainBonus`、`rotationReward`、`taskReward`、远航调度字段和反馈快照。
 - 航线委托三节点进度条当前由 `renderDirectiveTask()` 从本地 `progress` / `target` 即时渲染为带 `1` / `2` / `3` 步号的 `.directive-task-meter-node`，不单独记录为真实线上指标；委托完成和收益复盘仍依赖现有 `directive` 事件中的 `taskReward`、`taskRewardRate` 与指令轮换字段。
 - 指令轮换下一步收益短标当前由 `getDirectivePlan().nextRewardText` 即时派生并渲染为 `.directive-plan-step-reward`，不单独记录为真实线上指标；推荐指令执行后的真实复盘仍依赖现有 `directive` 事件中的 `planReward`、`chainBonus`、`rotationReward`、`stanceFinisherReward`、`masteryCapstoneReward` 和远航调度字段。

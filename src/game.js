@@ -4074,6 +4074,8 @@ export function getDirectiveTaskStatus(state, now = Date.now()) {
       rewardRate: DIRECTIVE_TASK_REWARD_RATE,
       rewardText,
       nextActionText: "",
+      nextStatusText: "",
+      nextStatusKind: "",
       nextRewardText: "",
       text: "航线委托：累计 100K 能量后解锁 3 步短期任务"
     };
@@ -4092,6 +4094,8 @@ export function getDirectiveTaskStatus(state, now = Date.now()) {
       rewardRate: DIRECTIVE_TASK_REWARD_RATE,
       rewardText,
       nextActionText: "",
+      nextStatusText: "",
+      nextStatusKind: "",
       nextRewardText: "",
       text:
         "航线委托已完成 · 已达成 3/3 推荐轮换；重置或超时后开启下一轮委托，继续轮换可维持连携与熟练"
@@ -4110,6 +4114,13 @@ export function getDirectiveTaskStatus(state, now = Date.now()) {
     targetSteps,
     rewardText
   );
+  const dispatch = getFarRouteDispatch(current, now);
+  const nextStatus = buildDirectiveTaskNextStatus(
+    current,
+    nextDirectives,
+    now,
+    dispatch
+  );
 
   return {
     unlocked: true,
@@ -4119,6 +4130,8 @@ export function getDirectiveTaskStatus(state, now = Date.now()) {
     rewardRate: DIRECTIVE_TASK_REWARD_RATE,
     rewardText,
     nextActionText: nextText,
+    nextStatusText: nextStatus.text,
+    nextStatusKind: nextStatus.kind,
     nextRewardText,
     text:
       "航线委托 " +
@@ -4127,9 +4140,29 @@ export function getDirectiveTaskStatus(state, now = Date.now()) {
       targetSteps +
       " · " +
       nextText +
+      (nextStatus.text ? " · " + nextStatus.text : "") +
       (nextRewardText ? " · 下一步收益 " + nextRewardText : "") +
       "，完成 3/3 推荐轮换 · 完成奖励 " +
       rewardText
+  };
+}
+
+function buildDirectiveTaskNextStatus(current, nextDirectives, now, dispatch) {
+  if (!nextDirectives.length) {
+    return { text: "", kind: "" };
+  }
+
+  const remainingMsList = nextDirectives.map((directive) =>
+    getDirectiveRemainingMs(current, directive, now, dispatch)
+  );
+
+  if (remainingMsList.some((remainingMs) => remainingMs <= 0)) {
+    return { text: "可执行", kind: "ready" };
+  }
+
+  return {
+    text: "等待 " + formatDuration(Math.min(...remainingMsList) / 1000),
+    kind: "waiting"
   };
 }
 
@@ -7250,9 +7283,15 @@ function getDirectiveChainWindowSeconds(directive, dispatch) {
   return DIRECTIVE_CHAIN_WINDOW_SECONDS;
 }
 
-function isDirectiveReady(state, directive, now, dispatch = null) {
+function getDirectiveRemainingMs(state, directive, now, dispatch = null) {
   const lastUsedAt = state.directives[directive.id] ?? 0;
-  return lastUsedAt <= 0 || lastUsedAt + getDirectiveCooldownMs(directive, dispatch) <= now;
+  return lastUsedAt > 0
+    ? Math.max(0, lastUsedAt + getDirectiveCooldownMs(directive, dispatch) - now)
+    : 0;
+}
+
+function isDirectiveReady(state, directive, now, dispatch = null) {
+  return getDirectiveRemainingMs(state, directive, now, dispatch) <= 0;
 }
 
 function formatDirectiveNameList(names) {
