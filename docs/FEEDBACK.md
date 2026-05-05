@@ -8,6 +8,9 @@
 - 本轮只增强航线指令图片层运行态扫视和测试，不新增可见文字、不新增收益、不新增存档字段，不改变点火收益、指令冷却、连携窗口、策略契合、航线委托、远航调度、星图航段、反馈入口或部署链路。
 - 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 129 项。
 - 构建产物已确认 `dist/src/app.js` 和 `dist/src/styles.css` 包含 `directiveSceneImage`、`directiveSceneImagePulse`、`.directive-scene-image.is-active` 与 `.directive-scene-image.is-locked`。
+- 发布和反馈处理已完成：`81f7f69 feat: highlight directive scene unlock state` 已推送，GitHub Pages workflow `25400622516` 成功；build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页返回 HTTP 200，线上首页、`src/app.js` 和 `src/styles.css` 已确认包含本轮标记。已回复 #3/#4/#6，评论地址：`https://github.com/Jassy930/codex-game-operator/issues/3#issuecomment-4382805394`、`https://github.com/Jassy930/codex-game-operator/issues/4#issuecomment-4382805399`、`https://github.com/Jassy930/codex-game-operator/issues/6#issuecomment-4382805413`，三个 issue 均保持 open 等待复测。
+- 回复后于 2026-05-06 04:32 CST 再次同步 GitHub Issues，当前仍为 5 个 open feedback issue、0 个 open bug issue；#3/#4/#6 更新时间均为 `2026-05-05T20:32:11Z`。
+- 钉钉通知未发送：2026-05-06 04:32 CST 运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` / `ROBOT` 相关有效 webhook URL，当前目录和 `/home/jassy/glm` 两层内未发现 `.env*` 文件；未将 webhook 写入仓库。
 
 - GitHub Issues：gh 可用且已认证；2026-05-06 04:11 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。#3“玩法太简单”和 #6“后半段玩法没有真正变化”仍是最近需要复测的主动短循环反馈。
 - 本轮 Product decision 处理 #3/#6：航线委托完成态已有完成收益短标、完成步号短标、最终节点信标、完成面板信标和满格进度扫光，但完成后动作胶囊隐藏，完成态短标层缺少“接下来继续轮换按哪个指令”的直接锚点。

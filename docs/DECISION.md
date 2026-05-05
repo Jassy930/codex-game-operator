@@ -20,6 +20,11 @@
 - 100K 前航线指令插画显示 locked 降权；100K 解锁后插画显示 active 边框、补光和轻量投光；降低动效偏好下关闭投光动画。
 - 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 129 项。
 - 构建产物已确认 `dist/src/app.js` 和 `dist/src/styles.css` 包含 `directiveSceneImage`、`directiveSceneImagePulse`、`.directive-scene-image.is-active` 与 `.directive-scene-image.is-locked`。
+- 代码和同步文档提交已创建并推送：`81f7f69 feat: highlight directive scene unlock state`。
+- 发布验证已通过：GitHub Pages workflow `25400622516` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页返回 HTTP 200，线上首页、`src/app.js` 和 `src/styles.css` 已确认包含 `directive-scene-image`、`directive-visual.svg`、`directiveSceneImage`、`.directive-scene-image.is-active`、`.directive-scene-image.is-locked` 与 `directiveSceneImagePulse`。
+- 已回复 GitHub Issue #3、#4 和 #6，说明航线指令插画运行态投光、验证结果、Pages 部署和复测问题；三个 issue 均保持 open，评论地址：`https://github.com/Jassy930/codex-game-operator/issues/3#issuecomment-4382805394`、`https://github.com/Jassy930/codex-game-operator/issues/4#issuecomment-4382805399`、`https://github.com/Jassy930/codex-game-operator/issues/6#issuecomment-4382805413`。
+- 回复后于 2026-05-06 04:32 CST 再次同步 GitHub Issues，当前仍为 5 个 open feedback issue、0 个 open bug issue；#3/#4/#6 更新时间均为 `2026-05-05T20:32:11Z`。
+- 钉钉通知未发送：2026-05-06 04:32 CST 运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` / `ROBOT` 相关有效 webhook URL，当前目录和 `/home/jassy/glm` 两层内未发现 `.env*` 文件；未将 webhook 写入仓库。
 
 ## 2026-05-06 Product decision：航线委托完成续航短标
 

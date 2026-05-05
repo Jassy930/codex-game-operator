@@ -8,6 +8,10 @@
 - 同步 GitHub Issues 反馈状态：2026-05-06 04:25 CST 当前 5 个 open issue、5 个 open feedback issue、0 个 open bug issue；#3/#4/#6 作为本轮关联反馈。
 - 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 129 项。
 - 构建产物已确认 `dist/src/app.js` 和 `dist/src/styles.css` 包含 `directiveSceneImage`、`directiveSceneImagePulse`、`.directive-scene-image.is-active` 与 `.directive-scene-image.is-locked`。
+- 代码和同步文档提交已创建并推送：`81f7f69 feat: highlight directive scene unlock state`。
+- 发布：GitHub Pages workflow `25400622516` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页返回 HTTP 200，线上首页、`src/app.js` 和 `src/styles.css` 已确认包含 `directive-scene-image`、`directive-visual.svg`、`directiveSceneImage`、`.directive-scene-image.is-active`、`.directive-scene-image.is-locked` 与 `directiveSceneImagePulse`。workflow 给出 Node.js 20 actions 弃用提醒，未影响本次部署。
+- 反馈处理：已回复 #3、#4 和 #6，说明航线指令插画运行态投光、验证结果、Pages 部署和复测问题；三个 issue 均保持 open，评论地址：`https://github.com/Jassy930/codex-game-operator/issues/3#issuecomment-4382805394`、`https://github.com/Jassy930/codex-game-operator/issues/4#issuecomment-4382805399`、`https://github.com/Jassy930/codex-game-operator/issues/6#issuecomment-4382805413`。回复后于 2026-05-06 04:32 CST 再次同步 GitHub Issues，当前仍为 5 个 open feedback issue、0 个 open bug issue；#3/#4/#6 更新时间均为 `2026-05-05T20:32:11Z`。
+- 钉钉通知未发送：2026-05-06 04:32 CST 运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` / `ROBOT` 相关有效 webhook URL，当前目录和 `/home/jassy/glm` 两层内未发现 `.env*` 文件；未将 webhook 写入仓库。
 
 - 航线委托新增“完成续航短标”：100K 后 3/3 委托完成态会在完成步号和完成收益旁显示当前续航动作，例如 `熟练续航 点火齐射`，让完成态直接接到下一轮可执行方向，继续回应 #3/#6 对主动短循环和后半段三步结构不够直观的反馈。
 - `src/game.js` 为 completed 任务状态新增 `completedFollowupText`；`src/app.js` 在完成态复用动作胶囊并切换“航线委托完成续航动作”标题；`src/styles.css` 增加 `.directive-task-action.is-completed`；`tests/game.test.js` 覆盖状态字段、运行时绑定和样式。
