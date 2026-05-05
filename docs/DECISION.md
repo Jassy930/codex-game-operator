@@ -20,8 +20,11 @@
 - 20M 后路线对照里的 `新路线` 信标不再使用默认灰色，改用 archive 状态色和状态点光晕。
 - 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 127 项。
 - 构建产物已确认 `dist/src/styles.css` 包含 `.far-dispatch-branch-choice-summary-signal.is-archive` 与 `#eadbff` / `#d5b4ff`。
-- 代码提交已创建：`83c73cd feat: distinguish far new route signal`。
-- 发布与反馈回复待推送后执行。
+- 代码提交已创建并推送：`83c73cd feat: distinguish far new route signal`；运营文档提交已创建并推送：`b629af3 docs: record far new route signal release`。
+- 发布验证已通过：GitHub Pages workflow `25376873437` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页和 `src/styles.css` 均返回 HTTP 200，线上产物已确认包含 `.far-dispatch-branch-choice-summary-signal.is-archive`、`#eadbff` 与 `#d5b4ff`。workflow 继续给出 Node.js 20 actions 弃用提醒，未影响本次部署。
+- 已回复 GitHub Issue #6，说明远航新路线信标差异色、验证结果、Pages 部署和复测问题；issue 保持 open，评论地址：`https://github.com/Jassy930/codex-game-operator/issues/6#issuecomment-4379296454`。
+- 回复后同步 GitHub Issues：2026-05-05 20:41 CST 当前仍为 5 个 open feedback issue、0 个 open bug issue；#6 更新时间为 `2026-05-05T12:40:47Z`。
+- 钉钉通知未发送：2026-05-05 20:41 CST 运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` / `ROBOT` 相关变量名，当前目录和 `/home/jassy/glm` 两层内未发现 `.env*` 文件；未将 webhook 写入仓库。
 - 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #6，以及远航决策信标状态点上线后的 `新路线` 默认态复盘。
 
 ## 2026-05-05 Product decision：远航决策信标状态点

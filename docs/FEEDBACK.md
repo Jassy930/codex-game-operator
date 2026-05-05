@@ -8,7 +8,9 @@
 - 本轮只增强远航路线对照条扫视性和测试，不改变远航收益、指令冷却、闭环、连段、投送、星图航段、升级价格、存档字段、反馈入口或部署链路。
 - 验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 127 项。
 - 构建产物已确认 `dist/src/styles.css` 包含 `.far-dispatch-branch-choice-summary-signal.is-archive` 与 `#eadbff` / `#d5b4ff`。
-- 代码提交已创建：`83c73cd feat: distinguish far new route signal`；发布与反馈回复待推送后执行。
+- 代码提交已创建并推送：`83c73cd feat: distinguish far new route signal`；运营文档提交已创建并推送：`b629af3 docs: record far new route signal release`；GitHub Pages workflow `25376873437` 成功，线上首页和 CSS 已确认包含远航新路线信标差异色。
+- 2026-05-05 20:40 CST 已在 #6 回复本轮处理结果、提交 `83c73cd` / `b629af3`、GitHub Pages workflow `25376873437` 和线上验证结果；Issue 保持 open 等待复测，评论地址：`https://github.com/Jassy930/codex-game-operator/issues/6#issuecomment-4379296454`。回复后于 2026-05-05 20:41 CST 再次同步 GitHub Issues，当前仍为 5 个 open feedback issue、0 个 open bug issue；#6 更新时间为 `2026-05-05T12:40:47Z`。
+- 钉钉通知未发送：2026-05-05 20:41 CST 运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` / `ROBOT` 相关变量名，当前目录和 `/home/jassy/glm` 两层内未发现 `.env*` 文件；未将 webhook 写入仓库。
 - 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #6，以及远航决策信标状态点上线后的 `新路线` 默认态复盘。
 
 - GitHub Issues：gh 可用且已认证；2026-05-05 20:17 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。#6 仍是最近更新反馈，继续指向“后半段玩法变化不明显、只有不停目标”。
