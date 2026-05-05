@@ -8,7 +8,10 @@
 - 同步 GitHub Issues 反馈状态：2026-05-06 01:51 CST 当前 5 个 open issue、5 个 open feedback issue、0 个 open bug issue；#4 作为本轮关联反馈，更新时间为 `2026-05-05T11:39:09Z`。
 - 验证通过：`node --test tests/game.test.js`、`npm install`、`npm test`、`npm run build`、`bun install --no-save`、`bun run test`、`bun run build`；测试数 129 项。
 - 构建产物已确认 `dist/index.html`、`dist/src/styles.css` 和 `dist/src/assets/upgrade-visual.svg` 包含 `upgrade-scene-image`、`upgrade-visual.svg`、`升级工坊视觉插画` 与 `upgradeRail`。
-- 发布、反馈回复和钉钉通知状态将在本轮推送后补充。
+- 代码和同步文档提交已创建并推送：`87a5daf feat: add upgrade panel visual asset`。
+- 发布：GitHub Pages workflow `25393172473` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页、`src/styles.css` 和 `src/assets/upgrade-visual.svg` 均返回 HTTP 200，并已确认包含 `upgrade-scene-image`、`upgrade-visual.svg`、`升级工坊视觉插画` 与 `upgradeRail`。workflow 给出 Node.js 20 actions 弃用提醒，未影响本次部署。
+- 反馈处理：已回复 #4，说明升级面板本地插画、验证结果、Pages 部署和复测问题；issue 保持 open，评论地址：`https://github.com/Jassy930/codex-game-operator/issues/4#issuecomment-4381740966`。回复后于 2026-05-06 01:58 CST 再次同步 GitHub Issues，当前仍为 5 个 open feedback issue、0 个 open bug issue；#4 更新时间为 `2026-05-05T17:58:11Z`。
+- 钉钉通知未发送：2026-05-06 01:58 CST 运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` / `ROBOT` 相关有效 webhook URL，当前目录和 `/home/jassy/glm` 两层内未发现 `.env*` 文件；未将 webhook 写入仓库。
 
 - 点火按钮新增“落点回声环”：普通点火和过载点火会在已有落点闪光、涟漪、火花束、爆发层和全按钮闪幕之外，再从实际点击落点扩散一圈较慢的回声环，继续回应 #5 对点击反馈、特效和点击欲望的反馈。
 - `index.html` 新增 `coreImpactEcho` 节点；`src/app.js` 在 `animateCore()` 中同步触发 `core-impact-echo` 并复用落点坐标；`src/styles.css` 新增普通/过载回声环样式、`coreImpactEcho` 动画和降低动效兜底；`tests/game.test.js` 覆盖静态节点、运行时绑定、触发状态、CSS 和 reduced motion。

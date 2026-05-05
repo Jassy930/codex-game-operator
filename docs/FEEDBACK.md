@@ -8,7 +8,9 @@
 - 本轮只增强升级面板视觉展示和测试，不新增收益、不新增存档字段，不改变升级价格、购买逻辑、目标系统、星图航段、航线策略、航线指令、远航调度、反馈入口或部署链路。
 - 本地验证已通过：`node --test tests/game.test.js`、`npm install`、`npm test`、`npm run build`、`bun install --no-save`、`bun run test`、`bun run build`；测试数 129 项。
 - 构建产物已确认 `dist/index.html`、`dist/src/styles.css` 和 `dist/src/assets/upgrade-visual.svg` 包含 `upgrade-scene-image`、`upgrade-visual.svg`、`升级工坊视觉插画` 与 `upgradeRail`。
-- 发布、反馈回复和通知状态将在本轮推送后补充；issue #4 保持 open 等待复测。
+- 发布和反馈处理已完成：`87a5daf feat: add upgrade panel visual asset` 已推送，GitHub Pages workflow `25393172473` 成功；build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页、`src/styles.css` 和 `src/assets/upgrade-visual.svg` 均返回 HTTP 200，并已确认包含本轮标记。已回复 #4，评论地址：`https://github.com/Jassy930/codex-game-operator/issues/4#issuecomment-4381740966`，issue 保持 open 等待复测。
+- 回复后于 2026-05-06 01:58 CST 再次同步 GitHub Issues，当前仍为 5 个 open feedback issue、0 个 open bug issue；#4 更新时间为 `2026-05-05T17:58:11Z`。
+- 钉钉通知未发送：2026-05-06 01:58 CST 运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` / `ROBOT` 相关有效 webhook URL，当前目录和 `/home/jassy/glm` 两层内未发现 `.env*` 文件；未将 webhook 写入仓库。
 - 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #4，以及升级面板已有卡片图标但缺少面板级本地插画的侧栏复盘。
 
 - GitHub Issues：gh 可用且已认证；2026-05-06 01:35 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。#3/#6 在上一轮回复后没有新的玩家复测；本轮转向 #5“点火按钮太薄弱，增加点击反馈，增加特效，增加点击欲望”。
