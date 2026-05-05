@@ -1,5 +1,29 @@
 # Decision
 
+## 2026-05-06 Product decision：升级面板本地插画
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-06 01:51 CST 已同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。没有 open bug；#5 刚完成点火反馈补强，本轮转向 #4“现在界面里全是密密麻麻的文字，能不能生成一些图片？让界面变得更好看一些”。
+
+当前最大问题：主操作区、航线指令、星图和反馈表单已经有本地 SVG 插画或视觉图形，但升级面板顶部仍是“升级 / 重置”加一组升级卡片。升级卡片自身有图标，面板层却缺少一张概览式图片资产，侧栏进入时仍显得偏文字和列表化。
+
+本轮决策：
+
+- 新增“升级面板本地插画”。
+- `src/assets/upgrade-visual.svg` 新增聚能透镜、自动采集臂、星核稳定器和星核谐振器组成的本地 SVG 插画。
+- `index.html` 在升级面板标题下方新增 `upgrade-scene-image`，随静态首页首屏侧栏展示。
+- `src/styles.css` 为 `upgrade-scene-image` 增加稳定宽高比、边框和暗色底，避免加载前后挤压升级卡片布局。
+- `tests/game.test.js` 覆盖静态首页引用、CSS 绑定和 SVG 资产标记。
+- 该改动只增强升级面板视觉锚点，不新增收益、不新增存档字段，不改变升级价格、购买逻辑、目标系统、星图航段、航线策略、航线指令、远航调度、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-05-06 01:51 CST 当前 5 个 open issue、5 个 open feedback issue、0 个 open bug issue；#4 作为本轮关联反馈，更新时间为 `2026-05-05T11:39:09Z`。
+- 升级面板标题下方会显示本地 `src/assets/upgrade-visual.svg` 插画，升级卡片仍保持原有购买状态、成本、进度和目标推荐展示。
+- 本地验证已通过：`node --test tests/game.test.js`、`npm install`、`npm test`、`npm run build`、`bun install --no-save`、`bun run test`、`bun run build`；测试数 129 项。
+- 构建产物已确认 `dist/index.html`、`dist/src/styles.css` 和 `dist/src/assets/upgrade-visual.svg` 包含 `upgrade-scene-image`、`upgrade-visual.svg`、`升级工坊视觉插画` 与 `upgradeRail`。
+- 发布验证、Issue 回复和钉钉通知状态将在本轮推送后补充。
+- 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #4，以及升级面板已有卡片图标但缺少面板级本地插画的侧栏复盘。
+
 ## 2026-05-06 Product decision：点火落点回声环
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-06 01:35 CST 已同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。没有 open bug；#3/#6 没有新的玩家复测，本轮转向 #5“点火按钮太薄弱，增加点击反馈，增加特效，增加点击欲望”。

@@ -2,6 +2,14 @@
 
 ## Unreleased
 
+- 升级面板新增本地 SVG 插画：侧栏升级标题下方现在显示 `src/assets/upgrade-visual.svg`，用聚能透镜、自动采集臂、星核稳定器和星核谐振器建立面板级图片锚点，继续回应 #4 对界面文字密度和图片化展示的反馈。
+- `src/assets/upgrade-visual.svg` 新增升级工坊插画；`index.html` 在升级面板内引用 `upgrade-scene-image`；`src/styles.css` 增加稳定宽高比、边框和暗色底；`tests/game.test.js` 覆盖静态首页、样式和资产标记。
+- 本轮只增强升级面板视觉展示，不新增收益、不新增存档字段，不改变升级价格、购买逻辑、目标系统、星图航段、航线策略、航线指令、远航调度、反馈入口或部署链路。
+- 同步 GitHub Issues 反馈状态：2026-05-06 01:51 CST 当前 5 个 open issue、5 个 open feedback issue、0 个 open bug issue；#4 作为本轮关联反馈，更新时间为 `2026-05-05T11:39:09Z`。
+- 验证通过：`node --test tests/game.test.js`、`npm install`、`npm test`、`npm run build`、`bun install --no-save`、`bun run test`、`bun run build`；测试数 129 项。
+- 构建产物已确认 `dist/index.html`、`dist/src/styles.css` 和 `dist/src/assets/upgrade-visual.svg` 包含 `upgrade-scene-image`、`upgrade-visual.svg`、`升级工坊视觉插画` 与 `upgradeRail`。
+- 发布、反馈回复和钉钉通知状态将在本轮推送后补充。
+
 - 点火按钮新增“落点回声环”：普通点火和过载点火会在已有落点闪光、涟漪、火花束、爆发层和全按钮闪幕之外，再从实际点击落点扩散一圈较慢的回声环，继续回应 #5 对点击反馈、特效和点击欲望的反馈。
 - `index.html` 新增 `coreImpactEcho` 节点；`src/app.js` 在 `animateCore()` 中同步触发 `core-impact-echo` 并复用落点坐标；`src/styles.css` 新增普通/过载回声环样式、`coreImpactEcho` 动画和降低动效兜底；`tests/game.test.js` 覆盖静态节点、运行时绑定、触发状态、CSS 和 reduced motion。
 - 本轮只增强点火命中反馈，不新增收益、不新增存档字段，不改变点击收益、过载奖励、连击窗口、升级价格、星图航段、航线策略、航线指令、远航调度或反馈入口。

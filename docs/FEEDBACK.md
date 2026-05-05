@@ -2,6 +2,15 @@
 
 ## 2026-05-06
 
+- GitHub Issues：gh 可用且已认证；2026-05-06 01:51 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。#5 刚完成点火反馈补强；本轮转向 #4“现在界面里全是密密麻麻的文字，能不能生成一些图片？让界面变得更好看一些”。
+- 本轮 Product decision 处理 #4：主操作区、航线指令、星图和反馈表单已经有本地 SVG 插画或图形锚点，但升级面板顶部仍主要是标题、重置按钮和升级卡片列表。升级卡片有图标，面板层缺少一张把四类升级连成工坊系统的本地图片资产。
+- 本轮改动新增“升级面板本地插画”：新增 `src/assets/upgrade-visual.svg`，静态首页在升级面板标题下方引用 `upgrade-scene-image`，用聚能透镜、自动采集臂、星核稳定器和星核谐振器建立侧栏图片锚点。
+- 本轮只增强升级面板视觉展示和测试，不新增收益、不新增存档字段，不改变升级价格、购买逻辑、目标系统、星图航段、航线策略、航线指令、远航调度、反馈入口或部署链路。
+- 本地验证已通过：`node --test tests/game.test.js`、`npm install`、`npm test`、`npm run build`、`bun install --no-save`、`bun run test`、`bun run build`；测试数 129 项。
+- 构建产物已确认 `dist/index.html`、`dist/src/styles.css` 和 `dist/src/assets/upgrade-visual.svg` 包含 `upgrade-scene-image`、`upgrade-visual.svg`、`升级工坊视觉插画` 与 `upgradeRail`。
+- 发布、反馈回复和通知状态将在本轮推送后补充；issue #4 保持 open 等待复测。
+- 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #4，以及升级面板已有卡片图标但缺少面板级本地插画的侧栏复盘。
+
 - GitHub Issues：gh 可用且已认证；2026-05-06 01:35 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。#3/#6 在上一轮回复后没有新的玩家复测；本轮转向 #5“点火按钮太薄弱，增加点击反馈，增加特效，增加点击欲望”。
 - 本轮 Product decision 处理 #5：点火按钮已经有落点闪光、涟漪、火花束、爆发层和全按钮闪幕，但命中后的余波持续时间仍偏短，普通点火和过载点火都缺少一圈更慢的落点回声，点击后的“冲击余韵”主要依赖收益浮层和读数跳闪。
 - 本轮改动新增“点火落点回声环”：静态首页新增 `coreImpactEcho` 节点，`animateCore()` 在普通点火和过载点火时触发 `core-impact-echo`，并复用 `--core-impact-x` / `--core-impact-y` 跟随实际点击落点；过载态使用更大尺寸、更长动画和更强红金光晕。

@@ -4928,6 +4928,18 @@ h2 {
   margin-bottom: 16px;
 }
 
+.upgrade-scene-image {
+  display: block;
+  width: 100%;
+  aspect-ratio: 32 / 11;
+  object-fit: cover;
+  margin-bottom: 14px;
+  border: 1px solid rgba(244, 178, 60, 0.16);
+  border-radius: 8px;
+  background: #111615;
+  box-shadow: inset 0 0 0 1px rgba(248, 243, 231, 0.04);
+}
+
 .ghost-button {
   min-height: 36px;
   padding: 0 12px;
