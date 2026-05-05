@@ -2,6 +2,14 @@
 
 ## 2026-05-05
 
+- GitHub Issues：gh 可用且已认证；2026-05-05 18:00 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。#4 是最近更新反馈，继续指向“界面文字密度高、希望更多图片”。
+- 本轮 Product decision 继续处理 #4：顶部产能读数卡和当前目标条已经有视觉锚点，但主操作区行动结果提示与离线回收提示仍是整行纯文字。
+- 本轮改动新增“主操作行动提示视觉短标”：`action-notice` 与 `offline-notice` 左侧显示固定 30px CSS 图形槽，行动提示和离线提示使用不同配色。
+- 本轮只调整主操作反馈提示展示和测试，不新增可见文字、不新增收益、不新增存档字段，不改变点击收益、离线结算、目标判定、升级价格、星图、航线指令、远航调度、反馈入口或部署链路。
+- 验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 122 项。
+- 构建产物已确认 `dist/src/styles.css` 包含 `.offline-notice::before`、`.action-notice::before` 与 `grid-template-columns: 30px minmax(0, 1fr)`。
+- 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #4，以及主操作反馈提示仍缺少图形锚点的首屏复盘。
+
 - GitHub Issues：gh 可用且已认证；2026-05-05 17:49 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。#4 是最近更新反馈，继续指向“界面文字密度高、希望更多图片”。
 - 本轮 Product decision 继续处理 #4：顶部产能读数已经有视觉徽记，但主操作区的当前目标条仍是目标名、目标值、长提示和进度条的纯文字组合。
 - 本轮改动新增“当前目标条视觉徽记”：目标条左侧显示固定内联 SVG 图形槽，右侧保留目标文本，进度条保持全宽展示。

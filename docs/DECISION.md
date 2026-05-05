@@ -1,5 +1,26 @@
 # Decision
 
+## 2026-05-05 Product decision：主操作行动提示视觉短标
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-05 18:00 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有 open bug；本轮继续处理真实反馈 #4“界面里全是密密麻麻的文字，能不能生成一些图片”。
+
+当前最大问题：顶部产能读数卡和当前目标条已经补上视觉锚点，但主操作区 `action-notice` 与 `offline-notice` 仍是整行纯文字。它们承载点击、过载、购买升级、目标完成和离线回收后的即时反馈，位于核心操作流中，仍会增加玩家确认结果时的阅读压力。
+
+本轮决策：
+
+- 新增“主操作行动提示视觉短标”。
+- `src/styles.css` 将 `action-notice` 与 `offline-notice` 改为 30px 图形槽 + 文本区的稳定布局，并用 CSS 渐变绘制行动/离线两类短标。
+- `tests/game.test.js` 覆盖静态首页提示节点、CSS 绑定和 `[hidden]` 状态保留。
+- 该改动只调整主操作反馈提示展示和测试，不新增可见文字、不新增收益、不新增存档字段，不改变点击收益、离线结算、目标判定、升级价格、星图、航线指令、远航调度、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-05-05 18:00 CST 当前 5 个 open feedback issue、0 个 open bug issue；#4 作为本轮主处理对象。
+- 行动提示和离线回收提示包含固定 30px 左侧视觉短标，隐藏状态继续通过 `[hidden]` 移除整条提示。
+- 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 122 项。
+- 构建产物已确认 `dist/src/styles.css` 包含 `.offline-notice::before`、`.action-notice::before` 与 `grid-template-columns: 30px minmax(0, 1fr)`。
+- 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #4，以及核心操作反馈提示仍缺少图形锚点的首屏复盘。
+
 ## 2026-05-05 Product decision：当前目标条视觉徽记
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-05 17:49 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有 open bug；本轮继续处理真实反馈 #4“界面里全是密密麻麻的文字，能不能生成一些图片”。

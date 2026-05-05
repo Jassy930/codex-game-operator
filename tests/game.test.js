@@ -1304,6 +1304,21 @@ test("当前目标条提供视觉徽记", () => {
   assert.match(styles, /grid-column: 1 \/ -1/);
 });
 
+test("主操作行动提示提供视觉短标", () => {
+  const indexHtml = readFileSync(new URL("../index.html", import.meta.url), "utf8");
+  const styles = readFileSync(new URL("../src/styles.css", import.meta.url), "utf8");
+
+  assert.match(indexHtml, /id="offlineNotice" class="offline-notice"/);
+  assert.match(indexHtml, /id="actionNotice" class="action-notice"/);
+  assert.match(styles, /\.offline-notice \{/);
+  assert.match(styles, /\.action-notice \{/);
+  assert.match(styles, /grid-template-columns: 30px minmax\(0, 1fr\)/);
+  assert.match(styles, /\.offline-notice::before,\n\.action-notice::before/);
+  assert.match(styles, /\.offline-notice::before/);
+  assert.match(styles, /\.action-notice\[hidden\]/);
+  assert.match(styles, /\.offline-notice\[hidden\]/);
+});
+
 test("点火按钮会渲染点击反馈和过载前兆效果", () => {
   const indexHtml = readFileSync(new URL("../index.html", import.meta.url), "utf8");
   const appJs = readFileSync(new URL("../src/app.js", import.meta.url), "utf8");

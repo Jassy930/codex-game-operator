@@ -2,6 +2,14 @@
 
 ## Unreleased
 
+- 主操作行动提示和离线回收提示新增视觉短标：点击、过载、购买升级、目标完成和离线回收后的核心提示现在左侧显示固定 CSS 图形槽，继续回应 #4 对首屏文字密度和图片化表达的反馈。
+- `src/styles.css` 将 `action-notice` 与 `offline-notice` 改为 30px 图形槽 + 文本区布局，并为行动/离线提示提供不同渐变短标；`tests/game.test.js` 覆盖静态首页提示节点、CSS 绑定和 `[hidden]` 状态保留。
+- 本轮只调整主操作反馈提示展示和测试，不新增可见文字、不新增收益、不新增存档字段，不改变点击收益、离线结算、目标判定、升级价格、星图、航线指令、远航调度、反馈入口或部署链路。
+- 同步 GitHub Issues 反馈状态：2026-05-05 18:00 CST 当前 5 个 open feedback issue、0 个 open bug issue；#4 作为本轮主处理对象。
+- 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 122 项。
+- 构建产物已确认 `dist/src/styles.css` 包含 `.offline-notice::before`、`.action-notice::before` 与 `grid-template-columns: 30px minmax(0, 1fr)`。
+- 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #4，以及主操作反馈提示仍缺少图形锚点的首屏复盘。
+
 - 当前目标条新增视觉徽记：主操作区目标条现在在目标文本旁显示固定尺寸内联 SVG 图形槽，继续回应 #4 对首屏文字密度和图片化表达的反馈。
 - `index.html` 为 `goal-strip` 添加 `goal-visual` 和 `goal-copy`；`src/styles.css` 将目标条改为 54px 图形槽、文本区和全宽进度条的稳定布局；`tests/game.test.js` 覆盖静态首页和 CSS 绑定。
 - 本轮只调整当前目标条展示和测试，不新增收益、不新增存档字段，不改变目标判定、点击、过载、升级、星图、航线指令、远航调度、反馈入口或部署链路。
