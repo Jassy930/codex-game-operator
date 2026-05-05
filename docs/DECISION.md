@@ -1,5 +1,28 @@
 # Decision
 
+## 2026-05-05 Product decision：航线委托三节点进度条
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-05 23:35 CST 已同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。没有 open bug；#3“玩法太简单”和 #6“后半段玩法没有真正变化”仍是本轮关联反馈。
+
+当前最大问题：航线委托已经显示下一步收益短标，但进度条本体仍只是连续填充。玩家能看到 `航线委托 X/3` 和下一步收益，却不能像上方指令轮换三格轨一样直接扫到哪一格已完成、哪一格是下一步、哪一格待推进。
+
+本轮决策：
+
+- 新增“航线委托三节点进度条”。
+- `index.html` 的静态首页委托进度条加入 `directive-task-meter-fill` 和 3 个 `directive-task-meter-node`。
+- `src/app.js` 的 `renderDirectiveTask()` 运行时按当前 `progress` / `target` 渲染 3 个节点，并标记 `is-complete`、`is-next`、`is-pending`。
+- `src/styles.css` 把委托进度条改成稳定三列视觉轨，填充条继续表示总体进度，节点负责表达三步状态。
+- `tests/game.test.js` 覆盖静态首页、运行时绑定和 CSS 标记。
+- 该改动只增强航线委托进度扫视性，不新增收益、不新增存档字段，不改变指令冷却、连携窗口、策略契合、航线委托奖励、远航调度、星图航段、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-05-05 23:35 CST 当前 5 个 open issue、5 个 open feedback issue、0 个 open bug issue；#3/#6 作为本轮关联反馈。
+- 航线委托进度条同时显示连续进度填充和 3 个离散节点，节点按完成、下一步、待推进切换视觉状态。
+- 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 128 项。
+- 构建产物已确认 `dist/index.html`、`dist/src/app.js` 和 `dist/src/styles.css` 包含 `directive-task-meter-fill` 与 `directive-task-meter-node`。
+- 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #3/#6，以及航线委托条已有收益短标但进度条缺少离散三步节点的链路复盘。
+
 ## 2026-05-05 Product decision：航线委托下一步收益短标
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-05 23:17 CST 已同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。没有 open bug；#3“玩法太简单”和 #6“后半段玩法没有真正变化”仍是本轮关联反馈。

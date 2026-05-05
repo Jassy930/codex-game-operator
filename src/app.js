@@ -658,8 +658,26 @@ function renderDirectiveTask(task) {
   meter.setAttribute("aria-valuetext", progressText);
 
   const fill = document.createElement("span");
+  fill.className = "directive-task-meter-fill";
   fill.style.width = meterValue + "%";
-  meter.append(fill);
+
+  const nodes = Array.from({ length: target }, (_item, index) => {
+    const step = index + 1;
+    const node = document.createElement("span");
+    const isComplete = task.unlocked && progress >= step;
+    const isNext = task.unlocked && !task.completed && !isComplete && step === progress + 1;
+    node.className = [
+      "directive-task-meter-node",
+      isComplete ? "is-complete" : "",
+      isNext ? "is-next" : "",
+      !isComplete && !isNext ? "is-pending" : ""
+    ]
+      .filter(Boolean)
+      .join(" ");
+    node.setAttribute("aria-hidden", "true");
+    return node;
+  });
+  meter.append(fill, ...nodes);
 
   const reward = document.createElement("small");
   reward.className = "directive-task-reward";

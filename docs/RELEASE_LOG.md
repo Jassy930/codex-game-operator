@@ -2,6 +2,14 @@
 
 ## Unreleased
 
+- 航线委托新增“三节点进度条”：100K 后委托条进度不再只有连续填充，运行时会显示 3 个离散节点并按已完成、下一步、待推进切换状态，继续回应 #3/#6 对主动短循环和后半段结构不够直观的反馈。
+- `index.html` 静态首页新增 `directive-task-meter-fill` 与 `directive-task-meter-node`；`src/app.js` 在 `renderDirectiveTask()` 中按 `progress` / `target` 渲染节点状态；`src/styles.css` 增加三列节点轨样式；`tests/game.test.js` 覆盖静态首页、运行时绑定和 CSS 标记。
+- 本轮只增强航线委托进度扫视性，不新增收益、不新增存档字段，不改变指令冷却、连携窗口、策略契合、航线委托奖励、远航调度、星图航段、反馈入口或部署链路。
+- 同步 GitHub Issues 反馈状态：2026-05-05 23:35 CST 当前 5 个 open issue、5 个 open feedback issue、0 个 open bug issue；#3/#6 作为本轮关联反馈。
+- 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 128 项。
+- 构建产物已确认 `dist/index.html`、`dist/src/app.js` 和 `dist/src/styles.css` 包含 `directive-task-meter-fill` 与 `directive-task-meter-node`。
+- 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #3/#6，以及航线委托条已有下一步收益短标但进度条缺少离散三步节点的链路复盘。
+
 - 航线委托新增“下一步收益短标”：100K 后委托条会直接显示当前推荐下一步收益，2/3 收束时会把 `连携 +24%`、`轮换目标 +18%`、`策略终结 +12%` 与 `委托完成 +8%` 放在同一条短标中，继续回应 #3/#6 对主动玩法和后半段变化不明显的反馈。
 - `src/game.js` 新增 `buildDirectiveTaskNextRewardText()`，让 `getDirectiveTaskStatus()` 输出 `nextRewardText`；`src/app.js` 在 `renderDirectiveTask()` 中渲染 `directive-task-reward`；`src/styles.css` 增加单行收益短标样式；`tests/game.test.js` 覆盖锁定态、起手态、2/3 收束、完成态、运行时绑定和 CSS。
 - 本轮只增强航线委托收益可见性，不新增收益、不新增存档字段，不改变指令冷却、连携窗口、策略契合、远航调度、星图航段、反馈入口或部署链路。
