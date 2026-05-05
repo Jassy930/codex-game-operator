@@ -1,5 +1,29 @@
 # Decision
 
+## 2026-05-05 Product decision：航线委托下一步收益短标
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-05 23:17 CST 已同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。没有 open bug；#3“玩法太简单”和 #6“后半段玩法没有真正变化”仍是本轮关联反馈。
+
+当前最大问题：上一轮已经让指令轮换三格轨显示下一步收益，但航线委托条仍主要显示 `航线委托 X/3` 和完成奖励。玩家如果从委托条理解三步任务，只能看到进度和最终奖励，不能在同一处看到下一步会触发的预案执行、连携、轮换目标、策略终结或满层回响；2/3 收束时也需要从按钮预览或执行反馈里拼出 `委托完成 +8%`。
+
+本轮决策：
+
+- 新增“航线委托下一步收益短标”。
+- `src/game.js` 让 `getDirectiveTaskStatus()` 输出 `nextRewardText`，复用 `getDirectivePlan()` 的下一步收益；当下一步会完成 3/3 委托时追加既有 `委托完成 +8%`。
+- `src/app.js` 在 `renderDirectiveTask()` 中渲染 `directive-task-reward`，并让紧凑文本优先显示 `task.nextRewardText`。
+- `src/styles.css` 新增 `.directive-task-reward`，用单行截断避免长收益串撑开委托条。
+- `tests/game.test.js` 覆盖锁定态、起手态、2/3 收束、完成态、运行时绑定和 CSS。
+- 该改动只增强航线委托收益可见性，不新增收益、不新增存档字段，不改变指令冷却、连携窗口、策略契合、远航调度、星图航段、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-05-05 23:17 CST 当前 5 个 open issue、5 个 open feedback issue、0 个 open bug issue；#3/#6 作为本轮关联反馈。
+- 航线委托 0/3 会显示 `预案执行 +6%`，2/3 会显示 `连携 +24% · 轮换目标 +18% · 策略终结 +12% · 委托完成 +8%`。
+- 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 128 项。
+- 构建产物已确认 `dist/src/game.js`、`dist/src/app.js` 和 `dist/src/styles.css` 包含 `buildDirectiveTaskNextRewardText`、`nextRewardText`、`directive-task-reward` 与 `下一步收益`。
+- 代码提交、推送、Pages 验证、Issue 回复和钉钉通知将在发布阶段完成后回填。
+- 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #3/#6，以及当前航线委托条只显示进度和完成奖励、未直接暴露下一步收益结构的链路复盘。
+
 ## 2026-05-05 Product decision：指令轮换下一步收益短标
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-05 22:53 CST 已同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。没有 open bug；#5 是最近更新反馈但上一轮刚处理点火命中闪幕，本轮转向 #3“玩法太简单”和 #6“后半段玩法没有真正变化”的共同问题。

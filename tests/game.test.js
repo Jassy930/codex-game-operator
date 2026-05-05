@@ -288,6 +288,7 @@ test("航线指令会返回轮换目标提示", () => {
     "指令轮换：累计 100K 能量后解锁 90 秒连携目标 · 解锁后先从非契合指令起手，第二步继续避开契合指令，把契合指令留到 3/3 策略终结；完成轮换会累积指令熟练，满层后用回响续航触发满层回响。"
   );
   assert.equal(lockedTask.text, "航线委托：累计 100K 能量后解锁 3 步短期任务");
+  assert.equal(lockedTask.nextRewardText, "");
   assert.equal(ready.progress, 0);
   assert.equal(ready.target, 3);
   assert.deepEqual(ready.nextDirectiveIds, ["ignition-salvo", "cruise-cache"]);
@@ -299,9 +300,10 @@ test("航线指令会返回轮换目标提示", () => {
     "指令轮换 0/3 · 先执行点火齐射或巡航回收，保留谐振脉冲完成 3/3 策略终结 · 匹配当前航线策略可获得策略契合 +10% · 随后在 90 秒内切换不同指令 · 完成 3/3 轮换会累积 3 分钟指令熟练，每层指令收益 +5%，最多 3 层；满层后继续完成 3/3 会触发满层回响 +10%。"
   );
   assert.equal(DIRECTIVE_TASK_REWARD_RATE, 0.08);
+  assert.equal(readyTask.nextRewardText, "预案执行 +6%");
   assert.equal(
     readyTask.text,
-    "航线委托 0/3 · 下一步 点火齐射或巡航回收，完成 3/3 推荐轮换 · 完成奖励 委托完成 +8%"
+    "航线委托 0/3 · 下一步 点火齐射或巡航回收 · 下一步收益 预案执行 +6%，完成 3/3 推荐轮换 · 完成奖励 委托完成 +8%"
   );
 });
 
@@ -392,7 +394,11 @@ test("轮换航线指令会触发航线连携收益", () => {
   );
   assert.equal(
     secondTask.text,
-    "航线委托 2/3 · 下一步 谐振脉冲，完成 3/3 推荐轮换 · 完成奖励 委托完成 +8%"
+    "航线委托 2/3 · 下一步 谐振脉冲 · 下一步收益 连携 +24% · 轮换目标 +18% · 策略终结 +12% · 委托完成 +8%，完成 3/3 推荐轮换 · 完成奖励 委托完成 +8%"
+  );
+  assert.equal(
+    secondTask.nextRewardText,
+    "连携 +24% · 轮换目标 +18% · 策略终结 +12% · 委托完成 +8%"
   );
   assert.equal(secondTask.progress, 2);
   assert.equal(secondTask.target, 3);
@@ -435,6 +441,7 @@ test("轮换航线指令会触发航线连携收益", () => {
   assert.equal(continuationTask.progress, 3);
   assert.equal(continuationTask.target, 3);
   assert.equal(continuationTask.completed, true);
+  assert.equal(continuationTask.nextRewardText, "");
   assert.deepEqual(continuationPlan.nextDirectiveIds, ["ignition-salvo"]);
   assert.equal(continuationPlan.nextRewardText, "连携 +24% · 轮换目标 +18%");
   assert.equal(continuationPlan.recommendationText, "熟练续航");
@@ -2048,6 +2055,9 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(appJs, /reward\.className = "directive-plan-step-reward"/);
   assert.match(appJs, /label\.textContent = nextActionText/);
   assert.match(appJs, /function renderDirectiveTask\(task\)/);
+  assert.match(appJs, /reward\.className = "directive-task-reward"/);
+  assert.match(appJs, /reward\.textContent = task\.nextRewardText \?\? ""/);
+  assert.match(appJs, /elements\.directiveTask\.replaceChildren\(text, reward, meter\)/);
   assert.match(appJs, /function renderFarDispatch\(dispatch\)/);
   assert.match(appJs, /branch\.className = "far-dispatch-branch is-" \+ getFarDispatchBranchKind\(dispatch\)/);
   assert.match(appJs, /branchRecommendation\.className = "far-dispatch-branch-recommendation"/);
@@ -2192,6 +2202,8 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(appJs, /payoff\.textContent = choice\.payoffText \?\? ""/);
   assert.match(appJs, /getDirectiveTaskDisplayText\(task\)/);
   assert.match(appJs, /getFarDispatchDisplayText\(dispatch\)/);
+  assert.match(gameJs, /function buildDirectiveTaskNextRewardText/);
+  assert.match(gameJs, /progress \+ 1 >= targetSteps/);
   assert.match(appJs, /function getFarDispatchBranchKind\(dispatch\)/);
   assert.match(appJs, /function getFarDispatchBranchChoiceKind\(choice\)/);
   assert.match(appJs, /function getFarDispatchBranchChoiceRoutePhaseKind\(choice\)/);
@@ -2253,7 +2265,7 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(appJs, /elements\.farDispatch\.replaceChildren\(\s*text,\s*sceneImage,\s*branch,/);
   assert.match(appJs, /branchChoices,/);
   assert.match(appJs, /elements\.directiveTask\.classList\.toggle\("is-completed", task\.completed\)/);
-  assert.match(appJs, /elements\.directiveTask\.replaceChildren\(text, meter\)/);
+  assert.match(appJs, /elements\.directiveTask\.replaceChildren\(text, reward, meter\)/);
   assert.match(appJs, /elements\.farDispatch\.classList\.toggle\("is-active", dispatch\.active\)/);
   assert.match(gameJs, /routeProgressPercent/);
   assert.match(gameJs, /routeRewardLabels/);
@@ -2362,6 +2374,8 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(styles, /\.directive-plan-step\.is-next/);
   assert.match(styles, /\.directive-task/);
   assert.match(styles, /\.directive-task-text,\s+\.far-dispatch-text/);
+  assert.match(styles, /\.directive-task-reward/);
+  assert.match(styles, /\.directive-task-reward\[hidden\]/);
   assert.match(styles, /\.directive-task-meter/);
   assert.match(styles, /\.directive-task\.is-completed/);
   assert.match(styles, /\.far-dispatch/);

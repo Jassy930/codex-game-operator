@@ -4073,6 +4073,7 @@ export function getDirectiveTaskStatus(state, now = Date.now()) {
       target: targetSteps,
       rewardRate: DIRECTIVE_TASK_REWARD_RATE,
       rewardText,
+      nextRewardText: "",
       text: "航线委托：累计 100K 能量后解锁 3 步短期任务"
     };
   }
@@ -4089,6 +4090,7 @@ export function getDirectiveTaskStatus(state, now = Date.now()) {
       target: targetSteps,
       rewardRate: DIRECTIVE_TASK_REWARD_RATE,
       rewardText,
+      nextRewardText: "",
       text:
         "航线委托已完成 · 已达成 3/3 推荐轮换；重置或超时后开启下一轮委托，继续轮换可维持连携与熟练"
     };
@@ -4100,6 +4102,12 @@ export function getDirectiveTaskStatus(state, now = Date.now()) {
   const nextText = nextDirectives.length
     ? "下一步 " + formatDirectiveNameList(nextDirectives.map((directive) => directive.name))
     : "继续按推荐预案执行";
+  const nextRewardText = buildDirectiveTaskNextRewardText(
+    plan,
+    progress,
+    targetSteps,
+    rewardText
+  );
 
   return {
     unlocked: true,
@@ -4108,6 +4116,7 @@ export function getDirectiveTaskStatus(state, now = Date.now()) {
     target: targetSteps,
     rewardRate: DIRECTIVE_TASK_REWARD_RATE,
     rewardText,
+    nextRewardText,
     text:
       "航线委托 " +
       progress +
@@ -4115,9 +4124,24 @@ export function getDirectiveTaskStatus(state, now = Date.now()) {
       targetSteps +
       " · " +
       nextText +
+      (nextRewardText ? " · 下一步收益 " + nextRewardText : "") +
       "，完成 3/3 推荐轮换 · 完成奖励 " +
       rewardText
   };
+}
+
+function buildDirectiveTaskNextRewardText(plan, progress, targetSteps, rewardText) {
+  const parts = [];
+
+  if (plan?.nextRewardText) {
+    parts.push(plan.nextRewardText);
+  }
+
+  if (progress + 1 >= targetSteps) {
+    parts.push(rewardText);
+  }
+
+  return parts.join(" · ");
 }
 
 export function setRouteStance(state, routeStanceId) {

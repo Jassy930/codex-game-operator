@@ -2419,6 +2419,26 @@ h2 {
   white-space: nowrap;
 }
 
+.directive-task-reward {
+  display: inline-block;
+  max-width: 100%;
+  justify-self: start;
+  overflow: hidden;
+  padding: 4px 8px;
+  border: 1px solid rgba(255, 211, 106, 0.26);
+  border-radius: 8px;
+  background: rgba(255, 211, 106, 0.1);
+  color: #fff7c2;
+  font-size: 0.72rem;
+  line-height: 1.2;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.directive-task-reward[hidden] {
+  display: none;
+}
+
 .directive-task-meter {
   display: block;
   width: 100%;

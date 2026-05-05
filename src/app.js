@@ -661,8 +661,17 @@ function renderDirectiveTask(task) {
   fill.style.width = meterValue + "%";
   meter.append(fill);
 
+  const reward = document.createElement("small");
+  reward.className = "directive-task-reward";
+  reward.textContent = task.nextRewardText ?? "";
+  reward.hidden = !task.nextRewardText;
+  if (task.nextRewardText) {
+    reward.title = "航线委托下一步收益：" + task.nextRewardText;
+    reward.setAttribute("aria-label", reward.title);
+  }
+
   elements.directiveTask.classList.toggle("is-completed", task.completed);
-  elements.directiveTask.replaceChildren(text, meter);
+  elements.directiveTask.replaceChildren(text, reward, meter);
 }
 
 function renderFarDispatchSceneImage() {
@@ -1432,7 +1441,14 @@ function getDirectiveTaskDisplayText(task) {
     return "航线委托 " + target + "/" + target + " · 已完成";
   }
 
-  return "航线委托 " + progress + "/" + target + " · " + task.rewardText;
+  return (
+    "航线委托 " +
+    progress +
+    "/" +
+    target +
+    " · " +
+    (task.nextRewardText || task.rewardText)
+  );
 }
 
 function getFarDispatchDisplayText(dispatch) {
