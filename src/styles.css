@@ -896,6 +896,69 @@ h2 {
   animation-duration: 640ms;
 }
 
+.core-impact-burst {
+  --core-impact-x: 50%;
+  --core-impact-y: 50%;
+  position: absolute;
+  top: var(--core-impact-y);
+  left: var(--core-impact-x);
+  z-index: 3;
+  width: 184px;
+  height: 184px;
+  border-radius: 999px;
+  background:
+    conic-gradient(
+      from -18deg,
+      transparent 0 5%,
+      rgba(255, 247, 194, 0.9) 6% 9%,
+      transparent 10% 17%,
+      rgba(244, 178, 60, 0.82) 18% 22%,
+      transparent 23% 31%,
+      rgba(19, 181, 166, 0.72) 32% 35%,
+      transparent 36% 46%,
+      rgba(255, 247, 194, 0.8) 47% 51%,
+      transparent 52% 64%,
+      rgba(232, 93, 117, 0.66) 65% 69%,
+      transparent 70% 100%
+    );
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-50%, -50%) scale(0.16) rotate(0deg);
+  mix-blend-mode: screen;
+  filter:
+    drop-shadow(0 0 14px rgba(255, 247, 194, 0.22))
+    drop-shadow(0 0 22px rgba(244, 178, 60, 0.16));
+  -webkit-mask: radial-gradient(farthest-side, transparent 0 28%, #000 30% 72%, transparent 74%);
+  mask: radial-gradient(farthest-side, transparent 0 28%, #000 30% 72%, transparent 74%);
+}
+
+.core-impact-burst.is-showing {
+  animation: coreImpactBurst 540ms ease-out;
+}
+
+.core-impact-burst.is-overload-impact {
+  width: 230px;
+  height: 230px;
+  background:
+    conic-gradient(
+      from -28deg,
+      rgba(255, 247, 194, 0.96) 0 7%,
+      transparent 8% 14%,
+      rgba(232, 93, 117, 0.92) 15% 21%,
+      transparent 22% 30%,
+      rgba(244, 178, 60, 0.96) 31% 38%,
+      transparent 39% 49%,
+      rgba(255, 247, 194, 0.92) 50% 58%,
+      transparent 59% 70%,
+      rgba(19, 181, 166, 0.78) 71% 78%,
+      transparent 79% 100%
+    );
+  animation-duration: 720ms;
+  filter:
+    drop-shadow(0 0 18px rgba(255, 247, 194, 0.32))
+    drop-shadow(0 0 32px rgba(232, 93, 117, 0.28));
+}
+
 .core-charge-ring {
   --core-charge-angle: 0deg;
   position: absolute;
@@ -7280,6 +7343,23 @@ h2 {
   }
 }
 
+@keyframes coreImpactBurst {
+  0% {
+    opacity: 0.9;
+    transform: translate(-50%, -50%) scale(0.16) rotate(-16deg);
+  }
+
+  46% {
+    opacity: 0.76;
+    transform: translate(-50%, -50%) scale(0.86) rotate(14deg);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(1.32) rotate(46deg);
+  }
+}
+
 @keyframes coreGainFloat {
   0% {
     opacity: 0;
@@ -8124,6 +8204,7 @@ h2 {
   .core-button.is-pulsing:not(.is-overload-impact) .core-combo-track::before,
   .core-button.is-pulsing:not(.is-overload-impact) .core-vein,
   .core-button.is-overload-impact .core-combo-track::before,
+  .core-impact-burst.is-showing,
   .core-gain-pop.is-showing::after,
   .core-gain-pop.is-overload-gain.is-showing::after,
   .directive-button.is-dispatch-route-step,
