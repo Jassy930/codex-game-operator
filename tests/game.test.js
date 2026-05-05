@@ -2008,6 +2008,7 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(appJs, /node\.title = stepTitle/);
   assert.match(appJs, /far-dispatch-branch-choice-summary-cost is-/);
   assert.match(appJs, /far-dispatch-branch-choice-summary-result is-/);
+  assert.match(appJs, /choice\.routeLoopStreakText \? " has-loop-streak" : ""/);
   assert.match(appJs, /"far-dispatch-branch-choice is-"/);
   assert.match(appJs, /" is-decision-" \+/);
   assert.match(appJs, /header\.className = "far-dispatch-branch-choice-head"/);
@@ -2321,6 +2322,10 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(styles, /\.far-dispatch-branch-choice-summary-item\.is-active-route[\s\S]*\.far-dispatch-branch-choice-summary-cost/);
   assert.match(styles, /\.far-dispatch-branch-choice-summary-item\.is-active-route[\s\S]*\.far-dispatch-branch-choice-summary-cost\.is-spend/);
   assert.match(styles, /\.far-dispatch-branch-choice-summary-item\.is-active-route[\s\S]*\.far-dispatch-branch-choice-summary-result/);
+  assert.match(styles, /\.far-dispatch-branch-choice-summary-result\.has-loop-streak/);
+  assert.match(styles, /animation: farDispatchSummaryLoopStreakResultGlow 1450ms ease-in-out infinite/);
+  assert.match(styles, /\.far-dispatch-branch-choice-summary-result\.has-loop-streak::before/);
+  assert.match(styles, /\.far-dispatch-branch-choice-summary-item\.is-active-route\.is-detour[\s\S]*\.far-dispatch-branch-choice-summary-result\.has-loop-streak/);
   assert.match(styles, /\.far-dispatch-branch-choice-summary-item\.is-detour \.far-dispatch-branch-choice-summary-reward/);
   assert.match(styles, /\.far-dispatch-branch-choice-summary-item\.is-active-route\.is-detour[\s\S]*\.far-dispatch-branch-choice-summary-reward/);
   assert.match(styles, /\.far-dispatch-branch-choice-summary-item\.is-detour \.far-dispatch-branch-choice-summary-step/);
@@ -2342,8 +2347,10 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(styles, /@keyframes farDispatchSummaryNextNodePulse/);
   assert.match(styles, /@keyframes farDispatchSummaryActiveActionGlow/);
   assert.match(styles, /@keyframes farDispatchSummaryActivePayoffGlow/);
+  assert.match(styles, /@keyframes farDispatchSummaryLoopStreakResultGlow/);
   assert.match(styles, /@media \(prefers-reduced-motion: reduce\) \{[\s\S]*\.far-dispatch-branch-choice-summary-item\.is-active-route[\s\S]*animation: none/);
   assert.match(styles, /@media \(prefers-reduced-motion: reduce\) \{[\s\S]*\.far-dispatch-branch-choice-summary-payoff[\s\S]*animation: none/);
+  assert.match(styles, /@media \(prefers-reduced-motion: reduce\) \{[\s\S]*\.far-dispatch-branch-choice-summary-result\.has-loop-streak[\s\S]*animation: none/);
   assert.match(styles, /@media \(max-width: 820px\) \{[\s\S]*\.far-dispatch-branch-choice-summary \{[\s\S]*grid-template-columns: 1fr/);
   assert.match(styles, /@media \(max-width: 820px\) \{[\s\S]*"glyph label action step"/);
   assert.match(styles, /@media \(max-width: 820px\) \{[\s\S]*"glyph phase reward payoff"/);

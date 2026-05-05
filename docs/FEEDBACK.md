@@ -2,6 +2,13 @@
 
 ## 2026-05-05
 
+- GitHub Issues：gh 可用且已认证；2026-05-05 15:37 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。#6 仍是最近更新反馈，指向“后半段只有不停目标，玩法没有真正变化”。
+- 本轮 Product decision 继续处理 #6：路线对照条已经显示 `远航突破 · 连段 X/3` / `绕行突破 · 连段 X/3`，但该信息仍只是普通回航结果短标，当前路线宽栏里缺少独立连段结果信标。
+- 本轮改动新增“远航连段回航结果信标”：当前路线的回航结果短标在携带 `routeLoopStreakText` 时追加 `has-loop-streak`，显示状态点和轻量补光，绕行路线使用单独差异色。
+- 本轮只调整当前路线对照条展示和测试，不新增可见文字、不新增收益、不新增存档字段，不改变远航连段结算、目标指令、分支路线、冷却、连携窗口、星图航段、反馈入口或部署链路。
+- 本地验证已通过：`node --test tests/game.test.js`、`npm install`、`npm test`、`npm run build`、`bun install --no-save`、`bun run test`、`bun run build`；测试数 118 项；构建产物已确认包含 `has-loop-streak` 和 `farDispatchSummaryLoopStreakResultGlow`。
+- 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #6，以及路线对照条连段短标上线后仍缺少结果信标的链路复盘。
+
 - GitHub Issues：gh 可用且已认证；2026-05-05 15:14 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。#6 仍是最近更新反馈，指向“后半段只有不停目标，玩法没有真正变化”。
 - 本轮 Product decision 继续处理 #6：远航连段已经出现在按钮收益、执行反馈、远航调度进度行和闭环复盘，但路线对照条的回航结果短标仍只显示远航突破/绕行突破，玩家在选择协同/绕行或准备回航前不容易从对照条看到连段层数。
 - 本轮改动新增“远航连段路线对照回航短标”：可推进或已完成的协同/绕行路线会显示 `远航突破 · 连段 X/3` 或 `绕行突破 · 连段 X/3`。

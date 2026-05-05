@@ -2,6 +2,14 @@
 
 ## Unreleased
 
+- 远航路线对照条新增“连段回航结果信标”：当前路线的回航结果短标如果包含 `连段 X/3`，会获得专门的状态点和轻量补光，让远航连段在当前路线宽栏里更容易被扫到，继续回应 #6 对后半段玩法变化不明显的反馈。
+- `src/app.js` 根据 `choice.routeLoopStreakText` 为路线对照条回航结果追加 `has-loop-streak`；`src/styles.css` 增加 `.far-dispatch-branch-choice-summary-result.has-loop-streak`、`farDispatchSummaryLoopStreakResultGlow`、绕行差异色和降低动效兜底；`tests/game.test.js` 覆盖静态绑定。
+- 本轮只调整当前路线对照条展示和测试，不新增可见文字、不新增收益、不新增存档字段，不改变远航连段结算、目标指令、分支路线、冷却、连携窗口、星图航段、反馈入口或部署链路。
+- 同步 GitHub Issues 反馈状态：2026-05-05 15:37 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 作为主处理对象。
+- 验证通过：`node --test tests/game.test.js`、`npm install`、`npm test`、`npm run build`、`bun install --no-save`、`bun run test`、`bun run build`；测试数 118 项。
+- 构建产物已确认 `dist/src/app.js` / `dist/src/styles.css` 包含 `has-loop-streak` 和 `farDispatchSummaryLoopStreakResultGlow`。
+- 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #6，以及路线对照条连段短标上线后仍缺少结果信标的链路复盘。
+
 - 远航路线对照条新增“连段回航短标”：协同/绕行路线的回航结果会显示 `远航突破 · 连段 X/3` 或 `绕行突破 · 连段 X/3`，让远航连段在选择路线和准备回目标前也进入同一层对照，继续回应 #6 对后半段玩法变化不明显的反馈。
 - `src/game.js` 从现有 `routeNodeStates` 和 `farRouteLoopStreak` 派生 `routeLoopStreakText` 并追加到 `routeReturnText`；未参与当前路线的待选槽不显示连段短标；`tests/game.test.js` 覆盖路线对照文本里的连段短标和非当前路线边界。
 - 本轮只调整路线对照展示文本和测试，不新增收益、不新增存档字段，不改变远航连段结算、目标指令、分支路线、冷却、连携窗口、星图航段、反馈入口或部署链路。

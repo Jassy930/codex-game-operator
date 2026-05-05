@@ -1,5 +1,28 @@
 # Decision
 
+## 2026-05-05 Product decision：远航连段回航结果信标
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-05 15:37 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有 open bug；本轮继续处理真实反馈 #6“后半段只有不停的目标，玩法没有真正变化”。
+
+当前最大问题：远航连段已经进入按钮收益、执行反馈、远航调度进度行、闭环复盘和路线对照条回航短标，但路线对照条里的 `远航突破 · 连段 X/3` / `绕行突破 · 连段 X/3` 仍只是普通结果短标。玩家在当前路线宽栏里扫“下一步动作 -> 本步收益 -> 回航结果”时，连段层数还没有独立视觉信标。
+
+本轮决策：
+
+- 新增“远航连段回航结果信标”。
+- `src/app.js` 在路线对照条回航结果携带 `routeLoopStreakText` 时，为结果短标追加 `has-loop-streak`。
+- `src/styles.css` 只在当前路线的回航结果短标上显示连段信标点、轻量补光和协同/绕行差异色，并在 `prefers-reduced-motion: reduce` 中关闭动画。
+- 该改动只调整当前路线对照条展示和测试，不新增可见文字、不新增收益、不新增存档字段，不改变远航连段结算、目标指令、分支路线、冷却、连携窗口、星图航段、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-05-05 15:37 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 作为本轮主处理对象。
+- `src/app.js` 会在 `choice.routeLoopStreakText` 存在时给路线对照条回航结果追加 `has-loop-streak`。
+- `src/styles.css` 包含 `farDispatchSummaryLoopStreakResultGlow`、`.far-dispatch-branch-choice-summary-result.has-loop-streak`、当前路线协同/绕行样式和降低动效兜底。
+- `tests/game.test.js` 覆盖 app class 绑定、CSS 信标、keyframes 和降低动效静态绑定。
+- 本地验证已通过：`node --test tests/game.test.js`、`npm install`、`npm test`、`npm run build`、`bun install --no-save`、`bun run test`、`bun run build`；测试数 118 项。
+- 构建产物已确认 `dist/src/app.js` / `dist/src/styles.css` 包含 `has-loop-streak` 和 `farDispatchSummaryLoopStreakResultGlow`。
+- 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #6，以及路线对照条连段短标上线后仍缺少结果信标的链路复盘。
+
 ## 2026-05-05 Product decision：远航连段路线对照回航短标
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-05 15:14 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有 open bug；本轮继续处理真实反馈 #6“后半段只有不停的目标，玩法没有真正变化”。

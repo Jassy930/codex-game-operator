@@ -980,7 +980,8 @@ function renderFarDispatchBranchChoiceSummaryItem(choice) {
   const result = document.createElement("span");
   result.className =
     "far-dispatch-branch-choice-summary-result is-" +
-    getFarDispatchBranchChoiceRouteReturnKind(choice);
+    getFarDispatchBranchChoiceRouteReturnKind(choice) +
+    (choice.routeLoopStreakText ? " has-loop-streak" : "");
   result.textContent = choice.routeReturnText ?? "";
 
   const progress = renderFarDispatchBranchChoiceSummaryProgress(choice);
