@@ -2,6 +2,18 @@
 
 ## Unreleased
 
+- 反馈表单新增本地 SVG 插画：侧栏反馈标题下方现在显示 `src/assets/feedback-visual.svg`，用反馈草稿、评分轨和 Issue 投递路径建立图片化锚点，继续回应 #4 对界面文字密度和图片化表达的反馈。
+- `src/assets/feedback-visual.svg` 新增反馈插画；`index.html` 在反馈标题下方引用 `feedback-scene-image`；`src/styles.css` 固定 16/5 展示比例；`tests/game.test.js` 覆盖静态首页、样式绑定和 SVG 资产存在。
+- 本轮只调整反馈表单视觉展示和测试，不新增可见说明文字，不改变反馈类型、评分、内容输入、校验、Issue 草稿、反馈快照、localStorage 事件、玩法数值、星图、航线指令、远航调度或部署链路。
+- 同步 GitHub Issues 反馈状态：2026-05-05 19:39 CST 当前 5 个 open feedback issue、0 个 open bug issue；#4 作为本轮主处理对象。
+- 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 127 项。
+- 构建产物已确认 `dist/index.html`、`dist/src/styles.css` 和 `dist/src/assets/feedback-visual.svg` 包含 `feedback-scene-image`、`feedback-visual.svg`、`反馈草稿视觉插画` 与 `feedbackAccent`。
+- 代码提交已创建并推送：`9826ee5 feat: add feedback form visual asset`。
+- 发布：GitHub Pages workflow `25374076553` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页、`src/styles.css` 和 `src/assets/feedback-visual.svg` 均返回 HTTP 200，线上产物已确认包含 `feedback-scene-image`、`feedback-visual.svg` 与 `反馈草稿视觉插画`。workflow 继续给出 Node.js 20 actions 弃用提醒，未影响本次部署。
+- 反馈处理：已回复 #4，说明反馈表单本地插画、验证结果、Pages 部署和复测问题；issue 保持 open，评论地址：`https://github.com/Jassy930/codex-game-operator/issues/4#issuecomment-4378850338`。回复后于 2026-05-05 19:39 CST 再次同步 GitHub Issues，当前仍为 5 个 open feedback issue、0 个 open bug issue；#4 更新时间为 `2026-05-05T11:39:09Z`。
+- 钉钉通知未发送：2026-05-05 19:39 CST 运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` / `ROBOT` 相关变量名，当前目录和 `/home/jassy/glm` 两层内未发现 `.env*` 文件；未将 webhook 写入仓库。
+- 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #4，以及反馈表单整体仍缺少本地插画资产的侧栏复盘。
+
 - 反馈表单标题新增视觉短标：侧栏反馈表单标题现在在“反馈”文字前显示固定 26px CSS 消息图形槽，继续回应 #4 对界面文字密度和图片化表达的反馈。
 - `index.html` 为反馈标题添加 `feedback-heading` 和 `feedback-heading-icon`；`src/styles.css` 绘制反馈标题消息短标并稳定标题的图标 + 文本布局；`tests/game.test.js` 覆盖静态首页和 CSS 绑定。
 - 本轮只调整反馈标题展示和测试，不新增可见说明文字，不改变反馈类型、评分、内容输入、校验、Issue 草稿、反馈快照、localStorage 事件、玩法数值、星图、航线指令、远航调度或部署链路。
