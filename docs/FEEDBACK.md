@@ -8,6 +8,9 @@
 - 本轮只增强航线委托完成进度扫视和测试，不新增可见文字、不新增收益、不新增存档字段，不改变指令冷却、连携窗口、策略契合、航线委托奖励数值、星图、远航调度、反馈入口或部署链路。
 - 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 129 项。
 - 构建产物已确认 `dist/src/styles.css` 包含 `.directive-task.is-completed .directive-task-meter-fill::after` 与 `directiveTaskCompletedMeterSweep`。
+- 发布和反馈处理已完成：`d7313d3 feat: add directive task completion meter sweep` 已推送，GitHub Pages workflow `25398312221` 成功；build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页返回 HTTP 200，线上 `src/styles.css` 已确认包含本轮标记。已回复 #3/#6，评论地址：`https://github.com/Jassy930/codex-game-operator/issues/3#issuecomment-4382444062`、`https://github.com/Jassy930/codex-game-operator/issues/6#issuecomment-4382445476`，两个 issue 均保持 open 等待复测。
+- 回复后于 2026-05-06 03:44 CST 再次同步 GitHub Issues，当前仍为 5 个 open feedback issue、0 个 open bug issue；#3 更新时间为 `2026-05-05T19:43:54Z`，#6 更新时间为 `2026-05-05T19:44:09Z`。
+- 钉钉通知未发送：2026-05-06 03:44 CST 运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` / `ROBOT` 相关有效 webhook URL，当前目录和 `/home/jassy/glm` 两层内未发现 `.env*` 文件；未将 webhook 写入仓库。
 - 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #3/#6，以及航线委托完成态已有面板和节点信标但进度填充条缺少完成扫光的链路复盘。
 
 - GitHub Issues：gh 可用且已认证；2026-05-06 03:18 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。#3“玩法太简单”和 #6“后半段玩法没有真正变化”仍是最近需要复测的主动短循环反馈。
