@@ -5,9 +5,13 @@
 - 星图总览新增“远航连段短标”：远航调度总览会在当前连段存在时显示 `连段 X/3`，让跨轮递进收益不只停留在执行区、路线对照条和按钮徽标中，继续回应 #6 对后半段玩法变化不明显的反馈。
 - `src/game.js` 在 `buildProjectOverviewDispatchText()` 中追加 `dispatch.loopStreakText`，并避免与闭环复盘文本重复；`tests/game.test.js` 覆盖星图总览摘要包含 `连段 1/3 · 闭环 1/3`。
 - 本轮只调整星图总览摘要文本和测试，不新增收益、不新增存档字段，不改变远航连段结算、远航调度路线、按钮徽标、反馈入口或部署链路。
-- 同步 GitHub Issues 反馈状态：2026-05-05 16:06 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 作为主处理对象。
+- 同步 GitHub Issues 反馈状态：2026-05-05 16:18 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 作为主处理对象。
 - 验证通过：`node --test tests/game.test.js`、`npm install`、`npm test`、`npm run build`、`bun install --no-save`、`bun run test`、`bun run build`；测试数 118 项。
 - 构建产物已确认 `dist/src/game.js` 包含 `dispatch.loopStreakText && !branchClosureText.includes(dispatch.loopStreakText)`。
+- 代码提交已创建并推送：`19724fc feat: show far streak in star overview`。
+- 发布：提交 `19724fc` 已推送到 `origin/main`；GitHub Pages workflow `25365301558` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页返回 HTTP 200，线上 `src/game.js` 已确认包含 `dispatch.loopStreakText` 与去重逻辑。
+- 反馈处理：已回复 #6，说明远航连段星图总览短标、验证结果、Pages 部署和复测问题，评论地址：`https://github.com/Jassy930/codex-game-operator/issues/6#issuecomment-4377567960`。因该评论中的反引号文本被命令行展开为空白，已补充更正评论明确显示 `连段 X/3`，更正评论地址：`https://github.com/Jassy930/codex-game-operator/issues/6#issuecomment-4377585377`。回复后于 2026-05-05 16:18 CST 再次同步 GitHub Issues，当前仍为 5 个 open feedback issue、0 个 open bug issue；#6 更新时间为 2026-05-05T08:18:05Z。
+- 钉钉通知未发送：2026-05-05 16:18 CST 运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` / `ROBOT` 相关变量名，当前目录和 `/home/jassy/glm` 未发现 `.env*` 文件；未将 webhook 写入仓库。
 - 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #6，以及远航连段在星图总览层缺少短标的链路复盘。
 
 - 远航路线步骤按钮新增“远航连段按钮徽标信标”：当前路线按钮若本次会触发 `远航连段 +X`，该徽标会被前置到路线步骤徽标之后，并获得状态点和轻量补光，让跨轮递进收益不再容易折叠进 `+N` 明细，继续回应 #6 对后半段玩法变化不明显的反馈。

@@ -2,11 +2,16 @@
 
 ## 2026-05-05
 
-- GitHub Issues：gh 可用且已认证；2026-05-05 16:06 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。#6 仍是最近更新反馈，指向“后半段只有不停目标，玩法没有真正变化”。
+- GitHub Issues：gh 可用且已认证；2026-05-05 16:18 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。#6 仍是最近更新反馈，指向“后半段只有不停目标，玩法没有真正变化”。
 - 本轮 Product decision 继续处理 #6：远航连段已经进入执行区、闭环复盘、路线对照条和当前按钮徽标，但星图计划总览里的“远航调度总览”还没有显示当前连段层数。
 - 本轮改动新增“远航连段星图总览短标”：星图总览远航调度摘要会在当前连段存在时显示 `连段 X/3`，并避免与闭环复盘文本重复。
 - 本轮只调整星图总览摘要文本和测试，不新增收益、不新增存档字段，不改变远航连段结算、远航调度路线、按钮徽标、反馈入口或部署链路。
 - 本地验证已通过：`node --test tests/game.test.js`、`npm install`、`npm test`、`npm run build`、`bun install --no-save`、`bun run test`、`bun run build`；测试数 118 项；构建产物已确认包含 `dispatch.loopStreakText && !branchClosureText.includes(dispatch.loopStreakText)`。
+- 代码提交已创建并推送：`19724fc feat: show far streak in star overview`。
+- 发布：GitHub Pages workflow `25365301558` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页返回 HTTP 200，线上 `src/game.js` 已确认包含 `dispatch.loopStreakText` 与去重逻辑。
+- #6 已回复：初次评论说明远航连段星图总览短标、验证结果、Pages 部署和复测问题，评论地址：`https://github.com/Jassy930/codex-game-operator/issues/6#issuecomment-4377567960`；因初次评论中的反引号文本被命令行展开为空白，已补充更正评论明确显示 `连段 X/3`，更正评论地址：`https://github.com/Jassy930/codex-game-operator/issues/6#issuecomment-4377585377`；issue 保持 open。
+- 回复后同步 GitHub Issues：2026-05-05 16:18 CST 当前仍为 5 个 open feedback issue、0 个 open bug issue；#6 更新时间为 2026-05-05T08:18:05Z。
+- 钉钉通知未发送：2026-05-05 16:18 CST 运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` / `ROBOT` 相关变量名，当前目录和 `/home/jassy/glm` 未发现 `.env*` 文件；未将 webhook 写入仓库。
 - 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #6，以及远航连段在星图总览层缺少短标的链路复盘。
 
 - GitHub Issues：gh 可用且已认证；2026-05-05 15:53 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。#6 仍是最近更新反馈，指向“后半段只有不停目标，玩法没有真正变化”。
