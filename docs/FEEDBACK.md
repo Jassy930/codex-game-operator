@@ -7,6 +7,8 @@
 - 本轮改动新增“当前目标条视觉徽记”：目标条左侧显示固定内联 SVG 图形槽，右侧保留目标文本，进度条保持全宽展示。
 - 本轮只调整当前目标条展示和测试，不新增收益、不新增存档字段，不改变目标判定、点击、过载、升级、星图、航线指令、远航调度、反馈入口或部署链路。
 - 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 121 项；构建产物已确认包含 `goal-visual` 与 `goal-copy`。
+- 代码提交已创建并推送：`0643441 feat: add goal strip visual badge`；GitHub Pages workflow `25369522833` 成功，线上首页和 CSS 已确认包含 `goal-visual` 与 `goal-copy`。
+- 2026-05-05 17:53 CST 已在 #4 回复本轮处理结果、提交 `0643441`、GitHub Pages workflow `25369522833` 和线上验证结果；Issue 保持 open 等待复测，评论地址：`https://github.com/Jassy930/codex-game-operator/issues/4#issuecomment-4378197523`。同步后 #4 更新时间为 `2026-05-05T09:53:09Z`。
 - 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #4，以及当前目标条仍缺少图形锚点的首屏复盘。
 
 - GitHub Issues：gh 可用且已认证；2026-05-05 17:29 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。#6 仍是最近更新反馈；本轮为避免继续重复连段可见性补丁，转向处理 #4 的首屏文字密度残留。
