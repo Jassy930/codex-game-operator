@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+- 远航路线步骤按钮新增“行动信标”：20M 后当前远航路线步骤对应的航线指令按钮在整按钮级高亮基础上播放轻量背景扫光和饱和度变化，让玩家扫到当前该执行的目标、分支/续航、回目标或整备指令时有动态锚点，继续回应 #6 对后半段玩法变化不明显的反馈。
+- `src/styles.css` 为 `.directive-button.is-dispatch-route-step` 增加 `directiveDispatchRouteStepBeacon` 动画，并在降低动效偏好中关闭该动画；`tests/game.test.js` 覆盖静态绑定。
+- 本轮只调整当前远航路线步骤对应指令按钮的展示和测试，不新增可见文字、不新增收益、不新增存档字段，不改变指令收益、冷却、连携窗口、星图路线、项目奖励、升级价格、反馈入口或部署链路。
+- 同步 GitHub Issues 反馈状态：2026-05-05 14:01 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 作为主处理对象。
+- 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认 `dist/src/styles.css` 包含 `directiveDispatchRouteStepBeacon` 和 `.directive-button.is-dispatch-route-step` 降低动效兜底。
+
 - 远航调度新增“远航路线步骤按钮信标”：20M 后当前远航路线步骤对应的航线指令按钮会获得整按钮级高亮，让玩家不只靠小徽标，也能直接扫到当前路线该执行哪一个指令，继续回应 #6 对后半段玩法变化不明显的反馈。
 - `src/app.js` 给存在 `dispatchRouteStepText` 的航线指令按钮增加 `is-dispatch-route-step` class；`src/styles.css` 为 `.directive-button.is-dispatch-route-step`、对应 `.directive-visual` 和 `.directive-dispatch-route-step` 增加高亮；`tests/game.test.js` 覆盖静态绑定。
 - 本轮只调整当前远航路线步骤对应指令按钮的展示和测试，不新增可见文字、不新增收益、不新增存档字段，不改变指令收益、冷却、连携窗口、星图路线、项目奖励、升级价格、反馈入口或部署链路。

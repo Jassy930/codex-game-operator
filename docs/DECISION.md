@@ -1,5 +1,27 @@
 # Decision
 
+## 2026-05-05 Product decision：远航路线步骤按钮行动信标
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-05 14:01 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有 open bug；本轮继续处理真实反馈 #6“后半段只有不停的目标，玩法没有真正变化”。
+
+当前最大问题：上一轮已经让 20M 后当前远航路线步骤对应的航线指令按钮获得整按钮级高亮，但它仍主要是静态强调。玩家在目标 -> 分支/续航 -> 回目标连续操作时，当前按钮可以用更轻的动态信标和远航闭环微图、步骤卡、路线对照条保持同层节奏。
+
+本轮决策：
+
+- 新增“远航路线步骤按钮行动信标”。
+- `src/styles.css` 让 `.directive-button.is-dispatch-route-step` 播放 `directiveDispatchRouteStepBeacon` 轻量背景扫光和饱和度变化。
+- 在 `prefers-reduced-motion: reduce` 中关闭该行动信标动画。
+- `tests/game.test.js` 增加静态断言，覆盖按钮行动信标动画、keyframes 和降低动效兜底。
+- 该改动只调整当前远航路线步骤对应指令按钮的展示和测试，不新增可见文字、不新增收益、不新增存档字段，不改变指令收益、冷却、连携窗口、星图路线、项目奖励、升级价格、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-05-05 14:01 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 作为本轮主处理对象。
+- `src/styles.css` 包含 `directiveDispatchRouteStepBeacon 1450ms ease-in-out infinite`、`@keyframes directiveDispatchRouteStepBeacon` 和降低动效兜底。
+- `tests/game.test.js` 覆盖远航路线步骤按钮行动信标静态绑定。
+- 本地完整验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认 `dist/src/styles.css` 包含 `directiveDispatchRouteStepBeacon` 和 `.directive-button.is-dispatch-route-step` 降低动效兜底。
+
 ## 2026-05-05 Product decision：远航路线步骤按钮信标
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-05 13:48 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有 open bug；本轮转回处理真实反馈 #6“后半段只有不停的目标，玩法没有真正变化”。

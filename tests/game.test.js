@@ -2533,8 +2533,11 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(styles, /\.directive-button \.directive-badge-overflow/);
   assert.match(styles, /\.directive-button\.is-recommended/);
   assert.match(styles, /\.directive-button\.is-dispatch-route-step/);
+  assert.match(styles, /animation: directiveDispatchRouteStepBeacon 1450ms ease-in-out infinite/);
   assert.match(styles, /\.directive-button\.is-dispatch-route-step \.directive-visual/);
   assert.match(styles, /\.directive-button\.is-dispatch-route-step \.directive-dispatch-route-step/);
+  assert.match(styles, /@keyframes directiveDispatchRouteStepBeacon/);
+  assert.match(styles, /@media \(prefers-reduced-motion: reduce\) \{[\s\S]*\.directive-button\.is-dispatch-route-step[\s\S]*animation: none/);
   assert.match(styles, /\.directive-button\.is-finisher-recommended/);
   assert.match(styles, /\.directive-button \.directive-dispatch-route-step/);
   assert.match(styles, /\.directive-button \.directive-recommendation/);
