@@ -2,6 +2,14 @@
 
 ## Unreleased
 
+- 点火反馈偏好开关新增视觉短标：主操作区的“点火音效”和“触感反馈”开关现在各自显示固定 24px CSS 图形槽，继续回应 #4 对首屏文字密度和图片化表达的反馈。
+- `index.html` 为两项反馈偏好添加 `feedback-toggle-icon`；`src/styles.css` 绘制声音/触感两类短标；`tests/game.test.js` 覆盖静态首页和 CSS 绑定。
+- 本轮只调整点火反馈偏好开关展示和测试，不新增可见文字，不改变点火收益、音效播放、触感调用、localStorage key、存档字段、升级价格、星图、航线指令、远航调度、反馈入口或部署链路。
+- 同步 GitHub Issues 反馈状态：2026-05-05 18:15 CST 当前 5 个 open feedback issue、0 个 open bug issue；#4 作为本轮主处理对象。
+- 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 122 项。
+- 构建产物已确认 `dist/index.html` 和 `dist/src/styles.css` 包含 `feedback-toggle-icon`、`feedback-toggle-icon-sound` 与 `feedback-toggle-icon-haptic`。
+- 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #4，以及主操作区反馈偏好开关仍缺少图形锚点的首屏复盘。
+
 - 主操作行动提示和离线回收提示新增视觉短标：点击、过载、购买升级、目标完成和离线回收后的核心提示现在左侧显示固定 CSS 图形槽，继续回应 #4 对首屏文字密度和图片化表达的反馈。
 - `src/styles.css` 将 `action-notice` 与 `offline-notice` 改为 30px 图形槽 + 文本区布局，并为行动/离线提示提供不同渐变短标；`tests/game.test.js` 覆盖静态首页提示节点、CSS 绑定和 `[hidden]` 状态保留。
 - 本轮只调整主操作反馈提示展示和测试，不新增可见文字、不新增收益、不新增存档字段，不改变点击收益、离线结算、目标判定、升级价格、星图、航线指令、远航调度、反馈入口或部署链路。

@@ -2,6 +2,14 @@
 
 ## 2026-05-05
 
+- GitHub Issues：gh 可用且已认证；2026-05-05 18:15 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。#4 是最近更新反馈，继续指向“界面文字密度高、希望更多图片”。
+- 本轮 Product decision 继续处理 #4：顶部产能读数、当前目标条、主操作行动提示和离线回收提示已有视觉锚点，但主操作区的点火音效/触感反馈偏好开关仍是 checkbox + 文字。
+- 本轮改动新增“点火反馈偏好视觉短标”：点火音效和触感反馈开关各自显示固定 24px CSS 图形槽，分别用声音/触感图形辅助扫视。
+- 本轮只调整点火反馈偏好开关展示和测试，不新增可见文字、不改变点火收益、音效播放、触感调用、localStorage key、存档字段、升级价格、星图、航线指令、远航调度、反馈入口或部署链路。
+- 验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 122 项。
+- 构建产物已确认 `dist/index.html` 和 `dist/src/styles.css` 包含 `feedback-toggle-icon`、`feedback-toggle-icon-sound` 与 `feedback-toggle-icon-haptic`。
+- 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #4，以及主操作区反馈偏好开关仍缺少图形锚点的首屏复盘。
+
 - GitHub Issues：gh 可用且已认证；2026-05-05 18:00 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。#4 是最近更新反馈，继续指向“界面文字密度高、希望更多图片”；回复后于 2026-05-05 18:09 CST 再次同步，当前仍为 5 个 open feedback issue、0 个 open bug issue，#4 更新时间为 `2026-05-05T10:09:31Z`。
 - 本轮 Product decision 继续处理 #4：顶部产能读数卡和当前目标条已经有视觉锚点，但主操作区行动结果提示与离线回收提示仍是整行纯文字。
 - 本轮改动新增“主操作行动提示视觉短标”：`action-notice` 与 `offline-notice` 左侧显示固定 30px CSS 图形槽，行动提示和离线提示使用不同配色。

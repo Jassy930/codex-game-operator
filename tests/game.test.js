@@ -1342,9 +1342,11 @@ test("点火按钮会渲染点击反馈和过载前兆效果", () => {
   assert.match(indexHtml, /class="feedback-toggle-list"/);
   assert.match(indexHtml, /class="feedback-toggle sound-toggle"/);
   assert.match(indexHtml, /id="soundToggle" type="checkbox" checked/);
+  assert.match(indexHtml, /class="feedback-toggle-icon feedback-toggle-icon-sound"/);
   assert.match(indexHtml, /点火音效/);
   assert.match(indexHtml, /class="feedback-toggle haptic-toggle"/);
   assert.match(indexHtml, /id="hapticToggle" type="checkbox" checked/);
+  assert.match(indexHtml, /class="feedback-toggle-icon feedback-toggle-icon-haptic"/);
   assert.match(indexHtml, /触感反馈/);
   assert.match(indexHtml, /class="core-label">点火<\/span>/);
   assert.match(appJs, /getCoreRewardPreview/);
@@ -1627,6 +1629,9 @@ test("点火按钮会渲染点击反馈和过载前兆效果", () => {
   assert.match(styles, /\.feedback-toggle-list/);
   assert.match(styles, /\.feedback-toggle/);
   assert.match(styles, /\.feedback-toggle input/);
+  assert.match(styles, /\.feedback-toggle-icon/);
+  assert.match(styles, /\.feedback-toggle-icon-sound::before/);
+  assert.match(styles, /\.feedback-toggle-icon-haptic::before/);
   assert.match(styles, /@keyframes coreShockwave/);
   assert.match(styles, /@keyframes coreIdleInviteRing/);
   assert.match(styles, /@keyframes coreRewardHintIdleBeacon/);

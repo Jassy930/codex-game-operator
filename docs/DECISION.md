@@ -1,5 +1,27 @@
 # Decision
 
+## 2026-05-05 Product decision：点火反馈偏好视觉短标
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-05 18:15 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有 open bug；本轮继续处理真实反馈 #4“界面里全是密密麻麻的文字，能不能生成一些图片”。
+
+当前最大问题：顶部产能读数、当前目标条、主操作行动提示和离线回收提示已经补上视觉锚点，但主操作区点火按钮下方的“点火音效 / 触感反馈”偏好开关仍是 checkbox + 文字。它们位于核心点火控件下方，属于首屏操作区的可见控制，仍会延续两个小控件只靠文字识别的扫视压力。
+
+本轮决策：
+
+- 新增“点火反馈偏好视觉短标”。
+- `index.html` 为点火音效和触感反馈开关添加 `feedback-toggle-icon` 图形槽。
+- `src/styles.css` 用 CSS 绘制声音和触感两类 24px 短标，保持 checkbox、文字和偏好存储逻辑不变。
+- `tests/game.test.js` 覆盖静态首页和 CSS 绑定。
+- 该改动只调整点火反馈偏好开关展示和测试，不新增可见文字、不改变点火收益、音效播放、触感调用、localStorage key、存档字段、升级价格、星图、航线指令、远航调度、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-05-05 18:15 CST 当前 5 个 open feedback issue、0 个 open bug issue；#4 作为本轮主处理对象。
+- 点火反馈偏好开关包含 `feedback-toggle-icon-sound` 与 `feedback-toggle-icon-haptic`，并保持原有 checkbox 与文案。
+- 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 122 项。
+- 构建产物已确认 `dist/index.html` 和 `dist/src/styles.css` 包含 `feedback-toggle-icon`、`feedback-toggle-icon-sound` 与 `feedback-toggle-icon-haptic`。
+- 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #4，以及主操作区反馈偏好开关仍缺少图形锚点的首屏复盘。
+
 ## 2026-05-05 Product decision：主操作行动提示视觉短标
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-05 18:00 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有 open bug；本轮继续处理真实反馈 #4“界面里全是密密麻麻的文字，能不能生成一些图片”。
