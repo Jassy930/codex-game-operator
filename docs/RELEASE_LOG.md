@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+- 升级面板插画新增“购买态投光”：静态首页默认 `upgrade-scene-image is-waiting`，运行时根据现有升级可购买状态给升级工坊插画切换 `is-ready`、`is-waiting` 和 `is-goal-ready`，让侧栏升级入口的图片层也表达当前是否可购买，继续回应 #4 的图片化和降文字密度反馈。
+- `src/app.js` 新增 `renderUpgradeSceneImage()` 并复用 `getUpgradeAffordability()`；`src/styles.css` 增加 `.upgrade-scene-image.is-ready/is-waiting/is-goal-ready`、`upgradeSceneImageReadyPulse` 和降低动效兜底；`tests/game.test.js` 覆盖静态标记、运行时绑定和 CSS。
+- 本轮只增强升级面板图片层扫视，不新增可见文字、不新增收益、不新增存档字段，不改变升级价格、购买逻辑、目标系统、星图航段、航线指令、远航调度、反馈入口或部署链路。
+- 同步 GitHub Issues 反馈状态：2026-05-06 06:18 CST 当前 5 个 open issue、5 个 open feedback issue、0 个 open bug issue；#4 作为本轮主关联反馈，#2/#3/#6 作为间接关联反馈。
+- 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 132 项。
+- 构建产物已确认 `dist/index.html`、`dist/src/app.js` 和 `dist/src/styles.css` 包含 `upgrade-scene-image is-waiting`、`upgradeSceneImage`、`is-ready`、`is-waiting`、`is-goal-ready` 与 `upgradeSceneImageReadyPulse`。
+
 - 反馈快照新增“星图章节上下文”：游戏内反馈生成 GitHub Issue 时，快照会在 `星图进度：...` 后追加 `星图章节：...`，记录当前章节、章节内位置、全局航段、阶段剩余段数和下一阶段/最终阶段，继续为 #2/#3/#6 的内容丰富度、主动玩法和后半段复测提供可诊断上下文。
 - `src/feedback.js` 复用 `getProjectOverview().chapterText` 格式化章节快照字段；`tests/game.test.js` 覆盖早期首段星图 1/4 快照和 26/57 远航长尾 14/44 后半段快照。
 - 本轮只增强真实反馈诊断能力，不新增界面可见文字、不新增收益、不新增存档字段，不改变星图航段、项目奖励、目标判定、航线策略、航线指令、远航调度、反馈入口交互或部署链路。

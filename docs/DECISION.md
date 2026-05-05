@@ -1,5 +1,27 @@
 # Decision
 
+## 2026-05-06 Product decision：升级插画购买态投光
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-06 06:18 CST 已同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。没有 open bug；#4“界面密密麻麻，希望更多图片”仍等待图片化复测，#2/#3/#6 仍等待内容丰富度、主动玩法和后半段复测。
+
+当前最大问题：升级面板已经有本地 `upgrade-visual.svg` 插画和升级卡片图标，但插画层仍是静态图。玩家判断当前能否购买升级仍主要依赖卡片内 `可购买` / `还差 X` 文字和按钮状态，图片层没有参与升级入口的 ready/waiting 扫视反馈。
+
+本轮决策：
+
+- 新增“升级插画购买态投光”。
+- `src/app.js` 新增 `renderUpgradeSceneImage()`，根据现有 `getUpgradeAffordability()` 给 `.upgrade-scene-image` 切换 `is-ready`、`is-waiting` 和 `is-goal-ready`。
+- `src/styles.css` 为 ready 状态提供青绿/金色轻量投光和 `upgradeSceneImageReadyPulse`，waiting 状态降低饱和度；`prefers-reduced-motion: reduce` 下关闭 ready 动画。
+- `index.html` 静态首页默认标记 `upgrade-scene-image is-waiting`；`tests/game.test.js` 覆盖静态标记、运行时绑定、样式和降低动效兜底。
+- 该改动只增强升级面板图片层的可购买状态扫视，不新增可见文字、不新增收益、不新增存档字段，不改变升级价格、购买逻辑、目标系统、星图航段、航线指令、远航调度、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-05-06 06:18 CST 当前 5 个 open issue、5 个 open feedback issue、0 个 open bug issue；#4 作为本轮主关联反馈，#2/#3/#6 作为间接关联反馈。
+- 没有可购买升级时升级插画显示 `is-waiting` 降权状态；存在任意可购买升级时显示 `is-ready` 投光；当前目标升级可购买时额外显示 `is-goal-ready`。
+- 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 132 项。
+- 构建产物已确认 `dist/index.html`、`dist/src/app.js` 和 `dist/src/styles.css` 包含 `upgrade-scene-image is-waiting`、`upgradeSceneImage`、`is-ready`、`is-waiting`、`is-goal-ready` 与 `upgradeSceneImageReadyPulse`。
+- 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #4，以及当前升级插画已存在但没有可购买状态的展示链路复盘。
+
 ## 2026-05-06 Product decision：星图章节反馈快照
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-06 06:01 CST 已同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。没有 open bug；#2“内容丰富度太差”、#3“玩法太简单”和 #6“后半段玩法没有真正变化”仍在等待带新快照的真实复测。

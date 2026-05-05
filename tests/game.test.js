@@ -1801,20 +1801,31 @@ test("升级卡片会渲染可扫视图标", () => {
 
 test("静态首页会渲染升级面板本地插画", () => {
   const indexHtml = readFileSync(new URL("../index.html", import.meta.url), "utf8");
+  const appJs = readFileSync(new URL("../src/app.js", import.meta.url), "utf8");
   const styles = readFileSync(new URL("../src/styles.css", import.meta.url), "utf8");
   const asset = readFileSync(
     new URL("../src/assets/upgrade-visual.svg", import.meta.url),
     "utf8"
   );
 
-  assert.match(indexHtml, /class="upgrade-scene-image"/);
+  assert.match(indexHtml, /class="upgrade-scene-image is-waiting"/);
   assert.match(indexHtml, /src="\.\/src\/assets\/upgrade-visual\.svg"/);
   assert.match(
     indexHtml,
     /alt="聚能透镜、自动采集臂、星核稳定器和星核谐振器组成的升级插画"/
   );
+  assert.match(appJs, /upgradeSceneImage: document\.querySelector\("\.upgrade-scene-image"\)/);
+  assert.match(appJs, /function renderUpgradeSceneImage\(current, goal\)/);
+  assert.match(appJs, /elements\.upgradeSceneImage\.classList\.toggle\("is-ready", hasReadyUpgrade\)/);
+  assert.match(appJs, /elements\.upgradeSceneImage\.classList\.toggle\("is-waiting", !hasReadyUpgrade\)/);
+  assert.match(appJs, /elements\.upgradeSceneImage\.classList\.toggle\("is-goal-ready", goalUpgradeReady\)/);
   assert.match(styles, /\.upgrade-scene-image/);
+  assert.match(styles, /\.upgrade-scene-image\.is-ready/);
+  assert.match(styles, /\.upgrade-scene-image\.is-goal-ready/);
+  assert.match(styles, /\.upgrade-scene-image\.is-waiting/);
   assert.match(styles, /aspect-ratio: 32 \/ 11/);
+  assert.match(styles, /@keyframes upgradeSceneImageReadyPulse/);
+  assert.match(styles, /@media \(prefers-reduced-motion: reduce\) \{[\s\S]*\.upgrade-scene-image\.is-ready[\s\S]*animation: none/);
   assert.match(asset, /升级工坊视觉插画/);
   assert.match(asset, /id="upgradeRail"/);
 });

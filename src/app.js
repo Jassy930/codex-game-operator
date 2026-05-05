@@ -226,6 +226,7 @@ const elements = {
   goalMeter: document.querySelector("#goalMeter"),
   offlineNotice: document.querySelector("#offlineNotice"),
   actionNotice: document.querySelector("#actionNotice"),
+  upgradeSceneImage: document.querySelector(".upgrade-scene-image"),
   upgradeList: document.querySelector("#upgradeList"),
   projectOverview: document.querySelector("#projectOverview"),
   projectOverviewDetail: document.querySelector("#projectOverviewDetail"),
@@ -479,10 +480,24 @@ function render() {
   );
   elements.projectFilterSummary.textContent = projectFilterSummary;
 
+  renderUpgradeSceneImage(current, goal);
   elements.upgradeList.replaceChildren(
     ...UPGRADE_DEFS.map((upgrade) => renderUpgrade(upgrade, current, goal))
   );
   renderProjectList(projects);
+}
+
+function renderUpgradeSceneImage(current, goal) {
+  const hasReadyUpgrade = UPGRADE_DEFS.some(
+    (upgrade) => getUpgradeAffordability(current, upgrade.id).canBuy
+  );
+  const goalUpgradeReady = goal.upgradeId
+    ? getUpgradeAffordability(current, goal.upgradeId).canBuy
+    : false;
+
+  elements.upgradeSceneImage.classList.toggle("is-ready", hasReadyUpgrade);
+  elements.upgradeSceneImage.classList.toggle("is-waiting", !hasReadyUpgrade);
+  elements.upgradeSceneImage.classList.toggle("is-goal-ready", goalUpgradeReady);
 }
 
 function renderCoreFeedback(combo) {
