@@ -4979,6 +4979,11 @@ function buildProjectOverviewDispatchText(dispatch) {
     dispatch.loopStreakText && !branchClosureText.includes(dispatch.loopStreakText)
       ? " · " + dispatch.loopStreakText
       : "";
+  const loopCapstoneText =
+    dispatch.loopCapstoneText &&
+    !branchClosureText.includes(dispatch.loopCapstoneText)
+      ? " · " + dispatch.loopCapstoneText
+      : "";
   const currentStep = Array.isArray(dispatch.loopSteps)
     ? dispatch.loopSteps.find((step) => step.state === "current")
     : null;
@@ -5003,6 +5008,7 @@ function buildProjectOverviewDispatchText(dispatch) {
     branchPlanStepText +
     branchClosureText +
     loopStreakText +
+    loopCapstoneText +
     " · 闭环 " +
     dispatch.loopProgress +
     "/" +

@@ -1,5 +1,27 @@
 # Decision
 
+## 2026-05-05 Product decision：远航满段回响星图总览短标
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-05 22:25 CST 已同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。没有 open bug；本轮继续处理真实反馈 #6“到后半段，游戏玩法已经开始无聊了，只有不停的目标，但是游戏玩法没有真正的变化”。
+
+当前最大问题：远航满段回响已经进入按钮预览、执行反馈、路线对照、卡片提示、主调度条和反馈快照，但星图总览的“远航调度总览”仍只显示 `连段 2/3 · 闭环 2/3`。如果玩家主要从星图层查看当前航段，仍需要回到主调度条或路线对照条才知道下一步回目标会触发满段终点奖励。
+
+本轮决策：
+
+- 新增“远航满段回响星图总览短标”。
+- `src/game.js` 在 `buildProjectOverviewDispatchText()` 中追加现有 `dispatch.loopCapstoneText`，并避免与闭环复盘文案重复。
+- `tests/game.test.js` 覆盖当前远航闭环下一步回目标会触发满段回响时，星图总览摘要显示 `连段 2/3 · 满段回响 +10% · 闭环 2/3`。
+- 该改动只增强星图总览摘要可见性，不新增收益、不新增存档字段，不改变远航连段结算、满段回响奖励、目标指令、协同/绕行路线、冷却、连携窗口、星图航段、反馈入口交互或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-05-05 22:25 CST 当前 5 个 open issue、5 个 open feedback issue、0 个 open bug issue；#6 作为本轮主处理对象。
+- 20M 后当前远航闭环下一步回目标会触发满段回响时，星图总览 `dispatchText` 包含 `连段 2/3 · 满段回响 +10% · 闭环 2/3`。
+- 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 128 项。
+- 构建产物已确认 `dist/src/game.js` 包含 `dispatch.loopCapstoneText` 与 `loopCapstoneText +` 的星图总览摘要追加逻辑。
+- 提交、推送、GitHub Pages 发布、Issue 回复和钉钉通知状态待本轮后续步骤完成后回填。
+- 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #6，以及满段回响进入主调度条和反馈快照后星图总览仍缺少终点奖励预告的链路复盘。
+
 ## 2026-05-05 Product decision：远航满段回响反馈快照短标
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-05 22:10 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有 open bug；本轮继续处理真实反馈 #6“到后半段，游戏玩法已经开始无聊了，只有不停的目标，但是游戏玩法没有真正的变化”。

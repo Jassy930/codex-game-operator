@@ -2,6 +2,15 @@
 
 ## Unreleased
 
+- 星图总览新增远航满段回响短标：20M 后当前远航闭环下一步回目标会把连段推到 3/3 时，“远航调度总览”会显示 `连段 2/3 · 满段回响 +10% · 闭环 2/3`，继续回应 #6 对后半段玩法变化不明显的反馈。
+- `src/game.js` 在 `buildProjectOverviewDispatchText()` 中追加现有 `dispatch.loopCapstoneText` 并避免与闭环复盘文案重复；`tests/game.test.js` 覆盖满段回响预告状态下的星图总览摘要。
+- 本轮只增强星图总览摘要展示和测试，不新增收益、不新增存档字段，不改变远航连段结算、满段回响奖励、目标指令、协同/绕行路线、冷却、连携窗口、星图航段、反馈入口交互或部署链路。
+- 同步 GitHub Issues 反馈状态：2026-05-05 22:25 CST 当前 5 个 open issue、5 个 open feedback issue、0 个 open bug issue；#6 作为本轮主处理对象。
+- 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 128 项。
+- 构建产物已确认 `dist/src/game.js` 包含 `dispatch.loopCapstoneText` 与 `loopCapstoneText +` 的星图总览摘要追加逻辑。
+- 提交、发布、反馈回复和钉钉通知状态待本轮后续步骤完成后回填。
+- 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #6，以及满段回响进入主调度条和反馈快照后星图总览仍缺少终点奖励预告的链路复盘。
+
 - 反馈快照新增远航满段回响预告短标：20M 后当前远航闭环下一步回目标会把连段推到 3/3 时，游戏内反馈 Issue 草稿会额外显示 `远航满段回响：满段回响 +10%`，继续回应 #6 对后半段玩法变化不明显的复测定位需求。
 - `src/feedback.js` 从 `getFarRouteDispatch()` 读取 `loopCapstoneText` 并写入 `snapshot.farRouteLoopCapstone`；`createFeedbackIssueBody()` 在存在该值时追加独立快照行；`tests/game.test.js` 覆盖满段回响预告状态下的反馈快照。
 - 本轮只增强反馈快照可诊断性，不新增收益、不新增存档字段，不改变远航连段结算、满段回响奖励、目标指令、协同/绕行路线、冷却、连携窗口、星图航段、反馈入口交互或部署链路。

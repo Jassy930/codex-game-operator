@@ -4721,6 +4721,7 @@ test("远航调度会在 20M 后按当前航段指定目标指令", () => {
     }
   };
   const capstoneDispatch = getFarRouteDispatch(capstoneLoopState, 60_000);
+  const capstoneOverview = getProjectOverview(capstoneLoopState, 60_000);
   const capstoneStatus = getDirectiveStatus(capstoneLoopState, 60_000);
   const capstoneIgnitionOption = capstoneStatus.options.find(
     (option) => option.id === "ignition-salvo"
@@ -4737,6 +4738,10 @@ test("远航调度会在 20M 后按当前航段指定目标指令", () => {
   assert.equal(capstoneDispatch.loopCapstoneText, "满段回响 +10%");
   assert.match(capstoneDispatch.loopStatusText, /连段 2\/3/);
   assert.match(capstoneDispatch.loopStatusText, /满段回响 \+10%/);
+  assert.match(
+    capstoneOverview.dispatchText,
+    /连段 2\/3 · 满段回响 \+10% · 闭环 2\/3/
+  );
   assert.deepEqual(
     capstoneDispatch.branchChoices.map((choice) => choice.routeReturnText),
     ["远航突破 · 连段 3/3 · 满段回响 +10%", "绕行突破"]
