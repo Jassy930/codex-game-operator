@@ -2147,6 +2147,12 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(appJs, /elements\.directivePlanTrack\.classList\.toggle\("is-next-waiting", nextWaiting\)/);
   assert.match(appJs, /isNext && nextReady \? "is-next-ready" : ""/);
   assert.match(appJs, /isNext && nextWaiting \? "is-next-waiting" : ""/);
+  assert.match(styles, /\.directive-plan-track::before/);
+  assert.match(styles, /\.directive-plan-track\.is-next-ready::before/);
+  assert.match(styles, /\.directive-plan-track\.is-next-waiting::before/);
+  assert.match(styles, /animation: directivePlanTrackReadyRail 1800ms ease-in-out infinite/);
+  assert.match(styles, /@keyframes directivePlanTrackReadyRail/);
+  assert.match(styles, /\.directive-plan-track\.is-next-ready::before,\s+\.directive-plan-step\.is-next-ready/);
   assert.match(appJs, /rewardText = plan\.nextRewardText \?\? ""/);
   assert.match(appJs, /reward\.className = "directive-plan-step-reward"/);
   assert.match(appJs, /label\.textContent = nextActionText/);

@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+- 指令轮换视觉轨新增“整轨状态光”：100K 后 `#directivePlanTrack.is-next-ready/is-next-waiting` 会在轨道后方显示 ready 绿色路线光或 waiting 暖色等待光，让下一步格和整条短循环路线的可执行状态同层可见，继续回应 #3/#6 对主动短循环和后半段三步结构可读性的反馈，同时不增加 #4 反馈中的文字密度。
+- `src/styles.css` 增加 `.directive-plan-track::before`、`.directive-plan-track.is-next-ready::before`、`.directive-plan-track.is-next-waiting::before`、`directivePlanTrackReadyRail` 和降低动效兜底；`tests/game.test.js` 覆盖整轨 ready/waiting 样式、keyframes 和 reduced motion 绑定。
+- 本轮只增强指令轮换路线层可执行性扫视，不新增可见文字、不新增收益、不新增存档字段，不改变点火收益、指令冷却、连携窗口、策略契合、航线委托、远航调度、星图航段、反馈入口或部署链路。
+- 同步 GitHub Issues 反馈状态：2026-05-06 04:57 CST 当前 5 个 open issue、5 个 open feedback issue、0 个 open bug issue；#3/#4/#6 作为本轮关联反馈。
+- 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 129 项。
+- 构建产物已确认 `dist/src/styles.css` 包含 `.directive-plan-track.is-next-ready::before`、`.directive-plan-track.is-next-waiting::before` 与 `directivePlanTrackReadyRail`。
+
 - 指令轮换视觉轨新增“下一步格可执行信标”：100K 后推荐下一格会根据推荐指令是否可执行显示 ready 边框、轻量补光或 waiting 底色，让玩家在 3 格轨上直接扫到当前下一步能否推进，继续回应 #3/#6 对主动短循环和后半段三步结构可读性的反馈，同时不增加 #4 反馈中的文字密度。
 - `src/app.js` 让 `renderDirectivePlanTrack()` 根据 `plan.nextDirectiveIds` 对应按钮的 `ready` 状态切换 `#directivePlanTrack.is-next-ready/is-next-waiting` 与 `.directive-plan-step.is-next-ready/is-next-waiting`；`src/styles.css` 增加 ready/waiting 样式、`directivePlanNextReadyBeacon` 和降低动效兜底；`tests/game.test.js` 覆盖运行时绑定和 CSS。
 - 本轮只增强指令轮换视觉轨可执行性扫视，不新增可见文字、不新增收益、不新增存档字段，不改变点火收益、指令冷却、连携窗口、策略契合、航线委托、远航调度、星图航段、反馈入口或部署链路。

@@ -1,5 +1,27 @@
 # Decision
 
+## 2026-05-06 Product decision：指令轮换整轨状态光
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-06 04:57 CST 已同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。没有 open bug；#3“玩法太简单”、#4“界面密密麻麻，希望更多图片”和 #6“后半段玩法没有真正变化”仍是需要持续复测的真实反馈。
+
+当前最大问题：指令轮换 3 格视觉轨已经显示下一步动作、收益和下一格 ready/waiting 状态，但整条轨道背景仍是静态的。玩家能看到“哪个格子是下一步”，却还需要从格子边框判断整条短循环路线现在是可推进还是等待冷却。
+
+本轮决策：
+
+- 新增“指令轮换整轨状态光”。
+- `src/styles.css` 复用已有的 `#directivePlanTrack.is-next-ready/is-next-waiting` 状态，在 `.directive-plan-track::before` 渲染轨道后方状态光。
+- ready 状态显示绿色路线光、轻量补光和 `directivePlanTrackReadyRail`；waiting 状态显示暖色等待底光；`prefers-reduced-motion: reduce` 下关闭 ready 动画。
+- `tests/game.test.js` 覆盖整轨 ready/waiting 选择器、keyframes 和降低动效兜底。
+- 该改动只增强 100K 后指令轮换路线层的可执行性扫视，不新增可见文字、不新增收益、不新增存档字段，不改变点火收益、指令冷却、连携窗口、策略契合、航线委托、远航调度、星图航段、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-05-06 04:57 CST 当前 5 个 open issue、5 个 open feedback issue、0 个 open bug issue；#3/#4/#6 作为本轮关联反馈。
+- 当前下一步推荐指令可执行时，指令轮换 3 格轨道后方显示 ready 绿色路线光；下一步推荐指令均在冷却时显示 waiting 暖色等待光；锁定态和完成态不误标整轨状态光。
+- 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 129 项。
+- 构建产物已确认 `dist/src/styles.css` 包含 `.directive-plan-track.is-next-ready::before`、`.directive-plan-track.is-next-waiting::before` 与 `directivePlanTrackReadyRail`。
+- 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #3/#4/#6，以及指令轮换视觉轨已有下一步格状态但缺少整轨 ready/waiting 路线光的链路复盘。
+
 ## 2026-05-06 Product decision：指令轮换下一步格可执行信标
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-06 04:39 CST 已同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。没有 open bug；#3“玩法太简单”、#4“界面密密麻麻，希望更多图片”和 #6“后半段玩法没有真正变化”仍是需要持续复测的真实反馈。

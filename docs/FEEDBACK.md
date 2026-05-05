@@ -2,6 +2,13 @@
 
 ## 2026-05-06
 
+- GitHub Issues：gh 可用且已认证；2026-05-06 04:57 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。#3/#6 仍是主动短循环和后半段玩法复测反馈，#4 仍是图片化和文字密度复测反馈。
+- 本轮 Product decision 处理 #3/#4/#6：上一轮已让当前下一格显示 ready/waiting，但整条 3 格指令轮换轨道仍是静态背景；玩家扫路线时缺少一层“整条短循环现在可推进/等待”的图形反馈。
+- 本轮改动新增“指令轮换整轨状态光”：复用 `#directivePlanTrack.is-next-ready/is-next-waiting`，在 `.directive-plan-track::before` 显示 ready 绿色路线光或 waiting 暖色等待光；ready 状态播放 `directivePlanTrackReadyRail`，降低动效偏好下关闭动画。
+- 本轮只增强指令轮换路线层可执行性扫视和测试，不新增可见文字、不新增收益、不新增存档字段，不改变点火收益、指令冷却、连携窗口、策略契合、航线委托、远航调度、星图航段、反馈入口或部署链路。
+- 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 129 项。
+- 构建产物已确认 `dist/src/styles.css` 包含 `.directive-plan-track.is-next-ready::before`、`.directive-plan-track.is-next-waiting::before` 与 `directivePlanTrackReadyRail`。
+
 - GitHub Issues：gh 可用且已认证；2026-05-06 04:39 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。#3/#6 仍是主动短循环和后半段玩法复测反馈，#4 仍是图片化和文字密度复测反馈。
 - 本轮 Product decision 处理 #3/#4/#6：指令轮换视觉轨已经显示下一步动作和收益，但下一步是否可执行主要在航线委托卡和按钮区呈现；3 格轨本身缺少 ready/waiting 状态信标。
 - 本轮改动新增“指令轮换下一步格可执行信标”：`renderDirectivePlanTrack()` 根据下一步推荐指令的 `ready` 状态给 `#directivePlanTrack` 和当前 `.directive-plan-step.is-next` 切换 `is-next-ready` / `is-next-waiting`；ready 格显示绿色边框、补光和轻量呼吸，waiting 格显示等待态底色。

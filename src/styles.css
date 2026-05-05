@@ -2402,6 +2402,8 @@ h2 {
 }
 
 .directive-plan-track {
+  position: relative;
+  isolation: isolate;
   display: grid;
   width: min(100%, 560px);
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -2409,8 +2411,47 @@ h2 {
   margin: -18px 0 0;
 }
 
+.directive-plan-track::before {
+  position: absolute;
+  inset: -5px;
+  z-index: 0;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  background: rgba(248, 243, 231, 0);
+  content: "";
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    background 140ms ease,
+    border-color 140ms ease,
+    opacity 140ms ease,
+    box-shadow 140ms ease;
+}
+
+.directive-plan-track.is-next-ready::before {
+  border-color: rgba(105, 214, 154, 0.28);
+  background:
+    linear-gradient(90deg, rgba(105, 214, 154, 0.12), rgba(244, 178, 60, 0.08)),
+    rgba(18, 20, 30, 0.08);
+  box-shadow:
+    0 0 0 1px rgba(105, 214, 154, 0.06),
+    0 0 18px rgba(105, 214, 154, 0.12);
+  opacity: 1;
+  animation: directivePlanTrackReadyRail 1800ms ease-in-out infinite;
+}
+
+.directive-plan-track.is-next-waiting::before {
+  border-color: rgba(255, 187, 105, 0.2);
+  background:
+    linear-gradient(90deg, rgba(255, 187, 105, 0.1), rgba(161, 124, 255, 0.07)),
+    rgba(18, 20, 30, 0.08);
+  box-shadow: 0 0 14px rgba(255, 187, 105, 0.08);
+  opacity: 1;
+}
+
 .directive-plan-step {
   position: relative;
+  z-index: 1;
   display: grid;
   min-height: 70px;
   align-content: center;
@@ -8809,6 +8850,24 @@ h2 {
   }
 }
 
+@keyframes directivePlanTrackReadyRail {
+  0%,
+  100% {
+    filter: saturate(1);
+    box-shadow:
+      0 0 0 1px rgba(105, 214, 154, 0.06),
+      0 0 16px rgba(105, 214, 154, 0.1);
+  }
+
+  50% {
+    filter: saturate(1.14);
+    box-shadow:
+      0 0 0 1px rgba(105, 214, 154, 0.12),
+      0 0 22px rgba(105, 214, 154, 0.18),
+      0 0 10px rgba(244, 178, 60, 0.1);
+  }
+}
+
 @keyframes directiveTaskNextNodeBeacon {
   0%,
   100% {
@@ -8986,6 +9045,7 @@ h2 {
   .core-gain-pop.is-showing::after,
   .core-gain-pop.is-overload-gain.is-showing::after,
   .directive-scene-image.is-active,
+  .directive-plan-track.is-next-ready::before,
   .directive-plan-step.is-next-ready,
   .directive-task.is-completed,
   .directive-task.is-next-ready,
