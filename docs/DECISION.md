@@ -1,5 +1,28 @@
 # Decision
 
+## 2026-05-05 Product decision：远航连段反馈快照短标
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-05 17:09 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有 open bug；本轮继续处理真实反馈 #6“后半段只有不停的目标，玩法没有真正变化”。
+
+当前最大问题：远航连段已经进入主调度条、按钮、路线对照条、闭环复盘、星图总览、项目卡片和当前航段视觉卡，但游戏内反馈快照仍主要把连段层数夹在远航调度长句或闭环进度句里。后续复测 #6 时，维护者需要直接看到玩家提交反馈时是否处于有效连段状态。
+
+本轮决策：
+
+- 新增“远航连段反馈快照短标”。
+- `createFeedbackEntry()` 从 `getFarRouteDispatch()` 读取 `loopStreakText`，写入 `snapshot.farRouteLoopStreak`。
+- `createFeedbackIssueBody()` 在连段存在时追加独立快照行 `- 远航连段：连段 X/3`。
+- 该改动只调整游戏内反馈 Issue 草稿和测试，不新增收益、不新增存档字段，不改变远航连段结算、远航调度路线、界面展示、反馈入口交互或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-05-05 17:09 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 作为本轮主处理对象。
+- 有效远航连段存在时，反馈 Issue body 会包含独立 `- 远航连段：连段 X/3` 快照行。
+- 无有效远航连段时，不额外输出远航连段快照行，避免早期反馈增加无效噪音。
+- `tests/game.test.js` 覆盖脉冲航闸附近带 `farRouteLoopStreak: 1` 的反馈快照。
+- 本地验证已通过：`node --test tests/game.test.js`、`npm install`、`npm test`、`npm run build`、`bun install --no-save`、`bun run test`、`bun run build`；测试数 119 项。
+- 构建产物已确认 `dist/src/feedback.js` 包含 `farRouteLoopStreak` 与 `- 远航连段：`。
+- 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #6，以及后续复测需要更直接记录玩家远航连段状态的反馈链路复盘。
+
 ## 2026-05-05 Product decision：远航连段主调度条信标
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-05 16:55 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有 open bug；本轮继续处理真实反馈 #6“后半段只有不停的目标，玩法没有真正变化”。

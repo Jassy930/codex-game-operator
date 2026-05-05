@@ -41,6 +41,7 @@ export function createFeedbackEntry({
   const currentState = state ?? {};
   const currentGoal = goal ?? {};
   const farRouteDispatch = getFarRouteDispatch(currentState);
+  const farRouteLoopStreak = formatFeedbackFarRouteLoopStreak(farRouteDispatch);
 
   return {
     id:
@@ -62,6 +63,7 @@ export function createFeedbackEntry({
       routeStance: getFeedbackRouteStanceId(currentState.routeStance),
       directiveMastery: getFeedbackDirectiveMastery(currentState.directiveMastery),
       farRouteDispatch: formatFeedbackFarRouteDispatch(farRouteDispatch),
+      farRouteLoopStreak,
       combo: currentState.combo ?? 0,
       goal: currentGoal.value ?? "未知",
       upgrades: currentState.upgrades ?? {}
@@ -82,6 +84,9 @@ export function createFeedbackIssueBody(entry) {
   const upgrades = Object.entries(snapshot.upgrades)
     .map(([id, level]) => `${id}:${level}`)
     .join(", ");
+  const farRouteLoopStreakLine = snapshot.farRouteLoopStreak
+    ? [`- 远航连段：${snapshot.farRouteLoopStreak}`]
+    : [];
 
   return [
     "## 玩家反馈",
@@ -102,6 +107,7 @@ export function createFeedbackIssueBody(entry) {
     `- 航线策略：${getFeedbackRouteStanceName(snapshot.routeStance)}`,
     `- 指令熟练：${snapshot.directiveMastery.stacks}/${DIRECTIVE_MASTERY_MAX_STACKS}`,
     `- 远航调度：${snapshot.farRouteDispatch}`,
+    ...farRouteLoopStreakLine,
     `- 连击：${snapshot.combo}`,
     `- 当前目标：${snapshot.goal}`,
     `- 升级：${upgrades || "无"}`,
@@ -137,6 +143,10 @@ function formatFeedbackFarRouteDispatch(dispatch) {
   const text = String(dispatch?.text ?? "未知").replace(/^远航调度：/, "");
   const loopStatusText = dispatch?.loopStatusText ? " · " + dispatch.loopStatusText : "";
   return text + loopStatusText;
+}
+
+function formatFeedbackFarRouteLoopStreak(dispatch) {
+  return String(dispatch?.loopStreakText ?? "");
 }
 
 function clampRating(value) {

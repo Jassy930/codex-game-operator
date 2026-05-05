@@ -6126,3 +6126,46 @@ test("反馈入口会生成带游戏快照的 GitHub Issue 链接", () => {
   assert.match(body, /闭环进度 0\/3 · 20M 后解锁/);
   assert.match(body, /lens:1/);
 });
+
+test("反馈快照会记录当前远航连段层数", () => {
+  const state = {
+    ...createInitialState(0),
+    energy: 3_472_075,
+    totalEnergy: 24_768_842,
+    energyPerClick: 16,
+    energyPerSecond: 17.5,
+    overloadBonus: 27,
+    routeStance: "cruise",
+    directiveMastery: {
+      stacks: 2,
+      expiresAt: Number.MAX_SAFE_INTEGER
+    },
+    directiveChain: {
+      lastDirectiveId: "ignition-salvo",
+      stacks: 1,
+      expiresAt: Number.MAX_SAFE_INTEGER
+    },
+    farRouteLoopStreak: 1,
+    upgrades: {
+      lens: 15,
+      collector: 25,
+      stabilizer: 21,
+      resonator: 11
+    }
+  };
+  const entry = createFeedbackEntry({
+    type: "experience",
+    rating: 3,
+    message: "后半段路线变化还是不明显",
+    state,
+    goal: { value: "脉冲航闸" },
+    sessionId: "far-streak-session",
+    createdAt: "2026-05-05T09:10:00.000Z"
+  });
+
+  const body = createFeedbackIssueBody(entry);
+
+  assert.match(body, /远航调度：航段 27\/57 脉冲航闸/);
+  assert.match(body, /闭环进度 2\/3/);
+  assert.match(body, /- 远航连段：连段 1\/3/);
+});

@@ -2,6 +2,13 @@
 
 ## 2026-05-05
 
+- GitHub Issues：gh 可用且已认证；2026-05-05 17:09 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。#6 仍是最近更新反馈，指向“后半段只有不停目标，玩法没有真正变化”。
+- 本轮 Product decision 继续处理 #6：远航连段已经进入主调度条、按钮、路线对照条、闭环复盘、星图总览、项目卡片和当前航段视觉卡，但反馈快照里仍缺少独立的当前连段短标。
+- 本轮改动新增“远航连段反馈快照短标”：游戏内反馈 Issue 草稿在当前远航连段有效时，会额外输出 `- 远航连段：连段 X/3`，方便后续复测直接确认玩家是否处于跨轮递进状态。
+- 本轮只调整反馈快照和测试，不新增收益、不新增存档字段，不改变远航连段结算、远航调度路线、界面展示、反馈入口交互或部署链路。
+- 本地验证已通过：`node --test tests/game.test.js`、`npm install`、`npm test`、`npm run build`、`bun install --no-save`、`bun run test`、`bun run build`；测试数 119 项；构建产物已确认包含 `farRouteLoopStreak` 与 `- 远航连段：`。
+- 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #6，以及后续复测需要更直接记录玩家远航连段状态的反馈链路复盘。
+
 - GitHub Issues：gh 可用且已认证；2026-05-05 16:55 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。#6 仍是最近更新反馈，指向“后半段只有不停目标，玩法没有真正变化”。
 - 本轮 Product decision 继续处理 #6：远航连段已经进入按钮、路线对照条、闭环复盘、星图总览、项目卡片和当前航段视觉卡，但主操作区远航调度条仍主要把连段层数放在闭环进度长句里。
 - 本轮改动新增“远航连段主调度条信标”：有效连段存在时，远航调度主面板会显示独立 `连段 X/3` 胶囊，并给面板追加 `has-loop-streak` 状态。

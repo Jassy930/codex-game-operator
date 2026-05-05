@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+- 游戏内反馈快照新增“远航连段”短标：当前远航连段有效时，预填 GitHub Issue 的游戏快照会额外显示 `- 远航连段：连段 X/3`，让 #6 后续复测能直接看到玩家提交反馈时的跨轮递进层数。
+- `src/feedback.js` 从 `getFarRouteDispatch()` 读取 `loopStreakText`，写入 `snapshot.farRouteLoopStreak` 并在 Issue body 中按需输出独立快照行；`tests/game.test.js` 覆盖脉冲航闸附近带 `farRouteLoopStreak: 1` 的反馈快照。
+- 本轮只调整反馈快照和测试，不新增收益、不新增存档字段，不改变远航连段结算、远航调度路线、界面展示、反馈入口交互或部署链路。
+- 同步 GitHub Issues 反馈状态：2026-05-05 17:09 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 作为主处理对象。
+- 验证通过：`node --test tests/game.test.js`、`npm install`、`npm test`、`npm run build`、`bun install --no-save`、`bun run test`、`bun run build`；测试数 119 项。
+- 构建产物已确认 `dist/src/feedback.js` 包含 `farRouteLoopStreak` 与 `- 远航连段：`。
+
 - 远航调度主条新增“远航连段信标”：当前远航连段有效时，主操作区远航调度面板会显示独立 `连段 X/3` 胶囊，并给面板追加 `has-loop-streak` 状态，让跨轮递进层数不只藏在闭环进度长句或路线对照结果中，继续回应 #6 对后半段玩法变化不明显的反馈。
 - `src/app.js` 在 `renderFarDispatch()` 中渲染 `far-dispatch-loop-streak`，并按 `dispatch.loopStreakText` 切换 `has-loop-streak`；`src/styles.css` 增加主调度条连段胶囊、状态点、`farDispatchLoopStreakBeacon` 和降低动效兜底；`tests/game.test.js` 覆盖静态 JS 和 CSS 绑定。
 - 本轮只调整远航调度主面板展示和测试，不新增收益、不新增存档字段，不改变远航连段结算、远航调度路线、星图总览、项目卡片、按钮徽标、反馈入口或部署链路。
