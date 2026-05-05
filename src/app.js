@@ -215,6 +215,7 @@ const elements = {
   combo: document.querySelector("#comboValue"),
   pulse: document.querySelector("#pulseValue"),
   directiveList: document.querySelector("#directiveList"),
+  directiveSceneImage: document.querySelector(".directive-scene-image"),
   directivePlan: document.querySelector("#directivePlan"),
   directivePlanTrack: document.querySelector("#directivePlanTrack"),
   directiveTask: document.querySelector("#directiveTask"),
@@ -572,6 +573,8 @@ function renderCoreRewardHint(coreReward) {
 }
 
 function renderDirectives(directives) {
+  elements.directiveSceneImage.classList.toggle("is-active", directives.unlocked);
+  elements.directiveSceneImage.classList.toggle("is-locked", !directives.unlocked);
   elements.directiveList.replaceChildren(
     ...directives.options.map((option) => renderDirective(option))
   );

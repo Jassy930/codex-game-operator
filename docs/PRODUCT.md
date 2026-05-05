@@ -4,6 +4,7 @@
 
 当前版本：
 
+- 航线指令插画会显示运行态投光：`renderDirectives()` 按 `directives.unlocked` 给 `.directive-scene-image` 切换 `is-active` / `is-locked`；100K 前插画降低饱和度和透明度，100K 解锁后显示边框、补光和 `directiveSceneImagePulse` 低频投光；降低动效偏好下关闭动画。该展示只增强航线指令图片层的解锁/运行态扫视，不新增可见文字、不新增收益、不新增存档字段，不改变指令冷却、连携窗口、策略契合、航线委托、远航调度、星图或反馈入口。
 - 航线委托完成态会显示完成续航动作短标：`getDirectiveTaskStatus()` 在 completed 状态返回 `completedFollowupText`，例如 `熟练续航 点火齐射`；运行时 `renderDirectiveTask()` 复用动作胶囊显示 `.directive-task-action.is-completed`，并把标题与可访问标签写为“航线委托完成续航动作”。该展示只增强 100K 后 3/3 委托完成态到下一轮续航动作的扫视，不新增收益、不新增存档字段，不改变指令冷却、连携窗口、策略契合、航线委托奖励数值、星图、远航调度、反馈入口或部署链路。
 - 航线委托完成态会显示完成步号短标：`getDirectiveTaskStatus()` 在 completed 状态返回 `completedStepText: "3/3 完成"`，运行时 `renderDirectiveTask()` 复用步号胶囊显示 `.directive-task-step.is-completed`，并把标题与可访问标签写为“航线委托完成步号”。该展示只增强 100K 后 3/3 委托完成态的终点扫视，不新增收益、不新增存档字段，不改变指令冷却、连携窗口、策略契合、航线委托奖励数值、星图、远航调度、反馈入口或部署链路。
 - 航线委托完成态的满格进度条会显示完成扫光：`.directive-task.is-completed .directive-task-meter-fill::after` 在 3/3 完成后播放 `directiveTaskCompletedMeterSweep` 浅金扫光，让完成收益短标、最终节点信标、整卡完成面板和满格轨道形成同层完成反馈；降低动效偏好下关闭动画并保留静态满格完成色。该展示只增强 100K 后 3/3 委托完成回报扫视，不新增可见文字、不新增收益、不新增存档字段，不改变指令冷却、连携窗口、策略契合、航线委托奖励数值、星图、远航调度、反馈入口或部署链路。

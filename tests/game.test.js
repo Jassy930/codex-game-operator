@@ -1325,6 +1325,10 @@ test("静态首页会引用航线指令插画资产", () => {
   assert.match(indexHtml, /src="\.\/src\/assets\/directive-visual\.svg"/);
   assert.match(indexHtml, /点火齐射、巡航回收、谐振脉冲和三步轮换组成的航线指令插画/);
   assert.match(styles, /\.directive-scene-image/);
+  assert.match(styles, /\.directive-scene-image\.is-active/);
+  assert.match(styles, /\.directive-scene-image\.is-locked/);
+  assert.match(styles, /@keyframes directiveSceneImagePulse/);
+  assert.match(styles, /@media \(prefers-reduced-motion: reduce\) \{[\s\S]*\.directive-scene-image\.is-active[\s\S]*animation: none/);
   assert.match(asset, /星核工坊航线指令插画/);
   assert.match(asset, /routeBeam/);
 });
@@ -1851,6 +1855,9 @@ test("航线指令按钮会渲染可扫视徽记", () => {
   assert.match(indexHtml, /class="directive-cooldown-meter"/);
   assert.match(indexHtml, /aria-label="点火齐射冷却进度"/);
   assert.match(appJs, /DIRECTIVE_ICON_DEFS/);
+  assert.match(appJs, /directiveSceneImage: document\.querySelector\("\.directive-scene-image"\)/);
+  assert.match(appJs, /elements\.directiveSceneImage\.classList\.toggle\("is-active", directives\.unlocked\)/);
+  assert.match(appJs, /elements\.directiveSceneImage\.classList\.toggle\("is-locked", !directives\.unlocked\)/);
   assert.match(appJs, /function renderDirectiveVisual\(option\)/);
   assert.match(appJs, /DIRECTIVE_VISIBLE_BADGE_LIMIT = 3/);
   assert.match(appJs, /function compactDirectiveBadges\(badges\)/);

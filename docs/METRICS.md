@@ -4,6 +4,7 @@
 
 当前实现：
 
+- 航线指令插画运行态投光当前由 `renderDirectives()` 根据本地 `directives.unlocked` 即时切换 `.directive-scene-image.is-active` / `.directive-scene-image.is-locked`，播放 `directiveSceneImagePulse` 并在降低动效偏好下关闭动画；它不单独记录为真实线上指标。航线指令解锁、推荐、执行与收益复盘仍依赖现有 `directive` 事件、按钮状态、航线委托字段和反馈快照。
 - 航线委托完成续航动作短标当前由 `getDirectiveTaskStatus().completedFollowupText` 和 `.directive-task-action.is-completed` 从本地完成态与现有下一步推荐即时渲染，不单独记录为真实线上指标；委托完成和后续续航复盘仍依赖现有 `directive` 事件中的指令 id、`planReward`、`chainBonus`、`rotationReward`、`taskReward`、完成收益短标、完成步号短标、执行反馈和反馈快照。
 - 航线委托完成步号短标当前由 `getDirectiveTaskStatus().completedStepText` 和 `.directive-task-step.is-completed` 从本地完成态即时渲染为 `3/3 完成`，不单独记录为真实线上指标；委托完成和收益复盘仍依赖现有 `directive` 事件中的 `taskReward`、`taskRewardRate`、完成收益短标、完成节点信标、完成面板信标、完成进度扫光、执行反馈和反馈快照。
 - 浏览器本地通过 localStorage 保存最近 200 条 session、click、first_upgrade_time、upgrade_purchase、goal_complete、reset 事件。

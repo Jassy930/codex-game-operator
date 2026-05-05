@@ -1,5 +1,26 @@
 # Decision
 
+## 2026-05-06 Product decision：航线指令插画运行态投光
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-06 04:25 CST 已同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。没有 open bug；#3“玩法太简单”、#4“界面密密麻麻，希望更多图片”和 #6“后半段玩法没有真正变化”仍是需要持续复测的真实反馈。
+
+当前最大问题：航线指令区已经有本地 `directive-visual.svg` 和三枚主动按钮徽记，但插画本身没有运行态。100K 前后主要靠按钮状态、轮换轨、航线委托和文字短标区分，图片层没有告诉玩家“航线指令已经进入可执行阶段”，也没有像远航插画一样参与 active 状态反馈。
+
+本轮决策：
+
+- 新增“航线指令插画运行态投光”。
+- `src/app.js` 在 `renderDirectives()` 中按 `directives.unlocked` 给 `.directive-scene-image` 切换 `is-active` / `is-locked`。
+- `src/styles.css` 为 `.directive-scene-image.is-active` 增加边框、补光和 `directiveSceneImagePulse`；为 `.directive-scene-image.is-locked` 增加低饱和降权；`prefers-reduced-motion: reduce` 下关闭 active 动画。
+- `tests/game.test.js` 覆盖静态资产、运行态绑定、active/locked 样式、keyframes 和降低动效兜底。
+- 该改动只增强 100K 前后航线指令插画的图片化运行态，不新增可见文字、不新增收益、不新增存档字段，不改变点火收益、指令冷却、连携窗口、策略契合、航线委托、远航调度、星图航段、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-05-06 04:25 CST 当前 5 个 open issue、5 个 open feedback issue、0 个 open bug issue；#3/#4/#6 作为本轮关联反馈。
+- 100K 前航线指令插画显示 locked 降权；100K 解锁后插画显示 active 边框、补光和轻量投光；降低动效偏好下关闭投光动画。
+- 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 129 项。
+- 构建产物已确认 `dist/src/app.js` 和 `dist/src/styles.css` 包含 `directiveSceneImage`、`directiveSceneImagePulse`、`.directive-scene-image.is-active` 与 `.directive-scene-image.is-locked`。
+
 ## 2026-05-06 Product decision：航线委托完成续航短标
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-06 04:11 CST 已同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。没有 open bug；#3“玩法太简单”和 #6“后半段玩法没有真正变化”仍是最近需要持续复测的主动玩法反馈。

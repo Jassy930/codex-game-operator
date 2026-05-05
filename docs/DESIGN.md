@@ -4,6 +4,7 @@
 
 M0 设计约束：
 
+- 航线指令插画必须提供解锁运行态：静态首页必须引用 `src/assets/directive-visual.svg`；运行时 `renderDirectives()` 必须按 `directives.unlocked` 给 `.directive-scene-image` 切换 `is-active` / `is-locked`。100K 前 locked 状态降低饱和度与透明度，100K 解锁后 active 状态显示边框、补光和 `directiveSceneImagePulse`；`prefers-reduced-motion: reduce` 必须关闭 active 动画。该插画状态只改变图片层展示，不新增可见文字、不新增收益、不新增存档字段，不改变指令冷却、连携窗口、策略契合、航线委托、远航调度、星图航段或反馈入口。
 - 航线委托完成态必须显示完成续航动作短标：`getDirectiveTaskStatus()` 在 completed 状态必须返回 `completedFollowupText`，从现有 `getDirectivePlan().recommendationText` 和 `nextDirectiveIds` 派生，例如 `熟练续航 点火齐射`；`renderDirectiveTask()` 在 `task.completed` 时必须用该值渲染 `.directive-task-action.is-completed`，标题和可访问标签必须写为“航线委托完成续航动作：...”；未完成态继续显示下一步动作，锁定态隐藏。该短标只从现有完成态和下一步推荐派生，不新增收益、不新增存档字段，不改变指令冷却、连携窗口、策略契合、航线委托奖励数值、星图航段、远航调度或反馈入口。
 - 航线委托完成态必须显示完成步号短标：`getDirectiveTaskStatus()` 在 completed 状态必须返回 `completedStepText`，值为 `3/3 完成`；`renderDirectiveTask()` 在 `task.completed` 时必须用该值渲染 `.directive-task-step.is-completed`，标题和可访问标签必须写为“航线委托完成步号：3/3 完成”；未完成态继续显示下一步步号，锁定态隐藏。该短标只从现有完成态派生，不新增收益、不新增存档字段，不改变指令冷却、连携窗口、策略契合、航线委托奖励数值、星图航段、远航调度或反馈入口。
 - 航线委托完成态必须提供完成进度扫光：`.directive-task.is-completed .directive-task-meter-fill::after` 必须在 3/3 满格进度条上播放 `directiveTaskCompletedMeterSweep`，让完成收益短标、完成面板和最终节点信标有轨道级呼应；`prefers-reduced-motion: reduce` 必须关闭该动画并保留静态满格完成色。该扫光只从现有 `task.completed` 展示态派生，不新增可见文字、不新增收益、不新增存档字段，不改变指令冷却、连携窗口、策略契合、航线委托奖励数值、星图航段、远航调度或反馈入口。

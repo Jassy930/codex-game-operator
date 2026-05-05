@@ -2,6 +2,13 @@
 
 ## 2026-05-06
 
+- GitHub Issues：gh 可用且已认证；2026-05-06 04:25 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。#3/#6 仍是主动短循环和后半段玩法复测反馈，#4 仍是图片化和文字密度复测反馈。
+- 本轮 Product decision 处理 #3/#4/#6：航线指令区已有本地 SVG 插画和按钮徽记，但 `directive-visual.svg` 只作为静态图片展示；100K 前后差异主要靠按钮状态、短标和长说明表达，图片层没有参与解锁后的主动玩法入口反馈。
+- 本轮改动新增“航线指令插画运行态投光”：`renderDirectives()` 按 `directives.unlocked` 给 `.directive-scene-image` 切换 `is-active` / `is-locked`；解锁后插画显示 active 边框、补光和低频投光，未解锁时降低饱和度与透明度。
+- 本轮只增强航线指令图片层运行态扫视和测试，不新增可见文字、不新增收益、不新增存档字段，不改变点火收益、指令冷却、连携窗口、策略契合、航线委托、远航调度、星图航段、反馈入口或部署链路。
+- 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 129 项。
+- 构建产物已确认 `dist/src/app.js` 和 `dist/src/styles.css` 包含 `directiveSceneImage`、`directiveSceneImagePulse`、`.directive-scene-image.is-active` 与 `.directive-scene-image.is-locked`。
+
 - GitHub Issues：gh 可用且已认证；2026-05-06 04:11 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。#3“玩法太简单”和 #6“后半段玩法没有真正变化”仍是最近需要复测的主动短循环反馈。
 - 本轮 Product decision 处理 #3/#6：航线委托完成态已有完成收益短标、完成步号短标、最终节点信标、完成面板信标和满格进度扫光，但完成后动作胶囊隐藏，完成态短标层缺少“接下来继续轮换按哪个指令”的直接锚点。
 - 本轮改动新增“航线委托完成续航短标”：`getDirectiveTaskStatus()` 在 completed 状态返回 `completedFollowupText`，运行时 `renderDirectiveTask()` 在完成态显示例如 `熟练续航 点火齐射` 并使用 `.directive-task-action.is-completed` 样式。

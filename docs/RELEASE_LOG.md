@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+- 航线指令插画新增运行态投光：100K 解锁后 `directive-visual.svg` 进入 active 边框、轻量补光和低频投光；100K 前显示 locked 降权，让航线指令图片不再只是静态装饰，继续回应 #4 对图片化和 #3/#6 对主动短循环入口不够醒目的反馈。
+- `src/app.js` 为 `.directive-scene-image` 绑定 `is-active` / `is-locked`；`src/styles.css` 增加 `.directive-scene-image.is-active`、`.directive-scene-image.is-locked`、`directiveSceneImagePulse` 和降低动效兜底；`tests/game.test.js` 覆盖静态资产、运行态绑定和样式。
+- 本轮只增强航线指令插画运行态扫视，不新增可见文字、不新增收益、不新增存档字段，不改变点火收益、指令冷却、连携窗口、策略契合、航线委托、远航调度、星图航段、反馈入口或部署链路。
+- 同步 GitHub Issues 反馈状态：2026-05-06 04:25 CST 当前 5 个 open issue、5 个 open feedback issue、0 个 open bug issue；#3/#4/#6 作为本轮关联反馈。
+- 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 129 项。
+- 构建产物已确认 `dist/src/app.js` 和 `dist/src/styles.css` 包含 `directiveSceneImage`、`directiveSceneImagePulse`、`.directive-scene-image.is-active` 与 `.directive-scene-image.is-locked`。
+
 - 航线委托新增“完成续航短标”：100K 后 3/3 委托完成态会在完成步号和完成收益旁显示当前续航动作，例如 `熟练续航 点火齐射`，让完成态直接接到下一轮可执行方向，继续回应 #3/#6 对主动短循环和后半段三步结构不够直观的反馈。
 - `src/game.js` 为 completed 任务状态新增 `completedFollowupText`；`src/app.js` 在完成态复用动作胶囊并切换“航线委托完成续航动作”标题；`src/styles.css` 增加 `.directive-task-action.is-completed`；`tests/game.test.js` 覆盖状态字段、运行时绑定和样式。
 - 本轮只增强航线委托完成后续航动作扫视，不新增收益、不新增存档字段，不改变指令冷却、连携窗口、策略契合、航线委托奖励数值、星图航段、远航调度、反馈入口或部署链路。
