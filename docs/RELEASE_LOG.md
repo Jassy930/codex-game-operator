@@ -7,6 +7,10 @@
 - 本轮只调整路线对照展示文本和测试，不新增收益、不新增存档字段，不改变远航连段结算、目标指令、分支路线、冷却、连携窗口、星图航段、反馈入口或部署链路。
 - 同步 GitHub Issues 反馈状态：2026-05-05 15:14 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 作为主处理对象。
 - 验证通过：`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 118 项；构建产物已确认包含 `routeLoopStreakText`。
+- 代码提交已创建并推送：`ded077f feat: show far streak in route returns`。
+- 发布：提交 `ded077f` 已推送到 `origin/main`；GitHub Pages workflow `25363471584` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页返回 HTTP 200，线上 `src/game.js` 已确认包含 `routeLoopStreakText` 和连段短标逻辑。workflow 继续给出 Node.js 20 actions 弃用提醒，未影响本次部署。
+- 反馈处理：已回复 #6，说明路线对照条连段回航短标、验证结果、Pages 部署和复测问题；issue 保持 open，评论地址：`https://github.com/Jassy930/codex-game-operator/issues/6#issuecomment-4377308038`。回复后于 2026-05-05 15:28 CST 再次同步 GitHub Issues，当前仍为 5 个 open feedback issue、0 个 open bug issue；#6 更新时间为 2026-05-05T07:28:39Z。
+- 钉钉通知未发送：2026-05-05 15:29 CST 运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` / `ROBOT` 相关变量名，当前目录和 `/home/jassy/glm` 两层内未发现 `.env*` 文件；未将 webhook 写入仓库。
 
 - 远航调度新增“远航连段闭环复盘”：协同/绕行路线刚完成 3/3 闭环时，闭环复盘会在已触发收益列表里追加“连段 X/3”；整备指令执行后，复盘会在已整备状态后继续显示“连段 X/3”，让远航连段不只停留在进度行和按钮收益里，继续回应 #6 对后半段玩法变化不明显的反馈。
 - `src/game.js` 让 `buildFarRouteDispatchBranchClosureText()` 读取 `farRouteLoopStreak` 并复用 `formatFarRouteDispatchLoopStreakText()`；`tests/game.test.js` 覆盖协同闭环、绕行闭环和整备后回航复盘里的连段文本。

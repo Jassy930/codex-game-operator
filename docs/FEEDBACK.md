@@ -7,6 +7,11 @@
 - 本轮改动新增“远航连段路线对照回航短标”：可推进或已完成的协同/绕行路线会显示 `远航突破 · 连段 X/3` 或 `绕行突破 · 连段 X/3`。
 - 本轮只调整路线对照展示文本和测试，不新增收益、不新增存档字段，不改变远航连段结算、目标指令、分支路线、冷却、连携窗口、星图航段、反馈入口或部署链路。
 - 本地验证已通过：`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 118 项；构建产物已确认包含 `routeLoopStreakText`。
+- 代码提交已创建并推送：`ded077f feat: show far streak in route returns`。
+- 发布：GitHub Pages workflow `25363471584` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页返回 HTTP 200，线上 `src/game.js` 已确认包含 `routeLoopStreakText`。
+- #6 已回复：说明路线对照条连段回航短标、验证结果、Pages 部署和复测问题；issue 保持 open，评论地址：`https://github.com/Jassy930/codex-game-operator/issues/6#issuecomment-4377308038`。
+- 回复后同步 GitHub Issues：2026-05-05 15:28 CST 当前仍为 5 个 open feedback issue、0 个 open bug issue；#6 更新时间为 2026-05-05T07:28:39Z。
+- 钉钉通知未发送：2026-05-05 15:29 CST 运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` / `ROBOT` 相关变量名，当前目录和 `/home/jassy/glm` 两层内未发现 `.env*` 文件；未将 webhook 写入仓库。
 - 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #6，以及远航连段上线后路线对照条没有承接连段层数的链路复盘。
 
 - GitHub Issues：gh 可用且已认证；2026-05-05 14:58 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。#6 仍是最近更新反馈，指向“后半段只有不停目标，玩法没有真正变化”。
