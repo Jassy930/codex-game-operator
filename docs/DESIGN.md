@@ -4,6 +4,7 @@
 
 M0 设计约束：
 
+- 主点火按钮必须提供命中闪幕：按钮内必须渲染 `#coreImpactFlare.core-impact-flare`，并由 `animateCore()` 在普通点火和过载点火时添加 `is-showing`，在过载点火时额外添加 `is-overload-impact`；闪幕必须复用点击落点坐标 `--core-impact-x` / `--core-impact-y`，普通和过载使用不同强度与时长，并纳入 `prefers-reduced-motion: reduce`。该展示只增强点击反馈，不新增收益、不新增存档字段，不改变点击收益、过载奖励、连击窗口、升级价格、星图航段、航线策略、航线指令、远航调度或反馈入口。
 - 远航调度路线对照必须提供决策信标：20M 后 `.far-dispatch-branch-choice-summary-item` 内必须渲染 `.far-dispatch-branch-choice-summary-signal`，由 `routeDecisionSignalKind` / `routeDecisionSignalText` 派生航段契合、新路线、契合稳航、契合改道、上轮稳航、轮替改道、当前路线或闭环完成；信标必须写入路线对照的标题和可访问摘要，只作为分支定位扫视锚点，不改变远航收益、指令冷却、闭环、连段、投送、星图航段、升级价格、存档字段、反馈入口或部署链路。
 - 远航调度路线对照决策信标必须提供无文字状态点：`.far-dispatch-branch-choice-summary-signal::before` 必须显示 5px 状态点，并按 `is-focus`、`is-stable` / `is-active`、`is-shift`、`is-completed` 切换颜色；当前路线内的信标必须播放 `farDispatchSummarySignalBeacon`，且纳入 `prefers-reduced-motion: reduce`。该状态点只增强信标扫视性，不新增可见文字、不新增收益、不新增存档字段，不改变远航路线、星图航段、反馈入口或部署链路。
 - 反馈表单必须包含本地 SVG 插画：`#feedbackForm` 在标题下方显示 `src/assets/feedback-visual.svg`，并通过 `.feedback-scene-image` 固定 16/5 展示比例；插画只表达反馈草稿、评分轨和 Issue 投递路径，不新增可见说明文字，不改变反馈类型、评分、内容输入、校验、Issue 草稿、反馈快照、localStorage 事件、玩法数值、星图航段、航线策略、航线指令、远航调度或部署链路。

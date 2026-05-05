@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+- 点火按钮新增“命中闪幕”：普通点火和过载点火会触发 `core-impact-flare` 全按钮闪幕，并跟随点击落点定位；过载态使用更强闪幕和更长动画，继续回应 #5 对点击反馈、特效和点击欲望的反馈。
+- `index.html` 新增 `coreImpactFlare` 展示层；`src/app.js` 接入 `animateCore()` 的普通/过载命中、落点定位和清理流程；`src/styles.css` 增加 `.core-impact-flare`、`coreImpactFlare` 动画和降低动效兜底；`tests/game.test.js` 覆盖静态绑定、运行时状态和 CSS。
+- 本轮只增强点火命中瞬间展示，不新增收益、不新增存档字段，不改变点击收益、过载收益、连击、升级价格、星图航段、航线指令、远航调度、反馈入口或部署链路。
+- 同步 GitHub Issues 反馈状态：2026-05-05 22:42 CST 当前 5 个 open issue、5 个 open feedback issue、0 个 open bug issue；#5 作为本轮主处理对象。
+- 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 128 项。
+- 构建产物已确认 `dist/index.html`、`dist/src/app.js` 和 `dist/src/styles.css` 包含 `core-impact-flare`、`coreImpactFlare`、`coreImpactFlare.classList.toggle("is-overload-impact", overloaded)` 与 `@keyframes coreImpactFlare`。
+
 - 星图总览新增远航满段回响短标：20M 后当前远航闭环下一步回目标会把连段推到 3/3 时，“远航调度总览”会显示 `连段 2/3 · 满段回响 +10% · 闭环 2/3`，继续回应 #6 对后半段玩法变化不明显的反馈。
 - `src/game.js` 在 `buildProjectOverviewDispatchText()` 中追加现有 `dispatch.loopCapstoneText` 并避免与闭环复盘文案重复；`tests/game.test.js` 覆盖满段回响预告状态下的星图总览摘要。
 - 本轮只增强星图总览摘要展示和测试，不新增收益、不新增存档字段，不改变远航连段结算、满段回响奖励、目标指令、协同/绕行路线、冷却、连携窗口、星图航段、反馈入口交互或部署链路。

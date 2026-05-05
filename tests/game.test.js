@@ -1333,6 +1333,7 @@ test("点火按钮会渲染点击反馈和过载前兆效果", () => {
   assert.match(indexHtml, /id="coreImpactRipple" class="core-impact-ripple"/);
   assert.match(indexHtml, /id="coreImpactSparks" class="core-impact-sparks"/);
   assert.match(indexHtml, /id="coreImpactBurst" class="core-impact-burst"/);
+  assert.match(indexHtml, /id="coreImpactFlare" class="core-impact-flare"/);
   assert.match(indexHtml, /class="core-charge-ring"/);
   assert.match(indexHtml, /id="coreGainPop" class="core-gain-pop"/);
   assert.match(indexHtml, /class="core-veins"/);
@@ -1373,6 +1374,7 @@ test("点火按钮会渲染点击反馈和过载前兆效果", () => {
   assert.match(appJs, /coreImpactRipple: document\.querySelector\("#coreImpactRipple"\)/);
   assert.match(appJs, /coreImpactSparks: document\.querySelector\("#coreImpactSparks"\)/);
   assert.match(appJs, /coreImpactBurst: document\.querySelector\("#coreImpactBurst"\)/);
+  assert.match(appJs, /coreImpactFlare: document\.querySelector\("#coreImpactFlare"\)/);
   assert.match(appJs, /elements\.coreChargeRing\.style\.setProperty\(\s*"--core-charge-angle"/);
   assert.match(appJs, /Math\.round\(combo\.progress \* 360\) \+ "deg"/);
   assert.match(appJs, /elements\.coreChargeRing\.classList\.toggle\("is-overload-ready", isOverloadReady\)/);
@@ -1431,6 +1433,8 @@ test("点火按钮会渲染点击反馈和过载前兆效果", () => {
   assert.match(appJs, /elements\.coreImpactSparks\.classList\.toggle\("is-overload-impact", overloaded\)/);
   assert.match(appJs, /elements\.coreImpactBurst\.classList\.add\("is-showing"\)/);
   assert.match(appJs, /elements\.coreImpactBurst\.classList\.toggle\("is-overload-impact", overloaded\)/);
+  assert.match(appJs, /elements\.coreImpactFlare\.classList\.add\("is-showing"\)/);
+  assert.match(appJs, /elements\.coreImpactFlare\.classList\.toggle\("is-overload-impact", overloaded\)/);
   assert.match(appJs, /window\.AudioContext \?\? window\.webkitAudioContext/);
   assert.match(appJs, /context\.createOscillator\(\)/);
   assert.match(appJs, /frequency: 392/);
@@ -1517,7 +1521,12 @@ test("点火按钮会渲染点击反馈和过载前兆效果", () => {
   assert.match(styles, /\.core-impact-burst\.is-showing/);
   assert.match(styles, /\.core-impact-burst\.is-overload-impact/);
   assert.match(styles, /@keyframes coreImpactBurst/);
+  assert.match(styles, /\.core-impact-flare/);
+  assert.match(styles, /\.core-impact-flare\.is-showing/);
+  assert.match(styles, /\.core-impact-flare\.is-overload-impact/);
+  assert.match(styles, /@keyframes coreImpactFlare/);
   assert.match(styles, /@media \(prefers-reduced-motion: reduce\) \{[\s\S]*\.core-impact-burst\.is-showing[\s\S]*animation: none/);
+  assert.match(styles, /@media \(prefers-reduced-motion: reduce\) \{[\s\S]*\.core-impact-flare\.is-showing[\s\S]*animation: none/);
   assert.match(styles, /\.core-charge-ring/);
   assert.match(styles, /--core-charge-angle/);
   assert.match(styles, /\.core-button:not\(\.is-combo-charging\):not\(\.is-pulsing\):not\(\.is-pressing\):not\(\.is-overload-ready\):not\(\.is-overload-hit\)[\s\S]*\.core-charge-ring/);

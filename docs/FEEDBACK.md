@@ -2,6 +2,14 @@
 
 ## 2026-05-05
 
+- GitHub Issues：gh 可用且已认证；2026-05-05 22:42 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。#6 仍是最近更新反馈；本轮为避免继续堆叠远航满段可见性补丁，转向处理 #5“点火按钮太薄弱、需要点击反馈和特效”。
+- 本轮 Product decision 处理 #5：点火按钮已有按压反冲、落点闪光、涟漪、火花、爆发层、收益浮层、音效和触感，但普通/过载命中仍缺少一层更快扫到的全按钮闪幕。
+- 本轮改动新增“点火命中闪幕”：普通点火和过载点火都会触发 `core-impact-flare`，并跟随点击落点定位；过载态使用更强闪幕和更长动画。
+- 本轮只增强点火命中瞬间展示和测试，不新增收益、不新增存档字段，不改变点击收益、过载收益、连击、升级价格、星图航段、航线指令、远航调度、反馈入口或部署链路。
+- 验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 128 项。
+- 构建产物已确认 `dist/index.html`、`dist/src/app.js` 和 `dist/src/styles.css` 包含 `core-impact-flare`、`coreImpactFlare`、`coreImpactFlare.classList.toggle("is-overload-impact", overloaded)` 与 `@keyframes coreImpactFlare`。
+- 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #5，以及当前点火按钮命中反馈层级复盘。
+
 - GitHub Issues：gh 可用且已认证；2026-05-05 22:25 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。#6 仍是最近更新反馈，继续指向“后半段玩法变化不明显、只有不停目标”。
 - 本轮 Product decision 继续处理 #6：满段回响已经进入按钮预览、执行反馈、路线对照、卡片提示、主调度条和反馈快照，但星图总览的“远航调度总览”仍只显示连段和闭环进度，缺少即将触发的满段回响短标。
 - 本轮改动新增“远航满段回响星图总览短标”：当当前远航闭环下一步回目标会触发满段回响时，星图总览摘要会显示 `连段 2/3 · 满段回响 +10% · 闭环 2/3`。

@@ -203,6 +203,7 @@ const elements = {
   coreImpactRipple: document.querySelector("#coreImpactRipple"),
   coreImpactSparks: document.querySelector("#coreImpactSparks"),
   coreImpactBurst: document.querySelector("#coreImpactBurst"),
+  coreImpactFlare: document.querySelector("#coreImpactFlare"),
   coreGainPop: document.querySelector("#coreGainPop"),
   coreOverloadBadge: document.querySelector("#coreOverloadBadge"),
   coreOverloadBadgeValue: document.querySelector("#coreOverloadBadgeValue"),
@@ -3029,6 +3030,7 @@ function animateCore({
   elements.coreImpactRipple.classList.remove("is-showing", "is-overload-impact");
   elements.coreImpactSparks.classList.remove("is-showing", "is-overload-impact");
   elements.coreImpactBurst.classList.remove("is-showing", "is-overload-impact");
+  elements.coreImpactFlare.classList.remove("is-showing", "is-overload-impact");
   requestAnimationFrame(() => {
     elements.coreButton.classList.add("is-pulsing");
     elements.coreButton.classList.toggle("is-overload-impact", overloaded);
@@ -3040,6 +3042,8 @@ function animateCore({
     elements.coreImpactSparks.classList.toggle("is-overload-impact", overloaded);
     elements.coreImpactBurst.classList.add("is-showing");
     elements.coreImpactBurst.classList.toggle("is-overload-impact", overloaded);
+    elements.coreImpactFlare.classList.add("is-showing");
+    elements.coreImpactFlare.classList.toggle("is-overload-impact", overloaded);
     elements.coreGainPop.classList.add("is-showing");
     elements.coreGainPop.classList.toggle("is-overload-gain", overloaded);
     elements.energy.classList.add(overloaded ? "is-core-overload-hit" : "is-core-hit");
@@ -3065,6 +3069,7 @@ function animateCore({
         elements.coreImpactRipple.classList.remove("is-showing", "is-overload-impact");
         elements.coreImpactSparks.classList.remove("is-showing", "is-overload-impact");
         elements.coreImpactBurst.classList.remove("is-showing", "is-overload-impact");
+        elements.coreImpactFlare.classList.remove("is-showing", "is-overload-impact");
       },
       overloaded ? 720 : 540
     );
@@ -3142,7 +3147,8 @@ function positionCoreImpact(event) {
     elements.coreImpactPoint,
     elements.coreImpactRipple,
     elements.coreImpactSparks,
-    elements.coreImpactBurst
+    elements.coreImpactBurst,
+    elements.coreImpactFlare
   ].forEach((element) => {
     element.style.setProperty("--core-impact-x", clampedX + "px");
     element.style.setProperty("--core-impact-y", clampedY + "px");

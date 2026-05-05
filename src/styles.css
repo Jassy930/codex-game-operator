@@ -959,6 +959,57 @@ h2 {
     drop-shadow(0 0 32px rgba(232, 93, 117, 0.28));
 }
 
+.core-impact-flare {
+  --core-impact-x: 50%;
+  --core-impact-y: 50%;
+  position: absolute;
+  inset: 3%;
+  z-index: 2;
+  border-radius: 999px;
+  background:
+    radial-gradient(circle at var(--core-impact-x) var(--core-impact-y), rgba(255, 247, 194, 0.62) 0 6%, rgba(244, 178, 60, 0.28) 15%, transparent 42%),
+    conic-gradient(
+      from 24deg,
+      transparent 0 10%,
+      rgba(255, 247, 194, 0.28) 12% 18%,
+      transparent 20% 38%,
+      rgba(19, 181, 166, 0.2) 40% 46%,
+      transparent 48% 64%,
+      rgba(244, 178, 60, 0.26) 66% 74%,
+      transparent 76% 100%
+    );
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(0.9) rotate(-8deg);
+  filter:
+    blur(0.2px)
+    drop-shadow(0 0 18px rgba(255, 247, 194, 0.22));
+  mix-blend-mode: screen;
+}
+
+.core-impact-flare.is-showing {
+  animation: coreImpactFlare 480ms ease-out;
+}
+
+.core-impact-flare.is-overload-impact {
+  background:
+    radial-gradient(circle at var(--core-impact-x) var(--core-impact-y), rgba(255, 247, 194, 0.82) 0 8%, rgba(232, 93, 117, 0.38) 18%, transparent 48%),
+    conic-gradient(
+      from -18deg,
+      rgba(255, 247, 194, 0.42) 0 12%,
+      transparent 14% 26%,
+      rgba(232, 93, 117, 0.36) 28% 42%,
+      transparent 44% 58%,
+      rgba(244, 178, 60, 0.4) 60% 78%,
+      transparent 80% 100%
+    );
+  animation-duration: 680ms;
+  filter:
+    blur(0.2px)
+    drop-shadow(0 0 24px rgba(255, 247, 194, 0.3))
+    drop-shadow(0 0 40px rgba(232, 93, 117, 0.22));
+}
+
 .core-charge-ring {
   --core-charge-angle: 0deg;
   position: absolute;
@@ -7552,6 +7603,28 @@ h2 {
   }
 }
 
+@keyframes coreImpactFlare {
+  0% {
+    opacity: 0;
+    transform: scale(0.84) rotate(-12deg);
+  }
+
+  18% {
+    opacity: 0.72;
+    transform: scale(0.96) rotate(-4deg);
+  }
+
+  54% {
+    opacity: 0.34;
+    transform: scale(1.06) rotate(5deg);
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(1.14) rotate(12deg);
+  }
+}
+
 @keyframes coreGainFloat {
   0% {
     opacity: 0;
@@ -8431,6 +8504,7 @@ h2 {
   .core-button.is-pulsing:not(.is-overload-impact) .core-vein,
   .core-button.is-overload-impact .core-combo-track::before,
   .core-impact-burst.is-showing,
+  .core-impact-flare.is-showing,
   .core-gain-pop.is-showing::after,
   .core-gain-pop.is-overload-gain.is-showing::after,
   .directive-button.is-dispatch-route-step,

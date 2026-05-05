@@ -1,5 +1,28 @@
 # Decision
 
+## 2026-05-05 Product decision：点火命中闪幕
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-05 22:42 CST 已同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。没有 open bug；本轮处理真实反馈 #5“点火按钮太薄弱了，增加点击反馈，增加特效，增加点击欲望”。
+
+当前最大问题：点火按钮已经有按压反冲、落点闪光、涟漪、火花、爆发层、收益浮层、音效和触感，但命中反馈仍主要集中在点击落点与读数层。普通点击时按钮整体缺少一层更快扫到的全按钮闪幕，过载命中虽然更强，也可以继续拉开和普通点击的视觉层级。
+
+本轮决策：
+
+- 新增“点火命中闪幕”。
+- `index.html` 在主点火按钮内增加 `coreImpactFlare` 展示层。
+- `src/app.js` 把 `coreImpactFlare` 接入 `animateCore()` 的普通命中、过载命中、点击落点定位和动画清理流程。
+- `src/styles.css` 新增 `.core-impact-flare`、过载差异样式、`coreImpactFlare` 动画和降低动效兜底。
+- `tests/game.test.js` 覆盖静态节点、运行时绑定、普通/过载状态切换、CSS 动画和 `prefers-reduced-motion` 绑定。
+- 该改动只增强点火命中瞬间展示，不新增收益、不新增存档字段，不改变点击收益、过载收益、连击、升级价格、星图航段、航线指令、远航调度、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-05-05 22:42 CST 当前 5 个 open issue、5 个 open feedback issue、0 个 open bug issue；#5 作为本轮主处理对象。
+- 普通点火和过载点火会触发 `coreImpactFlare`，并跟随点击落点定位；过载态使用更强闪幕和更长动画。
+- 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 128 项。
+- 构建产物已确认 `dist/index.html`、`dist/src/app.js` 和 `dist/src/styles.css` 包含 `core-impact-flare`、`coreImpactFlare`、`coreImpactFlare.classList.toggle("is-overload-impact", overloaded)` 与 `@keyframes coreImpactFlare`。
+- 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #5，以及当前点火按钮命中反馈层级复盘。
+
 ## 2026-05-05 Product decision：远航满段回响星图总览短标
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-05 22:25 CST 已同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。没有 open bug；本轮继续处理真实反馈 #6“到后半段，游戏玩法已经开始无聊了，只有不停的目标，但是游戏玩法没有真正的变化”。
