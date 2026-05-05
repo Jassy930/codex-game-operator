@@ -8,6 +8,10 @@
 - 同步 GitHub Issues 反馈状态：2026-05-05 16:40 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 作为主处理对象。
 - 验证通过：`node --test tests/game.test.js`、`npm install`、`npm test`、`npm run build`、`bun install --no-save`、`bun run test`、`bun run build`；测试数 118 项。
 - 构建产物已确认 `dist/src/game.js` 包含 `dispatchBadgeText: project.dispatchBadgeText`，`dist/src/app.js` 包含 `project-current-dispatch` 和 `is-dispatch-active`，`dist/src/styles.css` 包含 `.project-current-track .project-current-dispatch`。
+- 代码提交已创建并推送：`05fb55c feat: show far dispatch on current visual`。
+- 发布：提交 `05fb55c` 已推送到 `origin/main`；GitHub Pages workflow `25366738408` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页返回 HTTP 200，线上 `src/game.js` 已确认包含 `dispatchBadgeText: project.dispatchBadgeText`，线上 `src/app.js` 已确认包含 `project-current-dispatch` 和 `is-dispatch-active`，线上 `src/styles.css` 已确认包含 `.project-current-track .project-current-dispatch`。workflow 继续给出 Node.js 20 actions 弃用提醒，未影响本次部署。
+- 反馈处理：已回复 #6，说明远航连段当前航段视觉卡短标、验证结果、Pages 部署和复测问题；issue 保持 open，评论地址：`https://github.com/Jassy930/codex-game-operator/issues/6#issuecomment-4377786318`。回复后于 2026-05-05 16:49 CST 再次同步 GitHub Issues，当前仍为 5 个 open feedback issue、0 个 open bug issue；#6 更新时间为 2026-05-05T08:49:31Z。
+- 钉钉通知未发送：2026-05-05 16:50 CST 运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` / `ROBOT` 相关变量名，当前目录和 `/home/jassy/glm` 未发现 `.env*` 文件；未将 webhook 写入仓库。
 - 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #6，以及远航连段进入项目卡片后当前航段视觉卡仍缺少短标的链路复盘。
 
 - 星图项目卡片新增“远航连段短标”：当前指令链窗口有效且存在连段时，当前航段卡片会显示 `调度 点火齐射 · 连段 X/3`，调度说明和第三步回目标奖励文本也会承接该连段层数，继续回应 #6 对后半段玩法变化不明显的反馈。
