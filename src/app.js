@@ -583,6 +583,12 @@ function renderDirectives(directives) {
 function renderDirectivePlanTrack(plan, options) {
   const target = Math.max(1, plan.target ?? 3);
   const progress = Math.max(0, Math.min(target, plan.progress ?? 0));
+  const nextOptions = (plan.nextDirectiveIds ?? [])
+    .map((directiveId) => options.find((option) => option.id === directiveId))
+    .filter(Boolean);
+  const hasNextAction = plan.unlocked && progress < target && nextOptions.length > 0;
+  const nextReady = hasNextAction && nextOptions.some((option) => option.ready);
+  const nextWaiting = hasNextAction && !nextReady;
   const nextNames = (plan.nextDirectiveIds ?? [])
     .map((directiveId) => options.find((option) => option.id === directiveId)?.name)
     .filter(Boolean);
@@ -597,6 +603,10 @@ function renderDirectivePlanTrack(plan, options) {
   const rewardText = plan.nextRewardText ?? "";
   const rewardStep = Math.min(target, Math.max(1, progress + 1));
 
+  elements.directivePlanTrack.classList.toggle("is-active", Boolean(plan.unlocked));
+  elements.directivePlanTrack.classList.toggle("is-locked", !plan.unlocked);
+  elements.directivePlanTrack.classList.toggle("is-next-ready", nextReady);
+  elements.directivePlanTrack.classList.toggle("is-next-waiting", nextWaiting);
   elements.directivePlanTrack.replaceChildren(
     ...Array.from({ length: target }, (_item, index) => {
       const step = index + 1;
@@ -607,6 +617,8 @@ function renderDirectivePlanTrack(plan, options) {
         "directive-plan-step",
         isComplete ? "is-complete" : "",
         isNext ? "is-next" : "",
+        isNext && nextReady ? "is-next-ready" : "",
+        isNext && nextWaiting ? "is-next-waiting" : "",
         !isComplete && !isNext ? "is-pending" : ""
       ]
         .filter(Boolean)

@@ -2142,6 +2142,11 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(appJs, /renderFarDispatch\(directives\.dispatch/);
   assert.match(appJs, /function renderDirectivePlanTrack\(plan, options\)/);
   assert.match(appJs, /"directive-plan-step"/);
+  assert.match(appJs, /const nextReady = hasNextAction && nextOptions\.some\(\(option\) => option\.ready\)/);
+  assert.match(appJs, /elements\.directivePlanTrack\.classList\.toggle\("is-next-ready", nextReady\)/);
+  assert.match(appJs, /elements\.directivePlanTrack\.classList\.toggle\("is-next-waiting", nextWaiting\)/);
+  assert.match(appJs, /isNext && nextReady \? "is-next-ready" : ""/);
+  assert.match(appJs, /isNext && nextWaiting \? "is-next-waiting" : ""/);
   assert.match(appJs, /rewardText = plan\.nextRewardText \?\? ""/);
   assert.match(appJs, /reward\.className = "directive-plan-step-reward"/);
   assert.match(appJs, /label\.textContent = nextActionText/);
@@ -2494,6 +2499,11 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(styles, /\.directive-plan-step-reward/);
   assert.match(styles, /\.directive-plan-step\.is-complete/);
   assert.match(styles, /\.directive-plan-step\.is-next/);
+  assert.match(styles, /\.directive-plan-step\.is-next-ready/);
+  assert.match(styles, /\.directive-plan-step\.is-next-ready::after/);
+  assert.match(styles, /\.directive-plan-step\.is-next-waiting/);
+  assert.match(styles, /@keyframes directivePlanNextReadyBeacon/);
+  assert.match(styles, /@media \(prefers-reduced-motion: reduce\) \{[\s\S]*\.directive-plan-step\.is-next-ready[\s\S]*animation: none/);
   assert.match(styles, /\.directive-task/);
   assert.match(styles, /\.directive-task-text,\s+\.far-dispatch-text/);
   assert.match(styles, /\.directive-task-step/);

@@ -4,6 +4,7 @@
 
 当前版本：
 
+- 指令轮换 3 格视觉轨会显示下一步格可执行信标：`renderDirectivePlanTrack()` 会根据 `plan.nextDirectiveIds` 对应指令按钮的 `ready` 状态，给 `#directivePlanTrack` 和当前 `.directive-plan-step.is-next` 切换 `is-next-ready` / `is-next-waiting`；可执行时下一格显示绿色边框、轻量补光和 `directivePlanNextReadyBeacon`，等待冷却时显示 waiting 底色；降低动效偏好下关闭 ready 动画。该展示只增强 100K 后指令轮换视觉轨的可执行性扫视，不新增可见文字、不新增收益、不新增存档字段，不改变点火收益、指令冷却、连携窗口、策略契合、航线委托、远航调度、星图或反馈入口。
 - 航线指令插画会显示运行态投光：`renderDirectives()` 按 `directives.unlocked` 给 `.directive-scene-image` 切换 `is-active` / `is-locked`；100K 前插画降低饱和度和透明度，100K 解锁后显示边框、补光和 `directiveSceneImagePulse` 低频投光；降低动效偏好下关闭动画。该展示只增强航线指令图片层的解锁/运行态扫视，不新增可见文字、不新增收益、不新增存档字段，不改变指令冷却、连携窗口、策略契合、航线委托、远航调度、星图或反馈入口。
 - 航线委托完成态会显示完成续航动作短标：`getDirectiveTaskStatus()` 在 completed 状态返回 `completedFollowupText`，例如 `熟练续航 点火齐射`；运行时 `renderDirectiveTask()` 复用动作胶囊显示 `.directive-task-action.is-completed`，并把标题与可访问标签写为“航线委托完成续航动作”。该展示只增强 100K 后 3/3 委托完成态到下一轮续航动作的扫视，不新增收益、不新增存档字段，不改变指令冷却、连携窗口、策略契合、航线委托奖励数值、星图、远航调度、反馈入口或部署链路。
 - 航线委托完成态会显示完成步号短标：`getDirectiveTaskStatus()` 在 completed 状态返回 `completedStepText: "3/3 完成"`，运行时 `renderDirectiveTask()` 复用步号胶囊显示 `.directive-task-step.is-completed`，并把标题与可访问标签写为“航线委托完成步号”。该展示只增强 100K 后 3/3 委托完成态的终点扫视，不新增收益、不新增存档字段，不改变指令冷却、连携窗口、策略契合、航线委托奖励数值、星图、远航调度、反馈入口或部署链路。

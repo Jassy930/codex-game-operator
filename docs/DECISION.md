@@ -1,5 +1,27 @@
 # Decision
 
+## 2026-05-06 Product decision：指令轮换下一步格可执行信标
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-06 04:39 CST 已同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。没有 open bug；#3“玩法太简单”、#4“界面密密麻麻，希望更多图片”和 #6“后半段玩法没有真正变化”仍是需要持续复测的真实反馈。
+
+当前最大问题：航线委托卡已经能显示下一步 `可执行` / `等待 X 秒`，但上方 3 格指令轮换视觉轨只显示已完成、下一步和待推进。玩家扫 3 格轨时仍要下看委托卡或按钮区，才能确认当前下一格是可立即推进还是等待冷却。
+
+本轮决策：
+
+- 新增“指令轮换下一步格可执行信标”。
+- `src/app.js` 在 `renderDirectivePlanTrack()` 中根据 `plan.nextDirectiveIds` 对应的按钮 `ready` 状态，给 `#directivePlanTrack` 和当前 `.directive-plan-step.is-next` 切换 `is-next-ready` / `is-next-waiting`。
+- `src/styles.css` 为 `.directive-plan-step.is-next-ready` 增加绿色边框、补光和 `directivePlanNextReadyBeacon`；为 `.directive-plan-step.is-next-waiting` 增加等待态底色；`prefers-reduced-motion: reduce` 下关闭 ready 动画。
+- `tests/game.test.js` 覆盖运行时状态绑定、ready/waiting 样式、keyframes 和降低动效兜底。
+- 该改动只增强 100K 后指令轮换视觉轨的可执行性扫视，不新增可见文字、不新增收益、不新增存档字段，不改变点火收益、指令冷却、连携窗口、策略契合、航线委托、远航调度、星图航段、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-05-06 04:39 CST 当前 5 个 open issue、5 个 open feedback issue、0 个 open bug issue；#3/#4/#6 作为本轮关联反馈。
+- 当前下一步推荐指令可执行时，指令轮换 3 格轨的下一格显示 ready 边框和轻量补光；下一步推荐指令均在冷却时显示 waiting 底色；锁定态和完成态不误标可执行信标。
+- 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 129 项。
+- 构建产物已确认 `dist/src/app.js` 和 `dist/src/styles.css` 包含 `directivePlanTrack.classList.toggle("is-next-ready"`、`directivePlanNextReadyBeacon`、`.directive-plan-step.is-next-ready` 与 `.directive-plan-step.is-next-waiting`。
+- 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #3/#4/#6，以及指令轮换视觉轨已有下一步动作和收益、但缺少可执行状态信标的链路复盘。
+
 ## 2026-05-06 Product decision：航线指令插画运行态投光
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-06 04:25 CST 已同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。没有 open bug；#3“玩法太简单”、#4“界面密密麻麻，希望更多图片”和 #6“后半段玩法没有真正变化”仍是需要持续复测的真实反馈。

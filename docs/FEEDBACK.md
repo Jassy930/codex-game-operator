@@ -2,6 +2,13 @@
 
 ## 2026-05-06
 
+- GitHub Issues：gh 可用且已认证；2026-05-06 04:39 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。#3/#6 仍是主动短循环和后半段玩法复测反馈，#4 仍是图片化和文字密度复测反馈。
+- 本轮 Product decision 处理 #3/#4/#6：指令轮换视觉轨已经显示下一步动作和收益，但下一步是否可执行主要在航线委托卡和按钮区呈现；3 格轨本身缺少 ready/waiting 状态信标。
+- 本轮改动新增“指令轮换下一步格可执行信标”：`renderDirectivePlanTrack()` 根据下一步推荐指令的 `ready` 状态给 `#directivePlanTrack` 和当前 `.directive-plan-step.is-next` 切换 `is-next-ready` / `is-next-waiting`；ready 格显示绿色边框、补光和轻量呼吸，waiting 格显示等待态底色。
+- 本轮只增强指令轮换视觉轨可执行性扫视和测试，不新增可见文字、不新增收益、不新增存档字段，不改变点火收益、指令冷却、连携窗口、策略契合、航线委托、远航调度、星图航段、反馈入口或部署链路。
+- 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 129 项。
+- 构建产物已确认 `dist/src/app.js` 和 `dist/src/styles.css` 包含 `directivePlanTrack.classList.toggle("is-next-ready"`、`directivePlanNextReadyBeacon`、`.directive-plan-step.is-next-ready` 与 `.directive-plan-step.is-next-waiting`。
+
 - GitHub Issues：gh 可用且已认证；2026-05-06 04:25 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。#3/#6 仍是主动短循环和后半段玩法复测反馈，#4 仍是图片化和文字密度复测反馈。
 - 本轮 Product decision 处理 #3/#4/#6：航线指令区已有本地 SVG 插画和按钮徽记，但 `directive-visual.svg` 只作为静态图片展示；100K 前后差异主要靠按钮状态、短标和长说明表达，图片层没有参与解锁后的主动玩法入口反馈。
 - 本轮改动新增“航线指令插画运行态投光”：`renderDirectives()` 按 `directives.unlocked` 给 `.directive-scene-image` 切换 `is-active` / `is-locked`；解锁后插画显示 active 边框、补光和低频投光，未解锁时降低饱和度与透明度。
