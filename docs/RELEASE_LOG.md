@@ -8,6 +8,10 @@
 - 同步 GitHub Issues 反馈状态：2026-05-05 18:30 CST 当前 5 个 open feedback issue、0 个 open bug issue；#4 作为本轮主处理对象。
 - 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 123 项。
 - 构建产物已确认 `dist/index.html` 和 `dist/src/styles.css` 包含 `feedback-field-label`、`feedback-field-icon-type`、`feedback-field-icon-rating` 与 `feedback-field-icon-message`。
+- 代码提交已创建并推送：`40208e2 feat: add feedback form field markers`。
+- 发布：GitHub Pages workflow `25371481821` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页返回 HTTP 200，线上 `index.html` 和 `src/styles.css` 已确认包含 `feedback-field-label`、`feedback-field-icon-type`、`feedback-field-icon-rating` 与 `feedback-field-icon-message`。workflow 继续给出 Node.js 20 actions 弃用提醒，未影响本次部署。
+- 反馈处理：已回复 #4，说明反馈表单字段视觉短标、验证结果、Pages 部署和复测问题；issue 保持 open，评论地址：`https://github.com/Jassy930/codex-game-operator/issues/4#issuecomment-4378484199`。回复后于 2026-05-05 18:39 CST 再次同步 GitHub Issues，当前仍为 5 个 open feedback issue、0 个 open bug issue；#4 更新时间为 `2026-05-05T10:38:50Z`。
+- 钉钉通知未发送：2026-05-05 18:39 CST 运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` / `ROBOT` 相关变量名，当前目录和 `/home/jassy/glm` 两层内未发现 `.env*` 文件；未将 webhook 写入仓库。
 - 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #4，以及反馈表单字段仍缺少图形锚点的侧栏复盘。
 
 - 点火反馈偏好开关新增视觉短标：主操作区的“点火音效”和“触感反馈”开关现在各自显示固定 24px CSS 图形槽，继续回应 #4 对首屏文字密度和图片化表达的反馈。
