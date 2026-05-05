@@ -1,5 +1,28 @@
 # Decision
 
+## 2026-05-05 Product decision：远航满段回响
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-05 20:47 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有 open bug；本轮继续处理真实反馈 #6“到后半段，游戏玩法已经开始无聊了，只有不停的目标，但是游戏玩法没有真正的变化”。
+
+当前最大问题：远航调度已经有三步闭环、协同/绕行、路线稳航/改道、远航连段和多层可视化，但连段满 3/3 后仍只是在已有 `远航连段 +X` 的线性加成上封顶。玩家连续完成多轮时，满层瞬间缺少一次明确的“我把这条后半段短循环推满了”的回报。
+
+本轮决策：
+
+- 新增“远航满段回响”。
+- `src/game.js` 复用现有 `farRouteLoopStreak`，当本次 3/3 回到目标指令后连段达到 3/3 时，额外结算 `满段回响 +10%`。
+- `src/app.js` 把满段回响写入指令按钮徽标、预览明细和本地 directive 事件。
+- `src/styles.css` 增加 `directive-dispatch-loop-streak-capstone` 徽标样式。
+- `tests/game.test.js` 覆盖满层闭环预览、执行反馈、事件字段、反馈快照解锁说明和构建绑定。
+- 该改动不新增存档字段，不改变远航解锁门槛、星图航段、基础闭环、协同/绕行、投送、冷却、升级价格、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-05-05 20:47 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 作为本轮主处理对象。
+- 20M 后远航闭环在当前连段 2/3 时再次 3/3 回到目标指令，会把 `farRouteLoopStreak` 推到 3/3，并额外显示/结算 `满段回响 +X`。
+- 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 127 项。
+- 构建产物已确认 `dist/src/game.js`、`dist/src/app.js` 和 `dist/src/styles.css` 包含 `满段回响`、`dispatchLoopStreakCapstoneReward` 与 `directive-dispatch-loop-streak-capstone`。
+- 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #6，以及远航连段达到 3/3 后缺少满层瞬间回报的玩法复盘。
+
 ## 2026-05-05 Product decision：远航新路线信标差异色
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-05 20:34 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有 open bug；本轮继续处理真实反馈 #6“到后半段，游戏玩法已经开始无聊了，只有不停的目标，但是游戏玩法没有真正的变化”。

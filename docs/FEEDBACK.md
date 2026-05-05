@@ -2,6 +2,14 @@
 
 ## 2026-05-05
 
+- GitHub Issues：gh 可用且已认证；2026-05-05 20:47 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。#6 仍是最近更新反馈，继续指向“后半段玩法变化不明显、只有不停目标”。
+- 本轮 Product decision 继续处理 #6：远航连段已经有 1/3 到 3/3 的跨轮递进，但满层时仍只是线性加成封顶，缺少明确的满层回报。
+- 本轮改动新增“远航满段回响”：当 20M 后远航闭环在当前连段 2/3 时再次 3/3 回到目标指令，会把连段推到 3/3，并额外结算 `满段回响 +10%`；按钮预览、执行反馈和本地 directive 事件都会暴露该奖励。
+- 本轮不新增存档字段，不改变远航解锁门槛、星图航段、基础闭环、协同/绕行、投送、冷却、升级价格、反馈入口或部署链路。
+- 验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 127 项。
+- 构建产物已确认 `dist/src/game.js`、`dist/src/app.js` 和 `dist/src/styles.css` 包含 `满段回响`、`dispatchLoopStreakCapstoneReward` 与 `directive-dispatch-loop-streak-capstone`。
+- 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #6，以及远航连段满层缺少瞬间回报的玩法复盘。
+
 - GitHub Issues：gh 可用且已认证；2026-05-05 20:34 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。#6 仍是最近更新反馈，继续指向“后半段玩法变化不明显、只有不停目标”。
 - 本轮 Product decision 继续处理 #6：远航路线对照条已有决策信标和状态点，但 `新路线` 仍使用默认灰色胶囊，和其它已分类信标的视觉层级不一致。
 - 本轮改动新增“远航新路线信标差异色”：`.far-dispatch-branch-choice-summary-signal.is-archive` 使用独立 archive 状态色、渐变底和状态点光晕，让 `新路线` 与航段契合、稳航、改道、当前路线和闭环完成一样能被扫到。

@@ -1634,6 +1634,11 @@ function renderDirective(option) {
         dispatchLoopStreakRewardRate: result.dispatchLoopStreakRewardRate,
         dispatchLoopStreakStacks: result.dispatchLoopStreakStacks,
         dispatchLoopStreakRewardText: result.dispatchLoopStreakRewardText,
+        dispatchLoopStreakCapstoneReward: result.dispatchLoopStreakCapstoneReward,
+        dispatchLoopStreakCapstoneRewardRate:
+          result.dispatchLoopStreakCapstoneRewardRate,
+        dispatchLoopStreakCapstoneRewardText:
+          result.dispatchLoopStreakCapstoneRewardText,
         dispatchBreakthroughReward: result.dispatchBreakthroughReward,
         dispatchBreakthroughRewardRate: result.dispatchBreakthroughRewardRate,
         dispatchBreakthroughRewardText: result.dispatchBreakthroughRewardText,
@@ -1777,6 +1782,14 @@ function renderDirective(option) {
   dispatchLoopStreak.textContent = option.dispatchLoopStreakRewardText;
   dispatchLoopStreak.hidden = !option.dispatchLoopStreakRewardText;
 
+  const dispatchLoopStreakCapstone = document.createElement("span");
+  dispatchLoopStreakCapstone.className =
+    "directive-dispatch-loop-streak-capstone";
+  dispatchLoopStreakCapstone.textContent =
+    option.dispatchLoopStreakCapstoneRewardText;
+  dispatchLoopStreakCapstone.hidden =
+    !option.dispatchLoopStreakCapstoneRewardText;
+
   const dispatchBreakthrough = document.createElement("span");
   dispatchBreakthrough.className = "directive-dispatch-breakthrough";
   dispatchBreakthrough.textContent = option.dispatchBreakthroughRewardText;
@@ -1840,6 +1853,7 @@ function renderDirective(option) {
   badges.append(
     dispatchRouteStep,
     dispatchLoopStreak,
+    dispatchLoopStreakCapstone,
     recommendation,
     planBonus,
     taskBonus,
@@ -1954,6 +1968,7 @@ function getDirectivePreviewDetailTexts(option) {
     option.dispatchFocusLoopRewardText,
     option.dispatchLoopRewardText,
     option.dispatchLoopStreakRewardText,
+    option.dispatchLoopStreakCapstoneRewardText,
     option.dispatchBreakthroughRewardText,
     option.dispatchDetourBreakthroughRewardText,
     option.dispatchDetourInfusionText,
