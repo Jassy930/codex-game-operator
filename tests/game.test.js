@@ -6439,3 +6439,49 @@ test("反馈快照会记录当前远航连段层数", () => {
   assert.match(body, /闭环进度 2\/3/);
   assert.match(body, /- 远航连段：连段 1\/3/);
 });
+
+test("反馈快照会记录远航满段回响预告", () => {
+  const state = {
+    ...createInitialState(0),
+    energy: 5_000_000,
+    totalEnergy: 25_000_000,
+    energyPerClick: 16,
+    energyPerSecond: 17.5,
+    overloadBonus: 27,
+    routeStance: "cruise",
+    directiveMastery: {
+      stacks: 2,
+      expiresAt: Number.MAX_SAFE_INTEGER
+    },
+    directiveChain: {
+      lastDirectiveId: "resonance-pulse",
+      stacks: 1,
+      expiresAt: Number.MAX_SAFE_INTEGER
+    },
+    farRouteLoopStreak: FAR_ROUTE_DISPATCH_LOOP_STREAK_MAX_STACKS - 1,
+    farRouteLastBranchDirectiveId: "resonance-pulse",
+    upgrades: {
+      lens: 15,
+      collector: 25,
+      stabilizer: 21,
+      resonator: 11
+    }
+  };
+  const entry = createFeedbackEntry({
+    type: "experience",
+    rating: 3,
+    message: "快满段时想确认反馈快照能记录状态",
+    state,
+    goal: { value: "脉冲航闸" },
+    sessionId: "far-capstone-session",
+    createdAt: "2026-05-05T14:15:00.000Z"
+  });
+
+  const body = createFeedbackIssueBody(entry);
+
+  assert.match(body, /远航调度：航段 27\/57 脉冲航闸/);
+  assert.match(body, /闭环进度 2\/3/);
+  assert.match(body, /满段回响 \+10%/);
+  assert.match(body, /- 远航连段：连段 2\/3/);
+  assert.match(body, /- 远航满段回响：满段回响 \+10%/);
+});
