@@ -8,6 +8,10 @@
 - 同步 GitHub Issues 反馈状态：2026-05-06 05:14 CST 当前 5 个 open issue、5 个 open feedback issue、0 个 open bug issue；#3/#4/#6 作为本轮关联反馈。
 - 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 130 项。
 - 构建产物已确认 `dist/src/feedback.js` 包含 `directivePlan`、`directiveTask`、`formatFeedbackDirectivePlan`、`formatFeedbackDirectiveTask`、`- 指令轮换：` 与 `- 航线委托：`。
+- 代码和同步文档提交已创建并推送：`281efe6 feat: add directive context to feedback snapshots`。
+- 发布：GitHub Pages workflow `25402987097` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上 `src/feedback.js` 已确认包含 `- 指令轮换：`、`- 航线委托：` 与 `formatFeedbackDirectivePlan`。workflow 给出 Node.js 20 actions 弃用提醒，未影响本次部署。
+- 反馈处理：已回复 #3、#4 和 #6，说明反馈快照指令短循环上下文、验证结果、Pages 部署和复测问题；三个 issue 均保持 open，评论地址：`https://github.com/Jassy930/codex-game-operator/issues/3#issuecomment-4383179690`、`https://github.com/Jassy930/codex-game-operator/issues/4#issuecomment-4383179697`、`https://github.com/Jassy930/codex-game-operator/issues/6#issuecomment-4383179882`。回复后于 2026-05-06 05:22 CST 再次同步 GitHub Issues，当前仍为 5 个 open feedback issue、0 个 open bug issue；#3/#4 更新时间为 `2026-05-05T21:22:33Z`，#6 更新时间为 `2026-05-05T21:22:34Z`。
+- 钉钉通知未发送：2026-05-06 05:22 CST 运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` / `ROBOT` 相关有效 webhook URL，当前目录和 `/home/jassy/glm` 两层内未发现 `.env*` 文件；未将 webhook 写入仓库。
 
 - 指令轮换视觉轨新增“整轨状态光”：100K 后 `#directivePlanTrack.is-next-ready/is-next-waiting` 会在轨道后方显示 ready 绿色路线光或 waiting 暖色等待光，让下一步格和整条短循环路线的可执行状态同层可见，继续回应 #3/#6 对主动短循环和后半段三步结构可读性的反馈，同时不增加 #4 反馈中的文字密度。
 - `src/styles.css` 增加 `.directive-plan-track::before`、`.directive-plan-track.is-next-ready::before`、`.directive-plan-track.is-next-waiting::before`、`directivePlanTrackReadyRail` 和降低动效兜底；`tests/game.test.js` 覆盖整轨 ready/waiting 样式、keyframes 和 reduced motion 绑定。

@@ -8,6 +8,10 @@
 - 本轮只增强真实反馈可诊断性和测试，不新增界面可见文字、不新增收益、不新增存档字段，不改变点火收益、指令冷却、连携窗口、策略契合、航线委托、远航调度、星图航段或部署链路。
 - 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 130 项。
 - 构建产物已确认 `dist/src/feedback.js` 包含 `directivePlan`、`directiveTask`、`formatFeedbackDirectivePlan`、`formatFeedbackDirectiveTask`、`- 指令轮换：` 与 `- 航线委托：`。
+- 发布和反馈处理已完成：`281efe6 feat: add directive context to feedback snapshots` 已推送，GitHub Pages workflow `25402987097` 成功；build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上 `src/feedback.js` 已确认包含 `- 指令轮换：`、`- 航线委托：` 与 `formatFeedbackDirectivePlan`。
+- 已回复 #3/#4/#6，评论地址：`https://github.com/Jassy930/codex-game-operator/issues/3#issuecomment-4383179690`、`https://github.com/Jassy930/codex-game-operator/issues/4#issuecomment-4383179697`、`https://github.com/Jassy930/codex-game-operator/issues/6#issuecomment-4383179882`；三个 issue 均保持 open 等待带新快照的真实复测。
+- 回复后于 2026-05-06 05:22 CST 再次同步 GitHub Issues，当前仍为 5 个 open feedback issue、0 个 open bug issue；#3/#4 更新时间为 `2026-05-05T21:22:33Z`，#6 更新时间为 `2026-05-05T21:22:34Z`。
+- 钉钉通知未发送：2026-05-06 05:22 CST 运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` / `ROBOT` 相关有效 webhook URL，当前目录和 `/home/jassy/glm` 两层内未发现 `.env*` 文件；未将 webhook 写入仓库。
 
 - GitHub Issues：gh 可用且已认证；2026-05-06 04:57 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。#3/#6 仍是主动短循环和后半段玩法复测反馈，#4 仍是图片化和文字密度复测反馈。
 - 本轮 Product decision 处理 #3/#4/#6：上一轮已让当前下一格显示 ready/waiting，但整条 3 格指令轮换轨道仍是静态背景；玩家扫路线时缺少一层“整条短循环现在可推进/等待”的图形反馈。

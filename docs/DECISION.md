@@ -20,6 +20,7 @@
 - 新提交的游戏内反馈 Issue 会在“指令熟练”之后显示 `指令轮换：...` 和 `航线委托：...`；100K 前显示解锁状态，100K 后能记录当前 1/3、2/3、3/3 或完成态上下文。
 - 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 130 项。
 - 构建产物已确认 `dist/src/feedback.js` 包含 `directivePlan`、`directiveTask`、`formatFeedbackDirectivePlan`、`formatFeedbackDirectiveTask`、`- 指令轮换：` 与 `- 航线委托：`。
+- 发布和反馈处理已完成：提交 `281efe6` 已推送，GitHub Pages workflow `25402987097` 成功，线上 `src/feedback.js` 已确认包含新快照字段；已回复 #3/#4/#6 并保持 open，回复后 2026-05-06 05:22 CST 再同步仍为 5 个 open feedback issue、0 个 open bug issue。
 - 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #3/#4/#6，以及反馈快照已有远航长尾上下文但缺少 100K 后指令短循环上下文的链路复盘。
 
 ## 2026-05-06 Product decision：指令轮换整轨状态光
