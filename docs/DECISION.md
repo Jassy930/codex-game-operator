@@ -1,5 +1,27 @@
 # Decision
 
+## 2026-05-06 Product decision：航线委托完成进度扫光
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-06 03:36 CST 已同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。没有 open bug；#3“玩法太简单”和 #6“后半段玩法没有真正变化”仍是最近需要持续复测的主动玩法反馈。
+
+当前最大问题：航线委托 3/3 完成态已经显示完成收益短标、最终节点信标和整卡完成面板信标。但进度填充条本身仍只是静态满格渐变，完成态的“这条三步已经跑完”还可以在不增加文字密度的前提下补一层轨道级图形反馈。
+
+本轮决策：
+
+- 新增“航线委托完成进度扫光”。
+- `src/styles.css` 为 `.directive-task.is-completed .directive-task-meter-fill::after` 增加浅金扫光和 `directiveTaskCompletedMeterSweep` 动画。
+- `prefers-reduced-motion: reduce` 下关闭完成进度扫光动画，保留静态满格完成色、完成面板、完成收益短标和最终节点信标。
+- `tests/game.test.js` 覆盖完成进度扫光选择器、keyframes 和降低动效规则。
+- 该改动只增强 100K 后 3/3 委托完成回报扫视，不新增可见文字、不新增收益、不新增存档字段，不改变指令冷却、连携窗口、策略契合、航线委托奖励数值、星图航段、远航调度、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-05-06 03:36 CST 当前 5 个 open issue、5 个 open feedback issue、0 个 open bug issue；#3/#6 作为本轮关联反馈。
+- 航线委托完成态满格进度条显示轻量扫光；降低动效偏好下关闭扫光动画。
+- 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 129 项。
+- 构建产物已确认 `dist/src/styles.css` 包含 `.directive-task.is-completed .directive-task-meter-fill::after` 与 `directiveTaskCompletedMeterSweep`。
+- 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #3/#6，以及航线委托完成态已有面板和节点信标但进度填充条缺少完成扫光的链路复盘。
+
 ## 2026-05-06 Product decision：航线委托完成面板信标
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-06 03:18 CST 已同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。没有 open bug；#3“玩法太简单”和 #6“后半段玩法没有真正变化”仍是最近需要持续复测的主动玩法反馈。
