@@ -1920,7 +1920,9 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(indexHtml, /aria-label="指令轮换视觉轨"/);
   assert.match(indexHtml, /class="directive-task-meter"/);
   assert.match(indexHtml, /class="directive-task-meter-fill" style="width: 0%"/);
-  assert.match(indexHtml, /class="directive-task-meter-node is-pending" aria-hidden="true"/);
+  assert.match(indexHtml, /class="directive-task-meter-node is-pending" aria-hidden="true">1<\/span>/);
+  assert.match(indexHtml, /class="directive-task-meter-node is-pending" aria-hidden="true">2<\/span>/);
+  assert.match(indexHtml, /class="directive-task-meter-node is-pending" aria-hidden="true">3<\/span>/);
   assert.match(indexHtml, /class="far-dispatch-meter"/);
   assert.match(indexHtml, /class="far-dispatch-branch is-locked"/);
   assert.match(indexHtml, /class="far-dispatch-branch-recommendation"/);
@@ -2060,6 +2062,7 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(appJs, /fill\.className = "directive-task-meter-fill"/);
   assert.match(appJs, /"directive-task-meter-node"/);
   assert.match(appJs, /node\.setAttribute\("aria-hidden", "true"\)/);
+  assert.match(appJs, /node\.textContent = String\(step\)/);
   assert.match(appJs, /reward\.className = "directive-task-reward"/);
   assert.match(appJs, /reward\.textContent = task\.nextRewardText \?\? ""/);
   assert.match(appJs, /elements\.directiveTask\.replaceChildren\(text, reward, meter\)/);
@@ -2383,8 +2386,10 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(styles, /\.directive-task-reward\[hidden\]/);
   assert.match(styles, /\.directive-task-meter/);
   assert.match(styles, /grid-template-columns: repeat\(3, minmax\(0, 1fr\)\)/);
+  assert.match(styles, /height: 16px/);
   assert.match(styles, /\.directive-task-meter-fill/);
   assert.match(styles, /\.directive-task-meter-node/);
+  assert.match(styles, /place-items: center/);
   assert.match(styles, /\.directive-task-meter-node\.is-complete/);
   assert.match(styles, /\.directive-task-meter-node\.is-next/);
   assert.match(styles, /\.directive-task\.is-completed/);

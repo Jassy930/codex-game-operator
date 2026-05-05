@@ -675,6 +675,7 @@ function renderDirectiveTask(task) {
       .filter(Boolean)
       .join(" ");
     node.setAttribute("aria-hidden", "true");
+    node.textContent = String(step);
     return node;
   });
   meter.append(fill, ...nodes);

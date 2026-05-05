@@ -2,6 +2,14 @@
 
 ## 2026-05-05
 
+- GitHub Issues：gh 可用且已认证；2026-05-05 23:56 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。#3/#6 仍是最近更新的主动玩法与后半段结构反馈，本轮继续处理航线委托三步扫视成本。
+- 本轮 Product decision 处理 #3/#6：航线委托已有下一步收益短标和三节点进度条，但节点仍是无文字圆点，玩家要从 `航线委托 X/3` 反推节点对应 1/2/3 哪一步。
+- 本轮改动新增“航线委托节点步号”：静态首页和运行时 `renderDirectiveTask()` 会在 3 个 `directive-task-meter-node` 内显示 `1` / `2` / `3`，节点继续按 `is-complete` / `is-next` / `is-pending` 切换状态。
+- 本轮只增强航线委托三步扫视性和测试，不新增收益、不新增存档字段，不改变指令冷却、连携窗口、策略契合、航线委托奖励、远航调度、星图航段、反馈入口或部署链路。
+- 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 128 项。
+- 构建产物已确认 `dist/index.html`、`dist/src/app.js` 和 `dist/src/styles.css` 包含 `directive-task-meter-node` 步号、`node.textContent = String(step)`、`height: 16px` 与 `place-items: center`。
+- 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #3/#6，以及航线委托节点已有状态但缺少 1/2/3 步号的链路复盘。
+
 - GitHub Issues：gh 可用且已认证；2026-05-05 23:35 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。#3/#6 仍是最近更新的主动玩法与后半段玩法结构反馈，本轮继续处理航线委托的三步扫视成本。
 - 本轮 Product decision 处理 #3/#6：航线委托条已经显示下一步收益短标，但进度条本体仍是连续填充条，玩家要从 `X/3` 和填充比例判断已完成、下一步和待推进三格，和上方指令轮换三格轨的结构不完全一致。
 - 本轮改动新增“航线委托三节点进度条”：静态首页和运行时 `renderDirectiveTask()` 会在 `directive-task-meter` 内渲染 `directive-task-meter-fill` 与 3 个 `directive-task-meter-node`，按 `is-complete` / `is-next` / `is-pending` 标出委托三步状态。

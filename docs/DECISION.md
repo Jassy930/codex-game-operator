@@ -1,5 +1,28 @@
 # Decision
 
+## 2026-05-05 Product decision：航线委托节点步号
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-05 23:56 CST 已同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。没有 open bug；#3“玩法太简单”和 #6“后半段玩法没有真正变化”仍是本轮关联反馈。
+
+当前最大问题：航线委托已经有下一步收益短标和三节点进度条，但 3 个节点本身是无文字圆点。玩家能看出完成、下一步、待推进状态，但还需要从 `X/3` 文本反推节点对应第几步，和指令轮换轨、远航路线微图里直接显示 1/2/3 的三步语义不完全一致。
+
+本轮决策：
+
+- 新增“航线委托节点步号”。
+- `index.html` 的静态首页委托节点直接显示 `1` / `2` / `3`。
+- `src/app.js` 的 `renderDirectiveTask()` 运行时按节点序号写入 `node.textContent = String(step)`。
+- `src/styles.css` 把委托进度条高度和节点尺寸调整为稳定小圆徽标，确保数字不挤压布局。
+- `tests/game.test.js` 覆盖静态首页步号、运行时绑定和 CSS 尺寸/居中。
+- 该改动只增强航线委托三步扫视性，不新增收益、不新增存档字段，不改变指令冷却、连携窗口、策略契合、航线委托奖励、远航调度、星图航段、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-05-05 23:56 CST 当前 5 个 open issue、5 个 open feedback issue、0 个 open bug issue；#3/#6 作为本轮关联反馈。
+- 航线委托进度条的 3 个节点静态首页和运行时均显示 `1` / `2` / `3`，状态仍按完成、下一步、待推进切换。
+- 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 128 项。
+- 构建产物已确认 `dist/index.html`、`dist/src/app.js` 和 `dist/src/styles.css` 包含 `directive-task-meter-node` 步号、`node.textContent = String(step)`、`height: 16px` 与 `place-items: center`。
+- 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #3/#6，以及航线委托节点已有状态但缺少 1/2/3 步号的链路复盘。
+
 ## 2026-05-05 Product decision：航线委托三节点进度条
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-05 23:35 CST 已同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。没有 open bug；#3“玩法太简单”和 #6“后半段玩法没有真正变化”仍是本轮关联反馈。

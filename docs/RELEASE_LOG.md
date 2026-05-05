@@ -2,6 +2,14 @@
 
 ## Unreleased
 
+- 航线委托三节点进度条新增 `1` / `2` / `3` 步号：100K 后委托条节点不再只是无文字状态点，运行时和静态首页都会直接标出三步序号，继续回应 #3/#6 对主动短循环和后半段三步结构不够直观的反馈。
+- `index.html` 静态首页在 3 个 `directive-task-meter-node` 内写入步号；`src/app.js` 在 `renderDirectiveTask()` 中写入 `node.textContent = String(step)`；`src/styles.css` 把节点调整为 15px 圆形步号徽标；`tests/game.test.js` 覆盖静态首页、运行时绑定和 CSS 标记。
+- 本轮只增强航线委托三步扫视性，不新增收益、不新增存档字段，不改变指令冷却、连携窗口、策略契合、航线委托奖励、远航调度、星图航段、反馈入口或部署链路。
+- 同步 GitHub Issues 反馈状态：2026-05-05 23:56 CST 当前 5 个 open issue、5 个 open feedback issue、0 个 open bug issue；#3/#6 作为本轮关联反馈。
+- 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 128 项。
+- 构建产物已确认 `dist/index.html`、`dist/src/app.js` 和 `dist/src/styles.css` 包含 `directive-task-meter-node` 步号、`node.textContent = String(step)`、`height: 16px` 与 `place-items: center`。
+- 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #3/#6，以及航线委托节点已有状态但缺少步号的链路复盘。
+
 - 航线委托新增“三节点进度条”：100K 后委托条进度不再只有连续填充，运行时会显示 3 个离散节点并按已完成、下一步、待推进切换状态，继续回应 #3/#6 对主动短循环和后半段结构不够直观的反馈。
 - `index.html` 静态首页新增 `directive-task-meter-fill` 与 `directive-task-meter-node`；`src/app.js` 在 `renderDirectiveTask()` 中按 `progress` / `target` 渲染节点状态；`src/styles.css` 增加三列节点轨样式；`tests/game.test.js` 覆盖静态首页、运行时绑定和 CSS 标记。
 - 本轮只增强航线委托进度扫视性，不新增收益、不新增存档字段，不改变指令冷却、连携窗口、策略契合、航线委托奖励、远航调度、星图航段、反馈入口或部署链路。
