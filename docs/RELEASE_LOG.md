@@ -8,6 +8,10 @@
 - 同步 GitHub Issues 反馈状态：2026-05-05 22:42 CST 当前 5 个 open issue、5 个 open feedback issue、0 个 open bug issue；#5 作为本轮主处理对象。
 - 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 128 项。
 - 构建产物已确认 `dist/index.html`、`dist/src/app.js` 和 `dist/src/styles.css` 包含 `core-impact-flare`、`coreImpactFlare`、`coreImpactFlare.classList.toggle("is-overload-impact", overloaded)` 与 `@keyframes coreImpactFlare`。
+- 代码和同步文档提交已创建并推送：`acc6f27 feat: add core impact flare feedback`。
+- 发布：GitHub Pages workflow `25383474141` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页返回 HTTP 200，线上 `index.html` / `src/app.js` / `src/styles.css` 已确认包含 `coreImpactFlare`、`core-impact-flare` 与 `@keyframes coreImpactFlare`。workflow 继续给出 Node.js 20 actions 弃用提醒，未影响本次部署。
+- 反馈处理：已回复 #5，说明点火命中闪幕、验证结果、Pages 部署和复测问题；issue 保持 open，评论地址：`https://github.com/Jassy930/codex-game-operator/issues/5#issuecomment-4380394106`。回复后于 2026-05-05 22:48 CST 再次同步 GitHub Issues，当前仍为 5 个 open feedback issue、0 个 open bug issue；#5 更新时间为 `2026-05-05T14:47:59Z`。
+- 钉钉通知未发送：2026-05-05 22:48 CST 运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` / `ROBOT` 相关变量名，当前目录和 `/home/jassy/glm` 两层内未发现 `.env*` 文件；未将 webhook 写入仓库。
 
 - 星图总览新增远航满段回响短标：20M 后当前远航闭环下一步回目标会把连段推到 3/3 时，“远航调度总览”会显示 `连段 2/3 · 满段回响 +10% · 闭环 2/3`，继续回应 #6 对后半段玩法变化不明显的反馈。
 - `src/game.js` 在 `buildProjectOverviewDispatchText()` 中追加现有 `dispatch.loopCapstoneText` 并避免与闭环复盘文案重复；`tests/game.test.js` 覆盖满段回响预告状态下的星图总览摘要。

@@ -21,6 +21,11 @@
 - 普通点火和过载点火会触发 `coreImpactFlare`，并跟随点击落点定位；过载态使用更强闪幕和更长动画。
 - 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 128 项。
 - 构建产物已确认 `dist/index.html`、`dist/src/app.js` 和 `dist/src/styles.css` 包含 `core-impact-flare`、`coreImpactFlare`、`coreImpactFlare.classList.toggle("is-overload-impact", overloaded)` 与 `@keyframes coreImpactFlare`。
+- 代码和同步文档提交已创建并推送：`acc6f27 feat: add core impact flare feedback`。
+- 发布验证已通过：GitHub Pages workflow `25383474141` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页返回 HTTP 200，线上 `index.html` / `src/app.js` / `src/styles.css` 已确认包含 `coreImpactFlare`、`core-impact-flare` 与 `@keyframes coreImpactFlare`。workflow 继续给出 Node.js 20 actions 弃用提醒，未影响本次部署。
+- 已回复 GitHub Issue #5，说明点火命中闪幕、验证结果、Pages 部署和复测问题；issue 保持 open，评论地址：`https://github.com/Jassy930/codex-game-operator/issues/5#issuecomment-4380394106`。
+- 回复后于 2026-05-05 22:48 CST 再次同步 GitHub Issues，当前仍为 5 个 open feedback issue、0 个 open bug issue；#5 更新时间为 `2026-05-05T14:47:59Z`。
+- 钉钉通知未发送：2026-05-05 22:48 CST 运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` / `ROBOT` 相关变量名，当前目录和 `/home/jassy/glm` 两层内未发现 `.env*` 文件；未将 webhook 写入仓库。
 - 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #5，以及当前点火按钮命中反馈层级复盘。
 
 ## 2026-05-05 Product decision：远航满段回响星图总览短标
