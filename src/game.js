@@ -4074,6 +4074,7 @@ export function getDirectiveTaskStatus(state, now = Date.now()) {
       rewardRate: DIRECTIVE_TASK_REWARD_RATE,
       rewardText,
       nextStepText: "",
+      nextIntentText: "",
       nextActionText: "",
       nextStatusText: "",
       nextStatusKind: "",
@@ -4095,6 +4096,7 @@ export function getDirectiveTaskStatus(state, now = Date.now()) {
       rewardRate: DIRECTIVE_TASK_REWARD_RATE,
       rewardText,
       nextStepText: "",
+      nextIntentText: "",
       nextActionText: "",
       nextStatusText: "",
       nextStatusKind: "",
@@ -4112,6 +4114,7 @@ export function getDirectiveTaskStatus(state, now = Date.now()) {
     : "继续按推荐预案执行";
   const nextStepText =
     "第 " + Math.min(targetSteps, progress + 1) + "/" + targetSteps + " 步";
+  const nextIntentText = buildDirectiveTaskNextIntentText(plan, progress, targetSteps);
   const nextRewardText = buildDirectiveTaskNextRewardText(
     plan,
     progress,
@@ -4134,6 +4137,7 @@ export function getDirectiveTaskStatus(state, now = Date.now()) {
     rewardRate: DIRECTIVE_TASK_REWARD_RATE,
     rewardText,
     nextStepText,
+    nextIntentText,
     nextActionText: nextText,
     nextStatusText: nextStatus.text,
     nextStatusKind: nextStatus.kind,
@@ -4145,6 +4149,7 @@ export function getDirectiveTaskStatus(state, now = Date.now()) {
       targetSteps +
       " · " +
       nextStepText +
+      (nextIntentText ? " · " + nextIntentText : "") +
       " · " +
       nextText +
       (nextStatus.text ? " · " + nextStatus.text : "") +
@@ -4171,6 +4176,28 @@ function buildDirectiveTaskNextStatus(current, nextDirectives, now, dispatch) {
     text: "等待 " + formatDuration(Math.min(...remainingMsList) / 1000),
     kind: "waiting"
   };
+}
+
+function buildDirectiveTaskNextIntentText(plan, progress, targetSteps) {
+  if (plan?.recommendationText) {
+    return plan.recommendationText;
+  }
+
+  const rewardText = plan?.nextRewardText ?? "";
+
+  if (rewardText.includes(formatDirectiveStanceFinisherRate())) {
+    return "策略终结";
+  }
+
+  if (rewardText.includes(formatDirectiveRotationRewardRate())) {
+    return progress + 1 >= targetSteps ? "轮换收束" : "轮换推进";
+  }
+
+  if (progress > 0) {
+    return "连携续航";
+  }
+
+  return "";
 }
 
 function buildDirectiveTaskNextRewardText(plan, progress, targetSteps, rewardText) {

@@ -1,5 +1,29 @@
 # Decision
 
+## 2026-05-06 Product decision：航线委托下一步意图短标
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-06 01:16 CST 已同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。没有 open bug；#3“玩法太简单”和 #6“后半段玩法没有真正变化”仍是本轮关联反馈。
+
+当前最大问题：航线委托条已经显示下一步步号、动作、状态、收益和 1/2/3 节点，但玩家还不能从委托条本身直接看到这一步在轮换里的角色。比如 `下一步 谐振脉冲` 需要结合收益短标里的 `策略终结 +12%` 才能判断它是 3/3 收束，而不是普通续航。
+
+本轮决策：
+
+- 新增“航线委托下一步意图短标”。
+- `src/game.js` 让 `getDirectiveTaskStatus()` 输出 `nextIntentText`，优先复用 `getDirectivePlan()` 的推荐文案；当推荐文案为空时，从下一步收益派生 `策略终结`、`轮换收束`、`轮换推进` 或 `连携续航`。
+- `src/app.js` 在 `renderDirectiveTask()` 中渲染 `directive-task-intent`，并写入“航线委托下一步意图”的标题和可访问标签；紧凑委托文本也会带上该意图。
+- `index.html` 为静态首页委托区预留锁定态隐藏 intent 节点。
+- `src/styles.css` 为意图短标提供独立蓝色胶囊样式，并和步号、动作、状态、收益短标共享稳定截断布局。
+- `tests/game.test.js` 覆盖锁定态、起手态、冷却等待态、1/3 收束续航、2/3 策略终结、完成态、静态首页、运行时绑定和 CSS。
+- 该改动只增强航线委托下一步角色可见性，不新增收益、不新增存档字段，不改变指令冷却、连携窗口、策略契合、航线委托奖励、远航调度、星图航段、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-05-06 01:16 CST 当前 5 个 open issue、5 个 open feedback issue、0 个 open bug issue；#3/#6 作为本轮关联反馈。#3 更新时间为 `2026-05-05T17:09:22Z`，#6 更新时间为 `2026-05-05T17:09:23Z`。
+- 航线委托 0/3 下一步显示 `收束起手`；推荐指令冷却等待时仍保留该意图；1/3 可显示 `收束续航`；2/3 收束时显示 `策略终结`；完成态和锁定态不显示意图短标。
+- 本地验证已通过：`node --test tests/game.test.js`、`npm install`、`npm test`、`npm run build`、`bun install --no-save`、`bun run test`、`bun run build`；测试数 128 项。
+- 构建产物已确认 `dist/index.html`、`dist/src/app.js`、`dist/src/game.js` 和 `dist/src/styles.css` 包含 `directive-task-intent`、`nextIntentText`、`buildDirectiveTaskNextIntentText` 与“航线委托下一步意图”。
+- 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #3/#6，以及航线委托条已有步号/动作/状态/收益但缺少下一步角色短标的链路复盘。
+
 ## 2026-05-06 Product decision：航线委托下一步步号短标
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-06 00:57 CST 已同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。没有 open bug；#3“玩法太简单”和 #6“后半段玩法没有真正变化”仍是本轮关联反馈。

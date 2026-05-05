@@ -4,6 +4,7 @@
 
 M0 设计约束：
 
+- 航线委托必须显示下一步意图短标：`getDirectiveTaskStatus()` 必须返回 `nextIntentText`，优先复用 `getDirectivePlan()` 的推荐文案，缺少推荐文案时从下一步收益派生 `策略终结`、`轮换收束`、`轮换推进` 或 `连携续航`；`renderDirectiveTask()` 必须把该值渲染为 `.directive-task-intent`，并提供“航线委托下一步意图”的标题和可访问标签，完成态和锁定态隐藏。该短标只暴露现有推荐动作的轮换角色，不新增收益、不新增存档字段，不改变指令冷却、连携窗口、策略契合、航线委托奖励、远航调度、星图航段或反馈入口。
 - 航线委托必须显示下一步步号短标：`getDirectiveTaskStatus()` 必须返回 `nextStepText`，未完成委托显示 `第 N/3 步`，完成态和锁定态隐藏；`renderDirectiveTask()` 必须把该值渲染为 `.directive-task-step`，并提供“航线委托下一步步号”的标题和可访问标签。该短标只暴露现有 `progress` / `target` 的下一步位置，不新增收益、不新增存档字段，不改变指令冷却、连携窗口、策略契合、航线委托奖励、远航调度、星图航段或反馈入口。
 - 航线委托必须显示下一步状态短标：`getDirectiveTaskStatus()` 必须返回 `nextStatusText` / `nextStatusKind`，从下一步推荐指令的现有冷却状态派生 `可执行` 或 `等待 X 秒`；`renderDirectiveTask()` 必须把该值渲染为 `.directive-task-status`，并按 `is-ready` / `is-waiting` 切换状态色，完成态和锁定态隐藏。该短标只暴露现有推荐动作的可执行性，不新增收益、不新增存档字段，不改变指令冷却、连携窗口、策略契合、航线委托奖励、远航调度、星图航段或反馈入口。
 - 航线委托必须显示下一步动作短标：`getDirectiveTaskStatus()` 必须返回 `nextActionText`，内容复用下一步推荐指令，例如 `下一步 点火齐射或巡航回收`、`下一步 谐振脉冲`；`renderDirectiveTask()` 必须把该值渲染为 `.directive-task-action`，完成态和锁定态隐藏。该短标只暴露现有推荐动作，不新增收益、不新增存档字段，不改变指令冷却、连携窗口、策略契合、航线委托奖励、远航调度、星图航段或反馈入口。

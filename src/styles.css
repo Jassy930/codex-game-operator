@@ -2420,6 +2420,7 @@ h2 {
 }
 
 .directive-task-step,
+.directive-task-intent,
 .directive-task-action,
 .directive-task-status,
 .directive-task-reward {
@@ -2442,6 +2443,12 @@ h2 {
   border-color: rgba(19, 181, 166, 0.34);
   background: rgba(19, 181, 166, 0.12);
   color: #bdf4eb;
+}
+
+.directive-task-intent {
+  border-color: rgba(124, 201, 255, 0.34);
+  background: rgba(124, 201, 255, 0.12);
+  color: #dcefff;
 }
 
 .directive-task-action {
@@ -2469,6 +2476,7 @@ h2 {
 }
 
 .directive-task-step[hidden],
+.directive-task-intent[hidden],
 .directive-task-action[hidden],
 .directive-task-status[hidden],
 .directive-task-reward[hidden] {

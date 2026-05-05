@@ -657,6 +657,15 @@ function renderDirectiveTask(task) {
     stepLabel.setAttribute("aria-label", stepLabel.title);
   }
 
+  const intent = document.createElement("small");
+  intent.className = "directive-task-intent";
+  intent.textContent = task.nextIntentText ?? "";
+  intent.hidden = !task.nextIntentText;
+  if (task.nextIntentText) {
+    intent.title = "航线委托下一步意图：" + task.nextIntentText;
+    intent.setAttribute("aria-label", intent.title);
+  }
+
   const action = document.createElement("small");
   action.className = "directive-task-action";
   action.textContent = task.nextActionText ?? "";
@@ -722,7 +731,15 @@ function renderDirectiveTask(task) {
   }
 
   elements.directiveTask.classList.toggle("is-completed", task.completed);
-  elements.directiveTask.replaceChildren(text, stepLabel, action, status, reward, meter);
+  elements.directiveTask.replaceChildren(
+    text,
+    stepLabel,
+    intent,
+    action,
+    status,
+    reward,
+    meter
+  );
 }
 
 function renderFarDispatchSceneImage() {
@@ -1498,6 +1515,7 @@ function getDirectiveTaskDisplayText(task) {
     "/" +
     target +
     " · " +
+    (task.nextIntentText ? task.nextIntentText + " · " : "") +
     (task.nextRewardText || task.rewardText)
   );
 }
