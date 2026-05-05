@@ -2157,6 +2157,7 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(gameJs, /function buildFarRouteDispatchBranchRouteProgressPercent/);
   assert.match(appJs, /option\.recommended \? "is-recommended" : ""/);
   assert.match(appJs, /option\.cooling \? "is-cooling" : ""/);
+  assert.match(appJs, /option\.dispatchRouteStepText \? "is-dispatch-route-step" : ""/);
   assert.match(appJs, /option\.finisherRecommended \? "is-finisher-recommended" : ""/);
   assert.match(appJs, /badges\.className = "directive-badges"/);
   assert.match(appJs, /compactDirectiveBadges\(badges\)/);
@@ -2531,6 +2532,9 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(styles, /\.directive-button \.directive-badges \.is-collapsed-badge/);
   assert.match(styles, /\.directive-button \.directive-badge-overflow/);
   assert.match(styles, /\.directive-button\.is-recommended/);
+  assert.match(styles, /\.directive-button\.is-dispatch-route-step/);
+  assert.match(styles, /\.directive-button\.is-dispatch-route-step \.directive-visual/);
+  assert.match(styles, /\.directive-button\.is-dispatch-route-step \.directive-dispatch-route-step/);
   assert.match(styles, /\.directive-button\.is-finisher-recommended/);
   assert.match(styles, /\.directive-button \.directive-dispatch-route-step/);
   assert.match(styles, /\.directive-button \.directive-recommendation/);

@@ -1546,6 +1546,7 @@ function renderDirective(option) {
     option.ready ? "is-ready" : "",
     option.cooling ? "is-cooling" : "",
     option.recommended ? "is-recommended" : "",
+    option.dispatchRouteStepText ? "is-dispatch-route-step" : "",
     option.finisherRecommended ? "is-finisher-recommended" : ""
   ]
     .filter(Boolean)

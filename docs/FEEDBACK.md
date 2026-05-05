@@ -2,6 +2,14 @@
 
 ## 2026-05-05
 
+- GitHub Issues：gh 可用且已认证；2026-05-05 13:48 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。#6 指向“后半段只有不停目标，玩法没有真正变化”，本轮作为 Product decision 主处理对象。
+- 本轮 Product decision 处理 #6：远航调度已有目标、协同/绕行、回目标三步路线和按钮徽标，但当前路线步骤对应的指令按钮仍缺少整按钮级扫视锚点。
+- 本轮改动新增远航路线步骤按钮信标：`src/app.js` 给存在 `dispatchRouteStepText` 的航线指令按钮增加 `is-dispatch-route-step` class，`src/styles.css` 为该按钮、指令视觉徽记和路线步骤徽标增加高亮。
+- 本轮只调整当前远航路线步骤对应指令按钮的展示和测试，不新增可见文字、不新增收益、不新增存档字段，不改变指令收益、冷却、连携窗口、星图路线、项目奖励、升级价格、反馈入口或部署链路。
+- 本地完整验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认 `dist/src/app.js` 和 `dist/src/styles.css` 包含 `is-dispatch-route-step` 与对应样式。
+- 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #6，以及当前远航调度路线步骤在按钮层仍缺少整按钮级扫视锚点的复盘。
+
 - GitHub Issues：gh 可用且已认证；2026-05-05 13:30 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。#5 仍是最近更新反馈，集中在“点火按钮太薄弱、增加点击反馈、特效和点击欲望”。
 - 本轮 Product decision 继续处理 #5：点火按钮已有完整点击后反馈链、普通待机信标链、鼠标 hover 预热投光、键盘焦点预热投光和下方 `连击 0` 读数待机信标，但旁边的过载状态读数 `距过载 8 次` / `稳定` 在 0 连击普通待机时仍是静态胶囊。
 - 本轮改动新增点火过载状态读数待机信标：`.core-button:not(.is-combo-charging):not(.is-pulsing):not(.is-pressing):not(.is-overload-ready):not(.is-overload-hit) ~ .combo-line #pulseValue` 播放 `coreStableReadoutIdleBeacon` 轻量呼吸，并在降低动效偏好下关闭动画。

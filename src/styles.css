@@ -1869,6 +1869,32 @@ h2 {
   background: rgba(244, 178, 60, 0.11);
 }
 
+.directive-button.is-dispatch-route-step {
+  border-color: rgba(124, 201, 255, 0.66);
+  background:
+    linear-gradient(135deg, rgba(124, 201, 255, 0.16), rgba(255, 211, 106, 0.08)),
+    rgba(124, 201, 255, 0.1);
+  box-shadow:
+    inset 0 0 0 1px rgba(220, 239, 255, 0.08),
+    0 0 14px rgba(124, 201, 255, 0.13);
+}
+
+.directive-button.is-dispatch-route-step .directive-visual {
+  border-color: rgba(124, 201, 255, 0.58);
+  box-shadow:
+    inset 0 0 18px rgba(220, 239, 255, 0.1),
+    0 0 12px rgba(124, 201, 255, 0.16);
+}
+
+.directive-button.is-dispatch-route-step .directive-dispatch-route-step {
+  border: 1px solid rgba(220, 239, 255, 0.24);
+  background:
+    linear-gradient(90deg, rgba(124, 201, 255, 0.24), rgba(255, 211, 106, 0.12)),
+    rgba(124, 201, 255, 0.18);
+  color: #f2f9ff;
+  box-shadow: inset 0 0 0 1px rgba(220, 239, 255, 0.08);
+}
+
 .directive-button.is-finisher-recommended {
   border-color: rgba(232, 93, 117, 0.72);
 }

@@ -2,6 +2,14 @@
 
 ## Unreleased
 
+- 远航调度新增“远航路线步骤按钮信标”：20M 后当前远航路线步骤对应的航线指令按钮会获得整按钮级高亮，让玩家不只靠小徽标，也能直接扫到当前路线该执行哪一个指令，继续回应 #6 对后半段玩法变化不明显的反馈。
+- `src/app.js` 给存在 `dispatchRouteStepText` 的航线指令按钮增加 `is-dispatch-route-step` class；`src/styles.css` 为 `.directive-button.is-dispatch-route-step`、对应 `.directive-visual` 和 `.directive-dispatch-route-step` 增加高亮；`tests/game.test.js` 覆盖静态绑定。
+- 本轮只调整当前远航路线步骤对应指令按钮的展示和测试，不新增可见文字、不新增收益、不新增存档字段，不改变指令收益、冷却、连携窗口、星图路线、项目奖励、升级价格、反馈入口或部署链路。
+- 同步 GitHub Issues 反馈状态：2026-05-05 13:48 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 作为主处理对象。
+- 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认 `dist/src/app.js` 和 `dist/src/styles.css` 包含 `is-dispatch-route-step` 与对应样式。
+- 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #6，以及当前远航调度路线步骤在按钮层仍缺少整按钮级扫视锚点的复盘。
+
 - 点火按钮新增“过载状态读数待机信标”：主按钮 0 连击、未按压、未命中且不处于过载预备/命中状态时，下方 `距过载 8 次` / `稳定` 读数会轻量呼吸，让过载推进状态也参与点击前邀请节奏，继续回应 #5 对点击反馈、特效和点击欲望的反馈。
 - `src/styles.css` 为 `.core-button:not(.is-combo-charging):not(.is-pulsing):not(.is-pressing):not(.is-overload-ready):not(.is-overload-hit) ~ .combo-line #pulseValue` 增加 `coreStableReadoutIdleBeacon` 动画，并在降低动效偏好中关闭该动画；`tests/game.test.js` 覆盖静态绑定。
 - 本轮只调整 0 连击普通待机时的过载状态读数展示和测试，不新增可见文字、不新增收益、不新增存档字段，不改变点击收益、连击窗口、过载奖励、升级价格、星图路线、项目奖励、航线策略、航线指令、远航调度、反馈入口或部署链路。

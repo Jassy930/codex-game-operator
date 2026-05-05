@@ -1,5 +1,29 @@
 # Decision
 
+## 2026-05-05 Product decision：远航路线步骤按钮信标
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-05 13:48 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有 open bug；本轮转回处理真实反馈 #6“后半段只有不停的目标，玩法没有真正变化”。
+
+当前最大问题：20M 后远航调度已经有目标、协同/绕行、回目标三步路线，也有路线徽标和远航闭环轨；但当前路线步骤在航线指令按钮上主要靠一个小徽标标出。玩家在三个指令按钮之间扫视时，仍可能先读文字再确认当前该按哪一个。
+
+本轮决策：
+
+- 新增“远航路线步骤按钮信标”。
+- `src/app.js` 给存在 `dispatchRouteStepText` 的航线指令按钮增加 `is-dispatch-route-step` class。
+- `src/styles.css` 为 `.directive-button.is-dispatch-route-step`、对应 `.directive-visual` 和 `.directive-dispatch-route-step` 增加按钮级高亮。
+- `tests/game.test.js` 增加静态断言，覆盖路线步骤按钮 class 和样式选择器。
+- 该改动只调整当前远航路线步骤对应指令按钮的展示和测试，不新增可见文字、不新增收益、不新增存档字段，不改变指令收益、冷却、连携窗口、星图路线、项目奖励、升级价格、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-05-05 13:48 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 作为本轮主处理对象。
+- `src/app.js` 包含 `is-dispatch-route-step` 派生 class。
+- `src/styles.css` 包含 `.directive-button.is-dispatch-route-step`、`.directive-button.is-dispatch-route-step .directive-visual` 和 `.directive-button.is-dispatch-route-step .directive-dispatch-route-step`。
+- `tests/game.test.js` 覆盖远航路线步骤按钮信标静态绑定。
+- 本地完整验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认 `dist/src/app.js` 和 `dist/src/styles.css` 包含 `is-dispatch-route-step` 与对应样式。
+- 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #6，以及当前远航调度路线步骤在按钮层仍缺少整按钮级扫视锚点的复盘。
+
 ## 2026-05-05 Product decision：点火过载状态读数待机信标
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-05 13:30 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有 open bug；#5 仍是最近更新反馈，继续处理“点火按钮太薄弱，增加点击反馈、特效和点击欲望”。
