@@ -2636,6 +2636,10 @@ h2 {
 .directive-task.is-completed {
   border-color: rgba(19, 181, 166, 0.42);
   background: rgba(19, 181, 166, 0.12);
+  box-shadow:
+    0 0 0 1px rgba(19, 181, 166, 0.08),
+    0 0 18px rgba(19, 181, 166, 0.12);
+  animation: directiveTaskCompletedPanelBeacon 2200ms ease-in-out infinite;
 }
 
 .directive-task.is-completed .directive-task-meter-fill {
@@ -8714,6 +8718,24 @@ h2 {
   }
 }
 
+@keyframes directiveTaskCompletedPanelBeacon {
+  0%,
+  100% {
+    filter: saturate(1);
+    box-shadow:
+      0 0 0 1px rgba(19, 181, 166, 0.08),
+      0 0 16px rgba(19, 181, 166, 0.1);
+  }
+
+  50% {
+    filter: saturate(1.14);
+    box-shadow:
+      0 0 0 1px rgba(19, 181, 166, 0.13),
+      0 0 24px rgba(19, 181, 166, 0.18),
+      0 0 12px rgba(255, 211, 106, 0.1);
+  }
+}
+
 @keyframes directiveTaskReadyPanelBeacon {
   0%,
   100% {
@@ -8825,6 +8847,7 @@ h2 {
   .core-impact-echo.is-showing,
   .core-gain-pop.is-showing::after,
   .core-gain-pop.is-overload-gain.is-showing::after,
+  .directive-task.is-completed,
   .directive-task.is-next-ready,
   .directive-task-meter-node.is-next::after,
   .directive-task.is-completed .directive-task-meter-node.is-complete:last-child::after,

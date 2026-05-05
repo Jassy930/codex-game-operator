@@ -2504,8 +2504,11 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(styles, /@keyframes directiveTaskNextNodeBeacon/);
   assert.match(styles, /@media \(prefers-reduced-motion: reduce\) \{[\s\S]*\.directive-task-meter-node\.is-next::after[\s\S]*animation: none/);
   assert.match(styles, /\.directive-task\.is-completed/);
+  assert.match(styles, /directiveTaskCompletedPanelBeacon/);
   assert.match(styles, /\.directive-task\.is-completed \.directive-task-meter-node\.is-complete:last-child::after/);
   assert.match(styles, /@keyframes directiveTaskCompletedNodeBeacon/);
+  assert.match(styles, /@keyframes directiveTaskCompletedPanelBeacon/);
+  assert.match(styles, /@media \(prefers-reduced-motion: reduce\) \{[\s\S]*\.directive-task\.is-completed[\s\S]*animation: none/);
   assert.match(styles, /@media \(prefers-reduced-motion: reduce\) \{[\s\S]*\.directive-task\.is-completed \.directive-task-meter-node\.is-complete:last-child::after[\s\S]*animation: none/);
   assert.match(styles, /\.directive-task\.is-next-ready/);
   assert.match(styles, /\.directive-task\.is-next-ready \.directive-task-status\.is-ready/);

@@ -2,6 +2,14 @@
 
 ## Unreleased
 
+- 航线委托新增“完成面板信标”：100K 后 3/3 委托完成态会让整条委托卡显示青绿色完成边框、轻量补光和慢速脉冲，让 `委托完成 +8%` 完成收益短标、满格进度和三步终点节点形成同层完成反馈，继续回应 #3/#6 对主动短循环和后半段三步结构不够直观的反馈。
+- `src/styles.css` 为 `.directive-task.is-completed` 增加完成面板补光、`directiveTaskCompletedPanelBeacon` 动画和降低动效兜底；`tests/game.test.js` 覆盖 keyframes 和 reduced motion 绑定。
+- 本轮只增强航线委托完成面板扫视，不新增可见文字、不新增收益、不新增存档字段，不改变指令冷却、连携窗口、策略契合、航线委托奖励数值、星图航段、远航调度、反馈入口或部署链路。
+- 同步 GitHub Issues 反馈状态：2026-05-06 03:18 CST 当前 5 个 open issue、5 个 open feedback issue、0 个 open bug issue；#3/#6 作为本轮关联反馈。
+- 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 129 项。
+- 构建产物已确认 `dist/src/styles.css` 包含 `.directive-task.is-completed` 与 `directiveTaskCompletedPanelBeacon`。
+- 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #3/#6，以及航线委托完成态已有最终节点信标但缺少整卡完成反馈的扫视链路复盘。
+
 - 航线委托新增“完成节点信标”：100K 后 3/3 委托完成态会在最后一个完成节点外显示青绿色外环和轻量脉冲，让 `委托完成 +8%` 完成收益短标和三步终点节点在同一层被扫到，继续回应 #3/#6 对主动短循环和后半段三步结构不够直观的反馈。
 - `src/styles.css` 为 `.directive-task.is-completed .directive-task-meter-node.is-complete:last-child::after` 增加完成外环、补光、`directiveTaskCompletedNodeBeacon` 动画和降低动效兜底；`tests/game.test.js` 覆盖 CSS 选择器、keyframes 和 reduced motion 绑定。
 - 本轮只增强航线委托完成节点扫视，不新增可见文字、不新增收益、不新增存档字段，不改变指令冷却、连携窗口、策略契合、航线委托奖励数值、星图航段、远航调度、反馈入口或部署链路。

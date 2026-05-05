@@ -1,5 +1,27 @@
 # Decision
 
+## 2026-05-06 Product decision：航线委托完成面板信标
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-06 03:18 CST 已同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。没有 open bug；#3“玩法太简单”和 #6“后半段玩法没有真正变化”仍是最近需要持续复测的主动玩法反馈。
+
+当前最大问题：航线委托 3/3 完成态已经显示完成收益短标，并在最终节点上显示完成信标。但整条委托卡本身仍主要是静态完成底色，玩家扫卡片外层时还缺少一层不增加文字密度的“这一轮已完成”面板级反馈。
+
+本轮决策：
+
+- 新增“航线委托完成面板信标”。
+- `src/styles.css` 为 `.directive-task.is-completed` 增加完成态补光和 `directiveTaskCompletedPanelBeacon` 慢速脉冲。
+- `prefers-reduced-motion: reduce` 下关闭完成面板动画，保留静态完成边框、底色和节点信标兜底。
+- `tests/game.test.js` 覆盖完成面板 keyframes 和降低动效规则。
+- 该改动只增强 100K 后 3/3 委托完成回报扫视，不新增可见文字、不新增收益、不新增存档字段，不改变指令冷却、连携窗口、策略契合、航线委托奖励数值、星图航段、远航调度、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-05-06 03:18 CST 当前 5 个 open issue、5 个 open feedback issue、0 个 open bug issue；#3/#6 作为本轮关联反馈。
+- 航线委托完成态整卡显示青绿色完成边框、轻量补光和慢速脉冲；降低动效偏好下关闭脉冲动画。
+- 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 129 项。
+- 构建产物已确认 `dist/src/styles.css` 包含 `.directive-task.is-completed` 与 `directiveTaskCompletedPanelBeacon`。
+- 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #3/#6，以及航线委托完成态已有最终节点信标但缺少整卡完成反馈的扫视链路复盘。
+
 ## 2026-05-06 Product decision：航线委托完成节点信标
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-06 02:57 CST 已同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。没有 open bug；#3“玩法太简单”和 #6“后半段玩法没有真正变化”仍是最近需要持续复测的主动玩法反馈。
