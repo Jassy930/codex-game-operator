@@ -2,6 +2,14 @@
 
 ## 2026-05-05
 
+- GitHub Issues：gh 可用且已认证；2026-05-05 21:29 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。#6 仍是最近更新反馈，继续指向“后半段玩法变化不明显、只有不停目标”。
+- 本轮 Fix bug 继续处理 #6 相关远航链路：上一轮已把 `满段回响 +10%` 并入 `routeReturnText`，但分支卡片标题仍二次拼接 `routeLoopCapstoneText`，导致悬停/标题提示出现 `满段回响 +10% · 满段回响 +10%`。
+- 本轮改动移除 `choice.text` 中的二次拼接，让路线卡片标题、悬停提示和可访问摘要复用 `routeReturnText` 作为满段回响预告的唯一来源；新增测试断言满段回响在分支卡片提示中只出现一次。
+- 本轮只修复路线提示去重和测试，不改变远航收益、满段回响结算、连段层数、目标指令、协同/绕行路线、冷却、连携窗口、星图航段、反馈入口或部署链路。
+- 验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 127 项。
+- 构建产物已确认 `src/game.js` 与 `dist/src/game.js` 不再包含 `routeLoopCapstoneText ? " · "` 二次拼接；运行态样例中 `满段回响 +10%` 出现次数为 1。
+- 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #6，以及满段回响路线对照预告上线后的展示链路复盘。
+
 - GitHub Issues：gh 可用且已认证；2026-05-05 21:09 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。#6 仍是最近更新反馈，继续指向“后半段玩法变化不明显、只有不停目标”。
 - 本轮 Product decision 继续处理 #6：远航满段回响已经进入按钮预览、执行反馈和事件字段，但路线对照条的回航结果仍只显示 `远航突破 · 连段 3/3`，缺少回航前的满段终点预告。
 - 本轮改动新增“远航满段回响路线对照预告”：当前路线回航会把远航连段推到 3/3 时，路线对照条回航结果会显示 `远航突破 · 连段 3/3 · 满段回响 +10%`，并给当前路线结果追加 `has-loop-capstone` 信标。

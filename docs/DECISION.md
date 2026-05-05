@@ -1,5 +1,26 @@
 # Decision
 
+## 2026-05-05 Fix bug：远航满段回响卡片提示去重
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-05 21:29 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有 open bug；本地复盘发现上一轮 #6 相关满段回响预告存在展示缺陷，本轮进入 Fix bug。
+
+当前最大问题：上一轮已把 `满段回响 +10%` 并入路线回航结果 `routeReturnText`，但 `choice.text` 仍额外拼接 `routeLoopCapstoneText`。当当前路线回航会把远航连段推到 3/3 时，分支卡片标题和悬停提示会出现 `满段回响 +10% · 满段回响 +10%`，削弱路线对照条的可读性。
+
+本轮决策：
+
+- 移除 `src/game.js` 中 `choice.text` 对 `routeLoopCapstoneText` 的二次拼接。
+- 保持 `routeReturnText` 作为路线回航结果、分支卡片标题、悬停提示和可访问摘要中满段回响预告的唯一文案来源。
+- 在 `tests/game.test.js` 增加断言：满段回响在分支卡片提示中只出现一次，且不匹配重复片段。
+- 该修复不改变远航收益、满段回响结算、连段层数、目标指令、协同/绕行路线、冷却、连携窗口、星图航段、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-05-05 21:29 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 作为本轮关联反馈。
+- 20M 后当前路线回航会把远航连段推到 3/3 时，分支卡片提示只显示一次 `满段回响 +10%`。
+- 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 127 项。
+- 构建产物已确认 `src/game.js` 与 `dist/src/game.js` 不再包含 `routeLoopCapstoneText ? " · "` 二次拼接；运行态样例中 `满段回响 +10%` 出现次数为 1。
+- 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #6，以及满段回响路线对照预告上线后的展示链路复盘。
+
 ## 2026-05-05 Product decision：远航满段回响路线对照预告
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-05 21:09 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有 open bug；本轮继续处理真实反馈 #6“到后半段，游戏玩法已经开始无聊了，只有不停的目标，但是游戏玩法没有真正的变化”。

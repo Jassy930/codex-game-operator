@@ -5542,7 +5542,6 @@ function buildFarRouteDispatchBranchChoices(
         routeIntent.text +
         " · " +
         routeReturn.text +
-        (routeLoopCapstoneText ? " · " + routeLoopCapstoneText : "") +
         " · " +
         routeBranchStepText +
         " · " +

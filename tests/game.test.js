@@ -4729,6 +4729,15 @@ test("远航调度会在 20M 后按当前航段指定目标指令", () => {
     capstoneDispatch.branchChoices.map((choice) => choice.routeReturnText),
     ["远航突破 · 连段 3/3 · 满段回响 +10%", "绕行突破"]
   );
+  assert.equal(
+    (capstoneDispatch.branchChoices[0].text.match(/满段回响 \+10%/g) ?? [])
+      .length,
+    1
+  );
+  assert.doesNotMatch(
+    capstoneDispatch.branchChoices[0].text,
+    /满段回响 \+10% · 满段回响 \+10%/
+  );
   assert.equal(capstoneIgnitionOption.dispatchLoopStreakStacks, 3);
   assert.equal(capstoneIgnitionOption.dispatchLoopStreakCapstoneReward > 0, true);
   assert.equal(

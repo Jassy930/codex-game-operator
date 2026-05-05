@@ -2,6 +2,14 @@
 
 ## Unreleased
 
+- 修复远航满段回响路线卡片提示重复：20M 后当前路线回航会把远航连段推到 3/3 时，`满段回响 +10%` 在分支卡片标题/悬停提示中只出现一次。
+- `src/game.js` 移除 `choice.text` 对 `routeLoopCapstoneText` 的二次拼接，改为复用已包含满段回响的 `routeReturnText`；`tests/game.test.js` 增加重复文案防回归断言。
+- 本轮只修复路线提示去重和测试，不改变远航收益、满段回响结算、连段层数、目标指令、协同/绕行路线、冷却、连携窗口、星图航段、反馈入口或部署链路。
+- 同步 GitHub Issues 反馈状态：2026-05-05 21:29 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 作为本轮关联反馈。
+- 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 127 项。
+- 构建产物已确认 `src/game.js` 与 `dist/src/game.js` 不再包含 `routeLoopCapstoneText ? " · "` 二次拼接；运行态样例中 `满段回响 +10%` 出现次数为 1。
+- 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #6，以及满段回响路线对照预告上线后的展示链路复盘。
+
 - 远航路线对照条新增“满段回响”预告：20M 后当前路线回航会把远航连段推到 3/3 时，回航结果会显示 `远航突破 · 连段 3/3 · 满段回响 +10%`，继续回应 #6 对后半段玩法变化不明显的反馈。
 - `src/game.js` 从现有远航连段与路线状态派生 `routeLoopCapstoneText` 并并入 `routeReturnText`；`src/app.js` 为路线对照回航结果追加 `has-loop-capstone`；`src/styles.css` 增加满段回响结果信标、右侧状态点、补光和降动效兜底；`tests/game.test.js` 覆盖运行态字段、静态绑定、CSS 和构建标记。
 - 本轮只增强路线对照层的满段回响预判，不新增收益、不新增存档字段，不改变远航连段结算、目标指令、协同/绕行路线、冷却、连携窗口、星图航段、反馈入口或部署链路。
