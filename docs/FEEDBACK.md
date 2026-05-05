@@ -2,6 +2,14 @@
 
 ## 2026-05-06
 
+- GitHub Issues：gh 可用且已认证；2026-05-06 02:57 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。#3“玩法太简单”和 #6“后半段玩法没有真正变化”仍是最近需要复测的主动短循环反馈。
+- 本轮 Product decision 处理 #3/#6：航线委托完成态已经保留 `委托完成 +8%` 完成收益短标，但 3/3 完成后的最终节点仍只是和其它完成节点一样的静态完成色，缺少一层不增加文字密度的终点信标。
+- 本轮改动新增“航线委托完成节点信标”：`.directive-task.is-completed .directive-task-meter-node.is-complete:last-child::after` 在最后一个完成节点外显示青绿色外环和轻量脉冲；降低动效偏好下关闭动画。
+- 本轮只增强航线委托完成态扫视和测试，不新增可见文字、不新增收益、不新增存档字段，不改变指令冷却、连携窗口、策略契合、航线委托奖励数值、星图、远航调度、反馈入口或部署链路。
+- 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 129 项。
+- 构建产物已确认 `dist/src/styles.css` 包含 `.directive-task.is-completed .directive-task-meter-node.is-complete:last-child::after` 与 `directiveTaskCompletedNodeBeacon`。
+- 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #3/#6，以及航线委托完成态最终节点缺少完成信标的扫视链路复盘。
+
 - GitHub Issues：gh 可用且已认证；2026-05-06 02:39 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。#3“玩法太简单”和 #6“后半段玩法没有真正变化”仍是最近需要复测的主动短循环反馈。
 - 本轮 Product decision 处理 #3/#6：航线委托条已有下一步步号、意图、动作、状态、收益、可执行面板信标和 1/2/3 节点信标，但 3/3 完成态默认可见层只显示已完成和满格进度，完成奖励 `委托完成 +8%` 不再作为独立短标保留。
 - 本轮改动新增“航线委托完成收益短标”：`renderDirectiveTask()` 在 `task.completed` 时复用 `task.rewardText` 渲染 `.directive-task-reward.is-completed`，标题和可访问标签写为“航线委托完成收益”，静态首页预留隐藏收益节点。
