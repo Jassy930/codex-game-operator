@@ -2,7 +2,7 @@
 
 ## 2026-05-05 Product decision：远航满段回响
 
-阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-05 20:47 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有 open bug；本轮继续处理真实反馈 #6“到后半段，游戏玩法已经开始无聊了，只有不停的目标，但是游戏玩法没有真正的变化”。
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-05 20:47 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有 open bug；本轮继续处理真实反馈 #6“到后半段，游戏玩法已经开始无聊了，只有不停的目标，但是游戏玩法没有真正的变化”。本轮回复后于 2026-05-05 21:02 CST 再次同步，当前仍为 5 个 open feedback issue、0 个 open bug issue；#6 更新时间为 `2026-05-05T13:02:39Z`。
 
 当前最大问题：远航调度已经有三步闭环、协同/绕行、路线稳航/改道、远航连段和多层可视化，但连段满 3/3 后仍只是在已有 `远航连段 +X` 的线性加成上封顶。玩家连续完成多轮时，满层瞬间缺少一次明确的“我把这条后半段短循环推满了”的回报。
 
@@ -21,6 +21,10 @@
 - 20M 后远航闭环在当前连段 2/3 时再次 3/3 回到目标指令，会把 `farRouteLoopStreak` 推到 3/3，并额外显示/结算 `满段回响 +X`。
 - 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 127 项。
 - 构建产物已确认 `dist/src/game.js`、`dist/src/app.js` 和 `dist/src/styles.css` 包含 `满段回响`、`dispatchLoopStreakCapstoneReward` 与 `directive-dispatch-loop-streak-capstone`。
+- 代码提交已创建并推送：`4bfc0c1 feat: add far streak capstone reward`。
+- 发布验证已通过：GitHub Pages workflow `25377885015` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页、`src/game.js`、`src/app.js` 和 `src/styles.css` 均返回 HTTP 200，线上产物已确认包含 `满段回响`、`dispatchLoopStreakCapstoneReward` 与 `directive-dispatch-loop-streak-capstone`。workflow 继续给出 Node.js 20 actions 弃用提醒，未影响本次部署。
+- 已回复 GitHub Issue #6，说明远航满段回响、验证结果、Pages 部署和复测问题；issue 保持 open，评论地址：`https://github.com/Jassy930/codex-game-operator/issues/6#issuecomment-4379477237`。
+- 钉钉通知未发送：2026-05-05 21:03 CST 运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` / `ROBOT` 相关变量名，当前目录和 `/home/jassy/glm` 两层内未发现 `.env*` 文件；未将 webhook 写入仓库。
 - 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #6，以及远航连段达到 3/3 后缺少满层瞬间回报的玩法复盘。
 
 ## 2026-05-05 Product decision：远航新路线信标差异色
