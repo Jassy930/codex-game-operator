@@ -8,6 +8,10 @@
 - 同步 GitHub Issues 反馈状态：2026-05-06 01:35 CST 当前 5 个 open issue、5 个 open feedback issue、0 个 open bug issue；#5 作为本轮关联反馈，更新时间为 `2026-05-05T14:47:59Z`。
 - 验证通过：`node --test tests/game.test.js`、`npm install`、`npm test`、`npm run build`、`bun install --no-save`、`bun run test`、`bun run build`；测试数 128 项。
 - 构建产物已确认 `dist/index.html`、`dist/src/app.js` 和 `dist/src/styles.css` 包含 `coreImpactEcho`、`core-impact-echo` 与 `coreImpactEcho` 动画标记。
+- 代码提交已创建并推送：`ed5b1c4 feat: add core impact echo feedback`。
+- 发布：GitHub Pages workflow `25392463952` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页、`src/app.js` 和 `src/styles.css` 均返回 HTTP 200，并已确认包含 `coreImpactEcho`、`core-impact-echo` 与 `coreImpactEcho` 动画标记。workflow 给出 Node.js 20 actions 弃用提醒，未影响本次部署。
+- 反馈处理：已回复 #5，说明点火落点回声环、验证结果、Pages 部署和复测问题；issue 保持 open，评论地址：`https://github.com/Jassy930/codex-game-operator/issues/5#issuecomment-4381641766`。回复后于 2026-05-06 01:43 CST 再次同步 GitHub Issues，当前仍为 5 个 open feedback issue、0 个 open bug issue；#5 更新时间为 `2026-05-05T17:43:15Z`。
+- 钉钉通知未发送：2026-05-06 01:43 CST 运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` / `ROBOT` 相关有效 webhook URL，当前目录和 `/home/jassy/glm` 两层内未发现 `.env*` 文件；未将 webhook 写入仓库。
 
 - 航线委托新增“下一步意图短标”：100K 后委托条会在步号、动作、状态和收益旁直接显示 `收束起手`、`收束续航`、`策略终结` 等下一步角色，继续回应 #3/#6 对主动短循环和后半段三步结构不够直观的反馈。
 - `src/game.js` 让 `getDirectiveTaskStatus()` 输出 `nextIntentText`；`src/app.js` 在 `renderDirectiveTask()` 中渲染 `directive-task-intent` 并把紧凑委托文本带上意图；`index.html` 预留锁定态隐藏节点；`src/styles.css` 增加意图短标胶囊样式；`tests/game.test.js` 覆盖状态字段、静态首页、运行时绑定、CSS、等待冷却、1/3 续航和 3/3 策略终结案例。

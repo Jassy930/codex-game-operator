@@ -21,6 +21,11 @@
 - 普通点火会在实际点击落点显示一圈较慢扩散的回声环；第 8 次过载点火会显示更大的过载回声环。
 - 本地验证已通过：`node --test tests/game.test.js`、`npm install`、`npm test`、`npm run build`、`bun install --no-save`、`bun run test`、`bun run build`；测试数 128 项。
 - 构建产物已确认 `dist/index.html`、`dist/src/app.js` 和 `dist/src/styles.css` 包含 `coreImpactEcho`、`core-impact-echo` 与 `coreImpactEcho` 动画标记。
+- 代码提交已创建并推送：`ed5b1c4 feat: add core impact echo feedback`。
+- 发布验证已通过：GitHub Pages workflow `25392463952` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页、`src/app.js` 和 `src/styles.css` 均返回 HTTP 200，并已确认包含 `coreImpactEcho`、`core-impact-echo` 与 `coreImpactEcho` 动画标记。workflow 给出 Node.js 20 actions 弃用提醒，未影响本次部署。
+- 已回复 GitHub Issue #5，说明点火落点回声环、验证结果、Pages 部署和复测问题；issue 保持 open，评论地址：`https://github.com/Jassy930/codex-game-operator/issues/5#issuecomment-4381641766`。
+- 回复后于 2026-05-06 01:43 CST 再次同步 GitHub Issues，当前仍为 5 个 open feedback issue、0 个 open bug issue；#5 更新时间为 `2026-05-05T17:43:15Z`。
+- 钉钉通知未发送：2026-05-06 01:43 CST 运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` / `ROBOT` 相关有效 webhook URL，当前目录和 `/home/jassy/glm` 两层内未发现 `.env*` 文件；未将 webhook 写入仓库。
 - 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #5，以及点火命中反馈层级复盘。
 
 ## 2026-05-06 Product decision：航线委托下一步意图短标
