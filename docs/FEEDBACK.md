@@ -8,7 +8,9 @@
 - 本轮只增强路线对照层的满段回响预判和测试，不新增收益、不新增存档字段，不改变远航连段结算、目标指令、协同/绕行路线、冷却、连携窗口、星图航段、反馈入口或部署链路。
 - 验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 127 项。
 - 构建产物已确认 `dist/src/game.js`、`dist/src/app.js` 和 `dist/src/styles.css` 包含 `routeLoopCapstoneText`、`has-loop-capstone` 与 `farDispatchSummaryLoopCapstoneResultGlow`。
-- 代码提交已创建：`0bd397b feat: preview far capstone on route returns`；待推送与发布验证。
+- 代码提交已创建并推送：`0bd397b feat: preview far capstone on route returns`；运营文档提交已创建并推送：`d6385f4 docs: record far capstone route preview`；GitHub Pages workflow `25378979386` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页返回 HTTP 200，线上 `src/game.js` 已确认包含 `routeLoopCapstoneText` 与 `满段回响`，`src/app.js` 已确认包含 `has-loop-capstone`，`src/styles.css` 已确认包含 `farDispatchSummaryLoopCapstoneResultGlow`。workflow 继续给出 Node.js 20 actions 弃用提醒，未影响本次部署。
+- 2026-05-05 21:23 CST 已在 #6 回复本轮处理结果、提交 `0bd397b` / `d6385f4`、GitHub Pages workflow `25378979386` 和线上验证结果；Issue 保持 open 等待复测，评论地址：`https://github.com/Jassy930/codex-game-operator/issues/6#issuecomment-4379660831`。回复后于 2026-05-05 21:24 CST 再次同步 GitHub Issues，当前仍为 5 个 open feedback issue、0 个 open bug issue；#6 更新时间为 `2026-05-05T13:23:54Z`。
+- 钉钉通知未发送：2026-05-05 21:24 CST 运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` / `ROBOT` 相关变量名；未将 webhook 写入仓库。
 - 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #6，以及满段回响上线后路线对照层仍缺少回航前预告的链路复盘。
 
 - GitHub Issues：gh 可用且已认证；2026-05-05 20:47 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。#6 仍是最近更新反馈，继续指向“后半段玩法变化不明显、只有不停目标”。
