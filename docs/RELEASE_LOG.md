@@ -11,6 +11,7 @@
 - 代码和同步文档提交已创建并推送：`8a831ea feat: highlight directive task next node`。
 - 发布：GitHub Pages workflow `25393974618` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页和 `src/styles.css` 均返回 HTTP 200，并已确认包含 `.directive-task-meter-node.is-next::after` 与 `directiveTaskNextNodeBeacon`。workflow 给出 Node.js 20 actions 弃用提醒，未影响本次部署。
 - 反馈处理：已回复 #3 和 #6，说明航线委托下一步节点信标、验证结果、Pages 部署和复测问题；两个 issue 均保持 open，评论地址：`https://github.com/Jassy930/codex-game-operator/issues/3#issuecomment-4381842684`、`https://github.com/Jassy930/codex-game-operator/issues/6#issuecomment-4381842804`。回复后于 2026-05-06 02:14 CST 再次同步 GitHub Issues，当前仍为 5 个 open feedback issue、0 个 open bug issue；#3 更新时间为 `2026-05-05T18:14:34Z`，#6 更新时间为 `2026-05-05T18:14:36Z`。
+- 钉钉通知未发送：2026-05-06 02:17 CST 运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` / `ROBOT` 相关有效 webhook URL，当前目录和 `/home/jassy/glm` 两层内未发现 `.env*` 文件；未将 webhook 写入仓库。
 
 - 升级面板新增本地 SVG 插画：侧栏升级标题下方现在显示 `src/assets/upgrade-visual.svg`，用聚能透镜、自动采集臂、星核稳定器和星核谐振器建立面板级图片锚点，继续回应 #4 对界面文字密度和图片化展示的反馈。
 - `src/assets/upgrade-visual.svg` 新增升级工坊插画；`index.html` 在升级面板内引用 `upgrade-scene-image`；`src/styles.css` 增加稳定宽高比、边框和暗色底；`tests/game.test.js` 覆盖静态首页、样式和资产标记。
