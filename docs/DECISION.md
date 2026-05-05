@@ -18,6 +18,8 @@
 - GitHub Issues 已同步：2026-05-06 05:46 CST 当前 5 个 open issue、5 个 open feedback issue、0 个 open bug issue；#2/#3/#6 作为本轮关联反馈。
 - 新提交的游戏内反馈 Issue 会显示 `星图进度：...`；早期状态能显示 `0/57 · 下一段 1/57：点亮星图`，后半段能显示当前远航长线航段、奖励和进度。
 - 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 132 项。
+- 发布验证已通过：提交 `58c7e77` 已推送，GitHub Pages workflow `25404409954` 成功，线上首页返回 HTTP 200，线上 `src/feedback.js` 已确认包含 `getProjectOverview`、`projectOverview` 与 `星图进度`。
+- 已回复 GitHub Issue #2、#3 和 #6，说明星图进度快照摘要、验证结果、Pages 部署和复测问题；issue 均保持 open。回复后于 2026-05-06 05:55 CST 再次同步 GitHub Issues，当前仍为 5 个 open feedback issue、0 个 open bug issue。
 - 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #2/#3/#6，以及反馈快照缺少星图长线位置上下文的链路复盘。
 
 ## 2026-05-06 Product decision：点火反馈快照上下文

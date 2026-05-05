@@ -8,6 +8,10 @@
 - 同步 GitHub Issues 反馈状态：2026-05-06 05:46 CST 当前 5 个 open issue、5 个 open feedback issue、0 个 open bug issue；#2/#3/#6 作为本轮关联反馈，#4/#5 继续等待带新快照的真实复测。
 - 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 132 项。
 - 构建产物已确认 `dist/src/feedback.js` 包含 `getProjectOverview`、`projectOverview` 与 `- 星图进度：`。
+- 代码和同步文档提交已创建并推送：`58c7e77 feat: add project progress to feedback snapshots`。
+- 发布：GitHub Pages workflow `25404409954` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页返回 HTTP 200，线上 `src/feedback.js` 已确认包含 `getProjectOverview`、`projectOverview` 与 `- 星图进度：`。workflow 给出 Node.js 20 actions 弃用提醒，未影响本次部署。
+- 反馈处理：已回复 #2、#3 和 #6，说明星图进度快照摘要、验证结果、Pages 部署和复测问题；三个 issue 均保持 open，评论地址：`https://github.com/Jassy930/codex-game-operator/issues/2#issuecomment-4383443179`、`https://github.com/Jassy930/codex-game-operator/issues/3#issuecomment-4383444315`、`https://github.com/Jassy930/codex-game-operator/issues/6#issuecomment-4383445327`。回复后于 2026-05-06 05:55 CST 再次同步 GitHub Issues，当前仍为 5 个 open feedback issue、0 个 open bug issue；#2 更新时间为 `2026-05-05T21:55:22Z`，#3 更新时间为 `2026-05-05T21:55:35Z`，#6 更新时间为 `2026-05-05T21:55:47Z`。
+- 钉钉通知未发送：2026-05-06 05:56 CST 运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` / `ROBOT` 相关有效 webhook 变量，当前目录和 `/home/jassy/glm` 两层内未发现 `.env*` 文件；未将 webhook 写入仓库。
 
 - 反馈快照新增“点火反馈上下文”：游戏内反馈生成 GitHub Issue 时，快照会追加 `点火反馈：...`，记录当前下一击奖励预告、过载临界状态，以及点火音效/触感偏好开关状态，继续为 #5“点火按钮太薄弱”复测提供可诊断上下文。
 - `src/feedback.js` 复用 `getCoreRewardPreview()` 格式化快照字段；`src/app.js` 在提交反馈时传入 `soundEnabled` / `hapticEnabled`；`tests/game.test.js` 覆盖普通待机快照、过载前一击快照和反馈提交偏好传参。

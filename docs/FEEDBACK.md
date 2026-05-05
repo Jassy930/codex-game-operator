@@ -7,6 +7,10 @@
 - 本轮改动新增“星图进度快照摘要”：`createFeedbackEntry()` 读取 `getProjectOverview()`，预填 Issue 快照追加 `星图进度：...`，记录完成数、下一航段、奖励和当前进度。
 - 本轮只增强真实反馈可诊断性和测试，不新增界面可见文字、不新增收益、不新增存档字段，不改变星图航段、项目奖励、目标判定、航线策略、航线指令、远航调度、反馈入口交互或部署链路。
 - 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 132 项。
+- 发布和反馈处理已完成：`58c7e77 feat: add project progress to feedback snapshots` 已推送，GitHub Pages workflow `25404409954` 成功；build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页返回 HTTP 200，线上 `src/feedback.js` 已确认包含 `getProjectOverview` 与 `星图进度`。
+- 已回复 #2/#3/#6，评论地址：`https://github.com/Jassy930/codex-game-operator/issues/2#issuecomment-4383443179`、`https://github.com/Jassy930/codex-game-operator/issues/3#issuecomment-4383444315`、`https://github.com/Jassy930/codex-game-operator/issues/6#issuecomment-4383445327`；三个 issue 均保持 open 等待带新快照的真实复测。
+- 回复后于 2026-05-06 05:55 CST 再次同步 GitHub Issues，当前仍为 5 个 open feedback issue、0 个 open bug issue；#2 更新时间为 `2026-05-05T21:55:22Z`，#3 更新时间为 `2026-05-05T21:55:35Z`，#6 更新时间为 `2026-05-05T21:55:47Z`。
+- 钉钉通知未发送：2026-05-06 05:56 CST 运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` / `ROBOT` 相关有效 webhook 变量，当前目录和 `/home/jassy/glm` 两层内未发现 `.env*` 文件；未将 webhook 写入仓库。
 
 - GitHub Issues：gh 可用且已认证；2026-05-06 05:28 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。#5 仍是点火点击反馈和点击欲望复测反馈，#3/#4/#6 仍保持 open 等待带新快照的真实复测。
 - 本轮 Product decision 处理 #5：点火按钮已有多层点击反馈，但反馈快照只有 `连击` 数字，无法直接记录玩家提交反馈时的下一击预告、是否处于过载前一击，以及音效/触感反馈是否开启。
