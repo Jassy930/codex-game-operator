@@ -2,6 +2,17 @@
 
 ## 2026-05-05
 
+- GitHub Issues：gh 可用且已认证；2026-05-05 20:08 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。#6 在本轮回复后更新时间为 `2026-05-05T12:08:15Z`，继续指向“后半段玩法变化不明显、只有不停目标”。
+- 本轮 Product decision 处理 #6：远航调度已有协同/绕行、改道、稳航、闭环、突破和连段，但路线对照里的分支定位仍需要更直接的决策锚点。
+- 本轮改动新增“远航路线决策信标”：20M 后协同/绕行路线对照新增 `routeDecisionSignalText` 与 `far-dispatch-branch-choice-summary-signal`，用航段契合、新路线、稳航、改道、当前路线和闭环完成等短标解释分支定位。
+- 本轮只增强远航调度路线理解和测试，不改变远航收益、指令冷却、闭环、连段、投送、星图航段、升级价格、存档字段、反馈入口或部署链路。
+- 验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 127 项。
+- 构建产物已确认 `dist/src/app.js`、`dist/src/game.js` 和 `dist/src/styles.css` 包含 `routeDecisionSignalText` 与 `far-dispatch-branch-choice-summary-signal`。
+- 代码提交已创建并推送：`44aeadc feat: add far route decision signals`；GitHub Pages workflow `25375345942` 成功，线上首页、JS 和 CSS 已确认包含远航路线决策信标。
+- 2026-05-05 20:08 CST 已在 #6 回复本轮处理结果、提交 `44aeadc`、GitHub Pages workflow `25375345942` 和线上验证结果；Issue 保持 open 等待复测，评论地址：`https://github.com/Jassy930/codex-game-operator/issues/6#issuecomment-4379035678`。
+- 钉钉通知未发送：2026-05-05 20:09 CST 运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` / `ROBOT` 相关变量名，当前目录和 `/home/jassy/glm` 两层内未发现 `.env*` 文件；未将 webhook 写入仓库。
+- 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #6，以及远航调度路线对照条仍需更强决策锚点的复盘。
+
 - GitHub Issues：gh 可用且已认证；2026-05-05 19:52 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。#5 在本轮回复后更新时间为 `2026-05-05T11:52:06Z`，继续指向“点火按钮太薄弱、需要点击反馈和特效”。
 - 本轮 Product decision 处理 #5：点火按钮已有音效、触感、收益浮标、点击回弹、光点、涟漪和火花，但点击命中瞬间仍缺少一层更大范围、跟随点击位置扩散的爆发反馈。
 - 本轮改动新增“点火点击爆发反馈”：点火按钮新增 `coreImpactBurst` / `core-impact-burst` 爆发层，普通点击播放 540ms 扩散光束，过载点击播放 720ms 强化爆发层。

@@ -1,5 +1,32 @@
 # Decision
 
+## 2026-05-05 Product decision：远航路线决策信标
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-05 20:08 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有 open bug；本轮处理真实反馈 #6“到后半段，游戏玩法已经开始无聊了，只有不停的目标，但是游戏玩法没有真正的变化”。
+
+当前最大问题：20M 后远航调度已经提供目标指令、协同/绕行分支、改道、稳航、闭环、突破和连段，但路线对照中“为什么这条是首推、另一条是什么定位”仍主要藏在长句和收益徽标里。后半段玩法差异存在，但玩家扫视时仍容易把协同/绕行看成两张文字相近的卡。
+
+本轮决策：
+
+- 新增“远航路线决策信标”。
+- `src/game.js` 为远航调度分支选择派生 `routeDecisionSignalKind` / `routeDecisionSignalText`，覆盖航段契合、契合稳航、契合改道、上轮稳航、轮替改道、当前路线、闭环完成和新路线。
+- `src/app.js` 在远航路线对照条中渲染 `far-dispatch-branch-choice-summary-signal`，并把信标写入标题和可访问摘要。
+- `src/styles.css` 为决策信标添加独立 grid 区域、状态色和小屏重排，避免挤压现有阶段、动作、收益、资源和结果短标。
+- `tests/game.test.js` 覆盖运行态字段、静态绑定、CSS 布局和 20M 后脉冲航闸样例。
+- 该改动只增强远航调度路线理解和测试，不改变远航收益、指令冷却、闭环、连段、投送、星图航段、升级价格、存档字段、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-05-05 20:08 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 作为本轮主处理对象，回复后更新时间为 `2026-05-05T12:08:15Z`。
+- 20M 后路线对照中协同/绕行分支包含 `routeDecisionSignalText` 与 `far-dispatch-branch-choice-summary-signal`，首推样例显示 `航段契合`，建档样例显示 `新路线`。
+- 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 127 项。
+- 构建产物已确认 `dist/src/app.js`、`dist/src/game.js` 和 `dist/src/styles.css` 包含 `routeDecisionSignalText` 与 `far-dispatch-branch-choice-summary-signal`。
+- 代码提交已创建并推送：`44aeadc feat: add far route decision signals`。
+- 发布验证已通过：GitHub Pages workflow `25375345942` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页、`src/app.js`、`src/game.js` 和 `src/styles.css` 均返回 HTTP 200，线上产物已确认包含本轮新增标记。workflow 继续给出 Node.js 20 actions 弃用提醒，未影响本次部署。
+- 已回复 GitHub Issue #6，说明远航路线决策信标、验证结果、Pages 部署和复测问题；issue 保持 open，评论地址：`https://github.com/Jassy930/codex-game-operator/issues/6#issuecomment-4379035678`。
+- 钉钉通知未发送：2026-05-05 20:09 CST 运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` / `ROBOT` 相关变量名，当前目录和 `/home/jassy/glm` 两层内未发现 `.env*` 文件；未将 webhook 写入仓库。
+- 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #6，以及远航调度路线对照条仍需更强决策锚点的复盘。
+
 ## 2026-05-05 Product decision：点火点击爆发反馈
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-05 19:52 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有 open bug；本轮处理真实反馈 #5“点火按钮太薄弱了，增加点击反馈，增加特效，增加点击欲望”。

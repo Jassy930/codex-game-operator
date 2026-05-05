@@ -2,6 +2,18 @@
 
 ## Unreleased
 
+- 远航调度路线对照新增决策信标：20M 后协同/绕行路线对照现在会显示 `航段契合`、`新路线`、`契合稳航`、`轮替改道`、`当前路线`、`闭环完成` 等短标，让 #6 对应的后半段路线差异不只依赖长句和收益徽标。
+- `src/game.js` 为分支选择派生 `routeDecisionSignalKind` / `routeDecisionSignalText`；`src/app.js` 渲染 `far-dispatch-branch-choice-summary-signal` 并写入标题/可访问摘要；`src/styles.css` 增加桌面和小屏 grid 区域、状态色与当前路线样式；`tests/game.test.js` 覆盖运行态字段、静态绑定、CSS 布局和 20M 后样例。
+- 本轮只增强远航调度路线理解和测试，不改变远航收益、指令冷却、闭环、连段、投送、星图航段、升级价格、存档字段、反馈入口或部署链路。
+- 同步 GitHub Issues 反馈状态：2026-05-05 20:08 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 作为本轮主处理对象，回复后更新时间为 `2026-05-05T12:08:15Z`。
+- 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 127 项。
+- 构建产物已确认 `dist/src/app.js`、`dist/src/game.js` 和 `dist/src/styles.css` 包含 `routeDecisionSignalText` 与 `far-dispatch-branch-choice-summary-signal`。
+- 代码提交已创建并推送：`44aeadc feat: add far route decision signals`。
+- 发布：GitHub Pages workflow `25375345942` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页、`src/app.js`、`src/game.js` 和 `src/styles.css` 均返回 HTTP 200，线上产物已确认包含 `routeDecisionSignalText` 与 `far-dispatch-branch-choice-summary-signal`。workflow 继续给出 Node.js 20 actions 弃用提醒，未影响本次部署。
+- 反馈处理：已回复 #6，说明远航路线决策信标、验证结果、Pages 部署和复测问题；issue 保持 open，评论地址：`https://github.com/Jassy930/codex-game-operator/issues/6#issuecomment-4379035678`。
+- 钉钉通知未发送：2026-05-05 20:09 CST 运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` / `ROBOT` 相关变量名，当前目录和 `/home/jassy/glm` 两层内未发现 `.env*` 文件；未将 webhook 写入仓库。
+- 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #6，以及远航调度路线对照条仍需更强决策锚点的复盘。
+
 - 点火按钮新增点击爆发反馈：核心点火按钮现在包含 `coreImpactBurst` / `core-impact-burst` 爆发层，普通点击沿点击位置播放 540ms 扩散光束，过载点击播放 720ms 强化爆发层，回应 #5 对点击反馈、特效和点击欲望的反馈。
 - `index.html` 新增 `coreImpactBurst` 节点；`src/app.js` 在 `animateCore()` 和 `positionCoreImpact()` 中同步显示、清理和定位爆发层；`src/styles.css` 新增普通/过载两档爆发层样式、`coreImpactBurst` 关键帧和降动效绑定；`tests/game.test.js` 覆盖静态首页、运行时绑定和 CSS 绑定。
 - 本轮只增强点火按钮点击反馈和测试，不改变点击收益、过载收益、连击规则、升级价格、存档字段、音效/触感开关、星图、航线指令、远航调度、反馈入口或部署链路。

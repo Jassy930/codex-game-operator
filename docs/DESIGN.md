@@ -4,6 +4,7 @@
 
 M0 设计约束：
 
+- 远航调度路线对照必须提供决策信标：20M 后 `.far-dispatch-branch-choice-summary-item` 内必须渲染 `.far-dispatch-branch-choice-summary-signal`，由 `routeDecisionSignalKind` / `routeDecisionSignalText` 派生航段契合、新路线、契合稳航、契合改道、上轮稳航、轮替改道、当前路线或闭环完成；信标必须写入路线对照的标题和可访问摘要，只作为分支定位扫视锚点，不改变远航收益、指令冷却、闭环、连段、投送、星图航段、升级价格、存档字段、反馈入口或部署链路。
 - 反馈表单必须包含本地 SVG 插画：`#feedbackForm` 在标题下方显示 `src/assets/feedback-visual.svg`，并通过 `.feedback-scene-image` 固定 16/5 展示比例；插画只表达反馈草稿、评分轨和 Issue 投递路径，不新增可见说明文字，不改变反馈类型、评分、内容输入、校验、Issue 草稿、反馈快照、localStorage 事件、玩法数值、星图航段、航线策略、航线指令、远航调度或部署链路。
 - 反馈表单标题必须提供固定视觉短标：`#feedback-title.feedback-heading` 在“反馈”文字前显示 26px `.feedback-heading-icon` 图形槽，短标必须 `aria-hidden="true"`，只作为反馈入口扫视锚点，不新增可见说明文字，不改变反馈类型、评分、内容输入、校验、Issue 草稿、反馈快照、localStorage 事件、玩法数值、星图航段、航线策略、航线指令、远航调度或部署链路。
 - 反馈状态回执必须在非空时提供固定视觉短标：`.feedback-status:not(:empty)` 使用 20px 左侧 CSS 图形槽和文本区稳定布局，空状态不得显示图标；短标只作为提交结果扫视锚点，不新增可见说明文字，不改变反馈内容校验、Issue 草稿、反馈快照、localStorage 事件、玩法数值、星图航段、航线策略、航线指令、远航调度或部署链路。
