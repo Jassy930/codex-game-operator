@@ -3643,6 +3643,7 @@ export function getDirectivePlan(state, now = Date.now()) {
       unlocked: false,
       progress: 0,
       target: targetSteps,
+      nextRewardText: "",
       summaryText: "指令轮换：累计 100K 能量后解锁 90 秒连携目标",
       hintText: "解锁后先从非契合指令起手，第二步继续避开契合指令，把契合指令留到 3/3 策略终结；完成轮换会累积指令熟练，满层后用回响续航触发满层回响。",
       text:
@@ -3687,12 +3688,18 @@ export function getDirectivePlan(state, now = Date.now()) {
         : "，保留" + stanceDirective.name + "完成 3/3 策略终结"
       : "";
     const nextActionText = dispatchDirective ? openerPhrase : openerPrefix + openerNames;
+    const nextRewardText = buildDirectivePlanStarterRewardText(
+      nextDirectivePool,
+      stanceDirective,
+      dispatch
+    );
 
     return {
       unlocked: true,
       progress: 0,
       target: targetSteps,
       nextDirectiveIds: nextDirectivePool.map((directive) => directive.id),
+      nextRewardText,
       recommendationText,
       waitingRecommendationText,
       summaryText:
@@ -3950,6 +3957,13 @@ export function getDirectivePlan(state, now = Date.now()) {
           : "") +
         "；" +
         masteryHint;
+  const nextRewardText = buildDirectivePlanNextRewardText({
+    nextBonusText,
+    nextStacks,
+    completedRotation,
+    nextIncludesStanceDirective,
+    masteryAtCap
+  });
 
   return {
     unlocked: true,
@@ -3957,6 +3971,7 @@ export function getDirectivePlan(state, now = Date.now()) {
     target: targetSteps,
     remainingSeconds: Math.ceil(Math.max(0, (chain.expiresAt - now) / 1000)),
     nextDirectiveIds: nextDirectivePool.map((directive) => directive.id),
+    nextRewardText,
     recommendationText: dispatchReturnCanOverride
       ? "整备回航"
       : dispatchSyncReturnCanOverride
@@ -3998,6 +4013,50 @@ export function getDirectivePlan(state, now = Date.now()) {
     hintText,
     text: summaryText + " · " + hintText
   };
+}
+
+function buildDirectivePlanStarterRewardText(nextDirectivePool, stanceDirective, dispatch) {
+  const parts = [formatDirectivePlanBonusRate()];
+  const includesStanceDirective = Boolean(
+    stanceDirective &&
+      nextDirectivePool.some((directive) => directive.id === stanceDirective.id)
+  );
+
+  if (includesStanceDirective) {
+    parts.push(formatDirectiveStanceBonus(DIRECTIVE_STANCE_BONUS_RATE));
+  }
+
+  if (dispatch?.active) {
+    parts.push(dispatch.rewardText);
+  }
+
+  return parts.join(" · ");
+}
+
+function buildDirectivePlanNextRewardText({
+  nextBonusText,
+  nextStacks,
+  completedRotation,
+  nextIncludesStanceDirective,
+  masteryAtCap
+}) {
+  const willCompleteRotation =
+    completedRotation || nextStacks >= DIRECTIVE_CHAIN_MAX_STACKS;
+  const parts = [nextBonusText];
+
+  if (willCompleteRotation) {
+    parts.push(formatDirectiveRotationRewardRate());
+  }
+
+  if (willCompleteRotation && nextIncludesStanceDirective) {
+    parts.push(formatDirectiveStanceFinisherRate());
+  }
+
+  if (willCompleteRotation && masteryAtCap) {
+    parts.push(formatDirectiveMasteryCapstoneRate());
+  }
+
+  return parts.join(" · ");
 }
 
 export function getDirectiveTaskStatus(state, now = Date.now()) {
@@ -7262,6 +7321,22 @@ function formatDirectiveMasteryCapstoneReward(masteryCapstoneReward) {
   }
 
   return "满层回响 +" + formatNumber(masteryCapstoneReward);
+}
+
+function formatDirectivePlanBonusRate() {
+  return "预案执行 +" + Math.round(DIRECTIVE_PLAN_BONUS_RATE * 100) + "%";
+}
+
+function formatDirectiveRotationRewardRate() {
+  return "轮换目标 +" + Math.round(DIRECTIVE_ROTATION_REWARD_RATE * 100) + "%";
+}
+
+function formatDirectiveStanceFinisherRate() {
+  return "策略终结 +" + Math.round(DIRECTIVE_STANCE_FINISHER_RATE * 100) + "%";
+}
+
+function formatDirectiveMasteryCapstoneRate() {
+  return "满层回响 +" + Math.round(DIRECTIVE_MASTERY_CAPSTONE_RATE * 100) + "%";
 }
 
 function getDirectivePlanReward(baseGain, plan, directiveId) {

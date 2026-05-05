@@ -1,5 +1,28 @@
 # Decision
 
+## 2026-05-05 Product decision：指令轮换下一步收益短标
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-05 22:53 CST 已同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。没有 open bug；#5 是最近更新反馈但上一轮刚处理点火命中闪幕，本轮转向 #3“玩法太简单”和 #6“后半段玩法没有真正变化”的共同问题。
+
+当前最大问题：航线指令已经有预案执行、航线连携、轮换目标、策略终结、指令熟练、满层回响和 20M 后远航调度，但指令轮换三格视觉轨目前只告诉玩家“下一步按什么”。玩家要理解“为什么要按这一步”，仍需要读按钮预计收益、悬停长句或执行后的行动反馈，主动短循环的收益结构不够直接。
+
+本轮决策：
+
+- 新增“指令轮换下一步收益短标”。
+- `src/game.js` 让 `getDirectivePlan()` 输出 `nextRewardText`，覆盖起手预案奖励、连携倍率、轮换目标、策略终结和满层回响。
+- `src/app.js` 在 `renderDirectivePlanTrack()` 中把 `nextRewardText` 渲染到当前下一格；3/3 完成态渲染到最后一格。
+- `src/styles.css` 新增 `.directive-plan-step-reward`，用单行截断避免三格轨被长收益文本挤压。
+- `tests/game.test.js` 覆盖锁定态、起手态、1/3、2/3、3/3、满层回响和静态绑定。
+- 该改动只增强指令轮换收益结构可见性，不新增收益、不新增存档字段，不改变指令冷却、连携窗口、策略契合、远航调度、星图航段、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-05-05 22:53 CST 当前 5 个 open issue、5 个 open feedback issue、0 个 open bug issue；#3/#6 作为本轮关联反馈。
+- 指令轮换下一格会显示 `预案执行 +6%`、`连携 +12%`、`连携 +24% · 轮换目标 +18% · 策略终结 +12%` 或 `连携 +24% · 轮换目标 +18% · 满层回响 +10%` 等下一步收益短标。
+- 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 128 项。
+- 构建产物已确认 `dist/src/game.js`、`dist/src/app.js` 和 `dist/src/styles.css` 包含 `nextRewardText`、`buildDirectivePlanNextRewardText` 与 `directive-plan-step-reward`。
+- 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #3/#6，以及当前指令轮换三格轨只显示下一步按钮、未直接暴露下一步收益结构的链路复盘。
+
 ## 2026-05-05 Product decision：点火命中闪幕
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-05 22:42 CST 已同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。没有 open bug；本轮处理真实反馈 #5“点火按钮太薄弱了，增加点击反馈，增加特效，增加点击欲望”。

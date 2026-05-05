@@ -4,6 +4,7 @@
 
 M0 设计约束：
 
+- 航线指令轮换视觉轨必须显示下一步收益短标：`getDirectivePlan()` 必须返回 `nextRewardText`，覆盖起手预案奖励、连携倍率、轮换目标、策略终结和满层回响；`renderDirectivePlanTrack()` 必须把该短标渲染到当前下一格或 3/3 完成格的 `.directive-plan-step-reward`，并用单行截断避免挤压三格轨。该短标只暴露现有收益结构，不新增收益、不新增存档字段，不改变指令冷却、连携窗口、策略契合、远航调度、星图航段或反馈入口。
 - 主点火按钮必须提供命中闪幕：按钮内必须渲染 `#coreImpactFlare.core-impact-flare`，并由 `animateCore()` 在普通点火和过载点火时添加 `is-showing`，在过载点火时额外添加 `is-overload-impact`；闪幕必须复用点击落点坐标 `--core-impact-x` / `--core-impact-y`，普通和过载使用不同强度与时长，并纳入 `prefers-reduced-motion: reduce`。该展示只增强点击反馈，不新增收益、不新增存档字段，不改变点击收益、过载奖励、连击窗口、升级价格、星图航段、航线策略、航线指令、远航调度或反馈入口。
 - 远航调度路线对照必须提供决策信标：20M 后 `.far-dispatch-branch-choice-summary-item` 内必须渲染 `.far-dispatch-branch-choice-summary-signal`，由 `routeDecisionSignalKind` / `routeDecisionSignalText` 派生航段契合、新路线、契合稳航、契合改道、上轮稳航、轮替改道、当前路线或闭环完成；信标必须写入路线对照的标题和可访问摘要，只作为分支定位扫视锚点，不改变远航收益、指令冷却、闭环、连段、投送、星图航段、升级价格、存档字段、反馈入口或部署链路。
 - 远航调度路线对照决策信标必须提供无文字状态点：`.far-dispatch-branch-choice-summary-signal::before` 必须显示 5px 状态点，并按 `is-focus`、`is-stable` / `is-active`、`is-shift`、`is-completed` 切换颜色；当前路线内的信标必须播放 `farDispatchSummarySignalBeacon`，且纳入 `prefers-reduced-motion: reduce`。该状态点只增强信标扫视性，不新增可见文字、不新增收益、不新增存档字段，不改变远航路线、星图航段、反馈入口或部署链路。

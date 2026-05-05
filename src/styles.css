@@ -2331,7 +2331,7 @@ h2 {
 
 .directive-plan-step {
   display: grid;
-  min-height: 58px;
+  min-height: 70px;
   align-content: center;
   gap: 4px;
   padding: 8px 10px;
@@ -2357,6 +2357,26 @@ h2 {
   color: inherit;
   font-size: 0.76rem;
   font-weight: 850;
+}
+
+.directive-plan-step-reward {
+  display: block;
+  min-width: 0;
+  overflow: hidden;
+  color: rgba(189, 244, 235, 0.86);
+  font-size: 0.68rem;
+  font-weight: 850;
+  line-height: 1.15;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.directive-plan-step.is-next .directive-plan-step-reward {
+  color: #bdf4eb;
+}
+
+.directive-plan-step.is-complete .directive-plan-step-reward {
+  color: #fff7c2;
 }
 
 .directive-plan-step.is-complete {

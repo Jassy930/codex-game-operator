@@ -2,6 +2,14 @@
 
 ## Unreleased
 
+- 指令轮换视觉轨新增“下一步收益短标”：100K 后推荐格会直接显示 `预案执行 +6%`、`连携 +12%`、`轮换目标 +18%`、`策略终结 +12%` 或 `满层回响 +10%` 等下一步收益结构，回应 #3/#6 对主动玩法和后半段变化不明显的反馈。
+- `src/game.js` 新增 `nextRewardText` 派生与收益短标格式化；`src/app.js` 在 `renderDirectivePlanTrack()` 中渲染 `directive-plan-step-reward`；`src/styles.css` 增加单行收益短标样式；`tests/game.test.js` 覆盖状态字段、运行时绑定和 CSS。
+- 本轮只增强指令轮换三格轨可见性，不新增收益、不新增存档字段，不改变指令冷却、连携窗口、策略契合、远航调度、星图航段、反馈入口或部署链路。
+- 同步 GitHub Issues 反馈状态：2026-05-05 22:53 CST 当前 5 个 open issue、5 个 open feedback issue、0 个 open bug issue；#3/#6 作为本轮关联反馈。
+- 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 128 项。
+- 构建产物已确认 `dist/src/game.js`、`dist/src/app.js` 和 `dist/src/styles.css` 包含 `nextRewardText`、`buildDirectivePlanNextRewardText` 与 `directive-plan-step-reward`。
+- 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #3/#6，以及当前指令轮换三格轨只显示下一步按钮、未直接暴露下一步收益结构的链路复盘。
+
 - 点火按钮新增“命中闪幕”：普通点火和过载点火会触发 `core-impact-flare` 全按钮闪幕，并跟随点击落点定位；过载态使用更强闪幕和更长动画，继续回应 #5 对点击反馈、特效和点击欲望的反馈。
 - `index.html` 新增 `coreImpactFlare` 展示层；`src/app.js` 接入 `animateCore()` 的普通/过载命中、落点定位和清理流程；`src/styles.css` 增加 `.core-impact-flare`、`coreImpactFlare` 动画和降低动效兜底；`tests/game.test.js` 覆盖静态绑定、运行时状态和 CSS。
 - 本轮只增强点火命中瞬间展示，不新增收益、不新增存档字段，不改变点击收益、过载收益、连击、升级价格、星图航段、航线指令、远航调度、反馈入口或部署链路。

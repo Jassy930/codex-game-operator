@@ -590,6 +590,8 @@ function renderDirectivePlanTrack(plan, options) {
   const nextActionText = [plan.recommendationText ?? "下一步", nextText]
     .filter(Boolean)
     .join(" ");
+  const rewardText = plan.nextRewardText ?? "";
+  const rewardStep = Math.min(target, Math.max(1, progress + 1));
 
   elements.directivePlanTrack.replaceChildren(
     ...Array.from({ length: target }, (_item, index) => {
@@ -623,6 +625,14 @@ function renderDirectivePlanTrack(plan, options) {
       }
 
       item.append(marker, label);
+
+      if (rewardText && step === rewardStep) {
+        const reward = document.createElement("small");
+        reward.className = "directive-plan-step-reward";
+        reward.textContent = rewardText;
+        item.append(reward);
+      }
+
       return item;
     })
   );

@@ -2,6 +2,14 @@
 
 ## 2026-05-05
 
+- GitHub Issues：gh 可用且已认证；2026-05-05 22:53 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。#5 是最近更新反馈但上一轮刚处理点火命中闪幕；本轮转向 #3/#6 的主动玩法和后半段玩法结构反馈。
+- 本轮 Product decision 处理 #3/#6：100K 后指令轮换已经提供预案执行、连携、轮换目标、策略终结、指令熟练和满层回响，20M 后还有远航调度，但指令轮换三格视觉轨只显示下一步按钮，下一步收益结构仍需要读按钮预览或悬停长句。
+- 本轮改动新增“指令轮换下一步收益短标”：`getDirectivePlan()` 输出 `nextRewardText`，`renderDirectivePlanTrack()` 把预案执行、连携、轮换目标、策略终结和满层回响等收益渲染到推荐格的 `directive-plan-step-reward`。
+- 本轮只增强指令轮换可见性和测试，不新增收益、不新增存档字段，不改变指令冷却、连携窗口、策略契合、远航调度、星图航段、反馈入口或部署链路。
+- 验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 128 项。
+- 构建产物已确认 `dist/src/game.js`、`dist/src/app.js` 和 `dist/src/styles.css` 包含 `nextRewardText`、`buildDirectivePlanNextRewardText` 与 `directive-plan-step-reward`。
+- 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #3/#6，以及当前指令轮换三格轨只显示下一步按钮、未直接暴露下一步收益结构的链路复盘。
+
 - GitHub Issues：gh 可用且已认证；2026-05-05 22:42 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。#6 仍是最近更新反馈；本轮为避免继续堆叠远航满段可见性补丁，转向处理 #5“点火按钮太薄弱、需要点击反馈和特效”。
 - 本轮 Product decision 处理 #5：点火按钮已有按压反冲、落点闪光、涟漪、火花、爆发层、收益浮层、音效和触感，但普通/过载命中仍缺少一层更快扫到的全按钮闪幕。
 - 本轮改动新增“点火命中闪幕”：普通点火和过载点火都会触发 `core-impact-flare`，并跟随点击落点定位；过载态使用更强闪幕和更长动画。

@@ -281,6 +281,7 @@ test("航线指令会返回轮换目标提示", () => {
   );
 
   assert.equal(locked.progress, 0);
+  assert.equal(locked.nextRewardText, "");
   assert.equal(locked.summaryText, "指令轮换：累计 100K 能量后解锁 90 秒连携目标");
   assert.equal(
     locked.text,
@@ -290,6 +291,7 @@ test("航线指令会返回轮换目标提示", () => {
   assert.equal(ready.progress, 0);
   assert.equal(ready.target, 3);
   assert.deepEqual(ready.nextDirectiveIds, ["ignition-salvo", "cruise-cache"]);
+  assert.equal(ready.nextRewardText, "预案执行 +6%");
   assert.equal(ready.recommendationText, "收束起手");
   assert.equal(ready.waitingRecommendationText, "等待起手");
   assert.equal(
@@ -366,6 +368,7 @@ test("轮换航线指令会触发航线连携收益", () => {
   assert.equal(cruiseOption.previewText, "预计 +52.9 能量 · 预案执行 +2.7 · 航线连携 +12%");
   assert.equal(earlyResonanceOption.recommended, false);
   assert.deepEqual(firstPlan.nextDirectiveIds, ["cruise-cache"]);
+  assert.equal(firstPlan.nextRewardText, "连携 +12%");
   assert.equal(firstPlan.recommendationText, "收束续航");
   assert.equal(firstPlan.waitingRecommendationText, "等待续航");
   assert.equal(
@@ -382,6 +385,10 @@ test("轮换航线指令会触发航线连携收益", () => {
   assert.equal(
     secondPlan.text,
     "指令轮换 2/3 · 当前 巡航回收 · 连携窗口 1.5 分钟 · 下一步切换到谐振脉冲，预计连携 +24%，并触发轮换目标奖励；收束到谐振脉冲还会触发策略终结奖励；完成 3/3 轮换会累积 3 分钟指令熟练，每层指令收益 +5%，最多 3 层；满层后继续完成 3/3 会触发满层回响 +10%。"
+  );
+  assert.equal(
+    secondPlan.nextRewardText,
+    "连携 +24% · 轮换目标 +18% · 策略终结 +12%"
   );
   assert.equal(
     secondTask.text,
@@ -429,6 +436,7 @@ test("轮换航线指令会触发航线连携收益", () => {
   assert.equal(continuationTask.target, 3);
   assert.equal(continuationTask.completed, true);
   assert.deepEqual(continuationPlan.nextDirectiveIds, ["ignition-salvo"]);
+  assert.equal(continuationPlan.nextRewardText, "连携 +24% · 轮换目标 +18%");
   assert.equal(continuationPlan.recommendationText, "熟练续航");
   assert.equal(continuationPlan.waitingRecommendationText, "等待续航");
   assert.equal(
@@ -519,6 +527,10 @@ test("满层指令熟练会触发回响续航奖励", () => {
   assert.equal(plan.recommendationText, "回响续航");
   assert.equal(plan.waitingRecommendationText, "等待回响");
   assert.deepEqual(plan.nextDirectiveIds, ["ignition-salvo", "cruise-cache"]);
+  assert.equal(
+    plan.nextRewardText,
+    "连携 +24% · 轮换目标 +18% · 满层回响 +10%"
+  );
   assert.equal(
     plan.text,
     "指令轮换 3/3 · 当前 谐振脉冲 · 连携窗口 1.5 分钟 · 下一步切换到点火齐射或巡航回收进入回响续航，可维持连携 +24%，并继续触发轮换目标奖励与满层回响；重复同类会重置；当前指令熟练 3/3，下一次指令 +15%，完成 3/3 可触发满层回响 +10%，剩余 3 分钟。"
@@ -2032,6 +2044,8 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(appJs, /renderFarDispatch\(directives\.dispatch/);
   assert.match(appJs, /function renderDirectivePlanTrack\(plan, options\)/);
   assert.match(appJs, /"directive-plan-step"/);
+  assert.match(appJs, /rewardText = plan\.nextRewardText \?\? ""/);
+  assert.match(appJs, /reward\.className = "directive-plan-step-reward"/);
   assert.match(appJs, /label\.textContent = nextActionText/);
   assert.match(appJs, /function renderDirectiveTask\(task\)/);
   assert.match(appJs, /function renderFarDispatch\(dispatch\)/);
@@ -2343,6 +2357,7 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(styles, /\.directive-plan/);
   assert.match(styles, /\.directive-plan-track/);
   assert.match(styles, /\.directive-plan-step/);
+  assert.match(styles, /\.directive-plan-step-reward/);
   assert.match(styles, /\.directive-plan-step\.is-complete/);
   assert.match(styles, /\.directive-plan-step\.is-next/);
   assert.match(styles, /\.directive-task/);
