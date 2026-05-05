@@ -20,6 +20,11 @@
 - 航线委托完成态最后一个 3/3 节点显示完成外环和轻量脉冲；降低动效偏好下关闭脉冲动画。
 - 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 129 项。
 - 构建产物已确认 `dist/src/styles.css` 包含 `.directive-task.is-completed .directive-task-meter-node.is-complete:last-child::after` 与 `directiveTaskCompletedNodeBeacon`。
+- 代码和同步文档提交已创建并推送：`1fc0d5f feat: highlight directive task completion node`。
+- 发布验证已通过：GitHub Pages workflow `25396571465` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页返回 HTTP 200，线上 `src/styles.css` 已确认包含 `.directive-task.is-completed .directive-task-meter-node.is-complete:last-child::after` 与 `directiveTaskCompletedNodeBeacon`。
+- 已回复 GitHub Issue #3 和 #6，说明航线委托完成节点信标、验证结果、Pages 部署和复测问题；两个 issue 均保持 open，评论地址：`https://github.com/Jassy930/codex-game-operator/issues/3#issuecomment-4382203971`、`https://github.com/Jassy930/codex-game-operator/issues/6#issuecomment-4382205930`。
+- 回复后于 2026-05-06 03:10 CST 再次同步 GitHub Issues，当前仍为 5 个 open feedback issue、0 个 open bug issue；#3 更新时间为 `2026-05-05T19:07:28Z`，#6 更新时间为 `2026-05-05T19:07:45Z`。
+- 钉钉通知未发送：2026-05-06 03:10 CST 运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` / `ROBOT` 相关有效 webhook URL，当前目录和 `/home/jassy/glm` 两层内未发现 `.env*` 文件；未将 webhook 写入仓库。
 - 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #3/#6，以及航线委托完成态最终节点缺少完成信标的扫视链路复盘。
 
 ## 2026-05-06 Product decision：航线委托完成收益短标
