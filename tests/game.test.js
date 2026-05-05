@@ -1116,9 +1116,13 @@ test("静态首页会渲染当前航段视觉卡", () => {
   assert.match(appJs, /projectCurrentVisual: document\.querySelector\("#projectCurrentVisual"\)/);
   assert.match(appJs, /function renderProjectCurrentVisual\(project\)/);
   assert.match(appJs, /project-current-visual/);
+  assert.match(appJs, /project\.dispatchBadgeText \? "is-dispatch-active" : ""/);
+  assert.match(appJs, /project-current-dispatch/);
   assert.match(styles, /\.project-current-visual/);
   assert.match(styles, /\.project-current-orbit/);
   assert.match(styles, /\.project-current-track/);
+  assert.match(styles, /\.project-current-track \.project-current-dispatch/);
+  assert.match(styles, /\.project-current-visual\.is-dispatch-active/);
   assert.match(styles, /\.project-current-meter/);
   assert.match(styles, /\.project-current-visual\.is-reward-overload/);
 });
@@ -3769,6 +3773,11 @@ test("远航调度会在 20M 后按当前航段指定目标指令", () => {
     "远航调度总览：航段 27/57 脉冲航闸 · 目标 点火齐射 · 协同 谐振脉冲 · 分支 待选择：先执行目标 · 航段契合：协同 谐振脉冲 · 点击/过载航段保留当前资源 · 推荐分支：协同 谐振脉冲 · 可选择 · 补当前资源 · 推荐原因：点击/过载航段保留当前资源 · 后续协同回航触发闭环与远航突破 · 航段契合 +5% · 分支轮替：先完成协同或绕行闭环，下一轮开启分支改道 · 路线履历：记录 无 · 本轮 待选择 · 先完成任一分支闭环 · 路线预案：推荐 目标 点火齐射 -> 协同 谐振脉冲 -> 回目标 点火齐射 · 路线步骤：第 1/3 执行目标 点火齐射 · 闭环 0/3 · 下一步 目标 点火齐射"
   );
   assert.match(streakOverview.dispatchText, /连段 1\/3 · 闭环 1\/3/);
+  assert.equal(
+    streakOverview.currentVisual.dispatchBadgeText,
+    "调度 点火齐射 · 连段 1/3"
+  );
+  assert.match(streakOverview.currentVisual.title, /调度 点火齐射 · 连段 1\/3/);
   assert.equal(streakProject.dispatchBadgeText, "调度 点火齐射 · 连段 1/3");
   assert.match(streakProject.dispatchText, /连段 1\/3 · 3\/3 回到目标触发闭环/);
   assert.match(streakProject.dispatchStepText, /契合闭环 \+7% · 连段 1\/3/);

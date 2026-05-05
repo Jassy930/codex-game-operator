@@ -4527,6 +4527,19 @@ h2 {
   font-weight: 900;
 }
 
+.project-current-track .project-current-dispatch {
+  border-color: rgba(116, 204, 244, 0.34);
+  background: rgba(116, 204, 244, 0.12);
+  color: #c9f0ff !important;
+}
+
+.project-current-visual.is-dispatch-active {
+  border-color: rgba(116, 204, 244, 0.46);
+  box-shadow:
+    inset 0 0 22px rgba(116, 204, 244, 0.08),
+    0 0 0 1px rgba(244, 178, 60, 0.12);
+}
+
 .project-current-meter {
   display: block;
   min-width: 0;

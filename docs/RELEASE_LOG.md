@@ -2,6 +2,14 @@
 
 ## Unreleased
 
+- 星图总览当前航段视觉卡新增“远航调度短标”：20M 后当前航段视觉卡会显示 `调度 X`，当前远航连段有效时显示 `调度 X · 连段 X/3`，让跨轮递进收益进入默认可见的视觉卡层，继续回应 #6 对后半段玩法变化不明显的反馈。
+- `src/game.js` 让 `getProjectCurrentVisual()` 透传 `dispatchBadgeText` 并写入 title / aria-label；`src/app.js` 在视觉卡中渲染 `project-current-dispatch` 胶囊并追加 `is-dispatch-active`；`src/styles.css` 增加当前航段视觉卡调度胶囊和 active 边框样式；`tests/game.test.js` 覆盖数据、title、静态 JS 和 CSS 绑定。
+- 本轮只调整当前航段视觉卡展示和测试，不新增收益、不新增存档字段，不改变远航连段结算、远航调度路线、项目卡片、按钮徽标、反馈入口或部署链路。
+- 同步 GitHub Issues 反馈状态：2026-05-05 16:40 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 作为主处理对象。
+- 验证通过：`node --test tests/game.test.js`、`npm install`、`npm test`、`npm run build`、`bun install --no-save`、`bun run test`、`bun run build`；测试数 118 项。
+- 构建产物已确认 `dist/src/game.js` 包含 `dispatchBadgeText: project.dispatchBadgeText`，`dist/src/app.js` 包含 `project-current-dispatch` 和 `is-dispatch-active`，`dist/src/styles.css` 包含 `.project-current-track .project-current-dispatch`。
+- 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #6，以及远航连段进入项目卡片后当前航段视觉卡仍缺少短标的链路复盘。
+
 - 星图项目卡片新增“远航连段短标”：当前指令链窗口有效且存在连段时，当前航段卡片会显示 `调度 点火齐射 · 连段 X/3`，调度说明和第三步回目标奖励文本也会承接该连段层数，继续回应 #6 对后半段玩法变化不明显的反馈。
 - `src/game.js` 让 `getProjectStatuses(state, now)`、`getProjectOverview(state, now)` 和 `getFarRouteDispatch(state, now)` 使用一致时间判断项目卡片侧有效连段，并在 `buildProjectDispatchInfo()` 中追加 `loopStreakSuffix`；`src/app.js` 渲染项目列表时传入同一个 `now`；`tests/game.test.js` 覆盖项目卡片调度徽标、说明和路径奖励里的连段短标。
 - 本轮只调整当前航段项目卡片展示和测试，不新增收益、不新增存档字段，不改变远航连段结算、远航调度路线、按钮徽标、反馈入口或部署链路。

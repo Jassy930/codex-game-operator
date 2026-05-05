@@ -2,6 +2,13 @@
 
 ## 2026-05-05
 
+- GitHub Issues：gh 可用且已认证；2026-05-05 16:40 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。#6 仍是最近更新反馈，指向“后半段只有不停目标，玩法没有真正变化”。
+- 本轮 Product decision 继续处理 #6：远航连段已经进入执行区、闭环复盘、路线对照条、按钮徽标、星图总览和项目卡片，但星图总览默认可见的当前航段视觉卡还没有显示远航调度或连段层数。
+- 本轮改动新增“远航连段当前航段视觉卡短标”：有效远航调度存在时，当前航段视觉卡会显示 `调度 点火齐射`；有效连段存在时会显示 `调度 点火齐射 · 连段 X/3`，并同步进入视觉卡 title / aria-label。
+- 本轮只调整当前航段视觉卡展示和测试，不新增收益、不新增存档字段，不改变远航连段结算、远航调度路线、项目卡片、按钮徽标、反馈入口或部署链路。
+- 本地验证已通过：`node --test tests/game.test.js`、`npm install`、`npm test`、`npm run build`、`bun install --no-save`、`bun run test`、`bun run build`；测试数 118 项；构建产物已确认包含 `project-current-dispatch`、`is-dispatch-active` 和 `dispatchBadgeText: project.dispatchBadgeText`。
+- 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #6，以及远航连段进入项目卡片后当前航段视觉卡仍缺少短标的链路复盘。
+
 - GitHub Issues：gh 可用且已认证；2026-05-05 16:34 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。#6 仍是最近更新反馈，指向“后半段只有不停目标，玩法没有真正变化”。
 - 本轮 Product decision 继续处理 #6：远航连段已经进入主操作区、闭环复盘、路线对照条、按钮徽标和星图总览，但当前航段项目卡片仍只显示基础调度目标和三步路径。
 - 本轮改动新增“远航连段项目卡片短标”：有效连段存在时，当前航段项目卡片会显示 `调度 点火齐射 · 连段 X/3`，并把 `连段 X/3` 并入调度说明和第三步回目标奖励文本。

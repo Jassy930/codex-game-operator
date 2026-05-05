@@ -2307,7 +2307,8 @@ function renderProjectCurrentVisual(project) {
     "project-current-visual",
     "is-" + project.status,
     "is-track-" + project.trackId,
-    "is-reward-" + project.rewardId
+    "is-reward-" + project.rewardId,
+    project.dispatchBadgeText ? "is-dispatch-active" : ""
   ]
     .filter(Boolean)
     .join(" ");
@@ -2343,6 +2344,14 @@ function renderProjectCurrentVisual(project) {
   reward.textContent = project.reward;
 
   track.append(trackText, reward);
+
+  if (project.dispatchBadgeText) {
+    const dispatch = document.createElement("span");
+    dispatch.className = "project-current-dispatch";
+    dispatch.textContent = project.dispatchBadgeText;
+    track.append(dispatch);
+  }
+
   meta.append(kicker, name, segment, track);
 
   const meter = document.createElement("span");

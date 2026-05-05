@@ -46,6 +46,7 @@
 - 点火连击读数命中跳闪当前由本地 `.core-button.is-pulsing:not(.is-overload-impact) ~ .combo-line #comboValue`、`.core-button.is-overload-impact ~ .combo-line #comboValue` 和 `.core-button.is-overload-impact ~ .combo-line #pulseValue` 短时展示态即时渲染，不单独记录为真实线上指标；连击与过载状态仍通过 click 事件、`getComboStatus`、`lastGain` 和 `lastPulse` 复盘。
 - 点火过载奖励读数命中亮闪当前由本地 `animateCore` 的 `overloaded` 状态给 `#overloadValue` 短暂追加 `is-core-overload-prize` 即时渲染，不单独记录为真实线上指标；过载奖励来源仍通过 click 事件、`lastPulse`、`lastGain` 和当前 `overloadBonus` 复盘。
 - 星图总览航线预告视觉带当前由本地项目状态与 `getProjectForecastVisuals` 即时推导，不单独记录为真实线上指标；星图完成状态仍通过当前存档数值复盘。
+- 星图总览当前航段视觉卡里的远航调度短标当前由 `getProjectCurrentVisual()` 复用当前项目 `dispatchBadgeText` 即时渲染，不单独记录为真实线上指标；远航调度、远航连段和项目完成状态仍通过 `directive` 事件、反馈快照和当前存档数值复盘。
 - 远航路线步骤按钮行动信标和状态行锚点当前由 `dispatchRouteStepText` 派生的 `.directive-button.is-dispatch-route-step` 即时渲染为 `directiveDispatchRouteStepBeacon`，并由 `.directive-button.is-dispatch-route-step .directive-status::before` 渲染 `directiveDispatchRouteStatusBeacon`；这两者都不单独记录为真实线上指标。当前步骤和可执行/冷却语义仍通过 `directive` 事件中的 `dispatchRouteStepText`、按钮状态、路线反馈、远航调度文本和反馈快照复盘。
 - 远航闭环复盘中的连段文本当前由 `branchClosureText` 读取 `farRouteLoopStreak` 即时派生，不单独记录为真实线上指标；连段收益与层数仍通过 `directive` 事件中的 `dispatchLoopStreakReward`、`dispatchLoopStreakRewardRate` 和 `dispatchLoopStreakStacks` 复盘。
 - 星图总览远航调度摘要里的连段短标当前由 `dispatch.loopStreakText` 即时派生，并在 `branchClosureText` 已包含同一连段文本时避免重复展示，不单独记录为真实线上指标；连段收益与层数仍通过 `directive` 事件中的 `dispatchLoopStreakReward`、`dispatchLoopStreakRewardRate` 和 `dispatchLoopStreakStacks` 复盘。

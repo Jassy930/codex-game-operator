@@ -2472,6 +2472,7 @@ export function getProjectCurrentVisual(projects) {
     rewardId,
     trackId,
     trackText,
+    dispatchBadgeText: project.dispatchBadgeText,
     progress: project.progress,
     progressText: project.progressText,
     status: project.isCurrent ? "current" : "pending",
@@ -2486,6 +2487,7 @@ export function getProjectCurrentVisual(projects) {
       trackText +
       " · " +
       project.reward +
+      (project.dispatchBadgeText ? " · " + project.dispatchBadgeText : "") +
       " · " +
       project.progressText
   };

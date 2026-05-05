@@ -1,5 +1,29 @@
 # Decision
 
+## 2026-05-05 Product decision：远航连段当前航段视觉卡短标
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-05 16:40 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有 open bug；本轮继续处理真实反馈 #6“后半段只有不停的目标，玩法没有真正变化”。
+
+当前最大问题：远航连段已经进入执行区、闭环复盘、路线对照条、当前按钮徽标、星图总览和星图项目卡片，但星图总览默认可见的“当前航段视觉卡”仍只显示航段、章节、推进类型、奖励方向和进度条。玩家如果优先扫视觉卡，而不是读总览长摘要或项目列表，仍可能看不到当前远航调度和连段层数。
+
+本轮决策：
+
+- 新增“远航连段当前航段视觉卡短标”。
+- `getProjectCurrentVisual()` 复用当前航段已有 `dispatchBadgeText`，并把调度短标并入视觉卡 title / aria-label。
+- `renderProjectCurrentVisual()` 在存在 `dispatchBadgeText` 时追加 `project-current-dispatch` 胶囊，并给视觉卡追加 `is-dispatch-active`。
+- `src/styles.css` 为当前航段视觉卡的远航调度胶囊和 active 边框提供轻量强调。
+- 该改动只调整星图总览当前航段视觉卡展示和测试，不新增收益、不新增存档字段，不改变远航连段结算、远航调度路线、项目卡片、按钮徽标、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-05-05 16:40 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 作为本轮主处理对象。
+- `getProjectCurrentVisual(projects)` 会返回 `dispatchBadgeText`，并在 title 中包含 `调度 点火齐射 · 连段 1/3`。
+- 当前航段视觉卡在有效连段存在时渲染 `project-current-dispatch`，显示 `调度 点火齐射 · 连段 1/3`，并给外层追加 `is-dispatch-active`。
+- `tests/game.test.js` 覆盖视觉卡数据、title、静态 JS 绑定和 CSS 绑定。
+- 本地验证已通过：`node --test tests/game.test.js`、`npm install`、`npm test`、`npm run build`、`bun install --no-save`、`bun run test`、`bun run build`；测试数 118 项。
+- 构建产物已确认 `dist/src/game.js` 包含 `dispatchBadgeText: project.dispatchBadgeText`，`dist/src/app.js` 包含 `project-current-dispatch` 和 `is-dispatch-active`，`dist/src/styles.css` 包含 `.project-current-track .project-current-dispatch`。
+- 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #6，以及远航连段进入项目卡片后当前航段视觉卡仍缺少短标的链路复盘。
+
 ## 2026-05-05 Product decision：远航连段项目卡片短标
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-05 16:34 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有 open bug；本轮继续处理真实反馈 #6“后半段只有不停的目标，玩法没有真正变化”。
