@@ -205,6 +205,7 @@ const elements = {
   coreImpactBurst: document.querySelector("#coreImpactBurst"),
   coreImpactFlare: document.querySelector("#coreImpactFlare"),
   coreImpactEcho: document.querySelector("#coreImpactEcho"),
+  coreGainTrail: document.querySelector("#coreGainTrail"),
   coreGainPop: document.querySelector("#coreGainPop"),
   coreOverloadBadge: document.querySelector("#coreOverloadBadge"),
   coreOverloadBadgeValue: document.querySelector("#coreOverloadBadgeValue"),
@@ -3220,6 +3221,7 @@ function animateCore({
   elements.coreImpactBurst.classList.remove("is-showing", "is-overload-impact");
   elements.coreImpactFlare.classList.remove("is-showing", "is-overload-impact");
   elements.coreImpactEcho.classList.remove("is-showing", "is-overload-impact");
+  elements.coreGainTrail.classList.remove("is-showing", "is-overload-gain");
   requestAnimationFrame(() => {
     elements.coreButton.classList.add("is-pulsing");
     elements.coreButton.classList.toggle("is-overload-impact", overloaded);
@@ -3235,6 +3237,8 @@ function animateCore({
     elements.coreImpactFlare.classList.toggle("is-overload-impact", overloaded);
     elements.coreImpactEcho.classList.add("is-showing");
     elements.coreImpactEcho.classList.toggle("is-overload-impact", overloaded);
+    elements.coreGainTrail.classList.add("is-showing");
+    elements.coreGainTrail.classList.toggle("is-overload-gain", overloaded);
     elements.coreGainPop.classList.add("is-showing");
     elements.coreGainPop.classList.toggle("is-overload-gain", overloaded);
     elements.energy.classList.add(overloaded ? "is-core-overload-hit" : "is-core-hit");
@@ -3251,6 +3255,7 @@ function animateCore({
     coreGainTimer = window.setTimeout(
       () => {
         elements.coreGainPop.classList.remove("is-showing", "is-overload-gain");
+        elements.coreGainTrail.classList.remove("is-showing", "is-overload-gain");
       },
       overloaded ? 760 : 620
     );
@@ -3341,7 +3346,8 @@ function positionCoreImpact(event) {
     elements.coreImpactSparks,
     elements.coreImpactBurst,
     elements.coreImpactFlare,
-    elements.coreImpactEcho
+    elements.coreImpactEcho,
+    elements.coreGainTrail
   ].forEach((element) => {
     element.style.setProperty("--core-impact-x", clampedX + "px");
     element.style.setProperty("--core-impact-y", clampedY + "px");

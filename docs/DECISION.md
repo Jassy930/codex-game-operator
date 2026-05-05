@@ -1,5 +1,29 @@
 # Decision
 
+## 2026-05-06 Product decision：点火收益轨迹
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-06 07:49 CST 已同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。没有 open bug；#5“点火按钮太薄弱了，增加点击反馈，增加特效，增加点击欲望”仍等待带新效果的真实复测。
+
+当前最大问题：点火按钮已有落点闪光、涟漪、火花束、爆发层、闪幕、回声环、收益浮层、读数跳闪、音效和触感，但收益浮层与点击落点之间仍缺少一层短暂轨迹。普通点火和过载点火的“本次收益被打出”的视觉连接还可以增强，同时不能继续增加文字密度或改变任何收益。
+
+本轮决策：
+
+- 新增“点火收益轨迹”。
+- `index.html` 在点火按钮内新增 `#coreGainTrail.core-gain-trail`。
+- `src/app.js` 复用 `positionCoreImpact()` 的点击落点坐标，把 `coreGainTrail` 纳入 `animateCore()` 的显示、过载态切换和定时清理。
+- `src/styles.css` 新增 `.core-gain-trail`、`.core-gain-trail.is-overload-gain` 与 `coreGainTrail` 动画；普通点火显示短促金色轨迹，过载点火显示更宽、更亮的红金轨迹。
+- `prefers-reduced-motion: reduce` 必须关闭收益轨迹动画，保留系统降低动效偏好的现有策略。
+- `tests/game.test.js` 覆盖 DOM 查询、运行时状态切换、样式、keyframes 和降低动效兜底。
+- 该改动只增强点火点击反馈，不新增界面可见文字、不新增收益、不新增存档字段，不改变点击收益、过载收益、连击窗口、音效/触感开关、升级价格、星图航段、航线指令、远航调度、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-05-06 07:49 CST 当前 5 个 open issue、5 个 open feedback issue、0 个 open bug issue；#5 作为本轮主关联反馈。
+- 普通点火时 `#coreGainTrail` 与收益浮层同步播放 `coreGainTrail`，过载点火时额外切换 `is-overload-gain`。
+- 本地验证已通过：`bun test`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 135 项。
+- 构建产物已刷新；`dist/` 按仓库规则忽略。源码已确认包含 `coreGainTrail`、`.core-gain-trail.is-showing`、`.core-gain-trail.is-overload-gain`、`coreGainTrail` 和降低动效兜底。
+- 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #5，以及当前点火命中反馈已有多层但缺少收益轨迹层的链路复盘。
+
 ## 2026-05-06 Product decision：界面环境反馈快照
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-06 07:30 CST 已同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。没有 open bug；#4 仍等待图片化与文字密度复测，#5 仍等待点火点击反馈复测，#2/#3/#6 继续等待内容丰富度、主动玩法和后半段复测。

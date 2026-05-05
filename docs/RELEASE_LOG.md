@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+- 点火按钮新增“收益轨迹”：普通点火和过载点火时，按钮内 `#coreGainTrail.core-gain-trail` 会复用点击落点坐标播放短暂能量轨迹，过载态切换 `is-overload-gain` 使用更宽、更亮的红金轨迹，继续回应 #5 对点击反馈、特效和点击欲望的反馈。
+- `src/app.js` 将 `coreGainTrail` 纳入 `animateCore()` 的显示、过载态切换、定时清理和 `positionCoreImpact()` 坐标同步；`src/styles.css` 新增 `.core-gain-trail`、`.core-gain-trail.is-overload-gain`、`coreGainTrail` 动画和降低动效兜底；`tests/game.test.js` 覆盖点火收益轨迹 DOM 绑定、状态切换、样式和 reduced motion。
+- 本轮只增强点火点击反馈，不新增界面可见文字、不新增收益、不新增存档字段，不改变点击收益、过载收益、连击窗口、音效/触感开关、升级价格、星图航段、航线指令、远航调度、反馈入口或部署链路。
+- 同步 GitHub Issues 反馈状态：2026-05-06 07:49 CST 当前 5 个 open issue、5 个 open feedback issue、0 个 open bug issue；#5 作为本轮主关联反馈。
+- 验证通过：`bun test`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 135 项。
+- 构建产物已刷新；`dist/` 按仓库规则忽略。源码已确认包含 `coreGainTrail`、`.core-gain-trail.is-showing`、`.core-gain-trail.is-overload-gain`、`coreGainTrail` 和降低动效兜底。
+
 - 反馈快照新增“界面环境”：游戏内反馈生成 GitHub Issue 时，快照会追加 `界面环境：...`，记录提交反馈时的视口尺寸、系统降低动效偏好和主指针类型，例如 `视口 390x844 · 降低动效 开 · 指针 触屏`，继续为 #4 文字密度/图片化复测和 #5 点火动效复测提供诊断上下文。
 - `src/app.js` 新增 `getFeedbackView()` / `getPrimaryPointerKind()`，提交反馈时把当前 `projectFilter`、`window.innerWidth`、`window.innerHeight`、`prefers-reduced-motion` 和 pointer media query 结果传入 `createFeedbackEntry()`，并同步写入 `feedback_sent.view`；`src/feedback.js` 新增 `formatFeedbackViewEnvironment()`、视口格式化和触屏/鼠标指针文案；`tests/game.test.js` 覆盖字段输出、未知环境回退和前端提交传参。
 - 本轮只增强真实反馈诊断能力，不新增界面可见文字、不新增收益、不新增存档字段，不改变星图筛选交互、点火反馈、动效策略、航线指令、远航调度、反馈入口或部署链路。

@@ -4,6 +4,7 @@
 
 M0 设计约束：
 
+- 主点火按钮必须提供收益轨迹：按钮内必须渲染 `#coreGainTrail.core-gain-trail`，并由 `animateCore()` 在普通点火和过载点火时添加 `is-showing`，在过载点火时额外添加 `is-overload-gain`；收益轨迹必须复用点击落点坐标 `--core-impact-x` / `--core-impact-y`，普通和过载使用不同尺寸、强度与时长，并纳入 `prefers-reduced-motion: reduce`。该展示只增强点击反馈，不新增界面可见文字、不新增收益、不新增存档字段，不改变点击收益、过载奖励、连击窗口、升级价格、星图航段、航线策略、航线指令、远航调度或反馈入口。
 - 反馈快照必须记录界面环境：前端提交反馈时必须通过 `getFeedbackView()` 传入当前 `projectFilter`、`window.innerWidth`、`window.innerHeight`、`prefers-reduced-motion` 和 pointer media query 结果；`createFeedbackEntry()` 必须输出 `界面环境` 快照字段，格式化为 `视口 WxH · 降低动效 开/关 · 指针 触屏/鼠标/无`，旧入口或异常参数必须回退为 `未知`。该字段只用于真实反馈复盘，不新增界面可见文字、不新增收益、不新增存档字段，不改变星图筛选交互、点火反馈、动效策略、航线指令、远航调度、反馈入口或部署链路。
 - 反馈链路必须输出同源反馈编号：`createFeedbackIssueBody()` 必须在 Issue 正文的反馈信息区显示 `反馈编号：${entry.id}`；前端提交反馈时 `feedback_sent` 本地事件必须记录同一个 `feedbackId: entry.id`。该编号只用于对齐 GitHub Issue、本地反馈草稿和本地事件，不新增界面可见文字、不新增收益、不新增存档字段，不改变反馈内容校验、Issue 草稿生成、星图航段、航线指令、远航调度或部署链路。
 - 反馈快照必须记录升级购买态：`createFeedbackEntry()` 必须复用 `UPGRADE_DEFS`、`getUpgradeAffordability()` 和当前目标 `upgradeId` 输出 `升级购买态` 快照字段；有可购买升级时必须列出升级名，当前目标升级可购买时必须显示目标可购买，无可购买升级时必须显示目标升级或最近升级的能量缺口。该字段只用于真实反馈复盘，不新增界面可见文字、不新增收益、不新增存档字段，不改变升级价格、购买逻辑、目标系统、星图航段、航线指令、远航调度、反馈入口交互或部署链路。

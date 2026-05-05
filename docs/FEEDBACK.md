@@ -2,6 +2,14 @@
 
 ## 2026-05-06
 
+- GitHub Issues：gh 可用且已认证；2026-05-06 07:49 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。#5 仍是点火点击反馈复测反馈，#4 仍是图片化和文字密度复测反馈，#2/#3/#6 继续等待内容丰富度、主动玩法和后半段玩法变化复测。
+- 本轮 Product decision 处理 #5：点火按钮已经有落点闪光、涟漪、火花束、爆发层、闪幕、回声环、收益浮层、读数跳闪、音效和触感，但收益浮层与点击落点之间缺少一层短暂轨迹，普通点火和过载点火的“能量被打出”感仍可再补一层不增加文字的反馈。
+- 本轮改动新增“点火收益轨迹”：`index.html` 在点火按钮内新增 `#coreGainTrail`；`src/app.js` 复用 `positionCoreImpact()` 的点击落点坐标，在 `animateCore()` 中与收益浮层同步显示/清理，并在过载时切换 `is-overload-gain`；`src/styles.css` 新增 `.core-gain-trail`、过载强化态和 `coreGainTrail` 动画，且纳入 `prefers-reduced-motion: reduce`。
+- 本轮只增强点火点击反馈，不新增界面可见文字、不新增收益、不新增存档字段，不改变点击收益、过载收益、连击窗口、音效/触感开关、升级价格、星图航段、航线指令、远航调度、反馈入口或部署链路。
+- 本地验证已通过：`bun test`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 135 项。
+- 构建产物已刷新；`dist/` 按仓库规则忽略。源码已确认包含 `coreGainTrail`、`.core-gain-trail.is-showing`、`.core-gain-trail.is-overload-gain`、`coreGainTrail` 和降低动效兜底。
+- 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #5，以及当前点火命中反馈已有多层但缺少收益轨迹层的链路复盘。
+
 - GitHub Issues：gh 可用且已认证；2026-05-06 07:30 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。#4 仍是图片化和文字密度复测反馈，#5 仍是点火点击反馈复测反馈，#2/#3/#6 继续等待内容丰富度、主动玩法和后半段玩法变化复测。
 - 本轮 Product decision 主要服务 #4/#5，并间接服务所有 open feedback：当前反馈快照已记录星图筛选、星图进度、点火反馈、指令短循环和远航路线，但缺少玩家提交反馈时的视口、系统动效偏好和指针类型，复盘时无法区分小屏文字密度、触屏点火反馈和降低动效环境。
 - 本轮改动新增“界面环境反馈快照”：`src/app.js` 提交反馈时通过 `getFeedbackView()` 采集当前 `projectFilter`、`window.innerWidth`、`window.innerHeight`、`prefers-reduced-motion` 和主指针类型；`src/feedback.js` 预填 Issue 快照追加 `界面环境：...`，例如 `视口 390x844 · 降低动效 开 · 指针 触屏`，旧入口或异常参数回退为 `未知`。

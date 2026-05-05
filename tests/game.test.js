@@ -1449,6 +1449,7 @@ test("点火按钮会渲染点击反馈和过载前兆效果", () => {
   assert.match(appJs, /coreImpactBurst: document\.querySelector\("#coreImpactBurst"\)/);
   assert.match(appJs, /coreImpactFlare: document\.querySelector\("#coreImpactFlare"\)/);
   assert.match(appJs, /coreImpactEcho: document\.querySelector\("#coreImpactEcho"\)/);
+  assert.match(appJs, /coreGainTrail: document\.querySelector\("#coreGainTrail"\)/);
   assert.match(appJs, /elements\.coreChargeRing\.style\.setProperty\(\s*"--core-charge-angle"/);
   assert.match(appJs, /Math\.round\(combo\.progress \* 360\) \+ "deg"/);
   assert.match(appJs, /elements\.coreChargeRing\.classList\.toggle\("is-overload-ready", isOverloadReady\)/);
@@ -1511,6 +1512,9 @@ test("点火按钮会渲染点击反馈和过载前兆效果", () => {
   assert.match(appJs, /elements\.coreImpactFlare\.classList\.toggle\("is-overload-impact", overloaded\)/);
   assert.match(appJs, /elements\.coreImpactEcho\.classList\.add\("is-showing"\)/);
   assert.match(appJs, /elements\.coreImpactEcho\.classList\.toggle\("is-overload-impact", overloaded\)/);
+  assert.match(appJs, /elements\.coreGainTrail\.classList\.add\("is-showing"\)/);
+  assert.match(appJs, /elements\.coreGainTrail\.classList\.toggle\("is-overload-gain", overloaded\)/);
+  assert.match(appJs, /elements\.coreGainTrail\.classList\.remove\("is-showing", "is-overload-gain"\)/);
   assert.match(appJs, /window\.AudioContext \?\? window\.webkitAudioContext/);
   assert.match(appJs, /context\.createOscillator\(\)/);
   assert.match(appJs, /frequency: 392/);
@@ -1605,9 +1609,14 @@ test("点火按钮会渲染点击反馈和过载前兆效果", () => {
   assert.match(styles, /\.core-impact-echo\.is-showing/);
   assert.match(styles, /\.core-impact-echo\.is-overload-impact/);
   assert.match(styles, /@keyframes coreImpactEcho/);
+  assert.match(styles, /\.core-gain-trail/);
+  assert.match(styles, /\.core-gain-trail\.is-showing/);
+  assert.match(styles, /\.core-gain-trail\.is-overload-gain/);
+  assert.match(styles, /@keyframes coreGainTrail/);
   assert.match(styles, /@media \(prefers-reduced-motion: reduce\) \{[\s\S]*\.core-impact-burst\.is-showing[\s\S]*animation: none/);
   assert.match(styles, /@media \(prefers-reduced-motion: reduce\) \{[\s\S]*\.core-impact-flare\.is-showing[\s\S]*animation: none/);
   assert.match(styles, /@media \(prefers-reduced-motion: reduce\) \{[\s\S]*\.core-impact-echo\.is-showing[\s\S]*animation: none/);
+  assert.match(styles, /@media \(prefers-reduced-motion: reduce\) \{[\s\S]*\.core-gain-trail\.is-showing[\s\S]*animation: none/);
   assert.match(styles, /\.core-charge-ring/);
   assert.match(styles, /--core-charge-angle/);
   assert.match(styles, /\.core-button:not\(\.is-combo-charging\):not\(\.is-pulsing\):not\(\.is-pressing\):not\(\.is-overload-ready\):not\(\.is-overload-hit\)[\s\S]*\.core-charge-ring/);
