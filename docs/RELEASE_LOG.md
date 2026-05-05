@@ -8,6 +8,10 @@
 - 同步 GitHub Issues 反馈状态：2026-05-06 06:31 CST 当前 5 个 open issue、5 个 open feedback issue、0 个 open bug issue；#4 作为本轮主关联反馈，#2/#3/#6 作为间接关联反馈。
 - 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 133 项。
 - 构建产物已确认 `dist/src/feedback.js` 包含 `upgradeAffordability`、`formatFeedbackUpgradeAffordability` 与 `- 升级购买态：`。
+- 代码和同步文档提交已创建并推送：`b3604dc feat: add upgrade affordability feedback snapshot`。
+- 发布：GitHub Pages workflow `25406344542` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页返回 HTTP 200，线上 `src/feedback.js` 已确认包含 `upgradeAffordability`、`formatFeedbackUpgradeAffordability` 与 `- 升级购买态：`。workflow 给出 Node.js 20 actions 弃用提醒，未影响本次部署。
+- 反馈处理：已回复 #4，说明升级购买态反馈快照、验证结果、Pages 部署和复测问题；issue 保持 open，评论地址：`https://github.com/Jassy930/codex-game-operator/issues/4#issuecomment-4383700892`。回复后于 2026-05-06 06:44 CST 再次同步 GitHub Issues，当前仍为 5 个 open feedback issue、0 个 open bug issue；#4 更新时间为 `2026-05-05T22:44:21Z`。
+- 钉钉通知未发送：2026-05-06 06:44 CST 运行环境和本地 `.env*` 未提供 `DING` / `DINGTALK` / `WEBHOOK` / `ROBOT` 相关有效 webhook URL；未将 webhook 写入仓库。
 
 - 升级面板插画新增“购买态投光”：静态首页默认 `upgrade-scene-image is-waiting`，运行时根据现有升级可购买状态给升级工坊插画切换 `is-ready`、`is-waiting` 和 `is-goal-ready`，让侧栏升级入口的图片层也表达当前是否可购买，继续回应 #4 的图片化和降文字密度反馈。
 - `src/app.js` 新增 `renderUpgradeSceneImage()` 并复用 `getUpgradeAffordability()`；`src/styles.css` 增加 `.upgrade-scene-image.is-ready/is-waiting/is-goal-ready`、`upgradeSceneImageReadyPulse` 和降低动效兜底；`tests/game.test.js` 覆盖静态标记、运行时绑定和 CSS。

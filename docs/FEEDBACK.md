@@ -8,6 +8,10 @@
 - 本轮只增强真实反馈诊断能力和测试，不新增界面可见文字、不新增收益、不新增存档字段，不改变升级价格、购买逻辑、目标系统、星图、航线指令、远航调度、反馈入口交互或部署链路。
 - 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 133 项。
 - 构建产物已确认 `dist/src/feedback.js` 包含 `upgradeAffordability`、`formatFeedbackUpgradeAffordability` 与 `- 升级购买态：`。
+- 发布和反馈处理已完成：`b3604dc feat: add upgrade affordability feedback snapshot` 已推送，GitHub Pages workflow `25406344542` 成功；build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页返回 HTTP 200，线上 `src/feedback.js` 已确认包含本轮标记。
+- 已回复 #4，评论地址：`https://github.com/Jassy930/codex-game-operator/issues/4#issuecomment-4383700892`；issue 保持 open 等待带新快照的升级面板图片层购买态复测。
+- 回复后于 2026-05-06 06:44 CST 再次同步 GitHub Issues，当前仍为 5 个 open feedback issue、0 个 open bug issue；#4 更新时间为 `2026-05-05T22:44:21Z`。
+- 钉钉通知未发送：2026-05-06 06:44 CST 运行环境和本地 `.env*` 未提供 `DING` / `DINGTALK` / `WEBHOOK` / `ROBOT` 相关有效 webhook URL；未将 webhook 写入仓库。
 
 - GitHub Issues：gh 可用且已认证；2026-05-06 06:18 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。#4 仍是图片化和文字密度复测反馈，#2/#3/#6 仍是内容丰富度、主动玩法和后半段玩法变化复测反馈，#5 继续等待点火点击反馈复测。
 - 本轮 Product decision 处理 #4，并间接服务 #2/#3/#6：升级面板已经有本地 SVG 插画和升级图标，但插画层仍是静态图片；玩家判断当前能否购买升级仍主要依赖卡片文字，图片没有参与 ready/waiting 状态反馈。

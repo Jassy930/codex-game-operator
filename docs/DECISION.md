@@ -20,6 +20,9 @@
 - 新提交的游戏内反馈 Issue 会显示 `升级购买态：...`；无可购买升级时示例为 `无可购买升级 · 目标 聚能透镜 还差 4 能量`，当前目标升级可购买时示例为 `可购买 聚能透镜 · 目标 聚能透镜 可购买`。
 - 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 133 项。
 - 构建产物已确认 `dist/src/feedback.js` 包含 `upgradeAffordability`、`formatFeedbackUpgradeAffordability` 与 `- 升级购买态：`。
+- 发布验证已通过：提交 `b3604dc` 已推送，GitHub Pages workflow `25406344542` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页返回 HTTP 200，线上 `src/feedback.js` 已确认包含 `upgradeAffordability`、`formatFeedbackUpgradeAffordability` 与 `- 升级购买态：`。workflow 给出 Node.js 20 actions 弃用提醒，未影响本次部署。
+- 已回复 GitHub Issue #4，说明升级购买态反馈快照、验证结果、Pages 部署和复测问题；issue 保持 open，评论地址：`https://github.com/Jassy930/codex-game-operator/issues/4#issuecomment-4383700892`。回复后于 2026-05-06 06:44 CST 再次同步 GitHub Issues，当前仍为 5 个 open feedback issue、0 个 open bug issue；#4 更新时间为 `2026-05-05T22:44:21Z`。
+- 钉钉通知未发送：2026-05-06 06:44 CST 运行环境和本地 `.env*` 未提供 `DING` / `DINGTALK` / `WEBHOOK` / `ROBOT` 相关有效 webhook URL；未将 webhook 写入仓库。
 - 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #4，以及升级插画已有购买态展示但反馈快照缺少对应状态的链路复盘。
 
 ## 2026-05-06 Product decision：升级插画购买态投光
