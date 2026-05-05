@@ -2,6 +2,14 @@
 
 ## 2026-05-05
 
+- GitHub Issues：gh 可用且已认证；2026-05-05 14:18 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。#6 仍是最近更新反馈，指向“后半段只有不停目标，玩法没有真正变化”。
+- 本轮 Product decision 继续处理 #6：远航路线步骤对应按钮已经有整按钮级高亮和行动信标，但 `可执行` / `冷却中` 状态行仍是普通文本，玩家还需要额外确认当前路线步骤按钮是否能立刻执行。
+- 本轮改动新增远航路线步骤按钮状态锚点：`.directive-button.is-dispatch-route-step .directive-status` 使用胶囊底、左侧状态点和 `directiveDispatchRouteStatusBeacon` 轻量呼吸；ready/cooling 状态分别增强颜色，并在降低动效偏好下关闭动画。
+- 本轮只调整当前远航路线步骤对应指令按钮的状态展示和测试，不新增可见文字、不新增收益、不新增存档字段，不改变指令收益、冷却、连携窗口、星图路线、项目奖励、升级价格、反馈入口或部署链路。
+- 本地完整验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认 `dist/src/styles.css` 包含 `directiveDispatchRouteStatusBeacon` 和 `.directive-button.is-dispatch-route-step .directive-status::before`。
+- 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #6，以及当前按钮状态行在整按钮高亮和行动信标后仍缺少可执行状态锚点的复盘。
+
 - GitHub Issues：gh 可用且已认证；2026-05-05 14:01 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。#6 仍是最近更新反馈，指向“后半段只有不停目标，玩法没有真正变化”。
 - 本轮 Product decision 继续处理 #6：远航路线步骤对应按钮已经有整按钮级高亮，但目标 -> 分支/续航 -> 回目标连续执行时，当前按钮仍缺少和远航闭环微图、步骤卡、路线对照条同节奏的动态锚点。
 - 本轮改动新增远航路线步骤按钮行动信标：`.directive-button.is-dispatch-route-step` 播放 `directiveDispatchRouteStepBeacon` 轻量背景扫光和饱和度变化，并在降低动效偏好下关闭动画。

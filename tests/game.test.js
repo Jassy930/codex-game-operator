@@ -2536,8 +2536,15 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(styles, /animation: directiveDispatchRouteStepBeacon 1450ms ease-in-out infinite/);
   assert.match(styles, /\.directive-button\.is-dispatch-route-step \.directive-visual/);
   assert.match(styles, /\.directive-button\.is-dispatch-route-step \.directive-dispatch-route-step/);
+  assert.match(styles, /\.directive-button\.is-dispatch-route-step \.directive-status/);
+  assert.match(styles, /\.directive-button\.is-dispatch-route-step \.directive-status::before/);
+  assert.match(styles, /animation: directiveDispatchRouteStatusBeacon 1300ms ease-in-out infinite/);
+  assert.match(styles, /\.directive-button\.is-dispatch-route-step\.is-ready \.directive-status/);
+  assert.match(styles, /\.directive-button\.is-dispatch-route-step\.is-cooling \.directive-status/);
   assert.match(styles, /@keyframes directiveDispatchRouteStepBeacon/);
+  assert.match(styles, /@keyframes directiveDispatchRouteStatusBeacon/);
   assert.match(styles, /@media \(prefers-reduced-motion: reduce\) \{[\s\S]*\.directive-button\.is-dispatch-route-step[\s\S]*animation: none/);
+  assert.match(styles, /@media \(prefers-reduced-motion: reduce\) \{[\s\S]*\.directive-button\.is-dispatch-route-step \.directive-status::before[\s\S]*animation: none/);
   assert.match(styles, /\.directive-button\.is-finisher-recommended/);
   assert.match(styles, /\.directive-button \.directive-dispatch-route-step/);
   assert.match(styles, /\.directive-button \.directive-recommendation/);
