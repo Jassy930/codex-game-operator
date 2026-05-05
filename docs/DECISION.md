@@ -1,5 +1,28 @@
 # Decision
 
+## 2026-05-06 Product decision：航线委托可执行面板信标
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-06 02:23 CST 已同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。没有 open bug；#3“玩法太简单”和 #6“后半段玩法没有真正变化”仍是最近需要持续复测的主动玩法反馈。
+
+当前最大问题：航线委托条已经显示下一步步号、意图、动作、状态、收益和 1/2/3 节点；下一步节点也有信标。但“下一步已经可执行”仍主要依赖一个较小的 `可执行` 胶囊。玩家扫到委托条时，整条任务卡还没有把“现在可以推进这一格”作为面板级状态表现出来。
+
+本轮决策：
+
+- 新增“航线委托可执行面板信标”。
+- `src/app.js` 在 `renderDirectiveTask()` 中按 `task.nextStatusKind` 给 `#directiveTask` 切换 `is-next-ready` / `is-next-waiting`。
+- `src/styles.css` 为 ready 状态增加绿色边框、轻量补光和 `directiveTaskReadyPanelBeacon` 动画；waiting 状态只给较弱等待底色。
+- `prefers-reduced-motion: reduce` 下关闭 ready 面板动画，保留静态边框和底色。
+- `tests/game.test.js` 覆盖运行时状态类、ready/waiting 样式、动画 keyframes 和降低动效兜底。
+- 该改动只增强 100K 后航线委托可执行性扫视，不新增可见文字、不新增收益、不新增存档字段，不改变指令冷却、连携窗口、策略契合、航线委托奖励、星图航段、远航调度、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-05-06 02:23 CST 当前 5 个 open issue、5 个 open feedback issue、0 个 open bug issue；#3/#6 作为本轮关联反馈。
+- 下一步推荐指令可执行时，航线委托整条任务卡显示 ready 边框和轻量补光；下一步等待冷却时显示较弱 waiting 底色；完成态和锁定态不显示可执行面板信标。
+- 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 129 项。
+- 构建产物已确认 `dist/src/app.js` 和 `dist/src/styles.css` 包含 `is-next-ready`、`is-next-waiting` 与 `directiveTaskReadyPanelBeacon`。
+- 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #3/#6，以及航线委托条已有小状态胶囊但缺少面板级可执行信标的扫视链路复盘。
+
 ## 2026-05-06 Product decision：航线委托下一步节点信标
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-06 02:04 CST 已同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。没有 open bug；#3“玩法太简单”和 #6“后半段玩法没有真正变化”仍是需要持续复测的主动玩法反馈。

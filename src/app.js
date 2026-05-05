@@ -732,6 +732,8 @@ function renderDirectiveTask(task) {
   }
 
   elements.directiveTask.classList.toggle("is-completed", task.completed);
+  elements.directiveTask.classList.toggle("is-next-ready", task.nextStatusKind === "ready");
+  elements.directiveTask.classList.toggle("is-next-waiting", task.nextStatusKind === "waiting");
   elements.directiveTask.replaceChildren(
     text,
     stepLabel,

@@ -2626,6 +2626,28 @@ h2 {
   background: linear-gradient(90deg, #13b5a6, #f4b23c);
 }
 
+.directive-task.is-next-ready {
+  border-color: rgba(105, 214, 154, 0.46);
+  background:
+    linear-gradient(90deg, rgba(105, 214, 154, 0.13), rgba(161, 124, 255, 0.09)),
+    rgba(18, 20, 30, 0.28);
+  box-shadow:
+    0 0 0 1px rgba(105, 214, 154, 0.08),
+    0 0 22px rgba(105, 214, 154, 0.12);
+  animation: directiveTaskReadyPanelBeacon 1600ms ease-in-out infinite;
+}
+
+.directive-task.is-next-ready .directive-task-status.is-ready {
+  box-shadow: 0 0 14px rgba(105, 214, 154, 0.18);
+}
+
+.directive-task.is-next-waiting {
+  border-color: rgba(255, 187, 105, 0.3);
+  background:
+    linear-gradient(90deg, rgba(255, 187, 105, 0.1), rgba(161, 124, 255, 0.08)),
+    rgba(18, 20, 30, 0.24);
+}
+
 .far-dispatch {
   display: grid;
   width: min(100%, 560px);
@@ -8663,6 +8685,24 @@ h2 {
   }
 }
 
+@keyframes directiveTaskReadyPanelBeacon {
+  0%,
+  100% {
+    filter: saturate(1);
+    box-shadow:
+      0 0 0 1px rgba(105, 214, 154, 0.08),
+      0 0 18px rgba(105, 214, 154, 0.1);
+  }
+
+  50% {
+    filter: saturate(1.16);
+    box-shadow:
+      0 0 0 1px rgba(105, 214, 154, 0.12),
+      0 0 24px rgba(105, 214, 154, 0.18),
+      0 0 12px rgba(255, 211, 106, 0.1);
+  }
+}
+
 @keyframes directiveDispatchRouteStepBeacon {
   0%,
   100% {
@@ -8756,6 +8796,7 @@ h2 {
   .core-impact-echo.is-showing,
   .core-gain-pop.is-showing::after,
   .core-gain-pop.is-overload-gain.is-showing::after,
+  .directive-task.is-next-ready,
   .directive-task-meter-node.is-next::after,
   .directive-button.is-dispatch-route-step,
   .directive-button.is-dispatch-route-step .directive-dispatch-loop-streak,

@@ -4,6 +4,7 @@
 
 M0 设计约束：
 
+- 航线委托必须提供可执行面板信标：`renderDirectiveTask()` 必须根据 `task.nextStatusKind` 给 `#directiveTask` 切换 `is-next-ready` / `is-next-waiting`；下一步推荐指令可执行时，`.directive-task.is-next-ready` 必须显示 ready 边框、轻量补光和 `directiveTaskReadyPanelBeacon`，等待冷却时 `.directive-task.is-next-waiting` 只显示较弱等待底色；`prefers-reduced-motion: reduce` 必须关闭 ready 动画并保留静态边框。该信标只从现有下一步状态派生，不新增可见文字、不新增收益、不新增存档字段，不改变指令冷却、连携窗口、策略契合、航线委托奖励、星图航段、远航调度或反馈入口。
 - 航线委托下一步节点必须提供轻量信标：`.directive-task-meter-node.is-next::after` 必须在当前下一步节点外显示光环并播放 `directiveTaskNextNodeBeacon`，让玩家在 100K 后委托条中先扫到当前要推进的 1/2/3 节点；`prefers-reduced-motion: reduce` 必须关闭该动画并保留静态光环。该信标只从现有节点状态派生，不新增可见文字、不新增收益、不新增存档字段，不改变指令冷却、连携窗口、策略契合、航线委托奖励、星图航段、远航调度或反馈入口。
 - 航线委托必须显示下一步意图短标：`getDirectiveTaskStatus()` 必须返回 `nextIntentText`，优先复用 `getDirectivePlan()` 的推荐文案，缺少推荐文案时从下一步收益派生 `策略终结`、`轮换收束`、`轮换推进` 或 `连携续航`；`renderDirectiveTask()` 必须把该值渲染为 `.directive-task-intent`，并提供“航线委托下一步意图”的标题和可访问标签，完成态和锁定态隐藏。该短标只暴露现有推荐动作的轮换角色，不新增收益、不新增存档字段，不改变指令冷却、连携窗口、策略契合、航线委托奖励、远航调度、星图航段或反馈入口。
 - 航线委托必须显示下一步步号短标：`getDirectiveTaskStatus()` 必须返回 `nextStepText`，未完成委托显示 `第 N/3 步`，完成态和锁定态隐藏；`renderDirectiveTask()` 必须把该值渲染为 `.directive-task-step`，并提供“航线委托下一步步号”的标题和可访问标签。该短标只暴露现有 `progress` / `target` 的下一步位置，不新增收益、不新增存档字段，不改变指令冷却、连携窗口、策略契合、航线委托奖励、远航调度、星图航段或反馈入口。

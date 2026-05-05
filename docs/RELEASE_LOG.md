@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+- 航线委托新增“可执行面板信标”：100K 后下一步推荐指令可执行时，整条委托卡会显示 ready 边框、轻量补光和状态胶囊补光；推荐指令等待冷却时显示较弱 waiting 底色，继续回应 #3/#6 对主动短循环和后半段三步结构不够直观的反馈。
+- `src/app.js` 在 `renderDirectiveTask()` 中按 `nextStatusKind` 切换 `is-next-ready` / `is-next-waiting`；`src/styles.css` 增加 `directiveTaskReadyPanelBeacon` 动画、ready/waiting 面板样式和降低动效兜底；`tests/game.test.js` 覆盖运行时状态类、CSS 和 reduced motion。
+- 本轮只增强航线委托可执行性扫视，不新增可见文字、不新增收益、不新增存档字段，不改变指令冷却、连携窗口、策略契合、航线委托奖励、星图航段、远航调度、反馈入口或部署链路。
+- 同步 GitHub Issues 反馈状态：2026-05-06 02:23 CST 当前 5 个 open issue、5 个 open feedback issue、0 个 open bug issue；#3/#6 作为本轮关联反馈。
+- 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 129 项。
+- 构建产物已确认 `dist/src/app.js` 和 `dist/src/styles.css` 包含 `is-next-ready`、`is-next-waiting` 与 `directiveTaskReadyPanelBeacon`。
+
 - 航线委托新增“下一步节点信标”：100K 后委托条里当前下一步的 1/2/3 节点会显示静态外环和轻量脉冲，让玩家更快扫到当前要推进的节点，继续回应 #3/#6 对主动短循环和后半段三步结构不够直观的反馈。
 - `src/styles.css` 为 `.directive-task-meter-node.is-next::after` 增加外环、光晕、`directiveTaskNextNodeBeacon` 动画和降低动效兜底；`tests/game.test.js` 覆盖伪元素、动画 keyframes 和 reduced motion 绑定。
 - 本轮只增强航线委托三步节点扫视性，不新增可见文字、不新增收益、不新增存档字段，不改变指令冷却、连携窗口、策略契合、航线委托奖励、星图航段、远航调度、反馈入口或部署链路。

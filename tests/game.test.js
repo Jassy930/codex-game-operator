@@ -2360,6 +2360,8 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(appJs, /elements\.farDispatch\.replaceChildren\(\s*text,\s*sceneImage,\s*branch,/);
   assert.match(appJs, /branchChoices,/);
   assert.match(appJs, /elements\.directiveTask\.classList\.toggle\("is-completed", task\.completed\)/);
+  assert.match(appJs, /elements\.directiveTask\.classList\.toggle\("is-next-ready", task\.nextStatusKind === "ready"\)/);
+  assert.match(appJs, /elements\.directiveTask\.classList\.toggle\("is-next-waiting", task\.nextStatusKind === "waiting"\)/);
   assert.match(
     appJs,
     /elements\.directiveTask\.replaceChildren\(\s*text,\s*stepLabel,\s*intent,\s*action,\s*status,\s*reward,\s*meter\s*\)/
@@ -2497,6 +2499,11 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(styles, /@keyframes directiveTaskNextNodeBeacon/);
   assert.match(styles, /@media \(prefers-reduced-motion: reduce\) \{[\s\S]*\.directive-task-meter-node\.is-next::after[\s\S]*animation: none/);
   assert.match(styles, /\.directive-task\.is-completed/);
+  assert.match(styles, /\.directive-task\.is-next-ready/);
+  assert.match(styles, /\.directive-task\.is-next-ready \.directive-task-status\.is-ready/);
+  assert.match(styles, /\.directive-task\.is-next-waiting/);
+  assert.match(styles, /@keyframes directiveTaskReadyPanelBeacon/);
+  assert.match(styles, /@media \(prefers-reduced-motion: reduce\) \{[\s\S]*\.directive-task\.is-next-ready[\s\S]*animation: none/);
   assert.match(styles, /\.far-dispatch/);
   assert.match(styles, /\.far-dispatch-branch/);
   assert.match(styles, /\.far-dispatch-branch\.is-sync/);

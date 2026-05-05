@@ -2,6 +2,14 @@
 
 ## 2026-05-06
 
+- GitHub Issues：gh 可用且已认证；2026-05-06 02:23 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。#4/#5 已分别持续处理视觉图片化与点火反馈；#3“玩法太简单”和 #6“后半段玩法没有真正变化”仍是最近需要复测的主动短循环反馈。
+- 本轮 Product decision 处理 #3/#6：航线委托条已有下一步步号、意图、动作、状态、收益和 1/2/3 节点，当前下一步节点也有信标；但下一步已经可执行时，整条委托卡仍缺少面板级 ready 状态，只靠小 `可执行` 胶囊传达。
+- 本轮改动新增“航线委托可执行面板信标”：`renderDirectiveTask()` 按 `nextStatusKind` 切换 `is-next-ready` / `is-next-waiting`；ready 状态显示绿色边框、轻量补光和 `directiveTaskReadyPanelBeacon`，waiting 状态显示较弱等待底色；降低动效偏好下关闭 ready 动画。
+- 本轮只增强航线委托可执行性扫视和测试，不新增可见文字、不新增收益、不新增存档字段，不改变指令冷却、连携窗口、策略契合、航线委托奖励、星图航段、远航调度、反馈入口或部署链路。
+- 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 129 项。
+- 构建产物已确认 `dist/src/app.js` 和 `dist/src/styles.css` 包含 `is-next-ready`、`is-next-waiting` 与 `directiveTaskReadyPanelBeacon`。
+- 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #3/#6，以及航线委托条已有小状态胶囊但缺少面板级可执行信标的扫视链路复盘。
+
 - GitHub Issues：gh 可用且已认证；2026-05-06 02:04 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。#4/#5 已在前几轮分别处理视觉图片化和点火反馈，本轮回到 #3“玩法太简单”和 #6“后半段玩法没有真正变化”的三步主动循环扫视问题。
 - 本轮 Product decision 处理 #3/#6：航线委托条已经显示下一步步号、意图、动作、状态、收益和 1/2/3 节点，但当前下一步节点仍只是静态金色点。玩家要在多个短标和节点之间定位当前推进格，缺少一层不增加文字密度的行动信标。
 - 本轮改动新增“航线委托下一步节点信标”：`.directive-task-meter-node.is-next::after` 在下一步节点外显示光环并播放 `directiveTaskNextNodeBeacon` 轻量脉冲；降低动效偏好下保留静态光环并关闭动画。
