@@ -8,6 +8,11 @@
 - 本轮只调整远航调度复盘文本和测试，不新增收益、不新增存档字段，不改变目标指令、分支路线、冷却、连携窗口、远航连段结算、星图航段、反馈入口或部署链路。
 - 本地完整验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
 - 构建产物已确认 `dist/src/game.js` 包含 `state?.farRouteLoopStreak` 和“闭环复盘”关键标记。
+- 代码提交已创建并推送：`80db087 feat: show far loop streak in closure recap`。
+- 发布：提交 `80db087` 已推送到 `origin/main`；GitHub Pages workflow `25362720242` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页返回 HTTP 200，线上 `src/game.js` 已确认包含本轮关键标记。
+- #6 已回复：说明远航连段闭环复盘、验证结果、Pages 部署和复测问题；issue 保持 open，评论地址：`https://github.com/Jassy930/codex-game-operator/issues/6#issuecomment-4377188747`。
+- 回复后同步 GitHub Issues：2026-05-05 15:08 CST 当前仍为 5 个 open feedback issue、0 个 open bug issue；#6 更新时间为 2026-05-05T07:08:39Z。
+- 钉钉通知未发送：2026-05-05 15:09 CST 运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` / `ROBOT` 相关变量名，当前目录和 `/home/jassy/glm` 两层内未发现 `.env*` 文件；未将 webhook 写入仓库。
 - 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #6，以及远航闭环连段上线后复盘行没有承接连段层数的链路复盘。
 
 - GitHub Issues：gh 可用且已认证；2026-05-05 14:33 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。#6 仍是最近更新反馈，指向“后半段只有不停目标，玩法没有真正变化”。
