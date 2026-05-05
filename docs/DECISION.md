@@ -2,7 +2,7 @@
 
 ## 2026-05-05 Product decision：远航满段回响主调度条预告
 
-阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-05 21:48 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有 open bug；本轮继续处理真实反馈 #6“到后半段，游戏玩法已经开始无聊了，只有不停的目标，但是游戏玩法没有真正的变化”。
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-05 21:48 CST 已同步到 5 个 open feedback issue、0 个 open bug issue，回复后于 2026-05-05 22:04 CST 再次同步。没有 open bug；本轮继续处理真实反馈 #6“到后半段，游戏玩法已经开始无聊了，只有不停的目标，但是游戏玩法没有真正的变化”。
 
 当前最大问题：远航满段回响已经进入按钮预览、执行反馈、路线对照回航结果和卡片提示，但主操作区远航调度条只显示 `连段 2/3`，玩家在主调度面板扫到“下一步回目标”时，还不能直接看到这一步会触发满段终点奖励。
 
@@ -21,6 +21,11 @@
 - 20M 后当前远航闭环下一步回目标会触发满段回响时，主远航调度条显示 `满段回响 +10%`，并带 `.far-dispatch-loop-capstone` / `has-loop-capstone` 展示状态。
 - 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 127 项。
 - 构建产物已确认 `dist/src/game.js`、`dist/src/app.js` 和 `dist/src/styles.css` 包含 `loopCapstoneText`、`far-dispatch-loop-capstone` 与 `.far-dispatch.has-loop-capstone`。
+- 代码和同步文档提交已创建并推送：`2eb6207 feat: preview far capstone on dispatch panel`。
+- 发布验证已通过：GitHub Pages workflow `25381125865` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页返回 HTTP 200，线上 `src/game.js` 已确认包含 `loopCapstoneText`，`src/app.js` 已确认包含 `far-dispatch-loop-capstone` / `has-loop-capstone`，`src/styles.css` 已确认包含 `.far-dispatch.has-loop-capstone`。workflow 继续给出 Node.js 20 actions 弃用提醒，未影响本次部署。
+- 已回复 GitHub Issue #6，说明远航满段回响主调度条预告、验证结果、Pages 部署和复测问题；issue 保持 open，评论地址：`https://github.com/Jassy930/codex-game-operator/issues/6#issuecomment-4380017388`。
+- 回复后于 2026-05-05 22:04 CST 再次同步 GitHub Issues，当前仍为 5 个 open feedback issue、0 个 open bug issue；#6 更新时间为 `2026-05-05T14:04:32Z`。
+- 钉钉通知未发送：2026-05-05 22:04 CST 运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` / `ROBOT` 相关变量名；未将 webhook 写入仓库。
 - 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #6，以及满段回响已进入路线对照层后主调度条仍缺少终点奖励预告的链路复盘。
 
 ## 2026-05-05 Fix bug：远航满段回响卡片提示去重
