@@ -8,6 +8,10 @@
 - 同步 GitHub Issues 反馈状态：2026-05-06 07:16 CST 当前 5 个 open issue、5 个 open feedback issue、0 个 open bug issue；#2/#3/#4/#6 作为本轮关联反馈。
 - 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 134 项。
 - 构建产物已确认 `dist/src/feedback.js` 包含 `formatFeedbackProjectFilter` 与 `星图筛选`，`dist/src/app.js` 包含反馈提交时传入 `projectFilter`。
+- 代码和同步文档提交已创建并推送：`3e77696 feat: add project filter feedback snapshot`。
+- 发布：GitHub Pages workflow `25407759201` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页返回 HTTP 200，线上 `src/feedback.js` 已确认包含 `formatFeedbackProjectFilter` 与 `星图筛选`，线上 `src/app.js` 已确认反馈提交会传入 `projectFilter`。workflow 给出 Node.js 20 actions 弃用提醒，未影响本次部署。
+- 反馈处理：已回复 #2、#3、#4 和 #6，说明星图筛选反馈快照、验证结果、Pages 部署和复测问题；issue 均保持 open，评论地址：`https://github.com/Jassy930/codex-game-operator/issues/2#issuecomment-4383894085`、`https://github.com/Jassy930/codex-game-operator/issues/3#issuecomment-4383894218`、`https://github.com/Jassy930/codex-game-operator/issues/4#issuecomment-4383894404`、`https://github.com/Jassy930/codex-game-operator/issues/6#issuecomment-4383894649`。回复后于 2026-05-06 07:24 CST 再次同步 GitHub Issues，当前仍为 5 个 open feedback issue、0 个 open bug issue。
+- 钉钉通知未发送：2026-05-06 07:25 CST 运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` / `ROBOT` 相关有效 webhook 变量，当前目录和 `/home/jassy/glm` 两层内未发现 `.env*` 文件；未将 webhook 写入仓库。
 
 - 反馈快照新增“远航路线对照”：游戏内反馈生成 GitHub Issue 时，20M 后存在协同 / 绕行路线对照会追加 `远航路线对照：...`，记录首推、建档、当前路线、收益路径、资源取向和连段 / 满段回响预告，继续为 #6 后半段玩法复测提供可诊断上下文。
 - `src/feedback.js` 复用 `getFarRouteDispatch().branchChoiceSummaryText` 格式化路线对照字段；`tests/game.test.js` 覆盖远航锁定态不输出、普通路线对照和满段回响预告路线对照。

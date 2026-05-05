@@ -8,6 +8,10 @@
 - 本轮只增强真实反馈诊断能力，不新增界面可见文字、不新增收益、不新增存档字段，不改变星图筛选交互、星图航段、航线指令、远航调度、反馈入口或部署链路。
 - 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 134 项。
 - 构建产物已确认 `dist/src/feedback.js` 包含 `formatFeedbackProjectFilter` 与 `星图筛选`，`dist/src/app.js` 包含反馈提交时传入 `projectFilter`。
+- 发布和反馈处理已完成：`3e77696 feat: add project filter feedback snapshot` 已推送，GitHub Pages workflow `25407759201` 成功；build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页返回 HTTP 200，线上 `src/feedback.js` 和 `src/app.js` 已确认包含本轮标记。
+- 已回复 #2/#3/#4/#6，评论地址：`https://github.com/Jassy930/codex-game-operator/issues/2#issuecomment-4383894085`、`https://github.com/Jassy930/codex-game-operator/issues/3#issuecomment-4383894218`、`https://github.com/Jassy930/codex-game-operator/issues/4#issuecomment-4383894404`、`https://github.com/Jassy930/codex-game-operator/issues/6#issuecomment-4383894649`；issue 均保持 open 等待带新快照的真实复测。
+- 回复后于 2026-05-06 07:24 CST 再次同步 GitHub Issues，当前仍为 5 个 open feedback issue、0 个 open bug issue；#2/#3/#4/#6 更新时间已更新到本轮评论时间。
+- 钉钉通知未发送：2026-05-06 07:25 CST 运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` / `ROBOT` 相关有效 webhook 变量，当前目录和 `/home/jassy/glm` 两层内未发现 `.env*` 文件；未将 webhook 写入仓库。
 - 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #2/#3/#4/#6，以及当前反馈快照缺少玩家所见星图筛选视图的链路复盘。
 
 - GitHub Issues：gh 可用且已认证；2026-05-06 07:03 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。#6 仍是后半段玩法变化复测反馈，#3 继续作为主动玩法丰富度的间接关联反馈，#2/#4/#5 继续等待对应复测。
