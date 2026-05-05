@@ -8,6 +8,8 @@
 - 本轮只增强航线委托三步节点扫视性和测试，不新增可见文字、不新增收益、不新增存档字段，不改变指令冷却、连携窗口、策略契合、航线委托奖励、星图航段、远航调度、反馈入口或部署链路。
 - 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 129 项。
 - 构建产物已确认 `dist/src/styles.css` 包含 `.directive-task-meter-node.is-next::after` 与 `directiveTaskNextNodeBeacon`。
+- 发布和反馈处理已完成：`8a831ea feat: highlight directive task next node` 已推送，GitHub Pages workflow `25393974618` 成功；build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页和 `src/styles.css` 均返回 HTTP 200，并已确认包含本轮标记。已回复 #3/#6，评论地址：`https://github.com/Jassy930/codex-game-operator/issues/3#issuecomment-4381842684`、`https://github.com/Jassy930/codex-game-operator/issues/6#issuecomment-4381842804`，两个 issue 均保持 open 等待复测。
+- 回复后于 2026-05-06 02:14 CST 再次同步 GitHub Issues，当前仍为 5 个 open feedback issue、0 个 open bug issue；#3 更新时间为 `2026-05-05T18:14:34Z`，#6 更新时间为 `2026-05-05T18:14:36Z`。
 - 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #3/#6，以及航线委托条已有短标但下一步节点缺少行动信标的扫视链路复盘。
 
 - GitHub Issues：gh 可用且已认证；2026-05-06 01:51 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。#5 刚完成点火反馈补强；本轮转向 #4“现在界面里全是密密麻麻的文字，能不能生成一些图片？让界面变得更好看一些”。

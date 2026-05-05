@@ -20,6 +20,10 @@
 - 航线委托当前下一步节点显示静态外环和轻量脉冲；降低动效偏好下关闭脉冲动画。
 - 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 129 项。
 - 构建产物已确认 `dist/src/styles.css` 包含 `.directive-task-meter-node.is-next::after` 与 `directiveTaskNextNodeBeacon`。
+- 代码和同步文档提交已创建并推送：`8a831ea feat: highlight directive task next node`。
+- 发布验证已通过：GitHub Pages workflow `25393974618` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页和 `src/styles.css` 均返回 HTTP 200，线上 CSS 已确认包含 `.directive-task-meter-node.is-next::after` 与 `directiveTaskNextNodeBeacon`。workflow 给出 Node.js 20 actions 弃用提醒，未影响本次部署。
+- 已回复 GitHub Issue #3 和 #6，说明航线委托下一步节点信标、验证结果、Pages 部署和复测问题；两个 issue 均保持 open，评论地址：`https://github.com/Jassy930/codex-game-operator/issues/3#issuecomment-4381842684`、`https://github.com/Jassy930/codex-game-operator/issues/6#issuecomment-4381842804`。
+- 回复后于 2026-05-06 02:14 CST 再次同步 GitHub Issues，当前仍为 5 个 open feedback issue、0 个 open bug issue；#3 更新时间为 `2026-05-05T18:14:34Z`，#6 更新时间为 `2026-05-05T18:14:36Z`。
 - 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #3/#6，以及航线委托条已有短标但下一步节点缺少行动信标的扫视链路复盘。
 
 ## 2026-05-06 Product decision：升级面板本地插画
