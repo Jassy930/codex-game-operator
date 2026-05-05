@@ -1,5 +1,28 @@
 # Decision
 
+## 2026-05-06 Product decision：航线委托完成收益短标
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-06 02:39 CST 已同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。没有 open bug；#3“玩法太简单”和 #6“后半段玩法没有真正变化”仍是最近需要持续复测的主动玩法反馈。
+
+当前最大问题：航线委托条已经显示下一步步号、意图、动作、状态、收益、可执行面板信标和 1/2/3 节点信标。但 3/3 委托完成后，默认可见层只剩“已完成”和满格进度条，`委托完成 +8%` 主要留在执行反馈或完整悬停说明里。玩家扫委托卡时不容易把刚完成的三步短循环和本轮完成奖励对应起来。
+
+本轮决策：
+
+- 新增“航线委托完成收益短标”。
+- `index.html` 为静态首页委托区预留隐藏的 `directive-task-reward` 节点。
+- `src/app.js` 在 `renderDirectiveTask()` 中用 `task.completed ? task.rewardText : task.nextRewardText` 决定收益短标；完成态追加 `is-completed` 样式，并把标题与可访问标签写为“航线委托完成收益”。
+- `src/styles.css` 为 `.directive-task-reward.is-completed` 增加青绿色完成态边框、底色和轻量补光。
+- `tests/game.test.js` 覆盖 completed 状态的 `rewardText`、静态首页隐藏节点、运行时绑定和 CSS。
+- 该改动只增强 100K 后 3/3 委托完成回报扫视，不新增收益、不新增存档字段，不改变指令冷却、连携窗口、策略契合、航线委托奖励数值、星图航段、远航调度、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-05-06 02:39 CST 当前 5 个 open issue、5 个 open feedback issue、0 个 open bug issue；#3/#6 作为本轮关联反馈。
+- 航线委托未完成态继续显示下一步收益；3/3 完成态显示 `委托完成 +8%` 完成收益胶囊；锁定态隐藏收益短标。
+- 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 129 项。
+- 构建产物已确认 `dist/index.html`、`dist/src/app.js` 和 `dist/src/styles.css` 包含 `directive-task-reward`、`is-completed` 与“航线委托完成收益”。
+- 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #3/#6，以及航线委托完成态缺少独立完成收益短标的扫视链路复盘。
+
 ## 2026-05-06 Product decision：航线委托可执行面板信标
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-06 02:23 CST 已同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。没有 open bug；#3“玩法太简单”和 #6“后半段玩法没有真正变化”仍是最近需要持续复测的主动玩法反馈。

@@ -2535,6 +2535,13 @@ h2 {
   color: #ffe0ae;
 }
 
+.directive-task-reward.is-completed {
+  border-color: rgba(19, 181, 166, 0.4);
+  background: rgba(19, 181, 166, 0.14);
+  color: #bdf4eb;
+  box-shadow: 0 0 14px rgba(19, 181, 166, 0.14);
+}
+
 .directive-task-step[hidden],
 .directive-task-intent[hidden],
 .directive-task-action[hidden],

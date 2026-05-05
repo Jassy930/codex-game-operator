@@ -481,6 +481,7 @@ test("轮换航线指令会触发航线连携收益", () => {
   assert.equal(continuationTask.nextStatusText, "");
   assert.equal(continuationTask.nextStatusKind, "");
   assert.equal(continuationTask.nextRewardText, "");
+  assert.equal(continuationTask.rewardText, "委托完成 +8%");
   assert.deepEqual(continuationPlan.nextDirectiveIds, ["ignition-salvo"]);
   assert.equal(continuationPlan.nextRewardText, "连携 +24% · 轮换目标 +18%");
   assert.equal(continuationPlan.recommendationText, "熟练续航");
@@ -1990,6 +1991,7 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(indexHtml, /class="directive-task-intent" hidden/);
   assert.match(indexHtml, /class="directive-task-action" hidden/);
   assert.match(indexHtml, /class="directive-task-status" hidden/);
+  assert.match(indexHtml, /class="directive-task-reward" hidden/);
   assert.match(indexHtml, /class="directive-task-meter"/);
   assert.match(indexHtml, /class="directive-task-meter-fill" style="width: 0%"/);
   assert.match(indexHtml, /class="directive-task-meter-node is-pending" aria-hidden="true">1<\/span>/);
@@ -2144,8 +2146,10 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(appJs, /"directive-task-status"/);
   assert.match(appJs, /task\.nextStatusKind \? "is-" \+ task\.nextStatusKind : ""/);
   assert.match(appJs, /status\.textContent = task\.nextStatusText \?\? ""/);
-  assert.match(appJs, /reward\.className = "directive-task-reward"/);
-  assert.match(appJs, /reward\.textContent = task\.nextRewardText \?\? ""/);
+  assert.match(appJs, /const taskRewardText = task\.completed \? task\.rewardText : task\.nextRewardText/);
+  assert.match(appJs, /task\.completed \? "is-completed" : ""/);
+  assert.match(appJs, /reward\.textContent = taskRewardText \?\? ""/);
+  assert.match(appJs, /task\.completed \? "航线委托完成收益：" : "航线委托下一步收益："/);
   assert.match(
     appJs,
     /elements\.directiveTask\.replaceChildren\(\s*text,\s*stepLabel,\s*intent,\s*action,\s*status,\s*reward,\s*meter\s*\)/
@@ -2480,6 +2484,7 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(styles, /\.directive-task-status/);
   assert.match(styles, /\.directive-task-status\.is-ready/);
   assert.match(styles, /\.directive-task-status\.is-waiting/);
+  assert.match(styles, /\.directive-task-reward\.is-completed/);
   assert.match(styles, /\.directive-task-step\[hidden\]/);
   assert.match(styles, /\.directive-task-intent\[hidden\]/);
   assert.match(styles, /\.directive-task-action\[hidden\]/);

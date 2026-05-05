@@ -722,12 +722,20 @@ function renderDirectiveTask(task) {
   });
   meter.append(fill, ...nodes);
 
+  const taskRewardText = task.completed ? task.rewardText : task.nextRewardText;
   const reward = document.createElement("small");
-  reward.className = "directive-task-reward";
-  reward.textContent = task.nextRewardText ?? "";
-  reward.hidden = !task.nextRewardText;
-  if (task.nextRewardText) {
-    reward.title = "航线委托下一步收益：" + task.nextRewardText;
+  reward.className = [
+    "directive-task-reward",
+    task.completed ? "is-completed" : ""
+  ]
+    .filter(Boolean)
+    .join(" ");
+  reward.textContent = taskRewardText ?? "";
+  reward.hidden = !taskRewardText;
+  if (taskRewardText) {
+    reward.title =
+      (task.completed ? "航线委托完成收益：" : "航线委托下一步收益：") +
+      taskRewardText;
     reward.setAttribute("aria-label", reward.title);
   }
 

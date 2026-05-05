@@ -5,6 +5,7 @@
 当前实现：
 
 - 浏览器本地通过 localStorage 保存最近 200 条 session、click、first_upgrade_time、upgrade_purchase、goal_complete、reset 事件。
+- 航线委托完成收益短标当前由 `renderDirectiveTask()` 在本地 `task.completed` 为 true 时复用 `task.rewardText` 即时渲染为 `.directive-task-reward.is-completed`，不单独记录为真实线上指标；委托完成收益复盘仍依赖现有 `directive` 事件中的 `taskReward`、`taskRewardRate`、执行反馈和反馈快照。
 - 航线委托可执行面板信标当前由 `renderDirectiveTask()` 根据本地 `getDirectiveTaskStatus().nextStatusKind` 即时切换 `is-next-ready` / `is-next-waiting`，ready 状态播放 `directiveTaskReadyPanelBeacon` 并在降低动效偏好下关闭动画；它不单独记录为真实线上指标。推荐指令是否执行、是否冷却和执行后的收益复盘仍依赖现有 `directive` 事件、按钮状态、冷却进度、航线委托字段和反馈快照。
 - 航线委托下一步节点信标当前由 `.directive-task-meter-node.is-next::after` 从本地节点状态即时渲染，播放 `directiveTaskNextNodeBeacon` 轻量动效并在降低动效偏好下关闭动画；它不单独记录为真实线上指标。委托推进、完成和收益复盘仍依赖现有 `directive` 事件中的 `taskReward`、`taskRewardRate`、指令轮换字段、远航调度字段和反馈快照。
 - 航线委托下一步意图短标当前由 `getDirectiveTaskStatus().nextIntentText` 从本地 `getDirectivePlan()` 推荐文案和下一步收益即时派生并渲染为 `.directive-task-intent`，不单独记录为真实线上指标；推荐指令执行后的真实复盘仍依赖现有 `directive` 事件中的指令 id、`planReward`、`chainBonus`、`rotationReward`、`stanceFinisherReward`、`taskReward`、远航调度字段和反馈快照。
