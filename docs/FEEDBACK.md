@@ -2,6 +2,17 @@
 
 ## 2026-05-05
 
+- GitHub Issues：gh 可用且已认证；2026-05-05 19:19 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。#4 是最近更新反馈，继续指向“界面文字密度高、希望更多图片”。
+- 本轮 Product decision 继续处理 #4：反馈字段、提交按钮和状态回执已有视觉短标，但反馈表单标题仍是纯文字 `反馈`。
+- 本轮改动新增“反馈表单标题视觉短标”：反馈标题文字前显示固定 26px CSS 消息图形槽，辅助扫视侧栏反馈入口。
+- 本轮只调整反馈标题展示和测试，不新增可见说明文字，不改变反馈类型、评分、内容输入、校验、Issue 草稿、反馈快照、localStorage 事件、玩法数值、星图、航线指令、远航调度或部署链路。
+- 验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 126 项。
+- 构建产物已确认 `dist/index.html` 和 `dist/src/styles.css` 包含 `feedback-heading` 与 `feedback-heading-icon`。
+- 代码提交已创建并推送：`64af1a3 feat: add feedback heading visual marker`；GitHub Pages workflow `25373174667` 成功，线上首页和 CSS 已确认包含反馈标题视觉短标。
+- 2026-05-05 19:19 CST 已在 #4 回复本轮处理结果、提交 `64af1a3`、GitHub Pages workflow `25373174667` 和线上验证结果；Issue 保持 open 等待复测，评论地址：`https://github.com/Jassy930/codex-game-operator/issues/4#issuecomment-4378724706`。回复后于 2026-05-05 19:19 CST 再次同步 GitHub Issues，当前仍为 5 个 open feedback issue、0 个 open bug issue；#4 更新时间为 `2026-05-05T11:19:14Z`。
+- 钉钉通知未发送：2026-05-05 19:19 CST 运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` / `ROBOT` 相关变量名，当前目录和 `/home/jassy/glm` 两层内未发现 `.env*` 文件；未将 webhook 写入仓库。
+- 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #4，以及反馈表单标题仍缺少图形锚点的侧栏复盘。
+
 - GitHub Issues：gh 可用且已认证；2026-05-05 19:00 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。#4 是最近更新反馈，继续指向“界面文字密度高、希望更多图片”。
 - 本轮 Product decision 继续处理 #4：反馈表单字段和提交按钮已有视觉短标，但提交后的状态回执 `feedback-status` 仍是纯文字。
 - 本轮改动新增“反馈状态回执视觉短标”：反馈状态行非空时显示固定 20px CSS 回执图形槽，辅助扫视提交草稿或校验结果。

@@ -1,5 +1,31 @@
 # Decision
 
+## 2026-05-05 Product decision：反馈表单标题视觉短标
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-05 19:19 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有 open bug；本轮继续处理最近更新的真实反馈 #4“界面里全是密密麻麻的文字，能不能生成一些图片”。
+
+当前最大问题：反馈表单字段、提交按钮和状态回执已有视觉短标，但反馈表单标题仍是纯文字 `反馈`。玩家扫到侧栏反馈入口时，标题仍缺少图形锚点，和 #4 的侧栏文字密度反馈仍有关联。
+
+本轮决策：
+
+- 新增“反馈表单标题视觉短标”。
+- `index.html` 将反馈标题改为 `feedback-heading`，在标题文字前加入 `feedback-heading-icon` 图形槽。
+- `src/styles.css` 用 CSS 绘制 26px 消息短标，并让标题使用稳定的图标 + 文本布局。
+- `tests/game.test.js` 覆盖静态首页和 CSS 绑定。
+- 该改动只调整反馈标题展示和测试，不新增可见说明文字，不改变反馈类型、评分、内容输入、校验、Issue 草稿、反馈快照、localStorage 事件、玩法数值、星图、航线指令、远航调度或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-05-05 19:19 CST 当前 5 个 open feedback issue、0 个 open bug issue；#4 作为本轮主处理对象。
+- 反馈标题包含 `feedback-heading` 与 `feedback-heading-icon`，并保持 `aria-labelledby="feedback-title"` 绑定。
+- 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 126 项。
+- 构建产物已确认 `dist/index.html` 和 `dist/src/styles.css` 包含 `feedback-heading` 与 `feedback-heading-icon`。
+- 代码提交已创建并推送：`64af1a3 feat: add feedback heading visual marker`。
+- 发布验证已通过：GitHub Pages workflow `25373174667` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页和 `src/styles.css` 均返回 HTTP 200，线上产物已确认包含 `feedback-heading` 与 `feedback-heading-icon`。workflow 继续给出 Node.js 20 actions 弃用提醒，未影响本次部署。
+- 已回复 GitHub Issue #4，说明反馈表单标题视觉短标、验证结果、Pages 部署和复测问题；issue 保持 open，评论地址：`https://github.com/Jassy930/codex-game-operator/issues/4#issuecomment-4378724706`。
+- 回复后同步 GitHub Issues：2026-05-05 19:19 CST 当前仍为 5 个 open feedback issue、0 个 open bug issue；#4 更新时间为 `2026-05-05T11:19:14Z`。
+- 钉钉通知未发送：2026-05-05 19:19 CST 运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` / `ROBOT` 相关变量名，当前目录和 `/home/jassy/glm` 两层内未发现 `.env*` 文件；未将 webhook 写入仓库。
+
 ## 2026-05-05 Product decision：反馈状态回执视觉短标
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-05 19:00 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有 open bug；本轮继续处理最近更新的真实反馈 #4“界面里全是密密麻麻的文字，能不能生成一些图片”。
