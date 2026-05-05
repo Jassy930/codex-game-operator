@@ -198,12 +198,52 @@ h2 {
 }
 
 .goal-strip {
+  display: grid;
+  grid-template-columns: 54px minmax(0, 1fr);
+  gap: 12px 14px;
+  align-items: center;
   width: min(100%, 560px);
   padding: 16px;
   border-radius: 8px;
 }
 
-.goal-strip span {
+.goal-visual {
+  position: relative;
+  display: grid;
+  width: 54px;
+  height: 54px;
+  place-items: center;
+  align-self: start;
+  border: 1px solid rgba(244, 178, 60, 0.36);
+  border-radius: 8px;
+  background:
+    radial-gradient(circle at 50% 48%, rgba(244, 178, 60, 0.24), transparent 56%),
+    rgba(244, 178, 60, 0.1);
+  color: #f4b23c;
+  box-shadow: inset 0 0 0 1px rgba(255, 247, 194, 0.04);
+}
+
+.goal-visual::before {
+  position: absolute;
+  inset: 8px;
+  border: 1px solid rgba(19, 181, 166, 0.32);
+  border-radius: 999px;
+  content: "";
+}
+
+.goal-visual svg {
+  display: block;
+  width: 34px;
+  height: 34px;
+}
+
+.goal-copy {
+  display: grid;
+  min-width: 0;
+  gap: 5px;
+}
+
+.goal-copy span {
   display: block;
   color: rgba(248, 243, 231, 0.62);
   font-size: 0.82rem;
@@ -211,20 +251,18 @@ h2 {
 
 .goal-strip strong {
   display: block;
-  margin-top: 5px;
   font-size: 1.1rem;
 }
 
 .goal-strip .goal-hint {
-  margin-top: 8px;
   color: #fff7c2;
   font-weight: 850;
 }
 
 .goal-meter {
+  grid-column: 1 / -1;
   width: 100%;
   height: 8px;
-  margin-top: 14px;
   overflow: hidden;
   border-radius: 99px;
   background: rgba(248, 243, 231, 0.12);

@@ -1,5 +1,27 @@
 # Decision
 
+## 2026-05-05 Product decision：当前目标条视觉徽记
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-05 17:49 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有 open bug；本轮继续处理真实反馈 #4“界面里全是密密麻麻的文字，能不能生成一些图片”。
+
+当前最大问题：顶部产能读数卡片已经补上视觉徽记，但主操作区进入点火按钮前的“当前目标”条仍是目标、目标值、长提示和进度条的纯文字组合。该条位于首屏核心操作路径上，玩家仍需要先读一组文字才能把当前追逐目标和进度建立关联。
+
+本轮决策：
+
+- 新增“当前目标条视觉徽记”。
+- `index.html` 在 `goal-strip` 内添加固定尺寸 `goal-visual` 内联 SVG，并把现有目标文本收进 `goal-copy`。
+- `src/styles.css` 将目标条调整为 54px 图形槽 + 文本区 + 全宽进度条的稳定布局。
+- 该改动只调整当前目标条展示和测试，不新增收益、不新增存档字段，不改变目标判定、点击、过载、升级、星图、航线指令、远航调度、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-05-05 17:49 CST 当前 5 个 open feedback issue、0 个 open bug issue；#4 作为本轮主处理对象。
+- 当前目标条包含 `goal-visual` 与 `goal-copy`，`goalLabel`、`goalValue`、`goalHint` 和 `goalMeter` 仍保持原有运行时绑定。
+- `tests/game.test.js` 覆盖静态首页和 CSS 绑定。
+- 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 121 项。
+- 构建产物已确认 `dist/index.html` 和 `dist/src/styles.css` 包含 `goal-visual`、`goal-copy` 与 `goal-strip` 关键标记。
+- 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #4，以及当前目标条仍缺少图形锚点的首屏复盘。
+
 ## 2026-05-05 Product decision：顶部产能读数视觉徽记
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-05 17:29 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有 open bug；本轮处理真实反馈 #4“界面里全是密密麻麻的文字，能不能生成一些图片”。

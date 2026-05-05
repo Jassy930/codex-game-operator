@@ -73,9 +73,18 @@
       <section class="play-layout" aria-label="星核工坊控制台">
         <div class="core-zone">
           <div class="goal-strip">
-            <span id="goalLabel">目标</span>
-            <strong id="goalValue">购买第一次升级</strong>
-            <span id="goalHint" class="goal-hint">进度 0 次升级 / 1 次升级 · 还差 10 能量购买聚能透镜</span>
+            <span class="goal-visual" aria-hidden="true">
+              <svg viewBox="0 0 48 48" focusable="false">
+                <path d="M24 6l12 7v12c0 7-5 13-12 17-7-4-12-10-12-17V13z" fill="none" stroke="currentColor" stroke-width="4" stroke-linejoin="round" />
+                <path d="M24 15v18M15 24h18" stroke="currentColor" stroke-width="4" stroke-linecap="round" />
+                <circle cx="24" cy="24" r="6" fill="currentColor" opacity="0.22" />
+              </svg>
+            </span>
+            <span class="goal-copy">
+              <span id="goalLabel">目标</span>
+              <strong id="goalValue">购买第一次升级</strong>
+              <span id="goalHint" class="goal-hint">进度 0 次升级 / 1 次升级 · 还差 10 能量购买聚能透镜</span>
+            </span>
             <div class="goal-meter" aria-hidden="true">
               <span id="goalMeter"></span>
             </div>

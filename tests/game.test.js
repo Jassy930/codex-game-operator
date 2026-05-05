@@ -1283,6 +1283,27 @@ test("顶部产能读数卡片提供视觉徽记", () => {
   assert.match(styles, /\.score-card-overload \.score-icon/);
 });
 
+test("当前目标条提供视觉徽记", () => {
+  const indexHtml = readFileSync(new URL("../index.html", import.meta.url), "utf8");
+  const styles = readFileSync(new URL("../src/styles.css", import.meta.url), "utf8");
+
+  assert.match(indexHtml, /class="goal-strip"/);
+  assert.match(indexHtml, /class="goal-visual"/);
+  assert.match(indexHtml, /class="goal-copy"/);
+  assert.match(indexHtml, /id="goalLabel"/);
+  assert.match(indexHtml, /id="goalValue"/);
+  assert.match(indexHtml, /id="goalHint" class="goal-hint"/);
+  assert.match(indexHtml, /id="goalMeter"/);
+  assert.match(styles, /\.goal-strip \{/);
+  assert.match(styles, /grid-template-columns: 54px minmax\(0, 1fr\)/);
+  assert.match(styles, /\.goal-visual/);
+  assert.match(styles, /\.goal-visual::before/);
+  assert.match(styles, /\.goal-visual svg/);
+  assert.match(styles, /\.goal-copy/);
+  assert.match(styles, /\.goal-copy span/);
+  assert.match(styles, /grid-column: 1 \/ -1/);
+});
+
 test("点火按钮会渲染点击反馈和过载前兆效果", () => {
   const indexHtml = readFileSync(new URL("../index.html", import.meta.url), "utf8");
   const appJs = readFileSync(new URL("../src/app.js", import.meta.url), "utf8");
