@@ -925,6 +925,7 @@ function renderFarDispatchBranchChoiceSummaryItem(choice) {
   item.title = [
     choice.label,
     choice.decisionBadgeText,
+    choice.routeDecisionSignalText,
     choice.routeResourceText,
     choice.routePhaseText,
     choice.routeActionText,
@@ -946,6 +947,13 @@ function renderFarDispatchBranchChoiceSummaryItem(choice) {
 
   const label = document.createElement("strong");
   label.textContent = choice.label + " · " + (choice.decisionBadgeText ?? "");
+
+  const signal = document.createElement("span");
+  signal.className =
+    "far-dispatch-branch-choice-summary-signal is-" +
+    getFarDispatchBranchChoiceDecisionSignalKind(choice);
+  signal.textContent = choice.routeDecisionSignalText ?? "";
+  signal.hidden = !choice.routeDecisionSignalText;
 
   const phase = document.createElement("span");
   phase.className =
@@ -1000,6 +1008,7 @@ function renderFarDispatchBranchChoiceSummaryItem(choice) {
   item.append(
     glyph,
     label,
+    signal,
     phase,
     action,
     reward,
@@ -1441,6 +1450,11 @@ function getFarDispatchBranchChoiceStatus(choice) {
 function getFarDispatchBranchChoiceDecisionKind(choice) {
   const decisionKind = String(choice.decisionKind ?? "fallback");
   return decisionKind.replace(/[^a-z-]/g, "") || "fallback";
+}
+
+function getFarDispatchBranchChoiceDecisionSignalKind(choice) {
+  const signalKind = String(choice.routeDecisionSignalKind ?? "archive");
+  return signalKind.replace(/[^a-z-]/g, "") || "archive";
 }
 
 function getFarDispatchBranchChoiceRouteResourceKind(choice) {

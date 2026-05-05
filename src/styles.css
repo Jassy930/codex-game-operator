@@ -2560,11 +2560,11 @@ h2 {
 .far-dispatch-branch-choice-summary-item {
   position: relative;
   display: grid;
-  grid-template-columns: 18px minmax(0, 0.88fr) minmax(0, 0.84fr) minmax(0, 0.92fr) minmax(0, 0.78fr);
+  grid-template-columns: 18px minmax(0, 0.72fr) minmax(0, 0.76fr) minmax(0, 0.96fr) minmax(0, 0.78fr);
   grid-template-areas:
-    "glyph label phase action step"
-    "glyph reward payoff intent cost"
-    "glyph result result result result"
+    "glyph label signal action step"
+    "glyph phase reward payoff intent"
+    "glyph cost result result result"
     "progress progress progress progress progress";
   align-items: center;
   gap: 3px 4px;
@@ -2594,8 +2594,8 @@ h2 {
 .far-dispatch-branch-choice-summary-item.is-active-route {
   grid-template-columns: 18px minmax(0, 0.92fr) minmax(0, 0.92fr) minmax(0, 1.08fr) minmax(0, 1.08fr);
   grid-template-areas:
-    "glyph label phase action action"
-    "glyph step reward payoff payoff"
+    "glyph label signal action action"
+    "glyph phase step reward payoff"
     "glyph intent cost result result"
     "progress progress progress progress progress";
   border-color: rgba(255, 211, 106, 0.42);
@@ -2634,6 +2634,53 @@ h2 {
     rgba(5, 12, 20, 0.16);
   color: #fff7c2;
   box-shadow: inset 0 0 0 1px rgba(255, 247, 194, 0.07);
+}
+
+.far-dispatch-branch-choice-summary-item .far-dispatch-branch-choice-summary-signal {
+  grid-area: signal;
+  justify-self: start;
+  max-width: 100%;
+  padding: 2px 6px;
+  border: 1px solid rgba(248, 243, 231, 0.18);
+  border-radius: 999px;
+  background: rgba(248, 243, 231, 0.06);
+  color: rgba(248, 243, 231, 0.68);
+  box-shadow: inset 0 0 0 1px rgba(248, 243, 231, 0.04);
+}
+
+.far-dispatch-branch-choice-summary-item .far-dispatch-branch-choice-summary-signal.is-focus {
+  border-color: rgba(150, 231, 168, 0.36);
+  background: rgba(150, 231, 168, 0.12);
+  color: #d8ffe2;
+}
+
+.far-dispatch-branch-choice-summary-item .far-dispatch-branch-choice-summary-signal.is-stable,
+.far-dispatch-branch-choice-summary-item .far-dispatch-branch-choice-summary-signal.is-active {
+  border-color: rgba(124, 201, 255, 0.34);
+  background: rgba(124, 201, 255, 0.1);
+  color: #dcefff;
+}
+
+.far-dispatch-branch-choice-summary-item .far-dispatch-branch-choice-summary-signal.is-shift {
+  border-color: rgba(255, 126, 177, 0.36);
+  background: rgba(255, 126, 177, 0.12);
+  color: #ffd1df;
+}
+
+.far-dispatch-branch-choice-summary-item .far-dispatch-branch-choice-summary-signal.is-completed {
+  border-color: rgba(255, 211, 106, 0.36);
+  background: rgba(255, 211, 106, 0.12);
+  color: #fff7c2;
+}
+
+.far-dispatch-branch-choice-summary-item.is-active-route
+  .far-dispatch-branch-choice-summary-signal {
+  border-color: rgba(255, 211, 106, 0.42);
+  background:
+    linear-gradient(90deg, rgba(255, 211, 106, 0.16), rgba(124, 201, 255, 0.09)),
+    rgba(5, 12, 20, 0.16);
+  color: #fff7c2;
+  box-shadow: inset 0 0 0 1px rgba(255, 247, 194, 0.08);
 }
 
 .far-dispatch-branch-choice-summary-item span {
@@ -8272,19 +8319,20 @@ h2 {
   .far-dispatch-branch-choice-summary-item {
     grid-template-columns: 18px repeat(3, minmax(0, 1fr));
     grid-template-areas:
-      "glyph label action step"
+      "glyph label signal action"
       "glyph phase reward payoff"
-      "glyph intent cost result"
+      "glyph step intent cost"
+      "glyph result result result"
       "progress progress progress progress";
   }
 
   .far-dispatch-branch-choice-summary-item.is-active-route {
     grid-template-columns: 18px repeat(3, minmax(0, 1fr));
     grid-template-areas:
-      "glyph label action action"
-      "glyph phase payoff payoff"
-      "glyph step reward result"
-      "glyph intent cost result"
+      "glyph label signal action"
+      "glyph phase reward payoff"
+      "glyph step intent result"
+      "glyph cost result result"
       "progress progress progress progress";
   }
 

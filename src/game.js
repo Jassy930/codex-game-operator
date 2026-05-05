@@ -5306,6 +5306,8 @@ function buildFarRouteDispatchBranchChoices(
     );
     const decisionBadgeText =
       buildFarRouteDispatchBranchDecisionBadgeText(decisionKind);
+    const routeDecisionSignal =
+      buildFarRouteDispatchBranchDecisionSignal(decisionKind);
     const routeMarkerKind = buildFarRouteDispatchBranchRouteMarkerKind(
       active,
       shift,
@@ -5439,6 +5441,8 @@ function buildFarRouteDispatchBranchChoices(
       decisionText,
       decisionKind,
       decisionBadgeText,
+      routeDecisionSignalKind: routeDecisionSignal.kind,
+      routeDecisionSignalText: routeDecisionSignal.text,
       objectiveText,
       followupText,
       active,
@@ -5460,6 +5464,8 @@ function buildFarRouteDispatchBranchChoices(
         statusText +
         " · " +
         decisionBadgeText +
+        " · " +
+        routeDecisionSignal.text +
         " · " +
         routePhase.text +
         " · " +
@@ -5901,6 +5907,51 @@ function buildFarRouteDispatchBranchDecisionBadgeText(decisionKind) {
   }
 }
 
+function buildFarRouteDispatchBranchDecisionSignal(decisionKind) {
+  switch (decisionKind) {
+    case "recommended":
+      return {
+        kind: "focus",
+        text: "航段契合"
+      };
+    case "recommended-stable":
+      return {
+        kind: "stable",
+        text: "契合稳航"
+      };
+    case "recommended-shift":
+      return {
+        kind: "shift",
+        text: "契合改道"
+      };
+    case "fallback-stable":
+      return {
+        kind: "stable",
+        text: "上轮稳航"
+      };
+    case "fallback-shift":
+      return {
+        kind: "shift",
+        text: "轮替改道"
+      };
+    case "selected":
+      return {
+        kind: "active",
+        text: "当前路线"
+      };
+    case "completed":
+      return {
+        kind: "completed",
+        text: "闭环完成"
+      };
+    default:
+      return {
+        kind: "archive",
+        text: "新路线"
+      };
+  }
+}
+
 function buildFarRouteDispatchBranchObjectiveText(
   label,
   active,
@@ -6118,6 +6169,8 @@ function buildFarRouteDispatchBranchChoiceText(choices) {
           " · " +
           choice.decisionBadgeText +
           " · " +
+          choice.routeDecisionSignalText +
+          " · " +
           choice.routePhaseText +
           " · " +
           choice.routeActionText +
@@ -6171,6 +6224,8 @@ function buildFarRouteDispatchBranchChoiceSummaryText(choices) {
           choice.label +
           " " +
           choice.decisionBadgeText +
+          " · " +
+          choice.routeDecisionSignalText +
           " · " +
           choice.routePhaseText +
           " · " +

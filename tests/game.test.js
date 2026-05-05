@@ -2054,9 +2054,12 @@ test("静态首页会渲染航线指令轮换目标", () => {
   );
   assert.match(appJs, /function renderFarDispatchBranchChoiceSummaryItem\(choice\)/);
   assert.match(appJs, /choice\.routeResourceText/);
+  assert.match(appJs, /choice\.routeDecisionSignalText/);
   assert.match(appJs, /far-dispatch-branch-choice-summary-item is-/);
   assert.match(appJs, /choice\.active \? " is-active-route" : ""/);
   assert.match(appJs, /far-dispatch-branch-choice-summary-glyph is-/);
+  assert.match(appJs, /far-dispatch-branch-choice-summary-signal is-/);
+  assert.match(appJs, /getFarDispatchBranchChoiceDecisionSignalKind\(choice\)/);
   assert.match(appJs, /far-dispatch-branch-choice-summary-phase is-/);
   assert.match(appJs, /phase\.textContent = choice\.routePhaseText \?\? ""/);
   assert.match(appJs, /far-dispatch-branch-choice-summary-action is-/);
@@ -2169,6 +2172,7 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(appJs, /function getFarDispatchBranchChoiceRouteReturnKind\(choice\)/);
   assert.match(appJs, /function getFarDispatchBranchChoiceStatus\(choice\)/);
   assert.match(appJs, /function getFarDispatchBranchChoiceDecisionKind\(choice\)/);
+  assert.match(appJs, /function getFarDispatchBranchChoiceDecisionSignalKind\(choice\)/);
   assert.match(appJs, /function getFarDispatchBranchChoiceRouteResourceKind\(choice\)/);
   assert.match(appJs, /function getFarDispatchBranchChoiceRouteMarkerKind\(choice\)/);
   assert.match(appJs, /function getFarDispatchBranchChoiceRouteProgress\(choice\)/);
@@ -2223,6 +2227,8 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(gameJs, /routeRewardLabels/);
   assert.match(gameJs, /routeRewardSummaryText/);
   assert.match(gameJs, /routeFlowText/);
+  assert.match(gameJs, /routeDecisionSignalText/);
+  assert.match(gameJs, /buildFarRouteDispatchBranchDecisionSignal/);
   assert.match(gameJs, /routeReturnText/);
   assert.match(gameJs, /routeCommandLabels/);
   assert.match(gameJs, /routeCommandText/);
@@ -2347,8 +2353,8 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(styles, /\.far-dispatch-branch-choice-summary-item\.is-active-route strong/);
   assert.match(styles, /\.far-dispatch-branch-choice-summary-item\.is-active-route\.is-detour strong/);
   assert.match(styles, /\.far-dispatch-branch-choice-summary:has\(\.far-dispatch-branch-choice-summary-item\.is-active-route\) \{\s*grid-template-columns: minmax\(0, 1fr\);/);
-  assert.match(styles, /\.far-dispatch-branch-choice-summary-item\.is-active-route \{[\s\S]*grid-template-areas:\s*\n\s*"glyph label phase action action"/);
-  assert.match(styles, /\.far-dispatch-branch-choice-summary-item\.is-active-route \{[\s\S]*"glyph step reward payoff payoff"/);
+  assert.match(styles, /\.far-dispatch-branch-choice-summary-item\.is-active-route \{[\s\S]*grid-template-areas:\s*\n\s*"glyph label signal action action"/);
+  assert.match(styles, /\.far-dispatch-branch-choice-summary-item\.is-active-route \{[\s\S]*"glyph phase step reward payoff"/);
   assert.match(styles, /\.far-dispatch-branch-choice-summary-item\.is-active-route \{[\s\S]*"glyph intent cost result result"/);
   assert.match(styles, /\.far-dispatch-branch-choice-summary:has\(\.far-dispatch-branch-choice-summary-item\.is-active-route\)[\s\S]*\.far-dispatch-branch-choice-summary-item:not\(\.is-active-route\)/);
   assert.match(styles, /filter: saturate\(0\.72\)/);
@@ -2357,9 +2363,9 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(styles, /animation: farDispatchSummaryActiveRouteSweep 1450ms ease-in-out infinite/);
   assert.match(styles, /\.far-dispatch-branch-choice-summary-item\.is-active-route[\s\S]*\.far-dispatch-branch-choice-summary-progress-node\.is-next/);
   assert.match(styles, /animation: farDispatchSummaryNextNodePulse 1200ms ease-in-out infinite/);
-  assert.match(styles, /grid-template-areas:\s*\n\s*"glyph label phase action step"/);
-  assert.match(styles, /"glyph reward payoff intent cost"/);
-  assert.match(styles, /"glyph result result result result"/);
+  assert.match(styles, /grid-template-areas:\s*\n\s*"glyph label signal action step"/);
+  assert.match(styles, /"glyph phase reward payoff intent"/);
+  assert.match(styles, /"glyph cost result result result"/);
   assert.match(styles, /"progress progress progress progress progress"/);
   assert.match(styles, /\.far-dispatch-branch-choice-summary-item\.is-focused/);
   assert.match(styles, /\.far-dispatch-branch-choice-summary-glyph/);
@@ -2369,6 +2375,13 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(styles, /\.far-dispatch-branch-choice-summary-glyph\.is-progress/);
   assert.match(styles, /\.far-dispatch-branch-choice-summary-item\.is-active-route[\s\S]*\.far-dispatch-branch-choice-summary-glyph\.is-current/);
   assert.match(styles, /\.far-dispatch-branch-choice-summary-item\.is-active-route[\s\S]*\.far-dispatch-branch-choice-summary-glyph\.is-progress/);
+  assert.match(styles, /\.far-dispatch-branch-choice-summary-signal/);
+  assert.match(styles, /grid-area: signal/);
+  assert.match(styles, /\.far-dispatch-branch-choice-summary-signal\.is-focus/);
+  assert.match(styles, /\.far-dispatch-branch-choice-summary-signal\.is-stable/);
+  assert.match(styles, /\.far-dispatch-branch-choice-summary-signal\.is-shift/);
+  assert.match(styles, /\.far-dispatch-branch-choice-summary-signal\.is-completed/);
+  assert.match(styles, /\.far-dispatch-branch-choice-summary-item\.is-active-route[\s\S]*\.far-dispatch-branch-choice-summary-signal/);
   assert.match(styles, /\.far-dispatch-branch-choice-summary-phase/);
   assert.match(styles, /grid-area: phase/);
   assert.match(styles, /\.far-dispatch-branch-choice-summary-phase\.is-branch/);
@@ -2436,15 +2449,16 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(styles, /@media \(prefers-reduced-motion: reduce\) \{[\s\S]*\.far-dispatch-branch-choice-summary-result\.has-loop-streak[\s\S]*animation: none/);
   assert.match(styles, /@media \(prefers-reduced-motion: reduce\) \{[\s\S]*\.far-dispatch\.is-active \.far-dispatch-loop-streak[\s\S]*animation: none/);
   assert.match(styles, /@media \(max-width: 820px\) \{[\s\S]*\.far-dispatch-branch-choice-summary \{[\s\S]*grid-template-columns: 1fr/);
-  assert.match(styles, /@media \(max-width: 820px\) \{[\s\S]*"glyph label action step"/);
+  assert.match(styles, /@media \(max-width: 820px\) \{[\s\S]*"glyph label signal action"/);
   assert.match(styles, /@media \(max-width: 820px\) \{[\s\S]*"glyph phase reward payoff"/);
-  assert.match(styles, /@media \(max-width: 820px\) \{[\s\S]*"glyph intent cost result"/);
+  assert.match(styles, /@media \(max-width: 820px\) \{[\s\S]*"glyph step intent cost"/);
+  assert.match(styles, /@media \(max-width: 820px\) \{[\s\S]*"glyph result result result"/);
   assert.match(styles, /@media \(max-width: 820px\) \{[\s\S]*"progress progress progress progress"/);
   assert.match(styles, /@media \(max-width: 820px\) \{[\s\S]*\.far-dispatch-branch-choice-summary-item\.is-active-route \{[\s\S]*grid-template-columns: 18px repeat\(3, minmax\(0, 1fr\)\)/);
-  assert.match(styles, /@media \(max-width: 820px\) \{[\s\S]*\.far-dispatch-branch-choice-summary-item\.is-active-route \{[\s\S]*"glyph label action action"/);
-  assert.match(styles, /@media \(max-width: 820px\) \{[\s\S]*\.far-dispatch-branch-choice-summary-item\.is-active-route \{[\s\S]*"glyph phase payoff payoff"/);
-  assert.match(styles, /@media \(max-width: 820px\) \{[\s\S]*\.far-dispatch-branch-choice-summary-item\.is-active-route \{[\s\S]*"glyph step reward result"/);
-  assert.match(styles, /@media \(max-width: 820px\) \{[\s\S]*\.far-dispatch-branch-choice-summary-item\.is-active-route \{[\s\S]*"glyph intent cost result"/);
+  assert.match(styles, /@media \(max-width: 820px\) \{[\s\S]*\.far-dispatch-branch-choice-summary-item\.is-active-route \{[\s\S]*"glyph label signal action"/);
+  assert.match(styles, /@media \(max-width: 820px\) \{[\s\S]*\.far-dispatch-branch-choice-summary-item\.is-active-route \{[\s\S]*"glyph phase reward payoff"/);
+  assert.match(styles, /@media \(max-width: 820px\) \{[\s\S]*\.far-dispatch-branch-choice-summary-item\.is-active-route \{[\s\S]*"glyph step intent result"/);
+  assert.match(styles, /@media \(max-width: 820px\) \{[\s\S]*\.far-dispatch-branch-choice-summary-item\.is-active-route \{[\s\S]*"glyph cost result result"/);
   assert.match(styles, /\.far-dispatch-branch-choice\.is-sync/);
   assert.match(styles, /\.far-dispatch-branch-choice\.is-detour/);
   assert.match(styles, /\.far-dispatch-branch-choice\.is-shift/);
@@ -3719,6 +3733,12 @@ test("远航调度会在 20M 后按当前航段指定目标指令", () => {
   );
   assert.deepEqual(
     dispatch.branchChoices.map(
+      (choice) => choice.routeDecisionSignalKind + ":" + choice.routeDecisionSignalText
+    ),
+    ["focus:航段契合", "archive:新路线"]
+  );
+  assert.deepEqual(
+    dispatch.branchChoices.map(
       (choice) => choice.routeResourceKind + ":" + choice.routeResourceText
     ),
     ["current:保留当前", "progress:投送累计"]
@@ -3839,11 +3859,11 @@ test("远航调度会在 20M 后按当前航段指定目标指令", () => {
   );
   assert.equal(
     dispatch.branchChoiceText,
-    "分支选择：协同 谐振脉冲（可选择 · 首推 · 0/3 起手 · 下一步 1 点火齐射 · 校准/补给/闭环 · 收益点：校准 -> 补给 -> 闭环 · 无消耗 · 保当前 · 远航突破 · 连段 1/3 · 2 谐振脉冲 · 本步 +13% · 路线指令：点火齐射 -> 谐振脉冲 -> 点火齐射 · 补当前资源 · 推荐原因：点击/过载航段保留当前资源 · 路线判断：当前航段首推 · 路线目标：按当前航段推荐建立协同路线 · 下一步：先执行目标 点火齐射，再选协同 谐振脉冲 · 后续协同回航触发闭环与远航突破 · 本步合计 +13% · 回目标 远航闭环 +16% + 远航突破 +0.05%剩余 + 契合闭环 +7% · 远航协同 +5% · 协同补给 +3%当前 · 航段契合 +5%） / 绕行 巡航回收（可选择 · 建档 · 0/3 起手 · 下一步 1 点火齐射 · 校准/投送/闭环 · 收益点：校准 -> 投送 -> 闭环 · 消耗当前 · 推累计 · 绕行突破 · 连段 1/3 · 2 巡航回收 · 本步 +4% · 路线指令：点火齐射 -> 巡航回收 -> 点火齐射 · 投送累计航段 · 路线判断：备选建档 · 路线目标：建立绕行路线，记录为下轮对照 · 下一步：先执行目标 点火齐射，再选绕行 巡航回收 · 后续绕行回航触发闭环与绕行突破 · 本步合计 +4% · 投送累计 · 回目标 远航闭环 +16% + 远航突破 +0.05%剩余 + 绕行突破 +0.03%剩余 · 远航绕行 +4% · 绕行投送 -0.3%当前）"
+    "分支选择：协同 谐振脉冲（可选择 · 首推 · 航段契合 · 0/3 起手 · 下一步 1 点火齐射 · 校准/补给/闭环 · 收益点：校准 -> 补给 -> 闭环 · 无消耗 · 保当前 · 远航突破 · 连段 1/3 · 2 谐振脉冲 · 本步 +13% · 路线指令：点火齐射 -> 谐振脉冲 -> 点火齐射 · 补当前资源 · 推荐原因：点击/过载航段保留当前资源 · 路线判断：当前航段首推 · 路线目标：按当前航段推荐建立协同路线 · 下一步：先执行目标 点火齐射，再选协同 谐振脉冲 · 后续协同回航触发闭环与远航突破 · 本步合计 +13% · 回目标 远航闭环 +16% + 远航突破 +0.05%剩余 + 契合闭环 +7% · 远航协同 +5% · 协同补给 +3%当前 · 航段契合 +5%） / 绕行 巡航回收（可选择 · 建档 · 新路线 · 0/3 起手 · 下一步 1 点火齐射 · 校准/投送/闭环 · 收益点：校准 -> 投送 -> 闭环 · 消耗当前 · 推累计 · 绕行突破 · 连段 1/3 · 2 巡航回收 · 本步 +4% · 路线指令：点火齐射 -> 巡航回收 -> 点火齐射 · 投送累计航段 · 路线判断：备选建档 · 路线目标：建立绕行路线，记录为下轮对照 · 下一步：先执行目标 点火齐射，再选绕行 巡航回收 · 后续绕行回航触发闭环与绕行突破 · 本步合计 +4% · 投送累计 · 回目标 远航闭环 +16% + 远航突破 +0.05%剩余 + 绕行突破 +0.03%剩余 · 远航绕行 +4% · 绕行投送 -0.3%当前）"
   );
   assert.equal(
     dispatch.branchChoiceSummaryText,
-    "路线对照：协同 首推 · 0/3 起手 · 下一步 1 点火齐射 · 校准/补给/闭环 · 2 谐振脉冲 · 本步 +13% · 保当前 · 无消耗 · 远航突破 · 连段 1/3 / 绕行 建档 · 0/3 起手 · 下一步 1 点火齐射 · 校准/投送/闭环 · 2 巡航回收 · 本步 +4% · 推累计 · 消耗当前 · 绕行突破 · 连段 1/3"
+    "路线对照：协同 首推 · 航段契合 · 0/3 起手 · 下一步 1 点火齐射 · 校准/补给/闭环 · 2 谐振脉冲 · 本步 +13% · 保当前 · 无消耗 · 远航突破 · 连段 1/3 / 绕行 建档 · 新路线 · 0/3 起手 · 下一步 1 点火齐射 · 校准/投送/闭环 · 2 巡航回收 · 本步 +4% · 推累计 · 消耗当前 · 绕行突破 · 连段 1/3"
   );
   assert.equal(
     dispatch.loopStatusText,
