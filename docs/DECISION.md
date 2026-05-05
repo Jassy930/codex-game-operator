@@ -1,5 +1,28 @@
 # Decision
 
+## 2026-05-05 Product decision：点火过载状态读数待机信标
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-05 13:30 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有 open bug；#5 仍是最近更新反馈，继续处理“点火按钮太薄弱，增加点击反馈、特效和点击欲望”。
+
+当前最大问题：点火按钮已经有完整点击后反馈链、普通待机信标链、鼠标 hover 预热投光、键盘焦点预热投光和下方 `连击 0` 读数待机信标；但旁边的 `距过载 8 次` / `稳定` 过载状态读数在 0 连击普通待机时仍是静态胶囊。玩家还没按下之前，过载状态读数可以和按钮本体、下一击预告、连击轨、倒计时徽标、蓄能轨以及连击读数一起参与点击前邀请。
+
+本轮决策：
+
+- 新增“点火过载状态读数待机信标”。
+- `src/styles.css` 为 `.core-button:not(.is-combo-charging):not(.is-pulsing):not(.is-pressing):not(.is-overload-ready):not(.is-overload-hit) ~ .combo-line #pulseValue` 增加 `coreStableReadoutIdleBeacon` 轻量呼吸。
+- 在 `prefers-reduced-motion: reduce` 中关闭该待机信标动画。
+- `tests/game.test.js` 增加静态断言，覆盖过载状态读数待机信标选择器、keyframes 和降低动效兜底。
+- 该改动只调整 0 连击普通待机时的过载状态读数展示和测试，不新增可见文字、不新增收益、不新增存档字段，不改变点击收益、连击窗口、过载奖励、升级价格、星图路线、项目奖励、航线策略、航线指令、远航调度、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-05-05 13:30 CST 当前 5 个 open feedback issue、0 个 open bug issue；#5 作为本轮主处理对象。
+- `src/styles.css` 包含 `coreStableReadoutIdleBeacon 3200ms ease-in-out infinite`、`@keyframes coreStableReadoutIdleBeacon` 和降低动效兜底。
+- `tests/game.test.js` 覆盖点火过载状态读数待机信标静态绑定。
+- 本地完整验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认 `dist/src/styles.css` 包含 `coreStableReadoutIdleBeacon`、`~ .combo-line #pulseValue` 和降低动效兜底。
+- 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #5，以及当前 0 连击普通待机下方过载状态读数仍缺少点击前邀请信号的复盘。
+
 ## 2026-05-02 Product decision：点火连击读数待机信标
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-02 09:51 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有 open bug；本轮继续处理真实反馈 #5“点火按钮太薄弱，增加点击反馈、特效和点击欲望”。

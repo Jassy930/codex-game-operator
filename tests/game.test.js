@@ -1502,6 +1502,8 @@ test("点火按钮会渲染点击反馈和过载前兆效果", () => {
   assert.match(styles, /coreComboReadoutOverloadHit 520ms ease-out/);
   assert.match(styles, /\.core-button:not\(\.is-combo-charging\):not\(\.is-pulsing\):not\(\.is-pressing\):not\(\.is-overload-ready\):not\(\.is-overload-hit\)[\s\S]*~ \.combo-line #comboValue/);
   assert.match(styles, /coreComboReadoutIdleBeacon 2600ms ease-in-out infinite/);
+  assert.match(styles, /\.core-button:not\(\.is-combo-charging\):not\(\.is-pulsing\):not\(\.is-pressing\):not\(\.is-overload-ready\):not\(\.is-overload-hit\)[\s\S]*~ \.combo-line #pulseValue/);
+  assert.match(styles, /coreStableReadoutIdleBeacon 3200ms ease-in-out infinite/);
   assert.match(styles, /\.score-grid dd\.is-core-hit/);
   assert.match(styles, /scoreEnergyReadoutHit 360ms ease-out/);
   assert.match(styles, /\.score-grid dd\.is-core-overload-hit/);
@@ -1522,6 +1524,7 @@ test("点火按钮会渲染点击反馈和过载前兆效果", () => {
   assert.match(styles, /@keyframes coreComboReadoutHit/);
   assert.match(styles, /@keyframes coreComboReadoutOverloadHit/);
   assert.match(styles, /@keyframes coreComboReadoutIdleBeacon/);
+  assert.match(styles, /@keyframes coreStableReadoutIdleBeacon/);
   assert.match(styles, /@keyframes coreComboTrackHitSweep/);
   assert.match(styles, /@keyframes coreComboTrackOverloadSweep/);
   assert.match(styles, /@keyframes coreComboNextIdleBeacon/);
@@ -1601,6 +1604,7 @@ test("点火按钮会渲染点击反馈和过载前兆效果", () => {
   assert.match(styles, /@media \(prefers-reduced-motion: reduce\) \{[\s\S]*\.core-button:not\(\.is-combo-charging\):not\(\.is-pulsing\):not\(\.is-pressing\):not\(\.is-overload-ready\):not\(\.is-overload-hit\)[\s\S]*\.core-charge-ring[\s\S]*animation: none/);
   assert.match(styles, /@media \(prefers-reduced-motion: reduce\) \{[\s\S]*\.core-button:not\(\.is-pulsing\):not\(\.is-pressing\):not\(\.is-overload-ready\):not\(\.is-overload-hit\)[\s\S]*\.core-overload-badge[\s\S]*animation: none/);
   assert.match(styles, /@media \(prefers-reduced-motion: reduce\) \{[\s\S]*\.core-button:not\(\.is-combo-charging\):not\(\.is-pulsing\):not\(\.is-pressing\):not\(\.is-overload-ready\):not\(\.is-overload-hit\)[\s\S]*~ \.combo-line #comboValue[\s\S]*animation: none/);
+  assert.match(styles, /@media \(prefers-reduced-motion: reduce\) \{[\s\S]*\.core-button:not\(\.is-combo-charging\):not\(\.is-pulsing\):not\(\.is-pressing\):not\(\.is-overload-ready\):not\(\.is-overload-hit\)[\s\S]*~ \.combo-line #pulseValue[\s\S]*animation: none/);
   assert.match(styles, /@media \(prefers-reduced-motion: reduce\) \{[\s\S]*\.core-button:not\(\.is-combo-charging\):not\(\.is-pulsing\):not\(\.is-pressing\):not\(\.is-overload-ready\):not\(\.is-overload-hit\)[\s\S]*\.core-art[\s\S]*animation: none/);
   assert.match(styles, /@media \(prefers-reduced-motion: reduce\) \{[\s\S]*\.core-button:not\(\.is-combo-charging\):not\(\.is-pulsing\):not\(\.is-pressing\):not\(\.is-overload-ready\):not\(\.is-overload-hit\):hover[\s\S]*\.core-art[\s\S]*animation: none/);
   assert.match(styles, /@media \(prefers-reduced-motion: reduce\) \{[\s\S]*\.core-button:not\(\.is-combo-charging\):not\(\.is-pulsing\):not\(\.is-pressing\):not\(\.is-overload-ready\):not\(\.is-overload-hit\):focus-visible[\s\S]*\.core-art[\s\S]*animation: none/);

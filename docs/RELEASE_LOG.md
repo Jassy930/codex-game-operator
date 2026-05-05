@@ -2,6 +2,14 @@
 
 ## Unreleased
 
+- 点火按钮新增“过载状态读数待机信标”：主按钮 0 连击、未按压、未命中且不处于过载预备/命中状态时，下方 `距过载 8 次` / `稳定` 读数会轻量呼吸，让过载推进状态也参与点击前邀请节奏，继续回应 #5 对点击反馈、特效和点击欲望的反馈。
+- `src/styles.css` 为 `.core-button:not(.is-combo-charging):not(.is-pulsing):not(.is-pressing):not(.is-overload-ready):not(.is-overload-hit) ~ .combo-line #pulseValue` 增加 `coreStableReadoutIdleBeacon` 动画，并在降低动效偏好中关闭该动画；`tests/game.test.js` 覆盖静态绑定。
+- 本轮只调整 0 连击普通待机时的过载状态读数展示和测试，不新增可见文字、不新增收益、不新增存档字段，不改变点击收益、连击窗口、过载奖励、升级价格、星图路线、项目奖励、航线策略、航线指令、远航调度、反馈入口或部署链路。
+- 同步 GitHub Issues 反馈状态：2026-05-05 13:30 CST 当前 5 个 open feedback issue、0 个 open bug issue；#5 作为主处理对象。
+- 验证通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认 `dist/src/styles.css` 包含 `coreStableReadoutIdleBeacon`、`~ .combo-line #pulseValue` 和降低动效兜底。
+- 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #5，以及当前 0 连击普通待机下方过载状态读数仍缺少点击前邀请信号的复盘。
+
 - 点火按钮新增“连击读数待机信标”：主按钮 0 连击、未按压、未命中且不处于过载预备/命中状态时，下方 `连击 0` 读数会轻量呼吸，让连击读数也参与点击前邀请节奏，继续回应 #5 对点击反馈、特效和点击欲望的反馈。
 - `src/styles.css` 为 `.core-button:not(.is-combo-charging):not(.is-pulsing):not(.is-pressing):not(.is-overload-ready):not(.is-overload-hit) ~ .combo-line #comboValue` 增加 `coreComboReadoutIdleBeacon` 动画，并在降低动效偏好中关闭该动画；`tests/game.test.js` 覆盖静态绑定。
 - 本轮只调整 0 连击普通待机时的连击读数展示和测试，不新增可见文字、不新增收益、不新增存档字段，不改变点击收益、连击窗口、过载奖励、升级价格、星图路线、项目奖励、航线策略、航线指令、远航调度、反馈入口或部署链路。
