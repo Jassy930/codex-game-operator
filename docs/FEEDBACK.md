@@ -2,6 +2,13 @@
 
 ## 2026-05-05
 
+- GitHub Issues：gh 可用且已认证；2026-05-05 17:29 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。#6 仍是最近更新反馈；本轮为避免继续重复连段可见性补丁，转向处理 #4 的首屏文字密度残留。
+- 本轮 Product decision 处理 #4：星图、主操作区、航线指令和远航调度已有多层视觉资产，但顶部四个产能读数卡仍是纯文字/数字，首屏状态区缺少图形锚点。
+- 本轮改动新增“顶部产能读数视觉徽记”：能量、每秒、每次、过载四张读数卡各自显示固定 SVG 徽记和顶部色条。
+- 本轮只调整顶部读数展示和测试，不新增收益、不新增存档字段，不改变点击、过载、星图、航线指令、远航调度、反馈入口或部署链路。
+- 本地验证已通过：`node --test tests/game.test.js`、`npm install`、`npm test`、`npm run build`、`bun install --no-save`、`bun run test`、`bun run build`；测试数 120 项；构建产物已确认包含 `score-card` 与 `score-icon`。
+- 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #4，以及首屏顶部状态卡仍缺少图形锚点的界面复盘。
+
 - GitHub Issues：gh 可用且已认证；2026-05-05 17:09 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。#6 仍是最近更新反馈，指向“后半段只有不停目标，玩法没有真正变化”。
 - 本轮 Product decision 继续处理 #6：远航连段已经进入主调度条、按钮、路线对照条、闭环复盘、星图总览、项目卡片和当前航段视觉卡，但反馈快照里仍缺少独立的当前连段短标。
 - 本轮改动新增“远航连段反馈快照短标”：游戏内反馈 Issue 草稿在当前远航连段有效时，会额外输出 `- 远航连段：连段 X/3`，方便后续复测直接确认玩家是否处于跨轮递进状态。

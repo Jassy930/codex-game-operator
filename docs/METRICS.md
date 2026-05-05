@@ -45,6 +45,7 @@
 - 点火下一击预告命中跳闪当前由本地 `.core-button.is-pulsing:not(.is-overload-impact) + .core-reward-hint` 和 `.core-button.is-overload-impact + .core-reward-hint` 短时展示态即时渲染，不单独记录为真实线上指标；下一击预告内容仍通过现有点击产能、过载奖励和连击状态推导，点火行为仍通过 click 事件、连击状态、`lastGain` 和 `lastPulse` 复盘。
 - 点火连击读数命中跳闪当前由本地 `.core-button.is-pulsing:not(.is-overload-impact) ~ .combo-line #comboValue`、`.core-button.is-overload-impact ~ .combo-line #comboValue` 和 `.core-button.is-overload-impact ~ .combo-line #pulseValue` 短时展示态即时渲染，不单独记录为真实线上指标；连击与过载状态仍通过 click 事件、`getComboStatus`、`lastGain` 和 `lastPulse` 复盘。
 - 点火过载奖励读数命中亮闪当前由本地 `animateCore` 的 `overloaded` 状态给 `#overloadValue` 短暂追加 `is-core-overload-prize` 即时渲染，不单独记录为真实线上指标；过载奖励来源仍通过 click 事件、`lastPulse`、`lastGain` 和当前 `overloadBonus` 复盘。
+- 顶部产能读数视觉徽记当前由静态 `index.html` 中的 `score-card-*` / `score-icon-*` 标记和 `src/styles.css` 即时渲染，不单独记录为真实线上指标；能量、每秒、每次和过载数值仍通过现有存档状态、click 事件、directive 事件和反馈快照复盘。
 - 星图总览航线预告视觉带当前由本地项目状态与 `getProjectForecastVisuals` 即时推导，不单独记录为真实线上指标；星图完成状态仍通过当前存档数值复盘。
 - 星图总览当前航段视觉卡里的远航调度短标当前由 `getProjectCurrentVisual()` 复用当前项目 `dispatchBadgeText` 即时渲染，不单独记录为真实线上指标；远航调度、远航连段和项目完成状态仍通过 `directive` 事件、反馈快照和当前存档数值复盘。
 - 远航路线步骤按钮行动信标和状态行锚点当前由 `dispatchRouteStepText` 派生的 `.directive-button.is-dispatch-route-step` 即时渲染为 `directiveDispatchRouteStepBeacon`，并由 `.directive-button.is-dispatch-route-step .directive-status::before` 渲染 `directiveDispatchRouteStatusBeacon`；这两者都不单独记录为真实线上指标。当前步骤和可执行/冷却语义仍通过 `directive` 事件中的 `dispatchRouteStepText`、按钮状态、路线反馈、远航调度文本和反馈快照复盘。

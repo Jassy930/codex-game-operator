@@ -1,5 +1,27 @@
 # Decision
 
+## 2026-05-05 Product decision：顶部产能读数视觉徽记
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-05 17:29 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有 open bug；本轮处理真实反馈 #4“界面里全是密密麻麻的文字，能不能生成一些图片”。
+
+当前最大问题：星图、主操作区、航线指令和远航调度已经补了多层视觉资产，但首屏顶部四个产能读数卡片仍是纯文字标签和数字。玩家进入页面第一眼仍会看到一组密集文字/数字状态卡，和 #4 的视觉密度反馈仍有关联。
+
+本轮决策：
+
+- 新增“顶部产能读数视觉徽记”。
+- `index.html` 为能量、每秒、每次、过载四张读数卡添加固定尺寸内联 SVG 徽记。
+- `src/styles.css` 为四类读数卡添加 28px 图标槽、顶部色条和差异化颜色。
+- 该改动只调整顶部读数展示和测试，不新增收益、不新增存档字段，不改变点击、过载、星图、航线指令、远航调度、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-05-05 17:29 CST 当前 5 个 open feedback issue、0 个 open bug issue；#4 作为本轮主处理对象。
+- 顶部产能读数卡片包含 `score-card-*` 与 `score-icon-*` 视觉徽记，四类读数使用不同颜色锚点。
+- `tests/game.test.js` 覆盖静态首页和 CSS 绑定。
+- 本地验证已通过：`node --test tests/game.test.js`、`npm install`、`npm test`、`npm run build`、`bun install --no-save`、`bun run test`、`bun run build`；测试数 120 项。
+- 构建产物已确认 `dist/index.html` 和 `dist/src/styles.css` 包含 `score-card` 与 `score-icon` 关键标记。
+- 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #4，以及首屏顶部状态卡仍缺少图形锚点的界面复盘。
+
 ## 2026-05-05 Product decision：远航连段反馈快照短标
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-05 17:09 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有 open bug；本轮继续处理真实反馈 #6“后半段只有不停的目标，玩法没有真正变化”。

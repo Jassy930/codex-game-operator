@@ -1263,6 +1263,26 @@ test("静态首页会引用航线指令插画资产", () => {
   assert.match(asset, /routeBeam/);
 });
 
+test("顶部产能读数卡片提供视觉徽记", () => {
+  const indexHtml = readFileSync(new URL("../index.html", import.meta.url), "utf8");
+  const styles = readFileSync(new URL("../src/styles.css", import.meta.url), "utf8");
+
+  assert.match(indexHtml, /score-card score-card-energy/);
+  assert.match(indexHtml, /score-icon score-icon-energy/);
+  assert.match(indexHtml, /score-card score-card-second/);
+  assert.match(indexHtml, /score-icon score-icon-second/);
+  assert.match(indexHtml, /score-card score-card-click/);
+  assert.match(indexHtml, /score-icon score-icon-click/);
+  assert.match(indexHtml, /score-card score-card-overload/);
+  assert.match(indexHtml, /score-icon score-icon-overload/);
+  assert.match(styles, /\.score-card::before/);
+  assert.match(styles, /\.score-icon/);
+  assert.match(styles, /\.score-icon svg/);
+  assert.match(styles, /\.score-card-second \.score-icon/);
+  assert.match(styles, /\.score-card-click \.score-icon/);
+  assert.match(styles, /\.score-card-overload \.score-icon/);
+});
+
 test("点火按钮会渲染点击反馈和过载前兆效果", () => {
   const indexHtml = readFileSync(new URL("../index.html", import.meta.url), "utf8");
   const appJs = readFileSync(new URL("../src/app.js", import.meta.url), "utf8");

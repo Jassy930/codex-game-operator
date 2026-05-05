@@ -84,14 +84,29 @@ h2 {
 }
 
 .score-grid div {
+  position: relative;
+  overflow: hidden;
   min-width: 0;
   padding: 14px;
   border-radius: 8px;
 }
 
+.score-card::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 3px;
+  background: linear-gradient(90deg, rgba(19, 181, 166, 0.86), transparent);
+}
+
 .score-grid dt {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: 8px;
   color: rgba(248, 243, 231, 0.62);
   font-size: 0.78rem;
+  font-weight: 800;
 }
 
 .score-grid dd {
@@ -100,6 +115,54 @@ h2 {
   color: #fff7c2;
   font-size: 1.45rem;
   font-weight: 850;
+}
+
+.score-icon {
+  display: grid;
+  flex: 0 0 28px;
+  width: 28px;
+  height: 28px;
+  place-items: center;
+  border: 1px solid rgba(19, 181, 166, 0.34);
+  border-radius: 8px;
+  background: rgba(19, 181, 166, 0.11);
+  color: #13b5a6;
+}
+
+.score-icon svg {
+  display: block;
+  width: 18px;
+  height: 18px;
+}
+
+.score-card-second::before {
+  background: linear-gradient(90deg, rgba(150, 231, 168, 0.82), transparent);
+}
+
+.score-card-second .score-icon {
+  border-color: rgba(150, 231, 168, 0.34);
+  background: rgba(150, 231, 168, 0.1);
+  color: #96e7a8;
+}
+
+.score-card-click::before {
+  background: linear-gradient(90deg, rgba(244, 178, 60, 0.86), transparent);
+}
+
+.score-card-click .score-icon {
+  border-color: rgba(244, 178, 60, 0.36);
+  background: rgba(244, 178, 60, 0.12);
+  color: #f4b23c;
+}
+
+.score-card-overload::before {
+  background: linear-gradient(90deg, rgba(232, 93, 117, 0.86), transparent);
+}
+
+.score-card-overload .score-icon {
+  border-color: rgba(232, 93, 117, 0.38);
+  background: rgba(232, 93, 117, 0.12);
+  color: #e85d75;
 }
 
 .score-grid dd.is-core-hit {

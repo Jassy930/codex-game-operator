@@ -18,20 +18,53 @@
           <h1 id="game-title">星核工坊</h1>
         </div>
         <dl class="score-grid" aria-label="当前产能">
-          <div>
-            <dt>能量</dt>
+          <div class="score-card score-card-energy">
+            <dt>
+              <span class="score-icon score-icon-energy" aria-hidden="true">
+                <svg viewBox="0 0 32 32" focusable="false">
+                  <path d="M16 3l8 11-8 15-8-15z" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round" />
+                  <path d="M16 8v17M10 15h12" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" />
+                </svg>
+              </span>
+              <span>能量</span>
+            </dt>
             <dd id="energyValue">0</dd>
           </div>
-          <div>
-            <dt>每秒</dt>
+          <div class="score-card score-card-second">
+            <dt>
+              <span class="score-icon score-icon-second" aria-hidden="true">
+                <svg viewBox="0 0 32 32" focusable="false">
+                  <path d="M7 21a9 9 0 1 1 18 0" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" />
+                  <path d="M16 8v9l6 3" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+                  <path d="M8 25h16" stroke="currentColor" stroke-width="3" stroke-linecap="round" />
+                </svg>
+              </span>
+              <span>每秒</span>
+            </dt>
             <dd id="perSecondValue">0</dd>
           </div>
-          <div>
-            <dt>每次</dt>
+          <div class="score-card score-card-click">
+            <dt>
+              <span class="score-icon score-icon-click" aria-hidden="true">
+                <svg viewBox="0 0 32 32" focusable="false">
+                  <path d="M12 5l10 10-5 2 4 8-4 2-4-8-5 4z" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round" />
+                  <path d="M22 7l3-3M25 13h4M19 4V1" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" />
+                </svg>
+              </span>
+              <span>每次</span>
+            </dt>
             <dd id="perClickValue">1</dd>
           </div>
-          <div>
-            <dt>过载</dt>
+          <div class="score-card score-card-overload">
+            <dt>
+              <span class="score-icon score-icon-overload" aria-hidden="true">
+                <svg viewBox="0 0 32 32" focusable="false">
+                  <path d="M18 3L8 18h8l-2 11 10-16h-8z" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round" />
+                  <path d="M7 25c4 3 14 3 18 0" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" />
+                </svg>
+              </span>
+              <span>过载</span>
+            </dt>
             <dd id="overloadValue">+5</dd>
           </div>
         </dl>

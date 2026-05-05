@@ -2,6 +2,14 @@
 
 ## Unreleased
 
+- 顶部产能读数新增视觉徽记：能量、每秒、每次和过载四张首屏状态卡现在显示固定尺寸内联 SVG 图标与顶部色条，继续回应 #4 对界面文字密度和图片化表达的反馈。
+- `index.html` 为四张读数卡添加 `score-card-*` 与 `score-icon-*`；`src/styles.css` 增加 28px 图标槽、差异化颜色和顶部色条；`tests/game.test.js` 覆盖静态首页和 CSS 绑定。
+- 本轮只调整顶部读数展示和测试，不新增收益、不新增存档字段，不改变点击、过载、星图、航线指令、远航调度、反馈入口或部署链路。
+- 同步 GitHub Issues 反馈状态：2026-05-05 17:29 CST 当前 5 个 open feedback issue、0 个 open bug issue；#4 作为本轮主处理对象。
+- 验证通过：`node --test tests/game.test.js`、`npm install`、`npm test`、`npm run build`、`bun install --no-save`、`bun run test`、`bun run build`；测试数 120 项。
+- 构建产物已确认 `dist/index.html` 和 `dist/src/styles.css` 包含 `score-card` 与 `score-icon` 关键标记。
+- 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #4，以及首屏顶部状态卡仍缺少图形锚点的界面复盘。
+
 - 游戏内反馈快照新增“远航连段”短标：当前远航连段有效时，预填 GitHub Issue 的游戏快照会额外显示 `- 远航连段：连段 X/3`，让 #6 后续复测能直接看到玩家提交反馈时的跨轮递进层数。
 - `src/feedback.js` 从 `getFarRouteDispatch()` 读取 `loopStreakText`，写入 `snapshot.farRouteLoopStreak` 并在 Issue body 中按需输出独立快照行；`tests/game.test.js` 覆盖脉冲航闸附近带 `farRouteLoopStreak: 1` 的反馈快照。
 - 本轮只调整反馈快照和测试，不新增收益、不新增存档字段，不改变远航连段结算、远航调度路线、界面展示、反馈入口交互或部署链路。
