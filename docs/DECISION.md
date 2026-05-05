@@ -21,6 +21,11 @@
 - 指令轮换下一格会显示 `预案执行 +6%`、`连携 +12%`、`连携 +24% · 轮换目标 +18% · 策略终结 +12%` 或 `连携 +24% · 轮换目标 +18% · 满层回响 +10%` 等下一步收益短标。
 - 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 128 项。
 - 构建产物已确认 `dist/src/game.js`、`dist/src/app.js` 和 `dist/src/styles.css` 包含 `nextRewardText`、`buildDirectivePlanNextRewardText` 与 `directive-plan-step-reward`。
+- 代码提交已创建并推送：`20300f1 feat: show directive plan reward hints`。
+- 发布验证已通过：GitHub Pages workflow `25384570027` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页、`src/app.js`、`src/game.js` 和 `src/styles.css` 均返回 HTTP 200，线上产物已确认包含 `nextRewardText` 与 `directive-plan-step-reward`。workflow 继续给出 Node.js 20 actions 弃用提醒，未影响本次部署。
+- 已回复 GitHub Issue #3 和 #6，说明指令轮换下一步收益短标、验证结果、Pages 部署和复测问题；两个 issue 均保持 open，评论地址：`https://github.com/Jassy930/codex-game-operator/issues/3#issuecomment-4380554412`、`https://github.com/Jassy930/codex-game-operator/issues/6#issuecomment-4380554495`。
+- 回复后于 2026-05-05 23:08 CST 再次同步 GitHub Issues，当前仍为 5 个 open feedback issue、0 个 open bug issue；#3 更新时间为 `2026-05-05T15:08:09Z`，#6 更新时间为 `2026-05-05T15:08:10Z`。
+- 钉钉通知未发送：2026-05-05 23:11 CST 运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` / `ROBOT` 相关变量名，当前目录和 `/home/jassy/glm` 两层内未发现 `.env*` 文件；未将 webhook 写入仓库。
 - 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #3/#6，以及当前指令轮换三格轨只显示下一步按钮、未直接暴露下一步收益结构的链路复盘。
 
 ## 2026-05-05 Product decision：点火命中闪幕
