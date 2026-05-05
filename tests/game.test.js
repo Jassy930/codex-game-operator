@@ -6638,7 +6638,46 @@ test("反馈入口会生成带游戏快照的 GitHub Issue 链接", () => {
   assert.match(body, /远航调度：累计 20M 能量后解锁后半段航段调度/);
   assert.match(body, /远航续航、远航协同、协同补给、远航绕行、绕行投送、回航校准、分支改道、航段契合、路线稳航、轮替闭环、契合闭环、闭环奖励、远航突破、绕行突破、远航整备、整备续航、绕行整备、整备回航与满段回响/);
   assert.match(body, /闭环进度 0\/3 · 20M 后解锁/);
+  assert.match(body, /升级购买态：可购买 聚能透镜、自动采集臂/);
   assert.match(body, /lens:1/);
+});
+
+test("反馈快照会记录升级购买态", () => {
+  const waitingEntry = createFeedbackEntry({
+    type: "experience",
+    rating: 3,
+    message: "升级插画看不出什么时候可以买",
+    state: {
+      ...createInitialState(0),
+      energy: 6,
+      totalEnergy: 6
+    },
+    goal: { value: "购买第一次升级", upgradeId: "lens" },
+    sessionId: "upgrade-waiting-session",
+    createdAt: "2026-05-06T06:32:00.000Z"
+  });
+  const readyEntry = createFeedbackEntry({
+    type: "experience",
+    rating: 3,
+    message: "升级插画可购买状态复测",
+    state: {
+      ...createInitialState(0),
+      energy: 12,
+      totalEnergy: 12
+    },
+    goal: { value: "购买第一次升级", upgradeId: "lens" },
+    sessionId: "upgrade-ready-session",
+    createdAt: "2026-05-06T06:32:30.000Z"
+  });
+
+  assert.match(
+    createFeedbackIssueBody(waitingEntry),
+    /升级购买态：无可购买升级 · 目标 聚能透镜 还差 4 能量/
+  );
+  assert.match(
+    createFeedbackIssueBody(readyEntry),
+    /升级购买态：可购买 聚能透镜 · 目标 聚能透镜 可购买/
+  );
 });
 
 test("反馈快照会记录点火反馈过载临界状态", () => {

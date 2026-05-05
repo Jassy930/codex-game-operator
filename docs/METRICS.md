@@ -4,6 +4,7 @@
 
 当前实现：
 
+- 升级购买态反馈快照当前由 `createFeedbackEntry()` 复用本地 `UPGRADE_DEFS`、`getUpgradeAffordability()` 和当前目标 `upgradeId` 即时生成，只写入游戏内反馈 Issue 快照，不单独记录为真实线上指标；升级入口复盘仍依赖现有升级等级、能量、目标、`upgrade_purchase` 本地事件和反馈快照，发布前不能把该快照字段当作真实线上指标。
 - 星图章节反馈快照当前由 `createFeedbackEntry()` 复用本地 `getProjectOverview().chapterText` 即时生成，只写入游戏内反馈 Issue 快照，不单独记录为真实线上指标；内容丰富度、星图推进和后半段复盘仍依赖现有本地状态、`goal_complete`、`directive`、`feedback_sent` 事件和反馈快照，发布前不能把该快照字段当作真实线上指标。
 - 星图进度快照摘要当前由 `createFeedbackEntry()` 复用本地 `getProjectOverview()` 即时生成，只写入游戏内反馈 Issue 快照，不单独记录为真实线上指标；内容丰富度、星图推进和后半段复盘仍依赖现有本地状态、`goal_complete`、`directive`、`feedback_sent` 事件和反馈快照，发布前不能把该快照字段当作真实线上指标。
 - 点火反馈快照上下文当前由 `createFeedbackEntry()` 复用本地 `getCoreRewardPreview()` 并接收前端 `soundEnabled` / `hapticEnabled` 偏好即时生成，只写入游戏内反馈 Issue 快照，不单独记录为真实线上指标；点击行为、过载触发、音效和触感开关仍分别通过现有 `click`、`sound_toggle`、`haptic_toggle` 与 `feedback_sent` 本地事件复盘，发布前不能把这些本地事件当作真实线上指标。

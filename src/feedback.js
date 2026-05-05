@@ -1,11 +1,14 @@
 import {
   DEFAULT_ROUTE_STANCE_ID,
   DIRECTIVE_MASTERY_MAX_STACKS,
+  UPGRADE_DEFS,
+  formatNumber,
   getCoreRewardPreview,
   getDirectivePlan,
   getDirectiveTaskStatus,
   getFarRouteDispatch,
   getProjectOverview,
+  getUpgradeAffordability,
   ROUTE_STANCE_DEFS
 } from "./game.js";
 
@@ -51,6 +54,10 @@ export function createFeedbackEntry({
   const directiveTask = getDirectiveTaskStatus(currentState, now);
   const farRouteDispatch = getFarRouteDispatch(currentState, now);
   const projectOverview = getProjectOverview(currentState, now);
+  const upgradeAffordability = formatFeedbackUpgradeAffordability(
+    currentState,
+    currentGoal
+  );
   const farRouteLoopStreak = formatFeedbackFarRouteLoopStreak(farRouteDispatch);
   const farRouteLoopCapstone =
     formatFeedbackFarRouteLoopCapstone(farRouteDispatch);
@@ -76,6 +83,7 @@ export function createFeedbackEntry({
       routeStance: getFeedbackRouteStanceId(currentState.routeStance),
       projectOverview: formatFeedbackProjectOverview(projectOverview),
       projectChapter: formatFeedbackProjectChapter(projectOverview),
+      upgradeAffordability,
       directiveMastery: getFeedbackDirectiveMastery(currentState.directiveMastery),
       directivePlan: formatFeedbackDirectivePlan(directivePlan),
       directiveTask: formatFeedbackDirectiveTask(directiveTask),
@@ -137,6 +145,7 @@ export function createFeedbackIssueBody(entry) {
     ...farRouteLoopCapstoneLine,
     `- 连击：${snapshot.combo}`,
     `- 当前目标：${snapshot.goal}`,
+    `- 升级购买态：${snapshot.upgradeAffordability}`,
     `- 升级：${upgrades || "无"}`,
     `- Session：${entry.sessionId ?? "未知"}`,
     `- 创建时间：${entry.createdAt}`
@@ -204,6 +213,46 @@ function formatFeedbackProjectChapter(overview) {
   const currentText = chapterText.split("；当前 ")[1];
 
   return currentText ? "当前 " + currentText : chapterText;
+}
+
+function formatFeedbackUpgradeAffordability(state, goal) {
+  const entries = UPGRADE_DEFS.map((upgrade) => ({
+    upgrade,
+    affordability: getUpgradeAffordability(state, upgrade.id)
+  }));
+  const readyEntries = entries.filter((entry) => entry.affordability.canBuy);
+  const goalEntry = goal?.upgradeId
+    ? entries.find((entry) => entry.upgrade.id === goal.upgradeId)
+    : null;
+  const nearestWaiting = entries
+    .filter((entry) => !entry.affordability.canBuy)
+    .sort(
+      (left, right) =>
+        left.affordability.remaining - right.affordability.remaining
+    )[0];
+  const readyText = readyEntries.length
+    ? "可购买 " + readyEntries.map((entry) => entry.upgrade.name).join("、")
+    : "无可购买升级";
+  const goalText = goalEntry
+    ? "目标 " +
+      goalEntry.upgrade.name +
+      " " +
+      (goalEntry.affordability.canBuy
+        ? "可购买"
+        : "还差 " + formatNumber(goalEntry.affordability.remaining) + " 能量")
+    : "";
+  const nearestText =
+    !readyEntries.length &&
+    nearestWaiting &&
+    (!goalEntry || nearestWaiting.upgrade.id !== goalEntry.upgrade.id)
+      ? "最近 " +
+        nearestWaiting.upgrade.name +
+        " 还差 " +
+        formatNumber(nearestWaiting.affordability.remaining) +
+        " 能量"
+      : "";
+
+  return [readyText, goalText, nearestText].filter(Boolean).join(" · ");
 }
 
 function formatFeedbackDirectivePlan(plan) {

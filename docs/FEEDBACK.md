@@ -2,6 +2,13 @@
 
 ## 2026-05-06
 
+- GitHub Issues：gh 可用且已认证；2026-05-06 06:31 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。#4 仍是图片化和文字密度复测反馈，#2/#3/#6 仍是内容丰富度、主动玩法和后半段玩法变化复测反馈，#5 继续等待点火点击反馈复测。
+- 本轮 Product decision 处理 #4，并间接服务 #2/#3/#6：上一轮升级插画已经能按 ready/waiting/goal-ready 展示购买态，但反馈快照只记录升级等级，无法直接复盘玩家提交反馈时升级面板图片层处于哪种状态。
+- 本轮改动新增“升级购买态反馈快照”：`createFeedbackEntry()` 复用 `UPGRADE_DEFS`、`getUpgradeAffordability()` 和当前目标 `upgradeId`，预填 Issue 快照追加 `升级购买态：...`，记录可购买升级列表、目标升级可买状态或最近能量缺口。
+- 本轮只增强真实反馈诊断能力和测试，不新增界面可见文字、不新增收益、不新增存档字段，不改变升级价格、购买逻辑、目标系统、星图、航线指令、远航调度、反馈入口交互或部署链路。
+- 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 133 项。
+- 构建产物已确认 `dist/src/feedback.js` 包含 `upgradeAffordability`、`formatFeedbackUpgradeAffordability` 与 `- 升级购买态：`。
+
 - GitHub Issues：gh 可用且已认证；2026-05-06 06:18 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。#4 仍是图片化和文字密度复测反馈，#2/#3/#6 仍是内容丰富度、主动玩法和后半段玩法变化复测反馈，#5 继续等待点火点击反馈复测。
 - 本轮 Product decision 处理 #4，并间接服务 #2/#3/#6：升级面板已经有本地 SVG 插画和升级图标，但插画层仍是静态图片；玩家判断当前能否购买升级仍主要依赖卡片文字，图片没有参与 ready/waiting 状态反馈。
 - 本轮改动新增“升级插画购买态投光”：`renderUpgradeSceneImage()` 复用 `getUpgradeAffordability()`，给 `.upgrade-scene-image` 切换 `is-ready`、`is-waiting` 和 `is-goal-ready`；静态首页默认 waiting，ready 状态使用轻量投光，目标升级 ready 时加强边框。

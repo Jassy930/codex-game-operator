@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+- 反馈快照新增“升级购买态”：游戏内反馈生成 GitHub Issue 时，快照会追加 `升级购买态：...`，记录当前可购买升级、当前目标升级是否可购买，以及无可购买升级时的最近能量缺口，继续为 #4 的升级插画购买态复测提供可诊断上下文。
+- `src/feedback.js` 复用 `UPGRADE_DEFS`、`getUpgradeAffordability()`、`formatNumber()` 和当前目标 `upgradeId` 格式化升级购买态；`tests/game.test.js` 覆盖等待态、目标升级 ready 态和完整反馈 Issue 正文字段。
+- 本轮只增强真实反馈诊断能力，不新增界面可见文字、不新增收益、不新增存档字段，不改变升级价格、购买逻辑、目标系统、星图、航线指令、远航调度、反馈入口交互或部署链路。
+- 同步 GitHub Issues 反馈状态：2026-05-06 06:31 CST 当前 5 个 open issue、5 个 open feedback issue、0 个 open bug issue；#4 作为本轮主关联反馈，#2/#3/#6 作为间接关联反馈。
+- 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 133 项。
+- 构建产物已确认 `dist/src/feedback.js` 包含 `upgradeAffordability`、`formatFeedbackUpgradeAffordability` 与 `- 升级购买态：`。
+
 - 升级面板插画新增“购买态投光”：静态首页默认 `upgrade-scene-image is-waiting`，运行时根据现有升级可购买状态给升级工坊插画切换 `is-ready`、`is-waiting` 和 `is-goal-ready`，让侧栏升级入口的图片层也表达当前是否可购买，继续回应 #4 的图片化和降文字密度反馈。
 - `src/app.js` 新增 `renderUpgradeSceneImage()` 并复用 `getUpgradeAffordability()`；`src/styles.css` 增加 `.upgrade-scene-image.is-ready/is-waiting/is-goal-ready`、`upgradeSceneImageReadyPulse` 和降低动效兜底；`tests/game.test.js` 覆盖静态标记、运行时绑定和 CSS。
 - 本轮只增强升级面板图片层扫视，不新增可见文字、不新增收益、不新增存档字段，不改变升级价格、购买逻辑、目标系统、星图航段、航线指令、远航调度、反馈入口或部署链路。

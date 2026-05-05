@@ -1,5 +1,27 @@
 # Decision
 
+## 2026-05-06 Product decision：升级购买态反馈快照
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-06 06:31 CST 已同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。没有 open bug；#4“界面密密麻麻，希望更多图片”最近一次处理已把升级插画做成 ready/waiting/goal-ready 投光，但后续真实复测仍需要知道玩家提交反馈时升级面板到底处于可购买、等待攒能量，还是当前目标升级已可买。
+
+当前最大问题：反馈快照记录升级等级，但没有记录当时是否有可购买升级、当前目标升级是否可购买、无可购买时最近还差多少能量。复盘 #4 的升级插画购买态投光时，仍需要用能量、升级等级和成本公式反推出侧栏图片层状态。
+
+本轮决策：
+
+- 新增“升级购买态反馈快照”。
+- `src/feedback.js` 复用 `UPGRADE_DEFS`、`getUpgradeAffordability()` 和当前目标 `upgradeId`，在 Issue 快照中追加 `升级购买态：...`。
+- 快照覆盖无可购买升级、最近升级能量缺口、当前目标升级可购买，以及多个升级可购买列表。
+- `tests/game.test.js` 覆盖等待态和目标升级 ready 态，并把完整反馈 Issue 正文测试纳入新字段。
+- 该改动只增强真实反馈诊断能力，不新增界面可见文字、不新增收益、不新增存档字段，不改变升级价格、购买逻辑、目标系统、星图、航线指令、远航调度、反馈入口交互或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-05-06 06:31 CST 当前 5 个 open issue、5 个 open feedback issue、0 个 open bug issue；#4 作为本轮主关联反馈，#2/#3/#6 作为间接关联反馈。
+- 新提交的游戏内反馈 Issue 会显示 `升级购买态：...`；无可购买升级时示例为 `无可购买升级 · 目标 聚能透镜 还差 4 能量`，当前目标升级可购买时示例为 `可购买 聚能透镜 · 目标 聚能透镜 可购买`。
+- 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 133 项。
+- 构建产物已确认 `dist/src/feedback.js` 包含 `upgradeAffordability`、`formatFeedbackUpgradeAffordability` 与 `- 升级购买态：`。
+- 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #4，以及升级插画已有购买态展示但反馈快照缺少对应状态的链路复盘。
+
 ## 2026-05-06 Product decision：升级插画购买态投光
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-06 06:18 CST 已同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。没有 open bug；#4“界面密密麻麻，希望更多图片”仍等待图片化复测，#2/#3/#6 仍等待内容丰富度、主动玩法和后半段复测。
