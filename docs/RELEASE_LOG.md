@@ -8,6 +8,11 @@
 - 同步 GitHub Issues 反馈状态：2026-05-06 00:34 CST 当前 5 个 open issue、5 个 open feedback issue、0 个 open bug issue；#3/#6 作为本轮关联反馈。#3 更新时间为 `2026-05-05T16:26:13Z`，#6 更新时间为 `2026-05-05T16:26:15Z`。
 - 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 128 项。
 - 构建产物已确认 `dist/index.html`、`dist/src/app.js`、`dist/src/game.js` 和 `dist/src/styles.css` 包含 `directive-task-status`、`nextStatusText`、`nextStatusKind` 与“航线委托下一步状态”。
+- 代码提交已创建并推送：`817ea59 feat: show directive task next status`。
+- 发布：GitHub Pages workflow `25389878179` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页、`src/app.js`、`src/game.js` 和 `src/styles.css` 均返回 HTTP 200，并已确认包含 `directive-task-status`、`nextStatusText`、`nextStatusKind` 与“航线委托下一步状态”。workflow 给出 Node.js 20 actions 弃用提醒，未影响本次部署。
+- 反馈处理：已回复 #3 和 #6，说明航线委托下一步状态短标、验证结果、Pages 部署和复测问题；两个 issue 均保持 open，评论地址：`https://github.com/Jassy930/codex-game-operator/issues/3#issuecomment-4381285514`、`https://github.com/Jassy930/codex-game-operator/issues/6#issuecomment-4381285582`。
+- 回复后于 2026-05-06 00:50 CST 再次同步 GitHub Issues，当前仍为 5 个 open feedback issue、0 个 open bug issue；#3 和 #6 更新时间均为 `2026-05-05T16:50:52Z`。
+- 钉钉通知未发送：2026-05-06 00:51 CST 运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` / `ROBOT` 相关有效 webhook URL；未将 webhook 写入仓库。
 - 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #3/#6，以及航线委托条已有动作/收益/节点但缺少下一步可执行状态的链路复盘。
 
 - 航线委托新增“下一步动作短标”：100K 后委托条会在收益短标之外直接显示下一步实际指令，例如 `下一步 点火齐射或巡航回收`、`下一步 谐振脉冲`，继续回应 #3/#6 对主动短循环和后半段三步结构不够直观的反馈。

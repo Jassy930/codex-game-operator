@@ -8,6 +8,9 @@
 - 本轮只增强航线委托下一步可执行性可见性和测试，不新增收益、不新增存档字段，不改变指令冷却、连携窗口、策略契合、航线委托奖励、远航调度、星图航段、反馈入口或部署链路。
 - 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 128 项。
 - 构建产物已确认 `dist/index.html`、`dist/src/app.js`、`dist/src/game.js` 和 `dist/src/styles.css` 包含 `directive-task-status`、`nextStatusText`、`nextStatusKind` 与“航线委托下一步状态”。
+- 发布和反馈处理已完成：`817ea59 feat: show directive task next status` 已推送，GitHub Pages workflow `25389878179` 成功；线上首页、`src/app.js`、`src/game.js` 和 `src/styles.css` 均返回 HTTP 200，并已确认包含本轮标记。已回复 #3/#6，评论地址：`https://github.com/Jassy930/codex-game-operator/issues/3#issuecomment-4381285514`、`https://github.com/Jassy930/codex-game-operator/issues/6#issuecomment-4381285582`，两个 issue 均保持 open 等待复测。
+- 回复后于 2026-05-06 00:50 CST 再次同步 GitHub Issues，当前仍为 5 个 open feedback issue、0 个 open bug issue；#3 和 #6 更新时间均为 `2026-05-05T16:50:52Z`。
+- 钉钉通知未发送：2026-05-06 00:51 CST 运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` / `ROBOT` 相关有效 webhook URL；未将 webhook 写入仓库。
 - 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #3/#6，以及航线委托条已有动作/收益/节点但缺少下一步可执行状态的链路复盘。
 
 - GitHub Issues：gh 可用且已认证；2026-05-06 00:14 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。#3 更新时间为 `2026-05-05T16:07:35Z`，#6 更新时间为 `2026-05-05T16:05:36Z`；#3/#6 仍是最近更新的主动玩法与后半段结构反馈，本轮继续处理航线委托三步短循环的动作映射成本。
