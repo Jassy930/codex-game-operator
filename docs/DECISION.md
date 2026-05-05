@@ -1,5 +1,29 @@
 # Decision
 
+## 2026-05-05 Product decision：远航连段项目卡片短标
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-05 16:29 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有 open bug；本轮继续处理真实反馈 #6“后半段只有不停的目标，玩法没有真正变化”。
+
+当前最大问题：远航连段已经进入执行区、闭环复盘、路线对照条、当前按钮徽标和星图总览，但星图项目列表里的当前航段卡片仍只显示 `调度 点火齐射` 与基础三步路径。玩家在项目卡片层扫当前航段时，看不到这条跨轮递进连段已经延续到当前路线。
+
+本轮决策：
+
+- 新增“远航连段项目卡片短标”。
+- `getProjectStatuses(state, now)` 统一使用同一个 `now` 归一化状态，避免项目卡片和远航调度主体对连段有效期的判断不一致。
+- `buildProjectDispatchInfo()` 在当前指令链窗口仍有效且 `farRouteLoopStreak` 存在时，把 `连段 X/3` 并入当前航段卡片的调度徽标、调度说明和第三步回目标奖励文本。
+- 该改动只调整当前航段项目卡片展示和测试，不新增收益、不新增存档字段，不改变远航连段结算、远航调度路线、按钮徽标、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-05-05 16:29 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 作为本轮主处理对象。
+- `src/game.js` 中 `getProjectStatuses(state, now)`、`getProjectOverview(state, now)` 和 `getFarRouteDispatch(state, now)` 会在项目卡片侧使用一致时间判断有效连段。
+- 当前航段项目卡片在有效连段存在时显示 `调度 点火齐射 · 连段 1/3`，调度说明和第三步回目标奖励文本也包含 `连段 1/3`。
+- `tests/game.test.js` 覆盖项目卡片调度徽标、调度说明、调度路径和第三步奖励文本里的连段短标。
+- 本地验证已通过：`node --test tests/game.test.js`、`npm install`、`npm test`、`npm run build`、`bun install --no-save`、`bun run test`、`bun run build`；测试数 118 项。
+- 构建产物已确认 `dist/src/game.js` 包含 `loopStreakSuffix`、`badgeText: "调度 " + targetDirective.name + loopStreakSuffix`，`dist/src/app.js` 包含 `getProjectStatuses(current, now)`。
+- 代码提交、push、GitHub Pages 发布和 Issue 回复待本轮后续步骤完成。
+- 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #6，以及远航连段进入星图总览后项目卡片层仍缺少短标的链路复盘。
+
 ## 2026-05-05 Product decision：远航连段星图总览短标
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-05 16:18 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有 open bug；本轮继续处理真实反馈 #6“后半段只有不停的目标，玩法没有真正变化”。

@@ -407,7 +407,7 @@ function render() {
   const coreReward = getCoreRewardPreview(current, now);
   const production = getEffectiveProduction(current);
   const projectOverview = getProjectOverview(current, now);
-  const projects = getProjectStatuses(current);
+  const projects = getProjectStatuses(current, now);
   const routeStance = getRouteStanceStatus(current);
   const directives = getDirectiveStatus(current);
 

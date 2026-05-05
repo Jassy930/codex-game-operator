@@ -2003,8 +2003,8 @@ export function getCoreRewardPreview(state, now = Date.now()) {
   };
 }
 
-export function getProjectStatuses(state) {
-  const current = normalizeState(state);
+export function getProjectStatuses(state, now = Date.now()) {
+  const current = normalizeState(state, now);
   const segmentTotal = PROJECT_DEFS.length;
 
   const statuses = PROJECT_DEFS.map((project, index) => {
@@ -2033,7 +2033,7 @@ export function getProjectStatuses(state) {
 
   return statuses.map((project, index) => {
     const isCurrent = index === currentIndex;
-    const dispatchInfo = buildProjectDispatchInfo(project, current, isCurrent);
+    const dispatchInfo = buildProjectDispatchInfo(project, current, isCurrent, now);
 
     return {
       ...project,
@@ -2493,7 +2493,7 @@ export function getProjectCurrentVisual(projects) {
 
 export function getProjectOverview(state, now = Date.now()) {
   const current = normalizeState(state, now);
-  const projects = getProjectStatuses(current);
+  const projects = getProjectStatuses(current, now);
   const completed = projects.filter((project) => project.completed).length;
   const nextProject = projects.find((project) => !project.completed) ?? null;
   const bonusText = buildProjectBonusText(getProjectBonusesFromStatuses(projects));
@@ -3247,7 +3247,8 @@ export function getFarRouteDispatch(state, now = Date.now()) {
     };
   }
 
-  const project = getProjectStatuses(current).find((item) => !item.completed) ?? null;
+  const project =
+    getProjectStatuses(current, now).find((item) => !item.completed) ?? null;
   if (!project) {
     return {
       unlocked: true,
@@ -4940,7 +4941,7 @@ function buildProjectOverviewDispatchText(dispatch) {
   );
 }
 
-function buildProjectDispatchInfo(project, state, isCurrent) {
+function buildProjectDispatchInfo(project, state, isCurrent, now = Date.now()) {
   if (
     !isCurrent ||
     project.completed ||
@@ -4982,19 +4983,26 @@ function buildProjectDispatchInfo(project, state, isCurrent) {
     relayDirective,
     branchFocus
   );
-  const loopRewardText = getFarRouteDispatchLoopStepRewardText(
-    3,
-    relayDirective,
-    branchFocus
-  );
+  const loopStreakText =
+    state.directiveChain?.lastDirectiveId && state.directiveChain.expiresAt >= now
+      ? formatFarRouteDispatchLoopStreakText(state.farRouteLoopStreak)
+      : "";
+  const loopStreakSuffix = loopStreakText ? " · " + loopStreakText : "";
+  const loopRewardText =
+    getFarRouteDispatchLoopStepRewardText(
+      3,
+      relayDirective,
+      branchFocus
+    ) + loopStreakSuffix;
 
   return {
-    badgeText: "调度 " + targetDirective.name,
+    badgeText: "调度 " + targetDirective.name + loopStreakSuffix,
     detailText:
       "远航调度：目标 " +
       targetDirective.name +
       relayText +
       branchFocusText +
+      loopStreakSuffix +
       " · 3/3 回到目标触发闭环",
     targetDirectiveId: targetDirective.id,
     targetDirectiveName: targetDirective.name,

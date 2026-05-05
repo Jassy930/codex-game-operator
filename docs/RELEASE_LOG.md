@@ -2,6 +2,15 @@
 
 ## Unreleased
 
+- 星图项目卡片新增“远航连段短标”：当前指令链窗口有效且存在连段时，当前航段卡片会显示 `调度 点火齐射 · 连段 X/3`，调度说明和第三步回目标奖励文本也会承接该连段层数，继续回应 #6 对后半段玩法变化不明显的反馈。
+- `src/game.js` 让 `getProjectStatuses(state, now)`、`getProjectOverview(state, now)` 和 `getFarRouteDispatch(state, now)` 使用一致时间判断项目卡片侧有效连段，并在 `buildProjectDispatchInfo()` 中追加 `loopStreakSuffix`；`src/app.js` 渲染项目列表时传入同一个 `now`；`tests/game.test.js` 覆盖项目卡片调度徽标、说明和路径奖励里的连段短标。
+- 本轮只调整当前航段项目卡片展示和测试，不新增收益、不新增存档字段，不改变远航连段结算、远航调度路线、按钮徽标、反馈入口或部署链路。
+- 同步 GitHub Issues 反馈状态：2026-05-05 16:29 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 作为主处理对象。
+- 验证通过：`node --test tests/game.test.js`、`npm install`、`npm test`、`npm run build`、`bun install --no-save`、`bun run test`、`bun run build`；测试数 118 项。
+- 构建产物已确认 `dist/src/game.js` 包含 `loopStreakSuffix` 和 `badgeText: "调度 " + targetDirective.name + loopStreakSuffix`，`dist/src/app.js` 包含 `getProjectStatuses(current, now)`。
+- 代码提交、push、GitHub Pages 发布和反馈回复待本轮后续步骤完成。
+- 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #6，以及远航连段进入星图总览后项目卡片层仍缺少短标的链路复盘。
+
 - 星图总览新增“远航连段短标”：远航调度总览会在当前连段存在时显示 `连段 X/3`，让跨轮递进收益不只停留在执行区、路线对照条和按钮徽标中，继续回应 #6 对后半段玩法变化不明显的反馈。
 - `src/game.js` 在 `buildProjectOverviewDispatchText()` 中追加 `dispatch.loopStreakText`，并避免与闭环复盘文本重复；`tests/game.test.js` 覆盖星图总览摘要包含 `连段 1/3 · 闭环 1/3`。
 - 本轮只调整星图总览摘要文本和测试，不新增收益、不新增存档字段，不改变远航连段结算、远航调度路线、按钮徽标、反馈入口或部署链路。
