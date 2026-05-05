@@ -1,5 +1,28 @@
 # Decision
 
+## 2026-05-05 Product decision：远航连段按钮徽标信标
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-05 15:53 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有 open bug；本轮继续处理真实反馈 #6“后半段只有不停的目标，玩法没有真正变化”。
+
+当前最大问题：远航连段已经进入远航调度进度行、闭环复盘和路线对照条，但在实际要点击的航线指令按钮里，`远航连段 +X` 徽标排在多项远航收益之后，容易被压缩进 `+N`。玩家准备执行 3/3 回航或整备回航时，仍可能看不到当前按钮会触发跨轮递进收益。
+
+本轮决策：
+
+- 新增“远航连段按钮徽标信标”。
+- `src/app.js` 将 `dispatchLoopStreak` 徽标前置到 `dispatchRouteStep` 之后，让当前路线按钮优先露出连段收益。
+- `src/styles.css` 只在当前路线步骤按钮内强化 `.directive-dispatch-loop-streak`，追加状态点、轻量补光和降低动效兜底。
+- 该改动只调整现有按钮徽标排序和展示，不新增收益、不新增存档字段，不改变远航连段结算、目标指令、分支路线、冷却、连携窗口、星图航段、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-05-05 15:53 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 作为本轮主处理对象。
+- `src/app.js` 中 `badges.append()` 会按 `dispatchRouteStep -> dispatchLoopStreak -> recommendation` 的顺序优先显示当前路线和连段收益。
+- `src/styles.css` 包含 `.directive-button.is-dispatch-route-step .directive-dispatch-loop-streak`、状态点、`directiveDispatchLoopStreakBeacon` 和降低动效兜底。
+- `tests/game.test.js` 覆盖徽标排序、按钮连段信标、keyframes 和降低动效静态绑定。
+- 本地验证已通过：`node --test tests/game.test.js`、`npm install`、`npm test`、`npm run build`、`bun install --no-save`、`bun run test`、`bun run build`；测试数 118 项。
+- 构建产物已确认 `dist/src/app.js` / `dist/src/styles.css` 包含 `dispatchLoopStreak`、`directive-dispatch-loop-streak` 和 `directiveDispatchLoopStreakBeacon`。
+- 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #6，以及远航连段按钮徽标被折叠到 `+N` 明细里的链路复盘。
+
 ## 2026-05-05 Product decision：远航连段回航结果信标
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-05 15:37 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有 open bug；本轮继续处理真实反馈 #6“后半段只有不停的目标，玩法没有真正变化”。

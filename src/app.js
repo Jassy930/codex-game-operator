@@ -1814,6 +1814,7 @@ function renderDirective(option) {
 
   badges.append(
     dispatchRouteStep,
+    dispatchLoopStreak,
     recommendation,
     planBonus,
     taskBonus,
@@ -1828,7 +1829,6 @@ function renderDirective(option) {
     dispatchBranchRotation,
     dispatchFocusLoop,
     dispatchLoop,
-    dispatchLoopStreak,
     dispatchBreakthrough,
     dispatchDetourBreakthrough,
     dispatchDetourInfusion,

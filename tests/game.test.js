@@ -2173,6 +2173,10 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(appJs, /preview\.setAttribute\("aria-label", option\.previewText\)/);
   assert.match(appJs, /dispatchRouteStep\.className = "directive-dispatch-route-step"/);
   assert.match(appJs, /dispatchRouteStep\.textContent = option\.dispatchRouteStepText/);
+  assert.match(
+    appJs,
+    /badges\.append\(\s*dispatchRouteStep,\s*dispatchLoopStreak,\s*recommendation,/
+  );
   assert.match(appJs, /recommendation\.className = "directive-recommendation"/);
   assert.match(appJs, /recommendation\.textContent = option\.recommendationText/);
   assert.match(appJs, /planBonus\.className = "directive-plan-bonus"/);
@@ -2551,6 +2555,9 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(styles, /animation: directiveDispatchRouteStepBeacon 1450ms ease-in-out infinite/);
   assert.match(styles, /\.directive-button\.is-dispatch-route-step \.directive-visual/);
   assert.match(styles, /\.directive-button\.is-dispatch-route-step \.directive-dispatch-route-step/);
+  assert.match(styles, /\.directive-button\.is-dispatch-route-step \.directive-dispatch-loop-streak/);
+  assert.match(styles, /\.directive-button\.is-dispatch-route-step \.directive-dispatch-loop-streak::before/);
+  assert.match(styles, /animation: directiveDispatchLoopStreakBeacon 1450ms ease-in-out infinite/);
   assert.match(styles, /\.directive-button\.is-dispatch-route-step \.directive-status/);
   assert.match(styles, /\.directive-button\.is-dispatch-route-step \.directive-status::before/);
   assert.match(styles, /animation: directiveDispatchRouteStatusBeacon 1300ms ease-in-out infinite/);
@@ -2558,7 +2565,9 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(styles, /\.directive-button\.is-dispatch-route-step\.is-cooling \.directive-status/);
   assert.match(styles, /@keyframes directiveDispatchRouteStepBeacon/);
   assert.match(styles, /@keyframes directiveDispatchRouteStatusBeacon/);
+  assert.match(styles, /@keyframes directiveDispatchLoopStreakBeacon/);
   assert.match(styles, /@media \(prefers-reduced-motion: reduce\) \{[\s\S]*\.directive-button\.is-dispatch-route-step[\s\S]*animation: none/);
+  assert.match(styles, /@media \(prefers-reduced-motion: reduce\) \{[\s\S]*\.directive-button\.is-dispatch-route-step \.directive-dispatch-loop-streak[\s\S]*animation: none/);
   assert.match(styles, /@media \(prefers-reduced-motion: reduce\) \{[\s\S]*\.directive-button\.is-dispatch-route-step \.directive-status::before[\s\S]*animation: none/);
   assert.match(styles, /\.directive-button\.is-finisher-recommended/);
   assert.match(styles, /\.directive-button \.directive-dispatch-route-step/);

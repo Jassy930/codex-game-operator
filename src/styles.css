@@ -1906,6 +1906,33 @@ h2 {
   box-shadow: inset 0 0 0 1px rgba(220, 239, 255, 0.08);
 }
 
+.directive-button.is-dispatch-route-step .directive-dispatch-loop-streak {
+  position: relative;
+  padding-left: 16px;
+  border: 1px solid rgba(255, 211, 106, 0.3);
+  background:
+    linear-gradient(90deg, rgba(255, 211, 106, 0.26), rgba(124, 201, 255, 0.1)),
+    rgba(255, 211, 106, 0.14);
+  color: #fff6ca;
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 247, 194, 0.08),
+    0 0 12px rgba(255, 211, 106, 0.12);
+  animation: directiveDispatchLoopStreakBeacon 1450ms ease-in-out infinite;
+}
+
+.directive-button.is-dispatch-route-step .directive-dispatch-loop-streak::before {
+  position: absolute;
+  top: 50%;
+  left: 7px;
+  width: 5px;
+  height: 5px;
+  border-radius: 999px;
+  background: currentColor;
+  box-shadow: 0 0 8px currentColor;
+  content: "";
+  transform: translateY(-50%);
+}
+
 .directive-button.is-dispatch-route-step .directive-status {
   position: relative;
   justify-self: start;
@@ -7569,6 +7596,24 @@ h2 {
   }
 }
 
+@keyframes directiveDispatchLoopStreakBeacon {
+  0%,
+  100% {
+    filter: saturate(1);
+    box-shadow:
+      inset 0 0 0 1px rgba(255, 247, 194, 0.08),
+      0 0 12px rgba(255, 211, 106, 0.12);
+  }
+
+  50% {
+    filter: saturate(1.22);
+    box-shadow:
+      inset 0 0 0 1px rgba(255, 247, 194, 0.15),
+      0 0 15px rgba(255, 211, 106, 0.22),
+      0 0 10px rgba(124, 201, 255, 0.14);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .score-grid dd.is-core-hit,
   .score-grid dd.is-core-overload-hit,
@@ -7609,6 +7654,7 @@ h2 {
   .core-gain-pop.is-showing::after,
   .core-gain-pop.is-overload-gain.is-showing::after,
   .directive-button.is-dispatch-route-step,
+  .directive-button.is-dispatch-route-step .directive-dispatch-loop-streak,
   .directive-button.is-dispatch-route-step .directive-status::before,
   .far-dispatch.is-active .far-dispatch-scene-image,
   .far-dispatch.is-active .far-dispatch-loop-visual::after,
