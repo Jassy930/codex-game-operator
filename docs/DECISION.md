@@ -1,5 +1,28 @@
 # Decision
 
+## 2026-05-06 Product decision：远航路线对照反馈快照
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-06 07:03 CST 已同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。没有 open bug；#6“后半段玩法没有真正变化”仍等待带新快照的真实复测，#3 继续作为主动玩法丰富度的间接关联反馈。
+
+当前最大问题：反馈快照已经记录远航调度长文本、闭环进度、远航连段和满段回响，但没有单独记录玩家当时看到的“协同 / 绕行”路线对照摘要。复盘 #6 时，仍要从远航调度长句反推玩家提交反馈时是否处于首推路线、建档路线、当前路线或满段回响预告状态。
+
+本轮决策：
+
+- 新增“远航路线对照反馈快照”。
+- `src/feedback.js` 复用 `getFarRouteDispatch().branchChoiceSummaryText`，在 20M 后存在路线对照时向 Issue 快照追加 `远航路线对照：...`。
+- 锁定态不输出该字段，避免 20M 前反馈被无效远航信息扩写。
+- `tests/game.test.js` 覆盖锁定态不输出、普通 20M 后协同 / 绕行对照，以及满段回响预告下的当前路线对照。
+- 该改动只增强真实反馈诊断能力，不新增界面可见文字、不新增收益、不新增存档字段，不改变远航调度、航线指令、星图、反馈入口交互或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-05-06 07:03 CST 当前 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
+- 新提交的 20M 后游戏内反馈 Issue 会显示 `远航路线对照：...`；20M 前或远航未解锁反馈不会输出该行。
+- 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 133 项。
+- 构建产物已确认 `dist/src/feedback.js` 包含 `farRouteBranchChoices`、`formatFeedbackFarRouteBranchChoices` 与 `远航路线对照`。
+- 发布待执行：等待本轮代码和文档提交推送后验证 GitHub Pages workflow 与线上文件。
+- 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #6，以及当前反馈快照缺少远航路线对照短摘要的链路复盘。
+
 ## 2026-05-06 Product decision：反馈编号链路对齐
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-06 06:52 CST 已同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。没有 open bug；#2/#3/#4/#5/#6 均保持 open，等待带新快照的真实复测。

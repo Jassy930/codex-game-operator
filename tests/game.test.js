@@ -6640,6 +6640,7 @@ test("反馈入口会生成带游戏快照的 GitHub Issue 链接", () => {
   assert.match(body, /远航调度：累计 20M 能量后解锁后半段航段调度/);
   assert.match(body, /远航续航、远航协同、协同补给、远航绕行、绕行投送、回航校准、分支改道、航段契合、路线稳航、轮替闭环、契合闭环、闭环奖励、远航突破、绕行突破、远航整备、整备续航、绕行整备、整备回航与满段回响/);
   assert.match(body, /闭环进度 0\/3 · 20M 后解锁/);
+  assert.doesNotMatch(body, /远航路线对照：/);
   assert.match(body, /升级购买态：可购买 聚能透镜、自动采集臂/);
   assert.match(body, /lens:1/);
   assert.match(appJs, /recordEvent\("feedback_sent", \{[\s\S]*feedbackId: entry\.id/);
@@ -6816,6 +6817,8 @@ test("反馈快照会记录当前远航连段层数", () => {
   const body = createFeedbackIssueBody(entry);
 
   assert.match(body, /远航调度：航段 27\/57 脉冲航闸/);
+  assert.match(body, /远航路线对照：协同 首推 · 航段契合/);
+  assert.match(body, /绕行 建档 · 新路线/);
   assert.match(body, /闭环进度 2\/3/);
   assert.match(body, /- 远航连段：连段 1\/3/);
 });
@@ -6860,6 +6863,7 @@ test("反馈快照会记录远航满段回响预告", () => {
   const body = createFeedbackIssueBody(entry);
 
   assert.match(body, /远航调度：航段 27\/57 脉冲航闸/);
+  assert.match(body, /远航路线对照：协同 已选 · 当前路线/);
   assert.match(body, /闭环进度 2\/3/);
   assert.match(body, /满段回响 \+10%/);
   assert.match(body, /- 远航连段：连段 2\/3/);

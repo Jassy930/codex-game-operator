@@ -2,6 +2,14 @@
 
 ## Unreleased
 
+- 反馈快照新增“远航路线对照”：游戏内反馈生成 GitHub Issue 时，20M 后存在协同 / 绕行路线对照会追加 `远航路线对照：...`，记录首推、建档、当前路线、收益路径、资源取向和连段 / 满段回响预告，继续为 #6 后半段玩法复测提供可诊断上下文。
+- `src/feedback.js` 复用 `getFarRouteDispatch().branchChoiceSummaryText` 格式化路线对照字段；`tests/game.test.js` 覆盖远航锁定态不输出、普通路线对照和满段回响预告路线对照。
+- 本轮只增强真实反馈诊断能力，不新增界面可见文字、不新增收益、不新增存档字段，不改变远航调度、航线指令、星图、反馈入口交互或部署链路。
+- 同步 GitHub Issues 反馈状态：2026-05-06 07:03 CST 当前 5 个 open issue、5 个 open feedback issue、0 个 open bug issue；#6 作为本轮主关联反馈，#3 作为间接关联反馈。
+- 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 133 项。
+- 构建产物已确认 `dist/src/feedback.js` 包含 `farRouteBranchChoices`、`formatFeedbackFarRouteBranchChoices` 与 `远航路线对照`。
+- 发布待执行：等待本轮提交推送后验证 GitHub Pages workflow 与线上文件。
+
 - 反馈链路新增“反馈编号”：游戏内反馈生成 GitHub Issue 时会在评分后输出 `反馈编号：...`，浏览器本地 `feedback_sent` 事件会记录同一个 `feedbackId`，便于把 GitHub Issue、本地反馈草稿和本地事件对齐复盘。
 - `src/feedback.js` 在 Issue 正文中写入 `entry.id`；`src/app.js` 在 `feedback_sent` payload 中写入 `feedbackId: entry.id`；`tests/game.test.js` 覆盖正文和前端事件绑定。
 - 本轮只增强真实反馈诊断链路，不新增界面可见文字、不新增收益、不新增存档字段，不改变反馈校验、Issue 草稿生成、星图、航线指令、远航调度或部署链路。

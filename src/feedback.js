@@ -61,6 +61,8 @@ export function createFeedbackEntry({
   const farRouteLoopStreak = formatFeedbackFarRouteLoopStreak(farRouteDispatch);
   const farRouteLoopCapstone =
     formatFeedbackFarRouteLoopCapstone(farRouteDispatch);
+  const farRouteBranchChoices =
+    formatFeedbackFarRouteBranchChoices(farRouteDispatch);
 
   return {
     id:
@@ -88,6 +90,7 @@ export function createFeedbackEntry({
       directivePlan: formatFeedbackDirectivePlan(directivePlan),
       directiveTask: formatFeedbackDirectiveTask(directiveTask),
       farRouteDispatch: formatFeedbackFarRouteDispatch(farRouteDispatch),
+      farRouteBranchChoices,
       farRouteLoopStreak,
       farRouteLoopCapstone,
       combo: currentState.combo ?? 0,
@@ -116,6 +119,9 @@ export function createFeedbackIssueBody(entry) {
   const farRouteLoopCapstoneLine = snapshot.farRouteLoopCapstone
     ? [`- 远航满段回响：${snapshot.farRouteLoopCapstone}`]
     : [];
+  const farRouteBranchChoicesLine = snapshot.farRouteBranchChoices
+    ? [`- 远航路线对照：${snapshot.farRouteBranchChoices}`]
+    : [];
 
   return [
     "## 玩家反馈",
@@ -142,6 +148,7 @@ export function createFeedbackIssueBody(entry) {
     `- 指令轮换：${snapshot.directivePlan}`,
     `- 航线委托：${snapshot.directiveTask}`,
     `- 远航调度：${snapshot.farRouteDispatch}`,
+    ...farRouteBranchChoicesLine,
     ...farRouteLoopStreakLine,
     ...farRouteLoopCapstoneLine,
     `- 连击：${snapshot.combo}`,
@@ -315,6 +322,10 @@ function formatFeedbackFarRouteDispatch(dispatch) {
   const text = String(dispatch?.text ?? "未知").replace(/^远航调度：/, "");
   const loopStatusText = dispatch?.loopStatusText ? " · " + dispatch.loopStatusText : "";
   return text + loopStatusText;
+}
+
+function formatFeedbackFarRouteBranchChoices(dispatch) {
+  return stripFeedbackLabel(dispatch?.branchChoiceSummaryText ?? "", "路线对照");
 }
 
 function formatFeedbackFarRouteLoopStreak(dispatch) {

@@ -2,6 +2,14 @@
 
 ## 2026-05-06
 
+- GitHub Issues：gh 可用且已认证；2026-05-06 07:03 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。#6 仍是后半段玩法变化复测反馈，#3 继续作为主动玩法丰富度的间接关联反馈，#2/#4/#5 继续等待对应复测。
+- 本轮 Product decision 处理 #6，并间接服务 #3：当前反馈快照已有远航调度长文本、闭环进度、远航连段和满段回响，但没有单独记录玩家提交反馈时看到的协同 / 绕行路线对照摘要。
+- 本轮改动新增“远航路线对照反馈快照”：`createFeedbackEntry()` 复用 `getFarRouteDispatch().branchChoiceSummaryText`，20M 后存在路线对照时预填 Issue 快照追加 `远航路线对照：...`；20M 前或未解锁远航时不输出该行。
+- 本轮只增强真实反馈诊断能力，不新增界面可见文字、不新增收益、不新增存档字段，不改变远航调度、航线指令、星图、反馈入口交互或部署链路。
+- 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 133 项。
+- 构建产物已确认 `dist/src/feedback.js` 包含 `farRouteBranchChoices`、`formatFeedbackFarRouteBranchChoices` 与 `远航路线对照`。
+- 发布待执行：等待本轮提交推送后验证 GitHub Pages workflow 与线上文件。
+
 - GitHub Issues：gh 可用且已认证；2026-05-06 06:52 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。#2/#3/#6 仍是内容丰富度、主动玩法和后半段玩法变化复测反馈，#4 仍是图片化和文字密度复测反馈，#5 继续等待点火点击反馈复测。
 - 本轮 Product decision 间接服务所有 open feedback：未来玩家如果连续提交多条复测反馈，现有 Issue 正文、本地草稿和 `feedback_sent` 事件缺少同源编号，复盘时要靠时间和内容人工匹配。
 - 本轮改动新增“反馈编号链路对齐”：`createFeedbackIssueBody()` 在评分后输出 `反馈编号：...`，`src/app.js` 的 `feedback_sent` 事件 payload 记录同一个 `feedbackId`。
