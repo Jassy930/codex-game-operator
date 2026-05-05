@@ -1,5 +1,28 @@
 # Decision
 
+## 2026-05-06 Product decision：界面环境反馈快照
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-06 07:30 CST 已同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。没有 open bug；#4 仍等待图片化与文字密度复测，#5 仍等待点火点击反馈复测，#2/#3/#6 继续等待内容丰富度、主动玩法和后半段复测。
+
+当前最大问题：反馈快照已经记录星图筛选、星图进度、点火反馈、指令短循环和远航路线，但仍缺少玩家提交反馈时的界面环境。复盘 #4 时无法判断“文字密集”主要发生在窄屏、桌面宽屏还是触屏环境；复盘 #5 时也无法判断玩家是否开启系统降低动效，导致点火/远航/指令动效被自动降级。
+
+本轮决策：
+
+- 新增“界面环境反馈快照”。
+- `src/app.js` 在提交反馈时通过 `getFeedbackView()` 采集当前 `projectFilter`、视口宽高、`prefers-reduced-motion` 和主指针类型，并传入 `createFeedbackEntry()`。
+- `src/feedback.js` 在 Issue 快照追加 `界面环境：...`，格式为 `视口 390x844 · 降低动效 开 · 指针 触屏`；旧入口或异常参数回退为 `未知`。
+- `feedback_sent` 本地事件同步记录同一份 `view` 对象，便于本地草稿、事件和 GitHub Issue 对齐复盘。
+- `tests/game.test.js` 覆盖视口四舍五入、降低动效开关、触屏/鼠标指针文案、未知环境回退和前端提交传参。
+- 该改动只增强真实反馈诊断能力，不新增界面可见文字、不新增收益、不新增存档字段，不改变星图筛选交互、点火反馈、动效策略、航线指令、远航调度或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-05-06 07:30 CST 当前 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
+- 新提交的游戏内反馈 Issue 会显示 `界面环境：...`；可用于区分小屏/大屏、降低动效开关和触屏/鼠标环境。
+- 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 135 项。
+- 构建产物已刷新；`dist/` 按仓库规则忽略。源码已确认包含 `formatFeedbackViewEnvironment`、`界面环境`、`getFeedbackView()`、`prefers-reduced-motion: reduce` 和 `pointer: getPrimaryPointerKind()`。
+- 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #4/#5，以及当前反馈快照缺少视口、动效偏好和指针类型上下文的链路复盘。
+
 ## 2026-05-06 Product decision：星图筛选反馈快照
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-06 07:16 CST 已同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。没有 open bug；#2/#3/#6 仍等待内容丰富度、主动玩法和后半段复测，#4 继续等待图片化与文字密度复测，#5 继续等待点火反馈复测。

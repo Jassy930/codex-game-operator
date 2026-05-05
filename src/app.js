@@ -371,6 +371,7 @@ elements.feedbackForm.addEventListener("submit", (event) => {
 
   const current = normalizeState(state);
   const goal = getCurrentGoal(current);
+  const feedbackView = getFeedbackView();
   const entry = createFeedbackEntry({
     type: elements.feedbackType.value,
     rating: elements.feedbackRating.value,
@@ -382,9 +383,7 @@ elements.feedbackForm.addEventListener("submit", (event) => {
       soundEnabled,
       hapticEnabled
     },
-    view: {
-      projectFilter
-    }
+    view: feedbackView
   });
   const issueUrl = buildFeedbackIssueUrl(entry);
 
@@ -393,7 +392,8 @@ elements.feedbackForm.addEventListener("submit", (event) => {
     feedbackId: entry.id,
     type: entry.type,
     rating: entry.rating,
-    messageLength: entry.message.length
+    messageLength: entry.message.length,
+    view: feedbackView
   });
 
   elements.feedbackStatus.textContent = "已生成 GitHub Issue 草稿。";
@@ -489,6 +489,34 @@ function render() {
     ...UPGRADE_DEFS.map((upgrade) => renderUpgrade(upgrade, current, goal))
   );
   renderProjectList(projects);
+}
+
+function getFeedbackView() {
+  return {
+    projectFilter,
+    viewportWidth: window.innerWidth,
+    viewportHeight: window.innerHeight,
+    reducedMotion: Boolean(
+      window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches
+    ),
+    pointer: getPrimaryPointerKind()
+  };
+}
+
+function getPrimaryPointerKind() {
+  if (window.matchMedia?.("(pointer: coarse)")?.matches) {
+    return "coarse";
+  }
+
+  if (window.matchMedia?.("(pointer: fine)")?.matches) {
+    return "fine";
+  }
+
+  if (window.matchMedia?.("(pointer: none)")?.matches) {
+    return "none";
+  }
+
+  return "";
 }
 
 function renderUpgradeSceneImage(current, goal) {

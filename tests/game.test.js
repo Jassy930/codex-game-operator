@@ -6614,6 +6614,13 @@ test("反馈入口会生成带游戏快照的 GitHub Issue 链接", () => {
       soundEnabled: false,
       hapticEnabled: true
     },
+    view: {
+      projectFilter: INITIAL_PROJECT_FILTER_ID,
+      viewportWidth: 390,
+      viewportHeight: 844,
+      reducedMotion: true,
+      pointer: "coarse"
+    },
     now: 0,
     createdAt: "2026-04-28T13:40:00.000Z"
   });
@@ -6635,6 +6642,7 @@ test("反馈入口会生成带游戏快照的 GitHub Issue 链接", () => {
   assert.match(body, /进度 80 能量 \/ 100K 能量/);
   assert.match(body, /星图章节：当前 首段星图 1\/4 · 航段 1\/57 点亮星图/);
   assert.match(body, /星图筛选：本章 0\/4 · 下一条 航段 1\/57 点亮星图 · 剩余 4 段/);
+  assert.match(body, /界面环境：视口 390x844 · 降低动效 开 · 指针 触屏/);
   assert.match(body, new RegExp(`指令熟练：2/${DIRECTIVE_MASTERY_MAX_STACKS}`));
   assert.match(body, /指令轮换：累计 100K 能量后解锁 90 秒连携目标/);
   assert.match(body, /航线委托：累计 100K 能量后解锁 3 步短期任务/);
@@ -6645,7 +6653,51 @@ test("反馈入口会生成带游戏快照的 GitHub Issue 链接", () => {
   assert.match(body, /升级购买态：可购买 聚能透镜、自动采集臂/);
   assert.match(body, /lens:1/);
   assert.match(appJs, /recordEvent\("feedback_sent", \{[\s\S]*feedbackId: entry\.id/);
-  assert.match(appJs, /view: \{[\s\S]*projectFilter/);
+  assert.match(appJs, /const feedbackView = getFeedbackView\(\)/);
+  assert.match(appJs, /view: feedbackView/);
+  assert.match(appJs, /viewportWidth: window\.innerWidth/);
+  assert.match(appJs, /prefers-reduced-motion: reduce/);
+  assert.match(appJs, /pointer: getPrimaryPointerKind\(\)/);
+});
+
+test("反馈快照会记录提交时界面环境", () => {
+  const entry = createFeedbackEntry({
+    type: "experience",
+    rating: 3,
+    message: "小屏幕上文字密度仍然偏高",
+    state: createInitialState(0),
+    goal: { value: "购买第一次升级", upgradeId: "lens" },
+    sessionId: "view-environment-session",
+    view: {
+      viewportWidth: 1365.5,
+      viewportHeight: 768.4,
+      reducedMotion: false,
+      pointer: "fine"
+    },
+    createdAt: "2026-05-06T07:35:00.000Z"
+  });
+
+  const unknownEntry = createFeedbackEntry({
+    type: "experience",
+    rating: 3,
+    message: "旧入口没有传界面环境也要稳定生成快照",
+    state: createInitialState(0),
+    goal: { value: "购买第一次升级", upgradeId: "lens" },
+    sessionId: "unknown-view-environment-session",
+    view: {
+      projectFilter: "unknown-filter",
+      viewportWidth: 0,
+      viewportHeight: Number.NaN,
+      pointer: "unknown"
+    },
+    createdAt: "2026-05-06T07:36:00.000Z"
+  });
+
+  assert.match(
+    createFeedbackIssueBody(entry),
+    /界面环境：视口 1366x768 · 降低动效 关 · 指针 鼠标/
+  );
+  assert.match(createFeedbackIssueBody(unknownEntry), /界面环境：未知/);
 });
 
 test("反馈快照会记录升级购买态", () => {

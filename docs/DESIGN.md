@@ -4,6 +4,7 @@
 
 M0 设计约束：
 
+- 反馈快照必须记录界面环境：前端提交反馈时必须通过 `getFeedbackView()` 传入当前 `projectFilter`、`window.innerWidth`、`window.innerHeight`、`prefers-reduced-motion` 和 pointer media query 结果；`createFeedbackEntry()` 必须输出 `界面环境` 快照字段，格式化为 `视口 WxH · 降低动效 开/关 · 指针 触屏/鼠标/无`，旧入口或异常参数必须回退为 `未知`。该字段只用于真实反馈复盘，不新增界面可见文字、不新增收益、不新增存档字段，不改变星图筛选交互、点火反馈、动效策略、航线指令、远航调度、反馈入口或部署链路。
 - 反馈链路必须输出同源反馈编号：`createFeedbackIssueBody()` 必须在 Issue 正文的反馈信息区显示 `反馈编号：${entry.id}`；前端提交反馈时 `feedback_sent` 本地事件必须记录同一个 `feedbackId: entry.id`。该编号只用于对齐 GitHub Issue、本地反馈草稿和本地事件，不新增界面可见文字、不新增收益、不新增存档字段，不改变反馈内容校验、Issue 草稿生成、星图航段、航线指令、远航调度或部署链路。
 - 反馈快照必须记录升级购买态：`createFeedbackEntry()` 必须复用 `UPGRADE_DEFS`、`getUpgradeAffordability()` 和当前目标 `upgradeId` 输出 `升级购买态` 快照字段；有可购买升级时必须列出升级名，当前目标升级可购买时必须显示目标可购买，无可购买升级时必须显示目标升级或最近升级的能量缺口。该字段只用于真实反馈复盘，不新增界面可见文字、不新增收益、不新增存档字段，不改变升级价格、购买逻辑、目标系统、星图航段、航线指令、远航调度、反馈入口交互或部署链路。
 - 升级面板本地插画必须提供购买态投光：静态首页 `.upgrade-scene-image` 必须默认带 `is-waiting`；运行时 `renderUpgradeSceneImage()` 必须复用 `getUpgradeAffordability()`，当任意升级可购买时切换 `is-ready`，当当前目标升级可购买时切换 `is-goal-ready`，无可购买升级时切换 `is-waiting`。`.upgrade-scene-image.is-ready` 必须显示轻量投光和 `upgradeSceneImageReadyPulse`，`.upgrade-scene-image.is-waiting` 必须降权显示；`prefers-reduced-motion: reduce` 必须关闭 ready 动画。该状态只从现有能量、目标和升级价格派生，不新增可见文字、不新增收益、不新增存档字段，不改变升级购买逻辑、目标系统、星图航段、航线指令、远航调度或反馈入口。

@@ -68,6 +68,7 @@ export function createFeedbackEntry({
     projectStatuses,
     getFeedbackProjectFilterId(view?.projectFilter)
   );
+  const viewEnvironment = formatFeedbackViewEnvironment(view);
   const farRouteLoopStreak = formatFeedbackFarRouteLoopStreak(farRouteDispatch);
   const farRouteLoopCapstone =
     formatFeedbackFarRouteLoopCapstone(farRouteDispatch);
@@ -96,6 +97,7 @@ export function createFeedbackEntry({
       projectOverview: formatFeedbackProjectOverview(projectOverview),
       projectChapter: formatFeedbackProjectChapter(projectOverview),
       projectFilter,
+      viewEnvironment,
       upgradeAffordability,
       directiveMastery: getFeedbackDirectiveMastery(currentState.directiveMastery),
       directivePlan: formatFeedbackDirectivePlan(directivePlan),
@@ -156,6 +158,7 @@ export function createFeedbackIssueBody(entry) {
     `- 星图进度：${snapshot.projectOverview}`,
     `- 星图章节：${snapshot.projectChapter}`,
     `- 星图筛选：${snapshot.projectFilter}`,
+    `- 界面环境：${snapshot.viewEnvironment}`,
     `- 指令熟练：${snapshot.directiveMastery.stacks}/${DIRECTIVE_MASTERY_MAX_STACKS}`,
     `- 指令轮换：${snapshot.directivePlan}`,
     `- 航线委托：${snapshot.directiveTask}`,
@@ -246,6 +249,46 @@ function formatFeedbackProjectFilter(projects, filterId) {
     getProjectFilterBrief(projects, filterId),
     "筛选摘要"
   );
+}
+
+function formatFeedbackViewEnvironment(view) {
+  const viewportText = formatFeedbackViewport(view);
+  const motionText =
+    typeof view?.reducedMotion === "boolean"
+      ? "降低动效 " + (view.reducedMotion ? "开" : "关")
+      : "";
+  const pointerText = getFeedbackPointerText(view?.pointer);
+
+  return (
+    [viewportText, motionText, pointerText].filter(Boolean).join(" · ") ||
+    "未知"
+  );
+}
+
+function formatFeedbackViewport(view) {
+  const width = Number(view?.viewportWidth);
+  const height = Number(view?.viewportHeight);
+
+  if (
+    !Number.isFinite(width) ||
+    !Number.isFinite(height) ||
+    width <= 0 ||
+    height <= 0
+  ) {
+    return "";
+  }
+
+  return "视口 " + Math.round(width) + "x" + Math.round(height);
+}
+
+function getFeedbackPointerText(pointer) {
+  const pointerText = {
+    coarse: "触屏",
+    fine: "鼠标",
+    none: "无"
+  }[pointer];
+
+  return pointerText ? "指针 " + pointerText : "";
 }
 
 function formatFeedbackUpgradeAffordability(state, goal) {
