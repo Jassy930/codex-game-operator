@@ -20,6 +20,11 @@
 - 当前下一步推荐指令可执行时，指令轮换 3 格轨的下一格显示 ready 边框和轻量补光；下一步推荐指令均在冷却时显示 waiting 底色；锁定态和完成态不误标可执行信标。
 - 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 129 项。
 - 构建产物已确认 `dist/src/app.js` 和 `dist/src/styles.css` 包含 `directivePlanTrack.classList.toggle("is-next-ready"`、`directivePlanNextReadyBeacon`、`.directive-plan-step.is-next-ready` 与 `.directive-plan-step.is-next-waiting`。
+- 代码和同步文档提交已创建并推送：`30e57ce feat: highlight directive plan ready step`。
+- 发布验证已通过：GitHub Pages workflow `25401500495` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页返回 HTTP 200，线上 `src/app.js` 已确认包含 `directivePlanTrack.classList.toggle("is-next-ready"`、`is-next-waiting`，线上 `src/styles.css` 已确认包含 `.directive-plan-step.is-next-ready`、`.directive-plan-step.is-next-waiting` 与 `directivePlanNextReadyBeacon`。workflow 给出 Node.js 20 actions 弃用提醒，未影响本次部署。
+- 已回复 GitHub Issue #3、#4 和 #6，说明指令轮换下一步格可执行信标、验证结果、Pages 部署和复测问题；三个 issue 均保持 open，评论地址：`https://github.com/Jassy930/codex-game-operator/issues/3#issuecomment-4382951610`、`https://github.com/Jassy930/codex-game-operator/issues/4#issuecomment-4382951548`、`https://github.com/Jassy930/codex-game-operator/issues/6#issuecomment-4382951552`。
+- 回复后于 2026-05-06 04:51 CST 再次同步 GitHub Issues，当前仍为 5 个 open feedback issue、0 个 open bug issue；#3 更新时间为 `2026-05-05T20:51:18Z`，#4/#6 更新时间为 `2026-05-05T20:51:17Z`。
+- 钉钉通知未发送：2026-05-06 04:51 CST 运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` / `ROBOT` 相关有效 webhook URL，当前目录和 `/home/jassy/glm` 两层内未发现 `.env*` 文件；未将 webhook 写入仓库。
 - 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #3/#4/#6，以及指令轮换视觉轨已有下一步动作和收益、但缺少可执行状态信标的链路复盘。
 
 ## 2026-05-06 Product decision：航线指令插画运行态投光
