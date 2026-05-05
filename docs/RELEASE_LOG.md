@@ -8,6 +8,10 @@
 - 同步 GitHub Issues 反馈状态：2026-05-06 07:49 CST 当前 5 个 open issue、5 个 open feedback issue、0 个 open bug issue；#5 作为本轮主关联反馈。
 - 验证通过：`bun test`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 135 项。
 - 构建产物已刷新；`dist/` 按仓库规则忽略。源码已确认包含 `coreGainTrail`、`.core-gain-trail.is-showing`、`.core-gain-trail.is-overload-gain`、`coreGainTrail` 和降低动效兜底。
+- 代码和同步文档提交已创建并推送：`fb39d29 feat: add core gain trail`。
+- 发布：GitHub Pages workflow `25408819514` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页返回 HTTP 200，线上首页已确认包含 `coreGainTrail` 与 `core-gain-trail`，线上 `src/app.js` 已确认包含 `coreGainTrail` 和 `is-overload-gain`，线上 `src/styles.css` 已确认包含 `.core-gain-trail`、`.core-gain-trail.is-overload-gain`、`coreGainTrail` 与降低动效兜底。workflow 给出 Node.js 20 actions 弃用提醒，未影响本次部署。
+- 反馈处理：已回复 #5，说明点火收益轨迹、验证结果、Pages 部署和复测问题；issue 保持 open，评论地址：`https://github.com/Jassy930/codex-game-operator/issues/5#issuecomment-4384060839`。回复后于 2026-05-06 07:55 CST 再次同步 GitHub Issues，当前仍为 5 个 open feedback issue、0 个 open bug issue；#5 更新时间为 `2026-05-05T23:55:36Z`。
+- 钉钉通知未发送：2026-05-06 07:55 CST 运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` / `ROBOT` 相关有效 webhook 变量，当前目录和 `/home/jassy/glm` 两层内未发现 `.env*` 文件；未将 webhook 写入仓库。
 
 - 反馈快照新增“界面环境”：游戏内反馈生成 GitHub Issue 时，快照会追加 `界面环境：...`，记录提交反馈时的视口尺寸、系统降低动效偏好和主指针类型，例如 `视口 390x844 · 降低动效 开 · 指针 触屏`，继续为 #4 文字密度/图片化复测和 #5 点火动效复测提供诊断上下文。
 - `src/app.js` 新增 `getFeedbackView()` / `getPrimaryPointerKind()`，提交反馈时把当前 `projectFilter`、`window.innerWidth`、`window.innerHeight`、`prefers-reduced-motion` 和 pointer media query 结果传入 `createFeedbackEntry()`，并同步写入 `feedback_sent.view`；`src/feedback.js` 新增 `formatFeedbackViewEnvironment()`、视口格式化和触屏/鼠标指针文案；`tests/game.test.js` 覆盖字段输出、未知环境回退和前端提交传参。

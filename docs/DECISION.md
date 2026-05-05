@@ -22,6 +22,9 @@
 - 普通点火时 `#coreGainTrail` 与收益浮层同步播放 `coreGainTrail`，过载点火时额外切换 `is-overload-gain`。
 - 本地验证已通过：`bun test`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 135 项。
 - 构建产物已刷新；`dist/` 按仓库规则忽略。源码已确认包含 `coreGainTrail`、`.core-gain-trail.is-showing`、`.core-gain-trail.is-overload-gain`、`coreGainTrail` 和降低动效兜底。
+- 发布验证已通过：提交 `fb39d29` 已推送，GitHub Pages workflow `25408819514` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页返回 HTTP 200，线上首页、`src/app.js` 和 `src/styles.css` 已确认包含 `coreGainTrail`、`core-gain-trail`、`is-overload-gain` 与 `coreGainTrail`。workflow 给出 Node.js 20 actions 弃用提醒，未影响本次部署。
+- 已回复 GitHub Issue #5，说明点火收益轨迹、验证结果、Pages 部署和复测问题；issue 保持 open，评论地址：`https://github.com/Jassy930/codex-game-operator/issues/5#issuecomment-4384060839`。回复后于 2026-05-06 07:55 CST 再次同步 GitHub Issues，当前仍为 5 个 open feedback issue、0 个 open bug issue；#5 更新时间为 `2026-05-05T23:55:36Z`。
+- 钉钉通知未发送：2026-05-06 07:55 CST 运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` / `ROBOT` 相关有效 webhook 变量，当前目录和 `/home/jassy/glm` 两层内未发现 `.env*` 文件；未将 webhook 写入仓库。
 - 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #5，以及当前点火命中反馈已有多层但缺少收益轨迹层的链路复盘。
 
 ## 2026-05-06 Product decision：界面环境反馈快照
