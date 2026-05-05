@@ -1,5 +1,27 @@
 # Decision
 
+## 2026-05-06 Product decision：航线委托下一步节点信标
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-06 02:04 CST 已同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。没有 open bug；#3“玩法太简单”和 #6“后半段玩法没有真正变化”仍是需要持续复测的主动玩法反馈。
+
+当前最大问题：航线委托条已经显示下一步步号、意图、动作、状态、收益和 1/2/3 节点，但下一步节点只是静态金色圆点。玩家扫委托条时仍需要在多个短标和节点之间定位“当前要推进哪一格”，下一步节点缺少一层不增加文字密度的行动信标。
+
+本轮决策：
+
+- 新增“航线委托下一步节点信标”。
+- `src/styles.css` 为 `.directive-task-meter-node.is-next::after` 增加当前节点外环、轻量光晕和 `directiveTaskNextNodeBeacon` 动画。
+- `prefers-reduced-motion: reduce` 下关闭该动画，保留静态外环，避免影响降低动效玩家。
+- `tests/game.test.js` 覆盖 next 节点伪元素、动画 keyframes 和降低动效兜底。
+- 该改动只增强 100K 后航线委托三步节点扫视性，不新增可见文字、不新增收益、不新增存档字段，不改变指令冷却、连携窗口、策略契合、航线委托奖励、星图航段、远航调度、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-05-06 02:04 CST 当前 5 个 open issue、5 个 open feedback issue、0 个 open bug issue；#3/#6 作为本轮关联反馈。
+- 航线委托当前下一步节点显示静态外环和轻量脉冲；降低动效偏好下关闭脉冲动画。
+- 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 129 项。
+- 构建产物已确认 `dist/src/styles.css` 包含 `.directive-task-meter-node.is-next::after` 与 `directiveTaskNextNodeBeacon`。
+- 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #3/#6，以及航线委托条已有短标但下一步节点缺少行动信标的扫视链路复盘。
+
 ## 2026-05-06 Product decision：升级面板本地插画
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-06 01:51 CST 已同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。没有 open bug；#5 刚完成点火反馈补强，本轮转向 #4“现在界面里全是密密麻麻的文字，能不能生成一些图片？让界面变得更好看一些”。

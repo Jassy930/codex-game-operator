@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+- 航线委托新增“下一步节点信标”：100K 后委托条里当前下一步的 1/2/3 节点会显示静态外环和轻量脉冲，让玩家更快扫到当前要推进的节点，继续回应 #3/#6 对主动短循环和后半段三步结构不够直观的反馈。
+- `src/styles.css` 为 `.directive-task-meter-node.is-next::after` 增加外环、光晕、`directiveTaskNextNodeBeacon` 动画和降低动效兜底；`tests/game.test.js` 覆盖伪元素、动画 keyframes 和 reduced motion 绑定。
+- 本轮只增强航线委托三步节点扫视性，不新增可见文字、不新增收益、不新增存档字段，不改变指令冷却、连携窗口、策略契合、航线委托奖励、星图航段、远航调度、反馈入口或部署链路。
+- 同步 GitHub Issues 反馈状态：2026-05-06 02:04 CST 当前 5 个 open issue、5 个 open feedback issue、0 个 open bug issue；#3/#6 作为本轮关联反馈。
+- 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 129 项。
+- 构建产物已确认 `dist/src/styles.css` 包含 `.directive-task-meter-node.is-next::after` 与 `directiveTaskNextNodeBeacon`。
+
 - 升级面板新增本地 SVG 插画：侧栏升级标题下方现在显示 `src/assets/upgrade-visual.svg`，用聚能透镜、自动采集臂、星核稳定器和星核谐振器建立面板级图片锚点，继续回应 #4 对界面文字密度和图片化展示的反馈。
 - `src/assets/upgrade-visual.svg` 新增升级工坊插画；`index.html` 在升级面板内引用 `upgrade-scene-image`；`src/styles.css` 增加稳定宽高比、边框和暗色底；`tests/game.test.js` 覆盖静态首页、样式和资产标记。
 - 本轮只增强升级面板视觉展示，不新增收益、不新增存档字段，不改变升级价格、购买逻辑、目标系统、星图航段、航线策略、航线指令、远航调度、反馈入口或部署链路。

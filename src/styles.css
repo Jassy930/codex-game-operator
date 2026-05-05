@@ -2584,6 +2584,16 @@ h2 {
   line-height: 1;
 }
 
+.directive-task-meter-node::after {
+  position: absolute;
+  inset: -5px;
+  border: 1px solid transparent;
+  border-radius: inherit;
+  content: "";
+  opacity: 0;
+  pointer-events: none;
+}
+
 .directive-task-meter-node.is-complete {
   border-color: rgba(189, 244, 235, 0.86);
   background: #13b5a6;
@@ -2598,6 +2608,13 @@ h2 {
   box-shadow:
     0 0 0 2px rgba(18, 20, 30, 0.78),
     0 0 12px rgba(244, 178, 60, 0.42);
+}
+
+.directive-task-meter-node.is-next::after {
+  border-color: rgba(255, 247, 194, 0.72);
+  box-shadow: 0 0 14px rgba(244, 178, 60, 0.34);
+  opacity: 0.62;
+  animation: directiveTaskNextNodeBeacon 1200ms ease-in-out infinite;
 }
 
 .directive-task.is-completed {
@@ -8633,6 +8650,19 @@ h2 {
   }
 }
 
+@keyframes directiveTaskNextNodeBeacon {
+  0%,
+  100% {
+    opacity: 0.34;
+    transform: scale(0.82);
+  }
+
+  50% {
+    opacity: 0.78;
+    transform: scale(1.28);
+  }
+}
+
 @keyframes directiveDispatchRouteStepBeacon {
   0%,
   100% {
@@ -8726,6 +8756,7 @@ h2 {
   .core-impact-echo.is-showing,
   .core-gain-pop.is-showing::after,
   .core-gain-pop.is-overload-gain.is-showing::after,
+  .directive-task-meter-node.is-next::after,
   .directive-button.is-dispatch-route-step,
   .directive-button.is-dispatch-route-step .directive-dispatch-loop-streak,
   .directive-button.is-dispatch-route-step .directive-status::before,

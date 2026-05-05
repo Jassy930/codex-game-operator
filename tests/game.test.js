@@ -2489,9 +2489,13 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(styles, /height: 16px/);
   assert.match(styles, /\.directive-task-meter-fill/);
   assert.match(styles, /\.directive-task-meter-node/);
+  assert.match(styles, /\.directive-task-meter-node::after/);
   assert.match(styles, /place-items: center/);
   assert.match(styles, /\.directive-task-meter-node\.is-complete/);
   assert.match(styles, /\.directive-task-meter-node\.is-next/);
+  assert.match(styles, /\.directive-task-meter-node\.is-next::after/);
+  assert.match(styles, /@keyframes directiveTaskNextNodeBeacon/);
+  assert.match(styles, /@media \(prefers-reduced-motion: reduce\) \{[\s\S]*\.directive-task-meter-node\.is-next::after[\s\S]*animation: none/);
   assert.match(styles, /\.directive-task\.is-completed/);
   assert.match(styles, /\.far-dispatch/);
   assert.match(styles, /\.far-dispatch-branch/);
