@@ -2,12 +2,15 @@
 
 ## 2026-05-05
 
-- GitHub Issues：gh 可用且已认证；2026-05-05 18:00 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。#4 是最近更新反馈，继续指向“界面文字密度高、希望更多图片”。
+- GitHub Issues：gh 可用且已认证；2026-05-05 18:00 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。#4 是最近更新反馈，继续指向“界面文字密度高、希望更多图片”；回复后于 2026-05-05 18:09 CST 再次同步，当前仍为 5 个 open feedback issue、0 个 open bug issue，#4 更新时间为 `2026-05-05T10:09:31Z`。
 - 本轮 Product decision 继续处理 #4：顶部产能读数卡和当前目标条已经有视觉锚点，但主操作区行动结果提示与离线回收提示仍是整行纯文字。
 - 本轮改动新增“主操作行动提示视觉短标”：`action-notice` 与 `offline-notice` 左侧显示固定 30px CSS 图形槽，行动提示和离线提示使用不同配色。
 - 本轮只调整主操作反馈提示展示和测试，不新增可见文字、不新增收益、不新增存档字段，不改变点击收益、离线结算、目标判定、升级价格、星图、航线指令、远航调度、反馈入口或部署链路。
 - 验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 122 项。
 - 构建产物已确认 `dist/src/styles.css` 包含 `.offline-notice::before`、`.action-notice::before` 与 `grid-template-columns: 30px minmax(0, 1fr)`。
+- 代码提交已创建并推送：`75e778b feat: add action notice visual markers`；GitHub Pages workflow `25370211866` 成功，线上首页和 CSS 已确认包含主操作提示短标。
+- 2026-05-05 18:09 CST 已在 #4 回复本轮处理结果、提交 `75e778b`、GitHub Pages workflow `25370211866` 和线上验证结果；Issue 保持 open 等待复测，评论地址：`https://github.com/Jassy930/codex-game-operator/issues/4#issuecomment-4378307697`。
+- 钉钉通知未发送：2026-05-05 18:10 CST 运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` / `ROBOT` 相关变量名，当前目录和 `/home/jassy/glm` 两层内未发现 `.env*` 文件；未将 webhook 写入仓库。
 - 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #4，以及主操作反馈提示仍缺少图形锚点的首屏复盘。
 
 - GitHub Issues：gh 可用且已认证；2026-05-05 17:49 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。#4 是最近更新反馈，继续指向“界面文字密度高、希望更多图片”。

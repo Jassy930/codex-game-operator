@@ -5,9 +5,13 @@
 - 主操作行动提示和离线回收提示新增视觉短标：点击、过载、购买升级、目标完成和离线回收后的核心提示现在左侧显示固定 CSS 图形槽，继续回应 #4 对首屏文字密度和图片化表达的反馈。
 - `src/styles.css` 将 `action-notice` 与 `offline-notice` 改为 30px 图形槽 + 文本区布局，并为行动/离线提示提供不同渐变短标；`tests/game.test.js` 覆盖静态首页提示节点、CSS 绑定和 `[hidden]` 状态保留。
 - 本轮只调整主操作反馈提示展示和测试，不新增可见文字、不新增收益、不新增存档字段，不改变点击收益、离线结算、目标判定、升级价格、星图、航线指令、远航调度、反馈入口或部署链路。
-- 同步 GitHub Issues 反馈状态：2026-05-05 18:00 CST 当前 5 个 open feedback issue、0 个 open bug issue；#4 作为本轮主处理对象。
+- 同步 GitHub Issues 反馈状态：2026-05-05 18:00 CST 当前 5 个 open feedback issue、0 个 open bug issue；#4 作为本轮主处理对象。回复后于 2026-05-05 18:09 CST 再次同步，当前仍为 5 个 open feedback issue、0 个 open bug issue；#4 更新时间为 2026-05-05T10:09:31Z。
 - 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 122 项。
 - 构建产物已确认 `dist/src/styles.css` 包含 `.offline-notice::before`、`.action-notice::before` 与 `grid-template-columns: 30px minmax(0, 1fr)`。
+- 代码提交已创建并推送：`75e778b feat: add action notice visual markers`。
+- 发布：GitHub Pages workflow `25370211866` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页返回 HTTP 200，线上 `src/styles.css` 已确认包含 `.offline-notice::before`、`.action-notice::before` 与 `grid-template-columns: 30px minmax(0, 1fr)`。workflow 继续给出 Node.js 20 actions 弃用提醒，未影响本次部署。
+- 反馈处理：已回复 #4，说明主操作行动提示视觉短标、验证结果、Pages 部署和复测问题；issue 保持 open，评论地址：`https://github.com/Jassy930/codex-game-operator/issues/4#issuecomment-4378307697`。
+- 钉钉通知未发送：2026-05-05 18:10 CST 运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` / `ROBOT` 相关变量名，当前目录和 `/home/jassy/glm` 两层内未发现 `.env*` 文件；未将 webhook 写入仓库。
 - 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #4，以及主操作反馈提示仍缺少图形锚点的首屏复盘。
 
 - 当前目标条新增视觉徽记：主操作区目标条现在在目标文本旁显示固定尺寸内联 SVG 图形槽，继续回应 #4 对首屏文字密度和图片化表达的反馈。
