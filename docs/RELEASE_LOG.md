@@ -2,6 +2,14 @@
 
 ## Unreleased
 
+- 远航路线对照条决策信标新增状态点：20M 后协同/绕行路线对照里的 `航段契合`、`新路线`、`契合稳航`、`轮替改道`、`当前路线`、`闭环完成` 等信标现在带有无文字状态点，当前路线信标会播放轻量补光，继续回应 #6 对后半段路线差异不明显的反馈。
+- `src/styles.css` 为 `.far-dispatch-branch-choice-summary-signal` 增加 `::before` 状态点、状态色、`farDispatchSummarySignalBeacon` 和降低动效兜底；`tests/game.test.js` 覆盖 CSS 绑定。
+- 本轮只增强远航路线对照条扫视性和测试，不改变远航收益、指令冷却、闭环、连段、投送、星图航段、升级价格、存档字段、反馈入口或部署链路。
+- 同步 GitHub Issues 反馈状态：2026-05-05 20:17 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 作为本轮主处理对象。
+- 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 127 项。
+- 构建产物已确认 `dist/src/styles.css` 包含 `far-dispatch-branch-choice-summary-signal::before` 与 `farDispatchSummarySignalBeacon`。
+- 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #6，以及远航路线决策信标上线后的扫视层级复盘。
+
 - 远航调度路线对照新增决策信标：20M 后协同/绕行路线对照现在会显示 `航段契合`、`新路线`、`契合稳航`、`轮替改道`、`当前路线`、`闭环完成` 等短标，让 #6 对应的后半段路线差异不只依赖长句和收益徽标。
 - `src/game.js` 为分支选择派生 `routeDecisionSignalKind` / `routeDecisionSignalText`；`src/app.js` 渲染 `far-dispatch-branch-choice-summary-signal` 并写入标题/可访问摘要；`src/styles.css` 增加桌面和小屏 grid 区域、状态色与当前路线样式；`tests/game.test.js` 覆盖运行态字段、静态绑定、CSS 布局和 20M 后样例。
 - 本轮只增强远航调度路线理解和测试，不改变远航收益、指令冷却、闭环、连段、投送、星图航段、升级价格、存档字段、反馈入口或部署链路。

@@ -2,6 +2,14 @@
 
 ## 2026-05-05
 
+- GitHub Issues：gh 可用且已认证；2026-05-05 20:17 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。#6 仍是最近更新反馈，继续指向“后半段玩法变化不明显、只有不停目标”。
+- 本轮 Product decision 继续处理 #6：远航路线对照条已有决策信标，但信标仍主要靠文字和底色区分，当前路线宽栏里还缺少一层无文字状态点。
+- 本轮改动新增“远航决策信标状态点”：`far-dispatch-branch-choice-summary-signal` 增加 `::before` 状态点，按航段契合、稳航/当前、改道和闭环完成使用差异色；当前路线信标播放轻量补光。
+- 本轮只增强远航路线对照条扫视性和测试，不改变远航收益、指令冷却、闭环、连段、投送、星图航段、升级价格、存档字段、反馈入口或部署链路。
+- 验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 127 项。
+- 构建产物已确认 `dist/src/styles.css` 包含 `far-dispatch-branch-choice-summary-signal::before` 与 `farDispatchSummarySignalBeacon`。
+- 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #6，以及远航路线决策信标上线后的扫视层级复盘。
+
 - GitHub Issues：gh 可用且已认证；2026-05-05 20:08 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。#6 在本轮回复后更新时间为 `2026-05-05T12:08:15Z`，继续指向“后半段玩法变化不明显、只有不停目标”。
 - 本轮 Product decision 处理 #6：远航调度已有协同/绕行、改道、稳航、闭环、突破和连段，但路线对照里的分支定位仍需要更直接的决策锚点。
 - 本轮改动新增“远航路线决策信标”：20M 后协同/绕行路线对照新增 `routeDecisionSignalText` 与 `far-dispatch-branch-choice-summary-signal`，用航段契合、新路线、稳航、改道、当前路线和闭环完成等短标解释分支定位。

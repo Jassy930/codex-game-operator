@@ -2377,11 +2377,17 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(styles, /\.far-dispatch-branch-choice-summary-item\.is-active-route[\s\S]*\.far-dispatch-branch-choice-summary-glyph\.is-progress/);
   assert.match(styles, /\.far-dispatch-branch-choice-summary-signal/);
   assert.match(styles, /grid-area: signal/);
+  assert.match(styles, /\.far-dispatch-branch-choice-summary-signal::before/);
   assert.match(styles, /\.far-dispatch-branch-choice-summary-signal\.is-focus/);
+  assert.match(styles, /\.far-dispatch-branch-choice-summary-signal\.is-focus::before/);
   assert.match(styles, /\.far-dispatch-branch-choice-summary-signal\.is-stable/);
+  assert.match(styles, /\.far-dispatch-branch-choice-summary-signal\.is-stable::before/);
   assert.match(styles, /\.far-dispatch-branch-choice-summary-signal\.is-shift/);
+  assert.match(styles, /\.far-dispatch-branch-choice-summary-signal\.is-shift::before/);
   assert.match(styles, /\.far-dispatch-branch-choice-summary-signal\.is-completed/);
+  assert.match(styles, /\.far-dispatch-branch-choice-summary-signal\.is-completed::before/);
   assert.match(styles, /\.far-dispatch-branch-choice-summary-item\.is-active-route[\s\S]*\.far-dispatch-branch-choice-summary-signal/);
+  assert.match(styles, /animation: farDispatchSummarySignalBeacon 1450ms ease-in-out infinite/);
   assert.match(styles, /\.far-dispatch-branch-choice-summary-phase/);
   assert.match(styles, /grid-area: phase/);
   assert.match(styles, /\.far-dispatch-branch-choice-summary-phase\.is-branch/);
@@ -2443,8 +2449,10 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(styles, /@keyframes farDispatchSummaryActiveActionGlow/);
   assert.match(styles, /@keyframes farDispatchSummaryActivePayoffGlow/);
   assert.match(styles, /@keyframes farDispatchSummaryLoopStreakResultGlow/);
+  assert.match(styles, /@keyframes farDispatchSummarySignalBeacon/);
   assert.match(styles, /@keyframes farDispatchLoopStreakBeacon/);
   assert.match(styles, /@media \(prefers-reduced-motion: reduce\) \{[\s\S]*\.far-dispatch-branch-choice-summary-item\.is-active-route[\s\S]*animation: none/);
+  assert.match(styles, /@media \(prefers-reduced-motion: reduce\) \{[\s\S]*\.far-dispatch-branch-choice-summary-signal[\s\S]*animation: none/);
   assert.match(styles, /@media \(prefers-reduced-motion: reduce\) \{[\s\S]*\.far-dispatch-branch-choice-summary-payoff[\s\S]*animation: none/);
   assert.match(styles, /@media \(prefers-reduced-motion: reduce\) \{[\s\S]*\.far-dispatch-branch-choice-summary-result\.has-loop-streak[\s\S]*animation: none/);
   assert.match(styles, /@media \(prefers-reduced-motion: reduce\) \{[\s\S]*\.far-dispatch\.is-active \.far-dispatch-loop-streak[\s\S]*animation: none/);
