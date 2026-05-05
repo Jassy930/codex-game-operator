@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+- 反馈快照新增“星图筛选”：游戏内反馈生成 GitHub Issue 时，快照会追加 `星图筛选：...`，记录玩家提交反馈时正在查看的星图筛选摘要，例如默认本章、全部航段、远航长尾或奖励/状态筛选，继续为 #2/#3/#4/#6 复测提供可诊断上下文。
+- `src/app.js` 在提交反馈时把当前 `projectFilter` 传入 `createFeedbackEntry()`；`src/feedback.js` 复用 `getProjectStatuses()`、`getProjectFilterBrief()`、`PROJECT_FILTER_DEFS` 和 `INITIAL_PROJECT_FILTER_ID` 格式化筛选快照；`tests/game.test.js` 覆盖默认本章、远航长尾、未知筛选回退和前端提交传参。
+- 本轮只增强真实反馈诊断能力，不新增界面可见文字、不新增收益、不新增存档字段，不改变星图筛选交互、星图航段、航线指令、远航调度、反馈入口或部署链路。
+- 同步 GitHub Issues 反馈状态：2026-05-06 07:16 CST 当前 5 个 open issue、5 个 open feedback issue、0 个 open bug issue；#2/#3/#4/#6 作为本轮关联反馈。
+- 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 134 项。
+- 构建产物已确认 `dist/src/feedback.js` 包含 `formatFeedbackProjectFilter` 与 `星图筛选`，`dist/src/app.js` 包含反馈提交时传入 `projectFilter`。
+
 - 反馈快照新增“远航路线对照”：游戏内反馈生成 GitHub Issue 时，20M 后存在协同 / 绕行路线对照会追加 `远航路线对照：...`，记录首推、建档、当前路线、收益路径、资源取向和连段 / 满段回响预告，继续为 #6 后半段玩法复测提供可诊断上下文。
 - `src/feedback.js` 复用 `getFarRouteDispatch().branchChoiceSummaryText` 格式化路线对照字段；`tests/game.test.js` 覆盖远航锁定态不输出、普通路线对照和满段回响预告路线对照。
 - 本轮只增强真实反馈诊断能力，不新增界面可见文字、不新增收益、不新增存档字段，不改变远航调度、航线指令、星图、反馈入口交互或部署链路。

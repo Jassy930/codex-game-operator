@@ -1,5 +1,28 @@
 # Decision
 
+## 2026-05-06 Product decision：星图筛选反馈快照
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-06 07:16 CST 已同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。没有 open bug；#2/#3/#6 仍等待内容丰富度、主动玩法和后半段复测，#4 继续等待图片化与文字密度复测，#5 继续等待点火反馈复测。
+
+当前最大问题：反馈快照已记录星图进度、星图章节、指令轮换、航线委托、远航调度和路线对照，但没有记录玩家提交反馈时正在查看的星图筛选视图。复盘 #2/#3/#4/#6 时，仍无法直接判断玩家当时是在看默认“本章”、完整 57 段、远航长尾 44 段，还是某个奖励/状态筛选。
+
+本轮决策：
+
+- 新增“星图筛选反馈快照”。
+- `src/app.js` 在提交反馈时把当前运行时 `projectFilter` 传入 `createFeedbackEntry()`。
+- `src/feedback.js` 复用 `getProjectStatuses()` 和 `getProjectFilterBrief()`，在 Issue 快照追加 `星图筛选：...`。
+- 未知筛选回退到默认 `INITIAL_PROJECT_FILTER_ID`，避免旧入口或异常参数写出无效视图。
+- `tests/game.test.js` 覆盖默认本章筛选、远航长尾筛选、未知筛选回退和前端提交传参。
+- 该改动只增强真实反馈诊断能力，不新增界面可见文字、不新增收益、不新增存档字段，不改变星图筛选交互、星图航段、航线指令、远航调度、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-05-06 07:16 CST 当前 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。
+- 新提交的游戏内反馈 Issue 会显示 `星图筛选：...`，例如默认 `本章 0/4 · 下一条 航段 1/57 点亮星图 · 剩余 4 段`，远航长尾视图为 `远航长尾 13/44 · 下一条 航段 27/57 脉冲航闸 · 剩余 31 段`。
+- 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 134 项。
+- 构建产物已确认 `dist/src/feedback.js` 包含 `formatFeedbackProjectFilter` 与 `星图筛选`，`dist/src/app.js` 包含反馈提交时传入 `projectFilter`。
+- 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #2/#3/#4/#6，以及当前反馈快照缺少玩家所见星图筛选视图的链路复盘。
+
 ## 2026-05-06 Product decision：远航路线对照反馈快照
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-06 07:03 CST 已同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。没有 open bug；#6“后半段玩法没有真正变化”仍等待带新快照的真实复测，#3 继续作为主动玩法丰富度的间接关联反馈。

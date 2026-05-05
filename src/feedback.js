@@ -1,13 +1,17 @@
 import {
   DEFAULT_ROUTE_STANCE_ID,
   DIRECTIVE_MASTERY_MAX_STACKS,
+  INITIAL_PROJECT_FILTER_ID,
+  PROJECT_FILTER_DEFS,
   UPGRADE_DEFS,
   formatNumber,
   getCoreRewardPreview,
   getDirectivePlan,
   getDirectiveTaskStatus,
   getFarRouteDispatch,
+  getProjectFilterBrief,
   getProjectOverview,
+  getProjectStatuses,
   getUpgradeAffordability,
   ROUTE_STANCE_DEFS
 } from "./game.js";
@@ -43,6 +47,7 @@ export function createFeedbackEntry({
   goal,
   sessionId,
   preferences,
+  view,
   createdAt = new Date().toISOString(),
   now = Date.now()
 }) {
@@ -54,9 +59,14 @@ export function createFeedbackEntry({
   const directiveTask = getDirectiveTaskStatus(currentState, now);
   const farRouteDispatch = getFarRouteDispatch(currentState, now);
   const projectOverview = getProjectOverview(currentState, now);
+  const projectStatuses = getProjectStatuses(currentState, now);
   const upgradeAffordability = formatFeedbackUpgradeAffordability(
     currentState,
     currentGoal
+  );
+  const projectFilter = formatFeedbackProjectFilter(
+    projectStatuses,
+    getFeedbackProjectFilterId(view?.projectFilter)
   );
   const farRouteLoopStreak = formatFeedbackFarRouteLoopStreak(farRouteDispatch);
   const farRouteLoopCapstone =
@@ -85,6 +95,7 @@ export function createFeedbackEntry({
       routeStance: getFeedbackRouteStanceId(currentState.routeStance),
       projectOverview: formatFeedbackProjectOverview(projectOverview),
       projectChapter: formatFeedbackProjectChapter(projectOverview),
+      projectFilter,
       upgradeAffordability,
       directiveMastery: getFeedbackDirectiveMastery(currentState.directiveMastery),
       directivePlan: formatFeedbackDirectivePlan(directivePlan),
@@ -144,6 +155,7 @@ export function createFeedbackIssueBody(entry) {
     `- 航线策略：${getFeedbackRouteStanceName(snapshot.routeStance)}`,
     `- 星图进度：${snapshot.projectOverview}`,
     `- 星图章节：${snapshot.projectChapter}`,
+    `- 星图筛选：${snapshot.projectFilter}`,
     `- 指令熟练：${snapshot.directiveMastery.stacks}/${DIRECTIVE_MASTERY_MAX_STACKS}`,
     `- 指令轮换：${snapshot.directivePlan}`,
     `- 航线委托：${snapshot.directiveTask}`,
@@ -221,6 +233,19 @@ function formatFeedbackProjectChapter(overview) {
   const currentText = chapterText.split("；当前 ")[1];
 
   return currentText ? "当前 " + currentText : chapterText;
+}
+
+function getFeedbackProjectFilterId(filterId) {
+  return PROJECT_FILTER_DEFS.some((item) => item.id === filterId)
+    ? filterId
+    : INITIAL_PROJECT_FILTER_ID;
+}
+
+function formatFeedbackProjectFilter(projects, filterId) {
+  return stripFeedbackLabel(
+    getProjectFilterBrief(projects, filterId),
+    "筛选摘要"
+  );
 }
 
 function formatFeedbackUpgradeAffordability(state, goal) {

@@ -6634,6 +6634,7 @@ test("反馈入口会生成带游戏快照的 GitHub Issue 链接", () => {
   assert.match(body, /星图进度：0\/57 · 下一段 1\/57：点亮星图 · 奖励 总产能 \+12%/);
   assert.match(body, /进度 80 能量 \/ 100K 能量/);
   assert.match(body, /星图章节：当前 首段星图 1\/4 · 航段 1\/57 点亮星图/);
+  assert.match(body, /星图筛选：本章 0\/4 · 下一条 航段 1\/57 点亮星图 · 剩余 4 段/);
   assert.match(body, new RegExp(`指令熟练：2/${DIRECTIVE_MASTERY_MAX_STACKS}`));
   assert.match(body, /指令轮换：累计 100K 能量后解锁 90 秒连携目标/);
   assert.match(body, /航线委托：累计 100K 能量后解锁 3 步短期任务/);
@@ -6644,6 +6645,7 @@ test("反馈入口会生成带游戏快照的 GitHub Issue 链接", () => {
   assert.match(body, /升级购买态：可购买 聚能透镜、自动采集臂/);
   assert.match(body, /lens:1/);
   assert.match(appJs, /recordEvent\("feedback_sent", \{[\s\S]*feedbackId: entry\.id/);
+  assert.match(appJs, /view: \{[\s\S]*projectFilter/);
 });
 
 test("反馈快照会记录升级购买态", () => {
@@ -6776,6 +6778,57 @@ test("反馈快照会记录星图进度摘要", () => {
   assert.match(body, /星图进度：26\/57 · 下一段 27\/57：脉冲航闸 · 奖励 点击产能 \+18%/);
   assert.match(body, /进度 24\.8M 能量 \/ 30M 能量/);
   assert.match(body, /星图章节：当前 远航长尾 14\/44 · 航段 27\/57 脉冲航闸/);
+});
+
+test("反馈快照会记录星图筛选视图", () => {
+  const state = {
+    ...createInitialState(0),
+    totalEnergy: 24_768_842,
+    energy: 3_472_075,
+    energyPerClick: 16,
+    energyPerSecond: 17.5,
+    overloadBonus: 27,
+    routeStance: "cruise",
+    upgrades: {
+      lens: 15,
+      collector: 25,
+      stabilizer: 21,
+      resonator: 11
+    }
+  };
+  const entry = createFeedbackEntry({
+    type: "experience",
+    rating: 3,
+    message: "星图筛选切到远航长尾后再提交反馈",
+    state,
+    goal: { value: "脉冲航闸" },
+    sessionId: "project-filter-session",
+    view: {
+      projectFilter: "chapter-long-tail"
+    },
+    createdAt: "2026-05-06T07:20:00.000Z"
+  });
+  const invalidFilterEntry = createFeedbackEntry({
+    type: "experience",
+    rating: 3,
+    message: "未知筛选需要回退到默认本章视图",
+    state: createInitialState(0),
+    goal: { value: "购买第一次升级" },
+    sessionId: "project-filter-fallback-session",
+    view: {
+      projectFilter: "unknown-filter"
+    },
+    createdAt: "2026-05-06T07:21:00.000Z"
+  });
+
+  assert.match(
+    createFeedbackIssueBody(entry),
+    /星图筛选：远航长尾 13\/44 · 下一条 航段 27\/57 脉冲航闸 · 剩余 31 段/
+  );
+  assert.match(
+    createFeedbackIssueBody(invalidFilterEntry),
+    /星图筛选：本章 0\/4 · 下一条 航段 1\/57 点亮星图 · 剩余 4 段/
+  );
 });
 
 test("反馈快照会记录当前远航连段层数", () => {

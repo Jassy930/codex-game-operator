@@ -381,6 +381,9 @@ elements.feedbackForm.addEventListener("submit", (event) => {
     preferences: {
       soundEnabled,
       hapticEnabled
+    },
+    view: {
+      projectFilter
     }
   });
   const issueUrl = buildFeedbackIssueUrl(entry);
