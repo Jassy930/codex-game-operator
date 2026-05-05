@@ -5406,9 +5406,12 @@ function buildFarRouteDispatchBranchChoices(
       state,
       routeNodeStates
     );
+    const routeLoopCapstoneText =
+      buildFarRouteDispatchBranchRouteLoopCapstoneText(state, routeNodeStates);
     const routeReturn = buildFarRouteDispatchBranchRouteReturn(
       choice.kind,
-      routeLoopStreakText
+      routeLoopStreakText,
+      routeLoopCapstoneText
     );
     const routeCommandText =
       buildFarRouteDispatchBranchRouteCommandText(routeCommandLabels);
@@ -5488,6 +5491,7 @@ function buildFarRouteDispatchBranchChoices(
       routeReturnKind: routeReturn.kind,
       routeReturnText: routeReturn.text,
       routeLoopStreakText,
+      routeLoopCapstoneText,
       routeCommandLabels,
       routeCommandText,
       routeBranchStepText,
@@ -5538,6 +5542,7 @@ function buildFarRouteDispatchBranchChoices(
         routeIntent.text +
         " · " +
         routeReturn.text +
+        (routeLoopCapstoneText ? " · " + routeLoopCapstoneText : "") +
         " · " +
         routeBranchStepText +
         " · " +
@@ -5844,17 +5849,24 @@ function buildFarRouteDispatchBranchRouteIntent(kind) {
   };
 }
 
-function buildFarRouteDispatchBranchRouteReturn(kind, loopStreakText = "") {
+function buildFarRouteDispatchBranchRouteReturn(
+  kind,
+  loopStreakText = "",
+  loopCapstoneText = ""
+) {
   const routeReturn = {
     ...(FAR_ROUTE_DISPATCH_BRANCH_ROUTE_RETURN_LABELS[kind] ??
       FAR_ROUTE_DISPATCH_BRANCH_ROUTE_RETURN_LABELS.sync)
   };
+  const text = [
+    routeReturn.text,
+    loopStreakText,
+    loopCapstoneText
+  ].filter(Boolean).join(" · ");
 
   return {
     ...routeReturn,
-    text:
-      routeReturn.text +
-      (loopStreakText ? " · " + loopStreakText : "")
+    text
   };
 }
 
@@ -5877,6 +5889,34 @@ function buildFarRouteDispatchBranchRouteLoopStreakText(state, routeNodeStates) 
         );
 
   return formatFarRouteDispatchLoopStreakText(projectedStreak);
+}
+
+function buildFarRouteDispatchBranchRouteLoopCapstoneText(state, routeNodeStates) {
+  const routeIsRelevant =
+    routeNodeStates?.start === "next" ||
+    ["next", "done"].includes(routeNodeStates?.branch) ||
+    ["next", "done"].includes(routeNodeStates?.return);
+  if (!routeIsRelevant) {
+    return "";
+  }
+
+  const currentStreak = readFarRouteDispatchLoopStreak(state);
+  const projectedStreak =
+    routeNodeStates?.return === "done"
+      ? currentStreak
+      : Math.min(
+          FAR_ROUTE_DISPATCH_LOOP_STREAK_MAX_STACKS,
+          currentStreak + 1
+        );
+  if (projectedStreak < FAR_ROUTE_DISPATCH_LOOP_STREAK_MAX_STACKS) {
+    return "";
+  }
+
+  return (
+    "满段回响 +" +
+    Math.round(FAR_ROUTE_DISPATCH_LOOP_STREAK_CAPSTONE_RATE * 100) +
+    "%"
+  );
 }
 
 function buildFarRouteDispatchBranchRouteCommandLabels(
