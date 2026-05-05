@@ -1,5 +1,26 @@
 # Decision
 
+## 2026-05-05 Product decision：反馈状态回执视觉短标
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-05 19:00 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有 open bug；本轮继续处理最近更新的真实反馈 #4“界面里全是密密麻麻的文字，能不能生成一些图片”。
+
+当前最大问题：反馈表单字段、提交按钮和点火偏好控件已有视觉短标，但侧栏反馈表单提交后的 `feedback-status` 回执仍是纯文字。玩家点击提交或表单校验失败后，最后看到的状态反馈仍只靠一行文字识别，和 #4 的文字密度反馈仍有关联。
+
+本轮决策：
+
+- 新增“反馈状态回执视觉短标”。
+- `src/styles.css` 仅在 `.feedback-status:not(:empty)` 时显示 20px CSS 回执短标和稳定图标 + 文本网格布局。
+- `tests/game.test.js` 覆盖静态首页状态节点和 CSS 绑定。
+- 该改动只调整反馈状态回执展示和测试，不新增可见说明文字，不改变反馈内容校验、Issue 草稿、反馈快照、localStorage 事件、玩法数值、星图、航线指令、远航调度或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-05-05 19:00 CST 当前 5 个 open feedback issue、0 个 open bug issue；#4 作为本轮主处理对象。
+- 空 `feedback-status` 继续保持无图标占位；非空状态显示 `grid-template-columns: 20px minmax(0, 1fr)` 和 `::before` 回执短标。
+- 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 125 项。
+- 构建产物已确认 `dist/index.html` 和 `dist/src/styles.css` 包含 `feedbackStatus`、`.feedback-status:not(:empty)` 与 `grid-template-columns: 20px minmax(0, 1fr)`。
+- 发布、Issue 回复和钉钉通知状态待本轮推送后回填。
+
 ## 2026-05-05 Product decision：反馈提交按钮发送短标
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-05 18:44 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有 open bug；本轮继续处理最近更新的真实反馈 #4“界面里全是密密麻麻的文字，能不能生成一些图片”。

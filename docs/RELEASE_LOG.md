@@ -2,6 +2,15 @@
 
 ## Unreleased
 
+- 反馈状态回执新增视觉短标：侧栏反馈表单提交后或校验失败后的状态行现在在文字前显示固定 20px CSS 回执图形槽，继续回应 #4 对界面文字密度和图片化表达的反馈。
+- `src/styles.css` 为 `.feedback-status:not(:empty)` 增加 20px 图形槽、回执短标和稳定图标 + 文本网格布局；`tests/game.test.js` 覆盖静态首页状态节点和 CSS 绑定。
+- 本轮只调整反馈状态回执展示和测试，不新增可见说明文字，不改变反馈内容校验、Issue 草稿、反馈快照、localStorage 事件、玩法数值、星图、航线指令、远航调度或部署链路。
+- 同步 GitHub Issues 反馈状态：2026-05-05 19:00 CST 当前 5 个 open feedback issue、0 个 open bug issue；#4 作为本轮主处理对象。
+- 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 125 项。
+- 构建产物已确认 `dist/index.html` 和 `dist/src/styles.css` 包含 `feedbackStatus`、`.feedback-status:not(:empty)` 与 `grid-template-columns: 20px minmax(0, 1fr)`。
+- 发布、Issue 回复和钉钉通知状态待本轮推送后回填。
+- 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #4，以及反馈状态回执仍缺少图形锚点的侧栏复盘。
+
 - 反馈提交按钮新增发送短标：侧栏反馈表单的“提交反馈”按钮现在在文字前显示固定 22px CSS 发送图形槽，继续回应 #4 对界面文字密度和图片化表达的反馈。
 - `index.html` 为反馈提交按钮添加 `feedback-submit-icon`；`src/styles.css` 绘制发送短标并稳定按钮的图标 + 文本网格布局；`tests/game.test.js` 覆盖静态首页和 CSS 绑定。
 - 本轮只调整反馈提交按钮展示和测试，不新增可见说明文字，不改变反馈类型、评分、内容输入、Issue 草稿、反馈快照、localStorage 事件、玩法数值、星图、航线指令、远航调度或部署链路。
