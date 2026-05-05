@@ -22,6 +22,11 @@
 - 航线委托 0/3 下一步显示 `第 1/3 步`；推荐指令冷却等待时仍保留该步号；2/3 收束时显示 `第 3/3 步`；完成态和锁定态不显示步号短标。
 - 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 128 项。
 - 构建产物已确认 `dist/index.html`、`dist/src/app.js`、`dist/src/game.js` 和 `dist/src/styles.css` 包含 `directive-task-step`、`nextStepText` 与“航线委托下一步步号”。
+- 代码提交已创建并推送：`d1c2291 feat: show directive task next step`。
+- 发布验证已通过：GitHub Pages workflow `25390784667` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页、`src/app.js`、`src/game.js` 和 `src/styles.css` 均返回 HTTP 200，并已确认包含 `directive-task-step`、`nextStepText` 与“航线委托下一步步号”。
+- 已回复 GitHub Issue #3 和 #6，说明航线委托下一步步号短标、验证结果、Pages 部署和复测问题；两个 issue 均保持 open，评论地址：`https://github.com/Jassy930/codex-game-operator/issues/3#issuecomment-4381416477`、`https://github.com/Jassy930/codex-game-operator/issues/6#issuecomment-4381416702`。
+- 回复后于 2026-05-06 01:09 CST 再次同步 GitHub Issues，当前仍为 5 个 open feedback issue、0 个 open bug issue；#3 更新时间为 `2026-05-05T17:09:22Z`，#6 更新时间为 `2026-05-05T17:09:23Z`。
+- 钉钉通知未发送：2026-05-06 01:10 CST 运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` / `ROBOT` 相关有效 webhook URL，当前目录和 `/home/jassy/glm` 两层内未发现 `.env*` 文件；未将 webhook 写入仓库。
 - 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #3/#6，以及航线委托条已有动作/状态/收益但动作短标缺少当前步号的链路复盘。
 
 ## 2026-05-06 Product decision：航线委托下一步状态短标
