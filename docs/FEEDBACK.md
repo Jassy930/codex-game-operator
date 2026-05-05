@@ -8,6 +8,11 @@
 - 本轮只调整当前远航路线步骤对应指令按钮的展示和测试，不新增可见文字、不新增收益、不新增存档字段，不改变指令收益、冷却、连携窗口、星图路线、项目奖励、升级价格、反馈入口或部署链路。
 - 本地完整验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
 - 构建产物已确认 `dist/src/app.js` 和 `dist/src/styles.css` 包含 `is-dispatch-route-step` 与对应样式。
+- 代码提交已创建并推送：`c6f4655 feat: highlight far dispatch route step`。
+- 发布：提交 `c6f4655` 已推送到 `origin/main`；GitHub Pages workflow `25360280007` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页返回 HTTP 200，线上 `src/app.js` 和 `src/styles.css` 已确认包含 `is-dispatch-route-step`。
+- #6 已回复：说明远航路线步骤按钮信标、验证结果、Pages 部署和复测问题；issue 保持 open，评论地址：`https://github.com/Jassy930/codex-game-operator/issues/6#issuecomment-4376845333`。
+- 回复后同步 GitHub Issues：2026-05-05 13:55 CST 当前仍为 5 个 open feedback issue、0 个 open bug issue；#6 更新时间为 2026-05-05T05:55:49Z。
+- 钉钉通知未发送：2026-05-05 13:56 CST 运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` / `ROBOT` 相关变量名，当前目录和 `/home/jassy/glm` 两层内未发现 `.env*` 文件；未将 webhook 写入仓库。
 - 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #6，以及当前远航调度路线步骤在按钮层仍缺少整按钮级扫视锚点的复盘。
 
 - GitHub Issues：gh 可用且已认证；2026-05-05 13:30 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。#5 仍是最近更新反馈，集中在“点火按钮太薄弱、增加点击反馈、特效和点击欲望”。
