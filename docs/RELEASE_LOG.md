@@ -2,6 +2,16 @@
 
 ## Unreleased
 
+- 远航路线对照条 `新路线` 决策信标新增独立 archive 差异色：20M 后协同/绕行路线对照里的 `新路线` 不再回落到默认灰色胶囊，而是使用独立状态色、渐变底和状态点光晕，继续回应 #6 对后半段路线差异不明显的反馈。
+- `src/styles.css` 为 `.far-dispatch-branch-choice-summary-signal.is-archive` 增加状态色和状态点光晕；`tests/game.test.js` 覆盖 CSS 绑定；`docs/PRODUCT.md` 同步产品说明。
+- 本轮只增强远航路线对照条扫视性和测试，不改变远航收益、指令冷却、闭环、连段、投送、星图航段、升级价格、存档字段、反馈入口或部署链路。
+- 同步 GitHub Issues 反馈状态：2026-05-05 20:34 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 作为本轮主处理对象。
+- 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 127 项。
+- 构建产物已确认 `dist/src/styles.css` 包含 `.far-dispatch-branch-choice-summary-signal.is-archive` 与 `#eadbff` / `#d5b4ff`。
+- 代码提交已创建：`83c73cd feat: distinguish far new route signal`。
+- 发布与反馈回复待推送后执行。
+- 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #6，以及远航决策信标状态点上线后的 `新路线` 默认态复盘。
+
 - 远航路线对照条决策信标新增状态点：20M 后协同/绕行路线对照里的 `航段契合`、`新路线`、`契合稳航`、`轮替改道`、`当前路线`、`闭环完成` 等信标现在带有无文字状态点，当前路线信标会播放轻量补光，继续回应 #6 对后半段路线差异不明显的反馈。
 - `src/styles.css` 为 `.far-dispatch-branch-choice-summary-signal` 增加 `::before` 状态点、状态色、`farDispatchSummarySignalBeacon` 和降低动效兜底；`tests/game.test.js` 覆盖 CSS 绑定。
 - 本轮只增强远航路线对照条扫视性和测试，不改变远航收益、指令冷却、闭环、连段、投送、星图航段、升级价格、存档字段、反馈入口或部署链路。

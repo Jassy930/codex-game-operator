@@ -1,5 +1,29 @@
 # Decision
 
+## 2026-05-05 Product decision：远航新路线信标差异色
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-05 20:34 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有 open bug；本轮继续处理真实反馈 #6“到后半段，游戏玩法已经开始无聊了，只有不停的目标，但是游戏玩法没有真正的变化”。
+
+当前最大问题：远航路线对照条已有决策信标和状态点，但 `新路线` 仍使用默认灰色胶囊。玩家对比协同/绕行时，`新路线` 与其它已分类信标的视觉层级不一致，容易被当成普通文本而不是可选择路线的状态。
+
+本轮决策：
+
+- 新增“远航新路线信标差异色”。
+- `src/styles.css` 为 `.far-dispatch-branch-choice-summary-signal.is-archive` 增加独立 archive 状态色、渐变底和状态点光晕。
+- `tests/game.test.js` 覆盖 archive 信标样式绑定。
+- `docs/PRODUCT.md` 同步说明 `新路线` 使用独立 archive 状态色。
+- 该改动只增强远航路线对照条扫视性和测试，不改变远航收益、指令冷却、闭环、连段、投送、星图航段、升级价格、存档字段、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-05-05 20:34 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 作为本轮主处理对象。
+- 20M 后路线对照里的 `新路线` 信标不再使用默认灰色，改用 archive 状态色和状态点光晕。
+- 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 127 项。
+- 构建产物已确认 `dist/src/styles.css` 包含 `.far-dispatch-branch-choice-summary-signal.is-archive` 与 `#eadbff` / `#d5b4ff`。
+- 代码提交已创建：`83c73cd feat: distinguish far new route signal`。
+- 发布与反馈回复待推送后执行。
+- 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #6，以及远航决策信标状态点上线后的 `新路线` 默认态复盘。
+
 ## 2026-05-05 Product decision：远航决策信标状态点
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-05 20:17 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有 open bug；本轮继续处理真实反馈 #6“到后半段，游戏玩法已经开始无聊了，只有不停的目标，但是游戏玩法没有真正的变化”。
