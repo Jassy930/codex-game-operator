@@ -8,6 +8,10 @@
 - 同步 GitHub Issues 反馈状态：2026-05-06 07:30 CST 当前 5 个 open issue、5 个 open feedback issue、0 个 open bug issue；#4/#5 作为本轮主关联反馈。
 - 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 135 项。
 - 构建产物已刷新；`dist/` 按仓库规则忽略。源码已确认包含 `formatFeedbackViewEnvironment`、`界面环境`、`getFeedbackView()`、`prefers-reduced-motion: reduce` 和 `getPrimaryPointerKind()`。
+- 代码和同步文档提交已创建并推送：`28ca779 feat: add feedback view environment snapshot`。
+- 发布：GitHub Pages workflow `25408327241` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页返回 HTTP 200，线上 `src/feedback.js` 已确认包含 `formatFeedbackViewEnvironment` 与 `界面环境`，线上 `src/app.js` 已确认包含 `getFeedbackView()`、`prefers-reduced-motion: reduce` 和 `getPrimaryPointerKind()`。workflow 给出 Node.js 20 actions 弃用提醒，未影响本次部署。
+- 反馈处理：已回复 #4 和 #5，说明界面环境反馈快照、验证结果、Pages 部署和复测问题；issue 均保持 open，评论地址：`https://github.com/Jassy930/codex-game-operator/issues/4#issuecomment-4383990280`、`https://github.com/Jassy930/codex-game-operator/issues/5#issuecomment-4383990277`。回复后于 2026-05-06 07:41 CST 再次同步 GitHub Issues，当前仍为 5 个 open feedback issue、0 个 open bug issue。
+- 钉钉通知未发送：2026-05-06 07:41 CST 运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` / `ROBOT` 相关有效 webhook 变量，当前目录和 `/home/jassy/glm` 两层内未发现 `.env*` 文件；未将 webhook 写入仓库。
 
 - 反馈快照新增“星图筛选”：游戏内反馈生成 GitHub Issue 时，快照会追加 `星图筛选：...`，记录玩家提交反馈时正在查看的星图筛选摘要，例如默认本章、全部航段、远航长尾或奖励/状态筛选，继续为 #2/#3/#4/#6 复测提供可诊断上下文。
 - `src/app.js` 在提交反馈时把当前 `projectFilter` 传入 `createFeedbackEntry()`；`src/feedback.js` 复用 `getProjectStatuses()`、`getProjectFilterBrief()`、`PROJECT_FILTER_DEFS` 和 `INITIAL_PROJECT_FILTER_ID` 格式化筛选快照；`tests/game.test.js` 覆盖默认本章、远航长尾、未知筛选回退和前端提交传参。
