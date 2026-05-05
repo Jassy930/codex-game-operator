@@ -8,6 +8,10 @@
 - 同步 GitHub Issues 反馈状态：2026-05-05 16:55 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 作为主处理对象。
 - 验证通过：`node --test tests/game.test.js`、`npm install`、`npm test`、`npm run build`、`bun install --no-save`、`bun run test`、`bun run build`；测试数 118 项。
 - 构建产物已确认 `dist/src/app.js` 包含 `far-dispatch-loop-streak` 和 `has-loop-streak`，`dist/src/styles.css` 包含 `.far-dispatch-loop-streak`、`.far-dispatch.has-loop-streak` 和 `farDispatchLoopStreakBeacon`。
+- 代码提交已创建并推送：`201d9d9 feat: show far streak on dispatch panel`。
+- 发布：GitHub Pages workflow `25367356111` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页返回 HTTP 200，线上 `src/app.js` 已确认包含 `far-dispatch-loop-streak` 和 `has-loop-streak`，线上 `src/styles.css` 已确认包含 `.far-dispatch-loop-streak`、`.far-dispatch.has-loop-streak` 和 `farDispatchLoopStreakBeacon`。workflow 继续给出 Node.js 20 actions 弃用提醒，未影响本次部署。
+- 反馈处理：已回复 #6，说明远航连段主调度条信标、验证结果、Pages 部署和复测问题；issue 保持 open，评论地址：`https://github.com/Jassy930/codex-game-operator/issues/6#issuecomment-4377874170`。回复后于 2026-05-05 17:04 CST 再次同步 GitHub Issues，当前仍为 5 个 open feedback issue、0 个 open bug issue；#6 更新时间为 2026-05-05T09:03:51Z。
+- 钉钉通知未发送：2026-05-05 17:04 CST 运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` / `ROBOT` 相关变量名，当前目录和 `/home/jassy/glm` 两层内未发现 `.env*` 文件；未将 webhook 写入仓库。
 
 - 星图总览当前航段视觉卡新增“远航调度短标”：20M 后当前航段视觉卡会显示 `调度 X`，当前远航连段有效时显示 `调度 X · 连段 X/3`，让跨轮递进收益进入默认可见的视觉卡层，继续回应 #6 对后半段玩法变化不明显的反馈。
 - `src/game.js` 让 `getProjectCurrentVisual()` 透传 `dispatchBadgeText` 并写入 title / aria-label；`src/app.js` 在视觉卡中渲染 `project-current-dispatch` 胶囊并追加 `is-dispatch-active`；`src/styles.css` 增加当前航段视觉卡调度胶囊和 active 边框样式；`tests/game.test.js` 覆盖数据、title、静态 JS 和 CSS 绑定。

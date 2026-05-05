@@ -7,6 +7,11 @@
 - 本轮改动新增“远航连段主调度条信标”：有效连段存在时，远航调度主面板会显示独立 `连段 X/3` 胶囊，并给面板追加 `has-loop-streak` 状态。
 - 本轮只调整远航调度主面板展示和测试，不新增收益、不新增存档字段，不改变远航连段结算、远航调度路线、星图总览、项目卡片、按钮徽标、反馈入口或部署链路。
 - 本地验证已通过：`node --test tests/game.test.js`、`npm install`、`npm test`、`npm run build`、`bun install --no-save`、`bun run test`、`bun run build`；测试数 118 项；构建产物已确认包含 `far-dispatch-loop-streak`、`has-loop-streak` 和 `farDispatchLoopStreakBeacon`。
+- 代码提交已创建并推送：`201d9d9 feat: show far streak on dispatch panel`。
+- 发布：GitHub Pages workflow `25367356111` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页返回 HTTP 200，线上 `src/app.js` / `src/styles.css` 已确认包含本轮关键标记。
+- #6 已回复：说明远航连段主调度条信标、验证结果、Pages 部署和复测问题；issue 保持 open，评论地址：`https://github.com/Jassy930/codex-game-operator/issues/6#issuecomment-4377874170`。
+- 回复后同步 GitHub Issues：2026-05-05 17:04 CST 当前仍为 5 个 open feedback issue、0 个 open bug issue；#6 更新时间为 2026-05-05T09:03:51Z。
+- 钉钉通知未发送：2026-05-05 17:04 CST 运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` / `ROBOT` 相关变量名，当前目录和 `/home/jassy/glm` 两层内未发现 `.env*` 文件；未将 webhook 写入仓库。
 - 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #6，以及远航连段进入多个辅助层后主调度面板仍缺少独立短标的链路复盘。
 
 - GitHub Issues：gh 可用且已认证；2026-05-05 16:40 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。#6 仍是最近更新反馈，指向“后半段只有不停目标，玩法没有真正变化”。
