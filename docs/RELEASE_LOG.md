@@ -8,7 +8,10 @@
 - 同步 GitHub Issues 反馈状态：2026-05-05 14:33 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 作为主处理对象。
 - 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
 - 构建产物已确认 `dist` 中包含 `远航连段`、`dispatchLoopStreakReward`、`directive-dispatch-loop-streak` 和 `farRouteLoopStreak` 关键标记。
-- 发布、反馈处理和钉钉通知状态将在推送与部署后回填。
+- 代码提交已创建并推送：`51e8f20 feat: add far dispatch loop streak`。
+- 发布：提交 `51e8f20` 已推送到 `origin/main`；GitHub Pages workflow `25362112691` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页返回 HTTP 200，线上 `src/game.js` 已确认包含 `远航连段`、`farRouteLoopStreak` 和 `dispatchLoopStreakReward`，线上 `src/app.js` 已确认包含 `dispatchLoopStreakReward` 和 `directive-dispatch-loop-streak`，线上 `src/styles.css` 已确认包含 `directive-dispatch-loop-streak`。workflow 继续给出 Node.js 20 actions 弃用提醒，未影响本次部署。
+- 反馈处理：已回复 #6，说明远航闭环连段、验证结果、Pages 部署和复测问题；issue 保持 open，评论地址：`https://github.com/Jassy930/codex-game-operator/issues/6#issuecomment-4377111946`。回复后于 2026-05-05 14:52 CST 再次同步 GitHub Issues，当前仍为 5 个 open feedback issue、0 个 open bug issue；#6 更新时间为 2026-05-05T06:52:40Z。
+- 钉钉通知未发送：2026-05-05 14:53 CST 运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` / `ROBOT` 相关变量名，当前目录和 `/home/jassy/glm` 两层内未发现 `.env*` 文件；未将 webhook 写入仓库。
 - 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #6，以及当前远航闭环完成后缺少跨轮递进收益的复盘。
 
 - 远航路线步骤按钮新增“状态锚点”：20M 后当前远航路线步骤对应的航线指令按钮会把 `可执行` / `冷却中` 状态行升级为胶囊锚点和左侧状态点，让玩家在整按钮级高亮和行动信标之后还能直接扫到当前步骤是否可立刻执行，继续回应 #6 对后半段玩法变化不明显的反馈。
