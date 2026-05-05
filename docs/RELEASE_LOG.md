@@ -2,6 +2,14 @@
 
 ## Unreleased
 
+- 航线委托新增“完成步号短标”：100K 后 3/3 委托完成态会在完成收益短标旁显示 `3/3 完成`，让完成收益、完成面板、最终节点和满格进度扫光之外，再保留一层直接的终点步号锚点，继续回应 #3/#6 对主动短循环和后半段三步结构不够直观的反馈。
+- `src/game.js` 为 completed 任务状态新增 `completedStepText`；`src/app.js` 在完成态复用步号胶囊并切换“航线委托完成步号”标题；`src/styles.css` 增加 `.directive-task-step.is-completed`；`tests/game.test.js` 覆盖状态字段、运行时绑定和样式。
+- 本轮只增强航线委托完成步号扫视，不新增收益、不新增存档字段，不改变指令冷却、连携窗口、策略契合、航线委托奖励数值、星图航段、远航调度、反馈入口或部署链路。
+- 同步 GitHub Issues 反馈状态：2026-05-06 03:52 CST 当前 5 个 open issue、5 个 open feedback issue、0 个 open bug issue；#3/#6 作为本轮关联反馈。
+- 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 129 项。
+- 构建产物已确认 `dist/src/app.js`、`dist/src/game.js` 和 `dist/src/styles.css` 包含 `completedStepText`、`航线委托完成步号` 与 `.directive-task-step.is-completed`。
+- 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #3/#6，以及航线委托完成态已有完成图形反馈但缺少完成步号短标的链路复盘。
+
 - 航线委托新增“完成进度扫光”：100K 后 3/3 委托完成态会让满格进度条播放浅金扫光，让 `委托完成 +8%` 完成收益短标、整卡完成面板和三步终点节点形成同层完成反馈，继续回应 #3/#6 对主动短循环和后半段三步结构不够直观的反馈。
 - `src/styles.css` 为 `.directive-task.is-completed .directive-task-meter-fill::after` 增加完成进度扫光、`directiveTaskCompletedMeterSweep` 动画和降低动效兜底；`tests/game.test.js` 覆盖选择器、keyframes 和 reduced motion 绑定。
 - 本轮只增强航线委托完成进度扫视，不新增可见文字、不新增收益、不新增存档字段，不改变指令冷却、连携窗口、策略契合、航线委托奖励数值、星图航段、远航调度、反馈入口或部署链路。

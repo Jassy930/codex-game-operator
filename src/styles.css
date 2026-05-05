@@ -2505,6 +2505,13 @@ h2 {
   color: #bdf4eb;
 }
 
+.directive-task-step.is-completed {
+  border-color: rgba(255, 211, 106, 0.42);
+  background: rgba(19, 181, 166, 0.16);
+  color: #fff7c2;
+  box-shadow: 0 0 14px rgba(19, 181, 166, 0.14);
+}
+
 .directive-task-intent {
   border-color: rgba(124, 201, 255, 0.34);
   background: rgba(124, 201, 255, 0.12);

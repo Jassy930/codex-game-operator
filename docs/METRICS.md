@@ -4,6 +4,7 @@
 
 当前实现：
 
+- 航线委托完成步号短标当前由 `getDirectiveTaskStatus().completedStepText` 和 `.directive-task-step.is-completed` 从本地完成态即时渲染为 `3/3 完成`，不单独记录为真实线上指标；委托完成和收益复盘仍依赖现有 `directive` 事件中的 `taskReward`、`taskRewardRate`、完成收益短标、完成节点信标、完成面板信标、完成进度扫光、执行反馈和反馈快照。
 - 浏览器本地通过 localStorage 保存最近 200 条 session、click、first_upgrade_time、upgrade_purchase、goal_complete、reset 事件。
 - 航线委托完成进度扫光当前由 `.directive-task.is-completed .directive-task-meter-fill::after` 从本地完成态即时渲染，播放 `directiveTaskCompletedMeterSweep` 并在降低动效偏好下关闭动画；它不单独记录为真实线上指标。委托完成和收益复盘仍依赖现有 `directive` 事件中的 `taskReward`、`taskRewardRate`、完成收益短标、完成节点信标、完成面板信标、执行反馈和反馈快照。
 - 航线委托完成面板信标当前由 `.directive-task.is-completed` 从本地完成态即时渲染，播放 `directiveTaskCompletedPanelBeacon` 并在降低动效偏好下关闭动画；它不单独记录为真实线上指标。委托完成和收益复盘仍依赖现有 `directive` 事件中的 `taskReward`、`taskRewardRate`、完成收益短标、完成节点信标、执行反馈和反馈快照。
