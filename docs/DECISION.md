@@ -1,5 +1,32 @@
 # Decision
 
+## 2026-05-05 Product decision：远航闭环连段
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-05 14:33 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有 open bug；本轮继续处理真实反馈 #6“后半段只有不停的目标，玩法没有真正变化”。
+
+当前最大问题：远航调度已经有目标 -> 分支/续航 -> 回目标的 3 步闭环、整备回航、路线对照条、按钮高亮和状态锚点，但这些主要让当前轮次更容易被看见。完成闭环后，下一轮没有一个跨轮递进的玩法收益，玩家仍可能觉得后半段只是重复完成一轮目标。
+
+本轮决策：
+
+- 新增“远航闭环连段”。
+- 20M 后远航闭环 3/3 回到当前航段目标指令时，`farRouteLoopStreak` 增加 1 层，最高 3 层。
+- 闭环奖励结算时，按 `FAR_ROUTE_DISPATCH_LOOP_STREAK_REWARD_STEP = 0.03` 为每层追加有效基础指令收益，并显示“远航连段 +X”。
+- 完成闭环后进入整备续航，再整备回航到目标时可以吃到更高连段，让连续闭环从视觉循环变成有跨轮成长的短期目标。
+- `activateDirective()`、`getDirectiveStatus()`、`getFarRouteDispatch()`、指令按钮徽标、预计收益、执行反馈和本地 `directive` 事件都会记录或展示远航连段收益与层数。
+- `normalizeState()` 对新增存档字段做 0 到 3 层的兼容归一化。
+- 该改动不改变星图航段、分支路线、目标指令选择、冷却规则、连携窗口、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-05-05 14:33 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 作为本轮主处理对象。
+- `src/game.js` 包含 `FAR_ROUTE_DISPATCH_LOOP_STREAK_REWARD_STEP`、`FAR_ROUTE_DISPATCH_LOOP_STREAK_MAX_STACKS`、`farRouteLoopStreak`、远航闭环判断和远航连段奖励结算。
+- `src/app.js` 会把 `dispatchLoopStreak*` 写入本地事件、预计收益明细和按钮徽标；`src/styles.css` 包含 `.directive-dispatch-loop-streak`。
+- `tests/game.test.js` 覆盖远航连段常量、0 层、闭环获得 1 层、整备回航获得 2 层、预计收益和执行反馈包含“远航连段”，以及 app/styles 静态绑定。
+- 本地完整验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认 `dist` 中包含 `远航连段`、`dispatchLoopStreakReward`、`directive-dispatch-loop-streak` 和 `farRouteLoopStreak` 关键标记。
+- 发布、Issue 回复和钉钉通知状态将在推送与部署后回填。
+- 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #6，以及当前远航闭环完成后缺少跨轮递进收益的复盘。
+
 ## 2026-05-05 Product decision：远航路线步骤按钮状态锚点
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-05 14:18 CST 已同步到 5 个 open feedback issue、0 个 open bug issue。没有 open bug；本轮继续处理真实反馈 #6“后半段只有不停的目标，玩法没有真正变化”。

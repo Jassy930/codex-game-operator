@@ -2,6 +2,15 @@
 
 ## Unreleased
 
+- 远航调度新增“远航闭环连段”：20M 后远航闭环 3/3 回到当前航段目标指令时获得 1 层连段，最高 3 层；闭环奖励按每层 3% 追加“远航连段 +X”，完成闭环后的整备回航可以吃到更高连段，继续回应 #6 对后半段玩法变化不明显的反馈。
+- `src/game.js` 新增 `FAR_ROUTE_DISPATCH_LOOP_STREAK_REWARD_STEP`、`FAR_ROUTE_DISPATCH_LOOP_STREAK_MAX_STACKS`、`farRouteLoopStreak` 归一化、远航闭环连段判断和奖励结算；`src/app.js` 把 `dispatchLoopStreak*` 写入本地事件、预计收益明细和按钮徽标；`src/styles.css` 增加 `.directive-dispatch-loop-streak`；`tests/game.test.js` 覆盖远航连段规则和静态绑定。
+- 本轮新增兼容归一化的存档字段 `farRouteLoopStreak`；不改变星图航段、分支路线、目标指令选择、冷却规则、连携窗口、反馈入口或部署链路。
+- 同步 GitHub Issues 反馈状态：2026-05-05 14:33 CST 当前 5 个 open feedback issue、0 个 open bug issue；#6 作为主处理对象。
+- 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test` 和 `npm run build`；测试数 118 项。
+- 构建产物已确认 `dist` 中包含 `远航连段`、`dispatchLoopStreakReward`、`directive-dispatch-loop-streak` 和 `farRouteLoopStreak` 关键标记。
+- 发布、反馈处理和钉钉通知状态将在推送与部署后回填。
+- 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #6，以及当前远航闭环完成后缺少跨轮递进收益的复盘。
+
 - 远航路线步骤按钮新增“状态锚点”：20M 后当前远航路线步骤对应的航线指令按钮会把 `可执行` / `冷却中` 状态行升级为胶囊锚点和左侧状态点，让玩家在整按钮级高亮和行动信标之后还能直接扫到当前步骤是否可立刻执行，继续回应 #6 对后半段玩法变化不明显的反馈。
 - `src/styles.css` 为 `.directive-button.is-dispatch-route-step .directive-status` 增加胶囊样式、ready/cooling 状态色和 `directiveDispatchRouteStatusBeacon` 状态点动画，并在降低动效偏好中关闭该动画；`tests/game.test.js` 覆盖静态绑定。
 - 本轮只调整当前远航路线步骤对应指令按钮的状态展示和测试，不新增可见文字、不新增收益、不新增存档字段，不改变指令收益、冷却、连携窗口、星图路线、项目奖励、升级价格、反馈入口或部署链路。

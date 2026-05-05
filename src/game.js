@@ -1136,6 +1136,8 @@ export const FAR_ROUTE_DISPATCH_BRANCH_STABILITY_REWARD_RATE = 0.04;
 export const FAR_ROUTE_DISPATCH_BRANCH_FOCUS_REWARD_RATE = 0.05;
 export const FAR_ROUTE_DISPATCH_BRANCH_ROTATION_REWARD_RATE = 0.09;
 export const FAR_ROUTE_DISPATCH_FOCUS_LOOP_REWARD_RATE = 0.07;
+export const FAR_ROUTE_DISPATCH_LOOP_STREAK_REWARD_STEP = 0.03;
+export const FAR_ROUTE_DISPATCH_LOOP_STREAK_MAX_STACKS = 3;
 const FAR_ROUTE_DISPATCH_BRANCH_ROUTE_STEP_LABELS = Object.freeze({
   start: "1",
   branch: "2",
@@ -1230,6 +1232,7 @@ export function createInitialState(now = Date.now()) {
     },
     farRouteLastBranchDirectiveId: null,
     farRouteBranchRotationDirectiveId: null,
+    farRouteLoopStreak: 0,
     directives: { ...INITIAL_DIRECTIVES },
     upgrades: { ...INITIAL_UPGRADES }
   };
@@ -1301,6 +1304,10 @@ export function normalizeState(state, now = Date.now()) {
     ),
     farRouteBranchRotationDirectiveId: getValidDirectiveId(
       source.farRouteBranchRotationDirectiveId
+    ),
+    farRouteLoopStreak: Math.min(
+      FAR_ROUTE_DISPATCH_LOOP_STREAK_MAX_STACKS,
+      Math.max(0, Math.floor(readNumber(source.farRouteLoopStreak, 0)))
     ),
     directives,
     upgrades
@@ -1551,6 +1558,13 @@ export function activateDirective(state, directiveId, now = Date.now()) {
     directive.id,
     chain
   );
+  const dispatchLoopStreakReward = getFarRouteDispatchLoopStreakReward(
+    effectiveBaseGain,
+    dispatch,
+    directive.id,
+    chain,
+    current
+  );
   const dispatchBreakthroughReward = getFarRouteDispatchBreakthroughReward(
     dispatch,
     directive.id,
@@ -1628,6 +1642,7 @@ export function activateDirective(state, directiveId, now = Date.now()) {
       dispatchBranchRotationReward +
       dispatchFocusLoopReward +
       dispatchLoopReward +
+      dispatchLoopStreakReward +
       dispatchBreakthroughReward +
       dispatchDetourBreakthroughReward +
       dispatchPrepReward +
@@ -1667,6 +1682,12 @@ export function activateDirective(state, directiveId, now = Date.now()) {
       chain,
       now
     );
+  const nextFarRouteLoopStreak = getNextFarRouteDispatchLoopStreak(
+    current,
+    dispatch,
+    directive.id,
+    chain
+  );
   const nextState = {
     ...current,
     energy: energyAfterDetourInfusion + gain + dispatchSyncSupply,
@@ -1674,6 +1695,7 @@ export function activateDirective(state, directiveId, now = Date.now()) {
     directives: nextDirectives,
     farRouteLastBranchDirectiveId: nextFarRouteLastBranchDirectiveId,
     farRouteBranchRotationDirectiveId: nextFarRouteBranchRotationDirectiveId,
+    farRouteLoopStreak: nextFarRouteLoopStreak,
     directiveChain: {
       lastDirectiveId: directive.id,
       stacks: chain.stacks,
@@ -1703,6 +1725,8 @@ export function activateDirective(state, directiveId, now = Date.now()) {
   const dispatchFocusLoopRewardText =
     formatFarRouteDispatchFocusLoopReward(dispatchFocusLoopReward);
   const dispatchLoopRewardText = formatFarRouteDispatchLoopReward(dispatchLoopReward);
+  const dispatchLoopStreakRewardText =
+    formatFarRouteDispatchLoopStreakReward(dispatchLoopStreakReward);
   const dispatchBreakthroughRewardText =
     formatFarRouteDispatchBreakthroughReward(dispatchBreakthroughReward);
   const dispatchDetourBreakthroughRewardText =
@@ -1784,6 +1808,10 @@ export function activateDirective(state, directiveId, now = Date.now()) {
     dispatchFocusLoopRewardText,
     dispatchLoopReward,
     dispatchLoopRewardRate: FAR_ROUTE_DISPATCH_LOOP_REWARD_RATE,
+    dispatchLoopStreakReward,
+    dispatchLoopStreakRewardRate: FAR_ROUTE_DISPATCH_LOOP_STREAK_REWARD_STEP,
+    dispatchLoopStreakStacks: nextFarRouteLoopStreak,
+    dispatchLoopStreakRewardText,
     dispatchBreakthroughReward,
     dispatchBreakthroughRewardRate: FAR_ROUTE_DISPATCH_BREAKTHROUGH_REMAINING_RATE,
     dispatchBreakthroughRewardText,
@@ -1838,6 +1866,7 @@ export function activateDirective(state, directiveId, now = Date.now()) {
     dispatchBranchFocusRewardText,
     dispatchBranchRotationRewardText,
     dispatchLoopRewardText,
+    dispatchLoopStreakRewardText,
     dispatchBreakthroughRewardText,
     dispatchDetourBreakthroughRewardText,
     dispatchDetourInfusionText,
@@ -1871,6 +1900,7 @@ export function activateDirective(state, directiveId, now = Date.now()) {
       (dispatchBranchRotationRewardText ? dispatchBranchRotationRewardText + "，" : "") +
       (dispatchFocusLoopRewardText ? dispatchFocusLoopRewardText + "，" : "") +
       (dispatchLoopRewardText ? dispatchLoopRewardText + "，" : "") +
+      (dispatchLoopStreakRewardText ? dispatchLoopStreakRewardText + "，" : "") +
       (dispatchBreakthroughRewardText ? dispatchBreakthroughRewardText + "，" : "") +
       (dispatchDetourBreakthroughRewardText
         ? dispatchDetourBreakthroughRewardText + "，"
@@ -2699,6 +2729,19 @@ export function getDirectiveStatus(state, now = Date.now()) {
         directive.id,
         chain
       );
+      const dispatchLoopStreakReward = getFarRouteDispatchLoopStreakReward(
+        effectiveBaseGain,
+        dispatch,
+        directive.id,
+        chain,
+        current
+      );
+      const dispatchLoopStreakStacks = getNextFarRouteDispatchLoopStreak(
+        current,
+        dispatch,
+        directive.id,
+        chain
+      );
       const dispatchBreakthroughReward = getFarRouteDispatchBreakthroughReward(
         dispatch,
         directive.id,
@@ -2776,6 +2819,7 @@ export function getDirectiveStatus(state, now = Date.now()) {
           dispatchBranchRotationReward +
           dispatchFocusLoopReward +
           dispatchLoopReward +
+          dispatchLoopStreakReward +
           dispatchBreakthroughReward +
           dispatchDetourBreakthroughReward +
           dispatchPrepReward +
@@ -2808,6 +2852,8 @@ export function getDirectiveStatus(state, now = Date.now()) {
       const dispatchFocusLoopRewardText =
         formatFarRouteDispatchFocusLoopReward(dispatchFocusLoopReward);
       const dispatchLoopRewardText = formatFarRouteDispatchLoopReward(dispatchLoopReward);
+      const dispatchLoopStreakRewardText =
+        formatFarRouteDispatchLoopStreakReward(dispatchLoopStreakReward);
       const dispatchBreakthroughRewardText =
         formatFarRouteDispatchBreakthroughReward(dispatchBreakthroughReward);
       const dispatchDetourBreakthroughRewardText =
@@ -2902,6 +2948,10 @@ export function getDirectiveStatus(state, now = Date.now()) {
         dispatchFocusLoopRewardText,
         dispatchLoopReward,
         dispatchLoopRewardRate: FAR_ROUTE_DISPATCH_LOOP_REWARD_RATE,
+        dispatchLoopStreakReward,
+        dispatchLoopStreakRewardRate: FAR_ROUTE_DISPATCH_LOOP_STREAK_REWARD_STEP,
+        dispatchLoopStreakStacks,
+        dispatchLoopStreakRewardText,
         dispatchBreakthroughReward,
         dispatchBreakthroughRewardRate: FAR_ROUTE_DISPATCH_BREAKTHROUGH_REMAINING_RATE,
         dispatchBreakthroughRewardText,
@@ -2953,6 +3003,7 @@ export function getDirectiveStatus(state, now = Date.now()) {
         dispatchBranchFocusRewardText,
         dispatchBranchRotationRewardText,
         dispatchLoopRewardText,
+        dispatchLoopStreakRewardText,
         dispatchBreakthroughRewardText,
         dispatchDetourBreakthroughRewardText,
         dispatchDetourInfusionText,
@@ -2989,6 +3040,9 @@ export function getDirectiveStatus(state, now = Date.now()) {
               : "") +
             (dispatchFocusLoopRewardText ? " · " + dispatchFocusLoopRewardText : "") +
             (dispatchLoopRewardText ? " · " + dispatchLoopRewardText : "") +
+            (dispatchLoopStreakRewardText
+              ? " · " + dispatchLoopStreakRewardText
+              : "") +
             (dispatchBreakthroughRewardText
               ? " · " + dispatchBreakthroughRewardText
               : "") +
@@ -3033,6 +3087,11 @@ export function getDirectiveStatus(state, now = Date.now()) {
 export function getFarRouteDispatch(state, now = Date.now()) {
   const current = normalizeState(state, now);
   const loopTarget = DIRECTIVE_CHAIN_MAX_STACKS + 1;
+  const chainActive = Boolean(
+    current.directiveChain?.lastDirectiveId && current.directiveChain.expiresAt >= now
+  );
+  const loopStreak = chainActive ? current.farRouteLoopStreak : 0;
+  const loopStreakText = formatFarRouteDispatchLoopStreakText(loopStreak);
   const rewardText =
     "调度校准 +" + Math.round(FAR_ROUTE_DISPATCH_BONUS_RATE * 100) + "%";
   const cooldownText =
@@ -3070,6 +3129,10 @@ export function getFarRouteDispatch(state, now = Date.now()) {
     "契合闭环 +" +
     Math.round(FAR_ROUTE_DISPATCH_FOCUS_LOOP_REWARD_RATE * 100) +
     "%";
+  const loopStreakRewardText =
+    "远航连段 +" +
+    Math.round(FAR_ROUTE_DISPATCH_LOOP_STREAK_REWARD_STEP * 100) +
+    "%/层";
   const loopRewardText =
     "远航闭环 +" + Math.round(FAR_ROUTE_DISPATCH_LOOP_REWARD_RATE * 100) + "%";
   const breakthroughRewardText =
@@ -3121,6 +3184,11 @@ export function getFarRouteDispatch(state, now = Date.now()) {
       branchRotationRewardText,
       focusLoopRewardRate: FAR_ROUTE_DISPATCH_FOCUS_LOOP_REWARD_RATE,
       focusLoopRewardText,
+      loopStreak: 0,
+      loopStreakMaxStacks: FAR_ROUTE_DISPATCH_LOOP_STREAK_MAX_STACKS,
+      loopStreakRewardStep: FAR_ROUTE_DISPATCH_LOOP_STREAK_REWARD_STEP,
+      loopStreakRewardText,
+      loopStreakText: "",
       branchFocusKind: "",
       branchFocusText: "",
       branchFocusReasonText: "",
@@ -3205,6 +3273,11 @@ export function getFarRouteDispatch(state, now = Date.now()) {
       branchRotationRewardText,
       focusLoopRewardRate: FAR_ROUTE_DISPATCH_FOCUS_LOOP_REWARD_RATE,
       focusLoopRewardText,
+      loopStreak,
+      loopStreakMaxStacks: FAR_ROUTE_DISPATCH_LOOP_STREAK_MAX_STACKS,
+      loopStreakRewardStep: FAR_ROUTE_DISPATCH_LOOP_STREAK_REWARD_STEP,
+      loopStreakRewardText,
+      loopStreakText,
       branchFocusKind: "",
       branchFocusText: "",
       branchFocusReasonText: "",
@@ -3350,6 +3423,11 @@ export function getFarRouteDispatch(state, now = Date.now()) {
     branchRotationRewardText,
     focusLoopRewardRate: FAR_ROUTE_DISPATCH_FOCUS_LOOP_REWARD_RATE,
     focusLoopRewardText,
+    loopStreak,
+    loopStreakMaxStacks: FAR_ROUTE_DISPATCH_LOOP_STREAK_MAX_STACKS,
+    loopStreakRewardStep: FAR_ROUTE_DISPATCH_LOOP_STREAK_REWARD_STEP,
+    loopStreakRewardText,
+    loopStreakText,
     branchFocusKind: branchFocus.kind,
     branchFocusText: branchFocus.text,
     branchFocusReasonText: branchFocus.reasonText,
@@ -3409,7 +3487,10 @@ export function getFarRouteDispatch(state, now = Date.now()) {
     loopTarget: loopStatus.target,
     loopSteps,
     loopStepText: buildFarRouteDispatchLoopStepText(loopSteps),
-    loopStatusText: appendFarRouteDispatchBranchText(loopStatus.text, branchStatus),
+    loopStatusText: appendFarRouteDispatchLoopStreakText(
+      appendFarRouteDispatchBranchText(loopStatus.text, branchStatus),
+      loopStreak
+    ),
     text:
       "远航调度：" +
       project.segmentText +
@@ -7292,12 +7373,16 @@ function formatFarRouteDispatchFocusLoopReward(dispatchFocusLoopReward) {
   return "契合闭环 +" + formatNumber(dispatchFocusLoopReward);
 }
 
+function isFarRouteDispatchLoopClosure(dispatch, directiveId, chain) {
+  return (
+    dispatch?.active &&
+    dispatch.targetDirectiveId === directiveId &&
+    chain.stacks >= DIRECTIVE_CHAIN_MAX_STACKS
+  );
+}
+
 function getFarRouteDispatchLoopReward(baseGain, dispatch, directiveId, chain) {
-  if (
-    !dispatch?.active ||
-    dispatch.targetDirectiveId !== directiveId ||
-    chain.stacks < DIRECTIVE_CHAIN_MAX_STACKS
-  ) {
+  if (!isFarRouteDispatchLoopClosure(dispatch, directiveId, chain)) {
     return 0;
   }
 
@@ -7310,6 +7395,57 @@ function formatFarRouteDispatchLoopReward(dispatchLoopReward) {
   }
 
   return "远航闭环 +" + formatNumber(dispatchLoopReward);
+}
+
+function readFarRouteDispatchLoopStreak(state) {
+  return Math.min(
+    FAR_ROUTE_DISPATCH_LOOP_STREAK_MAX_STACKS,
+    Math.max(0, Math.floor(readNumber(state?.farRouteLoopStreak, 0)))
+  );
+}
+
+function getNextFarRouteDispatchLoopStreak(state, dispatch, directiveId, chain) {
+  const currentStreak = readFarRouteDispatchLoopStreak(state);
+  if (isFarRouteDispatchLoopClosure(dispatch, directiveId, chain)) {
+    return Math.min(
+      FAR_ROUTE_DISPATCH_LOOP_STREAK_MAX_STACKS,
+      currentStreak + 1
+    );
+  }
+
+  return dispatch?.active && chain.stacks > 0 ? currentStreak : 0;
+}
+
+function getFarRouteDispatchLoopStreakReward(
+  baseGain,
+  dispatch,
+  directiveId,
+  chain,
+  state
+) {
+  if (!isFarRouteDispatchLoopClosure(dispatch, directiveId, chain)) {
+    return 0;
+  }
+
+  const streak = getNextFarRouteDispatchLoopStreak(
+    state,
+    dispatch,
+    directiveId,
+    chain
+  );
+  if (streak <= 0) {
+    return 0;
+  }
+
+  return roundTo(baseGain * FAR_ROUTE_DISPATCH_LOOP_STREAK_REWARD_STEP * streak, 4);
+}
+
+function formatFarRouteDispatchLoopStreakReward(dispatchLoopStreakReward) {
+  if (!dispatchLoopStreakReward) {
+    return "";
+  }
+
+  return "远航连段 +" + formatNumber(dispatchLoopStreakReward);
 }
 
 function getFarRouteDispatchBreakthroughReward(dispatch, directiveId, chain) {
@@ -7812,6 +7948,21 @@ function getFarRouteDispatchLoopStatus(state, directive, relayDirective, now) {
       " · 剩余 " +
       windowText
   };
+}
+
+function formatFarRouteDispatchLoopStreakText(streak) {
+  const safeStreak = Math.min(
+    FAR_ROUTE_DISPATCH_LOOP_STREAK_MAX_STACKS,
+    Math.max(0, Math.floor(Number(streak) || 0))
+  );
+  return safeStreak > 0
+    ? "连段 " + safeStreak + "/" + FAR_ROUTE_DISPATCH_LOOP_STREAK_MAX_STACKS
+    : "";
+}
+
+function appendFarRouteDispatchLoopStreakText(text, streak) {
+  const loopStreakText = formatFarRouteDispatchLoopStreakText(streak);
+  return loopStreakText ? text + " · " + loopStreakText : text;
 }
 
 function getFarRouteDispatchLoopNextText(

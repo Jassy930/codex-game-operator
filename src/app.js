@@ -1404,7 +1404,8 @@ function getFarDispatchDisplayText(dispatch) {
   return [
     "远航调度：" + dispatch.segmentText,
     dispatch.projectName,
-    "目标 " + dispatch.targetDirectiveName
+    "目标 " + dispatch.targetDirectiveName,
+    dispatch.loopStreakText
   ]
     .filter(Boolean)
     .join(" · ");
@@ -1603,6 +1604,10 @@ function renderDirective(option) {
         dispatchLoopReward: result.dispatchLoopReward,
         dispatchLoopRewardRate: result.dispatchLoopRewardRate,
         dispatchLoopRewardText: result.dispatchLoopRewardText,
+        dispatchLoopStreakReward: result.dispatchLoopStreakReward,
+        dispatchLoopStreakRewardRate: result.dispatchLoopStreakRewardRate,
+        dispatchLoopStreakStacks: result.dispatchLoopStreakStacks,
+        dispatchLoopStreakRewardText: result.dispatchLoopStreakRewardText,
         dispatchBreakthroughReward: result.dispatchBreakthroughReward,
         dispatchBreakthroughRewardRate: result.dispatchBreakthroughRewardRate,
         dispatchBreakthroughRewardText: result.dispatchBreakthroughRewardText,
@@ -1741,6 +1746,11 @@ function renderDirective(option) {
   dispatchLoop.textContent = option.dispatchLoopRewardText;
   dispatchLoop.hidden = !option.dispatchLoopRewardText;
 
+  const dispatchLoopStreak = document.createElement("span");
+  dispatchLoopStreak.className = "directive-dispatch-loop-streak";
+  dispatchLoopStreak.textContent = option.dispatchLoopStreakRewardText;
+  dispatchLoopStreak.hidden = !option.dispatchLoopStreakRewardText;
+
   const dispatchBreakthrough = document.createElement("span");
   dispatchBreakthrough.className = "directive-dispatch-breakthrough";
   dispatchBreakthrough.textContent = option.dispatchBreakthroughRewardText;
@@ -1817,6 +1827,7 @@ function renderDirective(option) {
     dispatchBranchRotation,
     dispatchFocusLoop,
     dispatchLoop,
+    dispatchLoopStreak,
     dispatchBreakthrough,
     dispatchDetourBreakthrough,
     dispatchDetourInfusion,
@@ -1916,6 +1927,7 @@ function getDirectivePreviewDetailTexts(option) {
     option.dispatchBranchRotationRewardText,
     option.dispatchFocusLoopRewardText,
     option.dispatchLoopRewardText,
+    option.dispatchLoopStreakRewardText,
     option.dispatchBreakthroughRewardText,
     option.dispatchDetourBreakthroughRewardText,
     option.dispatchDetourInfusionText,
