@@ -2,7 +2,7 @@
 
 ## 2026-05-05 Product decision：航线委托节点步号
 
-阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-05 23:56 CST 已同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。没有 open bug；#3“玩法太简单”和 #6“后半段玩法没有真正变化”仍是本轮关联反馈。
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-06 00:07 CST 已同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。没有 open bug；#3“玩法太简单”和 #6“后半段玩法没有真正变化”仍是本轮关联反馈。
 
 当前最大问题：航线委托已经有下一步收益短标和三节点进度条，但 3 个节点本身是无文字圆点。玩家能看出完成、下一步、待推进状态，但还需要从 `X/3` 文本反推节点对应第几步，和指令轮换轨、远航路线微图里直接显示 1/2/3 的三步语义不完全一致。
 
@@ -17,10 +17,14 @@
 
 验收标准：
 
-- GitHub Issues 已同步：2026-05-05 23:56 CST 当前 5 个 open issue、5 个 open feedback issue、0 个 open bug issue；#3/#6 作为本轮关联反馈。
+- GitHub Issues 已同步：2026-05-06 00:07 CST 当前 5 个 open issue、5 个 open feedback issue、0 个 open bug issue；#3/#6 作为本轮关联反馈。#3 更新时间为 `2026-05-05T16:07:35Z`，#6 更新时间为 `2026-05-05T16:05:36Z`。
 - 航线委托进度条的 3 个节点静态首页和运行时均显示 `1` / `2` / `3`，状态仍按完成、下一步、待推进切换。
 - 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 128 项。
 - 构建产物已确认 `dist/index.html`、`dist/src/app.js` 和 `dist/src/styles.css` 包含 `directive-task-meter-node` 步号、`node.textContent = String(step)`、`height: 16px` 与 `place-items: center`。
+- 代码提交已创建并推送：`daab94c feat: add directive task node step labels`。
+- 发布验证已通过：GitHub Pages workflow `25387579398` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页返回 HTTP 200，线上首页、`src/app.js` 和 `src/styles.css` 已确认包含 1/2/3 委托节点、`node.textContent = String(step)`、16px 节点轨和居中样式。
+- 已回复 GitHub Issue #3 和 #6，说明航线委托节点步号、验证结果、Pages 部署和复测问题；两个 issue 均保持 open，评论地址：`https://github.com/Jassy930/codex-game-operator/issues/3#issuecomment-4380969076`、`https://github.com/Jassy930/codex-game-operator/issues/6#issuecomment-4380971881`。#3 评论已更正被 shell 命令替换吞掉的 ``航线委托 X/3`` 文本。
+- 钉钉通知未发送：2026-05-06 00:07 CST 运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` / `ROBOT` 相关有效 webhook URL；未将 webhook 写入仓库。
 - 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #3/#6，以及航线委托节点已有状态但缺少 1/2/3 步号的链路复盘。
 
 ## 2026-05-05 Product decision：航线委托三节点进度条

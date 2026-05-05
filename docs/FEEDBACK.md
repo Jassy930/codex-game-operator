@@ -2,12 +2,15 @@
 
 ## 2026-05-05
 
-- GitHub Issues：gh 可用且已认证；2026-05-05 23:56 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。#3/#6 仍是最近更新的主动玩法与后半段结构反馈，本轮继续处理航线委托三步扫视成本。
+- GitHub Issues：gh 可用且已认证；2026-05-06 00:07 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。#3 更新时间为 `2026-05-05T16:07:35Z`，#6 更新时间为 `2026-05-05T16:05:36Z`；#3/#6 仍是最近更新的主动玩法与后半段结构反馈，本轮继续处理航线委托三步扫视成本。
 - 本轮 Product decision 处理 #3/#6：航线委托已有下一步收益短标和三节点进度条，但节点仍是无文字圆点，玩家要从 `航线委托 X/3` 反推节点对应 1/2/3 哪一步。
 - 本轮改动新增“航线委托节点步号”：静态首页和运行时 `renderDirectiveTask()` 会在 3 个 `directive-task-meter-node` 内显示 `1` / `2` / `3`，节点继续按 `is-complete` / `is-next` / `is-pending` 切换状态。
 - 本轮只增强航线委托三步扫视性和测试，不新增收益、不新增存档字段，不改变指令冷却、连携窗口、策略契合、航线委托奖励、远航调度、星图航段、反馈入口或部署链路。
 - 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 128 项。
 - 构建产物已确认 `dist/index.html`、`dist/src/app.js` 和 `dist/src/styles.css` 包含 `directive-task-meter-node` 步号、`node.textContent = String(step)`、`height: 16px` 与 `place-items: center`。
+- 代码提交已创建并推送：`daab94c feat: add directive task node step labels`；GitHub Pages workflow `25387579398` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页返回 HTTP 200，线上首页、`src/app.js` 和 `src/styles.css` 已确认包含 1/2/3 委托节点、`node.textContent = String(step)`、16px 节点轨和居中样式。
+- 2026-05-06 00:05-00:07 CST 已在 #3/#6 回复本轮航线委托节点步号、提交 `daab94c`、GitHub Pages workflow `25387579398` 和线上验证结果；两个 issue 均保持 open 等待复测，评论地址：`https://github.com/Jassy930/codex-game-operator/issues/3#issuecomment-4380969076`、`https://github.com/Jassy930/codex-game-operator/issues/6#issuecomment-4380971881`。#3 评论已更正被 shell 命令替换吞掉的 ``航线委托 X/3`` 文本。
+- 钉钉通知未发送：2026-05-06 00:07 CST 运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` / `ROBOT` 相关有效 webhook URL；未将 webhook 写入仓库。
 - 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #3/#6，以及航线委托节点已有状态但缺少 1/2/3 步号的链路复盘。
 
 - GitHub Issues：gh 可用且已认证；2026-05-05 23:35 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。#3/#6 仍是最近更新的主动玩法与后半段玩法结构反馈，本轮继续处理航线委托的三步扫视成本。
