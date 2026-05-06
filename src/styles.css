@@ -3802,6 +3802,31 @@ h2 {
   color: #04140a;
 }
 
+.far-dispatch-branch-choice-summary-item.is-active-route
+  .far-dispatch-branch-choice-summary-progress-node.is-done {
+  box-shadow:
+    0 0 10px rgba(150, 231, 168, 0.34),
+    0 0 0 3px rgba(150, 231, 168, 0.08);
+}
+
+.far-dispatch-branch-choice-summary-item.is-active-route
+  .far-dispatch-branch-choice-summary-progress-node.is-done::after {
+  position: absolute;
+  inset: -4px;
+  border: 1px solid rgba(150, 231, 168, 0.48);
+  border-radius: inherit;
+  box-shadow: 0 0 10px rgba(150, 231, 168, 0.22);
+  content: "";
+  pointer-events: none;
+  animation: farDispatchSummaryDoneNodeEcho 1600ms ease-in-out infinite;
+}
+
+.far-dispatch-branch-choice-summary-progress.is-detour
+  .far-dispatch-branch-choice-summary-progress-node.is-done::after {
+  border-color: rgba(255, 126, 177, 0.46);
+  box-shadow: 0 0 10px rgba(255, 126, 177, 0.2);
+}
+
 .far-dispatch-branch-choice-summary-progress-node.is-next {
   border-color: rgba(255, 211, 106, 0.9);
   background: #ffd36a;
@@ -8831,6 +8856,19 @@ h2 {
   }
 }
 
+@keyframes farDispatchSummaryDoneNodeEcho {
+  0%,
+  100% {
+    opacity: 0.38;
+    transform: scale(0.9);
+  }
+
+  50% {
+    opacity: 0.88;
+    transform: scale(1.08);
+  }
+}
+
 @keyframes farDispatchLoopCurrentPulse {
   0%,
   100% {
@@ -9367,6 +9405,8 @@ h2 {
   .far-dispatch-branch-choice-summary-item.is-active-route
     .far-dispatch-branch-choice-summary-progress::after,
   .far-dispatch-branch-choice-summary-item.is-active-route,
+  .far-dispatch-branch-choice-summary-item.is-active-route
+    .far-dispatch-branch-choice-summary-progress-node.is-done::after,
   .far-dispatch-branch-choice-summary-item.is-active-route
     .far-dispatch-branch-choice-summary-progress-node.is-next,
   .far-dispatch-branch-choice-summary-item.is-active-route

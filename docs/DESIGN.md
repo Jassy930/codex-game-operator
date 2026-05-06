@@ -4,6 +4,7 @@
 
 M0 设计约束：
 
+- 远航路线对照条必须提供当前路线已完成节点回响：仅当 `.far-dispatch-branch-choice-summary-item.is-active-route` 内存在 `.far-dispatch-branch-choice-summary-progress-node.is-done` 时，可以通过 `::after` 显示轻量完成外环并播放 `farDispatchSummaryDoneNodeEcho`；绕行路线必须通过 `.far-dispatch-branch-choice-summary-progress.is-detour` 提供单独粉色回响；`prefers-reduced-motion: reduce` 必须关闭回响动画。该回响只增强当前路线 1/2/3 进度轨已走过节点的扫视，不新增 DOM、不新增界面可见文字、不新增收益、不新增存档字段，不改变远航路线、远航收益、指令冷却、星图航段、反馈入口或部署链路。
 - 远航路线对照条必须提供当前路线进度轨底光：仅当 `.far-dispatch-branch-choice-summary-item.is-active-route` 内存在 `.far-dispatch-branch-choice-summary-progress` 时，可以通过 `::before` 显示低频底光并播放 `farDispatchSummaryActiveRouteRailBeacon`；绕行路线必须通过 `.far-dispatch-branch-choice-summary-progress.is-detour::before` 提供单独粉金底光；`prefers-reduced-motion: reduce` 必须关闭底光动画。该底光只增强当前路线 1/2/3 进度轨的整条轨道扫视，不新增 DOM、不新增界面可见文字、不新增收益、不新增存档字段，不改变远航路线、远航收益、指令冷却、星图航段、反馈入口或部署链路。
 - 远航路线对照条必须提供下一步节点外环信标：仅当 `.far-dispatch-branch-choice-summary-item.is-active-route` 内存在 `.far-dispatch-branch-choice-summary-progress-node.is-next` 时，可以通过 `::after` 显示外环并播放 `farDispatchSummaryNextNodeHalo`；绕行路线必须通过 `.far-dispatch-branch-choice-summary-progress.is-detour` 提供单独外环颜色；`prefers-reduced-motion: reduce` 必须关闭外环动画。该信标只增强当前路线 1/2/3 进度轨的下一步扫视，不新增 DOM、不新增界面可见文字、不新增收益、不新增存档字段，不改变远航路线、远航收益、指令冷却、星图航段、反馈入口或部署链路。
 - 远航路线对照条必须提供当前路线整卡信标：仅当 `.far-dispatch-branch-choice-summary-item.is-active-route` 时，整张协同/绕行对照槽可以播放低频 `farDispatchSummaryActiveRouteCardBeacon` 补光；`prefers-reduced-motion: reduce` 必须关闭该动画并保留静态当前路线边框、背景和左侧边栏。该信标只增强当前路线执行期扫视，不新增 DOM、不新增界面可见文字、不新增收益、不新增存档字段，不改变远航路线、远航收益、指令冷却、星图航段、反馈入口或部署链路。

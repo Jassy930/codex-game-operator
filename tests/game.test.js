@@ -2717,6 +2717,9 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(styles, /\.far-dispatch-branch-choice-summary-item\.is-active-route[\s\S]*\.far-dispatch-branch-choice-summary-progress\.is-detour::after[\s\S]*border-right-color: rgba\(255, 209, 223, 0\.76\)/);
   assert.match(styles, /\.far-dispatch-branch-choice-summary-item\.is-active-route[\s\S]*\.far-dispatch-branch-choice-summary-progress\.is-detour::after[\s\S]*6px 0 12px rgba\(255, 126, 177, 0\.22\)/);
   assert.match(styles, /\.far-dispatch-branch-choice-summary-progress-node\.is-done/);
+  assert.match(styles, /\.far-dispatch-branch-choice-summary-item\.is-active-route[\s\S]*\.far-dispatch-branch-choice-summary-progress-node\.is-done/);
+  assert.match(styles, /\.far-dispatch-branch-choice-summary-item\.is-active-route[\s\S]*\.far-dispatch-branch-choice-summary-progress-node\.is-done::after/);
+  assert.match(styles, /\.far-dispatch-branch-choice-summary-progress\.is-detour[\s\S]*\.far-dispatch-branch-choice-summary-progress-node\.is-done::after/);
   assert.match(styles, /\.far-dispatch-branch-choice-summary-progress-node\.is-next/);
   assert.match(styles, /\.far-dispatch-branch-choice-summary-progress-node::before/);
   assert.match(styles, /content: attr\(data-step-label\)/);
@@ -2726,6 +2729,7 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(styles, /@keyframes farDispatchSummaryActiveRouteSweep/);
   assert.match(styles, /@keyframes farDispatchSummaryActiveRouteCardBeacon/);
   assert.match(styles, /@keyframes farDispatchSummaryActiveRouteRailBeacon/);
+  assert.match(styles, /@keyframes farDispatchSummaryDoneNodeEcho/);
   assert.match(styles, /@keyframes farDispatchSummaryNextNodePulse/);
   assert.match(styles, /@keyframes farDispatchSummaryNextNodeHalo/);
   assert.match(styles, /@keyframes farDispatchSummaryActiveActionGlow/);
@@ -2736,6 +2740,7 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(styles, /@keyframes farDispatchLoopStreakBeacon/);
   assert.match(styles, /@media \(prefers-reduced-motion: reduce\) \{[\s\S]*\.far-dispatch-branch-choice-summary-item\.is-active-route[\s\S]*animation: none/);
   assert.match(styles, /@media \(prefers-reduced-motion: reduce\) \{[\s\S]*\.far-dispatch-branch-choice-summary-progress::before[\s\S]*animation: none/);
+  assert.match(styles, /@media \(prefers-reduced-motion: reduce\) \{[\s\S]*\.far-dispatch-branch-choice-summary-progress-node\.is-done::after[\s\S]*animation: none/);
   assert.match(styles, /@media \(prefers-reduced-motion: reduce\) \{[\s\S]*\.far-dispatch-branch-choice-summary-progress-node\.is-next::after[\s\S]*animation: none/);
   assert.match(styles, /@media \(prefers-reduced-motion: reduce\) \{[\s\S]*\.far-dispatch-branch-choice-summary-signal[\s\S]*animation: none/);
   assert.match(styles, /@media \(prefers-reduced-motion: reduce\) \{[\s\S]*\.far-dispatch-branch-choice-summary-payoff[\s\S]*animation: none/);

@@ -2,6 +2,14 @@
 
 ## 2026-05-06
 
+- GitHub Issues：gh 可用且已认证；2026-05-06 09:19 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。#6 仍是后半段玩法变化复测反馈，#4 继续作为图片化和降文字密度约束。
+- 本轮 Product decision 处理 #6，并兼顾 #4：当前路线对照条已有置顶、宽栏、整卡补光、进度轨底光、下一步节点外环和进度端点光，但已完成节点本体仍只是静态实心点，已走过节点和当前端点之间还可以更图形化。
+- 本轮改动新增“远航对照条当前路线已完成节点回响”：`src/styles.css` 给当前路线里的 `.far-dispatch-branch-choice-summary-progress-node.is-done::after` 增加轻量外环回响，绕行路线使用单独粉色回响，并纳入 `prefers-reduced-motion: reduce`；`tests/game.test.js` 覆盖选择器、绕行态、keyframes 和 reduced motion。
+- 本轮只增强当前路线 1/2/3 进度轨已完成节点的扫视，不新增 DOM、不新增界面可见文字、不新增收益、不新增存档字段，不改变远航收益、路线选择、指令冷却、星图航段、反馈入口或部署链路。
+- 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 135 项。
+- 构建产物已刷新；`dist/` 按仓库规则忽略。`dist/src/styles.css` 已确认包含 `.far-dispatch-branch-choice-summary-progress-node.is-done::after`、`farDispatchSummaryDoneNodeEcho` 和绕行完成节点回响样式。
+- 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #6/#4，以及当前路线端点光已增强但已完成节点仍偏静态的扫视链路复盘。
+
 - GitHub Issues：gh 可用且已认证；2026-05-06 09:05 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。#6 仍是后半段玩法变化复测反馈，#4 继续作为图片化和降文字密度约束。
 - 本轮 Product decision 处理 #6，并兼顾 #4：当前路线对照条已有置顶、宽栏、整卡补光、进度轨底光和下一步节点外环，但已推进填充段末端仍较平直，当前路线“推进到这里”的端点还可以更图形化。
 - 本轮改动新增“远航对照条当前路线进度端点光”：`src/styles.css` 给当前路线里的 `.far-dispatch-branch-choice-summary-progress::after` 增加末端亮边和端点光，绕行路线使用单独粉色端点光；`tests/game.test.js` 覆盖选择器、协同端点光和绕行端点光。
