@@ -2709,7 +2709,10 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(styles, /\.far-dispatch-branch-choice-summary-progress::before/);
   assert.match(styles, /\.far-dispatch-branch-choice-summary-item\.is-active-route[\s\S]*\.far-dispatch-branch-choice-summary-progress::before/);
   assert.match(styles, /animation: farDispatchSummaryActiveRouteRailBeacon 1800ms ease-in-out infinite/);
+  assert.match(styles, /repeating-linear-gradient\(90deg, rgba\(255, 247, 194, 0\.26\) 0 3px, transparent 3px 12px\)/);
+  assert.match(styles, /background-size: 24px 100%, 100% 100%, 100% 100%/);
   assert.match(styles, /\.far-dispatch-branch-choice-summary-item\.is-active-route[\s\S]*\.far-dispatch-branch-choice-summary-progress\.is-detour::before/);
+  assert.match(styles, /repeating-linear-gradient\(90deg, rgba\(255, 209, 223, 0\.26\) 0 3px, transparent 3px 12px\)/);
   assert.match(styles, /\.far-dispatch-branch-choice-summary-progress::after/);
   assert.match(styles, /\.far-dispatch-branch-choice-summary-progress\.is-detour::after/);
   assert.match(styles, /\.far-dispatch-branch-choice-summary-item\.is-active-route[\s\S]*\.far-dispatch-branch-choice-summary-progress::after[\s\S]*border-right: 1px solid rgba\(255, 247, 194, 0\.72\)/);

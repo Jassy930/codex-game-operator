@@ -3732,8 +3732,10 @@ h2 {
 .far-dispatch-branch-choice-summary-item.is-active-route
   .far-dispatch-branch-choice-summary-progress::before {
   background:
+    repeating-linear-gradient(90deg, rgba(255, 247, 194, 0.26) 0 3px, transparent 3px 12px),
     linear-gradient(90deg, rgba(150, 231, 168, 0.28), rgba(255, 211, 106, 0.2)),
     rgba(248, 243, 231, 0.1);
+  background-size: 24px 100%, 100% 100%, 100% 100%;
   box-shadow: 0 0 10px rgba(255, 211, 106, 0.16);
   animation: farDispatchSummaryActiveRouteRailBeacon 1800ms ease-in-out infinite;
 }
@@ -3741,8 +3743,10 @@ h2 {
 .far-dispatch-branch-choice-summary-item.is-active-route
   .far-dispatch-branch-choice-summary-progress.is-detour::before {
   background:
+    repeating-linear-gradient(90deg, rgba(255, 209, 223, 0.26) 0 3px, transparent 3px 12px),
     linear-gradient(90deg, rgba(255, 126, 177, 0.26), rgba(255, 211, 106, 0.2)),
     rgba(248, 243, 231, 0.1);
+  background-size: 24px 100%, 100% 100%, 100% 100%;
   box-shadow: 0 0 10px rgba(255, 126, 177, 0.14);
 }
 

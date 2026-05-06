@@ -2,6 +2,14 @@
 
 ## 2026-05-06
 
+- GitHub Issues：gh 可用且已认证；2026-05-06 09:48 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。#6 仍是后半段玩法变化复测反馈，#4 继续作为图片化和降文字密度约束。
+- 本轮 Product decision 处理 #6，并兼顾 #4：当前路线对照条已有置顶、宽栏、整卡补光、底光、已推进端点光、已完成节点回响、下一步节点外环和待推进节点预告环，但进度轨底线仍偏连续，路线节奏还可以更图形化。
+- 本轮改动新增“远航对照条当前路线进度轨刻度层”：`src/styles.css` 给当前路线里的 `.far-dispatch-branch-choice-summary-progress::before` 叠加浅金推进刻度，绕行路线使用单独粉色刻度；`tests/game.test.js` 覆盖协同刻度、绕行刻度和刻度背景尺寸。
+- 本轮只增强当前路线 1/2/3 进度轨底线的路线节奏扫视，不新增 DOM、不新增界面可见文字、不新增收益、不新增存档字段，不改变远航收益、路线选择、指令冷却、星图航段、反馈入口或部署链路。
+- 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 135 项。
+- 构建产物已刷新；`dist/` 按仓库规则忽略。`dist/src/styles.css` 已确认包含协同和绕行推进刻度的 `repeating-linear-gradient` 标记。
+- 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #6/#4，以及当前路线底光已经存在但底线节奏仍偏连续的扫视链路复盘。
+
 - GitHub Issues：gh 可用且已认证；2026-05-06 09:34 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。#6 仍是后半段玩法变化复测反馈，#4 继续作为图片化和降文字密度约束。
 - 本轮 Product decision 处理 #6，并兼顾 #4：当前路线对照条已有置顶、宽栏、整卡补光、底光、已推进端点光、已完成节点回响和下一步节点外环，但待推进节点仍是普通暗点，后续路线链路还可以更图形化。
 - 本轮改动新增“远航对照条当前路线待推进节点预告环”：`src/styles.css` 给当前路线里的 `.far-dispatch-branch-choice-summary-progress-node.is-waiting::after` 增加轻量虚线预告环，绕行路线使用单独粉色预告环，并纳入 `prefers-reduced-motion: reduce`；`tests/game.test.js` 覆盖选择器、绕行态、keyframes 和 reduced motion。

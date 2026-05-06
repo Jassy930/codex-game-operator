@@ -1,5 +1,28 @@
 # Decision
 
+## 2026-05-06 Product decision：远航对照条当前路线进度轨刻度层
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-06 09:48 CST 已同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。没有 open bug；#6“后半段玩法没有真正变化”仍是主反馈，#4 的文字密度和图片化反馈继续约束本轮不能新增说明文字。
+
+当前最大问题：远航路线对照条已经把当前路线置顶、加宽、整卡补光，并在 1/2/3 迷你进度轨里标出底光、已推进端点、已完成节点回响、下一步节点外环和待推进节点预告环；但进度轨底线仍是一条连续柔光，缺少不增加文字的路线节奏刻度。
+
+本轮决策：
+
+- 新增“远航对照条当前路线进度轨刻度层”。
+- `src/styles.css` 仅在当前路线 `.far-dispatch-branch-choice-summary-progress::before` 的底光背景上叠加 `repeating-linear-gradient` 推进刻度。
+- 绕行路线复用 `.far-dispatch-branch-choice-summary-progress.is-detour::before` 切换粉色刻度，继续保持协同 / 绕行图形差异。
+- 继续复用既有 `prefers-reduced-motion: reduce` 兜底，降低动效偏好下关闭底光动画，保留静态刻度。
+- `tests/game.test.js` 增加静态断言，覆盖协同刻度、绕行刻度和刻度背景尺寸。
+- 该改动只增强当前路线 1/2/3 进度轨底线的路线节奏扫视，不新增 DOM、不新增界面可见文字、不新增收益、不新增存档字段，不改变远航收益、路线选择、指令冷却、星图航段、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-05-06 09:48 CST 当前 5 个 open issue、5 个 open feedback issue、0 个 open bug issue；#6 作为本轮主关联反馈，#4 作为图形化和文字密度约束。
+- 当前路线对照槽内的 `.far-dispatch-branch-choice-summary-progress::before` 获得浅金推进刻度；绕行路线使用粉色推进刻度；降低动效偏好继续关闭底光动画。
+- 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 135 项。
+- 构建产物已刷新；`dist/` 按仓库规则忽略。`dist/src/styles.css` 已确认包含协同刻度 `repeating-linear-gradient(90deg, rgba(255, 247, 194, 0.26)` 和绕行刻度 `repeating-linear-gradient(90deg, rgba(255, 209, 223, 0.26)`。
+- 本轮不新增外部网页调研；依据来自真实 GitHub 反馈 #6/#4，以及当前路线底光已经存在但底线节奏仍偏连续的扫视链路复盘。
+
 ## 2026-05-06 Product decision：远航对照条当前路线待推进节点预告环
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-06 09:34 CST 已同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。没有 open bug；#6“后半段玩法没有真正变化”仍是主反馈，#4 的文字密度和图片化反馈继续约束本轮不能新增说明文字。
