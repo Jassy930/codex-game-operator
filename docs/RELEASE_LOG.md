@@ -8,6 +8,10 @@
 - 同步 GitHub Issues 反馈状态：2026-05-06 09:48 CST 当前 5 个 open issue、5 个 open feedback issue、0 个 open bug issue；#6 作为本轮主关联反馈，#4 作为图形化和文字密度约束。
 - 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 135 项。
 - 构建产物已刷新；`dist/` 按仓库规则忽略。`dist/src/styles.css` 已确认包含协同刻度 `repeating-linear-gradient(90deg, rgba(255, 247, 194, 0.26)` 和绕行刻度 `repeating-linear-gradient(90deg, rgba(255, 209, 223, 0.26)`。
+- 代码和同步文档提交已创建并推送：`619fa43 feat: add active far route rail ticks`。
+- 发布：GitHub Pages workflow `25412345628` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页返回 HTTP 200，线上 `src/styles.css` 已确认包含协同和绕行刻度层标记。workflow 给出 Node.js 20 actions 弃用提醒，未影响本次部署。
+- 反馈处理：已回复 #6 和 #4，说明远航对照条当前路线进度轨刻度层、验证结果、Pages 部署和复测问题；issue 均保持 open，评论地址：`https://github.com/Jassy930/codex-game-operator/issues/6#issuecomment-4384531639`、`https://github.com/Jassy930/codex-game-operator/issues/4#issuecomment-4384531644`。回复后于 2026-05-06 09:57 CST 再次同步 GitHub Issues，当前仍为 5 个 open feedback issue、0 个 open bug issue；#6/#4 更新时间为 `2026-05-06T01:57:31Z`。
+- 钉钉通知未发送：2026-05-06 09:58 CST 运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` / `ROBOT` 相关有效 webhook 变量，当前目录和 `/home/jassy/glm` 两层内未发现 `.env*` 文件；未将 webhook 写入仓库。
 
 - 远航路线对照条新增“当前路线待推进节点预告环”：当前路线的 1/2/3 迷你进度轨待推进节点会在 `.far-dispatch-branch-choice-summary-progress-node.is-waiting::after` 显示轻量虚线预告环，绕行路线使用单独粉色预告环，继续回应 #6 的当前路线推进感和 #4 的图形化、降文字密度反馈。
 - `src/styles.css` 新增当前路线待推进节点预告环、绕行配色、`farDispatchSummaryWaitingNodeBeacon` 和降低动效兜底；`tests/game.test.js` 覆盖当前路线待推进节点预告环、绕行态、keyframes 和 reduced motion。
