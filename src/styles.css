@@ -3827,6 +3827,32 @@ h2 {
   box-shadow: 0 0 10px rgba(255, 126, 177, 0.2);
 }
 
+.far-dispatch-branch-choice-summary-item.is-active-route
+  .far-dispatch-branch-choice-summary-progress-node.is-waiting {
+  border-color: rgba(255, 211, 106, 0.34);
+  background: rgba(5, 12, 20, 0.94);
+  color: rgba(248, 243, 231, 0.72);
+  box-shadow: inset 0 0 0 1px rgba(255, 211, 106, 0.08);
+}
+
+.far-dispatch-branch-choice-summary-item.is-active-route
+  .far-dispatch-branch-choice-summary-progress-node.is-waiting::after {
+  position: absolute;
+  inset: -3px;
+  border: 1px dashed rgba(255, 211, 106, 0.3);
+  border-radius: inherit;
+  box-shadow: 0 0 8px rgba(255, 211, 106, 0.12);
+  content: "";
+  pointer-events: none;
+  animation: farDispatchSummaryWaitingNodeBeacon 1900ms ease-in-out infinite;
+}
+
+.far-dispatch-branch-choice-summary-progress.is-detour
+  .far-dispatch-branch-choice-summary-progress-node.is-waiting::after {
+  border-color: rgba(255, 126, 177, 0.3);
+  box-shadow: 0 0 8px rgba(255, 126, 177, 0.12);
+}
+
 .far-dispatch-branch-choice-summary-progress-node.is-next {
   border-color: rgba(255, 211, 106, 0.9);
   background: #ffd36a;
@@ -8869,6 +8895,19 @@ h2 {
   }
 }
 
+@keyframes farDispatchSummaryWaitingNodeBeacon {
+  0%,
+  100% {
+    opacity: 0.32;
+    transform: scale(0.96);
+  }
+
+  50% {
+    opacity: 0.68;
+    transform: scale(1.06);
+  }
+}
+
 @keyframes farDispatchLoopCurrentPulse {
   0%,
   100% {
@@ -9407,6 +9446,8 @@ h2 {
   .far-dispatch-branch-choice-summary-item.is-active-route,
   .far-dispatch-branch-choice-summary-item.is-active-route
     .far-dispatch-branch-choice-summary-progress-node.is-done::after,
+  .far-dispatch-branch-choice-summary-item.is-active-route
+    .far-dispatch-branch-choice-summary-progress-node.is-waiting::after,
   .far-dispatch-branch-choice-summary-item.is-active-route
     .far-dispatch-branch-choice-summary-progress-node.is-next,
   .far-dispatch-branch-choice-summary-item.is-active-route

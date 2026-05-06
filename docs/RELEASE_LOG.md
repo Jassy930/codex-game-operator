@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+- 远航路线对照条新增“当前路线待推进节点预告环”：当前路线的 1/2/3 迷你进度轨待推进节点会在 `.far-dispatch-branch-choice-summary-progress-node.is-waiting::after` 显示轻量虚线预告环，绕行路线使用单独粉色预告环，继续回应 #6 的当前路线推进感和 #4 的图形化、降文字密度反馈。
+- `src/styles.css` 新增当前路线待推进节点预告环、绕行配色、`farDispatchSummaryWaitingNodeBeacon` 和降低动效兜底；`tests/game.test.js` 覆盖当前路线待推进节点预告环、绕行态、keyframes 和 reduced motion。
+- 本轮只增强远航路线对照条的当前路线待推进节点扫视，不新增 DOM、不新增界面可见文字、不新增收益、不新增存档字段，不改变远航收益、路线选择、指令冷却、星图航段、反馈入口或部署链路。
+- 同步 GitHub Issues 反馈状态：2026-05-06 09:34 CST 当前 5 个 open issue、5 个 open feedback issue、0 个 open bug issue；#6 作为本轮主关联反馈，#4 作为图形化和文字密度约束。
+- 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 135 项。
+- 构建产物已刷新；`dist/` 按仓库规则忽略。`dist/src/styles.css` 已确认包含 `.far-dispatch-branch-choice-summary-progress-node.is-waiting::after`、`farDispatchSummaryWaitingNodeBeacon` 和绕行待推进节点预告环样式。
+
 - 远航路线对照条新增“当前路线已完成节点回响”：当前路线的 1/2/3 迷你进度轨已完成节点会在 `.far-dispatch-branch-choice-summary-progress-node.is-done::after` 显示轻量外环回响，绕行路线使用单独粉色回响，继续回应 #6 的当前路线推进感和 #4 的图形化、降文字密度反馈。
 - `src/styles.css` 新增当前路线已完成节点外环、绕行配色、`farDispatchSummaryDoneNodeEcho` 和降低动效兜底；`tests/game.test.js` 覆盖当前路线已完成节点回响、绕行态、keyframes 和 reduced motion。
 - 本轮只增强远航路线对照条的当前路线已完成节点扫视，不新增 DOM、不新增界面可见文字、不新增收益、不新增存档字段，不改变远航收益、路线选择、指令冷却、星图航段、反馈入口或部署链路。
