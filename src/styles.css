@@ -1116,8 +1116,48 @@ h2 {
   mask: linear-gradient(90deg, transparent 0, #000 16%, #000 78%, transparent 100%);
 }
 
+.core-gain-trail::before,
+.core-gain-trail::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  border-radius: 999px;
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-50%, -50%) scale(0.35);
+  mix-blend-mode: screen;
+}
+
+.core-gain-trail::before {
+  left: 22%;
+  width: 26px;
+  height: 26px;
+  background:
+    radial-gradient(circle, rgba(255, 247, 194, 0.9) 0 18%, rgba(244, 178, 60, 0.42) 42%, transparent 68%);
+  filter:
+    drop-shadow(0 0 10px rgba(255, 247, 194, 0.22))
+    drop-shadow(0 0 16px rgba(244, 178, 60, 0.16));
+}
+
+.core-gain-trail::after {
+  left: 86%;
+  width: 38px;
+  height: 14px;
+  background:
+    linear-gradient(90deg, rgba(255, 247, 194, 0.82), rgba(244, 178, 60, 0.38), transparent),
+    radial-gradient(ellipse at 20% 50%, rgba(255, 247, 194, 0.58), transparent 62%);
+  filter:
+    drop-shadow(0 0 12px rgba(255, 247, 194, 0.24))
+    drop-shadow(0 0 18px rgba(19, 181, 166, 0.12));
+}
+
 .core-gain-trail.is-showing {
   animation: coreGainTrail 620ms ease-out;
+}
+
+.core-gain-trail.is-showing::before,
+.core-gain-trail.is-showing::after {
+  animation: coreGainTrailSpark 620ms ease-out;
 }
 
 .core-gain-trail.is-overload-gain {
@@ -1131,6 +1171,32 @@ h2 {
     blur(0.1px)
     drop-shadow(0 0 18px rgba(255, 247, 194, 0.26))
     drop-shadow(0 0 30px rgba(232, 93, 117, 0.22));
+  animation-duration: 760ms;
+}
+
+.core-gain-trail.is-overload-gain::before {
+  width: 34px;
+  height: 34px;
+  background:
+    radial-gradient(circle, rgba(255, 247, 194, 0.96) 0 20%, rgba(232, 93, 117, 0.52) 45%, transparent 70%);
+  filter:
+    drop-shadow(0 0 14px rgba(255, 247, 194, 0.28))
+    drop-shadow(0 0 22px rgba(232, 93, 117, 0.2));
+}
+
+.core-gain-trail.is-overload-gain::after {
+  width: 54px;
+  height: 18px;
+  background:
+    linear-gradient(90deg, rgba(255, 247, 194, 0.9), rgba(232, 93, 117, 0.48), transparent),
+    radial-gradient(ellipse at 20% 50%, rgba(255, 247, 194, 0.68), transparent 64%);
+  filter:
+    drop-shadow(0 0 15px rgba(255, 247, 194, 0.3))
+    drop-shadow(0 0 26px rgba(232, 93, 117, 0.22));
+}
+
+.core-gain-trail.is-overload-gain.is-showing::before,
+.core-gain-trail.is-overload-gain.is-showing::after {
   animation-duration: 760ms;
 }
 
@@ -8165,6 +8231,27 @@ h2 {
   }
 }
 
+@keyframes coreGainTrailSpark {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.34);
+  }
+
+  18% {
+    opacity: 0.92;
+    transform: translate(-50%, -50%) scale(1);
+  }
+
+  68% {
+    opacity: 0.42;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(-26px, -50%) scale(1.26);
+  }
+}
+
 @keyframes coreBadgePulse {
   0%,
   100% {
@@ -9153,6 +9240,8 @@ h2 {
   .core-impact-flare.is-showing,
   .core-impact-echo.is-showing,
   .core-gain-trail.is-showing,
+  .core-gain-trail.is-showing::before,
+  .core-gain-trail.is-showing::after,
   .core-gain-pop.is-showing::after,
   .core-gain-pop.is-overload-gain.is-showing::after,
   .upgrade-scene-image.is-ready,

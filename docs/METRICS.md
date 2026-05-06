@@ -4,6 +4,7 @@
 
 当前实现：
 
+- 点火收益轨迹端点火花当前由 `.core-gain-trail::before` / `::after` 和 `coreGainTrailSpark` 从本地点火命中展示态即时渲染，不单独记录为真实线上指标；普通/过载点火仍通过 click 事件、`lastGain`、`lastPulse`、连击状态、点火反馈快照和界面环境快照复盘。
 - 界面环境反馈快照当前由前端 `getFeedbackView()` 采集当前星图筛选、视口宽高、系统降低动效偏好和主指针类型，并由 `createFeedbackEntry()` 即时生成 `界面环境` 字段写入游戏内反馈 Issue；同一份 `view` 对象也会写入本地 `feedback_sent` 事件。该字段只用于复盘小屏/大屏、触屏/鼠标和降低动效环境下的真实反馈，不代表远端指标上报，发布前不能把本地事件当作真实线上指标。
 - 反馈编号链路当前由 `createFeedbackEntry().id` 生成，游戏内反馈 Issue 正文显示 `反馈编号：...`，浏览器本地 `feedback_sent` 事件 payload 记录同一个 `feedbackId`；该字段只用于把 GitHub Issue、本地反馈草稿和本地事件对齐复盘，不代表远端指标上报，发布前不能把本地事件当作真实线上指标。
 - 升级购买态反馈快照当前由 `createFeedbackEntry()` 复用本地 `UPGRADE_DEFS`、`getUpgradeAffordability()` 和当前目标 `upgradeId` 即时生成，只写入游戏内反馈 Issue 快照，不单独记录为真实线上指标；升级入口复盘仍依赖现有升级等级、能量、目标、`upgrade_purchase` 本地事件和反馈快照，发布前不能把该快照字段当作真实线上指标。

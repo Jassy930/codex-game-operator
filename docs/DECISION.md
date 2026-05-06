@@ -1,5 +1,30 @@
 # Decision
 
+## 2026-05-06 Product decision：点火收益轨迹端点火花
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-06 08:01 CST 已同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。没有 open bug；#5“点火按钮太薄弱了，增加点击反馈，增加特效，增加点击欲望”仍是最近被回复的点火反馈，等待真实复测确认收益轨迹是否足够明显。
+
+当前最大问题：上一轮已新增 `core-gain-trail`，但轨迹主体是一条短光带，头尾没有独立火花锚点。玩家在普通点火和过载点火时能看到轨迹方向，但轨迹起点和冲出端还可以更明确；同时不应新增 DOM、文字、收益或存档字段。
+
+本轮决策：
+
+- 新增“点火收益轨迹端点火花”。
+- `src/styles.css` 通过 `.core-gain-trail::before` / `::after` 在现有收益轨迹上增加起点亮点和冲出端火花。
+- 普通点火沿用金色端点；过载点火通过 `.core-gain-trail.is-overload-gain::before` / `::after` 使用更大、更亮的红金端点。
+- 新增 `coreGainTrailSpark` 动画，让端点火花与现有 `coreGainTrail` 同步淡入、冲出和消散；过载态延长到 760ms。
+- `prefers-reduced-motion: reduce` 必须关闭端点火花动画，保留静态视觉与现有降低动效策略。
+- `tests/game.test.js` 覆盖端点伪元素、过载态、keyframes 和降低动效兜底。
+- 该改动只增强点火收益轨迹的头尾可读性，不新增 DOM、不新增界面可见文字、不新增收益、不新增存档字段，不改变点击收益、过载收益、连击窗口、音效/触感开关、升级价格、星图航段、航线指令、远航调度、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-05-06 08:01 CST 当前 5 个 open issue、5 个 open feedback issue、0 个 open bug issue；#5 作为本轮主关联反馈。
+- 普通点火时 `#coreGainTrail` 的起点和冲出端显示金色端点火花；过载点火时端点更大、更亮并随 `is-overload-gain` 延长动画。
+- 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 135 项。
+- 构建产物已刷新；`dist/` 按仓库规则忽略。源码和构建产物已确认包含 `.core-gain-trail::before`、`.core-gain-trail::after`、`.core-gain-trail.is-overload-gain.is-showing::before`、`coreGainTrailSpark` 和降低动效兜底。
+- 发布前还需完成提交、推送、等待 GitHub Pages workflow，并在成功后回复 #5。
+- 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #5，以及收益轨迹已有主体但缺少头尾火花锚点的链路复盘。
+
 ## 2026-05-06 Product decision：点火收益轨迹
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-06 07:49 CST 已同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。没有 open bug；#5“点火按钮太薄弱了，增加点击反馈，增加特效，增加点击欲望”仍等待带新效果的真实复测。

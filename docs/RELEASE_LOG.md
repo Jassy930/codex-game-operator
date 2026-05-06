@@ -2,6 +2,14 @@
 
 ## Unreleased
 
+- 点火收益轨迹新增“端点火花”：现有 `#coreGainTrail.core-gain-trail` 通过 `::before` / `::after` 显示起点亮点和冲出端火花，过载态 `is-overload-gain` 使用更大、更亮的红金端点，继续回应 #5 对点击反馈、特效和点击欲望的反馈。
+- `src/styles.css` 新增 `.core-gain-trail::before`、`.core-gain-trail::after`、过载端点样式、`coreGainTrailSpark` 动画和降低动效兜底；`tests/game.test.js` 覆盖端点伪元素、过载态、keyframes 和 reduced motion。
+- 本轮只增强点火收益轨迹头尾可读性，不新增 DOM、不新增界面可见文字、不新增收益、不新增存档字段，不改变点击收益、过载收益、连击窗口、音效/触感开关、升级价格、星图航段、航线指令、远航调度、反馈入口或部署链路。
+- 同步 GitHub Issues 反馈状态：2026-05-06 08:01 CST 当前 5 个 open issue、5 个 open feedback issue、0 个 open bug issue；#5 作为本轮主关联反馈。
+- 验证通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 135 项。
+- 构建产物已刷新；`dist/` 按仓库规则忽略。源码和 `dist/src/styles.css` 已确认包含 `.core-gain-trail::before`、`.core-gain-trail::after`、`.core-gain-trail.is-overload-gain.is-showing::before`、`coreGainTrailSpark` 和降低动效兜底。
+- 发布、反馈回复和钉钉通知状态待本轮收尾后补记。
+
 - 点火按钮新增“收益轨迹”：普通点火和过载点火时，按钮内 `#coreGainTrail.core-gain-trail` 会复用点击落点坐标播放短暂能量轨迹，过载态切换 `is-overload-gain` 使用更宽、更亮的红金轨迹，继续回应 #5 对点击反馈、特效和点击欲望的反馈。
 - `src/app.js` 将 `coreGainTrail` 纳入 `animateCore()` 的显示、过载态切换、定时清理和 `positionCoreImpact()` 坐标同步；`src/styles.css` 新增 `.core-gain-trail`、`.core-gain-trail.is-overload-gain`、`coreGainTrail` 动画和降低动效兜底；`tests/game.test.js` 覆盖点火收益轨迹 DOM 绑定、状态切换、样式和 reduced motion。
 - 本轮只增强点火点击反馈，不新增界面可见文字、不新增收益、不新增存档字段，不改变点击收益、过载收益、连击窗口、音效/触感开关、升级价格、星图航段、航线指令、远航调度、反馈入口或部署链路。
