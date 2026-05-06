@@ -4,6 +4,7 @@
 
 当前实现：
 
+- 远航路线对照条下一步节点外环信标当前由 `.far-dispatch-branch-choice-summary-item.is-active-route .far-dispatch-branch-choice-summary-progress-node.is-next::after` 和 `farDispatchSummaryNextNodeHalo` 从本地当前路线下一步展示态即时渲染，并在降低动效偏好下关闭动画，不单独记录为真实线上指标；下一步执行点、路线步骤和收益复盘仍依赖现有路线短标、按钮路线标记、路线反馈、反馈快照和 `directive` 事件中的远航字段。
 - 远航路线对照条当前路线整卡信标当前由 `.far-dispatch-branch-choice-summary-item.is-active-route` 和 `farDispatchSummaryActiveRouteCardBeacon` 从本地当前路线展示态即时渲染，并在降低动效偏好下关闭动画，不单独记录为真实线上指标；当前路线、路线步骤、收益和连段复盘仍依赖现有路线短标、按钮路线标记、路线反馈、反馈快照和 `directive` 事件中的远航字段。
 - 点火收益轨迹端点火花当前由 `.core-gain-trail::before` / `::after` 和 `coreGainTrailSpark` 从本地点火命中展示态即时渲染，不单独记录为真实线上指标；普通/过载点火仍通过 click 事件、`lastGain`、`lastPulse`、连击状态、点火反馈快照和界面环境快照复盘。
 - 界面环境反馈快照当前由前端 `getFeedbackView()` 采集当前星图筛选、视口宽高、系统降低动效偏好和主指针类型，并由 `createFeedbackEntry()` 即时生成 `界面环境` 字段写入游戏内反馈 Issue；同一份 `view` 对象也会写入本地 `feedback_sent` 事件。该字段只用于复盘小屏/大屏、触屏/鼠标和降低动效环境下的真实反馈，不代表远端指标上报，发布前不能把本地事件当作真实线上指标。

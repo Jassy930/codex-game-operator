@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+- 远航路线对照条新增“下一步节点外环信标”：当前路线的 1/2/3 迷你进度轨里，`.far-dispatch-branch-choice-summary-progress-node.is-next::after` 会显示外环并播放 `farDispatchSummaryNextNodeHalo`，绕行路线使用单独粉色外环，继续回应 #6 的当前执行点扫视和 #4 的图形化、降文字密度反馈。
+- `src/styles.css` 新增下一步节点外环、绕行配色和降低动效兜底；`tests/game.test.js` 覆盖下一步外环、绕行态、keyframes 和 reduced motion。
+- 本轮只增强远航路线对照条的下一步节点扫视，不新增 DOM、不新增界面可见文字、不新增收益、不新增存档字段，不改变远航收益、路线选择、指令冷却、星图航段、反馈入口或部署链路。
+- 同步 GitHub Issues 反馈状态：2026-05-06 08:34 CST 当前 5 个 open issue、5 个 open feedback issue、0 个 open bug issue；#6 作为本轮主关联反馈，#4 作为文字密度约束。
+- 验证通过：`npm test`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 135 项。
+- 构建产物已刷新；`dist/` 按仓库规则忽略。`dist/src/styles.css` 已确认包含 `.far-dispatch-branch-choice-summary-progress-node.is-next::after` 和 `farDispatchSummaryNextNodeHalo`。
+
 - 远航路线对照条新增“当前路线整卡信标”：本轮已选协同/绕行路线的 `.far-dispatch-branch-choice-summary-item.is-active-route` 会播放低频整卡补光，让当前路线本体和已有身份、动作、收益、回航结果、进度轨锚点形成同层执行态，继续回应 #6 的后半段路线执行理解和 #4 的降文字密度反馈。
 - `src/styles.css` 新增 `farDispatchSummaryActiveRouteCardBeacon` 并纳入 `prefers-reduced-motion: reduce` 兜底；`tests/game.test.js` 覆盖当前路线整卡动画、关键帧和 reduced motion。
 - 本轮只增强远航路线对照条的当前路线扫视，不新增 DOM、不新增界面可见文字、不新增收益、不新增存档字段，不改变远航收益、路线选择、指令冷却、星图航段、反馈入口或部署链路。

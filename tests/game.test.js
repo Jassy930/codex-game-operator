@@ -2712,10 +2712,13 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(styles, /\.far-dispatch-branch-choice-summary-progress-node\.is-next/);
   assert.match(styles, /\.far-dispatch-branch-choice-summary-progress-node::before/);
   assert.match(styles, /content: attr\(data-step-label\)/);
+  assert.match(styles, /\.far-dispatch-branch-choice-summary-item\.is-active-route[\s\S]*\.far-dispatch-branch-choice-summary-progress-node\.is-next::after/);
+  assert.match(styles, /\.far-dispatch-branch-choice-summary-progress\.is-detour[\s\S]*\.far-dispatch-branch-choice-summary-progress-node\.is-next::after/);
   assert.match(styles, /@keyframes farDispatchSummaryActionBeacon/);
   assert.match(styles, /@keyframes farDispatchSummaryActiveRouteSweep/);
   assert.match(styles, /@keyframes farDispatchSummaryActiveRouteCardBeacon/);
   assert.match(styles, /@keyframes farDispatchSummaryNextNodePulse/);
+  assert.match(styles, /@keyframes farDispatchSummaryNextNodeHalo/);
   assert.match(styles, /@keyframes farDispatchSummaryActiveActionGlow/);
   assert.match(styles, /@keyframes farDispatchSummaryActivePayoffGlow/);
   assert.match(styles, /@keyframes farDispatchSummaryLoopStreakResultGlow/);
@@ -2723,6 +2726,7 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(styles, /@keyframes farDispatchSummarySignalBeacon/);
   assert.match(styles, /@keyframes farDispatchLoopStreakBeacon/);
   assert.match(styles, /@media \(prefers-reduced-motion: reduce\) \{[\s\S]*\.far-dispatch-branch-choice-summary-item\.is-active-route[\s\S]*animation: none/);
+  assert.match(styles, /@media \(prefers-reduced-motion: reduce\) \{[\s\S]*\.far-dispatch-branch-choice-summary-progress-node\.is-next::after[\s\S]*animation: none/);
   assert.match(styles, /@media \(prefers-reduced-motion: reduce\) \{[\s\S]*\.far-dispatch-branch-choice-summary-signal[\s\S]*animation: none/);
   assert.match(styles, /@media \(prefers-reduced-motion: reduce\) \{[\s\S]*\.far-dispatch-branch-choice-summary-payoff[\s\S]*animation: none/);
   assert.match(styles, /@media \(prefers-reduced-motion: reduce\) \{[\s\S]*\.far-dispatch-branch-choice-summary-result\.has-loop-streak[\s\S]*animation: none/);
