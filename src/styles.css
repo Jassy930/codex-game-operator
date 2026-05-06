@@ -3729,6 +3729,23 @@ h2 {
   background: rgba(248, 243, 231, 0.12);
 }
 
+.far-dispatch-branch-choice-summary-item.is-active-route
+  .far-dispatch-branch-choice-summary-progress::before {
+  background:
+    linear-gradient(90deg, rgba(150, 231, 168, 0.28), rgba(255, 211, 106, 0.2)),
+    rgba(248, 243, 231, 0.1);
+  box-shadow: 0 0 10px rgba(255, 211, 106, 0.16);
+  animation: farDispatchSummaryActiveRouteRailBeacon 1800ms ease-in-out infinite;
+}
+
+.far-dispatch-branch-choice-summary-item.is-active-route
+  .far-dispatch-branch-choice-summary-progress.is-detour::before {
+  background:
+    linear-gradient(90deg, rgba(255, 126, 177, 0.26), rgba(255, 211, 106, 0.2)),
+    rgba(248, 243, 231, 0.1);
+  box-shadow: 0 0 10px rgba(255, 126, 177, 0.14);
+}
+
 .far-dispatch-branch-choice-summary-progress::after {
   width: max(0px, calc(var(--summary-route-progress, 0%) - 6px));
   max-width: calc(100% - 12px);
@@ -8764,6 +8781,19 @@ h2 {
   }
 }
 
+@keyframes farDispatchSummaryActiveRouteRailBeacon {
+  0%,
+  100% {
+    opacity: 0.5;
+    filter: saturate(1);
+  }
+
+  50% {
+    opacity: 0.92;
+    filter: saturate(1.18);
+  }
+}
+
 @keyframes farDispatchSummaryNextNodePulse {
   0%,
   100% {
@@ -9319,6 +9349,8 @@ h2 {
   .far-dispatch.is-active .far-dispatch-loop-step.is-current::before,
   .far-dispatch.is-active .far-dispatch-loop-step.is-current::after,
   .far-dispatch.is-active .far-dispatch-step-reward.is-current,
+  .far-dispatch-branch-choice-summary-item.is-active-route
+    .far-dispatch-branch-choice-summary-progress::before,
   .far-dispatch-branch-choice-summary-item.is-active-route
     .far-dispatch-branch-choice-summary-progress::after,
   .far-dispatch-branch-choice-summary-item.is-active-route,

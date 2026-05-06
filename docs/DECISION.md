@@ -1,5 +1,29 @@
 # Decision
 
+## 2026-05-06 Product decision：远航对照条当前路线进度轨底光
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-06 08:50 CST 已同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。没有 open bug；#6“后半段玩法没有真正变化”仍是主反馈，#4 的文字密度和图片化反馈继续约束本轮不能新增说明文字。
+
+当前最大问题：远航路线对照条已经把当前路线置顶、加宽、整卡补光，并在 1/2/3 迷你进度轨里标出下一步节点和外环；但轨道底线仍比较安静，玩家扫视当前路线时可能先看到节点，再反推整条路线轨道。为了回应 #6 的后半段路线执行感和 #4 的图形化诉求，本轮继续只增强现有图形层。
+
+本轮决策：
+
+- 新增“远航对照条当前路线进度轨底光”。
+- `src/styles.css` 仅对 `.far-dispatch-branch-choice-summary-item.is-active-route .far-dispatch-branch-choice-summary-progress::before` 增加低频底光动画 `farDispatchSummaryActiveRouteRailBeacon`。
+- 绕行路线复用 `.far-dispatch-branch-choice-summary-progress.is-detour::before` 切换粉色到底光，保持协同 / 绕行图形差异。
+- `prefers-reduced-motion: reduce` 必须关闭进度轨底光动画，保留静态轨道底色、已完成填充和下一步节点。
+- `tests/game.test.js` 增加静态断言，覆盖当前路线底光、绕行配色、关键帧和降低动效兜底。
+- 该改动只增强当前路线 1/2/3 进度轨的整条轨道扫视，不新增 DOM、不新增界面可见文字、不新增收益、不新增存档字段，不改变远航收益、路线选择、指令冷却、星图航段、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-05-06 08:50 CST 当前 5 个 open issue、5 个 open feedback issue、0 个 open bug issue；#6 作为本轮主关联反馈，#4 作为图形化和文字密度约束。
+- 当前路线对照槽内的 `.far-dispatch-branch-choice-summary-progress::before` 获得低频底光；绕行路线使用单独粉色底光；降低动效偏好下关闭动画。
+- 本地验证已通过：`npm test`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 135 项。
+- 构建产物已刷新；`dist/` 按仓库规则忽略。`dist/src/styles.css` 已确认包含 `.far-dispatch-branch-choice-summary-progress::before` 和 `farDispatchSummaryActiveRouteRailBeacon`。
+- 发布、反馈回复、回复后反馈同步和钉钉通知状态待发布后补记。
+- 本轮不新增外部网页调研；依据来自真实 GitHub 反馈 #6/#4，以及当前路线节点外环已增强但整条进度轨底线仍偏弱的扫视链路复盘。
+
 ## 2026-05-06 Product decision：远航对照条下一步节点外环信标
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-06 08:34 CST 已同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。没有 open bug；#6“后半段玩法没有真正变化”仍是主反馈，#4 的文字密度反馈继续约束本轮不能新增说明文字。

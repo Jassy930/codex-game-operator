@@ -2,6 +2,15 @@
 
 ## 2026-05-06
 
+- GitHub Issues：gh 可用且已认证；2026-05-06 08:50 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。#6 仍是后半段玩法变化复测反馈，#4 继续作为图片化和降文字密度约束。
+- 本轮 Product decision 处理 #6，并兼顾 #4：当前路线对照条已有置顶、宽栏、整卡补光、动作/收益锚点、1/2/3 迷你进度轨和下一步节点外环；但整条进度轨底线仍偏弱，当前路线推进感还可以更图形化。
+- 本轮改动新增“远航对照条当前路线进度轨底光”：`src/styles.css` 给当前路线里的 `.far-dispatch-branch-choice-summary-progress::before` 增加低频 `farDispatchSummaryActiveRouteRailBeacon` 底光，绕行路线使用单独粉色底光，并纳入 `prefers-reduced-motion: reduce`；`tests/game.test.js` 覆盖选择器、绕行态、keyframes 和 reduced motion。
+- 本轮只增强当前路线 1/2/3 进度轨整条轨道的扫视，不新增 DOM、不新增界面可见文字、不新增收益、不新增存档字段，不改变远航收益、路线选择、指令冷却、星图航段、反馈入口或部署链路。
+- 本地验证已通过：`npm test`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 135 项。
+- 构建产物已刷新；`dist/` 按仓库规则忽略。`dist/src/styles.css` 已确认包含 `.far-dispatch-branch-choice-summary-progress::before` 和 `farDispatchSummaryActiveRouteRailBeacon`。
+- 发布、反馈回复、回复后反馈同步和钉钉通知状态待发布后补记。
+- 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #6/#4，以及当前路线节点外环已增强但整条进度轨底线仍偏弱的扫视链路复盘。
+
 - GitHub Issues：gh 可用且已认证；2026-05-06 08:34 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。#6 仍是后半段玩法变化复测反馈，#4 继续作为图片化和降文字密度约束。
 - 本轮 Product decision 处理 #6，并兼顾 #4：当前路线对照条已经有置顶、宽栏、整卡补光、动作/收益锚点和 1/2/3 迷你进度轨；下一步节点仍主要依赖节点本体放大，执行点在宽栏里还可以更图形化。
 - 本轮改动新增“远航对照条下一步节点外环信标”：`src/styles.css` 给当前路线里的 `.far-dispatch-branch-choice-summary-progress-node.is-next::after` 增加外环和 `farDispatchSummaryNextNodeHalo`，绕行路线使用单独粉色外环，并纳入 `prefers-reduced-motion: reduce`；`tests/game.test.js` 覆盖选择器、绕行态、keyframes 和 reduced motion。

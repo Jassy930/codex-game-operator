@@ -4,6 +4,7 @@
 
 M0 设计约束：
 
+- 远航路线对照条必须提供当前路线进度轨底光：仅当 `.far-dispatch-branch-choice-summary-item.is-active-route` 内存在 `.far-dispatch-branch-choice-summary-progress` 时，可以通过 `::before` 显示低频底光并播放 `farDispatchSummaryActiveRouteRailBeacon`；绕行路线必须通过 `.far-dispatch-branch-choice-summary-progress.is-detour::before` 提供单独粉金底光；`prefers-reduced-motion: reduce` 必须关闭底光动画。该底光只增强当前路线 1/2/3 进度轨的整条轨道扫视，不新增 DOM、不新增界面可见文字、不新增收益、不新增存档字段，不改变远航路线、远航收益、指令冷却、星图航段、反馈入口或部署链路。
 - 远航路线对照条必须提供下一步节点外环信标：仅当 `.far-dispatch-branch-choice-summary-item.is-active-route` 内存在 `.far-dispatch-branch-choice-summary-progress-node.is-next` 时，可以通过 `::after` 显示外环并播放 `farDispatchSummaryNextNodeHalo`；绕行路线必须通过 `.far-dispatch-branch-choice-summary-progress.is-detour` 提供单独外环颜色；`prefers-reduced-motion: reduce` 必须关闭外环动画。该信标只增强当前路线 1/2/3 进度轨的下一步扫视，不新增 DOM、不新增界面可见文字、不新增收益、不新增存档字段，不改变远航路线、远航收益、指令冷却、星图航段、反馈入口或部署链路。
 - 远航路线对照条必须提供当前路线整卡信标：仅当 `.far-dispatch-branch-choice-summary-item.is-active-route` 时，整张协同/绕行对照槽可以播放低频 `farDispatchSummaryActiveRouteCardBeacon` 补光；`prefers-reduced-motion: reduce` 必须关闭该动画并保留静态当前路线边框、背景和左侧边栏。该信标只增强当前路线执行期扫视，不新增 DOM、不新增界面可见文字、不新增收益、不新增存档字段，不改变远航路线、远航收益、指令冷却、星图航段、反馈入口或部署链路。
 - 主点火按钮收益轨迹必须提供端点火花：`.core-gain-trail` 必须通过 `::before` / `::after` 显示起点亮点和冲出端火花，`.core-gain-trail.is-overload-gain` 必须提供更大、更亮的过载端点；端点火花必须与 `coreGainTrail` 同步显示并使用 `coreGainTrailSpark`，且纳入 `prefers-reduced-motion: reduce`。该展示只增强收益轨迹头尾可读性，不新增 DOM、不新增界面可见文字、不新增收益、不新增存档字段，不改变点击收益、过载奖励、连击窗口、升级价格、星图航段、航线策略、航线指令、远航调度或反馈入口。
