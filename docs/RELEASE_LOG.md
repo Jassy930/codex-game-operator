@@ -8,6 +8,10 @@
 - 同步 GitHub Issues 反馈状态：2026-05-06 08:17 CST 当前 5 个 open issue、5 个 open feedback issue、0 个 open bug issue；#6 作为本轮主关联反馈，#4 作为文字密度约束。
 - 验证通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 135 项。
 - 构建产物已刷新；`dist/` 按仓库规则忽略。`dist/src/styles.css` 已确认包含 `.far-dispatch-branch-choice-summary-item.is-active-route`、`farDispatchSummaryActiveRouteCardBeacon` 和降低动效兜底。
+- 代码提交已创建并推送：`a1bf1d9 feat: highlight active far route card`。
+- 发布：GitHub Pages workflow `25409776015` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页返回 HTTP 200，线上 `src/styles.css` 已确认包含 `.far-dispatch-branch-choice-summary-item.is-active-route` 和 `farDispatchSummaryActiveRouteCardBeacon`。workflow 给出 Node.js 20 actions 弃用提醒，未影响本次部署。
+- 反馈处理：已回复 #6 和 #4，说明远航对照条当前路线整卡信标、验证结果、Pages 部署和复测问题；issue 均保持 open，评论地址：`https://github.com/Jassy930/codex-game-operator/issues/6#issuecomment-4384213083`、`https://github.com/Jassy930/codex-game-operator/issues/4#issuecomment-4384215345`。回复后于 2026-05-06 08:27 CST 再次同步 GitHub Issues，当前仍为 5 个 open feedback issue、0 个 open bug issue；#6 更新时间为 `2026-05-06T00:26:59Z`，#4 更新时间为 `2026-05-06T00:27:26Z`。
+- 钉钉通知未发送：2026-05-06 08:29 CST 运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` / `ROBOT` 相关有效 webhook 变量，当前目录和 `/home/jassy/glm` 两层内未发现 `.env*` 文件；未将 webhook 写入仓库。
 
 - 点火收益轨迹新增“端点火花”：现有 `#coreGainTrail.core-gain-trail` 通过 `::before` / `::after` 显示起点亮点和冲出端火花，过载态 `is-overload-gain` 使用更大、更亮的红金端点，继续回应 #5 对点击反馈、特效和点击欲望的反馈。
 - `src/styles.css` 新增 `.core-gain-trail::before`、`.core-gain-trail::after`、过载端点样式、`coreGainTrailSpark` 动画和降低动效兜底；`tests/game.test.js` 覆盖端点伪元素、过载态、keyframes 和 reduced motion。

@@ -20,6 +20,9 @@
 - 当前路线对照槽成为 `is-active-route` 时，整卡获得低频补光；非当前路线仍维持降噪和悬停恢复。
 - 本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 135 项。
 - 构建产物已刷新；`dist/` 按仓库规则忽略。`dist/src/styles.css` 已确认包含 `.far-dispatch-branch-choice-summary-item.is-active-route`、`farDispatchSummaryActiveRouteCardBeacon` 和降低动效兜底。
+- 发布和反馈处理已完成：提交 `a1bf1d9 feat: highlight active far route card` 已推送；GitHub Pages workflow `25409776015` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页返回 HTTP 200，线上 `src/styles.css` 已确认包含 `.far-dispatch-branch-choice-summary-item.is-active-route` 和 `farDispatchSummaryActiveRouteCardBeacon`。
+- 已回复 GitHub Issue #6 和 #4，说明当前路线整卡信标、验证结果、Pages 部署和复测问题；issue 均保持 open，评论地址：`https://github.com/Jassy930/codex-game-operator/issues/6#issuecomment-4384213083`、`https://github.com/Jassy930/codex-game-operator/issues/4#issuecomment-4384215345`。回复后于 2026-05-06 08:27 CST 再次同步 GitHub Issues，当前仍为 5 个 open feedback issue、0 个 open bug issue。
+- 钉钉通知未发送：2026-05-06 08:29 CST 运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` / `ROBOT` 相关有效 webhook 变量，当前目录和 `/home/jassy/glm` 两层内未发现 `.env*` 文件；未将 webhook 写入仓库。
 - 本轮不新增外部网页调研；依据来自真实 GitHub 反馈 #6/#4，以及当前路线已有局部锚点但整卡状态仍偏静态的扫视链路复盘。
 
 ## 2026-05-06 Product decision：点火收益轨迹端点火花
