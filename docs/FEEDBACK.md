@@ -8,7 +8,9 @@
 - 本轮只增强点火收益轨迹头尾可读性，不新增 DOM、不新增界面可见文字、不新增收益、不新增存档字段，不改变点击收益、过载收益、连击窗口、音效/触感开关、升级价格、星图航段、航线指令、远航调度、反馈入口或部署链路。
 - 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 135 项。
 - 构建产物已刷新；`dist/` 按仓库规则忽略。源码和 `dist/src/styles.css` 已确认包含 `.core-gain-trail::before`、`.core-gain-trail::after`、`.core-gain-trail.is-overload-gain.is-showing::before`、`coreGainTrailSpark` 和降低动效兜底。
-- 发布、issue 回复和钉钉通知状态待本轮收尾后补记。
+- 发布和反馈处理已完成：`a075421 feat: add core gain trail sparks` 已推送，GitHub Pages workflow `25409324558` 成功；build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页和 `src/styles.css` 均返回 HTTP 200，线上资源已确认包含端点火花标记。已回复 #5，评论地址：`https://github.com/Jassy930/codex-game-operator/issues/5#issuecomment-4384137744`；issue 保持 open 等待端点火花真实复测。
+- 回复后于 2026-05-06 08:12 CST 再次同步 GitHub Issues，当前仍为 5 个 open feedback issue、0 个 open bug issue；#5 更新时间为 `2026-05-06T00:11:50Z`。
+- 钉钉通知未发送：2026-05-06 08:12 CST 运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` / `ROBOT` 相关有效 webhook 变量，当前目录和 `/home/jassy/glm` 两层内未发现 `.env*` 文件；未将 webhook 写入仓库。
 - 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #5，以及收益轨迹已有主体但缺少端点火花锚点的链路复盘。
 
 - GitHub Issues：gh 可用且已认证；2026-05-06 07:49 CST 通过 `ops/collect-feedback.sh` 同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。#5 仍是点火点击反馈复测反馈，#4 仍是图片化和文字密度复测反馈，#2/#3/#6 继续等待内容丰富度、主动玩法和后半段玩法变化复测。

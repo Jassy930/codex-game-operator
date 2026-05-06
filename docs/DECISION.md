@@ -22,7 +22,9 @@
 - 普通点火时 `#coreGainTrail` 的起点和冲出端显示金色端点火花；过载点火时端点更大、更亮并随 `is-overload-gain` 延长动画。
 - 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 135 项。
 - 构建产物已刷新；`dist/` 按仓库规则忽略。源码和构建产物已确认包含 `.core-gain-trail::before`、`.core-gain-trail::after`、`.core-gain-trail.is-overload-gain.is-showing::before`、`coreGainTrailSpark` 和降低动效兜底。
-- 发布前还需完成提交、推送、等待 GitHub Pages workflow，并在成功后回复 #5。
+- 发布和反馈处理已完成：提交 `a075421 feat: add core gain trail sparks` 已推送；GitHub Pages workflow `25409324558` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页返回 HTTP 200，线上首页包含 `coreGainTrail`，线上 `src/styles.css` 已确认包含 `.core-gain-trail::before`、`.core-gain-trail::after`、`.core-gain-trail.is-overload-gain.is-showing::before` 和 `coreGainTrailSpark`。workflow 给出 Node.js 20 actions 弃用提醒，未影响本次部署。
+- 已回复 GitHub Issue #5，说明端点火花、验证结果、Pages 部署和复测问题；issue 保持 open，评论地址：`https://github.com/Jassy930/codex-game-operator/issues/5#issuecomment-4384137744`。回复后于 2026-05-06 08:12 CST 再次同步 GitHub Issues，当前仍为 5 个 open feedback issue、0 个 open bug issue；#5 更新时间为 `2026-05-06T00:11:50Z`。
+- 钉钉通知未发送：2026-05-06 08:12 CST 运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` / `ROBOT` 相关有效 webhook 变量，当前目录和 `/home/jassy/glm` 两层内未发现 `.env*` 文件；未将 webhook 写入仓库。
 - 本轮未新增外部网页调研；依据来自真实 GitHub 反馈 #5，以及收益轨迹已有主体但缺少头尾火花锚点的链路复盘。
 
 ## 2026-05-06 Product decision：点火收益轨迹
