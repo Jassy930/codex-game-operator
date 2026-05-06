@@ -8,6 +8,10 @@
 - 同步 GitHub Issues 反馈状态：2026-05-06 08:34 CST 当前 5 个 open issue、5 个 open feedback issue、0 个 open bug issue；#6 作为本轮主关联反馈，#4 作为文字密度约束。
 - 验证通过：`npm test`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 135 项。
 - 构建产物已刷新；`dist/` 按仓库规则忽略。`dist/src/styles.css` 已确认包含 `.far-dispatch-branch-choice-summary-progress-node.is-next::after` 和 `farDispatchSummaryNextNodeHalo`。
+- 代码提交已创建并推送：`6d76f92 feat: highlight far route next node`。
+- 发布：GitHub Pages workflow `25410250781` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页返回 HTTP 200，线上 `src/styles.css` 已确认包含 `.far-dispatch-branch-choice-summary-progress-node.is-next::after` 和 `farDispatchSummaryNextNodeHalo`。
+- 反馈处理：已回复 #6 和 #4，说明远航对照条下一步节点外环信标、验证结果、Pages 部署和复测问题；issue 均保持 open，评论地址：`https://github.com/Jassy930/codex-game-operator/issues/6#issuecomment-4384273271`、`https://github.com/Jassy930/codex-game-operator/issues/4#issuecomment-4384273279`。回复后于 2026-05-06 08:42 CST 再次同步 GitHub Issues，当前仍为 5 个 open feedback issue、0 个 open bug issue；#6/#4 更新时间为 `2026-05-06T00:42:20Z`。
+- 钉钉通知未发送：2026-05-06 08:42 CST 运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` / `ROBOT` 相关有效 webhook 变量，当前目录和 `/home/jassy/glm` 两层内未发现 `.env*` 文件；未将 webhook 写入仓库。
 
 - 远航路线对照条新增“当前路线整卡信标”：本轮已选协同/绕行路线的 `.far-dispatch-branch-choice-summary-item.is-active-route` 会播放低频整卡补光，让当前路线本体和已有身份、动作、收益、回航结果、进度轨锚点形成同层执行态，继续回应 #6 的后半段路线执行理解和 #4 的降文字密度反馈。
 - `src/styles.css` 新增 `farDispatchSummaryActiveRouteCardBeacon` 并纳入 `prefers-reduced-motion: reduce` 兜底；`tests/game.test.js` 覆盖当前路线整卡动画、关键帧和 reduced motion。

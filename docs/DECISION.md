@@ -21,6 +21,9 @@
 - 当前路线对照槽内的 `.far-dispatch-branch-choice-summary-progress-node.is-next` 获得外环信标；绕行路线使用单独粉色外环；降低动效偏好下关闭动画。
 - 本地验证已通过：`npm test`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 135 项。
 - 构建产物已刷新；`dist/` 按仓库规则忽略。`dist/src/styles.css` 已确认包含 `.far-dispatch-branch-choice-summary-progress-node.is-next::after` 和 `farDispatchSummaryNextNodeHalo`。
+- 发布和反馈处理已完成：提交 `6d76f92 feat: highlight far route next node` 已推送；GitHub Pages workflow `25410250781` 成功，build job 已执行 `npm install`、`npm test` 和 `npm run build`，deploy job 成功；线上首页返回 HTTP 200，线上 `src/styles.css` 已确认包含 `.far-dispatch-branch-choice-summary-progress-node.is-next::after` 和 `farDispatchSummaryNextNodeHalo`。
+- 已回复 GitHub Issue #6 和 #4，说明下一步节点外环信标、验证结果、Pages 部署和复测问题；issue 均保持 open，评论地址：`https://github.com/Jassy930/codex-game-operator/issues/6#issuecomment-4384273271`、`https://github.com/Jassy930/codex-game-operator/issues/4#issuecomment-4384273279`。回复后于 2026-05-06 08:42 CST 再次同步 GitHub Issues，当前仍为 5 个 open feedback issue、0 个 open bug issue；#6/#4 更新时间为 `2026-05-06T00:42:20Z`。
+- 钉钉通知未发送：2026-05-06 08:42 CST 运行环境未提供 `DING` / `DINGTALK` / `WEBHOOK` / `ROBOT` 相关有效 webhook 变量，当前目录和 `/home/jassy/glm` 两层内未发现 `.env*` 文件；未将 webhook 写入仓库。
 - 本轮不新增外部网页调研；依据来自真实 GitHub 反馈 #6/#4，以及当前路线下一步节点已有放大但缺少外环锚点的扫视链路复盘。
 
 ## 2026-05-06 Product decision：远航对照条当前路线整卡信标
