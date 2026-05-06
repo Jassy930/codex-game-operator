@@ -21,6 +21,9 @@
 - 当前路线对照槽内的 `.far-dispatch-branch-choice-summary-progress-node.is-done::after` 获得轻量外环回响；绕行路线使用单独粉色回响；降低动效偏好下关闭动画。
 - 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 135 项。
 - 构建产物已刷新；`dist/` 按仓库规则忽略。`dist/src/styles.css` 已确认包含 `.far-dispatch-branch-choice-summary-progress-node.is-done::after`、`farDispatchSummaryDoneNodeEcho` 和绕行完成节点回响样式。
+- `430c7ed feat: highlight completed far route nodes` 已推送；GitHub Pages workflow `25411556168` 成功，线上首页返回 HTTP 200，线上 `src/styles.css` 已确认包含完成节点回响样式。workflow 给出 Node.js 20 actions 弃用提醒，未影响本次部署。
+- 已回复 #6 和 #4，issue 均保持 open 等复测；评论地址：`https://github.com/Jassy930/codex-game-operator/issues/6#issuecomment-4384438802`、`https://github.com/Jassy930/codex-game-operator/issues/4#issuecomment-4384439569`。回复后于 2026-05-06 09:29 CST 再次同步 GitHub Issues，当前仍为 5 个 open feedback issue、0 个 open bug issue；#6 更新时间为 `2026-05-06T01:28:47Z`，#4 更新时间为 `2026-05-06T01:29:04Z`。
+- 钉钉通知未发送：2026-05-06 09:29 CST 运行环境未提供有效 webhook 变量，当前目录和 `/home/jassy/glm` 两层内未发现 `.env*` 文件；未将 webhook 写入仓库。
 - 本轮不新增外部网页调研；依据来自真实 GitHub 反馈 #6/#4，以及当前路线端点光已增强但已完成节点仍偏静态的扫视链路复盘。
 
 ## 2026-05-06 Product decision：远航对照条当前路线进度端点光
