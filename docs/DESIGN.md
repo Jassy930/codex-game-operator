@@ -4,6 +4,7 @@
 
 M0 设计约束：
 
+- 远航路线对照条必须提供当前路线整卡信标：仅当 `.far-dispatch-branch-choice-summary-item.is-active-route` 时，整张协同/绕行对照槽可以播放低频 `farDispatchSummaryActiveRouteCardBeacon` 补光；`prefers-reduced-motion: reduce` 必须关闭该动画并保留静态当前路线边框、背景和左侧边栏。该信标只增强当前路线执行期扫视，不新增 DOM、不新增界面可见文字、不新增收益、不新增存档字段，不改变远航路线、远航收益、指令冷却、星图航段、反馈入口或部署链路。
 - 主点火按钮收益轨迹必须提供端点火花：`.core-gain-trail` 必须通过 `::before` / `::after` 显示起点亮点和冲出端火花，`.core-gain-trail.is-overload-gain` 必须提供更大、更亮的过载端点；端点火花必须与 `coreGainTrail` 同步显示并使用 `coreGainTrailSpark`，且纳入 `prefers-reduced-motion: reduce`。该展示只增强收益轨迹头尾可读性，不新增 DOM、不新增界面可见文字、不新增收益、不新增存档字段，不改变点击收益、过载奖励、连击窗口、升级价格、星图航段、航线策略、航线指令、远航调度或反馈入口。
 - 主点火按钮必须提供收益轨迹：按钮内必须渲染 `#coreGainTrail.core-gain-trail`，并由 `animateCore()` 在普通点火和过载点火时添加 `is-showing`，在过载点火时额外添加 `is-overload-gain`；收益轨迹必须复用点击落点坐标 `--core-impact-x` / `--core-impact-y`，普通和过载使用不同尺寸、强度与时长，并纳入 `prefers-reduced-motion: reduce`。该展示只增强点击反馈，不新增界面可见文字、不新增收益、不新增存档字段，不改变点击收益、过载奖励、连击窗口、升级价格、星图航段、航线策略、航线指令、远航调度或反馈入口。
 - 反馈快照必须记录界面环境：前端提交反馈时必须通过 `getFeedbackView()` 传入当前 `projectFilter`、`window.innerWidth`、`window.innerHeight`、`prefers-reduced-motion` 和 pointer media query 结果；`createFeedbackEntry()` 必须输出 `界面环境` 快照字段，格式化为 `视口 WxH · 降低动效 开/关 · 指针 触屏/鼠标/无`，旧入口或异常参数必须回退为 `未知`。该字段只用于真实反馈复盘，不新增界面可见文字、不新增收益、不新增存档字段，不改变星图筛选交互、点火反馈、动效策略、航线指令、远航调度、反馈入口或部署链路。

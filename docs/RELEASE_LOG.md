@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+- 远航路线对照条新增“当前路线整卡信标”：本轮已选协同/绕行路线的 `.far-dispatch-branch-choice-summary-item.is-active-route` 会播放低频整卡补光，让当前路线本体和已有身份、动作、收益、回航结果、进度轨锚点形成同层执行态，继续回应 #6 的后半段路线执行理解和 #4 的降文字密度反馈。
+- `src/styles.css` 新增 `farDispatchSummaryActiveRouteCardBeacon` 并纳入 `prefers-reduced-motion: reduce` 兜底；`tests/game.test.js` 覆盖当前路线整卡动画、关键帧和 reduced motion。
+- 本轮只增强远航路线对照条的当前路线扫视，不新增 DOM、不新增界面可见文字、不新增收益、不新增存档字段，不改变远航收益、路线选择、指令冷却、星图航段、反馈入口或部署链路。
+- 同步 GitHub Issues 反馈状态：2026-05-06 08:17 CST 当前 5 个 open issue、5 个 open feedback issue、0 个 open bug issue；#6 作为本轮主关联反馈，#4 作为文字密度约束。
+- 验证通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 135 项。
+- 构建产物已刷新；`dist/` 按仓库规则忽略。`dist/src/styles.css` 已确认包含 `.far-dispatch-branch-choice-summary-item.is-active-route`、`farDispatchSummaryActiveRouteCardBeacon` 和降低动效兜底。
+
 - 点火收益轨迹新增“端点火花”：现有 `#coreGainTrail.core-gain-trail` 通过 `::before` / `::after` 显示起点亮点和冲出端火花，过载态 `is-overload-gain` 使用更大、更亮的红金端点，继续回应 #5 对点击反馈、特效和点击欲望的反馈。
 - `src/styles.css` 新增 `.core-gain-trail::before`、`.core-gain-trail::after`、过载端点样式、`coreGainTrailSpark` 动画和降低动效兜底；`tests/game.test.js` 覆盖端点伪元素、过载态、keyframes 和 reduced motion。
 - 本轮只增强点火收益轨迹头尾可读性，不新增 DOM、不新增界面可见文字、不新增收益、不新增存档字段，不改变点击收益、过载收益、连击窗口、音效/触感开关、升级价格、星图航段、航线指令、远航调度、反馈入口或部署链路。

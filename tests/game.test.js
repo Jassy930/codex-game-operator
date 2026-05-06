@@ -2614,6 +2614,7 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(styles, /\.far-dispatch-branch-choice-summary-item\.is-active-route \{[\s\S]*grid-template-areas:\s*\n\s*"glyph label signal action action"/);
   assert.match(styles, /\.far-dispatch-branch-choice-summary-item\.is-active-route \{[\s\S]*"glyph phase step reward payoff"/);
   assert.match(styles, /\.far-dispatch-branch-choice-summary-item\.is-active-route \{[\s\S]*"glyph intent cost result result"/);
+  assert.match(styles, /\.far-dispatch-branch-choice-summary-item\.is-active-route \{[\s\S]*animation: farDispatchSummaryActiveRouteCardBeacon 1800ms ease-in-out infinite/);
   assert.match(styles, /\.far-dispatch-branch-choice-summary:has\(\.far-dispatch-branch-choice-summary-item\.is-active-route\)[\s\S]*\.far-dispatch-branch-choice-summary-item:not\(\.is-active-route\)/);
   assert.match(styles, /filter: saturate\(0\.72\)/);
   assert.match(styles, /\.far-dispatch-branch-choice-summary:has\(\.far-dispatch-branch-choice-summary-item\.is-active-route\)[\s\S]*\.far-dispatch-branch-choice-summary-item:not\(\.is-active-route\):hover/);
@@ -2713,6 +2714,7 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(styles, /content: attr\(data-step-label\)/);
   assert.match(styles, /@keyframes farDispatchSummaryActionBeacon/);
   assert.match(styles, /@keyframes farDispatchSummaryActiveRouteSweep/);
+  assert.match(styles, /@keyframes farDispatchSummaryActiveRouteCardBeacon/);
   assert.match(styles, /@keyframes farDispatchSummaryNextNodePulse/);
   assert.match(styles, /@keyframes farDispatchSummaryActiveActionGlow/);
   assert.match(styles, /@keyframes farDispatchSummaryActivePayoffGlow/);

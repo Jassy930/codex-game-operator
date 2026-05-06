@@ -1,5 +1,27 @@
 # Decision
 
+## 2026-05-06 Product decision：远航对照条当前路线整卡信标
+
+阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-06 08:17 CST 已同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。没有 open bug；#6“后半段玩法没有真正变化”仍是后半段玩法复测主反馈，#4 的文字密度反馈继续约束本轮不能继续增加说明文字。
+
+当前最大问题：远航路线对照条已经突出当前路线的身份、动作、本步收益、资源代价、回航结果、迷你进度轨和下一步节点，但整张当前路线卡本身仍主要是静态边框。玩家在协同 / 绕行路线执行期扫视时，仍可能先看到多个局部胶囊，再反推这整张卡就是当前路线。
+
+本轮决策：
+
+- 新增“远航对照条当前路线整卡信标”。
+- `src/styles.css` 仅对 `.far-dispatch-branch-choice-summary-item.is-active-route` 增加低频整卡补光动画 `farDispatchSummaryActiveRouteCardBeacon`。
+- `prefers-reduced-motion: reduce` 必须关闭整卡动画，保留静态当前路线边框、背景和左侧边栏。
+- `tests/game.test.js` 增加静态断言，覆盖当前路线整卡动画、关键帧和降低动效兜底。
+- 该改动只增强当前路线执行期扫视，不新增 DOM、不新增界面可见文字、不新增收益、不新增存档字段，不改变远航收益、路线选择、指令冷却、星图航段、反馈入口或部署链路。
+
+验收标准：
+
+- GitHub Issues 已同步：2026-05-06 08:17 CST 当前 5 个 open issue、5 个 open feedback issue、0 个 open bug issue；#6 作为本轮主关联反馈，#4 作为文字密度约束。
+- 当前路线对照槽成为 `is-active-route` 时，整卡获得低频补光；非当前路线仍维持降噪和悬停恢复。
+- 本地验证已通过：`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 135 项。
+- 构建产物已刷新；`dist/` 按仓库规则忽略。`dist/src/styles.css` 已确认包含 `.far-dispatch-branch-choice-summary-item.is-active-route`、`farDispatchSummaryActiveRouteCardBeacon` 和降低动效兜底。
+- 本轮不新增外部网页调研；依据来自真实 GitHub 反馈 #6/#4，以及当前路线已有局部锚点但整卡状态仍偏静态的扫视链路复盘。
+
 ## 2026-05-06 Product decision：点火收益轨迹端点火花
 
 阶段判断：仓库已有 package.json、可玩游戏、GitHub Pages 部署和游戏内反馈入口；GitHub Issues 2026-05-06 08:01 CST 已同步到 5 个 open issue、5 个 open feedback issue、0 个 open bug issue。没有 open bug；#5“点火按钮太薄弱了，增加点击反馈，增加特效，增加点击欲望”仍是最近被回复的点火反馈，等待真实复测确认收益轨迹是否足够明显。
