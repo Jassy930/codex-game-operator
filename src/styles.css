@@ -3758,8 +3758,21 @@ h2 {
 
 .far-dispatch-branch-choice-summary-item.is-active-route
   .far-dispatch-branch-choice-summary-progress::after {
+  box-sizing: border-box;
+  border-right: 1px solid rgba(255, 247, 194, 0.72);
   background-size: 180% 100%;
+  box-shadow:
+    6px 0 12px rgba(255, 211, 106, 0.22),
+    0 0 8px rgba(150, 231, 168, 0.14);
   animation: farDispatchSummaryActiveRouteSweep 1450ms ease-in-out infinite;
+}
+
+.far-dispatch-branch-choice-summary-item.is-active-route
+  .far-dispatch-branch-choice-summary-progress.is-detour::after {
+  border-right-color: rgba(255, 209, 223, 0.76);
+  box-shadow:
+    6px 0 12px rgba(255, 126, 177, 0.22),
+    0 0 8px rgba(255, 211, 106, 0.12);
 }
 
 .far-dispatch-branch-choice-summary-progress-node {

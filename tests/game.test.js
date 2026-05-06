@@ -2712,6 +2712,10 @@ test("静态首页会渲染航线指令轮换目标", () => {
   assert.match(styles, /\.far-dispatch-branch-choice-summary-item\.is-active-route[\s\S]*\.far-dispatch-branch-choice-summary-progress\.is-detour::before/);
   assert.match(styles, /\.far-dispatch-branch-choice-summary-progress::after/);
   assert.match(styles, /\.far-dispatch-branch-choice-summary-progress\.is-detour::after/);
+  assert.match(styles, /\.far-dispatch-branch-choice-summary-item\.is-active-route[\s\S]*\.far-dispatch-branch-choice-summary-progress::after[\s\S]*border-right: 1px solid rgba\(255, 247, 194, 0\.72\)/);
+  assert.match(styles, /\.far-dispatch-branch-choice-summary-item\.is-active-route[\s\S]*\.far-dispatch-branch-choice-summary-progress::after[\s\S]*6px 0 12px rgba\(255, 211, 106, 0\.22\)/);
+  assert.match(styles, /\.far-dispatch-branch-choice-summary-item\.is-active-route[\s\S]*\.far-dispatch-branch-choice-summary-progress\.is-detour::after[\s\S]*border-right-color: rgba\(255, 209, 223, 0\.76\)/);
+  assert.match(styles, /\.far-dispatch-branch-choice-summary-item\.is-active-route[\s\S]*\.far-dispatch-branch-choice-summary-progress\.is-detour::after[\s\S]*6px 0 12px rgba\(255, 126, 177, 0\.22\)/);
   assert.match(styles, /\.far-dispatch-branch-choice-summary-progress-node\.is-done/);
   assert.match(styles, /\.far-dispatch-branch-choice-summary-progress-node\.is-next/);
   assert.match(styles, /\.far-dispatch-branch-choice-summary-progress-node::before/);
