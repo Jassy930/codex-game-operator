@@ -20,6 +20,9 @@
 - 当前路线对照槽内的 `.far-dispatch-branch-choice-summary-progress::after` 获得末端亮边和端点光；绕行路线使用单独粉色端点光；降低动效偏好继续由既有 `::after` reduced motion 兜底关闭填充动画。
 - 本地验证已通过：`node --test tests/game.test.js`、`bun install --no-save`、`bun run test`、`bun run build`、`npm install`、`npm test`、`npm run build`；测试数 135 项。
 - 构建产物已刷新；`dist/` 按仓库规则忽略。`dist/src/styles.css` 已确认包含 `border-right: 1px solid rgba(255, 247, 194, 0.72)`、`border-right-color: rgba(255, 209, 223, 0.76)` 和当前路线端点光样式。
+- `2b7fceb feat: highlight active far route endpoint` 已推送；GitHub Pages workflow `25411162567` 成功，线上首页返回 HTTP 200，线上 `src/styles.css` 已确认包含端点光样式。workflow 给出 Node.js 20 actions 弃用提醒，未影响本次部署。
+- 已回复 #6 和 #4，issue 均保持 open 等复测；回复后于 2026-05-06 09:13 CST 再次同步 GitHub Issues，当前仍为 5 个 open feedback issue、0 个 open bug issue；#6 更新时间为 `2026-05-06T01:13:50Z`，#4 更新时间为 `2026-05-06T01:13:51Z`。
+- 钉钉通知未发送：2026-05-06 09:13 CST 运行环境未提供有效 webhook 变量，当前目录和 `/home/jassy/glm` 两层内未发现 `.env*` 文件；未将 webhook 写入仓库。
 - 本轮不新增外部网页调研；依据来自真实 GitHub 反馈 #6/#4，以及当前路线底光已增强但已推进填充端点仍偏弱的扫视链路复盘。
 
 ## 2026-05-06 Product decision：远航对照条当前路线进度轨底光
